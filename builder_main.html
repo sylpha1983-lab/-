@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>表情＋エフェクト複合ビルダー（順次ローダー／安定統合・カテゴリ折りたたみ・連動＋ポーズ＋髪型）</title>
+<title>表情＋エフェクト複合ビルダー（順次ローダー／安定統合・カテゴリ折りたたみ・連動＋ポーズ＋髪型＋背景）</title>
 <style>
   :root{--gap:10px;--pad:10px}
   *{box-sizing:border-box}
@@ -28,9 +28,9 @@
 </style>
 </head>
 <body>
-  <h1>表情＋エフェクト複合ビルダー　（順次ローダー／安定統合・カテゴリ折りたたみ・連動＋ポーズ＋髪型）</h1>
+  <h1>表情＋エフェクト複合ビルダー　（順次ローダー／安定統合・カテゴリ折りたたみ・連動＋ポーズ＋髪型＋背景）</h1>
 
-  <!-- ▼ 折りたためる読み込みチェッカー（UIは既存のまま） -->
+  <!-- ▼ 読み込みチェッカー -->
   <div class="card">
     <details id="checkerBox">
       <summary>読み込みチェッカー： <span id="loadSummary" class="pill count">—</span></summary>
@@ -38,7 +38,7 @@
     </details>
   </div>
 
-  <!-- プリセット（喜怒哀楽で折りたたみ） -->
+  <!-- プリセット -->
   <div class="card">
     <input id="presetSearch" type="search" placeholder="プリセット検索 / Preset search (JP/EN)">
     <details id="presetsBox">
@@ -51,7 +51,7 @@
     </details>
   </div>
 
-  <!-- 表情（喜怒哀楽で折りたたみ） -->
+  <!-- 表情 -->
   <div class="card">
     <input id="exprSearch" type="search" placeholder="表情検索 / Expression search (JP/EN)">
     <details id="exprBox">
@@ -63,7 +63,7 @@
     </details>
   </div>
 
-  <!-- エフェクト（系統ごと折りたたみ） -->
+  <!-- エフェクト -->
   <div class="card">
     <input id="effSearch" type="search" placeholder="エフェクト検索 / Effect search (JP/EN)">
     <details id="effBox">
@@ -72,7 +72,7 @@
     </details>
   </div>
 
-  <!-- ★ ポーズ（カテゴリごと折りたたみ・初期閉） -->
+  <!-- ポーズ -->
   <div class="card">
     <input id="poseSearch" type="search" placeholder="ポーズ検索 / Pose search (JP/EN)">
     <details id="poseBox">
@@ -81,12 +81,22 @@
     </details>
   </div>
 
-  <!-- ★ 髪型（カテゴリごと折りたたみ・初期閉） -->
+  <!-- 髪型 -->
   <div class="card">
     <input id="hairSearch" type="search" placeholder="髪型検索 / Hair search (JP/EN)">
     <details id="hairBox">
       <summary>髪型（カテゴリ別・初期閉） <span id="hairCount" class="pill count"></span></summary>
       <div id="catalogHair"></div>
+    </details>
+  </div>
+
+  <!-- 背景 -->
+  <div class="card">
+    <input id="bgSearch" type="search" placeholder="背景検索 / Background search (JP/EN)">
+    <details id="bgBox">
+      <summary>背景（野外・屋内・初期閉） <span id="bgCount" class="pill count"></span></summary>
+      <details><summary>背景：野外 / Outdoor <span id="bgOutCount" class="pill count"></span></summary><div id="bgOutdoor"></div></details>
+      <details><summary>背景：屋内 / Indoor <span id="bgInCount" class="pill count"></span></summary><div id="bgIndoor"></div></details>
     </details>
   </div>
 
@@ -113,10 +123,11 @@
 
 <script>
 /* ============================================================
-   互換レジストリ
+   レジストリ
    - mix（表情＋エフェクト）: __registerPromptPart
    - pose（ポーズ）         : __registerPosePart
    - hair（髪型）           : __registerHairPart
+   - background（背景）     : __registerBackgroundPart
 ============================================================ */
 window.__registerPromptPart = (id, data) => {
   window.promptBuilder = window.promptBuilder || {};
@@ -130,6 +141,10 @@ window.__registerHairPart = (id, data) => {
   window.hairBuilder = window.hairBuilder || {};
   window.hairBuilder[id] = data;
 };
+window.__registerBackgroundPart = (id, data) => {
+  window.backgroundBuilder = window.backgroundBuilder || {};
+  window.backgroundBuilder[id] = data;
+};
 
 /* ===== 参照 ===== */
 const loadLog      = document.getElementById('loadLog');
@@ -140,6 +155,7 @@ const exprCountEl   = document.getElementById('exprCount');
 const effCountEl    = document.getElementById('effCount');
 const poseCountEl   = document.getElementById('poseCount');
 const hairCountEl   = document.getElementById('hairCount');
+const bgCountEl     = document.getElementById('bgCount');
 
 const presetAreas = {
   joy:    document.getElementById('presetJoy'),
@@ -173,6 +189,11 @@ const catalogEffRoot  = document.getElementById('catalogEff');
 const catalogPoseRoot = document.getElementById('catalogPose');
 const catalogHairRoot = document.getElementById('catalogHair');
 
+const bgOutdoorRoot   = document.getElementById('bgOutdoor');
+const bgIndoorRoot    = document.getElementById('bgIndoor');
+const bgOutCountEl    = document.getElementById('bgOutCount');
+const bgInCountEl     = document.getElementById('bgInCount');
+
 const extraBody = document.getElementById('extraBody');
 const extraCount = document.getElementById('extraCount');
 const out = document.getElementById('out');
@@ -186,9 +207,10 @@ let allCategories = [];        // Expressions + Effects
 let allPresets = [];
 let allPoseCategories = [];    // Poses only
 let allHairCategories = [];    // Hair only
+let allBgCategories  = [];     // Background only
 
-/* ===== 出典表示用のソースマップ（自動付与に使用） ===== */
-const itemSourceMap   = new Map(); // tagId -> 'partX.js' / 'pose_partX.js' / 'hair_partX.js'
+/* ===== 出典表示用のソースマップ ===== */
+const itemSourceMap   = new Map(); // tagId -> 'partX.js' / 'pose_partX.js' / 'hair_partX.js' / 'background_partX.js'
 const presetSourceMap = new Map(); // presetId -> source string
 
 /* ===== 旧→新 変換（mix旧形式） ===== */
@@ -216,7 +238,7 @@ function convertOldExpressionEffectsToNew(obj){
   return { categories, presets };
 }
 
-/* ===== pose/hair 取り込みのゆるい正規化 ===== */
+/* ===== 共通正規化 ===== */
 function normalizeCategoryPart(data){
   if (!data) return null;
   if (Array.isArray(data.categories)) {
@@ -231,12 +253,11 @@ function normalizeCategoryPart(data){
   return null;
 }
 
-/* ===== ローディング（mix: part1-40、pose: pose_part1-200、hair: hair_part1-200） ===== */
-async function loadPartsSeq(from=1,to=40){
+/* ===== ローディング（mix:1-100 / pose:1-500 / hair:1-300 / background:1-200） ===== */
+async function loadPartsSeq(from=1,to=100){
   window.promptBuilder = window.promptBuilder || {};
   const addLog = (line,cls)=>{const d=document.createElement('div');d.textContent=line; if(cls)d.className=cls; loadLog.appendChild(d);};
   let ok=0, ng=0, empty=0;
-
   for (let i=from;i<=to;i++){
     const name=`part${i}`;
     try{
@@ -255,11 +276,10 @@ async function loadPartsSeq(from=1,to=40){
   updateLoadSummary();
 }
 
-async function loadPoseSeq(from=1,to=200){
+async function loadPoseSeq(from=1,to=500){
   window.poseBuilder = window.poseBuilder || {};
   const addLog = (line,cls)=>{const d=document.createElement('div');d.textContent=line; if(cls)d.className=cls; loadLog.appendChild(d);};
   let ok=0, ng=0, empty=0;
-
   for (let i=from;i<=to;i++){
     const id=`pose_part${i}`;
     try{
@@ -278,11 +298,10 @@ async function loadPoseSeq(from=1,to=200){
   updateLoadSummary();
 }
 
-async function loadHairSeq(from=1,to=200){
+async function loadHairSeq(from=1,to=300){
   window.hairBuilder = window.hairBuilder || {};
   const addLog = (line,cls)=>{const d=document.createElement('div');d.textContent=line; if(cls)d.className=cls; loadLog.appendChild(d);};
   let ok=0, ng=0, empty=0;
-
   for (let i=from;i<=to;i++){
     const id=`hair_part${i}`;
     try{
@@ -298,6 +317,28 @@ async function loadHairSeq(from=1,to=200){
   loadSummary.dataset.hairOk = ok;
   loadSummary.dataset.hairNg = ng;
   loadSummary.dataset.hairEmpty = empty;
+  updateLoadSummary();
+}
+
+async function loadBackgroundSeq(from=1,to=200){
+  window.backgroundBuilder = window.backgroundBuilder || {};
+  const addLog = (line,cls)=>{const d=document.createElement('div');d.textContent=line; if(cls)d.className=cls; loadLog.appendChild(d);};
+  let ok=0, ng=0, empty=0;
+  for (let i=from;i<=to;i++){
+    const id=`background_part${i}`;
+    try{
+      if (document.getElementById(`loader-${id}`)){ ensureRegisteredBackground(id)?(ok++):(empty++); addLog(`${id}: OK (cached)`,'ok'); continue; }
+      const url=`${id}.js`;
+      const res=await fetch(url,{cache:'no-store'});
+      if (res.status===404){ empty++; addLog(`${id}: EMPTY（未配置）`,'empty'); continue; }
+      const js=await res.text(); const s=document.createElement('script');
+      s.id=`loader-${id}`; s.textContent=js+`\n//# sourceURL=${url}`; document.head.appendChild(s);
+      ensureRegisteredBackground(id)?(ok++):(empty++, addLog(`${id}: EMPTY（ファイルは読めたが未登録）`,'empty'));
+    }catch(e){ ng++; addLog(`${id}: ERROR ${e.message}`,'ng'); }
+  }
+  loadSummary.dataset.bgOk = ok;
+  loadSummary.dataset.bgNg = ng;
+  loadSummary.dataset.bgEmpty = empty;
   updateLoadSummary();
 }
 
@@ -327,26 +368,29 @@ function ensureRegisteredHair(id){
   if (window.hairParts && window.hairParts[id]){ const norm=normalizeCategoryPart(window.hairParts[id]); if (norm){ window.hairBuilder[id]=norm; return true; } }
   return false;
 }
+function ensureRegisteredBackground(id){
+  if (window.backgroundBuilder && window.backgroundBuilder[id]) return true;
+  if (window[id]){ const norm=normalizeCategoryPart(window[id]); if (norm){ window.backgroundBuilder[id]=norm; return true; } }
+  if (window.backgroundParts && window.backgroundParts[id]){ const norm=normalizeCategoryPart(window.backgroundParts[id]); if (norm){ window.backgroundBuilder[id]=norm; return true; } }
+  return false;
+}
 
-/* ===== 統合（ここで “出典名” を控えて UI で自動付与） ===== */
+/* ===== 統合 ===== */
 function integrateMix(){
   const parts = window.promptBuilder || {};
-  const catMap = new Map(); // name -> {name, items:[]}
-  const presetArr = [];
-
+  const catMap = new Map(); const presetArr = [];
   Object.keys(parts).sort().forEach(k=>{
-    const src = `${k}.js`; // 例: part25.js
+    const src = `${k}.js`;
     const p = parts[k]||{};
     (p.categories||[]).forEach(cat=>{
       if (!cat || !cat.name) return;
-      const name = cat.name;
-      if (!catMap.has(name)) catMap.set(name,{name,items:[]});
-      const bucket = catMap.get(name);
+      if (!catMap.has(cat.name)) catMap.set(cat.name,{name:cat.name,items:[]});
+      const bucket = catMap.get(cat.name);
       (cat.items||[]).forEach(it=>{
         if (!it || !it.id) return;
         if (!bucket.items.some(x=>x.id===it.id)){
           bucket.items.push({id: it.id, label: it.label || it.id});
-          if (!itemSourceMap.has(it.id)) itemSourceMap.set(it.id, src); // 出典を記録
+          if (!itemSourceMap.has(it.id)) itemSourceMap.set(it.id, src);
         }
       });
     });
@@ -359,11 +403,9 @@ function integrateMix(){
       tags = [...new Set(tags.filter(Boolean))];
       presetArr.push({id: pr.id, label: pr.label || pr.id, tags});
       if (!presetSourceMap.has(pr.id)) presetSourceMap.set(pr.id, src);
-      // プリセットが参照するタグの出典が未登録なら、プリセットの出典を入れておく（補助）
       tags.forEach(tid=>{ if(!itemSourceMap.has(tid)) itemSourceMap.set(tid, src); });
     });
   });
-
   allCategories = [...catMap.values()].sort((a,b)=>{
     const ae = a.name.startsWith('Expressions') ? 0 : 1;
     const be = b.name.startsWith('Expressions') ? 0 : 1;
@@ -371,12 +413,11 @@ function integrateMix(){
   });
   allPresets = presetArr;
 }
-
 function integratePose(){
   const parts = window.poseBuilder || {};
   const catMap = new Map();
   Object.keys(parts).sort().forEach(k=>{
-    const src = `${k}.js`; // 例: pose_part12.js
+    const src = `${k}.js`;
     (parts[k].categories||[]).forEach(cat=>{
       if (!cat || !cat.name) return;
       if (!catMap.has(cat.name)) catMap.set(cat.name,{name:cat.name,items:[]});
@@ -391,12 +432,11 @@ function integratePose(){
   });
   allPoseCategories = [...catMap.values()].sort((a,b)=>a.name.localeCompare(b.name));
 }
-
 function integrateHair(){
   const parts = window.hairBuilder || {};
   const catMap = new Map();
   Object.keys(parts).sort().forEach(k=>{
-    const src = `${k}.js`; // 例: hair_part5.js
+    const src = `${k}.js`;
     (parts[k].categories||[]).forEach(cat=>{
       if (!cat || !cat.name) return;
       if (!catMap.has(cat.name)) catMap.set(cat.name,{name:cat.name,items:[]});
@@ -411,12 +451,30 @@ function integrateHair(){
   });
   allHairCategories = [...catMap.values()].sort((a,b)=>a.name.localeCompare(b.name));
 }
+function integrateBackground(){
+  const parts = window.backgroundBuilder || {};
+  const catMap = new Map();
+  Object.keys(parts).sort().forEach(k=>{
+    const src = `${k}.js`;
+    (parts[k].categories||[]).forEach(cat=>{
+      if (!cat || !cat.name) return;
+      if (!catMap.has(cat.name)) catMap.set(cat.name,{name:cat.name,items:[]});
+      const b=catMap.get(cat.name);
+      (cat.items||[]).forEach(it=>{
+        if (it && it.id && !b.items.some(x=>x.id===it.id)){
+          b.items.push({id:it.id,label:it.label||it.id});
+          if (!itemSourceMap.has(it.id)) itemSourceMap.set(it.id, src);
+        }
+      });
+    });
+  });
+  allBgCategories = [...catMap.values()].sort((a,b)=>a.name.localeCompare(b.name));
+}
 
-/* ===== 出典ラベル付け（UI表示専用／タグ値は不変） ===== */
+/* ===== 出典ラベル（UI表示用） ===== */
 function withSrcLabel(baseLabel, id){
   const src = itemSourceMap.get(id);
   if (!src) return baseLabel;
-  // 既に (part のような注記が含まれていればそのまま
   if (/\(.*part.*\.js\)$/i.test(baseLabel)) return baseLabel;
   return `${baseLabel} (${src})`;
 }
@@ -427,7 +485,7 @@ function withSrcLabelPreset(baseLabel, pid){
   return `${baseLabel} (${src})`;
 }
 
-/* ===== UI構築（既存の挙動は変えない） ===== */
+/* ===== UI構築 ===== */
 function moodBucketOf(label){
   const s=(label||'').toLowerCase();
   if (/(喜|安堵|微笑|星|雪|光)/.test(label)||/(joy|reliev|cheer|spark)/.test(s)) return 'joy';
@@ -436,23 +494,19 @@ function moodBucketOf(label){
   if (/(楽|遊|戯|泡|きら)/.test(label)||/(fun|play|bubble|sparkle)/.test(s)) return 'fun';
   return 'fun';
 }
-
 function buildPresets(){
   Object.values(presetAreas).forEach(el=> el.innerHTML='');
   presetBoxMap.clear();
-
   allPresets.forEach(p=>{
     const bucket = moodBucketOf(p.label);
     const lab = document.createElement('label'); lab.className='item';
     const cb  = document.createElement('input'); cb.type='checkbox'; cb.dataset.pid = p.id;
     lab.appendChild(cb);
-    const showLabel = withSrcLabelPreset(`${p.label} / ${p.id}`, p.id);
-    lab.appendChild(document.createTextNode(showLabel));
+    lab.appendChild(document.createTextNode(withSrcLabelPreset(`${p.label} / ${p.id}`, p.id)));
     presetAreas[bucket].appendChild(lab);
     presetBoxMap.set(p.id, cb);
     cb.addEventListener('change', ()=> applyPreset(p, cb.checked));
   });
-
   const counts = {joy:0,anger:0,sad:0,fun:0,other:0};
   allPresets.forEach(p=> counts[moodBucketOf(p.label)]++);
   presetAreaCounts.joy.textContent  = counts.joy;
@@ -462,7 +516,6 @@ function buildPresets(){
   presetAreaCounts.other.textContent= counts.other;
   presetCountEl.textContent = `全${allPresets.length}`;
 }
-
 function buildExpressionsByMood(){
   Object.values(exprAreas).forEach(el=> el.innerHTML='');
   const exprCat = allCategories.find(c=>c.name.startsWith('Expressions'));
@@ -474,8 +527,7 @@ function buildExpressionsByMood(){
     const cb  = document.createElement('input'); cb.type='checkbox';
     cb.dataset.id = it.id; cb.value = it.id;
     lab.appendChild(cb);
-    const showLabel = withSrcLabel(`${it.label || it.id} / ${it.id}`, it.id);
-    lab.appendChild(document.createTextNode(showLabel));
+    lab.appendChild(document.createTextNode(withSrcLabel(`${it.label || it.id} / ${it.id}`, it.id)));
     exprAreas[bucket].appendChild(lab);
     checkboxMap.set(it.id, cb);
     cb.addEventListener('change', syncPresetsFromCatalog);
@@ -487,7 +539,6 @@ function buildExpressionsByMood(){
   exprAreaCounts.sad.textContent   = counts.sad;
   exprAreaCounts.fun.textContent   = counts.fun;
 }
-
 function buildEffects(){
   catalogEffRoot.innerHTML='';
   allCategories.filter(c=>!c.name.startsWith('Expressions')).forEach(cat=>{
@@ -499,8 +550,7 @@ function buildEffects(){
       const cb=document.createElement('input'); cb.type='checkbox';
       cb.dataset.id=it.id; cb.value=it.id;
       lab.appendChild(cb);
-      const showLabel = withSrcLabel(`${it.label || it.id} / ${it.id}`, it.id);
-      lab.appendChild(document.createTextNode(showLabel));
+      lab.appendChild(document.createTextNode(withSrcLabel(`${it.label || it.id} / ${it.id}`, it.id)));
       wrap.appendChild(lab);
       checkboxMap.set(it.id, cb);
       cb.addEventListener('change', syncPresetsFromCatalog);
@@ -510,7 +560,6 @@ function buildEffects(){
   const effItems = allCategories.filter(c=>!c.name.startsWith('Expressions')).reduce((n,c)=>n+(c.items?.length||0),0);
   effCountEl.textContent = `全${effItems}`;
 }
-
 function buildPoses(){
   catalogPoseRoot.innerHTML='';
   allPoseCategories.forEach(cat=>{
@@ -522,8 +571,7 @@ function buildPoses(){
       const cb=document.createElement('input'); cb.type='checkbox';
       cb.dataset.id=it.id; cb.value=it.id;
       lab.appendChild(cb);
-      const showLabel = withSrcLabel(`${it.label || it.id} / ${it.id}`, it.id);
-      lab.appendChild(document.createTextNode(showLabel));
+      lab.appendChild(document.createTextNode(withSrcLabel(`${it.label || it.id} / ${it.id}`, it.id)));
       wrap.appendChild(lab);
       checkboxMap.set(it.id, cb);
       cb.addEventListener('change', syncPresetsFromCatalog);
@@ -533,7 +581,6 @@ function buildPoses(){
   const total = allPoseCategories.reduce((n,c)=>n+(c.items?.length||0),0);
   poseCountEl.textContent = `全${total}`;
 }
-
 function buildHair(){
   catalogHairRoot.innerHTML='';
   allHairCategories.forEach(cat=>{
@@ -545,8 +592,7 @@ function buildHair(){
       const cb=document.createElement('input'); cb.type='checkbox';
       cb.dataset.id=it.id; cb.value=it.id;
       lab.appendChild(cb);
-      const showLabel = withSrcLabel(`${it.label || it.id} / ${it.id}`, it.id);
-      lab.appendChild(document.createTextNode(showLabel));
+      lab.appendChild(document.createTextNode(withSrcLabel(`${it.label || it.id} / ${it.id}`, it.id)));
       wrap.appendChild(lab);
       checkboxMap.set(it.id, cb);
       cb.addEventListener('change', syncPresetsFromCatalog);
@@ -556,8 +602,33 @@ function buildHair(){
   const total = allHairCategories.reduce((n,c)=>n+(c.items?.length||0),0);
   hairCountEl.textContent = `全${total}`;
 }
+function buildBackground(){
+  // 「野外 / Outdoor」と「屋内 / Indoor」に振り分け表示（初期は閉）
+  bgOutdoorRoot.innerHTML=''; bgIndoorRoot.innerHTML='';
+  let outCount=0, inCount=0;
+  const isOutdoor = (name)=> /(^|\s)(Outdoor|野外)/i.test(name);
+  const isIndoor  = (name)=> /(^|\s)(Indoor|屋内)/i.test(name);
 
-/* ===== Extra / プリセット連動 / 検索 / 出力（既存のまま） ===== */
+  allBgCategories.forEach(cat=>{
+    const targetRoot = isOutdoor(cat.name) ? bgOutdoorRoot : (isIndoor(cat.name) ? bgIndoorRoot : bgOutdoorRoot);
+    (cat.items||[]).forEach(it=>{
+      const lab=document.createElement('label'); lab.className='item';
+      const cb=document.createElement('input'); cb.type='checkbox';
+      cb.dataset.id=it.id; cb.value=it.id;
+      lab.appendChild(cb);
+      lab.appendChild(document.createTextNode(withSrcLabel(`${it.label || it.id} / ${it.id}`, it.id)));
+      targetRoot.appendChild(lab);
+      checkboxMap.set(it.id, cb);
+      cb.addEventListener('change', syncPresetsFromCatalog);
+      (targetRoot===bgOutdoorRoot? outCount++ : inCount++);
+    });
+  });
+  bgOutCountEl.textContent = outCount;
+  bgInCountEl.textContent  = inCount;
+  bgCountEl.textContent    = `全${outCount+inCount}`;
+}
+
+/* ===== Extra / プリセット連動 / 検索 / 出力 ===== */
 function addExtra(id,label){
   if (checkboxMap.has(id) || extraSet.has(id)) return;
   extraSet.add(id);
@@ -565,8 +636,7 @@ function addExtra(id,label){
   const cbox  = document.createElement('input'); cbox.type='checkbox';
   cbox.checked = true; cbox.dataset.id=id; cbox.value=id; cbox.dataset.extra='1';
   labEl.appendChild(cbox);
-  const showLabel = withSrcLabel(label?`${label} / ${id}`:id, id);
-  labEl.appendChild(document.createTextNode(showLabel));
+  labEl.appendChild(document.createTextNode(withSrcLabel(label?`${label} / ${id}`:id, id)));
   extraBody.appendChild(labEl);
   extraCount.textContent = String(extraSet.size);
 }
@@ -604,6 +674,9 @@ document.getElementById('poseSearch').addEventListener('input',e=>{
 document.getElementById('hairSearch').addEventListener('input',e=>{
   filterList(document.getElementById('hairBox'), e.target.value);
 });
+document.getElementById('bgSearch').addEventListener('input',e=>{
+  filterList(document.getElementById('bgBox'), e.target.value);
+});
 function syncPresetsFromCatalog(){
   allPresets.forEach(p=>{
     const ids=p.tags||[]; let checked=0, known=0;
@@ -635,7 +708,7 @@ document.getElementById('btnGen').addEventListener('click', generateTags);
 document.getElementById('btnReset').addEventListener('click', resetAll);
 document.getElementById('btnCopy').addEventListener('click', ()=> navigator.clipboard.writeText(out.value));
 
-/* ===== 進捗サマリ ===== */
+/* ===== 進捗サマリ（チェッカー） ===== */
 function updateLoadSummary(){
   const mixOk=Number(loadSummary.dataset.mixOk||0),
         mixNg=Number(loadSummary.dataset.mixNg||0),
@@ -645,29 +718,35 @@ function updateLoadSummary(){
         poseEm=Number(loadSummary.dataset.poseEmpty||0),
         hairOk=Number(loadSummary.dataset.hairOk||0),
         hairNg=Number(loadSummary.dataset.hairNg||0),
-        hairEm=Number(loadSummary.dataset.hairEmpty||0);
-  loadSummary.textContent = `mix: 成功${mixOk}/失敗${mixNg}/空${mixEm} ｜ pose: 成功${poseOk}/失敗${poseNg}/空${poseEm} ｜ hair: 成功${hairOk}/失敗${hairNg}/空${hairEm}`;
+        hairEm=Number(loadSummary.dataset.hairEmpty||0),
+        bgOk=Number(loadSummary.dataset.bgOk||0),
+        bgNg=Number(loadSummary.dataset.bgNg||0),
+        bgEm=Number(loadSummary.dataset.bgEmpty||0);
+  loadSummary.textContent = `mix: 成功${mixOk}/失敗${mixNg}/空${mixEm} ｜ pose: 成功${poseOk}/失敗${poseNg}/空${poseEm} ｜ hair: 成功${hairOk}/失敗${hairNg}/空${hairEm} ｜ background: 成功${bgOk}/失敗${bgNg}/空${bgEm}`;
 }
 
-/* ===== 初期化（UIは初期クローズ維持） ===== */
+/* ===== 初期化（全details初期クローズ） ===== */
 (async function init(){
   loadLog.textContent = '';
-  await loadPartsSeq(1,40);   // mix (表情+エフェクト) 既存 part1～40
-  await loadPoseSeq(1,200);   // pose ライン
-  await loadHairSeq(1,200);   // hair ライン
+  await loadPartsSeq(1,100);       // mix
+  await loadPoseSeq(1,500);        // pose
+  await loadHairSeq(1,300);        // hair
+  await loadBackgroundSeq(1,200);  // background
   updateLoadSummary();
 
   // 統合＆UI構築
   integrateMix();
   integratePose();
   integrateHair();
+  integrateBackground();
   buildPresets();
   buildExpressionsByMood();
   buildEffects();
   buildPoses();
   buildHair();
+  buildBackground();
 
-  // すべて「閉じた状態」で開始
+  // すべて閉じた状態で開始
   document.querySelectorAll('details').forEach(d=> d.open=false);
 })();
 </script>
