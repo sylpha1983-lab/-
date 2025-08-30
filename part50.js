@@ -31,49 +31,27 @@
     {
       id:'Prism-Confession',
       label:'プリズムの告白',
-      tags:[
-        'prism-eyed-smile',
-        'prism-heart-refraction',
-        'facet-sparkle-dust',
-        'haze-rainbow-veil'
-      ]
+      tags:['prism-eyed-smile','prism-heart-refraction','facet-sparkle-dust','haze-rainbow-veil']
     },
     {
       id:'Crystal-Serenity',
       label:'クリスタル静謐',
-      tags:[
-        'crystal-gaze-serene',
-        'crystal-heart-flare',
-        'caustic-light-hearts'
-      ]
+      tags:['crystal-gaze-serene','crystal-heart-flare','caustic-light-hearts']
     },
     {
       id:'Iridescent-Wink-Beat',
       label:'虹彩ウィンク・鼓動',
-      tags:[
-        'iridescent-wink',
-        'prism-heart-refraction',
-        'crystal-heart-flare'
-      ]
+      tags:['iridescent-wink','prism-heart-refraction','crystal-heart-flare']
     },
     {
       id:'Shard-Tears-Romance',
       label:'結晶涙のロマンス',
-      tags:[
-        'shard-tears-glow',
-        'gem-shard-petals',
-        'facet-sparkle-dust',
-        'haze-rainbow-veil'
-      ]
+      tags:['shard-tears-glow','gem-shard-petals','facet-sparkle-dust','haze-rainbow-veil']
     },
     {
       id:'Facet-Blush-Spark',
       label:'ファセット紅潮・火花',
-      tags:[
-        'facet-blush-soft',
-        'facet-sparkle-dust',
-        'caustic-light-hearts'
-      ]
+      tags:['facet-blush-soft','facet-sparkle-dust','caustic-light-hearts']
     }
   ];
 

@@ -1,5 +1,5 @@
 /* ============================================
-   Fantasy Heart Pack — part42.js
+   Crystal Heart Pack — part42.js
    ============================================ */
 (function (g){
   const register = g.__registerPromptPart || function(id, data){
@@ -8,42 +8,38 @@
   };
 
   const expr = [
-    { id:'fae-heart-eyes',         label:'妖精・ハートアイ / fae heart eyes' },
-    { id:'arcane-heart-smile',     label:'秘術・ハートスマイル / arcane heart smile' },
-    { id:'myth-heart-gaze',        label:'神話・ハート視線 / myth heart gaze' },
-    { id:'enchanted-heart-blush',  label:'魔魅・ハート頬染め / enchanted heart blush' }
+    { id:'clear-heart-gaze',      label:'澄んだハート視線 / clear heart gaze' },
+    { id:'spark-heart-smirk',     label:'きらめきハート口元 / spark heart smirk' },
+    { id:'crystal-calm',          label:'クリスタルの静穏 / crystal calm' }
   ];
 
   const eff = [
-    { id:'rune-heart-glow',        label:'ルーン・ハート発光 / rune heart glow' },
-    { id:'fairy-heart-dust',       label:'妖精粉×ハート / fairy heart dust' },
-    { id:'portal-heart-ring',      label:'ポータル・ハートリング / portal heart ring' },
-    { id:'spell-heart-sigil',      label:'呪文・ハート印章 / spell heart sigil' }
+    { id:'crystal-heart-shards',     label:'クリスタルハート片 / crystal heart shards' },
+    { id:'prismatic-heart-flare',    label:'プリズムハート光芒 / prismatic heart flare' },
+    { id:'glassy-heart-bloom',       label:'ガラス調ハートブルーム / glassy heart bloom' },
+    { id:'refracted-heart-halo',     label:'屈折ハートハロー / refracted heart halo' }
   ];
 
   const presets = [
     {
-      id:'Enchanted-RuneDust',
-      label:'魔魅の符光',
+      id:'Crystal-PrismAura',
+      label:'クリスタル・プリズムオーラ',
       tags:[
-        'enchanted-heart-blush','fae-heart-eyes',
-        'rune-heart-glow','fairy-heart-dust','spell-heart-sigil'
+        'clear-heart-gaze','crystal-calm','prismatic-heart-flare','refracted-heart-halo'
       ]
     },
     {
-      id:'ArcanePortal-Gaze',
-      label:'秘術ポータル視線',
+      id:'Shards-and-Bloom',
+      label:'シャード＆ブルーム',
       tags:[
-        'arcane-heart-smile','myth-heart-gaze',
-        'portal-heart-ring','rune-heart-glow'
+        'spark-heart-smirk','crystal-heart-shards','glassy-heart-bloom','prismatic-heart-flare'
       ]
     },
     {
-      id:'FaeWhisper-Glow',
-      label:'妖精の囁き・輝き',
+      id:'Refraction-Serenity',
+      label:'屈折の静謐',
       tags:[
-        'fae-heart-eyes','enchanted-heart-blush',
-        'fairy-heart-dust','spell-heart-sigil'
+        'crystal-calm','clear-heart-gaze','refracted-heart-halo','glassy-heart-bloom'
       ]
     }
   ];
@@ -51,7 +47,7 @@
   register('part42',{
     categories:[
       { name:'Expressions / 表情', items: expr },
-      { name:'Effects / エフェクト（Heart: Fantasy）', items: eff }
+      { name:'Effects / エフェクト（Heart: Crystal）', items: eff }
     ],
     presets
   });

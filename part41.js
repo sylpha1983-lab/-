@@ -1,5 +1,5 @@
 /* ============================================
-   Kemono Heart Pack — part41.js
+   Romance Heart Pack — part41.js
    ============================================ */
 (function (g){
   const register = g.__registerPromptPart || function(id, data){
@@ -8,42 +8,39 @@
   };
 
   const expr = [
-    { id:'beast-heart-eyes',       label:'獣・ハートアイ / beast heart eyes' },
-    { id:'fang-heart-smile',       label:'牙・ハートスマイル / fang heart smile' },
-    { id:'wild-heart-gaze',        label:'野性・ハート視線 / wild heart gaze' },
-    { id:'ear-twitch-heart-blush', label:'耳ピク・ハート頬染め / ear twitch heart blush' }
+    { id:'soft-heart-eyes',     label:'やわらかハートアイ / soft heart eyes' },
+    { id:'shy-heart-smile',     label:'照れハート微笑み / shy heart smile' },
+    { id:'fluttering-blush',    label:'ときめき頬染め / fluttering blush' },
+    { id:'warm-gaze-heart',     label:'あたたかいハート視線 / warm hearted gaze' }
   ];
 
   const eff = [
-    { id:'fur-heart-sparkle',      label:'ファー×ハートスパーク / fur heart sparkle' },
-    { id:'pawpad-heart-print',     label:'肉球・ハートプリント / pawpad heart print' },
-    { id:'tail-heart-trail',       label:'尻尾・ハート軌跡 / tail heart trail' },
-    { id:'howl-heart-aura',        label:'遠吠え・ハートオーラ / howl heart aura' }
+    { id:'heart-petals',            label:'ハート花弁 / heart petals' },
+    { id:'soft-heart-glow',         label:'やわらハート光 / soft heart glow' },
+    { id:'gentle-heart-bokeh',      label:'やさしいハートボケ / gentle heart bokeh' },
+    { id:'background-heart-veil',   label:'背景ハートヴェール / background heart veil' }
   ];
 
   const presets = [
     {
-      id:'WildHowl-EmberHeart',
-      label:'野生の遠吠え・紅心',
+      id:'Romance-SoftGlow',
+      label:'ロマンス・ソフトグロー',
       tags:[
-        'wild-heart-gaze','beast-heart-eyes',
-        'howl-heart-aura','fur-heart-sparkle'
+        'soft-heart-eyes','shy-heart-smile','soft-heart-glow','gentle-heart-bokeh'
       ]
     },
     {
-      id:'FangSmile-PawPrint',
-      label:'牙スマイル・肉球印',
+      id:'WarmGaze-Petals',
+      label:'あたたか視線・花弁',
       tags:[
-        'fang-heart-smile','ear-twitch-heart-blush',
-        'pawpad-heart-print','tail-heart-trail'
+        'warm-gaze-heart','fluttering-blush','heart-petals','background-heart-veil'
       ]
     },
     {
-      id:'TwitchyHeart-Trail',
-      label:'ピク耳・ハート軌跡',
+      id:'ShySmile-Bokeh',
+      label:'照れ笑み・ハートボケ',
       tags:[
-        'ear-twitch-heart-blush','beast-heart-eyes',
-        'tail-heart-trail','fur-heart-sparkle'
+        'shy-heart-smile','fluttering-blush','gentle-heart-bokeh','soft-heart-glow'
       ]
     }
   ];
@@ -51,7 +48,7 @@
   register('part41',{
     categories:[
       { name:'Expressions / 表情', items: expr },
-      { name:'Effects / エフェクト（Heart: Kemono）', items: eff }
+      { name:'Effects / エフェクト（Heart: Romance）', items: eff }
     ],
     presets
   });

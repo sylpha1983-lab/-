@@ -1,5 +1,5 @@
 /* ============================================
-   Chained Heart Pack — part46.js
+   Bokeh / Soft Glow Heart Pack — part46.js
    ============================================ */
 (function (g){
   const register = g.__registerPromptPart || function(id, data){
@@ -9,70 +9,45 @@
 
   // === Expressions（表情）===
   const expr = [
-    { id:'steadfast-heart-gaze',   label:'揺るがぬ視線（ハート）/ steadfast heart gaze' },
-    { id:'bashful-heart-bite',     label:'はにかみ軽噛み（ハート）/ bashful lip-bite (heart)' },
-    { id:'resolve-with-heart',     label:'決意のまなざし（ハート）/ resolve with heart' },
-    { id:'shy-smile-locked',       label:'鍵付きシャイスマイル / shy smile (locked-heart)' }
+    { id:'soft-closed-smile',    label:'やわ微笑み（閉口） / soft closed smile' },
+    { id:'calm-eyes-half',       label:'落ち着き半目 / calm half-lidded eyes' },
+    { id:'serene-blush',         label:'静かな紅潮 / serene blush' },
+    { id:'glad-tear-faint',      label:'かすかな嬉涙 / faint glad tear' },
+    { id:'warm-gaze',            label:'あたたかい視線 / warm gaze' }
   ];
 
   // === Effects（エフェクト）===
   const eff = [
-    { id:'heart-chain-frame',      label:'画面枠のハートチェーン / heart chain frame' },
-    { id:'locked-heart-emblem',    label:'錠前ハートの紋章 / locked heart emblem' },
-    { id:'metal-spark-heart',      label:'金属きらめきのハート粒子 / metallic heart spark' },
-    { id:'soft-pulse-heart-glow',  label:'やわらか鼓動ハート光 / soft pulse heart glow' },
-    { id:'chain-bokeh-pink',       label:'ピンク鎖ボケ / pink chain bokeh' },
-    { id:'floating-mini-locks',    label:'浮遊ミニ錠前 / floating mini locks' }
+    { id:'bokeh-heart-field',    label:'ボケ・ハート群 / bokeh heart field' },
+    { id:'soft-heart-glow',      label:'やわらかな心光 / soft heart glow' },
+    { id:'veil-pastel-haze',     label:'パステルの靄 / pastel haze veil' },
+    { id:'inner-bloom-heart',    label:'内側ブルーム・ハート / inner bloom (heart)' },
+    { id:'petal-spark-hearts',   label:'花粉きらめき・ハート / petal spark hearts' }
   ];
 
   // === Presets（プリセット）===
   const presets = [
     {
-      id:'Locked-Heart-Aura',
-      label:'ロックド・ハート・オーラ',
-      tags:[
-        'resolve-with-heart',
-        'locked-heart-emblem',
-        'soft-pulse-heart-glow',
-        'metal-spark-heart',
-        'chain-bokeh-pink'
-      ]
+      id:'Bokeh-Whisper-Heart',
+      label:'ボケ囁きハート',
+      tags: ['soft-closed-smile','warm-gaze','bokeh-heart-field','soft-heart-glow','veil-pastel-haze']
     },
     {
-      id:'Chain-Frame-Shy',
-      label:'チェーン枠・シャイスマイル',
-      tags:[
-        'shy-smile-locked',
-        'heart-chain-frame',
-        'floating-mini-locks',
-        'soft-pulse-heart-glow'
-      ]
+      id:'Serene-Bloom',
+      label:'静謐なブルーム',
+      tags: ['calm-eyes-half','serene-blush','inner-bloom-heart','petal-spark-hearts']
     },
     {
-      id:'Steadfast-Emblem',
-      label:'不動の視線・ハート紋章',
-      tags:[
-        'steadfast-heart-gaze',
-        'locked-heart-emblem',
-        'metal-spark-heart',
-        'chain-bokeh-pink'
-      ]
-    },
-    {
-      id:'Bashful-Bite-Glow',
-      label:'はにかみ軽噛み・ハートの鼓動光',
-      tags:[
-        'bashful-heart-bite',
-        'soft-pulse-heart-glow',
-        'floating-mini-locks'
-      ]
+      id:'Faint-Tear-Spark',
+      label:'かすかな涙・火花',
+      tags: ['glad-tear-faint','soft-heart-glow','bokeh-heart-field']
     }
   ];
 
   register('part46',{
     categories:[
       { name:'Expressions / 表情', items: expr },
-      { name:'Effects / エフェクト（Heart: Chained）', items: eff }
+      { name:'Effects / エフェクト（Heart: Bokeh/Soft Glow）', items: eff }
     ],
     presets
   });

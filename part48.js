@@ -1,5 +1,5 @@
 /* ============================================
-   Nebula Heart Pack — part48.js
+   Ocean / Bubble Heart Pack — part48.js
    ============================================ */
 (function (g){
   const register = g.__registerPromptPart || function(id, data){
@@ -9,68 +9,45 @@
 
   // === Expressions（表情）===
   const expr = [
-    { id:'starry-heart-eyes',        label:'星屑ハートアイ / starry heart eyes' },
-    { id:'nebula-drift-smile',       label:'星雲漂う微笑み / nebula drift smile' },
-    { id:'cosmic-awe-gaze',          label:'宇宙への畏敬の眼差し / cosmic awe gaze' },
-    { id:'dreamy-comet-blink',       label:'夢見彗星まばたき / dreamy comet blink' }
+    { id:'ripple-smile',         label:'さざ波スマイル / ripple smile' },
+    { id:'tide-soft-gaze',       label:'潮のやわ視線 / tide soft gaze' },
+    { id:'sea-breeze-blush',     label:'潮風の紅潮 / sea breeze blush' },
+    { id:'pearled-tears',        label:'真珠涙 / pearled tears' },
+    { id:'drift-dreamy-eyes',    label:'漂う夢目 / drift dreamy eyes' }
   ];
 
   // === Effects（エフェクト）===
   const eff = [
-    { id:'nebula-heart-mist',        label:'星雲ハート霧 / nebula heart mist' },
-    { id:'starlit-heart-dust',       label:'星明かりハートダスト / starlit heart dust' },
-    { id:'aurora-heart-veil',        label:'オーロラ・ハートヴェール / aurora heart veil' },
-    { id:'galactic-heart-swirls',    label:'銀河スワール・ハート / galactic heart swirls' },
-    { id:'deep-space-glow',          label:'深宇宙グロウ / deep space glow' },
-    { id:'constellation-heart-lines',label:'星座線・ハート連結 / constellation heart lines' }
+    { id:'bubble-heart-trail',   label:'泡ハートの軌跡 / bubble heart trail' },
+    { id:'aqua-heart-glow',      label:'アクア心光 / aqua heart glow' },
+    { id:'sea-spray-mist',       label:'海しぶきの霧 / sea spray mist' },
+    { id:'light-shaft-undersea', label:'光条（海中） / undersea light shafts' },
+    { id:'foam-spark-hearts',    label:'泡沫スパーク・ハート / foam spark hearts' }
   ];
 
   // === Presets（プリセット）===
   const presets = [
     {
-      id:'Nebula-Whisper',
-      label:'星雲のささやき',
-      tags:[
-        'nebula-drift-smile',
-        'nebula-heart-mist',
-        'deep-space-glow',
-        'starlit-heart-dust'
-      ]
+      id:'Bubble-Confession',
+      label:'泡ハートの告白',
+      tags: ['ripple-smile','aqua-heart-glow','bubble-heart-trail','sea-spray-mist']
     },
     {
-      id:'Cosmic-Awe-Constellation',
-      label:'宇宙畏敬・星座ハート',
-      tags:[
-        'cosmic-awe-gaze',
-        'constellation-heart-lines',
-        'galactic-heart-swirls',
-        'deep-space-glow'
-      ]
+      id:'Undersea-Serenity',
+      label:'海中の静謐',
+      tags: ['tide-soft-gaze','light-shaft-undersea','aqua-heart-glow']
     },
     {
-      id:'Aurora-Heart-Dream',
-      label:'オーロラ・ハートドリーム',
-      tags:[
-        'dreamy-comet-blink',
-        'aurora-heart-veil',
-        'starlit-heart-dust'
-      ]
-    },
-    {
-      id:'Starry-Eyes-Nebula',
-      label:'星屑アイ・星雲ヴェール',
-      tags:[
-        'starry-heart-eyes',
-        'nebula-heart-mist',
-        'aurora-heart-veil'
-      ]
+      id:'Pearled-Tear-Dream',
+      label:'真珠涙の夢',
+      tags: ['pearled-tears','drift-dreamy-eyes','foam-spark-hearts']
     }
   ];
 
   register('part48',{
     categories:[
       { name:'Expressions / 表情', items: expr },
-      { name:'Effects / エフェクト（Heart: Nebula）', items: eff }
+      { name:'Effects / エフェクト（Heart: Ocean/Bubble）', items: eff }
     ],
     presets
   });
