@@ -1,0 +1,819 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>表情＋エフェクト複合ビルダー（喜怒哀楽・初期クローズ／ポーズ・髪型対応）</title>
+<style>
+  :root{--gap:10px;--pad:10px}
+  *{box-sizing:border-box}
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#fff;color:#111;margin:10px}
+  h1{font-size:1.15rem;margin:6px 0 12px}
+  .card{padding:var(--pad);border:1px solid #eee;border-radius:12px;background:#fff;margin:10px 0}
+  .row{display:flex;align-items:center;gap:8px;margin:8px 0;flex-wrap:wrap}
+  input[type="search"],input[type="text"]{width:100%;padding:.7em;border:1px solid #ccc;border-radius:10px}
+  .btn{padding:.65em 1em;border:1px solid #ccc;border-radius:10px;background:#f8f8f8}
+  .btn:active{transform:translateY(1px)}
+  details{border:1px solid #eee;border-radius:12px;padding:6px;margin:8px 0;background:#fff}
+  summary{cursor:pointer;font-weight:700;list-style:none}
+  summary::-webkit-details-marker{display:none}
+  label.item{display:flex;align-items:center;gap:8px;padding:6px 2px;line-height:1.25}
+  .muted{color:#666}
+  textarea{width:100%;min-height:140px;padding:10px;border:1px solid #ccc;border-radius:12px}
+  .pill{font-size:.8rem;border:1px solid #ddd;border-radius:999px;padding:.15em .55em;background:#fafafa}
+  .flex-between{display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .count{font-variant-numeric:tabular-nums}
+  .mono{font-family:ui-monospace,SFMono-Regular,Consolas,Menlo,monospace;font-size:.9rem;white-space:pre-wrap}
+  .ok{color:#067}.ng{color:#b00}.empty{color:#666}
+  .progressbar{width:100%;height:12px;background:#eee;border-radius:6px;overflow:hidden;margin-top:6px}
+  .progress-inner{height:100%;display:flex}
+  .seg-ok{background:#4CAF50;transition:width .15s}
+  .seg-ng{background:#E53935;transition:width .15s}
+  .seg-empty{background:#9E9E9E;transition:width .15s}
+  .seg-rest{background:transparent;flex:1}
+</style>
+</head>
+<body>
+  <h1>表情＋エフェクト複合ビルダー（喜怒哀楽・初期クローズ／ポーズ・髪型対応）</h1>
+
+  <!-- 読み込みチェッカー（進捗バー付き） -->
+  <div class="card">
+    <details id="checkerBox">
+      <summary>
+        読み込みチェッカー：
+        <span id="loadSummary" class="pill count">—</span>
+        <div class="progressbar"><div class="progress-inner">
+          <div id="barOk" class="seg-ok" style="width:0%"></div>
+          <div id="barNg" class="seg-ng" style="width:0%"></div>
+          <div id="barEmpty" class="seg-empty" style="width:0%"></div>
+          <div id="barRest" class="seg-rest"></div>
+        </div></div>
+      </summary>
+      <div id="loadLog" class="mono muted"></div>
+    </details>
+  </div>
+
+  <!-- プリセット -->
+  <div class="card">
+    <input id="presetSearch" type="search" placeholder="プリセット検索 / Preset search (JP/EN)">
+    <details id="presetsBox">
+      <summary>プリセット（✨ 喜 / 💢 怒 / 😢 哀 / 🎵 楽 / ❤️ heart・初期閉） <span id="presetCount" class="pill count"></span></summary>
+      <details><summary>✨ 喜 <span id="pcJoy" class="pill count"></span></summary><div id="presetJoy"></div></details>
+      <details><summary>💢 怒 <span id="pcAnger" class="pill count"></span></summary><div id="presetAnger"></div></details>
+      <details><summary>😢 哀 <span id="pcSad" class="pill count"></span></summary><div id="presetSad"></div></details>
+      <details><summary>🎵 楽 <span id="pcFun" class="pill count"></span></summary><div id="presetFun"></div></details>
+      <details><summary>❤️ heart <span id="pcHeart" class="pill count"></span></summary><div id="presetHeart"></div></details>
+      <details><summary>その他 <span id="pcOther" class="pill count"></span></summary><div id="presetOther"></div></details>
+    </details>
+  </div>
+
+  <!-- 表情 -->
+  <div class="card">
+    <input id="exprSearch" type="search" placeholder="表情検索 / Expression search (JP/EN)">
+    <details id="exprBox">
+      <summary>表情（✨ 喜 / 💢 怒 / 😢 哀 / 🎵 楽 / ❤️ heart・初期閉） <span id="exprCount" class="pill count"></span></summary>
+      <details><summary>✨ 喜 <span id="ecJoy" class="pill count"></span></summary><div id="exprJoy"></div></details>
+      <details><summary>💢 怒 <span id="ecAnger" class="pill count"></span></summary><div id="exprAnger"></div></details>
+      <details><summary>😢 哀 <span id="ecSad" class="pill count"></span></summary><div id="exprSad"></div></details>
+      <details><summary>🎵 楽 <span id="ecFun" class="pill count"></span></summary><div id="exprFun"></div></details>
+      <details><summary>❤️ heart <span id="ecHeart" class="pill count"></span></summary><div id="exprHeart"></div></details>
+    </details>
+  </div>
+
+  <!-- エフェクト -->
+  <div class="card">
+    <input id="effSearch" type="search" placeholder="エフェクト検索 / Effect search (JP/EN)">
+    <details id="effBox">
+      <summary>エフェクト（光／線／粒子／天候／VFX…・初期閉） <span id="effCount" class="pill count"></span></summary>
+      <div id="catalogEff"></div>
+    </details>
+  </div>
+
+  <!-- ポーズ -->
+  <div class="card">
+    <input id="poseSearch" type="search" placeholder="ポーズ検索 / Pose search (JP/EN)">
+    <details id="poseBox">
+      <summary>ポーズ（カテゴリ別・初期閉） <span id="poseCount" class="pill count"></span></summary>
+      <div id="catalogPose"></div>
+    </details>
+  </div>
+
+  <!-- 髪型（もう一段折りたたみあり） -->
+  <div class="card">
+    <input id="hairSearch" type="search" placeholder="髪型検索 / Hair search (JP/EN)">
+    <details id="hairBox">
+      <summary>髪型（カテゴリ別・初期閉） <span id="hairCount" class="pill count"></span></summary>
+      <div id="catalogHair"></div>
+    </details>
+  </div>
+
+  <!-- Extra -->
+  <div class="card">
+    <details id="extraBox">
+      <summary>Extra（カタログ外 / Not in catalog・初期閉） <span id="extraCount" class="pill count">0</span></summary>
+      <div id="extraBody"></div>
+    </details>
+  </div>
+
+  <!-- 出力 -->
+  <div class="card">
+    <div class="row flex-between">
+      <div class="row">
+        <button id="btnGen" class="btn">タグ生成</button>
+        <button id="btnReset" class="btn">リセット（Extra含む）</button>
+        <button id="btnCopy" class="btn">コピー</button>
+      </div>
+      <small class="muted">出力は英語タグ（id）をカンマ区切りで生成。UIは日英併記。</small>
+    </div>
+    <textarea id="out" placeholder="generated tags will appear here..."></textarea>
+  </div>
+
+<script>
+/* ============================================================
+   レジストリ
+============================================================ */
+window.__registerPromptPart = (id, data) => {
+  const pb = (window.promptBuilder = window.promptBuilder || {});
+  pb[id] = data;
+  const alias = window.__CURRENT_LOAD_NAME;
+  if (alias && !pb[alias]) pb[alias] = data;
+};
+window.registerPromptPart = window.__registerPromptPart;
+window.__registerPromptPack = window.__registerPromptPart;
+
+window.__registerPosePart = (id, data) => {
+  const p = (window.poseBuilder = window.poseBuilder || {});
+  p[id] = data;
+  const alias = window.__CURRENT_LOAD_NAME;
+  if (alias && !p[alias]) p[alias] = data;
+};
+window.__registerHairPart = (id, data) => {
+  const h = (window.hairBuilder = window.hairBuilder || {});
+  h[id] = data;
+  const alias = window.__CURRENT_LOAD_NAME;
+  if (alias && !h[alias]) h[alias] = data;
+};
+
+/* ===== 参照 ===== */
+const loadLog      = document.getElementById('loadLog');
+const loadSummary  = document.getElementById('loadSummary');
+const barOk        = document.getElementById('barOk');
+const barNg        = document.getElementById('barNg');
+const barEmpty     = document.getElementById('barEmpty');
+const barRest      = document.getElementById('barRest');
+
+const presetCountEl = document.getElementById('presetCount');
+const exprCountEl   = document.getElementById('exprCount');
+const effCountEl    = document.getElementById('effCount');
+const poseCountEl   = document.getElementById('poseCount');
+const hairCountEl   = document.getElementById('hairCount');
+
+const presetAreas = {
+  joy:    document.getElementById('presetJoy'),
+  anger:  document.getElementById('presetAnger'),
+  sad:    document.getElementById('presetSad'),
+  fun:    document.getElementById('presetFun'),
+  heart:  document.getElementById('presetHeart'),
+  other:  document.getElementById('presetOther'),
+};
+const presetAreaCounts = {
+  joy: document.getElementById('pcJoy'),
+  anger: document.getElementById('pcAnger'),
+  sad:  document.getElementById('pcSad'),
+  fun:  document.getElementById('pcFun'),
+  heart:document.getElementById('pcHeart'),
+  other:document.getElementById('pcOther'),
+};
+
+const exprAreas = {
+  joy:   document.getElementById('exprJoy'),
+  anger: document.getElementById('exprAnger'),
+  sad:   document.getElementById('exprSad'),
+  fun:   document.getElementById('exprFun'),
+  heart: document.getElementById('exprHeart'),
+};
+const exprAreaCounts = {
+  joy: document.getElementById('ecJoy'),
+  anger: document.getElementById('ecAnger'),
+  sad:  document.getElementById('ecSad'),
+  fun:  document.getElementById('ecFun'),
+  heart: document.getElementById('ecHeart'),
+};
+
+const catalogEffRoot  = document.getElementById('catalogEff');
+const catalogPoseRoot = document.getElementById('catalogPose');
+const catalogHairRoot = document.getElementById('catalogHair');
+
+const extraBody  = document.getElementById('extraBody');
+const extraCount = document.getElementById('extraCount');
+const out        = document.getElementById('out');
+
+/* ===== 状態 ===== */
+const checkboxMap  = new Map();
+const presetBoxMap = new Map();
+const extraSet     = new Set();
+
+// どのJS(ファイル)由来かを記録
+const tagSourceMap = new Map(); // id -> "part26.js" / "pose_part12.js" / "hair_part7.js"
+
+/* ===== データ ===== */
+let allCategories      = [];
+let allPresets         = [];
+let allPoseCategories  = [];
+let allHairCategories  = [];
+
+/* ===== 旧→新 変換 ===== */
+function convertOldExpressionEffectsToNew(obj){
+  const categories = [];
+  if (Array.isArray(obj.expressions) && obj.expressions.length){
+    categories.push({
+      name: 'Expressions / 表情',
+      items: obj.expressions.map(e=>({ id: e.id, label: `${(e.jp||e.label||e.id)} / ${e.id}` }))
+    });
+  }
+  if (Array.isArray(obj.effects) && obj.effects.length){
+    const groups = {};
+    obj.effects.forEach(e=>{
+      const key = e.category || 'Effects / エフェクト';
+      (groups[key]||(groups[key]=[])).push({ id: e.id, label: `${(e.jp||e.label||e.id)} / ${e.id}` });
+    });
+    Object.keys(groups).forEach(k=> categories.push({ name:k, items:groups[k] }));
+  }
+  const presets = Array.isArray(obj.presets) ? obj.presets.map(p=>({
+    id: p.id, label: p.label || p.id,
+    tags: [...new Set([...(p.tags||[]), ...(p.expressions||[]), ...(p.effects||[])])]
+  })) : [];
+  return { categories, presets };
+}
+function normalizeGenericPart(data){
+  if (!data) return null;
+  if (Array.isArray(data.categories)) {
+    data.categories.forEach(c=>{
+      c.items = (c.items||[]).map(it=>({ id: it.id, label: it.label || `${it.id}` }));
+    });
+    return data;
+  }
+  if (data.name && Array.isArray(data.items)){
+    return { categories:[{ name:data.name, items:data.items.map(it=>({id:it.id,label:it.label||it.id})) }] };
+  }
+  return null;
+}
+
+/* ===== 進捗バー ===== */
+const TOTAL_MIX  = 200;
+const TOTAL_POSE = 200;
+const TOTAL_HAIR = 200;
+function updateProgressBars(){
+  const mixOk=+loadSummary.dataset.mixOk||0,
+        mixNg=+loadSummary.dataset.mixNg||0,
+        mixEm=+loadSummary.dataset.mixEmpty||0,
+        poseOk=+loadSummary.dataset.poseOk||0,
+        poseNg=+loadSummary.dataset.poseNg||0,
+        poseEm=+loadSummary.dataset.poseEmpty||0,
+        hairOk=+loadSummary.dataset.hairOk||0,
+        hairNg=+loadSummary.dataset.hairNg||0,
+        hairEm=+loadSummary.dataset.hairEmpty||0;
+  const total = TOTAL_MIX + TOTAL_POSE + TOTAL_HAIR;
+  const ok = mixOk+poseOk+hairOk, ng = mixNg+poseNg+hairNg, em = mixEm+poseEm+hairEm;
+  barOk.style.width   = (total? ok/total*100 : 0).toFixed(2)+'%';
+  barNg.style.width   = (total? ng/total*100 : 0).toFixed(2)+'%';
+  barEmpty.style.width= (total? em/total*100 : 0).toFixed(2)+'%';
+  barRest.style.width = Math.max(0,100-( (total? ok/total*100:0) + (total? ng/total*100:0) + (total? em/total*100:0) )).toFixed(2)+'%';
+}
+
+/* ===== ローダー ===== */
+function __recordSourcesFromCategories(categories, fileLabel){
+  (categories||[]).forEach(cat=>{
+    (cat.items||[]).forEach(it=>{
+      if (it && it.id && !tagSourceMap.has(it.id)) tagSourceMap.set(it.id, fileLabel);
+    });
+  });
+}
+async function loadPartsSeq(from=1,to=200){
+  window.promptBuilder = window.promptBuilder || {};
+  const addLog=(t,c)=>{const d=document.createElement('div');d.textContent=t;if(c)d.className=c;loadLog.appendChild(d);};
+  let ok=0, ng=0, empty=0;
+  for(let i=from;i<=to;i++){
+    const name=`part${i}`;
+    try{
+      if (document.getElementById(`loader-${name}`)){
+        ensureRegisteredMix(name) ? ok++ : empty++;
+        addLog(`${name}: OK (cached)`,'ok');
+      }else{
+        const url=`${name}.js`;
+        const res=await fetch(url,{cache:'no-store'});
+        if(res.status===404){ empty++; addLog(`${name}: EMPTY（未配置）`,'empty'); }
+        else{
+          const js=await res.text();
+          const s=document.createElement('script'); s.id=`loader-${name}`;
+          window.__CURRENT_LOAD_NAME=name;
+          s.textContent=js+`\n//# sourceURL=${url}`;
+          document.head.appendChild(s);
+          window.__CURRENT_LOAD_NAME=null;
+          ensureRegisteredMix(name) ? ok++ : (empty++, addLog(`${name}: EMPTY（読了だが未登録）`,'empty'));
+        }
+      }
+    }catch(e){ ng++; addLog(`${name}: ERROR ${e.message}`,'ng'); }
+    loadSummary.dataset.mixOk=ok; loadSummary.dataset.mixNg=ng; loadSummary.dataset.mixEmpty=empty;
+    updateLoadSummary();
+  }
+}
+async function loadPoseSeq(from=1,to=200){
+  window.poseBuilder = window.poseBuilder || {};
+  const addLog=(t,c)=>{const d=document.createElement('div');d.textContent=t;if(c)d.className=c;loadLog.appendChild(d);};
+  let ok=0, ng=0, empty=0;
+  for(let i=from;i<=to;i++){
+    const id=`pose_part${i}`;
+    try{
+      if(document.getElementById(`loader-${id}`)){
+        ensureRegisteredPose(id) ? ok++ : empty++;
+        addLog(`${id}: OK (cached)`,'ok');
+      }else{
+        const url=`${id}.js`;
+        const res=await fetch(url,{cache:'no-store'});
+        if(res.status===404){ empty++; addLog(`${id}: EMPTY（未配置）`,'empty'); }
+        else{
+          const js=await res.text();
+          const s=document.createElement('script'); s.id=`loader-${id}`;
+          window.__CURRENT_LOAD_NAME=id;
+          s.textContent=js+`\n//# sourceURL=${url}`;
+          document.head.appendChild(s);
+          window.__CURRENT_LOAD_NAME=null;
+          ensureRegisteredPose(id) ? ok++ : (empty++, addLog(`${id}: EMPTY（読了だが未登録）`,'empty'));
+        }
+      }
+    }catch(e){ ng++; addLog(`${id}: ERROR ${e.message}`,'ng'); }
+    loadSummary.dataset.poseOk=ok; loadSummary.dataset.poseNg=ng; loadSummary.dataset.poseEmpty=empty;
+    updateLoadSummary();
+  }
+}
+async function loadHairSeq(from=1,to=200){
+  window.hairBuilder = window.hairBuilder || {};
+  const addLog=(t,c)=>{const d=document.createElement('div');d.textContent=t;if(c)d.className=c;loadLog.appendChild(d);};
+  let ok=0, ng=0, empty=0;
+  for(let i=from;i<=to;i++){
+    const id=`hair_part${i}`;
+    try{
+      if(document.getElementById(`loader-${id}`)){
+        ensureRegisteredHair(id) ? ok++ : empty++;
+        addLog(`${id}: OK (cached)`,'ok');
+      }else{
+        const url=`${id}.js`;
+        const res=await fetch(url,{cache:'no-store'});
+        if(res.status===404){ empty++; addLog(`${id}: EMPTY（未配置）`,'empty'); }
+        else{
+          const js=await res.text();
+          const s=document.createElement('script'); s.id=`loader-${id}`;
+          window.__CURRENT_LOAD_NAME=id;
+          s.textContent=js+`\n//# sourceURL=${url}`;
+          document.head.appendChild(s);
+          window.__CURRENT_LOAD_NAME=null;
+          ensureRegisteredHair(id) ? ok++ : (empty++, addLog(`${id}: EMPTY（読了だが未登録）`,'empty'));
+        }
+      }
+    }catch(e){ ng++; addLog(`${id}: ERROR ${e.message}`,'ng'); }
+    loadSummary.dataset.hairOk=ok; loadSummary.dataset.hairNg=ng; loadSummary.dataset.hairEmpty=empty;
+    updateLoadSummary();
+  }
+}
+function updateLoadSummary(){
+  const mixOk = +loadSummary.dataset.mixOk||0,
+        mixNg = +loadSummary.dataset.mixNg||0,
+        mixEm = +loadSummary.dataset.mixEmpty||0,
+        poseOk= +loadSummary.dataset.poseOk||0,
+        poseNg= +loadSummary.dataset.poseNg||0,
+        poseEm= +loadSummary.dataset.poseEmpty||0,
+        hairOk= +loadSummary.dataset.hairOk||0,
+        hairNg= +loadSummary.dataset.hairNg||0,
+        hairEm= +loadSummary.dataset.hairEmpty||0;
+  loadSummary.textContent =
+    `mix: 成功${mixOk}/失敗${mixNg}/空${mixEm} ｜ `+
+    `pose: 成功${poseOk}/失敗${poseNg}/空${poseEm} ｜ `+
+    `hair: 成功${hairOk}/失敗${hairNg}/空${hairEm}`;
+  updateProgressBars();
+}
+
+/* ===== ensure（登録確認 & 由来記録） ===== */
+function ensureRegisteredMix(name){
+  const fileLabel = `${name}.js`;
+  const pb = window.promptBuilder || {};
+  let d = pb[name];
+  if (!d && window.expressionEffects && window.expressionEffects[name]){
+    d = convertOldExpressionEffectsToNew(window.expressionEffects[name]);
+    pb[name]=d;
+  }
+  if (!d && window[name]){
+    const maybe = window[name];
+    d = maybe.categories ? maybe : convertOldExpressionEffectsToNew(maybe);
+    pb[name]=d;
+  }
+  if (!d) return false;
+  __recordSourcesFromCategories(d.categories, fileLabel);
+  (d.presets||[]).forEach(pr=>{
+    if(!allPresets.some(x=>x.id===pr.id)) allPresets.push({id:pr.id,label:pr.label,tags:pr.tags||[]});
+  });
+  return true;
+}
+function ensureRegisteredPose(id){
+  const fileLabel = `${id}.js`;
+  const p = window.poseBuilder || {};
+  let d = p[id];
+  if (!d && window[id]){ d = normalizeGenericPart(window[id]); if (d) p[id]=d; }
+  if (!d && window.poseParts && window.poseParts[id]){ d = normalizeGenericPart(window.poseParts[id]); if (d) p[id]=d; }
+  if (!d) return false;
+  __recordSourcesFromCategories(d.categories, fileLabel);
+  return true;
+}
+function ensureRegisteredHair(id){
+  const fileLabel = `${id}.js`;
+  const h = window.hairBuilder || {};
+  let d = h[id];
+  if (!d && window[id]){ d = normalizeGenericPart(window[id]); if (d) h[id]=d; }
+  if (!d && window.hairParts && window.hairParts[id]){ d = normalizeGenericPart(window.hairParts[id]); if (d) h[id]=d; }
+  if (!d) return false;
+  __recordSourcesFromCategories(d.categories, fileLabel);
+  return true;
+}
+
+/* ============================================================
+   統合
+============================================================ */
+function integrateMix(){
+  const parts = window.promptBuilder || {};
+  const catMap = new Map();
+  Object.keys(parts).sort().forEach(k=>{
+    const p = parts[k]||{};
+    (p.categories||[]).forEach(cat=>{
+      if (!cat || !cat.name) return;
+      if (!catMap.has(cat.name)) catMap.set(cat.name,{name:cat.name,items:[]});
+      const b=catMap.get(cat.name);
+      (cat.items||[]).forEach(it=>{
+        if (it && it.id && !b.items.some(x=>x.id===it.id)){
+          b.items.push({id:it.id,label:it.label||it.id});
+        }
+      });
+    });
+  });
+  allCategories = [...catMap.values()].sort((a,b)=>{
+    const ae = a.name.startsWith('Expressions') ? 0 : 1;
+    const be = b.name.startsWith('Expressions') ? 0 : 1;
+    return ae-be || a.name.localeCompare(b.name);
+  });
+}
+function integratePose(){
+  const parts = window.poseBuilder || {};
+  const catMap = new Map();
+  Object.keys(parts).sort().forEach(k=>{
+    (parts[k].categories||[]).forEach(cat=>{
+      if (!cat || !cat.name) return;
+      if (!catMap.has(cat.name)) catMap.set(cat.name,{name:cat.name,items:[]});
+      const b=catMap.get(cat.name);
+      (cat.items||[]).forEach(it=>{
+        if (it && it.id && !b.items.some(x=>x.id===it.id)){
+          b.items.push({id:it.id,label:it.label||it.id});
+        }
+      });
+    });
+  });
+  allPoseCategories = [...catMap.values()].sort((a,b)=>a.name.localeCompare(b.name));
+}
+function integrateHair(){
+  const parts = window.hairBuilder || {};
+  const catMap = new Map();
+  Object.keys(parts).sort().forEach(k=>{
+    (parts[k].categories||[]).forEach(cat=>{
+      if (!cat || !cat.name) return;
+      if (!catMap.has(cat.name)) catMap.set(cat.name,{name:cat.name,items:[]});
+      const b=catMap.get(cat.name);
+      (cat.items||[]).forEach(it=>{
+        if (it && it.id && !b.items.some(x=>x.id===it.id)){
+          b.items.push({id:it.id,label:it.label||it.id});
+        }
+      });
+    });
+  });
+  allHairCategories = [...catMap.values()].sort((a,b)=>a.name.localeCompare(b.name));
+}
+
+/* ============================================================
+   判定（喜怒哀楽・heart）強化版
+   - 正規表現の語彙セットに重みを持たせ、合計スコアが最大のバケットへ。
+   - heart は最優先（スコアに +Infinity 相当）。
+============================================================ */
+// [CHANGE] 強化語彙
+const MOOD_LEX = {
+  heart: [
+    /heart|❤|♥|love|恋|好き|大好き|kiss|キス|ちゅー|抱/i,
+    /blush|照れ|赤面|ドキドキ|ときめ/i
+  ],
+  joy: [
+    /smile|smiling|smiley|にこ|にっこり|微笑|笑顔|嬉|喜|happy|delight|grin|big[- ]?smile/i,
+    /laugh(?!ter)?|laughing|呵々|爆笑/i,
+    /wide[- ]?eyed(?!(\s*surpris))/i
+  ],
+  anger: [
+    /angry|anger|furious|rage|怒|憤|苛立|イラ/i,
+    /glare|side[- ]?eye|ジト目|じと目|睨|にら/i,
+    /scowl|grimace|brow[- ]?(furrow|down)|嫉妬|jealous/i
+  ],
+  sad: [
+    /sad|melanch|哀|寂|切な/i,
+    /tear(y|ful)?[- ]?eyes?|涙|うるみ瞳|グラス?ジー/i,
+    /cry|sob|pout|しょんぼり/i,
+    /sleepy|眠い|tired|疲れ|weary/i
+  ],
+  fun: [
+    /wink|winking|ウィンク|smirk|いたずら|tease|playful|戯|おちゃめ/i,
+    /tongue[- ]?out|てへぺろ|えへへ|mischief/i,
+    /surpris(e|ed)|びっくり|驚き/i
+  ]
+};
+
+// [CHANGE] スコアリング関数
+function moodBucketOf(rawLabel){
+  const t = (rawLabel||'').toLowerCase();
+  // heart は最優先
+  if (MOOD_LEX.heart.some(r=>r.test(t))) return 'heart';
+
+  const score = {joy:0, anger:0, sad:0, fun:0};
+  for (const k of Object.keys(score)){
+    MOOD_LEX[k].forEach((re,idx)=>{
+      if (re.test(t)) score[k] += (idx===0?2:1); // 先頭語彙は重み2
+    });
+  }
+  // 最大スコアのカテゴリを返す（同点は優先順位：喜>楽>怒>哀）
+  const order = ['joy','fun','anger','sad'];
+  let best='fun', bestScore=-1;
+  for (const k of order){
+    if (score[k] > bestScore){ best = k; bestScore = score[k]; }
+  }
+  return bestScore>0 ? best : 'fun';
+}
+/* ============================================================
+   髪型判定
+============================================================ */
+function isHairLikeCategoryName(name){
+  const n=(name||'').toLowerCase(), jp=name||'';
+  return /^hair\b/.test(n) || /ponytail|bangs|updo|braid|twintail/.test(n) || /long|short|medium/.test(n) ||
+         /color|colors|accent|palette|tone|gradation|gradient|highlight|mesh|neon|glow/.test(n) ||
+         /スタイル|前髪|ポニーテール|ツインテール|アップ|編み|ロング|ショート|ミディアム|カラー|色|ハイライト|グラデ|発光|アクセ|飾り/.test(jp);
+}
+function hairGroupName(name){
+  const n = (name||'').toLowerCase();
+  if (/ponytail/.test(n)) return 'Ponytails / ポニーテール系';
+  if (/color|colors|カラー/.test(n)) return 'Colors / カラー系';
+  if (/highlight|mesh|gradation|gradient|two[- ]?tone|neon|glow|グラデ|ハイライト|ツートーン|発光/.test(n)) return 'Highlights & Gradations / ハイライト・グラデ系';
+  if (/bangs|long|short|medium|updo|style|スタイル|前髪|ロング|ショート|ミディアム|まとめ|巻き|アップ/.test(n)) return 'Styles / スタイル系';
+  if (/accessor|飾|アクセ/.test(n)) return 'Accessories / アクセ系';
+  if (/traditional|ethnic|cultural|和|民族|伝統|文化/.test(n)) return 'Traditional & Cultural / 伝統・文化系';
+  if (/fantasy|magic|gothic|dark|otherworld|futur|sci[- ]?fi|cyber|sf|異世界|未来|幻想|魔法|ゴシック|ダーク/.test(n)) return 'Fantasy / Sci-Fi / Gothic';
+  return 'Other / その他';
+}
+function labelWithSource(baseLabel,id){
+  const src=tagSourceMap.get(id);
+  return `${baseLabel||id} / ${id}${src?` (${src})`:''}`;
+}
+
+/* ============================================================
+   ビルド
+============================================================ */
+function buildPresets(){
+  Object.values(presetAreas).forEach(el=>el.innerHTML='');
+  const counts={joy:0,anger:0,sad:0,fun:0,heart:0,other:0};
+
+  allPresets.forEach(pr=>{
+    const bucket = moodBucketOf(pr.label);
+    const area = presetAreas[bucket] || presetAreas.other;
+
+    // プリセット由来ファイルを表示（最大3）
+    const srcSet = new Set((pr.tags||[]).map(id=>tagSourceMap.get(id)).filter(Boolean));
+    const srcs = [...srcSet];
+    const srcLabel = srcs.length ? ` (${srcs.slice(0,3).join(', ')}${srcs.length>3?`, +${srcs.length-3} more`:''})` : '';
+
+    const lab=document.createElement('label'); lab.className='item';
+    const cb=document.createElement('input'); cb.type='checkbox'; cb.value=pr.id; cb.dataset.preset='1';
+    checkboxMap.set(cb,pr.id);
+    presetBoxMap.set(pr.id,pr.tags||[]);
+    lab.appendChild(cb);
+    lab.appendChild(document.createTextNode(`${pr.label}${srcLabel}`));
+    area.appendChild(lab);
+    counts[bucket]++;
+  });
+
+  presetCountEl.textContent=`全${allPresets.length}`;
+  presetAreaCounts.joy.textContent   = counts.joy;
+  presetAreaCounts.anger.textContent = counts.anger;
+  presetAreaCounts.sad.textContent   = counts.sad;
+  presetAreaCounts.fun.textContent   = counts.fun;
+  presetAreaCounts.heart.textContent = counts.heart;
+  presetAreaCounts.other.textContent = counts.other;
+}
+
+function buildExpressionsByMood(){
+  Object.values(exprAreas).forEach(el=> el && (el.innerHTML=''));
+  const exprCat = allCategories.find(c=>c.name.startsWith('Expressions'));
+  const items = exprCat?.items || [];
+  const counts={joy:0,anger:0,sad:0,fun:0,heart:0};
+
+  items.forEach(it=>{
+    const bucket = moodBucketOf(it.label||it.id);
+    const area = exprAreas[bucket] || exprAreas.fun;
+    const lab=document.createElement('label'); lab.className='item';
+    const cb=document.createElement('input'); cb.type='checkbox'; cb.value=it.id;
+    checkboxMap.set(cb,it.id);
+    lab.appendChild(cb);
+    lab.appendChild(document.createTextNode(labelWithSource(it.label, it.id)));
+    area.appendChild(lab);
+    counts[bucket]++;
+  });
+
+  exprCountEl.textContent=`全${items.length}`;
+  exprAreaCounts.joy.textContent   = counts.joy;
+  exprAreaCounts.anger.textContent = counts.anger;
+  exprAreaCounts.sad.textContent   = counts.sad;
+  exprAreaCounts.fun.textContent   = counts.fun;
+  exprAreaCounts.heart.textContent = counts.heart;
+}
+
+function buildEffects(){
+  catalogEffRoot.innerHTML='';
+  const effCats = allCategories.filter(c=>!c.name.startsWith('Expressions'))
+                               .filter(c=>!isHairLikeCategoryName(c.name));
+  effCats.forEach(cat=>{
+    const d=document.createElement('details'); d.open=false;
+    const s=document.createElement('summary'); s.textContent=cat.name+` (${cat.items.length})`;
+    d.appendChild(s);
+    cat.items.forEach(it=>{
+      const lab=document.createElement('label'); lab.className='item';
+      const cb=document.createElement('input'); cb.type='checkbox'; cb.value=it.id;
+      checkboxMap.set(cb,it.id);
+      lab.appendChild(cb);
+      lab.appendChild(document.createTextNode(labelWithSource(it.label, it.id)));
+      d.appendChild(lab);
+    });
+    catalogEffRoot.appendChild(d);
+  });
+  effCountEl.textContent=`全${effCats.reduce((a,c)=>a+c.items.length,0)}`;
+}
+function buildPoses(){
+  catalogPoseRoot.innerHTML='';
+  allPoseCategories.forEach(cat=>{
+    const d=document.createElement('details'); d.open=false;
+    const s=document.createElement('summary'); s.textContent=`${cat.name} (${cat.items.length})`;
+    d.appendChild(s);
+    cat.items.forEach(it=>{
+      const lab=document.createElement('label'); lab.className='item';
+      const cb=document.createElement('input'); cb.type='checkbox'; cb.value=it.id;
+      checkboxMap.set(cb,it.id);
+      lab.appendChild(cb);
+      lab.appendChild(document.createTextNode(labelWithSource(it.label, it.id)));
+      d.appendChild(lab);
+    });
+    catalogPoseRoot.appendChild(d);
+  });
+  poseCountEl.textContent=`全${allPoseCategories.reduce((a,c)=>a+c.items.length,0)}`;
+}
+function buildHair(){
+  catalogHairRoot.innerHTML='';
+  const groupMap = new Map();
+  function ensureGroup(name){
+    if (!groupMap.has(name)){
+      const gWrap=document.createElement('details'); gWrap.open=false;
+      const gSum=document.createElement('summary'); gSum.textContent=name+' ';
+      const gCnt=document.createElement('span'); gCnt.className='pill count'; gCnt.textContent='0';
+      gSum.appendChild(gCnt); gWrap.appendChild(gSum);
+      const gBody=document.createElement('div'); gWrap.appendChild(gBody);
+      catalogHairRoot.appendChild(gWrap);
+      groupMap.set(name,{wrap:gWrap, body:gBody, cnt:gCnt, num:0});
+    }
+    return groupMap.get(name);
+  }
+  allHairCategories.forEach(cat=>{
+    const gName=hairGroupName(cat.name);
+    const g=ensureGroup(gName);
+    const d=document.createElement('details'); d.open=false;
+    const s=document.createElement('summary'); s.textContent=`${cat.name} (${cat.items.length})`;
+    d.appendChild(s);
+    (cat.items||[]).forEach(it=>{
+      const lab=document.createElement('label'); lab.className='item';
+      const cb=document.createElement('input'); cb.type='checkbox'; cb.value=it.id;
+      checkboxMap.set(cb, cb.value);
+      lab.appendChild(cb);
+      lab.appendChild(document.createTextNode(labelWithSource(it.label, it.id)));
+      d.appendChild(lab);
+    });
+    g.body.appendChild(d);
+    g.num += 1;
+  });
+  groupMap.forEach(g=> g.cnt.textContent = g.num);
+  hairCountEl.textContent=`全${allHairCategories.reduce((a,c)=>a+(c.items?.length||0),0)}`;
+}
+
+/* ============================================================
+   Extra・検索・生成
+============================================================ */
+function ensureExtraTag(id){
+  if (!id) return;
+  if (!extraSet.has(id)){
+    extraSet.add(id);
+    const lab=document.createElement('label'); lab.className='item';
+    const cb=document.createElement('input'); cb.type='checkbox'; cb.checked=true; cb.value=id;
+    checkboxMap.set(cb, id);
+    lab.appendChild(cb);
+    lab.appendChild(document.createTextNode(labelWithSource(id, id)));
+    extraBody.appendChild(lab);
+    extraCount.textContent=String(extraSet.size);
+  }
+}
+function attachSearch(){
+  const bind = (inputId, rootDetailsId, listRoot, itemSelector='label.item')=>{
+    const box = document.getElementById(rootDetailsId);
+    const input = document.getElementById(inputId);
+    if (!input || !box) return;
+
+    const run = ()=>{
+      const q = (input.value||'').trim().toLowerCase();
+      Array.from(listRoot.querySelectorAll(':scope > details')).forEach(d=>d.open=false);
+      if(!q) return;
+      Array.from(listRoot.querySelectorAll(':scope > details')).forEach(d=>{
+        const summaryText = (d.querySelector(':scope > summary')?.textContent||'').toLowerCase();
+        const hitInSummary = summaryText.includes(q);
+        const hitInItems = Array.from(d.querySelectorAll(itemSelector)).some(l=>
+          (l.textContent||'').toLowerCase().includes(q)
+        );
+        if (hitInSummary || hitInItems) d.open=true;
+        Array.from(d.querySelectorAll(':scope > details')).forEach(dd=>{
+          const sm = (dd.querySelector(':scope > summary')?.textContent||'').toLowerCase();
+          const si = Array.from(dd.querySelectorAll(itemSelector)).some(l=>
+            (l.textContent||'').toLowerCase().includes(q)
+          );
+          if (sm.includes(q) || si) { d.open=true; dd.open=true; }
+        });
+      });
+      box.open = true;
+    };
+
+    input.addEventListener('input', run);
+  };
+
+  bind('presetSearch','presetsBox', document.getElementById('presetsBox'));
+  bind('exprSearch','exprBox', document.getElementById('exprBox'));
+  bind('effSearch','effBox', catalogEffRoot);
+  bind('poseSearch','poseBox', catalogPoseRoot);
+  bind('hairSearch','hairBox', catalogHairRoot);
+}
+function generateTags(){
+  const tags=[];
+  checkboxMap.forEach((id,cb)=>{
+    if(!cb.checked) return;
+    if(cb.dataset.preset){
+      (presetBoxMap.get(id)||[]).forEach(t=>tags.push(t));
+    }else{
+      tags.push(id);
+    }
+  });
+  extraSet.forEach(t=>tags.push(t));
+  out.value = [...new Set(tags)].join(', ');
+}
+function resetAll(){
+  checkboxMap.forEach((id,cb)=>{ cb.checked=false; });
+  extraSet.clear();
+  extraBody.innerHTML='';
+  extraCount.textContent='0';
+  out.value='';
+}
+function copyOut(){
+  out.select();
+  try{ document.execCommand('copy'); }catch(_){}
+}
+
+/* ============================================================
+   起動
+============================================================ */
+document.getElementById('btnGen')  .addEventListener('click',generateTags);
+document.getElementById('btnReset').addEventListener('click',resetAll);
+document.getElementById('btnCopy') .addEventListener('click',copyOut);
+
+(async()=>{
+  await loadPartsSeq(1,200);
+  integrateMix();
+  await loadPoseSeq(1,200);
+  integratePose();
+  await loadHairSeq(1,200);
+  integrateHair();
+
+  buildPresets();
+  buildExpressionsByMood();
+  buildEffects();
+  buildPoses();
+  buildHair();
+
+  attachSearch();
+  updateLoadSummary();
+
+  // すべての details は初期クローズ維持
+  document.querySelectorAll('details').forEach(d=> d.open=false);
+})();
+</script>
+</body>
+</html>
