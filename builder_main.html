@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>表情＋エフェクト複合ビルダー（ライトUI・カテゴリ直読）</title>
+<style>
+  :root{
+    --fg:#222; --muted:#667085; --ok:#16a34a; --bad:#dc2626; --empty:#2563eb; --bg:#fff; --chip:#f2f4f7;
+  }
+  html,body{margin:0;background:#fff;color:var(--fg);font-family:system-ui, -apple-system, Segoe UI, Roboto, Noto Sans JP, sans-serif;}
+  .wrap{max-width:860px;margin:16px auto;padding:0 12px 80px;}
+  h1{font-size:22px;line-height:1.35;margin:10px 0 16px;}
+  .row{display:flex;gap:10px;align-items:center;margin:10px 0;}
+  .btn{padding:10px 14px;border-radius:10px;border:1px solid #e5e7eb;background:#fff;cursor:pointer}
+  .counter{display:inline-flex;gap:10px;align-items:center;}
+  .badge{padding:6px 10px;border-radius:999px;font-size:12px;background:var(--chip)}
+  .b-ok{color:#fff;background:var(--ok);}
+  .b-bad{color:#fff;background:var(--bad);}
+  .b-empty{color:#fff;background:var(--empty);}
+  .meter{display:flex;align-items:center;gap:10px;margin:12px 0;}
+  .bar{flex:1;height:8px;border-radius:999px;background:#e5e7eb;position:relative;overflow:hidden}
+  .fill{position:absolute;inset:0 100% 0 0;background:linear-gradient(90deg,#b5e3c3,#16a34a)}
+  .slot{min-width:92px;text-align:right;color:#6b7280;font-size:12px;}
+  details{background:#fff;border:1px solid #e6e8ea;border-radius:12px;margin:12px 0;}
+  summary{padding:14px 16px;cursor:pointer;list-style:none;font-weight:700}
+  details[open]>summary{border-bottom:1px solid #eef0f2}
+  .panel{padding:10px 14px;}
+  .log{background:#0b1220;color:#e6edf3;border-radius:12px;padding:14px;font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;white-space:pre-wrap;line-height:1.35}
+  .grid{display:grid;grid-template-columns:1fr;gap:8px}
+  .chk{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid #e5e7eb;border-radius:12px}
+  .out{width:100%;min-height:94px;border:1px solid #e5e7eb;border-radius:12px;padding:10px}
+  .foot{position:fixed;z-index:10;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #e5e7eb;padding:10px}
+  .foot .row{margin:0}
+
+  /* トースト通知 */
+  #toastHost{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:9999;pointer-events:none}
+  .toast{
+    background:rgba(0,0,0,.9);color:#fff;border-radius:10px;
+    padding:8px 12px;margin-top:8px;min-width:140px;text-align:center;
+    font-size:13px;opacity:0;translate:0 8px;transition:opacity .22s ease, translate .22s ease;
+  }
+  .toast.show{opacity:1;translate:0 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>表情＋エフェクト複合ビルダー（ライト UI・カテゴリ直読）</h1>
+
+  <div class="row">
+    <button id="reloadBtn" class="btn">再読込</button>
+    <span class="counter">
+      <span class="badge b-ok" id="cntOK">成功 0</span>
+      <span class="badge b-bad" id="cntNG">失敗 0</span>
+      <span class="badge b-empty" id="cntEMPTY">空 1200</span>
+    </span>
+  </div>
+
+  <div class="row" id="totalRead">読み込み: 0 / 1200</div>
+
+  <!-- 全体進行バー -->
+  <div class="meter">
+    <div style="min-width:110px">overall</div>
+    <div class="bar"><div class="fill" id="fill-overall"></div></div>
+    <div class="slot"><span id="ok-overall" class="badge b-ok">成功 0</span></div>
+    <div class="slot"><span id="ng-overall" class="badge b-bad">失敗 0</span></div>
+    <div class="slot"><span id="em-overall" class="badge b-empty">空 1200</span></div>
+  </div>
+
+  <!-- 各カテゴリの進行・ログ（折りたたみ内に収納） -->
+  <details>
+    <summary>▼ 各カテゴリの進行・ログ（成功/失敗/空＋ログ）</summary>
+    <div class="panel">
+
+      <div id="meters"></div>
+
+      <details>
+        <summary>▼▼▼ 読み込みログ（OK / なし / エラー をリアルタイム表示）</summary>
+        <div class="panel"><div id="log" class="log">(ログはここに出ます)</div></div>
+      </details>
+    </div>
+  </details>
+
+  <!-- プリセット -->
+  <details id="d-presets">
+    <summary>▼ プリセット <span id="num-presets">0</span></summary>
+    <div class="panel"><div id="list-presets" class="grid"></div></div>
+  </details>
+
+  <!-- 表情（喜怒哀楽＋細分類＋その他） -->
+  <details id="d-expr">
+    <summary>▼ 表情 <span id="num-expr">0</span></summary>
+    <div class="panel">
+
+      <details><summary>✨ 喜 <span id="n-joy">0</span></summary><div class="panel"><div id="g-joy" class="grid"></div></div></details>
+      <details><summary>💢 怒 <span id="n-anger">0</span></summary><div class="panel"><div id="g-anger" class="grid"></div></div></details>
+      <details><summary>😢 哀 <span id="n-sad">0</span></summary><div class="panel"><div id="g-sad" class="grid"></div></div></details>
+      <details><summary>🎵 楽 <span id="n-happy">0</span></summary><div class="panel"><div id="g-happy" class="grid"></div></div></details>
+      <details><summary>❤️ heart <span id="n-heart">0</span></summary><div class="panel"><div id="g-heart" class="grid"></div></div></details>
+
+      <details><summary>👀 視線系 <span id="n-gaze">0</span></summary><div class="panel"><div id="g-gaze" class="grid"></div></div></details>
+      <details><summary>💧 涙系 <span id="n-tear">0</span></summary><div class="panel"><div id="g-tear" class="grid"></div></div></details>
+      <details><summary>👄 口元系 <span id="n-mouth">0</span></summary><div class="panel"><div id="g-mouth" class="grid"></div></div></details>
+      <details><summary>❓ 困惑 <span id="n-confuse">0</span></summary><div class="panel"><div id="g-confuse" class="grid"></div></div></details>
+      <details><summary>😳 緊張 <span id="n-tense">0</span></summary><div class="panel"><div id="g-tense" class="grid"></div></div></details>
+      <details><summary>☺️ 恥じらい <span id="n-shy">0</span></summary><div class="panel"><div id="g-shy" class="grid"></div></div></details>
+
+      <details><summary>▶ その他 <span id="n-etc">0</span></summary><div class="panel"><div id="g-etc" class="grid"></div></div></details>
+    </div>
+  </details>
+
+  <!-- エフェクト（被写体 / 背景） -->
+  <details id="d-effect">
+    <summary>▼ エフェクト <span id="num-effect">0</span></summary>
+    <div class="panel">
+
+      <details><summary>✨ 被写体エフェクト <span id="num-effect-subject">0</span></summary>
+        <div class="panel">
+          <details><summary>🧴 グロス・ハイライト <span id="n-fx-sub-gloss">0</span></summary><div class="panel"><div id="fx-sub-gloss" class="grid"></div></div></details>
+          <details><summary>🌟 スパークル・キラキラ <span id="n-fx-sub-sparkle">0</span></summary><div class="panel"><div id="fx-sub-sparkle" class="grid"></div></div></details>
+          <details><summary>🔆 リムライト系 <span id="n-fx-sub-rimlight">0</span></summary><div class="panel"><div id="fx-sub-rimlight" class="grid"></div></div></details>
+          <details><summary>🧿 目元補助・影 <span id="n-fx-sub-undereye">0</span></summary><div class="panel"><div id="fx-sub-undereye" class="grid"></div></div></details>
+          <details><summary>📸 フィルタ・調整 <span id="n-fx-sub-filter">0</span></summary><div class="panel"><div id="fx-sub-filter" class="grid"></div></div></details>
+          <details><summary>▶ その他 <span id="n-fx-sub-etc">0</span></summary><div class="panel"><div id="fx-sub-etc" class="grid"></div></div></details>
+        </div>
+      </details>
+
+      <details><summary>🏞 背景エフェクト <span id="num-effect-bg">0</span></summary>
+        <div class="panel">
+          <details><summary>💨 ライン／スピード線 <span id="n-fx-bg-lines">0</span></summary><div class="panel"><div id="fx-bg-lines" class="grid"></div></div></details>
+          <details><summary>🌫️ 霞・ダスト <span id="n-fx-bg-haze">0</span></summary><div class="panel"><div id="fx-bg-haze" class="grid"></div></div></details>
+          <details><summary>🌸 花びら・落葉 <span id="n-fx-bg-petals">0</span></summary><div class="panel"><div id="fx-bg-petals" class="grid"></div></div></details>
+          <details><summary>🔥 火の粉・粒子 <span id="n-fx-bg-embers">0</span></summary><div class="panel"><div id="fx-bg-embers" class="grid"></div></div></details>
+          <details><summary>🪟 破砕・スクリーン <span id="n-fx-bg-crack">0</span></summary><div class="panel"><div id="fx-bg-crack" class="grid"></div></div></details>
+          <details><summary>🌦 天気（ウェザー） <span id="n-fx-bg-weather">0</span></summary><div class="panel"><div id="fx-bg-weather" class="grid"></div></div></details>
+          <details><summary>▶ その他 <span id="n-fx-bg-etc">0</span></summary><div class="panel"><div id="fx-bg-etc" class="grid"></div></div></details>
+        </div>
+      </details>
+
+    </div>
+  </details>
+
+  <!-- 背景（場所 / 背景エフェクト / 天気） -->
+  <details id="d-bg">
+    <summary>▼ 背景 <span id="num-bg">0</span></summary>
+    <div class="panel">
+      <details><summary>📍 場所 <span id="n-bg-place">0</span></summary><div class="panel"><div id="bg-place" class="grid"></div></div></details>
+      <details><summary>🏞 背景エフェクト <span id="n-bg-effect">0</span></summary><div class="panel"><div id="bg-effect" class="grid"></div></div></details>
+      <details><summary>🌦 天気（ウェザー） <span id="n-bg-weather">0</span></summary><div class="panel"><div id="bg-weather" class="grid"></div></div></details>
+    </div>
+  </details>
+
+  <!-- ポーズ・髪型 -->
+  <details id="d-pose"><summary>▼ ポーズ <span id="num-pose">0</span></summary><div class="panel"><div id="list-pose" class="grid"></div></div></details>
+  <details id="d-hair"><summary>▼ 髪型 <span id="num-hair">0</span></summary><div class="panel"><div id="list-hair" class="grid"></div></div></details>
+</div>
+
+<div class="foot">
+  <div class="row">
+    <button id="gen" class="btn">タグ生成</button>
+    <button id="reset" class="btn">リセット</button>
+    <button id="copy" class="btn">コピー</button>
+  </div>
+  <textarea id="out" class="out" placeholder="generated tags will appear here..."></textarea>
+</div>
+
+<div id="toastHost" aria-live="polite"></div>
+
+<script>
+;(() => {
+  const BASE = "./";
+  const FILES = {
+    presets   : (i)=> `${BASE}presets_part${i}.js`,
+    faith     : (i)=> `${BASE}faith_part${i}.js`,
+    background: (i)=> `${BASE}background_part${i}.js`,
+    effect    : (i)=> `${BASE}effect_part${i}.js`,
+    pose      : (i)=> `${BASE}pose_part${i}.js`,
+    hair      : (i)=> `${BASE}hair_part${i}.js`,
+  };
+  const CAT_ORDER = ["presets","faith","background","effect","pose","hair"];
+  const CAT_SLOTS = {presets:200, faith:200, background:200, effect:200, pose:200, hair:200};
+  const TOTAL_SLOTS = Object.values(CAT_SLOTS).reduce((a,b)=>a+b,0);
+
+  window.__parts = window.__parts || { presets:{}, faith:{}, background:{}, effect:{}, pose:{}, hair:{} };
+  function __ensure(path){ const p = window.__parts; if(!p[path]) p[path]={}; return p[path]; }
+  window.__registerPresetPart     = (name, data)=>{ __ensure("presets")[name]=data; };
+  window.__registerPromptPart     = (name, data)=>{ __ensure("faith")[name]=data; };
+  window.__registerBackgroundPart = (name, data)=>{ __ensure("background")[name]=data; };
+  window.__registerEffectPart     = (name, data)=>{ __ensure("effect")[name]=data; };
+  window.__registerPosePart       = (name, data)=>{ __ensure("pose")[name]=data; };
+  window.__registerHairPart       = (name, data)=>{ __ensure("hair")[name]=data; };
+
+  const $ = (sel) => document.querySelector(sel);
+  const log = $('#log');
+  const metersBox = $('#meters');
+
+  const overall = {
+    fill: $('#fill-overall'),
+    ok: $('#ok-overall'), ng: $('#ng-overall'), em: $('#em-overall')
+  };
+
+  const meterMap = {};
+  function addMeterRow(label, key){
+    const row = document.createElement('div');
+    row.className = 'meter';
+    row.innerHTML = `
+      <div style="min-width:110px">${label}</div>
+      <div class="bar"><div class="fill" id="fill-${key}"></div></div>
+      <div class="slot"><span id="ok-${key}" class="badge b-ok">成功 0</span></div>
+      <div class="slot"><span id="ng-${key}" class="badge b-bad">失敗 0</span></div>
+      <div class="slot"><span id="em-${key}" class="badge b-empty">空 ${CAT_SLOTS[key]}</span></div>
+    `;
+    metersBox.appendChild(row);
+    meterMap[key] = {
+      fill: row.querySelector(`#fill-${key}`),
+      ok:  row.querySelector(`#ok-${key}`),
+      ng:  row.querySelector(`#ng-${key}`),
+      em:  row.querySelector(`#em-${key}`),
+      okn: 0, ngn: 0, emn: CAT_SLOTS[key],
+      total: CAT_SLOTS[key]
+    };
+  }
+  addMeterRow('presets','presets');
+  addMeterRow('faith','faith');
+  addMeterRow('background','background');
+  addMeterRow('effect','effect');
+  addMeterRow('pose','pose');
+  addMeterRow('hair','hair');
+
+  $('#cntOK').textContent = `成功 0`;
+  $('#cntNG').textContent = `失敗 0`;
+  $('#cntEMPTY').textContent = `空 ${TOTAL_SLOTS}`;
+  $('#totalRead').textContent = `読み込み: 0 / ${TOTAL_SLOTS}`;
+
+  let totalOk=0, totalNg=0, totalEm=TOTAL_SLOTS, totalRead=0;
+
+  function uiMeterUpdate(key){
+    const m = meterMap[key];
+    m.ok.textContent = `成功 ${m.okn}`;
+    m.ng.textContent = `失敗 ${m.ngn}`;
+    m.em.textContent = `空 ${m.emn}`;
+    const prog = (m.okn + m.ngn + (CAT_SLOTS[key]-m.emn)) / m.total;
+    m.fill.style.inset = `0 ${(1-prog)*100}% 0 0`;
+
+    overall.ok.textContent = `成功 ${totalOk}`;
+    overall.ng.textContent = `失敗 ${totalNg}`;
+    overall.em.textContent = `空 ${totalEm}`;
+    const oProg = (totalOk + totalNg + (TOTAL_SLOTS-totalEm)) / TOTAL_SLOTS;
+    overall.fill.style.inset = `0 ${(1-oProg)*100}% 0 0`;
+    $('#cntOK').textContent = `成功 ${totalOk}`;
+    $('#cntNG').textContent = `失敗 ${totalNg}`;
+    $('#cntEMPTY').textContent = `空 ${totalEm}`;
+    $('#totalRead').textContent = `読み込み: ${totalRead} / ${TOTAL_SLOTS}`;
+  }
+
+  function writeLog(s){ log.textContent += (log.textContent?'\n':'') + s; log.scrollTop = log.scrollHeight; }
+
+  function loadAsUMD(url){
+    return new Promise((resolve,reject)=>{
+      const s = document.createElement('script');
+      s.async = true;
+      s.src = url + `?v=${Date.now()}`;
+      s.onload = ()=> resolve();
+      s.onerror = ()=> reject(new Error('UMD load error'));
+      document.head.appendChild(s);
+    });
+  }
+
+  async function tryLoad(url){
+    try{
+      await import(url + `?v=${Date.now()}`);
+      return 'ok';
+    }catch(err){
+      const msg = String(err && err.message || err);
+      if (msg.includes('Failed to fetch dynamically imported module') ||
+          msg.includes('fetch') || msg.includes('404') || msg.includes('ERR')) return 'empty';
+      try{ await loadAsUMD(url); return 'ok'; }catch(e2){ return 'fail'; }
+    }
+  }
+
+  async function loadCategory(catKey){
+    const max = CAT_SLOTS[catKey];
+    writeLog(`=== ${catKey} 読み開始 ===`);
+    let hitEmpty = false;
+    for(let i=1;i<=max;i++){
+      if(hitEmpty) continue;
+      const url = FILES[catKey](i);
+      const res = await tryLoad(url);
+      totalRead++;
+      if(res==='ok'){
+        meterMap[catKey].okn++; totalOk++; meterMap[catKey].emn--; totalEm--;
+        writeLog(`OK : [${catKey}] part ${i} : OK`);
+      }else if(res==='empty'){
+        hitEmpty = true;
+        writeLog(`なし : [${catKey}] part ${i} : なし`);
+      }else{
+        meterMap[catKey].ngn++; totalNg++; meterMap[catKey].emn--; totalEm--;
+        writeLog(`エラー: [${catKey}] part ${i} : 失敗`);
+      }
+      uiMeterUpdate(catKey);
+    }
+    writeLog(`=== ${catKey} 読み終了 ===`);
+  }const el = {
+    presets: $('#list-presets'),
+    effectSub: {
+      gloss: $('#fx-sub-gloss'), sparkle: $('#fx-sub-sparkle'), rim: $('#fx-sub-rimlight'),
+      under: $('#fx-sub-undereye'), filter: $('#fx-sub-filter'), etc: $('#fx-sub-etc')
+    },
+    effectBg: {
+      lines: $('#fx-bg-lines'), haze: $('#fx-bg-haze'), petals: $('#fx-bg-petals'),
+      embers: $('#fx-bg-embers'), crack: $('#fx-bg-crack'), weather: $('#fx-bg-weather'), etc: $('#fx-bg-etc')
+    },
+    bg: { place: $('#bg-place'), effect: $('#bg-effect'), weather: $('#bg-weather') },
+    pose: $('#list-pose'),
+    hair: $('#list-hair'),
+    // 表情
+    joy:$('#g-joy'), anger:$('#g-anger'), sad:$('#g-sad'), happy:$('#g-happy'), heart:$('#g-heart'),
+    gaze:$('#g-gaze'), tear:$('#g-tear'), mouth:$('#g-mouth'), confuse:$('#g-confuse'),
+    tense:$('#g-tense'), shy:$('#g-shy'), etc:$('#g-etc'),
+    // カウント
+    numPresets:$('#num-presets'), numExpr:$('#num-expr'),
+    numEffect:$('#num-effect'), numPose:$('#num-pose'), numHair:$('#num-hair'), numBg:$('#num-bg'),
+    numEffectSub:$('#num-effect-subject'), numEffectBg:$('#num-effect-bg'),
+    nJoy:$('#n-joy'), nAnger:$('#n-anger'), nSad:$('#n-sad'), nHappy:$('#n-happy'), nHeart:$('#n-heart'),
+    nGaze:$('#n-gaze'), nTear:$('#n-tear'), nMouth:$('#n-mouth'), nConf:$('#n-confuse'), nTense:$('#n-tense'), nShy:$('#n-shy'), nEtc:$('#n-etc'),
+    nFxSubGloss:$('#n-fx-sub-gloss'), nFxSubSparkle:$('#n-fx-sub-sparkle'), nFxSubRim:$('#n-fx-sub-rimlight'),
+    nFxSubUnder:$('#n-fx-sub-undereye'), nFxSubFilter:$('#n-fx-sub-filter'), nFxSubEtc:$('#n-fx-sub-etc'),
+    nFxBgLines:$('#n-fx-bg-lines'), nFxBgHaze:$('#n-fx-bg-haze'), nFxBgPetals:$('#n-fx-bg-petals'),
+    nFxBgEmbers:$('#n-fx-bg-embers'), nFxBgCrack:$('#n-fx-bg-crack'), nFxBgWeather:$('#n-fx-bg-weather'), nFxBgEtc:$('#n-fx-bg-etc'),
+    nBgPlace:$('#n-bg-place'), nBgEffect:$('#n-bg-effect'), nBgWeather:$('#n-bg-weather')
+  };
+
+  const emotionDict = {
+    joy:['smile','grin','laugh','喜','ニヤ','にや','嬉','たの','楽','wink','happy','smirk'],
+    anger:['angry','怒','ムッ','furious','grit','gritted','frown'],
+    sad:['sad','cry','涙','泣','teary','tears','哀'],
+    happy:['relax','楽','ふわ','楽し','cheer','light','sparkle'],
+    heart:['heart','love','ラブ','❤','♡']
+  };
+  const subDict = {
+    gaze:['gaze','eye','eyes','視線','見開','細め','ウィンク','wink','rolling-eyes','narrow-eye','narrow-eyes','wide-eyed','上目','flutter-eyelids','glimmer','gleam','drowsy'],
+    tear:['涙','teary','tears','cry','泣','うるみ'],
+    mouth:['mouth','lip','唇','口','smirk','grin','press','bit-lip'],
+    confuse:['confuse','困惑','bewildered','puzzled'],
+    tense:['tense','緊張','こわば','stiffen','freeze','shaken'],
+    shy:['shy','bashful','恥','照','はにか']
+  };
+  const fxSubjectDict = {
+    gloss:['gloss','グロス','艶','つや','ハイライト','highlight','face-gloss','under-eye-shadow'],
+    sparkle:['sparkle','キラ','きら','glitter'],
+    rimlight:['rim','リム','縁光','edge light','rim-light'],
+    undereye:['under-eye','目の下','くま','veil'],
+    filter:['filter','tone','color','調整','補正','vignette','bloom']
+  };
+  const fxBgDict = {
+    lines:['line','線','speed','スピード','impact','集中線'],
+    haze:['haze','ダスト','霞','smoke','fog','dust'],
+    petals:['petal','花びら','sakura','桜','leaf','落ち葉','leaves'],
+    embers:['ember','火の粉','sparks','particle'],
+    crack:['crack','ひび','亀裂','screen-crack'],
+    weather:['rain','snow','sun','天気','weather','風','wind']
+  };
+
+  function labelOf(id,label){ return String(label||id||''); }
+
+  function classifyEmotion(label,id){
+    const s = `${label} ${id}`.toLowerCase();
+    for(const k of ['heart','anger','sad','joy','happy']) for(const kw of emotionDict[k]) if(s.includes(kw)) return k;
+    for(const k of Object.keys(subDict)) for(const kw of subDict[k]) if(s.includes(kw)) return k;
+    return 'etc';
+  }
+  function classifyFxSubject(label,id){
+    const s = `${label} ${id}`.toLowerCase();
+    for(const k of Object.keys(fxSubjectDict)) for(const kw of fxSubjectDict[k]) if(s.includes(kw)) return k;
+    return 'etc';
+  }
+  function classifyFxBg(label,id){
+    const s = `${label} ${id}`.toLowerCase();
+    for(const k of Object.keys(fxBgDict)) for(const kw of fxBgDict[k]) if(s.includes(kw)) return k;
+    return 'etc';
+  }
+
+  function addCheck(box, id, label){
+    const el = document.createElement('label');
+    el.className='chk';
+    el.innerHTML = `<input type="checkbox" data-id="${id}"><span>${labelOf(id,label)}</span>`;
+    box.appendChild(el);
+  }
+
+  function renderAll(){
+    // presets
+    let pCount=0;
+    for(const k in window.__parts.presets){
+      const d = window.__parts.presets[k];
+      (d?.presets||[]).forEach(p=>{ addCheck(el.presets, p.id, p.label); pCount++; });
+    }
+    el.numPresets.textContent = pCount;
+
+    // 表情
+    let eCounts = {joy:0,anger:0,sad:0,happy:0,heart:0,gaze:0,tear:0,mouth:0,confuse:0,tense:0,shy:0,etc:0,total:0};
+    for(const k in window.__parts.faith){
+      const d = window.__parts.faith[k];
+      (d?.categories||[]).forEach(c=>{
+        c.items?.forEach(it=>{
+          const grp = classifyEmotion(it.label||'', it.id||'');
+          addCheck(el[grp], it.id, it.label);
+          eCounts[grp]++; eCounts.total++;
+        });
+      });
+    }
+    el.numExpr.textContent = eCounts.total;
+    el.nJoy.textContent = eCounts.joy; el.nAnger.textContent = eCounts.anger; el.nSad.textContent = eCounts.sad;
+    el.nHappy.textContent = eCounts.happy; el.nHeart.textContent = eCounts.heart; el.nGaze.textContent = eCounts.gaze;
+    el.nTear.textContent = eCounts.tear; el.nMouth.textContent = eCounts.mouth; el.nConf.textContent = eCounts.confuse;
+    el.nTense.textContent = eCounts.tense; el.nShy.textContent = eCounts.shy; el.nEtc.textContent = eCounts.etc;
+
+    // effect
+    let fxSub={gloss:0,sparkle:0,rimlight:0,undereye:0,filter:0,etc:0}, fxBg={lines:0,haze:0,petals:0,embers:0,crack:0,weather:0,etc:0}, fxTotal=0;
+    for(const k in window.__parts.effect){
+      const d = window.__parts.effect[k];
+      (d?.categories||[]).forEach(c=>{
+        c.items?.forEach(it=>{
+          const tag = `${(it.id||'')}`.toLowerCase();
+          const label = (it.label||'').toLowerCase();
+
+          // 背景寄りキーワード優先で背景エフェクト
+          const isBg = Object.values(fxBgDict).some(arr=>arr.some(w=>label.includes(w)||tag.includes(w)));
+          if(isBg){
+            const grp = classifyFxBg(it.label||'', it.id||'');
+            addCheck(el.effectBg[grp], it.id, it.label); fxBg[grp]++; fxTotal++; return;
+          }
+          // それ以外は被写体エフェクトへ
+          const grp = classifyFxSubject(it.label||'', it.id||'');
+          addCheck(el.effectSub[grp], it.id, it.label); fxSub[grp]++; fxTotal++;
+        });
+      });
+    }
+    el.numEffect.textContent = fxTotal;
+    el.numEffectSub.textContent = fxSub.gloss+fxSub.sparkle+fxSub.rimlight+fxSub.undereye+fxSub.filter+fxSub.etc;
+    el.numEffectBg.textContent  = fxBg.lines+fxBg.haze+fxBg.petals+fxBg.embers+fxBg.crack+fxBg.weather+fxBg.etc;
+
+    el.nFxSubGloss.textContent = fxSub.gloss; el.nFxSubSparkle.textContent = fxSub.sparkle;
+    el.nFxSubRim.textContent = fxSub.rimlight; el.nFxSubUnder.textContent = fxSub.undereye; el.nFxSubFilter.textContent = fxSub.filter; el.nFxSubEtc.textContent = fxSub.etc;
+
+    el.nFxBgLines.textContent = fxBg.lines; el.nFxBgHaze.textContent = fxBg.haze; el.nFxBgPetals.textContent = fxBg.petals;
+    el.nFxBgEmbers.textContent = fxBg.embers; el.nFxBgCrack.textContent = fxBg.crack; el.nFxBgWeather.textContent = fxBg.weather; el.nFxBgEtc.textContent = fxBg.etc;
+
+    // background（場所/背景エフェクト/天気） : 既存データがあれば描画
+    let bgTotal=0, bgPlace=0, bgEff=0, bgWea=0;
+    for(const k in window.__parts.background){
+      const d = window.__parts.background[k];
+      (d?.categories||[]).forEach(c=>{
+        const name=(c.name||'').toLowerCase();
+        c.items?.forEach(it=>{
+          if(name.includes('place')||name.includes('場所')){ addCheck(el.bg.place,it.id,it.label); bgPlace++; }
+          else if(name.includes('weather')||name.includes('天気')){ addCheck(el.bg.weather,it.id,it.label); bgWea++; }
+          else { addCheck(el.bg.effect,it.id,it.label); bgEff++; }
+          bgTotal++;
+        });
+      });
+    }
+    el.numBg.textContent = bgTotal; el.nBgPlace.textContent=bgPlace; el.nBgEffect.textContent=bgEff; el.nBgWeather.textContent=bgWea;
+
+    // pose
+    let pz=0; for(const k in window.__parts.pose){ const d=window.__parts.pose[k]; (d?.categories||[]).forEach(c=>{ c.items?.forEach(it=>{ addCheck(el.pose,it.id,it.label); pz++; }); }); }
+    el.numPose.textContent=pz;
+
+    // hair
+    let hr=0; for(const k in window.__parts.hair){ const d=window.__parts.hair[k]; (d?.categories||[]).forEach(c=>{ c.items?.forEach(it=>{ addCheck(el.hair,it.id,it.label); hr++; }); }); }
+    el.numHair.textContent=hr;
+  }
+
+  // トースト通知（下中央・3秒で自動消滅）
+  const toastHost = document.getElementById('toastHost');
+  let toastQueue = [];
+  let toastBusy = false;
+
+  function showToast(message){
+    toastQueue.push(String(message||''));
+    if(!toastBusy) nextToast();
+  }
+  function nextToast(){
+    if(!toastQueue.length){ toastBusy=false; return; }
+    toastBusy=true;
+    const msg = toastQueue.shift();
+    const t = document.createElement('div');
+    t.className = 'toast';
+    t.textContent = msg;
+    toastHost.appendChild(t);
+    requestAnimationFrame(()=> t.classList.add('show'));
+    setTimeout(()=> {
+      t.classList.remove('show');
+      setTimeout(()=> { t.remove(); nextToast(); }, 220);
+    }, 3000);
+  }
+
+  async function run(){
+    log.textContent = '';
+    totalOk=0; totalNg=0; totalEm=TOTAL_SLOTS; totalRead=0;
+    for(const k of Object.keys(meterMap)){
+      meterMap[k].okn=0; meterMap[k].ngn=0; meterMap[k].emn=CAT_SLOTS[k]; uiMeterUpdate(k);
+    }
+    overall.ok.textContent='成功 0'; overall.ng.textContent='失敗 0'; overall.em.textContent=`空 ${TOTAL_SLOTS}`;
+    overall.fill.style.inset = `0 100% 0 0`;
+    $('#cntOK').textContent = `成功 0`;
+    $('#cntNG').textContent = `失敗 0`;
+    $('#cntEMPTY').textContent = `空 ${TOTAL_SLOTS}`;
+    $('#totalRead').textContent = `読み込み: 0 / ${TOTAL_SLOTS}`;
+
+    showToast('再読込しました');
+
+    for(const k of CAT_ORDER){ await loadCategory(k); }
+    writeLog('=== ロード終了 ===');
+
+    // 既存の描画エリアを初期化
+    ['list-presets','g-joy','g-anger','g-sad','g-happy','g-heart',
+     'g-gaze','g-tear','g-mouth','g-confuse','g-tense','g-shy','g-etc',
+     'fx-sub-gloss','fx-sub-sparkle','fx-sub-rimlight','fx-sub-undereye','fx-sub-filter','fx-sub-etc',
+     'fx-bg-lines','fx-bg-haze','fx-bg-petals','fx-bg-embers','fx-bg-crack','fx-bg-weather','fx-bg-etc',
+     'bg-place','bg-effect','bg-weather','list-pose','list-hair'
+    ].forEach(id=>{ const n=document.getElementById(id); if(n) n.innerHTML=''; });
+
+    renderAll();
+  }
+
+  // イベント
+  $('#reloadBtn').addEventListener('click', run);
+  $('#reset').addEventListener('click', ()=>{
+    document.querySelectorAll('input[type="checkbox"]').forEach(i=> i.checked=false);
+    $('#out').value = '';
+    showToast('リセットしました');
+  });
+  $('#copy').addEventListener('click', async ()=>{
+    try{
+      await navigator.clipboard.writeText($('#out').value||'');
+      showToast('コピーしました');
+    }catch(e){
+      showToast('コピーに失敗しました');
+    }
+  });
+  $('#gen').addEventListener('click', ()=>{
+    const ids = [];
+    document.querySelectorAll('input[type="checkbox"]:checked').forEach(i=> ids.push(i.dataset.id));
+    $('#out').value = ids.join(', ');
+    showToast('タグを生成しました');
+  });
+
+  // 初回
+  run();
+})();
+</script>
+</body>
+</html>
