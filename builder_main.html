@@ -1,0 +1,446 @@
+<!-- builder_main.html v12.3r1-emoji + toast-fix (2025-09-10) -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>表情＋エフェクト＋背景ビルダー（ライト UI・カテゴリ直読）</title>
+<style>
+  :root{
+    --fg:#222; --muted:#667085; --ok:#16a34a; --bad:#dc2626; --empty:#2563eb; --bg:#fff; --chip:#f2f4f7;
+    --line:#e5e7eb; --ink:#0b1220; --inkfg:#e6edf3;
+  }
+  html,body{margin:0;background:#fff;color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans JP,sans-serif}
+  .wrap{max-width:860px;margin:16px auto;padding:0 12px 120px}
+  h1{font-size:22px;line-height:1.35;margin:10px 0 16px}
+  .row{display:flex;gap:10px;align-items:center;margin:10px 0;flex-wrap:wrap}
+  .btn{padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:#fff}
+  .badge{padding:6px 10px;border-radius:999px;font-size:12px;background:var(--chip)}
+  .b-ok{color:#fff;background:var(--ok)}
+  .b-bad{color:#fff;background:var(--bad)}
+  .b-empty{color:#fff;background:var(--empty)}
+  .readline{font-size:14px;color:#111}
+  .meter-all{height:8px;background:#eef2f7;border-radius:999px;overflow:hidden}
+  .meter-fill{height:100%;width:0;background:linear-gradient(90deg,#93c5fd,#22c55e)}
+  details{background:#fff;border:1px solid var(--line);border-radius:12px;margin:12px 0}
+  summary{padding:14px 16px;cursor:pointer;list-style:none;font-weight:700}
+  details[open]>summary{border-bottom:1px solid #eef0f2}
+  .panel{padding:10px 14px}
+  .log{background:var(--ink);color:var(--inkfg);border-radius:12px;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;line-height:1.35;max-height:28vh;overflow:auto}
+  .grid{display:grid;grid-template-columns:1fr;gap:8px}
+  .chk{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--line);border-radius:12px}
+  .foot{position:fixed;z-index:10;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:10px}
+  .foot .row{margin:0}
+  .out{width:100%;min-height:110px;border:1px solid var(--line);border-radius:12px;padding:10px}
+  .meterRow{display:flex;align-items:center;gap:10px;margin:8px 0}
+  .meterBar{flex:1;height:6px;border-radius:999px;background:#eef2f7;position:relative;overflow:hidden}
+  .meterFill{position:absolute;inset:0 100% 0 0;background:linear-gradient(90deg,#b5e3c3,#16a34a)}
+  .slot{min-width:92px;text-align:right;color:#6b7280;font-size:12px}
+  .subhead{font-size:14px;color:#334155;margin:6px 0 8px;font-weight:700}
+  /* [CHANGE] Toast: 前面化＆3秒表示 */
+  .toast{
+    position:fixed;left:50%;bottom:96px;transform:translateX(-50%);
+    background:#111827;color:#fff;padding:10px 14px;border-radius:10px;
+    opacity:0;pointer-events:none;transition:opacity .25s ease;
+    z-index:10000; /* フッターより前面 */
+    font-size:14px;
+  }
+  .toast.show{opacity:1}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>表情＋エフェクト＋背景ビルダー（ライト UI・カテゴリ直読）</h1>
+
+  <div class="row">
+    <button id="reloadBtn" class="btn">再読込</button>
+    <span class="badge b-ok" id="cntOK">成功 0</span>
+    <span class="badge b-bad" id="cntNG">失敗 0</span>
+    <span class="badge b-empty" id="cntEMPTY">空 1200</span>
+  </div>
+
+  <div class="row" style="align-items:center">
+    <span class="readline">読み込み: <span id="totalRead">0</span> / <span id="totalMax">1200</span></span>
+    <div class="meter-all" style="flex:1;min-width:200px"><div id="overallFill" class="meter-fill"></div></div>
+  </div>
+
+  <details id="d-meters">
+    <summary>▼ 各カテゴリの進行・ログ（成功/失敗/空＋ログ）</summary>
+    <div class="panel">
+      <div id="meters"></div>
+      <div class="subhead">読み込みログ</div>
+      <div id="log" class="log">(ログはここに出ます)</div>
+    </div>
+  </details>
+
+  <details id="d-presets"><summary>▼ プリセット <span id="num-presets">0</span></summary>
+    <div class="panel"><div id="list-presets" class="grid"></div></div>
+  </details>
+
+  <details id="d-expr"><summary>▼ 表情 <span id="num-expr">0</span></summary>
+    <div class="panel">
+      <details><summary>✨ 喜 <span id="n-joy">0</span></summary><div class="panel"><div id="g-joy" class="grid"></div></div></details>
+      <details><summary>💢 怒 <span id="n-anger">0</span></summary><div class="panel"><div id="g-anger" class="grid"></div></div></details>
+      <details><summary>😢 哀 <span id="n-sad">0</span></summary><div class="panel"><div id="g-sad" class="grid"></div></div></details>
+      <details><summary>🎵 楽 <span id="n-happy">0</span></summary><div class="panel"><div id="g-happy" class="grid"></div></div></details>
+      <details><summary>❤️ heart <span id="n-heart">0</span></summary><div class="panel"><div id="g-heart" class="grid"></div></div></details>
+
+      <details><summary>👀 視線系 <span id="n-eyes">0</span></summary><div class="panel"><div id="g-eyes" class="grid"></div></div></details>
+      <details><summary>💧 涙系 <span id="n-tear">0</span></summary><div class="panel"><div id="g-tear" class="grid"></div></div></details>
+      <details><summary>👄 口元系 <span id="n-mouth">0</span></summary><div class="panel"><div id="g-mouth" class="grid"></div></div></details>
+      <details><summary>❓ 困惑 <span id="n-confuse">0</span></summary><div class="panel"><div id="g-confuse" class="grid"></div></div></details>
+      <details><summary>😳 緊張 <span id="n-tense">0</span></summary><div class="panel"><div id="g-tense" class="grid"></div></div></details>
+      <details><summary>☺️ 恥じらい <span id="n-shy">0</span></summary><div class="panel"><div id="g-shy" class="grid"></div></div></details>
+      <details><summary>▶ その他 <span id="n-etc">0</span></summary><div class="panel"><div id="g-etc" class="grid"></div></div></details>
+    </div>
+  </details>
+
+  <details id="d-eff-subject"><summary>▼ 被写体エフェクト <span id="num-eff-subject">0</span></summary>
+    <div class="panel">
+      <details><summary>✨ リング・輝き <span id="n-eff-ring">0</span></summary><div class="panel"><div id="g-eff-ring" class="grid"></div></div></details>
+      <details><summary>🧵 ライン／スピード線 <span id="n-eff-line">0</span></summary><div class="panel"><div id="g-eff-line" class="grid"></div></div></details>
+      <details><summary>🌫️ パーティクル・粉塵 <span id="n-eff-particle">0</span></summary><div class="panel"><div id="g-eff-particle" class="grid"></div></div></details>
+      <details><summary>💡 光・グロー／反射 <span id="n-eff-light">0</span></summary><div class="panel"><div id="g-eff-light" class="grid"></div></div></details>
+      <details><summary>🌊 歪み・液体・波紋 <span id="n-eff-distort">0</span></summary><div class="panel"><div id="g-eff-distort" class="grid"></div></div></details>
+      <details><summary>🧩 その他 <span id="n-eff-etc">0</span></summary><div class="panel"><div id="g-eff-etc" class="grid"></div></div></details>
+    </div>
+  </details>
+
+  <details id="d-bg"><summary>▼ 背景 <span id="num-bg">0</span></summary>
+    <div class="panel">
+      <details><summary>📍 場所 <span id="n-bg-place">0</span></summary>
+        <div class="panel"><div id="g-bg-place" class="grid"></div></div>
+      </details>
+      <details><summary>🧩 背景エフェクト <span id="n-bg-eff">0</span></summary>
+        <div class="panel"><div id="g-bg-eff" class="grid"></div></div>
+      </details>
+    </div>
+  </details>
+
+  <details id="d-pose"><summary>▼ ポーズ <span id="num-pose">0</span></summary>
+    <div class="panel"><div id="list-pose" class="grid"></div></div>
+  </details>
+  <details id="d-hair"><summary>▼ 髪型 <span id="num-hair">0</span></summary>
+    <div class="panel"><div id="list-hair" class="grid"></div></div>
+  </details>
+</div>
+
+<div class="foot">
+  <div class="row">
+    <button id="gen" class="btn">タグ生成</button>
+    <button id="reset" class="btn">リセット</button>
+    <button id="copy" class="btn">コピー</button>
+  </div>
+  <textarea id="out" class="out" placeholder="generated tags will appear here..."></textarea>
+</div>
+
+<div id="toast" class="toast">done</div>
+
+<script>
+;(()=>{
+const BASE="./";
+const FILES={
+  presets:(i)=>`${BASE}presets_part${i}.js`,
+  faith:(i)=>`${BASE}faith_part${i}.js`,
+  background:(i)=>`${BASE}background_part${i}.js`,
+  effect:(i)=>`${BASE}effect_part${i}.js`,
+  pose:(i)=>`${BASE}pose_part${i}.js`,
+  hair:(i)=>`${BASE}hair_part${i}.js`,
+};
+const CAT_ORDER=["presets","faith","background","effect","pose","hair"];
+const CAT_SLOTS={presets:200,faith:200,background:200,effect:200,pose:200,hair:200};
+const TOTAL_SLOTS=Object.values(CAT_SLOTS).reduce((a,b)=>a+b,0);
+
+window.__parts=window.__parts||{presets:{},faith:{},background:{},effect:{},pose:{},hair:{}};
+function __ensure(p){const w=window.__parts;if(!w[p])w[p]={};return w[p]}
+// [CHANGE] ここだけ修正：3引数/2引数 両対応にして presets へ正しく格納
+window.__registerPresetPart=function(a,b,c){
+  if(arguments.length===3 && String(a).toLowerCase()==='presets'){ __ensure('presets')[b]=c; return; }
+  if(arguments.length===2 && typeof a==='string' && /^presets_part\d+$/i.test(a)){ __ensure('presets')[a]=b; return; }
+  __ensure('presets')[a]=b;
+};
+
+window.__registerPromptPart=(n,d)=>{__ensure("faith")[n]=d};
+window.__registerBackgroundPart=(n,d)=>{__ensure("background")[n]=d};
+window.__registerEffectPart=(n,d)=>{__ensure("effect")[n]=d};
+window.__registerPosePart=(n,d)=>{__ensure("pose")[n]=d};
+window.__registerHairPart=(n,d)=>{__ensure("hair")[n]=d};
+
+const $=s=>document.querySelector(s);
+const log=$('#log'); const overallFill=$('#overallFill');
+$('#cntEMPTY').textContent=`空 ${TOTAL_SLOTS}`; $('#totalMax').textContent=TOTAL_SLOTS;
+
+const metersBox=$('#meters'), meterMap={};
+function addMeterRow(label,key){
+  const row=document.createElement('div');
+  row.className='meterRow';
+  row.innerHTML=`
+    <div style="min-width:120px">${label}</div>
+    <div class="meterBar"><div class="meterFill" id="fill-${key}"></div></div>
+    <div class="slot"><span id="ok-${key}" class="badge b-ok">成功 0</span></div>
+    <div class="slot"><span id="ng-${key}" class="badge b-bad">失敗 0</span></div>
+    <div class="slot"><span id="em-${key}" class="badge b-empty">空 ${CAT_SLOTS[key]}</span></div>`;
+  metersBox.appendChild(row);
+  meterMap[key]={fill:row.querySelector(`#fill-${key}`),ok:row.querySelector(`#ok-${key}`),ng:row.querySelector(`#ng-${key}`),em:row.querySelector(`#em-${key}`),okn:0,ngn:0,emn:CAT_SLOTS[key],total:CAT_SLOTS[key]};
+}
+['presets','faith','background','effect','pose','hair'].forEach(k=>addMeterRow(k,k));
+
+let totalOk=0,totalNg=0,totalEm=TOTAL_SLOTS,totalRead=0;
+$('#cntOK').textContent=`成功 ${totalOk}`; $('#cntNG').textContent=`失敗 ${totalNg}`; $('#totalRead').textContent=totalRead;
+
+function uiMeterUpdate(key){
+  const m=meterMap[key];
+  m.ok.textContent=`成功 ${m.okn}`; m.ng.textContent=`失敗 ${m.ngn}`; m.em.textContent=`空 ${m.emn}`;
+  const prog=(CAT_SLOTS[key]-m.emn)/m.total;
+  m.fill.style.inset=`0 ${(1-prog)*100}% 0 0`;
+  $('#cntOK').textContent=`成功 ${totalOk}`; $('#cntNG').textContent=`失敗 ${totalNg}`;
+  $('#cntEMPTY').textContent=`空 ${totalEm}`; $('#totalRead').textContent=totalRead;
+  const overall=(TOTAL_SLOTS-totalEm)/TOTAL_SLOTS;
+  overallFill.style.width=`${(overall*100).toFixed(1)}%`;
+}
+function writeLog(s){ if(log.textContent)log.textContent+='\n'; log.textContent+=s; log.scrollTop=log.scrollHeight; }
+
+function loadAsUMD(url){return new Promise((res,rej)=>{const s=document.createElement('script');s.async=true;s.src=url+`?v=${Date.now()}`;s.onload=()=>res();s.onerror=()=>rej(new Error('UMD load error'));document.head.appendChild(s);});}
+async function tryLoad(url){
+  try{ await import(url+`?v=${Date.now()}`); return 'ok'; }
+  catch(e){ const msg=String(e?.message||e);
+    if(msg.includes('Failed to fetch')||msg.includes('404')||msg.includes('ERR')) return 'empty';
+    try{ await loadAsUMD(url); return 'ok'; } catch{ return 'fail'; }
+  }
+}
+
+async function loadCategory(catKey){
+  const max=CAT_SLOTS[catKey]; writeLog(`=== ${catKey} 読み開始 ===`); let hitEmpty=false;
+  for(let i=1;i<=max;i++){
+    if(hitEmpty) continue;
+    const res=await tryLoad(FILES[catKey](i));
+    if(res==='ok'){ meterMap[catKey].okn++; totalOk++; meterMap[catKey].emn--; totalEm--; writeLog(`OK : [${catKey}] part ${i} : OK`); totalRead++; }
+    else if(res==='empty'){ hitEmpty=true; writeLog(`なし : [${catKey}] part ${i} : なし`); }
+    else{ meterMap[catKey].ngn++; totalNg++; meterMap[catKey].emn--; totalEm--; writeLog(`エラー: [${catKey}] part ${i} : 失敗`); totalRead++; }
+    uiMeterUpdate(catKey);
+  }
+  writeLog(`=== ${catKey} 読み終了 ===`);
+}
+
+function mkChk(id,label){ const lab=document.createElement('label'); lab.className='chk'; lab.innerHTML=`<input type="checkbox" data-id="${id}"><span>${label||id}</span>`; return lab; }
+
+const el={
+  presets:$('#list-presets'),
+  joy:$('#g-joy'), anger:$('#g-anger'), sad:$('#g-sad'), happy:$('#g-happy'), heart:$('#g-heart'),
+  eyes:$('#g-eyes'), tear:$('#g-tear'), mouth:$('#g-mouth'), confuse:$('#g-confuse'), tense:$('#g-tense'), shy:$('#g-shy'), etc:$('#g-etc'),
+  numPresets:$('#num-presets'), numExpr:$('#num-expr'),
+  effRing:$('#g-eff-ring'), effLine:$('#g-eff-line'), effParticle:$('#g-eff-particle'), effLight:$('#g-eff-light'), effDistort:$('#g-eff-distort'), effEtc:$('#g-eff-etc'),
+  nEffRing:$('#n-eff-ring'), nEffLine:$('#n-eff-line'), nEffParticle:$('#n-eff-particle'), nEffLight:$('#n-eff-light'), nEffDistort:$('#n-eff-distort'), nEffEtc:$('#n-eff-etc'),
+  numEffSubject:$('#num-eff-subject'),
+  bgPlace:$('#g-bg-place'), bgEff:$('#g-bg-eff'), nBgPlace:$('#n-bg-place'), nBgEff:$('#n-bg-eff'), numBg:$('#num-bg'),
+  listPose:$('#list-pose'), listHair:$('#list-hair'), numPose:$('#num-pose'), numHair:$('#num-hair'),
+};
+
+const emotionDict={
+  joy:['smile','grin','laugh','喜','嬉','にや','wink','happy','smirk','euphoric'],
+  anger:['angry','怒','miff','furious','grit','gritted','frown','annoyed','irritated'],
+  sad:['sad','cry','涙','泣','teary','tears','哀','しょん'],
+  happy:['relax','楽','楽し','calm','serene','composed'],
+  heart:['heart','love','ラブ','❤','♡'],
+  eyes:['eye','eyes','gaze','look','視線','見開','細め','上目','blink','drowsy','star','glimmer','gleam'],
+  tear:['tear','涙','うる','潤','teary'],
+  mouth:['mouth','lip','唇','bite','smug','bashful','tease'],
+  confuse:['confuse','困惑','bewilder'],
+  tense:['tense','緊張','nervous','stiffen','freeze'],
+  shy:['shy','はにか','恥','blush','bashful']
+};
+
+const effBGHint=['bg','background','backdrop','sakura','petals','leaves','snow','rain','drizzle','mist','haze','veil','cloud','starscape','city','street','forest','sea','mountain','desert','screen'];
+const effSubjectGroups=[
+  {key:'ring',words:['ring','rim','crown','halo','sparkle','gloss','bokeh']},
+  {key:'line',words:['line','線','burst','speed','slash','zigzag']},
+  {key:'particle',words:['dust','spark','ember','particle','snow','ashes','filament']},
+  {key:'light',words:['light','glow','shine','gleam','glimmer','gloss','highlight','flare']},
+  {key:'distort',words:['distort','warp','ripple','wave','liquid','ghost','trench','veil']}
+];
+function hitAny(s,arr){return arr.some(w=>s.includes(w))}
+
+function putEffSubject(node,grp){
+  const map={ring:el.effRing,line:el.effLine,particle:el.effParticle,light:el.effLight,distort:el.effDistort,etc:el.effEtc};
+  const cnt={ring:el.nEffRing,line:el.nEffLine,particle:el.nEffParticle,light:el.nEffLight,distort:el.nEffDistort,etc:el.nEffEtc};
+  (map[grp||'etc']).appendChild(node);
+  cnt[grp||'etc'].textContent=(+cnt[grp||'etc'].textContent||0)+1;
+}
+
+function renderAll(){
+  let pCount=0;
+  for(const k in window.__parts.presets){
+    (window.__parts.presets[k]?.presets||[]).forEach(p=>{el.presets.appendChild(mkChk(p.id,p.label||p.id)); pCount++;});
+  }
+  el.numPresets.textContent=pCount;
+
+  const eCnt={joy:0,anger:0,sad:0,happy:0,heart:0,eyes:0,tear:0,mouth:0,confuse:0,tense:0,shy:0,etc:0,total:0};
+  const exprMap={joy:el.joy,anger:el.anger,sad:el.sad,happy:el.happy,heart:el.heart,eyes:el.eyes,tear:el.tear,mouth:el.mouth,confuse:el.confuse,tense:el.tense,shy:el.shy,etc:el.etc};
+  for(const k in window.__parts.faith){
+    (window.__parts.faith[k]?.categories||[]).forEach(c=>{
+      c.items?.forEach(it=>{
+        const text=`${it.label||''}`.toLowerCase(); let grp='etc';
+        for(const g of ['heart','anger','sad','joy','happy']) if(hitAny(text,emotionDict[g])){grp=g;break}
+        if(grp==='etc'){ for(const g of ['eyes','tear','mouth','confuse','tense','shy']) if(hitAny(text,emotionDict[g])){grp=g;break} }
+        exprMap[grp].appendChild(mkChk(it.id,it.label||it.id)); eCnt[grp]++; eCnt.total++;
+      });
+    });
+  }
+  $('#num-expr').textContent=eCnt.total;
+  $('#n-joy').textContent=eCnt.joy; $('#n-anger').textContent=eCnt.anger; $('#n-sad').textContent=eCnt.sad; $('#n-happy').textContent=eCnt.happy; $('#n-heart').textContent=eCnt.heart;
+  $('#n-eyes').textContent=eCnt.eyes; $('#n-tear').textContent=eCnt.tear; $('#n-mouth').textContent=eCnt.mouth; $('#n-confuse').textContent=eCnt.confuse; $('#n-tense').textContent=eCnt.tense; $('#n-shy').textContent=eCnt.shy; $('#n-etc').textContent=eCnt.etc;
+
+  let bgPlace=0,bgEff=0, effSub=0;
+  for(const k in window.__parts.background){
+    (window.__parts.background[k]?.categories||[]).forEach(c=>{
+      const isEffect=/effect|エフェクト/i.test(c.name||'');
+      (c.items||[]).forEach(it=>{
+        const node=mkChk(it.id,it.label||it.id);
+        if(isEffect){ el.bgEff.appendChild(node); bgEff++; } else { el.bgPlace.appendChild(node); bgPlace++; }
+      });
+    });
+  }
+  el.nBgPlace.textContent=bgPlace; el.nBgEff.textContent=bgEff; el.numBg.textContent=bgPlace+bgEff;
+
+  let cRing=0,cLine=0,cParticle=0,cLight=0,cDistort=0,cEtc=0;
+  for(const k in window.__parts.effect){
+    (window.__parts.effect[k]?.categories||[]).forEach(c=>{
+      (c.items||[]).forEach(it=>{
+        const text=`${it.label||''} ${it.id}`.toLowerCase();
+        if(hitAny(text,effBGHint)){ el.bgEff.appendChild(mkChk(it.id,it.label||it.id)); bgEff++; return; }
+        let grp='etc'; for(const g of effSubjectGroups){ if(hitAny(text,g.words)){ grp=g.key; break; } }
+        putEffSubject(mkChk(it.id,it.label||it.id),grp);
+        if(grp==='ring')cRing++; else if(grp==='line')cLine++; else if(grp==='particle')cParticle++; else if(grp==='light')cLight++; else if(grp==='distort')cDistort++; else cEtc++;
+        effSub++;
+      });
+    });
+  }
+  el.nBgEff.textContent=bgEff; el.numBg.textContent=bgPlace+bgEff; el.numEffSubject.textContent=effSub;
+  el.nEffRing.textContent=cRing; el.nEffLine.textContent=cLine; el.nEffParticle.textContent=cParticle; el.nEffLight.textContent=cLight; el.nEffDistort.textContent=cDistort; el.nEffEtc.textContent=cEtc;
+
+  let p=0,h=0;
+  for(const k in window.__parts.pose){ (window.__parts.pose[k]?.categories||[]).forEach(c=> c.items?.forEach(it=>{ el.listPose.appendChild(mkChk(it.id,it.label)); p++; })); }
+  for(const k in window.__parts.hair){ (window.__parts.hair[k]?.categories||[]).forEach(c=> c.items?.forEach(it=>{ el.listHair.appendChild(mkChk(it.id,it.label)); h++; })); }
+  el.numPose.textContent=p; el.numHair.textContent=h;
+}
+
+async function run(){
+  log.textContent=''; totalOk=0; totalNg=0; totalEm=TOTAL_SLOTS; totalRead=0;
+  for(const k of CAT_ORDER){ meterMap[k].okn=0; meterMap[k].ngn=0; meterMap[k].emn=CAT_SLOTS[k]; uiMeterUpdate(k); }
+  for(const k of CAT_ORDER){ await loadCategory(k); }
+  writeLog('=== ロード終了 ==='); renderAll();
+}
+
+/* [CHANGE] Toast 3秒＋連打対策 */
+const toast=$('#toast');
+let toastTimer=null;
+function showToast(msg){
+  toast.textContent=msg;
+  toast.classList.add('show');
+  if(toastTimer) clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>toast.classList.remove('show'), 3000);
+}
+
+$('#reloadBtn').addEventListener('click', run);
+$('#reset').addEventListener('click', ()=>{ document.querySelectorAll('input[type="checkbox"]').forEach(i=>i.checked=false); $('#out').value=''; showToast('リセットしました'); });
+$('#copy').addEventListener('click', ()=>{ navigator.clipboard.writeText($('#out').value||''); showToast('コピーしました'); });
+$('#gen').addEventListener('click', ()=>{ const ids=[]; document.querySelectorAll('input[type="checkbox"]:checked').forEach(i=>ids.push(i.dataset.id)); $('#out').value = ids.join(', '); showToast('タグ生成しました'); });
+
+run();
+})();
+</script><!-- === Part番号オート記憶アドオン（UI変更なし） === -->
+<script>
+(() => {
+  // 初期カウント（ユーザー指定値）
+  const INITIAL = { presets:33, faith:32, effect:33, background:1, pose:0, hair:0 };
+
+  const KEY = 'pbPartCounters';
+  const load = () => {
+    try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; }
+  };
+  const save = (obj) => localStorage.setItem(KEY, JSON.stringify(obj));
+
+  // 既存値を保持しつつ、初期値を反映（既存>初期 を優先）
+  const state = Object.assign({presets:0,faith:0,effect:0,background:0,pose:0,hair:0}, load());
+  for (const k in INITIAL) state[k] = Math.max(Number(state[k]||0), Number(INITIAL[k]||0));
+  save(state);
+
+  // 名前から {cat, idx} を推定
+  function parseName(name, fallbackCat){
+    // 例: "faith_part12" / "effect_part3" / "presets_part7"
+    let cat = fallbackCat || '';
+    let idx = 0;
+    if (typeof name === 'string' && name.includes('_part')) {
+      const m = name.match(/^([a-zA-Z]+)_part(\d+)$/);
+      if (m) { cat = m[1]; idx = parseInt(m[2],10)||0; }
+    } else if (typeof name === 'string' && /^part\d+$/.test(name)) {
+      idx = parseInt(name.replace('part',''),10)||0;
+    }
+    // カテゴリ名の正規化（UI側のキーに合わせる）
+    const norm = {
+      presets:'presets', faith:'faith', effect:'effect', background:'background', pose:'pose', hair:'hair',
+      prompt:'faith', // 万一 "prompt_partN" のような歴史的名残に備える
+    };
+    cat = norm[cat] || (norm[fallbackCat] || '');
+    return { cat, idx };
+  }
+
+  // カウント更新
+  function bump(cat, idx){
+    if (!cat || !idx) return;
+    const cur = Number(state[cat]||0);
+    if (idx > cur) {
+      state[cat] = idx;
+      save(state);
+      // console.debug(`[pb] ${cat} max part -> ${idx}`);
+    }
+  }
+
+  // 既存レジストリ関数を退避
+  const _orig = {
+    preset : window.__registerPresetPart,
+    faith  : window.__registerPromptPart,
+    effect : window.__registerEffectPart,
+    bg     : window.__registerBackgroundPart,
+    pose   : window.__registerPosePart,
+    hair   : window.__registerHairPart,
+  };
+
+  // それぞれラップして、登録成功時に最大番号を更新
+  window.__registerPresetPart = function(name, data){
+    try { const {cat, idx} = parseName(name,'presets'); bump(cat, idx); } catch {}
+    return _orig.preset && _orig.preset.apply(this, arguments);
+  };
+  window.__registerPromptPart = function(name, data){
+    try { const {cat, idx} = parseName(name,'faith'); bump(cat, idx); } catch {}
+    return _orig.faith && _orig.faith.apply(this, arguments);
+  };
+  window.__registerEffectPart = function(name, data){
+    try { const {cat, idx} = parseName(name,'effect'); bump(cat, idx); } catch {}
+    return _orig.effect && _orig.effect.apply(this, arguments);
+  };
+  window.__registerBackgroundPart = function(name, data){
+    try { const {cat, idx} = parseName(name,'background'); bump(cat, idx); } catch {}
+    return _orig.bg && _orig.bg.apply(this, arguments);
+  };
+  window.__registerPosePart = function(name, data){
+    try { const {cat, idx} = parseName(name,'pose'); bump(cat, idx); } catch {}
+    return _orig.pose && _orig.pose.apply(this, arguments);
+  };
+  window.__registerHairPart = function(name, data){
+    try { const {cat, idx} = parseName(name,'hair'); bump(cat, idx); } catch {}
+    return _orig.hair && _orig.hair.apply(this, arguments);
+  };
+
+  // 便利関数：次に作るべき番号を参照（必要ならUIに出せる）
+  window.__pbGetNextIndex = function(cat){
+    const n = Number((load()[cat] ?? state[cat]) || 0);
+    return (n + 1);
+  };
+
+  // 参考：現在の最大をコンソールへ（不要なら消してOK）
+  // console.log('[pb] counters', state);
+})();
+</script>
+</body>
+</html>
