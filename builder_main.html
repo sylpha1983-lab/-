@@ -1,0 +1,841 @@
+<!-- builder_main.html v12.x（ライト UI・カテゴリ直読） -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>表情＋エフェクト＋背景ビルダー（ライト UI・カテゴリ直読）</title>
+<style>
+  :root{
+    --fg:#222; --muted:#667085; --ok:#16a34a; --bad:#dc2626; --empty:#2563eb; --bg:#fff; --chip:#f2f4f7;
+    --line:#e5e7eb; --ink:#0b1220; --inkfg:#e6edf3;
+  }
+  html,body{margin:0;background:#fff;color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans JP,sans-serif}
+  .wrap{max-width:860px;margin:16px auto;padding:0 12px calc(120px + 32vh)}
+  h1{font-size:22px;line-height:1.35;margin:10px 0 16px}
+  .row{display:flex;gap:10px;align-items:center;margin:10px 0;flex-wrap:wrap}
+  .btn{padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:#fff}
+  .badge{padding:6px 10px;border-radius:999px;font-size:12px;background:var(--chip)}
+  .b-ok{color:#fff;background:var(--ok)}
+  .b-bad{color:#fff;background:var(--bad)}
+  .b-empty{color:#fff;background:var(--empty)}
+  .readline{font-size:14px;color:var(--fg)}
+  .meter-all{height:8px;background:#eef2f7;border-radius:999px;overflow:hidden}
+  .meter-fill{height:100%;width:0;background:linear-gradient(90deg,#93c5fd,#22c55e)}
+  details{background:#fff;border:1px solid var(--line);border-radius:12px;margin:12px 0}
+  summary{padding:14px 16px;cursor:pointer;list-style:none;font-weight:700}
+  details[open]>summary{border-bottom:1px solid #eef0f2}
+  .panel{padding:10px 14px}
+  .log{
+    background:#0b1220;color:#e6edf3;border-radius:12px;padding:14px;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    white-space:pre-wrap;line-height:1.35;max-height:28vh;overflow:auto
+  }
+  .grid{display:grid;grid-template-columns:1fr;gap:8px}
+  .chk{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--line);border-radius:12px}
+  .foot{position:fixed;z-index:10;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:10px}
+  .foot .row{margin:0}
+  .out{width:100%;min-height:110px;border:1px solid var(--line);border-radius:12px;padding:10px}
+  .meterRow{display:flex;align-items:center;gap:10px;margin:8px 0}
+  .meterBar{flex:1;height:6px;border-radius:999px;background:#eef2f7;position:relative;overflow:hidden}
+  .meterFill{position:absolute;inset:0 100% 0 0;background:linear-gradient(90deg,#b5e3c3,#16a34a)}
+  .slot{min-width:92px;text-align:right;color:#6b7280;font-size:12px}
+  .subhead{font-size:14px;color:#334155;margin:6px 0 8px;font-weight:700}
+  .toast{
+    position:fixed;left:50%;bottom:96px;transform:translateX(-50%);
+    background:#111827;color:#fff;padding:10px 14px;border-radius:10px;
+    opacity:0;pointer-events:none;transition:opacity .25s ease;
+    z-index:10000;font-size:14px;
+  }
+  .toast.show{opacity:1}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>表情＋エフェクト＋背景ビルダー（ライト UI・カテゴリ直読）</h1>
+
+  <div class="row">
+    <button id="reloadBtn" class="btn">再読込</button>
+    <span class="badge b-ok" id="cntOK">成功 0</span>
+    <span class="badge b-bad" id="cntNG">失敗 0</span>
+    <span class="badge b-empty" id="cntEMPTY">空 1200</span>
+  </div>
+
+  <div class="row" style="align-items:center">
+    <span class="readline">読み込み: <span id="totalRead">0</span> / <span id="totalMax">1200</span></span>
+    <div class="meter-all" style="flex:1;min-width:200px"><div id="overallFill" class="meter-fill"></div></div>
+  </div>
+
+  <details id="d-meters">
+    <summary>▼ 各カテゴリの進行・ログ（成功/失敗/空＋ログ）</summary>
+    <div class="panel">
+      <div id="meters"></div>
+      <div class="subhead">読み込みログ</div>
+      <div id="log" class="log">(ログはここに出ます)</div>
+    </div>
+  </details>
+
+  <details id="d-presets"><summary>▼ プリセット <span id="num-presets">0</span></summary>
+    <div class="panel"><div id="list-presets" class="grid"></div></div>
+  </details>
+
+  <details id="d-expr"><summary>▼ 表情 <span id="num-expr">0</span></summary>
+    <div class="panel">
+      <details><summary>✨ 喜 <span id="n-joy">0</span></summary><div class="panel"><div id="g-joy" class="grid"></div></div></details>
+      <details><summary>💢 怒 <span id="n-anger">0</span></summary><div class="panel"><div id="g-anger" class="grid"></div></div></details>
+      <details><summary>😢 哀 <span id="n-sad">0</span></summary><div class="panel"><div id="g-sad" class="grid"></div></div></details>
+      <details><summary>🎵 楽 <span id="n-happy">0</span></summary><div class="panel"><div id="g-happy" class="grid"></div></div></details>
+      <details><summary>❤️ heart <span id="n-heart">0</span></summary><div class="panel"><div id="g-heart" class="grid"></div></div></details>
+
+      <details><summary>👀 視線系 <span id="n-eyes">0</span></summary><div class="panel"><div id="g-eyes" class="grid"></div></div></details>
+      <details><summary>💧 涙系 <span id="n-tear">0</span></summary><div class="panel"><div id="g-tear" class="grid"></div></div></details>
+      <details><summary>👄 口元系 <span id="n-mouth">0</span></summary><div class="panel"><div id="g-mouth" class="grid"></div></div></details>
+      <details><summary>❓ 困惑 <span id="n-confuse">0</span></summary><div class="panel"><div id="g-confuse" class="grid"></div></div></details>
+      <details><summary>😳 緊張 <span id="n-tense">0</span></summary><div class="panel"><div id="g-tense" class="grid"></div></div></details>
+      <details><summary>☺️ 恥じらい <span id="n-shy">0</span></summary><div class="panel"><div id="g-shy" class="grid"></div></div></details>
+      <details><summary>▶ その他 <span id="n-etc">0</span></summary><div class="panel"><div id="g-etc" class="grid"></div></div></details>
+    </div>
+  </details>
+
+  <details id="d-eff-subject"><summary>▼ 被写体エフェクト <span id="num-eff-subject">0</span></summary>
+    <div class="panel">
+      <details><summary>✨ リング・輝き <span id="n-eff-ring">0</span></summary><div class="panel"><div id="g-eff-ring" class="grid"></div></div></details>
+      <details><summary>🧵 ライン／スピード線 <span id="n-eff-line">0</span></summary><div class="panel"><div id="g-eff-line" class="grid"></div></div></details>
+      <details><summary>🌫️ パーティクル・粉塵 <span id="n-eff-particle">0</span></summary><div class="panel"><div id="g-eff-particle" class="grid"></div></div></details>
+      <details><summary>💡 光・グロー／反射 <span id="n-eff-light">0</span></summary><div class="panel"><div id="g-eff-light" class="grid"></div></div></details>
+      <details><summary>🌊 歪み・液体・波紋 <span id="n-eff-distort">0</span></summary><div class="panel"><div id="g-eff-distort" class="grid"></div></div></details>
+      <details><summary>🧩 その他 <span id="n-eff-etc">0</span></summary><div class="panel"><div id="g-eff-etc" class="grid"></div></div></details>
+    </div>
+  </details>
+
+  <details id="d-bg"><summary>▼ 背景 <span id="num-bg">0</span></summary>
+    <div class="panel">
+      <details><summary>📍 場所 <span id="n-bg-place">0</span></summary>
+        <div class="panel"><div id="g-bg-place" class="grid"></div></div>
+      </details>
+      <details><summary>🧩 背景エフェクト <span id="n-bg-eff">0</span></summary>
+        <div class="panel"><div id="g-bg-eff" class="grid"></div></div>
+      </details>
+    </div>
+  </details>
+
+  <details id="d-pose"><summary>▼ ポーズ <span id="num-pose">0</span></summary>
+    <div class="panel"><div id="list-pose" class="grid"></div></div>
+  </details>
+
+  <details id="d-hair"><summary>▼ 髪型 <span id="num-hair">0</span></summary>
+    <div class="panel" id="hair-groups"><div id="list-hair" class="grid" style="display:none"></div></div>
+
+    <details id="mesh-nested"><summary>🪡 メッシュ（種類 → ベース髪色 → メッシュ色）</summary>
+      <div class="panel">
+        <div id="mesh-types-host"></div>
+      </div>
+    </details>
+  </details>
+</div>
+
+<div class="foot">
+  <div class="row">
+    <button id="gen" class="btn">タグ生成</button>
+    <button id="reset" class="btn">リセット</button>
+    <button id="copy" class="btn">コピー</button>
+  </div>
+  <textarea id="out" class="out" placeholder="generated tags will appear here..."></textarea>
+</div>
+
+<div id="toast" class="toast">done</div>
+<script>
+;(()=>{
+const BASE="./";
+const FILES={
+  presets:(i)=>`${BASE}presets_part${i}.js`,
+  faith:(i)=>`${BASE}faith_part${i}.js`,
+  background:(i)=>`${BASE}background_part${i}.js`,
+  effect:(i)=>`${BASE}effect_part${i}.js`,
+  pose:(i)=>`${BASE}pose_part${i}.js`,
+  hair:(i)=>`${BASE}hair_part${i}.js`,
+};
+const CAT_ORDER=["presets","faith","background","effect","pose","hair"];
+const CAT_SLOTS={presets:200,faith:200,background:200,effect:200,pose:200,hair:200};
+const TOTAL_SLOTS=Object.values(CAT_SLOTS).reduce((a,b)=>a+b,0);
+
+window.__parts=window.__parts||{presets:{},faith:{},background:{},effect:{},pose:{},hair:{}};
+function __ensure(p){const w=window.__parts;if(!w[p])w[p]={};return w[p]}
+// 後方互換（3 形態対応）
+window.__registerPresetPart=function(a,b,c){
+  if(arguments.length===3 && String(a).toLowerCase()==='presets'){ __ensure('presets')[b]=c; return; }
+  if(arguments.length===2 && typeof a==='string' && /^presets_part\d+$/i.test(a)){ __ensure('presets')[a]=b; return; }
+  __ensure('presets')[a]=b;
+};
+window.__registerPromptPart=(n,d)=>{__ensure("faith")[n]=d};
+window.__registerBackgroundPart=(n,d)=>{__ensure("background")[n]=d};
+window.__registerEffectPart=(n,d)=>{__ensure("effect")[n]=d};
+window.__registerPosePart=(n,d)=>{__ensure("pose")[n]=d};
+window.__registerHairPart=(n,d)=>{__ensure("hair")[n]=d};
+
+const $=s=>document.querySelector(s);
+const setText=(s,v)=>{const el=$(s); if(el) el.textContent=v;};
+const log=$('#log'); const overallFill=$('#overallFill');
+$('#cntEMPTY').textContent=`空 ${TOTAL_SLOTS}`; $('#totalMax').textContent=TOTAL_SLOTS;
+
+const metersBox=$('#meters'), meterMap={};
+function addMeterRow(label,key){
+  const row=document.createElement('div');
+  row.className='meterRow';
+  row.innerHTML=`
+    <div style="min-width:120px">${label}</div>
+    <div class="meterBar"><div class="meterFill" id="fill-${key}"></div></div>
+    <div class="slot"><span id="ok-${key}" class="badge b-ok">成功 0</span></div>
+    <div class="slot"><span id="ng-${key}" class="badge b-bad">失敗 0</span></div>
+    <div class="slot"><span id="em-${key}" class="badge b-empty">空 ${CAT_SLOTS[key]}</span></div>`;
+  metersBox.appendChild(row);
+  meterMap[key]={fill:row.querySelector(`#fill-${key}`),ok:row.querySelector(`#ok-${key}`),ng:row.querySelector(`#ng-${key}`),em:row.querySelector(`#em-${key}`),okn:0,ngn:0,emn:CAT_SLOTS[key],total:CAT_SLOTS[key]};
+}
+['presets','faith','background','effect','pose','hair'].forEach(k=>addMeterRow(k,k));
+
+let totalOk=0,totalNg=0,totalEm=TOTAL_SLOTS,totalRead=0;
+$('#cntOK').textContent=`成功 ${totalOk}`; $('#cntNG').textContent=`失敗 ${totalNg}`; $('#totalRead').textContent=totalRead;
+function uiMeterUpdate(key){
+  const m=meterMap[key];
+  m.ok.textContent=`成功 ${m.okn}`; m.ng.textContent=`失敗 ${m.ngn}`; m.em.textContent=`空 ${m.emn}`;
+  const prog=(CAT_SLOTS[key]-m.emn)/m.total;
+  m.fill.style.inset=`0 ${(1-prog)*100}% 0 0`;
+  $('#cntOK').textContent=`成功 ${totalOk}`; $('#cntNG').textContent=`失敗 ${totalNg}`;
+  $('#cntEMPTY').textContent=`空 ${totalEm}`; $('#totalRead').textContent=totalRead;
+  const overall=(TOTAL_SLOTS-totalEm)/TOTAL_SLOTS;
+  overallFill.style.width=`${(overall*100).toFixed(1)}%`;
+}
+function writeLog(s){ if(log.textContent)log.textContent+='\n'; log.textContent+=s; log.scrollTop=log.scrollHeight; }
+
+// 読み込み（script タグ → fetch+blob フォールバック）
+function loadViaTag(url, timeout){
+  return new Promise((res)=>{
+    let done=false; const s=document.createElement('script');
+    s.async=true; s.src=url + (url.includes('?')?'&':'?') + 'v=' + Date.now();
+    s.onload=()=>{ if(done) return; done=true; res('ok'); };
+    s.onerror=()=>{ if(done) return; done=true; res('empty'); };
+    document.head.appendChild(s);
+    setTimeout(()=>{ if(done) return; done=true; res('hang'); }, timeout||2500);
+  });
+}
+function loadViaFetchBlob(url){
+  if(!window.fetch||!window.Blob||!URL||!URL.createObjectURL) return Promise.resolve('empty');
+  return fetch(url,{cache:'no-store'})
+    .then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.text(); })
+    .then(code=>{
+      const blob=new Blob([code],{type:'text/javascript'});
+      const u=URL.createObjectURL(blob);
+      return loadViaTag(u,2500).then(r=>{ try{URL.revokeObjectURL(u)}catch(_){} return r==='ok'?'ok':'empty'; });
+    }).catch(()=> 'empty');
+}
+function tryLoad(url){
+  return loadViaTag(url,2500).then(r=>{
+    if(r==='ok') return 'ok';
+    if(r==='hang'){ writeLog(`⚠ 読み込み待ちタイムアウト → fetch+blob に切替: ${url}`); return loadViaFetchBlob(url); }
+    return r;
+  });
+}
+
+/******** empty発生で打ち切り（既存仕様維持） ********/
+async function loadCategory(catKey){
+  const max=CAT_SLOTS[catKey];
+  writeLog(`=== ${catKey} 読み開始 ===`);
+  for(let i=1;i<=max;i++){
+    const res=await tryLoad(FILES[catKey](i));
+    if(res==='ok'){
+      meterMap[catKey].okn++; totalOk++; meterMap[catKey].emn--; totalEm--;
+      writeLog(`OK : [${catKey}] part ${i} : OK`); totalRead++;
+    }else if(res==='empty'){
+      writeLog(`なし : [${catKey}] part ${i} : なし`);
+      uiMeterUpdate(catKey);
+      break; // 最初の empty でこのカテゴリは打ち切り
+    }else{
+      meterMap[catKey].ngn++; totalNg++; meterMap[catKey].emn--; totalEm--;
+      writeLog(`エラー: [${catKey}] part ${i} : 失敗`); totalRead++;
+    }
+    uiMeterUpdate(catKey);
+  }
+  writeLog(`=== ${catKey} 読み終了 ===`);
+}
+
+function mkChk(id,label){
+  const lab=document.createElement('label');
+  lab.className='chk';
+  lab.innerHTML=`<input type="checkbox" data-id="${id}"><span>${label||id}</span>`;
+  return lab;
+}
+const el={
+  presets:$('#list-presets'),
+  joy:$('#g-joy'), anger:$('#g-anger'), sad:$('#g-sad'), happy:$('#g-happy'), heart:$('#g-heart'),
+  eyes:$('#g-eyes'), tear:$('#g-tear'), mouth:$('#g-mouth'), confuse:$('#g-confuse'), tense:$('#g-tense'), shy:$('#g-shy'), etc:$('#g-etc'),
+  numPresets:$('#num-presets'), numExpr:$('#num-expr'),
+  effRing:$('#g-eff-ring'), effLine:$('#g-eff-line'), effParticle:$('#g-eff-particle'), effLight:$('#g-eff-light'), effDistort:$('#g-eff-distort'), effEtc:$('#g-eff-etc'),
+  nEffRing:$('#n-eff-ring'), nEffLine:$('#n-eff-line'), nEffParticle:$('#n-eff-particle'), nEffLight:$('#n-eff-light'), nEffDistort:$('#n-eff-distort'), nEffEtc:$('#n-eff-etc'),
+  numEffSubject:$('#num-eff-subject'),
+  bgPlace:$('#g-bg-place'), bgEff:$('#g-bg-eff'), nBgPlace:$('#n-bg-place'), nBgEff:$('#n-bg-eff'), numBg:$('#num-bg'),
+  listPose:$('#list-pose'), numPose:$('#num-pose'),
+  hairGroups:$('#hair-groups'), numHair:$('#num-hair')
+};
+
+const emotionDict={
+  joy:['smile','grin','laugh','wink','happy','smirk','喜','嬉','楽','ニヤ'],
+  anger:['angry','furious','grit','gritted','frown','annoyed','irritated','怒','ムッ'],
+  sad:['sad','cry','teary','tears','涙','泣','哀'],
+  happy:['relax','cheer','sparkle','楽','ふわ','calm','serene','composed'],
+  heart:['heart','love','♡','❤','ラブ'],
+  eyes:['eye','eyes','gaze','look','視線','見開','細め','上目','blink','drowsy','star','glimmer','gleam'],
+  tear:['tear','涙','うる','潤','teary'],
+  mouth:['mouth','lip','唇','bite','smug','bashful','tease'],
+  confuse:['confuse','困惑','bewilder'],
+  tense:['tense','緊張','nervous','stiffen','freeze'],
+  shy:['shy','はにか','恥','blush','bashful']
+};
+
+const effBGHint=['bg','background','backdrop','sakura','petals','leaves','snow','rain','drizzle','mist','haze','veil','cloud','starscape','city','street','forest','sea','mountain','desert','screen'];
+
+const effSubjectGroups=[
+  {key:'ring',words:['ring','rim','crown','halo','sparkle','gloss','bokeh']},
+  {key:'line',words:['line','線','burst','speed','slash','zigzag']},
+  {key:'particle',words:['dust','spark','ember','particle','snow','ashes','filament']},
+  {key:'light',words:['light','glow','shine','gleam','glimmer','gloss','highlight','flare']},
+  {key:'distort',words:['distort','warp','ripple','wave','liquid','ghost','trench','veil']}
+];
+
+function hitAny(s,arr){return arr.some(w=>s.includes(w))}
+function putEffSubject(node,grp){
+  const map={ring:el.effRing,line:el.effLine,particle:el.effParticle,light:el.effLight,distort:el.effDistort,etc:el.effEtc};
+  const cnt={ring:$('#n-eff-ring'),line:$('#n-eff-line'),particle:$('#n-eff-particle'),light:$('#n-eff-light'),distort:$('#n-eff-distort'),etc:$('#n-eff-etc')};
+  (map[grp||'etc']).appendChild(node);
+  cnt[grp||'etc'].textContent=(+cnt[grp||'etc'].textContent||0)+1;
+}
+
+/* ====== ここから UI 描画 ====== */
+function renderAll(){
+  // presets
+  let pCount=0;
+  for(const k in window.__parts.presets){
+    (window.__parts.presets[k]?.presets||[]).forEach(p=>{
+      el.presets.appendChild(mkChk(p.id,p.label||p.id)); pCount++;
+    });
+  }
+  el.numPresets.textContent=pCount;
+
+  // 表情
+  const eCnt={joy:0,anger:0,sad:0,happy:0,heart:0,eyes:0,tear:0,mouth:0,confuse:0,tense:0,shy:0,etc:0,total:0};
+  const exprMap={joy:el.joy,anger:el.anger,sad:el.sad,happy:el.happy,heart:el.heart,eyes:el.eyes,tear:el.tear,mouth:el.mouth,confuse:el.confuse,tense:el.tense,shy:el.shy,etc:el.etc};
+  for(const k in window.__parts.faith){
+    (window.__parts.faith[k]?.categories||[]).forEach(c=>{
+      (c.items||[]).forEach(it=>{
+        const text=`${it.label||''}`.toLowerCase(); let grp='etc';
+        for(const g of ['heart','anger','sad','joy','happy']) if(hitAny(text,emotionDict[g])){grp=g;break}
+        if(grp==='etc'){ for(const g of ['eyes','tear','mouth','confuse','tense','shy']) if(hitAny(text,emotionDict[g])){grp=g;break} }
+        exprMap[grp].appendChild(mkChk(it.id,it.label||it.id)); eCnt[grp]++; eCnt.total++;
+      });
+    });
+  }
+  setText('#num-expr', eCnt.total);
+  setText('#n-joy',eCnt.joy); setText('#n-anger',eCnt.anger); setText('#n-sad',eCnt.sad); setText('#n-happy',eCnt.happy); setText('#n-heart',eCnt.heart);
+  setText('#n-eyes',eCnt.eyes); setText('#n-tear',eCnt.tear); setText('#n-mouth',eCnt.mouth); setText('#n-confuse',eCnt.confuse); setText('#n-tense',eCnt.tense); setText('#n-shy',eCnt.shy); setText('#n-etc',eCnt.etc);
+
+  // 背景（一次：フラットに配置）
+  let bgPlace=0,bgEff=0;
+  function walkBg(cat, inheritedEff){
+    const isEffect = inheritedEff || /effect|エフェクト/i.test(String(cat?.name||''));
+    (cat?.items||[]).forEach(it=>{
+      const node=mkChk(it.id,it.label||it.id);
+      if(isEffect){ $('#g-bg-eff').appendChild(node); bgEff++; } else { $('#g-bg-place').appendChild(node); bgPlace++; }
+    });
+    (cat?.categories||[]).forEach(sc=>walkBg(sc, isEffect));
+  }
+  for(const k in window.__parts.background){
+    (window.__parts.background[k]?.categories||[]).forEach(c=>walkBg(c,false));
+  }
+  setText('#n-bg-place', bgPlace); setText('#n-bg-eff', bgEff); setText('#num-bg', bgPlace+bgEff);
+
+  // 被写体エフェクト
+  let cRing=0,cLine=0,cParticle=0,cLight=0,cDistort=0,cEtc=0, effSub=0;
+  for(const k in window.__parts.effect){
+    (window.__parts.effect[k]?.categories||[]).forEach(c=>{
+      (c.items||[]).forEach(it=>{
+        const text=`${it.label||''} ${it.id}`.toLowerCase();
+        if(hitAny(text,effBGHint)){ $('#g-bg-eff').appendChild(mkChk(it.id,it.label||it.id)); bgEff++; return; }
+        let grp='etc'; for(const g of effSubjectGroups){ if(hitAny(text,g.words)){ grp=g.key; break; } }
+        putEffSubject(mkChk(it.id,it.label||it.id),grp);
+        if(grp==='ring')cRing++; else if(grp==='line')cLine++; else if(grp==='particle')cParticle++; else if(grp==='light')cLight++; else if(grp==='distort')cDistort++; else cEtc++;
+        effSub++;
+      });
+    });
+  }
+  setText('#n-bg-eff', bgEff); setText('#num-bg', bgPlace+bgEff); setText('#num-eff-subject', effSub);
+  setText('#n-eff-ring',cRing); setText('#n-eff-line',cLine); setText('#n-eff-particle',cParticle); setText('#n-eff-light',cLight); setText('#n-eff-distort',cDistort); setText('#n-eff-etc',cEtc);
+
+  /* === ポーズ === */
+  (function poseGrouping(){
+    const host = el.listPose; if(!host) return;
+    host.innerHTML = '';
+    const defs = [
+      { key:'stand',title:'立ち / Standing',kw:['stand','直立','standing'] },
+      { key:'sit',title:'座り / Sitting',kw:['sit','座り','chair','sofa'] },
+      { key:'kneel',title:'膝・しゃがみ / Kneel & Crouch',kw:['kneel','crouch','squat','正座'] },
+      { key:'hands',title:'手・腕 / Hands & Arms',kw:['hand-','hands-','finger','thumb','peace','ハートハンド','ピース','頬杖','指'] },
+      { key:'upper',title:'上半身 / Upper Body',kw:['shoulder','torso','chest','背','胸'] },
+      { key:'head',title:'頭・視線 / Head & Gaze',kw:['head','look','gaze','profile','camera','angle','視線','横顔'] },
+      { key:'dynamic',title:'動き・バランス / Dynamic',kw:['walk','run','jump','spin','lean','reach','push','pull','slide','sprint','skip','twirl'] },
+      { key:'dance',title:'ダンス・舞台 / Dance & Stage',kw:['dance','ballet','stage','idol','spotlight','sing','cheer'] },
+      { key:'lying',title:'寝転び・リラックス / Lying & Relax',kw:['lying','recline','nap','bed','sleep','stretch on bed'] },
+      { key:'daily',title:'日常・創作・仕事 / Daily & Creative',kw:['writing','painting','guitar','violin','cook','pan','chopping','plating','typing','presentation','phone','desk','office','kitchen'] },
+      { key:'sports',title:'スポーツ / Sports & Action',kw:['soccer','basketball','tennis','baseball','golf','volleyball','rugby','swimming','boxing','mma','fencing','parkour','skateboard','snowboard','surfing','marathon','weightlifting'] },
+      { key:'combat',title:'格闘・武器 / Combat & Action',kw:['sword','guard','kick','punch','aim','bow','rifle','weapon','shield','dodge','parry','finisher','stance','martial','archery','throwing'] },
+      { key:'pair',title:'ペア・グループ / Pair & Group',kw:['duo','pair','group','two-person','back-to-back','lineup','huddle','standing in a line','円陣'] },
+      { key:'jpn',title:'和風・着物 / Japanese',kw:['samurai','katana','kimono','tea ceremony','sumo','kendo','naginata','seiza','武士','着物','お点前','相撲'] },
+      { key:'west',title:'西洋・宮廷 / Western',kw:['curtsy','gentleman','salon toast','waltz','tango','hand kiss','dress'] },
+      { key:'sf',title:'SF・メカ / SF & Mecha',kw:['mech','cockpit','pilot','launch','mecha','sf','arm cannon','railgun','hatch'] },
+      { key:'loc',title:'ロケーション / Locations',kw:['loc-'] },
+      { key:'extra',title:'エクストラ / Extras',kw:['pose-','expressive','shrug','finger guns','casual salute'] },
+      { key:'others',title:'その他 / Others',kw:[] }
+    ];
+    const groups={};
+    defs.forEach(d=>{
+      const wrap=document.createElement('details'); wrap.open=false;
+      const sum=document.createElement('summary'); const count=document.createElement('span'); count.id=`cnt-${d.key}`; count.textContent='0';
+      sum.textContent=d.title+' '; sum.appendChild(count);
+      const panel=document.createElement('div'); panel.className='panel';
+      const grid=document.createElement('div'); grid.className='grid'; grid.id=`g-${d.key}`;
+      panel.appendChild(grid); wrap.appendChild(panel); wrap.insertBefore(sum,panel);
+      host.appendChild(wrap); groups[d.key]={grid,countEl:count,n:0,def:d};
+    });
+    function pickGroup(label,id){
+      const t = `${label||''} ${id||''}`.toLowerCase();
+      if (id && id.startsWith('loc-')) return 'loc';
+      for (const d of defs){ if (d.key==='others') continue; if (d.kw.some(k=>t.includes(k))) return d.key; }
+      return 'others';
+    }
+    let totalPose=0;
+    const src = window.__parts?.pose||{};
+    for(const k in src){
+      (src[k]?.categories||[]).forEach(c=>{
+        (c.items||[]).forEach(it=>{
+          const key=pickGroup(it.label,it.id);
+          groups[key]?.grid.appendChild(mkChk(it.id,it.label||it.id));
+          if(groups[key]){ groups[key].n++; totalPose++; }
+        });
+      });
+    }
+    Object.values(groups).forEach(g=>g.countEl.textContent=g.n);
+    el.numPose.textContent=totalPose;
+  })();
+
+  // 髪型（グルーピング）
+  (function hairGrouping(){
+    const host = el.hairGroups; if(!host) return;
+    host.innerHTML = '';
+    const defs = [
+      { key:'pony',title:'🐎 ポニーテール / Ponytails',kw:['ponytail','pony','side-ponytail','twin-ponies'] },
+      { key:'twin',title:'🎀 ツイン・サイド / Twin & Side',kw:['twin-tail','twin buns','twin','side-tail','side-ponytail'] },
+      { key:'bun',title:'🟤 お団子・アップ / Buns & Updos',kw:['bun','updo','chignon','french twist','roll updo','space buns'] },
+      { key:'short',title:'✂️ ショート / Short',kw:['short','pixie','bixie','bob','buzzcut','mullet'] },
+      { key:'medium',title:'📏 ミディアム / Medium',kw:['midi','medium','lob'] },
+      { key:'long',title:'💫 ロング / Long',kw:['long','mermaid','swan','ribbon-tie long'] },
+      { key:'bangs',title:'🧢 前髪 / Bangs',kw:['bang','fringe','curtain bangs','bottleneck'] },
+      { key:'braid',title:'🧶 編み・ブレイズ / Braids',kw:['braid','braided','fishtail','dutch','crown braid','rope'] },
+      { key:'acc',title:'🎗️ アクセ付き / Accessories',kw:['ribbon','hairpin','tiara','clip','barrette','flower','pearl','beads','chain','scrunchie'] },
+      { key:'fant',title:'🪄 ファンタジー・SF / Fantasy & SF',kw:['elf','demon','angel','fairy','goddess','knight','cyber','neon','android','hologram','mecha','space','vr','ai','samurai armor','gladiator','berserker'] },
+      { key:'cult',title:'🏛 文化・伝統 / Cultural & Traditional',kw:['samurai','maiko','geisha','miko','viking','egyptian','indi','arab','shrine','edo','kimono','tribal'] },
+      { key:'sports',title:'🏃 スポーツ / Sports & Action',kw:['runner','athlete','gym','fighter','martial','swimmer','dancer','basketball','soccer','tennis'] },
+      { key:'casual',title:'🧵 カジュアル / Casual & Everyday',kw:['casual','daily','schoolgirl','loose','messy','relaxed','carefree','quick-tie'] },
+      { key:'pastel',title:'🎨 パステル / Pastel Colors',kw:['pastel'] },
+      { key:'metallic',title:'✨ メタリック / Metallic Colors',kw:['metallic','chrome'] },
+      { key:'glow',title:'💡 発光・反応 / Glow & Reactive',kw:['glow','bioluminescent','phosphor','uv','radioactive','neon'] },
+      { key:'gradient',title:'🌈 グラデーション / Gradients',kw:['gradient','ombre'] },
+      { key:'basic',title:'🧪 ベーシック＆拡張色 / Basic Colors',kw:['hair-','-hair','brown','blonde','red','silver','white','black','auburn','ash','burgundy','rose gold','highlight','gloss','smoky','uv-reactive'] },
+      { key:'natural',title:'🍃 自然・元素 / Natural & Elements',kw:['forest','leaf','stone','sand','earth','river','ocean','lava','crystal','aqua','sunset'] },
+      { key:'others',title:'▶ その他 / Others',kw:[] },
+    ];
+    const groups={};
+    defs.forEach(d=>{
+      const dd=document.createElement('details'); dd.open=false;
+      const sm=document.createElement('summary'); const cnt=document.createElement('span'); cnt.id=`cnt-hair-${d.key}`; cnt.textContent='0';
+      sm.textContent=d.title+' '; sm.appendChild(cnt);
+      const panel=document.createElement('div'); panel.className='panel';
+      const grid=document.createElement('div'); grid.className='grid'; grid.id=`g-hair-${d.key}`;
+      panel.appendChild(grid); dd.appendChild(sm); dd.appendChild(panel);
+      host.appendChild(dd);
+      groups[d.key]={grid,countEl:cnt,n:0,def:d};
+    });
+    function pick(label,id){
+      const t=`${label||''} ${id||''}`.toLowerCase();
+      for(const d of defs){ if(d.key==='others') continue; if(d.kw.some(k=>t.includes(k))) return d.key; }
+      return 'others';
+    }
+    let total=0;
+    const src = window.__parts?.hair||{};
+    for(const k in src){
+      (src[k]?.categories||[]).forEach(c=>{
+        (c.items||[]).forEach(it=>{
+          const key=pick(it.label,it.id);
+          groups[key]?.grid.appendChild(mkChk(it.id,it.label||it.id));
+          if(groups[key]){ groups[key].n++; total++; }
+        });
+      });
+    }
+    Object.values(groups).forEach(g=>g.countEl.textContent=g.n);
+    el.numHair.textContent=total;
+  })();
+
+  // ===== メッシュ3段UIの構築（既存呼び出し維持） =====
+  buildNestedMeshUI();
+
+  // ===== 背景「場所」ツリーの後段ビルド（折りたたみ＆重複除去） =====
+  buildPlaceTreeAfterRender();
+}/* ===== メッシュ3段UI ===== */
+function buildNestedMeshUI(){
+  const host = document.getElementById('mesh-types-host') || document.getElementById('mesh-composer');
+  if (!host) return;
+  host.innerHTML = '';
+
+  const FIX_TYPES = [
+    { id:'inner color mesh', label:'インナーカラーメッシュ / inner color mesh' },
+    { id:'peekaboo mesh',    label:'ピーカブーメッシュ / peekaboo mesh' },
+    { id:'half & half color',label:'左右ハーフカラー / half & half color' },
+    { id:'highlight streaks',label:'ハイライトストリーク / highlight streaks' },
+  ];
+  const FIX_BASES = [
+    {id:'none',label:'指定なし'},
+    {id:'black',label:'black'},
+    {id:'brown',label:'brown'},
+    {id:'blonde',label:'blonde'},
+    {id:'ash gray',label:'ash gray'},
+    {id:'white',label:'white'},
+    {id:'pastel pink',label:'pastel pink'},
+  ];
+  const FIX_COLORS = ['red','blue','green','purple','neon pink','metallic gold','gradient purple→blue'];
+
+  const parts = (window.__parts && window.__parts.hair) ? window.__parts.hair : {};
+  const byId = new Map();
+  const EXTRA_TYPE_IDS = new Set([
+    'inner-color','underlayer-streaks','money-piece','front-streaks','side-streaks','bangs-streaks',
+    'chunky-streaks','bold-highlights','fine-streaks','mixed-streaks'
+  ]);
+  const BASE_NAME_HINTS = /base.*hair|ベース.*髪色/i;
+
+  for (const k in parts){
+    const catArr = parts[k]?.categories || [];
+    catArr.forEach(cat=>{
+      const isBaseCat = BASE_NAME_HINTS.test(String(cat?.name||''));
+      (cat.items||[]).forEach(it=>{
+        const id = String(it.id||'').trim();
+        const label = it.label || id;
+        if (!id) return;
+        if (id.startsWith('mesh-') || EXTRA_TYPE_IDS.has(id)){
+          if (!byId.has(id)) byId.set(id, {id, label, kind:'type'});
+        } else if (id.startsWith('hair-')){
+          const kind = isBaseCat ? 'base' : 'color';
+          if (!byId.has(id)) byId.set(id, {id, label, kind});
+        }
+      });
+    });
+  }
+
+  const TYPES  = [...FIX_TYPES.map(x=>({id:x.id,label:x.label}))];
+  const BASES  = [...FIX_BASES.map(x=>({id:x.id,label:x.label}))];
+  const COLORS = [...FIX_COLORS];
+
+  for (const v of byId.values()){
+    if (v.kind==='type'){ TYPES.push({id:v.id, label:`${v.label} / ${v.id}`}); }
+    else if (v.kind==='base'){ BASES.push({id:v.id, label:`${v.label}`}); }
+    else if (v.kind==='color'){ if (!BASES.some(b=>b.id===v.id)) COLORS.push(v.id); }
+  }
+
+  const mkDetails = (summaryText) => {
+    const d = document.createElement('details'); d.className = 'panel'; d.open = false;
+    const s = document.createElement('summary'); s.textContent = summaryText; d.appendChild(s);
+    const p = document.createElement('div'); p.className = 'panel grid'; d.appendChild(p);
+    return {wrap:d, grid:p};
+  };
+  const mkChk = (attrs, text) => {
+    const lab = document.createElement('label'); lab.className='chk';
+    const input = document.createElement('input'); input.type='checkbox';
+    Object.entries(attrs).forEach(([k,v])=>input.setAttribute(k,v));
+    const span = document.createElement('span'); span.textContent = text;
+    lab.appendChild(input); lab.appendChild(span);
+    return lab;
+  };
+
+  const a = mkDetails('🧵 メッシュの種類');  TYPES.forEach(t=>a.grid.appendChild(mkChk({'data-m2':'type','value':t.id}, t.label)));
+  const b = mkDetails('🪄 ベースの髪色');    BASES.forEach(c=>b.grid.appendChild(mkChk({'data-m2':'base','value':c.id}, c.label)));
+  const c = mkDetails('🌈 メッシュの色');    COLORS.forEach(col=>c.grid.appendChild(mkChk({'data-m2':'color','value':col}, col)));
+
+  host.appendChild(a.wrap); host.appendChild(b.wrap); host.appendChild(c.wrap);
+}
+
+/* ===== メッシュタグ（重複 "hair" 除去・接頭辞なし） ===== */
+function buildNestedMeshTokens(){
+  const wraps = document.querySelectorAll('[data-m2="type"], [data-m2="base"], [data-m2="color"]');
+  if (!wraps.length) return [];
+
+  const types  = [...document.querySelectorAll('[data-m2="type"]:checked')].map(i=>i.value);
+  const bases  = [...document.querySelectorAll('[data-m2="base"]:checked')].map(i=>i.value);
+  const colors = [...document.querySelectorAll('[data-m2="color"]:checked')].map(i=>i.value);
+
+  const toHair = (s)=> s && (/( hair)$/i.test(s) ? s : `${s} hair`);
+
+  const out = [];
+  const T = types.length ? types : []; // ← デフォルト自動追加なし（勝手に入らない）
+
+  T.forEach(t=>{
+    const baseList = bases.length ? bases : ['none'];
+    baseList.forEach(b=>{
+      if (colors.length){
+        colors.forEach(c=>{
+          const toks = [toHair(t)];
+          if (b!=='none') toks.push(toHair(b));
+          toks.push(toHair(c));
+          out.push([...new Set(toks)].join(', '));
+        });
+      }else{
+        const toks = [toHair(t)];
+        if (b!=='none') toks.push(toHair(b));
+        out.push([...new Set(toks)].join(', '));
+      }
+    });
+  });
+
+  return out;
+}
+
+/* ========= 背景の「場所」ツリー：自動追従（折りたたみ＋重複除去） ========= */
+const PLACE_SUBS = {
+  "学校":["教室","運動場","廊下","校門","図書室","屋上"],
+  "病院":["病室","手術室","受付","廊下","屋上"],
+  "城":["玉座の間","城門","回廊","庭園","塔"],
+  "都市":["広場","市場","住宅街","高層ビル街"],
+  "室内":["リビング","寝室","台所","廊下","玄関"],
+  "宇宙":["宇宙船内部","宇宙空間","惑星表面","基地","SF都市"],
+  "寺院":["本堂","境内","回廊"],
+  "神社":["本殿","鳥居","参道"],
+  "図書館":["閲覧室","書庫","廊下"],
+  "博物館":["展示室","ホール","廊下"],
+  "レストラン":["客席","厨房","個室"],
+  "カフェ":["カウンター","テーブル席","テラス席"]
+};
+function __bgEnsureHeadDynamic(name){
+  let det = document.querySelector(`details[data-bg-head="${name}"]`);
+  if (det) return det.querySelector('.grid');
+  det = document.createElement('details'); det.setAttribute('data-bg-head', name); det.open = false;
+  const sum = document.createElement('summary'); sum.textContent = name; det.appendChild(sum);
+  const panel = document.createElement('div'); panel.className = 'panel';
+  const grid = document.createElement('div'); grid.className = 'grid'; grid.id = `bg-place-${name}`;
+  panel.appendChild(grid); det.appendChild(panel);
+  document.getElementById('g-bg-place')?.appendChild(det);
+  return grid;
+}
+function __bgEnsureSub(headName, subName){
+  const headGrid = __bgEnsureHeadDynamic(headName);
+  const headDet = headGrid.closest('details');
+  let sub = headDet.querySelector(`details[data-bg-sub="${headName}:${subName}"]`);
+  if (sub) return sub.querySelector('.grid');
+  sub = document.createElement('details'); sub.setAttribute('data-bg-sub', `${headName}:${subName}`); sub.open = false;
+  const s = document.createElement('summary'); s.textContent = subName; sub.appendChild(s);
+  const p = document.createElement('div'); p.className = 'panel';
+  const g = document.createElement('div'); g.className = 'grid'; g.id = `bg-sub-${headName}-${subName}`;
+  p.appendChild(g); sub.appendChild(p); headDet.appendChild(sub);
+  return g;
+}
+function walkBg_place_dynamic(cat){
+  const name = String(cat?.name||'').trim();
+  if (!name) return;
+  if (/effect|エフェクト/i.test(name)) return; // エフェクト系は除外
+
+  const headGrid = __bgEnsureHeadDynamic(name);
+
+  if (PLACE_SUBS[name]) {
+    (cat?.categories||[]).forEach(sub=>{
+      const subName = String(sub?.name||'').trim();
+      if (PLACE_SUBS[name].includes(subName)) {
+        const subGrid = __bgEnsureSub(name, subName);
+        (sub?.items||[]).forEach(it=>subGrid.appendChild(mkChk(it.id, it.label||it.id)));
+      } else {
+        (sub?.items||[]).forEach(it=>headGrid.appendChild(mkChk(it.id, it.label||it.id)));
+      }
+    });
+    (cat?.items||[]).forEach(it=>headGrid.appendChild(mkChk(it.id, it.label||it.id)));
+  } else {
+    (cat?.items||[]).forEach(it=>headGrid.appendChild(mkChk(it.id, it.label||it.id)));
+    (cat?.categories||[]).forEach(sc=>walkBg_place_dynamic(sc));
+  }
+}
+function buildPlaceTreeAfterRender(){
+  try{
+    const src=(window.__parts&&window.__parts.background)||{};
+    // 既存の自動生成ツリーだけクリア（フラット本体は触らない）
+    document.querySelectorAll('details[data-bg-head]').forEach(d=>d.remove());
+
+    // まず動的ツリーを作りつつ、移動した ID を記録
+    const moved = new Set();
+    // 移動の際に mkChk を使うため、ID を収集する小ヘルパ
+    const collectMoved = (root)=>{
+      root.querySelectorAll('label.chk > input[type="checkbox"][data-id]').forEach(i=>moved.add(i.getAttribute('data-id')));
+    };
+
+    for(const k in src){ (src[k]?.categories||[]).forEach(cat=>walkBg_place_dynamic(cat)); }
+    // 生成済みツリーから ID 収集
+    document.querySelectorAll('details[data-bg-head]').forEach(head=>collectMoved(head));
+
+    // フラット直下にある「移動済み ID」を削除（重複防止）
+    const flat = document.querySelector('#g-bg-place');
+    if (flat && moved.size){
+      [...flat.querySelectorAll(':scope > label.chk > input[type="checkbox"][data-id]')].forEach(inp=>{
+        const id=inp.getAttribute('data-id');
+        if(moved.has(id)){
+          const lab=inp.closest('label.chk'); if(lab) lab.remove();
+        }
+      });
+    }
+
+    // 画面上の実数でカウント同期
+    const placeCount =
+      document.querySelectorAll('#g-bg-place > label.chk input[type="checkbox"]').length +
+      document.querySelectorAll('details[data-bg-head] .grid > label.chk input[type="checkbox"]').length;
+    const effCount =
+      document.querySelectorAll('#g-bg-eff > label.chk input[type="checkbox"]').length;
+
+    setText('#n-bg-place', placeCount);
+    setText('#n-bg-eff',   effCount);
+    setText('#num-bg',     placeCount + effCount);
+  }catch(e){ console.warn('place-tree build skipped:', e); }
+}
+
+/* ===== run・イベント ===== */
+function run(){
+  log.textContent=''; totalOk=0; totalNg=0; totalEm=TOTAL_SLOTS; totalRead=0;
+  for(const k of CAT_ORDER){ meterMap[k].okn=0; meterMap[k].ngn=0; meterMap[k].emn=CAT_SLOTS[k]; uiMeterUpdate(k); }
+  (async()=>{
+    for(const k of CAT_ORDER){ await loadCategory(k); }
+    writeLog('=== ロード終了 ==='); renderAll();
+  })();
+}
+
+const toast=$('#toast'); let toastTimer=null;
+function showToast(msg){
+  toast.textContent=msg; toast.classList.add('show');
+  if(toastTimer) clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>toast.classList.remove('show'),3000);
+}
+
+$('#reloadBtn').addEventListener('click', run);
+$('#reset').addEventListener('click', ()=>{
+  document.querySelectorAll('input[type="checkbox"]').forEach(i=>i.checked=false);
+  $('#out').value=''; showToast('リセットしました');
+});
+$('#copy').addEventListener('click', ()=>{
+  navigator.clipboard.writeText($('#out').value||''); showToast('コピーしました');
+});
+
+/* hair 出力の整形（既存維持） */
+function formatHairTokens(ids){
+  const lower = (s)=>String(s||'').toLowerCase();
+  const hasHairWord = (t)=> t.includes(' hair') || t.endsWith('-hair') || t.startsWith('hair-');
+
+  const colorMatchers = [
+    'pastel','metallic','glow','bioluminescent','phosphor','radioactive','neon',
+    'gradient','ombre','uv-reactive','highlight','gloss','smoky',
+    'uv-reactive yellow','uv-reactive orange',
+    'ash smoky gray','chocolate brown gloss','wine red gloss',
+    'blonde highlights','brown highlights'
+  ];
+  const colorRegexTail = /(black|brown|blonde|red|silver|white|gold|blue|green|pink|purple|pearl|copper|chrome|emerald)$/;
+
+  const isColor = (id)=>{
+    const t = lower(id);
+    return (
+      colorMatchers.some(k=>t.includes(k)) ||
+      colorRegexTail.test(t) ||
+      t.startsWith('hair-') || t.endsWith('-hair')
+    );
+  };
+  const isStyle = (id)=>{
+    const t = lower(id);
+    return /ponytail|twin|bun|updo|chignon|bob|pixie|pageboy|bang|fringe|braid|afro|mohawk|dread|undercut|hime|nihongami|mullet|lob|shag|wolf|wavy|curly|straight|perm/.test(t);
+  };
+
+  const mapped = ids.map((raw)=>{
+    const id = String(raw);
+    const t = lower(id);
+    if ((isColor(id) || isStyle(id)) && !hasHairWord(t)){
+      return id + ' hair';
+    }
+    return id;
+  });
+
+  return mapped.filter(tok => lower(tok).trim() !== 'hair');
+}
+
+/* タグ生成（既存） */
+document.getElementById('gen').addEventListener('click', ()=>{
+  try{
+    const baseIds = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
+      .map(el => el.getAttribute('data-id') || el.value || '')
+      .map(s => String(s).trim())
+      .filter(Boolean);
+
+    const formatted = (typeof formatHairTokens === 'function') ? formatHairTokens(baseIds) : baseIds;
+    const mesh = (typeof buildNestedMeshTokens === 'function') ? buildNestedMeshTokens() : [];
+
+    const seen = new Set(); const result = [];
+    [...formatted, ...mesh].forEach(tok => {
+      const t = String(tok || '').trim(); if(!t) return;
+      const key = t.toLowerCase(); if (seen.has(key)) return;
+      seen.add(key); result.push(t);
+    });
+
+    const out = document.getElementById('out'); if (out) out.value = result.join(', ');
+    showToast('タグ生成しました');
+  }catch(err){ console.error('gen failed:', err); }
+});
+
+// 初回オート実行
+if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', run); }
+else { run(); }
+
+})();
+</script>
+
+<!-- Part番号オート記憶（既存） -->
+<script>
+(()=>{
+  const INITIAL = { presets:33, faith:32, effect:33, background:1, pose:0, hair:0 };
+  const KEY='pbPartCounters';
+  const load=()=>{ try{ return JSON.parse(localStorage.getItem(KEY))||{}; }catch{ return {}; } };
+  const save=(obj)=>localStorage.setItem(KEY,JSON.stringify(obj));
+  const state=Object.assign({presets:0,faith:0,effect:0,background:0,pose:0,hair:0},load());
+  for(const k in INITIAL) state[k]=Math.max(Number(state[k]||0),Number(INITIAL[k]||0)); save(state);
+  function parseName(name, fallbackCat){
+    let cat=fallbackCat||'', idx=0;
+    if(typeof name==='string' && name.includes('_part')){
+      const m=name.match(/^([a-zA-Z]+)_part(\d+)$/); if(m){cat=m[1]; idx=parseInt(m[2],10)||0;}
+    } else if(typeof name==='string' && /^part\d+$/.test(name)){
+      idx=parseInt(name.replace('part',''),10)||0;
+    }
+    const norm={presets:'presets',faith:'faith',effect:'effect',background:'background',pose:'pose',hair:'hair',prompt:'faith'};
+    cat=norm[cat]||(norm[fallbackCat]||''); return {cat,idx};
+  }
+  function bump(cat,idx){
+    if(!cat||!idx) return; const cur=Number(state[cat]||0);
+    if(idx>cur){ state[cat]=idx; save(state); }
+  }
+  const _orig={
+    preset:window.__registerPresetPart, faith:window.__registerPromptPart, effect:window.__registerEffectPart,
+    bg:window.__registerBackgroundPart, pose:window.__registerPosePart, hair:window.__registerHairPart
+  };
+  window.__registerPresetPart=function(name,data){ try{const {cat,idx}=parseName(name,'presets'); bump(cat,idx);}catch{} return _orig.preset&&_orig.preset.apply(this,arguments); };
+  window.__registerPromptPart=function(name,data){ try{const {cat,idx}=parseName(name,'faith'); bump(cat,idx);}catch{} return _orig.faith&&_orig.faith.apply(this,arguments); };
+  window.__registerEffectPart=function(name,data){ try{const {cat,idx}=parseName(name,'effect'); bump(cat,idx);}catch{} return _orig.effect&&_orig.effect.apply(this,arguments); };
+  window.__registerBackgroundPart=function(name,data){ try{const {cat,idx}=parseName(name,'background'); bump(cat,idx);}catch{} return _orig.bg&&_orig.bg.apply(this,arguments); };
+  window.__registerPosePart=function(name,data){ try{const {cat,idx}=parseName(name,'pose'); bump(cat,idx);}catch{} return _orig.pose&&_orig.pose.apply(this,arguments); };
+  window.__registerHairPart=function(name,data){ try{const {cat,idx}=parseName(name,'hair'); bump(cat,idx);}catch{} return _orig.hair&&_orig.hair.apply(this,arguments); };
+  window.__pbGetNextIndex=function(cat){ const n=Number((load()[cat]??state[cat])||0); return (n+1); };
+})();
+</script>
+<script src="./enhance_addons.js"></script>
+</body>
+</html>
