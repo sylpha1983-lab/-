@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>AIイラスト用 シマビルダー🕊️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* --- ベースデザイン --- */
+    :root {
+      --primary-color: #4a90e2;
+      --accent-gradient: linear-gradient(135deg, #4a90e2 0%, #8e44ad 100%);
+      --bg-color: #f4f6f9;
+      --card-bg: #ffffff;
+      --text-color: #333;
+      --border-radius: 8px;
+    }
+
+    body { 
+      font-family: "Helvetica Neue", Arial, sans-serif; 
+      margin: 0; 
+      padding: 0 0 300px 0; 
+      background: var(--bg-color); 
+      color: var(--text-color);
+    }
+
+    /* --- ヘッダー --- */
+    header {
+      background: #fff;
+      padding: 15px 0;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      margin-bottom: 15px;
+    }
+
+    h1 { 
+      font-size: 1.6em; 
+      margin: 0; 
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .title-text {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .title-icon {
+      font-size: 1.2em;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 10px;
+    }
+
+    /* --- ログ --- */
+    #log-wrapper { 
+      margin-bottom: 10px; 
+      background: var(--card-bg);
+      padding: 8px 12px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .log-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+    .meter { display: inline-block; margin-right: 8px; font-size: 0.8em; padding: 2px 8px; border-radius: 12px; font-weight: bold; }
+    .success { background: #d4edda; color: #155724; }
+    .fail { background: #f8d7da; color: #721c24; }
+    
+    #log { 
+      white-space: pre-wrap; font-family: monospace; font-size: 0.8em; 
+      background: #2d2d2d; color: #e0e0e0; padding: 6px; 
+      border-radius: 4px; max-height: 80px; overflow-y: auto; 
+    }
+
+    /* --- セクション (大枠) --- */
+    .section { 
+      background: var(--card-bg);
+      margin-bottom: 8px; /* 隙間を詰める */
+      border-radius: var(--border-radius);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+
+    /* JSで生成される大見出しのスタイル */
+    summary.section-summary {
+      background: #fff;
+      padding: 10px 15px;
+      font-size: 1.1em;
+      font-weight: bold;
+      color: #444;
+      cursor: pointer;
+      list-style: none;
+      border-bottom: 1px solid transparent;
+      transition: background 0.2s;
+    }
+    summary.section-summary:hover { background: #f9fafc; }
+    details[open] > summary.section-summary {
+      background: #f0f4f8;
+      border-bottom: 1px solid #e0e0e0;
+      color: var(--primary-color);
+    }
+    summary::-webkit-details-marker { display: none; }
+
+    /* --- コンテンツエリア (JSで付与したクラス) --- */
+    .section-content {
+      padding: 5px;
+    }
+
+    /* 中項目（カテゴリ） */
+    .section-content details {
+      margin-bottom: 4px;
+      border: 1px solid #eee;
+      border-radius: 4px;
+      background: #fff;
+    }
+    .section-content details[open] {
+      background: #fcfdff;
+      border-color: #cce5ff;
+    }
+
+    .section-content summary {
+      font-size: 0.95em;
+      padding: 6px 10px;
+      cursor: pointer;
+      color: #555;
+      background: #fafafa;
+      border-radius: 4px;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .section-content details[open] > summary {
+      background: #e6f0ff;
+      color: #004085;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    /* --- グリッドレイアウト (重要) --- */
+    /* カテゴリが開いたときの中身のdivに適用 */
+    .section-content details[open] > div,
+    .expression-v2-complete details[open] > div, /* JSのバージョンによるクラス差分吸収 */
+    .pose-v2-latest details[open] > div,
+    .attire-v1-ultimate-revised details[open] > div {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* 幅に合わせて自動折り返し */
+      gap: 6px;
+      padding: 8px;
+    }
+
+    /* タグ（ラベル） */
+    label {
+      display: flex;
+      align-items: center;
+      padding: 6px 8px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 0.85em;
+      cursor: pointer;
+      transition: all 0.15s;
+      line-height: 1.3;
+      min-height: 30px;
+      word-break: break-word;
+    }
+    label:hover {
+      border-color: var(--primary-color);
+      background: #f0f8ff;
+    }
+    label:has(input:checked) {
+      background: #e7f3ff;
+      border-color: var(--primary-color);
+      font-weight: bold;
+      color: #0056b3;
+      box-shadow: inset 0 0 0 1px var(--primary-color);
+    }
+    input[type="checkbox"] {
+      accent-color: var(--primary-color);
+      transform: scale(1.1);
+      margin-right: 6px;
+      flex-shrink: 0;
+    }
+
+    /* --- フッター --- */
+    #mini-ui-fixed {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(5px);
+      border-top: 1px solid #ccc;
+      padding: 10px 15px 20px;
+      box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+      z-index: 9999;
+      box-sizing: border-box;
+    }
+    #actions { 
+      display: flex; 
+      gap: 10px; 
+      margin-bottom: 10px; 
+      max-width: 1000px; 
+      margin: 0 auto 10px auto; 
+    }
+    button { 
+      flex: 1; 
+      padding: 10px; 
+      font-size: 1em; 
+      border: none; 
+      border-radius: 6px; 
+      cursor: pointer; 
+      font-weight: bold; 
+      color: white;
+    }
+    #genBtn { background: linear-gradient(135deg, #4a90e2, #357abd); }
+    #copyBtn { background: #6c757d; }
+    #resetBtn { background: #dc3545; }
+    
+    textarea#out {
+      width: 100%;
+      height: 60px;
+      padding: 10px;
+      font-family: monospace;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      resize: none;
+      max-width: 1000px;
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>
+      <span class="title-text">AIイラスト用 シマビルダー</span>
+      <span class="title-icon">🕊️</span>
+    </h1>
+    <div class="subtitle">Ultimate Prompt Generation Tool</div>
+  </header>
+
+  <div class="container">
+    <div id="log-wrapper">
+      <div class="log-header">
+        <div>
+          <span class="meter success">成功 <span id="success-count">0</span></span>
+          <span class="meter fail">失敗 <span id="fail-count">0</span></span>
+        </div>
+        <div style="font-size: 0.85em;">
+          <button onclick="location.reload()" style="padding:2px 8px; border-radius:4px; border:1px solid #ccc;">再読込</button>
+        </div>
+      </div>
+      <div id="log" aria-hidden="true">Initializing...</div>
+    </div>
+
+    <div id="sections">
+      <div id="list-faith" class="section"></div>
+      <div id="list-pose" class="section"></div>
+      <div id="list-hair" class="section"></div>
+      <div id="list-attire" class="section"></div>
+      <div id="list-background" class="section"></div>
+      <div id="list-filter" class="section"></div>
+      <div id="list-effect" class="section"></div>
+      <div id="list-cinematic" class="section"></div>
+      <div id="list-lighting" class="section"></div>
+      <div id="list-presets" class="section"></div>
+
+      <div id="list-preview_sync" class="section"></div>
+      <div id="list-visualsync" class="section"></div>
+    </div>
+  </div>
+
+  <div id="mini-ui-fixed">
+    <div id="actions">
+      <button id="genBtn" type="button">生成 (Generate)</button>
+      <button id="copyBtn" type="button" onclick="copyTagOutput()">コピー</button>
+      <button id="resetBtn" type="button">リセット</button>
+    </div>
+    <textarea id="out" placeholder="生成されたタグがここに表示されます..."></textarea>
+  </div>
+
+  <script src="ext_manifest_loader.v1.js" data-ext></script>
+
+  <script>
+    function copyTagOutput() {
+      const outText = document.getElementById('out').value;
+      if(!outText) return;
+      navigator.clipboard.writeText(outText).then(() => {
+        const btn = document.getElementById('copyBtn');
+        const originalText = btn.textContent;
+        btn.textContent = "コピー完了!";
+        setTimeout(() => btn.textContent = originalText, 1500);
+      }).catch(err => { console.error("Copy failed", err); });
+    }
+
+    // チェックボックスとスライダーからタグを生成
+    function generateTags() {
+      // builder_core.v1.js の機能が優先されますが、予備として単純な収集ロジック
+      const tags = [];
+      document.querySelectorAll('#sections input[type=checkbox]:checked').forEach(cb => {
+        const tag = cb.dataset.en || cb.dataset.tag;
+        if (tag && tag.trim()) tags.push(tag.trim());
+      });
+      document.querySelectorAll('#sections input[type=range]').forEach(range => {
+        if(range.dataset.key && range.value != 100){
+           tags.push(`${range.dataset.key}:${range.value}%`);
+        }
+      });
+      // 出力エリア更新はコア側で行われることが多いですが、念のため
+      // document.getElementById('out').value = tags.join(', '); 
+    }
+    
+    function resetTags() { } // コア側で処理
+
+  </script>
+</body>
+</html>
+
