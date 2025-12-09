@@ -45,28 +45,17 @@
     ]
   };
 
-  // v1用 基礎辞書 (完全網羅)
+  // v1用 基礎辞書
   const DICT = {
     "masterpiece": "傑作", "best quality": "最高画質", "high resolution": "高解像度", "high quality": "高画質",
-    "highly detailed": "非常に詳細", "beautiful detailed face": "美しく詳細な顔", "perfect anatomy": "完璧な解剖学", "clearest output": "最も鮮明な出力",
-    "anime style": "アニメスタイル", "cel shading": "セルルック", "vibrant colors": "鮮やかな色", "clean lines": "綺麗な線", "flat color": "フラットカラー",
-    "photorealistic": "フォトリアル", "realistic": "リアル", "8k": "8K", "raw photo": "生写真", "detailed skin texture": "詳細な肌の質感", "hyperrealistic": "超写実的",
-    "3d render style": "3Dレンダリング", "octane render": "Octaneレンダー", "unreal engine 5": "UE5", "ray tracing": "レイトレーシング",
-    "highly detailed cg": "超詳細CG", "virtual youtuber style": "VTuber風",
-    
-    "studio ghibli style": "スタジオジブリ風", "shinkai makoto style": "新海誠風", "kyoto animation style": "京都アニメーション風",
-    "alphonse mucha style": "アルフォンス・ミュシャ風",
+    "anime style": "アニメスタイル", "photorealistic": "フォトリアル", "3d render style": "3Dレンダリング",
+    "studio ghibli style": "スタジオジブリ風", "shinkai makoto style": "新海誠風",
+    "low quality": "低品質", "worst quality": "最低品質", "bad anatomy": "崩れた人体",
     "contemporary": "現代", "near future": "近未来", "1990s style": "90年代風", "1980s style": "80年代風",
-    "absurdres": "超高解像度", "8k resolution": "8k解像度", "4k resolution": "4k解像度", "detailed background": "詳細な背景",
-    
-    "low quality": "低品質", "worst quality": "最低品質", "out of focus": "ピンボケ", "ugly": "醜い", "error": "エラー",
-    "jpeg artifacts": "JPEGノイズ", "lowers": "低解像度", "blurry": "ぼやけた", "bokeh": "ボケ",
-    "bad anatomy": "崩れた人体", "long neck": "長い首", "deformed": "変形", "mutated": "変異", "disfigured": "崩れた",
-    "malformed hands": "奇形の手", "missing limb": "欠損した肢", "floating limbs": "浮遊する肢", "disconnected limbs": "切断された肢",
-    "extra limb": "余分な肢", "missing fingers": "欠損した指", "extra fingers": "余分な指", "liquid fingers": "溶けた指",
-    "poorly drawn hands": "下手に描かれた手", "mutation": "突然変異"
+    "absurdres": "超高解像度", "8k resolution": "8k解像度", "4k resolution": "4k解像度", "detailed background": "詳細な背景"
   };
 
+  // UIヘルパー (v2以降と共通のクラスを使用)
   function createSubAccordion(title, items, type) {
     const details = document.createElement("details");
     details.className = "qp-sub-acc";
@@ -75,7 +64,17 @@
     details.style.borderRadius = "4px";
     details.style.background = "#fff";
     details.open = false; 
-    details.innerHTML = `<summary style="font-weight:bold;padding:6px 10px;cursor:pointer;background:#f9f9f9;font-size:0.9em;color:#555;">${title}</summary>`;
+
+    const summary = document.createElement("summary");
+    summary.textContent = title;
+    summary.style.fontWeight = "bold";
+    summary.style.padding = "6px 10px";
+    summary.style.cursor = "pointer";
+    summary.style.background = "#f9f9f9";
+    summary.style.fontSize = "0.9em";
+    summary.style.color = "#555";
+    details.appendChild(summary);
+
     const content = document.createElement("div");
     content.className = "qp-content-grid";
     content.style.padding = "8px";
@@ -89,6 +88,7 @@
       label.style.alignItems = "center";
       label.style.fontSize = "0.9em";
       label.style.cursor = "pointer";
+      
       const cb = document.createElement("input");
       cb.type = "checkbox";
       cb.style.marginRight = "6px";
@@ -98,7 +98,6 @@
         label.title = item.val;
         label.appendChild(cb);
         label.appendChild(document.createTextNode(item.label));
-        // v1辞書登録 (ラベル自体も)
         if(item.label && !DICT[item.label]) DICT[item.label] = item.label;
       } else {
         cb.dataset.val = item.en;
@@ -114,20 +113,32 @@
 
   function createMainSection(id, title) {
     const details = document.createElement("details");
-    details.id = id; 
+    details.id = id; // ★ このIDが超重要
     details.className = "qp-main-acc";
     details.style.marginBottom = "10px";
     details.style.border = "1px solid #ccc";
     details.style.borderRadius = "6px";
     details.style.background = "#fff";
     details.open = false; 
-    details.innerHTML = `<summary style="font-weight:bold;padding:10px 14px;cursor:pointer;background:#eef2f6;list-style:none;"><span style="margin-right:8px;">▶</span>${title}</summary>`;
+
+    const summary = document.createElement("summary");
+    summary.innerHTML = `<span style="margin-right:8px;">▶</span>${title}`;
+    summary.style.fontWeight = "bold";
+    summary.style.padding = "10px 14px";
+    summary.style.cursor = "pointer";
+    summary.style.background = "#eef2f6";
+    summary.style.listStyle = "none";
+    
     details.addEventListener("toggle", () => {
-      const span = details.querySelector("summary span");
+      const span = summary.querySelector("span");
       if(span) span.textContent = details.open ? "▼" : "▶";
     });
+
+    details.appendChild(summary);
+    
+    // コンテンツ格納用ラッパー (v2以降はここに追記する)
     const wrapper = document.createElement("div");
-    wrapper.className = "qp-section-content"; 
+    wrapper.className = "qp-section-content";
     wrapper.style.padding = "10px";
     details.appendChild(wrapper);
     return details;
@@ -150,36 +161,38 @@
       const root = document.createElement("div");
       root.className = "quality-preset-integrated";
 
-      // 1. プリセット
+      // 1. プリセット (ID: qp-presets)
       const secPresets = createMainSection("qp-presets", "📦 プリセット (Preset Sets)");
       Object.entries(BASE_PRESETS).forEach(([k,v]) => {
         secPresets.querySelector(".qp-section-content").appendChild(createSubAccordion(k, v, "preset"));
       });
       root.appendChild(secPresets);
 
-      // 2. スタイル
+      // 2. スタイル (ID: qp-styles)
       const secStyles = createMainSection("qp-styles", "🎨 スタイル (Style Words)");
       Object.entries(BASE_STYLES).forEach(([k,v]) => {
         secStyles.querySelector(".qp-section-content").appendChild(createSubAccordion(k, v, "style"));
       });
       root.appendChild(secStyles);
 
-      // 3. 時代
+      // 3. 時代・年代 (ID: qp-eras)
       const secEras = createMainSection("qp-eras", "🕰️ 時代・年代 (Era Words)");
       Object.entries(BASE_ERAS).forEach(([k,v]) => {
         secEras.querySelector(".qp-section-content").appendChild(createSubAccordion(k, v, "era"));
       });
       root.appendChild(secEras);
 
-      // 4. 品質
+      // 4. 品質ワード (ID: qp-quality)
       const secQuality = createMainSection("qp-quality", "🔧 品質ワード (Quality Words)");
       Object.entries(BASE_QUALITY).forEach(([k,v]) => {
         secQuality.querySelector(".qp-section-content").appendChild(createSubAccordion(k, v, "word"));
       });
       root.appendChild(secQuality);
 
-      // 5. ネガティブ
+      // --- ネガティブエリア ---
       root.appendChild(createNegativeSeparator());
+
+      // 5. ネガティブプリセット (ID: qp-neg-sets)
       const secNegSets = createMainSection("qp-neg-sets", "🚫 ネガティブプリセット (Negative Sets)");
       secNegSets.querySelector("summary").style.background = "#fff0f0";
       secNegSets.querySelector("summary").style.color = "#d00";
@@ -188,7 +201,7 @@
       });
       root.appendChild(secNegSets);
 
-      // 6. ネガティブワード (v2用)
+      // 6. ネガティブワード (ID: qp-neg-words) - v1では箱だけ作成
       const secNegWords = createMainSection("qp-neg-words", "🗑️ ネガティブ (Negative Words)");
       secNegWords.querySelector("summary").style.background = "#fff0f0";
       secNegWords.querySelector("summary").style.color = "#d00";
@@ -207,6 +220,20 @@
       return tags;
     }
   };
+  
+  // 共通スタイル定義
+  if (!document.getElementById("qp-styles-css")) {
+    const style = document.createElement('style');
+    style.id = "qp-styles-css";
+    style.textContent = `
+      .qp-main-acc { margin-bottom:10px; border:1px solid #ccc; border-radius:6px; background:#fff; }
+      .qp-sub-acc { margin-bottom:6px; border:1px solid #eee; border-radius:4px; background:#fff; }
+      .qp-content-grid { padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:6px; }
+      .qp-content-grid label { display:flex; align-items:center; font-size:0.9em; cursor:pointer; }
+      .qp-content-grid input { margin-right:6px; flex-shrink: 0; }
+    `;
+    document.head.appendChild(style);
+  }
 
   window.__registerPromptPart(KEY, VERSION, API);
 })();

@@ -1,12 +1,9 @@
 (function(){
   "use strict";
-  const VERSION = 2; // 拡張パック (建築・ポップ・ホラー追加版)
+  const VERSION = 2;
   const KEY = "quality_preset";
 
-  // ==========================================
-  // 1. 拡張データ定義
-  // ==========================================
-  
+  // === 拡張データ ===
   const EXTRA_PRESETS = {
     "🎨 アート・絵画風 (Artistic)": [
       { label: "厚塗り・油絵 (Oil)", val: "(oil painting), (impasto:1.2), (visible brushstrokes), (rich texture)" },
@@ -28,33 +25,6 @@
       { label: "木炭画 (Charcoal)", val: "(charcoal drawing), (smudged), (high contrast), (monochrome), (rough grain)" },
       { label: "パステル画 (Pastel)", val: "(pastel painting), (soft colors), (chalky texture), (blended), (dreamy)" }
     ],
-    "🏰 建築・空間様式 (Architecture)": [
-      { label: "ブルータリズム (Brutalist)", val: "(brutalism), (concrete structure), (geometric), (monolithic), (harsh lighting)" },
-      { label: "アール・デコ (Art Deco)", val: "(art deco), (gold geometric patterns), (luxury), (1920s style), (symmetrical)" },
-      { label: "ゴシック建築 (Gothic)", val: "(gothic architecture), (pointed arches), (flying buttresses), (intricate stone details), (cathedral)" },
-      { label: "インダストリアル (Industrial)", val: "(industrial loft), (exposed pipes), (brick walls), (metal beams), (factory aesthetic)" },
-      { label: "サイバネティック (Cybernetic)", val: "(cybernetic structure), (sci-fi architecture), (neon glowing lines), (metallic walls), (futuristic)" },
-      { label: "廃墟・ポストアポカリプス (Ruins)", val: "(abandoned), (ruins), (overgrown), (decay), (rusty), (post-apocalyptic)" }
-    ],
-    "🍬 ポップ・カワイイ (Cute & Pop)": [
-      { label: "ゆめかわいい (Yume Kawaii)", val: "(yume kawaii), (pastel colors), (dreamy), (unicorn colors), (fluffy), (cute)" },
-      { label: "パステルゴス (Pastel Goth)", val: "(pastel goth), (creepy cute), (pastel colors with black), (skulls and hearts)" },
-      { label: "原宿系 (Harajuku)", val: "(harajuku style), (colorful), (decora), (street fashion), (layered accessories)" },
-      { label: "Lo-fi (ローファイ)", val: "(lo-fi aesthetic), (retro anime style), (soft warm lighting), (nostalgic), (relaxing)" },
-      { label: "ヴェイパーウェイヴ (Vaporwave)", val: "(vaporwave), (neon pink and blue), (retro computer graphics), (statues), (glitch)" }
-    ],
-    "👻 ホラー・怪奇 (Horror & Weird)": [
-      { label: "リミナルスペース (Liminal)", val: "(liminal space), (empty rooms), (eerie), (unsettling), (fluorescent lights), (dreamcore)" },
-      { label: "ファウンドフッテージ (Found Footage)", val: "(found footage), (vhs glitch), (low quality video), (night vision), (shaky camera), (scary)" },
-      { label: "コズミックホラー (Eldritch)", val: "(cosmic horror), (eldritch abomination), (tentacles), (indescribable), (madness), (lovecraftian)" },
-      { label: "アナログホラー (Analog Horror)", val: "(analog horror), (distorted face), (crt scanlines), (broadcast interruption), (uncanny valley)" }
-    ],
-    "🌌 ファンタジー (Fantasy Types)": [
-      { label: "ダークファンタジー (Dark)", val: "(dark fantasy), (grimdark), (ominous), (fog), (desaturated colors), (souls-like)" },
-      { label: "ハイファンタジー (High)", val: "(high fantasy), (epic scale), (magic castles), (floating islands), (vibrant colors), (ethereal)" },
-      { label: "天界・神聖 (Celestial)", val: "(celestial), (divine), (glowing light), (clouds), (gold and white), (angelic)" },
-      { label: "ダンジョン (Dungeon)", val: "(dungeon), (torch light), (stone walls), (underground), (adventure), (rpg style)" }
-    ],
     "🎮 ゲーム・コンセプト (Game)": [
       { label: "設定画 (Char Sheet)", val: "(character sheet), (concept art), (multiple views), (front view), (side view), (back view)" },
       { label: "アイソメトリック (Isometric)", val: "(isometric view), (3d diorama), (miniature), (orthographic camera)" },
@@ -67,202 +37,10 @@
       { label: "ステッカー (Sticker)", val: "(sticker), (die-cut), (white border), (vector style), (cute)" },
       { label: "ロゴデザイン (Logo)", val: "(logo design), (vector), (minimalist), (simple), (modern), (flat), (symbol)" },
       { label: "Tシャツデザイン (T-Shirt)", val: "(t-shirt design), (graphic print), (vector art), (isolated on white)" }
-    ],
-    "📸 特殊撮影 (Camera)": [
-      { label: "魚眼 (Fisheye)", val: "(fisheye lens), (gopro footage), (wide angle), (distorted perspective)" },
-      { label: "防犯カメラ (CCTV)", val: "(cctv footage), (security camera), (low quality video), (grainy), (surveillance)" },
-      { label: "ポラロイド (Polaroid)", val: "(polaroid photo), (vintage exposure), (vignette), (soft focus), (film grain)" },
-      { label: "ドローン (Drone)", val: "(drone footage), (aerial view), (bird's eye view), (high altitude), (wide shot)" },
-      { label: "水中 (Underwater)", val: "(underwater photography), (refraction), (bubbles), (caustics)" },
-      { label: "マクロ (Macro)", val: "(macro photography), (extreme close-up), (shallow depth of field), (bokeh)" },
-      { label: "サーモグラフィ (Thermal)", val: "(thermal imaging), (heat map), (infrared camera), (predator vision)" },
-      { label: "X線 (X-Ray)", val: "(x-ray), (skeleton visible), (transparent body), (blue and white inverted)" },
-      { label: "ナイトビジョン (Night Vision)", val: "(night vision), (green tint), (grainy), (glowing eyes)" }
-    ],
-    "🎞️ フィルム・質感 (Film Looks)": [
-      { label: "Kodak Portra風", val: "(kodak portra), (analog film), (warm tones), (fine grain), (vintage color)" },
-      { label: "チェキ風 (Instax)", val: "(instax), (instant photo), (soft focus), (flash photography), (white frame)" },
-      { label: "使い捨てカメラ風", val: "(disposable camera), (harsh flash), (vignette), (lo-fi), (authentic)" },
-      { label: "VHSテープ風", val: "(vhs artifact), (glitch), (scanlines), (tracking error), (low resolution)" }
-    ],
-    "🧪 SF・パンク (Sci-Fi)": [
-      { label: "サイバーパンク", val: "(cyberpunk), (neon lights), (holograms), (night city), (chromatic aberration)" },
-      { label: "スチームパンク", val: "(steampunk), (brass and copper), (gears and cogs), (steam engine), (goggles)" },
-      { label: "バイオパンク", val: "(biopunk), (organic technology), (flesh and metal), (glowing veins), (mutant)" },
-      { label: "ソーラーパンク", val: "(solarpunk), (nature and technology), (green city), (sustainable), (sunlight)" },
-      { label: "ディーゼルパンク", val: "(dieselpunk), (steel and oil), (military industrial), (gritty), (smoke)" }
-    ],
-    "🏺 マニアック画法 (Niche)": [
-      { label: "設計図 (Blueprint)", val: "(blueprint), (schematic), (technical drawing), (white lines on blue), (grid background)" },
-      { label: "黒板アート (Chalkboard)", val: "(chalkboard art), (chalk texture), (blackboard), (white chalk), (hand drawn)" },
-      { label: "タロット風 (Tarot)", val: "(tarot card style), (art nouveau frame), (symbolic), (decorative border)" },
-      { label: "ボクセル (Voxel)", val: "(voxel art), (minecraft style), (3d pixels), (blocky), (isometric)" },
-      { label: "アスキーアート (ASCII)", val: "(ascii art), (text based), (monospaced font), (retro computer style)" },
-      { label: "クレイアニメ (Claymation)", val: "(claymation), (stop motion style), (plasticine), (clay texture), (aardman style)" },
-      { label: "折り紙 (Origami)", val: "(origami), (folded paper), (paper craft), (geometric), (sharp edges)" },
-      { label: "整理整頓 (Knolling)", val: "(knolling), (flat lay), (objects organized neatly), (top down view)" }
-    ],
-    "✨ 質感・効果 (Texture)": [
-      { label: "超光沢 (Ultra Glossy)", val: "(wet skin), (oiled skin), (glossy finish), (highly reflective), (sweat)" },
-      { label: "マット (Matte)", val: "(matte finish), (flat color), (soft lighting), (low contrast)" },
-      { label: "ガラス (Glass)", val: "(glass texture), (crystal), (translucent), (refraction), (fragile)" },
-      { label: "金属 (Metallic)", val: "(metallic texture), (chrome), (gold), (silver), (reflection)" },
-      { label: "ぬいぐるみ (Plushie)", val: "(plushie), (felt texture), (soft fabric), (stitches), (fuzzy)" },
-      { label: "グリッチ (Glitch)", val: "(glitch effect), (datamosh), (scanlines), (distortion), (vhs artifact)" }
-    ],
-    "💡 照明・雰囲気 (Mood)": [
-      { label: "シネマティック", val: "(cinematic lighting), (dramatic atmosphere), (movie poster), (depth of field)" },
-      { label: "ダーク・ゴシック", val: "(dark atmosphere), (gothic style), (chiaroscuro), (dimly lit), (mysterious)" },
-      { label: "ソフト・夢幻的", val: "(soft lighting), (dreamy atmosphere), (bloom), (pastel colors), (ethereal)" },
-      { label: "ホラー (Horror)", val: "(horror theme), (eerie), (creepy), (dark), (blood), (scary atmosphere)" },
-      { label: "ファンタジー", val: "(fantasy world), (magic), (glowing particles), (enchanted), (mystical)" }
-    ],
-    "🧸 キャラクター変形 (Deformation)": [
-      { label: "ちびキャラ (Chibi)", val: "(chibi), (super deformed), (big head), (cute), (simplified)" },
-      { label: "フィギュア風 (Figure)", val: "(figure), (toy), (plastic texture), (jointed), (miniature photography)" }
     ]
   };
 
-  // === 拡張スタイル ===
-  const EXTRA_STYLES = {
-    "漫画・コミック (Manga & Comics)": [
-      { ja: "少年漫画風", en: "shonen manga style" }, { ja: "少女漫画風", en: "shojo manga style" },
-      { ja: "劇画風", en: "gekiga style" }, { ja: "アメコミ風", en: "comic book style" },
-      { ja: "バンド・デシネ風", en: "bande dessinee style" }, { ja: "4コマ漫画風", en: "4koma" }
-    ],
-    "作家・スタジオ (More Artists)": [
-      { ja: "TRIGGER風", en: "studio trigger style" }, { ja: "ufotable風", en: "ufotable style" },
-      { ja: "MAPPA風", en: "mappa style" }, { ja: "クローバーワークス風", en: "cloverworks style" },
-      { ja: "CLAMP風", en: "clamp style" }, { ja: "手塚治虫風", en: "osamu tezuka style" },
-      { ja: "鳥山明風", en: "akira toriyama style" }, { ja: "永井博風 (シティポップ)", en: "hiroshi nagai style" },
-      { ja: "Artgerm風", en: "artgerm style" }, { ja: "WLOP風", en: "wlop style" }, { ja: "イリヤ・クブシノブ風", en: "ilya kuvshinov style" },
-      { ja: "グレッグ・ルトコフスキ風", en: "greg rutkowski style" }, { ja: "H.R.ギーガー風", en: "h.r. giger style" },
-      { ja: "ベクシンスキー風", en: "beksinski style" }
-    ],
-    "映画監督 (Directors)": [
-      { ja: "ティム・バートン風", en: "tim burton style" }, { ja: "ウェス・アンダーソン風", en: "wes anderson style" },
-      { ja: "スタンリー・キューブリック風", en: "stanley kubrick style" }, { ja: "クエンティン・タランティーノ風", en: "quentin tarantino style" },
-      { ja: "クリストファー・ノーラン風", en: "christopher nolan style" }, { ja: "新房昭之風", en: "akiyuki shinbo style" }
-    ],
-    "芸術運動 (Movements)": [
-      { ja: "アール・ヌーヴォー", en: "art nouveau" }, { ja: "アール・デコ", en: "art deco" },
-      { ja: "印象派", en: "impressionism style" }, { ja: "ゴッホ風", en: "van gogh style" },
-      { ja: "クリムト風", en: "gustav klimt style" }, { ja: "サルバドール・ダリ風", en: "salvador dali style" },
-      { ja: "キュビスム", en: "cubism" }, { ja: "浮世絵風", en: "ukiyo-e style" },
-      { ja: "バロック風", en: "baroque style" }, { ja: "シュルレアリスム", en: "surrealism" },
-      { ja: "ダダイズム", en: "dadaism" }, { ja: "バウハウス", en: "bauhaus style" }, 
-      { ja: "ヴェイパーウェイヴ", en: "vaporwave" }
-    ]
-  };
-
-  const EXTRA_ERAS = {
-    "歴史・時代 (Extended Eras)": [
-      { ja: "古代エジプト", en: "ancient egypt" }, { ja: "古代ギリシャ", en: "ancient greek" },
-      { ja: "中世ヨーロッパ", en: "medieval era" }, { ja: "西部開拓時代", en: "wild west" },
-      { ja: "ヴィクトリア朝", en: "victorian era" }, { ja: "大正ロマン", en: "taisho roman" },
-      { ja: "1920年代 (狂騒)", en: "roaring twenties" }, { ja: "1950年代 (ロカビリー)", en: "1950s style" },
-      { ja: "昭和レトロ", en: "showa era style" }, { ja: "バブル時代 (80s)", en: "bubble era" },
-      { ja: "Y2K (2000年代)", en: "y2k aesthetic" }, { ja: "ポストアポカリプス", en: "post-apocalyptic" },
-      { ja: "サイバーパンク未来", en: "cyberpunk future" }
-    ]
-  };
-
-  const EXTRA_QUALITY = {
-    "ディテール (Details)": [
-      { ja: "詳細な目", en: "detailed eyes" }, { ja: "詳細な顔", en: "detailed face" },
-      { ja: "詳細な髪", en: "detailed hair" }, { ja: "詳細な服", en: "detailed clothing" },
-      { ja: "詳細な水", en: "detailed water" }, { ja: "詳細な雲", en: "detailed clouds" }
-    ],
-    "カメラ・撮影 (Camera)": [
-      { ja: "被写界深度 (ボケ)", en: "depth of field" }, { ja: "ボケ", en: "bokeh" },
-      { ja: "モーションブラー", en: "motion blur" }, { ja: "長時間露光", en: "long exposure" },
-      { ja: "マクロレンズ", en: "macro lens" }, { ja: "魚眼レンズ", en: "fisheye lens" },
-      { ja: "チルトシフト", en: "tilt shift" }, { ja: "広角レンズ", en: "wide angle lens" },
-      { ja: "望遠レンズ", en: "telephoto lens" }, { ja: "光の軌跡", en: "light trails" }
-    ],
-    "構図 (Composition)": [
-      { ja: "黄金比", en: "golden ratio" }, { ja: "三分割法", en: "rule of thirds" },
-      { ja: "ダッチアングル", en: "dutch angle" }, { ja: "アオリ (下から)", en: "from below" },
-      { ja: "フカン (上から)", en: "from above" }, { ja: "ダイナミック", en: "dynamic angle" },
-      { ja: "クローズアップ", en: "close-up" }, { ja: "カウボーイショット", en: "cowboy shot" }
-    ],
-    "色彩・カラー (Colors)": [
-      { ja: "ビビッド", en: "vivid colors" }, { ja: "パステル", en: "pastel colors" },
-      { ja: "モノトーン", en: "monochrome" }, { ja: "セピア", en: "sepia" },
-      { ja: "ネオン", en: "neon colors" }, { ja: "虹色", en: "rainbow colors" },
-      { ja: "高コントラスト", en: "high contrast" }, { ja: "低コントラスト", en: "low contrast" }
-    ],
-    "技術・効果 (Tech & FX)": [
-      { ja: "HDR", en: "HDR" }, { ja: "UHD", en: "UHD" }, { ja: "レイトレーシング", en: "ray tracing" },
-      { ja: "サブサーフェス・スキャタリング", en: "subsurface scattering" },
-      { ja: "ボリュメトリック照明", en: "volumetric lighting" }, { ja: "チンダル現象", en: "god rays" },
-      { ja: "レンズフレア", en: "lens flare" }, { ja: "ブルーム", en: "bloom" },
-      { ja: "色収差", en: "chromatic aberration" }, { ja: "ビネット", en: "vignette" },
-      { ja: "回折スパイク", en: "diffraction spikes" }, { ja: "ハレーション", en: "halation" },
-      { ja: "フィルムグレイン", en: "film grain" }, { ja: "グローバルイルミネーション", en: "global illumination" },
-      { ja: "アンビエントオクルージョン", en: "ambient occlusion" }, { ja: "PBR", en: "physically based rendering" }
-    ]
-  };
-
-  const EXTRA_NEG_WORDS = {
-    "画質・品質 (Low Quality)": [
-      { ja: "低品質", en: "low quality" }, { ja: "最低品質", en: "worst quality" },
-      { ja: "普通の品質", en: "normal quality" }, { ja: "JPEGノイズ", en: "jpeg artifacts" },
-      { ja: "ぼやけた", en: "blurry" }, { ja: "ピンボケ", en: "out of focus" },
-      { ja: "低解像度", en: "lowres" }, { ja: "エラー", en: "error" },
-      { ja: "醜い", en: "ugly" }, { ja: "ピクセル化", en: "pixelated" }
-    ],
-    "人体崩壊 (Bad Anatomy)": [
-      { ja: "崩れた解剖学", en: "bad anatomy" }, { ja: "崩れた手", en: "bad hands" },
-      { ja: "奇形の手", en: "malformed hands" }, { ja: "欠損した指", en: "missing fingers" },
-      { ja: "余分な指", en: "extra fingers" }, { ja: "長い首", en: "long neck" },
-      { ja: "変形", en: "deformed" }, { ja: "突然変異", en: "mutated" },
-      { ja: "切断された肢", en: "disconnected limbs" }, { ja: "浮遊する肢", en: "floating limbs" },
-      { ja: "余分な手足", en: "extra limbs" }, { ja: "崩れた顔", en: "poorly drawn face" }
-    ],
-    "不要な要素 (Unwanted)": [
-      { ja: "テキスト", en: "text" }, { ja: "透かし", en: "watermark" }, { ja: "署名", en: "signature" },
-      { ja: "ユーザー名", en: "username" }, { ja: "ロゴ", en: "logo" }, { ja: "著作権名", en: "copyright name" },
-      { ja: "QRコード", en: "qr code" }, { ja: "バーコード", en: "bar code" }
-    ],
-    "構図・描写 (Composition)": [
-      { ja: "見切れ", en: "out of frame" }, { ja: "クロップ", en: "cropped" },
-      { ja: "悪い構図", en: "bad composition" }, { ja: "コラージュ", en: "collage" },
-      { ja: "モザイク", en: "mosaic" }, { ja: "グリッチ", en: "glitch" }
-    ]
-  };
-
-  // v2用 補完辞書 (翻訳漏れ修正版 + 新規追加分)
   const V2_DICT = {
-    // Architecture
-    "brutalism": "ブルータリズム", "concrete structure": "コンクリート構造", "monolithic": "一枚岩の", "harsh lighting": "きつい照明",
-    "art deco": "アール・デコ", "gold geometric patterns": "金の幾何学模様", "luxury": "豪華", "1920s style": "1920年代風", "symmetrical": "対称的",
-    "gothic architecture": "ゴシック建築", "pointed arches": "尖頭アーチ", "flying buttresses": "フライング・バットレス", "intricate stone details": "複雑な石の細工", "cathedral": "大聖堂",
-    "industrial loft": "インダストリアルロフト", "exposed pipes": "むき出しの配管", "brick walls": "レンガ壁", "metal beams": "金属梁", "factory aesthetic": "工場美学",
-    "cybernetic structure": "サイバネティック構造", "sci-fi architecture": "SF建築", "neon glowing lines": "ネオンの輝く線", "metallic walls": "金属壁",
-    "abandoned": "放棄された", "ruins": "廃墟", "overgrown": "植物に覆われた", "decay": "腐敗", "rusty": "錆びた", "post-apocalyptic": "ポストアポカリプス",
-    "japanese garden": "日本庭園", "industrial": "インダストリアル",
-    
-    // Cute & Pop
-    "yume kawaii": "ゆめかわいい", "unicorn colors": "ユニコーンカラー", "fluffy": "ふわふわ",
-    "pastel goth": "パステルゴス", "creepy cute": "キモカワ", "pastel colors with black": "パステルと黒", "skulls and hearts": "ドクロとハート",
-    "harajuku style": "原宿系", "decora": "デコラ", "street fashion": "ストリートファッション", "layered accessories": "重ね付けアクセ",
-    "lo-fi aesthetic": "ローファイ", "retro anime style": "レトロアニメ風", "soft warm lighting": "柔らかい暖色光", "relaxing": "リラックス",
-    "vaporwave": "ヴェイパーウェイヴ", "neon pink and blue": "ネオンピンクと青", "retro computer graphics": "レトロCG", "statues": "彫像",
-    
-    // Horror & Weird
-    "liminal space": "リミナルスペース", "empty rooms": "空の部屋", "unsettling": "不安にさせる", "fluorescent lights": "蛍光灯", "dreamcore": "ドリームコア",
-    "found footage": "ファウンドフッテージ", "vhs glitch": "VHSグリッチ", "low quality video": "低画質ビデオ", "shaky camera": "手ブレ", "scary": "怖い",
-    "cosmic horror": "コズミックホラー", "eldritch abomination": "名状しがたい怪物", "tentacles": "触手", "indescribable": "描写不能", "madness": "狂気", "lovecraftian": "ラヴクラフト風",
-    "analog horror": "アナログホラー", "distorted face": "歪んだ顔", "crt scanlines": "CRT走査線", "broadcast interruption": "放送中断", "uncanny valley": "不気味の谷",
-    
-    // Fantasy
-    "dark fantasy": "ダークファンタジー", "grimdark": "グリムダーク", "ominous": "不吉な", "fog": "霧", "desaturated colors": "彩度を落とした色", "souls-like": "ソウルライク",
-    "high fantasy": "ハイファンタジー", "epic scale": "壮大なスケール", "magic castles": "魔法の城", "floating islands": "浮遊島", "ethereal": "幻想的",
-    "celestial": "天界", "divine": "神聖な", "glowing light": "輝く光", "angelic": "天使のような",
-    "dungeon": "ダンジョン", "torch light": "松明の光", "stone walls": "石壁", "underground": "地下", "adventure": "冒険", "rpg style": "RPG風",
-    
-    // Presets Content Words (Previous)
     "oil painting": "油絵", "impasto": "厚塗り", "visible brushstrokes": "筆致", "rich texture": "豊かな質感",
     "watercolor medium": "水彩画", "wet on wet": "ウェット・オン・ウェット", "soft edges": "柔らかな輪郭", "splatter effect": "飛沫効果",
     "ink wash painting": "水墨画", "sumi-e": "墨絵", "monochrome": "モノクロ", "bold lines": "太い線", "brush stroke": "筆のタッチ",
@@ -287,72 +65,10 @@
     "vector art": "ベクターアート", "adobe illustrator": "イラレ風", "flat design": "フラットデザイン", "svg style": "SVG風",
     "sticker": "ステッカー", "die-cut": "ダイカット", "white border": "白い縁取り", "vector style": "ベクター調", "cute": "可愛い",
     "logo design": "ロゴデザイン", "vector": "ベクター", "simple": "シンプル", "modern": "モダン", "flat": "フラット", "symbol": "シンボル",
-    "t-shirt design": "Tシャツデザイン", "graphic print": "グラフィックプリント", "isolated on white": "白背景で分離",
-    "fisheye lens": "魚眼レンズ", "gopro footage": "GoPro映像", "wide angle": "広角", "distorted perspective": "歪んだパース",
-    "cctv footage": "防犯カメラ", "security camera": "監視カメラ", "grainy": "粒子感", "surveillance": "監視",
-    "polaroid photo": "ポラロイド", "vintage exposure": "ヴィンテージ露出", "vignette": "ビネット", "film grain": "フィルム粒子",
-    "drone footage": "ドローン映像", "aerial view": "空撮", "bird's eye view": "鳥瞰図", "high altitude": "高高度", "wide shot": "ワイドショット",
-    "underwater photography": "水中写真", "refraction": "屈折", "bubbles": "泡", "caustics": "コースティクス",
-    "macro photography": "マクロ撮影", "extreme close-up": "超接写", "shallow depth of field": "浅い被写界深度", "bokeh": "ボケ",
-    "thermal imaging": "サーモグラフィ", "heat map": "ヒートマップ", "infrared camera": "赤外線カメラ", "predator vision": "プレデター視覚",
-    "x-ray": "X線", "skeleton visible": "骨格透視", "transparent body": "透明な体", "blue and white inverted": "青白反転",
-    "night vision": "ナイトビジョン", "green tint": "緑かぶり", "glowing eyes": "輝く目",
-    "kodak portra": "Kodak Portra風", "analog film": "アナログフィルム", "warm tones": "暖色系", "fine grain": "微粒子", "vintage color": "ヴィンテージカラー",
-    "instax": "チェキ風", "instant photo": "インスタント写真", "flash photography": "フラッシュ撮影", "white frame": "白い枠",
-    "disposable camera": "使い捨てカメラ風", "harsh flash": "強いフラッシュ", "lo-fi": "ローファイ", "authentic": "本物っぽい",
-    "vhs artifact": "VHSノイズ", "glitch": "グリッチ", "scanlines": "走査線", "tracking error": "トラッキングエラー", "low resolution": "低解像度", "retro video": "レトロビデオ",
-    "cyberpunk": "サイバーパンク", "neon lights": "ネオン", "holograms": "ホログラム", "night city": "ナイトシティ", "chromatic aberration": "色収差",
-    "steampunk": "スチームパンク", "brass and copper": "真鍮と銅", "gears and cogs": "歯車", "steam engine": "蒸気機関", "goggles": "ゴーグル", "clockwork": "時計仕掛け",
-    "biopunk": "バイオパンク", "organic technology": "有機テクノロジー", "flesh and metal": "肉と金属", "glowing veins": "輝く静脈", "mutant": "ミュータント",
-    "solarpunk": "ソーラーパンク", "nature and technology": "自然と技術", "green city": "緑の都市", "sustainable": "持続可能", "sunlight": "日光",
-    "dieselpunk": "ディーゼルパンク", "steel and oil": "鋼鉄と油", "military industrial": "軍産複合体", "gritty": "無骨な", "smoke": "煙",
-    "blueprint": "設計図", "schematic": "回路図", "technical drawing": "製図", "white lines on blue": "青地に白線", "grid background": "グリッド背景",
-    "chalkboard art": "黒板アート", "chalk texture": "チョークの質感", "blackboard": "黒板", "white chalk": "白チョーク", "hand drawn": "手描き", "dusty": "粉っぽい",
-    "tarot card style": "タロット風", "art nouveau frame": "アール・ヌーヴォー枠", "symbolic": "象徴的", "decorative border": "装飾枠",
-    "voxel art": "ボクセルアート", "minecraft style": "マイクラ風", "3d pixels": "3Dピクセル", "blocky": "ブロック状",
-    "ascii art": "アスキーアート", "text based": "テキストベース", "monospaced font": "等幅フォント", "retro computer style": "レトロPC風", "green terminal": "緑の端末画面",
-    "claymation": "クレイアニメ", "stop motion style": "ストップモーション", "plasticine": "プラスティシン", "clay texture": "粘土の質感", "aardman style": "アードマン風",
-    "origami": "折り紙", "folded paper": "折った紙", "paper craft": "ペーパークラフト", "geometric": "幾何学的", "sharp edges": "鋭いエッジ",
-    "knolling": "並べる(Knolling)", "flat lay": "フラットレイ", "objects organized neatly": "整列した物体", "top down view": "真上からの視点",
-    "wet skin": "濡れた肌", "oiled skin": "オイル肌", "glossy finish": "光沢仕上げ", "highly reflective": "高反射", "sweat": "汗",
-    "glass texture": "ガラスの質感", "crystal": "クリスタル", "translucent": "半透明", "fragile": "儚さ",
-    "metallic texture": "金属の質感", "chrome": "クローム", "gold": "金", "silver": "銀", "reflection": "反射",
-    "plushie": "ぬいぐるみ", "felt texture": "フェルトの質感", "soft fabric": "柔らかい布", "stitches": "縫い目", "fuzzy": "ふわふわ",
-    "glitch effect": "グリッチ効果", "datamosh": "データモッシュ", "distortion": "歪み",
-    "cinematic lighting": "シネマティック照明", "dramatic atmosphere": "ドラマチックな雰囲気", "movie poster": "映画ポスター",
-    "dark atmosphere": "暗い雰囲気", "gothic style": "ゴシック様式", "chiaroscuro": "明暗法", "dimly lit": "薄暗い", "mysterious": "ミステリアス",
-    "dreamy atmosphere": "夢のような雰囲気", "bloom": "ブルーム", "ethereal": "幻想的",
-    "horror theme": "ホラーテーマ", "eerie": "不気味", "creepy": "怖い", "dark": "暗い", "blood": "血", "scary atmosphere": "恐ろしい雰囲気",
-    "fantasy world": "ファンタジー世界", "magic": "魔法", "glowing particles": "輝く粒子", "enchanted": "魔法にかかった", "mystical": "神秘的",
-    "chibi": "ちびキャラ", "super deformed": "スーパーデフォルメ", "big head": "頭でっかち", "simplified": "簡略化",
-    "figure": "フィギュア", "toy": "おもちゃ", "plastic texture": "プラスチック質感", "jointed": "関節付き", "miniature photography": "ミニチュア写真",
-    "depth of field": "被写界深度", "motion blur": "モーションブラー", "long exposure": "長時間露光", "light trails": "光の軌跡",
-    "macro lens": "マクロレンズ", "tilt shift": "チルトシフト", "wide angle lens": "広角レンズ", "telephoto lens": "望遠レンズ",
-    "golden ratio": "黄金比", "rule of thirds": "三分割法", "dutch angle": "ダッチアングル",
-    "from below": "アオリ", "from above": "フカン", "dynamic angle": "ダイナミック", "close-up": "クローズアップ",
-    "vivid colors": "ビビッド", "pastel colors": "パステル", "monochrome": "モノトーン", "sepia": "セピア", "neon colors": "ネオン", "rainbow colors": "虹色",
-    "high contrast": "高コントラスト", "low contrast": "低コントラスト",
-    "HDR": "ハイダイナミックレンジ(HDR)", "UHD": "超高精細(UHD)", "ray tracing": "レイトレーシング", "subsurface scattering": "サブサーフェス・スキャタリング",
-    "volumetric lighting": "ボリュメトリック", "god rays": "チンダル現象", "lens flare": "レンズフレア",
-    "physically based rendering": "物理ベースレンダリング", "PBR": "物理ベースレンダリング",
-    "global illumination": "グローバルイルミネーション", "ambient occlusion": "アンビエントオクルージョン",
-    "shonen manga style": "少年漫画風", "shojo manga style": "少女漫画風", "gekiga style": "劇画風",
-    "bande dessinee style": "バンド・デシネ風", "studio trigger style": "TRIGGER風", "ufotable style": "ufotable風", "mappa style": "MAPPA風", "cloverworks style": "クローバーワークス風", "clamp style": "CLAMP風", "osamu tezuka style": "手塚治虫風", "akira toriyama style": "鳥山明風", "hiroshi nagai style": "永井博風",
-    "artgerm style": "Artgerm風", "wlop style": "WLOP風", "ilya kuvshinov style": "イリヤ・クブシノブ風", "greg rutkowski style": "グレッグ・ルトコフスキ風", "h.r. giger style": "H.R.ギーガー風", "beksinski style": "ベクシンスキー風",
-    "tim burton style": "ティム・バートン風", "wes anderson style": "ウェス・アンダーソン風", "stanley kubrick style": "キューブリック風", "quentin tarantino style": "タランティーノ風", "christopher nolan style": "ノーラン風", "akiyuki shinbo style": "新房昭之風",
-    "art nouveau": "アール・ヌーヴォー", "art deco": "アール・デコ", "impressionism style": "印象派", "van gogh style": "ゴッホ風", "gustav klimt style": "クリムト風", "salvador dali style": "ダリ風", "cubism": "キュビスム",
-    "renaissance style": "ルネサンス風", "baroque style": "バロック風", "surrealism": "シュルレアリスム", "dadaism": "ダダイズム", "bauhaus style": "バウハウス", "vaporwave": "ヴェイパーウェイヴ",
-    "ancient greek": "古代ギリシャ", "medieval era": "中世", "wild west": "西部開拓時代", "roaring twenties": "狂騒の20年代",
-    "1950s style": "1950年代風", "showa era style": "昭和レトロ", "bubble era": "バブル時代", "y2k aesthetic": "Y2K", "post-apocalyptic": "ポストアポカリプス", "victorian fashion": "ヴィクトリア朝ファッション",
-    "detailed eyes": "詳細な目", "detailed face": "詳細な顔", "detailed hair": "詳細な髪", "detailed clothing": "詳細な服", "detailed water": "詳細な水", "detailed clouds": "詳細な雲", "detailed trees": "詳細な木々",
-    "cowboy shot": "カウボーイショット", "brutalism": "ブルータリズム", "industrial": "インダストリアル", "ruins": "廃墟", "japanese garden": "日本庭園",
-    "low quality": "低品質", "worst quality": "最低品質", "normal quality": "普通品質", "jpeg artifacts": "JPEGノイズ", "blurry": "ぼやけた", "out of focus": "ピンボケ", "lowres": "低解像度", "error": "エラー", "ugly": "醜い", "pixelated": "ピクセル化",
-    "bad anatomy": "崩れた人体", "bad hands": "崩れた手", "missing fingers": "欠損した指", "extra fingers": "余分な指", "long neck": "長い首", "deformed": "変形", "mutated": "変異", "disfigured": "崩れた", "missing limb": "欠損した肢", "extra limbs": "余分な手足",
-    "poorly drawn hands": "下手に描かれた手", "poorly drawn face": "下手に描かれた顔", "mutation": "変異",
-    "text": "テキスト", "watermark": "透かし", "signature": "署名", "username": "ユーザー名", "logo": "ロゴ", "copyright name": "著作権名", "qr code": "QRコード", "bar code": "バーコード",
-    "out of frame": "フレーム外", "cropped": "切り取り", "bad composition": "悪い構図", "collage": "コラージュ", "mosaic": "モザイク"
+    "t-shirt design": "Tシャツデザイン", "graphic print": "グラフィックプリント", "isolated on white": "白背景で分離"
   };
 
+  // UIヘルパー
   function createSubAccordion(title, items, type) {
     const details = document.createElement("details");
     details.className = "qp-sub-acc";
@@ -361,7 +77,7 @@
     details.style.borderRadius = "4px";
     details.style.background = "#fff";
     details.open = false; 
-    
+
     const summary = document.createElement("summary");
     summary.textContent = title;
     summary.style.fontWeight = "bold";
@@ -389,22 +105,13 @@
       const cb = document.createElement("input");
       cb.type = "checkbox";
       cb.style.marginRight = "6px";
-
-      if (type === "preset" || type === "negative_set") {
-        cb.dataset.val = item.val;
-        label.title = item.val;
-        label.appendChild(cb);
-        label.appendChild(document.createTextNode(item.label));
-        if(window.__outputTranslation && item.label && !V2_DICT[item.label]) V2_DICT[item.label] = item.label;
-      } else {
-        cb.dataset.val = item.en;
-        label.appendChild(cb);
-        label.appendChild(document.createTextNode(`${item.ja} / ${item.en}`));
-        if(window.__outputTranslation && item.en && item.ja) V2_DICT[item.en] = item.ja;
-      }
+      cb.dataset.val = item.val;
+      label.title = item.val;
+      
+      label.appendChild(cb);
+      label.appendChild(document.createTextNode(item.label));
       content.appendChild(label);
     });
-
     details.appendChild(content);
     return details;
   }
@@ -413,26 +120,12 @@
     initUI(container) {
       if (window.__outputTranslation) window.__outputTranslation.register(V2_DICT);
 
+      // マウント先 (v1が作成したID: #qp-presets)
       const presetsContainer = document.querySelector("#qp-presets .qp-section-content");
-      const stylesContainer = document.querySelector("#qp-styles .qp-section-content");
-      const erasContainer = document.querySelector("#qp-eras .qp-section-content");
-      const qualityContainer = document.querySelector("#qp-quality .qp-section-content");
-      const negWordsContainer = document.querySelector("#qp-neg-words .qp-section-content");
 
+      // コンテナが存在する場合のみ追記
       if (presetsContainer) {
         Object.entries(EXTRA_PRESETS).forEach(([k,v]) => presetsContainer.appendChild(createSubAccordion(k, v, "preset")));
-      }
-      if (stylesContainer) {
-        Object.entries(EXTRA_STYLES).forEach(([k,v]) => stylesContainer.appendChild(createSubAccordion(k, v, "style")));
-      }
-      if (erasContainer) {
-        Object.entries(EXTRA_ERAS).forEach(([k,v]) => erasContainer.appendChild(createSubAccordion(k, v, "era")));
-      }
-      if (qualityContainer) {
-        Object.entries(EXTRA_QUALITY).forEach(([k,v]) => qualityContainer.appendChild(createSubAccordion(k, v, "word")));
-      }
-      if (negWordsContainer) {
-        Object.entries(EXTRA_NEG_WORDS).forEach(([k,v]) => negWordsContainer.appendChild(createSubAccordion(k, v, "word")));
       }
     },
     getTags() { return []; } 
