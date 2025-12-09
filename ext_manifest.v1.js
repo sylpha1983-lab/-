@@ -1,15 +1,17 @@
 window.EXT_MANIFEST = [
   "builder_core.v1.js",
 
-  // ★ Quality Preset (v1～v8)
+  // ★ Quality Preset (v1～v10)
   "builder_ui.section.quality_preset.v1.js", // 土台
   "builder_ui.section.quality_preset.v2.js", // 芸術・アナログ・ゲーム
   "builder_ui.section.quality_preset.v3.js", // 特殊撮影・SF・質感
   "builder_ui.section.quality_preset.v4.js", // 世界観・メディア・素材
   "builder_ui.section.quality_preset.v5.js", // 美学・色彩・スタジオ
   "builder_ui.section.quality_preset.v6.js", // クリエイター・ゲーム
-  "builder_ui.section.quality_preset.v7.js", // レンダリング・高度技術
-  "builder_ui.section.quality_preset.v8.js", // ★ 新規: 音楽・ファッション・RPG
+  "builder_ui.section.quality_preset.v7.js", // 特化型ハイエンド
+  "builder_ui.section.quality_preset.v8.js", // 音楽・ファッション・RPG
+  "builder_ui.section.quality_preset.v9.js", // ★ 新規: 肌・質感・季節
+  "builder_ui.section.quality_preset.v10.js",// ★ 新規: 映像技術・3D詳細
 
   // 他カテゴリー
   "builder_ui.section.lighting.v1.js",
