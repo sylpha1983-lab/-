@@ -1,35 +1,36 @@
 (function(){
   "use strict";
-  const VERSION = 2; 
+  const VERSION = 3; 
   const KEY = "attire";
 
   const CATEGORIES = {
-    "制服・職業 (Uniforms/Jobs)": [
-      { ja: "セーラー服", en: "sailor uniform" }, { ja: "ブレザー制服", en: "school uniform" },
-      { ja: "スクール水着", en: "school swimsuit" }, { ja: "体操服", en: "gym uniform" },
-      { ja: "メイド服", en: "maid apron" }, { ja: "ナース服", en: "nurse uniform" },
-      { ja: "シスター", en: "nun habit" }, { ja: "巫女服", en: "miko attire" },
-      { ja: "警察官", en: "police uniform" }, { ja: "軍服", en: "military uniform" },
-      { ja: "スーツ", en: "business suit" }, { ja: "白衣", en: "lab coat" },
-      { ja: "バニーガール", en: "bunny suit" }, { ja: "レースクイーン", en: "race queen" },
-      { ja: "チアリーダー", en: "cheerleader" }, { ja: "CA制服", en: "flight attendant uniform" },
-      { ja: "OL制服", en: "office lady uniform" }
+    "ファンタジー・RPG (Fantasy)": [
+      { ja: "鎧/アーマー", en: "armor" }, { ja: "ビキニアーマー", en: "bikini armor" },
+      { ja: "ローブ", en: "robe" }, { ja: "魔法使いのローブ", en: "wizard robe" },
+      { ja: "マント", en: "cape" }, { ja: "革鎧", en: "leather armor" },
+      { ja: "踊り子衣装", en: "dancer outfit" }, { ja: "冒険者の服", en: "adventurer outfit" }
     ],
-    "スポーツウェア (Sports)": [
-      { ja: "スポーツウェア", en: "sportswear" }, { ja: "テニスウェア", en: "tennis uniform" },
-      { ja: "バレーユニフォーム", en: "volleyball uniform" }, { ja: "ジャージ", en: "track suit" },
-      { ja: "競泳水着", en: "competition swimsuit" }, { ja: "柔道着", en: "judo gi" }
+    "民族・伝統衣装 (Traditional)": [
+      { ja: "着物", en: "kimono" }, { ja: "浴衣", en: "yukata" }, { ja: "振袖", en: "furisode" },
+      { ja: "袴", en: "hakama" }, { ja: "チャイナドレス", en: "china dress" },
+      { ja: "漢服", en: "hanfu" }, { ja: "アオザイ", en: "ao dai" },
+      { ja: "ディアンドル", en: "dirndl" }, { ja: "サリー", en: "sari" }
+    ],
+    "ファッションスタイル (Style)": [
+      { ja: "ゴスロリ", en: "gothic lolita" }, { ja: "ロリータ", en: "lolita fashion" },
+      { ja: "パンク", en: "punk fashion" }, { ja: "スチームパンク", en: "steampunk attire" },
+      { ja: "サイバーパンク", en: "cyberpunk clothes" }, { ja: "地雷系/病みかわ", en: "yami kawaii" },
+      { ja: "テックウェア", en: "techwear" }, { ja: "ギャル", en: "gyaru" }
     ]
   };
 
   const API = {
     initUI(container) {
-      // v1のコンテナに追加する形にする (v1が土台)
       const parent = document.querySelector("#list-attire");
       if (!parent) return;
 
       const section = document.createElement("div");
-      section.className = "attire-v2-container";
+      section.className = "attire-v3-container";
 
       Object.entries(CATEGORIES).forEach(([cat, items]) => {
         const details = document.createElement("details");
@@ -61,7 +62,6 @@
         section.appendChild(details);
       });
       
-      // v1の下に追加
       parent.appendChild(section);
 
       if (window.__outputTranslation) {
@@ -72,10 +72,9 @@
     },
     getTags() {
       const tags = [];
-      document.querySelectorAll(".attire-v2-container input[type='checkbox']:checked").forEach(cb => tags.push(cb.dataset.en));
+      document.querySelectorAll(".attire-v3-container input[type='checkbox']:checked").forEach(cb => tags.push(cb.dataset.en));
       return tags;
     }
   };
   window.__registerPromptPart(KEY, VERSION, API);
 })();
-

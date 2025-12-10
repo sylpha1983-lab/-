@@ -60,26 +60,29 @@
     const sectionsRoot = document.getElementById("sections");
     if (!sectionsRoot) return;
 
-    // ★ 表示順序定義 (種族を2番目に)
+    // ★ プロンプト構成に最適化した表示順序
+    // 上から順に選択していくことで、自然と綺麗なプロンプト構造になります
     const order = [
-      { id: "quality_preset", label: "クオリティ・プリセット (Quality & Presets)" },
-      { id: "race", label: "種族 (Race)" }, 
-      { id: "expression", label: "表情 (Expression)" },
-      { id: "pose", label: "ポーズ (Pose)" },
-      { id: "hair", label: "ヘアスタイル (Hair Style)" },
-      { id: "attire", label: "服装 (Attire)" },
-      { id: "background", label: "背景 (Background)" },
-      { id: "filter", label: "フィルター調整 (Filter)" },
-      { id: "visualsync", label: "トーン補正 & プレビュー (Visual Sync)" },
-      { id: "lighting", label: "照明 (Lighting)" },
-      { id: "effect", label: "エフェクト (Effect)" }
+      { id: "quality_preset", label: "1. クオリティ・画風 (Quality & Style)" },
+      { id: "race", label: "2. 種族・素体 (Race)" },
+      { id: "hair", label: "3. ヘアスタイル (Hair)" },
+      { id: "expression", label: "4. 表情 (Expression)" },
+      { id: "attire", label: "5. 服装・衣装 (Attire)" },
+      { id: "pose", label: "6. ポーズ・構図 (Pose)" },
+      { id: "background", label: "7. 背景・場所 (Background)" },
+      { id: "lighting", label: "8. 照明・ライティング (Lighting)" },
+      { id: "effect", label: "9. エフェクト・演出 (Effects)" },
+      { id: "filter", label: "10. フィルター・効果 (Filter)" },
+      { id: "presets", label: "11. 保存済みプリセット (My Presets)" },
+      { id: "visualsync", label: "🛠️ Visual Sync (Preview & Adjust)" }
     ];
 
+    // 強制並べ替えロジック
     order.forEach(({ id, label }) => {
-      // 安全装置 (try-catch): 1つのカテゴリが失敗しても他は動かす
+      // エラー保護: 1つのカテゴリが失敗しても他は動かす
       try {
         const container = ensureContainer(id, label);
-        sectionsRoot.appendChild(container); // 強制並べ替え
+        sectionsRoot.appendChild(container); // 末尾に移動＝並び替え
 
         const versions = PROMPT_PARTS[id];
         if (versions) {
@@ -88,7 +91,6 @@
             const part = versions[v];
             if (part && !part._mounted) {
                if (part.initUI) {
-                 // 個別のinitUI実行を保護
                  try {
                    part.initUI(container);
                  } catch(e) {
@@ -174,7 +176,7 @@
     document.addEventListener("DOMContentLoaded", init, { once: true });
   else init();
 
-  // 翻訳ロジック (カッコ無視対応)
+  // 翻訳ロジック (変更なし)
   window.__outputTranslation = {
     mode: "en", 
     dict: {},
