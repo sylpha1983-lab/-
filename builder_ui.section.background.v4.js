@@ -1,7 +1,7 @@
 (function(){
   "use strict";
 
-  const VERSION = 4; // 大幅増量版
+  const VERSION = 4; // 場所・時間・天候 特化版
   const KEY = "background";
 
   // === 1. グラデーション用データ ===
@@ -125,7 +125,7 @@
       { ja: "夜 (Night)", en: "night" }, { ja: "深夜 (Midnight)", en: "midnight" },
       { ja: "晴れ", en: "sunny" }, { ja: "雨", en: "rain" }, { ja: "土砂降り", en: "heavy rain" },
       { ja: "曇り", en: "cloudy" }, { ja: "雪", en: "snow" }, { ja: "吹雪", en: "blizzard" },
-      { ja: "霧", en: "fog" }, { ja: "強風", en: "windy" }, { ja: "雷", en: "lightning" },
+      { ja: "霧 (Fog)", en: "fog" }, { ja: "強風", en: "windy" }, { ja: "雷", en: "lightning" },
       { ja: "虹", en: "rainbow" }, { ja: "オーロラ", en: "aurora" }
     ],
     "季節・イベント (Seasonal)": [
@@ -139,35 +139,7 @@
     ]
   };
 
-  // === 3. 背景エフェクト (Background Effects) カテゴリ ===
-  const BG_EFFECTS = {
-    "パーティクル・浮遊物 (Particles)": [
-      { ja: "花弁が舞う", en: "falling petals" }, { ja: "桜吹雪", en: "cherry blossom petals" },
-      { ja: "羽根が舞う", en: "feathers" }, { ja: "黒い羽", en: "black feathers" },
-      { ja: "キラキラ", en: "sparkles" }, { ja: "光の粒子", en: "light particles" },
-      { ja: "紙吹雪", en: "confetti" }, { ja: "火の粉", en: "embers" },
-      { ja: "気泡 (水中)", en: "air bubbles" }, { ja: "塵/埃", en: "dust" },
-      { ja: "雪の結晶", en: "snowflakes" }, { ja: "音符", en: "musical notes" }
-    ],
-    "光・空気感 (Light & Atmosphere)": [
-      { ja: "霧・フォグ", en: "fog" }, { ja: "湯気", en: "steam" },
-      { ja: "陽光・木漏れ日", en: "sunbeams" }, { ja: "逆光 (ゴッドレイ)", en: "god rays" },
-      { ja: "レンズフレア", en: "lens flare" }, { ja: "ボケ効果", en: "bokeh" },
-      { ja: "被写界深度 (背景ボケ)", en: "depth of field" }, { ja: "モーションブラー", en: "motion blur" },
-      { ja: "ブルーム (発光)", en: "bloom" }, { ja: "薄暗い", en: "dim light" },
-      { ja: "スポットライト", en: "spotlight" }, { ja: "映画のような照明", en: "cinematic lighting" }
-    ],
-    "スタイル・演出 (Style Effects)": [
-      { ja: "集中線", en: "speed lines" }, { ja: "枠線", en: "border" },
-      { ja: "ビネット (四隅暗)", en: "vignette" }, { ja: "色収差 (ズレ)", en: "chromatic aberration" },
-      { ja: "ノイズ加工", en: "film grain" }, { ja: "グリッチノイズ", en: "glitch" },
-      { ja: "ハーフトーン", en: "halftone" }, { ja: "シルエット", en: "silhouette" },
-      { ja: "油絵風", en: "oil painting style" }, { ja: "水彩風", en: "watercolor style" },
-      { ja: "スケッチ風", en: "sketch" }, { ja: "レトロ写真", en: "vintage photo" }
-    ]
-  };
-
-  // --- 以下、ロジック部分はv3と共通 ---
+  // ※ エフェクトカテゴリは削除しました（他のセクションと重複するため）
 
   function createGradientBuilder() {
     const wrapper = document.createElement('div');
@@ -258,7 +230,6 @@
     summary.textContent = summaryText;
     details.appendChild(summary);
 
-    // 見やすくするためGridレイアウト適用
     const content = document.createElement("div");
     content.style.display = "grid";
     content.style.gridTemplateColumns = "repeat(auto-fill, minmax(140px, 1fr))";
@@ -270,7 +241,7 @@
       label.style.display = "flex";
       label.style.alignItems = "center";
       label.style.fontSize = "0.9em";
-      label.title = item.en; // ツールチップで英語表示
+      label.title = item.en;
 
       const cb = document.createElement("input");
       cb.type = "checkbox";
@@ -299,7 +270,7 @@
       // 2. 場所カテゴリ
       const locDetails = document.createElement("details");
       locDetails.className = "bg-section-group";
-      locDetails.open = true; // 最初から開いておく
+      locDetails.open = true;
       
       const locSummary = document.createElement("summary");
       locSummary.textContent = "📍 場所・背景 (Location)";
@@ -313,32 +284,13 @@
       });
       section.appendChild(locDetails);
 
-      // 3. エフェクトカテゴリ
-      const effDetails = document.createElement("details");
-      effDetails.className = "bg-section-group";
-      effDetails.open = false;
-      
-      const effSummary = document.createElement("summary");
-      effSummary.textContent = "✨ 演出・エフェクト (Effects)";
-      effSummary.style.fontWeight = "bold";
-      effSummary.style.margin = "15px 0 5px";
-      effSummary.style.cursor = "pointer";
-      effDetails.appendChild(effSummary);
-      
-      Object.entries(BG_EFFECTS).forEach(([cat, items]) => {
-        effDetails.appendChild(createDetails(cat, items));
-      });
-      section.appendChild(effDetails);
-
       parent.appendChild(section);
 
       // 翻訳辞書登録
       if (window.__outputTranslation) {
         const dict = {};
-        [LOCATIONS, BG_EFFECTS].forEach(catObj => {
-             Object.values(catObj).flat().forEach(item => {
-                if (item.en && item.ja) dict[item.en] = item.ja;
-             });
+        Object.values(LOCATIONS).flat().forEach(item => {
+            if (item.en && item.ja) dict[item.en] = item.ja;
         });
         window.__outputTranslation.register(dict);
       }
@@ -361,3 +313,4 @@
 
   window.__registerPromptPart(KEY, VERSION, API);
 })();
+

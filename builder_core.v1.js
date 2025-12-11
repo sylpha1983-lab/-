@@ -60,7 +60,7 @@
     const sectionsRoot = document.getElementById("sections");
     if (!sectionsRoot) return;
 
-    // ★ 表示順序の更新
+    // ★ 表示順序の更新（最終形）
     const order = [
       { id: "quality_preset", label: "1. クオリティ・画風 (Quality & Style)" },
       { id: "anatomy", label: "2. 人体崩壊防止・構造 (Anatomy)" },
@@ -74,14 +74,15 @@
       { id: "texture", label: "10. 素材・質感 (Material/Texture)" },
       { id: "pose", label: "11. ポーズ・構図 (Pose)" },
       { id: "narrative", label: "12. ストーリー・行動 (Narrative)" },
-      { id: "composition", label: "13. 構図・設計 (Composition)" }, // ★ ここに追加
+      { id: "composition", label: "13. 構図・設計 (Composition)" },
       { id: "camera", label: "14. カメラ・レンズ (Camera/Lens)" },
       { id: "background", label: "15. 背景・場所 (Background)" },
       { id: "lighting", label: "16. 照明・ライティング (Lighting)" },
       { id: "atmosphere", label: "17. 雰囲気・色彩 (Atmosphere & Color)" },
       { id: "effect", label: "18. エフェクト・演出 (Effects)" },
-      { id: "filter", label: "19. フィルター・効果 (Filter)" },
-      { id: "presets", label: "20. 保存済みプリセット (My Presets)" },
+      { id: "postprocessing", label: "19. 仕上げ・後処理 (Post-Processing)" }, // ★ ここに追加
+      { id: "filter", label: "20. フィルター・効果 (Filter)" },
+      { id: "presets", label: "21. 保存済みプリセット (My Presets)" },
       { id: "visualsync", label: "🛠️ Visual Sync (Preview & Adjust)" }
     ];
 

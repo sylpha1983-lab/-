@@ -1,6 +1,6 @@
 (function(){
   "use strict";
-  const VERSION = 5; // 拡張パックE (デザイン詳細・柄・装飾)
+  const VERSION = 5; // 拡張パックE (デザイン詳細・柄)
   const KEY = "attire";
 
   const ATTIRE_DATA = {
@@ -33,10 +33,10 @@
     ],
     "🎀 装飾・ディテール (Decorations)": [
       { ja: "フリル", en: "frills" }, { ja: "レース", en: "lace" },
-      { ja: "リボン", en: "ribbon" }, { ja: "大きなリボン", en: "big ribbon" },
+      // リボンやベルトは accessories に移動したため削除
       { ja: "ボタン", en: "buttons" }, { ja: "ファスナー/ジッパー", en: "zipper" },
-      { ja: "ベルト/バックル", en: "belt" }, { ja: "チェーン (鎖)", en: "chain" },
-      { ja: "コルセット編み上げ", en: "laced up" }, { ja: "ファー (毛皮)", en: "fur trim" },
+      { ja: "コルセット編み上げ", en: "laced up" }, 
+      { ja: "ファー (トリミング)", en: "fur trim" }, // 部分的なファーは装飾として残す
       { ja: "ポンポン", en: "pom pom" }, { ja: "刺繍", en: "embroidery" }
     ]
   };
@@ -99,7 +99,7 @@
     getTags() {
       const tags = [];
       document.querySelectorAll(".attire-v5-container input[type='checkbox']:checked").forEach(cb => {
-        tags.push(cb.dataset.val || cb.dataset.en); // val優先、なければen
+        tags.push(cb.dataset.val || cb.dataset.en);
       });
       return tags;
     }
@@ -107,3 +107,4 @@
 
   window.__registerPromptPart(KEY, VERSION, API);
 })();
+

@@ -7,7 +7,8 @@
     "ファンタジー・RPG (Fantasy)": [
       { ja: "鎧/アーマー", en: "armor" }, { ja: "ビキニアーマー", en: "bikini armor" },
       { ja: "ローブ", en: "robe" }, { ja: "魔法使いのローブ", en: "wizard robe" },
-      { ja: "マント", en: "cape" }, { ja: "革鎧", en: "leather armor" },
+      // マントは accessories に移動したため削除
+      { ja: "革鎧", en: "leather armor" },
       { ja: "踊り子衣装", en: "dancer outfit" }, { ja: "冒険者の服", en: "adventurer outfit" }
     ],
     "民族・伝統衣装 (Traditional)": [
@@ -78,3 +79,4 @@
   };
   window.__registerPromptPart(KEY, VERSION, API);
 })();
+

@@ -1,7 +1,7 @@
 (function(){
   "use strict";
 
-  const VERSION = 2; // ambient lighting追加など強化版
+  const VERSION = 2; // Ambient Lighting等を追加した強化版
   const KEY = "lighting";
 
   const CATEGORIES = {
@@ -10,7 +10,7 @@
       { ja: "太陽光", en: "sunlight" },
       { ja: "ソフトライティング (柔らかい)", en: "soft lighting" },
       { ja: "ハードライティング (硬い)", en: "hard lighting" },
-      { ja: "アンビエント (環境光)", en: "ambient lighting" }, // ★追加
+      { ja: "アンビエント (環境光)", en: "ambient lighting" }, // ★v2追加
       { ja: "シネマティック (映画風)", en: "cinematic lighting" },
       { ja: "ドラマチック", en: "dramatic lighting" },
       { ja: "明るい照明", en: "bright lighting" },
@@ -97,3 +97,4 @@
 
   window.__registerPromptPart(KEY, VERSION, API);
 })();
+

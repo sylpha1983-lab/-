@@ -1,10 +1,10 @@
 (function(){
   "use strict";
 
-  const VERSION = 4; // カスタムビルダー搭載版
+  const VERSION = 4; // カスタムビルダー搭載版 (アクセサリ削除済)
   const KEY = "hair";
 
-  // --- 1. カスタムビルダー用のデータ (翻訳対応用に構造強化) ---
+  // --- 1. カスタムビルダー用のデータ ---
   const BUILDER_COLORS = [
     { ja: "指定なし", en: "", val: "" },
     { ja: "金", en: "Blonde", val: "blonde" },
@@ -62,7 +62,7 @@
     }
   ];
 
-  // --- 2. 既存カテゴリデータ (v1, v2, v3統合) ---
+  // --- 2. 既存カテゴリデータ (アクセサリー削除済) ---
   const CATEGORIES = {
     "髪の長さ (Length)": [
       { ja: "ショートヘア", en: "short hair" }, { ja: "ミディアムヘア", en: "medium hair" },
@@ -109,12 +109,8 @@
       { ja: "ドリルヘアー", en: "drill hair" }, { ja: "動物耳風の髪", en: "hair ears" },
       { ja: "ハート型アホ毛", en: "heart ahoge" }
     ],
-    "髪飾り・アクセサリー (Accessories)": [
-      { ja: "リボン", en: "hair ribbon" }, { ja: "ヘアバンド", en: "hairband" },
-      { ja: "カチューシャ", en: "hairband" }, { ja: "シュシュ", en: "scrunchie" },
-      { ja: "ヘアピン", en: "hairpin" }, { ja: "かんざし", en: "hair stick" },
-      { ja: "花の髪飾り", en: "hair flower" }, { ja: "ヘアオーナメント", en: "hair ornament" }
-    ],
+    // 髪飾りカテゴリは削除 (accessories.v1.jsへ移動)
+    
     "単色・基本カラー (Simple Colors)": [
       { ja: "金髪", en: "blonde hair" }, { ja: "黒髪", en: "black hair" }, { ja: "茶髪", en: "brown hair" },
       { ja: "銀髪", en: "silver hair" }, { ja: "白髪", en: "white hair" }, { ja: "赤髪", en: "red hair" },
@@ -144,19 +140,16 @@
     container.style.flexWrap = "wrap";
     container.style.alignItems = "center";
     
-    // ベース色セレクト
     const baseSel = document.createElement('select');
     baseSel.id = "hair-base-color";
     BUILDER_COLORS.forEach(c => {
       const opt = document.createElement('option');
       opt.value = c.val;
       opt.textContent = c.val ? `${c.ja} (${c.en})` : "ベース色: 指定なし";
-      // 翻訳用データを保持
       opt.dataset.ja = c.ja;
       baseSel.appendChild(opt);
     });
 
-    // サブ色セレクト
     const subSel = document.createElement('select');
     subSel.id = "hair-sub-color";
     BUILDER_COLORS.forEach(c => {
@@ -167,19 +160,17 @@
       subSel.appendChild(opt);
     });
 
-    // スタイルセレクト
     const styleSel = document.createElement('select');
     styleSel.id = "hair-style-method";
     BUILDER_STYLES.forEach(s => {
       const opt = document.createElement('option');
       opt.value = s.val;
       opt.dataset.format = s.format;
-      opt.dataset.format_ja = s.format_ja; // 日本語フォーマット
+      opt.dataset.format_ja = s.format_ja;
       opt.textContent = s.label;
       styleSel.appendChild(opt);
     });
 
-    // 有効化チェック
     const enableLabel = document.createElement('label');
     enableLabel.style.marginLeft = "auto";
     enableLabel.style.display = "flex";
@@ -199,7 +190,6 @@
     container.appendChild(enableLabel);
     wrapper.appendChild(container);
 
-    // プレビュー
     const preview = document.createElement('div');
     preview.id = "hair-builder-preview";
     preview.style.marginTop = "8px";
@@ -232,7 +222,6 @@
     return wrapper;
   }
 
-  // === API定義 ===
   const API = {
     initUI(container) {
       const parent = document.querySelector("#list-hair") || container;
@@ -241,10 +230,8 @@
       const section = document.createElement("div");
       section.className = "hair-v4-builder";
 
-      // 1. ビルダーUI
       section.appendChild(createBuilderUI());
 
-      // 2. 通常カテゴリUI
       Object.entries(CATEGORIES).forEach(([cat, items]) => {
         const details = document.createElement("details");
         details.className = "hair-cat";
@@ -265,19 +252,11 @@
           details.appendChild(label);
         });
         
-        details.addEventListener("change", e => {
-          if (e.target.type === "checkbox" && e.target.checked) {
-            details.querySelectorAll("input[type='checkbox']").forEach(c => {
-              if (c !== e.target) c.checked = false;
-            });
-          }
-        });
         section.appendChild(details);
       });
 
       parent.appendChild(section);
 
-      // ★ 固定カテゴリの翻訳辞書登録
       if (window.__outputTranslation) {
         const dict = {};
         Object.values(CATEGORIES).flat().forEach(item => {
@@ -291,7 +270,6 @@
       const tags = [];
       const enable = document.getElementById("hair-builder-enable");
       
-      // ★ ビルダータグ生成処理 & 動的翻訳登録
       if (enable && enable.checked) {
         const baseSel = document.getElementById("hair-base-color");
         const subSel = document.getElementById("hair-sub-color");
@@ -303,28 +281,11 @@
         if (baseVal && subVal) {
           const selectedOpt = styleSel.options[styleSel.selectedIndex];
           const format = selectedOpt.dataset.format;
-          const formatJa = selectedOpt.dataset.format_ja;
-
-          // 英語タグ生成
           const enTag = format.replace('{base}', baseVal).replace('{sub}', subVal);
-          
-          // 日本語タグ生成 (データ属性から日本語名を取得)
-          const baseJa = baseSel.options[baseSel.selectedIndex].dataset.ja;
-          const subJa = subSel.options[subSel.selectedIndex].dataset.ja;
-          const jaTag = formatJa.replace('{base}', baseJa).replace('{sub}', subJa);
-
-          // ★ ここで生成したタグペアを即座に辞書へ追加する
-          if (window.__outputTranslation) {
-            const tempDict = {};
-            tempDict[enTag] = jaTag;
-            window.__outputTranslation.register(tempDict);
-          }
-
           tags.push(enTag);
         }
       }
 
-      // 通常タグ
       document.querySelectorAll(".hair-v4-builder .hair-cat input[type='checkbox']:checked").forEach(cb => {
         tags.push(cb.dataset.en);
       });

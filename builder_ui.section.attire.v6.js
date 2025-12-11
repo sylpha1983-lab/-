@@ -1,9 +1,9 @@
 (function(){
   "use strict";
-  const VERSION = 6; // 拡張パックF (衣服の状態・ダメージ・着こなし)
+  const VERSION = 6; // 拡張パックF (状態・ダメージ・着こなし)
   const KEY = "attire";
 
-  // ★ 素材(Leather等)は texture.v1.js に任せ、ここは「状態」に特化させます
+  // ★ 素材(Leather等)や質感(Shiny等)を削除し、状態異常に特化
   const ATTIRE_DATA = {
     "💥 ダメージ・汚れ (Damage & Dirt)": [
       { ja: "破れた服", en: "torn clothes" },
@@ -54,12 +54,12 @@
         const details = document.createElement("details");
         details.className = "attire-cat";
         details.style.cssText = "margin-bottom:6px; border:1px solid #eee; border-radius:4px; background:#fff;";
-        // ダメージ系はたまに使う程度なので閉じておく
+        // 特殊な状態指定なので、デフォルトは閉じておく
         details.open = false; 
 
         const summary = document.createElement("summary");
         summary.textContent = title;
-        summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#fff0f5; color:#8b0000;"; // 赤系で「異常状態」感
+        summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#fff0f5; color:#8b0000;";
         details.appendChild(summary);
 
         const content = document.createElement("div");
