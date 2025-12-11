@@ -7,6 +7,16 @@ window.EXT_MANIFEST = [
   "builder_ui.section.quality_preset.v3.js",
   "builder_ui.section.anatomy.v1.js",
 
+  // Character Base
+  "builder_ui.section.race.v1.js",
+  "builder_ui.section.race.v2.js",
+  "builder_ui.section.race.v3.js",
+  "builder_ui.section.race.v4.js",
+  "builder_ui.section.bodytype.v1.js", // ★ 新規追加
+  "builder_ui.section.hair.v4.js",
+  "builder_ui.section.hair.v5.js",
+  "builder_ui.section.hair.v6.js",
+
   // Attire
   "builder_ui.section.attire.v1.js",
   "builder_ui.section.attire.v2.js",
@@ -25,25 +35,17 @@ window.EXT_MANIFEST = [
   "builder_ui.section.attire.v15.js",
   "builder_ui.section.attire.v16.js",
 
-  // Character Base
-  "builder_ui.section.race.v1.js",
-  "builder_ui.section.race.v2.js",
-  "builder_ui.section.race.v3.js",
-  "builder_ui.section.race.v4.js",
-  "builder_ui.section.hair.v4.js",
-  "builder_ui.section.hair.v5.js",
-  "builder_ui.section.hair.v6.js",
-
-  // Expression & Pose
+  // Expression & Pose & Camera
   "builder_ui.section.expression.v1.js",
   "builder_ui.section.expression.v2.js",
   "builder_ui.section.expression.v3.js",
   "builder_ui.section.pose.v3.js",
+  "builder_ui.section.camera.v1.js",
 
-  // Environment, Mood & Effects
+  // Environment
   "builder_ui.section.background.v4.js",
-  "builder_ui.section.lighting.v2.js", // ★ v2に変更
-  "builder_ui.section.atmosphere.v1.js", // ★ 新規追加
+  "builder_ui.section.lighting.v2.js", 
+  "builder_ui.section.atmosphere.v1.js", 
   "builder_ui.section.filter.v1.js",
   "builder_ui.section.effect.v1.js",
   

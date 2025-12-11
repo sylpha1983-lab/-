@@ -60,29 +60,30 @@
     const sectionsRoot = document.getElementById("sections");
     if (!sectionsRoot) return;
 
-    // ★ 表示順序の更新
+    // ★ 表示順序の更新: BodyTypeをRaceの次に追加
     const order = [
       { id: "quality_preset", label: "1. クオリティ・画風 (Quality & Style)" },
       { id: "anatomy", label: "2. 人体崩壊防止・構造 (Anatomy)" },
       { id: "race", label: "3. 種族・素体 (Race)" },
-      { id: "hair", label: "4. ヘアスタイル (Hair)" },
-      { id: "expression", label: "5. 表情 (Expression)" },
-      { id: "attire", label: "6. 服装・衣装 (Attire)" },
-      { id: "pose", label: "7. ポーズ・構図 (Pose)" },
-      { id: "background", label: "8. 背景・場所 (Background)" },
-      { id: "lighting", label: "9. 照明・ライティング (Lighting)" }, // ★ v2対応
-      { id: "atmosphere", label: "10. 雰囲気・色彩 (Atmosphere & Color)" }, // ★ 新規追加
-      { id: "effect", label: "11. エフェクト・演出 (Effects)" },
-      { id: "filter", label: "12. フィルター・効果 (Filter)" },
-      { id: "presets", label: "13. 保存済みプリセット (My Presets)" },
+      { id: "bodytype", label: "4. 体型・プロポーション (Body Type)" }, // ★ ここに追加
+      { id: "hair", label: "5. ヘアスタイル (Hair)" },
+      { id: "expression", label: "6. 表情 (Expression)" },
+      { id: "attire", label: "7. 服装・衣装 (Attire)" },
+      { id: "pose", label: "8. ポーズ・構図 (Pose)" },
+      { id: "camera", label: "9. カメラ・レンズ (Camera/Lens)" },
+      { id: "background", label: "10. 背景・場所 (Background)" },
+      { id: "lighting", label: "11. 照明・ライティング (Lighting)" },
+      { id: "atmosphere", label: "12. 雰囲気・色彩 (Atmosphere & Color)" },
+      { id: "effect", label: "13. エフェクト・演出 (Effects)" },
+      { id: "filter", label: "14. フィルター・効果 (Filter)" },
+      { id: "presets", label: "15. 保存済みプリセット (My Presets)" },
       { id: "visualsync", label: "🛠️ Visual Sync (Preview & Adjust)" }
     ];
 
-    // 強制並べ替えロジック
     order.forEach(({ id, label }) => {
       try {
         const container = ensureContainer(id, label);
-        sectionsRoot.appendChild(container); // 末尾に移動＝並び替え
+        sectionsRoot.appendChild(container);
 
         const versions = PROMPT_PARTS[id];
         if (versions) {
