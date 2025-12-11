@@ -60,23 +60,24 @@
     const sectionsRoot = document.getElementById("sections");
     if (!sectionsRoot) return;
 
-    // ★ 表示順序の更新: BodyTypeをRaceの次に追加
+    // ★ 表示順序の更新: TraitsをBodyTypeの次に追加
     const order = [
       { id: "quality_preset", label: "1. クオリティ・画風 (Quality & Style)" },
       { id: "anatomy", label: "2. 人体崩壊防止・構造 (Anatomy)" },
       { id: "race", label: "3. 種族・素体 (Race)" },
-      { id: "bodytype", label: "4. 体型・プロポーション (Body Type)" }, // ★ ここに追加
-      { id: "hair", label: "5. ヘアスタイル (Hair)" },
-      { id: "expression", label: "6. 表情 (Expression)" },
-      { id: "attire", label: "7. 服装・衣装 (Attire)" },
-      { id: "pose", label: "8. ポーズ・構図 (Pose)" },
-      { id: "camera", label: "9. カメラ・レンズ (Camera/Lens)" },
-      { id: "background", label: "10. 背景・場所 (Background)" },
-      { id: "lighting", label: "11. 照明・ライティング (Lighting)" },
-      { id: "atmosphere", label: "12. 雰囲気・色彩 (Atmosphere & Color)" },
-      { id: "effect", label: "13. エフェクト・演出 (Effects)" },
-      { id: "filter", label: "14. フィルター・効果 (Filter)" },
-      { id: "presets", label: "15. 保存済みプリセット (My Presets)" },
+      { id: "bodytype", label: "4. 体型・プロポーション (Body Type)" },
+      { id: "traits", label: "5. キャラ固有要素・特徴 (Traits/Identity)" }, // ★ ここに追加
+      { id: "hair", label: "6. ヘアスタイル (Hair)" },
+      { id: "expression", label: "7. 表情 (Expression)" },
+      { id: "attire", label: "8. 服装・衣装 (Attire)" },
+      { id: "pose", label: "9. ポーズ・構図 (Pose)" },
+      { id: "camera", label: "10. カメラ・レンズ (Camera/Lens)" },
+      { id: "background", label: "11. 背景・場所 (Background)" },
+      { id: "lighting", label: "12. 照明・ライティング (Lighting)" },
+      { id: "atmosphere", label: "13. 雰囲気・色彩 (Atmosphere & Color)" },
+      { id: "effect", label: "14. エフェクト・演出 (Effects)" },
+      { id: "filter", label: "15. フィルター・効果 (Filter)" },
+      { id: "presets", label: "16. 保存済みプリセット (My Presets)" },
       { id: "visualsync", label: "🛠️ Visual Sync (Preview & Adjust)" }
     ];
 

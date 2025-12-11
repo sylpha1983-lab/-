@@ -7,12 +7,13 @@ window.EXT_MANIFEST = [
   "builder_ui.section.quality_preset.v3.js",
   "builder_ui.section.anatomy.v1.js",
 
-  // Character Base
+  // Character Base & Identity
   "builder_ui.section.race.v1.js",
   "builder_ui.section.race.v2.js",
   "builder_ui.section.race.v3.js",
   "builder_ui.section.race.v4.js",
-  "builder_ui.section.bodytype.v1.js", // ★ 新規追加
+  "builder_ui.section.bodytype.v1.js",
+  "builder_ui.section.traits.v1.js", // ★ 新規追加
   "builder_ui.section.hair.v4.js",
   "builder_ui.section.hair.v5.js",
   "builder_ui.section.hair.v6.js",
