@@ -13,12 +13,12 @@ window.EXT_MANIFEST = [
   "builder_ui.section.race.v3.js",
   "builder_ui.section.race.v4.js",
   "builder_ui.section.bodytype.v1.js",
-  "builder_ui.section.traits.v1.js", // ★ 新規追加
+  "builder_ui.section.traits.v1.js",
   "builder_ui.section.hair.v4.js",
   "builder_ui.section.hair.v5.js",
   "builder_ui.section.hair.v6.js",
 
-  // Attire
+  // Attire, Accessories & Texture
   "builder_ui.section.attire.v1.js",
   "builder_ui.section.attire.v2.js",
   "builder_ui.section.attire.v3.js",
@@ -35,12 +35,16 @@ window.EXT_MANIFEST = [
   "builder_ui.section.attire.v14.js",
   "builder_ui.section.attire.v15.js",
   "builder_ui.section.attire.v16.js",
+  "builder_ui.section.accessories.v1.js",
+  "builder_ui.section.texture.v1.js",
 
-  // Expression & Pose & Camera
+  // Action, Composition & Camera
   "builder_ui.section.expression.v1.js",
   "builder_ui.section.expression.v2.js",
   "builder_ui.section.expression.v3.js",
   "builder_ui.section.pose.v3.js",
+  "builder_ui.section.narrative.v1.js",
+  "builder_ui.section.composition.v1.js", // ★ 新規追加
   "builder_ui.section.camera.v1.js",
 
   // Environment

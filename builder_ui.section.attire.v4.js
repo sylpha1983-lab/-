@@ -3,6 +3,7 @@
   const VERSION = 4; 
   const KEY = "attire";
 
+  // ★「小物・アクセサリー」を削除し、下着・足元・状態のみに絞りました
   const CATEGORIES = {
     "下着・水着 (Underwear/Swimwear)": [
       { ja: "ビキニ", en: "bikini" }, { ja: "ランジェリー", en: "lingerie" },
@@ -17,12 +18,8 @@
       { ja: "スニーカー", en: "sneakers" }, { ja: "ブーツ", en: "boots" },
       { ja: "ハイヒール", en: "high heels" }, { ja: "ローファー", en: "loafers" }
     ],
-    "小物・アクセサリー (Accessories)": [
-      { ja: "眼鏡", en: "glasses" }, { ja: "サングラス", en: "sunglasses" },
-      { ja: "帽子", en: "hat" }, { ja: "ヘッドフォン", en: "headphones" },
-      { ja: "マフラー", en: "scarf" }, { ja: "ネクタイ", en: "necktie" },
-      { ja: "チョーカー", en: "choker" }, { ja: "ピアス", en: "piercing" }
-    ],
+    // "小物" は builder_ui.section.accessories.v1.js に移動したため削除
+    
     "フェチ・状態 (Fetish/State)": [
       { ja: "絶対領域", en: "zettai ryouiki" }, { ja: "透け感", en: "see-through" },
       { ja: "濡れた服", en: "wet clothes" }, { ja: "はだけた", en: "open clothes" },
@@ -33,6 +30,8 @@
 
   const API = {
     initUI(container) {
+      // v4専用のコンテナ名を使用しているか確認
+      // 既存のリストに追加する場合、親IDは共通の #list-attire でOK
       const parent = document.querySelector("#list-attire");
       if (!parent) return;
 
@@ -85,3 +84,4 @@
   };
   window.__registerPromptPart(KEY, VERSION, API);
 })();
+

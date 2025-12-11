@@ -1,114 +1,89 @@
 (function(){
   "use strict";
-
-  const VERSION = 3; // ★ 拡張パックB
+  const VERSION = 3; // 統合版: ニュアンス & アクション
   const KEY = "expression";
 
-  const CATEGORIES = {
-    "戦闘・ダメージ・苦痛 (Combat & Pain)": [
-      { ja: "雄叫び", en: "shouting battle cry" },
-      { ja: "歯を食いしばる (苦痛)", en: "gritting teeth in pain" },
-      { ja: "痛みに耐える", en: "enduring pain" },
-      { ja: "絶望的な叫び", en: "desperate screaming" },
-      { ja: "殺気立った目", en: "bloodlust eyes" },
-      { ja: "虚ろな目 (ダメージ)", en: "empty eyes (trauma)" },
-      { ja: "意識が遠のく", en: "losing consciousness" },
-      { ja: "死に顔", en: "dead expression" }
+  const EXPRESSION_DATA = {
+    "😏 ニュアンス・性格 (Nuance)": [
+      { ja: "ドヤ顔 (Smug)", en: "smug" }, { ja: "軽蔑", en: "disdain" },
+      { ja: "誘惑的", en: "seductive smile" }, { ja: "病み顔 (ヤンデレ)", en: "yandere" },
+      { ja: "恍惚 (トロ顔)", en: "ahegao" }, { ja: "絶望", en: "despair" },
+      { ja: "狂気", en: "crazy" }, { ja: "パニック (あわわ)", en: "panicked" },
+      { ja: "ツンデレ", en: "tsundere" }, { ja: "クーデレ (無口)", en: "kuudere" },
+      { ja: "邪悪な笑み", en: "evil smile" }, { ja: "優しい笑み", en: "gentle smile" }
     ],
-    "異形・超常・ホラー (Supernatural & Horror)": [
-      { ja: "目が光る (発光)", en: "glowing eyes" },
-      { ja: "影に覆われた顔", en: "face shadowed by darkness" },
-      { ja: "狂気じみた笑顔 (ヤンデレ)", en: "yandere smile" },
-      { ja: "爬虫類の目", en: "reptilian eyes" },
-      { ja: "ぐるぐる目 (催眠)", en: "hypnotized eyes" },
-      { ja: "顔がない (のっぺらぼう)", en: "faceless" },
-      { ja: "目が複数ある", en: "multiple eyes" },
-      { ja: "口が裂ける", en: "slit mouth" }
-    ],
-    "食事・口元の詳細 (Eating & Mouth Actions)": [
-      { ja: "舌なめずり", en: "licking lips" },
-      { ja: "舌を出す (挑発)", en: "sticking tongue out" },
-      { ja: "何かをくわえる", en: "holding object in mouth" },
-      { ja: "噛みつく", en: "biting" },
-      { ja: "キス顔", en: "kissing face" },
-      { ja: "口を膨らませる (不満)", en: "pouting cheeks" },
-      { ja: "もぐもぐ (食事)", en: "chewing food" },
-      { ja: "飲み込む", en: "swallowing" }
-    ],
-    "視線・アングルの強調 (Gaze & Angles)": [
-      { ja: "上目遣い", en: "looking up" },
-      { ja: "見下ろす (蔑み)", en: "looking down (scorn)" },
-      { ja: "横目で見る", en: "sideways glance" },
-      { ja: "振り返って見る", en: "looking back" },
-      { ja: "目を逸らす", en: "looking away" },
-      { ja: "カメラ目線", en: "looking at viewer" },
-      { ja: "じっと見つめる", en: "staring intently" }
+    "🗣️ アクション・状態 (Actions)": [
+      { ja: "食べる (もぐもぐ)", en: "eating" }, { ja: "飲む", en: "drinking" },
+      { ja: "寝る (睡眠)", en: "sleeping" }, { ja: "あくび", en: "yawning" },
+      { ja: "キス顔", en: "kissing" }, { ja: "投げキッス", en: "blowing kiss" },
+      { ja: "ウインク", en: "wink" }, { ja: "叫ぶ", en: "shouting" },
+      { ja: "舐める", en: "licking" }, { ja: "噛む (咀嚼)", en: "chewing" },
+      { ja: "あごに手", en: "hand on chin" }, { ja: "頬杖", en: "head resting on hand" },
+      { ja: "シーッ (静かに)", en: "shushing" }
     ]
+  };
+
+  const DICT = {
+    "smug": "ドヤ顔", "disdain": "軽蔑", "seductive smile": "誘惑笑い", "yandere": "ヤンデレ",
+    "ahegao": "アヘ顔/恍惚", "despair": "絶望", "crazy": "狂気", "panicked": "パニック",
+    "tsundere": "ツンデレ", "kuudere": "クーデレ", "evil smile": "邪悪な笑み", "gentle smile": "優しい笑み",
+    "eating": "食べる", "drinking": "飲む", "sleeping": "寝る", "yawning": "あくび",
+    "kissing": "キス", "blowing kiss": "投げキッス", "wink": "ウインク", "shouting": "叫ぶ",
+    "licking": "舐める", "chewing": "噛む", "hand on chin": "あごに手",
+    "head resting on hand": "頬杖", "shushing": "シーッ"
   };
 
   const API = {
     initUI(container) {
-      // 合体モード：既存のUIを消さずに、下に追加する
-      const section = document.createElement("div");
-      section.className = "expression-v3-addon";
-      section.style.borderTop = "2px dashed #ccc"; 
-      section.style.marginTop = "10px";
-      section.style.paddingTop = "10px";
-      
-      const title = document.createElement("div");
-      title.textContent = "▼ 拡張パックB (v3 Add-on)";
-      title.style.fontSize = "0.9em";
-      title.style.color = "#666";
-      title.style.marginBottom = "5px";
-      section.appendChild(title);
+      if (window.__outputTranslation) window.__outputTranslation.register(DICT);
 
-      Object.entries(CATEGORIES).forEach(([cat, items]) => {
+      let parent = document.querySelector("#list-expression");
+      if (!parent) return;
+
+      const createCat = (title, items) => {
         const details = document.createElement("details");
         details.className = "expression-cat";
-        details.open = false; // ★ 閉じておく
+        details.style.cssText = "margin-bottom:6px; border:1px solid #eee; border-radius:4px; background:#fff;";
+        details.open = false; 
 
         const summary = document.createElement("summary");
-        summary.textContent = cat;
+        summary.textContent = title;
+        summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#f9f9f9; color:#555;";
         details.appendChild(summary);
+
+        const content = document.createElement("div");
+        content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(130px, 1fr)); gap:6px;";
 
         items.forEach(item => {
           const label = document.createElement("label");
-          label.style.display = "block";
-          label.textContent = `${item.ja} / ${item.en}`;
+          label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer;";
           const cb = document.createElement("input");
           cb.type = "checkbox";
-          cb.dataset.en = item.en;
-          label.prepend(cb);
-          details.appendChild(label);
+          cb.style.marginRight = "6px";
+          cb.dataset.val = item.en;
+          label.appendChild(cb);
+          label.appendChild(document.createTextNode(`${item.ja} / ${item.en}`));
+          content.appendChild(label);
         });
+        details.appendChild(content);
+        return details;
+      };
 
-        // 排他制御
-        details.addEventListener("change", e => {
-          if (e.target.type === "checkbox" && e.target.checked) {
-            details.querySelectorAll("input[type='checkbox']").forEach(c => {
-              if (c !== e.target) c.checked = false;
-            });
-          }
-        });
-        section.appendChild(details);
+      const root = document.createElement("div");
+      root.className = "expression-v3-container";
+      
+      Object.entries(EXPRESSION_DATA).forEach(([cat, items]) => {
+        root.appendChild(createCat(cat, items));
       });
-      container.appendChild(section);
 
-      // ★ 翻訳辞書への登録
-      if (window.__outputTranslation) {
-        const dict = {};
-        Object.values(CATEGORIES).flat().forEach(item => {
-          if (item.en && item.ja) {
-            dict[item.en] = item.ja;
-          }
-        });
-        window.__outputTranslation.register(dict);
-      }
+      const contentArea = parent.querySelector(".section-content") || parent;
+      contentArea.appendChild(root);
     },
+
     getTags() {
       const tags = [];
-      document.querySelectorAll(".expression-v3-addon input[type='checkbox']:checked").forEach(cb => {
-        tags.push(cb.dataset.en);
+      document.querySelectorAll(".expression-v3-container input[type='checkbox']:checked").forEach(cb => {
+        tags.push(cb.dataset.val);
       });
       return tags;
     }
