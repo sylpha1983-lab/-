@@ -60,26 +60,26 @@
     const sectionsRoot = document.getElementById("sections");
     if (!sectionsRoot) return;
 
-    // ★ プロンプト構成に最適化した表示順序
-    // 上から順に選択していくことで、自然と綺麗なプロンプト構造になります
+    // ★ 表示順序の更新
     const order = [
       { id: "quality_preset", label: "1. クオリティ・画風 (Quality & Style)" },
-      { id: "race", label: "2. 種族・素体 (Race)" },
-      { id: "hair", label: "3. ヘアスタイル (Hair)" },
-      { id: "expression", label: "4. 表情 (Expression)" },
-      { id: "attire", label: "5. 服装・衣装 (Attire)" },
-      { id: "pose", label: "6. ポーズ・構図 (Pose)" },
-      { id: "background", label: "7. 背景・場所 (Background)" },
-      { id: "lighting", label: "8. 照明・ライティング (Lighting)" },
-      { id: "effect", label: "9. エフェクト・演出 (Effects)" },
-      { id: "filter", label: "10. フィルター・効果 (Filter)" },
-      { id: "presets", label: "11. 保存済みプリセット (My Presets)" },
+      { id: "anatomy", label: "2. 人体崩壊防止・構造 (Anatomy)" },
+      { id: "race", label: "3. 種族・素体 (Race)" },
+      { id: "hair", label: "4. ヘアスタイル (Hair)" },
+      { id: "expression", label: "5. 表情 (Expression)" },
+      { id: "attire", label: "6. 服装・衣装 (Attire)" },
+      { id: "pose", label: "7. ポーズ・構図 (Pose)" },
+      { id: "background", label: "8. 背景・場所 (Background)" },
+      { id: "lighting", label: "9. 照明・ライティング (Lighting)" }, // ★ v2対応
+      { id: "atmosphere", label: "10. 雰囲気・色彩 (Atmosphere & Color)" }, // ★ 新規追加
+      { id: "effect", label: "11. エフェクト・演出 (Effects)" },
+      { id: "filter", label: "12. フィルター・効果 (Filter)" },
+      { id: "presets", label: "13. 保存済みプリセット (My Presets)" },
       { id: "visualsync", label: "🛠️ Visual Sync (Preview & Adjust)" }
     ];
 
     // 強制並べ替えロジック
     order.forEach(({ id, label }) => {
-      // エラー保護: 1つのカテゴリが失敗しても他は動かす
       try {
         const container = ensureContainer(id, label);
         sectionsRoot.appendChild(container); // 末尾に移動＝並び替え
@@ -176,7 +176,6 @@
     document.addEventListener("DOMContentLoaded", init, { once: true });
   else init();
 
-  // 翻訳ロジック (変更なし)
   window.__outputTranslation = {
     mode: "en", 
     dict: {},
