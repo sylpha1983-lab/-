@@ -5,7 +5,6 @@
   window.UI_REG = UI_REG;
   const PROMPT_PARTS = {};
 
-  // ★ UIスタイル定義 (ボタンをきれいに並べるCSS)
   const CSS = `
     .builder-footer-grid {
       display: flex;
@@ -15,9 +14,9 @@
       align-items: stretch;
     }
     .builder-footer-grid button {
-      flex: 1 1 auto; /* 幅を自動調整 */
+      flex: 1 1 auto;
       min-width: 70px;
-      height: 44px; /* 高さを統一 */
+      height: 44px;
       border-radius: 6px;
       border: none;
       font-weight: bold;
@@ -30,16 +29,31 @@
       padding: 0 10px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-    /* 各ボタンの色定義 */
-    #genBtn { background: #007bff; flex-grow: 2; min-width: 100px; font-size: 1rem; } /* 生成は大きく */
+    #genBtn { background: #007bff; flex-grow: 2; min-width: 100px; font-size: 1rem; }
     #translateBtn { background: #f0ad4e; }
     #copyBtn { background: #6c757d; }
     #resetBtn { background: #dc3545; }
     #footer-search-btn { background: #17a2b8; }
     #footer-history-btn { background: #6f42c1; }
-    
     .builder-footer-grid button:active { transform: translateY(1px); opacity: 0.9; }
   `;
+
+  // ヘルパー: タグの装飾を除去して「コア」を取得
+  function getCoreTag(formattedTag) {
+    return formattedTag
+      .replace(/[\(\{\[\]\}\)]/g, '') 
+      .replace(/:[\d\.]+(%?)/g, '')
+      .trim();
+  }
+
+  // ★ 全てのチェックボックスから「システムが知っているタグ一覧」を取得
+  function getKnownTags() {
+    const known = new Set();
+    document.querySelectorAll('input[type="checkbox"][data-en]').forEach(cb => {
+      known.add(cb.dataset.en);
+    });
+    return known;
+  }
 
   function ensureContainer(id, label) {
     let container = document.getElementById(`list-${id}`);
@@ -50,7 +64,6 @@
       const h2 = document.createElement("h2");
       h2.textContent = label;
       container.appendChild(h2);
-      
       const sectionsRoot = document.getElementById("sections");
       if (sectionsRoot) sectionsRoot.appendChild(container);
     }
@@ -67,14 +80,12 @@
     const details = document.createElement('details');
     details.className = 'accordion-wrap';
     details.open = false; 
-
     const summary = document.createElement("summary");
     summary.textContent = "▶ " + label;
     summary.className = "section-summary";
     details.addEventListener("toggle", () => {
       summary.textContent = (details.open ? "▼ " : "▶ ") + label;
     });
-
     const wrapper = document.createElement('div');
     wrapper.className = 'section-content'; 
     contentNodes.forEach(node => wrapper.appendChild(node));
@@ -91,6 +102,39 @@
   function attemptMount() {
     const sectionsRoot = document.getElementById("sections");
     if (!sectionsRoot) return;
+
+    if (!document.getElementById("ui-search-bar")) {
+      const wrap = document.createElement("div");
+      wrap.id = "ui-search-bar";
+      wrap.style.cssText = "margin-bottom:15px; position:sticky; top:0; z-index:100; background:#fff; padding:10px 0; border-bottom:1px solid #ccc;";
+      const input = document.createElement("input");
+      input.type = "text";
+      input.placeholder = "🔍 項目を検索... (例: ビキニ, bikini)";
+      input.style.cssText = "width:100%; padding:10px; fontSize:1em; borderRadius:4px; border:1px solid #ccc;";
+      input.addEventListener("input", (e) => {
+        const term = e.target.value.toLowerCase();
+        document.querySelectorAll(".section").forEach(sec => {
+          let secHit = false;
+          sec.querySelectorAll("details").forEach(det => {
+            let groupHit = false;
+            det.querySelectorAll("label").forEach(lbl => {
+              const text = lbl.textContent.toLowerCase();
+              if (term === "" || text.includes(term)) {
+                lbl.style.display = ""; groupHit = true;
+              } else {
+                lbl.style.display = "none";
+              }
+            });
+            if (term !== "" && groupHit) { det.open = true; det.style.display = ""; secHit = true; }
+            else if (term === "") { det.open = false; det.style.display = ""; secHit = true; }
+            else { det.style.display = "none"; }
+          });
+          sec.style.display = secHit ? "" : "none";
+        });
+      });
+      wrap.appendChild(input);
+      sectionsRoot.insertBefore(wrap, sectionsRoot.firstChild);
+    }
 
     const order = [
       { id: "quality_preset", label: "1. クオリティ・画風 (Quality & Style)" },
@@ -121,24 +165,18 @@
       try {
         const container = ensureContainer(id, label);
         sectionsRoot.appendChild(container);
-
         const versions = PROMPT_PARTS[id];
         if (versions) {
-          const sortedVersions = Object.keys(versions).map(v => parseInt(v)).sort((a, b) => a - b);
-          for (const v of sortedVersions) {
-            const part = versions[v];
-            if (part && !part._mounted) {
-               if (part.initUI) {
-                 try { part.initUI(container); } catch(e) { console.error(e); }
-               }
-               part._mounted = true; 
+          Object.keys(versions).map(v=>parseInt(v)).sort((a,b)=>a-b).forEach(v => {
+            if (versions[v] && !versions[v]._mounted) {
+               if (versions[v].initUI) try { versions[v].initUI(container); } catch(e) { console.error(e); }
+               versions[v]._mounted = true; 
             }
-          }
+          });
           if (container.children.length > 0) applyAccordion(container, label);
         }
       } catch (e) { console.error(e); }
     });
-
     window.dispatchEvent(new Event("promptPartMounted"));
   }
 
@@ -160,10 +198,50 @@
     return tags;
   };
 
+  // ★ 改良版生成ロジック: 未知のタグ（手動入力）を保護する
   function generateOutput() {
     const out = document.getElementById("out");
-    const tags = UI_REG.getAllSelected();
-    out.value = tags.join(", ");
+    
+    // 1. テキストエリアの現状を解析
+    const currentText = out.value;
+    const currentTags = currentText.split(',').map(s => s.trim()).filter(Boolean);
+    
+    // 2. 現在アクティブなチェックボックス一覧を取得
+    const activeRawTags = new Set(UI_REG.getAllSelected());
+    
+    // 3. システムが知っている全タグ一覧を取得（これが「未知のタグ」の判定基準）
+    const knownDictionary = getKnownTags();
+
+    const finalTags = [];
+    const processedActiveTags = new Set();
+
+    // A. 現状のタグを走査し、「残すべきもの」を選別
+    currentTags.forEach(tag => {
+      const core = getCoreTag(tag);
+
+      if (activeRawTags.has(core)) {
+        // ケース1: チェックボックスでONになっていて、テキストエリアにもある
+        // -> テキストエリアの記述（強調済みなど）を優先して残す
+        finalTags.push(tag);
+        processedActiveTags.add(core);
+      } 
+      else if (!knownDictionary.has(core)) {
+        // ケース2: チェックボックス一覧に存在しない「未知のタグ」（手動入力や複雑構文）
+        // -> これはユーザーが意図的に書いたものなので、保護して残す！
+        finalTags.push(tag);
+      }
+      // ケース3: 辞書にはあるが、チェックがOFFになっている
+      // -> 削除対象なので push しない
+    });
+
+    // B. チェックボックスでONだが、まだテキストエリアにないタグを追加
+    activeRawTags.forEach(rawTag => {
+      if (!processedActiveTags.has(rawTag)) {
+        finalTags.push(rawTag);
+      }
+    });
+
+    out.value = finalTags.join(", ");
     if (window.__outputTranslation) window.__outputTranslation.resetToEn();
   }
 
@@ -190,7 +268,6 @@
   }
 
   function init() {
-    // 1. CSS注入
     if(!document.getElementById('builder-core-style')) {
       const style = document.createElement('style');
       style.id = 'builder-core-style';
@@ -198,11 +275,10 @@
       document.head.appendChild(style);
     }
 
-    // 2. ボタンコンテナの整備
     const genBtn = document.getElementById("genBtn");
     if (genBtn) {
       const container = genBtn.parentElement;
-      container.classList.add("builder-footer-grid"); // CSSクラス適用
+      container.classList.add("builder-footer-grid");
       
       genBtn.addEventListener("click", generateOutput);
       document.getElementById("copyBtn")?.addEventListener("click", copyOutput);

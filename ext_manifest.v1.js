@@ -60,10 +60,11 @@ window.EXT_MANIFEST = [
   
   // 7. Utilities
   "builder_ui.section.presets.v1.js",
-  "builder_ui.visualsync.v4.js",
-  "ext_footer_search.js",
-  "ext_autosave.js", // ★ 新規追加 (自動保存)
-  "ext_history.js",  // ★ 新規追加 (履歴)
+  "builder_ui.visualsync.v4.js", // トーン補正(画像あり)
+  "ext_footer_search.js",        // 検索ボタン
+  "ext_autosave.js",             // 自動保存
+  "ext_history.js",              // 履歴
+  "ext_smart_edit.js",           // ★ 新規追加 (強調ボタン)
   "ext_copy_button.js"
 ];
 
