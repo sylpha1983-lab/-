@@ -79,8 +79,7 @@
       const text = outArea.value;
       const scrollPos = outArea.scrollTop;
 
-      // ★修正箇所: ここにあった && type !== "random" を削除しました
-      // これでランダムボタンでも自動範囲認識が動きます
+      // 自動範囲認識
       if (start === end) {
          const range = getTagRange(text, start);
          if (range.end > range.start) {
@@ -89,7 +88,6 @@
          }
       }
 
-      // 範囲確定後にテキスト取得
       let targetText = "";
       if (start !== end) {
         targetText = text.substring(start, end);
@@ -97,49 +95,37 @@
 
       let newText = "";
 
-      if (type === "weight") {
-        if (val === "raw") {
-          newText = getRawText(targetText);
-        }
-        else if (val === "[]") {
-          if (targetText.startsWith('[') && targetText.endsWith(']')) {
-            newText = `[${targetText}]`;
-          } else {
-            newText = `[${getCoreTextPreservingBrackets(targetText)}]`;
-          }
-        } 
-        else if (val === "{}") {
-          if (targetText.startsWith('{') && targetText.endsWith('}')) {
-            newText = `{${targetText}}`;
-          } else {
-            newText = `{${getCoreTextPreservingBrackets(targetText)}}`;
-          }
-        } 
-        else {
-          const core = getCoreTextPreservingBrackets(targetText);
-          if (val === "none") {
-            if (targetText.startsWith('(') && targetText.endsWith(')') && !targetText.includes(':')) {
-               newText = `(${targetText})`;
-            } else {
-               newText = `(${core})`;
-            }
-          } else {
-            newText = `(${core}:${val})`;
-          }
+      if (val === "raw") {
+        newText = getRawText(targetText);
+      }
+      else if (val === "[]") {
+        if (targetText.startsWith('[') && targetText.endsWith(']')) {
+          newText = `[${targetText}]`;
+        } else {
+          newText = `[${getCoreTextPreservingBrackets(targetText)}]`;
         }
       } 
-      else if (type === "random") {
-        // ★修正: 自動認識のおかげで targetText が入るようになったので動作します
-        if (!targetText) return; 
-        
-        if (targetText.startsWith('{') && targetText.endsWith('}') && targetText.includes('|')) {
-           newText = targetText.slice(1, -1).split('|').join(', ');
+      else if (val === "{}") {
+        if (targetText.startsWith('{') && targetText.endsWith('}')) {
+          newText = `{${targetText}}`;
         } else {
-           const items = targetText.split(',').map(s => s.trim()).filter(Boolean);
-           newText = `{${items.join('|')}}`;
+          newText = `{${getCoreTextPreservingBrackets(targetText)}}`;
+        }
+      } 
+      else {
+        const core = getCoreTextPreservingBrackets(targetText);
+        if (val === "none") {
+          if (targetText.startsWith('(') && targetText.endsWith(')') && !targetText.includes(':')) {
+             newText = `(${targetText})`;
+          } else {
+             newText = `(${core})`;
+          }
+        } else {
+          newText = `(${core}:${val})`;
         }
       }
 
+      // 反映
       if (start === end) {
          const insert = newText || "()"; 
          outArea.value = text.substring(0, start) + insert + text.substring(end);
@@ -155,7 +141,7 @@
       outArea.dispatchEvent(new Event('input'));
     }
 
-    // --- UI構築 ---
+    // --- メニュー構築 ---
     const menu = document.createElement('div');
     menu.id = "weight-popup-menu";
     menu.style.cssText = `position:absolute; bottom:100%; left:0; background:white; border:1px solid #ccc; border-radius:4px; box-shadow:0 4px 10px rgba(0,0,0,0.2); padding:5px; display:none; z-index:10002; min-width:280px;`;
@@ -181,17 +167,19 @@
     menu.appendChild(grid);
     toolbar.appendChild(menu);
 
+    // --- ボタン配置 ---
     const weightBtn = document.createElement('button');
     weightBtn.textContent = "( ) 強調";
     weightBtn.style.cssText = "font-size:0.85em; padding:8px 12px; border:1px solid #007bff; border-radius:4px; background:#e7f1ff; color:#0056b3; font-weight:bold; cursor:pointer;";
     weightBtn.onclick = (e) => { e.preventDefault(); e.stopPropagation(); const isVisible = menu.style.display === "block"; menu.style.display = isVisible ? "none" : "block"; };
     toolbar.appendChild(weightBtn);
 
-    const naiBtn = document.createElement('button');
-    naiBtn.textContent = "{ } NAI";
-    naiBtn.style.cssText = "font-size:0.85em; padding:8px 12px; border:1px solid #ccc; border-radius:4px; background:#f8f9fa; cursor:pointer; font-weight:bold; color:#333; margin-left:5px;";
-    naiBtn.onclick = (e) => { e.preventDefault(); applyEffect("weight", "{}"); };
-    toolbar.appendChild(naiBtn);
+    // シンプルに「{ }」に変更
+    const curlyBtn = document.createElement('button');
+    curlyBtn.textContent = "{ }";
+    curlyBtn.style.cssText = "font-size:0.85em; padding:8px 12px; border:1px solid #ccc; border-radius:4px; background:#f8f9fa; cursor:pointer; font-weight:bold; color:#333; margin-left:5px;";
+    curlyBtn.onclick = (e) => { e.preventDefault(); applyEffect("weight", "{}"); };
+    toolbar.appendChild(curlyBtn);
 
     const weakBtn = document.createElement('button');
     weakBtn.textContent = "[ ] 弱化";
@@ -199,12 +187,7 @@
     weakBtn.onclick = (e) => { e.preventDefault(); applyEffect("weight", "[]"); };
     toolbar.appendChild(weakBtn);
 
-    const randBtn = document.createElement('button');
-    randBtn.textContent = "🎲 ランダム";
-    randBtn.title = "選択範囲(カンマ区切り)を{A|B}形式に変換";
-    randBtn.style.cssText = "font-size:0.85em; padding:8px 12px; border:1px solid #28a745; border-radius:4px; background:#e8f5e9; cursor:pointer; font-weight:bold; color:#155724; margin-left:5px;";
-    randBtn.onclick = (e) => { e.preventDefault(); applyEffect("random", null); };
-    toolbar.appendChild(randBtn);
+    // ランダムボタンは削除しました
 
     document.addEventListener('click', (e) => {
       if (!menu.contains(e.target) && e.target !== weightBtn) { menu.style.display = "none"; }
