@@ -9,6 +9,73 @@
     if(window.console && console.log) console.log("[BuilderCore] " + msg);
   }
 
+  // --- 検索機能の実装 ---
+  function createSearchBar() {
+    const wrap = document.createElement("div");
+    wrap.style.marginBottom = "15px";
+    wrap.style.position = "sticky";
+    wrap.style.top = "0";
+    wrap.style.zIndex = "100";
+    wrap.style.background = "#fff";
+    wrap.style.padding = "10px 0";
+    wrap.style.borderBottom = "1px solid #ccc";
+
+    const input = document.createElement("input");
+    input.type = "text";
+    input.placeholder = "🔍 項目を検索... (例: ビキニ, bikini)";
+    input.style.width = "100%";
+    input.style.padding = "10px";
+    input.style.fontSize = "1em";
+    input.style.borderRadius = "4px";
+    input.style.border = "1px solid #ccc";
+
+    input.addEventListener("input", (e) => {
+      const term = e.target.value.toLowerCase();
+      const sections = document.querySelectorAll(".section");
+
+      sections.forEach(sec => {
+        const detailsList = sec.querySelectorAll("details");
+        let secHit = false;
+
+        detailsList.forEach(det => {
+          const labels = det.querySelectorAll("label");
+          let groupHit = false;
+
+          labels.forEach(lbl => {
+            const text = lbl.textContent.toLowerCase();
+            // チェックボックス自体は検索対象外だが、ラベルに含まれるテキストで判定
+            if (term === "" || text.includes(term)) {
+              lbl.style.display = ""; // 表示
+              groupHit = true;
+            } else {
+              lbl.style.display = "none"; // 非表示
+            }
+          });
+
+          // 検索ヒット時のみアコーディオンを開く
+          if (term !== "" && groupHit) {
+            det.open = true;
+            det.style.display = "";
+            secHit = true;
+          } else if (term === "") {
+            // 検索解除時は元の状態に戻す（閉じる）
+            det.open = false;
+            det.style.display = "";
+            secHit = true; // セクション自体は表示
+          } else {
+            det.style.display = "none";
+          }
+        });
+
+        // セクション内にヒットがなければセクションごと隠す
+        sec.style.display = secHit ? "" : "none";
+      });
+    });
+
+    wrap.appendChild(input);
+    return wrap;
+  }
+
   function ensureContainer(id, label) {
     let container = document.getElementById(`list-${id}`);
     if (!container) {
@@ -60,7 +127,14 @@
     const sectionsRoot = document.getElementById("sections");
     if (!sectionsRoot) return;
 
-    // ★ 表示順序の更新（最終形）
+    // ★ 検索バーの設置（すでにある場合は追加しない）
+    if (!document.getElementById("ui-search-bar")) {
+      const searchBar = createSearchBar();
+      searchBar.id = "ui-search-bar";
+      sectionsRoot.insertBefore(searchBar, sectionsRoot.firstChild);
+    }
+
+    // ★ 最終的なカテゴリ表示順序
     const order = [
       { id: "quality_preset", label: "1. クオリティ・画風 (Quality & Style)" },
       { id: "anatomy", label: "2. 人体崩壊防止・構造 (Anatomy)" },
@@ -80,7 +154,7 @@
       { id: "lighting", label: "16. 照明・ライティング (Lighting)" },
       { id: "atmosphere", label: "17. 雰囲気・色彩 (Atmosphere & Color)" },
       { id: "effect", label: "18. エフェクト・演出 (Effects)" },
-      { id: "postprocessing", label: "19. 仕上げ・後処理 (Post-Processing)" }, // ★ ここに追加
+      { id: "postprocessing", label: "19. 仕上げ・後処理 (Post-Processing)" },
       { id: "filter", label: "20. フィルター・効果 (Filter)" },
       { id: "presets", label: "21. 保存済みプリセット (My Presets)" },
       { id: "visualsync", label: "🛠️ Visual Sync (Preview & Adjust)" }
@@ -157,6 +231,12 @@
       el.value = 100;
       el.dispatchEvent(new Event('input'));
     });
+    // 検索バーもリセット
+    const searchBar = document.querySelector("#ui-search-bar input");
+    if(searchBar) {
+      searchBar.value = "";
+      searchBar.dispatchEvent(new Event('input'));
+    }
     const out = document.getElementById("out");
     if (out) out.value = "";
     if (window.__outputTranslation) window.__outputTranslation.resetToEn();
@@ -183,6 +263,7 @@
     document.addEventListener("DOMContentLoaded", init, { once: true });
   else init();
 
+  // 翻訳ロジック
   window.__outputTranslation = {
     mode: "en", 
     dict: {},

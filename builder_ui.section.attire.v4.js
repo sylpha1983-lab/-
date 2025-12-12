@@ -1,28 +1,74 @@
 (function(){
   "use strict";
-  const VERSION = 4; 
+  const VERSION = 4; // 下着・水着・足元の決定版
   const KEY = "attire";
 
-  // ★「小物・アクセサリー」を削除し、下着・足元・状態のみに特化
   const CATEGORIES = {
-    "下着・水着 (Underwear/Swimwear)": [
-      { ja: "ビキニ", en: "bikini" }, { ja: "ランジェリー", en: "lingerie" },
-      { ja: "ブラジャー", en: "bra" }, { ja: "パンティ", en: "panties" },
-      { ja: "紐パン", en: "side-tie panties" }, { ja: "スポーツブラ", en: "sports bra" },
-      { ja: "ベビードール", en: "babydoll" }, { ja: "ワンピース水着", en: "one-piece swimsuit" }
+    "👙 水着・スイムウェア (Swimwear Types)": [
+      { ja: "ビキニ", en: "bikini" },
+      { ja: "ワンピース水着", en: "one-piece swimsuit" },
+      { ja: "モノキニ", en: "monokini" }, // ★追加
+      { ja: "タンキニ", en: "tankini" }, // ★追加
+      { ja: "マイクロビキニ", en: "micro bikini" },
+      { ja: "紐ビキニ", en: "string bikini" }, // ★追加
+      { ja: "フロントタイ (前結び)", en: "front-tie bikini" }, // ★追加
+      { ja: "競泳水着", en: "competition swimsuit" },
+      { ja: "スクール水着", en: "school swimsuit" },
+      { ja: "白スク水", en: "white school swimsuit" }, // ★追加
+      { ja: "スリングショット", en: "slingshot swimsuit" },
+      { ja: "バンドゥビキニ", en: "bandeau bikini" }, // ★追加
+      { ja: "フリルビキニ", en: "frilled bikini" }, // ★追加
+      { ja: "ハイレグ", en: "highleg swimsuit" }
     ],
-    "レッグウェア・靴 (Legwear/Shoes)": [
-      { ja: "ニーソックス", en: "kneehighs" }, { ja: "オーバーニー", en: "thighhighs" },
-      { ja: "パンスト", en: "pantyhose" }, { ja: "黒タイツ", en: "black tights" },
-      { ja: "網タイツ", en: "fishnets" }, { ja: "ガーターベルト", en: "garter belt" },
-      { ja: "スニーカー", en: "sneakers" }, { ja: "ブーツ", en: "boots" },
-      { ja: "ハイヒール", en: "high heels" }, { ja: "ローファー", en: "loafers" }
+    "👙 下着・ランジェリー (Underwear/Lingerie)": [
+      { ja: "ランジェリー (総称)", en: "lingerie" },
+      { ja: "ブラジャー", en: "bra" },
+      { ja: "スポーツブラ", en: "sports bra" },
+      { ja: "パンティ", en: "panties" },
+      { ja: "紐パン", en: "side-tie panties" },
+      { ja: "縞パン (ボーダー)", en: "striped panties" }, // ★追加
+      { ja: "Tバック/Gストリング", en: "thong" }, // ★追加
+      { ja: "レースの下着", en: "lace underwear" }, // ★追加
+      { ja: "サテンの下着", en: "satin lingerie" }, // ★追加
+      { ja: "ベビードール", en: "babydoll" },
+      { ja: "キャミソール", en: "camisole" },
+      { ja: "コルセット", en: "corset" }, // ★追加
+      { ja: "テディ", en: "teddy" }, // ★追加
+      { ja: "さらし (胸)", en: "sarashi" }, // ★追加
+      { ja: "ふんどし", en: "fundoshi" }, // ★追加
+      { ja: "ニプレス", en: "pasties" } // ★追加
     ],
-    "フェチ・状態 (Fetish/State)": [
-      { ja: "絶対領域", en: "zettai ryouiki" }, { ja: "透け感", en: "see-through" },
-      { ja: "濡れた服", en: "wet clothes" }, { ja: "はだけた", en: "open clothes" },
-      { ja: "破れた服", en: "torn clothes" }, { ja: "ぴっちり", en: "skintight" },
-      { ja: "谷間", en: "cleavage" }, { ja: "へそ出し", en: "midriff" }
+    "🧦 レッグウェア・靴下 (Legwear)": [
+      { ja: "ニーソックス", en: "kneehighs" },
+      { ja: "オーバーニー", en: "thighhighs" },
+      { ja: "サイハイソックス", en: "thighhighs" },
+      { ja: "パンスト", en: "pantyhose" },
+      { ja: "黒タイツ", en: "black tights" },
+      { ja: "網タイツ", en: "fishnets" },
+      { ja: "ガーターベルト", en: "garter belt" },
+      { ja: "白ソックス", en: "white socks" }, // ★追加
+      { ja: "ルーズソックス", en: "loose socks" }, // ★追加
+      { ja: "レッグウォーマー", en: "leg warmers" }, // ★追加
+      { ja: "足袋 (タビ)", en: "tabi" } // ★追加
+    ],
+    "👠 靴 (Footwear)": [
+      { ja: "スニーカー", en: "sneakers" },
+      { ja: "ブーツ", en: "boots" },
+      { ja: "ハイヒール", en: "high heels" },
+      { ja: "ローファー", en: "loafers" },
+      { ja: "サンダル", en: "sandals" },
+      { ja: "裸足", en: "barefoot" }
+    ],
+    "😳 着こなし・状態 (State/Fetish)": [
+      { ja: "絶対領域", en: "zettai ryouiki" },
+      { ja: "透け感 (シースルー)", en: "see-through" },
+      { ja: "濡れた服", en: "wet clothes" },
+      { ja: "はだけた", en: "open clothes" },
+      { ja: "ぴっちり (Skintight)", en: "skintight" },
+      { ja: "胸元・谷間", en: "cleavage" },
+      { ja: "へそ出し", en: "midriff" },
+      { ja: "肩出し", en: "bare shoulders" },
+      { ja: "食い込み", en: "clothing cutout" }
     ]
   };
 
@@ -47,7 +93,7 @@
         const content = document.createElement("div");
         content.style.padding = "8px";
         content.style.display = "grid";
-        content.style.gridTemplateColumns = "repeat(auto-fill, minmax(130px, 1fr))";
+        content.style.gridTemplateColumns = "repeat(auto-fill, minmax(140px, 1fr))";
 
         items.forEach(item => {
           const label = document.createElement("label");

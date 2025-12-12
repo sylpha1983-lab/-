@@ -8,16 +8,17 @@ window.EXT_MANIFEST = [
   "builder_ui.section.anatomy.v1.js",
 
   // 2. Character Base
-  "builder_ui.section.race.v1.js",
-  "builder_ui.section.race.v2.js",
-  "builder_ui.section.race.v3.js",
-  "builder_ui.section.race.v4.js",
+  "builder_ui.section.race.v1.js", 
+  "builder_ui.section.race.v2.js", 
+  "builder_ui.section.race.v3.js", 
+  "builder_ui.section.race.v4.js", 
   "builder_ui.section.bodytype.v1.js",
   "builder_ui.section.traits.v1.js",
-  "builder_ui.section.hair.v4.js", // 基本＆ビルダー (アクセサリ削除済)
-  "builder_ui.section.hair.v5.js", // 拡張カラー
+  "builder_ui.section.hair.v4.js",
+  "builder_ui.section.hair.v5.js",
+  "builder_ui.section.hair.v6.js",
 
-  // 3. Attire & Fashion (整理済み)
+  // 3. Attire & Fashion
   "builder_ui.section.attire.v1.js",
   "builder_ui.section.attire.v2.js",
   "builder_ui.section.attire.v3.js",
@@ -43,15 +44,15 @@ window.EXT_MANIFEST = [
   "builder_ui.section.expression.v1.js",
   "builder_ui.section.expression.v2.js",
   "builder_ui.section.expression.v3.js",
-  "builder_ui.section.pose.v1.js", // 基本ポーズ
-  "builder_ui.section.pose.v2.js", // 拡張パックA
+  "builder_ui.section.pose.v1.js", 
+  "builder_ui.section.pose.v2.js", 
   "builder_ui.section.narrative.v1.js",
   "builder_ui.section.composition.v1.js",
   "builder_ui.section.camera.v1.js",
 
   // 6. Environment & Post-Processing
-  "builder_ui.section.background.v4.js", // 決定版
-  "builder_ui.section.lighting.v2.js",   // 決定版
+  "builder_ui.section.background.v4.js",
+  "builder_ui.section.lighting.v2.js",
   "builder_ui.section.atmosphere.v1.js",
   "builder_ui.section.effect.v1.js",
   "builder_ui.section.postprocessing.v1.js",
@@ -59,8 +60,8 @@ window.EXT_MANIFEST = [
   
   // 7. Utilities
   "builder_ui.section.presets.v1.js",
-  "builder_ui.preview_sync.v1.js",
-  "builder_ui.visualsync.v1.js",
+  "builder_ui.visualsync.v4.js", // ★ v4 (スライダーのみ)
+  "ext_footer_search.js",        // ★ 新規追加 (検索ボタン)
   "ext_copy_button.js"
 ];
 
