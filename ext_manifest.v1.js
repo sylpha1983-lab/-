@@ -60,8 +60,10 @@ window.EXT_MANIFEST = [
   
   // 7. Utilities
   "builder_ui.section.presets.v1.js",
-  "builder_ui.visualsync.v4.js", // ★ v4 (スライダーのみ)
-  "ext_footer_search.js",        // ★ 新規追加 (検索ボタン)
+  "builder_ui.visualsync.v4.js",
+  "ext_footer_search.js",
+  "ext_autosave.js", // ★ 新規追加 (自動保存)
+  "ext_history.js",  // ★ 新規追加 (履歴)
   "ext_copy_button.js"
 ];
 

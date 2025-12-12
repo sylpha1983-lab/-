@@ -2,41 +2,22 @@
   "use strict";
 
   function createSearchButton() {
-    // 生成ボタン(genBtn)がある場所を探す
     const genBtn = document.getElementById('genBtn');
-    
     if (!genBtn) return;
 
-    // ボタンの親コンテナを取得
     const container = genBtn.parentElement;
 
-    // 既に作成済みなら削除
+    // 既存ボタン削除
     const existing = document.getElementById("footer-search-btn");
     if(existing) existing.remove();
     
     // 検索ボタン作成
     const btn = document.createElement('button');
-    btn.id = "footer-search-btn";
-    btn.textContent = "🔍 確認"; // ★文字を短くしました
+    btn.id = "footer-search-btn"; // CoreのCSSが適用されるID
+    btn.textContent = "🔍 確認";
     btn.title = "選択中のアイテムを画像検索します";
     
-    // スタイル調整
-    btn.style.cssText = `
-      background-color: #17a2b8;
-      color: white;
-      border: none;
-      padding: 10px 12px; /* 横幅を少し節約 */
-      border-radius: 4px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-left: 4px;
-      font-size: 1rem;
-      height: 44px;
-      vertical-align: middle;
-      white-space: nowrap; /* 文字の折り返し防止 */
-    `;
-
-    // 検索メニュー作成 (非表示)
+    // 検索メニュー
     const menu = document.createElement('div');
     menu.id = "search-popup-menu";
     menu.style.cssText = `
@@ -58,7 +39,7 @@
     `;
     document.body.appendChild(menu);
 
-    // ボタンクリック時の動作
+    // クリックイベント
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
       e.preventDefault(); 
@@ -76,7 +57,6 @@
         return;
       }
 
-      // メニュー生成
       menu.innerHTML = `
         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #eee; padding-bottom:5px; margin-bottom:5px;">
           <span style="font-weight:bold; color:#555;">🔍 選択中の項目 (タップで検索)</span>
@@ -97,7 +77,6 @@
           display: flex;
           align-items: center;
         `;
-        // アイコン追加
         const icon = document.createElement('span');
         icon.textContent = "🔎 ";
         icon.style.marginRight = "8px";
@@ -125,6 +104,7 @@
       }
     });
 
+    // コンテナに追加
     container.appendChild(btn);
   }
 

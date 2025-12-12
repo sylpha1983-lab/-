@@ -5,76 +5,41 @@
   window.UI_REG = UI_REG;
   const PROMPT_PARTS = {};
 
-  function log(msg) {
-    if(window.console && console.log) console.log("[BuilderCore] " + msg);
-  }
-
-  // --- 検索機能の実装 ---
-  function createSearchBar() {
-    const wrap = document.createElement("div");
-    wrap.style.marginBottom = "15px";
-    wrap.style.position = "sticky";
-    wrap.style.top = "0";
-    wrap.style.zIndex = "100";
-    wrap.style.background = "#fff";
-    wrap.style.padding = "10px 0";
-    wrap.style.borderBottom = "1px solid #ccc";
-
-    const input = document.createElement("input");
-    input.type = "text";
-    input.placeholder = "🔍 項目を検索... (例: ビキニ, bikini)";
-    input.style.width = "100%";
-    input.style.padding = "10px";
-    input.style.fontSize = "1em";
-    input.style.borderRadius = "4px";
-    input.style.border = "1px solid #ccc";
-
-    input.addEventListener("input", (e) => {
-      const term = e.target.value.toLowerCase();
-      const sections = document.querySelectorAll(".section");
-
-      sections.forEach(sec => {
-        const detailsList = sec.querySelectorAll("details");
-        let secHit = false;
-
-        detailsList.forEach(det => {
-          const labels = det.querySelectorAll("label");
-          let groupHit = false;
-
-          labels.forEach(lbl => {
-            const text = lbl.textContent.toLowerCase();
-            // チェックボックス自体は検索対象外だが、ラベルに含まれるテキストで判定
-            if (term === "" || text.includes(term)) {
-              lbl.style.display = ""; // 表示
-              groupHit = true;
-            } else {
-              lbl.style.display = "none"; // 非表示
-            }
-          });
-
-          // 検索ヒット時のみアコーディオンを開く
-          if (term !== "" && groupHit) {
-            det.open = true;
-            det.style.display = "";
-            secHit = true;
-          } else if (term === "") {
-            // 検索解除時は元の状態に戻す（閉じる）
-            det.open = false;
-            det.style.display = "";
-            secHit = true; // セクション自体は表示
-          } else {
-            det.style.display = "none";
-          }
-        });
-
-        // セクション内にヒットがなければセクションごと隠す
-        sec.style.display = secHit ? "" : "none";
-      });
-    });
-
-    wrap.appendChild(input);
-    return wrap;
-  }
+  // ★ UIスタイル定義 (ボタンをきれいに並べるCSS)
+  const CSS = `
+    .builder-footer-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+      align-items: stretch;
+    }
+    .builder-footer-grid button {
+      flex: 1 1 auto; /* 幅を自動調整 */
+      min-width: 70px;
+      height: 44px; /* 高さを統一 */
+      border-radius: 6px;
+      border: none;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    /* 各ボタンの色定義 */
+    #genBtn { background: #007bff; flex-grow: 2; min-width: 100px; font-size: 1rem; } /* 生成は大きく */
+    #translateBtn { background: #f0ad4e; }
+    #copyBtn { background: #6c757d; }
+    #resetBtn { background: #dc3545; }
+    #footer-search-btn { background: #17a2b8; }
+    #footer-history-btn { background: #6f42c1; }
+    
+    .builder-footer-grid button:active { transform: translateY(1px); opacity: 0.9; }
+  `;
 
   function ensureContainer(id, label) {
     let container = document.getElementById(`list-${id}`);
@@ -127,14 +92,6 @@
     const sectionsRoot = document.getElementById("sections");
     if (!sectionsRoot) return;
 
-    // ★ 検索バーの設置（すでにある場合は追加しない）
-    if (!document.getElementById("ui-search-bar")) {
-      const searchBar = createSearchBar();
-      searchBar.id = "ui-search-bar";
-      sectionsRoot.insertBefore(searchBar, sectionsRoot.firstChild);
-    }
-
-    // ★ 最終的なカテゴリ表示順序
     const order = [
       { id: "quality_preset", label: "1. クオリティ・画風 (Quality & Style)" },
       { id: "anatomy", label: "2. 人体崩壊防止・構造 (Anatomy)" },
@@ -172,27 +129,14 @@
             const part = versions[v];
             if (part && !part._mounted) {
                if (part.initUI) {
-                 try {
-                   part.initUI(container);
-                 } catch(e) {
-                   console.error(`Error mounting ${id} v${v}:`, e);
-                   const errDiv = document.createElement("div");
-                   errDiv.style.color = "red";
-                   errDiv.style.fontSize = "0.8em";
-                   errDiv.textContent = `Error: ${e.message}`;
-                   container.appendChild(errDiv);
-                 }
+                 try { part.initUI(container); } catch(e) { console.error(e); }
                }
                part._mounted = true; 
             }
           }
-          if (container.children.length > 0) {
-              applyAccordion(container, label);
-          }
+          if (container.children.length > 0) applyAccordion(container, label);
         }
-      } catch (e) {
-        console.error(`Critical error in category ${id}:`, e);
-      }
+      } catch (e) { console.error(e); }
     });
 
     window.dispatchEvent(new Event("promptPartMounted"));
@@ -209,9 +153,7 @@
           try {
             const t = api.getTags();
             if (Array.isArray(t)) tags.push(...t);
-          } catch(e) {
-            console.error("Error getting tags:", e);
-          }
+          } catch(e) {}
         }
       });
     });
@@ -231,7 +173,6 @@
       el.value = 100;
       el.dispatchEvent(new Event('input'));
     });
-    // 検索バーもリセット
     const searchBar = document.querySelector("#ui-search-bar input");
     if(searchBar) {
       searchBar.value = "";
@@ -249,13 +190,26 @@
   }
 
   function init() {
-    document.getElementById("genBtn")?.addEventListener("click", generateOutput);
-    document.getElementById("copyBtn")?.addEventListener("click", copyOutput);
-    document.getElementById("resetBtn")?.addEventListener("click", resetAll);
-    
-    const transBtn = document.getElementById("translateBtn");
-    if (transBtn) {
-      transBtn.addEventListener("click", () => window.__outputTranslation.toggle());
+    // 1. CSS注入
+    if(!document.getElementById('builder-core-style')) {
+      const style = document.createElement('style');
+      style.id = 'builder-core-style';
+      style.textContent = CSS;
+      document.head.appendChild(style);
+    }
+
+    // 2. ボタンコンテナの整備
+    const genBtn = document.getElementById("genBtn");
+    if (genBtn) {
+      const container = genBtn.parentElement;
+      container.classList.add("builder-footer-grid"); // CSSクラス適用
+      
+      genBtn.addEventListener("click", generateOutput);
+      document.getElementById("copyBtn")?.addEventListener("click", copyOutput);
+      document.getElementById("resetBtn")?.addEventListener("click", resetAll);
+      
+      const transBtn = document.getElementById("translateBtn");
+      if (transBtn) transBtn.addEventListener("click", () => window.__outputTranslation.toggle());
     }
   }
   
