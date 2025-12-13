@@ -43,13 +43,22 @@
     return formattedTag
       .replace(/[\(\{\[\]\}\)]/g, '') 
       .replace(/:[\d\.]+(%?)/g, '')
-      .trim();
+      .trim()
+      .toLowerCase(); // ★重複判定のために小文字化
   }
 
   function getKnownTags() {
     const known = new Set();
     document.querySelectorAll('input[type="checkbox"][data-en]').forEach(cb => {
-      known.add(cb.dataset.en);
+      // data-en がカンマ区切りの場合もあるので分解して登録
+      const parts = cb.dataset.en.split(',');
+      parts.forEach(p => known.add(getCoreTag(p.trim())));
+      
+      // data-val も同様に (v4などで使用)
+      if(cb.dataset.val) {
+        const valParts = cb.dataset.val.split(',');
+        valParts.forEach(vp => known.add(getCoreTag(vp.trim())));
+      }
     });
     return known;
   }
@@ -197,30 +206,70 @@
     return tags;
   };
 
+  // ★ 修正版 生成ロジック (重複排除強化)
   function generateOutput() {
     const out = document.getElementById("out");
     const currentText = out.value;
+    
+    // 1. テキストエリアの現状を分解
     const currentTags = currentText.split(',').map(s => s.trim()).filter(Boolean);
-    const activeRawTags = new Set(UI_REG.getAllSelected());
-    const knownDictionary = getKnownTags();
-
-    const finalTags = [];
-    const processedActiveTags = new Set();
-
-    currentTags.forEach(tag => {
-      const core = getCoreTag(tag);
-      if (activeRawTags.has(core)) {
-        finalTags.push(tag);
-        processedActiveTags.add(core);
-      } 
-      else if (!knownDictionary.has(core)) {
-        finalTags.push(tag);
-      }
+    
+    // 2. チェックボックスから取得した値を「最小単位」まで分解してリスト化
+    // 例: ["A", "A, B"] -> ["A", "A", "B"]
+    const rawSelectedList = UI_REG.getAllSelected();
+    const activeRawTags = new Set();
+    
+    rawSelectedList.forEach(item => {
+      // カンマで分割して個別に登録
+      const parts = item.split(',').map(s => s.trim()).filter(Boolean);
+      parts.forEach(p => activeRawTags.add(p));
     });
 
+    // 3. 重複チェック用辞書 (コアタグ -> 元の文字列)
+    const knownDictionary = getKnownTags();
+    const finalTags = [];
+    const processedCores = new Set();
+
+    // A. 既存の手入力タグを維持するか判定
+    currentTags.forEach(tag => {
+      const core = getCoreTag(tag);
+      
+      // チェックボックスにあるタグなら、後でまとめて追加するのでスキップ（順序整列のため）
+      // ただし、手動で数値を変えている場合などは維持したいが…
+      // 簡易化のため「チェックボックスにあるものはチェックボックス優先」とする
+      // 逆に「手入力」とみなすのは knownDictionary に無いもの
+      
+      // ここでは「現在チェックされているもののCore」に含まれているかを確認
+      let isSelected = false;
+      activeRawTags.forEach(t => {
+        if (getCoreTag(t) === core) isSelected = true;
+      });
+
+      if (isSelected) {
+        // チェックされているなら、ここでは追加せず、後段の activeRawTags ループで追加させる
+        // (重複を防ぐため)
+        // ただし、もし既にprocessedCoresに入っていれば何もしない
+        if (!processedCores.has(core)) {
+             finalTags.push(tag); // やっぱり今の数値を優先して追加
+             processedCores.add(core);
+        }
+      } 
+      else if (!knownDictionary.has(core)) {
+        // システムに登録されていない未知のタグ（手入力）はそのまま残す
+        if (!processedCores.has(core)) {
+          finalTags.push(tag);
+          processedCores.add(core);
+        }
+      }
+      // システムにあるが、今チェックされていないものは削除される（=同期）
+    });
+
+    // B. チェックされているタグを追加 (まだ追加されていないものだけ)
     activeRawTags.forEach(rawTag => {
-      if (!processedActiveTags.has(rawTag)) {
+      const core = getCoreTag(rawTag);
+      if (!processedCores.has(core)) {
         finalTags.push(rawTag);
+        processedCores.add(core);
       }
     });
 
@@ -276,110 +325,63 @@
     document.addEventListener("DOMContentLoaded", init, { once: true });
   else init();
 
-  // --- 強化版翻訳ロジック ---
+  // --- 翻訳ロジック (変更なし) ---
   window.__outputTranslation = {
     mode: "en", 
     dict: {},
-    register(dict) { 
-      this.dict = { ...this.dict, ...dict }; 
-    },
+    register(dict) { this.dict = { ...this.dict, ...dict }; },
     resetToEn() {
       this.mode = "en";
       const btn = document.getElementById("translateBtn");
       if(btn) btn.textContent = "日本語表示";
     },
-
-    // 正規化関数: カッコ、記号、スペースを全て排除して比較用キーを作る
     normalize(str) {
-      return str
-        .replace(/[\(\{\[\]\}\)]/g, "")  
-        .replace(/:[\d\.]+(%?)/g, "")     
-        .replace(/\s+/g, "")
-        .toLowerCase();
+      return str.replace(/[\(\{\[\]\}\)]/g, "").replace(/:[\d\.]+(%?)/g, "").replace(/\s+/g, "").toLowerCase();
     },
-
     toggle() {
       const outEl = document.getElementById("out");
       const btn = document.getElementById("translateBtn");
       if (!outEl) return;
-      
       const current = outEl.value;
       if (!current.trim()) return;
-      
       const words = current.split(/,\s*/).filter(Boolean);
       let newText;
 
       if (this.mode === "en") {
-        // --- 英語 -> 日本語 ---
         newText = words.map(w => {
           let core = w.replace(/[\(\{\[\]\}\)]/g, "").replace(/:\d+(\.\d+)?/g, "").trim(); 
           let ja = this.dict[core] || this.dict[core.toLowerCase()];
-          if (ja) {
-             return w.replace(new RegExp(core.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'), ja);
-          }
+          if (ja) return w.replace(new RegExp(core.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'), ja);
           return w; 
         }).join(", ");
-        
         this.mode = "ja";
         if(btn) btn.textContent = "英語表示";
-
       } else {
-        // --- 日本語 -> 英語 (修復・再構築ロジック) ---
-        
-        // 1. 逆引きマップ作成 (正規化済み日本語キー -> 元の英語)
         const reverseMap = {};
         Object.entries(this.dict).forEach(([enKey, jaVal]) => {
           if (!jaVal) return;
           const normalizedJa = this.normalize(jaVal);
           reverseMap[normalizedJa] = enKey;
         });
-
         newText = words.map(w => {
-          // まず、単純な正規化で一致するか確認 (ティーン (10代) :1.2 -> ティーン10代 -> teenager)
           let searchKey = this.normalize(w);
           let en = reverseMap[searchKey];
-
-          // 正規表現で、タグの構造を3つに分解する
-          // 1. 前方のカッコ群 ( ( { [ )
-          // 2. 中身 (ティーン (10代))
-          // 3. 後方のカッコ群・ウェイト ( :1.2 ) } ] )
           const match = w.match(/^([\(\{\[]*)([\s\S]*?)((?::[\d\.]+(?:%?))?[\)\}\]]*)$/);
-          
-          if (!match) return w; // マッチしなければそのまま
-
+          if (!match) return w; 
           const prefix = match[1] || "";
           let core = match[2] || "";
           let suffix = match[3] || "";
-
-          // もし全体一致が見つかっていれば、元の構造(prefix/suffix)は無視して
-          // 英語に置き換えたいが、ウェイト(:1.2)などは維持したい。
-          
-          // なので、コア部分だけで再検索を試みる
           if (!en) {
              let coreKey = this.normalize(core);
              en = reverseMap[coreKey];
-             
-             // ★ここが修正ポイント: 「ティーン (10代)」の場合
-             // core = "ティーン (10" , suffix = ")" と誤判定される可能性がある
-             // もし見つからなければ、suffixのカッコをcoreに含めて再トライする
              if (!en && suffix.match(/^[\)\}\]]+$/)) { 
                 let retryKey = this.normalize(core + suffix);
-                if (reverseMap[retryKey]) {
-                   en = reverseMap[retryKey];
-                   // この場合、suffixは言葉の一部だったことになるので、suffixを空にする
-                   suffix = ""; 
-                }
+                if (reverseMap[retryKey]) { en = reverseMap[retryKey]; suffix = ""; }
              }
           }
-
-          if (en) {
-            // 見つかった英語で再構築 (prefix + 英語 + suffix)
-            return prefix + en + suffix;
-          }
-          
+          if (en) return prefix + en + suffix;
           return w;
         }).join(", ");
-        
         this.mode = "en";
         if(btn) btn.textContent = "日本語表示";
       }

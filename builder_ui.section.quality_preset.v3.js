@@ -4,22 +4,46 @@
   const KEY = "quality_preset";
 
   const QUALITY_DATA = {
+    "🛠️ 制作ソフト・ツール (Software & Tools)": [
+      { ja: "Cinema 4D", en: "cinema 4d" },
+      { ja: "ZBrush (彫刻)", en: "zbrush" },
+      { ja: "Maya", en: "maya" },
+      { ja: "Blender", en: "blender" },
+      { ja: "Substance Painter", en: "substance painter" }
+    ],
     "🖥️ レンダリング・エンジン (Rendering Engines)": [
       { ja: "Unreal Engine 5", en: "unreal engine 5" },
       { ja: "Octane Render", en: "octane render" },
       { ja: "Redshift Render", en: "redshift render" },
       { ja: "V-Ray Render", en: "v-ray" },
       { ja: "Arnold Render", en: "arnold render" },
+      { ja: "Corona Render", en: "corona render" },
       { ja: "Blender Cycles", en: "cycles render" }
     ],
     "⚙️ 3D技術・シェーダー (3D Tech)": [
       { ja: "パストレーシング", en: "path tracing" },
       { ja: "レイトレーシング", en: "ray tracing" },
+      { ja: "Lumen反射 (UE5)", en: "lumen reflections" },
+      { ja: "Naniteジオメトリ", en: "nanite geometry" },
       { ja: "PBR (物理ベース)", en: "physically based rendering" },
-      { ja: "SSS (サブサーフェス)", en: "subsurface scattering" },
+      { ja: "シェーダー", en: "shaders" },
+      { ja: "SSS (表面下散乱)", en: "subsurface scattering" },
       { ja: "アンビエントオクルージョン", en: "ambient occlusion" },
       { ja: "グローバルイルミネーション", en: "global illumination" },
       { ja: "ボリュメトリック照明", en: "volumetric lighting" }
+    ],
+    "✨ レンズ・ポストエフェクト (Lens & Post-Process)": [
+      { ja: "ゴッドレイ", en: "god rays" },
+      { ja: "レンズフレア", en: "lens flare" },
+      { ja: "ブルーム効果", en: "bloom" },
+      { ja: "色収差", en: "chromatic aberration" },
+      { ja: "ケラレ (周辺減光)", en: "vignette" },
+      { ja: "回折スパイク (光条)", en: "diffraction spikes" },
+      { ja: "ハレーション", en: "halation" },
+      { ja: "フィルムグレイン", en: "film grain" },
+      { ja: "ポストプロセス", en: "post-processing" },
+      { ja: "被写界深度 (DoF)", en: "depth of field" },
+      { ja: "ボケ", en: "bokeh" }
     ],
     "📸 カメラ・映画技術 (Camera & Cinema)": [
       { ja: "ISO 100", en: "iso 100" }, { ja: "f/1.8", en: "f/1.8" },
@@ -41,7 +65,8 @@
     "🎨 色彩・パレット (Color Palettes)": [
       { ja: "トリコロール", en: "tricolor" }, { ja: "モノトーン", en: "monotone" },
       { ja: "パステルカラー", en: "pastel colors" }, { ja: "ネオンカラー", en: "neon colors" },
-      { ja: "ビビッド", en: "vivid colors" }, { ja: "レトロカラー", en: "retro colors" }
+      { ja: "ビビッド", en: "vivid colors" }, { ja: "レトロカラー", en: "retro colors" },
+      { ja: "暖色系", en: "warm colour tones" }, { ja: "コダック Portra 400", en: "kodak portra 400" }
     ]
   };
 
@@ -65,7 +90,6 @@
     ]
   };
 
-  // 翻訳辞書
   const DICT = {};
   [...Object.values(QUALITY_DATA), ...Object.values(NEG_WORDS_DATA)].flat().forEach(item => {
     if(item.en && item.ja) DICT[item.en] = item.ja;

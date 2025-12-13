@@ -5,6 +5,7 @@ window.EXT_MANIFEST = [
   "builder_ui.section.quality_preset.v1.js",
   "builder_ui.section.quality_preset.v2.js",
   "builder_ui.section.quality_preset.v3.js",
+  "builder_ui.section.quality_preset.v4.js", // ★これ（初心者ガイド）を追加しました
   "builder_ui.section.anatomy.v1.js",
 
   // 2. Character Base
@@ -60,11 +61,11 @@ window.EXT_MANIFEST = [
   
   // 7. Utilities
   "builder_ui.section.presets.v1.js",
-  "builder_ui.visualsync.v4.js", // トーン補正(画像あり)
+  "builder_ui.visualsync.v4.js", // トーン補正
   "ext_footer_search.js",        // 検索ボタン
   "ext_autosave.js",             // 自動保存
   "ext_history.js",              // 履歴
-  "ext_smart_edit.js",           // ★ 新規追加 (強調ボタン)
+  "ext_smart_edit.js",           // 編集ボタン
   "ext_copy_button.js"
 ];
 
