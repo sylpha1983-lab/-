@@ -38,7 +38,7 @@
     .builder-footer-grid button:active { transform: translateY(1px); opacity: 0.9; }
   `;
 
-  // ヘルパー: タグの装飾を除去して「コア」を取得
+  // --- ヘルパー: コアタグ抽出 ---
   function getCoreTag(formattedTag) {
     return formattedTag
       .replace(/[\(\{\[\]\}\)]/g, '') 
@@ -46,7 +46,6 @@
       .trim();
   }
 
-  // ★ 全てのチェックボックスから「システムが知っているタグ一覧」を取得
   function getKnownTags() {
     const known = new Set();
     document.querySelectorAll('input[type="checkbox"][data-en]').forEach(cb => {
@@ -198,43 +197,27 @@
     return tags;
   };
 
-  // ★ 改良版生成ロジック: 未知のタグ（手動入力）を保護する
   function generateOutput() {
     const out = document.getElementById("out");
-    
-    // 1. テキストエリアの現状を解析
     const currentText = out.value;
     const currentTags = currentText.split(',').map(s => s.trim()).filter(Boolean);
-    
-    // 2. 現在アクティブなチェックボックス一覧を取得
     const activeRawTags = new Set(UI_REG.getAllSelected());
-    
-    // 3. システムが知っている全タグ一覧を取得（これが「未知のタグ」の判定基準）
     const knownDictionary = getKnownTags();
 
     const finalTags = [];
     const processedActiveTags = new Set();
 
-    // A. 現状のタグを走査し、「残すべきもの」を選別
     currentTags.forEach(tag => {
       const core = getCoreTag(tag);
-
       if (activeRawTags.has(core)) {
-        // ケース1: チェックボックスでONになっていて、テキストエリアにもある
-        // -> テキストエリアの記述（強調済みなど）を優先して残す
         finalTags.push(tag);
         processedActiveTags.add(core);
       } 
       else if (!knownDictionary.has(core)) {
-        // ケース2: チェックボックス一覧に存在しない「未知のタグ」（手動入力や複雑構文）
-        // -> これはユーザーが意図的に書いたものなので、保護して残す！
         finalTags.push(tag);
       }
-      // ケース3: 辞書にはあるが、チェックがOFFになっている
-      // -> 削除対象なので push しない
     });
 
-    // B. チェックボックスでONだが、まだテキストエリアにないタグを追加
     activeRawTags.forEach(rawTag => {
       if (!processedActiveTags.has(rawTag)) {
         finalTags.push(rawTag);
@@ -293,42 +276,110 @@
     document.addEventListener("DOMContentLoaded", init, { once: true });
   else init();
 
-  // 翻訳ロジック
+  // --- 強化版翻訳ロジック ---
   window.__outputTranslation = {
     mode: "en", 
     dict: {},
-    register(dict) { this.dict = { ...this.dict, ...dict }; },
+    register(dict) { 
+      this.dict = { ...this.dict, ...dict }; 
+    },
     resetToEn() {
       this.mode = "en";
       const btn = document.getElementById("translateBtn");
       if(btn) btn.textContent = "日本語表示";
     },
+
+    // 正規化関数: カッコ、記号、スペースを全て排除して比較用キーを作る
+    normalize(str) {
+      return str
+        .replace(/[\(\{\[\]\}\)]/g, "")  
+        .replace(/:[\d\.]+(%?)/g, "")     
+        .replace(/\s+/g, "")
+        .toLowerCase();
+    },
+
     toggle() {
       const outEl = document.getElementById("out");
       const btn = document.getElementById("translateBtn");
       if (!outEl) return;
+      
       const current = outEl.value;
       if (!current.trim()) return;
+      
       const words = current.split(/,\s*/).filter(Boolean);
       let newText;
+
       if (this.mode === "en") {
+        // --- 英語 -> 日本語 ---
         newText = words.map(w => {
           let core = w.replace(/[\(\{\[\]\}\)]/g, "").replace(/:\d+(\.\d+)?/g, "").trim(); 
           let ja = this.dict[core] || this.dict[core.toLowerCase()];
-          if (ja) return w.replace(new RegExp(core.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'), ja);
+          if (ja) {
+             return w.replace(new RegExp(core.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'), ja);
+          }
           return w; 
         }).join(", ");
+        
         this.mode = "ja";
         if(btn) btn.textContent = "英語表示";
+
       } else {
-        const reverseDict = {};
-        Object.entries(this.dict).forEach(([k, v]) => { reverseDict[v] = k; });
+        // --- 日本語 -> 英語 (修復・再構築ロジック) ---
+        
+        // 1. 逆引きマップ作成 (正規化済み日本語キー -> 元の英語)
+        const reverseMap = {};
+        Object.entries(this.dict).forEach(([enKey, jaVal]) => {
+          if (!jaVal) return;
+          const normalizedJa = this.normalize(jaVal);
+          reverseMap[normalizedJa] = enKey;
+        });
+
         newText = words.map(w => {
-          let core = w.replace(/[\(\{\[\]\}\):0-9\.]/g, "").trim();
-          let en = reverseDict[core];
-          if (en) return w.replace(core, en);
+          // まず、単純な正規化で一致するか確認 (ティーン (10代) :1.2 -> ティーン10代 -> teenager)
+          let searchKey = this.normalize(w);
+          let en = reverseMap[searchKey];
+
+          // 正規表現で、タグの構造を3つに分解する
+          // 1. 前方のカッコ群 ( ( { [ )
+          // 2. 中身 (ティーン (10代))
+          // 3. 後方のカッコ群・ウェイト ( :1.2 ) } ] )
+          const match = w.match(/^([\(\{\[]*)([\s\S]*?)((?::[\d\.]+(?:%?))?[\)\}\]]*)$/);
+          
+          if (!match) return w; // マッチしなければそのまま
+
+          const prefix = match[1] || "";
+          let core = match[2] || "";
+          let suffix = match[3] || "";
+
+          // もし全体一致が見つかっていれば、元の構造(prefix/suffix)は無視して
+          // 英語に置き換えたいが、ウェイト(:1.2)などは維持したい。
+          
+          // なので、コア部分だけで再検索を試みる
+          if (!en) {
+             let coreKey = this.normalize(core);
+             en = reverseMap[coreKey];
+             
+             // ★ここが修正ポイント: 「ティーン (10代)」の場合
+             // core = "ティーン (10" , suffix = ")" と誤判定される可能性がある
+             // もし見つからなければ、suffixのカッコをcoreに含めて再トライする
+             if (!en && suffix.match(/^[\)\}\]]+$/)) { 
+                let retryKey = this.normalize(core + suffix);
+                if (reverseMap[retryKey]) {
+                   en = reverseMap[retryKey];
+                   // この場合、suffixは言葉の一部だったことになるので、suffixを空にする
+                   suffix = ""; 
+                }
+             }
+          }
+
+          if (en) {
+            // 見つかった英語で再構築 (prefix + 英語 + suffix)
+            return prefix + en + suffix;
+          }
+          
           return w;
         }).join(", ");
+        
         this.mode = "en";
         if(btn) btn.textContent = "日本語表示";
       }

@@ -9,7 +9,7 @@
     const existing = document.getElementById("smart-edit-toolbar");
     if(existing) existing.remove();
 
-    // ツールバー
+    // ツールバー本体
     const toolbar = document.createElement('div');
     toolbar.id = "smart-edit-toolbar";
     toolbar.style.cssText = `
@@ -25,9 +25,11 @@
     label.textContent = "編集:";
     label.style.fontSize = "0.8em";
     label.style.color = "#666";
+    // ラベルも折り返さないようにする
+    label.style.whiteSpace = "nowrap";
     toolbar.appendChild(label);
 
-    // --- タグ範囲取得 ---
+    // --- 内部関数: タグ範囲取得 ---
     function getTagRange(text, pos) {
       let start = pos;
       let end = pos;
@@ -54,7 +56,7 @@
       };
     }
 
-    // --- コアテキスト抽出 ---
+    // --- 内部関数: コアテキスト抽出 ---
     function getCoreTextPreservingBrackets(str) {
       let text = str.trim();
       if (text.startsWith('(') && text.endsWith(')')) {
@@ -167,27 +169,82 @@
     menu.appendChild(grid);
     toolbar.appendChild(menu);
 
-    // --- ボタン配置 ---
+    // --- ボタン共通スタイル (white-space: nowrap を追加) ---
+    const btnStyle = `
+      font-size: 0.85em;
+      padding: 8px 10px; /* 少しパディングを調整 */
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      white-space: nowrap; /* ★これが重要：文字の折り返しを禁止 */
+    `;
+
+    // 1. 強調ボタン
     const weightBtn = document.createElement('button');
     weightBtn.textContent = "( ) 強調";
-    weightBtn.style.cssText = "font-size:0.85em; padding:8px 12px; border:1px solid #007bff; border-radius:4px; background:#e7f1ff; color:#0056b3; font-weight:bold; cursor:pointer;";
+    weightBtn.style.cssText = btnStyle + "border-color: #007bff; background: #e7f1ff; color: #0056b3;";
     weightBtn.onclick = (e) => { e.preventDefault(); e.stopPropagation(); const isVisible = menu.style.display === "block"; menu.style.display = isVisible ? "none" : "block"; };
     toolbar.appendChild(weightBtn);
 
-    // シンプルに「{ }」に変更
+    // 2. { } ボタン
     const curlyBtn = document.createElement('button');
     curlyBtn.textContent = "{ }";
-    curlyBtn.style.cssText = "font-size:0.85em; padding:8px 12px; border:1px solid #ccc; border-radius:4px; background:#f8f9fa; cursor:pointer; font-weight:bold; color:#333; margin-left:5px;";
+    curlyBtn.style.cssText = btnStyle + "background: #f8f9fa; color: #333; margin-left:5px;";
     curlyBtn.onclick = (e) => { e.preventDefault(); applyEffect("weight", "{}"); };
     toolbar.appendChild(curlyBtn);
 
+    // 3. 弱化ボタン
     const weakBtn = document.createElement('button');
     weakBtn.textContent = "[ ] 弱化";
-    weakBtn.style.cssText = "font-size:0.85em; padding:8px 12px; border:1px solid #ccc; border-radius:4px; background:#f8f9fa; cursor:pointer; font-weight:bold; color:#333; margin-left:5px;";
+    weakBtn.style.cssText = btnStyle + "background: #f8f9fa; color: #333; margin-left:5px;";
     weakBtn.onclick = (e) => { e.preventDefault(); applyEffect("weight", "[]"); };
     toolbar.appendChild(weakBtn);
 
-    // ランダムボタンは削除しました
+    // スペーサー
+    const spacer = document.createElement('div');
+    spacer.style.flexGrow = "1";
+    toolbar.appendChild(spacer);
+
+    // 4. 拡大ボタン
+    const expandBtn = document.createElement('button');
+    expandBtn.textContent = "↕️ 拡大";
+    expandBtn.style.cssText = `
+      font-size: 0.8em;
+      padding: 6px 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background: #fff;
+      cursor: pointer;
+      color: #555;
+      margin-left: 5px;
+      white-space: nowrap; /* 折り返し禁止 */
+    `;
+    expandBtn.onclick = (e) => {
+      e.preventDefault();
+      outArea.style.height = "50vh"; 
+    };
+    toolbar.appendChild(expandBtn);
+
+    // 5. 縮小ボタン
+    const resetSizeBtn = document.createElement('button');
+    resetSizeBtn.textContent = "↩️ 縮小";
+    resetSizeBtn.style.cssText = `
+      font-size: 0.8em;
+      padding: 6px 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background: #fff;
+      cursor: pointer;
+      color: #555;
+      margin-left: 5px;
+      white-space: nowrap; /* 折り返し禁止 */
+    `;
+    resetSizeBtn.onclick = (e) => {
+      e.preventDefault();
+      outArea.style.height = ""; 
+    };
+    toolbar.appendChild(resetSizeBtn);
 
     document.addEventListener('click', (e) => {
       if (!menu.contains(e.target) && e.target !== weightBtn) { menu.style.display = "none"; }
