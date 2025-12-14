@@ -19,16 +19,10 @@
     localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
   }
 
-  // ★ 究極正規化関数 (表記ゆれ・装飾無視)
-  function cleanTag(str) {
-    if (!str) return "";
-    return str
-      .toLowerCase()
-      .replace(/_/g, ' ')
-      .replace(/[\(\{\[\]\}\)]/g, ' ')
-      .replace(/:[\d\.]+(%?)/g, '')
-      .replace(/\s+/g, ' ')
-      .trim();
+  // ★テキストエリア取得 (SyncCheckのロジックを借りる)
+  function findTarget() {
+    if (window.findMainTextarea) return window.findMainTextarea();
+    return document.getElementById('out');
   }
 
   function createHistoryUI() {
@@ -56,7 +50,7 @@
 
     genBtn.addEventListener('click', () => {
       setTimeout(() => {
-        const out = document.getElementById('out');
+        const out = findTarget();
         if (out) saveHistory(out.value);
       }, 100);
     });
@@ -109,28 +103,26 @@
         };
       });
 
-      // ★ 復元ロジック
+      // ★復元機能
       menu.querySelectorAll('.hist-restore-btn').forEach(b => {
         b.onclick = (ev) => {
           const idx = ev.target.dataset.idx;
           const txt = history[idx].text;
-          const out = document.getElementById('out');
-          if(out) {
-            out.value = txt;
-            document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
-            const historyTagSet = new Set(txt.split(',').map(s => cleanTag(s)).filter(Boolean));
-            
-            document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-              const val = cb.dataset.en || cb.dataset.val;
-              if (!val) return;
-              const targets = val.split(',').map(s => cleanTag(s)).filter(Boolean);
-              if (targets.length > 0 && targets.every(t => historyTagSet.has(t))) {
-                cb.checked = true;
-              }
-            });
-            out.dispatchEvent(new Event('input'));
-            menu.style.display = "none";
+          const out = findTarget();
+          
+          if(!out) { alert("テキストエリアが見つかりません"); return; }
+
+          out.value = txt;
+          
+          // イベント発火
+          out.dispatchEvent(new Event('input', { bubbles: true }));
+          
+          // 念のため同期も呼ぶ
+          if (window.smartSyncCheckboxes) {
+            setTimeout(() => window.smartSyncCheckboxes(false), 200);
           }
+
+          menu.style.display = "none";
         };
       });
 

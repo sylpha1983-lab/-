@@ -1,37 +1,112 @@
 (function(){
   "use strict";
-  const VERSION = 1; // 統合版: 土台 & プリセットセット
+  const VERSION = 1; 
   const KEY = "quality_preset";
 
-  // === データ定義 ===
   const DATA = {
     "🏆 基本・汎用 (Standard)": [
       { label: "基本・最高画質", val: "(masterpiece:1.3), (best quality:1.3), (high resolution), (highly detailed), (beautiful detailed face), (perfect anatomy)" },
       { label: "アニメ塗り", val: "(masterpiece:1.3), (best quality:1.3), (anime style), (cel shading), (vibrant colors), (clean lines), (flat color)" },
       { label: "フォトリアル", val: "(masterpiece:1.3), (best quality:1.3), (photorealistic:1.4), (realistic), (8k), (raw photo), (detailed skin texture), (hyperrealistic)" },
-      { label: "3Dレンダリング風", val: "(masterpiece), (best quality), (3d render style), (octane render), (unreal engine 5), (ray tracing), (highly detailed cg)" }
+      { label: "3Dレンダリング風", val: "(masterpiece), (best quality), (3d render style), (octane render), (highly detailed cg)" }
     ],
     "💎 ハイエンド・特化 (High-End Specialized)": [
-      { label: "★究極・レンダリング (Ultimate Tech)", val: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.5), (anime-realism blend:1.4), (cinematic lighting:1.4), (ray tracing), (subsurface scattering), (global illumination), (physically based rendering), (unreal engine 5), (lumen reflections), (nanite geometry), (8k uhd)" },
-      { label: "超艶・粘液特化", val: "(masterpiece:1.3), (best quality:1.3), (ultra high resolution:1.3), (anime-realism blend:1.3), (semi-realistic rendering:1.2), (intricate details:1.3), (realistic textures:1.3), (extremely detailed skin, face, hair, slime textures:1.3), (cinematic lighting:1.3), (wet glossy oil-like sheen:1.3), (translucent dripping slime glow:1.3), (highly reflective fluid highlights:1.3), (subsurface scattering:1.3), (iridescent rainbow oil reflections:1.3), (UHD, ultra-sharp details:1.3), (vivid anime-like colors:1.3), (consistent anatomy:1.3)" },
-      { label: "人物特化ハイエンド", val: "(masterpiece:1.3), (best quality:1.3), (ultra high resolution:1.3), (intricate details:1.3), (extremely detailed skin, face, hair, background:1.3), (refined shading:1.3), (realistic textures:1.2), (photorealistic shading:1.2), (perfect facial anatomy:1.2), (ultra detailed face), (ultra detailed eyes), (soft blush:1.1), (ultra shiny skin:1.1), (natural skin texture:1.1), (subsurface scattering:1.2), (high-fidelity hair:1.2), (ultra shiny hair:1.1), (individual hair strands:1.2), (cinematic lighting:1.2), (soft natural lighting:1.2), (ray tracing-inspired effects:1.2), (global illumination:1.2), (ambient occlusion:1.1), (depth haze:1.1), (high-fidelity materials:1.2), (micro-texture:1.2), (UHD, ultra-sharp details:1.2), (high dynamic range:1.2), (bokeh lighting:1.1), (depth of field:1.2), (cinematic framing:1.2), (professional photography:1.2)" },
-      { label: "半アニメ・セミリアル", val: "(masterpiece:1.3), (best quality:1.3), (ultra high resolution:1.3), (anime style:1.2), (anime-realism blend:1.2), (semi-realistic rendering:1.1), (smooth shading:1.2), (soft gradient coloring:1.2), (glossy anime highlights:1.2), (cinematic lighting:1.1), (soft natural lighting:1.2), (vivid anime-like colors:1.2), (delicate lineart:1.2)" },
-      { label: "風景・背景特化", val: "(masterpiece:1.3), (best quality:1.3), (ultra detailed background:1.3), (scenery:1.3), (hyperrealistic landscape), (8k resolution), (volumetric lighting), (ray tracing), (tyndall effect), (detailed water), (detailed sky), (detailed clouds), (lush vegetation), (atmospheric perspective), (depth of field), (cinematic composition), (epic scale)" },
-      { label: "メカ・SF特化", val: "(masterpiece:1.3), (best quality:1.3), (ultra detailed mecha), (mechanical parts:1.3), (complex machinery), (metallic texture), (scratched metal), (glowing lights), (sci-fi atmosphere), (cybernetic), (hard surface modeling), (intricate panel lines), (reflections), (hdr), (unreal engine 5 render)" }
+      { 
+        label: "★究極・レンダリング (Ultimate Tech)", 
+        val: "(anime-realism blend:1.4), (cinematic lighting:1.4), (high fidelity), (extremely detailed)",
+        // ★最強の連動リスト
+        links: [
+          "基本・最高画質", "Standard", 
+          "安全セット", "Safe 3D", "キャラ・人物", "背景・空間", "物・メカ",
+          "レイトレーシング", "Ray Tracing", "UE5", "Unreal Engine", "Lumen", "Nanite",
+          "PBR", "物理ベース", "Global Illumination", "グローバルイルミネーション",
+          "SSS", "表面下散乱", "サブサーフェス", "Subsurface", "透け感", 
+          "ボリュメトリック", "Volumetric", "Ambient Occlusion", "アンビエント",
+          "V-Ray", "シネマティック", "Cinematic", "リアルなライティング", "Realistic Lighting",
+          "ゴッドレイ", "God Rays", "Bright", "明るい照明", "リムライト", "Rim Lighting", "ソフトライティング",
+          "被写界深度", "Depth of Field", "Depth", "奥行き", "ボケ", "Bokeh", 
+          "ソフトフォーカス", "Soft Focus", "ダイナミック", "Dynamic", "ぼやけた", "Blurry", 
+          "8K", "超高解像度", "整った顔立ち", "Perfect Face",
+          "高精細な肌理", "Detailed Skin", "リアルな肌", "Realistic Skin"
+        ]
+      },
+      { 
+        label: "超艶・粘液特化", 
+        val: "(anime-realism blend:1.3), (semi-realistic rendering:1.2), (intricate details:1.3), (extremely detailed skin, face, hair, slime textures:1.3), (cinematic lighting:1.3), (wet glossy oil-like sheen:1.3), (translucent dripping slime glow:1.3), (highly reflective fluid highlights:1.3), (iridescent rainbow oil reflections:1.3), (vivid anime-like colors:1.3)",
+        // ★追加: 質感・光沢系を連動
+        links: [
+          "基本・最高画質", 
+          "キャラ・人物",
+          "光沢/ツヤ肌", "Shiny Skin", "オイル肌", "Oil Skin", "濡れた肌", "Wet Skin",
+          "SSS", "サブサーフェス", "透け感",
+          "レイトレーシング", "Ray Tracing", "PBR",
+          "シネマティック", "Cinematic"
+        ]
+      },
+      { 
+        label: "人物特化ハイエンド", 
+        val: "(intricate details:1.3), (extremely detailed skin, face, hair:1.3), (refined shading:1.3), (realistic textures:1.2), (photorealistic shading:1.2), (perfect facial anatomy:1.2), (ultra detailed face), (ultra detailed eyes), (soft blush:1.1), (ultra shiny skin:1.1), (natural skin texture:1.1), (high-fidelity hair:1.2), (ultra shiny hair:1.1), (individual hair strands:1.2), (micro-texture:1.2), (cinematic framing:1.2), (professional photography:1.2)",
+        // ★追加: 人物・肌・解像度系を連動
+        links: [
+          "基本・最高画質", "フォトリアル",
+          "キャラ・人物", "安全セット",
+          "整った顔立ち", "Perfect Face", "高精細な肌理", "Detailed Skin", "リアルな肌", "Realistic Skin",
+          "SSS", "サブサーフェス", "透け感", "PBR",
+          "8K", "超高解像度",
+          "被写界深度", "ボケ", "Depth of Field", "ポートレート"
+        ]
+      },
+      { 
+        label: "半アニメ・セミリアル", 
+        val: "(anime style:1.2), (anime-realism blend:1.2), (semi-realistic rendering:1.1), (smooth shading:1.2), (soft gradient coloring:1.2), (glossy anime highlights:1.2), (vivid anime-like colors:1.2), (delicate lineart:1.2)",
+        // ★追加: アニメ・柔らかい光系を連動
+        links: [
+          "アニメ塗り", "Anime Style",
+          "キャラ・人物",
+          "ソフトライティング", "Soft Lighting", "ソフトフォーカス",
+          "スムース", "Smooth"
+        ]
+      },
+      { 
+        label: "風景・背景特化", 
+        val: "(ultra detailed background:1.3), (scenery:1.3), (hyperrealistic landscape), (detailed water), (detailed sky), (detailed clouds), (lush vegetation), (atmospheric perspective), (cinematic composition), (epic scale)",
+        // ★追加: 背景・環境系を連動
+        links: [
+          "基本・最高画質",
+          "背景・空間", "安全セット",
+          "ボリュメトリック", "Volumetric", "God Rays", "ゴッドレイ",
+          "8K", "超高解像度",
+          "広角", "Wide Angle", "パノラマ"
+        ]
+      },
+      { 
+        label: "メカ・SF特化", 
+        val: "(ultra detailed mecha), (mechanical parts:1.3), (complex machinery), (metallic texture), (scratched metal), (glowing lights), (sci-fi atmosphere), (cybernetic), (hard surface modeling), (intricate panel lines)",
+        // ★追加: メカ・硬質系を連動
+        links: [
+          "物・メカ", "安全セット",
+          "3Dレンダリング風",
+          "PBR", "物理ベース", "レイトレーシング",
+          "UE5", "Nanite",
+          "ハードサーフェス", "Hard Surface"
+        ]
+      }
     ],
     "🛠️ 制作ソフト・プリセット (Software Presets)": [
-      { label: "ZBrush (スカルプト感)", val: "(zbrush sculpt), (digital sculpting), (organic molding), (clay render style), (highly detailed)" },
-      { label: "Cinema 4D (ライティング)", val: "(cinema 4d render), (studio lighting), (global illumination), (3d art), (clean render)" },
-      { label: "Substance Painter (テクスチャ)", val: "(substance painter), (pbr textures), (realistic materials), (intricate texture), (detailed surface)" },
-      { label: "Blender Cycles (リアル)", val: "(blender cycles), (path tracing), (high fidelity), (volumetric fog), (realistic lighting)" },
+      { label: "ZBrush (スカルプト感)", val: "(zbrush sculpt), (digital sculpting), (organic molding), (clay render style)" },
+      { label: "Cinema 4D (ライティング)", val: "(cinema 4d render), (studio lighting), (3d art), (clean render)" },
+      { label: "Substance Painter (テクスチャ)", val: "(substance painter), (pbr textures), (intricate texture), (detailed surface)", links: ["PBR", "物理ベース"] },
+      { label: "Blender Cycles (リアル)", val: "(blender cycles), (path tracing), (high fidelity)", links: ["レイトレーシング", "Ray Tracing"] },
       { label: "Maya (モデリング)", val: "(maya 3d), (hard surface modeling), (clean topology), (3d model)" }
     ],
     "⚙️ 3D技術・プリセット (3D Tech Sets)": [
-      { label: "レイトレーシング (光と影)", val: "(ray tracing), (global illumination), (realistic shadows), (ambient occlusion), (high fidelity)" },
+      { label: "レイトレーシング (光と影)", val: "(ray tracing), (global illumination), (realistic shadows), (ambient occlusion), (realistic lighting)" },
       { label: "PBR (質感・マテリアル)", val: "(physically based rendering), (pbr textures), (highly detailed surface), (realistic materials), (roughness map)" },
-      { label: "ボリュメトリック (空気感)", val: "(volumetric lighting), (god rays), (tyndall effect), (atmospheric depth), (foggy atmosphere)" },
+      { label: "ボリュメトリック (空気感)", val: "(volumetric lighting), (god rays), (tyndall effect), (atmospheric depth), (foggy atmosphere), (depth haze)" },
       { label: "SSS (肌・透明感)", val: "(subsurface scattering), (translucent skin), (soft light penetration), (organic texture), (realistic skin)" },
-      { label: "UE5 (Lumen/Nanite)", val: "(unreal engine 5), (lumen reflections), (nanite geometry), (dynamic lighting), (virtual geometry)" }
+      { label: "UE5 (Lumen/Nanite)", val: "(unreal engine 5), (lumen reflections), (nanite geometry), (dynamic lighting), (virtual geometry)" },
+      { label: "被写界深度・ボケ", val: "(depth of field), (bokeh), (blurry background), (focus on character)" },
+      { label: "8K・超高解像度", val: "(8k uhd), (best quality), (masterpiece), (ultra high resolution)" }
     ],
     "🎬 シチュエーション (Situations)": [
       { label: "アイドルステージ (Idol Stage)", val: "(idol focus), (live concert), (stage lights), (sparkles), (soft ambient stage illumination), (light particles), (low-angle close-up), (cinematic glow)" },
@@ -67,222 +142,49 @@
     ]
   };
 
-  // v1用 翻訳辞書
-  const DICT = {
-    "masterpiece": "傑作", "best quality": "最高画質", "high resolution": "高解像度",
-    "anime style": "アニメスタイル", "photorealistic": "フォトリアル", "3d render style": "3Dレンダリング",
-    "low quality": "低品質", "worst quality": "最低品質", "bad anatomy": "崩れた人体",
-    // 制作ソフトプリセット
-    "zbrush sculpt": "ZBrushスカルプト", "digital sculpting": "デジタル彫刻", "organic molding": "有機的な造形", "clay render style": "クレイレンダー風",
-    "cinema 4d render": "Cinema 4Dレンダー", "studio lighting": "スタジオ照明", "3d art": "3Dアート", "clean render": "クリーンレンダー",
-    "substance painter": "Substance Painter", "pbr textures": "PBRテクスチャ", "realistic materials": "リアルなマテリアル", "intricate texture": "複雑なテクスチャ", "detailed surface": "詳細な表面",
-    "blender cycles": "Blender Cycles", "high fidelity": "高忠実度", "volumetric fog": "ボリュメトリックフォグ", "realistic lighting": "リアルな照明",
-    "maya 3d": "Maya 3D", "hard surface modeling": "ハードサーフェスモデリング", "clean topology": "綺麗なトポロジー", "3d model": "3Dモデル",
-    // 3D技術プリセット (新規)
-    "realistic shadows": "リアルな影", "roughness map": "ラフネスマップ", "highly detailed surface": "高詳細な表面",
-    "atmospheric depth": "大気の奥行き", "foggy atmosphere": "霧がかった雰囲気",
-    "translucent skin": "半透明な肌", "soft light penetration": "柔らかな光の透過", "organic texture": "有機的なテクスチャ", "realistic skin": "リアルな肌",
-    "dynamic lighting": "ダイナミックライティング", "virtual geometry": "仮想ジオメトリ",
-    // 既存 & 拡張分
-    "lumen reflections": "Lumen反射", "nanite geometry": "Naniteジオメトリ", "8k uhd": "8K UHD",
-    "physically based rendering": "物理ベースレンダリング",
-    "idol focus": "アイドルフォーカス", "sparkles": "きらめき", "light particles": "光の粒子", "cinematic glow": "映画的グロー",
-    "cozy modern café": "居心地の良いモダンカフェ", "mini event space": "ミニイベントスペース",
-    "dreamlike atmosphere": "夢のような雰囲気", "soft focus": "ソフトフォーカス", "faint sparkles": "ほのかなきらめき",
-    "floating feathers": "舞う羽", "bokeh heart shapes": "ハート型のボケ",
-    "anime-realism blend": "アニメとリアルの融合", "semi-realistic rendering": "セミリアル描写",
-    "wet glossy oil-like sheen": "濡れた油のような光沢", "translucent dripping slime glow": "滴る半透明な粘液の輝き",
-    "highly reflective fluid highlights": "高反射の流体ハイライト", "subsurface scattering": "表面下散乱(SSS)",
-    "iridescent rainbow oil reflections": "虹色のオイル反射", "vivid anime-like colors": "鮮やかなアニメ風の色",
-    "consistent anatomy": "一貫した解剖学",
-    "extremely detailed skin, face, hair, background": "超詳細な肌・顔・髪・背景",
-    "extremely detailed skin, face, hair, slime textures": "超詳細な肌・顔・髪・粘液",
-    "refined shading": "洗練された陰影", "photorealistic shading": "フォトリアルな陰影",
-    "perfect facial anatomy": "完璧な顔の構造", "ultra detailed face": "超詳細な顔", "ultra detailed eyes": "超詳細な目",
-    "soft blush": "柔らかな赤面", "ultra shiny skin": "超光沢肌", "natural skin texture": "自然な肌の質感",
-    "high-fidelity hair": "高忠実度の髪", "ultra shiny hair": "超光沢髪", "individual hair strands": "一本一本の髪",
-    "soft natural lighting": "柔らかな自然光", "ray tracing-inspired effects": "レイトレ風エフェクト",
-    "global illumination": "グローバルイルミネーション", "ambient occlusion": "アンビエントオクルージョン",
-    "depth haze": "奥行き霞", "high-fidelity materials": "高忠実度の素材", "micro-texture": "微細テクスチャ",
-    "high dynamic range": "ハイダイナミックレンジ", "bokeh lighting": "ボケ照明",
-    "cinematic framing": "映画的フレーミング", "professional photography": "プロの写真",
-    "ultra detailed background": "超詳細な背景", "scenery": "風景", "hyperrealistic landscape": "超写実的な風景",
-    "volumetric lighting": "ボリュメトリック照明", "ray tracing": "レイトレーシング", "tyndall effect": "チンダル現象",
-    "detailed water": "詳細な水", "detailed sky": "詳細な空", "detailed clouds": "詳細な雲",
-    "lush vegetation": "豊かな植生", "atmospheric perspective": "空気遠近法", "cinematic composition": "映画的構図", "epic scale": "壮大なスケール",
-    "ultra detailed mecha": "超詳細なメカ", "mechanical parts": "機械部品", "complex machinery": "複雑な機械",
-    "metallic texture": "金属の質感", "scratched metal": "傷ついた金属", "glowing lights": "輝くライト",
-    "sci-fi atmosphere": "SFの雰囲気", "cybernetic": "サイバネティック", "intricate panel lines": "複雑なパネルライン", "reflections": "反射", "hdr": "HDR",
-    "unreal engine 5 render": "UE5レンダリング",
-    "smooth shading": "滑らかな陰影", "soft gradient coloring": "柔らかなグラデーション彩色",
-    "glossy anime highlights": "光沢のあるアニメハイライト", "delicate lineart": "繊細な線画", "cinematic lighting": "シネマティック照明",
-    "live concert": "ライブコンサート", "stage lights": "ステージライト", "performance": "パフォーマンス", "microphone": "マイク", "energetic": "エネルギッシュ", "confetti": "紙吹雪",
-    "epic battle": "壮大なバトル", "fighting": "戦闘", "dynamic action": "ダイナミックなアクション", "explosions": "爆発", "debris": "瓦礫", "intense": "激しい",
-    "slice of life": "日常系", "daily life": "日常生活", "casual atmosphere": "カジュアルな雰囲気", "soft sunlight": "柔らかな日差し",
-    "date night": "デートナイト", "romantic atmosphere": "ロマンチックな雰囲気", "city lights": "街の灯り", "holding hands": "手をつなぐ", "blush": "赤面", "fashionable clothes": "おしゃれな服", "restaurant": "レストラン",
-    "school life": "学園生活", "classroom": "教室", "school uniform": "制服", "sunlight through window": "窓からの日差し", "friends": "友達", "youthful": "若々しい",
-    "spring season": "春", "cherry blossoms": "桜", "pink atmosphere": "ピンクの雰囲気", "warm breeze": "暖かい風",
-    "summer season": "夏", "intense sunlight": "強い日差し", "blue sky": "青空", "heat haze": "陽炎", "vibrant colors": "鮮やかな色", "high contrast": "高コントラスト",
-    "autumn season": "秋", "fallen leaves": "落ち葉", "orange and red theme": "オレンジと赤のテーマ", "warm lighting": "暖かい照明", "nostalgic atmosphere": "ノスタルジックな雰囲気",
-    "winter season": "冬", "snowing": "降雪", "snowy landscape": "雪景色", "cold atmosphere": "冷たい雰囲気", "breath steam": "白い息", "pale colors": "淡い色", "overcast": "曇り空",
-    "sunset": "夕日", "golden hour": "ゴールデンアワー", "orange sky": "オレンジの空", "dramatic shadows": "ドラマチックな影", "lens flare": "レンズフレア", "sentimental": "センチメンタル", "rim light": "リムライト",
-    "midnight": "深夜", "starry sky": "星空", "moonlight": "月光", "darkness": "暗闇", "quiet atmosphere": "静寂な雰囲気", "blue tint": "青みがかった",
-    "raining": "雨", "wet ground": "濡れた地面", "gloomy sky": "どんよりした空",
-    "atompunk": "アトムパンク", "1950s retro futurism": "50年代レトロフューチャー", "space age": "宇宙時代", "googie architecture": "グーギー建築", "fins": "テールフィン", "chrome": "クローム",
-    "cassette futurism": "カセットフューチャリズム", "retro computer": "レトロPC", "crt monitor": "CRTモニター", "analog tech": "アナログ技術", "80s sci-fi": "80年代SF",
-    "raygun gothic": "レイガンゴシック", "retro sci-fi": "レトロSF", "flash gordon style": "フラッシュ・ゴードン風", "rockets": "ロケット", "shiny metal": "輝く金属", "bubble helmets": "バブルヘルメット",
-    "synthwave": "シンセウェーブ", "neon grid": "ネオングリッド", "sunset": "夕日", "palm trees": "ヤシの木", "retro 80s": "レトロ80年代", "magenta and cyan": "マゼンタとシアン"
-  };
+  const DICT = { "masterpiece": "傑作", "best quality": "最高画質" };
 
-  // UIヘルパー
-  function createSubAccordion(title, items, type) {
-    const details = document.createElement("details");
-    details.className = "qp-sub-acc";
-    details.style.marginBottom = "6px";
-    details.style.border = "1px solid #eee";
-    details.style.borderRadius = "4px";
-    details.style.background = "#fff";
-    details.open = false; 
-
-    const summary = document.createElement("summary");
-    summary.textContent = title;
-    summary.style.fontWeight = "bold";
-    summary.style.padding = "6px 10px";
-    summary.style.cursor = "pointer";
-    summary.style.background = "#f9f9f9";
-    details.appendChild(summary);
-
-    const content = document.createElement("div");
-    content.className = "qp-content-grid";
-    content.style.padding = "8px";
-    content.style.display = "grid";
-    content.style.gridTemplateColumns = "repeat(auto-fill, minmax(200px, 1fr))";
-    content.style.gap = "6px";
-
-    items.forEach(item => {
-      const label = document.createElement("label");
-      label.style.display = "flex";
-      label.style.alignItems = "center";
-      label.style.fontSize = "0.9em";
-      label.style.cursor = "pointer";
-      
-      const cb = document.createElement("input");
-      cb.type = "checkbox";
-      cb.style.marginRight = "6px";
-      cb.dataset.val = item.val;
-      label.title = item.val;
-      label.appendChild(cb);
-      label.appendChild(document.createTextNode(item.label));
-      
-      if(item.label && !DICT[item.label]) DICT[item.label] = item.label;
-      content.appendChild(label);
-    });
-    details.appendChild(content);
-    return details;
+  function createSubAccordion(title, items, type) { 
+    const details = document.createElement("details"); details.className = "qp-sub-acc"; details.style.marginBottom = "6px"; details.style.border = "1px solid #eee"; details.style.borderRadius = "4px"; details.style.background = "#fff"; details.open = false; 
+    const summary = document.createElement("summary"); summary.textContent = title; summary.style.fontWeight = "bold"; summary.style.padding = "6px 10px"; summary.style.cursor = "pointer"; summary.style.background = "#f9f9f9"; details.appendChild(summary); 
+    const content = document.createElement("div"); content.className = "qp-content-grid"; content.style.padding = "8px"; content.style.display = "grid"; content.style.gridTemplateColumns = "repeat(auto-fill, minmax(200px, 1fr))"; content.style.gap = "6px"; 
+    items.forEach(item => { 
+      const label = document.createElement("label"); label.style.display = "flex"; label.style.alignItems = "center"; label.style.fontSize = "0.9em"; label.style.cursor = "pointer"; 
+      const cb = document.createElement("input"); cb.type = "checkbox"; cb.style.marginRight = "6px"; cb.dataset.val = item.val; 
+      if(item.links) cb.dataset.links = item.links.join(",");
+      label.title = item.val; label.appendChild(cb); label.appendChild(document.createTextNode(item.label)); 
+      if(item.label && !DICT[item.label]) DICT[item.label] = item.label; content.appendChild(label); 
+    }); 
+    details.appendChild(content); return details; 
   }
-
-  function createMainSection(id, title) {
-    const details = document.createElement("details");
-    details.id = id; 
-    details.className = "qp-main-acc";
-    details.style.marginBottom = "10px";
-    details.style.border = "1px solid #ccc";
-    details.style.borderRadius = "6px";
-    details.style.background = "#fff";
-    details.open = false; 
-
-    const summary = document.createElement("summary");
-    summary.innerHTML = `<span style="margin-right:8px;">▶</span>${title}`;
-    summary.style.fontWeight = "bold";
-    summary.style.padding = "10px 14px";
-    summary.style.cursor = "pointer";
-    summary.style.background = "#eef2f6";
-    summary.style.listStyle = "none";
-    details.appendChild(summary);
-    
-    const wrapper = document.createElement("div");
-    wrapper.className = "qp-section-content";
-    wrapper.style.padding = "10px";
-    details.appendChild(wrapper);
-    return details;
-  }
-
-  function createNegativeSeparator() {
-    const div = document.createElement("div");
-    div.style.marginTop = "30px"; 
-    div.style.marginBottom = "10px";
-    div.style.borderTop = "2px dashed #ffb3b3";
-    div.innerHTML = `<div style="margin-top:-12px; text-align:center;"><span style="background:#fff0f0; padding:0 15px; color:#d9534f; font-size:0.9em; font-weight:bold; border-radius:10px; border:1px solid #ffb3b3;">⚠️ NEGATIVE PROMPTS</span></div>`;
-    return div;
-  }
+  function createMainSection(id, title) { const details = document.createElement("details"); details.id = id; details.className = "qp-main-acc"; details.style.marginBottom = "10px"; details.style.border = "1px solid #ccc"; details.style.borderRadius = "6px"; details.style.background = "#fff"; details.open = false; const summary = document.createElement("summary"); summary.innerHTML = `<span style="margin-right:8px;">▶</span>${title}`; summary.style.fontWeight = "bold"; summary.style.padding = "10px 14px"; summary.style.cursor = "pointer"; summary.style.background = "#eef2f6"; summary.style.listStyle = "none"; details.appendChild(summary); const wrapper = document.createElement("div"); wrapper.className = "qp-section-content"; wrapper.style.padding = "10px"; details.appendChild(wrapper); return details; }
+  function createNegativeSeparator() { const div = document.createElement("div"); div.style.marginTop = "30px"; div.style.marginBottom = "10px"; div.style.borderTop = "2px dashed #ffb3b3"; div.innerHTML = `<div style="margin-top:-12px; text-align:center;"><span style="background:#fff0f0; padding:0 15px; color:#d9534f; font-size:0.9em; font-weight:bold; border-radius:10px; border:1px solid #ffb3b3;">⚠️ NEGATIVE PROMPTS</span></div>`; return div; }
 
   const API = {
     initUI(container) {
-      const parent = document.querySelector("#list-quality_preset") || container;
-      parent.innerHTML = ""; 
-
-      const root = document.createElement("div");
-      root.className = "quality-preset-integrated";
-
-      // 1. プリセット
+      const parent = document.querySelector("#list-quality_preset") || container; parent.innerHTML = ""; 
+      const root = document.createElement("div"); root.className = "quality-preset-integrated";
       const secPresets = createMainSection("qp-presets", "📦 プリセット (Preset Sets)");
-      Object.entries(DATA).forEach(([k,v]) => {
-        secPresets.querySelector(".qp-section-content").appendChild(createSubAccordion(k, v, "preset"));
-      });
+      Object.entries(DATA).forEach(([k,v]) => { secPresets.querySelector(".qp-section-content").appendChild(createSubAccordion(k, v, "preset")); });
       root.appendChild(secPresets);
-
-      // 2. スタイル (ID作成)
       root.appendChild(createMainSection("qp-styles", "🎨 スタイル (Style Words)"));
-
-      // 3. 時代 (ID作成)
       root.appendChild(createMainSection("qp-eras", "🕰️ 時代・年代 (Era Words)"));
-
-      // 4. 品質ワード (ID作成)
       root.appendChild(createMainSection("qp-quality", "🔧 品質ワード (Quality Words)"));
-
       root.appendChild(createNegativeSeparator());
-
-      // 5. ネガティブプリセット
       const secNegSets = createMainSection("qp-neg-sets", "🚫 ネガティブプリセット (Negative Sets)");
-      secNegSets.querySelector("summary").style.background = "#fff0f0";
-      secNegSets.querySelector("summary").style.color = "#d00";
-      Object.entries(NEG_SETS).forEach(([k,v]) => {
-        secNegSets.querySelector(".qp-section-content").appendChild(createSubAccordion(k, v, "negative_set"));
-      });
+      secNegSets.querySelector("summary").style.background = "#fff0f0"; secNegSets.querySelector("summary").style.color = "#d00";
+      Object.entries(NEG_SETS).forEach(([k,v]) => { secNegSets.querySelector(".qp-section-content").appendChild(createSubAccordion(k, v, "negative_set")); });
       root.appendChild(secNegSets);
-
-      // 6. ネガティブワード (ID作成)
       const secNegWords = createMainSection("qp-neg-words", "🗑️ ネガティブ (Negative Words)");
-      secNegWords.querySelector("summary").style.background = "#fff0f0";
-      secNegWords.querySelector("summary").style.color = "#d00";
+      secNegWords.querySelector("summary").style.background = "#fff0f0"; secNegWords.querySelector("summary").style.color = "#d00";
       root.appendChild(secNegWords);
-
       parent.appendChild(root);
-
       if (window.__outputTranslation) window.__outputTranslation.register(DICT);
     },
-    getTags() {
-      const tags = [];
-      document.querySelectorAll(".quality-preset-integrated input[type='checkbox']:checked").forEach(cb => {
-        tags.push(cb.dataset.val);
-      });
-      return tags;
-    }
+    getTags() { const tags = []; document.querySelectorAll(".quality-preset-integrated input[type='checkbox']:checked").forEach(cb => { tags.push(cb.dataset.val); }); return tags; }
   };
 
-  if (!document.getElementById("qp-styles-css")) {
-    const style = document.createElement('style');
-    style.id = "qp-styles-css";
-    style.textContent = `
-      .qp-main-acc { margin-bottom:10px; border:1px solid #ccc; border-radius:6px; background:#fff; }
-      .qp-sub-acc { margin-bottom:6px; border:1px solid #eee; border-radius:4px; background:#fff; }
-      .qp-content-grid { padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:6px; }
-      .qp-content-grid label { display:flex; align-items:center; font-size:0.9em; cursor:pointer; }
-      .qp-content-grid input { margin-right:6px; flex-shrink: 0; }
-    `;
-    document.head.appendChild(style);
-  }
-
+  if (!document.getElementById("qp-styles-css")) { const style = document.createElement('style'); style.id = "qp-styles-css"; style.textContent = `.qp-main-acc { margin-bottom:10px; border:1px solid #ccc; border-radius:6px; background:#fff; } .qp-sub-acc { margin-bottom:6px; border:1px solid #eee; border-radius:4px; background:#fff; } .qp-content-grid { padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:6px; } .qp-content-grid label { display:flex; align-items:center; font-size:0.9em; cursor:pointer; } .qp-content-grid input { margin-right:6px; flex-shrink: 0; }`; document.head.appendChild(style); }
   window.__registerPromptPart(KEY, VERSION, API);
 })();
 
