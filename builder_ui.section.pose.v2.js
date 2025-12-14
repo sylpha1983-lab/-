@@ -11,9 +11,15 @@
         { ja: "ビームサーベル抜刀", en: "wielding beam saber, glowing energy blade" },
         { ja: "二刀流 (ビーム)", en: "dual wielding beam sabers" },
         { ja: "ビームシールド展開", en: "deploying beam shield, energy barrier" },
-        { ja: "極太ビーム照射", en: "firing massive beam cannon" },
+        { ja: "極太ビーム照射", en: "firing massive beam cannon, energy blast" },
         { ja: "指先からビーム", en: "firing beam from fingertips" },
-        { ja: "全方位攻撃 (ファンネル)", en: "funnels attacking, remote weapons firing, all-range attack" }
+        { 
+          // ★ここを大幅強化
+          ja: "全方位攻撃 (ファンネル)", 
+          en: "(funnels attacking:1.3), (remote weapons firing:1.2), (all-range attack), (surrounded by floating weapons), (energy trails)",
+          // ★連動: これを選ぶと、宇宙・ビーム・ダイナミック構図が勝手についてくる
+          links: ["宇宙遊泳", "無重力浮遊", "ビーム", "Beam", "ダイナミック", "Dynamic"]
+        }
       ],
       "メカ・サイバーアクション": [
         { ja: "スラスター全開", en: "thrusters active, afterburner trail" },
@@ -93,12 +99,13 @@
 
   const API = {
     initUI() {
+      // 1. 翻訳辞書への登録
       if (window.__outputTranslation) {
-        // 1. 基本登録（メインの単語）
         const dict = {};
         Object.values(POSE_DATA_EXTREME).forEach(subCats => {
           Object.values(subCats).flat().forEach(item => {
             if (item.en && item.ja) {
+              // カンマ区切りの最初の部分をキーにする（(funnels attacking:1.3) などに対応）
               const firstPart = item.en.split(/,\s*/)[0];
               if (firstPart) dict[firstPart] = item.ja;
             }
@@ -106,14 +113,15 @@
         });
         window.__outputTranslation.register(dict);
 
-        // 2. ★サブタグ・補完辞書の登録（ここが修正ポイント）
+        // サブタグ用補完辞書
         const subDict = {
-          "energy blast": "エネルギー波",
+          "remote weapons firing": "遠隔武器発射",
+          "all-range attack": "オールレンジ攻撃",
+          "surrounded by floating weapons": "浮遊兵器に囲まれる",
+          "energy trails": "エネルギーの軌跡",
           "glowing energy blade": "発光する刃",
           "energy barrier": "エネルギー障壁",
           "funnels attacking": "ファンネル攻撃",
-          "remote weapons firing": "遠隔武器発射",
-          "all-range attack": "オールレンジ攻撃",
           "afterburner trail": "アフターバーナー",
           "sudden stop": "急停止",
           "ejecting parts": "パージ中",
@@ -156,7 +164,7 @@
         window.__outputTranslation.register(subDict);
       }
 
-      // 3. UIマウント処理
+      // 2. v1コンテナへのマウント
       const mount = () => {
         const root = document.getElementById("pose-master-root");
         if (!root) { setTimeout(mount, 100); return; }
@@ -168,8 +176,31 @@
         separator.innerHTML = "<span style='background:#fff; padding:0 10px; color:#ff0055; font-weight:bold; font-size:0.9em; display:inline-block; transform:translateY(-12px);'>▼ LIMIT BREAK (v2 Expansion)</span>";
         root.appendChild(separator);
 
+        // v1のレンダラーを使うが、事前にデータへ links 属性をセットアップする
         if (typeof window.__POSE_RENDERER === "function") {
+          // v1レンダラーは通常DOM生成しかしないため、ここで生成ロジックを少しハックして
+          // dataset.links を付与できるように、レンダリング後に属性を追加する処理は困難。
+          // なので、v1レンダラーが data-links に対応していなくても動くよう
+          // v1レンダラーを呼び出した直後に、手動で属性を追加する
+          
           window.__POSE_RENDERER(root, POSE_DATA_EXTREME, "v2-ext");
+          
+          // ★後付けで links 属性をDOMに注入する
+          setTimeout(() => {
+            Object.values(POSE_DATA_EXTREME).forEach(subCats => {
+              Object.values(subCats).flat().forEach(item => {
+                if (item.links) {
+                  // data-en が前方一致するチェックボックスを探す
+                  const inputs = root.querySelectorAll(`input[type="checkbox"]`);
+                  inputs.forEach(input => {
+                    if (input.dataset.en === item.en) {
+                      input.dataset.links = item.links.join(",");
+                    }
+                  });
+                }
+              });
+            });
+          }, 100);
         }
       };
       
