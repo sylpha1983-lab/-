@@ -3,6 +3,7 @@
   const VERSION = 1; 
   const KEY = "pose";
 
+  // ★ v1: 基本・日常・スタンダードな戦闘
   const POSE_DATA_BASIC = {
     "🧍 基本・日常 (Basic & Daily)": {
       "立ちポーズ": [
@@ -31,12 +32,29 @@
       "基本アクション": [
         { ja: "戦闘態勢", en: "battle stance" }, { ja: "構え", en: "taking a stance" },
         { ja: "ダッシュ", en: "sprinting" }, { ja: "回避", en: "evasive maneuver" },
-        { ja: "着地", en: "landing pose" }, { ja: "浮遊", en: "floating in air" }
+        { ja: "着地", en: "landing pose" }, { ja: "浮遊", en: "floating in air" },
+        { ja: "飛び跳ねる", en: "jumping" }, { ja: "回転", en: "spinning" }
       ],
       "打撃・格闘": [
-        { ja: "パンチ", en: "punching" }, { ja: "キック", en: "kicking" },
-        { ja: "ハイキック", en: "high kick" }, { ja: "回し蹴り", en: "roundhouse kick" },
-        { ja: "飛び蹴り", en: "flying kick" }, { ja: "防御", en: "guarding" }
+        { ja: "パンチ", en: "punching" }, 
+        { ja: "防御", en: "guarding" },
+        // ★誘導ワード追加エリア
+        { 
+          ja: "ハイキック", 
+          en: "high kick", 
+          links: ["戦闘態勢", "Battle Stance", "ダイナミック", "Dynamic"] 
+        },
+        { 
+          ja: "回し蹴り", 
+          en: "roundhouse kick", 
+          links: ["戦闘態勢", "Battle Stance", "回転", "Spinning", "ダイナミック", "Dynamic"]
+        },
+        { 
+          ja: "飛び蹴り", 
+          en: "flying kick", 
+          links: ["戦闘態勢", "Battle Stance", "飛び跳ねる", "Jumping", "浮遊", "Floating", "ダイナミック", "Dynamic"]
+        },
+        { ja: "キック", en: "kicking" }
       ],
       "武器 (実弾・冷兵器)": [
         { ja: "剣を構える", en: "holding sword" }, { ja: "斬撃", en: "slashing" },
@@ -127,6 +145,12 @@
             cb.type = "checkbox";
             cb.dataset.en = item.en;
             cb.style.marginRight = "5px";
+            
+            // ★機能強化: v1アイテムでも links (連動) を使えるように実装
+            if (item.links) {
+              cb.dataset.links = item.links.join(",");
+            }
+
             label.appendChild(cb);
             label.appendChild(document.createTextNode(item.ja));
             grid.appendChild(label);
