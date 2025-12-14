@@ -45,8 +45,10 @@ window.EXT_MANIFEST = [
   "builder_ui.section.expression.v1.js",
   "builder_ui.section.expression.v2.js",
   "builder_ui.section.expression.v3.js",
+  
+  // ★新・統合版v1 (これ1つで全ポーズを管理)
   "builder_ui.section.pose.v1.js", 
-  "builder_ui.section.pose.v2.js", 
+  
   "builder_ui.section.narrative.v1.js",
   "builder_ui.section.composition.v1.js",
   "builder_ui.section.camera.v1.js",
@@ -64,11 +66,10 @@ window.EXT_MANIFEST = [
   "builder_ui.visualsync.v4.js", 
   
   // 拡張機能
-  "ext_sync_check.js",     // 最新修正版
-  
+  "ext_sync_check.js",
   "ext_footer_search.js",        
   "ext_autosave.js",             
-  "ext_history.js",        // 最新修正版
+  "ext_history.js",
   "ext_smart_edit.js",           
   "ext_copy_button.js"
 ];
