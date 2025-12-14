@@ -46,8 +46,9 @@ window.EXT_MANIFEST = [
   "builder_ui.section.expression.v2.js",
   "builder_ui.section.expression.v3.js",
   
-  // ★新・統合版v1 (これ1つで全ポーズを管理)
+  // ★ ポーズ構成 (v1土台 + v2拡張)
   "builder_ui.section.pose.v1.js", 
+  "builder_ui.section.pose.v2.js", 
   
   "builder_ui.section.narrative.v1.js",
   "builder_ui.section.composition.v1.js",
