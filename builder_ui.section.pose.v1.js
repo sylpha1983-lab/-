@@ -3,74 +3,115 @@
   const VERSION = 1; 
   const KEY = "pose";
 
-  // ★ v1: 基本・日常・スタンダードな戦闘
   const POSE_DATA_BASIC = {
     "🧍 基本・日常 (Basic & Daily)": {
       "立ちポーズ": [
-        { ja: "立ちポーズ", en: "standing pose" }, { ja: "モデル立ち", en: "model pose" },
-        { ja: "S字立ち (コントラポスト)", en: "contrapposto, s-curve standing" },
-        { ja: "振り返り", en: "looking over shoulder" }, { ja: "腕組み", en: "crossed arms" },
-        { ja: "仁王立ち", en: "standing with legs apart, akimbo" }, { ja: "ポケットに手", en: "hands in pockets" }
+        { ja: "立ちポーズ", en: "standing pose" }, 
+        { ja: "モデル立ち", en: "model pose" },
+        { ja: "S字立ち（コントラポスト）", en: "contrapposto" },
+        { ja: "振り返り", en: "looking over shoulder" }, 
+        { ja: "腕組み", en: "crossed arms" },
+        { ja: "仁王立ち", en: "standing with legs apart" }, 
+        { ja: "ポケットに手", en: "hands in pockets" }
       ],
       "座り・床": [
-        { ja: "座りポーズ", en: "sitting pose" }, { ja: "足を組む", en: "crossed legs" },
-        { ja: "体育座り", en: "hugging knees" }, { ja: "ぺたん座り", en: "w-sitting" },
-        { ja: "横座り", en: "side sitting" }, { ja: "開脚座り", en: "spread legs sitting" },
-        { ja: "四つん這い", en: "all fours" }, { ja: "片膝立ち", en: "kneeling on one knee" }
+        { ja: "座りポーズ", en: "sitting pose" }, 
+        { ja: "足を組む", en: "crossed legs" },
+        { ja: "体育座り", en: "hugging knees" }, 
+        { ja: "ぺたん座り", en: "w-sitting" },
+        { ja: "横座り", en: "side sitting" }, 
+        { ja: "開脚座り", en: "spread legs sitting" },
+        { ja: "四つん這い", en: "all fours" }, 
+        { ja: "片膝立ち", en: "kneeling on one knee" }
       ],
       "寝転び": [
-        { ja: "仰向け", en: "lying on back" }, { ja: "うつ伏せ", en: "lying on stomach" },
-        { ja: "横向き (胎児)", en: "fetal position" }, { ja: "膝枕", en: "lap pillow" }
+        { ja: "仰向け", en: "lying on back" }, 
+        { ja: "うつ伏せ", en: "lying on stomach" },
+        { ja: "横向き（胎児）", en: "fetal position" }, 
+        { ja: "膝枕", en: "lap pillow" }
       ],
       "生活・仕事": [
-        { ja: "スマホ操作", en: "checking phone" }, { ja: "料理中", en: "cooking" },
-        { ja: "食事中", en: "eating" }, { ja: "自撮り", en: "taking selfie" },
-        { ja: "運転中", en: "driving car" }, { ja: "PC作業", en: "typing on computer" }
+        { ja: "スマホ操作", en: "checking phone" }, 
+        { ja: "料理中", en: "cooking" },
+        { ja: "食事中", en: "eating" }, 
+        { ja: "自撮り", en: "taking selfie" },
+        { ja: "運転中", en: "driving car" }, 
+        { ja: "PC作業", en: "typing on computer" }
       ]
     },
     "⚔️ スタンダード戦闘 (Standard Combat)": {
-      "基本アクション": [
-        { ja: "戦闘態勢", en: "battle stance" }, { ja: "構え", en: "taking a stance" },
-        { ja: "ダッシュ", en: "sprinting" }, { ja: "回避", en: "evasive maneuver" },
-        { ja: "着地", en: "landing pose" }, { ja: "浮遊", en: "floating in air" },
-        { ja: "飛び跳ねる", en: "jumping" }, { ja: "回転", en: "spinning" }
-      ],
-      "打撃・格闘": [
+      "打撃・格闘 (Punch & Strike)": [
         { ja: "パンチ", en: "punching" }, 
-        { ja: "防御", en: "guarding" },
-        // ★誘導ワード追加エリア
-        { 
-          ja: "ハイキック", 
-          en: "high kick", 
-          links: ["戦闘態勢", "Battle Stance", "ダイナミック", "Dynamic"] 
-        },
-        { 
-          ja: "回し蹴り", 
-          en: "roundhouse kick", 
-          links: ["戦闘態勢", "Battle Stance", "回転", "Spinning", "ダイナミック", "Dynamic"]
-        },
-        { 
-          ja: "飛び蹴り", 
-          en: "flying kick", 
-          links: ["戦闘態勢", "Battle Stance", "飛び跳ねる", "Jumping", "浮遊", "Floating", "ダイナミック", "Dynamic"]
-        },
-        { ja: "キック", en: "kicking" }
+        { ja: "ジャブ", en: "jab" },
+        { ja: "ストレート", en: "straight punch" }, 
+        { ja: "フック", en: "hook punch" }, 
+        { ja: "アッパー", en: "uppercut" },
+        { ja: "ボディブロー", en: "body blow" },
+        { ja: "裏拳", en: "backfist" }, 
+        { ja: "百裂拳（連打）", en: "rapid punches" },
+        { ja: "昇竜拳（飛びアッパー）", en: "shoryuken" },
+        { ja: "手刀（カラテチョップ）", en: "knifehand strike" },
+        { ja: "掌底（パームストライク）", en: "palm strike" },
+        { ja: "鉄槌（ハンマー）", en: "hammer fist" },
+        { ja: "エルボー（肘打ち）", en: "elbow strike" },
+        { ja: "頭突き（ヘッドバット）", en: "headbutt" },
+        { ja: "クロスカウンター", en: "cross counter" }
+      ],
+      "足技・蹴り (Kicks)": [
+        { ja: "ローキック", en: "low kick" }, 
+        { ja: "ミドルキック", en: "middle kick" },
+        { ja: "ハイキック", en: "high kick", links: ["戦闘態勢", "Battle Stance", "ダイナミック"] },
+        { ja: "前蹴り", en: "front kick" }, 
+        { ja: "後ろ蹴り", en: "back kick" },
+        { ja: "回し蹴り", en: "roundhouse kick", links: ["戦闘態勢", "回転"] },
+        { ja: "後ろ回し蹴り", en: "spinning back kick" },
+        
+        { ja: "踵落とし（アックスキック）", en: "axe kick" },
+        { ja: "膝蹴り（ニーキック）", en: "knee strike" },
+        { ja: "飛び膝蹴り", en: "flying knee" },
+        { ja: "ドロップキック", en: "dropkick", links: ["浮遊", "Floating", "ダイナミック"] },
+        
+        { ja: "サマーソルトキック", en: "somersault kick" },
+        { ja: "後方宙返りキック", en: "backflip kick" },
+        { ja: "竜巻旋風脚（ハリケーン）", en: "hurricane kick" },
+        { ja: "空中回転蹴り", en: "spinning aerial kick" },
+        
+        { ja: "スライディング", en: "sliding kick" },
+        { ja: "踏みつけ（ストンピング）", en: "stomping" }
+      ],
+      "アクション・構え": [
+        { ja: "戦闘態勢", en: "battle stance" }, 
+        { ja: "カンフーの構え", en: "kung fu stance" },
+        { ja: "ボクシングの構え", en: "boxing stance" },
+        { ja: "ダッシュ", en: "sprinting" }, 
+        { ja: "回避", en: "evasive maneuver" },
+        { ja: "着地（スーパーヒーロー）", en: "superhero landing" }, 
+        { ja: "タックル", en: "shoulder tackle" },
+        { ja: "波動拳の構え（気功）", en: "kamehameha pose" }
       ],
       "武器 (実弾・冷兵器)": [
-        { ja: "剣を構える", en: "holding sword" }, { ja: "斬撃", en: "slashing" },
-        { ja: "二刀流", en: "dual wielding" }, { ja: "銃を構える", en: "aiming gun" },
-        { ja: "乱射", en: "firing gun" }, { ja: "リロード", en: "reloading" }
+        { ja: "剣を構える", en: "holding sword" }, 
+        { ja: "斬撃", en: "slashing" },
+        { ja: "二刀流", en: "dual wielding" }, 
+        { ja: "銃を構える", en: "aiming gun" },
+        { ja: "乱射", en: "firing gun" }, 
+        { ja: "リロード", en: "reloading" }
       ]
     },
     "❤️ 交流・ライトな感情 (Interaction)": {
       "仕草": [
-        { ja: "ピース", en: "peace sign" }, { ja: "指差し", en: "pointing" },
-        { ja: "ハート", en: "making heart hands" }, { ja: "敬礼", en: "salute" },
-        { ja: "投げキッス", en: "blowing kiss" }, { ja: "手を振る", en: "waving hand" }
+        { ja: "ピース", en: "peace sign" }, 
+        { ja: "指差し", en: "pointing" },
+        { ja: "ハート", en: "making heart hands" }, 
+        { ja: "敬礼", en: "salute" },
+        { ja: "投げキッス", en: "blowing kiss" }, 
+        { ja: "手を振る", en: "waving hand" }
       ],
       "ペア": [
-        { ja: "手をつなぐ", en: "holding hands" }, { ja: "ハグ", en: "hugging" },
-        { ja: "お姫様抱っこ", en: "princess carry" }, { ja: "壁ドン", en: "kabedon" },
+        { ja: "手をつなぐ", en: "holding hands" }, 
+        { ja: "ハグ", en: "hugging" },
+        { ja: "お姫様抱っこ", en: "princess carry" }, 
+        { ja: "壁ドン", en: "kabedon" },
         { ja: "背中合わせ", en: "back-to-back" }
       ]
     }
@@ -78,23 +119,18 @@
 
   const API = {
     initUI(container) {
-      // 1. 翻訳辞書への登録 (カンマ対策)
       if (window.__outputTranslation) {
         const dict = {};
         Object.values(POSE_DATA_BASIC).forEach(subCats => {
           Object.values(subCats).flat().forEach(item => {
             if (item.en && item.ja) {
-              const firstPart = item.en.split(/,\s*/)[0];
-              if (firstPart) {
-                dict[firstPart] = item.ja;
-              }
+              dict[item.en] = item.ja;
             }
           });
         });
         window.__outputTranslation.register(dict);
       }
 
-      // 2. UI描画
       const parent = document.querySelector("#list-pose") || container;
       parent.innerHTML = "";
       
@@ -145,22 +181,15 @@
             cb.type = "checkbox";
             cb.dataset.en = item.en;
             cb.style.marginRight = "5px";
+            if (item.links) cb.dataset.links = item.links.join(",");
             
-            // ★機能強化: v1アイテムでも links (連動) を使えるように実装
-            if (item.links) {
-              cb.dataset.links = item.links.join(",");
-            }
-
             label.appendChild(cb);
             label.appendChild(document.createTextNode(item.ja));
             grid.appendChild(label);
             
-            // 安全策: レンダリング時も念のため登録
+            // 安全策
             if (window.__outputTranslation && item.ja && item.en) {
-              const firstPart = item.en.split(/,\s*/)[0];
-              if (firstPart) {
-                window.__outputTranslation.register({ [firstPart]: item.ja });
-              }
+               window.__outputTranslation.register({ [item.en]: item.ja });
             }
           });
 
