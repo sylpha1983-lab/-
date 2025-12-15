@@ -5,10 +5,12 @@
 
   const POSE_DATA_BASIC = {
     "🧍 基本・日常 (Basic & Daily)": {
-      "立ちポーズ": [
+      "立ち・待機": [
         { ja: "立ちポーズ", en: "standing pose" }, 
+        { ja: "待機ポーズ（アイドル）", en: "idle pose" },
         { ja: "モデル立ち", en: "model pose" },
         { ja: "S字立ち（コントラポスト）", en: "contrapposto" },
+        { ja: "日常ポーズ（カジュアル）", en: "casual pose" },
         { ja: "振り返り", en: "looking over shoulder" }, 
         { ja: "腕組み", en: "crossed arms" },
         { ja: "仁王立ち", en: "standing with legs apart" }, 
@@ -16,21 +18,25 @@
       ],
       "座り・床": [
         { ja: "座りポーズ", en: "sitting pose" }, 
-        { ja: "足を組む", en: "crossed legs" },
+        { ja: "あぐら", en: "sitting cross-legged" },
         { ja: "体育座り", en: "hugging knees" }, 
         { ja: "ぺたん座り", en: "w-sitting" },
         { ja: "横座り", en: "side sitting" }, 
         { ja: "開脚座り", en: "spread legs sitting" },
         { ja: "四つん這い", en: "all fours" }, 
-        { ja: "片膝立ち", en: "kneeling on one knee" }
+        { ja: "片膝立ち", en: "kneeling on one knee" },
+        { ja: "しゃがみポーズ", en: "crouch pose" }
       ],
-      "寝転び": [
+      "寝転び・リラックス": [
+        { ja: "寝ポーズ", en: "sleeping pose" },
+        { ja: "脱力ポーズ（リラックス）", en: "relaxed pose" },
         { ja: "仰向け", en: "lying on back" }, 
         { ja: "うつ伏せ", en: "lying on stomach" },
         { ja: "横向き（胎児）", en: "fetal position" }, 
         { ja: "膝枕", en: "lap pillow" }
       ],
       "生活・仕事": [
+        { ja: "考えるポーズ", en: "thinking pose" },
         { ja: "スマホ操作", en: "checking phone" }, 
         { ja: "料理中", en: "cooking" },
         { ja: "食事中", en: "eating" }, 
@@ -39,9 +45,65 @@
         { ja: "PC作業", en: "typing on computer" }
       ]
     },
-    "⚔️ スタンダード戦闘 (Standard Combat)": {
-      "打撃・格闘 (Punch & Strike)": [
-        { ja: "パンチ", en: "punching" }, 
+    "✨ スタイル・キャラクター (Style & Character)": {
+      "雰囲気・演出": [
+        { ja: "キメポーズ（スタイリッシュ）", en: "stylish pose", links: ["Dynamic"] },
+        { ja: "クールポーズ", en: "cool pose" },
+        { ja: "可愛いポーズ", en: "cute pose" },
+        { ja: "優雅ポーズ（エレガント）", en: "elegant pose" },
+        { ja: "ヒーロー立ち", en: "hero pose", links: ["Low Angle", "Dynamic"] },
+        { ja: "強キャラポーズ（バッドアス）", en: "badass pose", links: ["Confident"] }
+      ],
+      "性格・態度 (強気)": [
+        { ja: "自信ポーズ", en: "confident pose" },
+        { ja: "ドヤポーズ（傲慢）", en: "cocky pose", links: ["Smirk"] },
+        { ja: "威圧ポーズ", en: "intimidating pose" },
+        { ja: "支配的ポーズ", en: "dominant pose" },
+        { ja: "攻撃的ポーズ", en: "aggressive pose" },
+        { ja: "ツン寄りポーズ", en: "tsundere pose", links: ["Crossed Arms", "Looking Away"] }
+      ],
+      "性格・態度 (弱気/静)": [
+        { ja: "照れポーズ", en: "shy pose", links: ["Blush"] },
+        { ja: "従属/弱めポーズ", en: "submissive pose" },
+        { ja: "防御ポーズ", en: "defensive pose" },
+        { ja: "祈りポーズ", en: "prayer pose" }
+      ]
+    },
+    "🤸 アクション・運動 (Action & Motion)": {
+      "移動・跳躍": [
+        { ja: "動きのあるポーズ", en: "dynamic pose" },
+        { ja: "ダッシュ/走る", en: "sprinting" }, 
+        { ja: "ジャンプポーズ", en: "jump pose" },
+        { ja: "跳躍ポーズ（リープ）", en: "leap pose" },
+        { ja: "空中ポーズ", en: "mid-air pose" },
+        { ja: "着地ポーズ", en: "landing pose" },
+        { ja: "スライドポーズ", en: "slide pose" },
+        { ja: "よじ登りポーズ", en: "climbing pose" }
+      ],
+      "回転・柔軟・特殊": [
+        { ja: "回転ポーズ", en: "spin pose" },
+        { ja: "ひねりポーズ", en: "twist pose" },
+        { ja: "アクロポーズ", en: "acrobatic pose" },
+        { ja: "パルクールポーズ", en: "parkour pose" },
+        { ja: "ダンスポーズ", en: "dance pose" },
+        { ja: "ヨガポーズ", en: "yoga pose" },
+        { ja: "伸びポーズ（ストレッチ）", en: "stretch pose" },
+        { ja: "回避ポーズ", en: "dodge pose" }
+      ]
+    },
+    "⚔️ 戦闘・格闘 (Combat & Battle)": {
+      "基本アクション": [
+        { ja: "戦闘態勢", en: "battle stance" }, 
+        { ja: "攻撃ポーズ", en: "attack pose" },
+        { ja: "打撃ポーズ", en: "strike pose" },
+        { ja: "カンフーの構え", en: "kung fu stance" },
+        { ja: "ボクシングの構え", en: "boxing stance" },
+        { ja: "着地（スーパーヒーロー）", en: "superhero landing" }, 
+        { ja: "タックル", en: "shoulder tackle" },
+        { ja: "波動拳の構え（気功）", en: "kamehameha pose" }
+      ],
+      "パンチ・手技": [
+        { ja: "パンチポーズ", en: "punch pose" }, 
         { ja: "ジャブ", en: "jab" },
         { ja: "ストレート", en: "straight punch" }, 
         { ja: "フック", en: "hook punch" }, 
@@ -57,41 +119,30 @@
         { ja: "頭突き（ヘッドバット）", en: "headbutt" },
         { ja: "クロスカウンター", en: "cross counter" }
       ],
-      "足技・蹴り (Kicks)": [
+      "キック・足技": [
+        { ja: "キックポーズ", en: "kick pose" },
         { ja: "ローキック", en: "low kick" }, 
         { ja: "ミドルキック", en: "middle kick" },
-        { ja: "ハイキック", en: "high kick", links: ["戦闘態勢", "Battle Stance", "ダイナミック"] },
+        { ja: "ハイキック", en: "high kick", links: ["Battle Stance", "Dynamic"] },
         { ja: "前蹴り", en: "front kick" }, 
         { ja: "後ろ蹴り", en: "back kick" },
-        { ja: "回し蹴り", en: "roundhouse kick", links: ["戦闘態勢", "回転"] },
+        { ja: "回し蹴り", en: "roundhouse kick", links: ["Battle Stance", "Spinning"] },
         { ja: "後ろ回し蹴り", en: "spinning back kick" },
-        
         { ja: "踵落とし（アックスキック）", en: "axe kick" },
         { ja: "膝蹴り（ニーキック）", en: "knee strike" },
         { ja: "飛び膝蹴り", en: "flying knee" },
-        { ja: "ドロップキック", en: "dropkick", links: ["浮遊", "Floating", "ダイナミック"] },
-        
+        { ja: "ドロップキック", en: "dropkick", links: ["Floating", "Dynamic"] },
         { ja: "サマーソルトキック", en: "somersault kick" },
         { ja: "後方宙返りキック", en: "backflip kick" },
-        { ja: "竜巻旋風脚（ハリケーン）", en: "hurricane kick" },
+        { ja: "竜巻旋風脚", en: "hurricane kick" },
         { ja: "空中回転蹴り", en: "spinning aerial kick" },
-        
         { ja: "スライディング", en: "sliding kick" },
         { ja: "踏みつけ（ストンピング）", en: "stomping" }
       ],
-      "アクション・構え": [
-        { ja: "戦闘態勢", en: "battle stance" }, 
-        { ja: "カンフーの構え", en: "kung fu stance" },
-        { ja: "ボクシングの構え", en: "boxing stance" },
-        { ja: "ダッシュ", en: "sprinting" }, 
-        { ja: "回避", en: "evasive maneuver" },
-        { ja: "着地（スーパーヒーロー）", en: "superhero landing" }, 
-        { ja: "タックル", en: "shoulder tackle" },
-        { ja: "波動拳の構え（気功）", en: "kamehameha pose" }
-      ],
       "武器 (実弾・冷兵器)": [
+        { ja: "斬撃ポーズ", en: "slash pose" },
+        { ja: "突きポーズ", en: "thrust pose" },
         { ja: "剣を構える", en: "holding sword" }, 
-        { ja: "斬撃", en: "slashing" },
         { ja: "二刀流", en: "dual wielding" }, 
         { ja: "銃を構える", en: "aiming gun" },
         { ja: "乱射", en: "firing gun" }, 
@@ -129,6 +180,55 @@
           });
         });
         window.__outputTranslation.register(dict);
+
+        // 依頼リストの翻訳補完
+        window.__outputTranslation.register({
+          "dynamic pose": "動きのあるポーズ",
+          "stylish pose": "キメのポーズ",
+          "hero pose": "ヒーロー立ち",
+          "idle pose": "待機ポーズ",
+          "relaxed pose": "脱力ポーズ",
+          "casual pose": "日常ポーズ",
+          "elegant pose": "優雅ポーズ",
+          "cute pose": "可愛いポーズ",
+          "cool pose": "クールポーズ",
+          "badass pose": "強キャラポーズ",
+          "tsundere pose": "ツン寄りポーズ",
+          "shy pose": "照れポーズ",
+          "confident pose": "自信ポーズ",
+          "cocky pose": "ドヤポーズ",
+          "intimidating pose": "威圧ポーズ",
+          "dominant pose": "支配的ポーズ",
+          "submissive pose": "従属/弱めポーズ",
+          "defensive pose": "防御ポーズ",
+          "aggressive pose": "攻撃的ポーズ",
+          "attack pose": "攻撃ポーズ",
+          "strike pose": "打撃ポーズ",
+          "kick pose": "キックポーズ",
+          "punch pose": "パンチポーズ",
+          "slash pose": "斬撃ポーズ",
+          "thrust pose": "突きポーズ",
+          "dodge pose": "回避ポーズ",
+          "leap pose": "跳躍ポーズ",
+          "jump pose": "ジャンプポーズ",
+          "mid-air pose": "空中ポーズ",
+          "landing pose": "着地ポーズ",
+          "slide pose": "スライドポーズ",
+          "spin pose": "回転ポーズ",
+          "twist pose": "ひねりポーズ",
+          "crouch pose": "しゃがみポーズ",
+          "kneeling pose": "片膝ポーズ",
+          "sitting pose": "座りポーズ",
+          "sleeping pose": "寝ポーズ",
+          "stretch pose": "伸びポーズ",
+          "yoga pose": "ヨガポーズ",
+          "dance pose": "ダンスポーズ",
+          "acrobatic pose": "アクロポーズ",
+          "parkour pose": "パルクールポーズ",
+          "climbing pose": "よじ登りポーズ",
+          "prayer pose": "祈りポーズ",
+          "thinking pose": "考えるポーズ"
+        });
       }
 
       const parent = document.querySelector("#list-pose") || container;
@@ -187,7 +287,6 @@
             label.appendChild(document.createTextNode(item.ja));
             grid.appendChild(label);
             
-            // 安全策
             if (window.__outputTranslation && item.ja && item.en) {
                window.__outputTranslation.register({ [item.en]: item.ja });
             }
