@@ -10,86 +10,61 @@
       { label: "フォトリアル", val: "(masterpiece:1.3), (best quality:1.3), (photorealistic:1.4), (realistic), (8k), (raw photo), (detailed skin texture), (hyperrealistic)" },
       { label: "3Dレンダリング風", val: "(masterpiece), (best quality), (3d render style), (octane render), (highly detailed cg)" }
     ],
+    // ★新規追加: 戦闘・アクション画風
+    "⚔️ 戦闘・アクション画風 (Battle & Action Styles)": [
+      { 
+        label: "バトルアニメ風 (作画)", 
+        val: "(battle anime style), (sakuga), (intense action), (impact frames), (dynamic angle), (highly detailed effects)", 
+        links: ["ダイナミックポーズ", "Dynamic Pose", "エフェクト", "Effect"]
+      },
+      { 
+        label: "アクションドローイング (荒々しさ)", 
+        val: "(action drawing), (rough sketch style), (dynamic brushwork), (motion lines), (sketchy), (raw energy)", 
+        links: ["ダイナミックポーズ", "Dynamic Pose"]
+      },
+      { 
+        label: "劇画・アメコミ風", 
+        val: "(comic book style), (bold lines), (strong shadows), (inked), (western comic style), (high contrast)" 
+      },
+      { 
+        label: "マンガ戦闘 (集中線)", 
+        val: "(manga style), (monochrome), (speed lines), (focus lines), (sound effects), (action focus)" 
+      },
+      { 
+        label: "ダークファンタジー (重厚)", 
+        val: "(dark fantasy), (grimdark), (blood splatters), (heavy atmosphere), (gothic), (muted colors)" 
+      }
+    ],
     "💎 ハイエンド・特化 (High-End Specialized)": [
       { 
         label: "★究極・レンダリング (Ultimate Tech)", 
         val: "(anime-realism blend:1.4), (cinematic lighting:1.4), (high fidelity), (extremely detailed)",
-        // ★最強の連動リスト
-        links: [
-          "基本・最高画質", "Standard", 
-          "安全セット", "Safe 3D", "キャラ・人物", "背景・空間", "物・メカ",
-          "レイトレーシング", "Ray Tracing", "UE5", "Unreal Engine", "Lumen", "Nanite",
-          "PBR", "物理ベース", "Global Illumination", "グローバルイルミネーション",
-          "SSS", "表面下散乱", "サブサーフェス", "Subsurface", "透け感", 
-          "ボリュメトリック", "Volumetric", "Ambient Occlusion", "アンビエント",
-          "V-Ray", "シネマティック", "Cinematic", "リアルなライティング", "Realistic Lighting",
-          "ゴッドレイ", "God Rays", "Bright", "明るい照明", "リムライト", "Rim Lighting", "ソフトライティング",
-          "被写界深度", "Depth of Field", "Depth", "奥行き", "ボケ", "Bokeh", 
-          "ソフトフォーカス", "Soft Focus", "ダイナミック", "Dynamic", "ぼやけた", "Blurry", 
-          "8K", "超高解像度", "整った顔立ち", "Perfect Face",
-          "高精細な肌理", "Detailed Skin", "リアルな肌", "Realistic Skin"
-        ]
+        links: ["基本・最高画質", "安全セット", "キャラ・人物", "レイトレーシング", "Ray Tracing", "UE5", "PBR", "SSS", "ボリュメトリック", "8K", "整った顔立ち"]
       },
       { 
         label: "超艶・粘液特化", 
         val: "(anime-realism blend:1.3), (semi-realistic rendering:1.2), (intricate details:1.3), (extremely detailed skin, face, hair, slime textures:1.3), (cinematic lighting:1.3), (wet glossy oil-like sheen:1.3), (translucent dripping slime glow:1.3), (highly reflective fluid highlights:1.3), (iridescent rainbow oil reflections:1.3), (vivid anime-like colors:1.3)",
-        // ★追加: 質感・光沢系を連動
-        links: [
-          "基本・最高画質", 
-          "キャラ・人物",
-          "光沢/ツヤ肌", "Shiny Skin", "オイル肌", "Oil Skin", "濡れた肌", "Wet Skin",
-          "SSS", "サブサーフェス", "透け感",
-          "レイトレーシング", "Ray Tracing", "PBR",
-          "シネマティック", "Cinematic"
-        ]
+        links: ["基本・最高画質", "キャラ・人物", "光沢/ツヤ肌", "濡れた肌", "SSS", "レイトレーシング"]
       },
       { 
         label: "人物特化ハイエンド", 
         val: "(intricate details:1.3), (extremely detailed skin, face, hair:1.3), (refined shading:1.3), (realistic textures:1.2), (photorealistic shading:1.2), (perfect facial anatomy:1.2), (ultra detailed face), (ultra detailed eyes), (soft blush:1.1), (ultra shiny skin:1.1), (natural skin texture:1.1), (high-fidelity hair:1.2), (ultra shiny hair:1.1), (individual hair strands:1.2), (micro-texture:1.2), (cinematic framing:1.2), (professional photography:1.2)",
-        // ★追加: 人物・肌・解像度系を連動
-        links: [
-          "基本・最高画質", "フォトリアル",
-          "キャラ・人物", "安全セット",
-          "整った顔立ち", "Perfect Face", "高精細な肌理", "Detailed Skin", "リアルな肌", "Realistic Skin",
-          "SSS", "サブサーフェス", "透け感", "PBR",
-          "8K", "超高解像度",
-          "被写界深度", "ボケ", "Depth of Field", "ポートレート"
-        ]
+        links: ["基本・最高画質", "フォトリアル", "キャラ・人物", "整った顔立ち", "リアルな肌", "SSS", "8K", "被写界深度"]
       },
       { 
         label: "半アニメ・セミリアル", 
         val: "(anime style:1.2), (anime-realism blend:1.2), (semi-realistic rendering:1.1), (smooth shading:1.2), (soft gradient coloring:1.2), (glossy anime highlights:1.2), (vivid anime-like colors:1.2), (delicate lineart:1.2)",
-        // ★追加: アニメ・柔らかい光系を連動
-        links: [
-          "アニメ塗り", "Anime Style",
-          "キャラ・人物",
-          "ソフトライティング", "Soft Lighting", "ソフトフォーカス",
-          "スムース", "Smooth"
-        ]
+        links: ["アニメ塗り", "キャラ・人物", "ソフトライティング"]
       },
       { 
         label: "風景・背景特化", 
         val: "(ultra detailed background:1.3), (scenery:1.3), (hyperrealistic landscape), (detailed water), (detailed sky), (detailed clouds), (lush vegetation), (atmospheric perspective), (cinematic composition), (epic scale)",
-        // ★追加: 背景・環境系を連動
-        links: [
-          "基本・最高画質",
-          "背景・空間", "安全セット",
-          "ボリュメトリック", "Volumetric", "God Rays", "ゴッドレイ",
-          "8K", "超高解像度",
-          "広角", "Wide Angle", "パノラマ"
-        ]
+        links: ["基本・最高画質", "背景・空間", "ボリュメトリック", "8K", "広角"]
       },
       { 
         label: "メカ・SF特化", 
         val: "(ultra detailed mecha), (mechanical parts:1.3), (complex machinery), (metallic texture), (scratched metal), (glowing lights), (sci-fi atmosphere), (cybernetic), (hard surface modeling), (intricate panel lines)",
-        // ★追加: メカ・硬質系を連動
-        links: [
-          "物・メカ", "安全セット",
-          "3Dレンダリング風",
-          "PBR", "物理ベース", "レイトレーシング",
-          "UE5", "Nanite",
-          "ハードサーフェス", "Hard Surface"
-        ]
+        links: ["物・メカ", "3Dレンダリング風", "PBR", "レイトレーシング", "ハードサーフェス"]
       }
     ],
     "🛠️ 制作ソフト・プリセット (Software Presets)": [
@@ -142,8 +117,6 @@
     ]
   };
 
-  const DICT = { "masterpiece": "傑作", "best quality": "最高画質" };
-
   function createSubAccordion(title, items, type) { 
     const details = document.createElement("details"); details.className = "qp-sub-acc"; details.style.marginBottom = "6px"; details.style.border = "1px solid #eee"; details.style.borderRadius = "4px"; details.style.background = "#fff"; details.open = false; 
     const summary = document.createElement("summary"); summary.textContent = title; summary.style.fontWeight = "bold"; summary.style.padding = "6px 10px"; summary.style.cursor = "pointer"; summary.style.background = "#f9f9f9"; details.appendChild(summary); 
@@ -153,7 +126,7 @@
       const cb = document.createElement("input"); cb.type = "checkbox"; cb.style.marginRight = "6px"; cb.dataset.val = item.val; 
       if(item.links) cb.dataset.links = item.links.join(",");
       label.title = item.val; label.appendChild(cb); label.appendChild(document.createTextNode(item.label)); 
-      if(item.label && !DICT[item.label]) DICT[item.label] = item.label; content.appendChild(label); 
+      content.appendChild(label); 
     }); 
     details.appendChild(content); return details; 
   }
@@ -162,6 +135,44 @@
 
   const API = {
     initUI(container) {
+      // 1. 翻訳辞書の自動登録処理
+      if (window.__outputTranslation) {
+        const dict = {
+          "masterpiece": "傑作", "best quality": "最高画質",
+          "battle anime style": "バトルアニメ風",
+          "action drawing": "アクションドローイング",
+          "comic book style": "アメコミ風",
+          "manga style": "マンガ風",
+          "dark fantasy": "ダークファンタジー",
+          "sakuga": "作画(サクガ)",
+          "intense action": "激しいアクション",
+          "impact frames": "インパクトフレーム",
+          "dynamic angle": "ダイナミックなアングル",
+          "rough sketch style": "ラフスケッチ風",
+          "dynamic brushwork": "ダイナミックな筆致",
+          "motion lines": "効果線",
+          "speed lines": "集中線",
+          "focus lines": "集中線",
+          "sound effects": "描き文字(SFX)",
+          "grimdark": "グリムダーク",
+          "blood splatters": "返り血",
+          "heavy atmosphere": "重厚な雰囲気"
+        };
+        
+        // DATA内のラベルと値を自動登録 (簡易的)
+        Object.values(DATA).forEach(group => {
+          group.forEach(item => {
+            // (tag) のカッコを外して登録
+            const parts = item.val.split(/,\s*/);
+            parts.forEach(p => {
+              const raw = p.replace(/^\(|\)$/g, "").split(":")[0]; // (tag:1.3) -> tag
+              if (raw && !dict[raw]) dict[raw] = item.label; // デフォルトはラベル名を当てる
+            });
+          });
+        });
+        window.__outputTranslation.register(dict);
+      }
+
       const parent = document.querySelector("#list-quality_preset") || container; parent.innerHTML = ""; 
       const root = document.createElement("div"); root.className = "quality-preset-integrated";
       const secPresets = createMainSection("qp-presets", "📦 プリセット (Preset Sets)");
@@ -179,7 +190,6 @@
       secNegWords.querySelector("summary").style.background = "#fff0f0"; secNegWords.querySelector("summary").style.color = "#d00";
       root.appendChild(secNegWords);
       parent.appendChild(root);
-      if (window.__outputTranslation) window.__outputTranslation.register(DICT);
     },
     getTags() { const tags = []; document.querySelectorAll(".quality-preset-integrated input[type='checkbox']:checked").forEach(cb => { tags.push(cb.dataset.val); }); return tags; }
   };
