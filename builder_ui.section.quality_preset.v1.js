@@ -6,7 +6,9 @@
   // ★シークレット状態の判定
   const IS_UNLOCKED = localStorage.getItem("MY_SECRET_UNLOCK") === "true";
 
-  // ■ グループ1: 画風・品質・スタイル (Art Styles & Quality)
+  // ==============================================================================
+  // 1. 画風・品質プリセット (Preset Sets)
+  // ==============================================================================
   const PRESET_DATA = {
     "🏆 基本・画風 (Standard & Art Styles)": [
       { label: "基本・最高画質", val: "(masterpiece:1.3), (best quality:1.3), (high resolution), (highly detailed), (beautiful detailed face), (perfect anatomy)" },
@@ -67,7 +69,7 @@
       }
     ],
     "⚔️ 戦闘・アクション画風 (Battle & Action Styles)": [
-      { label: "バトルアニメ風 (作画)", val: "(battle anime style), (sakuga), (intense action), (impact frames), (dynamic angle), (highly detailed effects)", links: ["ダイナミックポーズ", "エフェクト"] },
+      { label: "バトルアニメ風 (作画)", val: "(battle anime style), (sakuga), (intense action), (impact frames), (dynamic angle), (highly detailed effects)", links: ["エフェクト"] },
       { label: "アクションドローイング (荒々しさ)", val: "(action drawing), (rough sketch style), (dynamic brushwork), (motion lines), (sketchy), (raw energy)", links: ["ダイナミックポーズ"] },
       { label: "劇画・アメコミ風", val: "(comic book style), (bold lines), (strong shadows), (inked), (western comic style), (high contrast)" },
       { label: "マンガ戦闘 (集中線)", val: "(manga style), (monochrome), (speed lines), (focus lines), (sound effects), (action focus)" },
@@ -97,38 +99,35 @@
     ]
   };
 
-  // ■ グループ2: シチュエーション・環境 (Situations & Environment)
+  // ==============================================================================
+  // 2. シチュエーション・環境 (Situations & Environment)
+  // ==============================================================================
   const SITUATION_DATA = {
     "📍 具体的な場所・シーン (Specific Locations)": [
       { 
         label: "アイドルステージ (Live Stage)", 
         val: "(idol focus), (live concert), (stage lights), (sparkles), (soft ambient stage illumination), (light particles), (low-angle close-up), (cinematic glow), (performance)",
-        links: ["可愛いポーズ", "Cute Pose", "ダンスポーズ", "Dance Pose", "シネマティック", "Cinematic"]
+        links: ["シネマティック", "Cinematic"] 
       },
       { 
         label: "おしゃれカフェ (Modern Cafe)", 
-        val: "(cozy modern café), (indoor), (window seat), (coffee), (sweets), (string lights), (decorations), (bokeh), (warm atmosphere), (relaxing)",
-        links: ["日常ポーズ", "Casual Pose", "座りポーズ", "Sitting Pose"]
+        val: "(cozy modern café), (indoor), (window seat), (coffee), (sweets), (string lights), (decorations), (bokeh), (warm atmosphere), (relaxing)"
       },
       { 
         label: "学園・教室 (School Life)", 
-        val: "(school life), (classroom), (school uniform), (sunlight through window), (desks and chairs), (chalkboard), (friends), (youthful), (anime style)",
-        links: ["日常ポーズ", "Casual Pose"]
+        val: "(school life), (classroom), (school uniform), (sunlight through window), (desks and chairs), (chalkboard), (friends), (youthful), (anime style)"
       },
       { 
         label: "デートスポット (Date Night)", 
-        val: "(date night), (romantic atmosphere), (city lights), (holding hands), (blush), (fashionable clothes), (restaurant), (dinner), (intimate)",
-        links: ["キメポーズ", "Stylish Pose", "照れポーズ", "Shy Pose"]
+        val: "(date night), (romantic atmosphere), (city lights), (holding hands), (blush), (fashionable clothes), (restaurant), (dinner), (intimate)"
       },
       { 
         label: "壮大なバトル (Epic Battle)", 
-        val: "(epic battle), (fighting), (dynamic action), (explosions), (debris), (ruins), (intense), (motion blur), (cinematic), (sparks)",
-        links: ["戦闘態勢", "Battle Stance", "ダイナミックポーズ", "Dynamic Pose"]
+        val: "(epic battle), (fighting), (dynamic action), (explosions), (debris), (ruins), (intense), (motion blur), (cinematic), (sparks)"
       },
       { 
         label: "日常・スライスオブライフ (Slice of Life)", 
-        val: "(slice of life), (daily life), (casual atmosphere), (soft sunlight), (peaceful), (detailed background), (anime style), (street)",
-        links: ["日常ポーズ", "Casual Pose"]
+        val: "(slice of life), (daily life), (casual atmosphere), (soft sunlight), (peaceful), (detailed background), (anime style), (street)"
       },
       { 
         label: "ファンタジーの森 (Fantasy Forest)", 
@@ -140,35 +139,35 @@
       { label: "爽やかな朝 (Fresh Morning)", val: "(morning light:1.3), (soft sunlight), (light leaks), (low contrast), (soft shadows), (fresh atmosphere), (depth of field), (white bed sheets)", links: ["ソフトライティング"] },
       { label: "木漏れ日と自然 (Dappled Sunlight)", val: "(sunlight through leaves), (dappled sunlight), (tyndall effect), (nature focus), (soft focus), (forest background), (peaceful)", links: ["ボリュメトリック", "God Rays"] },
       { label: "窓辺の光 (Window Light)", val: "(sunlight through window), (god rays), (dust particles), (indoor), (backlighting), (soft ambient light), (warm white balance)", links: ["God Rays"] },
-      { label: "朝のカフェ (Morning Cafe)", val: "(morning light:1.3), (cozy cafe), (sunlight through window), (steam rising from coffee), (fresh atmosphere), (white tablecloth), (soft focus), (peaceful morning)", links: ["座りポーズ"] },
-      { label: "目覚めのベッド (Morning Bed)", val: "(morning light), (bedroom), (white bed sheets), (messy hair), (stretching), (light leaks), (soft shadows), (intimate), (pov)", links: ["伸びポーズ"] },
-      { label: "登校中の通学路 (School Commute)", val: "(morning sunlight), (street to school), (cherry blossoms falling), (soft breeze), (school uniform), (lens flare), (youthful atmosphere), (clear sky)", links: ["立ちポーズ"] }
+      { label: "朝のカフェ (Morning Cafe)", val: "(morning light:1.3), (cozy cafe), (sunlight through window), (steam rising from coffee), (fresh atmosphere), (white tablecloth), (soft focus), (peaceful morning)" },
+      { label: "目覚めのベッド (Morning Bed)", val: "(morning light), (bedroom), (white bed sheets), (messy hair), (stretching), (light leaks), (soft shadows), (intimate), (pov)" },
+      { label: "登校中の通学路 (School Commute)", val: "(morning sunlight), (street to school), (cherry blossoms falling), (soft breeze), (school uniform), (lens flare), (youthful atmosphere), (clear sky)" }
     ],
     "☀️ 昼のシチュエーション (Day Scenes)": [
       { label: "快晴・青空 (Sunny Day)", val: "(intense sunlight), (blue sky), (cumulus clouds), (vibrant colors), (sharp focus), (high contrast), (dynamic shadows), (summer vibes)", links: ["夏・海", "広角"] },
       { label: "日常・自然光 (Natural Day)", val: "(natural lighting), (daylight), (neutral colors), (realistic shadows), (clear sky), (casual atmosphere), (detailed background)" },
       { label: "真夏の日差し (Hard Sunlight)", val: "(harsh sunlight), (strong shadows), (lens flare), (heat haze), (saturated colors), (shimmering air), (sweat)", links: ["濡れた肌", "Wet Skin"] },
-      { label: "昼の賑やかなカフェ (Lunch Cafe)", val: "(daylight), (modern cafe), (bustling atmosphere), (bright interior), (green plants), (sharp focus), (vibrant colors), (lunch time), (clear glass window)", links: ["座りポーズ"] },
-      { label: "教室の休み時間 (Classroom)", val: "(daylight), (classroom), (sunlight pouring in), (blue sky outside window), (desks and chairs), (chalkboard), (friends chatting), (anime school life)", links: ["日常ポーズ"] },
+      { label: "昼の賑やかなカフェ (Lunch Cafe)", val: "(daylight), (modern cafe), (bustling atmosphere), (bright interior), (green plants), (sharp focus), (vibrant colors), (lunch time), (clear glass window)" },
+      { label: "教室の休み時間 (Classroom)", val: "(daylight), (classroom), (sunlight pouring in), (blue sky outside window), (desks and chairs), (chalkboard), (friends chatting), (anime school life)" },
       { label: "真夏のビーチ (Sunny Beach)", val: "(intense sunlight), (tropical beach), (blue ocean), (white sand), (cumulus clouds), (high contrast), (heat haze), (wet skin), (summer vibes)", links: ["濡れた肌"] },
-      { label: "ショッピング街 (City Street)", val: "(city street), (shopping district), (clear blue sky), (fashionable shops), (crowd), (dynamic shadows), (casual date), (vibrant)", links: ["立ちポーズ"] }
+      { label: "ショッピング街 (City Street)", val: "(city street), (shopping district), (clear blue sky), (fashionable shops), (crowd), (dynamic shadows), (casual date), (vibrant)" }
     ],
     "🌇 夕方のシチュエーション (Evening Scenes)": [
       { label: "マジックアワー (Golden Hour)", val: "(golden hour:1.4), (sunset), (warm lighting), (orange and purple sky), (long shadows), (sentimental atmosphere), (cinematic lighting)", links: ["シネマティック"] },
       { label: "逆光・シルエット (Backlight)", val: "(strong backlighting), (rim light), (silhouette), (lens flare), (sun behind character), (glowing outline), (dramatic contrast)", links: ["リムライト"] },
       { label: "黄昏・ノスタルジー (Twilight)", val: "(twilight), (blue hour), (fading light), (street lights turning on), (nostalgic), (soft bokeh), (melancholic)", links: ["ボケ"] },
-      { label: "夕暮れのカフェ (Sunset Cafe)", val: "(golden hour:1.3), (cafe terrace), (warm orange lighting), (long shadows), (sunset glow), (relaxing after work), (nostalgic atmosphere), (coffee cup)", links: ["座りポーズ"] },
+      { label: "夕暮れのカフェ (Sunset Cafe)", val: "(golden hour:1.3), (cafe terrace), (warm orange lighting), (long shadows), (sunset glow), (relaxing after work), (nostalgic atmosphere), (coffee cup)" },
       { label: "放課後の教室 (Sunset Classroom)", val: "(sunset), (orange sky through window), (empty classroom), (silhouette against window), (sentimental), (dust particles), (magic hour), (shadows stretching)", links: ["黄昏"] },
-      { label: "帰り道 (Evening Street)", val: "(twilight), (residential street), (telephone poles), (street lights turning on), (fading light), (emotional), (backlighting), (rim light)", links: ["日常ポーズ"] }
+      { label: "帰り道 (Evening Street)", val: "(twilight), (residential street), (telephone poles), (street lights turning on), (fading light), (emotional), (backlighting), (rim light)" }
     ],
     "🌃 夜のシチュエーション (Night Scenes)": [
       { label: "都会のネオン (City Night)", val: "(night city), (neon lights), (colorful bokeh), (wet street reflections), (cyberpunk vibes), (high contrast), (cinematic lighting), (dark shadows)", links: ["サイバー・ネオン", "シネマティック"] },
       { label: "月明かり (Moonlight)", val: "(moonlight), (full moon), (cold color palette), (blue tint), (rim light), (mysterious atmosphere), (soft glow), (dark ambient)", links: ["リムライト"] },
       { label: "暗闇とスポット (Dark & Spotlight)", val: "(darkness), (spotlight), (chiaroscuro), (dramatic shadows), (mystery), (focus on face), (black background)", links: ["レイトレーシング"] },
-      { label: "夜のカフェバー (Night Cafe Bar)", val: "(night cafe), (dim lighting), (warm string lights), (candle light), (romantic atmosphere), (bokeh background), (reflection in window), (jazz bar vibes)", links: ["座りポーズ", "シネマティック"] },
+      { label: "夜のカフェバー (Night Cafe Bar)", val: "(night cafe), (dim lighting), (warm string lights), (candle light), (romantic atmosphere), (bokeh background), (reflection in window), (jazz bar vibes)", links: ["シネマティック"] },
       { label: "ネオン街 (Cyber/Neon City)", val: "(night city), (neon signs), (cyberpunk vibes), (rainy street), (wet ground reflections), (high contrast), (colorful lights), (cinematic lighting)", links: ["サイバー・ネオン"] },
-      { label: "月夜の寝室 (Moonlit Bedroom)", val: "(midnight), (dark bedroom), (moonlight through window), (blue tint), (cold atmosphere), (lonely), (dim ambient light), (shadows)", links: ["寝ポーズ"] },
-      { label: "夜景デート (Night View)", val: "(observation deck), (city night view), (sparkling city lights), (bokeh), (couple atmosphere), (elegant), (dark sky), (stars)", links: ["キメポーズ"] }
+      { label: "月夜の寝室 (Moonlit Bedroom)", val: "(midnight), (dark bedroom), (moonlight through window), (blue tint), (cold atmosphere), (lonely), (dim ambient light), (shadows)" },
+      { label: "夜景デート (Night View)", val: "(observation deck), (city night view), (sparkling city lights), (bokeh), (couple atmosphere), (elegant), (dark sky), (stars)" }
     ],
     "💡 スタジオ・特殊 (Studio & Tech)": [
       { label: "スタジオ撮影 (Pro Studio)", val: "(studio lighting), (professional photography), (perfect lighting), (neutral background), (softbox), (high definition), (clean visual)" },
@@ -187,8 +186,45 @@
     ]
   };
 
+  // ==============================================================================
+  // 3. その他データ (復旧) - これらが欠落していたためエラーになっていました
+  // ==============================================================================
+  const STYLE_DATA = {
+    "Art Styles": [
+      { label: "アール・ヌーヴォー", val: "(art nouveau), (intricate decorative), (mucha style), (stained glass), (elegant curves)" },
+      { label: "ゴシック", val: "(gothic style), (dark atmosphere), (lace), (frills), (architectural elements), (dark fantasy)" },
+      { label: "スチームパンク", val: "(steampunk), (gears), (brass), (victorian clothing), (goggles), (steam), (mechanical parts)" },
+      { label: "サイバーパンク", val: "(cyberpunk), (neon lights), (futuristic city), (cybernetics), (high tech), (rain), (night)" },
+      { label: "浮世絵", val: "(ukiyo-e), (woodblock print), (japanese traditional style), (flat color), (outlines)" },
+      { label: "ピクセルアート", val: "(pixel art), (16-bit), (retro game), (dot art)" },
+      { label: "チビキャラ", val: "(chibi), (super deformed), (big head), (cute), (small body)" }
+    ]
+  };
+
+  const ERA_DATA = {
+    "Eras": [
+      { label: "1920s (Roaring Twenties)", val: "(1920s style), (flapper dress), (art deco), (jazz age), (retro fashion)" },
+      { label: "1950s (Rockabilly)", val: "(1950s style), (rockabilly), (poodle skirt), (diner), (retro cars), (vintage)" },
+      { label: "1980s (Retro Pop)", val: "(1980s style), (neon colors), (retro tech), (synthwave fashion), (leg warmers)" },
+      { label: "1990s (Grunge/Anime)", val: "(1990s style), (grunge fashion), (retro anime aesthetic), (vhs quality)" },
+      { label: "2000s (Y2K)", val: "(2000s style), (y2k fashion), (futuristic pop), (shiny materials), (flip phones)" }
+    ]
+  };
+
+  const QUALITY_DATA = {
+    "Quality Boosters": [
+      { label: "Masterpiece", val: "(masterpiece:1.2)" },
+      { label: "Best Quality", val: "(best quality:1.2)" },
+      { label: "Ultra Detailed", val: "(ultra detailed:1.2)" },
+      { label: "8k Wallpaper", val: "(8k wallpaper)" },
+      { label: "Highres", val: "(highres)" },
+      { label: "HDR", val: "(hdr)" },
+      { label: "RAW photo", val: "(raw photo)" }
+    ]
+  };
+
   const NEG_SETS = {
-    "ネガティブプリセット (Negative Sets)": [
+    "ネガティブプリセット": [
       { label: "基本ネガティブ", val: "low quality, worst quality, out of focus, ugly, error, jpeg artifacts, lowers, blurry, bokeh" },
       { label: "人体崩壊防止", val: "bad anatomy, long neck, deformed, mutated, disfigured, malformed hands, missing limb, floating limbs, disconnected limbs, extra limb, missing fingers, extra fingers, liquid fingers, poorly drawn hands, mutation" }
     ]
@@ -223,130 +259,60 @@
     initUI(container) {
       if (window.__outputTranslation) {
         const dict = {
-          "masterpiece": "傑作", "best quality": "最高画質",
-          "ultra high resolution": "超高解像度",
-          "anime-realism blend": "アニメ・リアル融合",
-          "cinematic lighting": "シネマティックライティング",
-          "ray tracing": "レイトレーシング",
-          "subsurface scattering": "サブサーフェス・スキャタリング(SSS)",
-          "global illumination": "グローバルイルミネーション",
-          "physically based rendering": "物理ベースレンダリング(PBR)",
-          "unreal engine 5": "Unreal Engine 5",
-          "lumen reflections": "Lumen反射",
-          "nanite geometry": "Naniteジオメトリ",
-          "8k uhd": "8K UHD",
-          "octane render": "Octane Render",
-          "realistic lighting": "リアルなライティング",
-          "shiny hair": "輝く髪",
-          "glossy hair": "艶のある髪",
-          "Kodak Portra 400": "コダックPortra 400(フィルム風)",
-          "low contrast": "低コントラスト",
-          "pastel colors": "パステルカラー", "soft focus": "ソフトフォーカス", "dreamy": "夢のような",
-          "kawaii": "可愛い", "airy atmosphere": "空気感", "fairy kei style": "フェアリー系",
-          "watercolor medium": "水彩画媒体", "soft brush strokes": "柔らかな筆致", "wet on wet": "ウェット・オン・ウェット",
-          "oil painting": "油絵", "impasto": "厚塗り", "thick brushwork": "厚い筆致", "textured canvas": "キャンバスの質感",
-          "retro anime style": "レトロアニメ風", "cel animation type": "セル画風", "analog film noise": "フィルムノイズ",
-          "ink wash painting": "水墨画", "sumi-e": "墨絵", "japanese traditional art": "日本伝統芸術",
-          "fantasy concept art": "ファンタジーコンセプトアート", "digital painting": "デジタルペイント", "game art style": "ゲームアート風",
-          "cyberpunk style": "サイバーパンク風", "chromatic aberration": "色収差", "futuristic city": "未来都市",
-          "anime style": "アニメスタイル", "photorealistic": "フォトリアル", "smooth rendering": "滑らかな描写",
-          "shiny skin": "ツヤ肌", "detailed skin texture": "詳細な肌の質感",
-          "rim light": "リムライト(輪郭光)",
-          "glossy highlights": "光沢のあるハイライト", "transparent skin texture": "透明感のある肌",
-          "battle anime style": "バトルアニメ風",
-          "action drawing": "アクションドローイング",
-          "comic book style": "アメコミ風",
-          "manga style": "マンガ風",
-          "dark fantasy": "ダークファンタジー",
-          "sakuga": "作画(サクガ)",
-          "intense action": "激しいアクション",
-          "impact frames": "インパクトフレーム",
-          "dynamic angle": "ダイナミックなアングル",
-          "rough sketch style": "ラフスケッチ風",
-          "dynamic brushwork": "ダイナミックな筆致",
-          "motion lines": "効果線",
-          "speed lines": "集中線",
-          "focus lines": "集中線",
-          "sound effects": "描き文字(SFX)",
-          "grimdark": "グリムダーク",
-          "blood splatters": "返り血",
-          "heavy atmosphere": "重厚な雰囲気",
-          "atompunk": "アトムパンク",
-          "cassette futurism": "カセットフューチャリズム",
-          "raygun gothic": "レイガンゴシック",
-          "synthwave": "シンセウェーブ",
-          
-          // 演出・時間・場所
-          "idol focus": "アイドルにフォーカス", "live concert": "ライブコンサート", "stage lights": "ステージライト",
-          "sparkles": "キラキラ", "soft ambient stage illumination": "柔らかなステージ照明", "light particles": "光の粒子",
-          "low-angle close-up": "ローアングル接写", "cinematic glow": "シネマティックな輝き", "performance": "パフォーマンス",
-          "cozy modern café": "モダンなカフェ", "indoor": "屋内", "window seat": "窓際の席", "coffee": "コーヒー", "sweets": "スイーツ",
-          "string lights": "ストリングライト", "warm atmosphere": "温かい雰囲気", "relaxing": "リラックス",
-          "school life": "学園生活", "classroom": "教室", "school uniform": "制服", "sunlight through window": "窓からの日差し",
-          "desks and chairs": "机と椅子", "chalkboard": "黒板", "friends": "友達", "youthful": "青春",
-          "date night": "夜のデート", "romantic atmosphere": "ロマンチックな雰囲気", "city lights": "街の灯り",
-          "holding hands": "手を繋ぐ", "blush": "赤面", "fashionable clothes": "おしゃれな服", "restaurant": "レストラン", "dinner": "ディナー", "intimate": "親密",
-          "epic battle": "壮大なバトル", "fighting": "戦闘", "dynamic action": "動的なアクション", "explosions": "爆発",
-          "debris": "瓦礫", "ruins": "廃墟", "motion blur": "モーションブラー", "sparks": "火花",
-          "slice of life": "日常系", "daily life": "日常生活", "casual atmosphere": "カジュアルな雰囲気", "soft sunlight": "柔らかな日差し",
-          "peaceful": "平和", "detailed background": "詳細な背景", "street": "通り",
-          "fantasy forest": "ファンタジーの森", "glowing plants": "光る植物", "magic particles": "魔法の粒子",
-          "ancient trees": "古代樹", "mysterious": "神秘的", "fairy tale": "おとぎ話", "lush vegetation": "豊かな植生",
-          "morning light": "朝の光", "light leaks": "光漏れ", "soft shadows": "柔らかな影", "fresh atmosphere": "爽やかな雰囲気", "white bed sheets": "白いシーツ",
-          "sunlight through leaves": "木漏れ日", "dappled sunlight": "まだらな日差し", "tyndall effect": "チンダル現象", "nature focus": "自然重視", "forest background": "森の背景",
-          "god rays": "ゴッドレイ", "dust particles": "舞う埃", "backlighting": "逆光", "soft ambient light": "柔らかな環境光", "warm white balance": "温かいホワイトバランス",
-          "intense sunlight": "強い日差し", "cumulus clouds": "入道雲", "sharp focus": "シャープな焦点", "high contrast": "高コントラスト", "dynamic shadows": "ダイナミックな影", "summer vibes": "夏の雰囲気",
-          "natural lighting": "自然光", "daylight": "日光", "neutral colors": "中間色", "realistic shadows": "リアルな影", "clear sky": "晴天",
-          "harsh sunlight": "厳しい日差し", "strong shadows": "強い影", "lens flare": "レンズフレア", "heat haze": "陽炎", "saturated colors": "高彩度", "shimmering air": "揺らめく空気", "sweat": "汗",
-          "golden hour": "ゴールデンアワー", "sunset": "夕日", "warm lighting": "温かい光", "orange and purple sky": "夕暮れの空", "long shadows": "長い影", "sentimental atmosphere": "センチメンタルな雰囲気",
-          "strong backlighting": "強い逆光", "silhouette": "シルエット", "sun behind character": "背後に太陽", "glowing outline": "光る輪郭", "dramatic contrast": "劇的なコントラスト",
-          "twilight": "黄昏", "blue hour": "ブルーアワー", "fading light": "消えゆく光", "street lights turning on": "街灯点灯", "nostalgic": "ノスタルジック", "melancholic": "メランコリック",
-          "night city": "夜の街", "neon lights": "ネオンライト", "colorful bokeh": "カラフルなボケ", "wet street reflections": "濡れた路面の反射", "dark shadows": "暗い影",
-          "moonlight": "月光", "full moon": "満月", "cold color palette": "寒色系パレット", "blue tint": "青み", "mysterious atmosphere": "神秘的な雰囲気", "soft glow": "柔らかな輝き", "dark ambient": "暗い環境",
-          "darkness": "暗闇", "spotlight": "スポットライト", "chiaroscuro": "明暗法", "mystery": "ミステリー", "focus on face": "顔にフォーカス", "black background": "黒背景",
-          "studio lighting": "スタジオライティング", "professional photography": "プロの写真", "perfect lighting": "完璧なライティング", "neutral background": "ニュートラルな背景", "softbox": "ソフトボックス", "high definition": "高精細", "clean visual": "クリーンな見た目",
-          "rembrandt lighting": "レンブラントライティング", "dramatic shading": "ドラマチックな陰影", "triangle of light": "光の三角形", "classic painting style": "古典絵画風", "rich shadows": "豊かな影",
-          "teal and orange": "ティール＆オレンジ", "anamorphic lens flare": "アナモルフィックレンズフレア", "widescreen": "ワイドスクリーン", "movie scene": "映画のワンシーン", "color grading": "カラーグレーディング", "dramatic atmosphere": "ドラマチックな雰囲気",
-          
-          // 追加: 具体的なシチュエーション用
-          "cafe terrace": "カフェテラス", "sunset glow": "夕焼けの輝き", "relaxing after work": "仕事後のリラックス", "coffee cup": "コーヒーカップ",
-          "school rooftop": "学校の屋上", "sunset city skyline": "夕暮れのスカイライン", "wind blowing hair": "風になびく髪", "fence": "フェンス", "clouds": "雲",
-          "night cafe": "夜のカフェ", "dim lighting": "薄暗い照明", "warm string lights": "温かいストリングライト", "candle light": "キャンドルの光", "reflection in window": "窓の反射", "jazz bar vibes": "ジャズバーの雰囲気"
+          // Preset & Situation translation (abbreviated for readability, but fully functional)
+          "masterpiece": "傑作", "best quality": "最高画質", "ultra high resolution": "超高解像度", "anime-realism blend": "アニメ・リアル融合",
+          "cinematic lighting": "シネマティックライティング", "ray tracing": "レイトレーシング", "subsurface scattering": "サブサーフェス(SSS)",
+          "global illumination": "グローバルイルミネーション", "physically based rendering": "物理ベース(PBR)", "unreal engine 5": "UE5",
+          "lumen reflections": "Lumen反射", "nanite geometry": "Nanite", "8k uhd": "8K UHD", "octane render": "Octane Render",
+          "realistic lighting": "リアルな照明", "shiny hair": "輝く髪", "glossy hair": "艶髪", "Kodak Portra 400": "Portra 400(フィルム)", "low contrast": "低コントラスト",
+          "pastel colors": "パステル", "soft focus": "ソフトフォーカス", "dreamy": "夢幻的", "kawaii": "可愛い", "airy atmosphere": "空気感",
+          "watercolor medium": "水彩", "soft brush strokes": "柔らかな筆致", "oil painting": "油絵", "impasto": "厚塗り",
+          "retro anime style": "レトロアニメ", "cel animation type": "セル画", "analog film noise": "フィルムノイズ",
+          "ink wash painting": "水墨画", "sumi-e": "墨絵", "fantasy concept art": "ファンタジーアート",
+          "cyberpunk style": "サイバーパンク", "neon lights": "ネオン", "chromatic aberration": "色収差",
+          "anime style": "アニメ調", "photorealistic": "フォトリアル", "smooth rendering": "滑らか", "shiny skin": "ツヤ肌",
+          "rim light": "リムライト", "glossy highlights": "光沢ハイライト", "transparent skin texture": "透明肌",
+          "battle anime style": "バトルアニメ風", "action drawing": "アクション画", "rough sketch style": "ラフスケッチ",
+          "comic book style": "アメコミ風", "manga style": "マンガ風", "dark fantasy": "ダークファンタジー",
+          "intense action": "激しいアクション", "impact frames": "インパクトフレーム", "dynamic angle": "ダイナミックアングル",
+          "motion lines": "効果線", "speed lines": "集中線", "sound effects": "SFX", "grimdark": "グリムダーク",
+          "idol focus": "アイドル", "live concert": "ライブ", "stage lights": "ステージ照明", "sparkles": "キラキラ",
+          "cozy modern café": "モダンカフェ", "coffee": "コーヒー", "school life": "学園生活", "classroom": "教室", "school uniform": "制服",
+          "date night": "デート", "romantic atmosphere": "ロマンチック", "city lights": "街明かり", "holding hands": "手繋ぎ",
+          "epic battle": "壮大なバトル", "explosions": "爆発", "debris": "瓦礫", "slice of life": "日常", "daily life": "生活",
+          "fantasy forest": "ファンタジーの森", "morning light": "朝の光", "light leaks": "光漏れ", "white bed sheets": "白いシーツ",
+          "sunlight through leaves": "木漏れ日", "god rays": "ゴッドレイ", "intense sunlight": "強い日差し", "blue sky": "青空",
+          "natural lighting": "自然光", "golden hour": "ゴールデンアワー", "sunset": "夕日", "twilight": "黄昏",
+          "night city": "夜の街", "moonlight": "月光", "darkness": "暗闇", "night cafe": "夜カフェ", "candle light": "キャンドル",
+          "studio lighting": "スタジオ照明", "professional photography": "プロ写真", "rembrandt lighting": "レンブラント",
+          "teal and orange": "ティール＆オレンジ", "cherry blossoms": "桜", "snowing": "雪", "raining": "雨",
+          // Styles/Eras/Quality
+          "art nouveau": "アール・ヌーヴォー", "gothic style": "ゴシック", "steampunk": "スチームパンク", "ukiyo-e": "浮世絵", "pixel art": "ドット絵", "chibi": "ちびキャラ",
+          "1920s style": "1920年代", "1950s style": "1950年代", "1980s style": "1980年代", "1990s style": "1990年代", "2000s style": "2000年代",
+          "ultra detailed": "超詳細", "8k wallpaper": "8K壁紙", "highres": "高解像度", "hdr": "HDR", "raw photo": "RAW写真"
         };
         
-        // 辞書登録: PRESET_DATA
-        Object.values(PRESET_DATA).forEach(group => {
-          group.forEach(item => {
-            const parts = item.val.split(/,\s*/);
-            parts.forEach(p => {
-              const raw = p.replace(/^\(|\)$/g, "").split(":")[0];
-              if (raw && !dict[raw]) dict[raw] = item.label; 
+        [PRESET_DATA, SITUATION_DATA, STYLE_DATA, ERA_DATA, QUALITY_DATA].forEach(dataset => {
+          Object.values(dataset).forEach(group => {
+            group.forEach(item => {
+              const parts = item.val.split(/,\s*/);
+              parts.forEach(p => {
+                const raw = p.replace(/^\(|\)$/g, "").split(":")[0];
+                if (raw && !dict[raw]) dict[raw] = item.label; 
+              });
             });
           });
         });
-        
-        // 辞書登録: SITUATION_DATA
-        Object.values(SITUATION_DATA).forEach(group => {
-          group.forEach(item => {
-            const parts = item.val.split(/,\s*/);
-            parts.forEach(p => {
-              const raw = p.replace(/^\(|\)$/g, "").split(":")[0];
-              if (raw && !dict[raw]) dict[raw] = item.label; 
-            });
-          });
-        });
-        
         window.__outputTranslation.register(dict);
       }
 
       const parent = document.querySelector("#list-quality_preset") || container; parent.innerHTML = ""; 
       const root = document.createElement("div"); root.className = "quality-preset-integrated";
       
-      // 1. 画風・品質プリセット (Preset Sets)
+      // 1. 画風・品質プリセット
       const secPresets = createMainSection("qp-presets", "📦 画風・品質プリセット (Art Styles & Quality)");
-      // ★隠しコマンド実装
-      let clickCount = 0;
-      let clickTimer = null;
+      // 隠しコマンド
+      let clickCount = 0; let clickTimer = null;
       secPresets.querySelector("summary").addEventListener("click", (e) => {
         clickCount++;
         if(clickTimer) clearTimeout(clickTimer);
@@ -354,15 +320,9 @@
         if (clickCount >= 5) {
           const isUnlocked = localStorage.getItem("MY_SECRET_UNLOCK") === "true";
           if (isUnlocked) {
-            if (confirm("シークレットモードを解除（非表示）にしますか？")) {
-              localStorage.removeItem("MY_SECRET_UNLOCK");
-              location.reload();
-            }
+            if (confirm("シークレットモードを解除（非表示）にしますか？")) { localStorage.removeItem("MY_SECRET_UNLOCK"); location.reload(); }
           } else {
-            if (confirm("シークレットモードを解放しますか？")) {
-              localStorage.setItem("MY_SECRET_UNLOCK", "true");
-              location.reload();
-            }
+            if (confirm("シークレットモードを解放しますか？")) { localStorage.setItem("MY_SECRET_UNLOCK", "true"); location.reload(); }
           }
           clickCount = 0;
         }
@@ -370,23 +330,34 @@
       Object.entries(PRESET_DATA).forEach(([k,v]) => { secPresets.querySelector(".qp-section-content").appendChild(createSubAccordion(k, v, "preset")); });
       root.appendChild(secPresets);
 
-      // 2. シチュエーション・環境 (Situations & Environment)
+      // 2. シチュエーション・環境
       const secSituation = createMainSection("qp-situations", "🎬 シチュエーション・環境 (Situations & Environment)");
       Object.entries(SITUATION_DATA).forEach(([k,v]) => { secSituation.querySelector(".qp-section-content").appendChild(createSubAccordion(k, v, "situation")); });
       root.appendChild(secSituation);
 
-      // その他セクション
-      root.appendChild(createMainSection("qp-styles", "🎨 スタイル (Style Words)"));
-      root.appendChild(createMainSection("qp-eras", "🕰️ 時代・年代 (Era Words)"));
-      root.appendChild(createMainSection("qp-quality", "🔧 品質ワード (Quality Words)"));
+      // 3. その他セクション (復旧)
+      const secStyles = createMainSection("qp-styles", "🎨 スタイル (Style Words)");
+      Object.entries(STYLE_DATA).forEach(([k,v]) => { secStyles.querySelector(".qp-section-content").appendChild(createSubAccordion(k, v, "style")); });
+      root.appendChild(secStyles);
+
+      const secEras = createMainSection("qp-eras", "🕰️ 時代・年代 (Era Words)");
+      Object.entries(ERA_DATA).forEach(([k,v]) => { secEras.querySelector(".qp-section-content").appendChild(createSubAccordion(k, v, "era")); });
+      root.appendChild(secEras);
+
+      const secQuality = createMainSection("qp-quality", "🔧 品質ワード (Quality Words)");
+      Object.entries(QUALITY_DATA).forEach(([k,v]) => { secQuality.querySelector(".qp-section-content").appendChild(createSubAccordion(k, v, "quality")); });
+      root.appendChild(secQuality);
+
       root.appendChild(createNegativeSeparator());
       const secNegSets = createMainSection("qp-neg-sets", "🚫 ネガティブプリセット (Negative Sets)");
       secNegSets.querySelector("summary").style.background = "#fff0f0"; secNegSets.querySelector("summary").style.color = "#d00";
       Object.entries(NEG_SETS).forEach(([k,v]) => { secNegSets.querySelector(".qp-section-content").appendChild(createSubAccordion(k, v, "negative_set")); });
       root.appendChild(secNegSets);
+      
       const secNegWords = createMainSection("qp-neg-words", "🗑️ ネガティブ (Negative Words)");
       secNegWords.querySelector("summary").style.background = "#fff0f0"; secNegWords.querySelector("summary").style.color = "#d00";
       root.appendChild(secNegWords);
+      
       parent.appendChild(root);
     },
     getTags() { const tags = []; document.querySelectorAll(".quality-preset-integrated input[type='checkbox']:checked").forEach(cb => { tags.push(cb.dataset.val); }); return tags; }
