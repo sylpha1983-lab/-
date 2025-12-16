@@ -2,10 +2,14 @@ window.EXT_MANIFEST = [
   "builder_core.v1.js",
 
   // 1. Quality & Anatomy
-  "builder_ui.section.quality_preset.v1.js",
-  "builder_ui.section.quality_preset.v2.js",
-  "builder_ui.section.quality_preset.v3.js",
-  "builder_ui.section.quality_preset.v4.js",
+  // ★データファイルを先に読み込む (これでデータが確実に定義されます)
+  "builder_data.qp_base.js",        
+  "builder_data.qp_situations.js",  
+  
+  // ★UIファイルは「v1」の1つだけに統合しました
+  // (不具合の原因だった v2, v3, v4 は削除しました)
+  "builder_ui.section.quality_preset.v1.js", 
+
   "builder_ui.section.anatomy.v1.js",
 
   // 2. Character Base
