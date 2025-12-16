@@ -193,6 +193,108 @@
   function init() { if(!document.getElementById('builder-core-style')) { const style = document.createElement('style'); style.id = 'builder-core-style'; style.textContent = CSS; document.head.appendChild(style); } const genBtn = document.getElementById("genBtn"); if (genBtn) { const container = genBtn.parentElement; container.classList.add("builder-footer-grid"); genBtn.addEventListener("click", generateOutput); document.getElementById("copyBtn")?.addEventListener("click", copyOutput); document.getElementById("resetBtn")?.addEventListener("click", resetAll); const transBtn = document.getElementById("translateBtn"); if (transBtn) transBtn.addEventListener("click", () => window.__outputTranslation.toggle()); } const sectionsRoot = document.getElementById("sections"); if (sectionsRoot) { sectionsRoot.addEventListener("change", (e) => { if (e.target.matches('input[type="checkbox"]')) { applyLinkage(e.target); if (!e.target.checked) generateOutput(); } else if (e.target.matches('input[type="range"]')) { /* rangeはボタン待ち */ } }); } }
   
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init, { once: true }); else init();
-  window.__outputTranslation = { mode: "en", dict: {}, register(dict) { this.dict = { ...this.dict, ...dict }; }, resetToEn() { this.mode = "en"; const btn = document.getElementById("translateBtn"); if(btn) btn.textContent = "日本語表示"; }, normalize(str) { return str.replace(/[\(\{\[\]\}\)]/g, "").replace(/:[\d\.]+(%?)/g, "").replace(/\s+/g, "").toLowerCase(); }, toggle() { const outEl = document.getElementById("out"); const btn = document.getElementById("translateBtn"); if (!outEl) return; const current = outEl.value; if (!current.trim()) return; const words = current.split(/,\s*/).filter(Boolean); let newText; if (this.mode === "en") { newText = words.map(w => { let core = w.replace(/[\(\{\[\]\}\)]/g, "").replace(/:\d+(\.\d+)?/g, "").trim(); let ja = this.dict[core] || this.dict[core.toLowerCase()]; if (ja) return w.replace(new RegExp(core.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'), ja); return w; }).join(", "); this.mode = "ja"; if(btn) btn.textContent = "英語表示"; } else { const reverseMap = {}; Object.entries(this.dict).forEach(([enKey, jaVal]) => { if (!jaVal) return; const normalizedJa = this.normalize(jaVal); reverseMap[normalizedJa] = enKey; }); newText = words.map(w => { let searchKey = this.normalize(w); let en = reverseMap[searchKey]; const match = w.match(/^([\(\{\[]*)([\s\S]*?)((?::[\d\.]+(?:%?))?[\)\}\]]*)$/); if (!match) return w; const prefix = match[1] || ""; let core = match[2] || ""; let suffix = match[3] || ""; if (!en) { let coreKey = this.normalize(core); en = reverseMap[coreKey]; if (!en && suffix.match(/^[\)\}\]]+$/)) { let retryKey = this.normalize(core + suffix); if (reverseMap[retryKey]) { en = reverseMap[retryKey]; suffix = ""; } } } if (en) return prefix + en + suffix; return w; }).join(", "); this.mode = "en"; if(btn) btn.textContent = "日本語表示"; } outEl.value = newText; } };
+  
+  window.__outputTranslation = { 
+    mode: "en", 
+    dict: {}, 
+    register(dict) { this.dict = { ...this.dict, ...dict }; }, 
+    resetToEn() { 
+      this.mode = "en"; 
+      const btn = document.getElementById("translateBtn"); 
+      if(btn) btn.textContent = "日本語表示"; 
+    }, 
+    // ★ 修正: normalizeの強化（全角括弧の除去を追加）
+    normalize(str) { 
+      return str
+        .replace(/[\(\{\[\]\}\)]/g, "") 
+        .replace(/[（）【】［］｛｝]/g, "") // 全角括弧も除去
+        .replace(/:[\d\.]+(%?)/g, "")
+        .replace(/\s+/g, "")
+        .toLowerCase(); 
+    },
+    // ★ 追加: 括弧の余剰を削る正規化関数
+    fixExtraClosers(str) {
+      const trimOne = (s, openCh, closeCh) => {
+        const open = (s.match(new RegExp(`\\${openCh}`, "g")) || []).length;
+        const close = (s.match(new RegExp(`\\${closeCh}`, "g")) || []).length;
+        let extra = close - open;
+        while (extra > 0 && s.endsWith(closeCh)) {
+          s = s.slice(0, -1);
+          extra--;
+        }
+        return s;
+      };
+      // カンマ区切りごとに補正
+      return str
+        .split(/,\s*/)
+        .map(w => {
+          let s = w;
+          s = trimOne(s, "(", ")");
+          s = trimOne(s, "{", "}");
+          s = trimOne(s, "[", "]");
+          return s;
+        })
+        .join(", ");
+    },
+    toggle() { 
+      const outEl = document.getElementById("out"); 
+      const btn = document.getElementById("translateBtn"); 
+      if (!outEl) return; 
+      const current = outEl.value; 
+      if (!current.trim()) return; 
+      const words = current.split(/,\s*/).filter(Boolean); 
+      let newText; 
+      
+      if (this.mode === "en") { 
+        // 英語 -> 日本語
+        newText = words.map(w => { 
+          let core = w.replace(/[\(\{\[\]\}\)]/g, "").replace(/:\d+(\.\d+)?/g, "").trim(); 
+          let ja = this.dict[core] || this.dict[core.toLowerCase()]; 
+          if (ja) return w.replace(new RegExp(core.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'), ja); 
+          return w; 
+        }).join(", "); 
+        this.mode = "ja"; 
+        if(btn) btn.textContent = "英語表示"; 
+      } else { 
+        // 日本語 -> 英語
+        const reverseMap = {}; 
+        Object.entries(this.dict).forEach(([enKey, jaVal]) => { 
+          if (!jaVal) return; 
+          const normalizedJa = this.normalize(jaVal); 
+          reverseMap[normalizedJa] = enKey; 
+        }); 
+        newText = words.map(w => { 
+          let searchKey = this.normalize(w); 
+          let en = reverseMap[searchKey]; 
+          const match = w.match(/^([（(\{\[]*)([\s\S]*?)((?::[\d\.]+(?:%?))?[）)\}\]]*)$/); 
+          if (!match) return w; 
+          const prefix = match[1] || ""; 
+          let core = match[2] || ""; 
+          let suffix = match[3] || ""; 
+          
+          if (!en) { 
+            let coreKey = this.normalize(core); 
+            en = reverseMap[coreKey]; 
+            // サフィックス込みでリトライ
+            if (!en && suffix.match(/^[）)\}\]]+$/)) { 
+              let retryKey = this.normalize(core + suffix); 
+              if (reverseMap[retryKey]) { 
+                en = reverseMap[retryKey]; 
+                suffix = ""; 
+              } 
+            } 
+          } 
+          if (en) return prefix + en + suffix; 
+          return w; 
+        }).join(", "); 
+        this.mode = "en"; 
+        if(btn) btn.textContent = "日本語表示"; 
+      }
+      
+      // ★ ここで括弧の整合性を強制補正
+      newText = this.fixExtraClosers(newText);
+      outEl.value = newText; 
+    } 
+  };
 })();
 
