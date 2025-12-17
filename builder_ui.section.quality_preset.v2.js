@@ -1,217 +1,220 @@
 (function(){
   "use strict";
-  const VERSION = 2; // 統合版: 画風・文化・スタイル
+  const VERSION = 2; // シチュエーション（完全版）
   const KEY = "quality_preset";
 
-  const STYLES_DATA = {
-    "🏢 アニメスタジオ (Anime Studios)": [
-      { ja: "京都アニメーション", en: "kyoto animation" }, { ja: "ufotable", en: "ufotable" },
-      { ja: "SHAFT", en: "shaft" }, { ja: "TRIGGER", en: "studio trigger" },
-      { ja: "スタジオジブリ", en: "studio ghibli" }, { ja: "MAPPA", en: "mappa" },
-      { ja: "WIT STUDIO", en: "wit studio" }, { ja: "CloverWorks", en: "cloverworks" },
-      { ja: "A-1 Pictures", en: "a-1 pictures" }, { ja: "Production I.G", en: "production i.g" },
-      { ja: "マッドハウス", en: "madhouse" }, { ja: "ボンズ", en: "bones" },
-      { ja: "サンライズ", en: "sunrise" }, { ja: "東映アニメーション", en: "toei animation" },
-      { ja: "P.A.WORKS", en: "p.a. works" }, { ja: "動画工房", en: "doga kobo" }
+  // データ定義
+  const SITUATION_DATA = {
+    "📍 スポット・お店 (Spots & Shops)": [
+      { label: "アイドルステージ", val: "(idol focus), (live concert), (stage lights), (sparkles), (soft ambient stage illumination), (cinematic glow), (performance)", links: ["シネマティック"] },
+      { label: "おしゃれカフェ", val: "(cozy modern café), (indoor), (window seat), (coffee), (sweets), (string lights), (decorations), (bokeh)", links: ["ボケ"] },
+      { label: "バー・パブ", val: "(bar counter), (bottles on shelves), (dim lighting), (bartender), (cocktail), (glass), (jazz bar vibes), (adult atmosphere)", links: ["シネマティック"] },
+      { label: "コンビニ", val: "(convenience store), (bright fluorescent light), (shelves of snacks), (refrigerator), (night shift), (modern japan)" },
+      { label: "スーパーマーケット", val: "(supermarket), (grocery shopping), (aisle), (shopping basket), (fruit and vegetables), (bright lighting)" },
+      { label: "図書館", val: "(library), (bookshelves), (quiet atmosphere), (reading), (sunlight through window), (dust particles), (studying)" },
+      { label: "病院・病室", val: "(hospital room), (white bed), (medical equipment), (clean atmosphere), (sterile), (curtain), (window)" },
+      { label: "デートスポット", val: "(date night), (romantic atmosphere), (city lights), (holding hands), (blush), (fashionable clothes), (restaurant), (dinner)" }
     ],
-    "🖌️ イラストレーター (Illustrators)": [
-      { ja: "Mika Pikazo風", en: "mika pikazo style" }, { ja: "米山舞風", en: "yoneyama mai style" },
-      { ja: "ワダアルコ風", en: "wada arco style" }, { ja: "望月けい風", en: "kei mochizuki style" },
-      { ja: "副島成記風 (ペルソナ)", en: "shigenori soejima style" }, { ja: "新川洋司風 (MGS)", en: "yoji shinkawa style" },
-      { ja: "天野喜孝風 (FF)", en: "yoshitaka amano style" }, { ja: "村田蓮爾風", en: "range murata style" },
-      { ja: "カントク風", en: "kantoku style" }, { ja: "Tony風", en: "tony taka style" },
-      { ja: "珈琲貴族風", en: "coffee kizoku style" }, { ja: "redjuice風", en: "redjuice style" },
-      { ja: "huke風", en: "huke style" }, { ja: "深崎暮人風", en: "misaki kurehito style" }
+    "🏫 学園・青春 (School & Youth)": [
+      { label: "教室・授業中", val: "(classroom), (school desks), (chalkboard), (sunlight through window), (friends), (school uniform), (anime school life)" },
+      { label: "学校の廊下", val: "(school hallway), (lockers), (cleaning time), (sunlight), (after school), (perspective), (shiny floor)" },
+      { label: "屋上", val: "(school rooftop), (fence), (blue sky), (clouds), (wind blowing hair), (cityscape in background), (secret base), (lunch break)", links: ["青空", "風"] },
+      { label: "体育館", val: "(school gymnasium), (basketball hoop), (wooden floor), (indoor shoes), (sports equipment), (large windows), (echoing)" },
+      { label: "保健室", val: "(school infirmary), (white bed), (curtain), (medicine cabinet), (quiet), (resting), (afternoon sun)" },
+      { label: "通学路", val: "(street to school), (cherry blossoms falling), (morning sunlight), (telephone poles), (residential area), (walking), (chatting)" },
+      { label: "部室", val: "(club room), (messy desk), (hobby items), (after school), (sunset glow), (friends gathering), (cozy)" }
     ],
-    "🎮 ゲームアート (Game Styles)": [
-      { ja: "原神スタイル", en: "genshin impact style" }, { ja: "スターレイル風", en: "honkai: star rail style" },
-      { ja: "アークナイツ風", en: "arknights style" }, { ja: "アズレン風", en: "azur lane style" },
-      { ja: "ブルアカ風", en: "blue archive style" }, { ja: "FGO風", en: "fate/grand order style" },
-      { ja: "ペルソナ5風", en: "persona 5 style" }, { ja: "ダンガンロンパ風", en: "danganronpa style" },
-      { ja: "ニーア風", en: "nier: automata style" }, { ja: "FF風", en: "final fantasy style" },
-      { ja: "エルデンリング風", en: "elden ring style" }, { ja: "スプラトゥーン風", en: "splatoon style" },
-      { ja: "グラブル風", en: "granblue fantasy style" }, { ja: "アイマス風", en: "the idolm@ster style" }
+    "🏠 家・日常 (Home & Daily Life)": [
+      { label: "リビング", val: "(living room), (sofa), (television), (carpet), (relaxing), (cozy atmosphere), (family time), (indoor plants)" },
+      { label: "キッチン", val: "(modern kitchen), (cooking), (apron), (vegetables), (knife), (frying pan), (steam), (morning breakfast)" },
+      { label: "寝室・ベッド", val: "(bedroom), (messy bed), (white sheets), (pillow), (morning light), (pajamas), (stretching), (private space)" },
+      { label: "バスルーム", val: "(bathroom), (bathtub), (steam), (bubbles), (wet skin), (tiles), (mirror), (shampoo)", links: ["濡れた肌"] },
+      { label: "和室", val: "(japanese style room), (tatami mats), (shoji screen), (kotatsu), (tea cup), (cushion), (calm atmosphere)" },
+      { label: "玄関", val: "(entrance hall), (shoes), (umbrella stand), (welcome home), (door open), (leaving home)" },
+      { label: "ベランダ", val: "(apartment balcony), (laundry hanging), (potted plants), (city view), (railing), (breeze), (relaxing)" }
     ],
-    "🎨 アート・絵画風 (Artistic)": [
-      { label: "厚塗り・油絵", val: "(oil painting), (impasto:1.2), (visible brushstrokes), (rich texture)" },
-      { label: "水彩画", val: "(watercolor medium), (wet on wet), (soft edges), (splatter effect)" },
-      { label: "インク・水墨画", val: "(ink wash painting), (sumi-e), (monochrome), (bold lines), (brush stroke)" },
-      { label: "スケッチ", val: "(sketch), (pencil drawing), (rough lines), (graphite medium), (hatching)" },
-      { label: "線画", val: "(line art), (monochrome), (clean lines), (minimalist), (white background)" },
-      { label: "浮世絵", val: "(ukiyo-e style), (woodblock print), (flat perspective), (bold outlines), (washi paper texture)" },
-      { label: "ポップアート", val: "(pop art style), (bold colors), (halftone dots), (comic book style)" },
-      { label: "ステンドグラス", val: "(stained glass style), (vibrant light), (mosaic pattern), (black outline)" },
-      { label: "切り絵", val: "(paper cutout art), (layered paper), (shadow box), (3d depth)" },
-      { label: "サイケデリック", val: "(psychedelic art), (lsd trip style), (kaleidoscope pattern), (vibrant neon colors)" },
-      { label: "点描画", val: "(pointillism), (stippling), (dots texture), (georges seurat style)" }
+    "🏰 ファンタジー・RPG (Fantasy & RPG)": [
+      { label: "ファンタジーの森", val: "(fantasy forest), (glowing plants), (magic particles), (ancient trees), (mysterious), (fairy tale), (lush vegetation)", links: ["ファンタジー"] },
+      { label: "王宮・城", val: "(royal palace), (throne room), (chandelier), (red carpet), (marble pillars), (luxurious), (gold decorations), (king and queen)" },
+      { label: "ダンジョン", val: "(stone dungeon), (torch light), (dark atmosphere), (cobwebs), (stone walls), (treasure chest), (adventure), (danger)" },
+      { label: "冒険者ギルド", val: "(fantasy tavern), (wooden tables), (beer mugs), (lively atmosphere), (adventurers), (candle light), (fireplace), (quest board)" },
+      { label: "魔法研究所", val: "(alchemist lab), (potions), (scrolls), (books), (magic circle), (glowing crystals), (cluttered), (mysterious)" },
+      { label: "天空の城", val: "(floating island), (castle in the sky), (clouds), (waterfall into void), (fantasy landscape), (dreamy), (epic scale)", links: ["広角"] },
+      { label: "廃墟・遺跡", val: "(ancient ruins), (overgrown with moss), (broken pillars), (stone statues), (mysterious), (lost civilization), (sunlight filtering)" }
     ],
-    "🌸 美学・コア (Aesthetics)": [
-      { ja: "コテージコア", en: "cottagecore" }, { ja: "ダークアカデミア", en: "dark academia" },
-      { ja: "ウィアードコア", en: "weirdcore" }, { ja: "ドリームコア", en: "dreamcore" },
-      { ja: "プールコア", en: "poolcore" }, { ja: "トラウマコア", en: "traumacore" },
-      { ja: "ゴブリンコア", en: "goblincore" }, { ja: "フェアリーコア", en: "fairycore" },
-      { ja: "エンジェルコア", en: "angelcore" }, { ja: "サイバープレップ", en: "cyberprep" },
-      { label: "バービーコア", val: "(barbiecore), (pink aesthetic), (plastic texture), (girly), (fashion doll)" },
-      { label: "キッドコア", val: "(kidcore), (primary colors), (childhood nostalgia), (toys), (rainbow), (playful)" }
+    "🏙️ 都会・ストリート (Urban & Street)": [
+      { label: "繁華街", val: "(busy city street), (scramble crossing), (crowd), (skyscrapers), (billboards), (modern city), (daytime), (energetic)" },
+      { label: "路地裏", val: "(back alley), (narrow street), (pipes), (vending machine), (trash cans), (stray cat), (shadows), (gritty)" },
+      { label: "駅のホーム", val: "(train station platform), (train arriving), (commuters), (electric overhead lines), (sunset), (waiting), (travel)" },
+      { label: "夜のネオン街", val: "(cyberpunk city), (neon signs), (rainy street), (reflections), (night), (futuristic), (vibrant colors)", links: ["サイバー・ネオン"] },
+      { label: "公園", val: "(public park), (bench), (trees), (fountain), (pigeons), (relaxing), (peaceful), (lunch break)" },
+      { label: "ビルの屋上", val: "(skyscraper rooftop), (night city view), (railing), (windy), (city lights), (lonely), (dramatic)" }
     ],
-    "🎵 音楽・ファッション (Music & Fashion)": [
-      { ja: "ヘヴィメタル風", en: "heavy metal aesthetic" }, { ja: "ヒップホップ風", en: "hip hop style" },
-      { ja: "ジャズ/ノワール", en: "film noir style" }, { ja: "K-POP風", en: "k-pop aesthetic" },
-      { ja: "ビジュアル系", en: "visual kei" }, { ja: "パンクロック", en: "punk rock style" },
-      { ja: "EDM/レイブ", en: "rave style" }, { ja: "グランジ", en: "grunge aesthetic" },
-      { ja: "オートクチュール", en: "haute couture" }, { ja: "テックウェア", en: "techwear" },
-      { ja: "森ガール", en: "mori girl" }, { ja: "ギャル (Y2K)", en: "gyaru style" },
-      { ja: "ゴスロリ", en: "gothic lolita" }, { ja: "ストリート", en: "streetwear" },
-      { ja: "アヴァンギャルド", en: "avant-garde fashion" }
+    "🌺 自然・絶景 (Nature & Scenery)": [
+      { label: "花畑", val: "(flower field), (sunflowers), (blue sky), (wind), (petals scattered), (bright colors), (summer), (nature)" },
+      { label: "雪山", val: "(snowy mountain), (winter landscape), (snowing), (white world), (cold atmosphere), (pine trees), (footprints)" },
+      { label: "ビーチ", val: "(tropical beach), (white sand), (blue ocean), (emerald water), (palm trees), (cumulus clouds), (summer vacation)", links: ["夏・海"] },
+      { label: "洞窟", val: "(underground cave), (stalactites), (underground lake), (glowing crystals), (dark and cool), (echo), (mystery)" },
+      { label: "夕暮れの海", val: "(sunset beach), (orange sky), (reflection on water), (waves), (silhouette), (romantic), (sentimental)", links: ["夕暮れ"] },
+      { label: "星空", val: "(starry sky), (milky way), (shooting star), (night landscape), (silhouette of mountains), (beautiful), (universe)" }
     ],
-    "🖌️ 専門イラスト (Specialized Art)": [
-      { ja: "ボタニカルアート", en: "botanical illustration" }, { ja: "解剖図", en: "anatomical drawing" },
-      { ja: "建築スケッチ", en: "architectural sketch" }, { ja: "ファッション画", en: "fashion illustration" },
-      { ja: "児童画", en: "children's drawing" }, { ja: "等高線図", en: "topographic map" },
-      { ja: "特許図面", en: "patent drawing" }, { ja: "曼荼羅", en: "mandala" }
-    ]
-  };
-
-  const ERAS_DATA = {
-    "歴史・時代 (Extended Eras)": [
-      { ja: "古代エジプト", en: "ancient egypt" }, { ja: "古代ギリシャ", en: "ancient greek" },
-      { ja: "中世ヨーロッパ", en: "medieval era" }, { ja: "西部開拓時代", en: "wild west" },
-      { ja: "ヴィクトリア朝", en: "victorian era" }, { ja: "大正ロマン", en: "taisho roman" },
-      { ja: "1920年代 (狂騒)", en: "roaring twenties" }, { ja: "1950年代 (ロカビリー)", en: "1950s style" },
-      { ja: "昭和レトロ", en: "showa era style" }, { ja: "バブル時代 (80s)", en: "bubble era" },
-      { ja: "Y2K (2000年代)", en: "y2k aesthetic" }, { ja: "ポストアポカリプス", en: "post-apocalyptic" },
-      { ja: "サイバーパンク未来", en: "cyberpunk future" }
+    "🌅 朝 (Morning)": [
+      { label: "爽やかな朝", val: "(morning light:1.3), (soft sunlight), (light leaks), (low contrast), (soft shadows), (fresh atmosphere), (depth of field), (white bed sheets)", links: ["ソフトライティング"] },
+      { label: "木漏れ日", val: "(sunlight through leaves), (dappled sunlight), (tyndall effect), (nature focus), (soft focus), (forest background), (peaceful)", links: ["ボリュメトリック"] },
+      { label: "窓辺の光", val: "(sunlight through window), (god rays), (dust particles), (indoor), (backlighting), (soft ambient light), (warm white balance)", links: ["God Rays"] },
+      { label: "朝のカフェ", val: "(morning light:1.3), (cozy cafe), (sunlight through window), (steam rising from coffee), (fresh atmosphere), (white tablecloth), (soft focus), (peaceful morning)", links: ["座りポーズ"] },
+      { label: "目覚めのベッド", val: "(morning light), (bedroom), (white bed sheets), (messy hair), (stretching), (light leaks), (soft shadows), (intimate), (pov)", links: ["伸びポーズ"] },
+      { label: "登校中", val: "(morning sunlight), (street to school), (cherry blossoms falling), (soft breeze), (school uniform), (lens flare), (youthful atmosphere), (clear sky)", links: ["立ちポーズ"] }
+    ],
+    "☀️ 昼 (Day)": [
+      { label: "快晴・青空", val: "(intense sunlight), (blue sky), (cumulus clouds), (vibrant colors), (sharp focus), (high contrast), (dynamic shadows), (summer vibes)", links: ["夏・海", "広角"] },
+      { label: "日常・自然光", val: "(natural lighting), (daylight), (neutral colors), (realistic shadows), (clear sky), (casual atmosphere), (detailed background)" },
+      { label: "真夏の日差し", val: "(harsh sunlight), (strong shadows), (lens flare), (heat haze), (saturated colors), (shimmering air), (sweat)", links: ["濡れた肌"] },
+      { label: "昼のカフェ", val: "(daylight), (modern cafe), (bustling atmosphere), (bright interior), (green plants), (sharp focus), (vibrant colors), (lunch time), (clear glass window)", links: ["座りポーズ"] },
+      { label: "教室の休み時間", val: "(daylight), (classroom), (sunlight pouring in), (blue sky outside window), (desks and chairs), (chalkboard), (friends chatting), (anime school life)", links: ["日常ポーズ"] },
+      { label: "真夏のビーチ", val: "(intense sunlight), (tropical beach), (blue ocean), (white sand), (cumulus clouds), (high contrast), (heat haze), (wet skin), (summer vibes)", links: ["濡れた肌"] },
+      { label: "ショッピング街", val: "(city street), (shopping district), (clear blue sky), (fashionable shops), (crowd), (dynamic shadows), (casual date), (vibrant)", links: ["立ちポーズ"] }
+    ],
+    "🌇 夕方 (Evening)": [
+      { label: "マジックアワー", val: "(golden hour:1.4), (sunset), (warm lighting), (orange and purple sky), (long shadows), (sentimental atmosphere), (cinematic lighting)", links: ["シネマティック"] },
+      { label: "逆光・シルエット", val: "(strong backlighting), (rim light), (silhouette), (lens flare), (sun behind character), (glowing outline), (dramatic contrast)", links: ["リムライト"] },
+      { label: "黄昏", val: "(twilight), (blue hour), (fading light), (street lights turning on), (nostalgic), (soft bokeh), (melancholic)", links: ["ボケ"] },
+      { label: "夕暮れのカフェ", val: "(golden hour:1.3), (cafe terrace), (warm orange lighting), (long shadows), (sunset glow), (relaxing after work), (nostalgic atmosphere), (coffee cup)", links: ["座りポーズ"] },
+      { label: "放課後の教室", val: "(sunset), (orange sky through window), (empty classroom), (silhouette against window), (sentimental), (dust particles), (magic hour), (shadows stretching)", links: ["黄昏"] },
+      { label: "帰り道", val: "(twilight), (residential street), (telephone poles), (street lights turning on), (fading light), (emotional), (backlighting), (rim light)", links: ["日常ポーズ"] }
+    ],
+    "🌃 夜 (Night)": [
+      { label: "都会のネオン", val: "(night city), (neon lights), (colorful bokeh), (wet street reflections), (cyberpunk vibes), (high contrast), (cinematic lighting), (dark shadows)", links: ["サイバー・ネオン", "シネマティック"] },
+      { label: "月明かり", val: "(moonlight), (full moon), (cold color palette), (blue tint), (rim light), (mysterious atmosphere), (soft glow), (dark ambient)", links: ["リムライト"] },
+      { label: "暗闇とスポット", val: "(darkness), (spotlight), (chiaroscuro), (dramatic shadows), (mystery), (focus on face), (black background)", links: ["レイトレーシング"] },
+      { label: "夜のカフェバー", val: "(night cafe), (dim lighting), (warm string lights), (candle light), (romantic atmosphere), (bokeh background), (reflection in window), (jazz bar vibes)", links: ["シネマティック"] },
+      { label: "ネオン街", val: "(cyberpunk city), (neon signs), (rainy street), (reflections), (night), (futuristic), (vibrant colors)", links: ["サイバー・ネオン"] },
+      { label: "月夜の寝室", val: "(midnight), (dark bedroom), (moonlight through window), (blue tint), (cold atmosphere), (lonely), (dim ambient light), (shadows)", links: ["寝ポーズ"] },
+      { label: "夜景デート", val: "(observation deck), (city night view), (sparkling city lights), (bokeh), (couple atmosphere), (elegant), (dark sky), (stars)", links: ["キメポーズ"] }
+    ],
+    "💡 スタジオ・特殊 (Studio & Tech)": [
+      { label: "スタジオ撮影", val: "(studio lighting), (professional photography), (perfect lighting), (neutral background), (softbox), (high definition), (clean visual)" },
+      { label: "レンブラント", val: "(rembrandt lighting), (dramatic shading), (triangle of light), (artistic lighting), (classic painting style), (rich shadows)" },
+      { label: "映画的演出", val: "(cinematic lighting), (teal and orange), (anamorphic lens flare), (widescreen), (movie scene), (color grading), (dramatic atmosphere)", links: ["シネマティック"] }
+    ],
+    "🍃 季節・空気感 (Season & Atmosphere)": [
+      { label: "幻想的", val: "(dreamlike atmosphere), (soft focus), (faint sparkles), (floating feathers), (bokeh heart shapes), (pastel theme), (innocent)" },
+      { label: "春・桜", val: "(spring season), (cherry blossoms), (pink atmosphere), (soft sunlight), (warm breeze)" },
+      { label: "夏・海", val: "(summer season), (intense sunlight), (blue sky), (heat haze), (vibrant colors), (high contrast)" },
+      { label: "秋・紅葉", val: "(autumn season), (fallen leaves), (orange and red theme), (warm lighting), (nostalgic atmosphere)" },
+      { label: "冬・雪", val: "(winter season), (snowing), (snowy landscape), (cold atmosphere), (breath steam), (pale colors), (overcast)" },
+      { label: "夕暮れ", val: "(sunset), (golden hour), (orange sky), (dramatic shadows), (lens flare), (sentimental), (rim light)" },
+      { label: "深夜の静寂", val: "(midnight), (starry sky), (moonlight), (darkness), (quiet atmosphere), (blue tint), (cinematic lighting)" },
+      { label: "雨の情緒", val: "(raining), (wet ground), (reflections), (gloomy sky), (cinematic lighting), (atmospheric perspective)" }
     ]
   };
 
   // 翻訳辞書
   const DICT = {
-    // Studios & Illustrators & Games (省略形対応)
-    "kyoto animation": "京都アニメーション", "studio ghibli": "スタジオジブリ", "studio trigger": "TRIGGER",
-    "mika pikazo style": "Mika Pikazo風", "yoneyama mai style": "米山舞風", "genshin impact style": "原神風",
-    // Artistic Presets content
-    "oil painting": "油絵", "impasto": "厚塗り", "visible brushstrokes": "筆致", "rich texture": "豊かな質感",
-    "watercolor medium": "水彩画", "wet on wet": "ウェット・オン・ウェット", "soft edges": "柔らかな輪郭", "splatter effect": "飛沫効果",
-    "ink wash painting": "水墨画", "sumi-e": "墨絵", "monochrome": "モノクロ", "bold lines": "太い線", "brush stroke": "筆のタッチ",
-    "sketch": "スケッチ", "pencil drawing": "鉛筆画", "rough lines": "ラフな線", "graphite medium": "黒鉛画", "hatching": "ハッチング",
-    "line art": "線画", "clean lines": "綺麗な線", "minimalist": "ミニマリスト", "white background": "白背景",
-    "ukiyo-e style": "浮世絵風", "woodblock print": "木版画", "flat perspective": "平面的なパース", "bold outlines": "太い輪郭線", "washi paper texture": "和紙の質感",
-    "pop art style": "ポップアート", "bold colors": "大胆な色", "halftone dots": "ハーフトーン", "comic book style": "アメコミ風",
-    "stained glass style": "ステンドグラス風", "vibrant light": "鮮やかな光", "mosaic pattern": "モザイク模様", "black outline": "黒い輪郭線",
-    "paper cutout art": "切り絵", "layered paper": "重ねた紙", "shadow box": "シャドーボックス", "3d depth": "3Dの奥行き",
-    "psychedelic art": "サイケデリック", "lsd trip style": "LSDトリップ風", "kaleidoscope pattern": "万華鏡模様", "vibrant neon colors": "鮮やかなネオン色",
-    "pointillism": "点描画", "stippling": "点描", "dots texture": "ドットの質感", "georges seurat style": "スーラ風",
-    // Aesthetics
-    "cottagecore": "コテージコア", "dark academia": "ダークアカデミア", "weirdcore": "ウィアードコア",
-    "dreamcore": "ドリームコア", "poolcore": "プールコア", "traumacore": "トラウマコア",
-    "goblincore": "ゴブリンコア", "fairycore": "フェアリーコア", "angelcore": "エンジェルコア",
-    "cyberprep": "サイバープレップ",
-    "barbiecore": "バービーコア", "pink aesthetic": "ピンクの美学", "plastic texture": "プラスチック質感", "girly": "ガーリー", "fashion doll": "ファッションドール",
-    "kidcore": "キッドコア", "primary colors": "原色", "childhood nostalgia": "子供時代の郷愁", "toys": "おもちゃ", "rainbow": "虹", "playful": "遊び心",
-    // Music & Fashion
-    "heavy metal aesthetic": "ヘヴィメタル風", "hip hop style": "ヒップホップ風", "film noir style": "フィルム・ノワール風",
-    "k-pop aesthetic": "K-POP風", "visual kei": "ビジュアル系", "punk rock style": "パンクロック風",
-    "rave style": "レイブ風", "grunge aesthetic": "グランジ風",
-    "haute couture": "オートクチュール", "techwear": "テックウェア", "mori girl": "森ガール",
-    "gyaru style": "ギャル風", "gothic lolita": "ゴスロリ", "streetwear": "ストリート", "avant-garde fashion": "アヴァンギャルド",
-    // Specialized Art
-    "botanical illustration": "植物画", "anatomical drawing": "解剖図", "architectural sketch": "建築スケッチ",
-    "fashion illustration": "ファッション画", "children's drawing": "児童画", "topographic map": "等高線図",
-    "patent drawing": "特許図面", "mandala": "曼荼羅",
-    // Eras
-    "ancient egypt": "古代エジプト", "ancient greek": "古代ギリシャ", "medieval era": "中世", "wild west": "西部開拓時代",
-    "victorian era": "ヴィクトリア朝", "taisho roman": "大正ロマン", "roaring twenties": "狂騒の20年代",
-    "1950s style": "1950年代風", "showa era style": "昭和レトロ", "bubble era": "バブル時代",
-    "y2k aesthetic": "Y2K", "post-apocalyptic": "ポストアポカリプス", "cyberpunk future": "サイバーパンク未来"
+    // Spots & Shops
+    "idol focus": "アイドル", "live concert": "ライブ", "stage lights": "ステージ照明", "sparkles": "キラキラ",
+    "cinematic glow": "映画的輝き", "performance": "パフォーマンス", "cozy modern café": "モダンカフェ",
+    "coffee": "コーヒー", "sweets": "スイーツ", "string lights": "イルミネーション", "bar counter": "バーカウンター",
+    "bottles on shelves": "棚のボトル", "bartender": "バーテンダー", "cocktail": "カクテル", "jazz bar vibes": "ジャズバー",
+    "adult atmosphere": "大人の雰囲気", "convenience store": "コンビニ", "bright fluorescent light": "蛍光灯",
+    "shelves of snacks": "お菓子棚", "refrigerator": "冷蔵庫", "night shift": "夜勤", "modern japan": "現代日本",
+    "supermarket": "スーパー", "grocery shopping": "買い物", "shopping basket": "カゴ", "fruit and vegetables": "青果",
+    "library": "図書館", "bookshelves": "本棚", "quiet atmosphere": "静寂", "reading": "読書", "hospital room": "病室",
+    "white bed": "白いベッド", "medical equipment": "医療機器", "sterile": "無菌", "date night": "夜デート",
+    "romantic atmosphere": "ロマンチック", "city lights": "街明かり", "holding hands": "手繋ぎ", "restaurant": "レストラン",
+    "dinner": "ディナー", 
+    // School
+    "classroom": "教室", "school desks": "机", "chalkboard": "黒板", "friends": "友達",
+    "school uniform": "制服", "school hallway": "廊下", "lockers": "ロッカー", "cleaning time": "掃除時間",
+    "school rooftop": "屋上", "fence": "フェンス", "wind blowing hair": "風になびく髪", "secret base": "秘密基地",
+    "school gymnasium": "体育館", "basketball hoop": "バスケゴール", "wooden floor": "床", "indoor shoes": "上履き",
+    "school infirmary": "保健室", "medicine cabinet": "薬棚", "street to school": "通学路", "telephone poles": "電柱",
+    "club room": "部室", "messy desk": "散らかった机", 
+    // Home
+    "living room": "リビング", "sofa": "ソファ", "television": "テレビ",
+    "carpet": "カーペット", "family time": "団欒", "modern kitchen": "キッチン", "cooking": "料理", "apron": "エプロン",
+    "vegetables": "野菜", "frying pan": "フライパン", "bedroom": "寝室", "messy bed": "乱れたベッド", "white sheets": "シーツ",
+    "pillow": "枕", "pajamas": "パジャマ", "bathroom": "バスルーム", "bathtub": "バスタブ", "steam": "湯気", "bubbles": "泡",
+    "wet skin": "濡れた肌", "japanese style room": "和室", "tatami mats": "畳", "shoji screen": "障子", "kotatsu": "こたつ",
+    "entrance hall": "玄関", "shoes": "靴", "umbrella stand": "傘立て", "welcome home": "おかえり", "apartment balcony": "ベランダ",
+    "laundry hanging": "洗濯物", "potted plants": "鉢植え", 
+    // Fantasy
+    "fantasy forest": "ファンタジーの森", "glowing plants": "光る植物",
+    "magic particles": "魔法の粒子", "ancient trees": "古代樹", "royal palace": "王宮", "throne room": "玉座の間",
+    "chandelier": "シャンデリア", "red carpet": "赤絨毯", "marble pillars": "大理石の柱", "luxurious": "豪華な",
+    "gold decorations": "金の装飾", "stone dungeon": "ダンジョン", "torch light": "松明", "cobwebs": "蜘蛛の巣",
+    "stone walls": "石壁", "treasure chest": "宝箱", "fantasy tavern": "冒険者ギルド", "wooden tables": "木のテーブル",
+    "beer mugs": "ジョッキ", "adventurers": "冒険者", "quest board": "掲示板", "alchemist lab": "魔法研究所", "potions": "ポーション",
+    "scrolls": "巻物", "magic circle": "魔法陣", "glowing crystals": "水晶", "floating island": "浮遊島", "castle in the sky": "天空の城",
+    "waterfall into void": "奈落の滝", "epic scale": "壮大", "ancient ruins": "古代遺跡", "overgrown with moss": "苔むした",
+    "broken pillars": "壊れた柱", "stone statues": "石像", 
+    // Urban
+    "busy city street": "繁華街", "scramble crossing": "スクランブル交差点",
+    "crowd": "人混み", "billboards": "看板", "skyscrapers": "高層ビル", "back alley": "路地裏", "vending machine": "自販機",
+    "trash cans": "ゴミ箱", "stray cat": "野良猫", "train station platform": "駅のホーム", "train arriving": "電車到着",
+    "commuters": "通勤客", "cyberpunk city": "ネオン街", "neon signs": "ネオンサイン", "rainy street": "雨の通り",
+    "public park": "公園", "bench": "ベンチ", "fountain": "噴水", "skyscraper rooftop": "ビルの屋上", "night city view": "夜景",
+    // Nature
+    "flower field": "花畑", "sunflowers": "ひまわり", "snowy mountain": "雪山", "winter landscape": "冬景色", "snowing": "雪",
+    "white world": "銀世界", "tropical beach": "ビーチ", "white sand": "砂浜", "blue ocean": "青い海", "palm trees": "ヤシの木",
+    "underground cave": "洞窟", "stalactites": "鍾乳石", "underground lake": "地底湖", "sunset beach": "夕暮れの海",
+    "reflection on water": "水面の反射", "waves": "波", "starry sky": "星空", "milky way": "天の川", "shooting star": "流れ星",
+    // Time & Tech
+    "morning light": "朝の光", "light leaks": "光漏れ", "soft shadows": "柔らかな影", "fresh atmosphere": "爽やか",
+    "depth of field": "被写界深度", "sunlight through leaves": "木漏れ日", "dappled sunlight": "まだらな日差し",
+    "tyndall effect": "チンダル現象", "god rays": "ゴッドレイ", "dust particles": "舞う埃", "backlighting": "逆光",
+    "intense sunlight": "強い日差し", "blue sky": "青空", "cumulus clouds": "入道雲", "summer vibes": "夏の雰囲気",
+    "natural lighting": "自然光", "daylight": "日光", "harsh sunlight": "厳しい日差し", "heat haze": "陽炎",
+    "golden hour": "ゴールデンアワー", "sunset": "夕日", "orange and purple sky": "夕焼け空", "long shadows": "長い影",
+    "silhouette": "シルエット", "sun behind character": "背後の太陽", "twilight": "黄昏", "blue hour": "ブルーアワー",
+    "night city": "夜の街", "colorful bokeh": "カラフルなボケ", "moonlight": "月光", "full moon": "満月",
+    "darkness": "暗闇", "spotlight": "スポットライト", "chiaroscuro": "明暗法", "night cafe": "夜カフェ",
+    "candle light": "キャンドル", "cherry blossoms": "桜", "raining": "雨", "wet ground": "濡れた地面"
   };
+
+  function createSubAccordion(title, items, type) { 
+    const details = document.createElement("details"); details.className = "qp-sub-acc"; details.style.marginBottom = "6px"; details.style.border = "1px solid #eee"; details.style.borderRadius = "4px"; details.style.background = "#fff"; details.open = false; 
+    const summary = document.createElement("summary"); summary.textContent = title; summary.style.fontWeight = "bold"; summary.style.padding = "6px 10px"; summary.style.cursor = "pointer"; summary.style.background = "#f9f9f9"; details.appendChild(summary); 
+    const content = document.createElement("div"); content.className = "qp-content-grid"; content.style.padding = "8px"; content.style.display = "grid"; content.style.gridTemplateColumns = "repeat(auto-fill, minmax(200px, 1fr))"; content.style.gap = "6px"; 
+    
+    if(items && Array.isArray(items)){
+      items.forEach(item => { 
+        const label = document.createElement("label"); label.style.display = "flex"; label.style.alignItems = "center"; label.style.fontSize = "0.9em"; label.style.cursor = "pointer"; 
+        const cb = document.createElement("input"); cb.type = "checkbox"; cb.style.marginRight = "6px"; 
+        
+        if (item.val) {
+          cb.dataset.val = item.val;
+          label.title = item.val;
+          label.appendChild(cb);
+          label.appendChild(document.createTextNode(item.label));
+        } else if (item.en) {
+          cb.dataset.val = item.en;
+          label.appendChild(cb);
+          label.appendChild(document.createTextNode(`${item.ja} / ${item.en}`));
+        }
+        if(item.links) cb.dataset.links = item.links.join(",");
+        content.appendChild(label); 
+      });
+    }
+    details.appendChild(content); return details; 
+  }
 
   const API = {
     initUI(container) {
       if (window.__outputTranslation) window.__outputTranslation.register(DICT);
+      const root = document.querySelector(".quality-preset-integrated");
+      if (!root) return;
 
-      const stylesContainer = document.querySelector("#qp-styles .qp-section-content");
-      const erasContainer = document.querySelector("#qp-eras .qp-section-content");
+      const sec = document.createElement("details"); sec.className = "qp-main-acc";
+      sec.style.cssText = "margin-bottom:10px; border:1px solid #ccc; border-radius:6px; background:#fff;";
+      const summary = document.createElement("summary"); summary.innerHTML = `<span style="margin-right:8px;">▶</span>🎬 シチュエーション・環境 (Situations)`; 
+      summary.style.cssText = "font-weight:bold; padding:10px 14px; cursor:pointer; background:#eef2f6; list-style:none;";
+      sec.appendChild(summary);
+      const content = document.createElement("div"); content.className = "qp-section-content"; content.style.padding = "10px";
+      sec.appendChild(content);
 
-      if (stylesContainer) {
-        // スタイル系: ja/en形式と、preset形式(label/val)が混在しているので分岐
-        Object.entries(STYLES_DATA).forEach(([k, items]) => {
-          const details = document.createElement("details");
-          details.className = "qp-sub-acc";
-          details.style.marginBottom = "6px";
-          const summary = document.createElement("summary");
-          summary.textContent = k;
-          summary.style.fontWeight = "bold";
-          summary.style.cursor = "pointer";
-          summary.style.background = "#f9f9f9";
-          details.appendChild(summary);
-
-          const content = document.createElement("div");
-          content.className = "qp-content-grid";
-          content.style.padding = "8px";
-          content.style.display = "grid";
-          content.style.gridTemplateColumns = "repeat(auto-fill, minmax(200px, 1fr))";
-          content.style.gap = "6px";
-
-          items.forEach(item => {
-            const label = document.createElement("label");
-            label.style.display = "flex";
-            label.style.alignItems = "center";
-            const cb = document.createElement("input");
-            cb.type = "checkbox";
-            cb.style.marginRight = "6px";
-
-            if (item.val) {
-              cb.dataset.val = item.val;
-              label.title = item.val;
-              label.appendChild(cb);
-              label.appendChild(document.createTextNode(item.label));
-            } else {
-              cb.dataset.val = item.en;
-              label.appendChild(cb);
-              label.appendChild(document.createTextNode(`${item.ja} / ${item.en}`));
-            }
-            content.appendChild(label);
-          });
-          details.appendChild(content);
-          stylesContainer.appendChild(details);
-        });
-      }
-
-      if (erasContainer) {
-        Object.entries(ERAS_DATA).forEach(([k, items]) => {
-          const details = document.createElement("details");
-          details.className = "qp-sub-acc";
-          details.style.marginBottom = "6px";
-          const summary = document.createElement("summary");
-          summary.textContent = k;
-          summary.style.fontWeight = "bold";
-          summary.style.cursor = "pointer";
-          summary.style.background = "#f9f9f9";
-          details.appendChild(summary);
-
-          const content = document.createElement("div");
-          content.className = "qp-content-grid";
-          content.style.padding = "8px";
-          content.style.display = "grid";
-          content.style.gridTemplateColumns = "repeat(auto-fill, minmax(200px, 1fr))";
-          content.style.gap = "6px";
-
-          items.forEach(item => {
-            const label = document.createElement("label");
-            label.style.display = "flex";
-            label.style.alignItems = "center";
-            const cb = document.createElement("input");
-            cb.type = "checkbox";
-            cb.style.marginRight = "6px";
-            cb.dataset.val = item.en;
-            label.appendChild(cb);
-            label.appendChild(document.createTextNode(`${item.ja} / ${item.en}`));
-            content.appendChild(label);
-          });
-          details.appendChild(content);
-          erasContainer.appendChild(details);
-        });
-      }
+      Object.entries(SITUATION_DATA).forEach(([k,v]) => { content.appendChild(createSubAccordion(k, v)); });
+      root.appendChild(sec);
     },
     getTags() { return []; } 
   };
