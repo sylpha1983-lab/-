@@ -31,7 +31,7 @@
   };
 
   const PRESET_DATA = {
-    "🏆 基本・画風": [
+    "🏆 基本・画風 (Standard)": [
       { label: "基本・最高画質", val: "(masterpiece:1.3), (best quality:1.3), (high resolution), (highly detailed), (beautiful detailed face), (perfect anatomy)" },
       { label: "アニメ塗り", val: "(masterpiece:1.3), (best quality:1.3), (anime style), (cel shading), (vibrant colors), (clean lines), (flat color)" },
       { label: "フォトリアル", val: "(masterpiece:1.3), (best quality:1.3), (photorealistic:1.4), (realistic), (8k), (raw photo), (detailed skin texture), (hyperrealistic)" },
@@ -42,18 +42,43 @@
       { label: "レトロアニメ (90s)", val: "(1990s source material), (retro anime style), (cel animation type), (analog film noise), (vhs artifact), (muted colors)" },
       { label: "水墨画", val: "(ink wash painting), (sumi-e), (brush strokes), (monochrome), (japanese traditional art), (minimalist)" }
     ],
-    "💎 ハイエンド・特化": [
+    "💎 ハイエンド・特化 (High-End)": [
       { label: "★究極・レンダリング", val: "(anime-realism blend:1.4), (cinematic lighting:1.4), (high fidelity), (extremely detailed)", links: ["基本・最高画質", "安全セット", "キャラ・人物", "レイトレーシング", "UE5", "PBR", "SSS", "ボリュメトリック", "8K", "整った顔立ち"] },
       { label: "幻想・コンセプトアート", val: "(fantasy concept art), (highly detailed digital painting), (epic scale), (glowing magic), (intricate scenery), (game art style), (artstation), (majestic)", links: ["基本・最高画質", "背景・空間", "ファンタジー"] },
       { label: "サイバー・ネオン", val: "(cyberpunk style), (neon lights), (chromatic aberration), (futuristic city), (night), (glowing outlines), (high contrast), (vibrant cyan and magenta)", links: ["物・メカ", "SF"] },
       { label: "アニメ・セミリアル (透明感)", val: "(anime style:1.3), (cel shading:1.2), (soft lighting), (smooth rendering), (glossy highlights), (shiny hair:1.3), (beautiful detailed eyes), (transparent skin texture), (rim light), (blush)", links: ["アニメ塗り", "ソフトライティング", "光沢/ツヤ肌", "リムライト"] },
       { label: "人物特化ハイエンド", val: "(intricate details:1.3), (extremely detailed skin, face, hair:1.3), (refined shading:1.3), (realistic textures:1.2), (photorealistic shading:1.2), (perfect facial anatomy:1.2), (ultra detailed face), (ultra detailed eyes), (soft blush:1.1), (ultra shiny skin:1.1), (natural skin texture:1.1), (high-fidelity hair:1.2), (ultra shiny hair:1.1), (individual hair strands:1.2), (micro-texture:1.2), (cinematic framing:1.2), (professional photography:1.2)", links: ["基本・最高画質", "フォトリアル", "キャラ・人物", "整った顔立ち", "リアルな肌", "SSS", "8K", "被写界深度"] }
+    ],
+    "⚔️ 戦闘・アクション画風 (Battle & Action)": [
+      { label: "バトルアニメ風・作画", val: "(battle anime style), (sakuga), (intense action), (impact frames), (dynamic angle), (highly detailed effects)", links: ["エフェクト"] },
+      { label: "アクションドローイング", val: "(action drawing), (rough sketch style), (dynamic brushwork), (motion lines), (sketchy), (raw energy)", links: ["ダイナミックポーズ"] },
+      { label: "劇画・アメコミ風", val: "(comic book style), (bold lines), (strong shadows), (inked), (western comic style), (high contrast)" },
+      { label: "マンガ戦闘・集中線", val: "(manga style), (monochrome), (speed lines), (focus lines), (sound effects), (action focus)" },
+      { label: "ダークファンタジー", val: "(dark fantasy), (grimdark), (blood splatters), (heavy atmosphere), (gothic), (muted colors)" }
+    ],
+    "🛠️ 制作ソフト・プリセット (Software Presets)": [
+      { label: "Octane Render (派手)", val: "(octane render), (volumetric lighting), (caustics), (high contrast), (vibrant)", desc: "CGらしい派手な光と色彩。" },
+      { label: "Unreal Engine 5 (リアル)", val: "(unreal engine 5), (lumen global illumination), (nanite geometry), (photorealistic), (8k)", desc: "次世代ゲームエンジンのようなリアルさ。" },
+      { label: "ZBrush (造形・粘土)", val: "(zbrush sculpt), (digital sculpting), (clay texture), (model sheet style), (ambient occlusion)", desc: "3Dモデルの造形美を強調。" },
+      { label: "Substance Painter (質感)", val: "(substance painter), (pbr textures), (detailed material), (grunge), (scratches)", desc: "使い込まれた道具や汚れの表現。" }
+    ],
+    "⚙️ 3D技術・プリセット (3D Tech Sets)": [
+      { label: "レイトレーシング・光", val: "(ray tracing), (global illumination), (realistic lighting), (reflections), (blooms)", desc: "光の反射と拡散をシミュレート。" },
+      { label: "スタジオライティング", val: "(studio lighting), (softbox), (rim lighting), (neutral background), (professional photography)", desc: "写真館のような整った照明。" },
+      { label: "シネマティック・ルック", val: "(cinematic lighting), (teal and orange grading), (anamorphic lens flare), (widescreen), (dramatic atmosphere)", desc: "映画のような色調と演出。" }
+    ],
+    "🧪 サブジャンル・パンク (Sub-genres)": [
+      { label: "サイバーパンク", val: "(cyberpunk), (neon lights), (high tech low life), (futuristic city), (cybernetics)" },
+      { label: "スチームパンク", val: "(steampunk), (brass and copper), (gears and cogs), (victorian fashion), (steam engine)" },
+      { label: "ディーゼルパンク", val: "(dieselpunk), (steel and oil), (1940s style), (military machinery), (gritty)" },
+      { label: "バイオパンク", val: "(biopunk), (organic technology), (genetic engineering), (glowing veins), (fleshy texture)" },
+      { label: "ソーラーパンク", val: "(solarpunk), (nature and technology blend), (greenery), (solar panels), (utopia), (bright sunlight)" }
     ]
   };
 
   // シークレット
   if (IS_UNLOCKED) {
-    PRESET_DATA["💎 ハイエンド・特化"].unshift({ 
+    PRESET_DATA["💎 ハイエンド・特化 (High-End)"].unshift({ 
       label: "✨SECRET・究極艶", 
       val: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.5), (anime-realism blend:1.4), (cinematic lighting:1.4), (ray tracing), (subsurface scattering), (global illumination), (physically based rendering), (unreal engine 5), (lumen reflections), (nanite geometry), (8k uhd), (octane render), (realistic lighting), (shiny hair), (glossy hair), (Kodak Portra 400), (low contrast)",
       links: ["基本・最高画質", "光沢/ツヤ肌", "Shiny Skin", "シネマティック", "Cinematic", "UE5", "PBR", "整った顔立ち", "Perfect Face"]
@@ -62,6 +87,7 @@
 
   // 翻訳辞書
   const DICT = {
+    // Basic
     "masterpiece": "傑作", "best quality": "最高画質", "high resolution": "高解像度", "ultra high resolution": "超高解像度",
     "photorealistic": "フォトリアル", "realistic": "リアル", "8k": "8K", "raw photo": "RAW写真", "detailed skin texture": "肌の質感",
     "hyperrealistic": "超リアル", "octane render": "Octane Render", "anime style": "アニメ調", "cel shading": "セルルック",
@@ -77,10 +103,33 @@
     "unreal engine 5": "UE5", "cycles render": "Cycles Render", "zbrush sculpt": "ZBrushスカルプト", "digital sculpting": "デジタル彫刻",
     "clay render style": "クレイ風", "substance painter": "Substance Painter", "pbr textures": "PBRテクスチャ",
     "cinema 4d render": "C4Dレンダー", "studio lighting": "スタジオ照明", "clean render": "クリーンレンダー",
-    "Kodak Portra 400": "Portra 400"
+    "Kodak Portra 400": "Portra 400",
+    // Battle & Action
+    "battle anime style": "バトルアニメ風", "sakuga": "作画", "intense action": "激しいアクション", "impact frames": "インパクトフレーム",
+    "dynamic angle": "ダイナミックなアングル", "highly detailed effects": "詳細なエフェクト", "action drawing": "アクション画",
+    "rough sketch style": "ラフスケッチ風", "dynamic brushwork": "ダイナミックな筆致", "motion lines": "集中線", "sketchy": "スケッチ風",
+    "raw energy": "生のエネルギー", "comic book style": "アメコミ風", "bold lines": "太い線", "strong shadows": "強い影",
+    "inked": "インク画", "western comic style": "ウェスタンコミック", "high contrast": "高コントラスト", "manga style": "マンガ風",
+    "monochrome": "モノクロ", "speed lines": "スピード線", "focus lines": "集中線", "sound effects": "描き文字", "action focus": "アクション重視",
+    "dark fantasy": "ダークファンタジー", "grimdark": "グリムダーク", "blood splatters": "血飛沫", "heavy atmosphere": "重厚な雰囲気",
+    "gothic": "ゴシック", "muted colors": "くすんだ色",
+    // Software & Tech Packs
+    "caustics": "コースティクス", "lumen global illumination": "Lumen GI", "nanite geometry": "Nanite", "clay texture": "粘土の質感",
+    "model sheet style": "設定画風", "detailed material": "詳細なマテリアル", "grunge": "グランジ", "scratches": "傷",
+    "reflections": "反射", "blooms": "ブルーム", "softbox": "ソフトボックス", "rim lighting": "リムライト",
+    "neutral background": "ニュートラル背景", "professional photography": "プロの写真", "teal and orange grading": "ティール＆オレンジ",
+    "anamorphic lens flare": "アナモルフィックレンズフレア", "widescreen": "ワイドスクリーン", "dramatic atmosphere": "ドラマチックな雰囲気",
+    // Sub-genres
+    "high tech low life": "ハイテク・ローライフ", "futuristic city": "未来都市", "cybernetics": "サイバネティクス",
+    "steampunk": "スチームパンク", "brass and copper": "真鍮と銅", "gears and cogs": "歯車", "victorian fashion": "ヴィクトリア朝",
+    "steam engine": "蒸気機関", "dieselpunk": "ディーゼルパンク", "steel and oil": "鋼鉄と油", "1940s style": "40年代風",
+    "military machinery": "軍事機械", "gritty": "無骨な", "biopunk": "バイオパンク", "organic technology": "有機テクノロジー",
+    "genetic engineering": "遺伝子工学", "glowing veins": "光る血管", "fleshy texture": "肉の質感", "solarpunk": "ソーラーパンク",
+    "nature and technology blend": "自然と技術の融合", "greenery": "緑化", "solar panels": "ソーラーパネル", "utopia": "ユートピア",
+    "bright sunlight": "明るい日差し"
   };
 
-  // UIヘルパー (他ファイルでも使用するためwindowに公開しても良いが、今回は各ファイルにコピーして独立性を保つ)
+  // UIヘルパー
   function createSubAccordion(title, items) { 
     const details = document.createElement("details"); details.className = "qp-sub-acc"; details.style.marginBottom = "6px"; details.style.border = "1px solid #eee"; details.style.borderRadius = "4px"; details.style.background = "#fff"; details.open = false; 
     const summary = document.createElement("summary"); summary.textContent = title; summary.style.fontWeight = "bold"; summary.style.padding = "6px 10px"; summary.style.cursor = "pointer"; summary.style.background = "#f9f9f9"; details.appendChild(summary); 
@@ -157,7 +206,6 @@
     }
   };
   
-  // 共通CSS登録
   if (!document.getElementById("qp-styles-css")) { const style = document.createElement('style'); style.id = "qp-styles-css"; style.textContent = `.qp-main-acc { margin-bottom:10px; border:1px solid #ccc; border-radius:6px; background:#fff; } .qp-sub-acc { margin-bottom:6px; border:1px solid #eee; border-radius:4px; background:#fff; } .qp-content-grid { padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:6px; } .qp-content-grid label { display:flex; align-items:center; font-size:0.9em; cursor:pointer; } .qp-content-grid input { margin-right:6px; flex-shrink: 0; }`; document.head.appendChild(style); }
   window.__registerPromptPart(KEY, VERSION, API);
 })();
