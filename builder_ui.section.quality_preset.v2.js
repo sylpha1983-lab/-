@@ -1,10 +1,10 @@
 (function(){
   "use strict";
-  const VERSION = 2; // シチュエーション & テーマパック (拡張版)
+  const VERSION = 2; // シチュエーション & テーマパック (さらに拡張)
   const KEY = "quality_preset";
 
   // ==============================================================================
-  // 🎬 1. シチュエーション (Situations) - 場所・環境
+  // 🎬 1. シチュエーション (Situations)
   // ==============================================================================
   const SITUATION_DATA = {
     "📍 スポット・お店": [
@@ -16,6 +16,21 @@
       { label: "図書館", val: "(library), (bookshelves), (quiet atmosphere), (reading), (sunlight through window), (dust particles), (studying)" },
       { label: "病院・病室", val: "(hospital room), (white bed), (medical equipment), (clean atmosphere), (sterile), (curtain), (window)" },
       { label: "デートスポット", val: "(date night), (romantic atmosphere), (city lights), (holding hands), (blush), (fashionable clothes), (restaurant), (dinner)" }
+    ],
+    "🌌 SF・宇宙 (Sci-Fi & Space)": [
+      { label: "宇宙船コックピット", val: "(spaceship cockpit), (holographic interface), (stars through window), (futuristic controls), (sci-fi interior), (pilot seat), (glowing buttons)", links: ["サイバー・ネオン"] },
+      { label: "宇宙ステーション", val: "(space station corridor), (white panels), (artificial gravity), (view of earth), (clean aesthetic), (futuristic), (zero gravity hair)" },
+      { label: "サイバーパンク都市", val: "(cyberpunk city), (neon rain), (hologram billboards), (flying cars), (wet street), (night), (high tech low life)", links: ["サイバー・ネオン"] },
+      { label: "アンドロイド研究所", val: "(cybernetics lab), (robot parts), (cables), (server racks), (blue light), (data screen), (mechanical arm), (repairing)" },
+      { label: "異星の惑星", val: "(alien planet), (strange plants), (two moons), (purple sky), (rocky terrain), (unknown civilization), (sci-fi landscape)", links: ["ファンタジー"] }
+    ],
+    "⛩️ 和風・歴史 (Japanese & Historical)": [
+      { label: "神社・鳥居", val: "(shinto shrine), (red torii gate), (stone steps), (sacred atmosphere), (paper lantern), (autumn leaves), (traditional japan)" },
+      { label: "縁側・日本庭園", val: "(wooden engawa), (japanese garden), (koi pond), (bamboo pipe), (relaxing), (drinking tea), (sunny afternoon), (peaceful)" },
+      { label: "夏祭り・花火", val: "(summer festival), (fireworks in sky), (yukata), (stalls), (paper lanterns), (crowd), (night), (festive atmosphere)", links: ["夜"] },
+      { label: "竹林", val: "(bamboo forest), (sunlight filtering through bamboo), (green atmosphere), (pathway), (nature), (quiet), (misty)" },
+      { label: "畳の部屋", val: "(tatami room), (shoji screen), (hanging scroll), (flower arrangement), (sunlight patterns), (traditional interior), (seiza)" },
+      { label: "戦場・合戦跡", val: "(ancient battlefield), (broken arrows), (smoke), (sunset), (flags), (dramatic atmosphere), (historical)" }
     ],
     "🏫 学園・青春": [
       { label: "教室・授業中", val: "(classroom), (school desks), (chalkboard), (sunlight through window), (friends), (school uniform), (anime school life)" },
@@ -122,15 +137,34 @@
   };
 
   // ==============================================================================
-  // 📦 2. テーマ別パック (Theme Packs) ★大拡張★
+  // 📦 2. テーマ別パック (Theme Packs)
   // ==============================================================================
   const PACK_DATA = {
+    "⚔️ 戦闘・バトルパック (Battle Packs)": [
+      { label: "魔法詠唱", val: "(casting magic spell), (magic circle), (glowing particles), (floating in air), (intense energy), (wind blowing clothes), (fantasy battle), (dynamic pose)", links: ["エフェクト", "ファンタジー"] },
+      { label: "剣劇・抜刀", val: "(holding sword), (battle stance), (slashing effect), (sparkles from blade), (intense expression), (focused eyes), (enemy in background), (motion blur)", links: ["ダイナミックポーズ"] },
+      { label: "爆発・クライマックス", val: "(walking away from explosion), (cool guys don't look at explosions), (debris flying), (fire and smoke), (dramatic lighting), (silhouette), (action movie style)", links: ["シネマティック"] },
+      { label: "銃撃戦", val: "(holding gun), (aiming), (muzzle flash), (bullet shells), (taking cover), (urban warfare), (intense atmosphere), (detailed weapon)", links: ["アクション"] }
+    ],
+    "🎤 アイドル・ステージパック (Idol Packs)": [
+      { label: "ライブ・クライマックス", val: "(live concert), (singing), (holding microphone), (sweat and sparkles), (joyful smile), (audience light sticks), (confetti), (stage lighting), (idol costume)", links: ["アイドル"] },
+      { label: "ファンサ・ウインク", val: "(winking), (pointing at viewer), (finger heart), (cute pose), (idol smile), (close up), (bright background), (charming)", links: ["キメポーズ"] },
+      { label: "楽屋・出番前", val: "(dressing room), (looking in mirror), (nervous expression), (makeup items), (backstage), (preparing), (idol outfit), (quiet moment)" }
+    ],
     "💕 デート・恋愛パック (Romance Packs)": [
       { label: "水族館デート", val: "(aquarium date), (looking at fish), (blue ambient light), (reflection on glass), (romantic atmosphere), (walking together), (happy expression)", links: ["デートスポット"] },
       { label: "映画館デート", val: "(movie theater), (sitting next to each other), (eating popcorn), (dim lighting), (screen light reflecting on face), (intimate moment), (date night)", links: ["デートスポット"] },
       { label: "遊園地・観覧車", val: "(amusement park date), (ferris wheel in background), (holding crepe), (colorful lights), (happy smile), (vibrant atmosphere), (casual clothes)" },
       { label: "夜景・展望台", val: "(observation deck), (night city view), (sparkling city lights), (leaning on railing), (romantic mood), (couple atmosphere), (elegant)", links: ["夜"] },
       { label: "放課後デート", val: "(walking home together), (holding hands), (sunset glow), (school uniform), (blushing), (sentimental atmosphere), (residential street)", links: ["夕方"] }
+    ],
+    "👻 ホラーパック (Horror Packs)": [
+      { label: "追跡者からの逃走", val: "(running away:1.3), (looking back:1.3), (scared expression), (tears), (sweat), (abandoned hallway), (motion blur:1.2), (scary monster chasing from behind:1.3), (pursuer looming in background), (cinematic lighting), (dynamic angle), (dramatic shadows)", links: ["ダイナミックポーズ", "ホラー"] },
+      { label: "ロッカーに隠れる", val: "(hiding in locker), (pov from inside), (peeking through slit), (scared face), (covering mouth), (heavy breathing), (killer outside), (darkness), (ray tracing), (claustrophobic)", links: ["ホラー"] },
+      { label: "絶望的な遭遇", val: "(sitting on floor), (backing away), (screaming), (wide eyes), (horror on face), (monster looming), (low angle), (dutch angle), (dim lighting), (volumetric lighting), (shadows)", links: ["座りポーズ"] },
+      { label: "侵食・発狂", val: "(insane expression), (wide open eyes), (laughing), (blood on face), (distorted background), (glitch effect), (mental corruption), (psychedelic horror), (chromatic aberration), (intricate eyes)" },
+      { label: "儀式の生贄", val: "(lying on altar), (bound hands), (unconscious), (magic circle), (red candles), (hooded figures), (ritual chamber), (high angle shot), (glowing magic), (atmospheric lighting)", links: ["寝ポーズ"] },
+      { label: "心霊写真風", val: "(daily life photo), (peace sign), (group photo), (ghost face behind), (transparent spirit), (cursed image), (noise), (low quality style), (vhs artifact), (film grain)" }
     ],
     "🔪 ヤンデレパック (Yandere Packs)": [
       { label: "虚ろな目・愛の重さ", val: "(yandere), (empty eyes), (scary smile), (holding knife behind back), (shadow over face), (obsessed), (love hearts in eyes), (dark atmosphere)" },
@@ -149,10 +183,7 @@
     ],
     "🎢 絶叫・スリルパック (Thrill & Action)": [
       { label: "ジェットコースター", val: "(roller coaster), (screaming), (hands up), (wind blowing hair), (speed lines), (high altitude), (fear and excitement), (blue sky)", links: ["ダイナミックポーズ"] },
-      { label: "お化け屋敷（驚き）", val: "(haunted house attraction), (clinging to arm), (scared expression), (tears), (ghost prop in background), (dark corridor), (surprise)" },
-      { label: "追跡者からの逃走", val: "(running away:1.3), (looking back:1.3), (scared expression), (tears), (sweat), (abandoned hallway), (motion blur:1.2), (scary monster chasing from behind:1.3), (pursuer looming in background), (cinematic lighting), (dynamic angle), (dramatic shadows)", links: ["ダイナミックポーズ", "ホラー"] },
-      { label: "ロッカーに隠れる", val: "(hiding in locker), (pov from inside), (peeking through slit), (scared face), (covering mouth), (heavy breathing), (killer outside), (darkness), (ray tracing), (claustrophobic)", links: ["ホラー"] },
-      { label: "絶望的な遭遇", val: "(sitting on floor), (backing away), (screaming), (wide eyes), (horror on face), (monster looming), (low angle), (dutch angle), (dim lighting), (volumetric lighting), (shadows)", links: ["座りポーズ"] }
+      { label: "お化け屋敷（驚き）", val: "(haunted house attraction), (clinging to arm), (scared expression), (tears), (ghost prop in background), (dark corridor), (surprise)" }
     ]
   };
 
@@ -170,6 +201,23 @@
     "white bed": "白いベッド", "medical equipment": "医療機器", "sterile": "無菌", "date night": "夜デート",
     "romantic atmosphere": "ロマンチック", "city lights": "街明かり", "holding hands": "手繋ぎ", "restaurant": "レストラン",
     "dinner": "ディナー", 
+    // SF
+    "spaceship cockpit": "宇宙船コックピット", "holographic interface": "ホログラム画面", "stars through window": "窓の外の星",
+    "futuristic controls": "未来的な操作盤", "sci-fi interior": "SF風内装", "pilot seat": "パイロット席", "glowing buttons": "光るボタン",
+    "space station corridor": "宇宙ステーションの廊下", "white panels": "白いパネル", "artificial gravity": "人工重力", "view of earth": "地球の眺め",
+    "clean aesthetic": "清潔な美学", "zero gravity hair": "無重力の髪", "neon rain": "ネオンの雨", "hologram billboards": "ホログラム看板",
+    "flying cars": "空飛ぶ車", "high tech low life": "ハイテク・ローライフ", "cybernetics lab": "サイバネティクス研究所", "robot parts": "ロボット部品",
+    "server racks": "サーバーラック", "blue light": "青い光", "data screen": "データ画面", "mechanical arm": "機械アーム", "repairing": "修理中",
+    "alien planet": "異星", "strange plants": "奇妙な植物", "two moons": "二つの月", "purple sky": "紫の空", "rocky terrain": "岩場",
+    "unknown civilization": "未知の文明", "sci-fi landscape": "SF風景",
+    // Japanese
+    "shinto shrine": "神社", "red torii gate": "赤い鳥居", "stone steps": "石段", "sacred atmosphere": "神聖な雰囲気", "paper lantern": "提灯",
+    "autumn leaves": "紅葉", "traditional japan": "日本の伝統", "wooden engawa": "縁側", "japanese garden": "日本庭園", "koi pond": "鯉の池",
+    "bamboo pipe": "ししおどし", "drinking tea": "お茶を飲む", "sunny afternoon": "晴れた午後", "summer festival": "夏祭り", "fireworks in sky": "打ち上げ花火",
+    "yukata": "浴衣", "stalls": "屋台", "festive atmosphere": "お祭りの雰囲気", "bamboo forest": "竹林", "sunlight filtering through bamboo": "竹林の木漏れ日",
+    "green atmosphere": "緑の雰囲気", "pathway": "小道", "misty": "霧がかった", "tatami room": "畳の部屋", "hanging scroll": "掛け軸",
+    "flower arrangement": "生け花", "sunlight patterns": "光の模様", "traditional interior": "伝統的な内装", "seiza": "正座",
+    "ancient battlefield": "古戦場", "broken arrows": "折れた矢", "smoke": "煙", "flags": "旗", "dramatic atmosphere": "ドラマチック", "historical": "歴史的",
     // School
     "classroom": "教室", "school desks": "机", "chalkboard": "黒板", "friends": "友達",
     "school uniform": "制服", "school hallway": "廊下", "lockers": "ロッカー", "cleaning time": "掃除時間",
@@ -208,6 +256,36 @@
     "floating rocks": "浮遊する岩", "blood ocean": "血の海", "surreal": "シュール", "nightmare": "悪夢",
     "cursed forest": "呪われた森", "twisted trees": "歪んだ木", "dense fog": "濃霧", "hanging ropes": "吊るされた縄",
     "lost path": "迷い道", "ghostly figures": "幽霊の姿",
+    // Battle Packs
+    "casting magic spell": "魔法詠唱", "floating in air": "浮遊", "intense energy": "強烈なエネルギー", "wind blowing clothes": "服が風になびく",
+    "fantasy battle": "ファンタジーバトル", "dynamic pose": "ダイナミックポーズ", "holding sword": "剣を持つ", "battle stance": "戦闘態勢",
+    "slashing effect": "斬撃エフェクト", "sparkles from blade": "刃の火花", "intense expression": "真剣な表情", "focused eyes": "集中した目",
+    "enemy in background": "背景に敵", "walking away from explosion": "爆発から立ち去る", "cool guys don't look at explosions": "爆発を振り返らない",
+    "debris flying": "破片が飛ぶ", "fire and smoke": "炎と煙", "dramatic lighting": "劇的な照明", "action movie style": "アクション映画風",
+    "holding gun": "銃を持つ", "aiming": "狙う", "muzzle flash": "マズルフラッシュ", "bullet shells": "薬莢", "taking cover": "隠れる",
+    "urban warfare": "市街戦", "detailed weapon": "詳細な武器",
+    // Idol Packs
+    "singing": "歌う", "holding microphone": "マイクを持つ", "sweat and sparkles": "汗と輝き", "joyful smile": "喜びの笑顔",
+    "audience light sticks": "観客のペンライト", "confetti": "紙吹雪", "stage lighting": "ステージ照明", "idol costume": "アイドル衣装",
+    "winking": "ウインク", "pointing at viewer": "指差し", "finger heart": "指ハート", "cute pose": "可愛いポーズ",
+    "idol smile": "アイドルスマイル", "close up": "アップ", "bright background": "明るい背景", "charming": "魅力的",
+    "dressing room": "楽屋", "looking in mirror": "鏡を見る", "nervous expression": "緊張した顔", "makeup items": "メイク道具",
+    "backstage": "舞台裏", "preparing": "準備中", "idol outfit": "アイドル衣装", "quiet moment": "静かな瞬間",
+    // Horror Packs (Updated)
+    "running away": "逃げる", "looking back": "振り返る", "scared expression": "怯えた顔", "tears": "涙", "sweat": "冷や汗",
+    "abandoned hallway": "廃墟の廊下", "motion blur": "モーションブラー", "scary monster chasing from behind": "背後から迫る怪物",
+    "pursuer looming in background": "背景に迫る追跡者", "cinematic lighting": "シネマティック照明", "dynamic angle": "ダイナミックなアングル",
+    "dramatic shadows": "劇的な影", "hiding in locker": "ロッカーに隠れる", "pov from inside": "中からの視点", "peeking through slit": "隙間から覗く",
+    "scared face": "恐怖顔", "covering mouth": "口を覆う", "heavy breathing": "荒い息", "killer outside": "外に殺人鬼",
+    "darkness": "暗闇", "ray tracing": "レイトレーシング", "claustrophobic": "閉塞感", "sitting on floor": "床に座り込む", "backing away": "後ずさる",
+    "screaming": "悲鳴", "wide eyes": "見開いた目", "horror on face": "恐怖の表情", "monster looming": "怪物が迫る", "low angle": "ローアングル",
+    "dutch angle": "ダッチアングル", "dim lighting": "薄暗い照明", "volumetric lighting": "ボリュメトリック照明", "insane expression": "狂気の表情",
+    "wide open eyes": "カッと開いた目", "laughing": "笑う", "blood on face": "顔に血", "distorted background": "歪んだ背景", "glitch effect": "グリッチ効果",
+    "mental corruption": "精神汚染", "psychedelic horror": "サイケデリックホラー", "chromatic aberration": "色収差", "intricate eyes": "詳細な瞳",
+    "lying on altar": "祭壇に横たわる", "bound hands": "縛られた手", "unconscious": "気絶", "hooded figures": "フードの人物",
+    "high angle shot": "ハイアングル", "glowing magic": "魔法の輝き", "atmospheric lighting": "雰囲気のある照明", "daily life photo": "日常写真",
+    "peace sign": "ピースサイン", "group photo": "集合写真", "ghost face behind": "背後に幽霊", "transparent spirit": "透けた霊",
+    "cursed image": "呪いの画像", "noise": "ノイズ", "low quality style": "低画質風", "vhs artifact": "VHSノイズ", "film grain": "フィルムグレイン",
     // Romance & Date
     "aquarium date": "水族館デート", "looking at fish": "魚を見る", "reflection on glass": "ガラスの反射", "walking together": "一緒に歩く",
     "happy expression": "幸せな表情", "movie theater": "映画館", "sitting next to each other": "隣同士に座る", "eating popcorn": "ポップコーン",
@@ -233,23 +311,9 @@
     "soft blush": "ほんのり赤面", "rare expression": "珍しい表情", "looking at viewer": "こっちを見る", "gentle atmosphere": "優しい雰囲気",
     "holding cat": "猫を抱く", "gap moe": "ギャップ萌え",
     // Thrill & Action
-    "roller coaster": "ジェットコースター", "screaming": "絶叫", "hands up": "手を上げる", "speed lines": "集中線", "high altitude": "高所",
+    "roller coaster": "ジェットコースター", "hands up": "手を上げる", "speed lines": "集中線", "high altitude": "高所",
     "fear and excitement": "恐怖と興奮", "haunted house attraction": "お化け屋敷", "clinging to arm": "腕にしがみつく",
-    "ghost prop in background": "背景にお化け", "surprise": "驚き", "running away": "逃げる", "looking back": "振り返る",
-    "scared expression": "怯えた顔", "tears": "涙", "sweat": "冷や汗", "abandoned hallway": "廃墟の廊下", "motion blur": "モーションブラー",
-    "scary monster chasing from behind": "背後から迫る恐ろしい怪物", "pursuer looming in background": "背景に迫る追跡者",
-    "cinematic lighting": "シネマティック照明", "dynamic angle": "ダイナミックなアングル", "dramatic shadows": "劇的な影",
-    "hiding in locker": "ロッカーに隠れる", "pov from inside": "中からの視点", "peeking through slit": "隙間から覗く", "scared face": "恐怖顔",
-    "covering mouth": "口を覆う", "heavy breathing": "荒い息", "killer outside": "外に殺人鬼", "darkness": "暗闇", "ray tracing": "レイトレーシング",
-    "claustrophobic": "閉塞感", "sitting on floor": "床に座り込む", "backing away": "後ずさる", "wide eyes": "見開いた目",
-    "horror on face": "恐怖の表情", "monster looming": "怪物が迫る", "low angle": "ローアングル", "dutch angle": "ダッチアングル",
-    "dim lighting": "薄暗い照明", "volumetric lighting": "ボリュメトリック照明", "insane expression": "狂気の表情", "wide open eyes": "カッと開いた目",
-    "laughing": "笑う", "blood on face": "顔に血", "distorted background": "歪んだ背景", "glitch effect": "グリッチ効果", "mental corruption": "精神汚染",
-    "psychedelic horror": "サイケデリックホラー", "chromatic aberration": "色収差", "intricate eyes": "詳細な瞳", "lying on altar": "祭壇に横たわる",
-    "bound hands": "縛られた手", "unconscious": "気絶", "hooded figures": "フードの人物", "high angle shot": "ハイアングル",
-    "glowing magic": "魔法の輝き", "atmospheric lighting": "雰囲気のある照明", "daily life photo": "日常写真", "peace sign": "ピースサイン",
-    "group photo": "集合写真", "ghost face behind": "背後に幽霊", "transparent spirit": "透けた霊", "cursed image": "呪いの画像",
-    "noise": "ノイズ", "low quality style": "低画質風", "vhs artifact": "VHSノイズ", "film grain": "フィルムグレイン",
+    "ghost prop in background": "背景にお化け", "surprise": "驚き",
     // Urban
     "busy city street": "繁華街", "scramble crossing": "スクランブル交差点",
     "crowd": "人混み", "billboards": "看板", "skyscrapers": "高層ビル", "back alley": "路地裏", "vending machine": "自販機",
@@ -271,7 +335,7 @@
     "golden hour": "ゴールデンアワー", "sunset": "夕日", "orange and purple sky": "夕焼け空", "long shadows": "長い影",
     "silhouette": "シルエット", "sun behind character": "背後の太陽", "twilight": "黄昏", "blue hour": "ブルーアワー",
     "night city": "夜の街", "colorful bokeh": "カラフルなボケ", "moonlight": "月光", "full moon": "満月",
-    "darkness": "暗闇", "spotlight": "スポットライト", "chiaroscuro": "明暗法", "night cafe": "夜カフェ",
+    "spotlight": "スポットライト", "chiaroscuro": "明暗法", "night cafe": "夜カフェ",
     "candle light": "キャンドル", "cherry blossoms": "桜", "raining": "雨", "wet ground": "濡れた地面"
   };
 
@@ -279,26 +343,12 @@
     const details = document.createElement("details"); details.className = "qp-sub-acc"; details.style.marginBottom = "6px"; details.style.border = "1px solid #eee"; details.style.borderRadius = "4px"; details.style.background = "#fff"; details.open = false; 
     const summary = document.createElement("summary"); summary.textContent = title; summary.style.fontWeight = "bold"; summary.style.padding = "6px 10px"; summary.style.cursor = "pointer"; summary.style.background = "#f9f9f9"; details.appendChild(summary); 
     const content = document.createElement("div"); content.className = "qp-content-grid"; content.style.padding = "8px"; content.style.display = "grid"; content.style.gridTemplateColumns = "repeat(auto-fill, minmax(200px, 1fr))"; content.style.gap = "6px"; 
-    
-    if(items && Array.isArray(items)){
-      items.forEach(item => { 
-        const label = document.createElement("label"); label.style.display = "flex"; label.style.alignItems = "center"; label.style.fontSize = "0.9em"; label.style.cursor = "pointer"; 
-        const cb = document.createElement("input"); cb.type = "checkbox"; cb.style.marginRight = "6px"; 
-        
-        if (item.val) {
-          cb.dataset.val = item.val;
-          label.title = item.val;
-          label.appendChild(cb);
-          label.appendChild(document.createTextNode(item.label));
-        } else if (item.en) {
-          cb.dataset.val = item.en;
-          label.appendChild(cb);
-          label.appendChild(document.createTextNode(`${item.ja} / ${item.en}`));
-        }
-        if(item.links) cb.dataset.links = item.links.join(",");
-        content.appendChild(label); 
-      });
-    }
+    items.forEach(item => { 
+      const label = document.createElement("label"); label.style.display = "flex"; label.style.alignItems = "center"; label.style.fontSize = "0.9em"; label.style.cursor = "pointer"; 
+      const cb = document.createElement("input"); cb.type = "checkbox"; cb.style.marginRight = "6px"; cb.dataset.val = item.val || item.en; 
+      label.appendChild(cb); label.appendChild(document.createTextNode(item.label || `${item.ja}/${item.en}`)); 
+      if(item.links) cb.dataset.links = item.links.join(","); content.appendChild(label); 
+    }); 
     details.appendChild(content); return details; 
   }
 
