@@ -4,7 +4,9 @@
   const KEY = "quality_preset";
   const IS_UNLOCKED = localStorage.getItem("MY_SECRET_UNLOCK") === "true";
 
-  // 通常パック (省略なし)
+  // ==============================================================================
+  // 通常パック
+  // ==============================================================================
   const PACK_DATA = {
     "💼 職業・なりきりパック": [
       { label: "メイド・お給仕", val: "(maid outfit), (holding serving tray), (curtsy), (classic maid), (mansion interior), (elegant), (frills), (tea set)", links: ["立ちポーズ"] },
@@ -60,29 +62,38 @@
       { label: "対面座位・密着", val: "(1boy), (1girl), (mating press), (legs on shoulders), (deepest penetration), (eye contact), (womb marking), (internal view)", links: ["Basic R-18"] }
     ],
     
-    // 2. 表情・精神
+    // 2. 表情・精神 (拡張)
     "🤪 R-18 表情・精神 (Expressions & Mind)": [
+      { label: "ハート目・催眠", val: "(hypnotic heart eyes), (pink rings fading into pupils), (vacant smile), (euphoric tears), (drooling), (mind break)", desc: "トロトロに溶けた表情。" },
+      { label: "絶頂・震え", val: "(orgasm), (girl trembling in climax:1.5), (shaking), (arched back), (toes curling), (spasms)", desc: "限界を迎えた震え。" },
+      { label: "荒い呼吸・喘ぎ", val: "(rough breathing:1.5), (panting), (heavy breathing), (open mouth), (saliva), (sweat)", desc: "息遣いを感じる描写。" },
+      { label: "恍惚の溜息", val: "(ecstatic sighs), (trance), (half-closed eyes), (blushing), (drooling), (pleasure)", desc: "快楽に浸る表情。" },
       { label: "アヘ顔・ダブルピース", val: "(ahegao), (double peace sign), (rolling eyes), (tongue out), (saliva), (blushing heavily), (drooling), (happy)", desc: "快楽に溺れるド定番。" },
-      { label: "絶頂・イキ顔", val: "(orgasm face), (heavy breathing), (sweat), (climax), (toes curling), (shaking), (cum on face), (pleasure)", desc: "リアリティのある絶頂。" },
-      { label: "精神崩壊・レイプ目", val: "(mind break), (empty eyes), (no highlights in eyes), (open mouth), (drooling), (broken), (despair), (unable to resist)", desc: "心が壊れた状態。" },
-      { label: "メス顔・ハート目", val: "(heart-shaped pupils), (heart eyes), (seductive smile), (wanting more), (aroused), (horny), (lust), (looking at viewer)", desc: "好意と性欲。" },
       { label: "屈辱・悔し涙", val: "(humiliation), (crying), (tears), (biting lip), (forced), (looking away), (covering face), (shame)", desc: "不本意なセックス。" },
       { label: "嫌悪・蔑み", val: "(disgusted face), (looking down on viewer), (scorn), (cold eyes), (glaring), (furrowed brows)", desc: "ゴミを見るような目。" }
     ],
 
-    // 3. 演出・液体
+    // 3. 演出・液体 (拡張)
     "💦 演出・液体・状態 (Effects & Fluids)": [
-      // ★追加: ハート演出喘ぎ
+      { label: "吐息・ハート", val: "(foggy breath trails), (smeared heart-shaped breath patches), (erotic moan text floating), (heart particles:1.3), (pink atmosphere)", desc: "息で曇ったガラスとハート。" },
+      { label: "子宮紋・発光", val: "(womb symbol glowing softly through skin), (magic sigils), (pink-dimmed magical space), (glowing abdomen)", desc: "お腹の紋章が光る。" },
+      { label: "粘液・融合", val: "(wet mucus fuses with her body), (slime coating skin), (oily sheen), (translucent slime), (dripping)", desc: "粘液と肌の一体化。" },
       { label: "うめきハード・ハート乱舞", val: "(heart particles:1.3), (floating pink hearts around her:1.3), (moaning heart symbols:1.2), (moaning with hearts:1.2), (background glowing with heart effects:1.2)", desc: "空間をハートで埋め尽くす。" },
-      { label: "液体まみれ・ドロドロ", val: "(messy body), (sweat), (saliva), (cum on body), (bukkake), (sticky), (wet skin), (glistening skin)", desc: "全身を汚す。" },
-      { label: "大量射精・中出し", val: "(excessive cum), (creampie), (cum overflow), (cum dripping), (after sex), (puddle of cum), (leaking)", desc: "量の強調。" },
-      { label: "断面図・内部透視", val: "(cross section), (x-ray), (internal view), (cervix), (womb), (cum inside), (cutaway)", desc: "内部構造の描写。" },
-      { label: "発情・ヒート", val: "(heat), (steam), (heavy blush), (panties aside), (fingering), (masturbation), (exhaling)", desc: "ムラムラした状態。" },
-      { label: "精液膨張・腹ボテ", val: "(stomach bulge), (cum inflation), (distended belly), (full), (pregnant pose), (navel press)", desc: "お腹の膨らみ。" }
+      { label: "大量射精・中出し", val: "(semen gushing deep inside her), (crotch visibly overflowing), (fluid streaking down her trembling thighs), (creampie), (messy)", desc: "溢れ出る量。" },
+      { label: "断面図・内部透視", val: "(cross section), (x-ray), (internal view), (cervix), (womb), (cum inside), (cutaway)", desc: "内部構造の描写。" }
+    ],
+
+    // ★新設: 硝子・密着 (今回のご依頼分)
+    "🪟 硝子・密着 (Glass & Press)": [
+      { label: "ガラス押し付け・背面", val: "(viewed from the front through fogged glass panel), (girl in doggystyle position), (breasts pressed and flattened against the glass), (nipples clearly visible through pressure), (moisture trails on glass), (steam)", desc: "曇りガラス越しに胸が押し付けられる。" },
+      { label: "顔面プレス", val: "(face pressed against glass), (cheeks flattened), (open mouth), (saliva spreading on glass), (foggy glass), (distorted face)", desc: "顔がガラスにムギュっと。" },
+      { label: "ガラス越しバック", val: "(from behind glass), (doggystyle), (male partner behind), (fully inserted), (hands on glass), (sweat condensation), (privacy glass)", desc: "ガラスの向こうでの営み。" },
+      { label: "鏡越し・対面", val: "(looking in mirror), (reflection), (sex in front of mirror), (watching herself), (embarrassed), (steam)", desc: "鏡を使ったプレイ。" }
     ],
 
     // 4. ストーリー
     "🕰️ R-18 ストーリー・前後 (Time & Sequence)": [
+      { label: "スライムプール拘束", val: "(trapped in a pool of shimmering slime), (bird's-eye view), (legs spread wide), (unable to move), (sinking)", desc: "スライムの海に沈む。" },
       { label: "脱衣・恥じらい (Before)", val: "(undressing), (clothes half off), (panties down), (covering body), (shy), (blushing), (looking away), (reluctant), (waiting on bed)", desc: "行為前の緊張感。" },
       { label: "シャワー・準備 (Before)", val: "(showering), (bathroom), (naked), (wet hair), (steam), (washing body), (soap), (anticipation)", desc: "体を清める。" },
       { label: "焦らし・寸止め (Teasing)", val: "(teasing), (denial), (hovering), (begging), (wanting it), (impatience), (legs spread), (fingering)", desc: "高まる期待。" },
@@ -91,7 +102,9 @@
     ],
 
     // 5. 玩具
-    "🧸 R-18 玩具・器具 (Toys & Devices)": [
+    "🧸 R-18 玩具・責め (Toys & Torture)": [
+      { label: "口内責め・侵入", val: "(tentacles invade deep within her mouth), (mouth gaping), (tongue extended), (throat fucking), (saliva splattering), (choking)", desc: "口の中を蹂躙。" },
+      { label: "触手搾乳・愛撫", val: "(tentacle milking), (breast fondling), (nipple stimulation), (lactation), (squeezing breasts)", desc: "胸への集中攻撃。" },
       { label: "バイブ・ローター", val: "(sex toys), (vibrator), (dildo), (pink rotor), (holding toy), (masturbation), (pleasure), (buzzing)", desc: "自慰や責めに。" },
       { label: "浣腸・アナル責め", val: "(enema), (enema kit), (anal play), (plugged), (butt plug), (anal beads), (bent over), (shaking)", desc: "背徳的なプレイ。" },
       { label: "拘束具・猿轡", val: "(ball gag), (handcuffs), (rope), (shibari), (collar), (leash), (bound arms), (drooling), (muffled scream)", desc: "自由を奪う。" },
@@ -99,7 +112,7 @@
       { label: "スライム風呂・ローション", val: "(slime bath), (lotion), (viscous liquid), (slippery), (trapped), (massage), (nurunuru)", desc: "ヌルヌルの感触。" }
     ],
 
-    // 既存カテゴリー群
+    // 以下既存カテゴリー
     "🏩 H-ロケーション": [
       { label: "ラブホ・鏡張り", val: "(love hotel), (mirror chair), (glass wall), (pink lighting), (erotic atmosphere), (bed), (condom wrapper), (neon signs)", links: ["Basic R-18"] },
       { label: "マジックミラー号", val: "(magic mirror truck), (vehicle interior), (city street outside window), (exposed to public), (voyeurism), (passing pedestrians), (crowd outside)", links: ["Basic R-18"] },
@@ -130,10 +143,8 @@
       { label: "異種姦パーティ", val: "(monster gangbang), (orcs), (goblins), (slime), (tentacles), (breeding), (defeat), (messy)", links: ["Basic R-18"] }
     ],
     "😈 陵辱・ハード": [
-      // ★追加: 激しい挿入・指挿入
       { label: "NSFW挿入 (激)", val: "(rape), (vaginal penetration with thick penis)", desc: "激しい挿入" },
       { label: "NSFW指挿入 (激)", val: "(rape), (vaginal penetration with thick finger)", desc: "激しい指入れ" },
-      
       { label: "満員電車・痴漢", val: "(crowded train), (chikan), (groping), (molestation), (surrounded by men), (blushing), (trying not to voice), (public transport), (sweat)", links: ["Basic R-18"] },
       { label: "肉便器・公衆", val: "(public use), (cum dump), (messy body), (ahegao), (writing on body), (leash), (toilet), (submissive), (used)", links: ["Basic R-18"] },
       { label: "敗北・オーク", val: "(defeated), (lying on ground), (torn clothes), (crying), (orc looming), (goblin), (messy hair), (despair), (battlefield)", links: ["Basic R-18"] },
@@ -164,7 +175,7 @@
   };
 
   const DICT = {
-    // Basic
+    // 既存の辞書 (省略なし)
     "maid outfit": "メイド服", "holding serving tray": "トレイを持つ", "curtsy": "カーテシー", "classic maid": "クラシックメイド",
     "mansion interior": "屋敷の内装", "frills": "フリル", "tea set": "ティーセット", "nurse uniform": "ナース服",
     "holding syringe": "注射器を持つ", "clipboard": "カルテ", "medical checkup": "診察", "office lady": "OL",
@@ -244,25 +255,15 @@
     "breeder": "苗床", "peeing": "放尿", "watersports": "聖水", "armpit sex": "脇コキ", "sniffing": "匂いを嗅ぐ", "titjob": "パイズリ", "facesitting": "顔面騎乗",
     "suffocation": "窒息", "cant breathe": "息ができない",
     "vaginal penetration with thick penis": "極太ペニス挿入", "vaginal penetration with thick finger": "太い指挿入",
-    // Boy Girl
-    "1boy": "男", "1girl": "女", "heterosexual": "異性愛", "male focus": "男焦点", "female focus": "女焦点", "intimate": "親密", "couple": "カップル",
-    "locking eyes": "見つめ合う", "loving sex": "愛のあるセックス", "intertwined fingers": "恋人繋ぎ", "intense sex": "激しいセックス",
-    "grabbing hips": "腰を掴む", "climax": "絶頂", "hardcore": "ハードコア", "size difference": "体格差", "height difference": "身長差",
-    "giant penis": "巨根", "small girl": "小柄な少女", "masculine male": "男らしい", "mating press": "対面座位", "legs on shoulders": "足を肩に",
-    "deepest penetration": "最奥挿入", "womb marking": "子宮刻印",
-    // New Expression & Effects
-    "heart particles": "ハートの粒子", "floating pink hearts around her": "舞うピンクのハート", "moaning heart symbols": "ハートの喘ぎ",
-    "moaning with hearts": "ハート付きの喘ぎ", "background glowing with heart effects": "輝くハート背景",
-    // Story & Toys
-    "undressing": "脱衣中", "clothes half off": "着衣半脱ぎ", "panties down": "パンツ下ろし", "covering body": "体を隠す", "shy": "恥じらい",
-    "reluctant": "嫌がる", "waiting on bed": "ベッドで待機", "showering": "シャワー", "wet hair": "濡れ髪", "washing body": "体を洗う", "soap": "石鹸",
-    "anticipation": "期待", "teasing": "焦らし", "denial": "お預け", "hovering": "寸止め", "begging": "懇願", "impatience": "焦燥",
-    "after sex": "事後", "messy hair": "乱れ髪", "exhausted": "疲弊", "cum on sheets": "シーツの汚れ", "disheveled": "着衣乱れ",
-    "morning after": "翌朝", "hickey": "キスマーク", "memory of last night": "昨夜の記憶", "sex toys": "大人のおもちゃ", "vibrator": "バイブ",
-    "dildo": "ディルド", "pink rotor": "ローター", "holding toy": "おもちゃを持つ", "buzzing": "振動音", "enema": "浣腸", "enema kit": "浣腸キット",
-    "anal play": "アナル遊び", "plugged": "栓", "butt plug": "アナルプラグ", "anal beads": "アナルビーズ", "gynecological chair": "診察台",
-    "stirrups": "足乗せ台", "speculum": "クスコ", "medical exam": "触診", "slime bath": "スライム風呂", "lotion": "ローション",
-    "viscous liquid": "粘液", "slippery": "ヌルヌル", "massage": "マッサージ", "nurunuru": "ぬるぬる"
+    // ★追加辞書
+    "hypnotic heart eyes": "催眠ハート目", "pink rings fading into pupils": "瞳に溶けるピンクの輪", "vacant smile": "虚ろな笑み",
+    "euphoric tears": "歓喜の涙", "semen gushing deep inside her": "奥深くに注がれる精液",
+    "crotch visibly overflowing": "股間から溢れ出る", "fluid streaking down her trembling thighs": "震える太ももを伝う愛液",
+    "foggy breath trails": "白い吐息の跡", "smeared heart-shaped breath patches": "曇ったガラスにハート",
+    "womb symbol glowing softly through skin": "肌に浮かぶ子宮紋", "viewed from the front through fogged glass panel": "曇りガラス越し",
+    "breasts pressed and flattened against the glass": "ガラスに押し付けられた胸", "nipples clearly visible through pressure": "圧迫された乳首",
+    "moisture trails on glass": "ガラスの湿気", "face pressed against glass": "顔面プレス",
+    "steam": "湯気", "privacy glass": "すりガラス", "looking in mirror": "鏡を見る"
   };
 
   function createSubAccordion(title, items, isSecret) { 

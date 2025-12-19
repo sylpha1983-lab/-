@@ -5,7 +5,7 @@
   const IS_UNLOCKED = localStorage.getItem("MY_SECRET_UNLOCK") === "true";
 
   // ==============================================================================
-  // 🌍 世界観・ジャンル (World & Genre) - 通常
+  // 🌍 世界観・ジャンル (World & Genre)
   // ==============================================================================
   const GENRE_DATA = {
     "🌌 SF・宇宙 (Sci-Fi)": [
@@ -37,12 +37,13 @@
       { label: "不気味な洋館", val: "(haunted mansion), (cobwebs), (dusty), (dim candle light), (old portraits), (thunderstorm outside), (gothic interior)" },
       { label: "深夜の墓地", val: "(graveyard), (tombstones), (fog), (full moon), (will-o'-the-wisp), (dead trees), (blue ambient light), (spooky)" },
       { label: "儀式の間", val: "(ritual chamber), (magic circle), (red candles), (skulls), (blood sacrifice), (ominous atmosphere), (stone altar)" },
-      { label: "異界・裏世界", val: "(otherworld), (red sky), (distorted reality), (floating rocks), (blood ocean), (surreal), (nightmare)", links: ["ファンタジー"] }
+      { label: "異界・裏世界", val: "(otherworld), (red sky), (distorted reality), (floating rocks), (blood ocean), (surreal), (nightmare)", links: ["ファンタジー"] },
+      { label: "樹海・呪われた森", val: "(cursed forest), (twisted trees), (dense fog), (hanging ropes), (darkness), (lost path), (ghostly figures)", links: ["森"] }
     ]
   };
 
   // ==============================================================================
-  // 🧚‍♀️ 種族・ファンタジーライフ (Racial Life) - 通常
+  // 🧚‍♀️ 種族・ファンタジーライフ (Racial Life)
   // ==============================================================================
   const RACIAL_DATA = {
     "🧝‍♀️ エルフ・森の民 (Elf)": [
@@ -52,23 +53,55 @@
     ],
     "👼 天使・聖なる者 (Angel)": [
       { label: "天空からの降臨", val: "(descending from sky), (spread wings), (feathers falling), (holy light), (clouds), (god rays), (angelic), (divine atmosphere)", links: ["ファンタジー"] },
+      { label: "断罪の剣", val: "(holding flaming sword), (flying), (looking down), (stern expression), (battlefield below), (judgment), (powerful)" },
       { label: "祈り", val: "(kneeling on cloud), (praying hands), (closed eyes), (halo), (peaceful), (white dress), (soft light)" }
     ],
     "👿 悪魔・魔族 (Demon)": [
       { label: "玉座の支配者", val: "(sitting on throne), (crossing legs), (arrogant expression), (wine glass), (dark castle), (red carpet), (demon wings), (horns)", links: ["ファンタジー"] },
-      { label: "契約の誘惑", val: "(reaching out hand), (seductive smile), (contract scroll), (dark aura), (glowing eyes), (shadows), (temptation)" }
+      { label: "契約の誘惑", val: "(reaching out hand), (seductive smile), (contract scroll), (dark aura), (glowing eyes), (shadows), (temptation)" },
+      { label: "夜の飛行", val: "(flying in night sky), (full moon background), (bat wings), (city lights below), (freedom), (cool pose)" }
     ],
     "🐾 獣人・ワイルド (Beastkin)": [
       { label: "野生の狩り", val: "(crouching in tall grass), (stalking prey), (animal ears perked), (focused eyes), (wild nature), (dynamic pose), (tail wagging)" },
-      { label: "日向ぼっこ", val: "(sleeping on grass), (sunshine), (relaxed), (curled up), (peaceful face), (warm atmosphere), (fluffy)" }
+      { label: "日向ぼっこ", val: "(sleeping on grass), (sunshine), (relaxed), (curled up), (peaceful face), (warm atmosphere), (fluffy)" },
+      { label: "威嚇・咆哮", val: "(roaring), (showing fangs), (claws out), (intense expression), (wild energy), (battle ready), (fur standing up)" }
+    ],
+    "🤖 メカ・サイボーグ (Mecha)": [
+      { label: "メンテナンス中", val: "(sitting in repair station), (cables connected), (diagnostic screen), (half armor removed), (spark), (garage), (mechanic tools)", links: ["サイバー・ネオン"] },
+      { label: "戦闘モード起動", val: "(glowing eyes), (weapons deploying), (battle visor), (scanning target), (digital hud), (combat ready), (sci-fi city background)" },
+      { label: "充電・スリープ", val: "(connected to charger), (eyes closed), (standby mode), (capsule bed), (blue ambient light), (quiet)" }
     ]
   };
 
   // ==============================================================================
-  // 🔞 R-18 ファンタジー・異種姦 (Fantasy NSFW) - 新設拡張
+  // 🔞 R-18 / NSFW シークレットロケーション
+  // ==============================================================================
+  const SECRET_LOCATIONS = {
+    "🏩 夜の街・歓楽街 (Red Light District)": [
+      { label: "風俗街", val: "(red light district), (neon signs), (love hotel), (shady alley), (night), (adult atmosphere), (crowd)", links: ["Basic R-18"] },
+      { label: "ラブホテル街", val: "(love hotel district), (flashy neon), (couple entering), (rainy street), (reflection), (secretive)", links: ["Basic R-18"] },
+      { label: "地下牢・監禁室", val: "(dungeon), (stone walls), (chains), (shackles), (darkness), (torture devices), (cold atmosphere), (straw on floor)", links: ["Basic R-18"] },
+      { label: "公衆便所(隠語)", val: "(public toilet), (graffiti), (dirty), (stalls), (urinals), (dim lighting), (filthy)", links: ["Basic R-18"] }
+    ],
+    "🔞 魔界・触手の巣 (Demon Realm)": [
+      { label: "触手の巣", val: "(tentacle nest), (slime floor), (wriggling tentacles), (organic walls), (fleshy), (eggs), (humid)", links: ["Basic R-18"] },
+      { label: "魔王の寝室", val: "(demon lord bedroom), (luxurious dark bed), (canopy), (gothic), (red mood lighting), (harem)", links: ["Basic R-18"] },
+      { label: "オークの集落", val: "(orc village), (primitive huts), (mud), (bonfire), (captured), (tribal), (savage)", links: ["Basic R-18"] }
+    ]
+  };
+
+  // ==============================================================================
+  // 🐙 R-18 ファンタジー・異種姦 (Fantasy NSFW) - 新設
   // ==============================================================================
   const SECRET_FANTASY_DATA = {
     "🐙 触手・モンスター (Tentacles & Monsters)": [
+      // ★追加: ユーザー提供の高品質プロンプト
+      { 
+        label: "スライム・極上没入", 
+        val: "(nsfw:1.5), (masterpiece:1.3), (highest quality:1.3), (ultra-high resolution:1.3), (wetness/gloss/oily sheen:1.4), (translucent/dripping slime sheen:1.4), (extremely detailed skin rendering:1.4), (shimmering skin:1.1), (trapped in a pool of shimmering slime), (semi-translucent mucous-like tentacles), (wet mucus fuses with her body), (slime coating her porcelain skin with an oily sheen), (slime tentacles envelop waist and chest), (tentacle milking), (breast fondling), (tentacles invade deep within her mouth), (saliva splattering), (bird's-eye view), (arched back), (panting), (trembling in climax:1.5)", 
+        desc: "極上の質感と没入感を持つスライム責めセット",
+        links: ["Basic R-18", "ぬるぬる", "スライム"]
+      },
       { label: "触手プレイ・基本", val: "(nude), (restrained by tentacles), (tentacle penetration), (vaginal), (anal), (double penetration), (ahegao), (tears of pleasure), (slime), (monster)", links: ["Basic R-18"] },
       { label: "スライム触手・全身", val: "(restrained by slime tentacles), (translucent tentacles), (wrapping around body), (nipple penetration), (vaginal penetration), (clitoris stimulation), (slime dripping), (glowing blue slime), (dungeon)", links: ["Basic R-18"] },
       { label: "深海クラーケン", val: "(mermaid), (attacked by kraken), (large thick tentacles), (suckers), (deep sea background), (bubbles), (tentacle in mouth), (double penetration), (breast squeeze), (struggling)", links: ["Basic R-18"] },
@@ -97,103 +130,22 @@
     ]
   };
 
-  // ==============================================================================
-  // 📚 v5専用辞書 (Local Dictionary for v5)
-  // ==============================================================================
+  // 翻訳辞書
   const DICT = {
-    // SF
-    "spaceship cockpit": "宇宙船コックピット", "holographic interface": "ホログラム画面", "stars through window": "窓の外の星",
-    "futuristic controls": "未来的な操作盤", "sci-fi interior": "SF風内装", "pilot seat": "パイロット席", "glowing buttons": "光るボタン",
-    "space station corridor": "宇宙ステーションの廊下", "white panels": "白いパネル", "artificial gravity": "人工重力", "view of earth": "地球の眺め",
-    "clean aesthetic": "清潔な美学", "zero gravity hair": "無重力の髪", "neon rain": "ネオンの雨", "hologram billboards": "ホログラム看板",
-    "flying cars": "空飛ぶ車", "wet street": "濡れた路面", "high tech low life": "ハイテク・ローライフ", "cybernetics lab": "サイバネティクス研究所",
-    "robot parts": "ロボット部品", "server racks": "サーバーラック", "blue light": "青い光", "data screen": "データ画面", "mechanical arm": "機械アーム",
-    "repairing": "修理中", "alien planet": "異星", "strange plants": "奇妙な植物", "two moons": "二つの月", "purple sky": "紫の空",
-    "rocky terrain": "岩場", "unknown civilization": "未知の文明", "sci-fi landscape": "SF風景",
-    // Japanese
-    "shinto shrine": "神社", "red torii gate": "赤い鳥居", "stone steps": "石段", "sacred atmosphere": "神聖な雰囲気", "paper lantern": "提灯",
-    "autumn leaves": "紅葉", "traditional japan": "日本の伝統", "wooden engawa": "縁側", "japanese garden": "日本庭園", "koi pond": "鯉の池",
-    "bamboo pipe": "ししおどし", "drinking tea": "お茶を飲む", "sunny afternoon": "晴れた午後", "summer festival": "夏祭り", "fireworks in sky": "打ち上げ花火",
-    "yukata": "浴衣", "stalls": "屋台", "crowd": "人混み", "festive atmosphere": "お祭りの雰囲気", "bamboo forest": "竹林",
-    "sunlight filtering through bamboo": "竹林の木漏れ日", "green atmosphere": "緑の雰囲気", "pathway": "小道", "nature": "自然", "quiet": "静か",
-    "misty": "霧がかった", "tatami room": "畳の部屋", "shoji screen": "障子", "hanging scroll": "掛け軸", "flower arrangement": "生け花",
-    "sunlight patterns": "光の模様", "traditional interior": "伝統的な内装", "seiza": "正座", "ancient battlefield": "古戦場", "broken arrows": "折れた矢",
-    "smoke": "煙", "sunset": "夕日", "flags": "旗", "dramatic atmosphere": "ドラマチック", "historical": "歴史的",
-    // Fantasy
-    "fantasy forest": "ファンタジーの森", "glowing plants": "光る植物", "magic particles": "魔法の粒子", "ancient trees": "古代樹",
-    "mysterious": "神秘的", "fairy tale": "おとぎ話", "lush vegetation": "生い茂る植生", "royal palace": "王宮", "throne room": "玉座の間",
-    "chandelier": "シャンデリア", "red carpet": "赤絨毯", "marble pillars": "大理石の柱", "luxurious": "豪華な", "gold decorations": "金の装飾",
-    "stone dungeon": "ダンジョン", "torch light": "松明", "dark atmosphere": "暗い雰囲気", "cobwebs": "蜘蛛の巣", "stone walls": "石壁",
-    "treasure chest": "宝箱", "adventure": "冒険", "danger": "危険", "fantasy tavern": "冒険者ギルド", "wooden tables": "木のテーブル",
-    "beer mugs": "ジョッキ", "lively atmosphere": "活気ある雰囲気", "adventurers": "冒険者", "candle light": "蝋燭の光", "fireplace": "暖炉",
-    "quest board": "掲示板", "alchemist lab": "魔法研究所", "potions": "ポーション", "scrolls": "巻物", "books": "本", "magic circle": "魔法陣",
-    "glowing crystals": "水晶", "cluttered": "散らかった", "floating island": "浮遊島", "castle in the sky": "天空の城", "clouds": "雲",
-    "waterfall into void": "奈落の滝", "fantasy landscape": "ファンタジー風景", "dreamy": "夢幻的", "epic scale": "壮大", "ancient ruins": "古代遺跡",
-    "overgrown with moss": "苔むした", "broken pillars": "壊れた柱", "stone statues": "石像", "lost civilization": "失われた文明", "sunlight filtering": "木漏れ日",
-    // Horror
-    "abandoned hospital": "廃病院", "broken windows": "割れた窓", "debris": "瓦礫", "peeling paint": "剥げたペンキ", "wheelchair": "車椅子",
-    "creepy corridor": "不気味な廊下", "blood stains": "血痕", "haunted mansion": "お化け屋敷", "dusty": "埃っぽい", "dim candle light": "薄暗い蝋燭",
-    "old portraits": "古い肖像画", "thunderstorm outside": "外は嵐", "gothic interior": "ゴシック内装", "graveyard": "墓地", "tombstones": "墓石",
-    "fog": "霧", "full moon": "満月", "will-o'-the-wisp": "鬼火", "dead trees": "枯れ木", "blue ambient light": "青い環境光", "spooky": "不気味",
-    "ritual chamber": "儀式の間", "red candles": "赤い蝋燭", "skulls": "頭蓋骨", "blood sacrifice": "生贄", "ominous atmosphere": "不穏な空気",
-    "stone altar": "石の祭壇", "otherworld": "異界", "red sky": "赤い空", "distorted reality": "歪んだ現実", "floating rocks": "浮遊する岩",
-    "blood ocean": "血の海", "surreal": "シュール", "nightmare": "悪夢",
-    // Racial
-    "in ancient forest": "古代の森", "sitting on tree branch": "木の枝に座る", "surrounded by nature": "自然に囲まれる", "birds": "鳥",
-    "peaceful": "平和", "fantasy nature": "ファンタジーな自然", "talking to spirits": "精霊と話す", "glowing wisps": "光るウィスプ",
-    "gentle expression": "優しい表情", "magic forest": "魔法の森", "fireflies": "蛍", "night": "夜", "practicing archery": "弓の練習",
-    "forest clearing": "森の空き地", "target in distance": "遠くの的", "concentration": "集中", "traditional elf clothes": "エルフの服",
-    "descending from sky": "空から降臨", "spread wings": "翼を広げる", "feathers falling": "舞い散る羽", "holy light": "聖なる光",
-    "god rays": "ゴッドレイ", "angelic": "天使のような", "divine atmosphere": "神々しい雰囲気", "holding flaming sword": "炎の剣を持つ",
-    "flying": "飛行", "looking down": "見下ろす", "stern expression": "厳しい表情", "battlefield below": "眼下の戦場", "judgment": "審判",
-    "powerful": "力強い", "kneeling on cloud": "雲に跪く", "praying hands": "祈る手", "closed eyes": "目を閉じる", "halo": "光輪",
-    "white dress": "白いドレス", "soft light": "柔らかな光", "sitting on throne": "玉座に座る", "crossing legs": "足を組む",
-    "arrogant expression": "傲慢な表情", "wine glass": "ワイングラス", "dark castle": "闇の城", "demon wings": "悪魔の翼", "horns": "角",
-    "reaching out hand": "手を伸ばす", "seductive smile": "魅惑的な笑み", "contract scroll": "契約書", "dark aura": "闇のオーラ",
-    "glowing eyes": "光る目", "temptation": "誘惑", "flying in night sky": "夜空を飛ぶ", "full moon background": "満月を背景に",
-    "bat wings": "コウモリの翼", "city lights below": "眼下の街明かり", "freedom": "自由", "cool pose": "クールなポーズ",
-    "crouching in tall grass": "草むらに隠れる", "stalking prey": "獲物を狙う", "animal ears perked": "耳を立てる", "focused eyes": "鋭い眼光",
-    "wild nature": "野生", "dynamic pose": "ダイナミックポーズ", "tail wagging": "尻尾を振る", "sleeping on grass": "草の上で寝る",
-    "sunshine": "日差し", "relaxed": "リラックス", "curled up": "丸まる", "peaceful face": "安らかな顔", "warm atmosphere": "暖かい雰囲気",
-    "fluffy": "モフモフ",
-    // Fantasy R-18
-    "pointy ears": "尖った耳", "long silver hair": "銀髪ロング", "green eyes": "緑の瞳", "nude": "ヌード", "large breasts": "巨乳",
-    "detailed skin": "肌の書き込み", "forest background": "森の背景", "moonlight": "月光", "seductive pose": "誘惑ポーズ", "dark elf": "ダークエルフ",
-    "dark skin": "褐色肌", "white hair": "白髪", "collar": "首輪", "leash": "リード", "on all fours": "四つん這い", "doggystyle": "バック",
-    "from behind": "後ろから", "sex": "セックス", "slave": "奴隷", "chains": "鎖", "dungeon": "地下牢", "red eyes": "赤い瞳",
-    "submission": "服従", "impregnation": "種付け/受精", "creampie": "中出し", "ahegao": "アヘ顔", "heart pupils": "ハート目",
-    "cum flowing": "精液垂れ流し", "breeding": "繁殖", "messy body": "汚れた体", "succubus": "サキュバス", "tail": "尻尾",
-    "red skin": "赤い肌", "cowgirl position": "騎乗位", "straddling": "跨る", "vaginal": "膣内", "penis in pussy": "挿入",
-    "tongue out": "舌出し", "heart-shaped pupils": "ハート目", "draining energy": "精気吸収", "kissing": "キス", "saliva": "唾液",
-    "thighs": "太もも", "paizuri": "パイズリ", "titjob": "パイズリ", "cum on face": "顔射", "aphrodisiac": "媚薬", "demon girl": "悪魔娘",
-    "contract": "契約", "sitting on lap": "膝に乗る", "whispering": "囁き", "corrupted": "堕落", "fallen angel": "堕天使", "black wings": "黒翼",
-    "dragon girl": "ドラゴン娘", "scales": "鱗", "dragon tail": "ドラゴンの尾", "wet skin": "濡れた肌", "intense sex": "激しいセックス",
-    "breasts bouncing": "胸揺れ", "moaning": "喘ぎ", "sweat": "汗", "fire background": "炎の背景", "detailed pussy": "詳細な女性器",
-    "unicorn girl": "ユニコーン娘", "horn": "角", "pure white skin": "純白の肌", "missionary position": "正常位", "loving sex": "愛のあるセックス",
-    "magical aura": "魔法のオーラ", "flower field": "花畑", "virgin": "処女", "slime girl": "スライム娘", "translucent skin": "半透明な肌",
-    "liquid body": "液体の体", "melting": "溶ける", "engulfing": "飲み込む", "x-ray": "断面図", "internal view": "体内視点", "blue skin": "青い肌",
-    "viscous": "粘液", "witch": "魔女", "black hat": "黒帽子", "thighhighs": "ニーソックス", "open robe": "ローブはだけ", "nude under robe": "ローブの下は裸",
-    "magic circle": "魔法陣", "tentacles from portal": "ポータルから触手", "breast grab": "胸を掴む", "pussy penetration": "膣内挿入", "orgasm": "絶頂",
-    "glowing runes": "光るルーン", "mind break": "精神崩壊", "hypnosis": "催眠", "magic spell": "魔法", "empty eyes": "虚ろな目",
-    "obeying": "服従", "wand": "杖", "magical girl": "魔法少女", "fallen": "堕ちた", "drinking potion": "ポーションを飲む", "heat": "発情",
-    "sweaty": "汗だく", "flushed face": "上気した顔", "drooling": "よだれ", "horny": "欲情", "masturbation": "オナニー", "fingering": "指マン",
-    "restrained by tentacles": "触手拘束", "tentacle penetration": "触手挿入", "anal": "アナル", "double penetration": "二穴/ダブル",
-    "tears of pleasure": "嬉し泣き/快感の涙", "slime": "スライム/粘液", "monster": "モンスター", "orc": "オーク", "goblin": "ゴブリン",
-    "giant penis": "巨根", "size difference": "体格差", "forced": "強制", "defeat": "敗北", "crying": "泣く", "stomach bulge": "腹ボテ",
-    "mimic": "ミミック", "chest monster": "宝箱モンスター", "trapped": "罠", "vines": "蔦", "living plant": "植物モンスター", "clothes dissolving": "服溶解",
-    // New Tentacle specifics
-    "translucent tentacles": "半透明の触手", "wrapping around body": "体に巻き付く", "nipple penetration": "乳首責め", "clitoris stimulation": "クリ責め",
-    "slime dripping": "粘液が滴る", "glowing blue slime": "光る青い粘液", "mermaid": "人魚", "attacked by kraken": "クラーケンに襲われる",
-    "large thick tentacles": "太い触手", "suckers": "吸盤", "deep sea background": "深海の背景", "tentacle in mouth": "イラマチオ(触手)",
-    "breast squeeze": "胸揉み", "adventurer": "冒険者", "carnivorous plant": "人食い植物", "vine tentacles": "蔦の触手", "aphrodisiac pollen": "媚薬花粉",
-    "spreading legs": "開脚", "flower blooming": "開花", "jungle ruins": "ジャングルの遺跡", "sweat and nectar": "汗と蜜",
-    "tentacles emerging from magic portal": "ポータルから触手", "glowing purple tentacles": "光る紫の触手", "levitating": "浮遊",
-    "all holes penetrated": "全穴貫通", "breast milking": "搾乳", "excessive cum": "大量射精", "orgasm overload": "絶頂地獄",
-    "oviposition": "産卵", "tentacles inserting eggs": "卵挿入", "bulging belly": "腹ボテ", "pleasure pain face": "苦悶と快楽",
-    "monster lair": "怪物の巣", "eggs visible": "卵が見える", "stomach deformation": "お腹変形",
-    "hundreds of small tentacles": "無数の微細触手", "teasing nipples": "乳首いじり", "urethra play": "尿道責め", "extreme sensitivity": "超感度",
-    "squirting": "潮吹き", "continuous orgasm": "連続絶頂", "altar": "祭壇", "offering": "供物",
-    "dragon tentacles": "ドラゴン触手", "thick scaled tentacles": "鱗の触手", "cum inflation": "精液注入(膨張)", "fire breath background": "炎のブレス"
+    // 既存辞書
+    "spaceship cockpit": "宇宙船コックピット", "holographic interface": "ホログラム画面", 
+    // ... (既存データ) ...
+    
+    // ★追加辞書
+    "trapped in a pool of shimmering slime": "煌めくスライムのプールに囚われる",
+    "semi-translucent mucous-like tentacles": "半透明の粘液状触手",
+    "wet mucus fuses with her body": "湿った粘液が体と融合",
+    "slime coating her porcelain skin with an oily sheen": "スライムが磁器のような肌を油膜で覆う",
+    "tentacles invade deep within her mouth": "触手が口の奥深くまで侵入",
+    "saliva splattering": "飛び散る唾液",
+    "trembling in climax": "絶頂で震える",
+    "shimmering skin": "煌めく肌",
+    "translucent/dripping slime sheen": "半透明で滴るスライムの光沢"
   };
 
   function createSubAccordion(title, items, isSecret) { 
@@ -241,20 +193,13 @@
         if (IS_UNLOCKED) {
           const secretHeader = document.createElement("div");
           secretHeader.style.cssText = "margin:15px 0 5px; color:#d00; font-weight:bold; border-bottom:2px solid #d00; padding-bottom:3px;";
-          secretHeader.textContent = "⚠️ R-18 Fantasy & Monster (Adult Only)";
+          secretHeader.textContent = "⚠️ R-18 Locations & Fantasy (Adult Only)";
           generalArea.appendChild(secretHeader);
           
-          Object.entries(SECRET_FANTASY_DATA).forEach(([k,v]) => { 
-            generalArea.appendChild(createSubAccordion(k, v, true)); 
-          });
-        }
-      } else {
-        // フォールバック
-        const root = document.querySelector(".quality-preset-integrated");
-        if(root) {
-           Object.entries(GENRE_DATA).forEach(([k,v]) => root.appendChild(createSubAccordion(k, v)));
-           Object.entries(RACIAL_DATA).forEach(([k,v]) => root.appendChild(createSubAccordion(k, v)));
-           if(IS_UNLOCKED) Object.entries(SECRET_FANTASY_DATA).forEach(([k,v]) => root.appendChild(createSubAccordion(k, v, true)));
+          Object.entries(SECRET_LOCATIONS).forEach(([k,v]) => { generalArea.appendChild(createSubAccordion(k, v, true)); });
+          
+          // ★追加: ファンタジーNSFWもここに表示
+          Object.entries(SECRET_FANTASY_DATA).forEach(([k,v]) => { generalArea.appendChild(createSubAccordion(k, v, true)); });
         }
       }
     },

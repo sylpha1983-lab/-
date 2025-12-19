@@ -194,7 +194,7 @@
     if (!data) return null;
     const root = document.createElement("details"); root.className = "beginner-guide-root";
     root.style.cssText = "margin-bottom:12px; border:2px solid #89CFF0; border-radius:8px; background:#F0F8FF; display:block;";
-    root.open = false; // 閉じておく
+    root.open = false; // デフォルトは閉じる
 
     const summary = document.createElement("summary"); summary.innerHTML = "🔰 <b>初心者ガイド：迷ったらここから選ぶ</b>";
     summary.style.cssText = "padding:10px; cursor:pointer; font-weight:bold; list-style:none; outline:none; color:#0056b3;"; 
@@ -248,7 +248,7 @@
         presetsContent.appendChild(createSubAccordion(k, v)); 
       });
       
-      // シークレット（基本R-18）の展開 - IS_R18_UNLOCKED で制御
+      // シークレット（基本R-18）の展開
       if (IS_R18_UNLOCKED) {
         const secretHeader = document.createElement("div");
         secretHeader.style.cssText = "margin:15px 0 5px; color:#d00; font-weight:bold; border-bottom:2px solid #d00; padding-bottom:3px;";
@@ -283,7 +283,8 @@
 
       root.appendChild(secPresets);
 
-      // 2. コンテナ群
+      // 2. コンテナ群 (各拡張ファイルの受け皿)
+      // ★修正: 他のファイルが確実にIDを見つけられるように、innerIdの要素を生成して追加する方式に統一
       const sectionConfigs = [
         { id: "qp-situations", title: "🎬 シチュエーション・環境 (Situations & Environment)", innerId: "qp-situations-general-area" },
         { id: "qp-packs", title: "📦 シチュエーションパック (Context & Action Packs)", style: { border:"1px solid #99c", bg:"#f4f4ff", sumBg:"#e0e0ff", sumColor:"#336" }, innerId: "qp-packs-content" },
@@ -297,10 +298,22 @@
         const det = createMainSection(conf.id, conf.title, conf.style || {});
         const content = det.querySelector(".qp-section-content");
         
+        // ★修正: v2, v3, v4...などが getElementById で探すため、
+        // 確実にIDを持ったdivを作成してcontentに追加する。
+        // もしすでにIDがあるなら追加しない、というチェックも可能だが、
+        // 毎回リセット(innerHTML="")されるので新規作成で良い。
+        
+        // 既存のID割り当てロジック（そのまま）
         if (conf.innerId === "qp-situations-general-area") {
-           const div = document.createElement("div"); div.id = conf.innerId;
+           // v2などは qp-situations-general-area というIDのdivを探す
+           const div = document.createElement("div"); 
+           div.id = conf.innerId;
            content.appendChild(div);
         } else {
+           // v6などは content そのもののIDを探す場合もあるが、
+           // 安全のため、ここでも内部divを作ってIDを付与する方式に統一しても良い。
+           // しかし既存のv3/v4/v6/v7は contentのIDを期待している節があるため、
+           // innerIdをcontent自体のIDとして設定する（これが一番安全）。
            content.id = conf.innerId;
         }
         root.appendChild(det);
@@ -312,18 +325,23 @@
       
       // R-18トリガーエリア
       const r18Trigger = document.createElement("div");
-      // ★修正: cursor:pointerを削除し、タップハイライトを消すスタイルを追加
-      r18Trigger.style.cssText = "margin-top:-12px; text-align:center; user-select:none; -webkit-tap-highlight-color:transparent;";
+      // ★修正: cursor:default, user-select:none, tap-highlight-color:transparent で「反応なし」に見せる
+      r18Trigger.style.cssText = "margin-top:-12px; text-align:center; user-select:none; cursor:default; -webkit-tap-highlight-color:transparent; outline:none;";
       r18Trigger.innerHTML = `<span style="background:#fff0f0; padding:0 15px; color:#d9534f; font-size:0.9em; font-weight:bold; border-radius:10px; border:1px solid #ffb3b3;">⚠️ NEGATIVE PROMPTS</span>`;
       
-      // ★修正: 10回連打ロジック
+      // ★修正: 10回連打ロジック (0.5秒以内に次をタップしないとリセット)
       let negClickCount = 0; 
       let negClickTimer = null;
 
       r18Trigger.addEventListener("click", (e) => {
+        // デフォルト動作やバブリング防止（念のため）
+        // e.preventDefault(); 
+        
         negClickCount++;
         if (negClickTimer) clearTimeout(negClickTimer);
-        negClickTimer = setTimeout(() => { negClickCount = 0; }, 500); // 0.5秒間隔が空いたらリセット
+        
+        // 0.5秒間隔が空いたらリセット
+        negClickTimer = setTimeout(() => { negClickCount = 0; }, 500); 
 
         if (negClickCount >= 10) {
           const unlocked = localStorage.getItem("MY_SECRET_UNLOCK") === "true";
@@ -331,6 +349,7 @@
             ? "シークレットモード(R-18)を【封印】しますか？\n(ページがリロードされます)" 
             : "シークレットモード(R-18)を【解放】しますか？\n(ページがリロードされます)";
           
+          // alertやconfirmを出すと連打が止まるのでOK
           if(confirm(msg)) {
             localStorage.setItem("MY_SECRET_UNLOCK", (!unlocked).toString());
             location.reload();
