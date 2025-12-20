@@ -5,7 +5,7 @@
   const IS_UNLOCKED = localStorage.getItem("MY_SECRET_UNLOCK") === "true";
 
   // ==============================================================================
-  // 通常パック
+  // 通常パック (省略なし)
   // ==============================================================================
   const PACK_DATA = {
     "💼 職業・なりきりパック": [
@@ -61,8 +61,17 @@
       { label: "体格差・巨根", val: "(1boy), (1girl), (size difference), (height difference), (giant penis), (small girl), (stretching), (bulge), (masculine male)", links: ["Basic R-18"] },
       { label: "対面座位・密着", val: "(1boy), (1girl), (mating press), (legs on shoulders), (deepest penetration), (eye contact), (womb marking), (internal view)", links: ["Basic R-18"] }
     ],
+
+    // ★新設: 挿入・ピストン (今回のご依頼分)
+    "🍆 挿入・ピストン (Insertion & Motion)": [
+      { label: "明確な挿入描写", val: "(penetration clearly visible:1.3), (vaginal sex:1.3), (connection point), (inserting), (glans inside)", desc: "結合部をはっきり描く。" },
+      { label: "激しいピストン", val: "(hips moving rhythmically), (fully thrusting), (fast motion), (afterimage of hips), (piston motion), (shaking hips)", desc: "動きの激しさを強調。" },
+      { label: "腰ガッチリ・密着", val: "(his hands gripping her hips firmly), (keeping her pressed), (tight grip), (skin indentation), (no escape)", desc: "逃さないホールド感。" },
+      { label: "溢れる愛液・結合", val: "(crotch overflowing with fluids), (inner thighs wet and glistening), (semen dripping), (juicy), (wet sounds)", desc: "液体のリアリティ。" },
+      { label: "ガラス越し・激", val: "(breasts flattened against glass), (nipple pressure visible), (fully thrusting from behind), (glass reflection layering:1.3), (foggy breath)", desc: "硝子プレイの激しい版。" }
+    ],
     
-    // 2. 表情・精神 (拡張)
+    // 2. 表情・精神 (拡張済み)
     "🤪 R-18 表情・精神 (Expressions & Mind)": [
       { label: "ハート目・催眠", val: "(hypnotic heart eyes), (pink rings fading into pupils), (vacant smile), (euphoric tears), (drooling), (mind break)", desc: "トロトロに溶けた表情。" },
       { label: "絶頂・震え", val: "(orgasm), (girl trembling in climax:1.5), (shaking), (arched back), (toes curling), (spasms)", desc: "限界を迎えた震え。" },
@@ -73,7 +82,7 @@
       { label: "嫌悪・蔑み", val: "(disgusted face), (looking down on viewer), (scorn), (cold eyes), (glaring), (furrowed brows)", desc: "ゴミを見るような目。" }
     ],
 
-    // 3. 演出・液体 (拡張)
+    // 3. 演出・液体 (拡張済み)
     "💦 演出・液体・状態 (Effects & Fluids)": [
       { label: "吐息・ハート", val: "(foggy breath trails), (smeared heart-shaped breath patches), (erotic moan text floating), (heart particles:1.3), (pink atmosphere)", desc: "息で曇ったガラスとハート。" },
       { label: "子宮紋・発光", val: "(womb symbol glowing softly through skin), (magic sigils), (pink-dimmed magical space), (glowing abdomen)", desc: "お腹の紋章が光る。" },
@@ -83,7 +92,7 @@
       { label: "断面図・内部透視", val: "(cross section), (x-ray), (internal view), (cervix), (womb), (cum inside), (cutaway)", desc: "内部構造の描写。" }
     ],
 
-    // ★新設: 硝子・密着 (今回のご依頼分)
+    // 🪟 硝子・密着 (Glass & Press)
     "🪟 硝子・密着 (Glass & Press)": [
       { label: "ガラス押し付け・背面", val: "(viewed from the front through fogged glass panel), (girl in doggystyle position), (breasts pressed and flattened against the glass), (nipples clearly visible through pressure), (moisture trails on glass), (steam)", desc: "曇りガラス越しに胸が押し付けられる。" },
       { label: "顔面プレス", val: "(face pressed against glass), (cheeks flattened), (open mouth), (saliva spreading on glass), (foggy glass), (distorted face)", desc: "顔がガラスにムギュっと。" },
@@ -175,7 +184,7 @@
   };
 
   const DICT = {
-    // 既存の辞書 (省略なし)
+    // 既存辞書 (省略なし)
     "maid outfit": "メイド服", "holding serving tray": "トレイを持つ", "curtsy": "カーテシー", "classic maid": "クラシックメイド",
     "mansion interior": "屋敷の内装", "frills": "フリル", "tea set": "ティーセット", "nurse uniform": "ナース服",
     "holding syringe": "注射器を持つ", "clipboard": "カルテ", "medical checkup": "診察", "office lady": "OL",
@@ -263,7 +272,12 @@
     "womb symbol glowing softly through skin": "肌に浮かぶ子宮紋", "viewed from the front through fogged glass panel": "曇りガラス越し",
     "breasts pressed and flattened against the glass": "ガラスに押し付けられた胸", "nipples clearly visible through pressure": "圧迫された乳首",
     "moisture trails on glass": "ガラスの湿気", "face pressed against glass": "顔面プレス",
-    "steam": "湯気", "privacy glass": "すりガラス", "looking in mirror": "鏡を見る"
+    "steam": "湯気", "privacy glass": "すりガラス", "looking in mirror": "鏡を見る",
+    // 挿入・ピストン辞書
+    "penetration clearly visible": "結合部がはっきり見える", "connection point": "結合部", "inserting": "挿入中", "glans inside": "中にある亀頭",
+    "hips moving rhythmically": "リズミカルに動く腰", "fully thrusting": "根元まで突き入れる", "fast motion": "高速ピストン", "afterimage of hips": "腰の残像", "piston motion": "ピストン運動", "shaking hips": "震える腰",
+    "his hands gripping her hips firmly": "腰を強く掴む", "keeping her pressed": "押し付け続ける", "tight grip": "強いグリップ", "skin indentation": "肌の食い込み", "no escape": "逃げ場なし",
+    "semen dripping": "精液が垂れる", "juicy": "ジューシー", "wet sounds": "水音", "fully thrusting from behind": "背後から激しく突く"
   };
 
   function createSubAccordion(title, items, isSecret) { 

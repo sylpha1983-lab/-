@@ -4,19 +4,93 @@
   const KEY = "quality_preset";
   
   // ==============================================================================
-  // 🔑 解放状態の管理 (Split Keys)
+  // 🔑 解放状態の管理
   // ==============================================================================
   // 1. 究極艶 (Gloss): 画風プリセット5回連打
   const IS_GLOSS_UNLOCKED = localStorage.getItem("MY_GLOSS_UNLOCK") === "true";
-  
   // 2. R-18 (Secret): ネガティブ10回連打
   const IS_R18_UNLOCKED = localStorage.getItem("MY_SECRET_UNLOCK") === "true";
   
-  // グローバルフラグ更新
   window.__R18_MODE = IS_R18_UNLOCKED;
 
   // ==============================================================================
-  // 📚 マスター辞書 (Global Base Dictionary)
+  // 🎨 スマホ対応・UIスタイル定義
+  // ==============================================================================
+  function injectStyles() {
+    const styleId = "qp-mobile-style-full-restore";
+    if (document.getElementById(styleId)) return;
+
+    const css = `
+      /* 共通スタイル */
+      .qp-sub-acc {
+        border: 1px solid #ccc !important;
+        border-radius: 4px !important;
+        margin-bottom: 6px !important;
+        background: #fff !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .qp-sub-acc summary {
+        padding: 10px 12px !important;
+        font-weight: bold !important;
+        cursor: pointer !important;
+        background: #f9f9f9 !important;
+        font-size: 14px !important;
+        list-style: none !important;
+        outline: none !important;
+      }
+      .qp-sub-acc.qp-secret { border-color: #ffcccc !important; }
+      .qp-sub-acc.qp-secret summary { color: #d00 !important; background: #fff0f0 !important; }
+
+      /* スマホ向け調整 (600px以下) */
+      @media (max-width: 600px) {
+        .qp-section-content,
+        #qp-situations-general-area,
+        #qp-packs-content,
+        #qp-combat-content,
+        #qp-styles-content,
+        #qp-eras-content,
+        #qp-quality-content,
+        #qp-situations-general-area > details > div {
+          display: flex !important;
+          flex-direction: column !important;
+          gap: 8px !important;
+          width: 100% !important;
+        }
+
+        .qp-content-grid {
+          display: grid !important;
+          grid-template-columns: 1fr 1fr !important; /* 均等2列 */
+          gap: 10px 8px !important;
+          padding: 10px !important;
+          border-top: 1px solid #eee !important;
+          background: #fff !important;
+        }
+
+        .qp-content-grid label {
+          font-size: 13px !important;
+          display: flex !important;
+          align-items: flex-start !important;
+          line-height: 1.3 !important;
+          white-space: normal !important;
+        }
+
+        .qp-content-grid input[type="checkbox"] {
+          margin-right: 6px !important;
+          margin-top: 2px !important;
+          flex-shrink: 0 !important;
+          transform: scale(1.1) !important;
+        }
+      }
+    `;
+    const style = document.createElement("style");
+    style.id = styleId;
+    style.textContent = css;
+    document.head.appendChild(style);
+  }
+
+  // ==============================================================================
+  // 📚 マスター辞書 (翻訳漏れ対応済み)
   // ==============================================================================
   const MASTER_DICT = {
     // Quality & Style
@@ -27,29 +101,46 @@
     "perfect face": "完璧な顔", "beautiful detailed face": "美しく詳細な顔",
     "perfect anatomy": "完璧な肉体構造", "highly detailed": "詳細な書き込み",
     "glossy skin": "光沢のある肌", "oiled skin": "オイル肌", "shiny hair": "輝く髪",
+    "intricate details": "繊細な詳細", "extremely detailed": "極めて詳細",
     
-    // Tech & Render
+    // Tech & Render & Camera
     "octane render": "Octane Render", "unreal engine 5": "UE5(3D)", "ray tracing": "レイトレーシング",
     "global illumination": "GI(グローバル照明)", "volumetric lighting": "ボリュメトリック照明",
     "physically based rendering": "PBR(物理ベース)", "subsurface scattering": "SSS(表面下散乱)",
     "photon mapping": "フォトンマッピング", "path tracing": "パストレーシング",
+    "depth of field": "被写界深度(ボケ)", "anamorphic lens flare": "アナモルフィックレンズフレア",
+    "lens flare": "レンズフレア", "widescreen": "ワイドスクリーン", "glass reflection layering": "ガラスの反射レイヤー",
+    "soft light refraction": "柔らかな光の屈折", "chromatic aberration": "色収差",
     
-    // Battle & Action Style
-    "battle anime style": "バトルアニメ風", "sakuga": "作画", "comic book style": "アメコミ風",
-    "intense action": "激しいアクション", "impact frames": "インパクトフレーム", "dynamic angle": "ダイナミックアングル",
-    "manga style": "マンガ風", "speed lines": "集中線", "monochrome": "モノクロ", "dark fantasy": "ダークファンタジー",
+    // Color & Mood
+    "teal and orange grading": "ティール＆オレンジ", "dramatic atmosphere": "ドラマチックな雰囲気",
+    "kodak portra 400": "Kodak Portra 400(フィルム風)", "vibrant": "彩度高め", "dark": "暗め",
+    "red mood lighting": "赤いムード照明", "pink atmosphere": "ピンクの雰囲気",
+    "warm lighting": "暖色系の照明", "cold lighting": "寒色系の照明",
+    "red": "赤", "pink": "ピンク", "orange": "オレンジ", "teal": "ティール(青緑)",
     
-    // Sub-genres
-    "cyberpunk": "サイバーパンク", "steampunk": "スチームパンク", "biopunk": "バイオパンク",
-    "dieselpunk": "ディーゼルパンク", "solarpunk": "ソーラーパンク", "neon lights": "ネオンライト",
+    // Character Basics
+    "1boy": "男1人", "1girl": "女1人", "heterosexual": "男女(ノマカプ)",
+    "male focus": "男焦点", "female focus": "女焦点", "couple": "カップル",
+    "intimate": "親密", "sex": "セックス", "nude": "ヌード", "uncensored": "無修正",
+    "large breasts": "巨乳", "huge breasts": "爆乳", "medium breasts": "美乳",
+    "dark skin": "褐色肌", "red skin": "赤肌", "pale skin": "色白",
+    "red hair": "赤髪", "pink hair": "ピンク髪", "orange hair": "オレンジ髪",
+    "wet hair": "濡れた髪", "floating hair": "浮遊する髪", "messy hair": "ボサボサ髪/寝癖",
+    "bed hair": "寝癖",
     
-    // R-18 / Sensitive Base
-    "nsfw": "R-18", "nude": "ヌード", "uncensored": "無修正", "adult content": "成人向け",
-    "tentacles": "触手", "bondage": "拘束", "ahegao": "アヘ顔", "cum": "精液"
+    // Clothes
+    "judo gi": "柔道着", "karate gi": "空手着", "kimono": "着物",
+    "tight": "タイト(ぴっちり)", "wet clothes": "濡れ透け",
+    
+    // R-18 Generic
+    "nsfw": "R-18", "adult content": "成人向け", "hentai": "HENTAI",
+    "tentacles": "触手", "bondage": "拘束", "ahegao": "アヘ顔", "cum": "精液",
+    "rape": "レイプ", "forced": "強制", "bukkake": "ぶっかけ", "creampie": "中出し"
   };
 
   // ==============================================================================
-  // 🔰 初心者ガイド (Beginner Guide)
+  // 🔰 初心者ガイド (フル復旧)
   // ==============================================================================
   const BEGINNER_DATA = {
     "🔰 ① 3D技術・安全セット": [
@@ -63,11 +154,21 @@
       { label: "V-Ray (背景・建築・静寂)", val: "(v-ray)", desc: "静かでちゃんとしている。" },
       { label: "UE5 (ゲーム・世界観)", val: "(unreal engine 5)", desc: "環境・世界観重視。" },
       { label: "Cycles (Blender風)", val: "(cycles render)", desc: "主張は弱いが安全パイ。" }
+    ],
+    "🔰 ③ 完成形テンプレ": [
+      { label: "人物イラスト完成セット (Octane+)", val: "(octane render), (realistic lighting), (subsurface scattering)", desc: "キャラ1枚絵の安全構成。" },
+      { label: "ファンタジー背景セット (UE5+)", val: "(unreal engine 5), (global illumination), (volumetric lighting)", desc: "ゲームのような世界観。" },
+      { label: "武器・小物完成セット (V-Ray+)", val: "(v-ray), (physically based rendering), (ambient occlusion)", desc: "実在感のある物撮り。" }
+    ],
+    "🔰 ④ 質感・ツール (Optional)": [
+      { label: "ZBrush (スカルプト感)", val: "(zbrush sculpt), (digital sculpting), (clay render style)", desc: "フィギュアのような質感。" },
+      { label: "Substance Painter (テクスチャ)", val: "(substance painter), (pbr textures), (intricate texture)", desc: "表面の汚れや傷など。" },
+      { label: "Cinema 4D (クリーン)", val: "(cinema 4d render), (studio lighting), (clean render)", desc: "整った綺麗な3D感。" }
     ]
   };
 
   // ==============================================================================
-  // 📦 画風・品質プリセット (Presets)
+  // 📦 画風・品質プリセット (フル復旧)
   // ==============================================================================
   
   // ハイエンドリスト
@@ -79,7 +180,7 @@
     { label: "人物特化ハイエンド", val: "(intricate details:1.3), (extremely detailed skin, face, hair:1.3), (refined shading:1.3), (realistic textures:1.2), (photorealistic shading:1.2), (perfect facial anatomy:1.2), (ultra detailed face), (ultra detailed eyes), (soft blush:1.1), (ultra shiny skin:1.1), (natural skin texture:1.1)" }
   ];
 
-  // ★「SECRET・究極艶」は IS_GLOSS_UNLOCKED で制御
+  // ★「SECRET・究極艶」
   if (IS_GLOSS_UNLOCKED) {
     HIGH_END_LIST.unshift({
       label: "✨ SECRET・究極艶",
@@ -133,7 +234,7 @@
     ]
   };
 
-  // 汎用R-18 (基本のみ) - IS_R18_UNLOCKED で制御
+  // 汎用R-18 (基本のみ)
   const SECRET_DATA = {
     "💋 R-18 基本 (Basic NSFW)": [
       { label: "基本・R-18", val: "(nsfw), (uncensored), (explicit), (adult content), (hentai)" },
@@ -142,150 +243,116 @@
   };
 
   // ==============================================================================
-  // UI Helper Functions
+  // UI生成関数
   // ==============================================================================
   function createSubAccordion(title, items, isSecret = false) { 
-    const details = document.createElement("details"); details.className = "qp-sub-acc"; 
-    details.style.marginBottom = "6px"; details.style.border = isSecret ? "1px solid #ffcccc" : "1px solid #eee"; 
-    details.style.borderRadius = "4px"; details.style.background = "#fff"; details.open = false; 
-    
+    const details = document.createElement("details"); 
+    details.className = "qp-sub-acc" + (isSecret ? " qp-secret" : ""); 
     const summary = document.createElement("summary"); 
-    summary.textContent = title; summary.style.fontWeight = "bold"; 
-    summary.style.padding = "6px 10px"; summary.style.cursor = "pointer"; 
-    summary.style.background = isSecret ? "#fff0f0" : "#f9f9f9"; 
-    if(isSecret) summary.style.color = "#d00";
+    summary.textContent = title; 
     details.appendChild(summary); 
-
-    const content = document.createElement("div"); content.className = "qp-content-grid"; 
-    content.style.padding = "8px"; content.style.display = "grid"; 
-    content.style.gridTemplateColumns = "repeat(auto-fill, minmax(200px, 1fr))"; content.style.gap = "6px"; 
+    const content = document.createElement("div"); 
+    content.className = "qp-content-grid"; 
     
     items.forEach(item => { 
-      const label = document.createElement("label"); label.style.display = "flex"; label.style.alignItems = "center"; label.style.fontSize = "0.9em"; label.style.cursor = "pointer"; 
-      const cb = document.createElement("input"); cb.type = "checkbox"; cb.style.marginRight = "6px"; cb.dataset.val = item.val || item.en; 
-      label.appendChild(cb); label.appendChild(document.createTextNode(item.label || `${item.ja}/${item.en}`)); 
-      if(item.links) cb.dataset.links = item.links.join(","); content.appendChild(label); 
+      const label = document.createElement("label"); 
+      const cb = document.createElement("input"); 
+      cb.type = "checkbox"; 
+      cb.dataset.val = item.val || item.en; 
+      label.appendChild(cb); 
+      label.appendChild(document.createTextNode(item.label || `${item.ja}/${item.en}`)); 
+      if(item.links) cb.dataset.links = item.links.join(","); 
+      content.appendChild(label); 
     }); 
-    details.appendChild(content); return details; 
+    
+    details.appendChild(content); 
+    return details; 
   }
 
   function createMainSection(id, title, colorStyle = {}) {
-    const details = document.createElement("details"); details.id = id; details.className = "qp-main-acc";
+    const details = document.createElement("details"); 
+    details.id = id; 
+    details.className = "qp-main-acc";
     details.style.cssText = "margin-bottom:10px; border:1px solid #ccc; border-radius:6px; background:#fff;";
-    if(colorStyle.border) details.style.border = colorStyle.border;
-    if(colorStyle.bg) details.style.background = colorStyle.bg;
     
     const summary = document.createElement("summary"); 
     summary.innerHTML = `<span style="margin-right:8px;">▶</span>${title}`; 
     summary.className = "section-summary";
-    summary.style.cssText = "font-weight:bold; padding:10px 14px; cursor:pointer; background:#eef2f6; list-style:none; outline:none; user-select:none; display:flex; align-items:center;";
+    summary.style.cssText = "font-weight:bold; padding:12px 14px; cursor:pointer; background:#eef2f6; list-style:none; outline:none; user-select:none; display:flex; align-items:center;";
     if(colorStyle.sumBg) summary.style.background = colorStyle.sumBg;
     if(colorStyle.sumColor) summary.style.color = colorStyle.sumColor;
     
     details.appendChild(summary);
+    
     const content = document.createElement("div"); 
     content.id = id + "-content"; 
-    content.className = "qp-section-content"; content.style.padding = "10px";
-    details.appendChild(content);
+    content.className = "qp-section-content"; 
+    content.style.padding = "10px";
+    
+    details.appendChild(content); 
     return details;
   }
 
-  function createBeginnerGuide(data) {
-    if (!data) return null;
-    const root = document.createElement("details"); root.className = "beginner-guide-root";
-    root.style.cssText = "margin-bottom:12px; border:2px solid #89CFF0; border-radius:8px; background:#F0F8FF; display:block;";
-    root.open = false; // デフォルトは閉じる
-
-    const summary = document.createElement("summary"); summary.innerHTML = "🔰 <b>初心者ガイド：迷ったらここから選ぶ</b>";
-    summary.style.cssText = "padding:10px; cursor:pointer; font-weight:bold; list-style:none; outline:none; color:#0056b3;"; 
-    root.appendChild(summary);
-    
-    const contentWrapper = document.createElement("div"); contentWrapper.style.cssText = "padding:10px; border-top:1px solid #89CFF0; display:flex; flex-direction:column; gap:15px;";
-    
-    Object.entries(data).forEach(([title, items]) => {
-      const section = document.createElement("div"); section.style.cssText = "border:1px solid #bce; background:#fff; border-radius:8px; padding:10px; width:100%; box-sizing:border-box;";
-      const h4 = document.createElement("h4"); h4.textContent = title; h4.style.cssText = "margin:5px 0 8px 0; font-size:0.95em; color:#0056b3; border-bottom:1px dashed #bce; padding-bottom:3px;"; section.appendChild(h4);
-      const grid = document.createElement("div"); grid.style.cssText = "display:grid; gap:8px; grid-template-columns: 1fr;";
-      
-      items.forEach(item => {
-        const label = document.createElement("label"); label.style.cssText = "display:flex; align-items:center; background:#f9f9f9; padding:8px; border-radius:4px; cursor:pointer; border:1px solid #eee;";
-        const cb = document.createElement("input"); cb.type = "checkbox"; 
-        cb.className = "qp-beginner-cb"; 
-        cb.dataset.val = item.val; cb.style.marginRight = "10px"; cb.style.flexShrink = "0";
-        cb.addEventListener("change", (e) => {
-          if (e.target.checked) {
-             contentWrapper.querySelectorAll(".qp-beginner-cb").forEach(other => {
-               if (other !== e.target) other.checked = false;
-             });
-          }
-        });
-        const textDiv = document.createElement("div"); textDiv.innerHTML = `<div style="font-weight:bold; font-size:0.95em; color:#333;">${item.label}</div><div style="font-size:0.85em; color:#666; margin-top:2px;">${item.desc}</div>`;
-        label.appendChild(cb); label.appendChild(textDiv); grid.appendChild(label);
-      });
-      section.appendChild(grid); contentWrapper.appendChild(section);
-    });
-    root.appendChild(contentWrapper); return root;
-  }
-
+  // ==============================================================================
+  // 🚀 初期化処理
+  // ==============================================================================
   const API = {
     initUI(container) {
+      injectStyles();
       if (window.__outputTranslation) window.__outputTranslation.register(MASTER_DICT);
       
-      const parent = document.querySelector("#list-quality_preset") || container; parent.innerHTML = ""; 
-      const root = document.createElement("div"); root.className = "quality-preset-integrated";
+      const parent = document.querySelector("#list-quality_preset") || container; 
+      parent.innerHTML = ""; 
+      const root = document.createElement("div"); 
+      root.className = "quality-preset-integrated";
       
-      // 1. 画風・品質プリセット (v1本体)
+      // 1. 画風プリセットエリア
       const secPresets = createMainSection("qp-presets", "📦 画風・品質プリセット (Art Styles & Quality)");
       const presetsContent = secPresets.querySelector(".qp-section-content");
       presetsContent.id = "qp-presets-content"; 
 
       // 初心者ガイド
-      const beginnerGuide = createBeginnerGuide(BEGINNER_DATA);
-      if(beginnerGuide) presetsContent.appendChild(beginnerGuide);
+      const guideRoot = document.createElement("details");
+      guideRoot.style.cssText = "margin-bottom:12px; border:2px solid #89CFF0; border-radius:8px; background:#F0F8FF;";
+      guideRoot.innerHTML = `<summary style="padding:10px; cursor:pointer; font-weight:bold; color:#0056b3;">🔰 初心者ガイド：迷ったらここから選ぶ</summary>`;
+      const guideContent = document.createElement("div"); 
+      guideContent.style.padding = "10px";
+      guideContent.className = "qp-section-content"; // スマホ対応クラスを適用
+      Object.entries(BEGINNER_DATA).forEach(([k,v]) => { guideContent.appendChild(createSubAccordion(k, v)); });
+      guideRoot.appendChild(guideContent);
+      presetsContent.appendChild(guideRoot);
 
-      // 通常プリセットの展開
-      Object.entries(PRESET_DATA).forEach(([k,v]) => { 
-        presetsContent.appendChild(createSubAccordion(k, v)); 
-      });
+      // 通常プリセット全展開
+      Object.entries(PRESET_DATA).forEach(([k,v]) => { presetsContent.appendChild(createSubAccordion(k, v)); });
       
-      // シークレット（基本R-18）の展開
+      // シークレット（基本R-18）
       if (IS_R18_UNLOCKED) {
         const secretHeader = document.createElement("div");
         secretHeader.style.cssText = "margin:15px 0 5px; color:#d00; font-weight:bold; border-bottom:2px solid #d00; padding-bottom:3px;";
         secretHeader.textContent = "⚠️ R-18 / NSFW Content (Unlocked)";
         presetsContent.appendChild(secretHeader);
-        Object.entries(SECRET_DATA).forEach(([k,v]) => {
-          presetsContent.appendChild(createSubAccordion(k, v, true));
-        });
+        Object.entries(SECRET_DATA).forEach(([k,v]) => { presetsContent.appendChild(createSubAccordion(k, v, true)); });
       }
 
-      // ★解放トリガーA: 「究極艶」解放 (5回連打)
-      const summaryPresets = secPresets.querySelector("summary");
-      let clickCount = 0; let clickTimer = null;
-      summaryPresets.addEventListener("click", (e) => {
-        clickCount++; 
-        if(clickTimer) clearTimeout(clickTimer);
-        clickTimer = setTimeout(() => { clickCount = 0; }, 2000); 
+      // 究極艶解放トリガー (5回タップ)
+      let glossCount = 0;
+      let glossTimer = null;
+      secPresets.querySelector("summary").addEventListener("click", () => {
+        glossCount++;
+        if(glossTimer) clearTimeout(glossTimer);
+        glossTimer = setTimeout(() => { glossCount = 0; }, 2000);
         
-        if (clickCount >= 5) {
-          const unlocked = localStorage.getItem("MY_GLOSS_UNLOCK") === "true";
-          const msg = unlocked 
-            ? "究極艶モード(High-End Gloss)を【無効】にしますか？\n(ページがリロードされます)" 
-            : "究極艶モード(High-End Gloss)を【解放】しますか？\n(ページがリロードされます)";
-          
-          if (confirm(msg)) {
-            localStorage.setItem("MY_GLOSS_UNLOCK", (!unlocked).toString()); 
-            location.reload();
+        if (glossCount >= 5) {
+          if(confirm(IS_GLOSS_UNLOCKED ? "究極艶を封印しますか？" : "究極艶を解放しますか？")) {
+            localStorage.setItem("MY_GLOSS_UNLOCK", (!IS_GLOSS_UNLOCKED).toString()); location.reload();
           }
-          clickCount = 0;
+          glossCount = 0;
         }
       });
-
       root.appendChild(secPresets);
 
-      // 2. コンテナ群 (各拡張ファイルの受け皿)
-      // ★修正: 他のファイルが確実にIDを見つけられるように、innerIdの要素を生成して追加する方式に統一
-      const sectionConfigs = [
+      // 2. 空のコンテナ（他ファイル用スロット）
+      const config = [
         { id: "qp-situations", title: "🎬 シチュエーション・環境 (Situations & Environment)", innerId: "qp-situations-general-area" },
         { id: "qp-packs", title: "📦 シチュエーションパック (Context & Action Packs)", style: { border:"1px solid #99c", bg:"#f4f4ff", sumBg:"#e0e0ff", sumColor:"#336" }, innerId: "qp-packs-content" },
         { id: "qp-combat", title: "⚔️ 戦闘・アクション (Combat)", innerId: "qp-combat-content" },
@@ -294,78 +361,43 @@
         { id: "qp-quality", title: "🔧 品質・技術・ツール (Quality & Tech)", innerId: "qp-quality-content" },
       ];
 
-      sectionConfigs.forEach(conf => {
-        const det = createMainSection(conf.id, conf.title, conf.style || {});
-        const content = det.querySelector(".qp-section-content");
-        
-        // ★修正: v2, v3, v4...などが getElementById で探すため、
-        // 確実にIDを持ったdivを作成してcontentに追加する。
-        // もしすでにIDがあるなら追加しない、というチェックも可能だが、
-        // 毎回リセット(innerHTML="")されるので新規作成で良い。
-        
-        // 既存のID割り当てロジック（そのまま）
-        if (conf.innerId === "qp-situations-general-area") {
-           // v2などは qp-situations-general-area というIDのdivを探す
-           const div = document.createElement("div"); 
-           div.id = conf.innerId;
-           content.appendChild(div);
-        } else {
-           // v6などは content そのもののIDを探す場合もあるが、
-           // 安全のため、ここでも内部divを作ってIDを付与する方式に統一しても良い。
-           // しかし既存のv3/v4/v6/v7は contentのIDを期待している節があるため、
-           // innerIdをcontent自体のIDとして設定する（これが一番安全）。
-           content.id = conf.innerId;
-        }
-        root.appendChild(det);
+      config.forEach(c => {
+        const sec = createMainSection(c.id, c.title, c.style || {});
+        const inner = document.createElement("div"); 
+        inner.id = c.innerId;
+        sec.querySelector(".qp-section-content").appendChild(inner);
+        root.appendChild(sec);
       });
 
-      // 3. ネガティブ (★解放トリガーB: R-18解放 - 10回連打 & 無反応化)
-      const divNegSep = document.createElement("div"); 
-      divNegSep.style.cssText = "margin-top:30px; margin-bottom:10px; border-top:2px dashed #ffb3b3;";
+      // 3. ネガティブ (R-18解放トリガー)
+      const negTriggerWrap = document.createElement("div");
+      negTriggerWrap.style.cssText = "margin:30px 0 10px; border-top:2px dashed #ffb3b3; text-align:center;";
+      const trigger = document.createElement("div");
+      trigger.style.cssText = "margin-top:-12px; display:inline-block; user-select:none; cursor:default; -webkit-tap-highlight-color:transparent; outline:none;";
+      trigger.innerHTML = `<span style="background:#fff; padding:0 15px; color:#d9534f; font-weight:bold; font-size:0.9em; border:1px solid #ffb3b3; border-radius:10px;">⚠️ NEGATIVE PROMPTS</span>`;
       
-      // R-18トリガーエリア
-      const r18Trigger = document.createElement("div");
-      // ★修正: cursor:default, user-select:none, tap-highlight-color:transparent で「反応なし」に見せる
-      r18Trigger.style.cssText = "margin-top:-12px; text-align:center; user-select:none; cursor:default; -webkit-tap-highlight-color:transparent; outline:none;";
-      r18Trigger.innerHTML = `<span style="background:#fff0f0; padding:0 15px; color:#d9534f; font-size:0.9em; font-weight:bold; border-radius:10px; border:1px solid #ffb3b3;">⚠️ NEGATIVE PROMPTS</span>`;
-      
-      // ★修正: 10回連打ロジック (0.5秒以内に次をタップしないとリセット)
-      let negClickCount = 0; 
-      let negClickTimer = null;
+      let r18Count = 0;
+      let r18Timer = null;
+      trigger.addEventListener("click", () => {
+        r18Count++;
+        if(r18Timer) clearTimeout(r18Timer);
+        r18Timer = setTimeout(() => { r18Count = 0; }, 500);
 
-      r18Trigger.addEventListener("click", (e) => {
-        // デフォルト動作やバブリング防止（念のため）
-        // e.preventDefault(); 
-        
-        negClickCount++;
-        if (negClickTimer) clearTimeout(negClickTimer);
-        
-        // 0.5秒間隔が空いたらリセット
-        negClickTimer = setTimeout(() => { negClickCount = 0; }, 500); 
-
-        if (negClickCount >= 10) {
-          const unlocked = localStorage.getItem("MY_SECRET_UNLOCK") === "true";
-          const msg = unlocked 
-            ? "シークレットモード(R-18)を【封印】しますか？\n(ページがリロードされます)" 
-            : "シークレットモード(R-18)を【解放】しますか？\n(ページがリロードされます)";
-          
-          // alertやconfirmを出すと連打が止まるのでOK
-          if(confirm(msg)) {
-            localStorage.setItem("MY_SECRET_UNLOCK", (!unlocked).toString());
-            location.reload();
+        if (r18Count >= 10) {
+          if(confirm(IS_R18_UNLOCKED ? "R-18を封印しますか？" : "R-18を解放しますか？")) {
+            localStorage.setItem("MY_SECRET_UNLOCK", (!IS_R18_UNLOCKED).toString()); location.reload();
           }
-          negClickCount = 0;
+          r18Count = 0;
         }
       });
-
-      divNegSep.appendChild(r18Trigger);
-      root.appendChild(divNegSep);
+      negTriggerWrap.appendChild(trigger);
+      root.appendChild(negTriggerWrap);
 
       const secNegSets = createMainSection("qp-neg-sets", "🚫 ネガティブプリセット (Negative Sets)", { sumBg: "#fff0f0", sumColor: "#d00" });
       secNegSets.querySelector(".qp-section-content").id = "qp-neg-sets-content";
       root.appendChild(secNegSets);
       
-      const secNegWords = createMainSection("qp-neg-words", "🗑️ ネガティブ (Negative Words)", { sumBg: "#fff0f0", sumColor: "#d00" });
+      const secNegWords = createMainSection("qp-neg-words", "🗑️ ネガティブワード (Negative Words)", { sumBg: "#fff0f0", sumColor: "#d00" });
       secNegWords.querySelector(".qp-section-content").id = "qp-neg-words-content";
       root.appendChild(secNegWords);
       
