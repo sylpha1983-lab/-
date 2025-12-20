@@ -10,8 +10,20 @@
       { ja: "片目閉じ (ウインク)", en: "one eye closed" }, { ja: "細めた目", en: "squinting" },
       { ja: "見開いた目", en: "wide eyes" }, { ja: "ハート目", en: "heart-shaped pupils" },
       { ja: "しいたけ目", en: "symbol-shaped pupils" }, { ja: "星目", en: "star-shaped pupils" },
-      { ja: "オッドアイ", en: "heterochromia" }, { ja: "ハイライトなし", en: "empty eyes" },
+      { ja: "オッドアイ", en: "heterochromia" }, { ja: "ハイライトなし", en: "empty eyes" }, // 既存
       { ja: "ぐるぐる目", en: "swirl eyes" }, { ja: "三白眼", en: "sanpaku" }
+    ],
+    // ★追加: ハイライト消去・虚無
+    "🚫 ハイライト消し・虚無 (No Highlights)": [
+      { ja: "生気のない目 (強力)", en: "lifeless eyes", desc: "empty eyesより強力に光を消す" },
+      { ja: "死んだ目 (深刻)", en: "dead eyes", desc: "完全に死んでいる目" },
+      { ja: "濁った目", en: "dull eyes", desc: "輝きを失った濁り" },
+      { ja: "虚無の目 (ベタ塗り)", en: "void eyes", desc: "闇のような表現" },
+      { ja: "平坦な目 (光沢なし)", en: "flat eyes", desc: "塗りを平坦にして光を消す" },
+      { ja: "瞳孔なし", en: "no pupils", desc: "瞳の構造を簡略化" },
+      { ja: "収縮した瞳孔 (狂気)", en: "small pupils", desc: "点が打たれたような目" },
+      { ja: "散瞳 (開ききった)", en: "dilated pupils", desc: "焦点が合わない感じ" },
+      { ja: "目元に影", en: "shadow over eyes", desc: "物理的に光を遮る" }
     ],
     "👄 口・舌・歯 (Mouth)": [
       { ja: "口を開ける", en: "open mouth" }, { ja: "口を閉じる", en: "closed mouth" },
@@ -35,7 +47,10 @@
     "tsurime": "ツリ目", "tareme": "タレ目", "jitome": "ジト目", "closed eyes": "閉じた目",
     "one eye closed": "片目閉じ", "squinting": "細めた目", "wide eyes": "見開き目",
     "heart-shaped pupils": "ハート目", "symbol-shaped pupils": "しいたけ目", "star-shaped pupils": "星目",
-    "heterochromia": "オッドアイ", "empty eyes": "虚ろな目", "swirl eyes": "ぐるぐる目", "sanpaku": "三白眼",
+    "heterochromia": "オッドアイ", "empty eyes": "ハイライトなし", "swirl eyes": "ぐるぐる目", "sanpaku": "三白眼",
+    "lifeless eyes": "生気のない目", "dead eyes": "死んだ目", "dull eyes": "濁った目", "void eyes": "虚無の目",
+    "flat eyes": "平坦な目", "no pupils": "瞳孔なし", "small pupils": "小さい瞳孔", "dilated pupils": "散瞳",
+    "shadow over eyes": "目元の影",
     "open mouth": "開口", "closed mouth": "閉口", "parted lips": "半開き", "pout": "むくれ",
     "tongue out": "舌出し", "cat mouth": "猫口", "triangle mouth": "三角口", "fangs": "牙",
     "shark teeth": "ギザ歯", "clenched teeth": "食いしばり", "lipstick": "リップ",
@@ -50,7 +65,7 @@
       if (window.__outputTranslation) window.__outputTranslation.register(DICT);
 
       let parent = document.querySelector("#list-expression");
-      if (!parent) return; // v1が作るのを待つ
+      if (!parent) return; 
 
       const createCat = (title, items) => {
         const details = document.createElement("details");
@@ -75,6 +90,7 @@
           cb.dataset.val = item.en;
           label.appendChild(cb);
           label.appendChild(document.createTextNode(`${item.ja} / ${item.en}`));
+          if(item.desc) label.title = item.desc;
           content.appendChild(label);
         });
         details.appendChild(content);
