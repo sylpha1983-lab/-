@@ -1,6 +1,6 @@
 (function(){
   "use strict";
-  const VERSION = 3; // ファンタジー・民族衣装・スタイル (大幅増量版)
+  const VERSION = 3; // ファンタジー・民族・現代スタイル (統合版)
   const KEY = "attire";
 
   const CATEGORIES = {
@@ -43,25 +43,27 @@
       { ja: "色打掛", en: "uchikake" },
       { ja: "浴衣", en: "yukata" },
       { ja: "袴 (ハカマ)", en: "hakama" },
-      { ja: "巫女服", en: "miko attire" }, // v2にもあるがセットとして重要なので維持
+      { ja: "巫女服", en: "miko attire" },
       { ja: "忍者装束", en: "ninja suit" },
       { ja: "侍 (着流し)", en: "samurai clothes" },
       { ja: "法被 (ハッピ)", en: "happi coat" }
     ],
-    "🕶️ ファッションスタイル (Fashion Styles)": [
-      { ja: "ゴシック (Goth)", en: "gothic fashion" },
-      { ja: "パンク (Punk)", en: "punk fashion" },
-      { ja: "グランジ (Grunge)", en: "grunge fashion" },
-      { ja: "サイバーパンク", en: "cyberpunk attire" },
-      { ja: "スチームパンク", en: "steampunk attire" },
-      { ja: "テックウェア", en: "techwear" },
+    "🕶️ ファッションスタイル (Modern Styles)": [
+      { ja: "ストリート系", en: "streetwear, oversized" },
+      { ja: "テックウェア (機能的)", en: "techwear, straps, black" },
+      { ja: "サイバーパンク", en: "cyberpunk attire, neon" },
+      { ja: "スチームパンク", en: "steampunk attire, gears, brown" },
+      { ja: "ゴシック", en: "gothic fashion" },
+      { ja: "パンク", en: "punk fashion" },
+      { ja: "グランジ", en: "grunge fashion" },
       { ja: "プレッピー (優等生)", en: "preppy style" },
+      { ja: "ダークアカデミア", en: "dark academia, tweed, vintage" }, // ★追加
+      { ja: "コテージコア (田舎風)", en: "cottagecore, peasant dress" }, // ★追加
       { ja: "ボヘミアン", en: "bohemian style" },
       { ja: "ヴィンテージ/レトロ", en: "vintage style" },
-      { ja: "ロリータ", en: "lolita fashion" },
-      { ja: "ギャル", en: "gyaru style" },
-      { ja: "ストリート系", en: "streetwear" },
-      { ja: "ミリタリー風", en: "military fashion" }
+      { ja: "オートクチュール", en: "haute couture, avant-garde" }, // ★追加
+      { ja: "アスレジャー (スポーティ)", en: "athleisure, sporty" }, // ★追加
+      { ja: "ミニマリスト", en: "minimalist fashion" } // ★追加
     ]
   };
 
@@ -70,14 +72,12 @@
       const parent = document.querySelector("#list-attire");
       if (!parent) return;
 
-      // 既存のv3コンテナがあれば削除（更新用）
       const existing = parent.querySelector(".attire-v3-container");
       if(existing) existing.remove();
 
       const section = document.createElement("div");
       section.className = "attire-v3-container";
       
-      // 区切り線
       const sep = document.createElement("div");
       sep.style.cssText = "margin:15px 0 10px 0; border-top:1px dashed #ccc; text-align:center; color:#888; font-size:0.8em;";
       sep.textContent = "▼ ファンタジー・民族・スタイル (v3 Expanded) ▼";
@@ -90,7 +90,7 @@
         summary.textContent = cat;
         summary.style.fontWeight = "bold";
         summary.style.cursor = "pointer";
-        summary.style.background = "#fff8e1"; // クリーム色で区別
+        summary.style.background = "#fff8e1"; 
         details.appendChild(summary);
 
         const content = document.createElement("div");

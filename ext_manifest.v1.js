@@ -22,6 +22,7 @@ window.EXT_MANIFEST = [
   "builder_ui.section.hair.v4.js",
   "builder_ui.section.hair.v5.js",
   "builder_ui.section.hair.v6.js",
+  "builder_ui.section.skin_details.v1.js", // メイク・身体特徴
 
   // 3. Attire & Fashion
   "builder_ui.section.attire.v1.js",
@@ -40,11 +41,13 @@ window.EXT_MANIFEST = [
   "builder_ui.section.attire.v14.js",
   "builder_ui.section.attire.v15.js",
   "builder_ui.section.attire.v16.js",
+  "builder_ui.section.attire.v17.js", // ★追加: R-18特化 (Nude/Fetish)
+  "builder_ui.section.attire.v18.js", // ★追加: セクシーコスプレ・ファッション
+  "builder_ui.section.attire.v19.js", // ★追加: 年代別・レトロスタイル
 
   // 4. Details
   "builder_ui.section.accessories.v1.js",
   "builder_ui.section.texture.v1.js",
-  "builder_ui.section.skin_details.v1.js", // ★追加: 肌・装飾・メイク・傷
 
   // 5. Action & Camera
   "builder_ui.section.expression.v1.js",
