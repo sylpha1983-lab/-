@@ -5,16 +5,35 @@
   const IS_UNLOCKED = localStorage.getItem("MY_SECRET_UNLOCK") === "true";
 
   // ==============================================================================
-  // 通常パック (省略なし)
+  // 通常パック (General Packs)
   // ==============================================================================
   const PACK_DATA = {
     "💼 職業・なりきりパック": [
+      { label: "アイドル・シマエナガ風", val: "(idol-style outfit), (white and pastel blue frilly dress), (feather embroidery), (fluffy sleeves), (short layered skirt), (down feather texture), (translucent ribbons), (soft feather hairclip)", desc: "シマエナガモチーフのアイドル衣装" },
       { label: "メイド・お給仕", val: "(maid outfit), (holding serving tray), (curtsy), (classic maid), (mansion interior), (elegant), (frills), (tea set)", links: ["立ちポーズ"] },
       { label: "ナース・診察", val: "(nurse uniform), (holding syringe), (clipboard), (hospital room), (white background), (clean atmosphere), (medical checkup)", links: ["病院"] },
       { label: "OL・オフィス", val: "(office lady), (business suit), (holding documents), (modern office), (desk work), (glasses), (smart look), (high rise building view)", links: ["眼鏡"] },
       { label: "ポリス・逮捕", val: "(police uniform), (holding handcuffs), (police hat), (arresting pose), (cool expression), (patrol car background), (justice)", links: ["キメポーズ"] },
       { label: "バニーガール", val: "(bunny girl suit), (rabbit ears), (fishnet tights), (holding tray), (casino background), (roulette), (neon lights), (glamorous)", links: ["セクシー"] },
       { label: "巫女・神社", val: "(miko outfit), (holding broom), (shrine background), (sweeping leaves), (traditional japanese), (sacred atmosphere), (red hakama)", links: ["和風"] }
+    ],
+    // ★テーマ別・持ち物セット
+    "🎒 テーマ別・持ち物セット (Item Sets)": [
+      { label: "医者セット", val: "(holding stethoscope), (clipboard under arm), (holding syringe), (medical tools), (pen in pocket)", desc: "診察に必要な道具一式" },
+      { label: "ゴスロリセット", val: "(holding frilled parasol), (lace headdress), (cross necklace), (holding gothic doll), (rose decoration)", desc: "ゴシックな装飾品セット" },
+      { label: "現代っ子セット", val: "(holding smartphone), (drinking bubble tea), (headphones around neck), (stylish backpack), (mask)", desc: "今風のアイテムセット" },
+      { label: "冒険者セット", val: "(holding map), (compass), (lantern), (potion flask on belt), (leather backpack), (dagger)", desc: "旅の必需品セット" },
+      { label: "魔法使いセット", val: "(holding magic staff), (grimoire), (potion bottles), (crystal ball), (magic components)", desc: "魔法研究の道具" },
+      { label: "アイドルセット", val: "(holding microphone), (glow stick), (bouquet), (fan letter), (towel)", desc: "ステージ映えする小物" },
+      { label: "画材・美術セット", val: "(holding paintbrush), (palette), (easel), (apron with paint stains), (sketchbook), (pencils)", desc: "絵を描く道具" },
+      { label: "読書・勉強セット", val: "(open book), (stack of books), (glasses), (pen), (notebook), (library card)", desc: "知的なアイテム" }
+    ],
+    "💦 演出・エフェクト (Effects)": [
+      { label: "舞い散る羽根", val: "(floating feathers), (white feathers), (angelic atmosphere), (soft focus), (dreamy)" },
+      { label: "ハートのボケ", val: "(bokeh heart shapes), (pink atmosphere), (romantic light), (sparkles), (glowing particles)" },
+      { label: "雪の結晶", val: "(snowflake decorations), (winter theme), (glowing snowflakes), (cold breath), (magical atmosphere)" },
+      { label: "キラキラ粒子", val: "(faint sparkles), (light particles), (shimmering air), (magical dust), (fantasy setting)" },
+      { label: "ポラロイド写真", val: "(polaroid photo developing mid-air), (floating photos), (memories), (nostalgic)" }
     ],
     "🎉 イベント・行事": [
       { label: "クリスマス", val: "(santa costume), (christmas tree), (holding gift box), (snowy background), (lights and ornaments), (happy smile), (winter holiday)" },
@@ -62,7 +81,7 @@
       { label: "対面座位・密着", val: "(1boy), (1girl), (mating press), (legs on shoulders), (deepest penetration), (eye contact), (womb marking), (internal view)", links: ["Basic R-18"] }
     ],
 
-    // ★新設: 挿入・ピストン (今回のご依頼分)
+    // 🍆 挿入・ピストン
     "🍆 挿入・ピストン (Insertion & Motion)": [
       { label: "明確な挿入描写", val: "(penetration clearly visible:1.3), (vaginal sex:1.3), (connection point), (inserting), (glans inside)", desc: "結合部をはっきり描く。" },
       { label: "激しいピストン", val: "(hips moving rhythmically), (fully thrusting), (fast motion), (afterimage of hips), (piston motion), (shaking hips)", desc: "動きの激しさを強調。" },
@@ -71,7 +90,7 @@
       { label: "ガラス越し・激", val: "(breasts flattened against glass), (nipple pressure visible), (fully thrusting from behind), (glass reflection layering:1.3), (foggy breath)", desc: "硝子プレイの激しい版。" }
     ],
     
-    // 2. 表情・精神 (拡張済み)
+    // 2. 表情・精神
     "🤪 R-18 表情・精神 (Expressions & Mind)": [
       { label: "ハート目・催眠", val: "(hypnotic heart eyes), (pink rings fading into pupils), (vacant smile), (euphoric tears), (drooling), (mind break)", desc: "トロトロに溶けた表情。" },
       { label: "絶頂・震え", val: "(orgasm), (girl trembling in climax:1.5), (shaking), (arched back), (toes curling), (spasms)", desc: "限界を迎えた震え。" },
@@ -82,14 +101,17 @@
       { label: "嫌悪・蔑み", val: "(disgusted face), (looking down on viewer), (scorn), (cold eyes), (glaring), (furrowed brows)", desc: "ゴミを見るような目。" }
     ],
 
-    // 3. 演出・液体 (拡張済み)
+    // 3. 演出・液体
     "💦 演出・液体・状態 (Effects & Fluids)": [
       { label: "吐息・ハート", val: "(foggy breath trails), (smeared heart-shaped breath patches), (erotic moan text floating), (heart particles:1.3), (pink atmosphere)", desc: "息で曇ったガラスとハート。" },
       { label: "子宮紋・発光", val: "(womb symbol glowing softly through skin), (magic sigils), (pink-dimmed magical space), (glowing abdomen)", desc: "お腹の紋章が光る。" },
       { label: "粘液・融合", val: "(wet mucus fuses with her body), (slime coating skin), (oily sheen), (translucent slime), (dripping)", desc: "粘液と肌の一体化。" },
       { label: "うめきハード・ハート乱舞", val: "(heart particles:1.3), (floating pink hearts around her:1.3), (moaning heart symbols:1.2), (moaning with hearts:1.2), (background glowing with heart effects:1.2)", desc: "空間をハートで埋め尽くす。" },
+      { label: "液体まみれ・ドロドロ", val: "(messy body), (sweat), (saliva), (cum on body), (bukkake), (sticky), (wet skin), (glistening skin)", desc: "全身を汚す。" },
       { label: "大量射精・中出し", val: "(semen gushing deep inside her), (crotch visibly overflowing), (fluid streaking down her trembling thighs), (creampie), (messy)", desc: "溢れ出る量。" },
-      { label: "断面図・内部透視", val: "(cross section), (x-ray), (internal view), (cervix), (womb), (cum inside), (cutaway)", desc: "内部構造の描写。" }
+      { label: "断面図・内部透視", val: "(cross section), (x-ray), (internal view), (cervix), (womb), (cum inside), (cutaway)", desc: "内部構造の描写。" },
+      { label: "発情・ヒート", val: "(heat), (steam), (heavy blush), (panties aside), (fingering), (masturbation), (exhaling)", desc: "ムラムラした状態。" },
+      { label: "精液膨張・腹ボテ", val: "(stomach bulge), (cum inflation), (distended belly), (full), (pregnant pose), (navel press)", desc: "お腹の膨らみ。" }
     ],
 
     // 🪟 硝子・密着 (Glass & Press)
@@ -121,7 +143,7 @@
       { label: "スライム風呂・ローション", val: "(slime bath), (lotion), (viscous liquid), (slippery), (trapped), (massage), (nurunuru)", desc: "ヌルヌルの感触。" }
     ],
 
-    // 以下既存カテゴリー
+    // 6. H-ロケーション
     "🏩 H-ロケーション": [
       { label: "ラブホ・鏡張り", val: "(love hotel), (mirror chair), (glass wall), (pink lighting), (erotic atmosphere), (bed), (condom wrapper), (neon signs)", links: ["Basic R-18"] },
       { label: "マジックミラー号", val: "(magic mirror truck), (vehicle interior), (city street outside window), (exposed to public), (voyeurism), (passing pedestrians), (crowd outside)", links: ["Basic R-18"] },
@@ -130,6 +152,7 @@
       { label: "保健室のベッド", val: "(school infirmary), (curtain closed), (lying on bed), (nurse play), (after school sex), (creaking bed), (medicine cabinet)", links: ["Basic R-18"] },
       { label: "更衣室・盗撮", val: "(locker room), (changing clothes), (half naked), (hidden camera angle), (voyeurism), (gym clothes), (school swimsuit)", links: ["Basic R-18"] }
     ],
+    // 7. 学園
     "🏫 学園・背徳": [
       { label: "体育倉庫", val: "(gym storage room), (sweat), (sportswear), (bloomers), (ball cart), (dusty), (after school), (mat)", links: ["Basic R-18"] },
       { label: "放課後の教室", val: "(classroom), (sunset), (on desk), (skirt lifted), (messy clothes), (blackboard), (watching door), (secret relationship)", links: ["Basic R-18"] },
@@ -137,6 +160,7 @@
       { label: "プール・夜", val: "(school pool), (night), (moonlight), (wet swimsuit), (floating), (sneaking in), (water reflection)", links: ["Basic R-18"] },
       { label: "図書室・静寂", val: "(library), (bookshelves), (quiet), (covering mouth), (secret sex), (skirt lifted), (looking around)", links: ["Basic R-18"] }
     ],
+    // 8. 生活
     "🏠 生活・密着": [
       { label: "裸エプロン", val: "(naked apron), (kitchen), (cooking), (from behind), (messy hair), (apron only), (side breast), (domestic)", links: ["Basic R-18"] },
       { label: "ソファーで密着", val: "(living room), (sofa), (cuddling), (legs wrapped), (tv light), (relaxing), (missionary), (intimate)", links: ["Basic R-18"] },
@@ -144,6 +168,7 @@
       { label: "一緒にお風呂", val: "(bathroom), (bathtub), (washing body), (bubbles), (steam), (facing each other), (wet skin), (shampoo)", links: ["Basic R-18"] },
       { label: "玄関で待ち伏せ", val: "(entrance hall), (welcome home), (hugging), (standing sex), (still in shoes), (impatience), (kissing)", links: ["Basic R-18"] }
     ],
+    // 9. 乱交
     "👯 乱交・複数": [
       { label: "おじさん・醜男", val: "(ugly bastard), (fat man), (sweaty), (grinning), (ntr), (corruption), (forced), (contrast)", links: ["Basic R-18"] },
       { label: "輪姦・回し", val: "(gangbang), (multiple boys), (surrounded), (bukkake), (messy body), (white fluids), (ahegao), (mind break)", links: ["Basic R-18"] },
@@ -151,6 +176,7 @@
       { label: "サンドイッチ", val: "(spitroast), (double blowjob), (face fuck), (anal and oral), (messy face), (drooling), (hardcore)", links: ["Basic R-18"] },
       { label: "異種姦パーティ", val: "(monster gangbang), (orcs), (goblins), (slime), (tentacles), (breeding), (defeat), (messy)", links: ["Basic R-18"] }
     ],
+    // 10. 陵辱・ハード
     "😈 陵辱・ハード": [
       { label: "NSFW挿入 (激)", val: "(rape), (vaginal penetration with thick penis)", desc: "激しい挿入" },
       { label: "NSFW指挿入 (激)", val: "(rape), (vaginal penetration with thick finger)", desc: "激しい指入れ" },
@@ -160,6 +186,7 @@
       { label: "眠姦・睡眠", val: "(sleeping), (asleep), (molestation), (unaware), (bed), (night), (pajamas), (touching), (prank)", links: ["Basic R-18"] },
       { label: "強制・レイプ", val: "(rape), (forced), (struggling), (pinned down), (tears), (fear), (ripped clothes), (hand over mouth)", links: ["Basic R-18"] }
     ],
+    // 11. 催眠
     "💊 催眠・変容": [
       { label: "時間停止", val: "(time stop), (frozen people background), (pause button), (powerless), (unaware), (monochrome background), (colorful character), (statue)", links: ["Basic R-18"] },
       { label: "催眠・洗脳", val: "(hypnotized), (empty eyes), (swirl eyes), (mind control), (drooling), (obeying orders), (dull eyes), (slave), (trance)", links: ["Basic R-18"] },
@@ -167,6 +194,7 @@
       { label: "石化進行", val: "(petrification), (turning to stone), (grey skin), (statue), (immobile), (half stone), (fear), (partial)", links: ["Basic R-18"] },
       { label: "寄生・苗床", val: "(stomach bulge), (pregnant), (impregnation), (alien), (parasite), (eggs), (x-ray), (birthing), (breeder)", links: ["Basic R-18"] }
     ],
+    // 12. フェチ
     "🦶 フェチ・奉仕": [
       { label: "足舐め・踏み", val: "(footjob), (trampling), (licking feet), (soles), (toes), (looking down), (scorn), (dominance)", links: ["Basic R-18"] },
       { label: "顔面騎乗", val: "(facesitting), (suffocation), (thighs), (pussy view), (ass view), (smothering), (cant breathe)", links: ["Basic R-18"] },
@@ -174,6 +202,7 @@
       { label: "トイレ・放尿", val: "(peeing), (watersports), (toilet), (skirt lifted), (puddle), (relief), (embarrassed)", links: ["Basic R-18"] },
       { label: "ご奉仕・手コキ", val: "(handjob), (service), (kneeling), (looking at viewer), (tongue out), (saliva trail), (upward glance)", links: ["Basic R-18"] }
     ],
+    // 13. 拘束
     "⛓️ 拘束・責め": [
       { label: "緊縛・吊り", val: "(shibari), (rope bondage), (suspension), (hanging), (bound wrists), (bound legs), (rope marks), (kinbaku), (struggling)", links: ["Basic R-18"] },
       { label: "拘束椅子・機械", val: "(bondage chair), (restrained), (spread legs), (sex machine), (dildo machine), (vibrator), (helpless), (mechanical arms)", links: ["Basic R-18"] },
@@ -184,113 +213,69 @@
   };
 
   const DICT = {
-    // 既存辞書 (省略なし)
-    "maid outfit": "メイド服", "holding serving tray": "トレイを持つ", "curtsy": "カーテシー", "classic maid": "クラシックメイド",
-    "mansion interior": "屋敷の内装", "frills": "フリル", "tea set": "ティーセット", "nurse uniform": "ナース服",
-    "holding syringe": "注射器を持つ", "clipboard": "カルテ", "medical checkup": "診察", "office lady": "OL",
-    "business suit": "スーツ", "holding documents": "書類を持つ", "modern office": "オフィス", "desk work": "デスクワーク",
-    "glasses": "眼鏡", "smart look": "知的", "high rise building view": "高層ビルの眺め", "police uniform": "警官の制服",
-    "holding handcuffs": "手錠を持つ", "police hat": "警帽", "arresting pose": "逮捕ポーズ", "patrol car background": "パトカー",
-    "justice": "正義", "bunny girl suit": "バニーガール", "rabbit ears": "うさ耳", "fishnet tights": "網タイツ",
-    "holding tray": "トレイを持つ", "casino background": "カジノ", "roulette": "ルーレット", "neon lights": "ネオンライト",
-    "glamorous": "魅力的", "miko outfit": "巫女服", "holding broom": "箒を持つ", "shrine background": "神社",
-    "sweeping leaves": "掃除", "traditional japanese": "日本の伝統", "sacred atmosphere": "神聖な雰囲気", "red hakama": "赤袴",
-    "santa costume": "サンタコス", "christmas tree": "クリスマスツリー", "holding gift box": "プレゼントを持つ", "snowy background": "雪景色",
-    "lights and ornaments": "電飾と飾り", "happy smile": "幸せな笑顔", "winter holiday": "冬休み", "witch costume": "魔女コス",
-    "holding pumpkin": "カボチャを持つ", "jack-o'-lantern": "ジャック・オー・ランタン", "bats": "コウモリ", "purple and orange theme": "紫とオレンジ",
-    "spooky castle background": "不気味な城", "magic hat": "魔法の帽子", "wedding dress": "ウェディングドレス", "holding bouquet": "ブーケを持つ",
-    "church interior": "教会", "white veil": "ベール", "stained glass": "ステンドグラス", "happy tears": "嬉し泣き",
-    "marriage ceremony": "結婚式", "pure white": "純白", "wearing yukata": "浴衣", "onsen": "温泉", "open air bath": "露天風呂",
-    "wooden bucket": "木桶", "flushed face": "上気した顔", "night scenery": "夜景", "eating hamburger": "ハンバーガーを食べる",
-    "holding burger with both hands": "両手で持つ", "fast food restaurant": "ファストフード店", "french fries": "ポテト", "cola": "コーラ",
-    "happy eating face": "幸せそうに食べる", "open mouth": "口を開ける", "afternoon tea": "アフタヌーンティー", "holding tea cup": "カップを持つ",
-    "cake stand": "ケーキスタンド", "garden terrace": "テラス", "elegant dress": "エレガントなドレス", "sipping tea": "紅茶をすする",
-    "relaxing afternoon": "午後のひととき", "izakaya": "居酒屋", "holding beer mug": "ビールジョッキ", "kanpai": "乾杯",
-    "yakitori": "焼き鳥", "lively atmosphere": "活気ある雰囲気", "drinking": "飲む", "slightly drunk": "ほろ酔い", "lanterns": "提灯",
-    "aquarium date": "水族館デート", "looking at fish": "魚を見る", "reflection on glass": "ガラスの反射", "walking together": "一緒に歩く",
-    "happy expression": "幸せな表情", "movie theater": "映画館", "sitting next to each other": "隣同士に座る", "eating popcorn": "ポップコーン",
-    "screen light reflecting on face": "スクリーンの光", "intimate moment": "親密な瞬間", "amusement park date": "遊園地デート",
-    "ferris wheel in background": "背景に観覧車", "holding crepe": "クレープを持つ", "colorful lights": "カラフルな光",
-    "vibrant atmosphere": "活気ある雰囲気", "casual clothes": "私服", "observation deck": "展望台", "night city view": "夜景",
-    "sparkling city lights": "煌めく街", "leaning on railing": "手すりにもたれる", "romantic mood": "ロマンチックなムード", "couple atmosphere": "カップル",
-    "walking home together": "一緒に下校", "sunset glow": "夕焼け", "blushing": "赤面", "sentimental atmosphere": "感傷的",
-    "running away": "逃げる", "looking back": "振り返る", "scared expression": "怯えた顔", "tears": "涙", "sweat": "冷や汗",
-    "abandoned hallway": "廃墟の廊下", "motion blur": "モーションブラー", "scary monster chasing from behind": "背後から迫る怪物",
-    "pursuer looming in background": "背景に迫る追跡者", "cinematic lighting": "シネマティック照明", "dynamic angle": "ダイナミックなアングル",
-    "dramatic shadows": "劇的な影", "hiding in locker": "ロッカーに隠れる", "pov from inside": "中からの視点", "peeking through slit": "隙間から覗く",
-    "scared face": "恐怖顔", "covering mouth": "口を覆う", "heavy breathing": "荒い息", "killer outside": "外に殺人鬼",
-    "darkness": "暗闇", "ray tracing": "レイトレーシング", "claustrophobic": "閉塞感", "sitting on floor": "床に座り込む", "backing away": "後ずさる",
-    "screaming": "悲鳴", "wide eyes": "見開いた目", "horror on face": "恐怖の表情", "monster looming": "怪物が迫る", "low angle": "ローアングル",
-    "dutch angle": "ダッチアングル", "dim lighting": "薄暗い照明", "volumetric lighting": "ボリュメトリック照明", "shadows": "影",
-    "yandere": "ヤンデレ", "empty eyes": "虚ろな目", "scary smile": "怖い笑顔", "holding knife behind back": "背後にナイフ",
-    "shadow over face": "顔に影", "obsessed": "執着", "love hearts in eyes": "目にハート", "tsundere": "ツンデレ", "arms crossed": "腕組み",
-    "looking away": "そっぽを向く", "pout": "ふくれっ面", "angry but shy": "怒りつつ照れ", "school uniform": "制服",
-    "cute angry face": "可愛い怒り顔", "expressionless": "無表情", "staring": "じっと見る", "cool beauty": "クールビューティー",
-    "emotionless": "感情がない", "mysterious": "ミステリアス", "reading book": "読書", "intellectual": "知的", "calm demeanor": "落ち着いた態度",
-    "slight smile": "微かな笑み", "soft blush": "ほんのり赤面", "rare expression": "珍しい表情", "looking at viewer": "こっちを見る",
-    "gentle atmosphere": "優しい雰囲気", "holding cat": "猫を抱く", "gap moe": "ギャップ萌え", "roller coaster": "ジェットコースター",
-    "hands up": "手を上げる", "speed lines": "集中線", "high altitude": "高所", "fear and excitement": "恐怖と興奮",
-    "haunted house attraction": "お化け屋敷", "clinging to arm": "腕にしがみつく", "ghost prop in background": "背景にお化け", "surprise": "驚き",
-    // R-18 Translations
-    "love hotel": "ラブホ", "mirror chair": "鏡張りの椅子", "magic mirror truck": "マジックミラー号", "vehicle interior": "車内",
-    "voyeurism": "盗撮・覗き", "public toilet stall": "公衆トイレ", "cramped": "狭い", "mixed bath": "混浴", "rock bath": "岩風呂",
-    "crowded train": "満員電車", "chikan": "痴漢", "molestation": "痴漢行為", "time stop": "時間停止", "pause button": "一時停止",
-    "hypnotized": "催眠", "swirl eyes": "ぐるぐる目", "mind control": "洗脳", "public use": "公衆便所(隠語)", "cum dump": "肉便器",
-    "defeated": "敗北", "torn clothes": "破れた服", "orc looming": "オーク", "goblin": "ゴブリン", "shibari": "緊縛",
-    "rope bondage": "縄縛り", "suspension": "吊り", "bondage chair": "拘束椅子", "sex machine": "セックスマシーン", "wooden horse": "三角木馬",
-    "stuck in wall": "壁埋まり", "glory hole": "グローリーホール", "blindfold": "目隠し", "ball gag": "ボールギャグ", "sensory deprivation": "感覚遮断",
-    "oviposition": "産卵", "belly bulge": "腹ボテ", "encased in slime": "スライム漬け", "melting clothes": "溶ける服",
-    "bestiality": "獣姦", "knotting": "ノッティング", "forced fellatio": "無理やりフェラ", "irrumatio": "イラマチオ", "double blowjob": "ダブルフェラ",
-    "spitroast": "サンドイッチ/輪姦", "footjob": "足コキ", "trampling": "踏みつけ", "handjob": "手コキ", "service": "奉仕",
-    "outdoor sex": "野外セックス", "humiliation": "羞恥", "skirt lift": "スカートめくり", "panchira": "パンチラ", "selfie": "自撮り", "mirror selfie": "鏡越し自撮り",
-    "nude": "ヌード", "naked": "全裸", "ahegao": "アヘ顔", "tentacles": "触手", "bondage": "拘束", "nsfw": "R-18", "uncensored": "無修正",
-    "locker room": "更衣室", "changing clothes": "着替え", "half naked": "半裸", "hidden camera angle": "隠しカメラ視点", "gym clothes": "体操服",
-    "school swimsuit": "スクール水着", "sleeping": "睡眠", "asleep": "寝ている", "unaware": "気づかない", "collar": "首輪", "leash": "リード",
-    "chain": "鎖", "on all fours": "四つん這い", "pet play": "ペットプレイ", "bowl": "ボウル", "dog ears": "犬耳", "tail": "尻尾",
-    "stomach deformation": "お腹変形", "dissolving": "溶解", "bubbles": "泡", "mating": "交尾", "animal penis": "動物のペニス",
-    "parasite": "寄生", "crawling on skin": "肌を這う", "eggs": "卵", "nest": "巣", "bound by worms": "蟲拘束", "petrification": "石化",
-    "statue": "石像", "frozen": "凍結", "turning to stone": "石化中", "grey skin": "灰色の肌", "partially petrified": "部分石化",
-    "horrified expression": "恐怖の表情", "cum on breasts": "パイ射", "upward glance": "上目遣い", "nude in public": "公衆露出",
-    "laughed at": "笑われる", "covering body": "体を隠す", "surrounded": "囲まれる", "camera": "カメラ", "live streaming": "ライブ配信",
-    "showing body": "体を見せる", "nude filter": "裸フィルター", "condom wrapper": "コンドームの袋", "neon signs": "ネオンサイン",
-    "passing pedestrians": "通行人", "crowd outside": "外の人混み", "graffiti": "落書き", "dirty tiles": "汚れたタイル", "secret sex": "秘密のセックス",
-    "flushing sound": "流れる音", "peeking": "覗き", "wet body": "濡れた体", "nurse play": "ナースプレイ", "after school sex": "放課後セックス",
-    "creaking bed": "きしむベッド", "medicine cabinet": "薬棚", "gym storage room": "体育倉庫", "bloomers": "ブルマ", "ball cart": "ボールカゴ",
-    "teacher office": "指導室", "scolding": "説教", "kneeling": "土下座",
-    "pleading": "懇願", "punishment": "お仕置き", "school pool": "プール", "bookshelves": "本棚", "naked apron": "裸エプロン", "side breast": "横乳",
-    "domestic": "家庭的", "waking up": "寝起き", "morning wood": "朝立ち", "washing body": "体を洗う", "facing each other": "対面", "entrance hall": "玄関",
-    "welcome home": "おかえり", "still in shoes": "靴のまま", "impatience": "焦燥", "ugly bastard": "おじさん/醜男", "fat man": "デブ", "ntr": "寝取られ",
-    "double penetration": "ダブル貫通", "monster gangbang": "異種姦パーティ", "rape": "レイプ", "pinned down": "押さえつけ", "common sense alteration": "常識改変",
-    "breeder": "苗床", "peeing": "放尿", "watersports": "聖水", "armpit sex": "脇コキ", "sniffing": "匂いを嗅ぐ", "titjob": "パイズリ", "facesitting": "顔面騎乗",
-    "suffocation": "窒息", "cant breathe": "息ができない",
-    "vaginal penetration with thick penis": "極太ペニス挿入", "vaginal penetration with thick finger": "太い指挿入",
-    // ★追加辞書
+    // 既存
+    "maid outfit": "メイド服", "holding serving tray": "トレイを持つ", 
+    
+    // ★追加: セットアイテムの翻訳
+    "holding stethoscope": "聴診器を持つ", "clipboard under arm": "クリップボードを挟む", "holding syringe": "注射器を持つ",
+    "medical tools": "医療器具", "pen in pocket": "ポケットのペン", "holding frilled parasol": "フリルの日傘を持つ",
+    "lace headdress": "レースのヘッドドレス", "cross necklace": "十字架のネックレス", "holding gothic doll": "ゴシックドールを抱く",
+    "rose decoration": "薔薇の装飾", "holding smartphone": "スマホを持つ", "drinking bubble tea": "タピオカを飲む",
+    "headphones around neck": "首掛けヘッドフォン", "stylish backpack": "おしゃれなリュック", "mask": "マスク",
+    "holding map": "地図を持つ", "compass": "コンパス", "lantern": "ランタン", "potion flask on belt": "腰にポーション",
+    "leather backpack": "革のリュック", "dagger": "短剣", "holding magic staff": "魔法の杖を持つ", "grimoire": "魔導書",
+    "potion bottles": "ポーション瓶", "crystal ball": "水晶玉", "magic components": "魔法の触媒", "holding microphone": "マイクを持つ",
+    "glow stick": "サイリウム", "bouquet": "花束", "fan letter": "ファンレター", "towel": "タオル", "holding paintbrush": "筆を持つ",
+    "palette": "パレット", "easel": "イーゼル", "apron with paint stains": "絵の具で汚れたエプロン", "sketchbook": "スケッチブック",
+    "pencils": "鉛筆", "open book": "開いた本", "stack of books": "積まれた本", "glasses": "眼鏡", "pen": "ペン",
+    "notebook": "ノート", "library card": "図書カード",
+
+    // その他追加
+    "trembling in climax": "絶頂で震える", "rough breathing": "荒い呼吸", "ecstatic sighs": "恍惚の溜息",
+    "wet mucus fuses with her body": "粘液が体と融合", "slime coating skin": "スライムが肌を覆う", "oily sheen": "油膜の光沢",
+    "translucent slime": "半透明のスライム", "clothes dissolving": "服が溶ける",
+    "fragments of refracted floating light": "屈折して浮遊する光の破片", "trapped in a pool of shimmering slime": "煌めくスライムプールに囚われる",
+    "mouth gaping": "口を大きく開ける", "throat fucking": "イラマチオ", "tentacle milking": "触手搾乳", "breast fondling": "胸愛撫",
     "hypnotic heart eyes": "催眠ハート目", "pink rings fading into pupils": "瞳に溶けるピンクの輪", "vacant smile": "虚ろな笑み",
     "euphoric tears": "歓喜の涙", "semen gushing deep inside her": "奥深くに注がれる精液",
     "crotch visibly overflowing": "股間から溢れ出る", "fluid streaking down her trembling thighs": "震える太ももを伝う愛液",
     "foggy breath trails": "白い吐息の跡", "smeared heart-shaped breath patches": "曇ったガラスにハート",
     "womb symbol glowing softly through skin": "肌に浮かぶ子宮紋", "viewed from the front through fogged glass panel": "曇りガラス越し",
     "breasts pressed and flattened against the glass": "ガラスに押し付けられた胸", "nipples clearly visible through pressure": "圧迫された乳首",
-    "moisture trails on glass": "ガラスの湿気", "face pressed against glass": "顔面プレス",
-    "steam": "湯気", "privacy glass": "すりガラス", "looking in mirror": "鏡を見る",
-    // 挿入・ピストン辞書
-    "penetration clearly visible": "結合部がはっきり見える", "connection point": "結合部", "inserting": "挿入中", "glans inside": "中にある亀頭",
-    "hips moving rhythmically": "リズミカルに動く腰", "fully thrusting": "根元まで突き入れる", "fast motion": "高速ピストン", "afterimage of hips": "腰の残像", "piston motion": "ピストン運動", "shaking hips": "震える腰",
-    "his hands gripping her hips firmly": "腰を強く掴む", "keeping her pressed": "押し付け続ける", "tight grip": "強いグリップ", "skin indentation": "肌の食い込み", "no escape": "逃げ場なし",
-    "semen dripping": "精液が垂れる", "juicy": "ジューシー", "wet sounds": "水音", "fully thrusting from behind": "背後から激しく突く"
+    "moisture trails on glass": "ガラスの湿気", "face pressed against glass": "顔面プレス", "steam": "湯気",
+    "privacy glass": "すりガラス", "looking in mirror": "鏡を見る", "penetration clearly visible": "結合部がはっきり見える",
+    "connection point": "結合部", "inserting": "挿入中", "glans inside": "中にある亀頭", "hips moving rhythmically": "リズミカルに動く腰",
+    "fully thrusting": "根元まで突き入れる", "fast motion": "高速ピストン", "afterimage of hips": "腰の残像", "piston motion": "ピストン運動",
+    "shaking hips": "震える腰", "his hands gripping her hips firmly": "腰を強く掴む", "keeping her pressed": "押し付け続ける",
+    "tight grip": "強いグリップ", "skin indentation": "肌の食い込み", "no escape": "逃げ場なし", "semen dripping": "精液が垂れる",
+    "juicy": "ジューシー", "wet sounds": "水音", "fully thrusting from behind": "背後から激しく突く", "demon lord bedroom": "魔王の寝室",
+    "luxurious dark bed": "豪華な闇のベッド", "canopy": "天蓋", "harem": "ハーレム", "room": "部屋(自室)", "breasts bouncing": "胸揺れ",
+    "grabbing hips": "腰を掴む", "climax": "絶頂", "hardcore": "ハードコア", "vaginal sex": "膣セックス", "orgasm": "オーガズム",
+    "girl trembling in climax": "絶頂で震える少女", "shaking": "震え", "arched back": "背中を反らす", "toes curling": "足の指が縮こまる",
+    "spasms": "痙攣", "ecstatic sighs": "恍惚の溜息", "trance": "トランス状態", "half-closed eyes": "半目", "pleasure": "快楽",
+    "erotic moan text floating": "浮かぶエッチな喘ぎ文字", "heart particles": "ハートの粒子", "idol-style outfit": "アイドル衣装",
+    "white and pastel blue frilly dress": "白と水色のフリルドレス", "feather embroidery": "羽の刺繍", "fluffy sleeves": "ふわふわ袖",
+    "short layered skirt": "短い段フリルスカート", "down feather texture": "綿毛の質感", "translucent ribbons": "半透明のリボン",
+    "soft feather hairclip": "羽の髪飾り", "floating feathers": "舞い散る羽根", "white feathers": "白い羽", "dreamy": "夢のような",
+    "bokeh heart shapes": "ハート型のボケ", "pink atmosphere": "ピンクの雰囲気", "romantic light": "ロマンチックな光", "glowing particles": "光る粒子",
+    "snowflake decorations": "雪の結晶の飾り", "winter theme": "冬のテーマ", "glowing snowflakes": "光る雪の結晶", "cold breath": "白い息",
+    "magical atmosphere": "魔法の雰囲気", "faint sparkles": "ほのかな輝き", "light particles": "光の粒子", "shimmering air": "揺らめく空気",
+    "magical dust": "魔法の粉", "fantasy setting": "ファンタジー設定", "polaroid photo developing mid-air": "空中に浮かぶポラロイド",
+    "floating photos": "浮遊する写真", "memories": "思い出", "nostalgic": "ノスタルジック", "holding a plush doll": "ぬいぐるみを抱く",
+    "hugging plushie": "ハグする", "stuffed animal": "ぬいぐるみ", "lovingly": "愛おしそうに", "chest press": "胸に押し付ける",
+    "white head Shima-enaga bushtit plush": "シマエナガのぬいぐるみ", "tiny beady eyes": "つぶらな瞳", "soft round shape": "丸いフォルム",
+    "bird doll": "鳥の人形", "wing shaped hair accessory": "翼型の髪飾り", "white hair ornament": "白い髪飾り"
   };
 
   function createSubAccordion(title, items, isSecret) { 
-    const details = document.createElement("details"); details.className = "qp-sub-acc"; details.style.marginBottom = "6px"; details.style.border = "1px solid #eee"; details.style.borderRadius = "4px"; details.style.background = "#fff"; details.open = false; 
-    const summary = document.createElement("summary"); summary.textContent = title; summary.style.fontWeight = "bold"; summary.style.padding = "6px 10px"; summary.style.cursor = "pointer"; summary.style.background = "#f9f9f9"; 
-    
+    const details = document.createElement("details"); details.className = "qp-sub-acc"; 
+    const summary = document.createElement("summary"); summary.textContent = title; 
     if (isSecret) summary.style.color = "#d00";
-
     details.appendChild(summary); 
-    const content = document.createElement("div"); content.className = "qp-content-grid"; content.style.padding = "8px"; content.style.display = "grid"; content.style.gridTemplateColumns = "repeat(auto-fill, minmax(200px, 1fr))"; content.style.gap = "6px"; 
+    const content = document.createElement("div"); content.className = "qp-content-grid"; 
     items.forEach(item => { 
-      const label = document.createElement("label"); label.style.display = "flex"; label.style.alignItems = "center"; label.style.fontSize = "0.9em"; label.style.cursor = "pointer"; 
-      const cb = document.createElement("input"); cb.type = "checkbox"; cb.style.marginRight = "6px"; cb.dataset.val = item.val || item.en; 
+      const label = document.createElement("label"); const cb = document.createElement("input"); 
+      cb.type = "checkbox"; cb.dataset.val = item.val || item.en; 
       label.appendChild(cb); label.appendChild(document.createTextNode(item.label || `${item.ja}/${item.en}`)); 
       if(item.links) cb.dataset.links = item.links.join(","); content.appendChild(label); 
     }); 
@@ -300,27 +285,15 @@
   const API = {
     initUI(container) {
       if (window.__outputTranslation) window.__outputTranslation.register(DICT);
-      
       const sharedContent = document.getElementById("qp-packs-content");
       if (sharedContent) {
         Object.entries(PACK_DATA).forEach(([k,v]) => { sharedContent.appendChild(createSubAccordion(k, v)); });
-        
         if (IS_UNLOCKED) {
           const secretHeader = document.createElement("div");
           secretHeader.style.cssText = "margin:15px 0 5px; color:#d00; font-weight:bold; border-bottom:2px solid #d00; padding-bottom:3px;";
           secretHeader.textContent = "⚠️ R-18 Situations (Adult Only)";
           sharedContent.appendChild(secretHeader);
-
-          Object.entries(SECRET_PACK_DATA).forEach(([k,v]) => {
-            sharedContent.appendChild(createSubAccordion(k, v, true));
-          });
-        }
-
-      } else {
-        const root = document.querySelector(".quality-preset-integrated");
-        if (root) {
-          Object.entries(PACK_DATA).forEach(([k,v]) => root.appendChild(createSubAccordion(k, v)));
-          if(IS_UNLOCKED) Object.entries(SECRET_PACK_DATA).forEach(([k,v]) => root.appendChild(createSubAccordion(k, v, true)));
+          Object.entries(SECRET_PACK_DATA).forEach(([k,v]) => { sharedContent.appendChild(createSubAccordion(k, v, true)); });
         }
       }
     },

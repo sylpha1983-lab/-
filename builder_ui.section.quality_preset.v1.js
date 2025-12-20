@@ -3,9 +3,6 @@
   const VERSION = 1; 
   const KEY = "quality_preset";
   
-  // ==============================================================================
-  // 🔑 解放状態の管理
-  // ==============================================================================
   // 1. 究極艶 (Gloss): 画風プリセット5回連打
   const IS_GLOSS_UNLOCKED = localStorage.getItem("MY_GLOSS_UNLOCK") === "true";
   // 2. R-18 (Secret): ネガティブ10回連打
@@ -17,11 +14,10 @@
   // 🎨 スマホ対応・UIスタイル定義
   // ==============================================================================
   function injectStyles() {
-    const styleId = "qp-mobile-style-full-restore";
+    const styleId = "qp-mobile-style-final-fix";
     if (document.getElementById(styleId)) return;
 
     const css = `
-      /* 共通スタイル */
       .qp-sub-acc {
         border: 1px solid #ccc !important;
         border-radius: 4px !important;
@@ -42,7 +38,6 @@
       .qp-sub-acc.qp-secret { border-color: #ffcccc !important; }
       .qp-sub-acc.qp-secret summary { color: #d00 !important; background: #fff0f0 !important; }
 
-      /* スマホ向け調整 (600px以下) */
       @media (max-width: 600px) {
         .qp-section-content,
         #qp-situations-general-area,
@@ -57,24 +52,20 @@
           gap: 8px !important;
           width: 100% !important;
         }
-
         .qp-content-grid {
           display: grid !important;
-          grid-template-columns: 1fr 1fr !important; /* 均等2列 */
+          grid-template-columns: 1fr 1fr !important;
           gap: 10px 8px !important;
           padding: 10px !important;
           border-top: 1px solid #eee !important;
           background: #fff !important;
         }
-
         .qp-content-grid label {
           font-size: 13px !important;
           display: flex !important;
           align-items: flex-start !important;
           line-height: 1.3 !important;
-          white-space: normal !important;
         }
-
         .qp-content-grid input[type="checkbox"] {
           margin-right: 6px !important;
           margin-top: 2px !important;
@@ -90,151 +81,86 @@
   }
 
   // ==============================================================================
-  // 📚 マスター辞書 (翻訳漏れ対応済み)
+  // 📚 マスター辞書
   // ==============================================================================
   const MASTER_DICT = {
-    // Quality & Style
     "masterpiece": "傑作", "best quality": "最高画質", "high resolution": "高解像度",
-    "photorealistic": "フォトリアル", "realistic": "リアル", "raw photo": "生写真", "8k": "8K",
+    "photorealistic": "フォトリアル", "realistic": "リアル", "8k": "8K",
     "anime style": "アニメ調", "cel shading": "セルルック", "flat color": "フラットカラー",
-    "natural light": "自然光", "natural lighting": "自然な照明", "cinematic lighting": "シネマティック照明",
+    "natural light": "自然光", "cinematic lighting": "シネマティック照明",
     "perfect face": "完璧な顔", "beautiful detailed face": "美しく詳細な顔",
-    "perfect anatomy": "完璧な肉体構造", "highly detailed": "詳細な書き込み",
-    "glossy skin": "光沢のある肌", "oiled skin": "オイル肌", "shiny hair": "輝く髪",
-    "intricate details": "繊細な詳細", "extremely detailed": "極めて詳細",
-    
-    // Tech & Render & Camera
+    "highly detailed": "詳細な書き込み", "glossy skin": "光沢のある肌",
     "octane render": "Octane Render", "unreal engine 5": "UE5(3D)", "ray tracing": "レイトレーシング",
     "global illumination": "GI(グローバル照明)", "volumetric lighting": "ボリュメトリック照明",
     "physically based rendering": "PBR(物理ベース)", "subsurface scattering": "SSS(表面下散乱)",
-    "photon mapping": "フォトンマッピング", "path tracing": "パストレーシング",
-    "depth of field": "被写界深度(ボケ)", "anamorphic lens flare": "アナモルフィックレンズフレア",
-    "lens flare": "レンズフレア", "widescreen": "ワイドスクリーン", "glass reflection layering": "ガラスの反射レイヤー",
-    "soft light refraction": "柔らかな光の屈折", "chromatic aberration": "色収差",
-    
-    // Color & Mood
-    "teal and orange grading": "ティール＆オレンジ", "dramatic atmosphere": "ドラマチックな雰囲気",
-    "kodak portra 400": "Kodak Portra 400(フィルム風)", "vibrant": "彩度高め", "dark": "暗め",
-    "red mood lighting": "赤いムード照明", "pink atmosphere": "ピンクの雰囲気",
-    "warm lighting": "暖色系の照明", "cold lighting": "寒色系の照明",
-    "red": "赤", "pink": "ピンク", "orange": "オレンジ", "teal": "ティール(青緑)",
-    
-    // Character Basics
-    "1boy": "男1人", "1girl": "女1人", "heterosexual": "男女(ノマカプ)",
-    "male focus": "男焦点", "female focus": "女焦点", "couple": "カップル",
-    "intimate": "親密", "sex": "セックス", "nude": "ヌード", "uncensored": "無修正",
-    "large breasts": "巨乳", "huge breasts": "爆乳", "medium breasts": "美乳",
-    "dark skin": "褐色肌", "red skin": "赤肌", "pale skin": "色白",
-    "red hair": "赤髪", "pink hair": "ピンク髪", "orange hair": "オレンジ髪",
-    "wet hair": "濡れた髪", "floating hair": "浮遊する髪", "messy hair": "ボサボサ髪/寝癖",
-    "bed hair": "寝癖",
-    
-    // Clothes
-    "judo gi": "柔道着", "karate gi": "空手着", "kimono": "着物",
-    "tight": "タイト(ぴっちり)", "wet clothes": "濡れ透け",
-    
-    // R-18 Generic
-    "nsfw": "R-18", "adult content": "成人向け", "hentai": "HENTAI",
-    "tentacles": "触手", "bondage": "拘束", "ahegao": "アヘ顔", "cum": "精液",
-    "rape": "レイプ", "forced": "強制", "bukkake": "ぶっかけ", "creampie": "中出し"
+    "depth of field": "被写界深度(ボケ)", "anamorphic lens flare": "レンズフレア",
+    "widescreen": "ワイドスクリーン", "dramatic atmosphere": "ドラマチック",
+    "teal and orange grading": "ティール＆オレンジ", "vibrant": "彩度高め", "dark": "暗め",
+    "nsfw": "R-18", "nude": "ヌード", "uncensored": "無修正", "tentacles": "触手", "cum": "精液",
+    "anime-realism blend": "アニメ・リアル融合", "ultra high resolution": "超高解像度",
+    "diffraction spikes": "回折スパイク", "halation": "ハレーション", "film grain": "フィルムグレイン",
+    "lumen reflections": "Lumen反射", "nanite geometry": "Nanite", "post-processing": "ポストプロセス"
   };
 
   // ==============================================================================
-  // 🔰 初心者ガイド (フル復旧)
+  // 🔰 初心者ガイド
   // ==============================================================================
   const BEGINNER_DATA = {
     "🔰 ① 3D技術・安全セット": [
-      { label: "🟢 キャラ・人物 (肌と光)", val: "(realistic lighting), (subsurface scattering)", desc: "肌を生かし、全体をまとめる。迷ったらこれだけ。" },
-      { label: "🟢 背景・空間 (空気感)", val: "(global illumination), (volumetric lighting)", desc: "空間の破綻を防ぎ、一気に雰囲気が出る王道セット。" },
-      { label: "🟢 物・メカ (質感と影)", val: "(physically based rendering), (ambient occlusion)", desc: "質感が嘘をつかなくなり、影が締まる。" }
+      { label: "🟢 キャラ・人物 (肌と光)", val: "(realistic lighting), (subsurface scattering)", desc: "肌を生かし、全体をまとめる。" },
+      { label: "🟢 背景・空間 (空気感)", val: "(global illumination), (volumetric lighting)", desc: "空間の破綻を防ぎ、雰囲気が出る。" },
+      { label: "🟢 物・メカ (質感と影)", val: "(physically based rendering), (ambient occlusion)", desc: "質感がリアルになり、影が締まる。" }
     ],
     "🔰 ② エンジン選び (1つだけ)": [
-      { label: "Octane (とりあえず綺麗)", val: "(octane render)", desc: "光が派手で凄そうに見える。" },
-      { label: "Arnold (落ち着いたリアル)", val: "(arnold render)", desc: "人・顔・映画っぽさ。" },
-      { label: "V-Ray (背景・建築・静寂)", val: "(v-ray)", desc: "静かでちゃんとしている。" },
-      { label: "UE5 (ゲーム・世界観)", val: "(unreal engine 5)", desc: "環境・世界観重視。" },
-      { label: "Cycles (Blender風)", val: "(cycles render)", desc: "主張は弱いが安全パイ。" }
-    ],
-    "🔰 ③ 完成形テンプレ": [
-      { label: "人物イラスト完成セット (Octane+)", val: "(octane render), (realistic lighting), (subsurface scattering)", desc: "キャラ1枚絵の安全構成。" },
-      { label: "ファンタジー背景セット (UE5+)", val: "(unreal engine 5), (global illumination), (volumetric lighting)", desc: "ゲームのような世界観。" },
-      { label: "武器・小物完成セット (V-Ray+)", val: "(v-ray), (physically based rendering), (ambient occlusion)", desc: "実在感のある物撮り。" }
-    ],
-    "🔰 ④ 質感・ツール (Optional)": [
-      { label: "ZBrush (スカルプト感)", val: "(zbrush sculpt), (digital sculpting), (clay render style)", desc: "フィギュアのような質感。" },
-      { label: "Substance Painter (テクスチャ)", val: "(substance painter), (pbr textures), (intricate texture)", desc: "表面の汚れや傷など。" },
-      { label: "Cinema 4D (クリーン)", val: "(cinema 4d render), (studio lighting), (clean render)", desc: "整った綺麗な3D感。" }
+      { label: "Octane (派手)", val: "(octane render)", desc: "光が凄そうに見える。" },
+      { label: "Arnold (映画風)", val: "(arnold render)", desc: "落ち着いたリアル。" },
+      { label: "UE5 (世界観)", val: "(unreal engine 5)", desc: "ゲームのような環境。" }
     ]
   };
 
   // ==============================================================================
-  // 📦 画風・品質プリセット (フル復旧)
+  // 📦 画風・品質プリセット
   // ==============================================================================
-  
-  // ハイエンドリスト
   const HIGH_END_LIST = [
     { label: "★究極・レンダリング", val: "(anime-realism blend:1.4), (cinematic lighting:1.4), (high fidelity), (extremely detailed)" },
-    { label: "幻想・コンセプトアート", val: "(fantasy concept art), (highly detailed digital painting), (epic scale), (glowing magic), (intricate scenery), (game art style), (artstation), (majestic)" },
-    { label: "サイバー・ネオン", val: "(cyberpunk style), (neon lights), (chromatic aberration), (futuristic city), (night), (glowing outlines), (high contrast), (vibrant cyan and magenta)" },
-    { label: "アニメ・セミリアル (透明感)", val: "(anime style:1.3), (cel shading:1.2), (soft lighting), (smooth rendering), (glossy highlights), (shiny hair:1.3), (beautiful detailed eyes), (transparent skin texture), (rim light), (blush)" },
-    { label: "人物特化ハイエンド", val: "(intricate details:1.3), (extremely detailed skin, face, hair:1.3), (refined shading:1.3), (realistic textures:1.2), (photorealistic shading:1.2), (perfect facial anatomy:1.2), (ultra detailed face), (ultra detailed eyes), (soft blush:1.1), (ultra shiny skin:1.1), (natural skin texture:1.1)" }
+    { label: "幻想・コンセプトアート", val: "(fantasy concept art), (highly detailed digital painting), (epic scale), (glowing magic), (game art style)" },
+    { label: "サイバー・ネオン", val: "(cyberpunk style), (neon lights), (chromatic aberration), (futuristic city)" }
   ];
 
-  // ★「SECRET・究極艶」
   if (IS_GLOSS_UNLOCKED) {
     HIGH_END_LIST.unshift({
-      label: "✨ SECRET・究極艶",
-      val: "(unreal engine 5), (global illumination), (volumetric lighting), (masterpiece:1.3), (best quality:1.3), (high resolution), (highly detailed), (beautiful detailed face), (perfect anatomy), (ultra high resolution:1.5), (anime-realism blend:1.4), (cinematic lighting:1.4), (ray tracing), (subsurface scattering), (physically based rendering), (lumen reflections), (nanite geometry), (8k uhd), (octane render), (realistic lighting), (shiny hair), (glossy hair), (Kodak Portra 400), (low contrast), (teal and orange grading), (anamorphic lens flare), (widescreen), (dramatic atmosphere), perfect face, glossy skin",
-      desc: "解放された究極の質感設定",
-      links: [
-        "基本・最高画質", "UE5", "Unreal Engine 5", "Octane Render", "Ray Tracing", "Global Illumination", 
-        "Volumetric Lighting", "Subsurface Scattering", "PBR", "8K", "Cinematic Lighting", 
-        "Glossy Skin", "Shiny Hair", "Lens Flare", "Widescreen"
-      ]
+      label: "✨ SECRET・究極艶 (Full)",
+      val: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.5), (anime-realism blend:1.4), (cinematic lighting:1.4), (ray tracing), (subsurface scattering), (volumetric lighting), (god rays), (lens flare), (bloom), (chromatic aberration), (vignette), (diffraction spikes), (halation), (film grain), (global illumination), (ambient occlusion), (physically based rendering), (unreal engine 5), (octane render), (redshift render), (v-ray), (arnold render), (corona render), (cycles render), (cinema 4d), (zbrush), (maya), (path tracing), (lumen reflections), (nanite geometry), (physically based rendering), (shaders), (post-processing)",
+      desc: "全ての光と質感を盛り込んだ究極設定",
+      links: ["UE5", "PBR", "SSS", "Ray Tracing", "Global Illumination", "Volumetric", "Octane", "8K"]
     });
   }
 
   const PRESET_DATA = {
     "🏆 基本・画風 (Standard)": [
-      { label: "基本・最高画質", val: "(masterpiece:1.3), (best quality:1.3), (high resolution), (highly detailed), (beautiful detailed face), (perfect anatomy), (natural light), (natural lighting), (perfect face)" },
+      { label: "基本・最高画質", val: "(masterpiece:1.3), (best quality:1.3), (high resolution), (highly detailed), (beautiful detailed face), (perfect anatomy), (natural light), (perfect face)" },
       { label: "アニメ塗り", val: "(masterpiece:1.3), (best quality:1.3), (anime style), (cel shading), (vibrant colors), (clean lines), (flat color)" },
-      { label: "フォトリアル", val: "(masterpiece:1.3), (best quality:1.3), (photorealistic:1.4), (realistic), (8k), (raw photo), (detailed skin texture), (hyperrealistic)" },
-      { label: "3Dレンダリング風", val: "(masterpiece), (best quality), (3d render style), (octane render), (highly detailed cg)" },
-      { label: "パステル・夢かわ", val: "(pastel colors:1.3), (soft focus), (dreamy), (kawaii), (light pink and blue), (airy atmosphere), (fairy kei style), (soft lighting)" },
-      { label: "水彩画風", val: "(watercolor medium), (soft brush strokes), (colorful), (wet on wet), (artistic), (white background)" },
-      { label: "油絵・厚塗り", val: "(oil painting), (impasto), (thick brushwork), (textured canvas), (traditional media), (rich colors)" },
-      { label: "レトロアニメ (90s)", val: "(1990s source material), (retro anime style), (cel animation type), (analog film noise), (vhs artifact), (muted colors)" },
-      { label: "水墨画", val: "(ink wash painting), (sumi-e), (brush strokes), (monochrome), (japanese traditional art), (minimalist)" }
+      { label: "フォトリアル", val: "(masterpiece:1.3), (best quality:1.3), (photorealistic:1.4), (realistic), (8k), (raw photo), (detailed skin texture)" }
     ],
     "💎 ハイエンド・特化 (High-End)": HIGH_END_LIST,
-    "⚔️ 戦闘・アクション画風 (Battle & Action)": [
-      { label: "バトルアニメ風・作画", val: "(battle anime style), (sakuga), (intense action), (impact frames), (dynamic angle), (highly detailed effects)" },
-      { label: "アクションドローイング", val: "(action drawing), (rough sketch style), (dynamic brushwork), (motion lines), (sketchy), (raw energy)" },
-      { label: "劇画・アメコミ風", val: "(comic book style), (bold lines), (strong shadows), (inked), (western comic style), (high contrast)" },
-      { label: "マンガ戦闘・集中線", val: "(manga style), (monochrome), (speed lines), (focus lines), (sound effects), (action focus)" },
-      { label: "ダークファンタジー", val: "(dark fantasy), (grimdark), (blood splatters), (heavy atmosphere), (gothic), (muted colors)" }
+    "⚔️ 戦闘・アクション画風": [
+      { label: "バトルアニメ風", val: "(battle anime style), (sakuga), (intense action), (impact frames), (dynamic angle)" },
+      { label: "マンガ戦闘・集中線", val: "(manga style), (monochrome), (speed lines), (focus lines), (action focus)" }
     ],
-    "🛠️ 制作ソフト・プリセット (Software Presets)": [
-      { label: "Octane Render (派手)", val: "(octane render), (volumetric lighting), (caustics), (high contrast), (vibrant)", desc: "CGらしい派手な光と色彩。" },
-      { label: "Unreal Engine 5 (リアル)", val: "(unreal engine 5), (lumen global illumination), (nanite geometry), (photorealistic), (8k)", desc: "次世代ゲームエンジンのようなリアルさ。" },
-      { label: "ZBrush (造形・粘土)", val: "(zbrush sculpt), (digital sculpting), (clay texture), (model sheet style), (ambient occlusion)", desc: "3Dモデルの造形美を強調。" },
-      { label: "Substance Painter (質感)", val: "(substance painter), (pbr textures), (detailed material), (grunge), (scratches)", desc: "使い込まれた道具や汚れの表現。" }
+    "🛠️ 制作ソフト風": [
+      { label: "Octane Render", val: "(octane render), (volumetric lighting), (high contrast)" },
+      { label: "Unreal Engine 5", val: "(unreal engine 5), (lumen global illumination), (nanite geometry)" }
     ],
-    "⚙️ 3D技術・プリセット (3D Tech Sets)": [
-      { label: "レイトレーシング・光", val: "(ray tracing), (global illumination), (realistic lighting), (reflections), (blooms)", desc: "光の反射と拡散をシミュレート。" },
-      { label: "スタジオライティング", val: "(studio lighting), (softbox), (rim lighting), (neutral background), (professional photography)", desc: "写真館のような整った照明。" },
-      { label: "シネマティック・ルック", val: "(cinematic lighting), (teal and orange grading), (anamorphic lens flare), (widescreen), (dramatic atmosphere)", desc: "映画のような色調と演出。" }
+    "⚙️ 3D技術セット": [
+      { label: "レイトレーシング", val: "(ray tracing), (global illumination), (reflections)" },
+      { label: "シネマティック", val: "(cinematic lighting), (teal and orange grading), (anamorphic lens flare), (widescreen)" }
     ],
-    "🧪 サブジャンル・パンク (Sub-genres)": [
-      { label: "サイバーパンク", val: "(cyberpunk), (neon lights), (high tech low life), (futuristic city), (cybernetics)" },
-      { label: "スチームパンク", val: "(steampunk), (brass and copper), (gears and cogs), (victorian fashion), (steam engine)" },
-      { label: "ディーゼルパンク", val: "(dieselpunk), (steel and oil), (1940s style), (military machinery), (gritty)" },
-      { label: "バイオパンク", val: "(biopunk), (organic technology), (genetic engineering), (glowing veins), (fleshy texture)" },
-      { label: "ソーラーパンク", val: "(solarpunk), (nature and technology blend), (greenery), (solar panels), (utopia), (bright sunlight)" }
+    "🧪 サブジャンル": [
+      { label: "サイバーパンク", val: "(cyberpunk), (neon lights), (futuristic city)" },
+      { label: "スチームパンク", val: "(steampunk), (brass and copper), (gears and cogs)" }
     ]
   };
 
-  // 汎用R-18 (基本のみ)
   const SECRET_DATA = {
     "💋 R-18 基本 (Basic NSFW)": [
       { label: "基本・R-18", val: "(nsfw), (uncensored), (explicit), (adult content), (hentai)" },
@@ -242,106 +168,62 @@
     ]
   };
 
-  // ==============================================================================
-  // UI生成関数
-  // ==============================================================================
+  // UI生成関数 (v1オリジナル)
   function createSubAccordion(title, items, isSecret = false) { 
     const details = document.createElement("details"); 
     details.className = "qp-sub-acc" + (isSecret ? " qp-secret" : ""); 
     const summary = document.createElement("summary"); 
-    summary.textContent = title; 
-    details.appendChild(summary); 
-    const content = document.createElement("div"); 
-    content.className = "qp-content-grid"; 
-    
+    summary.textContent = title; details.appendChild(summary); 
+    const content = document.createElement("div"); content.className = "qp-content-grid"; 
     items.forEach(item => { 
-      const label = document.createElement("label"); 
-      const cb = document.createElement("input"); 
-      cb.type = "checkbox"; 
-      cb.dataset.val = item.val || item.en; 
-      label.appendChild(cb); 
-      label.appendChild(document.createTextNode(item.label || `${item.ja}/${item.en}`)); 
-      if(item.links) cb.dataset.links = item.links.join(","); 
+      const label = document.createElement("label"); const cb = document.createElement("input"); 
+      cb.type = "checkbox"; cb.dataset.val = item.val || item.en; 
+      label.appendChild(cb); label.appendChild(document.createTextNode(item.label || `${item.ja}/${item.en}`)); 
+      if(item.links) cb.dataset.links = item.links.join(",");
       content.appendChild(label); 
     }); 
-    
-    details.appendChild(content); 
-    return details; 
+    details.appendChild(content); return details; 
   }
 
   function createMainSection(id, title, colorStyle = {}) {
-    const details = document.createElement("details"); 
-    details.id = id; 
-    details.className = "qp-main-acc";
+    const details = document.createElement("details"); details.id = id; details.className = "qp-main-acc";
     details.style.cssText = "margin-bottom:10px; border:1px solid #ccc; border-radius:6px; background:#fff;";
-    
-    const summary = document.createElement("summary"); 
-    summary.innerHTML = `<span style="margin-right:8px;">▶</span>${title}`; 
-    summary.className = "section-summary";
+    const summary = document.createElement("summary"); summary.innerHTML = `<span style="margin-right:8px;">▶</span>${title}`; 
     summary.style.cssText = "font-weight:bold; padding:12px 14px; cursor:pointer; background:#eef2f6; list-style:none; outline:none; user-select:none; display:flex; align-items:center;";
     if(colorStyle.sumBg) summary.style.background = colorStyle.sumBg;
     if(colorStyle.sumColor) summary.style.color = colorStyle.sumColor;
-    
     details.appendChild(summary);
-    
-    const content = document.createElement("div"); 
-    content.id = id + "-content"; 
-    content.className = "qp-section-content"; 
-    content.style.padding = "10px";
-    
-    details.appendChild(content); 
-    return details;
+    const content = document.createElement("div"); content.id = id + "-content"; 
+    content.className = "qp-section-content"; content.style.padding = "10px";
+    details.appendChild(content); return details;
   }
 
-  // ==============================================================================
-  // 🚀 初期化処理
-  // ==============================================================================
   const API = {
     initUI(container) {
       injectStyles();
       if (window.__outputTranslation) window.__outputTranslation.register(MASTER_DICT);
+      const parent = document.querySelector("#list-quality_preset") || container; parent.innerHTML = ""; 
+      const root = document.createElement("div"); root.className = "quality-preset-integrated";
       
-      const parent = document.querySelector("#list-quality_preset") || container; 
-      parent.innerHTML = ""; 
-      const root = document.createElement("div"); 
-      root.className = "quality-preset-integrated";
-      
-      // 1. 画風プリセットエリア
-      const secPresets = createMainSection("qp-presets", "📦 画風・品質プリセット (Art Styles & Quality)");
+      // 1. 画風プリセット
+      const secPresets = createMainSection("qp-presets", "📦 画風・品質プリセット (Art Styles)");
       const presetsContent = secPresets.querySelector(".qp-section-content");
-      presetsContent.id = "qp-presets-content"; 
-
-      // 初心者ガイド
+      
       const guideRoot = document.createElement("details");
       guideRoot.style.cssText = "margin-bottom:12px; border:2px solid #89CFF0; border-radius:8px; background:#F0F8FF;";
-      guideRoot.innerHTML = `<summary style="padding:10px; cursor:pointer; font-weight:bold; color:#0056b3;">🔰 初心者ガイド：迷ったらここから選ぶ</summary>`;
-      const guideContent = document.createElement("div"); 
-      guideContent.style.padding = "10px";
-      guideContent.className = "qp-section-content"; // スマホ対応クラスを適用
+      guideRoot.innerHTML = `<summary style="padding:10px; cursor:pointer; font-weight:bold; color:#0056b3;">🔰 初心者ガイド</summary>`;
+      const guideContent = document.createElement("div"); guideContent.style.padding = "10px";
+      guideContent.className = "qp-section-content"; 
       Object.entries(BEGINNER_DATA).forEach(([k,v]) => { guideContent.appendChild(createSubAccordion(k, v)); });
       guideRoot.appendChild(guideContent);
       presetsContent.appendChild(guideRoot);
 
-      // 通常プリセット全展開
       Object.entries(PRESET_DATA).forEach(([k,v]) => { presetsContent.appendChild(createSubAccordion(k, v)); });
-      
-      // シークレット（基本R-18）
-      if (IS_R18_UNLOCKED) {
-        const secretHeader = document.createElement("div");
-        secretHeader.style.cssText = "margin:15px 0 5px; color:#d00; font-weight:bold; border-bottom:2px solid #d00; padding-bottom:3px;";
-        secretHeader.textContent = "⚠️ R-18 / NSFW Content (Unlocked)";
-        presetsContent.appendChild(secretHeader);
-        Object.entries(SECRET_DATA).forEach(([k,v]) => { presetsContent.appendChild(createSubAccordion(k, v, true)); });
-      }
+      if (IS_R18_UNLOCKED) Object.entries(SECRET_DATA).forEach(([k,v]) => { presetsContent.appendChild(createSubAccordion(k, v, true)); });
 
-      // 究極艶解放トリガー (5回タップ)
       let glossCount = 0;
-      let glossTimer = null;
       secPresets.querySelector("summary").addEventListener("click", () => {
         glossCount++;
-        if(glossTimer) clearTimeout(glossTimer);
-        glossTimer = setTimeout(() => { glossCount = 0; }, 2000);
-        
         if (glossCount >= 5) {
           if(confirm(IS_GLOSS_UNLOCKED ? "究極艶を封印しますか？" : "究極艶を解放しますか？")) {
             localStorage.setItem("MY_GLOSS_UNLOCK", (!IS_GLOSS_UNLOCKED).toString()); location.reload();
@@ -351,38 +233,32 @@
       });
       root.appendChild(secPresets);
 
-      // 2. 空のコンテナ（他ファイル用スロット）
+      // 2. 空のコンテナ
       const config = [
-        { id: "qp-situations", title: "🎬 シチュエーション・環境 (Situations & Environment)", innerId: "qp-situations-general-area" },
-        { id: "qp-packs", title: "📦 シチュエーションパック (Context & Action Packs)", style: { border:"1px solid #99c", bg:"#f4f4ff", sumBg:"#e0e0ff", sumColor:"#336" }, innerId: "qp-packs-content" },
-        { id: "qp-combat", title: "⚔️ 戦闘・アクション (Combat)", innerId: "qp-combat-content" },
-        { id: "qp-styles", title: "🎨 スタイル・文化 (Styles & Culture)", innerId: "qp-styles-content" },
-        { id: "qp-eras", title: "🕰️ 時代・年代 (Eras)", innerId: "qp-eras-content" },
-        { id: "qp-quality", title: "🔧 品質・技術・ツール (Quality & Tech)", innerId: "qp-quality-content" },
+        { id: "qp-situations", title: "🎬 シチュエーション・環境", innerId: "qp-situations-general-area" },
+        { id: "qp-packs", title: "📦 シチュエーションパック", innerId: "qp-packs-content" },
+        { id: "qp-combat", title: "⚔️ 戦闘・アクション", innerId: "qp-combat-content" },
+        { id: "qp-styles", title: "🎨 スタイル・文化", innerId: "qp-styles-content" },
+        { id: "qp-eras", title: "🕰️ 時代・年代", innerId: "qp-eras-content" },
+        { id: "qp-quality", title: "🔧 品質・技術・ツール", innerId: "qp-quality-content" }
       ];
-
       config.forEach(c => {
-        const sec = createMainSection(c.id, c.title, c.style || {});
-        const inner = document.createElement("div"); 
-        inner.id = c.innerId;
+        const sec = createMainSection(c.id, c.title);
+        const inner = document.createElement("div"); inner.id = c.innerId;
         sec.querySelector(".qp-section-content").appendChild(inner);
         root.appendChild(sec);
       });
 
-      // 3. ネガティブ (R-18解放トリガー)
+      // 3. ネガティブ
       const negTriggerWrap = document.createElement("div");
       negTriggerWrap.style.cssText = "margin:30px 0 10px; border-top:2px dashed #ffb3b3; text-align:center;";
       const trigger = document.createElement("div");
-      trigger.style.cssText = "margin-top:-12px; display:inline-block; user-select:none; cursor:default; -webkit-tap-highlight-color:transparent; outline:none;";
+      trigger.style.cssText = "margin-top:-12px; display:inline-block; user-select:none; cursor:default; -webkit-tap-highlight-color:transparent;";
       trigger.innerHTML = `<span style="background:#fff; padding:0 15px; color:#d9534f; font-weight:bold; font-size:0.9em; border:1px solid #ffb3b3; border-radius:10px;">⚠️ NEGATIVE PROMPTS</span>`;
       
       let r18Count = 0;
-      let r18Timer = null;
       trigger.addEventListener("click", () => {
         r18Count++;
-        if(r18Timer) clearTimeout(r18Timer);
-        r18Timer = setTimeout(() => { r18Count = 0; }, 500);
-
         if (r18Count >= 10) {
           if(confirm(IS_R18_UNLOCKED ? "R-18を封印しますか？" : "R-18を解放しますか？")) {
             localStorage.setItem("MY_SECRET_UNLOCK", (!IS_R18_UNLOCKED).toString()); location.reload();
@@ -393,11 +269,11 @@
       negTriggerWrap.appendChild(trigger);
       root.appendChild(negTriggerWrap);
 
-      const secNegSets = createMainSection("qp-neg-sets", "🚫 ネガティブプリセット (Negative Sets)", { sumBg: "#fff0f0", sumColor: "#d00" });
+      const secNegSets = createMainSection("qp-neg-sets", "🚫 ネガティブプリセット", { sumBg: "#fff0f0", sumColor: "#d00" });
       secNegSets.querySelector(".qp-section-content").id = "qp-neg-sets-content";
       root.appendChild(secNegSets);
       
-      const secNegWords = createMainSection("qp-neg-words", "🗑️ ネガティブワード (Negative Words)", { sumBg: "#fff0f0", sumColor: "#d00" });
+      const secNegWords = createMainSection("qp-neg-words", "🗑️ ネガティブワード", { sumBg: "#fff0f0", sumColor: "#d00" });
       secNegWords.querySelector(".qp-section-content").id = "qp-neg-words-content";
       root.appendChild(secNegWords);
       
@@ -405,8 +281,7 @@
     },
     getTags() { 
       const tags = []; 
-      document.querySelectorAll(".quality-preset-integrated input[type='checkbox']:checked").forEach(cb => { tags.push(cb.dataset.val); }); 
-      document.querySelectorAll(".beginner-guide-root input[type='checkbox']:checked").forEach(cb => { tags.push(cb.dataset.val); });
+      document.querySelectorAll(".quality-preset-integrated input[type='checkbox']:checked").forEach(cb => tags.push(cb.dataset.val)); 
       return tags; 
     }
   };

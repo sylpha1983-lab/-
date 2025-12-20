@@ -3,9 +3,6 @@
   const VERSION = 4; 
   const KEY = "quality_preset";
 
-  // ==============================================================================
-  // 1. 品質・技術データ
-  // ==============================================================================
   const QUALITY_DATA = {
     "🛠️ 制作ソフト・ツール": [
       { ja: "Cinema 4D", en: "cinema 4d" }, { ja: "ZBrush (彫刻)", en: "zbrush" }, { ja: "Maya", en: "maya" }, { ja: "Blender", en: "blender" }, { ja: "Substance Painter", en: "substance painter" }
@@ -30,13 +27,10 @@
     ],
     "💎 超高解像度・補正": [
       { ja: "8K UHD", en: "8k uhd" }, { ja: "4K UHD", en: "4k uhd" }, { ja: "16K解像度", en: "16k resolution" }, { ja: "ギガピクセル", en: "gigapixel" },
-      { ja: "RAW写真", en: "raw photo" }, { ja: "シャープフォーカス", en: "sharp focus" }
+      { ja: "RAW写真", en: "raw photo" }, { ja: "シャープフォーカス", en: "sharp focus" }, { ja: "アニメ・リアル融合", en: "anime-realism blend" }
     ]
   };
 
-  // ==============================================================================
-  // 2. ネガティブワード (単語)
-  // ==============================================================================
   const NEG_WORDS_DATA = {
     "画質・品質 (Low Quality)": [
       { ja: "低品質", en: "low quality" }, { ja: "最低品質", en: "worst quality" }, { ja: "JPEGノイズ", en: "jpeg artifacts" }, { ja: "ぼやけた", en: "blurry" },
@@ -51,80 +45,41 @@
       { ja: "テキスト", en: "text" }, { ja: "透かし", en: "watermark" }, { ja: "署名", en: "signature" }, { ja: "ユーザー名", en: "username" },
       { ja: "ロゴ", en: "logo" }, { ja: "QRコード", en: "qr code" }, { ja: "バーコード", en: "bar code" }
     ],
-    // ★追加: 目のハイライト除去用
-    "👁️ 目のハイライト除去 (Kill Highlights)": [
-      { ja: "目のハイライト", en: "eye highlight" },
-      { ja: "目の反射", en: "reflection" },
-      { ja: "キラキラ・輝き", en: "sparkle" },
-      { ja: "光の粒子", en: "light particles" },
-      { ja: "美しい目 (キラキラ化防止)", en: "beautiful detailed eyes" },
-      { ja: "明るい目", en: "bright eyes" }
+    "👁️ 目のハイライト除去": [
+      { ja: "目のハイライト", en: "eye highlight" }, { ja: "目の反射", en: "reflection" }, { ja: "キラキラ・輝き", en: "sparkle" },
+      { ja: "光の粒子", en: "light particles" }, { ja: "美しい目", en: "beautiful detailed eyes" }, { ja: "明るい目", en: "bright eyes" }
     ]
   };
 
-  // ==============================================================================
-  // 3. ネガティブプリセット (セット)
-  // ==============================================================================
   const NEG_SETS = {
     "ネガティブプリセット": [
       { label: "基本ネガティブ", val: "low quality, worst quality, out of focus, ugly, error, jpeg artifacts, lowers, blurry, bokeh" },
       { label: "人体崩壊防止", val: "bad anatomy, long neck, deformed, mutated, disfigured, malformed hands, missing limb, floating limbs, disconnected limbs, extra limb, missing fingers, extra fingers, liquid fingers, poorly drawn hands, mutation" },
-      // ★追加
-      { label: "目のハイライト完全除去", val: "eye highlight, reflection, sparkle, light particles, bright eyes, beautiful detailed eyes, happy, vibrant eyes", desc: "目に光を入れないための強力な除外設定" }
+      { label: "目のハイライト完全除去", val: "eye highlight, reflection, sparkle, light particles, bright eyes, beautiful detailed eyes, happy, vibrant eyes" }
     ]
   };
 
-  // 翻訳辞書
-  const DICT = {
-    "cinema 4d": "Cinema 4D", "zbrush": "ZBrush", "blender": "Blender", "substance painter": "Substance Painter",
-    "unreal engine 5": "UE5", "octane render": "Octane Render", "ray tracing": "レイトレーシング", "path tracing": "パストレーシング",
-    "lumen reflections": "Lumen反射", "nanite geometry": "Nanite", "physically based rendering": "PBR",
-    "subsurface scattering": "SSS", "ambient occlusion": "AO", "global illumination": "GI", "volumetric lighting": "ボリュメトリック照明",
-    "god rays": "ゴッドレイ", "lens flare": "レンズフレア", "bloom": "ブルーム", "chromatic aberration": "色収差",
-    "vignette": "ケラレ", "depth of field": "被写界深度", "bokeh": "ボケ", "rembrandt lighting": "レンブラント照明",
-    "cinematic lighting": "シネマティック照明", "8k uhd": "8K", "raw photo": "RAW写真", "sharp focus": "シャープ",
-    "low quality": "低品質", "worst quality": "最低品質", "jpeg artifacts": "JPEGノイズ", "blurry": "ぼやけた",
-    "bad anatomy": "崩れた解剖学", "bad hands": "崩れた手", "missing fingers": "欠損した指", "extra fingers": "余分な指",
-    "text": "テキスト", "watermark": "透かし", "signature": "署名", "username": "ユーザー名", "logo": "ロゴ",
-    // 目のハイライト関連
-    "eye highlight": "目のハイライト", "reflection": "反射", "sparkle": "キラキラ", 
-    "light particles": "光の粒子", "beautiful detailed eyes": "美しく詳細な目", "bright eyes": "明るい目"
-  };
-
   function createSubAccordion(title, items) { 
-    const details = document.createElement("details"); details.className = "qp-sub-acc"; details.style.marginBottom = "6px"; details.style.border = "1px solid #eee"; details.style.borderRadius = "4px"; details.style.background = "#fff"; details.open = false; 
-    const summary = document.createElement("summary"); summary.textContent = title; summary.style.fontWeight = "bold"; summary.style.padding = "6px 10px"; summary.style.cursor = "pointer"; summary.style.background = "#f9f9f9"; details.appendChild(summary); 
-    const content = document.createElement("div"); content.className = "qp-content-grid"; content.style.padding = "8px"; content.style.display = "grid"; content.style.gridTemplateColumns = "repeat(auto-fill, minmax(200px, 1fr))"; content.style.gap = "6px"; 
+    const details = document.createElement("details"); details.className = "qp-sub-acc"; 
+    const summary = document.createElement("summary"); summary.textContent = title; details.appendChild(summary); 
+    const content = document.createElement("div"); content.className = "qp-content-grid"; 
     items.forEach(item => { 
-      const label = document.createElement("label"); label.style.display = "flex"; label.style.alignItems = "center"; label.style.fontSize = "0.9em"; label.style.cursor = "pointer"; 
-      const cb = document.createElement("input"); cb.type = "checkbox"; cb.style.marginRight = "6px"; cb.dataset.val = item.val || item.en; 
+      const label = document.createElement("label"); const cb = document.createElement("input"); 
+      cb.type = "checkbox"; cb.dataset.val = item.val || item.en; 
       label.appendChild(cb); label.appendChild(document.createTextNode(item.label || `${item.ja}/${item.en}`)); 
-      if(item.links) cb.dataset.links = item.links.join(","); content.appendChild(label); 
+      content.appendChild(label); 
     }); 
     details.appendChild(content); return details; 
   }
 
   const API = {
     initUI(container) {
-      if (window.__outputTranslation) window.__outputTranslation.register(DICT);
-      
-      // ★修正: v1.jsが作ったコンテナを探して、そこに中身を入れるだけにする
-      // 重複作成（createElementによるメインセクション作成）を廃止
-      
       const conQuality = document.getElementById("qp-quality-content");
-      if (conQuality) {
-        Object.entries(QUALITY_DATA).forEach(([k,v]) => { conQuality.appendChild(createSubAccordion(k, v)); });
-      }
-
+      if (conQuality) Object.entries(QUALITY_DATA).forEach(([k,v]) => { conQuality.appendChild(createSubAccordion(k, v)); });
       const conNegSets = document.getElementById("qp-neg-sets-content");
-      if (conNegSets) {
-        Object.entries(NEG_SETS).forEach(([k,v]) => { conNegSets.appendChild(createSubAccordion(k, v)); });
-      }
-
+      if (conNegSets) Object.entries(NEG_SETS).forEach(([k,v]) => { conNegSets.appendChild(createSubAccordion(k, v)); });
       const conNegWords = document.getElementById("qp-neg-words-content");
-      if (conNegWords) {
-        Object.entries(NEG_WORDS_DATA).forEach(([k,v]) => { conNegWords.appendChild(createSubAccordion(k, v)); });
-      }
+      if (conNegWords) Object.entries(NEG_WORDS_DATA).forEach(([k,v]) => { conNegWords.appendChild(createSubAccordion(k, v)); });
     },
     getTags() { return []; } 
   };

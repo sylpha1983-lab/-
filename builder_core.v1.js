@@ -73,7 +73,34 @@
       const input = document.createElement("input"); input.type = "text"; input.placeholder = "🔍 項目を検索... (例: ビキニ, bikini)"; input.style.cssText = "width:100%; padding:10px; fontSize:1em; borderRadius:4px; border:1px solid #ccc;";
       input.addEventListener("input", (e) => { const term = e.target.value.toLowerCase(); document.querySelectorAll(".section").forEach(sec => { let secHit = false; sec.querySelectorAll("details").forEach(det => { let groupHit = false; det.querySelectorAll("label").forEach(lbl => { const text = lbl.textContent.toLowerCase(); if (term === "" || text.includes(term)) { lbl.style.display = ""; groupHit = true; } else { lbl.style.display = "none"; } }); if (term !== "" && groupHit) { det.open = true; det.style.display = ""; secHit = true; } else if (term === "") { det.open = false; det.style.display = ""; secHit = true; } else { det.style.display = "none"; } }); sec.style.display = secHit ? "" : "none"; }); }); wrap.appendChild(input); sectionsRoot.insertBefore(wrap, sectionsRoot.firstChild);
     }
-    const order = [ { id: "quality_preset", label: "1. クオリティ・画風 (Quality & Style)" }, { id: "anatomy", label: "2. 人体崩壊防止・構造 (Anatomy)" }, { id: "race", label: "3. 種族・素体 (Race)" }, { id: "bodytype", label: "4. 体型・プロポーション (Body Type)" }, { id: "traits", label: "5. キャラ固有要素・特徴 (Traits)" }, { id: "hair", label: "6. ヘアスタイル (Hair)" }, { id: "expression", label: "7. 表情 (Expression)" }, { id: "attire", label: "8. 服装・衣装 (Attire)" }, { id: "accessories", label: "9. アクセサリ・小物 (Accessories)" }, { id: "texture", label: "10. 素材・質感 (Material/Texture)" }, { id: "pose", label: "11. ポーズ・構図 (Pose)" }, { id: "narrative", label: "12. ストーリー・行動 (Narrative)" }, { id: "composition", label: "13. 構図・設計 (Composition)" }, { id: "camera", label: "14. カメラ・レンズ (Camera/Lens)" }, { id: "background", label: "15. 背景・場所 (Background)" }, { id: "lighting", label: "16. 照明・ライティング (Lighting)" }, { id: "atmosphere", label: "17. 雰囲気・色彩 (Atmosphere & Color)" }, { id: "effect", label: "18. エフェクト・演出 (Effects)" }, { id: "postprocessing", label: "19. 仕上げ・後処理 (Post-Processing)" }, { id: "filter", label: "20. フィルター・効果 (Filter)" }, { id: "presets", label: "21. 保存済みプリセット (My Presets)" }, { id: "visualsync", label: "🛠️ Visual Sync (Preview & Adjust)" } ];
+    
+    // ★ここに新しい skin_details を追加します！
+    const order = [ 
+      { id: "quality_preset", label: "1. クオリティ・画風 (Quality & Style)" }, 
+      { id: "anatomy", label: "2. 人体崩壊防止・構造 (Anatomy)" }, 
+      { id: "race", label: "3. 種族・素体 (Race)" }, 
+      { id: "bodytype", label: "4. 体型・プロポーション (Body Type)" }, 
+      { id: "traits", label: "5. キャラ固有要素・特徴 (Traits)" }, 
+      { id: "hair", label: "6. ヘアスタイル (Hair)" }, 
+      { id: "skin_details", label: "7. メイク・身体特徴 (Skin & Details)" }, // ★追加しました
+      { id: "expression", label: "8. 表情 (Expression)" }, 
+      { id: "attire", label: "9. 服装・衣装 (Attire)" }, 
+      { id: "accessories", label: "10. アクセサリ・小物 (Accessories)" }, 
+      { id: "texture", label: "11. 素材・質感 (Material/Texture)" }, 
+      { id: "pose", label: "12. ポーズ・構図 (Pose)" }, 
+      { id: "narrative", label: "13. ストーリー・行動 (Narrative)" }, 
+      { id: "composition", label: "14. 構図・設計 (Composition)" }, 
+      { id: "camera", label: "15. カメラ・レンズ (Camera/Lens)" }, 
+      { id: "background", label: "16. 背景・場所 (Background)" }, 
+      { id: "lighting", label: "17. 照明・ライティング (Lighting)" }, 
+      { id: "atmosphere", label: "18. 雰囲気・色彩 (Atmosphere & Color)" }, 
+      { id: "effect", label: "19. エフェクト・演出 (Effects)" }, 
+      { id: "postprocessing", label: "20. 仕上げ・後処理 (Post-Processing)" }, 
+      { id: "filter", label: "21. フィルター・効果 (Filter)" }, 
+      { id: "presets", label: "22. 保存済みプリセット (My Presets)" }, 
+      { id: "visualsync", label: "🛠️ Visual Sync (Preview & Adjust)" } 
+    ];
+    
     order.forEach(({ id, label }) => { try { const container = ensureContainer(id, label); sectionsRoot.appendChild(container); const versions = PROMPT_PARTS[id]; if (versions) { Object.keys(versions).map(v=>parseInt(v)).sort((a,b)=>a-b).forEach(v => { if (versions[v] && !versions[v]._mounted) { if (versions[v].initUI) try { versions[v].initUI(container); } catch(e) { console.error(e); } versions[v]._mounted = true; } }); if (container.children.length > 0) applyAccordion(container, label); } } catch (e) { console.error(e); } });
     window.dispatchEvent(new Event("promptPartMounted"));
   }

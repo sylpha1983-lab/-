@@ -44,7 +44,7 @@ window.EXT_MANIFEST = [
   // 4. Details
   "builder_ui.section.accessories.v1.js",
   "builder_ui.section.texture.v1.js",
-  "builder_ui.section.texture.v2.js", // ★追加: R-18/フェチ質感拡張
+  "builder_ui.section.skin_details.v1.js", // ★追加: 肌・装飾・メイク・傷
 
   // 5. Action & Camera
   "builder_ui.section.expression.v1.js",
@@ -52,18 +52,15 @@ window.EXT_MANIFEST = [
   "builder_ui.section.expression.v3.js",
   "builder_ui.section.pose.v1.js", 
   "builder_ui.section.pose.v2.js", 
-  "builder_ui.section.pose.v3.js",     // ★追加: 武器グリップ拡張
   "builder_ui.section.narrative.v1.js",
   "builder_ui.section.composition.v1.js",
   "builder_ui.section.camera.v1.js",
-  "builder_ui.section.camera.v2.js",   // ★追加: R-18/特殊アングル拡張
 
   // 6. Environment & Post-Processing
   "builder_ui.section.background.v4.js",
   "builder_ui.section.lighting.v2.js",
   "builder_ui.section.atmosphere.v1.js",
   "builder_ui.section.effect.v1.js",
-  "builder_ui.section.effect.v2.js",   // ★追加: オーラ・エフェクト拡張
   "builder_ui.section.postprocessing.v1.js",
   "builder_ui.section.filter.v1.js",
   
