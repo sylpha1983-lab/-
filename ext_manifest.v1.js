@@ -2,15 +2,14 @@ window.EXT_MANIFEST = [
   "builder_core.v1.js",
 
   // 1. Quality & Anatomy
-  "builder_ui.data.v1.js",                    // ★【追加】ここに追加！(データ定義)
-  "builder_ui.section.quality_preset.v1.js", // ★統合版 (画風・NSFW・基本)
+  "builder_ui.data.v1.js",
+  "builder_ui.section.quality_preset.v1.js",
   "builder_ui.section.quality_preset.v2.js",
   "builder_ui.section.quality_preset.v5.js",
   "builder_ui.section.quality_preset.v6.js",
   "builder_ui.section.quality_preset.v7.js",
   "builder_ui.section.quality_preset.v3.js",
   "builder_ui.section.quality_preset.v4.js",
-  // v8, v9 は v1に統合済みのため削除
 
   "builder_ui.section.anatomy.v1.js",
 
@@ -19,7 +18,7 @@ window.EXT_MANIFEST = [
   "builder_ui.section.race.v2.js", 
   "builder_ui.section.race.v3.js", 
   "builder_ui.section.race.v4.js",
-  "builder_ui.section.race.v5.js",            // ★【追加】翼・ウィング完全版
+  "builder_ui.section.race.v5.js",
   "builder_ui.section.bodytype.v1.js",
   "builder_ui.section.traits.v1.js",
   "builder_ui.section.hair.v4.js",
@@ -67,6 +66,8 @@ window.EXT_MANIFEST = [
   "builder_ui.section.lighting.v2.js",
   "builder_ui.section.atmosphere.v1.js",
   "builder_ui.section.effect.v1.js",
+  "builder_ui.section.effect.v2.js", // ★追加: オーラ強化
+  "builder_ui.section.effect.v3.js", // ★追加: 配信・UI・デジタル
   "builder_ui.section.postprocessing.v1.js",
   "builder_ui.section.filter.v1.js",
   
