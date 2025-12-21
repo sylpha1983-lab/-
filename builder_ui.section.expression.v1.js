@@ -1,6 +1,6 @@
 (function(){
   "use strict";
-  const VERSION = 1; // 統合版: 基本感情 & 視線
+  const VERSION = 1; // 統合版: 基本感情のみ (視線はv2へ移動)
   const KEY = "expression";
 
   const EXPRESSION_DATA = {
@@ -12,13 +12,6 @@
       { ja: "真剣", en: "serious" }, { ja: "無表情", en: "expressionless" },
       { ja: "驚き", en: "surprised" }, { ja: "恥ずかしい", en: "embarrassed" },
       { ja: "照れ隠し", en: "shy" }, { ja: "神経質/不安", en: "nervous" }
-    ],
-    "👁️ 視線・目線 (Gaze)": [
-      { ja: "カメラ目線", en: "looking at viewer" }, { ja: "よそ見", en: "looking away" },
-      { ja: "振り返り", en: "looking back" }, { ja: "横目", en: "sideways glance" },
-      { ja: "見上げる (上目遣い)", en: "looking up" }, { ja: "見下ろす", en: "looking down" },
-      { ja: "目を合わせる", en: "eye contact" }, { ja: "覗き込む", en: "peeking" },
-      { ja: "目を逸らす", en: "averting eyes" }, { ja: "遠くを見る", en: "looking afar" }
     ]
   };
 
@@ -26,11 +19,7 @@
     "smile": "笑顔", "happy": "幸せ", "laughing": "大笑い", "light smile": "微笑み",
     "angry": "怒り", "furious": "激怒", "sad": "悲しい", "crying": "泣く",
     "serious": "真剣", "expressionless": "無表情", "surprised": "驚き",
-    "embarrassed": "恥じらい", "shy": "照れ", "nervous": "不安",
-    "looking at viewer": "カメラ目線", "looking away": "よそ見", "looking back": "振り返り",
-    "sideways glance": "横目", "looking up": "見上げ", "looking down": "見下ろし",
-    "eye contact": "アイコンタクト", "peeking": "覗き見",
-    "averting eyes": "目を逸らす", "looking afar": "遠くを見る"
+    "embarrassed": "恥じらい", "shy": "照れ", "nervous": "不安"
   };
 
   const API = {
@@ -43,21 +32,21 @@
         parent.id = "list-expression";
         parent.className = "section";
         const h2 = document.createElement("h2");
-        h2.textContent = "4. 表情 (Expression)"; // Coreの順序制御用
+        h2.textContent = "4. 表情 (Expression)"; 
         parent.appendChild(h2);
         document.getElementById("sections").appendChild(parent);
       } else {
-        parent.innerHTML = ""; // 再構築のためクリア
-        const h2 = document.createElement("h2");
-        h2.textContent = "4. 表情 (Expression)";
-        parent.appendChild(h2);
+        // 重複防止：古いv1コンテナがあれば消す
+        const old = parent.querySelector(".expression-v1-container");
+        if(old) old.remove();
       }
 
       const createCat = (title, items) => {
         const details = document.createElement("details");
         details.className = "expression-cat";
         details.style.cssText = "margin-bottom:6px; border:1px solid #eee; border-radius:4px; background:#fff;";
-        details.open = false; 
+        
+        details.open = false; // ★初期閉
 
         const summary = document.createElement("summary");
         summary.textContent = title;
@@ -89,11 +78,15 @@
         root.appendChild(createCat(cat, items));
       });
 
-      // コンテンツエリアを作成して追加
-      const contentArea = document.createElement("div");
-      contentArea.className = "section-content";
-      contentArea.appendChild(root);
-      parent.appendChild(contentArea);
+      const contentArea = parent.querySelector(".section-content");
+      if (contentArea) {
+        contentArea.insertBefore(root, contentArea.firstChild); // 先頭に追加
+      } else {
+        const newContent = document.createElement("div");
+        newContent.className = "section-content";
+        newContent.appendChild(root);
+        parent.appendChild(newContent);
+      }
     },
 
     getTags() {
