@@ -1,14 +1,16 @@
 window.EXT_MANIFEST = [
   "builder_core.v1.js",
 
-  // 1. Quality & Anatomy (分割構成)
-  "builder_ui.section.quality_preset.v1.js", // 画風・品質・基本
-  "builder_ui.section.quality_preset.v2.js", // 🎬 シチュエーション: 日常・現実
-  "builder_ui.section.quality_preset.v5.js", // 🌍 シチュエーション: 世界観・ジャンル
-  "builder_ui.section.quality_preset.v6.js", // 🎭 キャラクターパック: 職業・属性
-  "builder_ui.section.quality_preset.v7.js", // ⚔️ 戦闘・アクション
-  "builder_ui.section.quality_preset.v3.js", // スタイル・年代
-  "builder_ui.section.quality_preset.v4.js", // 技術・ネガティブ
+  // 1. Quality & Anatomy
+  "builder_ui.data.v1.js",                    // ★【追加】ここに追加！(データ定義)
+  "builder_ui.section.quality_preset.v1.js", // ★統合版 (画風・NSFW・基本)
+  "builder_ui.section.quality_preset.v2.js",
+  "builder_ui.section.quality_preset.v5.js",
+  "builder_ui.section.quality_preset.v6.js",
+  "builder_ui.section.quality_preset.v7.js",
+  "builder_ui.section.quality_preset.v3.js",
+  "builder_ui.section.quality_preset.v4.js",
+  // v8, v9 は v1に統合済みのため削除
 
   "builder_ui.section.anatomy.v1.js",
 
@@ -22,7 +24,7 @@ window.EXT_MANIFEST = [
   "builder_ui.section.hair.v4.js",
   "builder_ui.section.hair.v5.js",
   "builder_ui.section.hair.v6.js",
-  "builder_ui.section.skin_details.v1.js", // メイク・身体特徴
+  "builder_ui.section.skin_details.v1.js",
 
   // 3. Attire & Fashion
   "builder_ui.section.attire.v1.js",
@@ -41,9 +43,9 @@ window.EXT_MANIFEST = [
   "builder_ui.section.attire.v14.js",
   "builder_ui.section.attire.v15.js",
   "builder_ui.section.attire.v16.js",
-  "builder_ui.section.attire.v17.js", // ★追加: R-18特化 (Nude/Fetish)
-  "builder_ui.section.attire.v18.js", // ★追加: セクシーコスプレ・ファッション
-  "builder_ui.section.attire.v19.js", // ★追加: 年代別・レトロスタイル
+  "builder_ui.section.attire.v17.js",
+  "builder_ui.section.attire.v18.js",
+  "builder_ui.section.attire.v19.js",
 
   // 4. Details
   "builder_ui.section.accessories.v1.js",

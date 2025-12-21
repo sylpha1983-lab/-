@@ -69,6 +69,10 @@
 
   const API = {
     initUI(container) {
+      // 🛑 R-18ロック判定: 解放されていなければここで終了（表示しない）
+      const IS_UNLOCKED = localStorage.getItem("MY_SECRET_UNLOCK") === "true";
+      if (!IS_UNLOCKED) return;
+
       if (window.__outputTranslation) window.__outputTranslation.register(DICT);
       let parent = document.querySelector("#list-attire");
       if (!parent) return;
@@ -106,6 +110,7 @@
       contentArea.appendChild(root);
     },
     getTags() {
+      // UIが存在しない場合（ロック中）は空配列を返すため安全
       const tags = [];
       document.querySelectorAll(".attire-v17-container input:checked").forEach(cb => tags.push(cb.dataset.en));
       return tags;
