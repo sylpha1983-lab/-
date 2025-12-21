@@ -62,9 +62,23 @@
         items.forEach(item => {
           const label = document.createElement("label");
           label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer;";
-          const cb = document.createElement("input"); cb.type = "checkbox"; cb.style.marginRight = "6px";
-          if (item.val) { cb.dataset.val = item.val; label.title = item.val; label.appendChild(cb); label.appendChild(document.createTextNode(item.label)); }
-          else { cb.dataset.val = item.en; label.appendChild(cb); label.appendChild(document.createTextNode(item.ja)); }
+          const cb = document.createElement("input"); 
+          cb.type = "checkbox"; 
+          cb.style.marginRight = "6px";
+          
+          if (item.val) { 
+             // ★修正: 連動機能を有効化
+             cb.dataset.val = item.val; 
+             cb.dataset.links = item.val;
+             label.title = item.val; 
+             label.appendChild(cb); 
+             label.appendChild(document.createTextNode(item.label)); 
+          } else { 
+             cb.dataset.en = item.en; 
+             cb.dataset.val = item.en;
+             label.appendChild(cb); 
+             label.appendChild(document.createTextNode(item.ja)); 
+          }
           content.appendChild(label);
         });
         details.appendChild(content);

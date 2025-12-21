@@ -65,10 +65,9 @@
   const API = {
     initUI() {
       if (window.__outputTranslation) window.__outputTranslation.register(DICT);
-      // 親コンテナ取得 (v1が作ったもの)
       const setsRoot = document.getElementById("race-root-sets-content");
       const partsRoot = document.getElementById("race-root-parts-content");
-      if (!setsRoot || !partsRoot) return; // v1未ロードなら何もしない
+      if (!setsRoot || !partsRoot) return; 
 
       const createCat = (target, title, items) => {
         const details = document.createElement("details");
@@ -84,9 +83,22 @@
           const label = document.createElement("label");
           label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer;";
           const cb = document.createElement("input");
-          cb.type = "checkbox"; cb.style.marginRight = "6px";
-          if (item.val) { cb.dataset.val = item.val; label.title = item.val; label.appendChild(cb); label.appendChild(document.createTextNode(item.label)); }
-          else { cb.dataset.val = item.en; label.appendChild(cb); label.appendChild(document.createTextNode(`${item.ja}`)); }
+          cb.type = "checkbox"; 
+          cb.style.marginRight = "6px";
+          
+          if (item.val) { 
+             cb.dataset.val = item.val;
+             // ★修正: 連動機能を有効化
+             cb.dataset.links = item.val; 
+             label.title = item.val; 
+             label.appendChild(cb); 
+             label.appendChild(document.createTextNode(item.label)); 
+          } else { 
+             cb.dataset.en = item.en; // 互換性
+             cb.dataset.val = item.en; // 新仕様
+             label.appendChild(cb); 
+             label.appendChild(document.createTextNode(`${item.ja}`)); 
+          }
           content.appendChild(label);
         });
         details.appendChild(content);
@@ -96,7 +108,7 @@
       Object.entries(SETS_DATA).forEach(([t, i]) => createCat(setsRoot, t, i));
       Object.entries(PARTS_DATA).forEach(([t, i]) => createCat(partsRoot, t, i));
     },
-    getTags() { return []; } // Coreが全チェックボックスを収集するため空でOK
+    getTags() { return []; } 
   };
   window.__registerPromptPart(KEY, VERSION, API);
 })();

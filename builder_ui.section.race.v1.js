@@ -40,14 +40,13 @@
       const contentArea = parent.querySelector(".section-content") || parent;
       contentArea.innerHTML = ""; 
 
-      // ヘルパー: 親アコーディオン作成
       const createRootAcc = (id, title, color) => {
         const det = document.createElement("details");
         det.id = id;
         det.className = "race-root-acc";
         det.style.cssText = "margin-bottom:10px; border:2px solid " + color + "; border-radius:6px; background:#fff;";
         
-        // ★修正点: 初期状態を閉じる (false)
+        // 初期状態は閉じる
         det.open = false; 
 
         const sum = document.createElement("summary");
@@ -62,12 +61,9 @@
         return con;
       };
 
-      // 1. セット用コンテナ (青系)
       const setsRoot = createRootAcc("race-root-sets", "📦 キャラクターセット (Full Sets)", "#007bff");
-      // 2. パーツ用コンテナ (緑系)
       const partsRoot = createRootAcc("race-root-parts", "🧩 身体パーツ・特徴 (Parts & Traits)", "#28a745");
 
-      // ヘルパー: サブカテゴリー作成
       const createSubCat = (targetRoot, title, items) => {
         const details = document.createElement("details");
         details.className = "race-cat";
@@ -82,7 +78,19 @@
           const label = document.createElement("label");
           label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer;";
           const cb = document.createElement("input");
-          cb.type = "checkbox"; cb.dataset.en = item.en; cb.style.marginRight = "6px";
+          
+          cb.type = "checkbox"; 
+          
+          // ★修正: セット(val)がある場合、それをlinks(連動対象)としても登録する
+          if(item.val) {
+             cb.dataset.val = item.val;
+             // これにより、Coreの連動機能が働き、ON/OFFが同期されます
+             cb.dataset.links = item.val; 
+          } else {
+             cb.dataset.en = item.en;
+          }
+          
+          cb.style.marginRight = "6px";
           label.appendChild(cb); label.appendChild(document.createTextNode(item.ja));
           content.appendChild(label);
         });
@@ -104,7 +112,8 @@
       const roots = document.querySelectorAll("#race-root-sets, #race-root-parts");
       roots.forEach(r => {
         r.querySelectorAll("input[type='checkbox']:checked").forEach(cb => {
-            if(cb.dataset.en) tags.push(cb.dataset.en);
+            const val = cb.dataset.val || cb.dataset.en;
+            if(val) tags.push(val);
         });
       });
       return tags;
