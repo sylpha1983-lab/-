@@ -18,7 +18,8 @@ window.EXT_MANIFEST = [
   "builder_ui.section.race.v1.js", 
   "builder_ui.section.race.v2.js", 
   "builder_ui.section.race.v3.js", 
-  "builder_ui.section.race.v4.js", 
+  "builder_ui.section.race.v4.js",
+  "builder_ui.section.race.v5.js",            // ★【追加】翼・ウィング完全版
   "builder_ui.section.bodytype.v1.js",
   "builder_ui.section.traits.v1.js",
   "builder_ui.section.hair.v4.js",

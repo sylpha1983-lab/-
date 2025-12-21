@@ -1,44 +1,33 @@
 (function(){
   "use strict";
-
   const VERSION = 1; 
   const KEY = "race"; 
 
-  // ★ v2, v3, v4 に詳細があるので、v1は基本ファンタジー種族のみに絞る
-  const CATEGORIES = {
+  const DATA_SETS = {
     "基本ファンタジー種族 (Basic Fantasy)": [
-      { ja: "人間", en: "human" },
-      { ja: "エルフ", en: "elf" }, 
-      { ja: "ダークエルフ", en: "dark elf" },
-      { ja: "ドワーフ", en: "dwarf" }, 
-      { ja: "ハーフリング/小人", en: "halfling" },
-      { ja: "巨人", en: "giant" },
-      { ja: "オーク", en: "orc" },
-      { ja: "ゴブリン", en: "goblin" }
+      { ja: "人間", en: "human" }, { ja: "エルフ", en: "elf" }, 
+      { ja: "ダークエルフ", en: "dark elf" }, { ja: "ドワーフ", en: "dwarf" }, 
+      { ja: "ハーフリング/小人", en: "halfling" }, { ja: "巨人", en: "giant" },
+      { ja: "オーク", en: "orc" }, { ja: "ゴブリン", en: "goblin" }
     ],
     "神聖・邪悪 (Holy & Evil)": [
-      { ja: "天使", en: "angel" }, 
-      { ja: "堕天使", en: "fallen angel" },
-      { ja: "悪魔", en: "demon" }, 
-      { ja: "サキュバス", en: "succubus" }
-    ],
-    "肌の色・スキン属性 (Skin Types)": [
-      { ja: "褐色肌", en: "dark skin" }, 
-      { ja: "日焼け肌", en: "tan" },
-      { ja: "色白", en: "pale skin" }, 
-      { ja: "異色肌 (青肌など)", en: "colored skin" },
-      { ja: "青肌", en: "blue skin" }, 
-      { ja: "緑肌", en: "green skin" },
-      { ja: "赤肌", en: "red skin" }, 
-      { ja: "グレー肌", en: "grey skin" }
+      { ja: "天使", en: "angel" }, { ja: "堕天使", en: "fallen angel" },
+      { ja: "悪魔", en: "demon" }, { ja: "サキュバス", en: "succubus" }
+    ]
+  };
+
+  const DATA_PARTS = {
+    "🎨 肌の色・スキン属性 (Skin Types)": [
+      { ja: "褐色肌", en: "dark skin" }, { ja: "日焼け肌", en: "tan" },
+      { ja: "色白", en: "pale skin" }, { ja: "異色肌", en: "colored skin" },
+      { ja: "青肌", en: "blue skin" }, { ja: "緑肌", en: "green skin" },
+      { ja: "赤肌", en: "red skin" }, { ja: "グレー肌", en: "grey skin" }
     ]
   };
 
   const API = {
     initUI(container) {
       const parent = document.querySelector("#list-race") || container;
-      
-      // 親コンテナ作成 (Coreの読み込み順序に依存せず動作するように)
       if (!parent.id) {
          parent.id = "list-race";
          const h2 = document.createElement("h2");
@@ -47,75 +36,80 @@
          if(existingH2) existingH2.remove();
          parent.prepend(h2);
       }
-      
-      parent.innerHTML = ""; 
 
-      const section = document.createElement("div");
-      section.className = "race-v1";
+      const contentArea = parent.querySelector(".section-content") || parent;
+      contentArea.innerHTML = ""; 
 
-      Object.entries(CATEGORIES).forEach(([cat, items]) => {
+      // ヘルパー: 親アコーディオン作成
+      const createRootAcc = (id, title, color) => {
+        const det = document.createElement("details");
+        det.id = id;
+        det.className = "race-root-acc";
+        det.style.cssText = "margin-bottom:10px; border:2px solid " + color + "; border-radius:6px; background:#fff;";
+        
+        // ★修正点: 初期状態を閉じる (false)
+        det.open = false; 
+
+        const sum = document.createElement("summary");
+        sum.textContent = title;
+        sum.style.cssText = "font-weight:bold; padding:10px; background:" + color + "22; cursor:pointer; font-size:1.1em; color:#333;";
+        const con = document.createElement("div");
+        con.id = id + "-content";
+        con.style.padding = "10px";
+        det.appendChild(sum);
+        det.appendChild(con);
+        contentArea.appendChild(det);
+        return con;
+      };
+
+      // 1. セット用コンテナ (青系)
+      const setsRoot = createRootAcc("race-root-sets", "📦 キャラクターセット (Full Sets)", "#007bff");
+      // 2. パーツ用コンテナ (緑系)
+      const partsRoot = createRootAcc("race-root-parts", "🧩 身体パーツ・特徴 (Parts & Traits)", "#28a745");
+
+      // ヘルパー: サブカテゴリー作成
+      const createSubCat = (targetRoot, title, items) => {
         const details = document.createElement("details");
         details.className = "race-cat";
-        details.style.marginBottom = "6px";
-        details.style.border = "1px solid #eee";
-        details.style.borderRadius = "4px";
-        details.style.background = "#fff";
-        details.open = false; 
-
+        details.style.cssText = "margin-bottom:6px; border:1px solid #ccc; border-radius:4px; background:#fff;";
         const summary = document.createElement("summary");
-        summary.textContent = cat;
-        summary.style.fontWeight = "bold";
-        summary.style.padding = "6px 10px";
-        summary.style.cursor = "pointer";
-        summary.style.background = "#f9f9f9";
-        summary.style.color = "#555";
+        summary.textContent = title;
+        summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#f9f9f9; color:#555;";
         details.appendChild(summary);
-
         const content = document.createElement("div");
-        content.style.padding = "8px";
-        content.style.display = "grid";
-        content.style.gridTemplateColumns = "repeat(auto-fill, minmax(140px, 1fr))";
-        content.style.gap = "6px";
-
+        content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(130px, 1fr)); gap:6px;";
         items.forEach(item => {
           const label = document.createElement("label");
-          label.style.display = "flex";
-          label.style.alignItems = "center";
-          label.style.fontSize = "0.9em";
-          
+          label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer;";
           const cb = document.createElement("input");
-          cb.type = "checkbox";
-          cb.dataset.en = item.en;
-          cb.style.marginRight = "6px";
-          
-          label.appendChild(cb);
-          label.appendChild(document.createTextNode(`${item.ja} / ${item.en}`));
+          cb.type = "checkbox"; cb.dataset.en = item.en; cb.style.marginRight = "6px";
+          label.appendChild(cb); label.appendChild(document.createTextNode(item.ja));
           content.appendChild(label);
         });
         details.appendChild(content);
-        section.appendChild(details);
-      });
+        targetRoot.appendChild(details);
+      };
 
-      parent.appendChild(section);
+      Object.entries(DATA_SETS).forEach(([t, i]) => createSubCat(setsRoot, t, i));
+      Object.entries(DATA_PARTS).forEach(([t, i]) => createSubCat(partsRoot, t, i));
 
       if (window.__outputTranslation) {
         const dict = {};
-        Object.values(CATEGORIES).flat().forEach(item => {
-          if (item.en && item.ja) dict[item.en] = item.ja;
-        });
+        [...Object.values(DATA_SETS), ...Object.values(DATA_PARTS)].flat().forEach(i => dict[i.en] = i.ja);
         window.__outputTranslation.register(dict);
       }
     },
-
     getTags() {
       const tags = [];
-      document.querySelectorAll(".race-v1 input[type='checkbox']:checked").forEach(cb => {
-        tags.push(cb.dataset.en);
+      const roots = document.querySelectorAll("#race-root-sets, #race-root-parts");
+      roots.forEach(r => {
+        r.querySelectorAll("input[type='checkbox']:checked").forEach(cb => {
+            if(cb.dataset.en) tags.push(cb.dataset.en);
+        });
       });
       return tags;
     }
   };
-  
   window.__registerPromptPart(KEY, VERSION, API);
 })();
 
