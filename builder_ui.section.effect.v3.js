@@ -1,79 +1,69 @@
 (function(){
   "use strict";
-  const VERSION = 3; // 拡張パック: デジタル・UI・画面演出
+  const VERSION = 3; // 拡張パック: デジタル・UI・画面演出 (誘導ワード強化版)
   const KEY = "effect";
 
   const CATEGORIES = {
     "📺 配信・実況・SNS (Stream & Social)": [
-      { ja: "配信画面 (Livestream)", en: "livestream" },
-      { ja: "YouTube風", en: "youtube" },
-      { ja: "Twitch風", en: "twitch" },
-      { ja: "ニコニコ動画風", en: "niconico" },
-      { ja: "フェイクスクショ", en: "fake screenshot" },
-      { ja: "スクリーンキャプチャ", en: "screen capture" },
-      { ja: "コメント欄/流れる文字", en: "comment stream, scrolling text" },
-      { ja: "ウェブカメラ枠", en: "webcam window" },
-      { ja: "SNS画面", en: "social media" },
-      { ja: "インスタグラム風", en: "instagram" },
-      { ja: "自撮り構図", en: "selfie" }
+      { ja: "配信画面 (Livestream)", en: "livestream, live streaming interface, overlay, viewer count" },
+      { ja: "YouTube風 (再生画面)", en: "youtube interface, video player, progress bar, play button, red accent" },
+      { ja: "Twitch風 (紫/ゲーミング)", en: "twitch interface, purple theme, live chat overlay, facecam frame, gamer room" },
+      { ja: "ニコニコ風 (流れる文字)", en: "niconico, danmaku, scrolling text overlay, many comments on screen" },
+      { ja: "コメント欄オーバーレイ", en: "comment stream, chat log, text overlay, live reaction" },
+      { ja: "ウェブカメラ枠 (ワイプ)", en: "webcam window, picture in picture, facecam, rectangle frame" },
+      { ja: "SNS画面 (インスタ風)", en: "instagram interface, social media post, heart icon, smartphone screen" },
+      { ja: "自撮り構図 (スマホ持ち)", en: "mirror selfie, holding phone, phone screen reflection" },
+      { ja: "フェイクスクショ (枠)", en: "fake screenshot, screen capture, user interface" },
+      { ja: "VTuber風", en: "vtuber, virtual youtuber, 2d avatar, anime avatar, facecam" }
     ],
     "🎮 ゲームUI・HUD (Game Interface)": [
-      { ja: "ゲーム画面 (Gameplay)", en: "gameplay mechanics" },
-      { ja: "HUD (ヘッドアップディスプレイ)", en: "hud" },
-      { ja: "ユーザーインターフェース", en: "user interface" },
-      { ja: "HPバー/体力ゲージ", en: "health bar" },
-      { ja: "ミニマップ", en: "minimap" },
-      { ja: "スキルアイコン", en: "skill icon" },
-      { ja: "テキストボックス", en: "text box" },
-      { ja: "吹き出し", en: "speech bubble" },
-      { ja: "ノベルゲーム風", en: "visual novel" },
-      { ja: "恋愛シミュレーション風", en: "dating sim" },
-      { ja: "ピクセルアート/ドット絵", en: "pixel art, 8-bit" }
+      { ja: "ゲームプレイ画面 (FPS/RPG)", en: "gameplay screenshot, in-game ui, video game mechanics" },
+      { ja: "HUD (SF/未来的)", en: "hud, heads-up display, futuristic ui, sci-fi interface" },
+      { ja: "HPバー/体力ゲージ", en: "health bar, life gauge, status bar, game icons" },
+      { ja: "ミニマップ", en: "minimap, radar, compass overlay" },
+      { ja: "スキルアイコン/スロット", en: "skill icons, inventory slots, hotbar" },
+      { ja: "テキストボックス (RPG風)", en: "rpg text box, dialogue window, pixel text" },
+      { ja: "ノベルゲーム風 (ADV)", en: "visual novel style, dating sim interface, text box at bottom" },
+      { ja: "ドット絵・レトロゲー", en: "pixel art, 8-bit, 16-bit, retro game style" },
+      { ja: "ガチャ画面風", en: "gacha screen, summon result, ssr, rarity stars" }
     ],
     "📹 モニター・画質演出 (Screen Artifacts)": [
-      { ja: "VHS (ビデオテープ風)", en: "vhs" },
-      { ja: "グリッチ (バグ表示)", en: "glitch" },
-      { ja: "ノイズ・砂嵐", en: "noise, static noise" },
-      { ja: "走査線 (スキャンライン)", en: "scanlines" },
-      { ja: "色収差 (ズレ)", en: "chromatic aberration" },
-      { ja: "魚眼レンズ", en: "fisheye" },
-      { ja: "CCTV (監視カメラ)", en: "cctv" },
-      { ja: "データモッシング", en: "datamoshing" },
-      { ja: "低画質 (Low Res)", en: "lowres, bad quality" },
-      { ja: "1990年代風", en: "1990s (style)" },
-      { ja: "レトロTV", en: "retro tv" }
+      { ja: "VHS (ビデオテープ風)", en: "vhs artifacts, tracking error, magnetic tape noise, 90s footage" },
+      { ja: "グリッチ (バグ・ノイズ)", en: "glitch art, datamoshing, digital distortion, corrupted image" },
+      { ja: "砂嵐・スタティック", en: "static noise, television snow, grainy texture" },
+      { ja: "走査線 (スキャンライン)", en: "scanlines, crt screen effect, interlaced video" },
+      { ja: "監視カメラ (CCTV)", en: "cctv overlay, security camera, night vision, rec icon, monochrome" },
+      { ja: "低画質 (圧縮ノイズ)", en: "lowres, jpeg artifacts, compression noise, blurry" },
+      { ja: "魚眼レンズ", en: "fisheye lens, distorted view, gopro footage" }
     ],
     "🖼️ 枠・フレーム (Frames)": [
-      { ja: "レターボックス (映画枠)", en: "letterbox" },
-      { ja: "ポラロイド枠", en: "polaroid frame" },
-      { ja: "額縁", en: "framed" },
-      { ja: "コラージュ", en: "collage" },
-      { ja: "分割画面", en: "split screen" },
-      { ja: "ピクチャーインピクチャー", en: "pip" }
+      { ja: "レターボックス (映画枠)", en: "letterbox, cinematic aspect ratio, black bars" },
+      { ja: "ポラロイド枠", en: "polaroid frame, instant photo border" },
+      { ja: "スマホ画面越し", en: "view through smartphone, phone camera interface, rec button" }
     ]
   };
 
   const DICT = {
-    "livestream": "配信画面", "fake screenshot": "フェイクスクショ", "screen capture": "キャプチャ",
-    "comment stream": "コメント欄", "webcam window": "ワイプ枠", "social media": "SNS",
-    "gameplay mechanics": "ゲーム画面", "hud": "HUD", "user interface": "UI",
-    "health bar": "体力ゲージ", "minimap": "ミニマップ", "visual novel": "ノベルゲー",
-    "pixel art": "ドット絵", "vhs": "VHS", "glitch": "グリッチ", "scanlines": "走査線",
-    "chromatic aberration": "色収差", "cctv": "監視カメラ", "letterbox": "レターボックス"
+    "livestream": "配信画面", "video player": "動画プレーヤー", "progress bar": "進行バー",
+    "play button": "再生ボタン", "twitch interface": "Twitch風UI", "purple theme": "紫テーマ",
+    "scrolling text": "流れる文字", "danmaku": "弾幕", "comment stream": "コメント欄",
+    "webcam window": "ワイプ枠", "instagram interface": "インスタ風UI", "smartphone screen": "スマホ画面",
+    "gameplay screenshot": "ゲーム画面", "hud": "HUD", "health bar": "体力ゲージ",
+    "minimap": "ミニマップ", "visual novel style": "ノベルゲー風", "pixel art": "ドット絵",
+    "vhs artifacts": "VHSノイズ", "glitch art": "グリッチ", "scanlines": "走査線",
+    "cctv overlay": "監視カメラ枠", "letterbox": "レターボックス"
   };
 
   const API = {
     initUI(container) {
       if (window.__outputTranslation) window.__outputTranslation.register(DICT);
 
-      // v1/v2が作成した親を探す
       let parent = document.querySelector("#list-effect");
       if (!parent) return;
 
       const root = document.createElement("div");
       root.className = "effect-v3-container";
 
-      // ヘルパー
       const createCat = (title, items) => {
         const details = document.createElement("details");
         details.className = "effect-cat";
@@ -98,6 +88,7 @@
           cb.style.marginRight = "6px";
           
           label.appendChild(cb);
+          // 日本語のみ表示（マウスオーバーで英語）
           label.appendChild(document.createTextNode(`${item.ja}`));
           label.title = item.en;
           content.appendChild(label);
@@ -125,3 +116,4 @@
 
   window.__registerPromptPart(KEY, VERSION, API);
 })();
+
