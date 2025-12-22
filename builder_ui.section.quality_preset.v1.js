@@ -138,13 +138,13 @@
         }
       });
 
-      // 究極艶の挿入ロジック (データ側に定義はないためここで処理)
+      // 究極艶の挿入ロジック
       if (DATA.PRESET) {
         const presetData = {...DATA.PRESET}; // 浅いコピー
         if (IS_GLOSS_UNLOCKED) {
           // ハイエンドリストに挿入する処理
           const highEndKey = "💎 ハイエンド・特化 (High-End)";
-          // 究極艶アイテム定義
+          // 究極艶アイテム定義 (以前の完全版プロンプト)
           const GLOSS_ITEM = {
             label: "✨ SECRET・究極艶 (Full)",
             val: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.5), (anime-realism blend:1.4), (cinematic lighting:1.4), (ray tracing), (subsurface scattering), (global illumination), (physically based rendering), (unreal engine 5), (lumen reflections), (nanite geometry), (8k uhd), (octane render), (realistic lighting), (shiny hair), (glossy hair), (Kodak Portra 400), (low contrast)",
@@ -174,8 +174,9 @@
         { id: "qp-situations", title: "🎬 シチュエーション・環境", innerId: "qp-situations-general-area" },
         { id: "qp-packs", title: "📦 シチュエーションパック", innerId: "qp-packs-content" },
         { id: "qp-combat", title: "⚔️ 戦闘・アクション", innerId: "qp-combat-content" },
-        { id: "qp-styles", title: "🎨 スタイル・文化", innerId: "qp-styles-content" },
-        { id: "qp-eras", title: "🕰️ 時代・年代", innerId: "qp-eras-content" },
+        // ★修正: スタイル・年代のコンテナ生成を削除 (Styleカテゴリーへ移行のため)
+        // { id: "qp-styles", title: "🎨 スタイル・文化", innerId: "qp-styles-content" },
+        // { id: "qp-eras", title: "🕰️ 時代・年代", innerId: "qp-eras-content" },
         { id: "qp-quality", title: "🔧 品質・技術・ツール", innerId: "qp-quality-content" }
       ];
       config.forEach(c => {

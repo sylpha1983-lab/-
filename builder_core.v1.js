@@ -74,30 +74,31 @@
       input.addEventListener("input", (e) => { const term = e.target.value.toLowerCase(); document.querySelectorAll(".section").forEach(sec => { let secHit = false; sec.querySelectorAll("details").forEach(det => { let groupHit = false; det.querySelectorAll("label").forEach(lbl => { const text = lbl.textContent.toLowerCase(); if (term === "" || text.includes(term)) { lbl.style.display = ""; groupHit = true; } else { lbl.style.display = "none"; } }); if (term !== "" && groupHit) { det.open = true; det.style.display = ""; secHit = true; } else if (term === "") { det.open = false; det.style.display = ""; secHit = true; } else { det.style.display = "none"; } }); sec.style.display = secHit ? "" : "none"; }); }); wrap.appendChild(input); sectionsRoot.insertBefore(wrap, sectionsRoot.firstChild);
     }
     
-    // ★ここに新しい skin_details を追加します！
+    // ★カテゴリー順序の再構成（Styleを追加）
     const order = [ 
-      { id: "quality_preset", label: "1. クオリティ・画風 (Quality & Style)" }, 
-      { id: "anatomy", label: "2. 人体崩壊防止・構造 (Anatomy)" }, 
-      { id: "race", label: "3. 種族・素体 (Race)" }, 
-      { id: "bodytype", label: "4. 体型・プロポーション (Body Type)" }, 
-      { id: "traits", label: "5. キャラ固有要素・特徴 (Traits)" }, 
-      { id: "hair", label: "6. ヘアスタイル (Hair)" }, 
-      { id: "skin_details", label: "7. メイク・身体特徴 (Skin & Details)" }, // ★追加しました
-      { id: "expression", label: "8. 表情 (Expression)" }, 
-      { id: "attire", label: "9. 服装・衣装 (Attire)" }, 
-      { id: "accessories", label: "10. アクセサリ・小物 (Accessories)" }, 
-      { id: "texture", label: "11. 素材・質感 (Material/Texture)" }, 
-      { id: "pose", label: "12. ポーズ・構図 (Pose)" }, 
-      { id: "narrative", label: "13. ストーリー・行動 (Narrative)" }, 
-      { id: "composition", label: "14. 構図・設計 (Composition)" }, 
-      { id: "camera", label: "15. カメラ・レンズ (Camera/Lens)" }, 
-      { id: "background", label: "16. 背景・場所 (Background)" }, 
-      { id: "lighting", label: "17. 照明・ライティング (Lighting)" }, 
-      { id: "atmosphere", label: "18. 雰囲気・色彩 (Atmosphere & Color)" }, 
-      { id: "effect", label: "19. エフェクト・演出 (Effects)" }, 
-      { id: "postprocessing", label: "20. 仕上げ・後処理 (Post-Processing)" }, 
-      { id: "filter", label: "21. フィルター・効果 (Filter)" }, 
-      { id: "presets", label: "22. 保存済みプリセット (My Presets)" }, 
+      { id: "quality_preset", label: "1. 品質・技術 (Quality & Tech)" }, 
+      { id: "style", label: "2. 画風・スタイル (Art Style)" },          // ★新設
+      { id: "anatomy", label: "3. 人体崩壊防止・構造 (Anatomy)" }, 
+      { id: "race", label: "4. 種族・素体 (Race)" }, 
+      { id: "bodytype", label: "5. 体型・プロポーション (Body Type)" }, 
+      { id: "traits", label: "6. キャラ固有要素・特徴 (Traits)" }, 
+      { id: "hair", label: "7. ヘアスタイル (Hair)" }, 
+      { id: "skin_details", label: "8. メイク・身体特徴 (Skin & Details)" },
+      { id: "expression", label: "9. 表情 (Expression)" }, 
+      { id: "attire", label: "10. 服装・衣装 (Attire)" }, 
+      { id: "accessories", label: "11. アクセサリ・小物 (Accessories)" }, 
+      { id: "texture", label: "12. 素材・質感 (Material/Texture)" }, 
+      { id: "pose", label: "13. ポーズ・構図 (Pose)" }, 
+      { id: "narrative", label: "14. ストーリー・行動 (Narrative)" }, 
+      { id: "composition", label: "15. 構図・設計 (Composition)" }, 
+      { id: "camera", label: "16. カメラ・レンズ (Camera/Lens)" }, 
+      { id: "background", label: "17. 背景・場所 (Background)" }, 
+      { id: "lighting", label: "18. 照明・ライティング (Lighting)" }, 
+      { id: "atmosphere", label: "19. 雰囲気・色彩 (Atmosphere & Color)" }, 
+      { id: "effect", label: "20. エフェクト・演出 (Effects)" }, 
+      { id: "postprocessing", label: "21. 仕上げ・後処理 (Post-Processing)" }, 
+      { id: "filter", label: "22. フィルター・効果 (Filter)" }, 
+      { id: "presets", label: "23. 保存済みプリセット (My Presets)" }, 
       { id: "visualsync", label: "🛠️ Visual Sync (Preview & Adjust)" } 
     ];
     
