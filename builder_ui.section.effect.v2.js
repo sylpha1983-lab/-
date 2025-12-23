@@ -56,7 +56,9 @@
       { ja: "空気の波紋", en: "ripples in air" },
       { ja: "歪み波", en: "distortion waves" },
       { ja: "エネルギー歪み", en: "energy distortion" },
-      { ja: "空気の歪み (陽炎)", en: "air distortion, heat haze" }
+      // ★修正: 翻訳漏れを防ぐため分割
+      { ja: "空気の歪み", en: "air distortion" },
+      { ja: "陽炎 (Heat Haze)", en: "heat haze" }
     ],
     "🌪️ 渦・バリア (Swirl & Barrier)": [
       { ja: "渦巻くオーラ", en: "swirling aura" },
@@ -105,7 +107,7 @@
         const details = document.createElement("details");
         details.open = false; 
         details.style.marginBottom = "8px";
-        details.style.border = "1px solid #d0e0ff"; // 拡張版は少し青みを入れる
+        details.style.border = "1px solid #d0e0ff"; 
         details.style.borderRadius = "4px";
         
         const summary = document.createElement("summary");
@@ -156,10 +158,14 @@
       }
     },
     getTags() {
-      // v1が全inputを拾うため空配列を返す
-      return [];
+      const tags = [];
+      document.querySelectorAll(".effect-section input[type='checkbox']:checked").forEach(cb => {
+        if(cb.dataset.en) tags.push(cb.dataset.en);
+      });
+      return tags;
     }
   };
 
   window.__registerPromptPart(KEY, VERSION, API);
 })();
+
