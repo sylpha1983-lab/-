@@ -1,21 +1,19 @@
 window.EXT_MANIFEST = [
   "builder_core.v1.js",
 
-  // 1. Quality & Anatomy (品質・技術)
+  // 1. Quality & Anatomy
   "builder_ui.data.v1.js",
-  "builder_ui.section.quality_preset.v1.js", // 基本・NSFW・ネガティブ
-  "builder_ui.section.quality_preset.v2.js", // シチュエーション・場所
-  // "builder_ui.section.quality_preset.v3.js", // ★削除 (Styleカテゴリーへ移行)
-  "builder_ui.section.quality_preset.v4.js", // ツール・3D技術
-  "builder_ui.section.quality_preset.v5.js", // R-18シチュエーション
-  "builder_ui.section.quality_preset.v6.js", // 職業パック
-  "builder_ui.section.quality_preset.v7.js", // 戦闘パック
-  // v8, v9 は Styleカテゴリーの v2, v3 になったため読み込まない
+  "builder_ui.section.quality_preset.v1.js",
+  "builder_ui.section.quality_preset.v2.js", 
+  "builder_ui.section.quality_preset.v4.js", 
+  "builder_ui.section.quality_preset.v5.js", 
+  "builder_ui.section.quality_preset.v6.js", 
+  "builder_ui.section.quality_preset.v7.js", 
 
-  // 2. Art Style (★新設: 画風・スタイル)
-  "builder_ui.section.style.v1.js", // アニメ・ゲーム・作家
-  "builder_ui.section.style.v2.js", // 美術・伝統・アナログ
-  "builder_ui.section.style.v3.js", // デジタル・デザイン・ネット美学
+  // 2. Art Style
+  "builder_ui.section.style.v1.js",
+  "builder_ui.section.style.v2.js",
+  "builder_ui.section.style.v3.js",
 
   "builder_ui.section.anatomy.v1.js",
 
@@ -69,10 +67,13 @@ window.EXT_MANIFEST = [
 
   // 7. Environment & Post-Processing
   "builder_ui.section.background.v4.js",
-  "builder_ui.section.lighting.v2.js",
+  
+  // ★ここを整理しました
+  "builder_ui.section.lighting.v1.js", // ① 基本 (親・初期化)
+  "builder_ui.section.lighting.v2.js", // ② 高度 (マウント)
+  "builder_ui.section.shadow.v1.js",   // ③ 影 (マウント)
+  
   "builder_ui.section.atmosphere.v1.js",
-  "builder_ui.section.effect.v1.js",
-  "builder_ui.section.effect.v2.js",
   "builder_ui.section.effect.v3.js",
   "builder_ui.section.postprocessing.v1.js",
   "builder_ui.section.filter.v1.js",

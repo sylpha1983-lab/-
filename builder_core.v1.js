@@ -7,8 +7,6 @@
   window.__isGenerating = false;
 
   const CSS = ` .builder-footer-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; align-items: stretch; } .builder-footer-grid button { flex: 1 1 auto; min-width: 70px; height: 44px; border-radius: 6px; border: none; font-weight: bold; color: #fff; cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; padding: 0 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); } #genBtn { background: #007bff; flex-grow: 2; min-width: 100px; font-size: 1rem; } #translateBtn { background: #f0ad4e; } #copyBtn { background: #6c757d; } #resetBtn { background: #dc3545; } #footer-search-btn { background: #17a2b8; } #footer-history-btn { background: #6f42c1; } .builder-footer-grid button:active { transform: translateY(1px); opacity: 0.9; } .category-reset-btn { background: transparent; border: 1px solid #ccc; color: #666; border-radius: 4px; padding: 2px 8px; font-size: 0.8em; cursor: pointer; margin-left: 10px; transition: all 0.2s; flex-shrink: 0; } .category-reset-btn:hover { background: #dc3545; color: #fff; border-color: #dc3545; } #linkage-toast { position: fixed; top: 15%; left: 50%; transform: translateX(-50%); background: rgba(40, 44, 52, 0.95); color: #fff; padding: 10px 20px; border-radius: 20px; font-size: 0.85em; z-index: 11000; box-shadow: 0 5px 15px rgba(0,0,0,0.3); opacity: 0; transition: opacity 0.3s, top 0.3s; pointer-events: none; white-space: normal; max-width: 90vw; width: max-content; text-align: center; font-weight: bold; line-height: 1.4; } #linkage-toast.show { opacity: 1; top: 10%; } @keyframes linked-flash-anim { 0% { background-color: rgba(255, 215, 0, 0.6); box-shadow: 0 0 10px rgba(255, 215, 0, 0.8); transform: scale(1.02); } 100% { background-color: transparent; box-shadow: none; transform: scale(1); } } .linked-flash { animation: linked-flash-anim 1.5s ease-out; border-radius: 4px; }
-  
-  /* ★カテゴリーマネージャー用CSS */
   #active-category-floater { position: fixed; top: 15px; right: 15px; z-index: 10000; display: flex; flex-direction: column; align-items: flex-end; }
   #floater-btn { background: rgba(0, 123, 255, 0.95); color: white; padding: 8px 16px; border-radius: 30px; font-weight: bold; box-shadow: 0 4px 12px rgba(0,0,0,0.3); cursor: pointer; border: 2px solid rgba(255,255,255,0.2); backdrop-filter: blur(4px); transition: all 0.2s; display: none; align-items: center; gap: 6px; font-size: 0.9em; }
   #floater-btn:active { transform: scale(0.95); }
@@ -19,14 +17,9 @@
   .close-all-btn { background: #dc3545; color: white; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 0.9em; }
   .floater-item { padding: 8px 12px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; font-size: 0.9em; }
   .floater-item:last-child { border-bottom: none; }
-  .floater-item span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; }
   .item-close-btn { background: #eee; border: none; color: #666; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1em; margin-left: 8px; }
-  .item-close-btn:hover { background: #ccc; color: #333; }
-  @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   `;
 
-  // 正規化関数
   function getCoreTag(formattedTag) {
     if (!formattedTag) return "";
     return formattedTag.toLowerCase().replace(/:\s*[\d\.]+(%?)/g, '').replace(/[^a-z0-9\u3040-\u309f\u30a0-\u30ff\u4e00-\u9faf]/g, '');
@@ -47,6 +40,9 @@
       container = document.createElement("div"); container.id = `list-${id}`; container.className = "section";
       const h2 = document.createElement("h2"); h2.textContent = label; container.appendChild(h2);
       const sectionsRoot = document.getElementById("sections"); if (sectionsRoot) sectionsRoot.appendChild(container);
+    } else {
+      const h2 = container.querySelector("h2");
+      if(h2) h2.textContent = label;
     }
     return container;
   }
@@ -74,10 +70,10 @@
       input.addEventListener("input", (e) => { const term = e.target.value.toLowerCase(); document.querySelectorAll(".section").forEach(sec => { let secHit = false; sec.querySelectorAll("details").forEach(det => { let groupHit = false; det.querySelectorAll("label").forEach(lbl => { const text = lbl.textContent.toLowerCase(); if (term === "" || text.includes(term)) { lbl.style.display = ""; groupHit = true; } else { lbl.style.display = "none"; } }); if (term !== "" && groupHit) { det.open = true; det.style.display = ""; secHit = true; } else if (term === "") { det.open = false; det.style.display = ""; secHit = true; } else { det.style.display = "none"; } }); sec.style.display = secHit ? "" : "none"; }); }); wrap.appendChild(input); sectionsRoot.insertBefore(wrap, sectionsRoot.firstChild);
     }
     
-    // ★カテゴリー順序の再構成（Styleを追加）
+    // ★カテゴリー順序
     const order = [ 
-      { id: "quality_preset", label: "1. 品質・技術 (Quality & Tech)" }, 
-      { id: "style", label: "2. 画風・スタイル (Art Style)" },          // ★新設
+      { id: "quality_preset", label: "1. 品質・設定 (Quality & Settings)" }, 
+      { id: "style", label: "2. 画風・スタイル (Art Style)" },
       { id: "anatomy", label: "3. 人体崩壊防止・構造 (Anatomy)" }, 
       { id: "race", label: "4. 種族・素体 (Race)" }, 
       { id: "bodytype", label: "5. 体型・プロポーション (Body Type)" }, 
@@ -93,21 +89,60 @@
       { id: "composition", label: "15. 構図・設計 (Composition)" }, 
       { id: "camera", label: "16. カメラ・レンズ (Camera/Lens)" }, 
       { id: "background", label: "17. 背景・場所 (Background)" }, 
-      { id: "lighting", label: "18. 照明・ライティング (Lighting)" }, 
+      
+      // ★18. 照明・ライティング・陰 (Shadow含む)
+      { id: "lighting", label: "18. 照明・ライティング ・陰(Lighting＆shadow)" }, 
+      
       { id: "atmosphere", label: "19. 雰囲気・色彩 (Atmosphere & Color)" }, 
       { id: "effect", label: "20. エフェクト・演出 (Effects)" }, 
       { id: "postprocessing", label: "21. 仕上げ・後処理 (Post-Processing)" }, 
       { id: "filter", label: "22. フィルター・効果 (Filter)" }, 
       { id: "presets", label: "23. 保存済みプリセット (My Presets)" }, 
-      { id: "visualsync", label: "🛠️ Visual Sync (Preview & Adjust)" } 
+      { id: "visualsync", label: "🛠️ Visual Sync (Preview & Adjust)" },
+      
+      // ★Internal: Shadow (Lightingの中に入れる)
+      { id: "lighting_advanced", label: "Lighting Advanced (Internal)" }, 
+      { id: "shadow", label: "Shadow (Internal)" }
     ];
     
-    order.forEach(({ id, label }) => { try { const container = ensureContainer(id, label); sectionsRoot.appendChild(container); const versions = PROMPT_PARTS[id]; if (versions) { Object.keys(versions).map(v=>parseInt(v)).sort((a,b)=>a-b).forEach(v => { if (versions[v] && !versions[v]._mounted) { if (versions[v].initUI) try { versions[v].initUI(container); } catch(e) { console.error(e); } versions[v]._mounted = true; } }); if (container.children.length > 0) applyAccordion(container, label); } } catch (e) { console.error(e); } });
+    order.forEach(({ id, label }) => { 
+      try { 
+        let container;
+        // ★重要: Shadowの場合は箱を作らず、Lightingの箱を渡す
+        if (id === "shadow") {
+            container = document.getElementById("list-lighting");
+        } else {
+            container = ensureContainer(id, label); 
+            sectionsRoot.appendChild(container); 
+        }
+
+        const versions = PROMPT_PARTS[id]; 
+        if (versions) { 
+          // バージョン順に実行
+          Object.keys(versions).map(v=>parseInt(v)).sort((a,b)=>a-b).forEach(v => { 
+            if (versions[v] && !versions[v]._mounted) { 
+              if (versions[v].initUI) {
+                  // containerが存在する場合のみ実行
+                  if(container) {
+                      try { versions[v].initUI(container); } catch(e) { console.error(e); } 
+                  }
+              }
+              versions[v]._mounted = true; 
+            } 
+          }); 
+          // Shadow以外で、かつコンテナに中身がある場合のみアコーディオン化
+          if (id !== "shadow" && container && container.children.length > 0) {
+              applyAccordion(container, label); 
+          }
+        } 
+      } catch (e) { console.error(e); } 
+    });
     window.dispatchEvent(new Event("promptPartMounted"));
   }
   window.__triggerUIMount = attemptMount;
+  
+  // (以下Utility関数は変更なし)
   UI_REG.getAllSelected = function() { const tags = []; Object.values(PROMPT_PARTS).forEach(versions => { Object.keys(versions).forEach(v => { const api = versions[v]; if (typeof api.getTags === "function") { try { const t = api.getTags(); if (Array.isArray(t)) tags.push(...t); } catch(e) {} } }); }); return tags; };
-
   function generateOutput() {
     window.__isGenerating = true; 
     const out = document.getElementById("out"); if (!out) return; 
@@ -127,7 +162,6 @@
     if (window.__outputTranslation) window.__outputTranslation.resetToEn();
     setTimeout(() => { window.__isGenerating = false; }, 100);
   }
-
   function showLinkageToast(items, mode) {
     let toast = document.getElementById("linkage-toast");
     if (!toast) { toast = document.createElement("div"); toast.id = "linkage-toast"; document.body.appendChild(toast); }
@@ -137,7 +171,6 @@
     toast.classList.add("show");
     setTimeout(() => { toast.classList.remove("show"); }, 3000);
   }
-
   function applyLinkage(checkbox) {
     const isChecked = checkbox.checked;
     if (!checkbox.dataset.links) return;
@@ -163,13 +196,9 @@
     if (linkedItems.length > 0) showLinkageToast(linkedItems, isChecked);
     if (stateChanged && !isChecked) generateOutput();
   }
-
   function resetAll() { if(!confirm("全てリセットしますか？")) return; document.querySelectorAll("input[type='checkbox']").forEach(el => el.checked = false); document.querySelectorAll("input[type='range']").forEach(el => { el.value = 100; el.dispatchEvent(new Event('input')); }); const searchBar = document.querySelector("#ui-search-bar input"); if(searchBar) { searchBar.value = ""; searchBar.dispatchEvent(new Event('input')); } const out = document.getElementById("out"); if (out) out.value = ""; out.dispatchEvent(new Event('input', { bubbles: true })); if (window.__outputTranslation) window.__outputTranslation.resetToEn(); }
   function copyOutput() { const out = document.getElementById("out"); out.select(); document.execCommand("copy"); }
-  
-  // ★カテゴリーマネージャー機能
   function initFloater() {
-    // コンテナ作成
     const floater = document.createElement('div');
     floater.id = 'active-category-floater';
     floater.innerHTML = `
@@ -183,41 +212,32 @@
       </div>
     `;
     document.body.appendChild(floater);
-
     const floaterBtn = document.getElementById('floater-btn');
     const floaterList = document.getElementById('floater-list');
     const itemsContainer = document.getElementById('floater-items');
     const openCountSpan = document.getElementById('open-count');
     const closeAllBtn = floater.querySelector('.close-all-btn');
-
-    // 開いているカテゴリーを収集してリスト更新
     const updateList = () => {
       const openedDetails = Array.from(document.querySelectorAll('details.qp-main-acc[open], details.accordion-wrap[open]'));
       const count = openedDetails.length;
       openCountSpan.textContent = count;
-
       if (count > 0) {
         floaterBtn.classList.add('show');
         itemsContainer.innerHTML = '';
         openedDetails.forEach(det => {
           const summary = det.querySelector('summary');
           const title = summary ? summary.textContent.replace(/[▶▼]/g, '').trim() : 'カテゴリー';
-          
           const itemDiv = document.createElement('div');
           itemDiv.className = 'floater-item';
           itemDiv.innerHTML = `<span>${title}</span>`;
-          
           const closeBtn = document.createElement('button');
           closeBtn.className = 'item-close-btn';
           closeBtn.innerHTML = '×';
           closeBtn.onclick = (e) => {
             e.stopPropagation();
-            // 子カテゴリーを閉じる
             det.querySelectorAll('details').forEach(d => d.removeAttribute('open'));
-            // 親を閉じる
             det.removeAttribute('open');
-            // リスト更新
-            setTimeout(updateList, 50); // DOM反映待ち
+            setTimeout(updateList, 50);
           };
           itemDiv.appendChild(closeBtn);
           itemsContainer.appendChild(itemDiv);
@@ -227,24 +247,15 @@
         floaterList.classList.remove('open');
       }
     };
-
-    // イベントリスナー
     const sectionsRoot = document.getElementById("sections");
     if (sectionsRoot) {
       sectionsRoot.addEventListener('toggle', (e) => {
         if (e.target.tagName === 'DETAILS' && (e.target.classList.contains('qp-main-acc') || e.target.classList.contains('accordion-wrap'))) {
-          // 少し遅延させて状態が確定してから更新
           setTimeout(updateList, 50);
         }
       }, true);
     }
-
-    // ボタンクリックでリスト開閉
-    floaterBtn.addEventListener('click', () => {
-      floaterList.classList.toggle('open');
-    });
-
-    // 全て閉じる
+    floaterBtn.addEventListener('click', () => { floaterList.classList.toggle('open'); });
     closeAllBtn.addEventListener('click', () => {
       document.querySelectorAll('details.qp-main-acc[open], details.accordion-wrap[open]').forEach(det => {
         det.querySelectorAll('details').forEach(d => d.removeAttribute('open'));
@@ -252,25 +263,14 @@
       });
       setTimeout(updateList, 50);
     });
-
-    // 初期チェック
     setTimeout(updateList, 500);
   }
-
   function init() { if(!document.getElementById('builder-core-style')) { const style = document.createElement('style'); style.id = 'builder-core-style'; style.textContent = CSS; document.head.appendChild(style); } const genBtn = document.getElementById("genBtn"); if (genBtn) { const container = genBtn.parentElement; container.classList.add("builder-footer-grid"); genBtn.addEventListener("click", generateOutput); document.getElementById("copyBtn")?.addEventListener("click", copyOutput); document.getElementById("resetBtn")?.addEventListener("click", resetAll); const transBtn = document.getElementById("translateBtn"); if (transBtn) transBtn.addEventListener("click", () => window.__outputTranslation.toggle()); } const sectionsRoot = document.getElementById("sections"); if (sectionsRoot) { sectionsRoot.addEventListener("change", (e) => { if (e.target.matches('input[type="checkbox"]')) { applyLinkage(e.target); if (!e.target.checked) generateOutput(); } else if (e.target.matches('input[type="range"]')) { /* rangeはボタン待ち */ } }); } 
-    initFloater(); // マネージャー起動
+    initFloater(); 
   }
-  
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init, { once: true }); else init();
-  
   window.__outputTranslation = { 
-    mode: "en", 
-    dict: {}, 
-    register(dict) { this.dict = { ...this.dict, ...dict }; }, 
-    resetToEn() { this.mode = "en"; const btn = document.getElementById("translateBtn"); if(btn) btn.textContent = "日本語表示"; }, 
-    normalize(str) { return str.replace(/[\(\{\[\]\}\)]/g, "").replace(/[（）【】［］｛｝]/g, "").replace(/:[\d\.]+(%?)/g, "").replace(/\s+/g, "").toLowerCase(); }, 
-    fixExtraClosers(str) { const trimOne = (s, openCh, closeCh) => { const open = (s.match(new RegExp(`\\${openCh}`, "g")) || []).length; const close = (s.match(new RegExp(`\\${closeCh}`, "g")) || []).length; let extra = close - open; while (extra > 0 && s.endsWith(closeCh)) { s = s.slice(0, -1); extra--; } return s; }; return str.split(/,\s*/).map(w => { let s = w; s = trimOne(s, "(", ")"); s = trimOne(s, "{", "}"); s = trimOne(s, "[", "]"); return s; }).join(", "); },
-    toggle() { const outEl = document.getElementById("out"); const btn = document.getElementById("translateBtn"); if (!outEl) return; const current = outEl.value; if (!current.trim()) return; const words = current.split(/,\s*/).filter(Boolean); let newText; if (this.mode === "en") { newText = words.map(w => { let core = w.replace(/[\(\{\[\]\}\)]/g, "").replace(/:\d+(\.\d+)?/g, "").trim(); let ja = this.dict[core] || this.dict[core.toLowerCase()]; if (ja) return w.replace(new RegExp(core.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'), ja); return w; }).join(", "); this.mode = "ja"; if(btn) btn.textContent = "英語表示"; } else { const reverseMap = {}; Object.entries(this.dict).forEach(([enKey, jaVal]) => { if (!jaVal) return; const normalizedJa = this.normalize(jaVal); reverseMap[normalizedJa] = enKey; }); newText = words.map(w => { let searchKey = this.normalize(w); let en = reverseMap[searchKey]; const match = w.match(/^([（(\{\[]*)([\s\S]*?)((?::[\d\.]+(?:%?))?[）)\}\]]*)$/); if (!match) return w; const prefix = match[1] || ""; let core = match[2] || ""; let suffix = match[3] || ""; if (!en) { let coreKey = this.normalize(core); en = reverseMap[coreKey]; if (!en && suffix.match(/^[）)\}\]]+$/)) { let retryKey = this.normalize(core + suffix); if (reverseMap[retryKey]) { en = reverseMap[retryKey]; suffix = ""; } } } if (en) return prefix + en + suffix; return w; }).join(", "); this.mode = "en"; if(btn) btn.textContent = "日本語表示"; } newText = this.fixExtraClosers(newText); outEl.value = newText; } 
+    mode: "en", dict: {}, register(dict) { this.dict = { ...this.dict, ...dict }; }, resetToEn() { this.mode = "en"; const btn = document.getElementById("translateBtn"); if(btn) btn.textContent = "日本語表示"; }, normalize(str) { return str.replace(/[\(\{\[\]\}\)]/g, "").replace(/[（）【】［］｛｝]/g, "").replace(/:[\d\.]+(%?)/g, "").replace(/\s+/g, "").toLowerCase(); }, fixExtraClosers(str) { const trimOne = (s, openCh, closeCh) => { const open = (s.match(new RegExp(`\\${openCh}`, "g")) || []).length; const close = (s.match(new RegExp(`\\${closeCh}`, "g")) || []).length; let extra = close - open; while (extra > 0 && s.endsWith(closeCh)) { s = s.slice(0, -1); extra--; } return s; }; return str.split(/,\s*/).map(w => { let s = w; s = trimOne(s, "(", ")"); s = trimOne(s, "{", "}"); s = trimOne(s, "[", "]"); return s; }).join(", "); }, toggle() { const outEl = document.getElementById("out"); const btn = document.getElementById("translateBtn"); if (!outEl) return; const current = outEl.value; if (!current.trim()) return; const words = current.split(/,\s*/).filter(Boolean); let newText; if (this.mode === "en") { newText = words.map(w => { let core = w.replace(/[\(\{\[\]\}\)]/g, "").replace(/:\d+(\.\d+)?/g, "").trim(); let ja = this.dict[core] || this.dict[core.toLowerCase()]; if (ja) return w.replace(new RegExp(core.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'), ja); return w; }).join(", "); this.mode = "ja"; if(btn) btn.textContent = "英語表示"; } else { const reverseMap = {}; Object.entries(this.dict).forEach(([enKey, jaVal]) => { if (!jaVal) return; const normalizedJa = this.normalize(jaVal); reverseMap[normalizedJa] = enKey; }); newText = words.map(w => { let searchKey = this.normalize(w); let en = reverseMap[searchKey]; const match = w.match(/^([（(\{\[]*)([\s\S]*?)((?::[\d\.]+(?:%?))?[）)\\}\\]]*)$/); if (!match) return w; const prefix = match[1] || ""; let core = match[2] || ""; let suffix = match[3] || ""; if (!en) { let coreKey = this.normalize(core); en = reverseMap[coreKey]; if (!en && suffix.match(/^[）)\}\]]+$/)) { let retryKey = this.normalize(core + suffix); if (reverseMap[retryKey]) { en = reverseMap[retryKey]; suffix = ""; } } } if (en) return prefix + en + suffix; return w; }).join(", "); this.mode = "en"; if(btn) btn.textContent = "日本語表示"; } newText = this.fixExtraClosers(newText); outEl.value = newText; } 
   };
 })();
 

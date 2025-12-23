@@ -1,6 +1,6 @@
 (function(){
   "use strict";
-  const VERSION = 3; // 拡張パック: デジタル・UI・画面演出 (翻訳強化+TikTok版)
+  const VERSION = 3; // 拡張パック: デジタル・UI・画面演出 (完成版)
   const KEY = "effect";
 
   const CATEGORIES = {
@@ -9,8 +9,8 @@
       { ja: "YouTube風 (再生画面)", en: "youtube interface, video player, progress bar, play button, red accent" },
       { ja: "Twitch風 (紫/ゲーミング)", en: "twitch interface, purple theme, live chat overlay, facecam frame, gamer room" },
       { ja: "ニコニコ風 (流れる文字)", en: "niconico, danmaku, scrolling text overlay, many comments on screen" },
-      // ★追加: TikTok風 (スマホ本体が出にくい構成)
-      { ja: "TikTok風 (縦動画UI)", en: "tiktok interface, vertical video, social media app, music note icon, heart button, share icon" },
+      // ★TikTok修正: スマホ本体が出ないよう、UIパーツのみを指定
+      { ja: "TikTok風 (縦動画UI)", en: "tiktok interface, vertical video, social media app, music note icon, heart button, share icon, ui overlay" },
       { ja: "コメント欄オーバーレイ", en: "comment stream, chat log, text overlay, live reaction" },
       { ja: "ウェブカメラ枠 (ワイプ)", en: "webcam window, picture in picture, facecam, rectangle frame" },
       { ja: "SNS画面 (インスタ風)", en: "instagram interface, social media post, heart icon, smartphone screen" },
@@ -39,21 +39,22 @@
       { ja: "魚眼レンズ", en: "fisheye lens, distorted view, gopro footage" }
     ],
     "🖼️ 枠・フレーム (Frames)": [
-      { ja: "レターボックス (映画枠)", en: "letterbox, cinematic aspect ratio, black bars" },
+      // ★レターボックス強化: 強調構文と映画用語を追加
+      { ja: "レターボックス (映画枠)", en: "letterbox, (black bars:1.4), movie screencap, cinematic aspect ratio, widescreen, anamorphic lens, 2.35:1" },
       { ja: "ポラロイド枠", en: "polaroid frame, instant photo border" },
       { ja: "スマホ画面越し", en: "view through smartphone, phone camera interface, rec button" }
     ]
   };
 
   const DICT = {
-    // 配信・SNS系 (翻訳漏れ完全修正)
+    // 配信・SNS系
     "livestream": "配信画面", "live streaming interface": "配信UI", "overlay": "オーバーレイ", "viewer count": "視聴者数",
     "youtube interface": "YouTube風UI", "video player": "動画プレーヤー", "progress bar": "進行バー", "play button": "再生ボタン", "red accent": "赤アクセント",
     "twitch interface": "Twitch風UI", "purple theme": "紫テーマ", "live chat overlay": "チャット欄", "facecam frame": "顔出し枠", "gamer room": "ゲーミング部屋",
     "niconico": "ニコニコ", "danmaku": "弾幕", "scrolling text overlay": "流れるコメント", "many comments on screen": "画面コメント",
     
     // TikTok関連
-    "tiktok interface": "TikTok風UI", "vertical video": "縦動画", "social media app": "SNSアプリ", "music note icon": "音符アイコン", "heart button": "いいねボタン", "share icon": "シェアボタン",
+    "tiktok interface": "TikTok風UI", "vertical video": "縦動画", "social media app": "SNSアプリ", "music note icon": "音符アイコン", "heart button": "いいねボタン", "share icon": "シェアボタン", "ui overlay": "UI表示",
     
     "comment stream": "コメント欄", "chat log": "チャットログ", "text overlay": "テキスト表示", "live reaction": "リアクション",
     "webcam window": "ワイプ枠", "picture in picture": "PinP", "facecam": "顔出し", "rectangle frame": "長方形枠",
@@ -83,7 +84,8 @@
     "fisheye lens": "魚眼レンズ", "distorted view": "歪んだ視界", "gopro footage": "GoPro映像",
 
     // フレーム
-    "letterbox": "レターボックス", "cinematic aspect ratio": "シネマティック比率", "black bars": "黒帯",
+    "letterbox": "レターボックス", "(black bars:1.4)": "黒帯(強)", "movie screencap": "映画スクショ風", "cinematic aspect ratio": "シネマ比率", "widescreen": "ワイドスクリーン", "anamorphic lens": "アナモルフィックレンズ", "2.35:1": "シネスコ",
+    "black bars": "黒帯",
     "polaroid frame": "ポラロイド枠", "instant photo border": "インスタント写真枠",
     "view through smartphone": "スマホ画面越し", "phone camera interface": "カメラインターフェース", "rec button": "録画ボタン"
   };
