@@ -26,7 +26,7 @@
       { ja: "傷跡 (顔)", en: "scar on face" },
       { ja: "タトゥー", en: "tattoo" },
       { ja: "紋章/刻印", en: "crest" },
-      { ja: "異色肌 (青肌等)", en: "colored skin" }, // Raceでカバーしきれない場合用
+      { ja: "異色肌 (青肌等)", en: "colored skin" }, 
       { ja: "オッドアイ", en: "heterochromia" }
     ],
     "トレードマーク (Signature Items)": [
@@ -41,17 +41,8 @@
       { ja: "武器 (剣)", en: "holding sword" },
       { ja: "杖", en: "holding staff" },
       { ja: "タバコ", en: "cigarette" }
-    ],
-    "テーマカラー (Character Theme Color)": [
-      { ja: "赤と黒のテーマ", en: "red and black theme" },
-      { ja: "青と白のテーマ", en: "blue and white theme" },
-      { ja: "黒と金のテーマ", en: "black and gold theme" },
-      { ja: "白と金のテーマ", en: "white and gold theme" },
-      { ja: "パステルカラー", en: "pastel theme" },
-      { ja: "ゴシック (黒)", en: "gothic theme" },
-      { ja: "サイバー (ネオン)", en: "cyber theme" },
-      { ja: "自然 (緑)", en: "nature theme" }
     ]
+    // テーマカラーはAtmosphereへ移動済み
   };
 
   const API = {
@@ -65,7 +56,7 @@
       const h = document.createElement("div");
       h.textContent = "🆔 キャラクター固有要素 (Traits/Identity)";
       h.style.fontWeight = "bold";
-      h.style.color = "#d9534f"; // 赤系で「重要」感を出す
+      h.style.color = "#d9534f"; 
       h.style.marginBottom = "8px";
       section.appendChild(h);
 
@@ -123,3 +114,4 @@
 
   window.__registerPromptPart(KEY, VERSION, API);
 })();
+
