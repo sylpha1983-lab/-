@@ -59,8 +59,21 @@ window.EXT_MANIFEST = [
   "builder_ui.section.expression.v1.js",
   "builder_ui.section.expression.v2.js",
   "builder_ui.section.expression.v3.js",
+  
+  // ポーズ (v1~v12)
   "builder_ui.section.pose.v1.js", 
   "builder_ui.section.pose.v2.js", 
+  "builder_ui.section.pose.v3.js", 
+  "builder_ui.section.pose.v4.js", 
+  "builder_ui.section.pose.v5.js", 
+  "builder_ui.section.pose.v6.js", 
+  "builder_ui.section.pose.v7.js", 
+  "builder_ui.section.pose.v8.js", 
+  "builder_ui.section.pose.v9.js", 
+  "builder_ui.section.pose.v10.js", 
+  "builder_ui.section.pose.v11.js", 
+  "builder_ui.section.pose.v12.js", // ★新規: 視線・頭
+
   "builder_ui.section.narrative.v1.js",
   "builder_ui.section.composition.v1.js",
   "builder_ui.section.camera.v1.js",
@@ -68,10 +81,9 @@ window.EXT_MANIFEST = [
   // 7. Environment & Post-Processing
   "builder_ui.section.background.v4.js",
   
-  // ★ここを整理しました
-  "builder_ui.section.lighting.v1.js", // ① 基本 (親・初期化)
-  "builder_ui.section.lighting.v2.js", // ② 高度 (マウント)
-  "builder_ui.section.shadow.v1.js",   // ③ 影 (マウント)
+  "builder_ui.section.lighting.v1.js", 
+  "builder_ui.section.lighting.v2.js", 
+  "builder_ui.section.shadow.v1.js",   
   
   "builder_ui.section.atmosphere.v1.js",
   "builder_ui.section.effect.v3.js",

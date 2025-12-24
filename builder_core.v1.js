@@ -100,8 +100,8 @@
       { id: "presets", label: "23. 保存済みプリセット (My Presets)" }, 
       { id: "visualsync", label: "🛠️ Visual Sync (Preview & Adjust)" },
       
-      // ★Internal: Shadow (Lightingの中に入れる)
-      { id: "lighting_advanced", label: "Lighting Advanced (Internal)" }, 
+      // ★修正箇所: 不要なInternalセクション定義を削除しました
+      // { id: "lighting_advanced", label: "Lighting Advanced (Internal)" }, 
       { id: "shadow", label: "Shadow (Internal)" }
     ];
     
@@ -141,7 +141,7 @@
   }
   window.__triggerUIMount = attemptMount;
   
-  // (以下Utility関数は変更なし)
+  // (以下Utility関数)
   UI_REG.getAllSelected = function() { const tags = []; Object.values(PROMPT_PARTS).forEach(versions => { Object.keys(versions).forEach(v => { const api = versions[v]; if (typeof api.getTags === "function") { try { const t = api.getTags(); if (Array.isArray(t)) tags.push(...t); } catch(e) {} } }); }); return tags; };
   function generateOutput() {
     window.__isGenerating = true; 
