@@ -22,11 +22,10 @@
 
   // ---- 2. 設定と変数 ----
   const basePath = "./";
-  const MAX_VERSION = 10;
+  const MAX_VERSION = 10; // 探索する最大バージョン数
   const logArea = document.getElementById("log");
   let stats = { success: 0, fail: 0, empty: 0 };
   
-  // ロード済みファイルを記録するキャッシュ
   const LOADED_CACHE = {}; 
 
   // ---- 3. ユーティリティ関数 ----
@@ -43,68 +42,53 @@
 
   function sleep(ms){ return new Promise(function(r){setTimeout(r,ms);}); }
 
-  // ---- 4. 安全なファイル読み込み関数 (リトライ機能付き) ----
+  // ---- 4. 安全なファイル読み込み関数 ----
   async function safeLoad(file, retry=true) {
     const normalizedFile = file.replace(/^\.\//, "").replace(basePath, "").replace('//', '/');
 
-    // 既に成功している場合はスキップ
-    if (LOADED_CACHE[normalizedFile] === true) {
-      return true;
-    }
+    if (LOADED_CACHE[normalizedFile] === true) return true;
     
     let attempt = 0;
-    const maxAttempts = retry ? 3 : 1; // リトライ有効なら最大3回試行
+    const maxAttempts = retry ? 3 : 1; 
 
     while(attempt < maxAttempts) {
-      // 2回目以降は少し待機してからリトライ (180ms)
       if (attempt > 0) {
         let waitTime = 180;
-        log(`🔄 Retrying ${file} after ${waitTime}ms (Attempt ${attempt + 1})...`, 'empty'); // 青色ログ
+        log(`🔄 Retrying ${file} after ${waitTime}ms (Attempt ${attempt + 1})...`, 'empty'); 
         await sleep(waitTime);
       }
 
       try {
         const res = await fetch(file, { cache: "no-cache" });
         
-        // ファイルが存在しない (404) 場合
         if (res.status === 404) {
-          // 404は「失敗」ではなく「存在しない」として扱うため、即座に終了
-          // stats.empty++; // 必要に応じてカウント
-          // log(`❌ Not Found: ${file}`, "fail"); // ログがうるさくなるので抑制可能
           LOADED_CACHE[normalizedFile] = false;
           return false; 
         }
         
-        // 読み込み成功
         if (res.ok) {
           const js = await res.text();
           try {
-            eval(js); // スクリプト実行
+            eval(js); 
             LOADED_CACHE[normalizedFile] = true; 
             stats.success++;
-            if(attempt > 0) log(`✔ Loaded on Retry: ${file}`, 'success'); // 緑色ログ
+            if(attempt > 0) log(`✔ Loaded on Retry: ${file}`, 'success'); 
             else log(`✔ Loaded: ${file}`, "success");
             return true;
           } catch(e) {
             throw new Error(`Eval failed: ${e.message}`);
           }
         }
-        
-        // その他のHTTPエラー (500など)
         throw new Error(`HTTP ${res.status}`);
 
       } catch (e) {
-        // ネットワークエラーや実行エラー
         if (attempt === maxAttempts - 1) {
-          // 最終試行でもダメだった場合
           log(`❌ Failed to fetch ${file}: ${e.message}`, "fail");
           stats.fail++;
         }
       }
-      
       attempt++;
     }
-    
     LOADED_CACHE[normalizedFile] = false; 
     return false;
   }
@@ -126,33 +110,25 @@
     return [];
   }
 
-  // ---- 6. 自動探索ロジック (安定版) ----
+  // ---- 6. 自動探索ロジック (全バージョン探索版) ----
   async function loadCategory(cat) { 
-    let consecutiveFails = 0;
     let registeredAny = false;
 
+    // v1 から MAX_VERSION まで全てチェックする (抜け番があっても止まらない)
     for (let v = 1; v <= MAX_VERSION; v++) {
       const file = `${basePath}builder_ui.section.${cat}.v${v}.js`;
-
-      // safeLoadを呼び出す (404ならfalseが返る)
       const ok = await safeLoad(file, true); 
 
       if (ok) {
         registeredAny = true;
-        consecutiveFails = 0; // 成功したら連続失敗カウントをリセット
-      } else {
-        // 失敗した場合
-        consecutiveFails++;
-        // 404などの失敗ログはsafeLoad内で出力済み
       }
-
-      // 2回連続でファイルが見つからなければ、それ以降のバージョンはないと判断して打ち切る
-      if (consecutiveFails >= 2) { 
-        // log(`⚠ Stop searching ${cat} at v${v} (2 consecutive fails)`, "empty");
-        break;
-      }
+      // ★修正: 連続失敗による break を削除し、飛び番(v1, v6, v8...)に対応
     }
-    if (!registeredAny) log(`⚠ No extensions found for ${cat}`, "empty");
+    
+    if (!registeredAny) {
+      // 1つも見つからなかった場合のみログを出す（うるさくないように）
+      // log(`ℹ No extensions found for ${cat}`, "empty");
+    }
   }
 
   // ---- 7. 初期化実行関数 ----
@@ -160,7 +136,6 @@
     if (window.__manifestInitialized) return;
     window.__manifestInitialized = true;
     
-    // statsのリセット
     stats = { success: 0, fail: 0, empty: 0 };
     
     log("🔍 Manifest loader start...");
@@ -173,23 +148,26 @@
         return;
     }
 
-    // 2. Static manifest をロードし、ファイルリストを取得
-    const staticFilesList = await loadStaticManifest();
+    // 2. 翻訳辞書ロード (必須)
+    await safeLoad(`${basePath}builder_data.translation.v1.js`, true);
 
-    // 3. Static Manifest内のファイルを一つずつロード
+    // 3. Static Manifest内のファイルをロード
+    const staticFilesList = await loadStaticManifest();
     for (const file of staticFilesList) {
       const fullPath = `./${file}`;
       await safeLoad(fullPath, true); 
     }
 
-    // 4. 自動探索対象カテゴリ (最新版を見つけるために全探索)
+    // 4. 自動探索対象カテゴリ 
+    // ★修正: quality_preset を追加しました
     const categories = [
+      "quality_preset", // ← これが重要！(v1, v6, v8, v9, v10を読み込むため)
       "expression","filter","hair","pose","attire","background",
       "lighting","effect","cinematic","faith","presets",
       "preview_sync","visualsync"
     ];
 
-    // 5. 各カテゴリごとにv1～v10を探索
+    // 5. 各カテゴリごとに全バージョンを探索
     for (const cat of categories) {
       await loadCategory(cat);
     }
@@ -212,7 +190,6 @@
   }
 
   // ---- 8. 実行開始 ----
-  // DOMContentLoadedを待たずに即時実行し、HTML内の古いスクリプトより先に走らせる
   init();
 
 })();
