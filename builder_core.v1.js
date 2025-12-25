@@ -89,51 +89,29 @@
       { id: "composition", label: "15. 構図・設計 (Composition)" }, 
       { id: "camera", label: "16. カメラ・レンズ (Camera/Lens)" }, 
       { id: "background", label: "17. 背景・場所 (Background)" }, 
-      
-      // ★18. 照明・ライティング・陰 (Shadow含む)
-      { id: "lighting", label: "18. 照明・ライティング ・陰(Lighting＆shadow)" }, 
-      
+      { id: "lighting", label: "18. 照明・ライティング (Lighting & Shadow)" }, 
       { id: "atmosphere", label: "19. 雰囲気・色彩 (Atmosphere & Color)" }, 
       { id: "effect", label: "20. エフェクト・演出 (Effects)" }, 
       { id: "postprocessing", label: "21. 仕上げ・後処理 (Post-Processing)" }, 
       { id: "filter", label: "22. フィルター・効果 (Filter)" }, 
       { id: "presets", label: "23. 保存済みプリセット (My Presets)" }, 
       { id: "visualsync", label: "🛠️ Visual Sync (Preview & Adjust)" },
-      
-      // ★修正箇所: 不要なInternalセクション定義を削除しました
-      // { id: "lighting_advanced", label: "Lighting Advanced (Internal)" }, 
       { id: "shadow", label: "Shadow (Internal)" }
     ];
     
     order.forEach(({ id, label }) => { 
       try { 
         let container;
-        // ★重要: Shadowの場合は箱を作らず、Lightingの箱を渡す
-        if (id === "shadow") {
-            container = document.getElementById("list-lighting");
-        } else {
-            container = ensureContainer(id, label); 
-            sectionsRoot.appendChild(container); 
-        }
-
+        if (id === "shadow") { container = document.getElementById("list-lighting"); } else { container = ensureContainer(id, label); sectionsRoot.appendChild(container); }
         const versions = PROMPT_PARTS[id]; 
         if (versions) { 
-          // バージョン順に実行
           Object.keys(versions).map(v=>parseInt(v)).sort((a,b)=>a-b).forEach(v => { 
             if (versions[v] && !versions[v]._mounted) { 
-              if (versions[v].initUI) {
-                  // containerが存在する場合のみ実行
-                  if(container) {
-                      try { versions[v].initUI(container); } catch(e) { console.error(e); } 
-                  }
-              }
+              if (versions[v].initUI) { if(container) { try { versions[v].initUI(container); } catch(e) { console.error(e); } } }
               versions[v]._mounted = true; 
             } 
           }); 
-          // Shadow以外で、かつコンテナに中身がある場合のみアコーディオン化
-          if (id !== "shadow" && container && container.children.length > 0) {
-              applyAccordion(container, label); 
-          }
+          if (id !== "shadow" && container && container.children.length > 0) { applyAccordion(container, label); }
         } 
       } catch (e) { console.error(e); } 
     });
@@ -141,27 +119,96 @@
   }
   window.__triggerUIMount = attemptMount;
   
-  // (以下Utility関数)
   UI_REG.getAllSelected = function() { const tags = []; Object.values(PROMPT_PARTS).forEach(versions => { Object.keys(versions).forEach(v => { const api = versions[v]; if (typeof api.getTags === "function") { try { const t = api.getTags(); if (Array.isArray(t)) tags.push(...t); } catch(e) {} } }); }); return tags; };
+  
+  // ★新機能: カッコを考慮したスマート分割関数
+  function smartSplit(text) {
+    if (!text) return [];
+    const result = [];
+    let current = "";
+    let depth = 0;
+    for (let i = 0; i < text.length; i++) {
+      const char = text[i];
+      if (char === "(" || char === "{" || char === "[") depth++;
+      else if (char === ")" || char === "}" || char === "]") depth--;
+      
+      // カンマ等で区切るのは、カッコの外にいる時(depth===0)だけ
+      if (depth === 0 && (char === "," || char === "，" || char === "、" || char === "\n")) {
+        if (current.trim()) result.push(current.trim());
+        current = "";
+      } else {
+        current += char;
+      }
+    }
+    if (current.trim()) result.push(current.trim());
+    return result;
+  }
+
+  // ===========================
+  // generateOutput() (スマート分割適用済み)
+  // ===========================
   function generateOutput() {
-    window.__isGenerating = true; 
-    const out = document.getElementById("out"); if (!out) return; 
-    const currentText = out.value;
-    const currentTags = currentText.split(/[,，\n]+/).map(s => s.trim()).filter(Boolean);
+    window.__isGenerating = true;
+    const out = document.getElementById("out");
+    if (!out) return;
+
+    const OT = window.__outputTranslation || null;
+    const keepMode = OT ? OT.mode : "en"; // "en" or "ja"
+
+    const currentText = out.value || "";
+    // ★ここをスマート分割に変更
+    const currentTags = smartSplit(currentText);
+
     const rawSelectedList = UI_REG.getAllSelected();
     const activeRawTags = new Set();
-    rawSelectedList.forEach(item => { item.split(/[,，\n]+/).map(s => s.trim()).filter(Boolean).forEach(p => activeRawTags.add(p)); });
+    rawSelectedList.forEach(item => {
+      // ★ここもスマート分割に変更
+      smartSplit(item || "").forEach(p => activeRawTags.add(p));
+    });
+
     let knownDictionary = new Set();
     try { knownDictionary = getKnownTags(); } catch(e) { console.error("Dict error", e); }
+
     const finalTags = [];
     const processedCores = new Set();
-    currentTags.forEach(tag => { const core = getCoreTag(tag); if (!knownDictionary.has(core)) { if (!processedCores.has(core)) { finalTags.push(tag); processedCores.add(core); } } });
-    activeRawTags.forEach(rawTag => { const core = getCoreTag(rawTag); if (!processedCores.has(core)) { finalTags.push(rawTag); processedCores.add(core); } });
-    out.value = finalTags.join(", ");
+
+    currentTags.forEach(tag => {
+      const core = getCoreTag(tag);
+      if (!knownDictionary.has(core)) {
+        if (!processedCores.has(core)) {
+          finalTags.push(tag);
+          processedCores.add(core);
+        }
+      }
+    });
+
+    activeRawTags.forEach(rawTag => {
+      const core = getCoreTag(rawTag);
+      if (!processedCores.has(core)) {
+        finalTags.push(rawTag);
+        processedCores.add(core);
+      }
+    });
+
+    let outText = finalTags.join(", ");
+
+    if (OT && keepMode === "ja" && OT.enToJa) {
+      // 翻訳用の分割はシンプルでOK（辞書は単語単位なので）
+      const words = outText.split(/[,，、\n]+/).map(s => s.trim()).filter(Boolean);
+      outText = words.map(w => {
+        const core = w.replace(/[\(\{\[\]\}\)]/g, "").replace(/:[\d\.]+(%?)/g, "").trim().toLowerCase();
+        const ja = OT.enToJa[core];
+        if (!ja) return w;
+        return w.replace(new RegExp(core.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'), ja);
+      }).join(", ");
+    }
+
+    out.value = outText;
     out.dispatchEvent(new Event('input', { bubbles: true }));
-    if (window.__outputTranslation) window.__outputTranslation.resetToEn();
+
     setTimeout(() => { window.__isGenerating = false; }, 100);
   }
+
   function showLinkageToast(items, mode) {
     let toast = document.getElementById("linkage-toast");
     if (!toast) { toast = document.createElement("div"); toast.id = "linkage-toast"; document.body.appendChild(toast); }
@@ -171,6 +218,7 @@
     toast.classList.add("show");
     setTimeout(() => { toast.classList.remove("show"); }, 3000);
   }
+
   function applyLinkage(checkbox) {
     const isChecked = checkbox.checked;
     if (!checkbox.dataset.links) return;
@@ -196,8 +244,10 @@
     if (linkedItems.length > 0) showLinkageToast(linkedItems, isChecked);
     if (stateChanged && !isChecked) generateOutput();
   }
+
   function resetAll() { if(!confirm("全てリセットしますか？")) return; document.querySelectorAll("input[type='checkbox']").forEach(el => el.checked = false); document.querySelectorAll("input[type='range']").forEach(el => { el.value = 100; el.dispatchEvent(new Event('input')); }); const searchBar = document.querySelector("#ui-search-bar input"); if(searchBar) { searchBar.value = ""; searchBar.dispatchEvent(new Event('input')); } const out = document.getElementById("out"); if (out) out.value = ""; out.dispatchEvent(new Event('input', { bubbles: true })); if (window.__outputTranslation) window.__outputTranslation.resetToEn(); }
   function copyOutput() { const out = document.getElementById("out"); out.select(); document.execCommand("copy"); }
+
   function initFloater() {
     const floater = document.createElement('div');
     floater.id = 'active-category-floater';
@@ -233,12 +283,7 @@
           const closeBtn = document.createElement('button');
           closeBtn.className = 'item-close-btn';
           closeBtn.innerHTML = '×';
-          closeBtn.onclick = (e) => {
-            e.stopPropagation();
-            det.querySelectorAll('details').forEach(d => d.removeAttribute('open'));
-            det.removeAttribute('open');
-            setTimeout(updateList, 50);
-          };
+          closeBtn.onclick = (e) => { e.stopPropagation(); det.querySelectorAll('details').forEach(d => d.removeAttribute('open')); det.removeAttribute('open'); setTimeout(updateList, 50); };
           itemDiv.appendChild(closeBtn);
           itemsContainer.appendChild(itemDiv);
         });
@@ -248,29 +293,117 @@
       }
     };
     const sectionsRoot = document.getElementById("sections");
-    if (sectionsRoot) {
-      sectionsRoot.addEventListener('toggle', (e) => {
-        if (e.target.tagName === 'DETAILS' && (e.target.classList.contains('qp-main-acc') || e.target.classList.contains('accordion-wrap'))) {
-          setTimeout(updateList, 50);
-        }
-      }, true);
-    }
+    if (sectionsRoot) { sectionsRoot.addEventListener('toggle', (e) => { if (e.target.tagName === 'DETAILS' && (e.target.classList.contains('qp-main-acc') || e.target.classList.contains('accordion-wrap'))) { setTimeout(updateList, 50); } }, true); }
     floaterBtn.addEventListener('click', () => { floaterList.classList.toggle('open'); });
-    closeAllBtn.addEventListener('click', () => {
-      document.querySelectorAll('details.qp-main-acc[open], details.accordion-wrap[open]').forEach(det => {
-        det.querySelectorAll('details').forEach(d => d.removeAttribute('open'));
-        det.removeAttribute('open');
-      });
-      setTimeout(updateList, 50);
-    });
+    closeAllBtn.addEventListener('click', () => { document.querySelectorAll('details.qp-main-acc[open], details.accordion-wrap[open]').forEach(det => { det.querySelectorAll('details').forEach(d => d.removeAttribute('open')); det.removeAttribute('open'); }); setTimeout(updateList, 50); });
     setTimeout(updateList, 500);
   }
-  function init() { if(!document.getElementById('builder-core-style')) { const style = document.createElement('style'); style.id = 'builder-core-style'; style.textContent = CSS; document.head.appendChild(style); } const genBtn = document.getElementById("genBtn"); if (genBtn) { const container = genBtn.parentElement; container.classList.add("builder-footer-grid"); genBtn.addEventListener("click", generateOutput); document.getElementById("copyBtn")?.addEventListener("click", copyOutput); document.getElementById("resetBtn")?.addEventListener("click", resetAll); const transBtn = document.getElementById("translateBtn"); if (transBtn) transBtn.addEventListener("click", () => window.__outputTranslation.toggle()); } const sectionsRoot = document.getElementById("sections"); if (sectionsRoot) { sectionsRoot.addEventListener("change", (e) => { if (e.target.matches('input[type="checkbox"]')) { applyLinkage(e.target); if (!e.target.checked) generateOutput(); } else if (e.target.matches('input[type="range"]')) { /* rangeはボタン待ち */ } }); } 
-    initFloater(); 
+
+  function init() {
+    if(!document.getElementById('builder-core-style')) { const style = document.createElement('style'); style.id = 'builder-core-style'; style.textContent = CSS; document.head.appendChild(style); }
+    const genBtn = document.getElementById("genBtn");
+    if (genBtn) {
+      const container = genBtn.parentElement;
+      container.classList.add("builder-footer-grid");
+      genBtn.addEventListener("click", generateOutput);
+      document.getElementById("copyBtn")?.addEventListener("click", copyOutput);
+      document.getElementById("resetBtn")?.addEventListener("click", resetAll);
+      const transBtn = document.getElementById("translateBtn");
+      if (transBtn) transBtn.addEventListener("click", () => window.__outputTranslation.toggle());
+    }
+    const sectionsRoot = document.getElementById("sections");
+    if (sectionsRoot) {
+      sectionsRoot.addEventListener("change", (e) => {
+        if (e.target.matches('input[type="checkbox"]')) {
+          applyLinkage(e.target);
+          if (!e.target.checked) generateOutput();
+        } else if (e.target.matches('input[type="range"]')) {
+          /* rangeはボタン待ち */
+        }
+      });
+    }
+    initFloater();
   }
+
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init, { once: true }); else init();
+
+  // ★大幅強化された翻訳エンジン (カッコ消失バグ修正済み)
   window.__outputTranslation = { 
-    mode: "en", dict: {}, register(dict) { this.dict = { ...this.dict, ...dict }; }, resetToEn() { this.mode = "en"; const btn = document.getElementById("translateBtn"); if(btn) btn.textContent = "日本語表示"; }, normalize(str) { return str.replace(/[\(\{\[\]\}\)]/g, "").replace(/[（）【】［］｛｝]/g, "").replace(/:[\d\.]+(%?)/g, "").replace(/\s+/g, "").toLowerCase(); }, fixExtraClosers(str) { const trimOne = (s, openCh, closeCh) => { const open = (s.match(new RegExp(`\\${openCh}`, "g")) || []).length; const close = (s.match(new RegExp(`\\${closeCh}`, "g")) || []).length; let extra = close - open; while (extra > 0 && s.endsWith(closeCh)) { s = s.slice(0, -1); extra--; } return s; }; return str.split(/,\s*/).map(w => { let s = w; s = trimOne(s, "(", ")"); s = trimOne(s, "{", "}"); s = trimOne(s, "[", "]"); return s; }).join(", "); }, toggle() { const outEl = document.getElementById("out"); const btn = document.getElementById("translateBtn"); if (!outEl) return; const current = outEl.value; if (!current.trim()) return; const words = current.split(/,\s*/).filter(Boolean); let newText; if (this.mode === "en") { newText = words.map(w => { let core = w.replace(/[\(\{\[\]\}\)]/g, "").replace(/:\d+(\.\d+)?/g, "").trim(); let ja = this.dict[core] || this.dict[core.toLowerCase()]; if (ja) return w.replace(new RegExp(core.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'), ja); return w; }).join(", "); this.mode = "ja"; if(btn) btn.textContent = "英語表示"; } else { const reverseMap = {}; Object.entries(this.dict).forEach(([enKey, jaVal]) => { if (!jaVal) return; const normalizedJa = this.normalize(jaVal); reverseMap[normalizedJa] = enKey; }); newText = words.map(w => { let searchKey = this.normalize(w); let en = reverseMap[searchKey]; const match = w.match(/^([（(\{\[]*)([\s\S]*?)((?::[\d\.]+(?:%?))?[）)\\}\\]]*)$/); if (!match) return w; const prefix = match[1] || ""; let core = match[2] || ""; let suffix = match[3] || ""; if (!en) { let coreKey = this.normalize(core); en = reverseMap[coreKey]; if (!en && suffix.match(/^[）)\}\]]+$/)) { let retryKey = this.normalize(core + suffix); if (reverseMap[retryKey]) { en = reverseMap[retryKey]; suffix = ""; } } } if (en) return prefix + en + suffix; return w; }).join(", "); this.mode = "en"; if(btn) btn.textContent = "日本語表示"; } newText = this.fixExtraClosers(newText); outEl.value = newText; } 
+    mode: "en", 
+    enToJa: {}, 
+    jaToEn: {}, 
+    
+    register(dict) { 
+      Object.entries(dict).forEach(([enKeys, jaVal]) => {
+        if(!enKeys || !jaVal) return;
+        const enKeyList = enKeys.split(/,\s*/).filter(Boolean);
+        enKeyList.forEach(key => { this.enToJa[key.toLowerCase().trim()] = jaVal; });
+        const mainEnKey = enKeyList[0];
+        if (!mainEnKey) return;
+        const normJaFull = this.normalize(jaVal);
+        if (!this.jaToEn[normJaFull]) { this.jaToEn[normJaFull] = mainEnKey; }
+        const shortJa = jaVal.replace(/[（\(].*?[）\)]/g, "").trim();
+        const normJaShort = this.normalize(shortJa);
+        if (normJaShort && normJaShort !== normJaFull && !this.jaToEn[normJaShort]) { this.jaToEn[normJaShort] = mainEnKey; }
+      });
+    }, 
+    
+    registerReverse(dict) {
+      Object.entries(dict).forEach(([jaKey, enVal]) => {
+        if(!jaKey || !enVal) return;
+        const normJa = this.normalize(jaKey);
+        this.jaToEn[normJa] = enVal;
+      });
+    },
+
+    resetToEn() { this.mode = "en"; const btn = document.getElementById("translateBtn"); if(btn) btn.textContent = "日本語表示"; }, 
+    normalize(str) { return str.replace(/[\(\{\[\]\}\)]/g, "").replace(/[（）【】［］｛｝]/g, "").replace(/:[\d\.]+(%?)/g, "").replace(/[^a-zA-Z0-9\u3040-\u309f\u30a0-\u30ff\u4e00-\u9faf]/g, "").toLowerCase(); }, 
+    fixExtraClosers(str) { 
+      const trimOne = (s, openCh, closeCh) => { const open = (s.match(new RegExp(`\\${openCh}`, "g")) || []).length; const close = (s.match(new RegExp(`\\${closeCh}`, "g")) || []).length; let extra = close - open; while (extra > 0 && s.endsWith(closeCh)) { s = s.slice(0, -1); extra--; } return s; }; 
+      return str.split(/,\s*/).map(w => { let s = w; s = trimOne(s, "(", ")"); s = trimOne(s, "{", "}"); s = trimOne(s, "[", "]"); return s; }).join(", "); 
+    }, 
+    
+    toggle() { 
+      const outEl = document.getElementById("out"); const btn = document.getElementById("translateBtn"); if (!outEl) return; const current = outEl.value; if (!current.trim()) return; 
+      const words = current.split(/[,，、\n]+/).map(s=>s.trim()).filter(Boolean); 
+      let newText; 
+      
+      if (this.mode === "en") { 
+        newText = words.map(w => { 
+          let core = w.replace(/[\(\{\[\]\}\)]/g, "").replace(/:[\d\.]+(%?)/g, "").trim().toLowerCase(); 
+          let ja = this.enToJa[core]; 
+          if (ja) return w.replace(new RegExp(core.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'), ja); 
+          return w; 
+        }).join(", "); 
+        this.mode = "ja"; if(btn) btn.textContent = "英語表示"; 
+      } else { 
+        newText = words.map(w => {
+          let s = w;
+          let prefix = "";
+          while (s.startsWith("(") || s.startsWith("（") || s.startsWith("{") || s.startsWith("｛") || s.startsWith("[") || s.startsWith("［")) {
+            prefix += s[0];
+            s = s.slice(1);
+          }
+          let suffix = "";
+          while (s.endsWith(")") || s.endsWith("）") || s.endsWith("}") || s.endsWith("｝") || s.endsWith("]") || s.endsWith("］")) {
+            suffix = s.slice(-1) + suffix;
+            s = s.slice(0, -1);
+          }
+          let weight = "";
+          const m = s.match(/(:[\d\.]+%?)$/);
+          if (m) {
+            weight = m[1];
+            s = s.slice(0, -weight.length);
+          }
+          const key = this.normalize(s);
+          const en = this.jaToEn[key];
+          if (en) return prefix + en + weight + suffix;
+          return w;
+        }).join(", ");
+        this.mode = "en"; if(btn) btn.textContent = "日本語表示"; 
+      } 
+      newText = this.fixExtraClosers(newText); outEl.value = newText; 
+    } 
   };
 })();
 

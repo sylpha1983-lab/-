@@ -1,8 +1,12 @@
 window.EXT_MANIFEST = [
   "builder_core.v1.js",
 
+  // ★重要: ここに翻訳データファイルを足さないと、翻訳機能が動きません
+  "builder_data.translation.v1.js",
+
   // 1. Quality & Anatomy
   "builder_ui.data.v1.js",
+  "builder_data.qp_base.js", 
   "builder_ui.section.quality_preset.v1.js",
   "builder_ui.section.quality_preset.v2.js", 
   "builder_ui.section.quality_preset.v4.js", 
@@ -72,7 +76,7 @@ window.EXT_MANIFEST = [
   "builder_ui.section.pose.v9.js", 
   "builder_ui.section.pose.v10.js", 
   "builder_ui.section.pose.v11.js", 
-  "builder_ui.section.pose.v12.js", // ★新規: 視線・頭
+  "builder_ui.section.pose.v12.js",
 
   "builder_ui.section.narrative.v1.js",
   "builder_ui.section.composition.v1.js",
