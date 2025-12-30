@@ -93,15 +93,19 @@
   const API = {
     initUI(container) {
       if (window.__outputTranslation) window.__outputTranslation.register(DICT);
-      
-      const root = document.querySelector("#list-style");
+
+      const root = container || document.querySelector("#list-style");
       if (!root) return;
+
+      // 二重マウント防止（ログ爆増・DOM重複の芽を摘む）
+      if (root.dataset && root.dataset.styleV1Mounted === "1") return;
+      if (root.dataset) root.dataset.styleV1Mounted = "1";
 
       const createSub = (title, items) => {
         const details = document.createElement("details");
         details.className = "style-cat";
         details.style.cssText = "margin-bottom:6px; border:1px solid #b197fc; border-radius:4px; background:#fff;";
-        details.open = false; 
+        details.open = false;
 
         const summary = document.createElement("summary");
         summary.innerHTML = `${title} <span style="font-size:0.8em; color:#6741d9;">(Anime/Game)</span>`;
@@ -118,24 +122,31 @@
           cb.type = "checkbox";
           cb.style.marginRight = "6px";
           cb.dataset.val = item.en;
+          cb.dataset.en  = item.en;
+          cb.dataset.ja  = item.ja;
           label.appendChild(cb);
           label.appendChild(document.createTextNode(item.ja));
           label.title = item.en;
           content.appendChild(label);
         });
+
         details.appendChild(content);
         return details;
       };
 
-      // 既存のコンテンツエリアがあれば使い、なければ作る
-      const sectionContent = root.querySelector(".section-content") || (() => {
-        const d = document.createElement("div"); d.className="section-content"; root.appendChild(d); return d;
+      // 既存のコンテンツエリアがあれば使い、なければ作る（衝突しやすい section-content は避ける）
+      const sectionContent = root.querySelector(".style-section-content") || (() => {
+        const d = document.createElement("div");
+        d.className = "style-section-content";
+        root.appendChild(d);
+        return d;
       })();
 
       Object.entries(STYLE_DATA).forEach(([key, val]) => {
         sectionContent.appendChild(createSub(key, val));
       });
     },
+
     getTags() {
       // 自分の管理下のタグを収集
       const tags = [];
@@ -146,7 +157,7 @@
         });
       }
       return tags;
-    } 
+    }
   };
 
   window.__registerPromptPart(KEY, VERSION, API);

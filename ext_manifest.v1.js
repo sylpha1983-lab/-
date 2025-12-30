@@ -1,30 +1,46 @@
+// ============================================================
+// ext_manifest.v1.js (2025-12-30 Stable Version)
+// ============================================================
+
 window.EXT_MANIFEST = [
   "builder_core.v1.js",
 
-  // ★重要: ここに翻訳データファイルを足さないと、翻訳機能が動きません
+  // ★ 翻訳データ
   "builder_data.translation.v1.js",
 
   // 1. Quality & Anatomy
   "builder_ui.data.v1.js",
-  "builder_data.qp_base.js", 
-  "builder_ui.section.quality_preset.v1.js",
-  "builder_ui.section.quality_preset.v2.js", 
-  "builder_ui.section.quality_preset.v4.js", 
-  "builder_ui.section.quality_preset.v5.js", 
-  "builder_ui.section.quality_preset.v6.js", 
-  "builder_ui.section.quality_preset.v7.js", 
+  "builder_data.qp_base.js",
+  "builder_data.quality_preset.js",
 
-  // 2. Art Style
+  // -------------------------------
+  // Quality Preset (依存順)
+  // -------------------------------
+  "builder_ui.section.quality_preset.v1.js",
+  "builder_ui.section.quality_preset.v2.js",
+  "builder_ui.section.quality_preset.v3.js",
+  "builder_ui.section.quality_preset.v4.js",
+  "builder_ui.section.quality_preset.v5.js",
+  "builder_ui.section.quality_preset.v6.js",
+  "builder_ui.section.quality_preset.v7.js",
+  "builder_ui.section.quality_preset.v8.js",
+  "builder_ui.section.quality_preset.v9.js",
+  "builder_ui.section.quality_preset.v10.js",
+
+  // -------------------------------
+  // Style / Anatomy
+  // -------------------------------
   "builder_ui.section.style.v1.js",
   "builder_ui.section.style.v2.js",
   "builder_ui.section.style.v3.js",
-
   "builder_ui.section.anatomy.v1.js",
 
-  // 3. Character Base
-  "builder_ui.section.race.v1.js", 
-  "builder_ui.section.race.v2.js", 
-  "builder_ui.section.race.v3.js", 
+  // -------------------------------
+  // Character Base
+  // -------------------------------
+  "builder_ui.section.race.v1.js",
+  "builder_ui.section.race.v2.js",
+  "builder_ui.section.race.v3.js",
   "builder_ui.section.race.v4.js",
   "builder_ui.section.race.v5.js",
   "builder_ui.section.bodytype.v1.js",
@@ -63,20 +79,21 @@ window.EXT_MANIFEST = [
   "builder_ui.section.expression.v1.js",
   "builder_ui.section.expression.v2.js",
   "builder_ui.section.expression.v3.js",
-  
+
   // ポーズ (v1~v12)
-  "builder_ui.section.pose.v1.js", 
-  "builder_ui.section.pose.v2.js", 
-  "builder_ui.section.pose.v3.js", 
-  "builder_ui.section.pose.v4.js", 
-  "builder_ui.section.pose.v5.js", 
-  "builder_ui.section.pose.v6.js", 
-  "builder_ui.section.pose.v7.js", 
-  "builder_ui.section.pose.v8.js", 
-  "builder_ui.section.pose.v9.js", 
-  "builder_ui.section.pose.v10.js", 
-  "builder_ui.section.pose.v11.js", 
+  "builder_ui.section.pose.v1.js",
+  "builder_ui.section.pose.v2.js",
+  "builder_ui.section.pose.v3.js",
+  "builder_ui.section.pose.v4.js",
+  "builder_ui.section.pose.v5.js",
+  "builder_ui.section.pose.v6.js",
+  "builder_ui.section.pose.v7.js",
+  "builder_ui.section.pose.v8.js",
+  "builder_ui.section.pose.v9.js",
+  "builder_ui.section.pose.v10.js",
+  "builder_ui.section.pose.v11.js",
   "builder_ui.section.pose.v12.js",
+  "builder_ui.section.pose.v13.js",
 
   "builder_ui.section.narrative.v1.js",
   "builder_ui.section.composition.v1.js",
@@ -84,26 +101,23 @@ window.EXT_MANIFEST = [
 
   // 7. Environment & Post-Processing
   "builder_ui.section.background.v4.js",
-  
-  "builder_ui.section.lighting.v1.js", 
-  "builder_ui.section.lighting.v2.js", 
-  "builder_ui.section.shadow.v1.js",   
-  
+  "builder_ui.section.lighting.v1.js",
+  "builder_ui.section.lighting.v2.js",
+  "builder_ui.section.shadow.v1.js",
   "builder_ui.section.atmosphere.v1.js",
   "builder_ui.section.effect.v3.js",
   "builder_ui.section.postprocessing.v1.js",
   "builder_ui.section.filter.v1.js",
-  
+
   // 8. Utilities
   "builder_ui.section.presets.v1.js",
-  "builder_ui.visualsync.v4.js", 
-  
+  "builder_ui.visualsync.v4.js",
+
   // Extensions
   "ext_sync_check.js",
-  "ext_footer_search.js",        
-  "ext_autosave.js",             
+  "ext_footer_search.js",
+  "ext_autosave.js",
   "ext_history.js",
-  "ext_smart_edit.js",           
+  "ext_smart_edit.js",
   "ext_copy_button.js"
 ];
-

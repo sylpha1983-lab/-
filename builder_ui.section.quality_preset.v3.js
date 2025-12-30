@@ -66,7 +66,11 @@
     const content = document.createElement("div"); content.className = "qp-content-grid"; content.style.padding = "8px"; content.style.display = "grid"; content.style.gridTemplateColumns = "repeat(auto-fill, minmax(200px, 1fr))"; content.style.gap = "6px"; 
     items.forEach(item => { 
       const label = document.createElement("label"); label.style.display = "flex"; label.style.alignItems = "center"; label.style.fontSize = "0.9em"; label.style.cursor = "pointer"; 
-      const cb = document.createElement("input"); cb.type = "checkbox"; cb.style.marginRight = "6px"; cb.dataset.val = item.val || item.en; 
+      const cb = document.createElement("input"); cb.type = "checkbox"; cb.style.marginRight = "6px"; cb.dataset.val = item.val || item.en;
+ cb.addEventListener("change", () => {
+  if (window.__VISUAL_SYNC?.updateSelectedList)
+    window.__VISUAL_SYNC.updateSelectedList();
+});
       label.appendChild(cb); label.appendChild(document.createTextNode(item.label || `${item.ja}/${item.en}`)); 
       if(item.links) cb.dataset.links = item.links.join(","); content.appendChild(label); 
     }); 

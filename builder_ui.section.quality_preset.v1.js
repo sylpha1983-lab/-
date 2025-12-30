@@ -61,6 +61,9 @@
         const cb = document.createElement("input");
         cb.type = "checkbox";
         cb.dataset.val = item.val || item.en;
+cb.addEventListener("change", () => {
+  if (window.__VISUAL_SYNC?.updateSelectedList) window.__VISUAL_SYNC.updateSelectedList();
+});
         if(item.links) cb.dataset.links = item.links.join(",");
         if(item.desc) label.title = item.desc;
         if(item.label.includes("㊙️") || item.label.includes("⚡") || item.label.includes("⚠️")) {

@@ -3,6 +3,7 @@
   const VERSION = 3;
   const KEY = "style";
 
+  // ===== 中身は完全に元のまま =====
   const STYLE_DATA = {
     "🔮 ネット・美学 (Internet Aesthetics)": [
       { ja: "ヴェイパーウェイヴ", en: "vaporwave, aesthetic, neon pink and blue, retro computer, greek statues, glitch" },
@@ -52,25 +53,35 @@
     "dreamcore": "ドリームコア", "liminal space": "リミナルスペース", "kawaiicore": "カワイイコア", "y2k aesthetic": "Y2K",
     "cyberpunk": "サイバーパンク", "steampunk": "スチームパンク", "solarpunk": "ソーラーパンク",
     "dieselpunk": "ディーゼルパンク", "biopunk": "バイオパンク", "atompunk": "アトムパンク",
-    "pixel art": "ドット絵", "voxel art": "ボクセル", "low poly": "ローポリ", "vector art": "ベクター画",
-    "glitch art": "グリッチアート", "flat design": "フラットデザイン", "memphis design": "メンフィス",
-    "brutalism": "ブルータリズム", "pop art style": "ポップアート",
-    "film noir": "フィルムノワール", "vintage photo": "ヴィンテージ写真", "polaroid style": "ポラロイド風",
-    "double exposure": "ダブル露光", "infrared photography": "赤外線写真", "fisheye lens": "魚眼レンズ", "tilt-shift": "ティルトシフト"
+    "pixel art": "ドット絵", "voxel art": "ボクセル", "low poly": "ローポリ",
+    "vector art": "ベクター画", "glitch art": "グリッチアート", "flat design": "フラットデザイン",
+    "memphis design": "メンフィス", "brutalism": "ブルータリズム", "pop art style": "ポップアート",
+    "film noir": "フィルムノワール", "vintage photo": "ヴィンテージ写真",
+    "polaroid style": "ポラロイド風", "double exposure": "ダブル露光",
+    "infrared photography": "赤外線写真", "fisheye lens": "魚眼レンズ", "tilt-shift": "ティルトシフト"
   };
+  // ===== 中身ここまで =====
+
+  function resolveRoot(container){
+    return container || document.querySelector("#list-style");
+  }
 
   const API = {
     initUI(container) {
       if (window.__outputTranslation) window.__outputTranslation.register(DICT);
-      
-      const root = document.querySelector("#list-style");
+
+      const root = resolveRoot(container);
       if (!root) return;
+
+      // ✅ 二重マウント防止
+      if (root.dataset && root.dataset.styleV3Mounted === "1") return;
+      if (root.dataset) root.dataset.styleV3Mounted = "1";
 
       const createSub = (title, items) => {
         const details = document.createElement("details");
         details.className = "style-cat";
         details.style.cssText = "margin-bottom:6px; border:1px solid #b197fc; border-radius:4px; background:#fff;";
-        details.open = false; 
+        details.open = false;
 
         const summary = document.createElement("summary");
         summary.innerHTML = `${title} <span style="font-size:0.8em; color:#6741d9;">(Modern)</span>`;
@@ -78,46 +89,61 @@
         details.appendChild(summary);
 
         const content = document.createElement("div");
-        content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:6px;";
+        content.style.cssText =
+          "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:6px;";
 
         items.forEach(item => {
           const label = document.createElement("label");
           label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer;";
+
           const cb = document.createElement("input");
           cb.type = "checkbox";
           cb.style.marginRight = "6px";
           cb.dataset.val = item.en;
+          cb.dataset.en  = item.en;
+          cb.dataset.ja  = item.ja;
+
           label.appendChild(cb);
           label.appendChild(document.createTextNode(item.ja));
           label.title = item.en;
           content.appendChild(label);
         });
+
         details.appendChild(content);
         return details;
       };
 
-      // v1, v2と同じ親コンテナに追加
-      const sectionContent = root.querySelector(".section-content") || (() => {
-        const d = document.createElement("div"); d.className="section-content"; root.appendChild(d); return d;
+      // ✅ v1 / v2 と同じ安全な親コンテナを使用
+      const styleHost = root.querySelector(".style-section-content") || (() => {
+        const d = document.createElement("div");
+        d.className = "style-section-content";
+        root.appendChild(d);
+        return d;
       })();
 
+      // ✅ v3 専用ラッパー
+      const v3Container = document.createElement("div");
+      v3Container.className = "style-v3-container";
+      styleHost.appendChild(v3Container);
+
       Object.entries(STYLE_DATA).forEach(([key, val]) => {
-        sectionContent.appendChild(createSub(key, val));
+        v3Container.appendChild(createSub(key, val));
       });
     },
+
     getTags() {
-      // #list-style内のチェックボックスはv1,v2,v3共通で取得可能
-      // ここでは空配列を返し、親側でまとめて取得させるか、
-      // 念のため自分の管理分を返すようにする（が、今回はCoreに任せる想定で空でもOK）
-      // 安全のため、v2同様に実装
       const tags = [];
-      const parent = document.querySelector("#list-style");
-      if(parent){
-        // 注: 他のバージョンと重複して取得しないよう、厳密には自分のDOMを特定すべきだが
-        // Coreが重複排除するので問題なし
-      }
+      const root = document.querySelector("#list-style");
+      if (!root) return tags;
+
+      const box = root.querySelector(".style-v3-container");
+      if (!box) return tags;
+
+      box.querySelectorAll("input[type='checkbox']:checked").forEach(cb => {
+        if (cb.dataset && cb.dataset.val) tags.push(cb.dataset.val);
+      });
       return tags;
-    } 
+    }
   };
 
   window.__registerPromptPart(KEY, VERSION, API);

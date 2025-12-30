@@ -16,8 +16,8 @@
         { ja: "窓辺に座る", en: "sitting in window, sitting on windowsill" },
         { ja: "枕の上に座る", en: "sitting on pillow" },
         { ja: "箱の上に座る", en: "sitting on box" },
-        { ja: "ボールの上に座る (Balance)", en: "sitting on ball" },
-        { ja: "椅子に逆座り", en: "sitting backwards, straddling chair" }
+        { ja: "ボールの上に座る", en: "sitting on ball" },
+        { ja: "椅子に逆座り", en: "sitting backwards" }
       ],
       "屋外・特殊": [
         { ja: "ベンチに座る", en: "sitting on bench" },
@@ -29,89 +29,67 @@
         { ja: "車の上に座る", en: "sitting on car" }
       ]
     },
+    "🏍️ 乗り物・騎乗 (Vehicles & Riding)": {
+      "マシン": [
+        { ja: "運転する (Driving)", en: "driving, driving car" }, // ★追加
+        { ja: "乗る (Riding)", en: "riding" }, // ★追加
+        { ja: "バイクに跨る", en: "riding motorcycle" },
+        { ja: "バイク走行中", en: "riding motorcycle, leaning into turn" },
+        { ja: "オープンカー", en: "sitting in convertible" },
+        { ja: "自転車に乗る", en: "riding bicycle" },
+        { ja: "戦車長 (ハッチ)", en: "tank commander" }
+      ],
+      "ファンタジー・動物": [
+        { ja: "乗馬 (Horseback)", en: "horseback riding, riding horse" }, // ★追加
+        { ja: "ドラゴンに乗る", en: "riding dragon" },
+        { ja: "ほうきに乗る", en: "broom riding, flying on broom" } // ★追加
+      ]
+    },
     "🌲 生物・自然との位置関係 (On Nature & Beings)": {
       "人・動物の上": [
-        { ja: "人の上にいる (On Person)", en: "on person" },
+        { ja: "人の上にいる", en: "on person" },
         { ja: "人の上に座る", en: "sitting on person" },
-        { ja: "膝の上にいる (On Lap)", en: "on lap, sitting on lap" },
-        { ja: "肩の上にいる (On Shoulder)", en: "on shoulder, sitting on shoulder" },
-        { ja: "頭の上にいる (On Head)", en: "on head, sitting on head" },
-        { ja: "腕に乗る", en: "sitting on arm" },
+        { ja: "膝の上にいる", en: "on lap, sitting on lap" },
+        { ja: "肩の上にいる", en: "on shoulder, sitting on shoulder" },
+        { ja: "頭の上にいる", en: "on head, sitting on head" },
         { ja: "動物に乗る/座る", en: "sitting on animal, riding animal" },
-        { ja: "顔面騎乗 (顔に座る)", en: "sitting on face" }
+        { ja: "顔面騎乗", en: "sitting on face" }
       ],
       "自然物": [
         { ja: "地面に座る", en: "sitting on ground" },
         { ja: "岩の上に座る", en: "sitting on rock" },
         { ja: "切り株に座る", en: "sitting on tree stump" },
         { ja: "丸太に座る", en: "sitting on log" },
-        { ja: "木に座る (枝)", en: "sitting in tree, sitting on branch" },
+        { ja: "木に座る (枝)", en: "sitting in tree" },
         { ja: "水面に座る (浮く)", en: "sitting on water" }
       ]
     },
-    "👒 頭・体に乗せる (Objects on Head & Body)": {
-      "動物・生物": [
+    "👒 頭・体に乗せる (Objects on Head)": {
+      "乗せる": [
         { ja: "動物が頭に乗っている", en: "animal on head" },
-        { ja: "猫が頭に乗っている", en: "cat on head" },
-        { ja: "ウサギが頭に乗っている", en: "rabbit on head" },
         { ja: "鳥が頭に乗っている", en: "bird on head" },
-        { ja: "ポケモン/生物が頭に", en: "pokemon on head, creature on head" },
-        { ja: "ちびキャラが頭に", en: "chibi on head, person on head" }
-      ],
-      "植物・食べ物": [
-        { ja: "花が頭に咲いている", en: "flower on head, sprouting" },
-        { ja: "葉っぱが頭に (たぬき)", en: "leaf on head" },
+        { ja: "物が頭に乗っている", en: "object on head" },
+        { ja: "花が頭に咲いている", en: "flower on head" },
         { ja: "食べ物が頭に", en: "food on head" },
-        { ja: "果物が頭に", en: "fruit on head" }
-      ],
-      "ユニーク・ネタ": [
-        { ja: "物が頭に乗っている (汎用)", en: "object on head" },
-        { ja: "タオルを頭に乗せる (温泉)", en: "towel on head" },
         { ja: "お札が頭に (キョンシー)", en: "ofuda on head" },
-        { ja: "頭蓋骨を被る", en: "skull on head" },
-        { ja: "パンツを被る (変態)", en: "panties on head, panty mask" } // テキストより
+        { ja: "パンツを被る", en: "panties on head" }
       ]
     },
-    "📍 場所・位置指定 (Location & On Object)": {
+    "📍 場所・位置指定 (Location)": {
       "屋内・家具": [
-        { ja: "ベッドの上 (On Bed)", en: "on bed" },
-        { ja: "椅子の上 (On Chair)", en: "on chair" },
-        { ja: "ソファの上 (On Couch)", en: "on couch" },
-        { ja: "机の上 (On Desk)", en: "on desk" },
+        { ja: "ベッドの上", en: "on bed" },
+        { ja: "椅子の上", en: "on chair" },
+        { ja: "ソファの上", en: "on couch" },
+        { ja: "机の上", en: "on desk" },
         { ja: "テーブルの上", en: "on table" },
-        { ja: "床の上", en: "on floor" },
-        { ja: "タオル/毛布の上", en: "on beach towel, on blanket" }
-      ],
-      "屋外・高所": [
-        { ja: "屋根の上", en: "on roof" },
-        { ja: "手すりの上", en: "on railing" },
-        { ja: "ベンチの上", en: "on bench" },
-        { ja: "乗り物の上", en: "on vehicle, on car, on motorcycle" },
-        { ja: "地面の上 (草/砂)", en: "on ground, on grass, on sand" }
+        { ja: "床の上", en: "on floor" }
       ],
       "環境インタラクション": [
         { ja: "壁にもたれる", en: "leaning against wall" },
         { ja: "窓の外を見る", en: "looking out window" },
         { ja: "柱に隠れる", en: "hiding behind pillar" },
-        { ja: "手すりにもたれる", en: "leaning on railing" },
         { ja: "壁に手をつく", en: "hand on wall" },
-        { ja: "水面に浮かぶ", en: "floating on water" },
-        { ja: "崖の縁に座る", en: "sitting on cliff edge" }
-      ]
-    },
-    "🏍️ 乗り物・騎乗 (Vehicles & Riding)": {
-      "マシン": [
-        { ja: "バイクに跨る", en: "riding motorcycle, sitting on bike" },
-        { ja: "バイク走行中", en: "riding motorcycle, leaning into turn" },
-        { ja: "車の運転", en: "driving car, hands on steering wheel" },
-        { ja: "オープンカー", en: "sitting in convertible" },
-        { ja: "自転車に乗る", en: "riding bicycle" },
-        { ja: "戦車長 (ハッチ)", en: "tank commander, looking out from hatch" }
-      ],
-      "ファンタジー": [
-        { ja: "乗馬 (馬)", en: "riding horse, equestrian" },
-        { ja: "ドラゴンに乗る", en: "riding dragon" },
-        { ja: "ほうきで飛ぶ", en: "flying on broom" }
+        { ja: "水面に浮かぶ", en: "floating on water" }
       ]
     }
   };

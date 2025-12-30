@@ -7,17 +7,29 @@
 
     const container = genBtn.parentElement;
 
-    // 既存ボタン削除
     const existing = document.getElementById("footer-search-btn");
     if(existing) existing.remove();
     
-    // 検索ボタン作成
     const btn = document.createElement('button');
-    btn.id = "footer-search-btn"; // CoreのCSSが適用されるID
+    btn.id = "footer-search-btn";
     btn.textContent = "🔍 確認";
     btn.title = "選択中のアイテムを画像検索します";
-    
-    // 検索メニュー
+
+    // ✅ Coreボタンと同じスタイルを継承
+    btn.style.cssText = `
+      flex: 1 1 auto;
+      min-width: 70px;
+      height: 44px;
+      border-radius: 6px;
+      border: none;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      font-size: 0.9rem;
+      background: #28a745;
+    `;
+
+    // 🔍 ポップアップメニュー
     const menu = document.createElement('div');
     menu.id = "search-popup-menu";
     menu.style.cssText = `
@@ -39,17 +51,16 @@
     `;
     document.body.appendChild(menu);
 
-    // クリックイベント
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
-      e.preventDefault(); 
+      e.preventDefault();
       
       const checked = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
-        .filter(cb => cb.dataset.en) 
+        .filter(cb => cb.dataset.en || cb.dataset.val)
         .map(cb => {
            let label = cb.parentElement.textContent.trim();
            if(label.includes('/')) label = label.split('/')[0].trim();
-           return { label: label, tag: cb.dataset.en };
+           return { label, tag: cb.dataset.en || cb.dataset.val };
         });
 
       if (checked.length === 0) {
@@ -63,37 +74,25 @@
           <span id="search-menu-close" style="cursor:pointer; font-size:1.5em; padding:0 10px; color:#999;">&times;</span>
         </div>
       `;
-      
+
       const list = document.createElement('div');
       checked.forEach(item => {
         const itemBtn = document.createElement('div');
-        itemBtn.textContent = `${item.label}`;
+        itemBtn.textContent = item.label;
         itemBtn.style.cssText = `
-          padding: 12px 10px;
+          padding: 10px;
           cursor: pointer;
           border-bottom: 1px solid #f0f0f0;
-          font-size: 1em;
+          font-size: 0.95em;
           color: #007bff;
-          display: flex;
-          align-items: center;
         `;
-        const icon = document.createElement('span');
-        icon.textContent = "🔎 ";
-        icon.style.marginRight = "8px";
-        itemBtn.prepend(icon);
-
-        itemBtn.onmouseover = () => itemBtn.style.background = "#f0f8ff";
-        itemBtn.onmouseout = () => itemBtn.style.background = "transparent";
-        
         itemBtn.onclick = () => {
-          const query = encodeURIComponent(`${item.tag} anime art`);
-          window.open(`https://www.google.com/search?tbm=isch&q=${query}`, '_blank');
+          const q = encodeURIComponent(item.tag || item.label);
+          window.open("https://www.google.com/search?tbm=isch&q=" + q, "_blank");
         };
-        
         list.appendChild(itemBtn);
       });
       menu.appendChild(list);
-
       menu.querySelector('#search-menu-close').onclick = () => menu.style.display = "none";
       menu.style.display = "block";
     });
@@ -104,7 +103,7 @@
       }
     });
 
-    // コンテナに追加
+    // ✅ 生成ボタン群の中に追加！
     container.appendChild(btn);
   }
 
@@ -114,4 +113,3 @@
     setTimeout(createSearchButton, 500);
   }
 })();
-

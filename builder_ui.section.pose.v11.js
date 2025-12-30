@@ -8,8 +8,8 @@
     "🧺 手持ちアイテム・基本 (Holding Objects)": {
       "日用品・雑貨": [
         { ja: "物を持つ (基本)", en: "holding object" },
-        { ja: "物を抱きしめる", en: "hugging object" }, // ★追加
-        { ja: "枕を抱きしめる", en: "hugging pillow, pillow hug" }, // ★追加
+        { ja: "物を抱きしめる", en: "hugging object" },
+        { ja: "枕を抱きしめる", en: "hugging pillow, pillow hug" },
         { ja: "スマホを持つ", en: "holding phone, looking at phone" },
         { ja: "肩で電話を挟む", en: "cradling phone" },
         { ja: "本を持つ", en: "holding book, open book" },
@@ -22,6 +22,21 @@
         { ja: "帽子を持つ", en: "holding hat" },
         { ja: "外したメガネを持つ", en: "holding removed eyewear" },
         { ja: "脱いだ服を持つ", en: "holding unworn clothes" }
+      ]
+    },
+    "🎨 趣味・作品・道具 (Hobbies & Arts)": {
+      "作品・道具": [
+        { ja: "描かれた絵 (画用紙等)", en: "drawing, holding drawing" }, // ★追加
+        { ja: "子供の絵 (クレヨン画)", en: "child's drawing, crayon drawing" }, // ★追加
+        { ja: "絵筆/ペンを持つ", en: "holding paintbrush, holding pen" },
+        { ja: "パレットを持つ", en: "holding palette" },
+        { ja: "マイクを持つ", en: "holding microphone" },
+        { ja: "楽器を持つ", en: "holding instrument" },
+        { ja: "カメラを持つ", en: "holding camera" }
+      ],
+      "カード・嗜好": [
+        { ja: "カードを持つ", en: "holding card" },
+        { ja: "タバコを持つ", en: "holding cigarette" }
       ]
     },
     "🍔 飲食・食べ物 (Food & Drink)": {
@@ -39,21 +54,14 @@
         { ja: "お酒を持つ", en: "holding alcohol" }
       ]
     },
-    "🧸 趣味・動物 (Hobby & Animals)": {
+    "🧸 生き物・ぬいぐるみ (Animals & Plush)": {
       "自然・生物": [
         { ja: "動物を抱く", en: "holding animal, hugging animal" },
-        { ja: "動物を撫でる", en: "petting animal, stroking animal" }, // ★追加
+        { ja: "動物を撫でる", en: "petting animal, stroking animal" },
         { ja: "ぬいぐるみを抱く", en: "holding stuffed toy" },
         { ja: "花を持つ", en: "holding flower" },
         { ja: "花束を持つ", en: "holding bouquet" },
         { ja: "じょうろを持つ", en: "holding watering can" }
-      ],
-      "エンタメ": [
-        { ja: "マイクを持つ", en: "holding microphone" },
-        { ja: "楽器を持つ", en: "holding instrument" },
-        { ja: "カメラを持つ", en: "holding camera" },
-        { ja: "カードを持つ", en: "holding card" },
-        { ja: "タバコを持つ", en: "holding cigarette" }
       ]
     }
   };

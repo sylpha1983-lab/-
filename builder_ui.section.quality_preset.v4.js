@@ -65,7 +65,11 @@
     const content = document.createElement("div"); content.className = "qp-content-grid"; 
     items.forEach(item => { 
       const label = document.createElement("label"); const cb = document.createElement("input"); 
-      cb.type = "checkbox"; cb.dataset.val = item.val || item.en; 
+      cb.type = "checkbox"; cb.dataset.val = item.val || item.en;
+ cb.addEventListener("change", () => {
+  if (window.__VISUAL_SYNC?.updateSelectedList)
+    window.__VISUAL_SYNC.updateSelectedList();
+});
       label.appendChild(cb); label.appendChild(document.createTextNode(item.label || `${item.ja}/${item.en}`)); 
       content.appendChild(label); 
     }); 

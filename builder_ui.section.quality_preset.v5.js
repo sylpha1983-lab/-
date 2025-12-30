@@ -24,7 +24,11 @@
       const label = document.createElement("label"); 
       const cb = document.createElement("input"); 
       cb.type = "checkbox"; 
-      cb.dataset.val = item.val || item.en; 
+      cb.dataset.val = item.val || item.en;
+cb.addEventListener("change", () => {
+  if (window.__VISUAL_SYNC?.updateSelectedList)
+    window.__VISUAL_SYNC.updateSelectedList();
+}); 
       label.appendChild(cb); 
       label.appendChild(document.createTextNode(item.label || `${item.ja}/${item.en}`)); 
       if(item.links) cb.dataset.links = item.links.join(","); 

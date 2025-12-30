@@ -8,7 +8,8 @@
     "👀 視線・見る方向 (Eye Gaze & Looking)": {
       "カメラ・視聴者": [
         { ja: "カメラ目線 (基本)", en: "looking at viewer" },
-        { ja: "じっと見つめる (凝視)", en: "staring, staring at viewer" }, // ★追加
+        { ja: "じっと見つめる (凝視)", en: "staring, staring at viewer" },
+        { ja: "睨む (Glaring)", en: "glaring, angry eyes" }, // ★追加
         { ja: "振り返って見る", en: "looking back" },
         { ja: "前を見る", en: "looking ahead" }
       ],

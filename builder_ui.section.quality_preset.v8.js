@@ -84,7 +84,11 @@
       const label = document.createElement("label"); 
       label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer;";
       const cb = document.createElement("input"); 
-      cb.type = "checkbox"; cb.style.marginRight = "6px"; cb.dataset.val = item.en; 
+      cb.type = "checkbox"; cb.style.marginRight = "6px"; cb.dataset.val = item.en;
+ cb.addEventListener("change", () => {
+  if (window.__VISUAL_SYNC?.updateSelectedList)
+    window.__VISUAL_SYNC.updateSelectedList();
+});
       label.appendChild(cb); label.appendChild(document.createTextNode(item.ja)); label.title = item.en;
       content.appendChild(label); 
     }); 

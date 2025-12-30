@@ -3,6 +3,7 @@
   const VERSION = 2;
   const KEY = "style";
 
+  // --- ここから下の STYLE_DATA / DICT は一切削らず原文そのまま ---
   const STYLE_DATA = {
     "🖌️ アナログ画材・描画技法 (Traditional Media)": [
       { ja: "色鉛筆画", en: "colored pencil drawing, hatching, soft colors" },
@@ -67,19 +68,28 @@
     "knitted texture": "ニット風", "needle felt": "フェルト風", "claymation": "クレイアニメ風",
     "porcelain": "陶磁器風", "kintsugi": "金継ぎ", "latte art": "ラテアート", "ice sculpture": "氷彫刻"
   };
+  // --- 原文ここまで ---
+
+  function resolveRoot(container){
+    return container || document.querySelector("#list-style");
+  }
 
   const API = {
     initUI(container) {
       if (window.__outputTranslation) window.__outputTranslation.register(DICT);
-      
-      const root = document.querySelector("#list-style");
+
+      const root = resolveRoot(container);
       if (!root) return;
+
+      // ✅ 二重マウント防止（ログ爆増・DOM増殖を止める）
+      if (root.dataset && root.dataset.styleV2Mounted === "1") return;
+      if (root.dataset) root.dataset.styleV2Mounted = "1";
 
       const createSub = (title, items) => {
         const details = document.createElement("details");
         details.className = "style-cat";
         details.style.cssText = "margin-bottom:6px; border:1px solid #b197fc; border-radius:4px; background:#fff;";
-        details.open = false; 
+        details.open = false;
 
         const summary = document.createElement("summary");
         summary.innerHTML = `${title} <span style="font-size:0.8em; color:#6741d9;">(Classic)</span>`;
@@ -92,51 +102,59 @@
         items.forEach(item => {
           const label = document.createElement("label");
           label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer;";
+
           const cb = document.createElement("input");
           cb.type = "checkbox";
           cb.style.marginRight = "6px";
+
+          // ✅ 既存互換を壊さず、今後の翻訳・同期に強い属性を追加
           cb.dataset.val = item.en;
+          cb.dataset.en  = item.en;
+          cb.dataset.ja  = item.ja;
+
           label.appendChild(cb);
           label.appendChild(document.createTextNode(item.ja));
           label.title = item.en;
           content.appendChild(label);
         });
+
         details.appendChild(content);
         return details;
       };
 
-      const sectionContent = root.querySelector(".section-content") || (() => {
-        const d = document.createElement("div"); d.className="section-content"; root.appendChild(d); return d;
+      // ✅ core と衝突しやすい ".section-content" は使わない（芽を摘む）
+      //    style v1修正版と同じ ".style-section-content" を共有する
+      const styleHost = root.querySelector(".style-section-content") || (() => {
+        const d = document.createElement("div");
+        d.className = "style-section-content";
+        root.appendChild(d);
+        return d;
       })();
 
+      // ✅ v2が生成した範囲を囲う（将来 getTags を分離しやすい）
+      const v2Container = document.createElement("div");
+      v2Container.className = "style-v2-container";
+      styleHost.appendChild(v2Container);
+
       Object.entries(STYLE_DATA).forEach(([key, val]) => {
-        sectionContent.appendChild(createSub(key, val));
+        v2Container.appendChild(createSub(key, val));
       });
     },
+
     getTags() {
       const tags = [];
-      const root = document.querySelector(".style-v2-container"); 
-      // Note: v1とv2で同じ親(#list-style)を使うため、
-      // 厳密に自分のタグだけ取得するには、dataset.valを持つ全inputから
-      // このファイルの辞書にあるものを照合するか、
-      // あるいは単に「#list-style内の全チェック」をCoreに任せる手もありますが、
-      // ここではCoreが重複排除するので「#list-style」内の全チェックを返すのが安全です。
-      // ただしv1と競合しないよう、ここではあえて「何もしない」か、
-      // 自身の生成したDOMを特定クラスで囲うのがベストです。
-      // 今回はDOM生成時にクラスを付けていないため、汎用的に取得します。
-      
-      // 修正: 自身の管理下にある要素を特定しやすくするため、
-      // initUI内でコンテナにクラスをつけるか、
-      // シンプルに「#list-style」以下の全チェックボックスを返す実装にします。
-      // (重複はCoreが弾きます)
       const parent = document.querySelector("#list-style");
-      if(parent){
-        parent.querySelectorAll("input[type='checkbox']:checked").forEach(cb => {
-           if(cb.dataset.val) tags.push(cb.dataset.val);
-        });
-      }
+      if (!parent) return tags;
+
+      // ✅ v2が作った範囲だけ拾う（将来の合算方式でも安全）
+      const box = parent.querySelector(".style-v2-container");
+      if (!box) return tags;
+
+      box.querySelectorAll("input[type='checkbox']:checked").forEach(cb => {
+        if (cb.dataset && cb.dataset.val) tags.push(cb.dataset.val);
+      });
       return tags;
-    } 
+    }
   };
 
   window.__registerPromptPart(KEY, VERSION, API);

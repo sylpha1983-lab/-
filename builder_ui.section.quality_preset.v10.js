@@ -1,74 +1,116 @@
 (function(){
   "use strict";
-  const VERSION = 10; // R-18専用
+  const VERSION = 10; // R-18専用 (Fixed & Lightweight v3)
   const KEY = "quality_preset";
   const IS_UNLOCKED = localStorage.getItem("MY_SECRET_UNLOCK") === "true";
 
-  // R-18 統合データ
+  // =============================================================================
+  // 🔞 R-18 統合プリセットデータ (UI Definition)
+  // ※ 翻訳データは builder_data.translation.v1.js に移動済み
+  // =============================================================================
   const R18_FULL_DATA = {
     "⚠️ NSFWフラグ・基本 (Flags)": [
       { label: "NSFW (基本)", val: "nsfw, (uncensored)" },
       { label: "R-18 (卑猥)", val: "r-18, (lewd), (erotic), (sexual)" },
-      { label: "ヌード許可", val: "nude, naked, (nipples), (pussy)" },
-      { label: "体液・汚れ", val: "(sweat), (wet skin), (saliva), (cum), (sticky texture)" }
+      { label: "ヌード許可", val: "nude, naked, (nipples), (pussy), (no clothes)" },
+      { label: "体液・汚れ", val: "(sweat), (wet skin), (saliva), (cum), (sticky texture), (messy body)" },
+      { label: "高画質R-18補正", val: "(masterpiece:1.3), (best quality:1.3), (ultra high resolution:1.3), (intricate details:1.3), (realistic textures:1.2), (extremely detailed skin:1.3), (cinematic lighting:1.2), (depth of field:1.1)" }
     ],
     "⚡ 濃厚・Hシチュエーション (Induction)": [
       { label: "⚡ 濃厚セックスセット", val: "nsfw, (uncensored), r-18, (lewd), (sexual), (1boy), (1girl), (heterosexual), (sex), (intimate), (couple), (sweat), (hardcore), (vaginal sex:1.3)", desc: "これをONにしてポーズを選ぶだけで完璧なHシーンに" },
       { label: "⚡ 激しい動き・エフェクト", val: "(hips moving rhythmically), (fully thrusting), (fast motion), (afterimage of hips), (piston motion), (shaking hips), (foggy breath trails), (smeared heart-shaped breath patches), (erotic moan text floating), (heart particles:1.3), (pink atmosphere)" },
-      { label: "中出し (Creampie)", val: "(cum inside), (creampie), (overflowing cum)" },
-      { label: "断面図 (X-Ray)", val: "(cross-section), (x-ray), (internal view)" }
+      { label: "中出し (Creampie)", val: "(cum inside), (creampie), (overflowing cum), (filling womb), (semen gushing deep inside)" },
+      { label: "断面図 (X-Ray)", val: "(cross-section), (x-ray), (internal view), (cervix penetration), (womb marking), (glowing womb)" }
     ],
-    "👫 男女・ノーマル (Boy & Girl)": [
-      { label: "男女・基本セット", val: "(1boy), (1girl), (heterosexual), (male focus), (female focus), (sex), (intimate), (couple)" },
+    "🐙 触手・スライム (Tentacles & Slime)": [
+      { label: "触手基本セット", val: "(tentacles), (slime), (mucus), (living tentacles), (bioluminescent), (thick tentacle), (slimy texture), (wriggling)" },
+      { label: "生体スーツ・モノキニ", val: "(living monokini), (tentacle suit), (slime bodysuit), (pulsing texture), (fused with skin), (translucent slime), (jelly fabric), (glowing seams), (clinging tightly)" },
+      { label: "スライム拘束・責め", val: "(slime suit attack), (slime groping breasts), (slime sucking nipples), (arms locked behind back), (bound by slime), (unable to resist)" },
+      { label: "体内侵入・寄生", val: "(tentacles invade mouth), (deep throat), (stomach bulge), (internal view), (parasite), (eggs), (impregnation), (tentacles invade deep within her body cavity)" },
+      { label: "触手搾乳", val: "(tentacle milking), (suction cups), (breast milking), (nipple stimulation), (milking devices), (petal-shaped tentacle motifs), (squeezing breasts)" }
+    ],
+    "🧘 体位・基本48手 (Positions)": [
+      { label: "正常位 (Missionary)", val: "(missionary position), (lying on back), (legs spread), (looking at viewer), (holding hands), (loving sex)" },
+      { label: "騎乗位 (Cowgirl)", val: "(cowgirl position), (straddling), (sitting on lap), (bouncing breasts), (looking down), (dominant female)" },
+      { label: "背面騎乗位 (Reverse Cowgirl)", val: "(reverse cowgirl position), (showing ass), (back to viewer), (arched back), (looking back)" },
+      { label: "バック (Doggystyle)", val: "(doggystyle), (on all fours), (from behind), (grabbing hips), (ass focus), (deep penetration), (curved silhouette)" },
+      { label: "対面座位 (Mating Press)", val: "(mating press), (legs on shoulders), (deepest penetration), (folded body), (intense eye contact)" },
+      { label: "駅弁 (Standing)", val: "(standing sex), (lifted up), (carrying), (legs wrapped around waist), (against wall)" },
+      { label: "側位 (Spoon)", val: "(spooning sex), (lying on side), (hugging from behind), (gentle sex), (intimate)" },
+      { label: "屈曲位 (Prone Bone)", val: "(prone bone), (lying on stomach), (hips raised), (face in pillow), (helpless)" },
+      { label: "M字開脚", val: "(m-shaped posture), (legs spread wide), (knees raised), (presenting), (open legs)" }
+    ],
+    "👅 奉仕・ご奉仕 (Service)": [
+      { label: "フェラチオ", val: "(fellatio), (blowjob), (sucking penis), (cheeks hollowed), (looking up), (bobbing head)" },
+      { label: "パイズリ", val: "(paizuri), (titfuck), (sandwiching penis), (breasts squished), (cleavage), (looking at penis)" },
+      { label: "手コキ", val: "(handjob), (stroking), (jerking off), (saliva lubrication), (glans focus)" },
+      { label: "イラマチオ", val: "(irrumatio), (deep throat), (face fuck), (gagging), (tears), (choking), (grabbed by hair)" },
+      { label: "69 (シックスナイン)", val: "(69 position), (simultaneous oral), (mutual pleasure), (top view)" },
+      { label: "足コキ", val: "(footjob), (soles), (toes), (rubbing with feet), (trampling), (looking down)" },
+      { label: "クンニ", val: "(cunnilingus), (licking pussy), (tongue), (spread legs), (pleasure face)" }
+    ],
+    "👗 着衣プレイ・チラリズム (Clothed Sex)": [
+      { label: "たくし上げ (Lifted)", val: "(skirt lifted), (clothes lifted), (exposing panties), (access to crotch), (hiding face)" },
+      { label: "ずらし (Pulled Aside)", val: "(panties pulled aside), (crotchless panties), (fingering through clothes), (quickie)" },
+      { label: "半脱ぎ (Half-off)", val: "(clothes half removed), (bra pulled down), (shoulders bare), (disheveled), (messy clothes)" },
+      { label: "着衣セックス", val: "(clothed sex), (sex with clothes on), (school uniform), (public indecency), (hastily)" }
+    ],
+    "👫 男女・シチュエーション (Relations)": [
       { label: "純愛・見つめ合い", val: "(1boy), (1girl), (missionary position), (sex), (locking eyes), (loving sex), (blushing), (intertwined fingers), (kissing), (romantic)" },
-      { label: "激しいセックス", val: "(1boy), (1girl), (doggystyle), (intense sex), (sweat), (messy hair), (breasts bouncing), (grabbing hips), (climax), (hardcore)" },
       { label: "体格差・巨根", val: "(1boy), (1girl), (size difference), (height difference), (giant penis), (small girl), (stretching), (bulge), (masculine male)" },
-      { label: "対面座位・密着", val: "(1boy), (1girl), (mating press), (legs on shoulders), (deepest penetration), (eye contact), (womb marking), (internal view)" }
+      { label: "寝取られ (NTR)", val: "(ntr), (cheating), (cuckold), (watching from closet), (video call), (crying), (forced smile)" }
     ],
     "🍆 挿入・ピストン (Insertion)": [
-      { label: "結合部アップ", val: "(penetration clearly visible:1.3), (connection point), (inserting), (glans inside)" },
-      { label: "激しいピストン", val: "(fast piston motion), (blur), (afterimage), (intense sex)" },
-      { label: "最奥突き", val: "(cervix penetration), (womb marking), (deepest part)" },
-      { label: "腰ガッチリ・密着", val: "(his hands gripping her hips firmly), (keeping her pressed), (tight grip), (skin indentation), (no escape)" },
-      { label: "クリ責め", val: "(clitoris stimulation), (rubbing clit), (fingering)" },
-      { label: "溢れる愛液・結合", val: "(crotch overflowing with fluids), (inner thighs wet and glistening), (semen dripping), (juicy), (wet sounds)" }
+      { label: "結合部アップ", val: "(penetration clearly visible:1.3), (connection point), (inserting), (glans inside), (close up)" },
+      { label: "激しいピストン", val: "(fast piston motion), (blur), (afterimage), (intense sex), (clapping sounds)" },
+      { label: "最奥突き", val: "(cervix penetration), (womb marking), (deepest part), (stomach bulge)" },
+      { label: "クリ責め", val: "(clitoris stimulation), (rubbing clit), (fingering), (pearl)" },
+      { label: "ダブルピース・アヘ顔", val: "(double peace sign), (ahegao), (rolling eyes), (tongue out), (mind break), (drooling)" }
     ],
     "🤪 R-18 表情・精神 (Expressions)": [
-      { label: "あへ顔", val: "(ahegao), (rolling eyes), (tongue out), (drooling)" },
-      { label: "ハート目", val: "(heart-shaped pupils), (pink eyes), (infatuated)" },
-      { label: "快楽堕ち", val: "(mind break), (empty eyes), (pleasure face), (blush)" },
-      { label: "涙目・懇願", val: "(tears), (crying), (begging), (humiliation)" },
-      { label: "絶頂・震え", val: "(orgasm), (girl trembling in climax:1.5), (shaking), (arched back), (toes curling), (spasms)" }
+      { label: "あへ顔", val: "(ahegao:1.3), (rolling eyes), (tongue out), (drooling), (v-shaped eyebrows)" },
+      { label: "ハート目", val: "(heart-shaped pupils), (pink eyes), (infatuated), (love struck)" },
+      { label: "虚ろ目・レイプ目", val: "(vacant eyes), (empty eyes), (no pupil highlights), (glassy eyes), (mind break), (broken expression)" },
+      { label: "快楽堕ち", val: "(pleasure face), (blush), (slobber), (euphoric tears), (ecstatic expression)" },
+      { label: "涙目・懇願", val: "(tears), (crying), (begging), (humiliation), (flushed face), (desperate moan)" },
+      { label: "絶頂・震え", val: "(orgasm), (girl trembling in climax:1.5), (shaking), (arched back), (toes curling), (spasms), (body control)" }
     ],
     "💦 演出・液体 (Fluids)": [
-      { label: "大量射精", val: "(copious cum), (cumshot), (splashing cum), (cum everywhere)" },
-      { label: "顔射", val: "(cum on face), (bukkake), (sticky face)" },
-      { label: "潮吹き", val: "(squirting), (gushing liquid), (wet sheets)" },
-      { label: "精液溜まり", val: "(cum pool), (puddle of cum), (messy bed)" },
+      { label: "大量射精", val: "(copious cum), (cumshot), (splashing cum), (cum everywhere), (cum explosion)" },
+      { label: "顔射", val: "(cum on face), (bukkake), (sticky face), (eye closed)" },
+      { label: "潮吹き", val: "(squirting), (gushing liquid), (wet sheets), (fountain), (pussy juice splash)" },
+      { label: "精液溜まり", val: "(cum pool), (puddle of cum), (messy bed), (sheets covered in fluids)" },
       { label: "吐息・ハート", val: "(foggy breath trails), (smeared heart-shaped breath patches), (erotic moan text floating), (heart particles:1.3), (pink atmosphere)" },
       { label: "粘液・融合", val: "(wet mucus fuses with her body), (slime coating skin), (oily sheen), (translucent slime), (dripping)" }
     ],
     "🪟 硝子・密着 (Glass)": [
-      { label: "窓ガラス押し付け", val: "(pressed against glass), (window view), (flattened breasts)" },
-      { label: "ガラス越し視点", val: "(view through glass), (fogged glass), (hand print on glass)" },
-      { label: "ガラス押し付け・背面", val: "(viewed from the front through fogged glass panel), (girl in doggystyle position), (breasts pressed and flattened against the glass), (nipples clearly visible through pressure), (moisture trails on glass), (steam)" }
+      { label: "窓ガラス押し付け", val: "(pressed against glass:1.3), (window view), (flattened breasts), (breath on glass), (face smeared across surface)" },
+      { label: "ガラス越し視点", val: "(view through glass), (fogged glass), (hand print on glass), (voyeur), (moisture trails on glass)" },
+      { label: "ガラス押し付け・背面", val: "(viewed from the front through fogged glass panel), (girl in doggystyle position), (breasts pressed and flattened against the glass), (nipples clearly visible through pressure), (steam)" }
     ],
     "🕰️ R-18 ストーリー (Time)": [
       { label: "脱衣・恥じらい", val: "(undressing), (clothes half off), (panties down), (covering body), (shy), (blushing), (looking away)" },
-      { label: "事後・余韻", val: "(after sex), (messy hair), (lying on bed), (exhausted), (heavy breathing), (cum on sheets), (disheveled), (peaceful face)" },
+      { label: "事後・余韻", val: "(after sex), (messy hair), (lying on bed), (exhausted), (heavy breathing), (cum on sheets), (disheveled), (peaceful face), (cuddle)" },
       { label: "朝チュン", val: "(morning after), (waking up), (naked in bed), (messy room), (sunlight), (hickey), (memory of last night), (kissing)" }
     ],
     "🧸 玩具・責め (Toys)": [
-      { label: "バイブ", val: "(vibrator), (dildo), (sex toy)" },
-      { label: "ローター", val: "(pink rotor), (wired toy)" },
+      { label: "バイブ", val: "(vibrator), (dildo), (sex toy), (insertion)" },
+      { label: "ローター", val: "(pink rotor), (wired toy), (remote control)" },
       { label: "口内責め", val: "(tentacles invade deep within her mouth), (mouth gaping), (tongue extended), (throat fucking), (saliva splattering), (choking)" },
       { label: "触手搾乳", val: "(tentacle milking), (breast fondling), (nipple stimulation), (lactation), (squeezing breasts)" }
     ],
     "🏩 H-ロケーション (Locations)": [
-      { label: "ラブホテル", val: "(love hotel), (mirror room), (neon lights), (fancy bed)" },
-      { label: "お風呂・温泉", val: "(bathroom), (onsen), (steam), (wet body), (tiled wall)" },
+      { label: "ラブホテル", val: "(love hotel), (mirror room), (neon lights), (fancy bed), (pillows)" },
+      { label: "お風呂・温泉", val: "(bathroom), (onsen), (steam), (wet body), (tiled wall), (soap)" },
       { label: "マジックミラー号", val: "(magic mirror truck), (vehicle interior), (city street outside window), (exposed to public), (voyeurism)" },
-      { label: "公衆トイレ", val: "(public toilet stall), (cramped), (sitting on toilet), (pants down), (graffiti), (dirty tiles), (secret sex)" }
+      { label: "公衆トイレ", val: "(public toilet stall), (cramped), (sitting on toilet), (pants down), (graffiti), (dirty tiles), (secret sex)" },
+      { label: "スライムの巣", val: "(slime nest), (gloomy hall), (dimly lit), (covered in slime), (sticky floor)" }
+    ],
+    "🌳 野外・露出 (Outdoor)": [
+      { label: "野外露出", val: "(outdoor sex), (public nudity), (exposure), (shame), (risk of being seen)" },
+      { label: "公園", val: "(public park), (bench), (night park), (bushes), (street lamp)" },
+      { label: "路地裏", val: "(back alley), (trash cans), (dark), (wall press), (dirty)" },
+      { label: "森の中", val: "(forest), (nature), (grass), (leaves), (secluded)" }
     ],
     "🏫 学園・背徳 (School)": [
       { label: "体育倉庫", val: "(gym storage room), (sweat), (sportswear), (bloomers), (ball cart), (dusty), (after school)" },
@@ -77,7 +119,7 @@
     ],
     "👯 乱交・複数 (Group)": [
       { label: "3P (2男1女)", val: "(threesome), (2boys), (1girl), (sandwich)" },
-      { label: "輪姦・ギャングバング", val: "(gangbang), (multiple boys), (group sex)" },
+      { label: "輪姦・ギャングバング", val: "(gangbang), (multiple boys), (group sex), (bukkake)" },
       { label: "おじさん・醜男", val: "(ugly bastard), (fat man), (sweaty), (grinning), (ntr), (corruption), (forced)" },
       { label: "異種姦パーティ", val: "(monster gangbang), (orcs), (goblins), (slime), (tentacles), (breeding), (defeat)" }
     ],
@@ -99,38 +141,19 @@
     ]
   };
 
-  const R18_DICT = {
-    "trembling in climax": "絶頂で震える", "rough breathing": "荒い呼吸", "ecstatic sighs": "恍惚の溜息",
-    "wet mucus fuses with her body": "粘液が体と融合", "slime coating skin": "スライムが肌を覆う", "oily sheen": "油膜の光沢",
-    "translucent slime": "半透明のスライム", "clothes dissolving": "服が溶ける", "mouth gaping": "口を大きく開ける",
-    "throat fucking": "イラマチオ", "tentacle milking": "触手搾乳", "breast fondling": "胸愛撫",
-    "hypnotic heart eyes": "催眠ハート目", "pink rings fading into pupils": "瞳に溶けるピンクの輪", "vacant smile": "虚ろな笑み",
-    "euphoric tears": "歓喜の涙", "semen gushing deep inside her": "奥深くに注がれる精液", "crotch visibly overflowing": "股間から溢れ出る",
-    "fluid streaking down her trembling thighs": "震える太ももを伝う愛液", "foggy breath trails": "白い吐息の跡",
-    "smeared heart-shaped breath patches": "曇ったガラスにハート", "womb symbol glowing softly through skin": "肌に浮かぶ子宮紋",
-    "breasts pressed and flattened against the glass": "ガラスに押し付けられた胸", "nipples clearly visible through pressure": "圧迫された乳首",
-    "face pressed against glass": "顔面プレス", "penetration clearly visible": "結合部がはっきり見える",
-    "connection point": "結合部", "inserting": "挿入中", "glans inside": "中にある亀頭", "hips moving rhythmically": "リズミカルに動く腰",
-    "fully thrusting": "根元まで突き入れる", "fast motion": "高速ピストン", "afterimage of hips": "腰の残像", "piston motion": "ピストン運動",
-    "shaking hips": "震える腰", "his hands gripping her hips firmly": "腰を強く掴む", "keeping her pressed": "押し付け続ける",
-    "semen dripping": "精液が垂れる", "juicy": "ジューシー", "wet sounds": "水音", "fully thrusting from behind": "背後から激しく突く",
-    "demon lord bedroom": "魔王の寝室", "luxurious dark bed": "豪華な闇のベッド", "canopy": "天蓋", "harem": "ハーレム",
-    "grabbing hips": "腰を掴む", "climax": "絶頂", "hardcore": "ハードコア", "vaginal sex": "膣セックス", "orgasm": "オーガズム",
-    "girl trembling in climax": "絶頂で震える少女", "shaking": "震え", "arched back": "背中を反らす", "toes curling": "足の指が縮こまる",
-    "spasms": "痙攣", "trance": "トランス状態", "pleasure": "快楽", "erotic moan text floating": "浮かぶエッチな喘ぎ文字",
-    "heart particles": "ハートの粒子", "pink atmosphere": "ピンクの雰囲気"
-  };
-
   const API = {
     initUI(container) {
       if (!IS_UNLOCKED) return;
-      if (window.__outputTranslation) window.__outputTranslation.register(R18_DICT);
+      // ★ 辞書登録処理は builder_data.translation.v1.js に委任したため削除
 
       const mount = () => {
         const root = document.getElementById("qp-root-container");
         if(!root || !window.__QP_UTILS) { setTimeout(mount, 50); return; }
         
-        // R-18セクション作成
+        // 既存のR-18セクションがあれば削除（重複防止）
+        const old = document.getElementById("qp-r18-category");
+        if(old) old.remove();
+
         const secR18 = window.__QP_UTILS.createMainSection("qp-r18-category", "🔞 R-18・H設定 (Adult Settings)", { 
           sumBg: "#fff0f0", sumColor: "#d00", className: "qp-r18-root" 
         });
@@ -141,7 +164,7 @@
           conR18.appendChild(window.__QP_UTILS.createSubAccordion(title, items, "secret"));
         });
 
-        // 戦闘アクション(qp-combat)の前に追加
+        // 戦闘アクション(qp-combat)の前、なければ末尾に追加
         const combat = document.getElementById("qp-combat");
         if(combat) root.insertBefore(secR18, combat);
         else root.appendChild(secR18);
@@ -152,3 +175,4 @@
   };
   window.__registerPromptPart(KEY, VERSION, API);
 })();
+
