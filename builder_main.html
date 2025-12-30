@@ -323,7 +323,25 @@
       border-color: var(--primary-color);
       box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
     }
-  </style>
+  
+/* --- Log fullscreen toggle --- */
+#log-wrapper.fullscreen{
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 99999 !important;
+  background: #fff !important;
+  padding: 10px !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+#log-wrapper.fullscreen #log{
+  height: calc(100vh - 80px) !important;
+  max-height: none !important;
+}
+body.log-fullscreen{
+  overflow: hidden !important;
+}
+</style>
 </head>
 <body>
 
@@ -344,7 +362,7 @@
         </div>
         <div style="font-size: 0.85em;">
           <label><input type="checkbox" id="auto-scroll" checked> ログ自動スクロール</label>
-          <button onclick="location.reload()" class="reload-btn">再読込</button>
+          <button type="button" id="log-expand" class="reload-btn">拡大</button><button type="button" id="log-shrink" class="reload-btn" style="display:none;">縮小</button><button onclick="location.reload()" class="reload-btn">再読込</button>
         </div>
       </div>
       <div id="log" aria-hidden="true">Initializing...</div>
@@ -398,6 +416,38 @@
     
     function resetTags() { } 
   </script>
+
+<script>
+(function(){
+  const wrap = () => document.getElementById('log-wrapper');
+  const btnExpand = () => document.getElementById('log-expand');
+  const btnShrink = () => document.getElementById('log-shrink');
+  function setFull(on){
+    const w = wrap(); if(!w) return;
+    if(on){
+      w.classList.add('fullscreen');
+      document.body.classList.add('log-fullscreen');
+      if(btnExpand()) btnExpand().style.display='none';
+      if(btnShrink()) btnShrink().style.display='';
+      // keep scroll at bottom if auto-scroll is on
+      const as = document.getElementById('auto-scroll');
+      if(as && as.checked) w.querySelector('#log')?.scrollTo(0, 1e9);
+    }else{
+      w.classList.remove('fullscreen');
+      document.body.classList.remove('log-fullscreen');
+      if(btnExpand()) btnExpand().style.display='';
+      if(btnShrink()) btnShrink().style.display='none';
+    }
+  }
+  document.addEventListener('click', (e)=>{
+    if(e.target && e.target.id==='log-expand'){ e.preventDefault(); setFull(true); }
+    if(e.target && e.target.id==='log-shrink'){ e.preventDefault(); setFull(false); }
+  });
+  // ESC to shrink
+  document.addEventListener('keydown',(e)=>{ if(e.key==='Escape'){ setFull(false); } });
+})();
+</script>
+
 </body>
 </html>
 
