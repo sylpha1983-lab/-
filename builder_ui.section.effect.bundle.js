@@ -36,7 +36,19 @@
       { ja: "ブラー (ブレ)", en: "motion blur" }, { ja: "血しぶき", en: "blood splash" },
       { ja: "瓦礫", en: "debris" }, { ja: "ひび割れ", en: "cracked ground" }
     ]
-  };
+  
+    ,
+    "🤖 メカ設計・説得力 (Mechanical Credibility)": [
+      { ja: "機械設計感", en: "mechanical design" },
+      { ja: "工業デザイン感", en: "industrial design" },
+      { ja: "精密工学っぽさ", en: "precision engineering" },
+      { ja: "高精細ディテール", en: "high fidelity details" },
+      { ja: "製品化前提の完成度", en: "production-ready design" },
+      { ja: "機能優先デザイン", en: "functional design" },
+      { ja: "設計図っぽい正確さ", en: "orthographic design feel" },
+      { ja: "輪郭が読みやすい", en: "clean silhouette" }
+    ]
+};
 
   const API = {
     initUI(container) {
@@ -207,7 +219,19 @@
       { ja: "鬼火", en: "spirit flames" },
       { ja: "ウィスプ (光球)", en: "will-o'-the-wisp" }
     ]
-  };
+  
+    ,
+    "🤖 メカ設計・説得力 (Mechanical Credibility)": [
+      { ja: "機械設計感", en: "mechanical design" },
+      { ja: "工業デザイン感", en: "industrial design" },
+      { ja: "精密工学っぽさ", en: "precision engineering" },
+      { ja: "高精細ディテール", en: "high fidelity details" },
+      { ja: "製品化前提の完成度", en: "production-ready design" },
+      { ja: "機能優先デザイン", en: "functional design" },
+      { ja: "設計図っぽい正確さ", en: "orthographic design feel" },
+      { ja: "輪郭が読みやすい", en: "clean silhouette" }
+    ]
+};
 
   const API = {
     initUI(container) {
@@ -337,7 +361,19 @@
       { ja: "ポラロイド枠", en: "polaroid frame, instant photo border" },
       { ja: "スマホ画面越し", en: "view through smartphone, phone camera interface, rec button" }
     ]
-  };
+  
+    ,
+    "🤖 メカ設計・説得力 (Mechanical Credibility)": [
+      { ja: "機械設計感", en: "mechanical design" },
+      { ja: "工業デザイン感", en: "industrial design" },
+      { ja: "精密工学っぽさ", en: "precision engineering" },
+      { ja: "高精細ディテール", en: "high fidelity details" },
+      { ja: "製品化前提の完成度", en: "production-ready design" },
+      { ja: "機能優先デザイン", en: "functional design" },
+      { ja: "設計図っぽい正確さ", en: "orthographic design feel" },
+      { ja: "輪郭が読みやすい", en: "clean silhouette" }
+    ]
+};
 
   const DICT = {
     // 配信・SNS系

@@ -5,9 +5,6 @@
 
   var KEY = "preset_packs";
   var VERSION = 1;
-  // Debug: add ?ppdebug=1 to URL or set window.DEBUG_PRESET_PACKS = true
-  var DEBUG = (typeof window !== "undefined" && window.DEBUG_PRESET_PACKS) ||
-              (typeof location !== "undefined" && /[?&]ppdebug=1(?:&|$)/.test(location.search || ""));
 
   function safeText(v) {
     return (v === null || v === undefined) ? "" : String(v);
@@ -90,7 +87,8 @@
     var subJa = safeText(it.subtitle_ja || it.desc_ja || it.sub_ja || it.desc || "");
     var subEn = safeText(it.subtitle_en || it.desc_en || it.sub_en || "");
     var tags = ensureArray(it.tags || it.values || it.val || it.prompt || []);
-    return { id: id, titleJa: titleJa, titleEn: titleEn, subJa: subJa, subEn: subEn, tags: tags };
+    var isHeader = !!(it && (it.type === "header" || it.is_header === true || it.header === true));
+    return { id: id, titleJa: titleJa, titleEn: titleEn, subJa: subJa, subEn: subEn, tags: tags, isHeader: isHeader };
   }
 
   function buildGroupUI(group) {
@@ -103,7 +101,7 @@
 
     var summary = document.createElement("summary");
     summary.style.cssText =
-      "cursor:pointer; padding:12px 12px; user-select:none;" +
+      "list-style:none; cursor:pointer; padding:12px 12px; user-select:none;" +
       "display:flex; align-items:center; justify-content:space-between;" +
       "background:rgba(0,0,0,0.03); font-weight:700; color:#222;";
 
@@ -145,11 +143,70 @@
 
     var content = document.createElement("div");
     content.className = "preset-pack-items";
-    content.style.cssText =
-      "padding:12px; display:grid; grid-template-columns:repeat(2, 1fr); gap:10px;";
+
+    // If items include header separators, render as nested collapsible blocks
+    var hasHeaders = false;
+    for (var hi = 0; hi < group.items.length; hi++) {
+      var it0 = normalizeItem(group.items[hi]);
+      if (it0.isHeader) { hasHeaders = true; break; }
+    }
+
+    if (!hasHeaders) {
+      content.style.cssText =
+        "padding:12px; display:grid; grid-template-columns:repeat(2, 1fr); gap:10px;";
+    } else {
+      content.style.cssText =
+        "padding:12px; display:flex; flex-direction:column; gap:10px;";
+    }
+
+    var currentGrid = null;
 
     for (var i = 0; i < group.items.length; i++) {
       var item = normalizeItem(group.items[i]);
+
+      // Header item (category separator) -> collapsible subsection
+      if (hasHeaders && item.isHeader) {
+        var sub = document.createElement("details");
+        sub.className = "preset-pack-subsection";
+        sub.open = false;
+        sub.style.cssText =
+          "border-radius:12px; border:1px solid rgba(0,0,0,0.10);" +
+          "background:rgba(255,255,255,0.98); overflow:hidden;";
+
+        var subSummary = document.createElement("summary");
+        subSummary.style.cssText =
+          "list-style:none; cursor:pointer; user-select:none;" +
+          "padding:10px 12px; font-weight:900; color:#222;" +
+          "background:rgba(0,0,0,0.04);" +
+          "display:flex; align-items:center; justify-content:space-between; gap:10px;";
+
+        var subLeft = document.createElement("div");
+        subLeft.style.cssText = "display:flex; align-items:center; gap:10px;";
+        subLeft.appendChild(document.createTextNode(item.titleJa));
+
+        var subRight = document.createElement("div");
+        subRight.appendChild(document.createTextNode("△ 開閉"));
+        subRight.style.cssText =
+          "font-size:0.82em; font-weight:800; color:rgba(0,0,0,0.45);" +
+          "padding:6px 10px; border-radius:999px; background:rgba(255,255,255,0.65);" +
+          "border:1px solid rgba(0,0,0,0.08);";
+
+        subSummary.appendChild(subLeft);
+        subSummary.appendChild(subRight);
+        subSummary.className = "preset-pack-subsummary";
+
+        var subWrap = document.createElement("div");
+        subWrap.style.cssText =
+          "padding:10px; display:grid; grid-template-columns:repeat(2, 1fr); gap:10px;";
+
+        sub.appendChild(subSummary);
+        sub.appendChild(subWrap);
+
+        content.appendChild(sub);
+
+        currentGrid = subWrap;
+        continue;
+      }
 
       var label = document.createElement("label");
       label.className = "preset-pack-card";
@@ -220,7 +277,8 @@
         };
       })(cb, label);
 
-      content.appendChild(label);
+      if (hasHeaders && currentGrid) { currentGrid.appendChild(label); } else { content.appendChild(label); }
+
     }
 
     details.appendChild(content);
@@ -228,9 +286,20 @@
   }
 
   var API = {
-    initUI: function (container) {
-      var parent = container || document.querySelector("#list-preset_packs");
+    initUI: function () {
+      var parent = document.querySelector("#list-preset_packs");
       if (!parent) return;
+
+      // Hide native details markers and unify toggle visuals (one-time)
+      if (!document.getElementById("pp-details-marker-style")) {
+        var st = document.createElement("style");
+        st.id = "pp-details-marker-style";
+        st.textContent =
+          "#list-preset_packs details > summary::-webkit-details-marker{display:none;}" +
+          "#list-preset_packs details > summary::marker{content:'';}" +
+          "#list-preset_packs summary{list-style:none;}" ;
+        document.head.appendChild(st);
+      }
 
       var mount = parent.querySelector(".section-content") || parent;
 
@@ -242,12 +311,6 @@
 
       var db = getDB();
       var groupsRaw = extractGroups(db);
-
-      if (DEBUG) {
-        try {
-          console.log("[PresetPacks] db=", db, "groupsRaw=", groupsRaw);
-        } catch (e0) {}
-      }
 
       if (!groupsRaw || groupsRaw.length === 0) {
         mount.appendChild(
@@ -302,20 +365,4 @@
       if (tries > 60) clearInterval(timer);
     }, 50);
   }
-
-  // If this bundle is loaded AFTER the first UI mount, the section can stay blank.
-  // To make it deterministic, re-trigger mount once when possible.
-  try {
-    setTimeout(function () {
-      var host = document.getElementById("list-preset_packs");
-      var hasUI = !!(host && host.querySelector && host.querySelector(".preset-packs-container"));
-
-      if (!hasUI && typeof window.__triggerUIMount === "function") {
-        if (DEBUG) {
-          try { console.log("[PresetPacks] late-load detected -> re-triggering mount"); } catch (e3) {}
-        }
-        window.__triggerUIMount();
-      }
-    }, 0);
-  } catch (e4) {}
 })();

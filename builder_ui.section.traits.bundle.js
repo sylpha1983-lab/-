@@ -48,7 +48,18 @@
       { ja: "タバコ", en: "cigarette" }
     ]
     // テーマカラーはAtmosphereへ移動済み
-  };
+  
+    ,
+    "🤖 メカ方向性 (Mecha Direction)": [
+      { ja: "メカ工学ノリ", en: "mecha engineering" },
+      { ja: "軍用ハード感", en: "military hardware" },
+      { ja: "航空宇宙っぽい部品感", en: "aerospace hardware" },
+      { ja: "ロボ工学感", en: "robotics" },
+      { ja: "産業機械感", en: "industrial machinery" },
+      { ja: "ディーゼルパンク機械", en: "dieselpunk machinery" },
+      { ja: "近未来テック", en: "near-future tech" }
+    ]
+};
 
   const API = {
     initUI(container) {

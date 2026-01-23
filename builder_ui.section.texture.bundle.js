@@ -9,6 +9,22 @@
   const VERSION = 1;
   const KEY = "texture";
 
+  // ✅ 表示順を固定（美しく並べる）
+  const CATEGORY_ORDER = [
+    "🧖‍♀️ 肌の質感 (Skin Texture)",
+    "👙 布・衣装の材質 (Fabric)",
+    "💦 液体・粘液 (Fluids & Slime)",
+    "🧱 硬質・環境素材 (Hard Surface)",
+    "🔍 微細ディテール (Micro Details)",
+
+    // 追加メカ系（ここにまとめる）
+    "🧱 素材・質感｜メカ形状言語 (Hard Surface Language)",
+    "🧱 素材・質感｜製造・加工痕 (Manufacturing Marks)",
+    "🧱 素材・質感｜ラベル・印字 (Labels & Markings)",
+    "🧱 素材・質感｜情報密度・摩耗 (Readable Detail & Wear)",
+    "⚙️ 構造・メカニズム｜駆動・骨格 (Structure & Mechanism)"
+  ];
+
   const CATEGORIES = {
     "🧖‍♀️ 肌の質感 (Skin Texture)": [
       { ja: "陶器のような肌 (つるつる)", en: "porcelain skin" },
@@ -71,6 +87,54 @@
       { ja: "刺繍 (ししゅう)", en: "embroidery" },
       { ja: "ステッチ (縫い目)", en: "stitches" },
       { ja: "埃 (ほこり)", en: "dust" }
+    ],
+
+    "🧱 素材・質感｜メカ形状言語 (Hard Surface Language)": [
+      { ja: "シャープエッジ", en: "sharp edges" },
+      { ja: "面取り (Chamfer)", en: "chamfered edges" },
+      { ja: "ベベル (角処理)", en: "beveled edges" },
+      { ja: "パネルライン", en: "panel lines" },
+      { ja: "装甲の重なり", en: "layered armor plates" },
+      { ja: "噛み合う外装", en: "interlocking panels" },
+      { ja: "精密な隙間 (公差)", en: "tight tolerances" },
+      { ja: "グリーブル (機械ゴチャ)", en: "greeble details" },
+      { ja: "キットバッシュ感", en: "kitbash look" }
+    ],
+    "🧱 素材・質感｜製造・加工痕 (Manufacturing Marks)": [
+      { ja: "ヘアライン金属", en: "brushed metal" },
+      { ja: "アルマイト (陽極酸化)", en: "anodized aluminum" },
+      { ja: "粉体塗装", en: "powder-coated metal" },
+      { ja: "マット金属", en: "matte metal" },
+      { ja: "切削部品", en: "machined parts" },
+      { ja: "CNC痕", en: "CNC machining marks" },
+      { ja: "溶接跡", en: "weld seams" },
+      { ja: "リベット/ボルト", en: "rivets and bolts" },
+      { ja: "焼け色/熱跡", en: "heat discoloration" },
+      { ja: "油汚れ", en: "oil stains" }
+    ],
+    "🧱 素材・質感｜ラベル・印字 (Labels & Markings)": [
+      { ja: "デカール", en: "decals" },
+      { ja: "注意ラベル", en: "warning labels" },
+      { ja: "シリアル印字", en: "serial numbers" },
+      { ja: "整備マーキング", en: "maintenance markings" }
+    ],
+    "🧱 素材・質感｜情報密度・摩耗 (Readable Detail & Wear)": [
+      { ja: "微細ディテール", en: "micro details" },
+      { ja: "表面の細部", en: "fine surface detail" },
+      { ja: "制御されたグリーブル", en: "controlled greebles" },
+      { ja: "エッジ摩耗", en: "edge wear" },
+      { ja: "浅い傷", en: "subtle scratches" }
+    ],
+    "⚙️ 構造・メカニズム｜駆動・骨格 (Structure & Mechanism)": [
+      { ja: "露出した関節", en: "exposed joints" },
+      { ja: "アクチュエータ (駆動部)", en: "actuators" },
+      { ja: "油圧ピストン", en: "hydraulic pistons" },
+      { ja: "サーボモーター", en: "servo motors" },
+      { ja: "ギア構造", en: "gear assemblies" },
+      { ja: "ヒンジ", en: "hinges" },
+      { ja: "ベアリングの収まり", en: "bearing housings" },
+      { ja: "補強フレーム", en: "reinforced frame" },
+      { ja: "荷重支持構造", en: "load-bearing structure" }
     ]
   };
 
@@ -78,24 +142,29 @@
     initUI(container) {
       const parent = document.querySelector("#list-texture") || container;
       parent.innerHTML = "";
-      
+
       const section = document.createElement("div");
       section.className = "texture-section";
-      
+
+      // 見出し
       const h = document.createElement("div");
       h.textContent = "🧶 素材・質感 (Material/Texture)";
       h.style.fontWeight = "bold";
-      h.style.color = "#556b2f"; 
+      h.style.color = "#556b2f";
       h.style.marginBottom = "8px";
       section.appendChild(h);
 
-      Object.entries(CATEGORIES).forEach(([cat, items]) => {
+      // ✅ ORDERに沿って描画
+      CATEGORY_ORDER.forEach((cat) => {
+        const items = CATEGORIES[cat];
+        if (!items || !items.length) return;
+
         const details = document.createElement("details");
-        details.open = false; 
+        details.open = false;
         details.style.marginBottom = "8px";
         details.style.border = "1px solid #e0e0d0";
         details.style.borderRadius = "4px";
-        
+
         const summary = document.createElement("summary");
         summary.textContent = cat;
         summary.style.cursor = "pointer";
@@ -121,12 +190,12 @@
           label.style.borderRadius = "4px";
           label.style.border = "1px solid #e0e0d0";
           label.style.cursor = "pointer";
-          
+
           const cb = document.createElement("input");
           cb.type = "checkbox";
           cb.dataset.en = item.en;
           cb.style.marginRight = "6px";
-          
+
           label.appendChild(cb);
           label.appendChild(document.createTextNode(item.ja));
           content.appendChild(label);
@@ -161,11 +230,11 @@
 (function(){
   "use strict";
 
-  const VERSION = 2; 
+  const VERSION = 2;
   const KEY = "texture";
   const IS_UNLOCKED = localStorage.getItem("MY_SECRET_UNLOCK") === "true";
 
-  // ✅ 通常表示：フェチ・質感拡張 (General Fetish & Texture)
+  // ✅ v2は「追加分」だけ。表示順も固定する
   const EXTENDED_CATEGORIES = {
     "👙 衣装・フェチ素材 (Fetish Fabric)": [
       { ja: "ラテックス (ゴム)", en: "latex" },
@@ -193,7 +262,11 @@
     ]
   };
 
-  // 🔞 シークレット表示：R-18 体液 (Adult Fluids)
+  const EXTENDED_ORDER = [
+    "👙 衣装・フェチ素材 (Fetish Fabric)",
+    "💧 液体・汗・オイル (Fluids & Sweat)"
+  ];
+
   const SECRET_CATEGORIES = {
     "🔞 R-18 液体・白濁 (Adult Fluids)": [
       { ja: "精液 (白濁液)", en: "cum, white fluid" },
@@ -206,26 +279,32 @@
     ]
   };
 
+  function hasCategoryAlready(sectionEl, catText) {
+    // 既に同じ summary があれば v2では追加しない（重複排除）
+    const summaries = sectionEl.querySelectorAll("summary");
+    for (const s of summaries) {
+      if ((s.textContent || "").trim() === catText.trim()) return true;
+    }
+    return false;
+  }
+
   const API = {
     initUI(container) {
-      const section = container.querySelector(".texture-section") || document.createElement("div");
-      if (!section.className) {
-        section.className = "texture-section";
-        const h = document.createElement("div");
-        h.textContent = "🧶 素材・質感 (Material/Texture)";
-        h.style.fontWeight = "bold"; h.style.color = "#556b2f"; h.style.marginBottom = "8px";
-        section.appendChild(h);
-        container.appendChild(section);
-      }
+      const section = container.querySelector(".texture-section");
+      if (!section) return; // v1が器を作る前提（安全）
 
-      // 通常カテゴリの表示
-      Object.entries(EXTENDED_CATEGORIES).forEach(([cat, items]) => {
+      // ✅ v2追加カテゴリを、指定順で「重複が無ければ」追加
+      EXTENDED_ORDER.forEach((cat) => {
+        const items = EXTENDED_CATEGORIES[cat];
+        if (!items || !items.length) return;
+        if (hasCategoryAlready(section, cat)) return;
+
         const details = document.createElement("details");
-        details.open = false; 
+        details.open = false;
         details.style.marginBottom = "8px";
-        details.style.border = "1px solid #e0e0d0"; // 通常色
+        details.style.border = "1px solid #e0e0d0";
         details.style.borderRadius = "4px";
-        
+
         const summary = document.createElement("summary");
         summary.textContent = cat;
         summary.style.cursor = "pointer";
@@ -251,31 +330,34 @@
           label.style.borderRadius = "4px";
           label.style.border = "1px solid #e0e0d0";
           label.style.cursor = "pointer";
-          
+
           const cb = document.createElement("input");
           cb.type = "checkbox";
           cb.dataset.en = item.en;
           cb.style.marginRight = "6px";
-          
+
           label.appendChild(cb);
           label.appendChild(document.createTextNode(item.ja));
           content.appendChild(label);
         });
+
         details.appendChild(content);
         section.appendChild(details);
       });
 
-      // シークレットカテゴリの表示
+      // 🔞（解放時のみ）も重複チェックして追加
       if (IS_UNLOCKED) {
         Object.entries(SECRET_CATEGORIES).forEach(([cat, items]) => {
+          if (hasCategoryAlready(section, cat)) return;
+
           const details = document.createElement("details");
-          details.open = false; 
+          details.open = false;
           details.style.marginBottom = "8px";
-          details.style.border = "1px solid #ffcccc"; // 赤枠
+          details.style.border = "1px solid #ffcccc";
           details.style.borderRadius = "4px";
-          
+
           const summary = document.createElement("summary");
-          summary.innerHTML = `${cat}`;
+          summary.textContent = cat;
           summary.style.cursor = "pointer";
           summary.style.fontSize = "0.9em";
           summary.style.fontWeight = "bold";
@@ -300,16 +382,17 @@
             label.style.borderRadius = "4px";
             label.style.border = "1px solid #ffcccc";
             label.style.cursor = "pointer";
-            
+
             const cb = document.createElement("input");
             cb.type = "checkbox";
             cb.dataset.en = item.en;
             cb.style.marginRight = "6px";
-            
+
             label.appendChild(cb);
             label.appendChild(document.createTextNode(item.ja));
             content.appendChild(label);
           });
+
           details.appendChild(content);
           section.appendChild(details);
         });
@@ -317,7 +400,8 @@
 
       if (window.__outputTranslation) {
         const dict = {};
-        [...Object.values(EXTENDED_CATEGORIES), ...Object.values(SECRET_CATEGORIES)].flat().forEach(i => dict[i.en] = i.ja);
+        Object.values(EXTENDED_CATEGORIES).flat().forEach(i => dict[i.en] = i.ja);
+        Object.values(SECRET_CATEGORIES).flat().forEach(i => dict[i.en] = i.ja);
         window.__outputTranslation.register(dict);
       }
     },
@@ -328,4 +412,3 @@
 })();
 
 })();
-

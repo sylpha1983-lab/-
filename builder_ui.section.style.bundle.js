@@ -363,6 +363,16 @@
       { ja: "バイオパンク", en: "biopunk, organic tech, flesh, genetic engineering, glowing plants" },
       { ja: "アトムパンク (50s)", en: "atompunk, 1950s retro futurism, space age, atomic power, googie architecture" }
     ],
+
+    "🤖 メカ・工業文脈 (Mecha & Industrial Context)": [
+      { ja: "メカ工学ノリ", en: "mecha engineering" },
+      { ja: "軍用ハード", en: "military hardware" },
+      { ja: "航空宇宙ハード", en: "aerospace hardware" },
+      { ja: "ロボ工学", en: "robotics" },
+      { ja: "産業機械", en: "industrial machinery" },
+      { ja: "近未来テック", en: "near-future tech" }
+    ],
+
     "💻 デジタル・デザイン様式 (Digital & Design)": [
       { ja: "ピクセルアート (ドット)", en: "pixel art, 16-bit, retro game sprite, dithering" },
       { ja: "ボクセル (箱庭)", en: "voxel art, minecraft style, 3d blocks, isometric view" },
