@@ -10,22 +10,41 @@
   // packs: { "Group Title": [ {label, val, desc?, links?}, ... ], ... }
   window.__PP_DB.packs = {
     "🎭 表情演出プリセット (Expression FX Packs)": [
-      { label: "焦る：目を見開く＋汗", desc: "表情セット", val: "panicking, wide-eyed, sweat, sweatdrop" },
-      { label: "怯える：震え＋涙目", desc: "表情セット", val: "scared, trembling, watery_eyes, tears_in_eyes" },
-      { label: "我慢：唇を噛む＋涙", desc: "表情セット", val: "biting_lip, trembling_lips, tears_in_eyes" },
-      { label: "嫌悪：軽蔑＋目細め", desc: "表情セット", val: "disdain, narrowed_eyes, glare" },
-      { label: "照れ：全顔赤面＋目逸らし", desc: "表情セット", val: "full-face_blush, looking_away, embarrassed" },
-      { label: "動揺：目が泳ぐ＋汗", desc: "表情セット", val: "nervous, shifty_eyes, sweating" },
-      { label: "怒り：眉圧＋歯噛み", desc: "表情セット", val: "angry_eyebrows, furrowed_brow, clenched_teeth" },
-      { label: "狂気：瞳開き＋笑み", desc: "表情セット", val: "crazy_eyes, dilated_pupils, evil_smile" },
-      { label: "眠気：とろ目＋口半開き", desc: "表情セット", val: "sleepy_eyes, half-closed_eyes, parted_lips" },
-      { label: "泣き：嗚咽＋涙", desc: "表情セット", val: "crying, sobbing, streaming_tears" },
-      { label: "驚き：目見開き＋口開け", desc: "表情セット", val: "surprised, wide-eyed, open_mouth" },
-      { label: "恥：鼻赤＋汗", desc: "表情セット", val: "nose_blush, embarrassed, sweatdrop" },
-      { label: "強がり：涙目＋強気目線", desc: "表情セット", val: "tears_in_eyes, glare, forced_smile" },
-      { label: "誘惑：上目遣い＋舌", desc: "表情セット", val: "looking_up, half-closed_eyes, tongue_out, seductive_smile" },
-      { label: "疲労：虚ろ目＋ため息", desc: "表情セット", val: "tired, glazed_eyes, sigh" },
-    ],
+    { type: "header", id: "fx_hdr_panic", label: "⚡ 焦り・パニック", desc: "焦り／動揺／驚き" },
+    { label: "焦る演出セット", desc: "焦る＋目を見開く＋汗", val: "panic, wide-eyed, sweat, sweatdrop" },
+    { label: "動揺演出セット", desc: "動揺＋目が泳ぐ＋汗", val: "nervous, blank_stare, sweatdrop, sweating" },
+    { label: "驚き演出セット", desc: "驚き＋目見開き＋口開け", val: "surprised, wide-eyed, open_mouth, gasp" },
+
+    { type: "header", id: "fx_hdr_fear", label: "🕯 恐怖・怯え", desc: "恐怖／怯え／泣き" },
+    { label: "怯え演出セット", desc: "怯える＋震える＋涙目", val: "scared, trembling, watery_eyes, tears_in_eyes" },
+    { label: "泣き演出セット", desc: "泣き＋嗚咽＋涙", val: "crying, sobbing, streaming_tears, trembling_lips" },
+
+    { type: "header", id: "fx_hdr_disdain", label: "🧊 嫌悪・軽蔑", desc: "嫌悪／軽蔑" },
+    { label: "嫌悪演出セット", desc: "嫌悪＋軽蔑＋目細め", val: "disgust, contempt, squinting, glaring" },
+
+    { type: "header", id: "fx_hdr_restraint", label: "🫧 我慢・抑制", desc: "我慢／強がり／疲労" },
+    { label: "我慢演出セット", desc: "唇噛み＋歯噛み＋緊張", val: "restrained, biting_lip, clenched_teeth, nervous_sweat" },
+    { label: "強がり演出セット", desc: "強気＋涙目＋目逸らし", val: "forced_smile, watery_eyes, looking_away, trembling_lips" },
+    { label: "疲労演出セット", desc: "虚ろ目＋ため息＋汗", val: "tired, glazed_eyes, sigh, sweating" },
+
+    { type: "header", id: "fx_hdr_shy", label: "🌸 恥・照れ・誘惑", desc: "恥／照れ／誘惑" },
+    { label: "照れ演出セット", desc: "全顔赤面＋目逸らし", val: "bashful, full-face_blush, looking_away, shy" },
+    { label: "恥演出セット", desc: "鼻赤＋汗＋視線逸らし", val: "embarrassed, nose_blush, sweatdrop, looking_away" },
+    { label: "誘惑演出セット", desc: "誘う＋視線＋唇", val: "seductive_smile, half-closed_eyes, parted_lips, stare" },
+
+    { type: "header", id: "fx_hdr_anger", label: "🔥 怒り・狂気", desc: "怒り／狂気" },
+    { label: "怒り演出セット", desc: "眉圧＋歯噛み＋睨み", val: "angry, furrowed_brow, clenched_teeth, glaring" },
+    { label: "狂気演出セット", desc: "瞳開き＋不穏な笑み", val: "crazy_eyes, wide-eyed, evil_smile, stare" },
+
+    { type: "header", id: "fx_hdr_sleepy", label: "💤 眠気・脱力", desc: "眠気／脱力" },
+    { label: "眠気演出セット", desc: "とろ目＋口半開き", val: "sleepy_eyes, half-closed_eyes, open_mouth, tired" },
+
+    { type: "header", id: "fx_hdr_r18", label: "🔞 R-18 心理（非露骨）", desc: "露骨ではなく心理寄り" },
+    { label: "抑圧演出セット", desc: "視線逸らし＋汗＋口元固め", val: "suppressed_heat, looking_away, sweatdrop, trembling_lips" },
+    { label: "背徳演出セット", desc: "ためらい＋赤面＋目逸らし", val: "forbidden, full-face_blush, looking_away, nervous" },
+    { label: "支配演出セット", desc: "強い視線＋眉圧＋緊張", val: "dominant, glare, furrowed_brow, nervous_sweat" },
+    { label: "従属演出セット", desc: "伏し目＋赤面＋震え", val: "submissive, downcast_eyes, blush, trembling" }
+  ],
     "📸 写真系エフェクトパック (Photo Effect Packs)": [
       { label: "映画調（Anamorphic Film）", desc: "王道フィルム", val: "(cinematic lighting), (anamorphic lens flare), (subtle film grain), (soft contrast curve), (teal-orange color grading)" },
       { label: "柔光夢幻（Soft Bloom）", desc: "ポートレート柔光", val: "(soft lighting), (subtle bloom), (gentle highlight roll-off), (pastel color grading), (low contrast)" },
