@@ -9,6 +9,28 @@
   const KEY = "expression";
 
   const EXPRESSION_DATA = {
+    "🎭 表情プリセット (Expression Presets)": [
+      { ja: "ゴミを見るような目", en: "disdain, narrowed_eyes, half-closed_eyes, glare" },
+      { ja: "嫌悪（うわ…）", en: "disgust, frown, furrowed_brow" },
+      { ja: "我慢（唇を噛む）", en: "biting_lip, tense, furrowed_brow" },
+      { ja: "耐える（涙をこらえる）", en: "tears_in_eyes, watery_eyes, trembling_lips, forced_smile" },
+      { ja: "動揺（目が泳ぐ）", en: "nervous, sweating, shifty_eyes" },
+      { ja: "焦り（目を見開く）", en: "panicking, wide-eyed, sweatdrop" },
+      { ja: "怯え（縮こまる）", en: "scared, trembling, watery_eyes" },
+      { ja: "震える怒り", en: "angry, trembling, clenched_teeth" },
+      { ja: "虚無（魂抜け）", en: "expressionless, blank_stare, dead_eyes" },
+      { ja: "狂気の微笑", en: "crazy, evil_smile, dilated_pupils" },
+      { ja: "ドS嘲笑", en: "smirk, disdain, half-closed_eyes" },
+      { ja: "泣き笑い", en: "crying, smiling, streaming_tears" },
+      { ja: "強がり（涙目）", en: "tears_in_eyes, glare, blush" },
+      { ja: "恥ずか死（赤面＋目逸らし）", en: "full-face_blush, looking_away, embarrassed" },
+      { ja: "誘惑（上目遣い）", en: "seductive_smile, looking_up, half-closed_eyes" },
+      { ja: "甘え（とろ目）", en: "sleepy_eyes, parted_lips, blush" },
+      { ja: "照れ怒り", en: "blush, angry_eyebrows, pout" },
+      { ja: "不機嫌（ムスッ）", en: "annoyed, frown, furrowed_brow" },
+      { ja: "嘲る（片眉）", en: "one_eyebrow_raised, smirk, half-closed_eyes" },
+      { ja: "呆れ（ため息顔）", en: "sigh, deadpan, half-closed_eyes" },
+    ],
     "😊 基本感情 (Basic Emotions)": [
       { ja: "笑顔 (スマイル)", en: "smile" }, { ja: "幸せそう", en: "happy" },
       { ja: "大笑い", en: "laughing" }, { ja: "微笑み", en: "light smile" },

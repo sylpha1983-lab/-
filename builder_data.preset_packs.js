@@ -9,6 +9,23 @@
 
   // packs: { "Group Title": [ {label, val, desc?, links?}, ... ], ... }
   window.__PP_DB.packs = {
+    "🎭 表情演出プリセット (Expression FX Packs)": [
+      { label: "焦る：目を見開く＋汗", desc: "表情セット", val: "panicking, wide-eyed, sweat, sweatdrop" },
+      { label: "怯える：震え＋涙目", desc: "表情セット", val: "scared, trembling, watery_eyes, tears_in_eyes" },
+      { label: "我慢：唇を噛む＋涙", desc: "表情セット", val: "biting_lip, trembling_lips, tears_in_eyes" },
+      { label: "嫌悪：軽蔑＋目細め", desc: "表情セット", val: "disdain, narrowed_eyes, glare" },
+      { label: "照れ：全顔赤面＋目逸らし", desc: "表情セット", val: "full-face_blush, looking_away, embarrassed" },
+      { label: "動揺：目が泳ぐ＋汗", desc: "表情セット", val: "nervous, shifty_eyes, sweating" },
+      { label: "怒り：眉圧＋歯噛み", desc: "表情セット", val: "angry_eyebrows, furrowed_brow, clenched_teeth" },
+      { label: "狂気：瞳開き＋笑み", desc: "表情セット", val: "crazy_eyes, dilated_pupils, evil_smile" },
+      { label: "眠気：とろ目＋口半開き", desc: "表情セット", val: "sleepy_eyes, half-closed_eyes, parted_lips" },
+      { label: "泣き：嗚咽＋涙", desc: "表情セット", val: "crying, sobbing, streaming_tears" },
+      { label: "驚き：目見開き＋口開け", desc: "表情セット", val: "surprised, wide-eyed, open_mouth" },
+      { label: "恥：鼻赤＋汗", desc: "表情セット", val: "nose_blush, embarrassed, sweatdrop" },
+      { label: "強がり：涙目＋強気目線", desc: "表情セット", val: "tears_in_eyes, glare, forced_smile" },
+      { label: "誘惑：上目遣い＋舌", desc: "表情セット", val: "looking_up, half-closed_eyes, tongue_out, seductive_smile" },
+      { label: "疲労：虚ろ目＋ため息", desc: "表情セット", val: "tired, glazed_eyes, sigh" },
+    ],
     "📸 写真系エフェクトパック (Photo Effect Packs)": [
       { label: "映画調（Anamorphic Film）", desc: "王道フィルム", val: "(cinematic lighting), (anamorphic lens flare), (subtle film grain), (soft contrast curve), (teal-orange color grading)" },
       { label: "柔光夢幻（Soft Bloom）", desc: "ポートレート柔光", val: "(soft lighting), (subtle bloom), (gentle highlight roll-off), (pastel color grading), (low contrast)" },
