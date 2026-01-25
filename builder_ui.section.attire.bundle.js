@@ -518,6 +518,16 @@
   const KEY = "attire";
 
   const ATTIRE_DATA = {
+
+    "🪩 ホログラフィック衣装 (Holographic Outfits)": [
+      { ja: "ホログラフィック・ボディスーツ", en: "holographic bodysuit" },
+      { ja: "ホログラフィック・タクティカルスーツ", en: "holographic tactical suit" },
+      { ja: "ホログラフィック・オペレーターユニフォーム", en: "holographic operator uniform" },
+      { ja: "ホログラフィック・ドレス", en: "holographic dress" },
+      { ja: "透明ホロ・クローク", en: "transparent holo-cloak" },
+      { ja: "プリズム発光アーマー", en: "prismatic light-emitting armor" }
+    ],
+
     "👚 袖・肩・腕 (Sleeves & Arms)": [
       { ja: "ノースリーブ (袖なし)", en: "sleeveless" }, { ja: "半袖", en: "short sleeves" },
       { ja: "長袖", en: "long sleeves" }, { ja: "パフスリーブ", en: "puff sleeves" },

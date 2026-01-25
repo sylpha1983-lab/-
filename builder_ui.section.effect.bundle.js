@@ -314,6 +314,8 @@
     "🎮 ゲームUI・HUD (Game Interface)": [
       { ja: "ゲームプレイ画面 (FPS/RPG)", en: "gameplay screenshot, in-game ui, video game mechanics" },
       { ja: "HUD (SF/未来的)", en: "hud, heads-up display, futuristic ui, sci-fi interface" },
+      { ja: "ホログラフィックUI", en: "holographic ui, hologram overlay, translucent interface, neon glow" },
+      { ja: "AR投影パネル", en: "augmented reality overlay, floating panels, sci-fi hologram screen" },
       { ja: "HPバー/体力ゲージ", en: "health bar, life gauge, status bar, game icons" },
       { ja: "ミニマップ", en: "minimap, radar, compass overlay" },
       { ja: "スキルアイコン/スロット", en: "skill icons, inventory slots, hotbar" },
@@ -322,7 +324,18 @@
       { ja: "ドット絵・レトロゲー", en: "pixel art, 8-bit, 16-bit, retro game style" },
       { ja: "ガチャ画面風", en: "gacha screen, summon result, ssr, rarity stars" }
     ],
-    "📹 モニター・画質演出 (Screen Artifacts)": [
+      "🪩 ホログラフィック (Holographic)": [
+      { ja: "投影ホロ（存在）", en: "holographic projection, hologram, semi-transparent body, glowing edges, volumetric light body" },
+      { ja: "投影ホロUI（HUD/AR）", en: "holographic ui, floating UI panels, AR interface, translucent interface, holographic screen" },
+      { ja: "素材ホロ（虹色反射）", en: "holographic material, iridescent surface, holographic foil, prismatic reflections, rainbow diffraction, thin film interference" },
+      { ja: "スキャンライン・シマー", en: "scanlines, shimmer, digital noise, glitch shimmer" },
+      { ja: "データストランド", en: "glowing data strands, luminous threads, data stream particles" },
+      { ja: "デジタルグリッド", en: "digital grid, wireframe overlay, data lines" },
+      { ja: "クロマティック・トレイル", en: "chromatic light trails, spectral highlights, color separation glow" },
+      { ja: "ネオングロー", en: "neon glow, emissive lighting, cyberpunk glow" }
+
+    ],
+"📹 モニター・画質演出 (Screen Artifacts)": [
       { ja: "VHS (ビデオテープ風)", en: "vhs artifacts, tracking error, magnetic tape noise, 90s footage" },
       { ja: "グリッチ (バグ・ノイズ)", en: "glitch art, datamoshing, digital distortion, corrupted image" },
       { ja: "砂嵐・スタティック", en: "static noise, television snow, grainy texture" },

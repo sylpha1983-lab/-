@@ -10,6 +10,16 @@
   const KEY = "texture";
 
   const CATEGORIES = {
+
+    "🪩 ホログラフィック素材 (Holographic Materials)": [
+      { ja: "ホログラフィック素材", en: "holographic material" },
+      { ja: "虹彩（イリデセント）表面", en: "iridescent surface" },
+      { ja: "プリズム反射", en: "prismatic reflection" },
+      { ja: "光の回折（ディフラクション）", en: "light diffraction" },
+      { ja: "スペクトル・ハイライト", en: "spectral highlights" },
+      { ja: "透明ポリマー", en: "transparent polymer" },
+      { ja: "クロマティック光沢", en: "chromatic sheen" }
+    ],
     "🧖‍♀️ 肌の質感 (Skin Texture)": [
       { ja: "陶器のような肌 (つるつる)", en: "porcelain skin" },
       { ja: "リアルな肌 (毛穴等)", en: "realistic skin texture" },

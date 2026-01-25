@@ -726,10 +726,12 @@
         { label: "ドラマ照明（Dramatic Portrait）", desc: "人物立体感", val: "(rim lighting), (face-focused lighting), (controlled highlights), (contrast emphasis), (portrait color grading)" },
         { label: "逆光演出（Backlight Glow）", desc: "エモ逆光", val: "(strong backlight), (light bloom), (rim glow), (atmospheric haze), (highlight diffusion)" },
         { label: "高精細写真（Studio Sharp）", desc: "スタジオ硬質", val: "(studio lighting), (high clarity), (sharp detail), (controlled reflections), (neutral color tone)" },
-        { label: "夜景写真（Night City Photo）", desc: "夜ネオン", val: "(night lighting), (neon highlights), (high dynamic range), (urban color grading), (light reflections)" }
+        { label: "夜景写真（Night City Photo）", desc: "夜ネオン", val: "(night lighting), (neon highlights), (high dynamic range), (urban color grading), (light reflections)" },
+        { label: "ホログラフィック（Holographic Foil）", desc: "虹色ホロ/反射", val: "(holographic), (iridescent), (rainbow diffraction), (prismatic highlights), (thin film interference), (specular highlight bloom)" }
       ],
   "🎮 ゲーム/3D系エフェクトパック (Game & 3D Effect Packs)": [
         { label: "リアルタイムGI（Lumen GI）", desc: "ゲーム的光", val: "(unreal engine 5), (lumen global illumination), (realistic lighting), (ambient occlusion), (high dynamic range)" },
+        { label: "ホログラフィックUI（Holographic UI）", desc: "AR/HUD投影", val: "(holographic ui), (hologram overlay), (futuristic hud), (floating panels), (translucent interface), (neon cyan glow)" },
         { label: "PBR強調（PBR Boost）", desc: "材質の説得力", val: "(physically based rendering), (realistic textures), (specular response), (roughness variation), (clearcoat reflections)" },
         { label: "霧体積（Volumetric Fog）", desc: "空気が出る", val: "(volumetric lighting), (volumetric fog), (god rays), (atmospheric perspective), (light scattering)" },
         { label: "高密度ジオメトリ（Nanite Detail）", desc: "造形密度", val: "(nanite geometry), (ultra detailed), (micro details), (edge fidelity), (high poly)" },
@@ -738,6 +740,42 @@
         { label: "ハードシャドウ（Contact Shadow）", desc: "影を締める", val: "(contact shadow), (hard shadows), (ambient occlusion), (sharp edges), (high contrast)" },
         { label: "金属映り込み（Metal Reflections）", desc: "反射強め", val: "(environment reflections), (specular highlights), (anisotropic highlights), (reflection clarity), (polished metal)" }
       ],
+  "🪩 ホログラフィックEX (Holographic EX)": [
+        { label: "素材ホロセット（Material Holo）", desc: "衣装/表面/反射", val: "(holographic material), (iridescent surface), (rainbow diffraction), (prismatic reflection), (thin film interference), (light-reactive fabric), (transparent polymer), (specular highlight bloom)" },
+        { label: "投影ホロセット（Projection Holo）", desc: "存在/幽体/輪郭", val: "(holographic projection), (semi-transparent body), (ethereal body made of light), (glowing edges), (volumetric light body), (digital particles), (floating hologram), (scanline shimmer)" },
+        { label: "投影ホロ＋UI（Operator UI）", desc: "AR/HUD/操作卓", val: "(holographic operator), (floating UI panels), (holographic ui), (AR interface), (glowing data streams), (digital glyphs), (holographic screen), (translucent interface), (neon glow)" },
+
+        { label: "状態変化（Flicker/Glitch）", desc: "ホロの揺らぎ/不安定", val: "(hologram flickering), (unstable holographic projection), (signal interference), (glitch shimmer), (scanline interference)" },
+        { label: "状態変化（Phase Shift）", desc: "位相ズレ/断続", val: "(phase-shifting hologram), (partial data loss), (ghosting trails), (temporal jitter), (data dropout)" },
+        { label: "感情同期（Emotional Sync）", desc: "感情が光になる", val: "(emotional resonance glow), (heartbeat-synced light pulse), (affection-linked brightness), (memory echo hologram), (emotional data feedback)" },
+        { label: "強度：Subtle", desc: "控えめホロ", val: "(subtle holographic presence), (soft holographic glow), (thin scanlines), (low particle density)" },
+        { label: "強度：Balanced", desc: "標準ホロ", val: "(balanced holographic projection), (moderate glow), (clean hologram edges), (stable data particles)" },
+        { label: "強度：Intense", desc: "強めホロ", val: "(intense holographic glow), (bright edge bloom), (dense digital particles), (strong data streams)" },
+        { label: "強度：Overwhelming", desc: "圧倒ホロ", val: "(overwhelming holographic emission), (blinding neon glow), (heavy scanlines), (hologram storm), (glitch overload)" },
+        { label: "色プロファイル：Cyan-Blue", desc: "標準青緑", val: "(neon cyan glow), (cool blue hologram), (cyan highlights), (cool digital glow)" },
+        { label: "色プロファイル：Warm Amber", desc: "温かい琥珀", val: "(warm amber hologram), (golden data glow), (soft warm emission), (amber highlights)" },
+        { label: "色プロファイル：Magenta-Pink", desc: "妖艶ピンク", val: "(magenta hologram), (pink neon glow), (violet data light), (chromatic shimmer)" },
+        { label: "色プロファイル：White-Gold", desc: "聖光ホロ", val: "(white-gold hologram), (holy luminous glow), (clean halo light), (soft white bloom)" },
+        { label: "色プロファイル：Glitch Rainbow", desc: "虹グリッチ", val: "(glitch rainbow hologram), (prismatic noise), (chromatic aberration), (rainbow diffraction)" },
+      ],
+
+  "🧿 ホログラフィック・オペレーター×感情同期 (Holographic Operator Sync Combos)": [
+        { label: "指令卓×接続の糸", desc: "手が触れそうで触れない", val: "(holographic operator), (hands almost touching but not overlapping:1.2), (glowing data strands), (floating UI panels), (bittersweet connection), (emotional resonance glow)" },
+        { label: "治療/補修×低電力", desc: "壊れかけの優しさ", val: "(holographic operator), (low-power hologram mode), (soft ambient glow), (memory echo hologram), (warm gentle smile), (unstable holographic projection)" },
+        { label: "戦闘後×ノイズ混じり", desc: "息とノイズの余韻", val: "(holographic operator), (signal interference), (hologram flickering), (volumetric lighting), (filmic contrast), (heartbeat-synced light pulse)" },
+        { label: "別れ際×位相ズレ", desc: "輪郭が遠のく", val: "(holographic operator), (phase-shifting hologram), (partial data loss), (tears_in_eyes), (trembling_lips), (emotional data feedback)" },
+        { label: "祝福×白金ホロ", desc: "聖域のリンク", val: "(white-gold hologram), (digital halo), (sacred geometric glyphs), (affection-linked brightness), (soft warm backlight), (gentle smile)" }
+      ],
+
+  "🧬 ホロ状態×表情シナジー (Holo State × Expression Synergy)": [
+        { label: "Flicker × 動揺", desc: "ノイズ＝心拍", val: "(hologram flickering), (signal interference), nervous, blank_stare, sweatdrop, trembling_lips" },
+        { label: "Low-Power × 眠気", desc: "光が薄い＝体温", val: "(low-power hologram mode), sleepy_eyes, half-closed_eyes, tired, soft ambient glow" },
+        { label: "Phase Shift × ためらい", desc: "触れない境界", val: "(phase-shifting hologram), (hands almost touching but not overlapping:1.2), full-face_blush, looking_away, nervous_smile, memory echo hologram" },
+        { label: "Data Loss × 泣き", desc: "欠けていく記憶", val: "(partial data loss), crying, streaming_tears, watery_eyes, emotional data feedback" },
+        { label: "Glitch Overload × 狂気", desc: "光が裂ける", val: "(glitch overload), (unstable holographic projection), crazy_eyes, wide-eyed, evil_smile, stare" },
+        { label: "Stable Projection × 誘惑", desc: "綺麗すぎる危うさ", val: "(balanced holographic projection), seductive_smile, half-closed_eyes, parted_lips, stare, clean hologram edges" }
+      ],
+
   "🤖 メカ脳パック (Mechanical Packs)": [
         { label: "🧠 Mechanical Brain ON（設計者の脳）", desc: "設計思想・完成度の底上げ", val: "mechanical design, industrial design, precision engineering, production-ready design, functional design, orthographic design feel, clean silhouette, high fidelity details" },
         { label: "🔩 Hard Surface｜Clean（精密外装）", desc: "硬質で読みやすい外装言語", val: "sharp edges, chamfered edges, beveled edges, panel lines, tight tolerances, clean silhouette" },
@@ -995,6 +1033,9 @@
       { label: "サイバーパンク・ネトランナー", val: "(cyberpunk netrunner), (holographic UI), (neon city), (data cables), (visor), (street tech)", desc: "情報戦・都市夜景" },
       { label: "サイバーパンク・メカニック", val: "(cyberpunk mechanic), (tool belt), (workshop), (sparks), (chrome parts), (garage)", desc: "整備工房" },
       { label: "企業エージェント", val: "(corporate agent), (sleek suit), (neon office), (hologram screen), (cold lighting)", desc: "近未来コーポ" },
+      { label: "ホログラフィックオペレーター（存在定義）", desc: "投影人格/光の身体", val: "(holographic operator:1.5), (clearly female:1.4), (semi-transparent figure:1.3), (ethereal body made of light:1.3), (glowing edges:1.3), (digital circuits faintly visible:1.2), (long translucent blue hair:1.4), (warm gentle smile:1.4), (soft facial features:1.3)" },
+      { label: "リアル×ホロ接続（関係演出）", desc: "触れそうで触れない距離", val: "standing close, slightly floating, (hands almost touching but not overlapping:1.4), glowing data strands connecting their hands, reflected light paints their faces, bittersweet connection, (emotional realism:1.3)" },
+      { label: "未来指令室・ホロ環境（シーン）", desc: "操作卓/星空/AR空間", val: "futuristic control deck, filled with holographic interfaces, panoramic glass window, stars and nebulae outside, soft warm backlight, cool digital glow, cinematic mid-shot, side angle showing both profiles" },
       { label: "バウンティハンター", val: "(bounty hunter), (tactical gear), (neon alley), (wanted poster), (rainy night)", desc: "賞金稼ぎ" },
       { label: "ドローンオペレーター", val: "(drone operator), (remote controller), (HUD), (surveillance drones), (rooftop)", desc: "監視・索敵" },
       { label: "アンドロイド技師", val: "(android engineer), (repair tools), (lab), (assembly line), (clean sci-fi)", desc: "研究室・工房" },
