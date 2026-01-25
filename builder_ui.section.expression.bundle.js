@@ -9,30 +9,6 @@
   const KEY = "expression";
 
   const EXPRESSION_DATA = {
-    "🎭 表情プリセット (Expression Presets)": [
-{ group_ja: "喜び・笑い", group_en: "Joy & Laughter", items: [
-        { ja: "無邪気（目きら）", en: "smile, wide-eyed, sparkling_eyes" },
-        { ja: "満面の笑み", en: "grin, shining_eyes" },
-        { ja: "にやけ（抑えきれない）", en: "smug, light_blush, grin" },
-        { ja: "照れ笑い", en: "embarrassed, blush, nervous_smile" },
-        { ja: "爆笑（涙目）", en: "laughing, open_mouth, tears_in_eyes" },
-        { ja: "笑い泣き", en: "laughing, streaming_tears, blush" },
-        { ja: "ふふっ（口元笑い）", en: "smirk, half-closed_eyes" }
-      ] },
-{ group_ja: "怒り・不機嫌", group_en: "Anger & Irritation", items: [{ ja: "震える怒り", en: "angry, trembling, clenched_teeth" }, { ja: "不機嫌（ムスッ）", en: "annoyed, frown, furrowed_brow" }, { ja: "照れ怒り", en: "blush, angry_eyebrows, pout" }] },
-{ group_ja: "涙・複雑", group_en: "Bittersweet", items: [{ ja: "泣き笑い", en: "crying, smiling, streaming_tears" }] },
-{ group_ja: "誘惑・甘え", group_en: "Seduction & Softness", items: [
-        { ja: "誘惑（上目遣い）", en: "seductive_smile, looking_up, half-closed_eyes" },
-        { ja: "甘え（とろ目）", en: "sleepy_eyes, parted_lips, blush" },
-        { ja: "恥ずか死（赤面＋目逸らし）", en: "full-face_blush, looking_away, embarrassed" }
-      ] },
-{ group_ja: "見下し・嫌悪", group_en: "Contempt & Disgust", items: [{ ja: "ゴミを見るような目", en: "disdain, narrowed_eyes, half-closed_eyes, glare" }, { ja: "嫌悪（うわ…）", en: "disgust, frown, furrowed_brow" }, { ja: "ドS嘲笑", en: "smirk, disdain, half-closed_eyes" }, { ja: "嘲る（片眉）", en: "one_eyebrow_raised, smirk, half-closed_eyes" }, { ja: "呆れ（ため息顔）", en: "sigh, deadpan, half-closed_eyes" }] },
-{ group_ja: "我慢・抑制", group_en: "Restraint & Endurance", items: [{ ja: "我慢（唇を噛む）", en: "biting_lip, tense, furrowed_brow" }, { ja: "耐える（涙をこらえる）", en: "tears_in_eyes, watery_eyes, trembling_lips, forced_smile" }, { ja: "強がり（涙目）", en: "tears_in_eyes, glare, blush" }] },
-{ group_ja: "焦り・動揺", group_en: "Panic & Nervous", items: [{ ja: "動揺（目が泳ぐ）", en: "nervous, sweating, shifty_eyes" }, { ja: "焦り（目を見開く）", en: "panicking, wide-eyed, sweatdrop" }] },
-{ group_ja: "恐怖・怯え", group_en: "Fear", items: [{ ja: "怯え（縮こまる）", en: "scared, trembling, watery_eyes" }] },
-{ group_ja: "虚無・狂気", group_en: "Void & Madness", items: [{ ja: "虚無（魂抜け）", en: "expressionless, blank_stare, dead_eyes" }, { ja: "狂気の微笑", en: "crazy, evil_smile, dilated_pupils" }] }
-],
-
     "😊 基本感情 (Basic Emotions)": [
       { ja: "笑顔 (スマイル)", en: "smile" }, { ja: "幸せそう", en: "happy" },
       { ja: "大笑い", en: "laughing" }, { ja: "微笑み", en: "light smile" },
@@ -71,63 +47,34 @@
       }
 
       const createCat = (title, items) => {
-  const details = document.createElement("details");
-  details.className = "expression-cat";
-  details.style.cssText = "margin-bottom:6px; border:1px solid #eee; border-radius:4px; background:#fff;";
-  details.open = false; // ★初期閉
+        const details = document.createElement("details");
+        details.className = "expression-cat";
+        details.style.cssText = "margin-bottom:6px; border:1px solid #eee; border-radius:4px; background:#fff;";
+        
+        details.open = false; // ★初期閉
 
-  const summary = document.createElement("summary");
-  summary.textContent = title;
-  summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#f9f9f9; color:#555;";
-  details.appendChild(summary);
+        const summary = document.createElement("summary");
+        summary.textContent = title;
+        summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#f9f9f9; color:#555;";
+        details.appendChild(summary);
 
-  const makeGrid = (container, list) => {
-    const content = document.createElement("div");
-    content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(130px, 1fr)); gap:6px;";
-    (Array.isArray(list) ? list : []).forEach(item => {
-      const label = document.createElement("label");
-      label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer;";
-      const cb = document.createElement("input");
-      cb.type = "checkbox";
-      cb.style.marginRight = "6px";
-      cb.dataset.val = item.en;
-      label.appendChild(cb);
-      label.appendChild(document.createTextNode(`${item.ja} / ${item.en}`));
-      content.appendChild(label);
-    });
-    container.appendChild(content);
-  };
+        const content = document.createElement("div");
+        content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(130px, 1fr)); gap:6px;";
 
-  const container = document.createElement("div");
-  container.style.cssText = "padding:6px 6px 8px 6px;";
-
-  // Grouped presets: [{group_ja, group_en, items:[{ja,en}...]}]
-  if (Array.isArray(items) && items.length && items[0] && items[0].items) {
-    items.forEach(g => {
-      const sub = document.createElement("details");
-      sub.className = "expression-subcat";
-      sub.style.cssText = "margin:6px 4px; border:1px solid #eee; border-radius:4px; background:#fff;";
-      sub.open = false;
-
-      const subSum = document.createElement("summary");
-      subSum.textContent = `${g.group_ja || ""}${g.group_en ? " (" + g.group_en + ")" : ""}`;
-      subSum.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#fbfbfb; color:#555;";
-      sub.appendChild(subSum);
-
-      const subWrap = document.createElement("div");
-      subWrap.style.cssText = "padding:4px 2px 6px 2px;";
-      sub.appendChild(subWrap);
-
-      makeGrid(subWrap, g.items);
-      container.appendChild(sub);
-    });
-  } else {
-    makeGrid(container, items);
-  }
-
-  details.appendChild(container);
-  return details;
-};
+        items.forEach(item => {
+          const label = document.createElement("label");
+          label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer;";
+          const cb = document.createElement("input");
+          cb.type = "checkbox";
+          cb.style.marginRight = "6px";
+          cb.dataset.val = item.en;
+          label.appendChild(cb);
+          label.appendChild(document.createTextNode(`${item.ja} / ${item.en}`));
+          content.appendChild(label);
+        });
+        details.appendChild(content);
+        return details;
+      };
 
       const root = document.createElement("div");
       root.className = "expression-v1-container";
@@ -468,3 +415,4 @@
 })();
 
 })();
+

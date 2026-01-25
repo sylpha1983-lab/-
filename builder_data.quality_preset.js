@@ -52,6 +52,11 @@
 
   // ■ 2. 画風・品質 (Presets)
   window.__QP_DB.presets = {
+    "⚠️ NSFWフラグ・基本 (NSFW Flags)": [
+      { label: "NSFW", desc: "NSFWフラグ", val: "nsfw" },
+      { label: "R-18", desc: "成人向け", val: "r18" },
+      { label: "Explicit", desc: "露骨寄り", val: "explicit" }
+    ],
     "🏆 基本・画風 (Standard & Art Styles)": [
       { label: "基本・最高画質", val: "(masterpiece:1.3), (best quality:1.3), (high resolution), (highly detailed), (beautiful detailed face), (perfect anatomy)" },
       { label: "アニメ塗り", val: "(masterpiece:1.3), (best quality:1.3), (anime style), (cel shading), (vibrant colors), (clean lines), (flat color)" },
@@ -65,7 +70,6 @@
     ],
     "💎 ハイエンド・特化 (High-End Specialized)": [
       { label: "★究極・レンダリング (Ultimate Tech)", val: "(anime-realism blend:1.4), (cinematic lighting:1.4), (high fidelity), (extremely detailed)", links: ["基本・最高画質", "安全セット", "キャラ・人物", "レイトレーシング", "UE5", "PBR", "SSS", "ボリュメトリック", "8K", "整った顔立ち"] },
-      { label: "★High-Quality｜Mechanical（機械設計）", val: "(mechanical design), (industrial design), (precision engineering), (production-ready design), (functional design), (orthographic design feel), (clean silhouette), (high fidelity details), (micro details), (fine surface detail)", links: ["★究極・レンダリング (Ultimate Tech)", "PBR", "UE5", "レイトレーシング"] },
       { label: "幻想・コンセプトアート", val: "(fantasy concept art), (highly detailed digital painting), (epic scale), (glowing magic), (intricate scenery), (game art style), (artstation), (majestic)", links: ["基本・最高画質", "背景・空間", "ファンタジー"] },
       { label: "サイバー・ネオン (Cyber Neon)", val: "(cyberpunk style), (neon lights), (chromatic aberration), (futuristic city), (night), (glowing outlines), (high contrast), (vibrant cyan and magenta)", links: ["物・メカ", "SF"] },
       { label: "アニメ・セミリアル (透明感)", val: "(anime style:1.3), (cel shading:1.2), (soft lighting), (smooth rendering), (glossy highlights), (shiny hair:1.3), (beautiful detailed eyes), (transparent skin texture), (rim light), (blush)", links: ["アニメ塗り", "ソフトライティング", "光沢/ツヤ肌", "リムライト"] },

@@ -461,8 +461,14 @@ cb.addEventListener("change", () => {
   "use strict";
   const VERSION = 4; 
   const KEY = "quality_preset";
+  const IS_UNLOCKED = localStorage.getItem("MY_SECRET_UNLOCK") === "true";
 
   const QUALITY_DATA = {
+    "⚠️ NSFWフラグ・基本": [
+      { ja: "NSFW", en: "nsfw" },
+      { ja: "R-18", en: "r18" },
+      { ja: "Explicit", en: "explicit" }
+    ],
     "🛠️ 制作ソフト・ツール": [
       { ja: "Cinema 4D", en: "cinema 4d" }, { ja: "ZBrush (彫刻)", en: "zbrush" }, { ja: "Maya", en: "maya" }, { ja: "Blender", en: "blender" }, { ja: "Substance Painter", en: "substance painter" }
     ],
@@ -538,7 +544,11 @@ cb.addEventListener("change", () => {
   const API = {
     initUI(container) {
       const conQuality = document.getElementById("qp-quality-content");
-      if (conQuality) Object.entries(QUALITY_DATA).forEach(([k,v]) => { conQuality.appendChild(createSubAccordion(k, v)); });
+      if (conQuality) Object.entries(QUALITY_DATA).forEach(([k,v]) => {
+        // シークレット未解除ならNSFWフラグは非表示
+        if (!IS_UNLOCKED && /NSFWフラグ/.test(k)) return;
+        conQuality.appendChild(createSubAccordion(k, v));
+      });
 
 // ========================================================
 // 🧩 シークレットモード: 開発者モードトグル（⚙️ 3D技術・シェーダー10回）
