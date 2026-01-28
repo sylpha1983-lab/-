@@ -363,6 +363,7 @@ body.log-fullscreen{
         </div>
         <div style="font-size: 0.85em;">
           <label><input type="checkbox" id="auto-scroll" checked> <span id="lbl-auto-scroll">ログ自動スクロール</span></label>
+          <label style="margin-left:12px;"><input type="checkbox" id="simpleVisualizeToggle"> <span id="lbl-simple-visualize">生成内容の簡易可視化</span></label>
           <button type="button" id="log-expand" class="reload-btn">拡大</button><button type="button" id="log-shrink" class="reload-btn" style="display:none;">縮小</button><button id="btn-reload" onclick="location.reload()" class="reload-btn">再読込</button>
         </div>
       </div>
@@ -396,6 +397,15 @@ body.log-fullscreen{
       <button id="resetBtn" type="button">リセット</button>
     </div>
     <textarea id="out" placeholder="ここに生成されたタグが表示されます..."></textarea>
+<section id="aiSummaryThumb" class="ai-thumb" hidden></section>
+<section id="aiSummaryHistory" class="ai-history" hidden>
+  <div class="ai-history__head">
+    <div class="ai-history__title">🗂️ 履歴サマリー（直近10件）</div>
+    <button id="aiHistoryClear" class="ai-thumb__btn" type="button">全消去</button>
+  </div>
+  <div id="aiHistoryList" class="ai-history__list"></div>
+</section>
+
   </div>
 
   <script src="ext_manifest_loader.v1.js" data-ext></script>
@@ -546,6 +556,28 @@ body.log-fullscreen{
     run();
   }
 })();
+window.__simpleVisualizeEnabled=true;
+
+// ---- Reset linkage for Simple Visualize ----
+(function(){
+  function hideSimpleVisualize(){
+    var t=document.getElementById('aiSummaryThumb');
+    var h=document.getElementById('aiSummaryHistory');
+    if(t) t.hidden=true;
+    if(h) h.hidden=true;
+    window.__simpleVisualizeEnabled=false;
+    try{ localStorage.setItem('simple_visualize_enabled_v1','0'); }catch(e){}
+  }
+  document.addEventListener('click',function(e){
+    var el=e.target;
+    if(!el) return;
+    var txt=(el.textContent||'').trim();
+    if(el.id==='btn-reset' || txt.indexOf('リセット')!==-1){
+      hideSimpleVisualize();
+    }
+  },true);
+})();
+
 </script>
 </body>
 </html>

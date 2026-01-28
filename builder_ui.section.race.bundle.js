@@ -90,7 +90,7 @@
           if(item.val) {
              cb.dataset.val = item.val;
              // これにより、Coreの連動機能が働き、ON/OFFが同期されます
-             cb.dataset.links = item.val; 
+             cb.dataset.links = item.links; 
           } else {
              cb.dataset.en = item.en;
           }
@@ -222,7 +222,7 @@
           if (item.val) { 
              cb.dataset.val = item.val;
              // ★修正: 連動機能を有効化
-             cb.dataset.links = item.val; 
+             cb.dataset.links = item.links; 
              label.title = item.val; 
              label.appendChild(cb); 
              label.appendChild(document.createTextNode(item.label)); 
@@ -271,10 +271,38 @@
       { label: "ヴァンパイアセット", val: "vampire, fangs, pale skin, red eyes, coffin, gothic" },
       { label: "死神セット", val: "grim reaper, skeleton, holding scythe, black robe, hood, skull" }
     ],
+    "😈 魔族セット (Demonic Race Sets)": [
+      { label: "😈 魔族セット (Demonkin)", val: "demonkin, demonic humanoid, horns, devil tail, infernal aura, glowing eyes" },
+      { label: "👑 高位魔族セット (Archdemon)", val: "archdemon, demonic royalty, large horns, ornate dark armor, hellfire aura, intimidating presence" }
+    ],
+    "🐉 ドラゴン娘セット (Dragon Girl Sets)": [
+      { label: "🔥 火竜娘セット (Fire Dragon Girl)", val: "dragon girl, draconic humanoid, dragon horns, dragon tail, dragon wings, dragon scales, slit pupils, non-human fantasy anatomy, fire dragon girl, flame aura, ember particles, molten glow between scales, heat distortion, warm red-orange lighting", links:"dragon horns, dragon tail, dragon wings, dragon scales, slit pupils" },
+      { label: "💧 水竜娘セット (Water Dragon Girl)", val: "dragon girl, draconic humanoid, dragon horns, dragon tail, dragon wings, dragon scales, slit pupils, non-human fantasy anatomy, water dragon girl, water aura, splashing water, flowing droplets, mist spray, blue lighting, wet scales", links:"dragon horns, dragon tail, dragon wings, dragon scales, slit pupils" },
+      { label: "❄ 氷竜娘セット (Ice Dragon Girl)", val: "dragon girl, draconic humanoid, dragon horns, dragon tail, dragon wings, dragon scales, slit pupils, non-human fantasy anatomy, ice dragon girl, frost aura, crystalline scales, cold mist breath, snow particles, icy blue-white lighting", links:"dragon horns, dragon tail, dragon wings, dragon scales, slit pupils" },
+      { label: "🌱 土竜娘セット (Earth Dragon Girl)", val: "dragon girl, draconic humanoid, dragon horns, dragon tail, dragon wings, dragon scales, slit pupils, non-human fantasy anatomy, earth dragon girl, stone-like scales, moss accents, dust particles, rugged texture, earthy tones", links:"dragon horns, dragon tail, dragon wings, dragon scales, slit pupils" },
+      { label: "🪙 金竜娘セット (Metal/Gold Dragon Girl)", val: "dragon girl, draconic humanoid, dragon horns, dragon tail, dragon wings, dragon scales, slit pupils, non-human fantasy anatomy, metal dragon girl, golden scales, metallic sheen, reflective highlights, ornate armor accents, warm gold light", links:"dragon horns, dragon tail, dragon wings, dragon scales, slit pupils" },
+      { label: "🌪 風竜娘セット (Wind Dragon Girl)", val: "dragon girl, draconic humanoid, dragon horns, dragon tail, dragon wings, dragon scales, slit pupils, non-human fantasy anatomy, wind dragon girl, wind aura, swirling air currents, flowing ribbons, motion blur, airy atmosphere", links:"dragon horns, dragon tail, dragon wings, dragon scales, slit pupils" },
+      { label: "⚡ 雷竜娘セット (Lightning Dragon Girl)", val: "dragon girl, draconic humanoid, dragon horns, dragon tail, dragon wings, dragon scales, slit pupils, non-human fantasy anatomy, lightning dragon girl, electric aura, lightning arcs, charged particles, high contrast lighting", links:"dragon horns, dragon tail, dragon wings, dragon scales, slit pupils" },
+      { label: "☀ 光竜娘セット (Light Dragon Girl)", val: "dragon girl, draconic humanoid, dragon horns, dragon tail, dragon wings, dragon scales, slit pupils, non-human fantasy anatomy, light dragon girl, radiant aura, holy glow, sun rays, shimmering particles, soft bloom", links:"dragon horns, dragon tail, dragon wings, dragon scales, slit pupils" },
+      { label: "🌑 闇竜娘セット (Dark Dragon Girl)", val: "dragon girl, draconic humanoid, dragon horns, dragon tail, dragon wings, dragon scales, slit pupils, non-human fantasy anatomy, dark dragon girl, shadow aura, void mist, dark particles, ominous glow, low-key lighting", links:"dragon horns, dragon tail, dragon wings, dragon scales, slit pupils" }
+    ],
+    "🧚 妖精セット (Fairy Sets)": [
+      { label: "🌸 花妖精セット (Flower Fairy)", val: "fairy, fairy wings, translucent wings, ethereal body, glowing skin, petite mythical anatomy, magical aura, floating, flower fairy, petals swirling, pollen sparkle, floral hair ornaments, pastel glow", links:"fairy wings, butterfly wings, pointy ears, flower crown, floating limbs, floating hair, fairy kei", links:"fairy wings, butterfly wings, pointy ears, flower crown, floating limbs, floating hair, fairy kei" },
+      { label: "🔥 火妖精セット (Fire Fairy)", val: "fairy, fairy wings, translucent wings, ethereal body, glowing skin, petite mythical anatomy, magical aura, floating, fire fairy, flame aura, ember sparkles, warm glow", links:"fairy wings, butterfly wings, pointy ears, flower crown, floating limbs, floating hair, fairy kei" },
+      { label: "💧 水妖精セット (Water Fairy)", val: "fairy, fairy wings, translucent wings, ethereal body, glowing skin, petite mythical anatomy, magical aura, floating, water fairy, water aura, droplets, soft mist, blue glow", links:"fairy wings, butterfly wings, pointy ears, flower crown, floating limbs, floating hair, fairy kei", links:"fairy wings, butterfly wings, pointy ears, flower crown, floating limbs, floating hair, fairy kei" },
+      { label: "❄ 氷妖精セット (Ice Fairy)", val: "fairy, fairy wings, translucent wings, ethereal body, glowing skin, petite mythical anatomy, magical aura, floating, ice fairy, frost aura, snow sparkles, crystalline shimmer", links:"fairy wings, butterfly wings, pointy ears, flower crown, floating limbs, floating hair, fairy kei", links:"fairy wings, butterfly wings, pointy ears, flower crown, floating limbs, floating hair, fairy kei" },
+      { label: "🌱 土妖精セット (Earth Fairy)", val: "fairy, fairy wings, translucent wings, ethereal body, glowing skin, petite mythical anatomy, magical aura, floating, earth fairy, leaf dust, moss accents, earthy glow", links:"fairy wings, butterfly wings, pointy ears, flower crown, floating limbs, floating hair, fairy kei", links:"fairy wings, butterfly wings, pointy ears, flower crown, floating limbs, floating hair, fairy kei" },
+      { label: "🌪 風妖精セット (Wind Fairy)", val: "fairy, fairy wings, translucent wings, ethereal body, glowing skin, petite mythical anatomy, magical aura, floating, wind fairy, swirling air, flowing ribbons, airy particles", links:"fairy wings, butterfly wings, pointy ears, flower crown, floating limbs, floating hair, fairy kei", links:"fairy wings, butterfly wings, pointy ears, flower crown, floating limbs, floating hair, fairy kei" },
+      { label: "⚡ 雷妖精セット (Lightning Fairy)", val: "fairy, fairy wings, translucent wings, ethereal body, glowing skin, petite mythical anatomy, magical aura, floating, lightning fairy, electric sparkles, lightning arcs, sharp contrast", links:"fairy wings, butterfly wings, pointy ears, flower crown, floating limbs, floating hair, fairy kei", links:"fairy wings, butterfly wings, pointy ears, flower crown, floating limbs, floating hair, fairy kei" },
+      { label: "☀ 光妖精セット (Light Fairy)", val: "fairy, fairy wings, translucent wings, ethereal body, glowing skin, petite mythical anatomy, magical aura, floating, light fairy, radiant aura, sun rays, soft bloom", links:"fairy wings, butterfly wings, pointy ears, flower crown, floating limbs, floating hair, fairy kei", links:"fairy wings, butterfly wings, pointy ears, flower crown, floating limbs, floating hair, fairy kei" },
+      { label: "🌑 闇妖精セット (Dark Fairy)", val: "fairy, fairy wings, translucent wings, ethereal body, glowing skin, petite mythical anatomy, magical aura, floating, dark fairy, shadow aura, void sparkles, low-key glow", links:"fairy wings, butterfly wings, pointy ears, flower crown, floating limbs, floating hair, fairy kei", links:"fairy wings, butterfly wings, pointy ears, flower crown, floating limbs, floating hair, fairy kei" }
+    ],
+    "🌊 海洋・深海セット (Aquatic/Deep Sea Sets)": [
+      { label: "🧜 マーメイドセット (Mermaid)", val: "mermaid, fish tail, fins, seashells, underwater, bubbles" },
+      { label: "🪼 クラゲ娘セット (Jellyfish Girl)", val: "jellyfish girl, translucent body, bioluminescence, tentacles, underwater, floating, glowing particles" },
+      { label: "🦈 鮫娘セット (Shark Girl)", val: "shark girl, dorsal fin, sharp teeth, shark tail, ocean, water droplets, predatory eyes" }
+    ],
     "🐉 伝説・精霊セット (Mythical Sets)": [
-      { label: "ドラゴン娘セット", val: "dragon girl, dragon wings, dragon tail, horns, scales, claws" },
-      { label: "妖精セット", val: "fairy, translucent wings, mini girl, floating, sparkles, nature" },
-      { label: "マーメイドセット", val: "mermaid, fish tail, fins, seashells, underwater, bubbles" },
       { label: "雪女セット", val: "yuki-onna, pale skin, kimono, snow, ice breath, cold atmosphere" },
       { label: "天狗セット", val: "tengu, black wings, crow mask, traditional japanese clothes, holding fan" }
     ],
@@ -313,7 +341,7 @@
           
           // ★修正: 連動機能を有効化
           cb.dataset.val = item.val; 
-          cb.dataset.links = item.val;
+          cb.dataset.links = item.links;
           
           label.title = item.val; 
           label.appendChild(cb); 
@@ -375,7 +403,37 @@
       { ja: "複眼", en: "compound eyes" }, { ja: "異形頭", en: "object head" },
       { ja: "翼", en: "wings" }, { ja: "コウモリ翼", en: "bat wings" }
     ]
-  };
+  };// --- Parts (Support): subtle add-ons to complement Full Sets ---
+const PARTS_DATA_3 = {
+  "🧩 パーツ（補助）角・突起 (Horns & Spikes)": [
+    { ja: "小さな角（控えめ）", en: "small horns, subtle horns" },
+    { ja: "短い角", en: "short horns" },
+    { ja: "曲がった角（控えめ）", en: "curved horns, subtle" },
+    { ja: "一本角（控えめ）", en: "single horn, subtle" },
+    { ja: "棘（小）", en: "small spikes, subtle spikes" }
+  ],
+  "🧩 パーツ（補助）尾 (Tail)": [
+    { ja: "細い尻尾", en: "thin tail" },
+    { ja: "長い尻尾（控えめ）", en: "long tail, subtle" },
+    { ja: "悪魔尾（先端スペード・控えめ）", en: "spade tail, subtle" },
+    { ja: "獣尾（控えめ）", en: "fluffy tail, subtle" }
+  ],
+  "🧩 パーツ（補助）鱗・模様 (Scales - Partial)": [
+    { ja: "局所鱗（頬/首/肩）", en: "subtle scales, partial scales, scales on cheeks, scales on neck, scales on shoulders" },
+    { ja: "鱗模様（控えめ）", en: "scale pattern, subtle" },
+    { ja: "虹彩鱗（控えめ）", en: "iridescent scales, subtle" }
+  ],
+  "🧩 パーツ（補助）ヒレ・鰓 (Fins & Gills)": [
+    { ja: "背びれ（小）", en: "small dorsal fin" },
+    { ja: "耳ヒレ（控えめ）", en: "ear fins, delicate fins" },
+    { ja: "鰓（控えめ）", en: "gill slits, subtle" }
+  ],
+  "🧩 パーツ（補助）触手 (Tentacles - Subtle)": [
+    { ja: "小さな触手（髪飾り風）", en: "small tentacles, hair-like tentacles, subtle tentacles" },
+    { ja: "触手の尾（控えめ）", en: "tentacle tail, subtle" },
+    { ja: "浮遊触手（控えめ）", en: "floating tentacle appendages, subtle" }
+  ]
+};
 
   const DICT = { "dark skin": "褐色肌", "tanned skin": "日焼け肌", "pale skin": "色白肌", "albino": "アルビノ", "blue skin": "青肌", "green skin": "緑肌", "red skin": "赤肌", "purple skin": "紫肌", "grey skin": "灰色の肌", "metallic skin": "金属肌", "android": "アンドロイド", "artificial human": "人造人間", "joints": "関節", "mechanical parts": "機械部品", "glowing lines": "光るライン", "cyborg": "サイボーグ", "mechanical limbs": "機械の四肢", "half human": "半人間", "sci-fi": "SF", "armor": "アーマー", "ball-jointed doll": "球体関節人形", "doll joints": "ドール関節", "artificial skin": "人工皮膚", "porcelain skin": "陶器の肌", "mecha girl": "メカ娘", "full armor": "フルアーマー", "robot": "ロボット", "helmet": "ヘルメット", "futuristic weapons": "未来的な武器", "automaton": "オートマタ", "clockwork": "時計仕掛け", "gears": "歯車", "steampunk": "スチームパンク", "keyhole on back": "背中の鍵穴", "lamia": "ラミア", "monster girl": "モンスター娘", "snake body": "蛇の体", "snake tail": "蛇の尾", "scales": "鱗", "long tail": "長い尻尾", "arachne": "アラクネ", "spider body": "蜘蛛の体", "spider legs": "蜘蛛の脚", "multiple eyes": "複数の目", "centaur": "ケンタウロス", "horse body": "馬の体", "4 legs": "四本足", "tail": "尻尾", "alraune": "アルラウネ", "flower body": "花の体", "vines": "ツタ", "petals": "花弁", "nature": "自然", "harpy": "ハーピー", "bird wings": "鳥の翼", "bird legs": "鳥の脚", "talons": "鉤爪", "feathers": "羽", "slime girl": "スライム娘", "liquid body": "液体の体", "translucent skin": "半透明の肌", "glossy": "光沢", "melting": "溶解", "multiple arms": "多腕", "4 arms": "4本腕", "multiple legs": "多脚", "cyclops": "単眼", "single eye": "一つ目", "third eye": "三つ目", "compound eyes": "複眼", "object head": "異形頭", "wings": "翼", "bat wings": "コウモリ翼" };
 
@@ -406,7 +464,7 @@
           if (item.val) { 
              // ★修正: 連動機能を有効化
              cb.dataset.val = item.val; 
-             cb.dataset.links = item.val;
+             cb.dataset.links = item.links;
              label.title = item.val; 
              label.appendChild(cb); 
              label.appendChild(document.createTextNode(item.label)); 
@@ -425,6 +483,9 @@
       Object.entries(PARTS_DATA_1).forEach(([t, i]) => createCat(partsRoot, t, i));
       Object.entries(SETS_DATA).forEach(([t, i]) => createCat(setsRoot, t, i));
       Object.entries(PARTS_DATA_2).forEach(([t, i]) => createCat(partsRoot, t, i));
+      if (typeof PARTS_DATA_3 !== 'undefined') {
+        Object.entries(PARTS_DATA_3).forEach(([t, i]) => createCat(partsRoot, t, i));
+      }
     },
     getTags() { return []; }
   };

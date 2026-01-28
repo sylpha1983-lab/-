@@ -45,6 +45,7 @@ window.EXT_MANIFEST = [
   "ext_floating_panel.js",
   "ext_footer_search.js",
   "ext_history.js",
+  "ext_simple_visualize.js",
   "ext_smart_edit.js",
   "ext_sync_check.js",
   "ext_i18n_section_labels.js",

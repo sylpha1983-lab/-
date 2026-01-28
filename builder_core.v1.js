@@ -572,7 +572,13 @@
   function resetAll() {
     if (!confirm("全てリセットしますか？")) return;
 
-    document.querySelectorAll("input[type='checkbox']").forEach((el) => (el.checked = false));
+    // Many extension panels update their visibility/state via checkbox
+    // 'change' events (e.g. "生成内容の簡易可視化"). If we only flip
+    // `checked=false`, those panels can remain visible/stale after reset.
+    const allCheckboxes = Array.from(document.querySelectorAll("input[type='checkbox']"));
+    allCheckboxes.forEach((el) => (el.checked = false));
+    // Notify listeners after the state change.
+    allCheckboxes.forEach((el) => el.dispatchEvent(new Event("change", { bubbles: true })));
     document.querySelectorAll("input[type='range']").forEach((el) => {
       el.value = 100;
       el.dispatchEvent(new Event("input"));

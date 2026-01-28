@@ -1,0 +1,18 @@
+{
+  "version": "Completed v1.1",
+  "display_settings": [
+    "生成内容の簡易可視化 (default OFF)"
+  ],
+  "features": [
+    "HC Emotional System",
+    "World Preset Prompt Packs",
+    "Beginner-safe visualization (optional)",
+    "Silent Professional UI"
+  ],
+  "core_modules": [
+    "builder_data.hc_presets.js",
+    "builder_data.world_presets.js",
+    "builder_core.hc_expand.js",
+    "builder_core.prompt.js"
+  ]
+}
