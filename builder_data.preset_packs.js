@@ -1086,6 +1086,197 @@
     { label: "空賊 / Sky Pirate", val: "sky pirate, airship deck, wind, flag, wide angle", desc: "場所: 飛空艇甲板 / 構図: wide, sky" },
 ],
 
+  "🎭 なりきりおすすめセット｜神獣・伝説なりきり (Mythic Beasts)": [
+    
+{
+  label: "青龍 / Seiryu",
+  val: "seiryu beastkin, true eastern dragon fusion entity, mythic divine creature, not humanoid cosplay, biological dragon anatomy as primary form, eastern dragon god presence, humanoid girl with a clearly human face (no animal muzzle), long azure dragon horns sweeping backward, large flowing dragon tail covered in blue-green scales, scaled skin along arms, back, thighs (azure dragon scales), dragon claws on hands and feet, ethereal whisker-like tendrils near the face, glowing cyan dragon eyes accent, wind and cloud aura swirling around the body, not cosplay, true eastern dragon fusion form",
+  desc: "四神：東・青龍（東洋龍融合）"
+},
+{
+  label: "白虎 / Byakko",
+  val: "byakko beastkin, humanoid girl with a clearly human face (no animal muzzle), thick white tiger fur covering body, bold black tiger stripes clearly visible, tiger ears and sharp feline fangs, powerful digitigrade tiger legs, long striped tiger tail, clawed hands and feet, piercing golden predator eyes accent, ferocious guardian beast aura, not cosplay, true white tiger fusion form",
+  desc: "四神：西・白虎（白虎融合）"
+},
+{
+  label: "朱雀 / Suzaku",
+  val: "suzaku beastkin, humanoid girl with a clearly human face (no animal beak), large fiery bird wings spreading from her back, feathered arms with red and gold plumage, long flowing tail feathers like flames, subtle feather textures across shoulders and hips, embers floating around the body, crimson glowing eyes accent, sacred fire bird aura, not cosplay, true divine bird fusion form",
+  desc: "四神：南・朱雀（火鳥融合）"
+},
+{
+  label: "麒麟 / Qilin",
+  val: "qilin beastkin, humanoid girl with a clearly human face (no animal muzzle), single curved qilin horn on the forehead, scaled body with soft golden and jade tones, deer-like digitigrade legs with glowing hooves, lion-like tail with flowing fur, subtle flame and cloud motifs along the body, gentle luminous eyes accent, sacred auspicious beast aura, not cosplay, true qilin fusion form",
+  desc: "四神：中央・麒麟（瑞獣融合）"
+},
+{
+      label: "バハムート / Bahamut",
+      val: "bahamut beastkin, humanoid girl with a clearly human face (no animal muzzle), massive backward-curving dragon horns, large draconic wings fully visible, long dragon tail, iridescent scaled skin on shoulders arms thighs, clawed hands and taloned feet, draconic eye glow accent, ancient dragon deity aura, not cosplay, true beast fusion",
+      synergy_tags: [
+        "human face, no animal muzzle, but true dragon anatomy",
+        "massive horns, wings visible, tail visible, iridescent scales",
+        "clawed hands, taloned feet, draconic glow, slit pupils accent",
+        "celestial temple, cosmic throne room, starfield window",
+        "god rays, volumetric lighting, cinematic backlight",
+        "low angle, cinematic mid-shot, heroic framing",
+        "calm stern expression, overwhelming divine intimidation"
+      ],
+      desc: "神獣: 竜王 / 自動シナジー: 神光・威圧・低角度"
+    },
+    {
+      label: "リヴァイアサン / Leviathan",
+      val: "leviathan beastkin, humanoid girl with a clearly human face (no animal muzzle), serpentine lower body or long scaled tail replacing legs, bioluminescent deep-sea scales, fins along back and arms, webbed claws, water dripping and abyssal mist, deep ocean deity pressure aura, not cosplay, true sea-serpent fusion",
+      synergy_tags: [
+        "human face, no animal muzzle, but true sea-serpent anatomy",
+        "serpentine tail replacing legs, fins visible, bioluminescent scales",
+        "wet sheen, water dripping, caustics, abyssal mist",
+        "pressure in the air, abyssal presence, drowning quiet",
+        "deep ocean corridor, flooded deck, dark water reflections",
+        "side angle, cinematic profile, mid-shot",
+        "quiet distant expression, controlled emotion"
+      ],
+      desc: "神獣: 海の巨蛇 / 自動シナジー: 深海・水光・静圧"
+    },
+    {
+      label: "オロチ / Orochi",
+      val: "orochi beastkin, humanoid girl with a clearly human face (no animal muzzle), eight serpentine tails or necks emerging from back as living appendages, shimmering snake scales across skin, forked-tongue smile accent, reptilian slit-eye glow accent, coiling tail wraps around body, cursed shrine serpent deity aura, not cosplay, true multi-serpent fusion",
+      synergy_tags: [
+        "human face, no animal muzzle, but multi-serpent appendages",
+        "eight serpentine tails/necks visible, coiling motion",
+        "snake scales on skin, cursed shrine aura, taboo miasma",
+        "shrine ruins, torii gate at night, drifting fog",
+        "low fog, moody lighting, filmic contrast",
+        "three-quarter view, cinematic mid-shot",
+        "emotionless smile, unsettling serenity"
+      ],
+      desc: "神獣: 八岐大蛇 / 自動シナジー: 霧・禁忌・多重気配"
+    },
+    {
+      label: "ヒュドラ / Hydra",
+      val: "hydra beastkin, humanoid girl with a clearly human face (no animal muzzle), multiple serpent necks emerging from shoulders/back as living appendages, scaled skin with regeneration scars, toxic-green scale sheen, long reptilian tail, clawed hands, relentless regenerative myth aura, not cosplay, true many-headed fusion",
+      synergy_tags: [
+        "human face, no animal muzzle, but multiple serpent necks visible",
+        "regeneration scars, scaled skin, toxic-green sheen",
+        "long reptilian tail, clawed hands, resilient menace",
+        "toxic swamp air, quiet threat, persistent will",
+        "swamp ruins, wet stone, murky reflections",
+        "volumetric haze, soft backlight, cinematic framing",
+        "tired but unbroken expression, stubborn gaze"
+      ],
+      desc: "神獣: 多頭竜 / 自動シナジー: 沼・毒霧・再生の気配"
+    },
+    {
+      label: "フェンリル / Fenrir",
+      val: "full body fusion with Fenrir, humanoid girl with a clearly human face (no animal muzzle), skin transforming into silver wolf fur, fur naturally covering chest waist hips, luminous wolf ears, wolf-like limbs with sharp claws, digitigrade wolf legs, fluffy wolf tail, moonlit wolf eyes glow accent, primal wolf god lunar aura, not cosplay, true beast fusion",
+      synergy_tags: [
+        "human face, no animal muzzle, full body wolf-fusion",
+        "silver wolf fur, wolf ears, fluffy tail, digitigrade legs",
+        "sharp claws, primal posture, moonlit glow",
+        "winter night, moonlight shafts, drifting snow",
+        "cool rim light, cinematic backlight, low contrast",
+        "medium shot, dynamic stance, predatory elegance",
+        "calm but feral expression, overwhelming lunar aura"
+      ],
+      desc: "神獣: 巨狼 / 自動シナジー: 月夜・氷・終末の気配"
+    },
+    {
+      label: "ヨルムンガンド / Jormungandr",
+      val: "jormungandr beastkin, humanoid girl with a clearly human face (no animal muzzle), world-serpent traits: massive scaled tail coiling around her, sea-green iridescent scales across body, venomous rune markings, fin-like spines along back, webbed claws, cold oceanic apocalypse aura, not cosplay, true world-serpent fusion",
+      synergy_tags: [
+        "human face, no animal muzzle, world-serpent fusion",
+        "massive scaled tail coiling around, fin spines visible",
+        "sea-green iridescent scales, runic venom markings",
+        "stormy sea horizon, apocalyptic ocean aura",
+        "cold rim light, mist, cinematic contrast",
+        "wide to medium shot, coiling composition",
+        "detached prophecy gaze, unstoppable doom"
+      ],
+      desc: "神獣: 世界蛇 / 自動シナジー: 終末スケール・地平線"
+    },
+    {
+      label: "クラーケン / Kraken",
+      val: "kraken beastkin, humanoid girl with a clearly human face (no animal muzzle), multiple thick cephalopod appendages unfurling around her form, distinct circular textures along the appendages, wet glossy skin with ink-stained accents, abyssal glowing eyes accent, deep-sea monster aura, not cosplay, true cephalopod fusion, biological fantasy creature, dark abyss aesthetic",
+      synergy_tags: [
+        "human face, no animal muzzle, cephalopod fusion",
+        "multiple tentacles visible with suction cups",
+        "wet glossy skin, ink mist, abyssal glow accents",
+        "deep-sea trench, black water, drifting particles",
+        "cool caustics, volumetric fog, cinematic lighting",
+        "medium shot, tentacles framing silhouette",
+        "quiet menace, hungry patience"
+      ],
+      desc: "深海神獣クラーケン（センシティブ回避・生物的表現）"
+    },
+    {
+      label: "フェニックス / Phoenix",
+      val: "phoenix beastkin, humanoid girl with a clearly human face (no animal muzzle), blazing feathered wings fully visible, fiery plumage forming shoulders and hips, long tail feathers trailing embers, glowing ember marks on skin, taloned feet and clawed hands, rebirth flame aura, not cosplay, true fire-bird fusion",
+      synergy_tags: [
+        "human face, no animal muzzle, fire-bird fusion",
+        "fiery wings visible, ember plumage, tail feathers trailing sparks",
+        "glowing ember marks, heat haze, rebirth flame aura",
+        "sunrise ash field, temple ruins, floating embers",
+        "warm backlight, god rays, cinematic bloom",
+        "heroic mid-shot, wings framing composition",
+        "serene smile, unburning confidence"
+      ],
+      desc: "神獣: 不死鳥 / 自動シナジー: 再生・残光・朝焼け"
+    },
+    {
+      label: "ケルベロス / Cerberus",
+      val: "cerberus beastkin, humanoid girl with a clearly human face (no animal muzzle), three-headed hound motif as spectral canine heads behind shoulders (clearly visible), black hellhound fur patches on body, canine ears, spiked collar chains, clawed hands and digitigrade legs, hellfire breath aura, not cosplay, true underworld hound fusion",
+      synergy_tags: [
+        "human face, no animal muzzle, underworld hound fusion",
+        "three spectral canine heads visible behind shoulders",
+        "black hellhound fur patches, chains, spiked collar",
+        "hellfire breath mist, ash, underworld gate",
+        "red rim light, smoke, cinematic contrast",
+        "low angle, medium shot, intimidating stance",
+        "cold glare, loyal menace"
+      ],
+      desc: "神獣: 冥府の番犬 / 自動シナジー: 境界・鎖・監視"
+    },
+    {
+      label: "グリフォン / Griffin",
+      val: "griffin beastkin, humanoid girl with a clearly human face (no animal muzzle), large eagle wings fully visible, feathered arms and shoulder plumage, lion-like hind legs with fur, lion tail with tuft, sharp talons and claws, regal sky predator aura, not cosplay, true griffin fusion",
+      synergy_tags: [
+        "human face, no animal muzzle, griffin fusion",
+        "eagle wings visible, feathered arms, lion hind legs",
+        "lion tail tuft, sharp talons, regal predator aura",
+        "cliff edge, high sky wind, flying feathers",
+        "strong backlight, volumetric light, cinematic framing",
+        "three-quarter mid-shot, wings spread pose",
+        "noble focused gaze, heroic calm"
+      ],
+      desc: "神獣: 鷲獅子 / 自動シナジー: 山頂・風・守護"
+    },
+    {
+      label: "スフィンクス / Sphinx",
+      val: "sphinx beastkin, humanoid girl with a clearly human face (no animal muzzle), lioness body traits: tawny fur across torso and limbs, powerful feline claws, long lion tail, optional folded wings, ancient desert guardian aura, hieroglyphic markings on fur, not cosplay, true sphinx fusion",
+      synergy_tags: [
+        "human face, no animal muzzle, desert guardian fusion",
+        "lioness fur body traits, feline claws, lion tail visible",
+        "hieroglyphic markings, ancient stone dust aura",
+        "desert ruins, broken obelisk, warm sand haze",
+        "golden backlight, soft haze, cinematic contrast",
+        "seated regal pose, medium shot",
+        "silent riddle smile, timeless authority"
+      ],
+      desc: "神獣: 砂漠の守護 / 自動シナジー: 古代遺跡・沈黙"
+    },
+    {
+      label: "ベヒーモス / Behemoth",
+      val: "behemoth beastkin, humanoid girl with a clearly human face (no animal muzzle), colossal horned beast traits: massive curved horns, thick armored hide texture on skin, ultra-muscular limbs, heavy hoof-like feet, earth-cracking weight presence, dust and stone debris aura, not cosplay, true colossal beast fusion",
+      synergy_tags: [
+        "human face, no animal muzzle, colossal beast fusion",
+        "massive curved horns, thick armored hide texture",
+        "hoof-like feet, ultra-muscular limbs, immense weight",
+        "dust and stone debris, ground cracking presence",
+        "hard rim light, volumetric dust, cinematic scale",
+        "low angle, wide to medium shot",
+        "slow breathing menace, unmovable dominance"
+      ],
+      desc: "神獣: 地の巨獣 / 自動シナジー: 震動・砂塵・重量"
+    },
+  ],
     
 "🧰 テーマ別・持ち物セット (Item Sets)": [
     {
@@ -1316,11 +1507,17 @@
         if (k.indexOf("🎭 なりきりおすすめセット｜職業・なりきり") === 0 &&
             Object.prototype.toString.call(packs[k]) === "[object Array]") {
           roleplayChildren.push({
-            title_ja: k.replace(/^🎭 なりきりおすすめセット｜/,""),
-            title_en: "",
+            title_ja: k.replace(/^🎭 なりきりおすすめセット｜/,"").replace(/ \(.+?\)$/,""),
+            title_en: (k.match(/\((.*?)\)$/)||[])[1] || "",
             children: packs[k]
           });
         }
+      }
+
+      // 1b) 神獣・伝説なりきり：特別枠
+      var mythicKey = "🎭 なりきりおすすめセット｜神獣・伝説なりきり (Mythic Beasts)";
+      if (Object.prototype.toString.call(packs[mythicKey]) === "[object Array]") {
+        roleplayChildren.push({ title_ja: "神獣・伝説なりきり", title_en: "Mythic Beasts", children: packs[mythicKey] });
       }
 
       // 2) 📍 場所・状況：シチュエーションパック（オブジェクト）を子サブグループ化

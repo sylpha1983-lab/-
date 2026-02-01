@@ -441,6 +441,61 @@
     return result;
   }
 
+  // --- Subject Anchor (auto-front) ---
+function applySubjectAnchorOrdering(text) {
+  try {
+    const tags = smartSplit(text || "");
+    if (!tags.length) return text || "";
+    const ANCHOR_PAT = /(beastkin|kraken|cephalopod|true\s+cephalopod\s+fusion|mythic\s*beast|bahamut|fenrir|leviathan|seiryu|byakko|suzaku|qilin|kirin|qinglong|baihu|zhuque|cerberus|hydra|orochi|jormungandr|griffin|sphinx|behemoth|phoenix|青龍|白虎|朱雀|麒麟)/i;
+
+    const coreOf = (tag) => {
+      try {
+        if (typeof getCoreTag === "function") return getCoreTag(tag);
+      } catch (e) {}
+      return String(tag || "")
+        .replace(/[\(\{\[\]\}\)]/g, "")
+        .replace(/:[\d\.]+(%?)/g, "")
+        .trim()
+        .toLowerCase();
+    };
+
+    const anchors = [];
+    const rest = [];
+    const seen = new Set();
+
+    tags.forEach((t) => {
+      const c = coreOf(t);
+      if (seen.has(c)) return;
+      if (ANCHOR_PAT.test(t)) anchors.push(t);
+      else rest.push(t);
+      seen.add(c);
+    });
+
+    const ordered = anchors.slice(0, 8).concat(rest);
+    
+/*ANCHOR_ORDER_PATCH_V2*/
+try {
+  const __p = Array.isArray(ordered) ? ordered : [];
+  const __isQuality = (s) => /\b(masterpiece|best quality|highres|ultra[- ]detailed|ultra high resolution|8k|16k|34k|uhd|4k|ray tracing|octane render|unreal engine|global illumination|subsurface scattering|volumetric lighting|cinematic lighting|dramatic lighting|official art|unity 8k wallpaper|illustration|sharp focus|extremely detailed|intricate details|detailed background|depth of field|bokeh|hdr|film grain|post-processing|lens flare|bloom|chromatic aberration|vignette|halation|diffraction spikes|ambient occlusion)\b/i.test(s);
+  const __isAnchor  = (s) => /\b(seiryu\s+beastkin|byakko\s+beastkin|suzaku\s+beastkin|genbu\s+beastkin|kraken\s+beastkin|beastkin)\b|\b(true\s+eastern\s+dragon\s+fusion\s+entity|mythic\s+divine\s+creature|biological\s+.*\s+anatomy|god\s+presence)\b/i.test(s);
+  const __anchors = [];
+  const __quality = [];
+  const __rest = [];
+  for (const __s of __p) {
+    if (!__s) continue;
+    if (__isAnchor(__s)) __anchors.push(__s);
+    else if (__isQuality(__s)) __quality.push(__s);
+    else __rest.push(__s);
+  }
+  ordered.length = 0;
+  ordered.push(...__anchors, ...__rest, ...__quality);
+} catch (e) {}
+return ordered.join(", ");
+  } catch (e) {
+    return text || "";
+  }
+}
+
   function generateOutput() {
     window.__isGenerating = true;
     const out = document.getElementById("out");
@@ -488,7 +543,9 @@
 
     let outText = finalTags.join(", ");
 
-    if (OT && keepMode === "ja" && OT.enToJa) {
+    
+    outText = applySubjectAnchorOrdering(outText);
+if (OT && keepMode === "ja" && OT.enToJa) {
       const words = outText.split(/[,，、\n]+/).map((s) => s.trim()).filter(Boolean);
       outText = words
         .map((w) => {
