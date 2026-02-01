@@ -1,5 +1,5 @@
 // Auto-generated bundle for section 'attire'
-// Contains 19 versions stacked in ascending order.
+// Contains 20 versions stacked in ascending order.
 
 (function(){
 // --- builder_ui.section.attire.v1.js ---
@@ -2292,6 +2292,104 @@
       return tags;
     }
   };
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
+})();
+
+
+(function(){
+// --- builder_ui.section.attire.v20.js ---
+(function(){
+  "use strict";
+  const VERSION = 20; // 節分・鬼 (日本伝承イベント)
+  const KEY = "attire";
+
+  const ATTIRE_DATA = {
+    "👹 節分・鬼衣装 (Setsubun Oni Attire)": [
+      { ja: "鬼の衣装 (オニコス)", en: "oni costume" },
+      { ja: "鬼の羽織", en: "oni haori" },
+      { ja: "鬼の着物", en: "oni kimono" },
+      { ja: "鬼の腹掛け", en: "oni haragake" },
+      { ja: "鬼のふんどし", en: "oni fundoshi" }
+    ],
+    "🐯 虎柄・鬼パンツ (Tiger Stripes)": [
+      { ja: "虎柄 (タイガープリント)", en: "tiger print" },
+      { ja: "虎縞 (タイガーストライプ)", en: "tiger stripes" },
+      { ja: "虎柄のふんどし", en: "tiger-striped fundoshi" },
+      { ja: "虎柄の腰布", en: "tiger-striped loincloth" },
+      { ja: "虎柄のパンツ", en: "tiger-striped pants" }
+    ]
+  };
+
+  const DICT = {};
+  Object.values(ATTIRE_DATA).flat().forEach(item => {
+    if (item.en && item.ja) DICT[item.en] = item.ja;
+  });
+
+  const API = {
+    initUI(container) {
+      if (window.__outputTranslation) window.__outputTranslation.register(DICT);
+
+      const parent = document.querySelector("#list-attire") || container;
+      if (!parent) return;
+
+      // 既存があれば削除（更新用）
+      const existing = parent.querySelector(".attire-v20-container");
+      if (existing) existing.remove();
+
+      const createCat = (title, items) => {
+        const details = document.createElement("details");
+        details.className = "attire-cat";
+        details.style.cssText = "margin-bottom:6px; border:1px solid #eee; border-radius:4px; background:#fff;";
+        details.open = false;
+
+        const summary = document.createElement("summary");
+        summary.textContent = title;
+        summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#fff8f0; color:#7a3b00;";
+        details.appendChild(summary);
+
+        const content = document.createElement("div");
+        content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:6px;";
+
+        items.forEach(item => {
+          const label = document.createElement("label");
+          label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer;";
+          const cb = document.createElement("input");
+          cb.type = "checkbox";
+          cb.dataset.en = item.en;
+          cb.style.marginRight = "6px";
+          label.appendChild(cb);
+          label.appendChild(document.createTextNode(`${item.ja} / ${item.en}`));
+          content.appendChild(label);
+        });
+
+        details.appendChild(content);
+        return details;
+      };
+
+      const root = document.createElement("div");
+      root.className = "attire-v20-container";
+
+      const sep = document.createElement("div");
+      sep.style.cssText = "margin:15px 0 10px 0; border-top:1px dashed #cc9; text-align:center; color:#a66; font-size:0.8em;";
+      sep.textContent = "▼ 節分・鬼 (v20) ▼";
+      root.appendChild(sep);
+
+      Object.entries(ATTIRE_DATA).forEach(([cat, items]) => {
+        root.appendChild(createCat(cat, items));
+      });
+
+      const contentArea = parent.querySelector(".section-content") || parent;
+      contentArea.appendChild(root);
+    },
+
+    getTags() {
+      const tags = [];
+      document.querySelectorAll(".attire-v20-container input[type='checkbox']:checked").forEach(cb => tags.push(cb.dataset.en));
+      return tags;
+    }
+  };
+
   window.__registerPromptPart(KEY, VERSION, API);
 })();
 })();
