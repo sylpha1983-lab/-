@@ -495,8 +495,37 @@ return ordered.join(", ");
     return text || "";
   }
 }
+// __SETSUBUN_BEANS_THROW_V1
+function __isSetsubunToken(rawTag) {
+  const s = String(rawTag||"").trim().toLowerCase();
+  return s.includes("setsubun beans") || s === "roasted soybeans (setsubun beans)" || s === "throwing roasted soybeans (setsubun beans)";
+}
+function __composeBeansThrow(activeRawTags) {
+  let hasBeans=false, hasThrow=false;
+  const keep=[];
+  activeRawTags.forEach(t=>{
+    const raw=String(t||"").trim();
+    const low=raw.toLowerCase();
+    const core=getCoreTag(raw);
+    if (low === "roasted soybeans (setsubun beans)") { hasBeans=true; return; }
+    if (low === "throwing roasted soybeans (setsubun beans)") { hasBeans=true; hasThrow=true; return; }
+    if (core === "throwing") { hasThrow=true; return; }
+    keep.push(raw);
+  });
+  if (!hasBeans) return keep;
+  // beans selected
+  if (hasThrow) {
+    keep.push("throwing roasted soybeans (setsubun beans)");
+  } else {
+    keep.push("roasted soybeans (setsubun beans)");
+  }
+  return keep;
+}
 
-  function generateOutput() {
+function generateOutput() {
+    // __QTY_NOT_PRESERVED_V1
+    const __qtyCores = new Set(["quantitysingle","quantitymultiple","quantitymany"]);
+
     window.__isGenerating = true;
     const out = document.getElementById("out");
     if (!out) return;
@@ -504,36 +533,22 @@ return ordered.join(", ");
     const OT = window.__outputTranslation || null;
     const keepMode = OT ? OT.mode : "en";
 
-    const currentText = out.value || "";
-    const currentTags = smartSplit(currentText);
-
     const rawSelectedList = UI_REG.getAllSelected();
     const activeRawTags = new Set();
     rawSelectedList.forEach((item) => {
       smartSplit(item || "").forEach((p) => activeRawTags.add(p));
     });
 
-    let knownDictionary = new Set();
-    try {
-      knownDictionary = getKnownTags();
-    } catch (e) {
-      console.error("Dict error", e);
-    }
+    // NOTE: We intentionally rebuild output from scratch on every Generate to avoid
+    // "sticky" / duplicated tags when toggling checkboxes.
 
     const finalTags = [];
     const processedCores = new Set();
 
-    currentTags.forEach((tag) => {
-      const core = getCoreTag(tag);
-      if (!knownDictionary.has(core)) {
-        if (!processedCores.has(core)) {
-          finalTags.push(tag);
-          processedCores.add(core);
-        }
-      }
-    });
+    // compose beans + throwing (setsubun) into a single clean token
+    const __composedActiveTags = __composeBeansThrow(Array.from(activeRawTags));
 
-    activeRawTags.forEach((rawTag) => {
+    __composedActiveTags.forEach((rawTag) => {
       const core = getCoreTag(rawTag);
       if (!processedCores.has(core)) {
         finalTags.push(rawTag);
@@ -545,7 +560,8 @@ return ordered.join(", ");
 
     
     outText = applySubjectAnchorOrdering(outText);
-if (OT && keepMode === "ja" && OT.enToJa) {
+
+    if (OT && keepMode === "ja" && OT.enToJa) {
       const words = outText.split(/[,，、\n]+/).map((s) => s.trim()).filter(Boolean);
       outText = words
         .map((w) => {

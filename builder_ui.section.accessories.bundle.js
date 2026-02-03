@@ -166,15 +166,6 @@
         { ja: "キセル", en: "kiseru" }
       ]
     },
-    // ★アクション定義
-        "🔢 数量 (Quantity)": {
-          isQuantity: true,
-          items: [
-            { ja: "単体", en: "single" },
-            { ja: "複数", en: "multiple" },
-            { ja: "大量", en: "many" }
-          ]
-        },
     "🤲 アイテムの状態・動作 (Item Actions)": {
       isAction: true,
       items: [
@@ -299,36 +290,36 @@
       // 2. 結合ロジック
       const postfixActions = new Set(["in mouth", "on back", "on belt", "on head", "in pocket"]);
 
-      // 数量がある場合は、ターゲット側に前置きする (例: multiple hamburgers)
-      const applyQty = (qty, target) => qty ? `${qty} ${target}` : target;
-
       // 出力先
       const finalTags = [...normalTags];
 
-      if (targetTags.length > 0) {
-        const qtyList = (quantityTags.length > 0) ? quantityTags : [null];
+      // NOTE:
+      // 数量を「holding multiple hamburger」のような“複合フレーズ”へ埋め込むと、
+      // 生成欄の既存テキスト整理（未選択タグの除去）で“未知タグ”扱いになり、
+      // チェックを外しても残留しやすい。
+      // ここでは数量を“独立タグ”として出力し、ターゲット/アクションと並べる。
+      // 例: holding hamburger, multiple
 
+      if (targetTags.length > 0) {
+        // まず、アクション×ターゲットを従来通り結合
         if (actionTags.length > 0) {
-          // アクション×ターゲット×数量 を結合
           actionTags.forEach(action => {
             targetTags.forEach(target => {
-              qtyList.forEach(qty => {
-                const t = applyQty(qty, target);
-                if (postfixActions.has(action)) finalTags.push(`${t} ${action}`);     // "multiple sword on back"
-                else finalTags.push(`${action} ${t}`);                               // "holding multiple sword"
-              });
+              if (postfixActions.has(action)) finalTags.push(`${target} ${action}`); // "sword on back"
+              else finalTags.push(`${action} ${target}`);                           // "holding sword"
             });
           });
         } else {
-          // ターゲットのみ（数量があれば適用）
-          targetTags.forEach(target => {
-            qtyList.forEach(qty => finalTags.push(applyQty(qty, target)));
-          });
+          // ターゲットのみ
+          finalTags.push(...targetTags);
         }
+
+        // 数量は「ターゲットがある時だけ」独立タグとして付与
+        if (quantityTags.length > 0) finalTags.push(...quantityTags);
       } else {
-        // ターゲットが無い場合：アクションはそのまま、数量は捨てる
-        finalTags.push(...actionTags);
-      }
+        // ターゲットが無い場合：アクション/数量は捨てる（単独で出さない）
+        // finalTags.push(...actionTags);
+        }
 
       // 3. 重複除去（順序維持）
       const seen = new Set();
