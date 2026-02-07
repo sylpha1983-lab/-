@@ -131,6 +131,20 @@
   .floater-item { padding: 8px 12px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; font-size: 0.9em; }
   .floater-item:last-child { border-bottom: none; }
   .item-close-btn { background: #eee; border: none; color: #666; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1em; margin-left: 8px; }
+  
+  /* --- UI Tweak Test: Accordion readability (Food & Drink etc.) --- */
+  details.accordion-wrap > .section-content{
+    padding: 10px 12px;
+  }
+
+  /* Subgroup cards (nested groups inside Accessories/Food) */
+  details.subgroup{
+    margin-top: 8px;
+    padding: 6px;
+    border-radius: 8px;
+    background: rgba(0,0,0,0.03);
+  }
+
   `;
 
   function getCoreTag(formattedTag) {
