@@ -503,7 +503,6 @@
 
 "🍱 食べ物・飲み物 / 🌍 世界観別フード / 🪖 戦場・終末食": {
     icon: "🪖",
-    isTarget: true,
     items: [
         { ja: "干し肉", en: "dried meat" },
         { ja: "塩漬け肉", en: "salted meat" },
@@ -746,7 +745,6 @@
 
 "🍱 食べ物・飲み物 / 🥤 飲み物 / カフェ・甘味": {
   icon: "☕",
-    isTarget: true,
   items: [
         { ja: "カフェラテ", en: "caffe latte" },
         { ja: "カプチーノ", en: "cappuccino" },
@@ -775,7 +773,6 @@
 
 "🍱 食べ物・飲み物 / 🥤 飲み物 / 機能性飲料": {
   icon: "⚡",
-    isTarget: true,
   items: [
         { ja: "スタミナドリンク", en: "stamina drink" },
         { ja: "スポーツドリンク", en: "sports drink" },
@@ -786,7 +783,6 @@
 
 "🍱 食べ物・飲み物 / 🥤 飲み物 / アルコール": {
   icon: "🍺",
-    isTarget: true,
   items: [
         { ja: "呪い酒", en: "cursed liquor" },
         { ja: "竜血酒", en: "dragon blood wine" },
@@ -831,7 +827,6 @@
 
 "🍱 食べ物・飲み物 / 🥤 飲み物 / 世界観ドリンク": {
   icon: "🌌",
-    isTarget: true,
   items: [
         { ja: "神酒", en: "divine sake" },
         { ja: "儀式酒", en: "ritual liquor" },
@@ -917,7 +912,109 @@
         { ja: "ポケットに入れる", en: "in pocket" }
       ]
     }
-  };
+  ,
+  "🍱 食べ物・飲み物 / 🍴 食感・質感 / 🔥 焼き・揚げ": {
+    icon: "🔥",
+    items: [
+      { ja: "汎用：サクサク", en: "crispy" },
+      { ja: "汎用：カリカリ", en: "crunchy" },
+      { ja: "汎用：きつね色", en: "golden-brown" },
+      { ja: "汎用：ジュワッ（油音）", en: "sizzling" },
+      { ja: "汎用：均一に揚がった", en: "evenly fried" },
+      { ja: "汎用：香ばしい焦げ目", en: "lightly charred" },
+      { ja: "汎用：ディープフライ質感", en: "deep-fried texture" },
+      { ja: "肉向け：中がジューシー", en: "juicy interior" },
+      { ja: "肉向け：肉汁が弾ける", en: "bursting meat juices" },
+      { ja: "肉向け：中がやわらかい", en: "tender inside" },
+      { ja: "肉向け：脂が溶けた", en: "rendered fat" },
+      { ja: "肉向け：肉繊維が艶めく", en: "glistening meat fibers" },
+      { ja: "肉向け：表面がカラメル化", en: "caramelized meat surface" },
+      { ja: "衣向け：衣サクサク", en: "crispy batter" },
+      { ja: "衣向け：層がパリパリ", en: "flaky crust" },
+      { ja: "衣向け：天ぷら衣", en: "light tempura coating" },
+      { ja: "衣向け：砕ける食感", en: "shattering crunch" },
+      { ja: "衣向け：軽い衣", en: "airy fried coating" },
+      { ja: "衣向け：繊細な揚げ殻", en: "delicate fried shell" },
+    ]
+  }
+,
+  "🍱 食べ物・飲み物 / 🍴 食感・質感 / 🥖 ふわ・もち": {
+    icon: "🥖",
+    items: [
+      { ja: "基本：ふわふわ", en: "fluffy" },
+      { ja: "基本：空気感", en: "airy" },
+      { ja: "基本：柔らかい", en: "soft texture" },
+      { ja: "基本：しっとり", en: "moist" },
+      { ja: "基本：もっちり", en: "chewy" },
+      { ja: "基本：弾力のある噛み心地", en: "elastic bite" },
+      { ja: "基本：口どけ", en: "melt-in-mouth" },
+      { ja: "基本：とろける", en: "melting" },
+    ]
+  },
+  "🍱 食べ物・飲み物 / 🍴 食感・質感 / 🍖 肉汁・脂": {
+    icon: "🍖",
+    items: [
+      { ja: "基本：ジューシー", en: "juicy" },
+      { ja: "基本：肉汁が滴る", en: "dripping juices" },
+      { ja: "基本：肉汁が弾ける", en: "bursting juices" },
+      { ja: "基本：脂が艶めく", en: "glossy fat" },
+      { ja: "基本：とろける脂", en: "melting fat" },
+      { ja: "基本：霜降り", en: "rich marbling" },
+      { ja: "調理：表面の脂が焼けた", en: "rendered fat" },
+      { ja: "調理：肉汁が閉じ込められた", en: "sealed juices" },
+    ]
+  },
+  "🍱 食べ物・飲み物 / 🍴 食感・質感 / 🍓 瑞々しさ": {
+    icon: "🍓",
+    items: [
+      { ja: "基本：瑞々しい", en: "fresh" },
+      { ja: "基本：水分感", en: "moist" },
+      { ja: "基本：露を帯びた", en: "dewy" },
+      { ja: "基本：果肉が透ける", en: "translucent flesh" },
+      { ja: "基本：果汁たっぷり", en: "juicy fruit flesh" },
+      { ja: "基本：みずみずしい断面", en: "water-rich cut surface" },
+      { ja: "表現：きらめく水滴", en: "sparkling droplets" },
+      { ja: "表現：冷たさを感じる", en: "cool freshness" },
+    ]
+  },
+  "🍱 食べ物・飲み物 / 🍴 食感・質感 / ♨ 温度": {
+    icon: "♨",
+    items: [
+          { ja: "基本：熱々", en: "piping hot" },
+      { ja: "基本：温かい", en: "warm" },
+      { ja: "基本：ぬるい", en: "lukewarm" },
+      { ja: "基本：冷たい", en: "chilled" },
+      { ja: "基本：キンキンに冷えた", en: "ice-cold" },
+      { ja: "表現：口に火傷しそう", en: "scalding hot" },
+      { ja: "表現：ひんやり感", en: "cool to the touch" },
+    ]
+  },
+  "🍱 食べ物・飲み物 / 🍴 食感・質感 / 🌫 湯気": {
+    icon: "🌫",
+    items: [
+    
+      { ja: "基本：湯気", en: "steam" },
+      { ja: "表現：立ちのぼる湯気", en: "rising steam" },
+      { ja: "表現：もくもく湯気", en: "billowing steam" },
+      { ja: "表現：ふわり湯気", en: "soft steam" },
+      { ja: "表現：濃い湯気", en: "dense steam" },
+      { ja: "表現：かすかな湯気", en: "faint steam" },
+      { ja: "表現：白い湯気", en: "white steam" },
+  ]
+  },
+  "🍱 食べ物・飲み物 / 🍴 食感・質感 / 🌿 香り": {
+    icon: "🌿",
+    items: [
+      { ja: "焼き立ての香り", en: "fresh-baked aroma" },
+      { ja: "香ばしい香り", en: "toasty aroma" },
+      { ja: "燻製の香り", en: "smoky aroma" },
+      { ja: "バターの香り", en: "buttery aroma" },
+      { ja: "ハーブの香り", en: "herbal aroma" },
+      { ja: "柑橘の香り", en: "citrus aroma" },
+      { ja: "スパイスの香り", en: "spiced aroma" },
+      { ja: "甘い香り", en: "sweet aroma" },
+]
+  }};
 
   const API = {
     initUI(container) {
@@ -939,7 +1036,17 @@
       const weaponEntries = entries.filter(([n]) => n.startsWith("⚔️ 武器・兵器 /"));
       const modifierEntries = entries.filter(([n]) => n.startsWith("🧩 武器の外観・状態"));
       const foodEntries = entries.filter(([n]) => n.startsWith("🍱 食べ物・飲み物 /"));
-      const otherEntries = entries.filter(([n]) => !n.startsWith("⚔️ 武器・兵器 /") && !n.startsWith("🧩 武器の外観・状態") && !n.startsWith("🍱 食べ物・飲み物 /"));
+
+      // 🤲 アイテムの状態・動作 は最上段に固定（UIの美観・導線優先）
+      const itemActionEntries = entries.filter(([n]) => n.startsWith("🤲 アイテムの状態・動作"));
+
+      // 通常カテゴリ（※上記・武器・食べ物系を除外）
+      const otherEntries = entries.filter(([n]) =>
+        !n.startsWith("🤲 アイテムの状態・動作") &&
+        !n.startsWith("⚔️ 武器・兵器 /") &&
+        !n.startsWith("🧩 武器の外観・状態") &&
+        !n.startsWith("🍱 食べ物・飲み物 /")
+      );
 
       const renderCategory = (catName, catData, mount) => {
         const details = document.createElement("details");
@@ -988,6 +1095,9 @@
         details.appendChild(content);
         mount.appendChild(details);
       };
+
+      // 🤲 アイテムの状態・動作（最上段）
+      itemActionEntries.forEach(([catName, catData]) => renderCategory(catName, catData, section));
 
       // 通常カテゴリ
       otherEntries.forEach(([catName, catData]) => renderCategory(catName, catData, section));
@@ -1043,8 +1153,33 @@
         renderCategory(leafTitle, cat, genreWrap);
       });
 
+      // 🍴 食感・質感（Step A-1: まずは1棚だけ）
+      const textureWrap = document.createElement("details");
+      textureWrap.className = "subgroup";
+      const textureSum = document.createElement("summary");
+      textureSum.textContent = "🍴 食感・質感";
+      textureWrap.appendChild(textureSum);
+
+      [
+        "🍱 食べ物・飲み物 / 🍴 食感・質感 / 🔥 焼き・揚げ",
+        "🍱 食べ物・飲み物 / 🍴 食感・質感 / 🥖 ふわ・もち",
+        "🍱 食べ物・飲み物 / 🍴 食感・質感 / 🍖 肉汁・脂",
+        "🍱 食べ物・飲み物 / 🍴 食感・質感 / 🍓 瑞々しさ",
+        
+        "🍱 食べ物・飲み物 / 🍴 食感・質感 / ♨ 温度",
+        "🍱 食べ物・飲み物 / 🍴 食感・質感 / 🌫 湯気",
+        "🍱 食べ物・飲み物 / 🍴 食感・質感 / 🌿 香り",
+      ].forEach((k) => {
+        const cat = foodMap[k];
+        if (!cat) return;
+        const leafTitle = k.split(" / ").slice(-1)[0];
+        renderCategory(leafTitle, cat, textureWrap);
+      });
+
+      foodWrap.appendChild(textureWrap);
       foodWrap.appendChild(worldWrap);
       foodWrap.appendChild(genreWrap);
+
 
       // 🥤 飲み物（カテゴリ分割テスト：旧フラットは残す）
       const drinksWrap = document.createElement("details");
