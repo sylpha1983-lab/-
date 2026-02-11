@@ -24,6 +24,7 @@ window.EXT_MANIFEST = [
   "builder_ui.section.skin_details.bundle.js",
   "builder_ui.section.attire.bundle.js",
   "builder_ui.section.accessories.bundle.js",
+  "builder_ui.section.creatures.bundle.js",
   "builder_ui.section.texture.bundle.js",
   "builder_ui.section.expression.bundle.js",
   "builder_ui.section.pose.bundle.js",

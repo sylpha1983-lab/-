@@ -300,7 +300,10 @@
     "🌊 海洋・深海セット (Aquatic/Deep Sea Sets)": [
       { label: "🧜 マーメイドセット (Mermaid)", val: "mermaid, fish tail, fins, seashells, underwater, bubbles" },
       { label: "🪼 クラゲ娘セット (Jellyfish Girl)", val: "jellyfish girl, translucent body, bioluminescence, tentacles, underwater, floating, glowing particles" },
-      { label: "🦈 鮫娘セット (Shark Girl)", val: "shark girl, dorsal fin, sharp teeth, shark tail, ocean, water droplets, predatory eyes" }
+      { label: "🦈 鮫娘セット (Shark Girl)", val: "shark girl, prominent dorsal fin, thick muscular shark tail, rows of serrated teeth, predatory eyes, gill slits, rough dermal denticles texture, apex predator aura, not cosplay, true biological fusion" },
+      { label: "🐊 ワニ娘セット (Crocodile Girl)", val: "crocodile girl, armored reptilian scales, powerful jawline, serrated teeth, crocodile tail, dorsal scutes, slit pupils, ambush predator aura, not cosplay, true biological fusion" },
+      { label: "🐍 蛇娘セット (Snake Girl)", val: "snake girl, scaled skin, serpentine tail, forked tongue, slit pupils, venomous fangs, coiling posture, cold predatory gaze, not cosplay, true biological fusion" },
+      { label: "🐟 深海魚娘セット (Deep-Sea Fish Girl)", val: "deep sea fish girl, abyssal bioluminescence, anglerfish lure, translucent fins, irregular teeth, blackened scales, uncanny asymmetry, deep-sea predator aura, not cosplay, true biological fusion" }
     ],
     "🐉 伝説・精霊セット (Mythical Sets)": [
       { label: "雪女セット", val: "yuki-onna, pale skin, kimono, snow, ice breath, cold atmosphere" },
