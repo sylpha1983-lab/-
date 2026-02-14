@@ -354,11 +354,13 @@
       { id: "camera", label: "17. カメラ・レンズ (Camera/Lens)" },
       { id: "background", label: "18. 背景・場所 (Background)" },
       { id: "lighting", label: "19. 照明・ライティング (Lighting & Shadow)" },
-      { id: "atmosphere", label: "20. 雰囲気・環境 (Atmosphere)" },
-      { id: "effect", label: "21. エフェクト・粒子 (Effect)" },
-      { id: "postprocessing", label: "22. ポスト処理・画作り (Post-processing)" },
-      { id: "filter", label: "23. フィルタ・色味調整 (Filters)" },
-      { id: "presets", label: "🎛 プリセット管理 (Presets)" },
+      { id: "atmosphere", label: "20. 雰囲気・色彩 (Atmosphere & Color)" },
+      { id: "effect", label: "21. エフェクト・演出 (Effects)" },
+      { id: "postprocessing", label: "22. 仕上げ・後処理 (Post-Processing)" },
+      { id: "filter", label: "23. フィルター・効果 (Filter)" },
+      { id: "presets", label: "24. 保存済みプリセット (My Presets)" },
+      { id: "visualsync", label: "🛠️ Visual Sync (Preview & Adjust)" },
+      { id: "shadow", label: "Shadow (Internal)" },
     ];
 
     // ★ここが追加：他のbundleが参照する用
