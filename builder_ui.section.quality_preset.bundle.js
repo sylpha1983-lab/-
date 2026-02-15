@@ -1379,6 +1379,19 @@ cb.addEventListener("change", () => {
     { label: "Sense of Depth", val: "sense of depth" }
   ];
 
+
+  // ========================================================
+  // 🏪 Commercial Product Mode (adds "productization" pressure; additive, no replacement)
+  // ========================================================
+  const COMMERCIAL_MODE_DATA = [
+    { label: "🎁 フィギュア完全商品化 (Figure)", val: "product photography, studio lighting, softbox lighting, seamless white background, macro lens product shot, retail catalog shot, 1/7 scale collectible figure, premium collectible, pre-painted figure, detailed sculpt, injection molded details, visible seam lines, subtle mold lines, clear coat finish, matte and gloss contrast, display base, engraved nameplate" },
+    { label: "🧊 アクリルスタンド商品 (Acrylic Stand)", val: "acrylic stand product, clear acrylic plate, transparent material, transparent edges, laser cut acrylic, printed acrylic surface, double-sided print, small detachable base, product mockup, isolated on white, studio product photo" },
+    { label: "🧸 ラバーストラップ商品 (Rubber Strap)", val: "rubber strap merchandise, silicone material, matte silicone texture, molded rubber edges, flat simplified design, thick outline, keychain loop, metal keychain ring, product photography, white seamless background, retail packaging mockup" },
+    { label: "🪙 缶バッジ商品 (Pin Badge)", val: "metal pin badge, circular button badge, glossy lamination, reflective metal edge, printed badge surface, product mockup, studio product photography, isolated on white, clean catalog shot" },
+    { label: "📦 パッケージ演出 (Packaging)", val: "retail packaging, window box packaging, clear plastic blister packaging, blister tray, cardboard backing, hanging retail hook, barcode label, SKU label, warning label, authenticity hologram sticker, limited edition sticker seal" },
+    { label: "🛒 EC物撮り用 (E-commerce)", val: "e-commerce product listing style, isolated on white, true color reproduction, clean catalog layout, product title header, price badge overlay, star rating icon overlay, thumbnail gallery strip, commercial product photo, studio lighting" }
+  ];
+
   // ========================================================
   // ✅ New: Link-based Presets (Quality core only, links choose Lighting/Post/etc.)
   // ========================================================
@@ -1631,6 +1644,14 @@ cb.addEventListener("change", () => {
 wrap.id = "qp-link-presets";
         wrap.appendChild(createLinkPresetAccordion("🔗 リンク型プリセット (選ぶだけで他棚も連動)", LINK_PRESET_DATA));
         conQuality.appendChild(wrap);
+
+        // 🏪 Commercial Product Mode (additive)
+        if (!document.getElementById("qp-commercial-mode")) {
+          const accCommercial = window.__QP_UTILS.createSubAccordion("🏪 商品レンダリング（Commercial Mode）", COMMERCIAL_MODE_DATA);
+          accCommercial.id = "qp-commercial-mode";
+          conQuality.appendChild(accCommercial);
+        }
+
         // --- Quality Booster (Mode) ---
         (function(){
           const LS_KEY = "QUALITY_MODE_V1";

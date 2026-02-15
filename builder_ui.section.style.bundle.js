@@ -343,6 +343,40 @@
 
   // ===== 中身は完全に元のまま =====
   const STYLE_DATA = {
+        "🧸 ホビー・立体スタイル (Hobby & Figures)": [
+      
+      { ja: "ねんどろいど風", en: "nendoroid style, super deformed figure, big head small body, glossy plastic" },
+      { ja: "フィギュア風", en: "figure style, collectible figure, detailed sculpt, painted, manufactured look" },
+      { ja: "PVCフィギュア風", en: "PVC figure style, glossy PVC material, painted figure, premium collectible" },
+      { ja: "アクリルスタンド風", en: "acrylic standee, acrylic stand merchandise, clear acrylic plate, printed acrylic, die-cut standee, small acrylic base" },
+      { ja: "ラバーストラップ風", en: "rubber strap merchandise, silicone keychain charm, rubber keychain, flat chibi design, thick outline, molded rubber edges, keychain loop" },
+      { ja: "スケールフィギュア風", en: "scale figure style, 1/7 scale figure, museum-quality paint, fine gradients, premium collectible" },
+      { ja: "アクションフィギュア風", en: "action figure, articulated joints, visible seams, hinge joints, interchangeable parts" },
+      { ja: "プラモデル風", en: "plastic model style, scale model, panel lines, plastic texture, sprue marks" },
+      { ja: "ガレージキット風", en: "garage kit style, resin kit, hand-painted, unassembled parts" },
+      { ja: "箱絵・パッケージ風", en: "box art, product package design, retail packaging, promotional image" },
+      { ja: "ブリスター梱包風", en: "blister packaging, clear plastic blister, backing card, retail display" },
+      { ja: "台座・ネームプレート", en: "display base, pedestal, nameplate, acrylic stand, premium display" },
+      { ja: "スタジオ物撮り", en: "product photography, lightbox, seamless backdrop, softbox lighting, clean studio" },
+      { ja: "回転台ショット", en: "turntable shot, 360 product view, centered composition" },
+      { ja: "マクロ塗装ディテール", en: "macro shot, paintwork details, decals, clear coat, tiny scratches" },
+      { ja: "トイ写真風", en: "toy photography, miniature diorama, shallow depth of field" }
+    
+    ],
+    "🎤 MMD・3DダンスCG セット (MMD / Dance CG)": [
+      { ja: "style: MMD風", en: "style: MMD style, miku miku dance, 3D anime character, dance pose" },
+      { ja: "style: セルルック3D", en: "style: cel-shaded 3D, toon shader, anime 3D render" },
+      { ja: "light: ステージライト", en: "light: concert stage lighting, spotlights, glow sticks, lens flare" },
+      { ja: "effect: モーションブラー強め", en: "effect: motion blur, dynamic movement, dancing" },
+      { ja: "atmosphere: ライブ会場の空気感", en: "atmosphere: concert atmosphere, haze, bloom, crowd silhouettes" },
+      { ja: "light: ビート同期ライト", en: "light: beat-synced lights, rhythm lighting, pulsating stage lights" },
+      { ja: "effect: レーザー演出", en: "effect: laser beams, stage lasers, club lighting" },
+      { ja: "effect: スモーク＆ヘイズ", en: "effect: stage smoke, haze machine, volumetric haze" },
+      { ja: "background: LEDスクリーン背景", en: "background: LED screen backdrop, VJ visuals, stage screen" },
+      { ja: "light: リムライト強め", en: "light: strong rim light, backlight, stage backlight" },
+      { ja: "camera: ダイナミックカメラ", en: "camera: dynamic camera angle, wide-angle lens, performance shot" },
+      { ja: "effect: 残像・軌跡エフェクト", en: "effect: afterimage effect, motion trails, light trails" }
+    ],
     "🔮 ネット・美学 (Internet Aesthetics)": [
       { ja: "ヴェイパーウェイヴ", en: "vaporwave, aesthetic, neon pink and blue, retro computer, greek statues, glitch" },
       { ja: "シンセウェイヴ (80s)", en: "synthwave, retrowave, neon grid, sunset, futuristic 80s, outrun" },
@@ -396,7 +430,28 @@
     "memphis design": "メンフィス", "brutalism": "ブルータリズム", "pop art style": "ポップアート",
     "film noir": "フィルムノワール", "vintage photo": "ヴィンテージ写真",
     "polaroid style": "ポラロイド風", "double exposure": "ダブル露光",
-    "infrared photography": "赤外線写真", "fisheye lens": "魚眼レンズ", "tilt-shift": "ティルトシフト"
+    "infrared photography": "赤外線写真", "fisheye lens": "魚眼レンズ", "tilt-shift": "ティルトシフト",
+    "nendoroid style": "ねんどろいど風",
+    "super deformed figure": "デフォルメフィギュア",
+    "figure style": "フィギュア風",
+    "collectible figure": "コレクションフィギュア",
+    "PVC figure style": "PVCフィギュア風",
+    "PVC material": "PVC素材",
+    "plastic model style": "プラモデル風",
+    "scale model": "スケールモデル",
+    "panel lines": "パネルライン",
+    "sprue marks": "ランナー跡",
+    "garage kit style": "ガレージキット風",
+    "resin kit": "レジンキット",
+    "toy photography": "トイ写真",
+    "miniature diorama": "ミニチュアジオラマ",
+    "MMD style": "MMD風",
+    "miku miku dance": "ミクミクダンス",
+    "cel-shaded 3D": "セルルック3D",
+    "toon shader": "トゥーンシェーダ",
+    "concert stage lighting": "ステージライト",
+    "concert atmosphere": "ライブ会場の空気感"
+
   };
   // ===== 中身ここまで =====
 
