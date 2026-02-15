@@ -69,7 +69,7 @@
 cb.addEventListener("change", () => {
   if (window.__VISUAL_SYNC?.updateSelectedList) window.__VISUAL_SYNC.updateSelectedList();
 });
-        if(item.links) cb.dataset.links = item.links.join(",");
+        if(item.links) cb.dataset.linksInternal = item.links.join(",");
         if(item.desc) label.title = item.desc;
         if(item.label.includes("㊙️") || item.label.includes("⚡") || item.label.includes("⚠️")) {
           label.style.fontWeight = "bold"; label.style.color = "#800080"; label.style.background = "#f0e6ff"; label.style.border = "1px solid #d0b0ff";
@@ -351,7 +351,51 @@ cb.addEventListener("change", () => {
         });
       }
     },
-    getTags() { return []; } 
+    getTags() {
+      var tags = getLinkedTags();
+      var mode = getMode();
+      if (!mode || mode === "normal") return tags;
+
+      var out = [];
+      for (var i = 0; i < tags.length; i++) {
+        var s = String(tags[i] || "");
+
+        if (mode === "enhanced") {
+          s = s.replace(/\bbest\s+quality\b/gi, "highest quality");
+        } else if (mode === "extreme") {
+          // remove weaker quality tokens inside QUALITY section only
+          s = s.replace(/\(\s*masterpiece\s*\)/gi, "");
+          s = s.replace(/\bmasterpiece\b/gi, "");
+          s = s.replace(/\bbest\s+quality\b/gi, "");
+          s = s.replace(/\bhighest\s+quality\b/gi, "");
+        }
+
+        // cleanup commas/spaces
+        s = s.replace(/\s*,\s*/g, ", ").replace(/^,\s*|,\s*$/g, "").trim();
+        if (s) out.push(s);
+      }
+
+      if (mode === "extreme") {
+        out.push(
+          "highest quality",
+          "absurdres",
+          "(masterpiece:1.4)",
+          "ultra detailed",
+          "(highres)",
+          "(ultra-detailed)",
+          "(8k)"
+        );
+      }
+
+      // de-dup while preserving order
+      var seen = Object.create(null);
+      var finalTags = [];
+      for (var j = 0; j < out.length; j++) {
+        var t = out[j];
+        if (!seen[t]) { seen[t] = 1; finalTags.push(t); }
+      }
+      return finalTags;
+    } 
   };
 
   window.__registerPromptPart(KEY, VERSION, API);
@@ -435,7 +479,7 @@ cb.addEventListener("change", () => {
     window.__VISUAL_SYNC.updateSelectedList();
 });
       label.appendChild(cb); label.appendChild(document.createTextNode(item.label || `${item.ja}/${item.en}`)); 
-      if(item.links) cb.dataset.links = item.links.join(","); content.appendChild(label); 
+      if(item.links) cb.dataset.linksInternal = item.links.join(","); content.appendChild(label); 
     }); 
     details.appendChild(content); return details; 
   }
@@ -447,7 +491,7 @@ cb.addEventListener("change", () => {
       if (window.__outputTranslation) window.__outputTranslation.register(DICT);
       return;
     },
-    getTags() { return []; }
+    getTags() { return getLinkedTags(); }
   };
 
   window.__registerPromptPart(KEY, VERSION, API);
@@ -631,7 +675,7 @@ cb.addEventListener("change", () => {
 }); 
       label.appendChild(cb); 
       label.appendChild(document.createTextNode(item.label || `${item.ja}/${item.en}`)); 
-      if(item.links) cb.dataset.links = item.links.join(","); 
+      if(item.links) cb.dataset.linksInternal = item.links.join(","); 
       content.appendChild(label); 
     }); 
     
@@ -866,7 +910,7 @@ cb.addEventListener("change", () => {
     window.__VISUAL_SYNC.updateSelectedList();
 });
       label.appendChild(cb); label.appendChild(document.createTextNode(item.label || `${item.ja}/${item.en}`)); 
-      if(item.links) cb.dataset.links = item.links.join(","); content.appendChild(label); 
+      if(item.links) cb.dataset.linksInternal = item.links.join(","); content.appendChild(label); 
     }); 
     details.appendChild(content); return details; 
   }
@@ -1287,5 +1331,458 @@ cb.addEventListener("change", () => {
   window.__registerPromptPart(KEY, VERSION, API);
 })();
 
+})();
+
+
+
+(function(){
+// --- builder_ui.section.quality_preset.v11.js ---
+(function(){
+  "use strict";
+  const VERSION = 11;
+  const KEY = "quality_preset";
+
+  // ========================================================
+  // ✅ New: Fine-tune categories (Line / Color / Ornament / Atmos)
+  // ========================================================
+  const LINE_DETAIL_DATA = [
+    { label: "Clean Lineart", val: "clean lineart" },
+    { label: "Colored Lineart", val: "colored lineart" },
+    { label: "Ultra-fine Lines", val: "ultra-fine lines" },
+    { label: "Delicate Outline", val: "delicate outline" },
+    { label: "Smooth Gradients", val: "smooth gradients" },
+    { label: "Polished Anime Style", val: "polished anime style" },
+    { label: "Soft Edges", val: "soft edges" }
+  ];
+
+  const COLOR_PALETTE_DATA = [
+    { label: "Pastel Colors", val: "pastel colors" },
+    { label: "Pale Colors", val: "pale colors" },
+    { label: "Warm Color Palette", val: "warm color palette" },
+    { label: "Pink & Red Palette", val: "pink and red color palette" }
+  ];
+
+  const ORNAMENT_DATA = [
+    { label: "Crystal Hair", val: "crystal hair" },
+    { label: "Translucent Hair", val: "translucent hair" },
+    { label: "Sparkle Hair", val: "sparkle hair" },
+    { label: "Crystal Eyes", val: "crystal eyes" },
+    { label: "Jewelry Eyes", val: "jewelry eyes" }
+  ];
+
+  const ATMOSPHERE_DATA = [
+    { label: "Romantic Atmosphere", val: "romantic atmosphere" },
+    { label: "Mystical Atmosphere", val: "mystical atmosphere" },
+    { label: "Cozy Interior Light", val: "cozy interior light" },
+    { label: "Dreamy Painting", val: "dreamy painting" },
+    { label: "Illusion Effect", val: "illusion effect" },
+    { label: "Sense of Depth", val: "sense of depth" }
+  ];
+
+  // ========================================================
+  // ✅ New: Link-based Presets (Quality core only, links choose Lighting/Post/etc.)
+  // ========================================================
+  const LINK_PRESET_DATA = [
+    {
+      label: "🎬 シネマティック・核 (Link Preset)",
+      val: "(masterpiece), (best quality), (ultra high resolution), (intricate details)",
+      links: ["cinematic lighting", "volumetric lighting", "ray tracing", "depth of field", "bokeh"]
+    },
+    {
+      label: "🌸 パステル・繊細 (Link Preset)",
+      val: "(masterpiece), (best quality), (highres), (ultra-detailed)",
+      links: ["pastel colors", "pale colors", "soft edges", "smooth gradients"]
+    },
+    {
+      label: "💎 クリスタル瞳・髪 (Link Preset)",
+      val: "(masterpiece), (best quality), (highres), (extremely detailed)",
+      links: ["crystal eyes", "jewelry eyes", "crystal hair", "sparkle hair"]
+    },
+    {
+      label: "🫧 夢幻ブースト (Link Preset)",
+      val: "(masterpiece), (best quality), (highres), (ultra-detailed)",
+      links: ["dreamy painting", "romantic atmosphere", "illusion effect", "sense of depth"]
+    }
+  ];
+
+  // ========================================================
+  // Link engine (reference counting to avoid accidental uncheck)
+  // ========================================================
+  // ========================================================
+  // 🔗 Link engine (internal only, NO checkbox toggling)
+  // - Prevents chain reactions with existing auto-link systems
+  // - Uses reference counting so multiple presets can share the same link tag safely
+  // ========================================================
+  function ensureLinkStateStore() {
+    if (!window.__QP_LINK_INTERNAL) window.__QP_LINK_INTERNAL = { counts: new Map() };
+    return window.__QP_LINK_INTERNAL;
+  }
+
+  function addLinks(links) {
+    const st = ensureLinkStateStore();
+    (links || []).forEach(tag => {
+      const t = String(tag || "").trim();
+      if (!t) return;
+      const cur = st.counts.get(t) || 0;
+      st.counts.set(t, cur + 1);
+    });
+  }
+
+  function removeLinks(links) {
+    const st = ensureLinkStateStore();
+    (links || []).forEach(tag => {
+      const t = String(tag || "").trim();
+      if (!t) return;
+      const cur = st.counts.get(t) || 0;
+      const next = cur - 1;
+      if (next <= 0) st.counts.delete(t);
+      else st.counts.set(t, next);
+    });
+  }
+
+  function getLinkedTags() {
+    const st = ensureLinkStateStore();
+    return Array.from(st.counts.keys());
+  }
+
+  // =========================
+  // Quality Booster core (scoped to Quality section tags)
+  // =========================
+  var __QB_STORAGE_KEY = "qp_quality_booster_mode_v1";
+  function qbGetMode(){
+    try { return (localStorage.getItem(__QB_STORAGE_KEY) || "normal"); } catch(e){ return "normal"; }
+  }
+  function qbSetMode(mode){
+    try { localStorage.setItem(__QB_STORAGE_KEY, mode || "normal"); } catch(e){}
+  }
+  function qbApplyModeToString(s){
+    if(!s || typeof s !== "string") return s;
+    var mode = qbGetMode();
+    var t = s;
+
+    // Normalize whitespace
+    t = t.replace(/\s+/g, " ").trim();
+
+    // Always: if user already has masterpiece:1.4, don't add again
+    var hasMaster14 = /\(\s*masterpiece\s*:\s*1\.4\s*\)/i.test(t);
+
+    if(mode === "normal"){
+      // no-op
+      return t;
+    }
+
+    // Common cleanup: remove duplicate plain 'masterpiece' token when extreme/enhanced will add/keep weighted one
+    if(mode === "enhanced" || mode === "extreme"){
+      t = t
+        .replace(/(^|[,(\s])masterpiece([,\)\s]|$)/ig, "$1")
+        .replace(/\s+,/g, ",")
+        .replace(/,\s*,/g, ",")
+        .replace(/^,\s*/,"")
+        .trim();
+    }
+
+    // Replace best quality -> highest quality (keep weight if provided)
+    if(mode === "enhanced" || mode === "extreme"){
+      t = t.replace(/\(\s*best quality\s*:\s*([0-9.]+)\s*\)/ig, function(_, w){
+        return "(highest quality:" + w + ")";
+      });
+      t = t.replace(/\bbest quality\b/ig, "highest quality");
+    }
+
+    if(mode === "extreme"){
+      // If the string already contains any of the extreme signature tokens, don't prepend again.
+      var hasAbsurd = /\babsurdres\b/i.test(t);
+      var hasHQ = /\bhighest quality\b/i.test(t) || /\(\s*highest quality\s*:\s*[0-9.]+\s*\)/i.test(t);
+
+      var prefixParts = [];
+      if(!hasMaster14) prefixParts.push("(masterpiece:1.4)");
+      if(!hasHQ) prefixParts.push("highest quality");
+      if(!/\bultra detailed\b/i.test(t)) prefixParts.push("ultra detailed");
+      if(!hasAbsurd) prefixParts.push("absurdres");
+      if(!/\(\s*highres\s*\)/i.test(t) && !/\bhighres\b/i.test(t)) prefixParts.push("(highres)");
+      if(!/\(\s*8k\s*\)/i.test(t) && !/\b8k\b/i.test(t)) prefixParts.push("(8k)");
+
+      if(prefixParts.length){
+        if(t) t = prefixParts.join(", ") + ", " + t;
+        else t = prefixParts.join(", ");
+      }
+    }
+
+    // Final trim commas
+    t = t.replace(/\s+,/g, ",").replace(/,\s*,/g, ",").replace(/^,\s*/,"").replace(/,\s*$/,"").trim();
+    return t;
+  }
+
+  function qbCollectQualityTags(){
+    var root = document.getElementById("qp-quality-content");
+    if(!root) return [];
+    var selected = root.querySelectorAll('input:checked, select, textarea');
+    var out = [];
+    for(var i=0;i<selected.length;i++){
+      var el = selected[i];
+
+      // Exclude the booster radios themselves
+      if(el.tagName === "INPUT" && el.type === "radio" && el.name === "quality-booster-mode") continue;
+
+      // Only harvest elements that look like prompt-tag inputs
+      var val = (el.getAttribute && (el.getAttribute("data-value") || el.getAttribute("data-tag"))) || (el.dataset && (el.dataset.value || el.dataset.tag)) || el.value;
+
+      if(!val) continue;
+
+      // Exclude UI/control-only values
+      if(val === "on" || val === "off" || val === "normal" || val === "enhanced" || val === "extreme") continue;
+
+      // Skip pure numbers etc
+      if(typeof val === "string"){
+        val = val.trim();
+        if(!val) continue;
+      }
+      out.push(val);
+    }
+
+    // Apply mode transform + de-dup
+    var dedup = {};
+    var res = [];
+    for(var j=0;j<out.length;j++){
+      var t = qbApplyModeToString(out[j]);
+      if(!t) continue;
+      if(dedup[t]) continue;
+      dedup[t] = 1;
+      res.push(t);
+    }
+    return res;
+  }
+
+
+
+  function wirePresetCheckboxLinks(presetContainer) {
+    // Read links from dataset (set by UI builder) and store internally only.
+    presetContainer.querySelectorAll("input[type='checkbox'][data-links]").forEach(cb => {
+      cb.addEventListener("change", () => {
+        const links = (cb.dataset.linksInternal || "").split(",").map(s => s.trim()).filter(Boolean);
+        if (cb.checked) addLinks(links);
+        else removeLinks(links);
+        if (window.__VISUAL_SYNC?.updateSelectedList) window.__VISUAL_SYNC.updateSelectedList();
+      });
+    });
+  }
+
+  const API = {
+    initUI(container) {
+      // ----------------------------------------------------
+      // A) Render new categories into UI (Fine-Tune section)
+      // ----------------------------------------------------
+      const root = document.getElementById("qp-root-container");
+      if (!root || !window.__QP_UTILS) return;
+
+      if (!document.getElementById("qp-finetune")) {
+        const secFine = window.__QP_UTILS.createMainSection("qp-finetune", "🧩 繊細・色・装飾 (Fine-Tune)");
+        const conFine = secFine.querySelector(".qp-section-content");
+
+        conFine.appendChild(window.__QP_UTILS.createSubAccordion("✏️ 線画・アニメ精密 (Line & Anime Detail)", LINE_DETAIL_DATA));
+        conFine.appendChild(window.__QP_UTILS.createSubAccordion("🎨 色味・パレット (Color Palette)", COLOR_PALETTE_DATA));
+        conFine.appendChild(window.__QP_UTILS.createSubAccordion("💎 瞳・髪の装飾 (Eye & Hair Ornament)", ORNAMENT_DATA));
+        conFine.appendChild(window.__QP_UTILS.createSubAccordion("🌫 雰囲気ブースト (Atmosphere Booster)", ATMOSPHERE_DATA));
+
+        // Insert before NEG trigger if exists, else append
+        const negWrap = document.getElementById("qp-neg-trigger-wrap");
+        if (negWrap && negWrap.parentNode) {
+          negWrap.parentNode.insertBefore(secFine, negWrap);
+        } else {
+          root.appendChild(secFine);
+        }
+      }
+
+      // ----------------------------------------------------
+      // C) Add link-based presets into Quality section (no lighting/post in val)
+      // ----------------------------------------------------
+      const conQuality = document.getElementById("qp-quality-content");
+      if (conQuality && !document.getElementById("qp-link-presets")) {
+        const wrap = document.createElement("div");
+        
+  function createLinkPresetAccordion(title, items){
+    const details = document.createElement("details");
+    details.className = "qp-sub-acc";
+    details.open = false;
+    const summary = document.createElement("summary");
+    summary.textContent = title;
+    details.appendChild(summary);
+
+    const content = document.createElement("div");
+    content.className = "qp-content-grid";
+
+    items.forEach(item => {
+      const label = document.createElement("label");
+      const cb = document.createElement("input");
+      cb.type = "checkbox";
+      cb.dataset.val = item.val || item.en;
+      // IMPORTANT: do NOT use data-links (core linkage toggles other checkboxes).
+      if(item.links) cb.dataset.linksInternal = item.links.join(",");
+      if(item.desc) label.title = item.desc;
+      label.appendChild(cb);
+      label.appendChild(document.createTextNode(item.label || `${item.ja}/${item.en}`));
+      content.appendChild(label);
+    });
+
+    details.appendChild(content);
+    return details;
+  }
+
+wrap.id = "qp-link-presets";
+        wrap.appendChild(createLinkPresetAccordion("🔗 リンク型プリセット (選ぶだけで他棚も連動)", LINK_PRESET_DATA));
+        conQuality.appendChild(wrap);
+        // --- Quality Booster (Mode) ---
+        (function(){
+          const LS_KEY = "QUALITY_MODE_V1";
+          const MODES = {
+            normal: { label:"🟦 Normal (best quality)", replace:"best quality" },
+            enhanced:{ label:"🟨 Enhanced (highest quality)", replace:"highest quality" },
+            // Keep this string WITHOUT leading parentheses so emphasized wrappers (e.g. "((best quality))")
+            // can safely wrap it without producing "(((masterpiece...)".
+            extreme:{ label:"🟥 Extreme (masterpiece+highest+absurdres)", replace:"", prepend:"(masterpiece:1.4), highest quality, ultra detailed, absurdres" }
+          };
+
+          function getMode(){
+            return localStorage.getItem(LS_KEY) || window.__QUALITY_MODE || "normal";
+          }
+          function setMode(m){
+            window.__QUALITY_MODE = m;
+            localStorage.setItem(LS_KEY, m);
+          }
+
+          function showToast(text){
+            let toast = document.getElementById("linkage-toast");
+            if(!toast){
+              toast = document.createElement("div");
+              toast.id="linkage-toast";
+              toast.style.cssText="position:fixed; left:50%; transform:translateX(-50%); bottom:90px; background:rgba(0,0,0,.85); color:#fff; padding:10px 14px; border-radius:10px; font-size:13px; z-index:99999; max-width:92vw; max-height:32vh; overflow:auto; box-sizing:border-box; text-align:left; line-height:1.35; white-space:pre-wrap; word-break:break-word;";
+              document.body.appendChild(toast);
+            }
+            const t = (text||"").toString();
+            toast.textContent = (t.length>180 ? (t.slice(0,180)+"…") : t);
+            toast.classList.add("show");
+            toast.style.display="block";
+            clearTimeout(toast.__t);
+            toast.__t=setTimeout(()=>{ toast.classList.remove("show"); toast.style.display="none"; }, 2500);
+          }
+
+          function applyModeToString(s){
+            const mode = getMode();
+            if(!s || mode==="normal") return s;
+
+            // Always work on a string copy
+            s = String(s);
+
+            // Extreme mode should NOT duplicate masterpiece that already exists in other presets.
+            if(mode==="extreme"){
+              // remove standalone or weighted masterpiece tokens inside the string
+              s = s.replace(/\(\s*masterpiece\s*(?::\s*[0-9.]+)?\s*\)/ig, "");
+              s = s.replace(/\bmasterpiece\b/ig, "");
+              // cleanup leftover commas/spaces from removals
+              s = s.replace(/\s+,\s+/g, ", ").replace(/^\s*,\s*|\s*,\s*$/g, "").trim();
+            }
+
+            // Replace weighted and unweighted best quality tokens.
+            const replPlain = (MODES[mode] && MODES[mode].replace) ? MODES[mode].replace : "highest quality";
+
+            // 1) Handle emphasized variants like "((best quality:1.4))"
+            s = s.replace(/(\(+)(\s*best\s+quality\s*:\s*([0-9.]+)\s*)(\)+)/ig, (m, lpar, inner, w, rpar)=>{
+              const n = (lpar||"").length;
+              const lead = "(".repeat(n);
+              const tail = ")".repeat(n);
+              if(mode==="enhanced") return `${lead}highest quality:${w}${tail}`;
+              // In extreme mode, avoid creating odd "((masterpiece..." patterns by keeping the whole replacement
+              // inside the same paren-depth as the original emphasized token.
+              if(mode==="extreme") return "";
+              return `${lead}best quality:${w}${tail}`;
+            });
+
+            // 2) Standard weighted: (best quality:1.3)
+            s = s.replace(/\(\s*best\s+quality\s*:\s*([0-9.]+)\s*\)/ig, (m,w)=>{
+              if(mode==="enhanced") return `(highest quality:${w})`;
+              // Keep as a single parenthetical chunk to prevent stray commas and double-paren look.
+              if(mode==="extreme") return `(masterpiece:1.4, highest quality:${w}, ultra detailed, absurdres)`;
+              return `(best quality:${w})`;
+            });
+
+            // 3) Plain token: best quality
+            s = s.replace(/\bbest\s+quality\b/ig, replPlain);
+
+            // Final step for extreme: prepend the Extreme booster and avoid accidental commas
+            if(mode==="extreme"){
+              var prefix = MODES.extreme.prepend || "";
+              var t = (s || "").trim();
+              if(prefix){
+                // If it doesn't already contain our extreme signature, prepend it.
+                var hasMasterpiece14 = /^\(?\s*masterpiece:1\.4\b/i.test(t);
+                var hasAbsurdres = /\babsurdres\b/i.test(t);
+                if(t){
+                  if(!hasMasterpiece14 && !hasAbsurdres){
+                    t = prefix + ", " + t;
+                  }
+                }else{
+                  t = prefix;
+                }
+              }
+              s = t.replace(/\s+,\s+/g, ", ").replace(/^\s*,\s*|\s*,\s*$/g, "").trim();
+            }
+            return s;
+          }
+
+          function mountQualityBoosterUI(){
+            if(document.getElementById("qp-quality-booster")) return;
+            const host = document.getElementById("qp-quality-content");
+            if(!host) return;
+
+            const details = document.createElement("details");
+            details.className="qp-sub-acc";
+            details.open=false;
+
+            const summary = document.createElement("summary");
+            summary.textContent="🧪 Quality Booster (モード切替)";
+            details.appendChild(summary);
+
+            const box = document.createElement("div");
+            box.className="qp-content-grid";
+
+            const name="quality-booster-mode";
+            const cur=getMode();
+
+            Object.keys(MODES).forEach(k=>{
+              const label=document.createElement("label");
+              const r=document.createElement("input");
+              r.type="radio";
+              r.name=name;
+              r.value=k;
+              if(k===cur) r.checked=true;
+              r.addEventListener("change", ()=>{
+                if(!r.checked) return;
+                setMode(k);
+                showToast(`⚙️ Quality Booster: 「${MODES[k].label}」に切り替えました`);
+                if(window.__VISUAL_SYNC?.updateSelectedList) window.__VISUAL_SYNC.updateSelectedList();
+              });
+              label.appendChild(r);
+              label.appendChild(document.createTextNode(MODES[k].label));
+              box.appendChild(label);
+            });
+
+            details.appendChild(box);
+            host.appendChild(details);
+          }
+          // init
+          try{ mountQualityBoosterUI(); }catch(e){}
+        })();
+
+
+        // Attach link info to each preset checkbox
+        // __QP_UTILS.createSubAccordion stores links into dataset.links if item.links exists
+        wirePresetCheckboxLinks(wrap);
+      }
+    },
+    getTags() { return getLinkedTags(); }
+  };
+
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
 })();
 

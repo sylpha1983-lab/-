@@ -595,6 +595,47 @@ function generateOutput() {
         .join(", ");
     }
 
+    
+    // ---- Quality Booster (global post-process; replaces only "best quality") ----
+    try {
+      const mode = window.__QUALITY_MODE || "normal";
+      if (mode !== "normal" && typeof outText === "string" && /best\s+quality/i.test(outText)) {
+        const raw = outText.split(",");
+        const tokens = [];
+        const seen = {};
+        let hasAbsurdres = false;
+        let hasMasterpiece = false;
+
+        for (let i = 0; i < raw.length; i++) {
+          let t = (raw[i] || "").trim();
+          if (!t) continue;
+
+          if (/absurdres/i.test(t)) hasAbsurdres = true;
+          if (/masterpiece/i.test(t)) hasMasterpiece = true;
+
+          if (/best\s+quality/i.test(t)) {
+            t = t.replace(/best\s+quality/gi, "highest quality");
+          }
+
+          if (/absurdres/i.test(t)) hasAbsurdres = true;
+          if (/masterpiece/i.test(t)) hasMasterpiece = true;
+
+          if (!seen[t]) {
+            seen[t] = 1;
+            tokens.push(t);
+          }
+        }
+
+        if (mode === "extreme") {
+          if (!hasAbsurdres) tokens.push("absurdres");
+          if (!hasMasterpiece) tokens.unshift("masterpiece");
+        }
+
+        outText = tokens.join(", ");
+      }
+    } catch (e) {}
+    // ---- /Quality Booster ----
+
     out.value = outText;
     out.dispatchEvent(new Event("input", { bubbles: true }));
 
