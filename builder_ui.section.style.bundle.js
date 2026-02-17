@@ -362,7 +362,31 @@
       { ja: "マクロ塗装ディテール", en: "macro shot, paintwork details, decals, clear coat, tiny scratches" },
       { ja: "トイ写真風", en: "toy photography, miniature diorama, shallow depth of field" }
     
-    ],
+    ],"🎁 商品化・グッズ化 (Merch & Productization)": [
+      { ja: "商品パッケージ風", en: "retail product packaging, box art, blister pack, branding labels, barcode, sealed plastic window" },
+      { ja: "ブラインドボックス玩具風", en: "blind box toy, collectible series packaging, small boxed figure, mystery box" },
+      { ja: "ガチャカプセル玩具風", en: "gacha capsule toy, capsule packaging, prize toy, small collectible" },
+      { ja: "クレーンゲーム景品風", en: "crane game prize, arcade prize figure, prize box packaging" },
+      { ja: "アクションフィギュア風", en: "action figure style, articulated joints, poseable figure, manufactured plastic" },
+      { ja: "可動関節強調（フィグマ系）", en: "figma-like articulated figure, visible joints, poseable limbs, action figure engineering" },
+      { ja: "レジンキャスト風", en: "resin cast figure, garage kit finish, hand-painted resin, matte resin surface" },
+      { ja: "透明レジン限定版風", en: "clear resin limited edition, translucent parts, pearlescent tint, internal refraction" },
+      { ja: "ジオラマ台座展示風", en: "diorama base display, scenic base, nameplate, museum display plinth" },
+      { ja: "クリスタルドーム展示風", en: "crystal dome display, acrylic dome case, premium collectible display" },
+      { ja: "スノードーム風", en: "snow globe display, glass sphere, swirling particles, miniature diorama inside" },
+      { ja: "ホログラム投影展示風", en: "hologram projection display, volumetric light, floating holographic figure, sci-fi showcase" }
+    ]
+,"🧸 ちびキャラ (Chibi Characters)": [
+  {"ja":"ちびキャラ","en":"chibi character, super deformed"},
+  {"ja":"SDキャラ","en":"SD character, super deformed"},
+  {"ja":"2頭身","en":"two-head-tall proportions"},
+  {"ja":"3頭身","en":"three-head-tall proportions"},
+  {"ja":"デフォルメ強め","en":"strongly deformed proportions"},
+  {"ja":"ぷにキャラ","en":"puni chibi, soft round chibi"},
+  {"ja":"マスコット風","en":"mascot style, cute simplified chibi"},
+  {"ja":"幼児体型（ちび）","en":"childlike chibi proportions, big head small body"}
+],
+
     "🎤 MMD・3DダンスCG セット (MMD / Dance CG)": [
       { ja: "style: MMD風", en: "style: MMD style, miku miku dance, 3D anime character, dance pose" },
       { ja: "style: セルルック3D", en: "style: cel-shaded 3D, toon shader, anime 3D render" },

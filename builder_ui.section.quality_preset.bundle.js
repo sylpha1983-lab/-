@@ -41,6 +41,13 @@
       .beginner-guide-root summary { padding: 10px; cursor: pointer; font-weight: bold; list-style: none; outline: none; background: #F0F8FF; color: #0056b3; }
       .bg-section { border: 1px solid #bce; background: #fff; border-radius: 8px; padding: 10px; margin-bottom: 10px; }
       .bg-header { margin: 5px 0 8px 0; font-size: 0.95em; color: #0056b3; border-bottom: 1px dashed #bce; padding-bottom: 3px; font-weight: bold; }
+
+      .qp-guide-btnrow{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 2px 0;}
+      .qp-guide-btn{padding:8px 10px;border:1px solid #89CFF0;border-radius:10px;background:#f7fbff;font-weight:bold;cursor:pointer;font-size:13px;}
+      .qp-guide-btn:active{transform:scale(0.98);}
+      .qp-guide-highlight{border:2px solid rgba(80,160,255,0.7)!important; box-shadow:0 0 18px rgba(80,160,255,0.45)!important;}
+      .qp-auto-glow{border:2px solid rgba(80,160,255,0.6)!important; box-shadow:0 0 22px rgba(80,160,255,0.35)!important;}
+
     `;
     const style = document.createElement("style");
     style.id = styleId;
@@ -149,6 +156,135 @@ cb.addEventListener("change", () => {
       const guide = document.createElement("details"); guide.className = "beginner-guide-root";
       guide.innerHTML = "<summary>🔰 <b>初心者ガイド：迷ったらここから選ぶ</b></summary>";
       const gContent = document.createElement("div"); gContent.style.cssText = "padding:10px; border-top:1px solid #89CFF0; display:flex; flex-direction:column; gap:10px;";
+
+      // ✅ 用途別ワンタップ導線（Beginner Workflow Buttons）
+      function __qpGuideOpenAndHighlight(el){
+        if(!el) return;
+        try{
+          // 1) Open all ancestor <details> and common accordion containers
+          let p = el;
+          // If el is a summary, treat its parent details as the primary target
+          if(p && p.tagName==="SUMMARY" && p.parentElement && p.parentElement.tagName==="DETAILS") p = p.parentElement;
+          while(p){
+            try{
+              if(p.tagName==="DETAILS"){ p.open = true; }
+              // common accordion patterns (best-effort)
+              if(p.classList && (p.classList.contains("accordion-item") || p.classList.contains("accordion") || p.classList.contains("group") || p.classList.contains("box"))){
+                const sum = p.querySelector(":scope > summary");
+                if(sum && sum.parentElement && sum.parentElement.tagName==="DETAILS") sum.parentElement.open = true;
+                const hdr = p.querySelector(":scope > .accordion-header, :scope > .header, :scope > .title");
+                if(hdr && typeof hdr.click === "function") hdr.click();
+              }
+            }catch(e){}
+            p = p.parentElement;
+          }
+
+          // 2) Also open the nearest details (if any)
+          const det = (el.tagName==="DETAILS") ? el : el.closest("details");
+          if(det) det.open = true;
+
+          // 3) Highlight + scroll
+          const target = (el.tagName==="SUMMARY" && el.parentElement) ? el.parentElement : el;
+          target.classList.add("qp-guide-highlight");
+          // Deterministic scroll (independent of tap position)
+          const r = target.getBoundingClientRect();
+          const absTop = (window.pageYOffset || document.documentElement.scrollTop || 0) + r.top;
+          const offset = 140;
+          try{ window.scrollTo({ top: Math.max(0, absTop - offset), left:0, behavior:"smooth" }); }
+          catch(e){ window.scrollTo(0, Math.max(0, absTop - offset)); }
+
+          setTimeout(()=>{ try{ target.classList.remove("qp-guide-highlight"); }catch(e){} }, 3200);
+        }catch(e){}
+      }
+      
+      function __qpGuideFindByTextContains(keyword){
+  const k = String(keyword||"").trim();
+  if(!k) return null;
+  const candidates = Array.from(document.querySelectorAll("button, summary, .card, .tile, .btn, .qp-card, .qp-tile, label, a, div"));
+  for(const el of candidates){
+    const t = (el.textContent||"").trim();
+    if(!t) continue;
+    if(t.indexOf(k) >= 0) return el.closest("details") || el;
+  }
+  return null;
+}
+
+function __qpGuideClickCheckboxByLabel(labelText){
+  try{
+    const labels = Array.from(document.querySelectorAll("label")).filter(l => (l.textContent||"").includes(labelText));
+    if(!labels.length) return false;
+    const lab = labels[0];
+    const inp = lab.querySelector('input[type="checkbox"], input[type="radio"]');
+    if(inp){
+      if(!inp.checked) inp.click();
+      return true;
+    }
+  }catch(e){}
+  return false;
+}
+
+function __qpGuideFindBySummaryContains(keyword){
+        const k = String(keyword||"").trim();
+        if(!k) return null;
+        const sums = Array.from(document.querySelectorAll("details > summary"));
+        const hit = sums.find(s => (s.textContent||"").indexOf(k) >= 0);
+        return hit ? hit.parentElement : null;
+      }
+      function __qpGuideFocus(target){
+        // target can be element id or summary keyword
+        let el = null;
+        if(!target) return;
+        if(typeof target === "string"){
+          el = document.getElementById(target) || __qpGuideFindBySummaryContains(target) || __qpGuideFindByTextContains(target);
+        }else{
+          el = target;
+        }
+        __qpGuideOpenAndHighlight(el);
+      }
+      function __qpGuideLog(msg){
+        try{
+          // If optional AI summary logger exists, add a lightweight line; otherwise ignore.
+          if(window.__AI_SUMMARY && typeof window.__AI_SUMMARY.push === "function"){
+            window.__AI_SUMMARY.push({ type:"guide", text: msg });
+          }
+        }catch(e){}
+      }
+
+      const btnRow = document.createElement("div");
+      btnRow.className = "qp-guide-btnrow";
+      btnRow.innerHTML = `
+        <button type="button" class="qp-guide-btn" data-act="commercial">🎁 グッズ化したい</button>
+        <button type="button" class="qp-guide-btn" data-act="illustration">🎨 イラストとして仕上げたい</button>
+        <button type="button" class="qp-guide-btn" data-act="game3d">🎮 ゲーム・3D風にしたい</button>
+        <button type="button" class="qp-guide-btn" data-act="maxquality">✨ とにかく最高画質にしたい</button>
+      `;
+      btnRow.addEventListener("click", (ev)=>{
+        const b = ev && ev.target ? ev.target.closest("button.qp-guide-btn") : null;
+        if(!b) return;
+        const act = b.dataset.act;
+        if(act==="commercial"){
+          __qpGuideLog("Guide: Commercial workflow suggested");
+          __qpGuideFocus("qp-commercial-mode");
+          // also hint style-side merch section if present
+          __qpGuideFocus("商品化");
+        }else if(act==="illustration"){
+          __qpGuideLog("Guide: Illustration finishing suggested");
+          __qpGuideFocus("qp-finetune");
+        }else if(act==="game3d"){
+          __qpGuideLog("Guide: Game/3D workflow suggested");
+          __qpGuideFocus("MMD・3DダンスCG");
+          __qpGuideFocus("3Dレンダリング");
+        }else if(act==="maxquality"){
+          __qpGuideLog("Guide: Max quality suggested");
+          // 1) turn on the beginner ultra-quality preset (if present)
+          __qpGuideClickCheckboxByLabel("超高画質セット");
+          // 2) jump to Quality Booster tile (for advanced tweaks)
+          __qpGuideFocus("Quality Booster");
+        }
+      });
+      gContent.appendChild(btnRow);
+
+
       Object.entries(BEGINNER_DATA).forEach(([t, i]) => {
         const sec = document.createElement("div"); sec.className = "bg-section";
         sec.innerHTML = `<h4 class="bg-header">${t}</h4>`;

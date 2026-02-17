@@ -114,6 +114,44 @@
   }
   #linkage-toast.show { opacity: 1; top: 10%; }
 
+  #commercial-suggest-toast{
+    position: fixed;
+    top: 18%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(20, 20, 24, 0.96);
+    color:#fff;
+    padding: 12px 18px;
+    border-radius: 16px;
+    font-size: 0.88em;
+    z-index: 12000;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    opacity: 0;
+    transition: opacity 0.25s, top 0.25s;
+    pointer-events: none;
+    max-width: 92vw;
+    width: max-content;
+    text-align:center;
+    line-height:1.45;
+  }
+  #commercial-suggest-toast.show{ opacity: 1; top: 12%; pointer-events:auto; }
+  #commercial-suggest-toast .btnrow{ margin-top:8px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+  #commercial-suggest-toast button{
+    cursor:pointer;
+    border:1px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.08);
+    color:#fff;
+    padding:6px 10px;
+    border-radius:12px;
+    font-weight:700;
+    font-size:0.92em;
+  }
+  #commercial-suggest-toast button.primary{
+    background: rgba(0, 200, 120, 0.25);
+    border-color: rgba(0, 200, 120, 0.55);
+  }
+
+
   @keyframes linked-flash-anim {
     0% { background-color: rgba(255, 215, 0, 0.6); box-shadow: 0 0 10px rgba(255, 215, 0, 0.8); transform: scale(1.02); }
     100% { background-color: transparent; box-shadow: none; transform: scale(1); }
@@ -660,6 +698,140 @@ function generateOutput() {
     }, 3000);
   }
 
+  
+  // ---- Commercial Mode Suggestion (for hobby/merch styles) ----
+  const __COMMERCIAL_HINT_KEYWORDS = [
+    "acrylic stand", "acrylic standee", "rubber strap", "keychain charm",
+    "action figure", "figma", "nendoroid", "blind box", "gacha", "capsule toy",
+    "blister", "retail packaging", "window box", "vinyl toy", "be@rbrick",
+    "garage kit", "resin", "pin badge", "button badge", "acrylic", "strap merchandise"
+  ];
+
+  function __isCommercialHintStyle(cb){
+    try{
+      if(!cb || !cb.dataset) return false;
+      const s = ((cb.dataset.en || cb.dataset.val || "") + " " + (cb.dataset.ja || "")).toLowerCase();
+      return __COMMERCIAL_HINT_KEYWORDS.some(k => s.includes(k));
+    }catch(_e){ return false; }
+  }
+
+  function __ensureCommercialToast(){
+    let t = document.getElementById("commercial-suggest-toast");
+    if(!t){
+      t = document.createElement("div");
+      t.id = "commercial-suggest-toast";
+      document.body.appendChild(t);
+    }
+    return t;
+  }
+
+  function __hideCommercialToast(){
+    const t = document.getElementById("commercial-suggest-toast");
+    if(t) t.classList.remove("show");
+  }
+
+  
+// --- Commercial Mode auto-apply tracking (for easy undo) ---
+window.__COMMERCIAL_AUTO_CHECKED = window.__COMMERCIAL_AUTO_CHECKED || [];
+window.__COMMERCIAL_AUTO_APPLIED = window.__COMMERCIAL_AUTO_APPLIED || false;
+function undoCommercialDefaults(){
+  try{
+    const arr = window.__COMMERCIAL_AUTO_CHECKED || [];
+    // Uncheck in reverse so dependent UI updates behave predictably
+    for(let i=arr.length-1;i>=0;i--){
+      const cb = arr[i];
+      if(cb && cb.checked){
+        cb.checked = false;
+        cb.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+    }
+    window.__COMMERCIAL_AUTO_CHECKED = [];
+    window.__COMMERCIAL_AUTO_APPLIED = false;
+    // clear global hint flag
+    window.__COMMERCIAL_MODE_AUTO = false;
+    __setCommercialAutoGlow(false);
+  }catch(e){}
+
+
+function __setCommercialAutoGlow(on){
+  try{
+    const el = document.getElementById("qp-commercial-mode");
+    if(!el) return;
+    if(on) el.classList.add("qp-auto-glow");
+    else el.classList.remove("qp-auto-glow");
+  }catch(e){}
+}
+
+}
+// Undo when the Commercial Mode master toggle is turned OFF
+document.addEventListener('change', (e)=>{
+  const t = e && e.target;
+  if(!t || t.type !== 'checkbox') return;
+  const en = (t.dataset && t.dataset.en) ? String(t.dataset.en) : '';
+  const ja = (t.dataset && t.dataset.ja) ? String(t.dataset.ja) : '';
+  const isCommercialToggle = /commercial\s*mode/i.test(en) || /商業|商品|コマーシャル|商用/.test(ja);
+  if(isCommercialToggle && !t.checked && window.__COMMERCIAL_AUTO_APPLIED){
+    undoCommercialDefaults();
+  }
+});
+function applyCommercialDefaults(){
+  window.__COMMERCIAL_AUTO_CHECKED = [];
+  window.__COMMERCIAL_AUTO_APPLIED = true;
+
+    // Set a small global flag so other parts can read it if needed
+    window.__COMMERCIAL_MODE_AUTO = true;
+
+    // Helper: check a checkbox that matches a predicate
+    const all = Array.from(document.querySelectorAll('input[type="checkbox"]'));
+    const checkFirst = (pred) => {
+      const cb = all.find(pred);
+      if(cb && !cb.checked){
+        cb.checked = true;
+        cb.dispatchEvent(new Event("change", { bubbles: true }));
+        // track for undo (only what we toggled)
+        try{ window.__COMMERCIAL_AUTO_CHECKED.push(cb); }catch(e){}
+        return true;
+      }
+      return false;
+    };
+
+    // 1) product photography (prefer Quality Commercial Mode item if present)
+    checkFirst(cb => /product\s+photography/i.test(cb.dataset.en || cb.dataset.val || ""));
+    // 2) seamless white background (background section or commercial mode tag)
+    checkFirst(cb => /(seamless\s+white|white\s+seamless|white\s+backdrop|white\s+studio)/i.test(cb.dataset.en || cb.dataset.val || ""));
+    // 3) shadow under object / product shadow
+    checkFirst(cb => /(shadow\s+under|realistic\s+shadow|product\s+shadow)/i.test(cb.dataset.en || cb.dataset.val || "") || /影/.test(cb.dataset.ja || ""));
+    __setCommercialAutoGlow(true);
+  }
+
+  function showCommercialSuggestToast(styleName){
+    const now = Date.now();
+    if(window.__lastCommercialSuggestAt && (now - window.__lastCommercialSuggestAt) < 8000) return;
+    window.__lastCommercialSuggestAt = now;
+
+    const t = __ensureCommercialToast();
+    const name = styleName ? `「${styleName}」` : "このスタイル";
+    t.innerHTML = `
+      🏪 ${name} は商品化向きです。<br/>
+      商品レンダリング（白背景・シャドウ・product photography）を自動適用しますか？
+      <div class="btnrow">
+        <button class="primary" id="commercial-yes">YES（適用）</button>
+        <button id="commercial-no">NO</button>
+      </div>
+    `;
+    t.classList.add("show");
+
+    const yes = t.querySelector("#commercial-yes");
+    const no  = t.querySelector("#commercial-no");
+    if(yes){
+      yes.onclick = () => { __hideCommercialToast(); applyCommercialDefaults(); };
+    }
+    if(no){
+      no.onclick = () => { __hideCommercialToast(); };
+    }
+  }
+
+
   function applyLinkage(checkbox) {
     const isChecked = checkbox.checked;
     if (!checkbox.dataset.links) return;
@@ -865,6 +1037,23 @@ function generateOutput() {
         sectionsRoot.addEventListener("change", (e) => {
           if (e.target.matches('input[type="checkbox"]')) {
             applyLinkage(e.target);
+            // Suggest Commercial Mode when hobby/merch style is turned ON
+            if (e.target.checked && __isCommercialHintStyle(e.target)) {
+              showCommercialSuggestToast(e.target.dataset.ja || e.target.dataset.en || "");
+            }
+
+            // If the style that triggered Commercial AUTO is turned OFF, and no other
+            // "commercial-hint" styles remain selected, undo the AUTO-applied checkboxes.
+            // This fixes the confusion where users uncheck the original style and expect
+            // the auto-applied commercial tags (white seamless/shadow/product photo) to vanish.
+            if (!e.target.checked && __isCommercialHintStyle(e.target) && window.__COMMERCIAL_AUTO_APPLIED) {
+              const anyHintStillOn = Array.from(
+                sectionsRoot.querySelectorAll("input[type=\"checkbox\"]:checked")
+              ).some((cb) => __isCommercialHintStyle(cb));
+              if (!anyHintStillOn) {
+                undoCommercialDefaults();
+              }
+            }
           }
         });
       }
