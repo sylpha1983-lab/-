@@ -25,12 +25,28 @@
   const MAX_VERSION = 10; // 探索する最大バージョン数
   const logArea = document.getElementById("log");
   let stats = { success: 0, fail: 0, empty: 0 };
+
+  function isDevMode(){
+    try { return localStorage.getItem("BUILDER_DEV_MODE") === "true"; }
+    catch(e){ return false; }
+  }
+  const DEV_MODE = isDevMode();
+
+  function setProgress(pct, label){
+    if (DEV_MODE) return;
+    const bar = document.getElementById("progress-bar");
+    const txt = document.getElementById("progress-text");
+    if (bar) bar.style.width = Math.max(0, Math.min(100, pct)) + "%";
+    if (txt && label) txt.textContent = label;
+  }
+
   
   const LOADED_CACHE = {}; 
 
   // ---- 3. ユーティリティ関数 ----
   function log(msg, cls) {
     console.log(msg);
+    if (!DEV_MODE) return;
     if (!logArea) return;
     const line = document.createElement("div");
     line.textContent = msg;
@@ -153,12 +169,18 @@
 
     // 3. Static Manifest内のファイルをロード
     const staticFilesList = await loadStaticManifest();
+    const totalStatic = (staticFilesList && staticFilesList.length) ? staticFilesList.length : 1;
+    let doneStatic = 0;
+    setProgress(1, "Manifest loaded…");
     for (const file of staticFilesList) {
       const fullPath = `./${file}`;
-      await safeLoad(fullPath, true); 
+      await safeLoad(fullPath, true);
+      doneStatic++;
+      const pct = Math.round((doneStatic / totalStatic) * 100);
+      setProgress(pct, `Loading… ${doneStatic}/${totalStatic}`);
     }
-
-    // 4. 自動探索対象カテゴリ 
+    setProgress(100, "Finalizing…");
+// 4. 自動探索対象カテゴリ 
     // ★修正: quality_preset を追加しました
     const categories = [
       "quality_preset", // ← これが重要！(v1, v6, v8, v9, v10を読み込むため)

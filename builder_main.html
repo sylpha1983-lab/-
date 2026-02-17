@@ -8,7 +8,7 @@
     /* --- ベースデザイン --- */
     :root {
       --primary-color: #4a90e2; /* アクセントカラー（青） */
-      --accent-gradient: linear-gradient(135deg, #4a90e2 0%, #8e44ad 100%);
+      --accent-gradient: linear-gradient(90deg, #a9e3ff 0%, #ffffff 45%, #e7f3ff 70%, #f2f5ff 100%);
       --bg-color: #f4f6f9;      /* 全体の背景色 */
       --card-bg: #ffffff;       /* カードの背景色 */
       --text-color: #333;
@@ -25,15 +25,31 @@
 
     /* --- ヘッダー --- */
     header {
-      background: #fff;
-      padding: 20px 0;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(234,246,255,0.78));
+padding: 20px 0;
       text-align: center;
       box-shadow: 0 2px 10px rgba(0,0,0,0.05);
       margin-bottom: 15px;
       border-bottom: 1px solid #eaeaea;
     }
 
-    h1 { 
+    
+    /* --- シマエナガ：上品な羽の気配（操作を邪魔しない背景エフェクト） --- */
+    header::before{
+      content:"";
+      position:absolute;
+      inset:-20px;
+      pointer-events:none;
+      opacity:0.14;
+      background-repeat: repeat;
+      background-size: 220px 220px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%2386d0ff' stroke-opacity='0.55' stroke-width='2'%3E%3Cpath d='M40 170 C70 140 100 115 150 85 C120 100 90 125 60 160'/%3E%3Cpath d='M55 165 C85 135 115 110 165 80'/%3E%3Cpath d='M70 160 C96 136 128 108 178 74'/%3E%3Cpath d='M120 150 C140 130 160 118 190 95 C168 108 150 123 130 144'/%3E%3C/g%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.55' stroke-width='1.5'%3E%3Cpath d='M38 172 C68 142 98 117 148 87'/%3E%3Cpath d='M118 152 C140 132 160 120 188 98'/%3E%3C/g%3E%3C/svg%3E");
+      filter: blur(0.2px);
+      transform: translateY(-6px);
+    }
+h1 { 
       font-size: 1.8em; 
       margin: 0; 
       font-weight: 800;
@@ -45,12 +61,21 @@
     }
 
     .title-text {
-      background: var(--accent-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+  /* Snowy gradient but readable on white */
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 
-    .title-icon {
+  letter-spacing: 0.065em;
+  font-weight: 880;
+
+  /* Contrast helpers (keeps elegance) */
+  -webkit-text-stroke: 0.6px rgba(30,36,48,0.28);
+  text-shadow:
+    0 2px 10px rgba(30,36,48,0.16),
+    0 1px 0 rgba(255,255,255,0.65);
+}    .title-icon {
       font-size: 1.2em;
       animation: float 3s ease-in-out infinite;
     }
@@ -342,12 +367,161 @@ body.log-fullscreen{
   overflow: hidden !important;
 }
     .dev-only{ display:none !important; }
-</style>
+
+    /* --- Loading UI (User Mode) --- */
+    #loading-wrapper{
+      background:#fff;
+      border:1px solid #eaeaea;
+      border-radius:10px;
+      padding:12px 14px;
+      margin: 0 0 12px 0;
+      box-shadow:0 2px 10px rgba(0,0,0,0.05);
+    }
+    .progress-outer{
+      height:10px;
+      background:#eef2f7;
+      border-radius:999px;
+      overflow:hidden;
+      margin:8px 0;
+    }
+    .progress-inner{
+      height:100%;
+      background: var(--accent-gradient);
+      border-radius:999px;
+      transition: width 0.18s ease;
+    }
+    .loading-title{ font-weight:800; }
+    .loading-text{ font-size:0.9em; opacity:0.85; }
+
+
+    /* === ShimaBuilder Theme 1: Snowfield (safe decorative) === */
+    :root{
+      --shima-ice-1:#f7fbff;
+      --shima-ice-2:#eaf4ff;
+      --shima-sky:#cfe8ff;
+      --shima-ink:#1e2430;
+      --shima-shadow: rgba(0,0,0,0.14);
+      --shima-panel: rgba(255,255,255,0.90);
+    }
+
+    body{
+      position: relative;
+      background: linear-gradient(180deg, var(--shima-ice-1), var(--shima-ice-2));
+    }
+    body::before{
+      content:"";
+      position: fixed; inset:0;
+      z-index:-2;
+      background:
+        url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27520%27%20height%3D%27520%27%20viewBox%3D%270%200%20520%20520%27%3E%0A%3Cdefs%3E%0A%3Cfilter%20id%3D%27b%27%20x%3D%27-20%25%27%20y%3D%27-20%25%27%20width%3D%27140%25%27%20height%3D%27140%25%27%3E%0A%3CfeGaussianBlur%20stdDeviation%3D%2710%27/%3E%0A%3C/filter%3E%0A%3C/defs%3E%0A%3Cg%20filter%3D%27url%28%23b%29%27%20opacity%3D%270.9%27%3E%0A%3Cpath%20d%3D%27M185%20318c-52-22-74-92-36-142%2034-45%20101-59%20150-29%2028%2017%2052%2047%2057%2080%205%2034-8%2069-33%2092%2028%209%2055%2028%2072%2057-42%208-87-3-121-27-31%2040-89%2057-137%2039%2019-17%2034-39%2048-70z%27%0A%20fill%3D%27rgba%28255%2C255%2C255%2C0.08%29%27/%3E%0A%3Ccircle%20cx%3D%27278%27%20cy%3D%27212%27%20r%3D%2710%27%20fill%3D%27rgba%28255%2C255%2C255%2C0.10%29%27/%3E%0A%3C/g%3E%0A%3C/svg%3E") no-repeat right 6% top 18% / 360px 360px,
+        radial-gradient(900px 600p/* --- ShimaBuilder extra: tiny Shima-enaga face & feather whisper --- */
+    /* --- ShimaBuilder extra: Elegant Shima-enaga mark (quiet & minimal) --- */
+.shima-face{
+  display:inline-block;
+  width:32px; height:32px;
+  border-radius:999px;
+  background: rgba(255,255,255,0.97);
+  border:1px solid rgba(207,232,255,0.95);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+  position: relative;
+  margin-right: 10px;
+  vertical-align: -6px;
+  flex: 0 0 auto;
+  filter: saturate(0.95);
+  transition: filter 180ms ease, box-shadow 180ms ease;
+}
+.shima-face::before, .shima-face::after{
+  content:"";
+  position:absolute;
+  width:4px; height:4px;
+  border-radius:999px;
+  background: rgba(30,36,48,0.92);
+  top: 12px;
+}
+.shima-face::before{ left: 10px; }
+.shima-face::after{ right: 10px; }
+/* tiny glossy highlight */
+.shima-face i{
+  display:none;
+}
+.shima-face:hover{
+  filter: brightness(1.03) saturate(1.0);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+}
+
+    header{
+      position: relative;
+      overflow: hidden;
+    }
+    header::after{
+      content:"";
+      position:absolute;
+      inset:-8px;
+      pointer-events:none;
+      opacity:0.08;
+      background-repeat: repeat;
+      background-size: 220px 220px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%2394d1ff' stroke-width='2' stroke-linecap='round' opacity='0.9'%3E%3Cpath d='M30 70 C70 40, 120 40, 170 70'/%3E%3Cpath d='M45 74 C80 55, 120 55, 155 74'/%3E%3Cpath d='M60 78 C90 68, 120 68, 140 78'/%3E%3Cpath d='M105 40 C112 70, 112 100, 105 140'/%3E%3C/g%3E%3C/svg%3E");
+      transform: rotate(-6deg);
+    }
+
+    button, .btn, input[type="button"], input[type="submit"]{
+      border-radius: 12px;
+      border: 1px solid rgba(207,232,255,0.8);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+    }
+    button:hover, .btn:hover{
+      filter: brightness(1.03);
+    }
+
+    /* Subtle snow specks (static, non-interactive) */
+    .shima-noise{
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.06;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Ccircle cx='12' cy='28' r='1.1' fill='white'/%3E%3Ccircle cx='44' cy='72' r='0.9' fill='white'/%3E%3Ccircle cx='88' cy='40' r='1.0' fill='white'/%3E%3Ccircle cx='128' cy='98' r='0.8' fill='white'/%3E%3Ccircle cx='150' cy='18' r='1.0' fill='white'/%3E%3C/svg%3E");
+    }
+
+    h d='M105 40 C112 70, 112 100, 105 140'/%3E%3C/g%3E%3C/svg%3E");
+      transform: rotate(-6deg);
+    }
+
+    button, .btn, input[type="button"], input[type="submit"]{
+      border-radius: 12px;
+      border: 1px solid rgba(207,232,255,0.8);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+    }
+    button:hover, .btn:hover{
+      filter: brightness(1.03);
+    }
+
+    /* Subtle snow specks (static, non-interactive) */
+    .shima-noise{
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.06;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Ccircle cx='12' cy='28' r='1.1' fill='white'/%3E%3Ccircle cx='44' cy='72' r='0.9' fill='white'/%3E%3Ccircle cx='88' cy='40' r='1.0' fill='white'/%3E%3Ccircle cx='128' cy='98' r='0.8' fill='white'/%3E%3Ccircle cx='150' cy='18' r='1.0' fill='white'/%3E%3C/svg%3E");
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{ animation: none !important; transition: none !important; }
+    }
+
+  </style>
 </head>
 <body>
+  <div class="shima-noise" aria-hidden="true"></div>
+
 
   <header>
     <h1>
+      <span class="shima-face" aria-hidden="true"></span>
       <span class="title-text">AIイラスト用 シマビルダー</span>
       <span class="title-icon">🕊️</span>
     </h1>
@@ -355,7 +529,15 @@ body.log-fullscreen{
   </header>
 
   <div class="container">
-    <div id="log-wrapper">
+    
+    <div id="loading-wrapper" style="display:none;">
+      <div class="loading-title">Loading…</div>
+      <div class="progress-outer">
+        <div id="progress-bar" class="progress-inner" style="width:0%;"></div>
+      </div>
+      <div id="progress-text" class="loading-text">Preparing…</div>
+    </div>
+<div id="log-wrapper">
       <div class="log-header">
         <div>
           <span class="meter success"><span id="lbl-success">成功</span> <span id="success-count">0</span></span>
@@ -576,6 +758,35 @@ window.__simpleVisualizeEnabled=true;
       hideSimpleVisualize();
     }
   },true);
+})();
+
+
+// ---- Loading UI mode switch (Admin: log / User: progress) ----
+(function(){
+  "use strict";
+  function isDev(){
+    try { return localStorage.getItem("BUILDER_DEV_MODE") === "true"; }
+    catch(e){ return false; }
+  }
+  function applyLoadingMode(){
+    var logW = document.getElementById("log-wrapper");
+    var loadW = document.getElementById("loading-wrapper");
+    if(!logW || !loadW) return;
+    if(isDev()){
+      logW.style.display = "";
+      loadW.style.display = "none";
+    }else{
+      logW.style.display = "none";
+      loadW.style.display = "";
+    }
+  }
+  var run = function(){ applyLoadingMode(); setTimeout(applyLoadingMode, 250); };
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", run);
+  }else{
+    run();
+  }
+  window.__applyLoadingMode = applyLoadingMode;
 })();
 
 </script>
