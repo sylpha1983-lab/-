@@ -78,7 +78,7 @@
         summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#f9f9f9; color:#555;";
         details.appendChild(summary);
         const content = document.createElement("div");
-        content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(130px, 1fr)); gap:6px;";
+        content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(130px, 1fr)); gap:8px;";
         items.forEach(item => {
           const label = document.createElement("label");
           label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer;";
@@ -211,7 +211,7 @@
         summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#f9f9f9; color:#555;";
         details.appendChild(summary);
         const content = document.createElement("div");
-        content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(130px, 1fr)); gap:6px;";
+        content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(130px, 1fr)); gap:8px;";
         items.forEach(item => {
           const label = document.createElement("label");
           label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer;";
@@ -334,7 +334,7 @@
         summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#f9f9f9; color:#555;";
         details.appendChild(summary);
         const content = document.createElement("div");
-        content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:6px;";
+        content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:8px;";
         items.forEach(item => {
           const label = document.createElement("label");
           label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer;";
@@ -390,13 +390,46 @@
       { label: "オートマタ", val: "automaton, clockwork, gears, steampunk, keyhole on back" }
     ],
     "🐍 異形・モンスター娘セット (Monster Sets)": [
-      { label: "ラミアセット", val: "lamia, monster girl, snake body, snake tail, scales, long tail" },
-      { label: "アラクネセット", val: "arachne, monster girl, spider body, spider legs, multiple eyes" },
-      { label: "ケンタウロスセット", val: "centaur, monster girl, horse body, 4 legs, tail" },
-      { label: "アルラウネセット", val: "alraune, monster girl, flower body, vines, petals, nature" },
-      { label: "ハーピーセット", val: "harpy, monster girl, bird wings, bird legs, talons, feathers" },
-      { label: "スライム娘セット", val: "slime girl, liquid body, translucent skin, glossy, melting" }
-    ]
+      { label: "ゴルゴン（種族）", val: "gorgon, serpent-haired being, ancient cursed race, scaled skin, reptilian slit pupils, petrifying gaze aura" },
+      { label: "└ メデューサ型（安定生成）", val: "medusa, beautiful medusa, snake hair replacing normal hair, human upper body, single head, no hydra, no extra snakes except hair, petrifying gaze aura, elegant serpent queen presence" },
+      { label: "└ 怪物型ゴルゴン", val: "monstrous gorgon, distorted serpent hair, heavy scales, fanged mouth, ancient curse presence, inhuman gaze" },
+      { label: "└ ナーガ混成型", val: "gorgon naga hybrid, serpent hair, scaled upper body, serpentine lower form implied, cold reptilian presence" },
+
+      { label: "ラミア（種族）", val: "lamia, monster girl, snake lower body, coiled tail, scales" },
+      { label: "└ ブースト：質感・演出", val: "glossy scales, iridescent sheen, wet highlights, hypnotic gaze, eerie beauty" },
+      { label: "└ 本命：ラミア（安定）", val: "lamia girl, human upper body, serpentine lower body, coiled tail, elegant pose, refined face" },
+      { label: "└ 補助：変種・混成", val: "cobra hood motif, viper fangs, venomous aura, tail wrapping, temple ruins, moonlit fog" },
+
+      { label: "アラクネ（種族）", val: "arachne, monster girl, spider lower body, web, silk threads" },
+      { label: "└ ブースト：質感・演出", val: "silk shimmer, sticky strands, web glint, chitin reflections, night forest haze" },
+      { label: "└ 本命：アラクネ（安定）", val: "arachne girl, human upper body, spider abdomen, multiple legs, web weaving pose, calm smile" },
+      { label: "└ 補助：変種・混成", val: "black widow motif, orb-weaver pattern, cocoon props, predator stance, dungeon lair" },
+
+      { label: "ケンタウロス（種族）", val: "centaur girl, human upper body, horse body, hooves, tail" },
+      { label: "└ ブースト：質感・演出", val: "muscle definition, coat shine, flowing mane, dust motes, golden hour light" },
+      { label: "└ 本命：ケンタウロス（安定）", val: "centaur heroine, graceful stance, archer posture, noble expression, fantasy armor accents" },
+      { label: "└ 補助：変種・混成", val: "zebra stripes, unicorn horn, bard gear, forest clearing, gallop motion blur" },
+
+      { label: "アルラウネ（種族）", val: "alraune, plant monster girl, flower petals, vine hair, floral scent" },
+      { label: "└ ブースト：質感・演出", val: "pollen sparkles, dew drops, translucent petals, soft bioluminescence" },
+      { label: "└ 本命：アルラウネ（安定）", val: "alraune girl, petal dress, vine ornaments, gentle smile, garden throne" },
+      { label: "└ 補助：変種・混成", val: "poisonous bloom, thorny vines, carnivorous flower, misty greenhouse, fantasy forest" },
+
+      { label: "ハーピー（種族）", val: "harpy girl, bird wings, talons, feathers, avian" },
+      { label: "└ ブースト：質感・演出", val: "feather gloss, wind gusts, sky particles, sun flare, high altitude" },
+      { label: "└ 本命：ハーピー（安定）", val: "harpy maiden, wide wings spread, perched pose, confident look, cliff edge" },
+      { label: "└ 補助：変種・混成", val: "owl eyes, raven feathers, siren song vibe, storm clouds, dynamic dive" },
+
+      { label: "スライム（種族）", val: "slime girl, gelatin body, translucent skin, goo, liquid form" },
+      { label: "└ ブースト：質感・演出", val: "refraction, caustics, glossy wet surface, bubbles inside, dripping trails" },
+      { label: "└ 本命：スライム（安定）", val: "slime girl, semi-transparent body, cute expression, gentle pose, soft glow" },
+      { label: "└ 補助：変種・混成", val: "colored slime gradients, crystal slime, metallic slime, laboratory glass, neon lighting" },
+
+      { label: "ドライアド（種族）", val: "dryad, tree spirit girl, bark texture, leaf hair, forest guardian" },
+      { label: "└ ブースト：質感・演出", val: "moss detail, bark pores, floating leaves, god rays, woodland particles" },
+      { label: "└ 本命：ドライアド（安定）", val: "dryad girl, wooden skin accents, leaf dress, serene eyes, ancient tree backdrop" },
+      { label: "└ 補助：変種・混成", val: "autumn leaves, sakura petals, hollow tree altar, spirit wisps, enchanted forest" },
+]
   };
   
   const PARTS_DATA_2 = {
@@ -451,34 +484,121 @@ const PARTS_DATA_3 = {
         const details = document.createElement("details");
         details.className = "race-cat";
         details.style.cssText = "margin-bottom:6px; border:1px solid #eee; border-radius:4px; background:#fff;";
+
         const summary = document.createElement("summary");
         summary.textContent = title;
-        summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#f9f9f9; color:#555;";
+        summary.style.cssText = "font-weight:bold; padding:8px 10px; cursor:pointer; background:#f9f9f9; color:#555;";
         details.appendChild(summary);
+
         const content = document.createElement("div");
-        content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(130px, 1fr)); gap:6px;";
-        items.forEach(item => {
-          const label = document.createElement("label");
-          label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer;";
-          const cb = document.createElement("input"); 
-          cb.type = "checkbox"; 
-          cb.style.marginRight = "6px";
-          
-          if (item.val) { 
-             // ★修正: 連動機能を有効化
-             cb.dataset.val = item.val; 
-             cb.dataset.links = item.links;
-             label.title = item.val; 
-             label.appendChild(cb); 
-             label.appendChild(document.createTextNode(item.label)); 
-          } else { 
-             cb.dataset.en = item.en; 
-             cb.dataset.val = item.en;
-             label.appendChild(cb); 
-             label.appendChild(document.createTextNode(item.ja)); 
-          }
-          content.appendChild(label);
-        });
+
+        const getLabelText = (it) => (it.label || it.ja || "").trim();
+        // └ が含まれているかチェック（シマエナガ型・棚化の判定）
+        const hasIndented = items.some(it => getLabelText(it).startsWith("└"));
+
+        if (hasIndented) {
+          // ▼▼▼ 修正版：シマエナガ風の棚表示ロジック ▼▼▼
+          content.style.cssText = "padding:12px 8px; display:flex; flex-direction:column; gap:16px;";
+
+          // チェックボックス＆テキストを作る共通関数
+          const makeCheckboxCard = (it, isHead = false) => {
+            const label = document.createElement("label");
+
+            // 親（種族名）か、子（ブースト等）かでデザインを分ける
+            if (isHead) {
+              label.style.cssText = "display:flex; align-items:flex-start; gap:8px; cursor:pointer; padding:10px 12px; background:#eff6ff; border-bottom:1px solid #bfdbfe; font-weight:bold; color:#1e3a8a; width:100%; box-sizing:border-box;";
+            } else {
+              label.style.cssText = "display:flex; align-items:flex-start; gap:6px; cursor:pointer; padding:8px; border:1px solid #e5e7eb; border-radius:6px; background:#fff; font-size:0.9em; width:100%; box-sizing:border-box; box-shadow:0 1px 2px rgba(0,0,0,0.02);";
+            }
+
+            const cb = document.createElement("input");
+            cb.type = "checkbox";
+            cb.style.marginTop = "3px";
+
+            const v = it.val || it.en;
+            if (v) cb.dataset.val = v;
+            if (it.links) cb.dataset.links = it.links;
+            label.title = v || "";
+
+            label.appendChild(cb);
+
+            const txt = document.createElement("span");
+            txt.style.cssText = "line-height:1.4; word-break:break-word;";
+            txt.textContent = getLabelText(it).replace(/^└\s*/, "");
+            label.appendChild(txt);
+
+            return label;
+          };
+
+          // 棚（箱）を組み立てる関数
+          const makeShelf = (head, children) => {
+            const shelf = document.createElement("div");
+            shelf.className = "race-shelf";
+            shelf.style.cssText = "border:2px dashed #60a5fa; border-radius:8px; background:#f8fafc; overflow:hidden; display:flex; flex-direction:column; width:100%; box-sizing:border-box;";
+
+            // 1. ヘッダー（親要素）
+            shelf.appendChild(makeCheckboxCard(head, true));
+
+            // 2. 子要素グリッド
+            const grid = document.createElement("div");
+            grid.style.cssText = "padding:10px; display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:8px; width:100%; box-sizing:border-box;";
+
+            children.forEach(ch => {
+              grid.appendChild(makeCheckboxCard(ch, false));
+            });
+
+            shelf.appendChild(grid);
+            return shelf;
+          };
+
+          // データを親と子に振り分けて箱を生成
+          let currentHead = null;
+          let currentChildren = [];
+          const flush = () => {
+            if (!currentHead) return;
+            content.appendChild(makeShelf(currentHead, currentChildren));
+            currentHead = null;
+            currentChildren = [];
+          };
+
+          items.forEach(it => {
+            const name = getLabelText(it);
+            if (!name.startsWith("└")) {
+              flush();
+              currentHead = it;
+            } else {
+              currentChildren.push(it);
+            }
+          });
+          flush();
+          // ▲▲▲ 修正版ロジック ここまで ▲▲▲
+
+        } else {
+          // 従来通りのフラット表示（└がない場合）
+          content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:8px;";
+          items.forEach(item => {
+            const label = document.createElement("label");
+            label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer;";
+            const cb = document.createElement("input");
+            cb.type = "checkbox";
+            cb.style.marginRight = "6px";
+
+            if (item.val) {
+              cb.dataset.val = item.val;
+              if (item.links) cb.dataset.links = item.links;
+              label.title = item.val;
+              label.appendChild(cb);
+              label.appendChild(document.createTextNode(item.label));
+            } else {
+              cb.dataset.val = item.en;
+              label.title = item.en;
+              label.appendChild(cb);
+              label.appendChild(document.createTextNode(item.ja));
+            }
+            content.appendChild(label);
+          });
+        }
+
         details.appendChild(content);
         target.appendChild(details);
       };
@@ -588,7 +708,7 @@ const PARTS_DATA_3 = {
         summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#f9f9f9; color:#555;";
         details.appendChild(summary);
         const content = document.createElement("div");
-        content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:6px;";
+        content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:8px;";
         items.forEach(item => {
           const label = document.createElement("label");
           label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer;";

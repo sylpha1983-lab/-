@@ -222,7 +222,23 @@ h1 {
       padding: 10px;
     }
 
-    /* 個別タグ（ラベル） */
+    
+/* --- FIX: Shima-enaga Collection left-gap on mobile ---
+   The global rule `.attire-v1-ultimate-revised details[open] > div { display:grid; ... }`
+   unintentionally turns the Shima grouped top-level body into a grid, creating empty right space.
+   Force the top-level shima grouped body to be a normal block flow, while keeping inner panels intact.
+*/
+.attire-v1-ultimate-revised details.shima-grouped[open] > .shima-grouped-body{
+  display:block !important;
+  width:100% !important;
+  box-sizing:border-box;
+}
+.attire-v1-ultimate-revised details.shima-grouped[open] > .shima-grouped-body > .shima-panels{
+  display:block !important;
+  width:100% !important;
+  box-sizing:border-box;
+}
+/* 個別タグ（ラベル） */
     #sections label {
       display: flex;
       align-items: center;
