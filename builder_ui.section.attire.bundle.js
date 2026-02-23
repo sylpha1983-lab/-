@@ -2537,8 +2537,114 @@
     {ja:"シマエナガ・白宇宙の化身", en:"Shima White Cosmos Incarnation", group:"role", tag:"Shima-enaga cosmos incarnation, white cosmic textures, nebula feathers, abstract divinity"},
     {ja:"シマエナガ・神光プライム", en:"Shima Godlight Feather Prime", group:"dress", tag:"Shima-enaga godlight prime, concentrated luminous feathers, prismatic highlights, ultimate form"},
     {ja:"シマエナガ・オーロラ玉座", en:"Shima Aurora Throne Regalia", group:"season", tag:"Shima-enaga aurora regalia, aurora ribbon feathers, throne-worthy mantle, polar light"},
-    {ja:"シマエナガ・原初フォーム", en:"Shima Origin Form", group:"force", tag:"Shima-enaga origin form, pure simplified feather symbolism, primal white/black balance, iconic silhouette"}
-  ];
+    {ja:"シマエナガ・原初フォーム", en:"Shima Origin Form", group:"force", tag:"Shima-enaga origin form, pure simplified feather symbolism, primal white/black balance, iconic silhouette"},
+
+    // Spicy Special Glam +30
+    {ja:"攻めスペシャル・サテン深スリット", en:"Spicy Special Satin Deep Slit", spicyGroup:"glam_dress", group:"spicy", label:"SPICY", tag:"satin gown, deep slit, glossy drape, elegant glam, refined silhouette"},
+    {ja:"攻めスペシャル・ベルベット夜会", en:"Spicy Special Velvet Gala", spicyGroup:"glam_dress", group:"spicy", label:"SPICY", tag:"velvet evening dress, soft sheen, luxe texture, cinematic night glam"},
+    {ja:"攻めスペシャル・クリスタル縁ビスチェ", en:"Spicy Special Crystal Bustier", spicyGroup:"glam_dress", group:"spicy", label:"SPICY", tag:"crystal-trim bustier, structured fit, jewel accents, high-fashion glam"},
+    {ja:"攻めスペシャル・シルクホルター艶", en:"Spicy Special Silk Halter", spicyGroup:"glam_dress", group:"spicy", label:"SPICY", tag:"silk halter dress, smooth fabric flow, flattering neckline, elegant shine"},
+    {ja:"攻めスペシャル・レースマーメイド", en:"Spicy Special Lace Mermaid", spicyGroup:"glam_dress", group:"spicy", label:"SPICY", tag:"lace mermaid dress, intricate lace, bodyline elegance, mature glam"},
+    {ja:"攻めスペシャル・片肩グラム", en:"Spicy Special One-Shoulder", spicyGroup:"mode_bodycon", group:"spicy", label:"SPICY", tag:"one-shoulder cocktail dress, asymmetric cut, sleek glam, modern silhouette"},
+    {ja:"攻めスペシャル・オペラグローブ礼装", en:"Spicy Special Opera Gloves", spicyGroup:"glam_dress", group:"spicy", label:"SPICY", tag:"opera gloves, gala styling, satin shine, classic luxury mood"},
+    {ja:"攻めスペシャル・背中リボン背面魅せ", en:"Spicy Special Backless Ribbon", spicyGroup:"glam_dress", group:"spicy", label:"SPICY", tag:"backless dress, ribbon back detail, elegant exposure, tasteful allure"},
+    {ja:"攻めスペシャル・真珠チェーン背中飾り", en:"Spicy Special Pearl Chain", spicyGroup:"glam_dress", group:"spicy", label:"SPICY", tag:"pearl chain back accessory, luxe sparkle, refined detailing"},
+    {ja:"攻めスペシャル・透けレイヤー正装", en:"Spicy Special Sheer Overlay", spicyGroup:"glam_dress", group:"spicy", label:"SPICY", tag:"sheer overlay layers, subtle translucency, light-catching fabric, elegant glam"},
+    {ja:"攻めスペシャル・ネオン艶ボディコン", en:"Spicy Special Neon Bodycon", spicyGroup:"mode_bodycon", group:"spicy", label:"SPICY", tag:"neon shimmer bodycon, nightclub glow, sleek fit, city night vibe"},
+    {ja:"攻めスペシャル・ルーフトップ風スリット", en:"Spicy Special Rooftop Slit", spicyGroup:"glam_dress", group:"spicy", label:"SPICY", tag:"wind-slit skirt, rooftop night, dynamic hem, dramatic silhouette"},
+    {ja:"攻めスペシャル・反射素材シティナイト", en:"Spicy Special Reflective Night", spicyGroup:"mode_bodycon", group:"spicy", label:"SPICY", tag:"reflective fabric accents, city lights, glossy highlights, modern glam"},
+    {ja:"攻めスペシャル・月光シースルーカーデ", en:"Spicy Special Moonlit Cardigan", spicyGroup:"outer_gloss", group:"spicy", label:"SPICY", tag:"moonlit sheer cardigan, soft translucency, gentle drape, night elegance"},
+    {ja:"攻めスペシャル・スポットライト礼装スーツ", en:"Spicy Special Spotlight Suit", spicyGroup:"suit_formal", group:"spicy", label:"SPICY", tag:"spotlight glam suit, tailored lines, stage-ready shine, confident presence"},
+    {ja:"攻めスペシャル・ホログラムミニドレス", en:"Spicy Special Holo Mini", spicyGroup:"glam_dress", group:"spicy", label:"SPICY", tag:"holographic mini dress, prism sheen, edgy glam, club fashion"},
+    {ja:"攻めスペシャル・雨夜グロスレザー", en:"Spicy Special Rain Gloss", spicyGroup:"glam_dress", group:"spicy", label:"SPICY", tag:"gloss leather look, rainy night reflections, sharp highlights, urban edge"},
+    {ja:"攻めスペシャル・夜景ベルベットジャケット", en:"Spicy Special Velvet Jacket", spicyGroup:"suit_formal", group:"spicy", label:"SPICY", tag:"velvet jacket styling, skyline night, luxe texture, chic layering"},
+    {ja:"攻めスペシャル・プリズムクラブドレス", en:"Spicy Special Prism Club", spicyGroup:"glam_dress", group:"spicy", label:"SPICY", tag:"prism shimmer club dress, luminous gradients, vivid nightlife glow"},
+    {ja:"攻めスペシャル・シルエットロングコート艶", en:"Spicy Special Long Coat", spicyGroup:"outer_gloss", group:"spicy", label:"SPICY", tag:"sleek long coat dress, slit detail, silhouette emphasis, night chic"},
+    {ja:"攻めスペシャル・ゴシックレース深V", en:"Spicy Special Gothic Lace", spicyGroup:"leather_goth", group:"spicy", label:"SPICY", tag:"gothic lace deep v, dark elegance, lace detail, dramatic glam"},
+    {ja:"攻めスペシャル・ブラックサテンコルセット", en:"Spicy Special Satin Corset", spicyGroup:"leather_goth", group:"spicy", label:"SPICY", tag:"black satin corset set, structured waist, luxurious sheen, bold glam"},
+    {ja:"攻めスペシャル・黒薔薇シマー", en:"Spicy Special Black Rose", spicyGroup:"leather_goth", group:"spicy", label:"SPICY", tag:"black rose accents, shimmer fabric, dark romantic glam"},
+    {ja:"攻めスペシャル・影スリットレイヤード", en:"Spicy Special Shadow Slit", spicyGroup:"glam_dress", group:"spicy", label:"SPICY", tag:"layered dress, shadow slit, subtle exposure, cinematic contrast"},
+    {ja:"攻めスペシャル・紅差しダークグラム", en:"Spicy Special Crimson Accent", spicyGroup:"leather_goth", group:"spicy", label:"SPICY", tag:"crimson accent details, dark glam palette, striking contrast"},
+    {ja:"攻めスペシャル・構築モード輪郭セット", en:"Spicy Special Structured Mode", spicyGroup:"mode_bodycon", group:"spicy", label:"SPICY", tag:"structured high-fashion set, contour lines, modern cut, runway vibe"},
+    {ja:"攻めスペシャル・彫刻肩モードトップ", en:"Spicy Special Sculpted Shoulder", spicyGroup:"mode_bodycon", group:"spicy", label:"SPICY", tag:"sculpted shoulder top, sharp silhouette, fashion-forward glam"},
+    {ja:"攻めスペシャル・ハイウエスト光沢パンツ", en:"Spicy Special Gloss Trousers", spicyGroup:"mode_bodycon", group:"spicy", label:"SPICY", tag:"high-waist gloss trousers, sleek tailoring, reflective finish, chic"},
+    {ja:"攻めスペシャル・ミニマルシルクスーツ", en:"Spicy Special Minimal Silk", spicyGroup:"suit_formal", group:"spicy", label:"SPICY", tag:"minimal silk suit, clean lines, subtle shine, refined presence"},
+    {ja:"攻めスペシャル・スリットコートドレス", en:"Spicy Special Coat Dress", spicyGroup:"outer_gloss", group:"spicy", label:"SPICY", tag:"coat dress with slit, modern minimal glam, elegant cut"},
+  
+  { ja:"攻めスペシャル・ダークベルベットスリップ", en:"Spicy Special Dark Velvet Slip", group:"spicy", label:"SPICY", spicyGroup:"dark_glam", tag:"black velvet slip dress, subtle sheen, lace trim, night glamour" },
+  { ja:"攻めスペシャル・漆黒レースボディスーツ", en:"Spicy Special Obsidian Lace Bodysuit", group:"spicy", label:"SPICY", spicyGroup:"dark_glam", tag:"black lace bodysuit, sheer panels, elegant sensuality" },
+  { ja:"攻めスペシャル・黒薔薇コルセット", en:"Spicy Special Black Rose Corset", group:"spicy", label:"SPICY", spicyGroup:"dark_glam", tag:"corset with black rose embroidery, satin ribbons, hourglass silhouette" },
+  { ja:"攻めスペシャル・スモークシフォンガウン", en:"Spicy Special Smoke Chiffon Gown", group:"spicy", label:"SPICY", spicyGroup:"dark_glam", tag:"smoky chiffon gown, translucent layers, floating hem, moody lighting" },
+  { ja:"攻めスペシャル・ダークサテンローブ", en:"Spicy Special Dark Satin Robe", group:"spicy", label:"SPICY", spicyGroup:"dark_glam", tag:"dark satin robe, glossy drape, deep neckline, luxe loungewear" },
+  { ja:"攻めスペシャル・影羽ケープドレス", en:"Spicy Special Shadow Feather Cape Dress", group:"spicy", label:"SPICY", spicyGroup:"dark_glam", tag:"cape dress, feather-like gradient cape, dramatic silhouette, noir glamour" },
+  { ja:"攻めスペシャル・月影シアードレス", en:"Spicy Special Moonshadow Sheer Dress", group:"spicy", label:"SPICY", spicyGroup:"dark_glam", tag:"sheer dress, layered mesh, moonlit shimmer, elegant conceal-reveal" },
+  { ja:"攻めスペシャル・黒曜スリットドレス", en:"Spicy Special Obsidian Slit Dress", group:"spicy", label:"SPICY", spicyGroup:"dark_glam", tag:"high slit dress, obsidian shine, sleek lines, confident stance" },
+  { ja:"攻めスペシャル・ダークグロススカートスーツ", en:"Spicy Special Dark Gloss Skirt Suit", group:"spicy", label:"SPICY", spicyGroup:"dark_glam", tag:"glossy skirt suit, sharp shoulders, noir chic, subtle sparkle" },
+  { ja:"攻めスペシャル・黒金ハーネスドレス", en:"Spicy Special Black-Gold Harness Dress", group:"spicy", label:"SPICY", spicyGroup:"dark_glam", tag:"black and gold harness accents, elegant dress, refined edgy" },
+  { ja:"攻めスペシャル・夜霧ネグリジェ", en:"Spicy Special Nightmist Negligee", group:"spicy", label:"SPICY", spicyGroup:"dark_glam", tag:"negligee, soft lace, misty translucence, romantic noir" },
+  { ja:"攻めスペシャル・黒真珠チョーカードレス", en:"Spicy Special Black Pearl Choker Dress", group:"spicy", label:"SPICY", spicyGroup:"dark_glam", tag:"dress with black pearl choker collar, glossy fabric, elegant" },
+  { ja:"攻めスペシャル・ダークレザータイトワンピ", en:"Spicy Special Dark Leather Bodycon", group:"spicy", label:"SPICY", spicyGroup:"dark_glam", tag:"dark leather bodycon dress, matte+gloss contrast, sleek" },
+  { ja:"攻めスペシャル・影織りロンググローブ", en:"Spicy Special Shadow-Weave Long Gloves", group:"spicy", label:"SPICY", spicyGroup:"dark_glam", tag:"opera gloves, sheer pattern, shadow motif, classy allure" },
+  { ja:"攻めスペシャル・暗紅シルクチャイナ", en:"Spicy Special Deep Crimson Silk Cheongsam", group:"spicy", label:"SPICY", spicyGroup:"dark_glam", tag:"deep crimson silk cheongsam, black lace edging, sultry elegance" },
+  { ja:"攻めスペシャル・漆黒ベールヘッドピース", en:"Spicy Special Obsidian Veil Headpiece", group:"spicy", label:"SPICY", spicyGroup:"dark_glam", tag:"black veil headpiece, subtle sparkle, gothic chic" },
+  { ja:"攻めスペシャル・ダークスパンコールミニ", en:"Spicy Special Dark Sequin Mini", group:"spicy", label:"SPICY", spicyGroup:"dark_glam", tag:"dark sequin mini dress, shimmer, stage-ready glamour" },
+  { ja:"攻めスペシャル・黒影オフショルドレス", en:"Spicy Special Noir Off-Shoulder Dress", group:"spicy", label:"SPICY", spicyGroup:"dark_glam", tag:"off-shoulder dress, soft drape, noir elegance, collarbone highlight" },
+  { ja:"攻めスペシャル・夜光タトゥーストッキング", en:"Spicy Special Nightglow Tattoo Stockings", group:"spicy", label:"SPICY", spicyGroup:"dark_glam", tag:"patterned stockings, tattoo-like motifs, faint glow, stylish" },
+  { ja:"攻めスペシャル・黒煙フードマント", en:"Spicy Special Black Smoke Hooded Mantle", group:"spicy", label:"SPICY", spicyGroup:"dark_glam", tag:"hooded mantle, smoky gradient, cinematic silhouette, mysterious" },
+  { ja:"攻めスペシャル・高級ビキニ雪結晶", en:"Spicy Special Luxury Bikini Snowflake", group:"spicy", label:"SPICY", spicyGroup:"luxury_swim", tag:"luxury bikini, ice-blue, snowflake charm, glossy fabric" },
+  { ja:"攻めスペシャル・高級ワンピース水着シルク", en:"Spicy Special Luxury One-piece Silk Swim", group:"spicy", label:"SPICY", spicyGroup:"luxury_swim", tag:"one-piece swimsuit, silk-like sheen, minimal cut, premium" },
+  { ja:"攻めスペシャル・高級ラッシュガード艶", en:"Spicy Special Glossy Rash Guard", group:"spicy", label:"SPICY", spicyGroup:"luxury_swim", tag:"glossy rash guard, feather stripe lines, sleek sport glam" },
+  { ja:"攻めスペシャル・高級ビキニ羽根ライン", en:"Spicy Special Feather-Line Luxury Bikini", group:"spicy", label:"SPICY", spicyGroup:"luxury_swim", tag:"bikini, feather line accents, refined, high-end resort" },
+  { ja:"攻めスペシャル・高級モノキニ宝石", en:"Spicy Special Jewel Monokini", group:"spicy", label:"SPICY", spicyGroup:"luxury_swim", tag:"monokini with jewel connector, reflective, couture swim" },
+  { ja:"攻めスペシャル・高級シアーパレオ", en:"Spicy Special Sheer Pareo", group:"spicy", label:"SPICY", spicyGroup:"luxury_swim", tag:"sheer pareo wrap, translucent shimmer, elegant beachwear" },
+  { ja:"攻めスペシャル・高級ビーチガウン", en:"Spicy Special Luxury Beach Gown", group:"spicy", label:"SPICY", spicyGroup:"luxury_swim", tag:"beach gown, flowing chiffon, subtle glitter, premium resort" },
+  { ja:"攻めスペシャル・高級ハイウエスト水着", en:"Spicy Special High-Waist Luxury Swim", group:"spicy", label:"SPICY", spicyGroup:"luxury_swim", tag:"high-waist bikini, sculpted lines, satin gloss, classy" },
+  { ja:"攻めスペシャル・高級水着ボンデージライン", en:"Spicy Special Couture Strapline Swim", group:"spicy", label:"SPICY", spicyGroup:"luxury_swim", tag:"couture swimwear, strapline detailing, tasteful edgy" },
+  { ja:"攻めスペシャル・高級スイムキャップ羽チャーム", en:"Spicy Special Swim Cap Feather Charm", group:"spicy", label:"SPICY", spicyGroup:"luxury_swim", tag:"swim cap, feather charm, polished sporty luxury" },
+  { ja:"攻めスペシャル・ハイブランドボディコン", en:"Spicy Special High-Brand Bodycon", group:"spicy", label:"SPICY", spicyGroup:"highbrand_mode", tag:"designer bodycon, clean cut, premium fabric, runway vibe" },
+  { ja:"攻めスペシャル・ハイブランドシルクブラウス", en:"Spicy Special Designer Silk Blouse", group:"spicy", label:"SPICY", spicyGroup:"highbrand_mode", tag:"silk blouse, subtle sheen, tailored cuffs, luxury" },
+  { ja:"攻めスペシャル・ハイブランドペンシルスカート", en:"Spicy Special Designer Pencil Skirt", group:"spicy", label:"SPICY", spicyGroup:"highbrand_mode", tag:"pencil skirt, precise tailoring, high-end minimal" },
+  { ja:"攻めスペシャル・ハイブランドトレンチ艶", en:"Spicy Special Designer Gloss Trench", group:"spicy", label:"SPICY", spicyGroup:"highbrand_mode", tag:"gloss trench coat, belt cinch, modern luxury" },
+  { ja:"攻めスペシャル・ハイブランドカットアウトドレス", en:"Spicy Special Designer Cutout Dress", group:"spicy", label:"SPICY", spicyGroup:"highbrand_mode", tag:"cutout dress, tasteful geometry, couture minimal" },
+  { ja:"攻めスペシャル・ハイブランドレザースカート", en:"Spicy Special Designer Leather Skirt", group:"spicy", label:"SPICY", spicyGroup:"highbrand_mode", tag:"leather skirt, matte-gloss mix, chic" },
+  { ja:"攻めスペシャル・ハイブランドジャケットミニ", en:"Spicy Special Designer Jacket Mini", group:"spicy", label:"SPICY", spicyGroup:"highbrand_mode", tag:"cropped jacket, mini dress layering, runway styling" },
+  { ja:"攻めスペシャル・ハイブランドストラップヒール", en:"Spicy Special Designer Strap Heels", group:"spicy", label:"SPICY", spicyGroup:"highbrand_mode", tag:"strap heels, metallic accent, high fashion" },
+  { ja:"攻めスペシャル・ハイブランドシアートップス", en:"Spicy Special Designer Sheer Top", group:"spicy", label:"SPICY", spicyGroup:"highbrand_mode", tag:"sheer top, fine mesh, luxury layering, elegant" },
+  { ja:"攻めスペシャル・ハイブランドグローブバッグ", en:"Spicy Special Designer Glove & Bag", group:"spicy", label:"SPICY", spicyGroup:"highbrand_mode", tag:"long gloves and mini bag, logo-less luxury, refined" },
+  { ja:"攻めスペシャル・異世界艶サイバー魔装", en:"Spicy Special Cyber Arcane Glam Armor", group:"spicy", label:"SPICY", spicyGroup:"isekai_glam", tag:"cyber arcane armor, glowing runes, sleek plating, sensual silhouette" },
+  { ja:"攻めスペシャル・異世界艶ナノスーツ", en:"Spicy Special Futuristic Nano Suit", group:"spicy", label:"SPICY", spicyGroup:"isekai_glam", tag:"futuristic nano suit, reflective, body-hugging, luminous seams" },
+  { ja:"攻めスペシャル・異世界艶魔導スーツ", en:"Spicy Special Arcane Suit", group:"spicy", label:"SPICY", spicyGroup:"isekai_glam", tag:"arcane suit, magic circuits, glossy fabric, mystic tech" },
+  { ja:"攻めスペシャル・異世界艶星屑マント", en:"Spicy Special Stardust Cape", group:"spicy", label:"SPICY", spicyGroup:"isekai_glam", tag:"stardust cape, floating particles, dramatic, otherworldly" },
+  { ja:"攻めスペシャル・異世界艶ホログラムドレス", en:"Spicy Special Hologram Dress", group:"spicy", label:"SPICY", spicyGroup:"isekai_glam", tag:"hologram dress, shifting iridescence, sci-fi couture" },
+  { ja:"攻めスペシャル・異世界艶魔装ボディスーツ", en:"Spicy Special Enchanted Bodysuit", group:"spicy", label:"SPICY", spicyGroup:"isekai_glam", tag:"enchanted bodysuit, rune patterns, sleek armor joints" },
+  { ja:"攻めスペシャル・異世界艶ウィングユニット", en:"Spicy Special Wing Unit Harness", group:"spicy", label:"SPICY", spicyGroup:"isekai_glam", tag:"back-mounted wing unit, slim harness, energy feathers" },
+  { ja:"攻めスペシャル・異世界艶プラズマコート", en:"Spicy Special Plasma Coat", group:"spicy", label:"SPICY", spicyGroup:"isekai_glam", tag:"plasma-lined coat, glowing edges, futuristic glam" },
+  { ja:"攻めスペシャル・異世界艶光剣ホルスター", en:"Spicy Special Lightblade Holster", group:"spicy", label:"SPICY", spicyGroup:"isekai_glam", tag:"lightblade holster accessory, sleek belts, sci-fi fantasy" },
+  { ja:"攻めスペシャル・異世界艶魔晶アクセ", en:"Spicy Special Magic Crystal Accessories", group:"spicy", label:"SPICY", spicyGroup:"isekai_glam", tag:"magic crystals, floating shards, elegant sparkle" },
+  { ja:"攻めスペシャル・異世界艶戦術ドレスアーマー", en:"Spicy Special Tactical Dress Armor", group:"spicy", label:"SPICY", spicyGroup:"isekai_glam", tag:"dress armor hybrid, armored bodice, flowing skirt panels" },
+  { ja:"攻めスペシャル・異世界艶月光ヘルム", en:"Spicy Special Moonlight Helm", group:"spicy", label:"SPICY", spicyGroup:"isekai_glam", tag:"moonlight helm, open-face, elegant, luminous" },
+  { ja:"ナイトクラブ艶・ネオン透過ドレス", en:"Nightclub Glam Neon Sheer Dress", tag:"nightclub neon sheer dress, translucent panels, neon edge piping, glow trim, sleek nightlife silhouette", group:"spicy", label:"SPICY", spicyGroup:"nightclub_glam" },
+  { ja:"ナイトクラブ艶・メタリックボディスーツ", en:"Nightclub Glam Metallic Bodysuit", tag:"metallic glossy bodysuit, reflective chrome fabric, club lighting shine, sculpted silhouette", group:"spicy", label:"SPICY", spicyGroup:"nightclub_glam" },
+  { ja:"ナイトクラブ艶・リキッドラメスリットドレス", en:"Nightclub Glam Liquid Glitter Slit Dress", tag:"liquid glitter dress, wet-look shimmer, high slit, glossy highlights, nightclub vibe", group:"spicy", label:"SPICY", spicyGroup:"nightclub_glam" },
+  { ja:"ナイトクラブ艶・レーザーカットジャケット", en:"Nightclub Glam Laser-Cut Jacket", tag:"laser-cut short jacket, geometric cutouts, neon underglow, nightlife styling", group:"spicy", label:"SPICY", spicyGroup:"nightclub_glam" },
+  { ja:"ナイトクラブ艶・ネオンハーネスセット", en:"Nightclub Glam Neon Harness Set", tag:"neon harness accessories over sleek outfit, minimal straps, luminous accents, clubwear", group:"spicy", label:"SPICY", spicyGroup:"nightclub_glam" },,
+  { ja:"和艶・高級・黒振袖スリット", en:"Waglam Luxury Black Furisode Slit", tag:"black furisode with daring slit, luxurious silk sheen, elegant drape", group:"spicy", label:"SPICY", spicyGroup:"wa_lux_glam" },
+  { ja:"和艶・高級・金箔羽織", en:"Waglam Luxury Gold Leaf Haori", tag:"gold leaf haori, gilded patterns, opulent shimmer, refined layering", group:"spicy", label:"SPICY", spicyGroup:"wa_lux_glam" },
+  { ja:"和艶・高級・漆塗り質感帯", en:"Waglam Luxury Lacquer Obi Texture", tag:"lacquered obi texture, glossy urushi finish, deep reflective shine", group:"spicy", label:"SPICY", spicyGroup:"wa_lux_glam" },
+  { ja:"和艶・高級・金襴刺繍の襟元", en:"Waglam Luxury Kinran Embroidered Collar", tag:"kinran brocade embroidery, gold thread collar, premium detail", group:"spicy", label:"SPICY", spicyGroup:"wa_lux_glam" },
+  { ja:"和艶・高級・簪と艶髪", en:"Waglam Luxury Kanzashi & Gloss Hair", tag:"kanzashi hairpin, glossy black hair, elegant shine, high-end finish", group:"spicy", label:"SPICY", spicyGroup:"wa_lux_glam" },
+
+  { ja:"未来ランウェイ艶・ホログラム布コート", en:"Future Runway Glam Hologram Coat", tag:"holographic fabric long coat, shifting iridescence, runway silhouette, premium sheen", group:"spicy", label:"SPICY", spicyGroup:"futuristic_runway_glam" },
+  { ja:"未来ランウェイ艶・半透明ハイブランドスーツ", en:"Future Runway Glam Translucent Luxury Suit", tag:"semi-transparent luxury suit, layered sheer panels, high-fashion cut, glossy finish", group:"spicy", label:"SPICY", spicyGroup:"futuristic_runway_glam" },
+  { ja:"未来ランウェイ艶・光沢アシンメトリードレス", en:"Future Runway Glam Glossy Asymmetric Dress", tag:"glossy asymmetric dress, sharp couture lines, reflective highlights, runway drama", group:"spicy", label:"SPICY", spicyGroup:"futuristic_runway_glam" },
+  { ja:"未来ランウェイ艶・LEDステッチドレス", en:"Future Runway Glam LED Stitch Dress", tag:"LED stitch accents, luminous seams, minimalist couture, futuristic runway styling", group:"spicy", label:"SPICY", spicyGroup:"futuristic_runway_glam" },
+  { ja:"未来ランウェイ艶・クリア素材ヒールブーツ", en:"Future Runway Glam Clear Heel Boots", tag:"clear material high-heel boots, transparent gloss, designer runway accessory", group:"spicy", label:"SPICY", spicyGroup:"futuristic_runway_glam" },
+  { ja:"冷艶・氷結スリットドレス", en:"Cold Glam Frozen Slit Dress", tag:"ice-themed slit dress, frosted gloss, cold shimmer, crystalline highlights", group:"spicy", label:"SPICY", spicyGroup:"cold_glam" },
+  { ja:"冷艶・結晶ビキニ", en:"Cold Glam Crystal Bikini", tag:"crystal bikini, snowflake facets, icy shine, sparkling frost accents", group:"spicy", label:"SPICY", spicyGroup:"cold_glam" },
+  { ja:"冷艶・冷光スーツ", en:"Cold Glam Cold-Light Suit", tag:"cold light suit, pale luminous trim, sleek glossy fabric, winter glow", group:"spicy", label:"SPICY", spicyGroup:"cold_glam" },
+  { ja:"冷艶・霜羽ケープ", en:"Cold Glam Frost Feather Cape", tag:"frost feather cape, translucent feather layers, icy sheen, winter glamour", group:"spicy", label:"SPICY", spicyGroup:"cold_glam" },
+  { ja:"冷艶・氷霧ボディコン", en:"Cold Glam Ice-Mist Bodycon", tag:"bodycon dress with ice-mist gradient, glossy finish, chilled aura, sleek silhouette", group:"spicy", label:"SPICY", spicyGroup:"cold_glam" },
+];
 
   function escapeHTML(str){
     return String(str||"")
@@ -2564,20 +2670,24 @@
   }
 
   function isSpicy(s){
-    const ja = (s.ja||"");
-    const tag = (s.tag||"").toLowerCase();
-    const en  = (s.en||"").toLowerCase();
-    if (ja.includes("グラビア")) return true;
-    if (ja.includes("攻め") && ja.includes("チャイナ")) return true;
-    if (tag.includes("gravure") || tag.includes("lingerie") || tag.includes("bikini") || tag.includes("swimsuit")) return true;
-    if (en.includes("bikini") || en.includes("lingerie") || en.includes("swimsuit")) return true;
-    return false;
-  }
+  const grp = String(s && s.group || "");
+  const sGrp = String(s && s.spicyGroup || "");
+  if (grp === "spicy") return true;
+  if (s && s.spicyTag) return true;
+  // spicyGroup が付いているものは「攻め」確定
+  if (sGrp) return true;
+  return false;
+}
 
-  function badgeFor(s){
+function badgeFor(s){
     const ja = (s.ja||"");
     const tag = (s.tag||"").toLowerCase();
-    if (isSpicy(s)) return {key:"spicy", label:"SPICY"};
+    if (isSpicy(s)) {
+      const sg = (s.spicyGroup||"");
+      const map = {glam_dress:"GLAM", suit_formal:"SUIT", outer_gloss:"OUTER", leather_goth:"GOTH", mode_bodycon:"MODE"};
+      const lbl = map[sg] || "SPICY";
+      return {key:"spicy", label:lbl};
+    }
     if (ja.includes("制服") || ja.includes("学園") || ja.includes("学生") || ja.includes("図書") || ja.includes("生徒会") || tag.includes("uniform")) return {key:"uniform", label:"UNIFORM"};
     if (ja.includes("カジュアル") || ja.includes("ストリート") || ja.includes("ゆめかわ") || ja.includes("カフェ") || tag.includes("casual") || tag.includes("street")) return {key:"casual", label:"CASUAL"};
     if (ja.includes("フォース") || ja.includes("パイロット") || ja.includes("オペレーター") || tag.includes("force") || tag.includes("tactical") || tag.includes("pilot")) return {key:"force", label:"FORCE"};
@@ -2779,9 +2889,17 @@
       wrap.style.flex='1 1 auto';
 
       const isSpicy = (s)=>{
+        const grp = String(s?.group || "");
+        const sGrp = String(s?.spicyGroup || "");
         const ja = String(s?.ja||"");
         const en = String(s?.en||"");
-        const tag = String(s?.tag||"").toLowerCase();
+        const tagRaw = String(s?.tag||"");
+        const tag = tagRaw.toLowerCase();
+        // Hard routing: explicit group/spicyGroup/tag forces "Spicy Special"
+        if (grp === "spicy") return true;
+        if (tag.includes("spicy") || tagRaw.toUpperCase() === "SPICY") return true;
+        if (["nightclub_glam","wa_lux_glam","futuristic_runway_glam","cold_glam"].includes(sGrp)) return true;
+        // Heuristic routing (legacy)
         return ja.includes("攻め") || ja.includes("グラビア") || en.toLowerCase().includes("bold") || en.toLowerCase().includes("gravure") || tag.includes("gravure") || tag.includes("lingerie") || tag.includes("bikini") || tag.includes("swimsuit") || tag.includes("night club");
       };
 
@@ -2954,7 +3072,11 @@ function buildSection(opts){
 
       // Distribute ALL sets (except spicy ones) into groups
       SETS.forEach(s => {
-        if (isSpicy(s)) return;
+        if (isSpicy(s)
+            || String(s?.label ?? '').toUpperCase().includes('SPICY')
+            || String(s?.group ?? '').toLowerCase().startsWith('spicy')
+            || /^(ナイトクラブ艶|和艶・高級|未来ランウェイ艶|冷艶)/.test(String(s?.ja ?? ''))
+          ) return;
         const k = detectShimaGroup(s);
         (groupMap[k] || groupMap.casual).items.push(s);
       });
@@ -2963,7 +3085,114 @@ function buildSection(opts){
       GROUPS = GROUPS.filter(g => g.items && g.items.length);
 
 
-      // Grouped variant for Shima-enaga Collection (nested subsections)
+        // ===== 🌶️ Spicy Special: explicit labeling & grouping (NO auto classification) =====
+  const SPICY_GROUP_BY_JA = {
+  "攻めスペシャル・サテン深スリット":"glam_dress",
+  "攻めスペシャル・ベルベット夜会":"glam_dress",
+  "攻めスペシャル・クリスタル縁ビスチェ":"glam_dress",
+  "攻めスペシャル・シルクホルター艶":"glam_dress",
+  "攻めスペシャル・レースマーメイド":"glam_dress",
+  "攻めスペシャル・片肩グラム":"mode_bodycon",
+  "攻めスペシャル・オペラグローブ礼装":"glam_dress",
+  "攻めスペシャル・背中リボン背面魅せ":"glam_dress",
+  "攻めスペシャル・真珠チェーン背中飾り":"glam_dress",
+  "攻めスペシャル・透けレイヤー正装":"glam_dress",
+  "攻めスペシャル・ネオン艶ボディコン":"mode_bodycon",
+  "攻めスペシャル・ルーフトップ風スリット":"glam_dress",
+  "攻めスペシャル・反射素材シティナイト":"mode_bodycon",
+  "攻めスペシャル・月光シースルーカーデ":"outer_gloss",
+  "攻めスペシャル・スポットライト礼装スーツ":"suit_formal",
+  "攻めスペシャル・ホログラムミニドレス":"glam_dress",
+  "攻めスペシャル・夜景ベルベットジャケット":"suit_formal",
+  "攻めスペシャル・プリズムクラブドレス":"glam_dress",
+  "攻めスペシャル・シルエットロングコート艶":"outer_gloss",
+  "攻めスペシャル・ゴシックレース深V":"leather_goth",
+  "攻めスペシャル・ブラックサテンコルセット":"leather_goth",
+  "攻めスペシャル・黒薔薇シマー":"leather_goth",
+  "攻めスペシャル・紅差しダークグラム":"leather_goth",
+  "攻めスペシャル・構築モード輪郭セット":"mode_bodycon",
+  "攻めスペシャル・彫刻肩モードトップ":"mode_bodycon",
+  "攻めスペシャル・ハイウエスト光沢パンツ":"mode_bodycon",
+  "攻めスペシャル・ミニマルシルクスーツ":"suit_formal",
+  "攻めスペシャル・スリットコートドレス":"outer_gloss"
+};
+  const SPICY_GROUPS_DEF = [
+    { key:"glam_dress", icon:"💎", ja:"グラム・ドレス", en:"Glam Dresses" },
+    { key:"suit_formal", icon:"🕴️", ja:"スーツ・礼装", en:"Suits & Formal" },
+    { key:"outer_gloss", icon:"🧥", ja:"アウター艶", en:"Glossy Outerwear" },
+    { key:"leather_goth", icon:"🖤", ja:"レザー・ゴシック", en:"Leather & Gothic" },
+    { key:"mode_bodycon", icon:"✨", ja:"モード・ボディコン", en:"Mode & Bodycon" },
+    { key:"dark_glam", icon:"🌑", ja:"ダーク艶", en:"Dark Glam" },
+    { key:"luxury_swim", icon:"🩱", ja:"高級水着艶", en:"Luxury Swim Glam" },
+    { key:"highbrand_mode", icon:"👜", ja:"ハイブランド艶", en:"High-Brand Mode" },
+    { key:"nightclub_glam", icon:"🌃", ja:"ナイトクラブ艶", en:"Nightclub Glam" },
+    { key:"wa_lux_glam", icon:"🎴", ja:"和艶・高級", en:"Luxury Wa Glam" },
+    { key:"futuristic_runway_glam", icon:"🪩", ja:"未来ランウェイ艶", en:"Future Runway Glam" },
+    { key:"cold_glam", icon:"❄️", ja:"冷艶", en:"Ice & Snow Glam" },
+
+    { key:"isekai_glam", icon:"🛸", ja:"異世界艶", en:"Isekai Glam" },
+  ];
+
+  function detectSpicyGroup(s) {
+    if (!s) return "glam_dress";
+    if (s.spicyGroup) return s.spicyGroup;
+    return SPICY_GROUP_BY_JA[s.ja] || "glam_dress";
+  }
+// Prebuild spicy groups from spicySets (strict mapping; missing => glam_dress)
+let SPICY_GROUPS = SPICY_GROUPS_DEF.map(g => ({...g, items: []}));
+const SPICY_GROUP_INDEX = Object.fromEntries(SPICY_GROUPS.map(g => [g.key, g]));
+spicySets.forEach(s => {
+  const k = detectSpicyGroup(s);
+  (SPICY_GROUP_INDEX[k] || SPICY_GROUP_INDEX.glam_dress).items.push(s);
+});
+SPICY_GROUPS = SPICY_GROUPS.filter(g => g.items.length > 0);
+  function buildSpicyGroupedSection(opts) {
+    const {
+      title,
+      icon,
+      count,
+      summaryClass="section-summary spicy-special",
+      detailsClass="section-details spicy-special-details",
+      groups,
+    } = opts || {};
+
+    const wrap = document.createElement("details");
+    wrap.className = detailsClass;
+    wrap.open = false;
+
+    const sum = document.createElement("summary");
+    sum.className = summaryClass;
+    sum.innerHTML = `<span class="summary-left"><span class="icon">${icon || ""}</span><span class="title">${title || ""}</span></span>` +
+      `<span class="summary-right"><span class="count">${count || 0}</span></span>`;
+
+    const panelsWrap = document.createElement("div");
+    panelsWrap.className = "group-panels";
+    // Force single-column layout (override any grid styles)
+    panelsWrap.style.display = "flex";
+    panelsWrap.style.flexDirection = "column";
+    panelsWrap.style.gap = "10px";
+    panelsWrap.style.width = "100%";
+
+    (groups || []).forEach(g => {
+      const sec = buildSection({
+        title: g.ja,
+        icon: g.icon,
+        items: g.items,
+        count: g.items.length,
+        summaryClass: "shima-accordion",
+        detailsClass: "subgroup-details",
+        idPrefix: `spicy_`,
+        hideEn: true,
+      });
+      panelsWrap.appendChild(sec);
+    });
+
+    wrap.appendChild(sum);
+    wrap.appendChild(panelsWrap);
+    return wrap;
+  }
+
+// Grouped variant for Shima-enaga Collection (nested subsections)
       function buildShimaGroupedSection(opts){
   const wrap = document.createElement("details");
   wrap.className = "shima-grouped";
@@ -3111,16 +3340,13 @@ wrap.appendChild(title);
       }));
 
       if (spicySets.length){
-        wrap.appendChild(buildSection({
-          idPrefix: "attire_v21_spicy",
-          icon: "🌶️",
-          title: "攻め・グラビア (Spicy & Glam)",
-          count: spicySets.length,
-          items: spicySets,
-          open: false,
-          summaryClass: "spicy"
-        }));
-      }
+    wrap.appendChild(buildSpicyGroupedSection({
+      title: "🌶️ 攻め・スペシャル (Spicy Special)",
+      icon: "🌶️",
+      count: spicySets.length,
+      groups: SPICY_GROUPS,
+    }));
+  }
 
       // prepend to top so it doesn't get buried by older versions
       if (contentArea.firstChild) if(contentArea && contentArea.insertBefore){
