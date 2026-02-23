@@ -135,6 +135,205 @@ cb.addEventListener("change", () => {
     { label: "髪の解像度アップ", val: "(detailed hair), (hair strands), (lustrous hair)" }
   ];
 
+  // ============================
+  // 👥 Cast Control (People Count)
+  // - Enable toggle prevents affecting models that don't need it
+  // - Girls/Boys counts are mutually exclusive within each group
+  // ============================
+  const CAST_CONTROL = {
+    girls: [
+      { key: "cc_g1", label: "1girl", desc: "女1", val: "1girl" },
+      { key: "cc_g2", label: "2girls", desc: "女2", val: "2girls" },
+      { key: "cc_g3", label: "3girls", desc: "女3", val: "3girls" },
+      { key: "cc_g4", label: "4girls", desc: "女4", val: "4girls" },
+      { key: "cc_g5", label: "5girls", desc: "女5", val: "5girls" }
+    ],
+    boys: [
+      { key: "cc_b1", label: "1boy", desc: "男1", val: "1boy" },
+      { key: "cc_b2", label: "2boys", desc: "男2", val: "2boys" },
+      { key: "cc_b3", label: "3boys", desc: "男3", val: "3boys" },
+      { key: "cc_b4", label: "4boys", desc: "男4", val: "4boys" },
+      { key: "cc_b5", label: "5boys", desc: "男5", val: "5boys" }
+    ]
+  };
+
+  function _setDisabledInBox(box, disabled) {
+    box.querySelectorAll("input[type=checkbox]").forEach((cb) => {
+      cb.disabled = disabled;
+      if (disabled) cb.checked = false;
+    });
+    box.classList.toggle("disabled", !!disabled);
+  }
+
+  function createCastControlAccordion() {
+    const d = document.createElement("details");
+    d.className = "qp-subacc";
+    d.open = false;
+
+    const s = document.createElement("summary");
+    s.className = "qp-subacc-summary";
+
+    const titleWrap = document.createElement("div");
+    titleWrap.className = "qp-subacc-title";
+    titleWrap.textContent = "👥 人物制御（人数）";
+
+    const enableWrap = document.createElement("label");
+    enableWrap.style.display = "inline-flex";
+    enableWrap.style.alignItems = "center";
+    enableWrap.style.gap = "8px";
+    enableWrap.style.userSelect = "none";
+
+    const enable = document.createElement("input");
+    enable.type = "checkbox";
+    enable.id = "cc-enable";
+    enableWrap.appendChild(enable);
+
+    const enableTxt = document.createElement("span");
+    enableTxt.textContent = "有効化";
+    enableWrap.appendChild(enableTxt);
+
+    s.appendChild(titleWrap);
+    s.appendChild(enableWrap);
+    d.appendChild(s);
+
+    const box = document.createElement("div");
+    box.className = "qp-subacc-box";
+
+    const note = document.createElement("div");
+    note.className = "qp-note";
+    note.textContent = "※ モデルによって不要な場合があるので、必要な時だけON。女/男はそれぞれ1つだけ選択（同時に女+男はOK）。";
+    box.appendChild(note);
+
+    const mkRow = (label, items, groupClass) => {
+  const row = document.createElement("div");
+  row.style.display = "flex";
+  row.style.flexWrap = "wrap";
+  row.style.gap = "10px";
+  row.style.alignItems = "flex-start";
+  row.style.margin = "12px 0";
+
+  const left = document.createElement("div");
+  left.style.fontWeight = "700";
+  left.style.minWidth = "72px";
+  left.style.paddingTop = "6px";
+  left.textContent = label;
+
+  const right = document.createElement("div");
+  // ✅ ルール準拠：grid固定禁止 → flex-wrap で増殖に耐える
+  right.style.display = "flex";
+  right.style.flexWrap = "wrap";
+  right.style.gap = "8px";
+  right.style.alignItems = "flex-start";
+  right.style.width = "100%";
+  right.style.flex = "1 1 240px";
+
+  const makePill = (it) => {
+    const id = it.key;
+
+    const lab = document.createElement("label");
+    lab.style.display = "inline-flex";
+    lab.style.alignItems = "center";
+    lab.style.gap = "10px";
+    lab.style.padding = "10px 12px";
+    lab.style.border = "1px solid var(--qp-border, #d0d7de)";
+    lab.style.borderRadius = "12px";
+    lab.style.background = "var(--qp-bg, #fff)";
+    lab.style.cursor = "pointer";
+    lab.style.userSelect = "none";
+    lab.style.minWidth = "140px";
+
+    const cb = document.createElement("input");
+    cb.type = "checkbox";
+    cb.id = id;
+    cb.dataset.val = it.val;
+    cb.dataset.ccGroup = groupClass;
+    // 目視できるチェックボックスは不要：ピル自体がボタンになる
+    cb.style.display = "none";
+
+    const meta = document.createElement("div");
+    meta.style.display = "flex";
+    meta.style.flexDirection = "column";
+    meta.style.lineHeight = "1.1";
+
+    const t = document.createElement("div");
+    t.style.fontWeight = "700";
+    t.textContent = it.label;
+
+    const ds = document.createElement("div");
+    ds.style.fontSize = "12px";
+    ds.style.opacity = "0.75";
+    ds.textContent = it.desc;
+
+    meta.appendChild(t);
+    meta.appendChild(ds);
+
+    const paint = () => {
+      if (cb.checked) {
+        lab.style.outline = "2px solid rgba(37, 99, 235, 0.35)";
+        lab.style.borderColor = "rgba(37, 99, 235, 0.65)";
+      } else {
+        lab.style.outline = "none";
+        lab.style.borderColor = "var(--qp-border, #d0d7de)";
+      }
+    };
+
+    cb.addEventListener("change", () => {
+      if (!cb.checked) { paint(); return; }
+
+      // girls / boys はそれぞれ排他（女+男の同時はOK）
+      box.querySelectorAll(`input[type=checkbox][data-cc-group='${groupClass}']`).forEach((x) => {
+        if (x !== cb) x.checked = false;
+      });
+
+      // 見た目更新
+      box.querySelectorAll(`input[type=checkbox][data-cc-group='${groupClass}']`).forEach((x) => {
+        const parent = x.closest("label");
+        if (!parent) return;
+        if (x.checked) {
+          parent.style.outline = "2px solid rgba(37, 99, 235, 0.35)";
+          parent.style.borderColor = "rgba(37, 99, 235, 0.65)";
+        } else {
+          parent.style.outline = "none";
+          parent.style.borderColor = "var(--qp-border, #d0d7de)";
+        }
+      });
+    });
+
+    lab.addEventListener("click", (ev) => {
+      // labelクリックでトグル、ただし無効化中は無視
+      if (cb.disabled) return;
+      // input自体がdisplay:noneなので、自前でトグル
+      cb.checked = !cb.checked;
+      cb.dispatchEvent(new Event("change", { bubbles: true }));
+      ev.preventDefault();
+    });
+
+    lab.appendChild(cb);
+    lab.appendChild(meta);
+    paint();
+    return lab;
+  };
+
+  items.forEach((it) => right.appendChild(makePill(it)));
+
+  row.appendChild(left);
+  row.appendChild(right);
+  return row;
+};
+
+    box.appendChild(mkRow("Girls", CAST_CONTROL.girls, "girls"));
+    box.appendChild(mkRow("Boys", CAST_CONTROL.boys, "boys"));
+
+    _setDisabledInBox(box, true);
+
+    enable.addEventListener("change", () => {
+      _setDisabledInBox(box, !enable.checked);
+    });
+
+    d.appendChild(box);
+    return d;
+  }
+
   if (IS_GLOSS_UNLOCKED) {
     HIGH_END_DATA.unshift({
       label: "㊙️ 究極的艶 (Ultimate Gloss)",
@@ -303,7 +502,14 @@ function __qpGuideFindBySummaryContains(keyword){
       const secQuality = window.__QP_UTILS.createMainSection("qp-quality", "💎 品質・基本設定 (Quality & Settings)");
       const conQuality = secQuality.querySelector(".qp-section-content");
       
-      const subBase = window.__QP_UTILS.createSubAccordion("✨ 画質・クオリティ (Base)", BASE_QUALITY);
+      
+      // 👥 Cast Control (People Count) — placed right under Beginner Guide area
+      try{
+        const subCast = createCastControlAccordion();
+        conQuality.appendChild(subCast);
+      }catch(e){ console.warn("Cast Control init failed", e); }
+
+const subBase = window.__QP_UTILS.createSubAccordion("✨ 画質・クオリティ (Base)", BASE_QUALITY);
       // 艶解放隠しコマンド
       let glossTap = 0; let lastGlossTime = 0;
       subBase.querySelector("summary").addEventListener("click", () => {
@@ -693,6 +899,22 @@ function __qpGuideFindBySummaryContains(keyword){
     "👁️ 目のハイライト除去": [
       { ja: "目のハイライト", en: "eye highlight" }, { ja: "目の反射", en: "reflection" }, { ja: "キラキラ・輝き", en: "sparkle" },
       { ja: "光の粒子", en: "light particles" }, { ja: "美しい目", en: "beautiful detailed eyes" }, { ja: "明るい目", en: "bright eyes" }
+    ]
+    ,
+    "人物除外 (People Exclusion)": [
+      { label: "no humans", val: "no humans" },
+      { label: "no human", val: "no human" },
+      { label: "no people", val: "no people" },
+      { label: "no women", val: "no women" },
+      { label: "no men", val: "no men" },
+      { label: "no girls", val: "no girls" },
+      { label: "no boys", val: "no boys" },
+      { label: "no child", val: "no child" },
+      { label: "no teen", val: "no teen" },
+      { label: "no adult", val: "no adult" },
+      { label: "no old", val: "no old" },
+      { label: "no loli", val: "no loli" },
+      { label: "no shota", val: "no shota" }
     ]
   };
 
