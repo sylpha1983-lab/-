@@ -79,7 +79,6 @@
         const details = document.createElement("details");
         details.style.marginBottom = "6px";
         const summary = document.createElement("summary");
-        summary.className = "specialized";
         summary.textContent = cat;
         summary.style.fontWeight = "bold";
         summary.style.cursor = "pointer";
@@ -2403,49 +2402,69 @@
   // 56 curated Shima-enaga themed outfit sets (JA title + short EN label + full prompt tag)
   const SETS = [
     // Casual / Daily (7)
-    {ja:"シマエナガ・カジュアル雪街", en:"Shima Casual Snow Street", tag:"Shima-enaga casual outfit, white/gray knit hoodie with feather-lined hood, fluffy faux-fur collar, snowflake embroidery, pastel scarf, winter street fashion"},
-    {ja:"シマエナガ・ゆめかわパーカー", en:"Shima YumeKawa Hoodie", tag:"Shima-enaga pastel casual hoodie, feather trims, cloud-like puff sleeves, cute bird motif patches, soft pastel palette, yume-kawaii streetwear"},
-    {ja:"シマエナガ・春のライトジャケット", en:"Shima Spring Jacket", tag:"Shima-enaga light jacket, white bomber with subtle feather texture, sakura and snowflake mixed embroidery, clean casual look"},
-    {ja:"シマエナガ・部屋着もふもふ", en:"Shima Fluffy Loungewear", tag:"Shima-enaga fluffy loungewear set, oversized sweater with feather pattern, soft pajama shorts, cozy home outfit"},
-    {ja:"シマエナガ・カフェ店員カジュアル", en:"Shima Cafe Casual", tag:"Shima-enaga cafe casual uniform, apron with bird face emblem, white shirt, feather hairclip, warm friendly vibe"},
-    {ja:"シマエナガ・スポーツジャージ", en:"Shima Sport Jersey", tag:"Shima-enaga sporty tracksuit, white and ice-blue jersey, feather stripe accents, athletic cute"},
-    {ja:"シマエナガ・レインコート", en:"Shima Raincoat", tag:"Shima-enaga raincoat, translucent white coat with feather shimmer, waterdrop pattern, hood shaped like bird head"},
+    {ja:"シマエナガ・カジュアル雪街", en:"Shima Casual Snow Street", group:"casual", tag:"Shima-enaga casual outfit, white/gray knit hoodie with feather-lined hood, fluffy faux-fur collar, snowflake embroidery, pastel scarf, winter street fashion"},
+    {ja:"シマエナガ・ゆめかわパーカー", en:"Shima YumeKawa Hoodie", group:"casual", tag:"Shima-enaga pastel casual hoodie, feather trims, cloud-like puff sleeves, cute bird motif patches, soft pastel palette, yume-kawaii streetwear"},
+    {ja:"シマエナガ・春のライトジャケット", en:"Shima Spring Jacket", group:"casual", tag:"Shima-enaga light jacket, white bomber with subtle feather texture, sakura and snowflake mixed embroidery, clean casual look"},
+    {ja:"シマエナガ・部屋着もふもふ", en:"Shima Fluffy Loungewear", group:"casual", tag:"Shima-enaga fluffy loungewear set, oversized sweater with feather pattern, soft pajama shorts, cozy home outfit"},
+    {ja:"シマエナガ・カフェ店員カジュアル", en:"Shima Cafe Casual", group:"casual", tag:"Shima-enaga cafe casual uniform, apron with bird face emblem, white shirt, feather hairclip, warm friendly vibe"},
+    {ja:"シマエナガ・スポーツジャージ", en:"Shima Sport Jersey", group:"casual", tag:"Long-tailed bushtit inspired sports tracksuit, white rounded chest panel resembling fluffy shima-enaga face, small black circular eye emblems on chest, beak-shaped zipper charm, feather-pattern side stripes on sleeves and pants, tail-feather motif extending from lower back, soft white faux-fur trimmed collar, multiple embroidered shima-enaga patches, snow-white and sky-blue color scheme, rounded silhouette design"},
+    {ja:"シマエナガ・レインコート", en:"Shima Raincoat", group:"casual", tag:"Long-tailed bushtit inspired raincoat, translucent white and icy blue material, hood shaped like fluffy shima-enaga head, small black eye embroidery on hood, rounded body silhouette, tail-feather shaped back panel, visible shima-enaga stickers beneath transparent layer, feather-textured inner lining, bird-shaped zipper pull, snow-white and soft blue color balance"},
 
-    // School / Uniform (7)
-    {ja:"シマエナガ・学園制服ブレザー", en:"Shima School Blazer", tag:"Shima-enaga school uniform blazer, white blazer with feather piping, snowflake crest, pleated skirt, ribbon tie"},
-    {ja:"シマエナガ・セーラー服氷彩", en:"Shima Sailor Ice", tag:"Shima-enaga sailor uniform, icy blue sailor collar, feather-shaped scarf, crisp pleated skirt"},
-    {ja:"シマエナガ・冬制服コート", en:"Shima Winter Uniform", tag:"Shima-enaga winter school coat, white duffle coat with feather fur trim, snowflake buttons, scarf"},
-    {ja:"シマエナガ・体育着ブルマ風", en:"Shima PE Retro", tag:"Shima-enaga retro PE uniform, white and blue gym outfit, sporty bloomers style, feather logo"},
-    {ja:"シマエナガ・学園アイドル制服", en:"Shima Idol Uniform", tag:"Shima-enaga idol school uniform, short jacket, layered skirt, feather accessories, stage-ready cute"},
-    {ja:"シマエナガ・図書委員", en:"Shima Library Prefect", tag:"Shima-enaga librarian uniform, cardigan, ribbon, modest skirt, feather bookmark accessories"},
-    {ja:"シマエナガ・生徒会正装", en:"Shima Student Council", tag:"Shima-enaga student council uniform, formal white blazer, armband with bird crest, ceremonial vibe"},
+    // School / Uniform (23)
+    {ja:"シマエナガ・学園制服ブレザー", en:"Shima School Blazer", group:"school", tag:"Shima-enaga school uniform blazer, white blazer with feather piping, snowflake crest, pleated skirt, ribbon tie"},
+    {ja:"シマエナガ・セーラー服氷彩", en:"Shima Sailor Ice", group:"school", tag:"Shima-enaga sailor uniform, icy blue sailor collar, feather-shaped scarf, crisp pleated skirt"},
+    {ja:"シマエナガ・冬制服コート", en:"Shima Winter Uniform", group:"school", tag:"Shima-enaga winter school coat, white duffle coat with feather fur trim, snowflake buttons, scarf"},
+    {ja:"シマエナガ・体育着ブルマ風", en:"Shima PE Retro", group:"school", tag:"Shima-enaga retro PE uniform, white and blue gym outfit, sporty bloomers style, feather logo"},
+    {ja:"シマエナガ・学園アイドル制服", en:"Shima Idol Uniform", group:"school", tag:"Shima-enaga idol school uniform, short jacket, layered skirt, feather accessories, stage-ready cute"},
+    {ja:"シマエナガ・図書委員", en:"Shima Library Prefect", group:"school", tag:"Shima-enaga librarian uniform, cardigan, ribbon, modest skirt, feather bookmark accessories"},
+    {ja:"シマエナガ・生徒会正装", en:"Shima Student Council", group:"school", tag:"Shima-enaga student council uniform, formal white blazer, armband with bird crest, ceremonial vibe"},
+
+    {ja:"シマエナガ・夏制服セーラー薄羽", en:"Shima Summer Sailor", group:"school", tag:"Shima-enaga summer sailor uniform, light short-sleeve top, ice-blue collar, subtle feather stitch, airy pleated skirt"},
+    {ja:"シマエナガ・夏制服シャツリボン", en:"Shima Summer Shirt & Ribbon", group:"school", tag:"Shima-enaga summer school shirt, crisp white short sleeves, sky-blue ribbon, tiny bird crest patch, neat pleated skirt"},
+    {ja:"シマエナガ・学ラン黒羽", en:"Shima Gakuran Black Feather", group:"school", tag:"Shima-enaga gakuran, classic black uniform, feather-shaped metal buttons, small shima-enaga crest embroidery, clean silhouette"},
+    {ja:"シマエナガ・秋制服上着つき", en:"Shima Autumn Jacket Uniform", group:"school", tag:"Shima-enaga autumn uniform with jacket, lightweight bomber/blouson, feather stripe cuffs, small patch, layered school look"},
+    {ja:"シマエナガ・通学ニットベスト", en:"Shima Knit Vest", group:"school", tag:"Shima-enaga school knit vest, white and gray color-block, subtle feather knit pattern, tiny patch, tidy preppy style"},
+    {ja:"シマエナガ・冬制服マフラー", en:"Shima Winter Scarf Uniform", group:"school", tag:"Shima-enaga winter uniform with scarf, soft knit scarf with feather motif ends, minimal crest, warm layered look"},
+
+    // School / Uniform Expansion (+10)
+    {ja:"シマエナガ・春制服カーディガン", en:"Shima Spring Cardigan Uniform", group:"school", tag:"Shima-enaga spring uniform with cardigan, light knit cardigan, feather-line trim, small chest patch, soft pastel accent, neat pleated skirt"},
+    {ja:"シマエナガ・春制服ライトブレザー", en:"Shima Spring Light Blazer", group:"school", tag:"Shima-enaga spring blazer uniform, thin blazer, subtle feather piping, small crest, airy layers, clean school look"},
+    {ja:"シマエナガ・梅雨レイン通学", en:"Shima Rainy Commute", group:"school", tag:"Shima-enaga rainy commute uniform, water-repellent school coat, minimal droplet pattern, feather-shimmer lining, discreet bird patch, tidy silhouette"},
+    {ja:"シマエナガ・梅雨傘通学仕様", en:"Shima Umbrella Commute", group:"school", tag:"Shima-enaga umbrella commute style, school uniform with clear umbrella, subtle feather motif on handle strap, small sticker patch, rain-speckled fabric"},
+    {ja:"シマエナガ・体育祭体操服", en:"Shima Sports Day Gym", group:"school", tag:"Shima-enaga sports day gym uniform, athletic jersey and shorts, feather stripe accents, small team patch, zipper charm, clean sporty silhouette"},
+    {ja:"シマエナガ・体育祭応援団", en:"Shima Sports Day Cheer", group:"school", tag:"Shima-enaga sports festival cheer outfit, light cheer jacket, feather-lined hem, armband patch, headband with small feather motif, energetic school spirit"},
+    {ja:"シマエナガ・文化祭メイド制服", en:"Shima Culture Fest Maid", group:"school", tag:"Shima-enaga culture festival maid uniform, classic maid dress with subtle feather embroidery, small apron patch, tidy frills kept minimal, school cafe vibe"},
+    {ja:"シマエナガ・文化祭ステージ衣装", en:"Shima Culture Fest Stage", group:"school", tag:"Shima-enaga culture festival stage costume, school idol stage uniform variant, ribbon with feather pattern, small crest, glossy trim, performance-ready but still school themed"},
+    {ja:"シマエナガ・スケ番仕様", en:"Shima Sukeban Style", group:"school", tag:"Shima-enaga sukeban style uniform, long skirt, modified blazer, bold but controlled feather embroidery, small bird patch, tough school vibe"},
+    {ja:"シマエナガ・番長ヤンキー仕様", en:"Shima Banchou Yankee", group:"school", tag:"Shima-enaga banchou/yankee uniform, open-collar shirt, embroidered jacket with feather motif, armband patch, confident delinquent aura"},
+
 
     // Force / Tactical (7)
-    {ja:"シマエナガフォース・フロストパイロット", en:"Force Frost Pilot", tag:"Shima-enaga force pilot suit, sleek white tactical flight suit, icy blue lines, feather armor panels, helmet with bird crest"},
-    {ja:"シマエナガフォース・オペレータースーツ", en:"Force Operator", tag:"Shima-enaga force operator suit, white stealth bodysuit, feather camo pattern, utility belt, comms headset"},
-    {ja:"シマエナガフォース・セレモニードレスユニフォーム", en:"Force Ceremony Dress", tag:"Shima-enaga force formal uniform dress, high-collar coat dress, feather epaulets, snowflake medals"},
-    {ja:"シマエナガフォース・メカニック", en:"Force Mechanic", tag:"Shima-enaga force mechanic jumpsuit, white coverall, feather patch, tool harness, oil smudges, garage vibe"},
-    {ja:"シマエナガフォース・スナイパーギリー", en:"Force Sniper Ghillie", tag:"Shima-enaga force ghillie suit, white feather ghillie, snow camouflage, cold-breath haze"},
-    {ja:"シマエナガフォース・医療班", en:"Force Medic", tag:"Shima-enaga force medic uniform, white tactical medic coat, feather insignia, medical pouch, clean sterile"},
-    {ja:"シマエナガフォース・艦橋クルー", en:"Force Bridge Crew", tag:"Shima-enaga force bridge crew uniform, sleek white suit, holographic panels, feather badge"},
+    {ja:"シマエナガフォース・フロストパイロット", en:"Force Frost Pilot", group:"force", tag:"Shima-enaga force pilot suit, sleek white tactical flight suit, icy blue lines, feather armor panels, helmet with bird crest"},
+    {ja:"シマエナガフォース・オペレータースーツ", en:"Force Operator", group:"force", tag:"Shima-enaga force operator suit, white stealth bodysuit, feather camo pattern, utility belt, comms headset"},
+    {ja:"シマエナガフォース・セレモニードレスユニフォーム", en:"Force Ceremony Dress", group:"force", tag:"Shima-enaga force formal uniform dress, high-collar coat dress, feather epaulets, snowflake medals"},
+    {ja:"シマエナガフォース・メカニック", en:"Force Mechanic", group:"force", tag:"Shima-enaga force mechanic jumpsuit, white coverall, feather patch, tool harness, oil smudges, garage vibe"},
+    {ja:"シマエナガフォース・スナイパーギリー", en:"Force Sniper Ghillie", group:"force", tag:"Shima-enaga force ghillie suit, white feather ghillie, snow camouflage, cold-breath haze"},
+    {ja:"シマエナガフォース・医療班", en:"Force Medic", group:"force", tag:"Shima-enaga force medic uniform, white tactical medic coat, feather insignia, medical pouch, clean sterile"},
+    {ja:"シマエナガフォース・艦橋クルー", en:"Force Bridge Crew", group:"force", tag:"Shima-enaga force bridge crew uniform, sleek white suit, holographic panels, feather badge"},
 
     // Dresses / Gowns (7)
-    {ja:"シマエナガ・羽衣レガリア", en:"Feather Regalia", tag:"Shima-enaga motif outfit set, white feather bolero, snowflake embroidery, round fluffy A-line silhouette, elegant winter regalia"},
-    {ja:"シマエナガ・ストリートゆめかわ", en:"Street YumeKawa", tag:"Shima-enaga street yume-kawaii dress, pastel layers, feather ribbons, cute bird motifs, playful"},
-    {ja:"シマエナガ・ゴスロリ雪影", en:"Gothic Snow Lolita", tag:"Shima-enaga gothic lolita dress, black and white, feather lace, snowflake patterns, mini top hat with feathers"},
-    {ja:"シマエナガ・ホワイトバレエ", en:"White Ballet", tag:"Shima-enaga ballet costume, white tutu like fluffy feathers, delicate snowflake sequins, graceful"},
-    {ja:"シマエナガ・聖夜のドレス", en:"Holy Night Dress", tag:"Shima-enaga holy night gown, luminous white fabric, feather halo accessories, soft glow"},
-    {ja:"シマエナガ・星空の歌姫", en:"Starlit Diva", tag:"Shima-enaga diva stage dress, shimmering feathers, starry gradient, microphone accessory, spotlight"},
-    {ja:"シマエナガ・氷晶プリンセス", en:"Ice Crystal Princess", tag:"Shima-enaga princess gown, ice-crystal ornaments, feather cape, glittering snow particles"},
+    {ja:"シマエナガ・羽衣レガリア", en:"Feather Regalia", group:"dress", tag:"Shima-enaga motif outfit set, white feather bolero, snowflake embroidery, round fluffy A-line silhouette, elegant winter regalia"},
+    {ja:"シマエナガ・ストリートゆめかわ", en:"Street YumeKawa", group:"dress", tag:"Shima-enaga street yume-kawaii dress, pastel layers, feather ribbons, cute bird motifs, playful"},
+    {ja:"シマエナガ・ゴスロリ雪影", en:"Gothic Snow Lolita", group:"dress", tag:"Shima-enaga gothic lolita dress, black and white, feather lace, snowflake patterns, mini top hat with feathers"},
+    {ja:"シマエナガ・ホワイトバレエ", en:"White Ballet", group:"dress", tag:"Shima-enaga ballet costume, white tutu like fluffy feathers, delicate snowflake sequins, graceful"},
+    {ja:"シマエナガ・聖夜のドレス", en:"Holy Night Dress", group:"dress", tag:"Shima-enaga holy night gown, luminous white fabric, feather halo accessories, soft glow"},
+    {ja:"シマエナガ・星空の歌姫", en:"Starlit Diva", group:"dress", tag:"Shima-enaga diva stage dress, shimmering feathers, starry gradient, microphone accessory, spotlight"},
+    {ja:"シマエナガ・氷晶プリンセス", en:"Ice Crystal Princess", group:"dress", tag:"Shima-enaga princess gown, ice-crystal ornaments, feather cape, glittering snow particles"},
 
     // China / Eastern (7)
     {ja:"攻めチャイナ・雪羽スリット", en:"Bold Cheongsam Snow", tag:"bold cheongsam dress, Shima-enaga motif, white silk, feather embroidery, high slit, icy jewelry"},
     {ja:"攻めチャイナ・サイバー氷龍", en:"Cyber Cheongsam", tag:"cyber cheongsam, Shima-enaga motif, neon ice-blue circuits, feather patterns, futuristic accessories"},
-    {ja:"チャイナ・純白羽紋", en:"White Feather Cheongsam", tag:"Shima-enaga cheongsam, pure white, feather brocade, snowflake buttons, elegant"},
-    {ja:"チャイナ・黒銀雪影", en:"Black Silver Cheongsam", tag:"Shima-enaga black cheongsam with silver feather embroidery, winter night vibe"},
-    {ja:"東方・巫女装束雪祈", en:"Miko Snow Prayer", tag:"Shima-enaga miko outfit, white and red, feather tassels, snow shrine atmosphere"},
-    {ja:"和洋折衷・羽織ドレス", en:"Haori Dress Fusion", tag:"Shima-enaga haori dress fusion, kimono sleeves, modern skirt, feather patterns"},
-    {ja:"中華・龍鳳羽冠", en:"Dragon-Phoenix Crown", tag:"Shima-enaga chinese ceremonial outfit, dragon-phoenix headdress with feathers, ornate silk"},
+    {ja:"チャイナ・純白羽紋", en:"White Feather Cheongsam", group:"east", tag:"Shima-enaga cheongsam, pure white, feather brocade, snowflake buttons, elegant"},
+    {ja:"チャイナ・黒銀雪影", en:"Black Silver Cheongsam", group:"east", tag:"Shima-enaga black cheongsam with silver feather embroidery, winter night vibe"},
+    {ja:"東方・巫女装束雪祈", en:"Miko Snow Prayer", group:"east", tag:"Shima-enaga miko outfit, white and red, feather tassels, snow shrine atmosphere"},
+    {ja:"和洋折衷・羽織ドレス", en:"Haori Dress Fusion", group:"east", tag:"Shima-enaga haori dress fusion, kimono sleeves, modern skirt, feather patterns"},
+    {ja:"中華・龍鳳羽冠", en:"Dragon-Phoenix Crown", group:"east", tag:"Shima-enaga chinese ceremonial outfit, dragon-phoenix headdress with feathers, ornate silk"},
 
     // Gravure / Glam (7)
     {ja:"グラビア・フェザー水着", en:"Feather Swimsuit", tag:"gravure idol costume, Shima-enaga motif swimsuit, white and ice-blue, feather frills, glossy"},
@@ -2457,154 +2476,69 @@
     {ja:"グラビア・撮影会セット", en:"Photoshoot Set", tag:"Shima-enaga gravure photoshoot outfit, studio lights, feather props, glossy makeup"},
 
     // Fantasy / Role (7)
-    {ja:"シマ騎士・白羽の鎧", en:"Shima Knight", tag:"Shima-enaga knight armor, white feather pauldrons, snowflake crest, elegant plate armor"},
-    {ja:"シマ魔導士・氷紋ローブ", en:"Shima Mage", tag:"Shima-enaga mage robe, icy runes, feather-lined hood, magical aura"},
-    {ja:"シマ忍者・雪迷彩", en:"Shima Ninja", tag:"Shima-enaga ninja outfit, white stealth suit, feather mask, snow camouflage"},
-    {ja:"シマ海賊・羽根帽子", en:"Shima Pirate", tag:"Shima-enaga pirate outfit, tricorne hat with feathers, white coat, winter sea vibe"},
-    {ja:"シマ天使・白羽の礼装", en:"Shima Angel", tag:"Shima-enaga angelic attire, feather wings motif, halo, pure white dress"},
-    {ja:"シマ悪魔・黒羽の誘惑", en:"Shima Devil", tag:"Shima-enaga devilish outfit, black feathers, sharp accessories, seductive gothic fashion"},
-    {ja:"シマ巫女・雪神楽", en:"Shima Kagura Miko", tag:"Shima-enaga kagura miko outfit, ceremonial sleeves, feather ornaments, sacred snow"},
+    {ja:"シマ騎士・白羽の鎧", en:"Shima Knight", group:"role", tag:"Shima-enaga knight armor, white feather pauldrons, snowflake crest, elegant plate armor"},
+    {ja:"シマ魔導士・氷紋ローブ", en:"Shima Mage", group:"role", tag:"Shima-enaga mage robe, icy runes, feather-lined hood, magical aura"},
+    {ja:"シマ忍者・雪迷彩", en:"Shima Ninja", group:"role", tag:"Shima-enaga ninja outfit, white stealth suit, feather mask, snow camouflage"},
+    {ja:"シマ海賊・羽根帽子", en:"Shima Pirate", group:"role", tag:"Shima-enaga pirate outfit, tricorne hat with feathers, white coat, winter sea vibe"},
+    {ja:"シマ天使・白羽の礼装", en:"Shima Angel", group:"role", tag:"Shima-enaga angelic attire, feather wings motif, halo, pure white dress"},
+    {ja:"シマ悪魔・黒羽の誘惑", en:"Shima Devil", group:"role", tag:"Shima-enaga devilish outfit, black feathers, sharp accessories, seductive gothic fashion"},
+    {ja:"シマ巫女・雪神楽", en:"Shima Kagura Miko", group:"role", tag:"Shima-enaga kagura miko outfit, ceremonial sleeves, feather ornaments, sacred snow"},
 
     // Seasonal / Event (7)
-    {ja:"シマエナガ・浴衣夏氷", en:"Shima Yukata", tag:"Shima-enaga yukata, pale blue patterns, feather obi, summer night festival"},
-    {ja:"シマエナガ・着物冬白", en:"Shima Kimono", tag:"Shima-enaga kimono, white and gray, feather crest, snowy garden"},
-    {ja:"シマエナガ・クリスマスサンタ", en:"Shima Santa", tag:"Shima-enaga santa outfit, fluffy white fur trim, feather pompom, festive"},
-    {ja:"シマエナガ・ハロウィン梟魔女", en:"Shima Owl Witch", tag:"Shima-enaga witch costume, feather hat, moonlight, playful spooky"},
-    {ja:"シマエナガ・新年晴れ着", en:"Shima New Year", tag:"Shima-enaga new year haregi, elegant kimono, feather ornament, shrine visit"},
-    {ja:"シマエナガ・節分鬼かわ", en:"Shima Oni Cute", tag:"Shima-enaga cute oni costume, small horns, tiger stripes, feather cape"},
-    {ja:"シマエナガ・花嫁純白", en:"Shima Bride", tag:"Shima-enaga bridal gown, feather veil, snowflake tiara, pure white"}
+    {ja:"シマエナガ・浴衣夏氷", en:"Shima Yukata", group:"season", tag:"Shima-enaga yukata, pale blue patterns, feather obi, summer night festival"},
+    {ja:"シマエナガ・着物冬白", en:"Shima Kimono", group:"season", tag:"Shima-enaga kimono, white and gray, feather crest, snowy garden"},
+    {ja:"シマエナガ・クリスマスサンタ", en:"Shima Santa", group:"season", tag:"Shima-enaga santa outfit, fluffy white fur trim, feather pompom, festive"},
+    {ja:"シマエナガ・ハロウィン梟魔女", en:"Shima Owl Witch", group:"season", tag:"Shima-enaga witch costume, feather hat, moonlight, playful spooky"},
+    {ja:"シマエナガ・新年晴れ着", en:"Shima New Year", group:"season", tag:"Shima-enaga new year haregi, elegant kimono, feather ornament, shrine visit"},
+    {ja:"シマエナガ・節分鬼かわ", en:"Shima Oni Cute", group:"season", tag:"Shima-enaga cute oni costume, small horns, tiger stripes, feather cape"},
+    {ja:"シマエナガ・花嫁純白", en:"Shima Bride", group:"season", tag:"Shima-enaga bridal gown, feather veil, snowflake tiara, pure white"},
+
+    // --- Expanded Shima Collection (44) ---
+    {ja:"シマエナガ・ライトフェザー", en:"Shima Light Feather Variant", group:"casual", tag:"Shima-enaga outfit, lightweight feather-themed casual attire, white head motif accents, subtle feather embroidery, soft white/gray palette"},
+    {ja:"シマエナガ・ヘヴィフェザー", en:"Shima Heavy Feather Variant", group:"casual", tag:"Shima-enaga outfit, heavier feather motif layering, thick feather-textured trims, monochrome white/black accents, cozy silhouette"},
+    {ja:"シマエナガ・祭り羽織", en:"Shima Festival Feather Dress", group:"east", tag:"Shima-enaga festival attire, feather-pattern yukata/haori fusion, snowflake and feather motifs, elegant yet playful"},
+    {ja:"シマエナガ・天体羽衣", en:"Shima Celestial Plume Edition", group:"role", tag:"Shima-enaga celestial outfit, starlight embroidery, moon-and-feather ornaments, luminous fabric, night fantasy vibe"},
+    {ja:"シマエナガ・雪花タイプ", en:"Shima Snow Blossom Type", group:"season", tag:"Shima-enaga winter outfit, snow blossom embroidery, fluffy white trims, ice-blue highlights, gentle cute silhouette"},
+    {ja:"シマエナガ・アーバン羽根フーディ", en:"Shima Urban Feather Hoodie", group:"casual", tag:"Shima-enaga street hoodie, feather stripe accents, bird patch set, white/ice-blue color blocking, casual"},
+    {ja:"シマエナガ・ロイヤル白羽根", en:"Shima Royal White Plume", group:"role", tag:"Shima-enaga royal attire, white plume capelet, subtle crown motifs, refined ceremonial styling, jewel accents"},
+    {ja:"シマエナガ・フライトギア", en:"Shima Flight-Ready Gear", group:"force", tag:"Shima-enaga tactical flight outfit, feather-shaped panels, streamlined silhouette, wing-like back details, crisp white/gray"},
+    {ja:"シマエナガ・夜咲きプルーム", en:"Shima Night Bloom Plume", group:"role", tag:"Shima-enaga night attire, dark-to-light gradient, feather shimmer embroidery, elegant seductive mood"},
+    {ja:"シマエナガ・巫女融合", en:"Shima Shrine Maiden Fusion", group:"east", tag:"Shima-enaga shrine maiden outfit, white/red accents, feather talismans, bird crest patches, sacred cute vibe"},
+    {ja:"シマエナガ・ホロフェザー", en:"Shima Holo Feather Shine", group:"role", tag:"Shima-enaga holographic feather outfit, iridescent feather trims, hologram panels, futuristic shine"},
+    {ja:"シマエナガ・黎明ローブ", en:"Shima Dawn Light Robe", group:"dress", tag:"Shima-enaga robe, dawn glow gradient, feather-lined hood, soft luminous fabric, serene"},
+    {ja:"シマエナガ・バトルトリム", en:"Shima Battle-Trimmed Feathers", group:"force", tag:"Shima-enaga battle attire, feather-edged armor trims, reinforced panels, wing insignia, awakened feel"},
+    {ja:"シマエナガ・サファイア羽根", en:"Shima Sapphire Plume Variant", group:"role", tag:"Shima-enaga dress, sapphire jewel feather ornaments, crystalline accents, luxurious ceremonial styling"},
+    {ja:"シマエナガ・竜羽融合", en:"Shima Dragon Plume Fusion", group:"force", tag:"Shima-enaga fusion attire with dragon-inspired feather armor, scaled sheen, wing-like back unit, awakened battle form"},
+    {ja:"シマエナガ・白炎フェニックス", en:"Shima Phoenix White Blaze", group:"force", tag:"Shima-enaga phoenix-inspired regalia, white flame motifs, glowing feather layers, radiant ceremonial dress"},
+    {ja:"シマエナガ・天使翼フォーム", en:"Shima Celestial Angel Wing Form", group:"force", tag:"Shima-enaga angelic form, translucent feather wings, halo ornaments, luminous white/ice-blue dress"},
+    {ja:"シマエナガ・結晶進化", en:"Shima Crystal Feather Evolution", group:"force", tag:"Shima-enaga evolved dress, crystal feather adornments, prismatic highlights, high-end ritual fashion"},
+    {ja:"シマエナガ・フロストウィング極", en:"Shima Frost Wing Full Regalia", group:"season", tag:"Shima-enaga frost wing regalia, layered ice-feather cape, cold glow particles, majestic winter queen vibe"},
+    {ja:"シマエナガ・星雲シマー", en:"Shima Nebula Shimmer Dress", group:"role", tag:"Shima-enaga nebula dress, stardust shimmer fabric, floating feather particles, deep night fantasy"},
+    {ja:"シマエナガ・月護り", en:"Shima Lunar Guardian Attire", group:"season", tag:"Shima-enaga lunar guardian outfit, crescent motifs, feather armor panels, sacred warrior styling"},
+    {ja:"シマエナガ・風霊マント", en:"Shima Wind Spirit Mantle", group:"role", tag:"Shima-enaga wind spirit mantle, feather ribbons flowing, airy translucent layers, ethereal"},
+    {ja:"シマエナガ・聖騎士羽装甲", en:"Shima Holy Knight Plume Armor", group:"force", tag:"Shima-enaga holy knight armor, plume pauldrons, wing crest, white steel + feather fusion"},
+    {ja:"シマエナガ・聖歌隊ローブ", en:"Shima Sacred Choir White Robe", group:"dress", tag:"Shima-enaga choir ceremonial robe, feather embroidery, cathedral elegance, pure white layers"},
+    {ja:"シマエナガ・浮遊アークヘイロー", en:"Shima Floating Arc Halo Dress", group:"dress", tag:"Shima-enaga dress with floating arc halo ornaments, luminous feathers orbiting, divine atmosphere"},
+    {ja:"シマエナガ・雪皇后神話", en:"Shima Mythic Snow Empress Form", group:"dress", tag:"Shima-enaga mythic snow empress, heavy feather mantle, ice crystal crown, regal winter form"},
+    {ja:"シマエナガ・光の聖堂ドレス", en:"Shima Radiant Light Cathedral Gown", group:"dress", tag:"Shima-enaga cathedral gown, stained-glass light motifs, feather veil layers, ritual luxury"},
+    {ja:"シマエナガ・星海ローブ", en:"Shima Star Ocean Plume Robe", group:"dress", tag:"Shima-enaga star-ocean robe, cosmic gradients, plume-lined cape, astral shimmer"},
+    {ja:"シマエナガ・アーコン礼装", en:"Shima Archon Attire", group:"dress", tag:"Shima-enaga archon regalia, emblematic feathers, sovereign aura, high ritual form"},
+    {ja:"シマエナガ・神権プルーム", en:"Shima Divine Sovereign Plume", group:"dress", tag:"Shima-enaga divine sovereign regalia, crown-like plume halo, gilded feather ornaments, supreme ceremonial dress"},
+    {ja:"シマエナガ・無限白翼", en:"Shima Infinite White Wing Form", group:"dress", tag:"Shima-enaga infinite white wing form, massive ethereal wings, pure light feathers, transcendent aura"},
+    {ja:"シマエナガ・超越レガリア", en:"Shima Transcendence Feather Regalia", group:"dress", tag:"Shima-enaga transcendence regalia, layered feather architecture, luminous gradients, mythic elegance"},
+    {ja:"シマエナガ・天冠", en:"Shima Celestial Crown Shima", group:"dress", tag:"Shima-enaga celestial crown attire, crown and halo fusion, crystal feather tiara, radiant"},
+    {ja:"シマエナガ・終光アバター", en:"Shima Final Light Avatar", group:"dress", tag:"Shima-enaga final light avatar, light-body silhouette, feather particles, divine manifestation"},
+    {ja:"シマエナガ・聖断マント", en:"Shima Sacred Judgment Mantle", group:"role", tag:"Shima-enaga mantle of judgment, wing sigils, sharp feather edges, holy authority"},
+    {ja:"シマエナガ・永劫エーテル", en:"Shima Ethereal Eternity Dress", group:"dress", tag:"Shima-enaga eternity dress, endless flowing feather layers, soft glow, timeless serenity"},
+    {ja:"シマエナガ・極寒女王", en:"Shima Ultimate Frost Queen Form", group:"season", tag:"Shima-enaga ultimate frost queen, ice-feather armor, blizzard aura, regal dominance"},
+    {ja:"シマエナガ・黎明女帝", en:"Shima Luminous Dawn Empress", group:"dress", tag:"Shima-enaga dawn empress, sunrise gradients, feather crown, imperial regalia"},
+    {ja:"シマエナガ・至高戴冠", en:"Shima Supreme Halo Coronation", group:"dress", tag:"Shima-enaga coronation attire, supreme halo rings, floating feathers, ceremonial grandeur"},
+    {ja:"シマエナガ・星図の書記", en:"Shima Astral Archive Keeper", group:"role", tag:"Shima-enaga archive keeper outfit, astral script motifs, feather cape, scholarly divine vibe"},
+    {ja:"シマエナガ・白宇宙の化身", en:"Shima White Cosmos Incarnation", group:"role", tag:"Shima-enaga cosmos incarnation, white cosmic textures, nebula feathers, abstract divinity"},
+    {ja:"シマエナガ・神光プライム", en:"Shima Godlight Feather Prime", group:"dress", tag:"Shima-enaga godlight prime, concentrated luminous feathers, prismatic highlights, ultimate form"},
+    {ja:"シマエナガ・オーロラ玉座", en:"Shima Aurora Throne Regalia", group:"season", tag:"Shima-enaga aurora regalia, aurora ribbon feathers, throne-worthy mantle, polar light"},
+    {ja:"シマエナガ・原初フォーム", en:"Shima Origin Form", group:"force", tag:"Shima-enaga origin form, pure simplified feather symbolism, primal white/black balance, iconic silhouette"}
   ];
-
-  // v66 Attire-specialized expansion shelves (world/use/emotion focused)
-  // Each item: {ja, en, tag}  / JA-EN pair required
-  const EXTRA_SHELVES = [
-    {
-      key: "night_fantasy",
-      icon: "🌙",
-      title: "夜・幻想系 (Night & Fantasy)",
-      idPrefix: "attire_v21_night",
-      items: [
-        {ja:"月光ドレス", en:"Moonlight Dress", tag:"moonlight dress, Shima-enaga motif, luminous white silk, feather embroidery, subtle silver glow, night garden atmosphere"},
-        {ja:"星屑ホログラム衣装", en:"Stardust Hologram Outfit", tag:"stardust hologram outfit, Shima-enaga motif, iridescent fabric, holographic feather patterns, floating sparkles, cosmic sheen"},
-        {ja:"ルミエール・レガリア進化", en:"Lumiere Regalia Evolved", tag:"Lumiere Regalia evolved, Shima-enaga motif regalia, radiant feather cape, cathedral-light rays, ceremonial elegance"},
-        {ja:"夜霧シースルーコート", en:"Nightmist Sheer Coat", tag:"nightmist sheer coat, Shima-enaga motif, translucent organza layers, feather-lined hood, misty glow, moody nocturne"},
-        {ja:"天体観測マント", en:"Celestial Observation Cloak", tag:"celestial observation cloak, Shima-enaga motif, star map embroidery, feather shoulder mantle, telescope strap, midnight sky"},
-        {ja:"夢幻リボンドレス", en:"Phantasmal Ribbon Dress", tag:"phantasmal ribbon dress, Shima-enaga motif, flowing feather ribbons, soft luminescent gradients, dreamlike bokeh"},
-        {ja:"月輪ヘイロードレス", en:"Lunar Halo Dress", tag:"lunar halo dress, Shima-enaga motif, halo-like headpiece, pearly fabric, gentle moonbeam lighting"},
-        {ja:"星祈りのヴェール", en:"Star-Prayer Veil", tag:"star-prayer veil, Shima-enaga motif, veil with tiny feather constellations, sacred night ritual, quiet glow"}
-      ]
-    },
-    {
-      key: "battle_awaken",
-      icon: "⚔",
-      title: "戦闘・覚醒系 (Battle & Awakening)",
-      idPrefix: "attire_v21_battle",
-      items: [
-        {ja:"Shima Battle Form", en:"Shima Battle Form", tag:"Shima Battle Form, white tactical armor, feather-plate pauldrons, snowflake crest, combat-ready silhouette"},
-        {ja:"Frost Wing改", en:"Frost Wing Kai", tag:"Frost Wing (Kai), Shima-enaga motif combat suit, reinforced wing-like cape, icy circuitry lines, cold-breath haze"},
-        {ja:"神獣融合衣装", en:"Divine-Beast Fusion Attire", tag:"divine-beast fusion attire, Shima-enaga motif, beast sigils, feather armor hybrid, awakening aura"},
-        {ja:"覚醒コアアーマー", en:"Awakening Core Armor", tag:"awakening core armor, Shima-enaga motif, glowing core chestpiece, feather fins, powered exosuit accents"},
-        {ja:"断罪の白羽装束", en:"White Plume Judicator", tag:"white plume judicator garb, Shima-enaga motif, sharp feather pauldrons, ceremonial combat robe, solemn power"},
-        {ja:"戦場ライトアーマー", en:"Battlefield Light Armor", tag:"battlefield light armor, Shima-enaga motif, flexible plates, feather mesh undersuit, mobility focused"},
-        {ja:"霊装ブレードコート", en:"Spirit Blade Coat", tag:"spirit blade coat, Shima-enaga motif, long coat with feather-lined tails, blade harness, awakening glint"},
-        {ja:"指揮官マントアーマー", en:"Commander Cape Armor", tag:"commander cape armor, Shima-enaga motif, feather epaulets, tactical cape, insignia medals"}
-      ]
-    },
-    {
-      key: "ritual_luxury",
-      icon: "💎",
-      title: "高級・儀式系 (Luxury & Ritual)",
-      idPrefix: "attire_v21_ritual",
-      items: [
-        {ja:"王冠礼装", en:"Crown Regalia", tag:"crown regalia, Shima-enaga motif, jeweled crown, white-gold embroidery, feather brooch, royal ceremony"},
-        {ja:"聖堂シースルー", en:"Cathedral Sheer Attire", tag:"cathedral sheer attire, Shima-enaga motif, tasteful sheer layers, feather lace, stained-glass glow, sacred elegance"},
-        {ja:"宝石装飾フルドレス", en:"Jewel-Embellished Full Dress", tag:"jewel-embellished full dress, Shima-enaga motif, gemstone ornaments, feather filigree, premium couture"},
-        {ja:"誓約のベール", en:"Vow Veil", tag:"vow veil, Shima-enaga motif, feather-stitched veil, snowflake tiara, solemn ritual, soft light"},
-        {ja:"聖歌隊礼装", en:"Choir Ceremonial Dress", tag:"choir ceremonial dress, Shima-enaga motif, high-collar robe dress, feather trim, hymn atmosphere"},
-        {ja:"星冠の宝飾コート", en:"Star-Crown Jewelry Coat", tag:"star-crown jewelry coat, Shima-enaga motif, white coat with jewel buttons, feather collar, aristocratic"},
-        {ja:"儀式の羽根首輪ドレス", en:"Ritual Feather Choker Dress", tag:"ritual feather choker dress, Shima-enaga motif, feather choker, satin gown, incense glow"},
-        {ja:"白銀の謁見ドレス", en:"Silver Audience Gown", tag:"silver audience gown, Shima-enaga motif, formal audience dress, feather train, palace hall lighting"}
-      ]
-    },
-    {
-      key: "ice_winter",
-      icon: "🧊",
-      title: "氷雪・冬特化 (Ice & Winter)",
-      idPrefix: "attire_v21_ice",
-      items: [
-        {ja:"雪原遠征装備", en:"Snowfield Expedition Gear", tag:"snowfield expedition gear, Shima-enaga motif, insulated coat, feather-lined hood, utility straps, arctic survival"},
-        {ja:"氷結騎士", en:"Icebound Knight", tag:"icebound knight armor, Shima-enaga motif, frosted plate armor, feather crests, crystalline edges"},
-        {ja:"白羽根重装", en:"White-Feather Heavy Armor", tag:"white-feather heavy armor, Shima-enaga motif, layered feather plates, snowflake insignia, heavy defense"},
-        {ja:"吹雪対策フード", en:"Blizzard-Proof Hooded Wear", tag:"blizzard-proof hooded wear, Shima-enaga motif, scarf and goggles, feather fur trim, harsh snowstorm"},
-        {ja:"霜花の式典マント", en:"Frostflower Ceremonial Mantle", tag:"frostflower ceremonial mantle, Shima-enaga motif, mantle with frostflower embroidery, feather clasp, winter palace"},
-        {ja:"氷晶スノーブーツセット", en:"Ice-Crystal Boots Set", tag:"ice-crystal boots set, Shima-enaga motif, fur-lined boots, crystal ornaments, winter fashion"},
-        {ja:"白夜の遠征ドレス", en:"Polar Night Expedition Dress", tag:"polar night expedition dress, Shima-enaga motif, warm dress with feather insulation, aurora glow"},
-        {ja:"雪羽ねむりコート", en:"Snowfeather Sleep Coat", tag:"snowfeather sleep coat, Shima-enaga motif, oversized fluffy coat, cozy winter rest, soft snow"}
-      ]
-    },
-    {
-      key: "stage_diva",
-      icon: "🎤",
-      title: "歌姫・舞台系 (Diva & Stage)",
-      idPrefix: "attire_v21_stage",
-      items: [
-        {ja:"Idol Stage Evolution", en:"Idol Stage Evolution", tag:"idol stage evolution outfit, Shima-enaga motif, layered feather skirt, stage-ready sparkle, spotlight"},
-        {ja:"Symphonic Metal Ver.", en:"Symphonic Metal Ver.", tag:"symphonic metal diva outfit, Shima-enaga motif, light armor corset, feather cape, concert lights, powerful"},
-        {ja:"Concert Light Armor", en:"Concert Light Armor", tag:"concert light armor, Shima-enaga motif, reflective plates, feather pauldrons, glowstick reflections, stage haze"},
-        {ja:"眩光マイクスタンド衣装", en:"Radiant Mic-Stand Outfit", tag:"radiant mic-stand outfit, Shima-enaga motif, elegant coat-dress, mic stand accessory, god rays"},
-        {ja:"観客光粒子ドレス", en:"Audience Light-Particle Dress", tag:"audience light-particle dress, Shima-enaga motif, shimmering particles, feather glitter, crowd silhouettes"},
-        {ja:"レーザーリボンステージ", en:"Laser Ribbon Stagewear", tag:"laser ribbon stagewear, Shima-enaga motif, ribbon harness, laser beams, feather trims, dynamic show"},
-        {ja:"白羽オーケストラ礼装", en:"Feather Orchestra Dress", tag:"feather orchestra dress, Shima-enaga motif, formal concert dress, feather epaulets, orchestra hall"},
-        {ja:"星降るアンコールドレス", en:"Encore Starfall Dress", tag:"encore starfall dress, Shima-enaga motif, starfall sequins, feather train, final chorus spotlight"}
-      ]
-    },
-    {
-      key: "casual_yumekawa",
-      icon: "🌸",
-      title: "ゆめかわ・カジュアル特化 (Yumekawa & Casual)",
-      idPrefix: "attire_v21_casual",
-      items: [
-        {ja:"pastel shima street", en:"pastel shima street", tag:"pastel shima streetwear, Shima-enaga motif, pastel bomber, feather patches, cute street vibe"},
-        {ja:"ゆる部屋着", en:"Cozy Loungewear", tag:"cozy loungewear, Shima-enaga motif, oversized sweater, feather pattern, soft shorts, relaxed"},
-        {ja:"春風ライトウェア", en:"Spring Breeze Lightwear", tag:"spring breeze lightwear, Shima-enaga motif, light cardigan, feather hairclip, fresh air"},
-        {ja:"ふわもこパーカー", en:"Fluffy Sherpa Hoodie", tag:"fluffy sherpa hoodie, Shima-enaga motif, feather-lined hood, cloud-like texture, comfy"},
-        {ja:"おでかけワンピ", en:"Outing One-piece Dress", tag:"outing one-piece dress, Shima-enaga motif, simple cute dress, feather ribbon, casual date"},
-        {ja:"夜更かしルームセット", en:"Late-Night Room Set", tag:"late-night room set, Shima-enaga motif, comfy knit, feather socks, warm lamp light"},
-        {ja:"スニーカー＆ソックス映え", en:"Sneakers & Socks Pop", tag:"sneakers and socks pop, Shima-enaga motif, sporty casual, feather logo, playful"},
-        {ja:"雨上がりパステル", en:"After-Rain Pastel", tag:"after-rain pastel outfit, Shima-enaga motif, light rain jacket, pastel palette, wet street reflection"}
-      ]
-    },
-    {
-      key: "tactician",
-      icon: "🧠",
-      title: "戦略・参謀系 (Tactician & Command)",
-      idPrefix: "attire_v21_tact",
-      items: [
-        {ja:"予見師礼装", en:"Foresight Strategist Regalia", tag:"foresight strategist regalia, Shima-enaga motif, high-collar formal coat, feather-lined mantle, subtle authority"},
-        {ja:"軍師マント", en:"Strategist Cape", tag:"strategist cape, Shima-enaga motif, cape with feather edging, tactical insignia, war-room mood"},
-        {ja:"情報統制フォーマル", en:"Information-Control Formal", tag:"information-control formal, Shima-enaga motif, sleek suit dress, armband insignia, controlled elegance"},
-        {ja:"指揮系統ベスト", en:"Command-Chain Vest", tag:"command-chain vest, Shima-enaga motif, vest with medal bars, feather badge, staff uniform"},
-        {ja:"参謀机上のドレス", en:"War-Room Desk Dress", tag:"war-room desk dress, Shima-enaga motif, smart dress, feather pen accessory, map table light"},
-        {ja:"作戦立案コート", en:"Operation Planner Coat", tag:"operation planner coat, Shima-enaga motif, long coat, clipboard, feather epaulets, calm focus"},
-        {ja:"参謀礼服（式典）", en:"Ceremonial Staff Uniform", tag:"ceremonial staff uniform, Shima-enaga motif, formal uniform, feather epaulets, medal ribbons"},
-        {ja:"暗号解析スーツ", en:"Cipher Analyst Suit", tag:"cipher analyst suit, Shima-enaga motif, minimalist suit, holographic screens glow, analytical aura"}
-      ]
-    }
-  ];
-
-  function uniqueByTag(items){
-    const seen = new Set();
-    const out = [];
-    (items||[]).forEach(it=>{
-      const t = String((it && it.tag) || "");
-      if(!t) return;
-      if(seen.has(t)) return;
-      seen.add(t);
-      out.push(it);
-    });
-    return out;
-  }
-
 
   function escapeHTML(str){
     return String(str||"")
@@ -2666,27 +2600,7 @@
       .attire-v21-shima summary .shima-title-jp{flex:1; min-width:0; white-space:normal; word-break:normal; overflow-wrap:anywhere;}
       .attire-v21-shima summary .shima-count{margin-left:auto; white-space:nowrap;}
       .attire-v21-shima summary.spicy{background:linear-gradient(90deg, rgba(255,225,235,0.90), rgba(255,255,255,0.70));}
-      /* v69: make Specialized stand out (featured) without breaking Shima UI */
-      .attire-v21-shima details.shima-specialized{border:2px solid rgba(140,110,255,0.28); box-shadow:0 10px 28px rgba(70,40,160,0.10);}
-      .attire-v21-shima summary.specialized, .attire-v21-shima details.shima-specialized > summary{
-        background:linear-gradient(90deg, rgba(230,235,255,0.96), rgba(255,255,255,0.74));
-      }
-      .attire-v21-shima .shima-feature-badge{
-        margin-left:8px;
-        padding:2px 8px;
-        border-radius:999px;
-        font-size:0.70em;
-        font-weight:900;
-        letter-spacing:0.06em;
-        border:1px solid rgba(0,0,0,0.10);
-        background:rgba(255,255,255,0.78);
-        color:#3a2a7a;
-        white-space:nowrap;
-      }
       .attire-v21-shima summary::-webkit-details-marker{display:none;}
-      /* v68: ensure Specialized parent does not show native disclosure marker */
-      .attire-v21-shima details.shima-specialized > summary{list-style:none;}
-      .attire-v21-shima details.shima-specialized > summary::-webkit-details-marker{display:none;}
 @media (min-width: 740px){ .attire-v21-shima .shima-grid{grid-template-columns:1fr;} }
       @media (min-width: 980px){ .attire-v21-shima .shima-grid{grid-template-columns:repeat(3,minmax(0,1fr));} }
       .attire-v21-shima .shima-card{
@@ -2925,16 +2839,128 @@ function buildSection(opts){
         return details;
       }
 
-      // Build fixed groups (keeps the original curated order; excludes spicy items automatically)
-      const GROUPS = [
-        { title: "日常・カジュアル", icon: "🧣", items: SETS.slice(0,7).filter(s=>!isSpicy(s)) },
-        { title: "学園・制服", icon: "🎓", items: SETS.slice(7,14).filter(s=>!isSpicy(s)) },
-        { title: "フォース・戦術", icon: "🛡️", items: SETS.slice(14,21).filter(s=>!isSpicy(s)) },
-        { title: "ドレス・礼装", icon: "👗", items: SETS.slice(21,28).filter(s=>!isSpicy(s)) },
-        { title: "東方・中華", icon: "🐉", items: SETS.slice(28,35).filter(s=>!isSpicy(s)) },
-        { title: "異世界・ロール", icon: "✨", items: SETS.slice(42,49).filter(s=>!isSpicy(s)) },
-        { title: "季節・イベント", icon: "🎐", items: SETS.slice(49,56).filter(s=>!isSpicy(s)) },
-      ].filter(g=>g.items && g.items.length);
+      // Build dynamic groups (auto-categorize all non-spicy Shima sets so UI count matches)
+            const SHIMA_GROUP_BY_JA = {
+        "シマエナガ・ゆめかわパーカー":"casual",
+        "シマエナガ・アーバン羽根フーディ":"casual",
+        "シマエナガ・カジュアル雪街":"casual",
+        "シマエナガ・カフェ店員カジュアル":"casual",
+        "シマエナガ・スポーツジャージ":"casual",
+        "シマエナガ・ヘヴィフェザー":"casual",
+        "シマエナガ・ライトフェザー":"casual",
+        "シマエナガ・レインコート":"casual",
+        "シマエナガ・春のライトジャケット":"casual",
+        "シマエナガ・部屋着もふもふ":"casual",
+        "シマエナガ・セーラー服氷彩":"school",
+        "シマエナガ・体育着ブルマ風":"school",
+        "シマエナガ・冬制服コート":"school",
+        "シマエナガ・図書委員":"school",
+        "シマエナガ・学園アイドル制服":"school",
+        "シマエナガ・学園制服ブレザー":"school",
+        "シマエナガ・生徒会正装":"school",
+        "シマエナガフォース・オペレータースーツ":"force",
+        "シマエナガフォース・スナイパーギリー":"force",
+        "シマエナガフォース・セレモニードレスユニフォーム":"force",
+        "シマエナガフォース・フロストパイロット":"force",
+        "シマエナガフォース・メカニック":"force",
+        "シマエナガフォース・医療班":"force",
+        "シマエナガフォース・艦橋クルー":"force",
+        "シマエナガ・バトルトリム":"force",
+        "シマエナガ・フライトギア":"force",
+        "シマエナガ・原初フォーム":"force",
+        "シマエナガ・天使翼フォーム":"force",
+        "シマエナガ・白炎フェニックス":"force",
+        "シマエナガ・竜羽融合":"force",
+        "シマエナガ・結晶進化":"force",
+        "シマエナガ・聖騎士羽装甲":"force",
+        "シマエナガ・アーコン礼装":"dress",
+        "シマエナガ・ゴスロリ雪影":"dress",
+        "シマエナガ・ストリートゆめかわ":"dress",
+        "シマエナガ・ホワイトバレエ":"dress",
+        "シマエナガ・光の聖堂ドレス":"dress",
+        "シマエナガ・天冠":"dress",
+        "シマエナガ・星海ローブ":"dress",
+        "シマエナガ・星空の歌姫":"dress",
+        "シマエナガ・氷晶プリンセス":"dress",
+        "シマエナガ・永劫エーテル":"dress",
+        "シマエナガ・浮遊アークヘイロー":"dress",
+        "シマエナガ・無限白翼":"dress",
+        "シマエナガ・神光プライム":"dress",
+        "シマエナガ・神権プルーム":"dress",
+        "シマエナガ・終光アバター":"dress",
+        "シマエナガ・羽衣レガリア":"dress",
+        "シマエナガ・聖夜のドレス":"dress",
+        "シマエナガ・聖歌隊ローブ":"dress",
+        "シマエナガ・至高戴冠":"dress",
+        "シマエナガ・超越レガリア":"dress",
+        "シマエナガ・雪皇后神話":"dress",
+        "シマエナガ・黎明ローブ":"dress",
+        "シマエナガ・黎明女帝":"dress",
+        "シマエナガ・巫女融合":"east",
+        "シマエナガ・祭り羽織":"east",
+        "チャイナ・純白羽紋":"east",
+        "チャイナ・黒銀雪影":"east",
+        "中華・龍鳳羽冠":"east",
+        "和洋折衷・羽織ドレス":"east",
+        "東方・巫女装束雪祈":"east",
+        "シマエナガ・サファイア羽根":"role",
+        "シマエナガ・ホロフェザー":"role",
+        "シマエナガ・ロイヤル白羽根":"role",
+        "シマエナガ・夜咲きプルーム":"role",
+        "シマエナガ・天体羽衣":"role",
+        "シマエナガ・星図の書記":"role",
+        "シマエナガ・星雲シマー":"role",
+        "シマエナガ・白宇宙の化身":"role",
+        "シマエナガ・聖断マント":"role",
+        "シマエナガ・風霊マント":"role",
+        "シマ天使・白羽の礼装":"role",
+        "シマ巫女・雪神楽":"role",
+        "シマ忍者・雪迷彩":"role",
+        "シマ悪魔・黒羽の誘惑":"role",
+        "シマ海賊・羽根帽子":"role",
+        "シマ騎士・白羽の鎧":"role",
+        "シマ魔導士・氷紋ローブ":"role",
+        "シマエナガ・オーロラ玉座":"season",
+        "シマエナガ・クリスマスサンタ":"season",
+        "シマエナガ・ハロウィン梟魔女":"season",
+        "シマエナガ・フロストウィング極":"season",
+        "シマエナガ・新年晴れ着":"season",
+        "シマエナガ・月護り":"season",
+        "シマエナガ・極寒女王":"season",
+        "シマエナガ・浴衣夏氷":"season",
+        "シマエナガ・着物冬白":"season",
+        "シマエナガ・節分鬼かわ":"season",
+        "シマエナガ・花嫁純白":"season",
+        "シマエナガ・雪花タイプ":"season"
+      };
+
+      function detectShimaGroup(s){
+        return (s && s.group) || SHIMA_GROUP_BY_JA[s.ja] || "role";
+      }
+
+
+      let GROUPS = [
+        { key: "casual", title: "日常・カジュアル", icon: "🧣", items: [] },
+        { key: "school", title: "学園・制服", icon: "🎓", items: [] },
+        { key: "force", title: "フォース・戦術", icon: "🛡️", items: [] },
+        { key: "dress", title: "ドレス・礼装", icon: "👗", items: [] },
+        { key: "east", title: "東方・中華", icon: "🐉", items: [] },
+        { key: "role", title: "異世界・ロール", icon: "✨", items: [] },
+        { key: "season", title: "季節・イベント", icon: "🎐", items: [] },
+      ];
+
+      const groupMap = Object.create(null);
+      GROUPS.forEach(g => { groupMap[g.key] = g; });
+
+      // Distribute ALL sets (except spicy ones) into groups
+      SETS.forEach(s => {
+        if (isSpicy(s)) return;
+        const k = detectShimaGroup(s);
+        (groupMap[k] || groupMap.casual).items.push(s);
+      });
+
+      // Remove empty groups (keeps UI compact)
+      GROUPS = GROUPS.filter(g => g.items && g.items.length);
 
 
       // Grouped variant for Shima-enaga Collection (nested subsections)
@@ -3075,60 +3101,7 @@ wrap.appendChild(title);
   wrap.appendChild(body);
   return wrap;
 }
-            // v67: line-separate specialized attire into a single parent accordion (keeps Shima UI stable)
-      function buildSpecializedContainer(opts){
-        const det = document.createElement("details");
-        det.className = "shima-specialized";
-        det.open = !!opts.open;
-        det.style.display = "block";
-        det.style.width = "100%";
-        det.style.maxWidth = "100%";
-        det.style.boxSizing = "border-box";
-        det.style.cssText = "display: block !important; width: 100% !important; margin-bottom: 8px;";
-
-        const summary = document.createElement("summary");
-        // v69: featured styling hook
-        summary.className = "specialized";
-        const t = splitTitle(opts.title);
-        summary.innerHTML = `<span class="shima-feather">${opts.icon}</span> ` +
-          `<span class="shima-title-jp">${escapeHTML(t.jp)}</span>` +
-          ` <span class="shima-feature-badge">FEATURED</span>` +
-          ((t.en) ? ` <span class="shima-title-en">(${escapeHTML(t.en)})</span>` : ``) +
-          ` <span style="margin-left:auto; font-weight:800; color:#234; font-size:0.92em;">${opts.count}</span>`;
-        det.appendChild(summary);
-
-        const box = document.createElement("div");
-        box.className = "shima-specialized-body";
-        box.style.display = "block";
-        box.style.width = "100%";
-        box.style.maxWidth = "100%";
-        box.style.boxSizing = "border-box";
-        box.style.paddingTop = "8px";
-        det.appendChild(box);
-
-        return {det, box};
-      }
-
-      // Specialized count = total selectable cards inside specialized subtree
-      let specializedCount = 0;
-      specializedCount += (shimaSets ? shimaSets.length : 0);
-      specializedCount += (spicySets ? spicySets.length : 0);
-      try{
-        EXTRA_SHELVES.forEach(shelf=>{
-          const items = uniqueByTag(shelf.items || []);
-          specializedCount += items.length;
-        });
-      }catch(e){}
-
-      const specialized = buildSpecializedContainer({
-        icon: "🜂",
-        title: "特殊・特化衣装 (Specialized Attire)",
-        count: specializedCount,
-        open: false
-      });
-
-      // Put all specialized shelves inside the parent container (line separation)
-      specialized.box.appendChild(buildShimaGroupedSection({
+      wrap.appendChild(buildShimaGroupedSection({
         idPrefix: "attire_v21_shima",
         icon: "🐦",
         title: "シマエナガ・コレクション (Shima-enaga Collection)",
@@ -3138,7 +3111,7 @@ wrap.appendChild(title);
       }));
 
       if (spicySets.length){
-        specialized.box.appendChild(buildSection({
+        wrap.appendChild(buildSection({
           idPrefix: "attire_v21_spicy",
           icon: "🌶️",
           title: "攻め・グラビア (Spicy & Glam)",
@@ -3149,31 +3122,13 @@ wrap.appendChild(title);
         }));
       }
 
-      // v66 shelves (world/use/emotion focused) live under the specialized parent too
-      EXTRA_SHELVES.forEach(shelf=>{
-        const items = uniqueByTag(shelf.items || []);
-        if (!items.length) return;
-        specialized.box.appendChild(buildSection({
-          idPrefix: shelf.idPrefix,
-          icon: shelf.icon,
-          title: shelf.title,
-          count: items.length,
-          items: items,
-          open: false
-        }));
-      });
-
-      wrap.appendChild(specialized.det);
-
-      // v69: Featured Specialized should appear at the top of the Attire section list.
-      // Insert the Shima UI block at the beginning of the accordion body (not at the bottom).
-      if (contentArea && contentArea.insertBefore){
-        contentArea.insertBefore(wrap, contentArea.firstChild || null);
-      } else if(listRoot && listRoot.insertBefore){
-        listRoot.insertBefore(wrap, listRoot.firstChild || null);
-      } else {
-        (parent || document.body).appendChild(wrap);
+      // prepend to top so it doesn't get buried by older versions
+      if (contentArea.firstChild) if(contentArea && contentArea.insertBefore){
+        contentArea.insertBefore(wrap, contentArea.firstChild);
+      } else if(listRoot && listRoot.appendChild){
+        listRoot.appendChild(wrap);
       }
+      else contentArea.appendChild(wrap);
     },
 
     getTags(){
