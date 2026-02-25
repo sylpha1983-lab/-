@@ -1,5 +1,5 @@
 // Auto-generated bundle for section 'attire'
-const SHIMA_BRAND_CORE = "Shima-enaga inspired humanoid, based on a small round white long-tailed bushtit, distinct compact round white upper-body silhouette, pure white smooth rounded bird-like hood attached to the back, clear symmetrical black circular eye-ring markings placed on hood sides, small subtle beak motif detail integrated into hood design, hood always pure white, never recolored, no animal ears, no mammal tail, optional slender avian tail feather fan, controlled feather expression, never oversized wings";
+const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small round white long-tailed bushtit, very compact round upper-body silhouette, noticeably small and fluffy proportions, snow-white and charcoal-black signature palette, bold symmetrical black circular eye-ring markings as a visible motif (patch/embroidery/print), tiny subtle beak motif detail, small subtle feather crest accent, long narrow avian tail feathers made of multiple thin layered plumes, thin elegant bird tail fan structure, not mammal tail, minimal decorative feather accents, no animal ears, no large angel wings, no giant feather spread, balanced proportions, bird-like but wearable";
 // Contains 20 versions stacked in ascending order.
 
 (function(){
@@ -3405,9 +3405,13 @@ wrap.appendChild(title);
       // Apply hood state only when Shima-enaga themed attire is selected
       const hasShima = tags.some(t => /Shima-enaga|long-tailed bushtit/i.test(t));
       if (hasShima) {
-        if (__shimaHoodMode === "worn") tags.unshift(__HOOD_WORN);
-        else if (__shimaHoodMode === "down") tags.unshift(__HOOD_DOWN);
-        // auto => no tag
+        // Apply hood state ONLY when the selected Shima outfit already implies a hood/outerwear.
+        // This avoids forcing hooded parkas onto ceremonial/maid/etc outfits.
+        const hasHoodCapable = tags.some(t => /(hood|hoodie|parka|puffer|jacket|coat|anorak|down jacket|padded)/i.test(t));
+        if (hasHoodCapable && __shimaHoodMode && __shimaHoodMode !== "auto") {
+          if (__shimaHoodMode === "worn") tags.unshift(__HOOD_WORN);
+          else if (__shimaHoodMode === "down") tags.unshift(__HOOD_DOWN);
+        }
       }
       return tags;
     }
