@@ -116,11 +116,6 @@
           
           // イベント発火
           out.dispatchEvent(new Event('input', { bubbles: true }));
-          
-          // 念のため同期も呼ぶ
-          if (window.smartSyncCheckboxes) {
-            setTimeout(() => window.smartSyncCheckboxes(false), 200);
-          }
 
           menu.style.display = "none";
         };
