@@ -19,6 +19,13 @@
       out.value = saved;
       out.dispatchEvent(new Event('input', { bubbles: true }));
       out.dispatchEvent(new Event('change', { bubbles: true }));
+      
+      // ★追加: 読み込んだ直後に直接同期を呼び出す
+      if (window.smartSyncCheckboxes) {
+        // UI生成待ちのために少し遅延させる
+        setTimeout(() => window.smartSyncCheckboxes(false), 500);
+        setTimeout(() => window.smartSyncCheckboxes(false), 1500);
+      }
     }
   }
 

@@ -610,6 +610,7 @@ function generateOutput() {
     });
 
     let outText = finalTags.join(", ");
+    if (typeof window.__shimaApplyHoodToText === "function") { outText = window.__shimaApplyHoodToText(outText); }
 
     
     outText = applySubjectAnchorOrdering(outText);
@@ -676,6 +677,8 @@ function generateOutput() {
 
     out.value = outText;
     out.dispatchEvent(new Event("input", { bubbles: true }));
+    try { if (window.__applyHoodStateToOutput) window.__applyHoodStateToOutput(); } catch (e) {}
+
 
     setTimeout(() => {
       window.__isGenerating = false;
