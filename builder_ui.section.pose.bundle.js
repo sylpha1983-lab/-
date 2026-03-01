@@ -277,7 +277,7 @@
           subSummary.style.cssText = "font-size:0.9em; font-weight:bold; color:#444; cursor:pointer; margin-bottom:5px; outline:none;";
           
           const grid = document.createElement("div");
-          grid.style.cssText = "display:grid; grid-template-columns:repeat(auto-fill, minmax(130px, 1fr)); gap:5px; margin-top:5px;";
+          grid.style.cssText = "display:grid; grid-template-columns:1fr; gap:5px; margin-top:5px;";
 
           items.forEach(item => {
             const label = document.createElement("label");
@@ -623,7 +623,16 @@
         { ja: "帽子で挨拶", en: "hat tip" },
         { ja: "ピース", en: "v-sign" },
         { ja: "そわそわする", en: "fidgeting" }
-      ]
+      ,
+        { ja: "歯を食いしばる", en: "clenched teeth" },
+        { ja: "にやり（自信の笑み）", en: "smirk" },
+        { ja: "微笑（やさしい）", en: "gentle smile" },
+        { ja: "口を少し開ける", en: "slightly open mouth" },
+        { ja: "口を閉じて微笑", en: "closed-mouth smile" },
+        { ja: "驚きの口（小さく開く）", en: "small open mouth, surprised" },
+        { ja: "唇を噛む", en: "biting lip" },
+        { ja: "舌を少し出す", en: "tongue out, playful" }
+]
     },
     "🎸 趣味・アウトドア (Hobbies)": {
       "遊び・アクティビティ": [
@@ -1590,13 +1599,34 @@
         { ja: "上を見る (見上げる)", en: "looking up" },
         { ja: "下を見る (見下ろす)", en: "looking down" }
       ]
-    },
+    
+,
+      "目の状態 (Eye State)": [
+        { ja: "半目", en: "half-closed eyes" },
+        { ja: "眠たげ半目", en: "sleepy eyes, half-closed eyes" },
+        { ja: "三白眼", en: "sanpaku eyes, visible sclera" },
+        { ja: "潤み目", en: "watery eyes" },
+        { ja: "うるうる目", en: "teary eyes, watery eyes" },
+        { ja: "伏し目 (まぶた落とし)", en: "downcast eyes, lowered eyelids" },
+        { ja: "目を細める", en: "squinting" },
+        { ja: "目を見開く", en: "wide-eyed" },
+        { ja: "焦点ぼかし", en: "unfocused eyes" }
+      ]
+},
     "🙇 頭の動作・角度 (Head Movement)": {
       "角度": [
         { ja: "首をかしげる (Tilt)", en: "head tilt" },
         { ja: "うつむく (Head Down)", en: "head down" },
         { ja: "仰け反る/空を見る (Head Back)", en: "head back" }
-      ]
+      ,
+        { ja: "首を少しだけかしげる", en: "subtle head tilt" },
+        { ja: "首を深くかしげる", en: "strong head tilt" },
+        { ja: "顎を少し上げる", en: "chin up" },
+        { ja: "顎を少し引く", en: "chin down, tucked chin" },
+        { ja: "首を横に向ける", en: "head turned sideways" },
+        { ja: "首を振り向ける（肩越し）", en: "looking over shoulder" },
+        { ja: "首をすくめ気味", en: "neck tucked, shy posture" }
+]
     }
   };
 
@@ -1776,3 +1806,1025 @@
 
 })();
 
+
+
+(function(){
+// --- builder_ui.section.pose.v14.js ---
+(function(){
+  "use strict";
+
+  const VERSION = 14;
+  const KEY = "pose";
+
+  // Reuse the same "secret" flag as quality_preset (A).
+  // NOTE: Do NOT create new unlock logic here; just read.
+  const IS_R18_UNLOCKED = (function(){
+    try { return localStorage.getItem("MY_SECRET_UNLOCK") === "true"; } catch(e){ return false; }
+  })();
+
+  // ---------- Data (Stage 1: Daily / Structure-first) ----------
+  const POSE_STAGE1_MOST_USED = {
+    "⭐ よく使う (Most Used)": {
+      "定番": [
+        { ja: "立ちポーズ", en: "standing pose" },
+        { ja: "待機ポーズ（アイドル）", en: "idle pose" },
+        { ja: "座る", en: "sitting" },
+        { ja: "しゃがみ", en: "crouching" },
+        { ja: "歩く", en: "walking" },
+        { ja: "走る", en: "running" },
+        { ja: "ジャンプ", en: "jumping" },
+        { ja: "振り向き", en: "looking back" },
+        { ja: "手を振る", en: "waving" },
+        { ja: "ピース", en: "peace sign" },
+        { ja: "敬礼", en: "salute" },
+        { ja: "腕組み", en: "crossed arms" },
+      ]
+    }
+  };
+
+  const POSE_COMPLETED = {
+
+  "✅ 完成ポーズ：🧍 立ち (Standing)": {
+    "ニュートラル": [
+      { ja: "自然立ち（ニュートラル）", en: "standing pose, neutral stance" },
+      { ja: "体重移動（片足重心）", en: "standing pose, weight shift, one leg relaxed" },
+      { ja: "自然立ち（肩の力を抜く）", en: "standing pose, relaxed shoulders, calm neutral" },
+      { ja: "直立（正面）", en: "standing upright, front-facing, formal neutral" },
+      { ja: "つま先内股（控えめ）", en: "standing pose, toes slightly inward, shy neutral" },
+      { ja: "片足つま先（軽く）", en: "standing pose, one foot on tiptoe, light stance" },
+      { ja: "腰ひねり（コントラポスト軽）", en: "standing pose, slight contrapposto, subtle hip shift" },
+      { ja: "腕下ろし＋手を後ろに組む", en: "standing pose, hands clasped behind back, composed" },
+      { ja: "腕下ろし＋手を前で組む", en: "standing pose, hands clasped in front, polite neutral" },
+      { ja: "肩を少しすくめる", en: "standing pose, slight shrug, casual neutral" },
+      { ja: "足を肩幅（安定）", en: "standing stance, feet shoulder-width, stable" },
+      { ja: "片足前（踏み出し）", en: "standing pose, one foot forward, ready stance" },
+
+      { ja: "肩を落としてリラックス", en: "relaxed standing, shoulders down" },
+      { ja: "足をそろえた上品立ち", en: "feet together, elegant standing" },
+      { ja: "つま先を外に開いた立ち", en: "toes turned out, poised stance" },
+      { ja: "片足を軽く後ろへ（モデル）", en: "one foot slightly back, poised" },
+      { ja: "壁際に立つ（姿勢良く）", en: "standing near wall, good posture" },
+      { ja: "足を揃えて直立（丁寧）", en: "standing pose, feet together, polite upright" },
+      { ja: "腕を後ろで軽く組む（品）", en: "standing pose, hands loosely clasped behind back, elegant" },
+      { ja: "腕を前で軽く組む（おしとやか）", en: "standing pose, hands loosely clasped in front, demure" },
+      { ja: "腕を横に下ろす（自然）", en: "standing pose, arms relaxed at sides, natural" },
+      { ja: "片手を腰に添える（軽）", en: "standing pose, one hand on hip, subtle" },
+      { ja: "両手を腰に添える（堂々）", en: "standing pose, hands on hips, confident" },
+      { ja: "腕を背中に回す（背中見せ）", en: "standing pose, arms behind back, back view emphasis" },
+      { ja: "かかと浮かせ（軽やか）", en: "standing pose, heels slightly lifted, light stance" },
+      { ja: "足をクロスして立つ（モデル）", en: "standing pose, legs crossed, model stance" },
+      { ja: "つま先を外に開く（バレエ風）", en: "standing pose, toes turned out, ballet-inspired" },],
+    "挨拶": [
+      { ja: "軽く手を振る（挨拶）", en: "standing pose, waving hand, friendly greeting" },
+      { ja: "軽いお辞儀（挨拶）", en: "standing pose, small bow, polite greeting" },
+      { ja: "会釈（軽く）", en: "standing pose, nodding slightly, casual greeting" },
+      { ja: "深めのお辞儀（丁寧）", en: "standing pose, deep bow, formal greeting" },
+      { ja: "手を振る（元気）", en: "standing pose, energetic wave, cheerful greeting" },
+      { ja: "片手を上げる（こんにちは）", en: "standing pose, one hand raised, hello gesture" },
+      { ja: "敬礼（簡易）", en: "standing pose, quick salute, greeting" },
+      { ja: "帽子に手（ハットチップ）", en: "standing pose, tipping hat gesture, greeting" },
+      { ja: "合掌（挨拶）", en: "standing pose, hands together, respectful greeting" },
+      { ja: "軽い手招き（おいで）", en: "standing pose, small beckoning gesture, inviting" },
+      { ja: "指で挨拶（2本指）", en: "standing pose, two-finger salute, casual greeting" },
+      { ja: "胸に手を当てる（礼）", en: "standing pose, hand on chest, sincere greeting" },
+
+      { ja: "カーテシー（基本）", en: "curtsy, polite greeting, skirt held lightly" },
+      { ja: "カーテシー（深め）", en: "deep curtsy, formal greeting, graceful posture" },
+      { ja: "カーテシー（片手スカート）", en: "curtsy, one hand holding skirt, elegant greeting" },
+      { ja: "ドレスの裾をつまんで一礼", en: "holding skirt hem, small bow, elegant greeting" },
+      { ja: "貴婦人の会釈（手を胸に）", en: "ladylike nod, hand over chest, refined greeting" },
+      { ja: "手袋の手で手を振る（上品）", en: "gentle wave, gloved hand, refined greeting" },
+      { ja: "手を胸に当てて感謝", en: "hand over heart, thankful greeting" },
+      { ja: "片手を差し出す（ダンス前）", en: "offering a hand, pre-dance invitation pose" },
+      { ja: "礼儀正しいお辞儀（背筋）", en: "polite bow, straight posture, formal greeting" },
+      { ja: "席へ案内するジェスチャー", en: "welcoming gesture, inviting someone forward" },
+      { ja: "会釈（軽くうなずく）", en: "greeting, slight nod, polite" },
+      { ja: "深いお辞儀（丁寧）", en: "greeting, deep bow, respectful" },
+      { ja: "片手を胸に当てて一礼", en: "greeting, hand over chest, polite bow" },
+      { ja: "手を振る（大きく）", en: "greeting, big wave, cheerful" },
+      { ja: "手を振る（小さく）", en: "greeting, small wave, shy" },
+      { ja: "敬礼（カジュアル）", en: "greeting, casual salute" },
+      { ja: "帽子を取る仕草（紳士/淑女）", en: "greeting, hat tip gesture, courteous" },
+      { ja: "握手を求める手差し出し", en: "greeting, offering handshake, hand extended" },
+      { ja: "カーテシー（基本）", en: "curtsy, basic, skirt held lightly" },
+      { ja: "カーテシー（深め）", en: "deep curtsy, elegant" },
+      { ja: "カーテシー（片手で裾をつまむ）", en: "curtsy, one hand holding skirt hem" },
+      { ja: "貴婦人の会釈（首＋肩だけ）", en: "lady's nod, subtle bow, refined" },
+      { ja: "舞踏会の挨拶（片手を広げる）", en: "ballroom greeting, one arm extended, graceful" },],
+    "仕草": [
+      { ja: "髪をかき上げる（仕草）", en: "standing pose, brushing hair, casual gesture" },
+      { ja: "軽く振り返る（仕草）", en: "standing pose, looking over shoulder, subtle twist" },
+      { ja: "腕組み（考え中）", en: "standing pose, arms crossed, thinking" },
+      { ja: "頬に指（考える）", en: "standing pose, finger on cheek, pondering" },
+      { ja: "腰に手（自信）", en: "standing pose, hands on hips, confident" },
+      { ja: "ポケットに手（ラフ）", en: "standing pose, hands in pockets, casual" },
+      { ja: "手を髪に添える", en: "standing pose, hand touching hair, gentle gesture" },
+      { ja: "袖をつまむ（照れ）", en: "standing pose, holding sleeve, shy gesture" },
+      { ja: "背伸び（ストレッチ）", en: "standing pose, stretching upward, casual" },
+      { ja: "指差し（説明）", en: "standing pose, pointing gesture, explaining" },
+      { ja: "腕を広げる（歓迎）", en: "standing pose, arms open wide, welcoming" },
+      { ja: "胸の前で手を合わせる（お願い）", en: "standing pose, hands together near chest, pleading" },
+      { ja: "スマイルピース（写真）", en: "standing pose, peace sign, photo pose" },
+      { ja: "顎を上げる（挑発）", en: "standing pose, chin up, teasing attitude" },
+    
+      { ja: "ドレスの裾を軽く持つ", en: "lightly holding skirt, elegant gesture" },
+      { ja: "腰に手を当て自信", en: "hand on hip, confident" },
+      { ja: "両手を背中で組む", en: "hands clasped behind back, composed" },
+      { ja: "指先で髪を整える", en: "fixing hair with fingertips, delicate" },
+      { ja: "小さく首をかしげる", en: "tilting head slightly, cute gesture" },
+      { ja: "胸元のブローチに触れる", en: "touching chest brooch area, refined" },
+      { ja: "顎に手を当てる（考える）", en: "gesture, hand on chin, thinking" },
+      { ja: "頬に手を当てる（照れ）", en: "gesture, hand on cheek, bashful" },
+      { ja: "口元に指（内緒）", en: "gesture, finger to lips, shh" },
+      { ja: "指差し（説明）", en: "gesture, pointing, explaining" },
+      { ja: "手を広げる（どうぞ）", en: "gesture, arms open, presenting" },
+      { ja: "腕組み（強気）", en: "gesture, arms crossed, assertive" },
+      { ja: "片手を頭の後ろ（照れ笑い）", en: "gesture, hand behind head, embarrassed smile" },
+      { ja: "両手を背中で組む（見学）", en: "gesture, hands clasped behind back, observing" },
+      { ja: "スカートの裾を整える（ドレス）", en: "gesture, adjusting skirt hem, dress" },
+      { ja: "裾を軽く持ち上げる（段差）", en: "gesture, lifting skirt slightly, stepping" },
+      { ja: "胸の前で手を重ねる（おしとやか）", en: "gesture, hands folded at chest, demure" },
+      { ja: "両手を前で重ねる（淑女）", en: "gesture, hands folded in front, lady-like" },],
+    "対人": [
+      { ja: "握手（対人）", en: "standing pose, handshake, interpersonal interaction" },
+      { ja: "肩を叩く（対人）", en: "standing pose, patting shoulder, interpersonal interaction" },
+      { ja: "壁ドン（対人）", en: "interpersonal pose, kabedon, pinning against wall" },
+      { ja: "耳打ち（対人）", en: "interpersonal pose, whispering into ear, close distance" },
+      { ja: "手を引く（対人）", en: "interpersonal pose, pulling someone's hand, leading" },
+      { ja: "肩を抱く（対人）", en: "interpersonal pose, arm around shoulder, friendly" },
+      { ja: "抱き止め（対人）", en: "interpersonal pose, catching someone, protective" },
+      { ja: "指切り（約束）", en: "interpersonal pose, pinky promise, close interaction" },
+      { ja: "ハイタッチ（対人）", en: "interpersonal pose, high five, celebration" },
+      { ja: "握手（強め）", en: "interpersonal pose, firm handshake, agreement" },
+      { ja: "袖をつかむ（引き留め）", en: "interpersonal pose, grabbing sleeve, stopping" },
+      { ja: "背中を押す（励まし）", en: "interpersonal pose, pushing back gently, encouragement" },
+      { ja: "肩に手（励ます）", en: "interpersonal pose, hand on shoulder, comforting" },
+      { ja: "指で口元（しーっ）", en: "interpersonal pose, shushing gesture, close interaction" },
+    
+      { ja: "腕を組んで話す", en: "arms crossed, talking stance" },
+      { ja: "相手に手を差し出す", en: "extending hand to someone" },
+      { ja: "肩を支える", en: "supporting someone by the shoulder" },
+      { ja: "腕を引く（引き止める）", en: "pulling someone's arm, stopping them" },
+      { ja: "円陣を組む（手を重ねる）", en: "team huddle, hands together" },
+      { ja: "背中を押す（送り出す）", en: "pushing someone forward, encouraging" },
+      { ja: "握手（しっかり）", en: "interaction, firm handshake" },
+      { ja: "肩を軽く叩く", en: "interaction, patting shoulder" },
+      { ja: "ハイタッチ", en: "interaction, high five" },
+      { ja: "グータッチ", en: "interaction, fist bump" },
+      { ja: "腕を組んで寄り添う", en: "interaction, linking arms, close" },
+      { ja: "耳打ち（内緒話）", en: "interaction, whispering to ear" },
+      { ja: "背中を押す（促す）", en: "interaction, gentle push on back, urging" },
+      { ja: "手を引く（連れていく）", en: "interaction, pulling hand, leading" },
+      { ja: "壁ドン（近距離）", en: "interaction, kabedon, close distance" },
+      { ja: "相手を抱き止める", en: "interaction, catching someone, protective" },
+      { ja: "ハグ（優しく）", en: "interaction, gentle hug" },
+      { ja: "集合写真ポーズ（肩寄せ）", en: "interaction, group photo pose, shoulders close" },],
+    "演出": [
+      { ja: "モデル立ち（演出）", en: "model pose, stylish stance, contrapposto" },
+      { ja: "白鳥のポーズ（ダンス）", en: "dance pose, one leg raised, tiptoe contact, elegant weight shift" },
+      { ja: "ヒーロー立ち（胸を張る）", en: "heroic pose, chest out, strong presence" },
+      { ja: "勝利ポーズ（拳を上げる）", en: "victory pose, fist raised, triumphant" },
+      { ja: "マント翻し（演出）", en: "dramatic pose, cape fluttering, cinematic" },
+      { ja: "背中を見せる（振り返り）", en: "dramatic pose, back view, looking back" },
+      { ja: "風を受ける（髪なびき）", en: "dramatic pose, wind blowing hair, cinematic" },
+      { ja: "ステージ決め（アイドル）", en: "stage pose, idol-style, spotlight moment" },
+      { ja: "指差しカメラ（決め）", en: "dramatic pose, pointing at camera, dynamic" },
+      { ja: "片足上げ＋重心傾き（バレエ）", en: "ballet pose, one leg raised, elegant weight shift" },
+      { ja: "剣を掲げる（象徴）", en: "dramatic pose, raising weapon high, symbolic" },
+      { ja: "礼をする（フィナーレ）", en: "finale bow, performance ending, elegant" },
+      { ja: "影に立つ（シルエット）", en: "silhouette pose, standing in shadow, cinematic" },
+      { ja: "片膝立ち（宣誓）", en: "one-knee pose, vow, dramatic" },
+    
+      { ja: "ドレス回転（裾ひらり）", en: "twirling dress, skirt swirl, elegant spin" },
+      { ja: "ワルツのフレーム（片手差し）", en: "waltz frame, one hand extended, ballroom pose" },
+      { ja: "バレエの基本ポーズ", en: "ballet pose, graceful arms, elegant stance" },
+      { ja: "オペラ鑑賞の気品立ち", en: "elegant stance, refined, opera-night vibe" },
+      { ja: "スカートを広げる（写真用）", en: "holding skirt out, photo pose, elegant display" },
+      { ja: "階段で振り返る（ドレス）", en: "turning back on stairs, gown, cinematic pose" },
+      { ja: "花束を抱えて微笑む（ドレス）", en: "holding bouquet, gentle smile, formal dress pose" },
+      { ja: "舞踏会の一歩（踏み出し）", en: "ballroom step forward, poised movement" },
+      { ja: "スポットライトのプリマ", en: "prima donna pose, spotlight, stage presence" },
+      { ja: "王宮の謁見ポーズ", en: "royal audience pose, dignified posture" },
+      { ja: "モデル立ち（脚クロス強）", en: "cinematic pose, strong model stance, legs crossed" },
+      { ja: "プリンセス立ち（つま先＋手重ね）", en: "cinematic pose, princess stance, tiptoe, hands folded" },
+      { ja: "階段で振り返り（ドレス）", en: "cinematic, looking back on stairs, dress" },
+      { ja: "裾ひらり回転（ドレスターン）", en: "cinematic, dress twirl, skirt swish" },
+      { ja: "ワルツの誘い（片手差し出し）", en: "cinematic, waltz invitation, hand extended" },
+      { ja: "勝利ポーズ（片手拳）", en: "cinematic, victory pose, fist raised" },
+      { ja: "ヒーローポーズ（胸張り）", en: "cinematic, hero pose, chest out" },
+      { ja: "風を受ける（髪なびき）", en: "cinematic, wind-swept hair, dramatic" },
+      { ja: "片膝を軽く曲げてお辞儀（舞台）", en: "cinematic, stage bow, slight knee bend" },
+      { ja: "光に向かって手を伸ばす", en: "cinematic, reaching toward light" },]
+  },
+
+  "✅ 完成ポーズ：🪑 座り (Seated)": {
+    "ニュートラル": [
+      { ja: "椅子座り（ニュートラル）", en: "sitting pose, neutral seated posture" },
+      { ja: "床座り（ニュートラル）", en: "sitting on floor, relaxed seated posture" },
+      { ja: "椅子座り（背筋）", en: "sitting pose, straight back, composed" },
+      { ja: "椅子座り（リラックス）", en: "sitting pose, relaxed seated posture" },
+      { ja: "床座り（あぐら）", en: "sitting on floor, cross-legged, relaxed" },
+      { ja: "床座り（正座）", en: "seiza sitting, formal kneeling" },
+      { ja: "床座り（体育座り）", en: "sitting pose, knees hugged, compact" },
+      { ja: "椅子浅く腰掛け", en: "sitting pose, perched on edge of chair" },
+      { ja: "椅子＋足を揃える", en: "sitting pose, knees together, polite" },
+      { ja: "椅子＋片足前（ラフ）", en: "sitting pose, one leg forward, casual" },
+    
+      { ja: "椅子に浅く腰掛ける", en: "perching on chair edge, neutral" },
+      { ja: "背もたれに軽くもたれる", en: "lightly leaning on backrest, neutral" },
+      { ja: "床座り（正座）", en: "seiza sitting, formal" },
+      { ja: "床座り（あぐら）", en: "cross-legged sitting, casual" },
+      { ja: "椅子に浅く座る（姿勢よく）", en: "seated pose, sitting upright on chair, proper" },
+      { ja: "椅子に深く座る（リラックス）", en: "seated pose, sitting back, relaxed" },
+      { ja: "足を揃えて座る（淑女）", en: "seated pose, knees together, lady-like" },
+      { ja: "足首クロス（上品）", en: "seated pose, ankles crossed, elegant" },
+      { ja: "膝の上で手を重ねる", en: "seated pose, hands folded on lap" },
+      { ja: "背筋を伸ばして正面", en: "seated pose, straight back, front-facing" },
+      { ja: "床座り（正座風）", en: "seated pose, kneeling-seiza style" },
+      { ja: "床座り（あぐら）", en: "seated pose, cross-legged on floor" },],
+    "仕草": [
+      { ja: "足組み（仕草）", en: "sitting pose, legs crossed, composed" },
+      { ja: "頬杖（仕草）", en: "sitting pose, chin resting on hand, thoughtful" },
+      { ja: "足をぶらぶら（子供っぽい）", en: "sitting pose, legs dangling, playful" },
+      { ja: "指を絡める（緊張）", en: "sitting pose, fingers interlaced, nervous" },
+      { ja: "髪をいじる（落ち着きない）", en: "sitting pose, playing with hair, fidgeting" },
+      { ja: "腕組み（不満）", en: "sitting pose, arms crossed, dissatisfied" },
+      { ja: "片手を頬に（考え中）", en: "sitting pose, hand to cheek, thinking" },
+      { ja: "両手を膝に（おとなしい）", en: "sitting pose, hands on knees, quiet" },
+      { ja: "頬杖（退屈）", en: "sitting pose, chin on hand, bored" },
+      { ja: "胸の前で手を組む（期待）", en: "sitting pose, hands clasped, hopeful" },
+      { ja: "足を揃えてつま先内（照れ）", en: "sitting pose, toes inward, shy" },
+      { ja: "肘を膝に（前傾）", en: "sitting pose, elbows on knees, leaning forward" },
+    
+      { ja: "ドレスの裾を整える", en: "adjusting dress hem, seated, refined gesture" },
+      { ja: "背筋を伸ばして上品に座る", en: "sitting upright, refined, elegant posture" },
+      { ja: "ひざをそろえて手を重ねる", en: "knees together, hands folded, elegant seated" },
+      { ja: "ティーカップを想定して手を添える", en: "hands poised as if holding teacup, refined" },
+      { ja: "扇子を持つような手元（小物なし）", en: "hands posed as if with a fan, graceful" },
+      { ja: "頬に手を添えて微笑む", en: "hand to cheek, gentle smile, seated" },
+      { ja: "少し横向き座り（写真用）", en: "slightly turned seated pose, photo-ready" },
+      { ja: "椅子の背にもたれ気品", en: "leaning back slightly, dignified seated" },
+      { ja: "頬杖（考え事）", en: "seated gesture, resting chin on hand, thinking" },
+      { ja: "膝を抱える（小さく）", en: "seated gesture, hugging knees, compact" },
+      { ja: "スカートの裾を整える（座り）", en: "seated gesture, smoothing skirt, dress" },
+      { ja: "髪を耳にかける", en: "seated gesture, tucking hair behind ear" },
+      { ja: "指を絡める（緊張）", en: "seated gesture, fingers interlaced, nervous" },
+      { ja: "片手を口元（微笑み）", en: "seated gesture, hand near mouth, soft smile" },
+      { ja: "手を膝に置いて前傾", en: "seated gesture, leaning forward, hands on knees" },
+      { ja: "足を組む（堂々）", en: "seated gesture, legs crossed, confident" },
+      { ja: "両手を胸の前で合わせる（お願い）", en: "seated gesture, hands together, pleading" },],
+    "対人": [
+      { ja: "前屈みで会話（対人）", en: "sitting pose, leaning forward, talking to someone" },
+      { ja: "座ったまま手を振る（対人）", en: "sitting pose, waving hand, interpersonal greeting" },
+      { ja: "向かい合って会話（対人）", en: "seated interpersonal, face-to-face conversation" },
+      { ja: "横並びで会話（対人）", en: "seated interpersonal, sitting side-by-side talking" },
+      { ja: "肩を寄せる（対人）", en: "seated interpersonal, leaning shoulder-to-shoulder" },
+      { ja: "膝の上に乗る（対人）", en: "seated interpersonal, sitting on someone's lap" },
+      { ja: "手を握る（対人）", en: "seated interpersonal, holding hands, close" },
+      { ja: "膝に手を置く（対人）", en: "seated interpersonal, hand placed on knee, intimate" },
+      { ja: "背中合わせ（対人）", en: "seated interpersonal, back-to-back sitting, trust" },
+      { ja: "頭を寄せる（対人）", en: "seated interpersonal, heads close, whispering" },
+    
+      { ja: "身を乗り出して聞く", en: "leaning in to listen, seated" },
+      { ja: "相手に向けて手を差し出す", en: "reaching hand out, seated interaction" },
+      { ja: "横並びで座る想定", en: "sitting side-by-side, implied interaction" },
+      { ja: "肘をついて話す（近距離）", en: "elbow on knee, close talk" },
+      { ja: "横並びで座る（肩寄せ）", en: "interaction, sitting side by side, close" },
+      { ja: "前屈みで話す（距離近め）", en: "interaction, leaning in while seated, close talk" },
+      { ja: "手を取り合う（座り）", en: "interaction, holding hands while seated" },
+      { ja: "膝の上に手を置く（安心させる）", en: "interaction, placing hand on other's knee, comforting" },
+      { ja: "隣に座って見上げる", en: "interaction, sitting beside, looking up" },
+      { ja: "座ったまま手を振る", en: "interaction, wave while seated" },
+      { ja: "肩にもたれる（甘え）", en: "interaction, leaning on shoulder, affectionate" },
+      { ja: "肘で軽くつつく（笑）", en: "interaction, playful elbow poke" },],
+    "演出": [
+      { ja: "祈り座り（演出）", en: "kneeling pose, hands together, prayer" },
+      { ja: "戦術座り（演出）", en: "seated tactical pose, calm readiness" },
+      { ja: "玉座座り（王者）", en: "throne sitting pose, regal, commanding" },
+      { ja: "足組み＋腕組み（支配者）", en: "dominant seated pose, legs crossed, arms crossed" },
+      { ja: "片膝立ち（祈り/誓い）", en: "kneeling pose, vow or prayer, dramatic" },
+      { ja: "座り込み（疲弊）", en: "sitting slumped, exhausted, dramatic" },
+      { ja: "椅子に深く沈む（陰）", en: "sitting deep in chair, shadowy mood" },
+      { ja: "舞台袖で待機（演出）", en: "sitting backstage, waiting, cinematic" },
+      { ja: "机に肘（作戦会議）", en: "seated pose, elbows on table, planning" },
+      { ja: "床に座って見上げる（演出）", en: "sitting on floor, looking up, cinematic" },
+    
+      { ja: "窓辺に座る（シルエット）", en: "sitting by window, silhouette, cinematic" },
+      { ja: "椅子を逆向きに座る", en: "sitting backwards on chair, dramatic" },
+      { ja: "玉座に座る（威厳）", en: "sitting like on a throne, dignified" },
+      { ja: "ステージ袖で座る", en: "sitting backstage, contemplative" },
+      { ja: "玉座座り（威厳）", en: "cinematic seated, throne pose, regal" },
+      { ja: "椅子の背にもたれ（支配者）", en: "cinematic seated, lounging back, dominant" },
+      { ja: "前傾で告白（真剣）", en: "cinematic seated, leaning forward, confession" },
+      { ja: "片足を組んで微笑む（貴族）", en: "cinematic seated, aristocratic smile, legs crossed" },
+      { ja: "床座りで祈る（静謐）", en: "cinematic seated, praying on floor, serene" },
+      { ja: "ドレスで椅子に優雅に座る", en: "cinematic seated, elegant dress sitting, graceful" },]
+  },
+
+  "✅ 完成ポーズ：🛏 横臥 (Lying)": {
+    "ニュートラル": [
+      { ja: "仰向け（ニュートラル）", en: "lying on back, relaxed" },
+      { ja: "横向き（ニュートラル）", en: "lying on side, relaxed" },
+      { ja: "うつ伏せ（ニュートラル）", en: "lying on stomach, relaxed" },
+      { ja: "仰向け（腕を広げる）", en: "lying on back, arms spread, relaxed" },
+      { ja: "横向き（丸まる）", en: "lying on side, slightly curled, cozy" },
+      { ja: "横向き（手を枕）", en: "lying on side, hand as pillow, relaxed" },
+      { ja: "仰向け（片膝立て）", en: "lying on back, one knee raised, casual" }
+    ,
+      { ja: "仰向け（手は横）", en: "lying on back, arms at sides, neutral" },
+      { ja: "仰向け（腕を上に）", en: "lying on back, arms raised above head" },
+      { ja: "うつ伏せ（肘つき）", en: "lying prone, propped on elbows" },
+      { ja: "横向き（丸く）", en: "lying on side, curled slightly" },
+      { ja: "横向き（伸びる）", en: "lying on side, stretched out" },
+      { ja: "大の字（リラックス）", en: "lying spread-eagle, relaxed" },],
+    "感情": [
+      { ja: "星空を見る（感情）", en: "lying on back, gazing at the sky, dreamy mood" },
+      { ja: "落ち込み横臥（感情）", en: "lying down, curled slightly, depressed mood" },
+      { ja: "眠そう（うとうと）", en: "lying down, drowsy, sleepy mood" },
+      { ja: "安心して微笑む", en: "lying down, gentle smile, relieved" },
+      { ja: "泣き崩れ（感情）", en: "lying down, crying, emotional breakdown" },
+      { ja: "怒りのうつ伏せ（じたばた）", en: "lying on stomach, frustrated, kicking lightly" },
+      { ja: "ぼんやり天井を見る", en: "lying on back, staring at ceiling, empty mood" },
+      { ja: "胸に手（鼓動）", en: "lying on back, hand on chest, heartfelt" },
+      { ja: "膝を抱えて丸まる（不安）", en: "lying down, hugging knees, anxious" },
+      { ja: "星空を見上げる（夢）", en: "lying on back, gazing at stars, dreamy" },
+    
+      { ja: "安堵して横たわる", en: "lying down relieved, calm breath" },
+      { ja: "眠気まなこで横になる", en: "drowsy, lying down, sleepy eyes" },
+      { ja: "抱き枕のように腕を抱える", en: "arms hugging self, curled lying pose" },
+      { ja: "虚ろに天井を見る", en: "staring at ceiling, empty gaze" },
+      { ja: "切なさで丸まる", en: "curling up, melancholy" },
+      { ja: "丸まる（落ち込み）", en: "lying curled up, depressed mood" },
+      { ja: "顔を腕で隠す（泣き）", en: "lying, face covered by arms, crying" },
+      { ja: "天井を見つめる（虚無）", en: "lying on back, staring at ceiling, emptiness" },
+      { ja: "星を見る仰向け（夢）", en: "lying on back, looking at stars, dreamy" },
+      { ja: "抱き枕のように腕を抱える（寂しさ）", en: "lying, hugging arms like a pillow, lonely" },
+      { ja: "膝を抱えて横臥（不安）", en: "lying, hugging knees, anxious" },],
+    "演出": [
+      { ja: "傷つき倒れ（演出）", en: "fallen down, injured, dramatic" },
+      { ja: "崩れ落ち（演出）", en: "collapsing on the ground, exhausted, dramatic" },
+      { ja: "倒れ伏す（戦闘後）", en: "fallen prone, post-battle collapse, dramatic" },
+      { ja: "血塗れ（演出）", en: "bloodied, lying down, gritty cinematic" },
+      { ja: "抱きかかえられる（演出）", en: "being carried, limp body, dramatic" },
+      { ja: "ベッドに沈む（夜）", en: "lying on bed, sinking into sheets, night mood" },
+      { ja: "床に転がる（投げ出し）", en: "lying on floor, sprawled, dramatic" },
+      { ja: "片腕を伸ばす（救い）", en: "lying down, reaching out, dramatic" },
+      { ja: "月光の横臥（演出）", en: "lying down, moonlight, cinematic lighting" }
+    ,
+      { ja: "倒れ伏す（戦闘後）", en: "cinematic, collapsed on ground after battle" },
+      { ja: "傷つき倒れ（手を伸ばす）", en: "cinematic, wounded collapse, reaching hand" },
+      { ja: "床に崩れ落ちる（劇的）", en: "cinematic, dramatic fall to floor" },
+      { ja: "抱き寄せられて横臥（救済）", en: "cinematic, lying while being held, rescued" },
+      { ja: "ベッドで気絶（ドレスの裾広がり）", en: "cinematic, fainted on bed, dress skirt spread" },]
+  },
+
+  "✅ 完成ポーズ：🚶 行動 (Movement)": {
+    "軽移動": [
+      { ja: "歩く（軽移動）", en: "walking pose, casual steps" },
+      { ja: "のんびり歩く", en: "slow walking, relaxed pace" },
+      { ja: "小さな足取り（慎重）", en: "small steps, careful walking" },
+      { ja: "忍び足（ステルス）", en: "sneaking walk, stealth steps" },
+      { ja: "ふらふら歩く（酔い）", en: "staggering walk, drunk steps" },
+    
+      { ja: "ゆっくり歩く", en: "slow walk, casual movement" },
+      { ja: "足取り軽く歩く", en: "light steps, walking" },
+      { ja: "すり足で歩く", en: "shuffling walk, cautious steps" },
+      { ja: "忍び足（静かに歩く）", en: "tiptoeing, stealthy walk" },
+      { ja: "ゆっくり歩く（自然）", en: "walking slowly, natural gait" },
+      { ja: "小さく歩く（控えめ）", en: "walking with small steps, modest" },
+      { ja: "つま先歩き（忍び）", en: "tiptoe walking, sneaking" },
+      { ja: "スキップ（軽快）", en: "skipping, playful" },],
+    "移動": [
+      { ja: "走る（移動）", en: "running pose, forward motion" },
+      { ja: "小走り（ジョグ）", en: "jogging pose, light run" },
+      { ja: "全力疾走", en: "sprinting, full speed run" },
+      { ja: "方向転換（走り）", en: "running turn, changing direction" },
+      { ja: "追いかける（走り）", en: "running chase pose, pursuing" },
+    
+      { ja: "小走り", en: "jogging, light run" },
+      { ja: "全力疾走", en: "sprinting, full speed run" },
+      { ja: "駆け出し（スタート）", en: "run start, launching forward" },
+      { ja: "方向転換しながら走る", en: "running while turning, dynamic" },
+      { ja: "ジョギング", en: "jogging" },
+      { ja: "走る（腕振り）", en: "running, arms pumping" },
+      { ja: "走り出し（スタート）", en: "running start, launching" },
+      { ja: "全力疾走（フォーム）", en: "sprinting, athletic form" },],
+    "強移動": [
+      { ja: "ダッシュ開始（強移動）", en: "sprint start pose, explosive motion" },
+      { ja: "ダッシュ中（前傾）", en: "sprinting, forward lean, powerful strides" },
+      { ja: "踏み込み（強移動）", en: "strong step-in, explosive movement" },
+      { ja: "跳躍前の踏切", en: "takeoff step, preparing to leap" },
+      { ja: "スタートダッシュ", en: "starting sprint, push-off motion" },
+    
+      { ja: "突進ダッシュ", en: "charging dash, aggressive sprint" },
+      { ja: "坂道ダッシュ（前傾）", en: "leaning forward, uphill sprint" },
+      { ja: "加速中（腕振り大）", en: "accelerating, strong arm swing" },
+      { ja: "ブレーキ動作（急停止）", en: "hard stop, skidding to a halt" },
+      { ja: "ダッシュ（前傾）", en: "dash, forward lean, fast" },
+      { ja: "突進（一直線）", en: "charging forward, straight rush" },
+      { ja: "ステップイン（踏み込み）", en: "step-in, driving forward" },
+      { ja: "滑り込み（急停止）", en: "power slide stop, skidding" },],
+    "空中": [
+      { ja: "ジャンプ（空中）", en: "jumping pose, airborne moment" },
+      { ja: "空中ひねり", en: "mid-air twist, dynamic rotation" },
+      { ja: "空中で膝を抱える", en: "airborne, knees tucked, compact jump" },
+      { ja: "空中で脚を伸ばす", en: "airborne, legs extended, dynamic" },
+      { ja: "着地直前（空中）", en: "mid-air, just before landing" },
+      { ja: "ジャンプ回転（トリック）", en: "spinning jump, trick motion" },
+    
+      { ja: "ジャンプ頂点（無重力感）", en: "jump apex, weightless moment" },
+      { ja: "空中ひねり", en: "mid-air twist, dynamic" },
+      { ja: "着地直前（膝曲げ）", en: "pre-landing, knees bent" },
+      { ja: "飛び込み（前方）", en: "leaping forward, diving motion" },
+      { ja: "ジャンプ（膝曲げ）", en: "jumping, knees bent" },
+      { ja: "跳躍（両足たたむ）", en: "leaping, legs tucked" },
+      { ja: "空中ひねり（スピン）", en: "mid-air twist, spinning" },
+      { ja: "着地直前（脚伸ばし）", en: "mid-air before landing, legs extended" },],
+    "回避": [
+      { ja: "スライド回避（回避）", en: "sliding dodge pose, evasive movement" },
+      { ja: "バックステップ（回避）", en: "backstep dodge, evasive" },
+      { ja: "横ステップ（回避）", en: "sidestep dodge, quick lateral move" },
+      { ja: "転がり回避", en: "combat roll dodge, rolling" },
+      { ja: "しゃがみ回避", en: "ducking dodge, crouch evasive" },
+      { ja: "パリィ体勢（回避）", en: "parry stance, defensive timing" },
+    
+      { ja: "サイドステップ回避", en: "sidestep dodge, quick" },
+      { ja: "後方ステップ回避", en: "backstep dodge" },
+      { ja: "しゃがみ回避", en: "ducking dodge, crouch" },
+      { ja: "受け身（転がり）", en: "tactical roll, recovery" },
+      { ja: "回避ロール（前転）", en: "dodge roll, forward roll" },
+      { ja: "サイドステップ回避", en: "sidestep dodge" },
+      { ja: "後方ステップ回避", en: "backstep dodge" },
+      { ja: "しゃがみ回避（低姿勢）", en: "crouch dodge, low stance" },],
+    "戦闘：構え": [
+      { ja: "戦闘構え（基本）", en: "combat stance, ready" },
+      { ja: "戦闘構え（戦闘）", en: "combat stance, ready to fight" },
+      { ja: "背後警戒（戦闘）", en: "combat stance, checking behind, alert" },
+      { ja: "抜刀（戦闘）", en: "drawing weapon, quick draw" },
+      { ja: "射撃姿勢（小物なし）", en: "combat stance, aiming pose (no prop)" },
+      { ja: "射撃構え（両手）", en: "aiming stance, two-handed" },
+    ],
+    "戦闘：攻撃": [
+      { ja: "斬撃動作（戦闘）", en: "slashing motion, dynamic attack" },
+      { ja: "斬撃（横薙ぎ）", en: "slashing attack, horizontal swing" },
+      { ja: "踏み込み斬り（戦闘）", en: "step-in slash, aggressive attack" },
+      { ja: "戦闘：剣を振り下ろす", en: "combat action, downward slash" },
+      { ja: "突き（攻撃）", en: "thrust attack motion, forward stab" },
+      { ja: "突き（刺突）", en: "thrust attack, lunge" },
+      { ja: "戦闘：突き（前進）", en: "combat action, thrust attack, stepping forward" },
+      { ja: "蹴り（攻撃）", en: "kicking attack motion, dynamic kick" },
+      { ja: "蹴り（前蹴り）", en: "kick, front kick" },
+      { ja: "回し蹴り（戦闘）", en: "roundhouse kick, dynamic strike" },
+      { ja: "戦闘：回し蹴り", en: "combat action, roundhouse kick" },
+    ],
+    "戦闘：防御": [
+      { ja: "構え（防御）", en: "defensive stance, guard up" },
+      { ja: "ガード姿勢（防御）", en: "guard stance, blocking" },
+      { ja: "戦闘：ガード構え", en: "combat stance, guard up, defensive posture" },
+      { ja: "受け流し（戦闘）", en: "deflecting motion, counter-ready" },
+      { ja: "回避しながらガード", en: "guarding while dodging, defensive move" },
+    ],
+    "戦闘：被弾": [
+      { ja: "戦闘：被弾よろけ", en: "hit reaction, staggering backward" },
+      { ja: "被弾よろけ", en: "hit reaction, staggering" },
+      { ja: "被弾（膝をつく）", en: "hit reaction, dropping to one knee" },
+      { ja: "被弾（のけぞり）", en: "hit reaction, recoiling backward" },
+    ],
+    "激動": [
+      { ja: "突進（激動）", en: "charging forward, aggressive rush" },
+      { ja: "突進（激動）", en: "charging rush, aggressive" },
+      { ja: "飛び込み（タックル）", en: "diving tackle, collision" },
+      { ja: "衝突回避（身をひねる）", en: "twisting body to avoid impact" },
+      { ja: "崩れ落ちる（激動）", en: "stumbling collapse, uncontrolled" },
+      { ja: "吹き飛ぶ（激動）", en: "being knocked back, airborne impact" },
+      { ja: "よろめき（激動）", en: "staggering, losing balance" },
+    
+      { ja: "吹き飛ばされる", en: "being knocked back, airborne" },
+      { ja: "転倒する", en: "falling down, losing balance" },
+      { ja: "滑り込む（勢い）", en: "sliding in, high momentum" },
+      { ja: "崩れ落ちる（膝から）", en: "collapsing to knees, dramatic" },
+      { ja: "吹き飛ばされる", en: "knocked back, flying" },
+      { ja: "転倒（つまずき）", en: "tripping and falling" },
+      { ja: "滑り落ちる", en: "slipping down" },
+      { ja: "崩れ落ち（膝から）", en: "collapsing to knees" },]
+  }
+
+};
+const POSE_STAGE1_BODY = {
+  "🧠 身体構造 (Body Structure)": {
+
+    "🗣 頭 (Head)": [
+      { ja: "首をかしげる", en: "head tilt" },
+      { ja: "首を傾ける（深め）", en: "head tilt, tilted head" },
+      { ja: "振り向く", en: "looking back, head turned" },
+      { ja: "うなずく", en: "nodding" },
+      { ja: "首を振る", en: "shaking head" },
+      { ja: "首を伸ばす", en: "neck extended" },
+      { ja: "顎を上げる", en: "chin up" },
+      { ja: "顎を引く", en: "chin down" },
+      { ja: "耳を傾ける（聞く）", en: "listening, head tilt" },
+      { ja: "頭を少し下げる", en: "head lowered slightly" },
+      { ja: "頭を上げる", en: "head raised" },
+      { ja: "頭を左右に傾ける", en: "tilting head side to side" },
+      { ja: "頭をかく", en: "scratching head" },
+      { ja: "こめかみに手（考える）", en: "hand on temple" },
+      { ja: "額に手（困る）", en: "hand to forehead" },
+      { ja: "首を回す", en: "neck roll" },
+      { ja: "髪を払いのける（頭）", en: "tossing hair" },
+      { ja: "見上げる（首ごと）", en: "head back, looking up" },
+      { ja: "うつむく（首ごと）", en: "head down, looking down" },
+      { ja: "肩越しに振り返る", en: "over the shoulder look" },
+      { ja: "首をかしげる（ほんの少し）", en: "subtle head tilt" },
+      { ja: "首をかしげる（強め）", en: "strong head tilt" },
+      { ja: "顎を上げる（ほんの少し）", en: "slight chin up" },
+      { ja: "顎を引く（ほんの少し）", en: "slight chin down" },
+      { ja: "首をすくめる（内気）", en: "neck tucked" },
+      { ja: "肩越しに振り向く", en: "looking over shoulder" },
+      { ja: "頭を横に向ける", en: "head turned sideways" },
+      { ja: "わずかに首をかしげる", en: "subtle head tilt" },
+      { ja: "強く首をかしげる", en: "strong head tilt" },
+      { ja: "顎を少し上げる", en: "slight chin up" },
+      { ja: "顎を少し引く", en: "slight chin down" },
+      { ja: "頭を少し横に向ける", en: "slight head turn" },
+      { ja: "肩越しにわずかに振り返る", en: "slight over-the-shoulder glance" },
+      { ja: "首をすくめて内気", en: "neck tucked, shy posture" }
+    ],
+
+    "👀 視線：方向 (Eye Gaze / Direction)": [
+      { ja: "カメラ目線", en: "looking at viewer" },
+      { ja: "目をそらす", en: "looking away" },
+      { ja: "上を見る", en: "looking up" },
+      { ja: "下を見る", en: "looking down" },
+      { ja: "横を見る", en: "looking to the side" },
+      { ja: "遠くを見る", en: "looking into the distance" },
+      { ja: "斜め上を見る", en: "looking up to the side" },
+      { ja: "斜め下を見る", en: "looking down to the side" }
+    ],
+
+    "👀 視線：感情 (Eye Gaze / Emotion)": [
+      { ja: "横目で見る", en: "side glance" },
+      { ja: "上目遣い", en: "upward gaze" },
+      { ja: "目を細める", en: "narrowed eyes" },
+      { ja: "流し目", en: "bedroom eyes, sidelong glance" },
+      { ja: "眠たげな半目", en: "sleepy half-lidded eyes" },
+      { ja: "焦点が合わない目", en: "unfocused gaze" },
+      { ja: "涙目（潤み）", en: "teary eyes" },
+      { ja: "きりっとした目", en: "sharp focused eyes" }
+    ],
+
+    "👀 視線：特殊 (Eye Gaze / Special)": [
+      { ja: "伏し目", en: "downcast eyes" },
+      { ja: "見つめる（強め）", en: "intense gaze" },
+      { ja: "きょとん（焦点が合わない）", en: "blank stare" },
+      { ja: "視線を追う", en: "tracking gaze" },
+      { ja: "目を閉じる", en: "eyes closed" },
+      { ja: "片目を閉じる（ウィンク）", en: "winking" },
+      { ja: "目を見開く", en: "wide-eyed" },
+      { ja: "ちらっと見る", en: "quick glance" }
+    ],
+
+    "👄 口元：微笑 (Mouth / Smile)": [
+      { ja: "微笑", en: "gentle smile" },
+      { ja: "口を閉じた微笑", en: "closed-mouth smile" },
+      { ja: "にやり", en: "smirk" },
+      { ja: "ほほえみ（弱）", en: "subtle smile" },
+      { ja: "ほほえみ（中）", en: "soft smile" },
+      { ja: "満面の笑み", en: "big smile" },
+      { ja: "口角を上げる", en: "raised mouth corners" }
+    ],
+
+    "👄 口元：口開け (Mouth / Open)": [
+      { ja: "口を少し開ける", en: "slightly open mouth" },
+      { ja: "驚きの口（小）", en: "small open mouth" },
+      { ja: "口を少し開ける（弱）", en: "slightly parted lips" },
+      { ja: "口を開ける（中）", en: "open mouth" },
+      { ja: "あえぎ口", en: "panting mouth" }
+    ],
+
+    "👄 口元：緊張 (Mouth / Tension)": [
+      { ja: "噛みしめ", en: "clenched teeth" },
+      { ja: "唇を噛む", en: "biting lip" },
+      { ja: "唇をきゅっと結ぶ", en: "pressed lips" },
+      { ja: "口をへの字にする", en: "downturned mouth" }
+    ],
+
+    "🧍 体幹 (Torso/Posture)": [
+      { ja: "上体をひねる", en: "twisting torso" },
+      { ja: "前かがみ", en: "leaning forward" },
+      { ja: "反る", en: "arching back" },
+      { ja: "背筋を伸ばす", en: "upright posture" },
+      { ja: "猫背", en: "slouching" },
+      { ja: "S字姿勢", en: "S-curve pose" },
+      { ja: "腰をひねる", en: "hip twist" },
+      { ja: "腰を落とす", en: "lowered stance" },
+      { ja: "片腰を上げる", en: "hip pop" },
+      { ja: "胸を張る", en: "chest out" },
+      { ja: "肩をすくめる", en: "shrugging" },
+      { ja: "肩を落とす", en: "shoulders lowered" },
+      { ja: "体を横に傾ける", en: "leaning sideways" },
+      { ja: "腰を反らす", en: "arched waist" },
+      { ja: "背中を丸める（強め）", en: "hunched back" },
+      { ja: "上体を起こす", en: "straightening up" },
+      { ja: "上体を沈める", en: "torso lowered" },
+      { ja: "片側に体重を寄せる（体幹）", en: "torso weight shift" },
+      { ja: "胸を前に出す（挑発）", en: "forward chest, teasing posture" },
+      { ja: "腰に力を入れる（踏ん張り）", en: "braced core" },
+      { ja: "S字姿勢（強）", en: "strong S-curve posture" },
+      { ja: "S字姿勢（弱）", en: "subtle S-curve posture" },
+      { ja: "猫背", en: "slouched posture" },
+      { ja: "反り腰", en: "arched lower back" },
+      { ja: "胸を張る", en: "chest out posture" },
+      { ja: "肩を落とす", en: "dropped shoulders" }
+    ],
+
+    "✋ 手・腕 (Arms & Hands)": [
+      { ja: "万歳", en: "arms up, arms raised" },
+      { ja: "手を振る", en: "waving" },
+      { ja: "敬礼", en: "salute" },
+      { ja: "ハートを作る", en: "heart hands" },
+      { ja: "手を腰に当てる", en: "hand on hip" },
+      { ja: "指差し", en: "pointing" },
+      { ja: "両手を胸の前で組む", en: "hands clasped in front of chest" },
+      { ja: "手を胸に当てる", en: "hand on chest" },
+      { ja: "両手を背中に回す", en: "hands behind back" },
+      { ja: "腕を組む", en: "crossed arms" },
+      { ja: "片手を頬に当てる", en: "hand on cheek" },
+      { ja: "指でVサイン", en: "peace sign" },
+      { ja: "両手でピース", en: "double peace sign" },
+      { ja: "指を口元に（しー）", en: "finger to lips" },
+      { ja: "指で髪をいじる", en: "playing with hair" },
+      { ja: "手を差し出す", en: "reaching out hand" },
+      { ja: "手をつなぐ（対人）", en: "holding hands" },
+      { ja: "手を握る（拳）", en: "clenched fist" },
+      { ja: "拳を突き上げる", en: "fist pump" },
+      { ja: "手を合わせる（祈り）", en: "hands in prayer" },
+      { ja: "拍手", en: "clapping" },
+      { ja: "腕を広げる", en: "arms spread wide" },
+      { ja: "肘をつく（テーブル）", en: "elbows on table" },
+      { ja: "手をポケットに入れる", en: "hands in pockets" },
+      { ja: "片手ピース", en: "one-hand peace sign" },
+      { ja: "両手ピース", en: "double peace sign" },
+      { ja: "両手でハート", en: "two-hand heart gesture" },
+      { ja: "指ハート", en: "finger heart" },
+      { ja: "両手でフレーム", en: "hand frame gesture" },
+      { ja: "手で狐", en: "fox hand sign" },
+      { ja: "親指を立てる", en: "thumbs up" },
+      { ja: "小指を立てる", en: "pinky up" },
+      { ja: "OKサイン", en: "OK sign" }
+    ],
+
+    "🦵 足・立ち方 (Legs & Stance)": [
+      { ja: "片足で立つ", en: "standing on one leg" },
+      { ja: "足を広げる", en: "wide stance" },
+      { ja: "つま先立ち", en: "tiptoe" },
+      { ja: "膝立ち", en: "kneeling" },
+      { ja: "キック", en: "kicking" },
+      { ja: "回し蹴り", en: "roundhouse kick" },
+      { ja: "足を揃える", en: "feet together" },
+      { ja: "内股", en: "pigeon-toed" },
+      { ja: "片膝を曲げる", en: "one knee bent" },
+      { ja: "膝を寄せる", en: "knees together" },
+      { ja: "軽くクロス脚", en: "legs crossed slightly" },
+      { ja: "片足を前に出す", en: "one foot forward" },
+      { ja: "片足を後ろに引く", en: "one foot back" },
+      { ja: "ステップ", en: "stepping" },
+      { ja: "つま先を外に向ける", en: "toes pointed outward" },
+      { ja: "かかとを上げる", en: "heels lifted" },
+      { ja: "しゃがむ", en: "squatting" },
+      { ja: "中腰", en: "half squat" },
+      { ja: "踏ん張る", en: "braced stance" },
+      { ja: "バレエ足（ターンアウト）", en: "ballet turnout stance" },
+      { ja: "片膝立ち（片膝つき）", en: "one knee down" },
+      { ja: "ジャンプ準備（膝曲げ）", en: "jump prep, knees bent" }
+    ],
+
+    "🦵 足先角度 (Toe Angles)": [
+      { ja: "つま先内向き", en: "toes pointed inward" },
+      { ja: "つま先外向き", en: "toes pointed outward" },
+      { ja: "つま先だけ内向き（軽）", en: "slightly inward toes" },
+      { ja: "つま先だけ外向き（軽）", en: "slightly outward toes" },
+      { ja: "つま先立ち", en: "tiptoe stance" },
+      { ja: "片足つま先立ち", en: "one-foot tiptoe" },
+      { ja: "かかとを浮かせる", en: "heels raised" }
+    ],
+
+    "🪑 座る・床 (Sitting & Floor)": [
+      { ja: "座る（基本）", en: "sitting" },
+      { ja: "体育座り", en: "sitting with knees up" },
+      { ja: "あぐら", en: "cross-legged" },
+      { ja: "横になる", en: "lying down" },
+      { ja: "寝転ぶ（仰向け）", en: "lying on back" },
+      { ja: "寝転ぶ（うつ伏せ）", en: "lying on stomach" },
+      { ja: "椅子に座る（背筋）", en: "sitting on chair, upright" },
+      { ja: "椅子で足を組む", en: "sitting with legs crossed" },
+      { ja: "椅子で前のめり", en: "sitting leaning forward" },
+      { ja: "椅子で頬杖", en: "sitting with chin on hand" },
+      { ja: "床に正座", en: "seiza" },
+      { ja: "床に膝立ち", en: "kneeling" },
+      { ja: "横座り", en: "side sitting" },
+      { ja: "胡坐（深め）", en: "deep cross-legged sitting" },
+      { ja: "膝抱え（床）", en: "knees hugged sitting" },
+      { ja: "寝そべり（横向き）", en: "lying on side" },
+      { ja: "寝そべり（うつ伏せ腕立て）", en: "lying on stomach, propped on elbows" },
+      { ja: "寝そべり（仰向け手を頭の後ろ）", en: "lying on back, hands behind head" },
+      { ja: "寝転びから起き上がる", en: "rising from lying" },
+      { ja: "座って足を伸ばす", en: "sitting with legs stretched out" },
+      { ja: "座ってつま先を立てる", en: "sitting, toes pointed" },
+      { ja: "床に手をつく（座り）", en: "sitting, hands on floor behind" }
+    ],
+
+    "⚖️ 重心：基本 (Balance / Basic)": [
+      { ja: "重心を片足に寄せる", en: "weight on one leg" },
+      { ja: "左右に重心移動", en: "shifting weight" },
+      { ja: "体幹でバランスを取る", en: "core balance" },
+      { ja: "前重心（踏み込み）", en: "forward weight shift" },
+      { ja: "後重心（引き）", en: "backward weight shift" },
+      { ja: "膝を柔らかく保つ", en: "soft knees, balanced stance" },
+      { ja: "つま先でバランス", en: "balancing on toes" },
+      { ja: "片足バランス（静止）", en: "one-leg balance" },
+      { ja: "空中バランス（一点）", en: "one point aerial balance" },
+      { ja: "回転中のバランス", en: "mid-flip freeze" }
+    ],
+
+    "⚖️ 重心：崩れ (Balance / Unstable)": [
+      { ja: "重心を低く保つ", en: "low center of gravity" },
+      { ja: "重心を高くする（背伸び）", en: "high balance, stretching" },
+      { ja: "片足に強く乗る", en: "hard weight on one leg" },
+      { ja: "踵重心", en: "weight on heels" },
+      { ja: "つま先重心", en: "weight on toes" },
+      { ja: "左右の足に均等", en: "even weight distribution" },
+      { ja: "腰を落として安定", en: "stabilized, hips lowered" },
+      { ja: "体をねじって保持", en: "twist balance hold" },
+      { ja: "片足を後ろに伸ばすバランス", en: "arabesque balance" },
+      { ja: "腕でバランス補助", en: "arms used for balance" },
+      { ja: "重心が前に流れる", en: "center of gravity forward" },
+      { ja: "重心が後ろに流れる", en: "center of gravity backward" },
+      { ja: "ふらつく（不安定）", en: "wobbling, unstable balance" },
+      { ja: "踏み替えバランス", en: "step-to-step balance" },
+      { ja: "回転準備バランス", en: "spin prep balance" },
+      { ja: "ふらつく重心", en: "wobbling balance" },
+      { ja: "崩れかけの重心", en: "nearly losing balance" },
+      { ja: "倒れ込み重心", en: "falling forward balance" }
+    ],
+
+    "🦶 接地：壁 (Contact / Wall)": [
+      { ja: "壁接触（背中）", en: "back contact with wall" },
+      { ja: "背中を壁につける", en: "back against wall" },
+      { ja: "肩を壁につける", en: "shoulder against wall" },
+      { ja: "手で壁を押す", en: "hand pushing against wall" },
+      { ja: "手を壁につく", en: "hand on wall" },
+      { ja: "背中を壁につける", en: "back against wall" },
+      { ja: "肩を壁に預ける", en: "shoulder against wall" },
+      { ja: "壁にもたれる", en: "leaning on wall" },
+      { ja: "足を壁につける", en: "foot against wall" },
+      { ja: "壁に手をつく", en: "hand against wall" },
+      { ja: "壁にもたれる", en: "leaning against wall" }
+    ],
+
+    "🦶 接地：床 (Contact / Floor)": [
+      { ja: "踏み込み接地", en: "grounded lunge contact" },
+      { ja: "膝接地", en: "knee contact with ground" },
+      { ja: "手を床につく", en: "hand on ground" },
+      { ja: "爪先で床をなぞる", en: "toe tracing the floor" },
+      { ja: "膝と手で接地", en: "hands and knees on ground" },
+      { ja: "肘接地", en: "elbow contact with ground" },
+      { ja: "座って床に手をつく", en: "hands on floor while seated" },
+      { ja: "床に手をつく", en: "hands on floor" },
+      { ja: "床に肘をつく", en: "elbows on floor" },
+      { ja: "床に片手をつく", en: "one hand on floor" },
+      { ja: "膝を床につける", en: "knees on floor" }
+    ],
+
+    "🦶 接地：物体 (Contact / Object)": [
+      { ja: "両足ベタ足接地", en: "both feet planted" },
+      { ja: "つま先だけ接地", en: "toe contact" },
+      { ja: "かかとだけ接地", en: "heel contact" },
+      { ja: "片足接地（ステップ）", en: "single foot contact" },
+      { ja: "着地直後（衝撃）", en: "impact landing contact" },
+      { ja: "座り接地（尻）", en: "seated contact" },
+      { ja: "片足つま先接地", en: "one foot toe contact" },
+      { ja: "片足かかと接地", en: "one foot heel contact" },
+      { ja: "ステップ接地（連続）", en: "continuous stepping contact" },
+      { ja: "四つん這い接地", en: "all fours" },
+      { ja: "寝転び接地（全身）", en: "full-body contact with surface" },
+      { ja: "抱きつき接触（対人）", en: "hugging contact" },
+      { ja: "押さえつけ接触（対人）", en: "pinning contact" },
+      { ja: "触れ合い（指先）", en: "fingertip contact" },
+      { ja: "物体にもたれる（机・手すり）", en: "leaning on object, leaning on table or railing" },
+      { ja: "物体に座る（段差・箱）", en: "sitting on object, sitting on ledge" },
+      { ja: "頬を物体に寄せる", en: "cheek against object" },
+      { ja: "手すりにもたれる", en: "leaning on railing" },
+      { ja: "机に手をつく", en: "hands on table" }
+    ]
+
+  }
+};
+const POSE_STAGE2_ACTION = {
+    "🟡 STAGE 2：アクション・非日常 (Action)": {
+      "移動・運動": [
+        { ja: "ダッシュ", en: "sprinting" },
+        { ja: "跳躍", en: "leaping" },
+        { ja: "宙に浮く（軽い）", en: "lightly airborne" },
+      ],
+      "戦闘・構え": [
+        { ja: "構える", en: "battle stance" },
+        { ja: "ガード", en: "guarding" },
+        { ja: "突撃", en: "charging" },
+      ],
+      "交流（ライト）": [
+        { ja: "ハグ（ライト）", en: "hugging" },
+        { ja: "手をつなぐ", en: "holding hands" },
+        { ja: "肩を寄せる", en: "leaning close" },
+      ],
+    }
+  };
+
+  // ---------- Stage 3: Special / cinematic ----------
+  const POSE_STAGE3_SPECIAL = {
+    "🔵 STAGE 3：特殊・演出 (Special & Cinematic)": {
+      "超常": [
+        { ja: "浮遊", en: "floating" },
+        { ja: "空中停止", en: "suspended in mid-air" },
+        { ja: "重力無視", en: "gravity-defying pose" },
+      ],
+    }
+  };
+
+  // ---------- Stage 4: R-ish (non-explicit) - gated ----------
+  const POSE_STAGE4_R = {
+    "🔴 STAGE 4：艶・ムード (R Mood)": {
+      "ムード": [
+        { ja: "誘惑ポーズ（ムード）", en: "seductive pose" },
+        { ja: "視線で誘う", en: "inviting gaze" },
+        { ja: "身体のライン強調", en: "accentuating body lines" },
+      ],
+    }
+  };
+
+  // ---------- UI helpers ----------
+  function makeSeparator(label, color, bg){
+    const d = document.createElement("div");
+    d.style.cssText = [
+      "margin: 14px 0 10px 0",
+      "border-top: 2px dashed " + color,
+      "text-align:center"
+    ].join(";") + ";";
+    d.innerHTML = "<span style='background:" + (bg||"#f7f7f7") + "; padding:0 10px; color:" + color + "; font-weight:800; font-size:0.92em; display:inline-block; transform:translateY(-12px); border-radius:10px;'>" + label + "</span>";
+    return d;
+  }
+
+  // Renderer (compatible with old datasets): {Big:{Small:[{ja,en}]}}
+  function renderCategories(root, data, ns){
+    Object.keys(data).forEach(bigTitle => {
+      const mainDetails = document.createElement("details");
+      mainDetails.open = false;
+
+      const summary = document.createElement("summary");
+      summary.textContent = bigTitle;
+      summary.style.cssText = "font-weight:800; padding:10px 12px; background:#f2f3f6; border:1px solid #e2e4ea; border-radius:12px; margin:10px 0; list-style:none;";
+
+      // hide default marker and use our own triangle via CSS-like padding
+      summary.style.listStyle = "none";
+
+      mainDetails.appendChild(summary);
+
+      const sub = data[bigTitle];
+      const subWrap = document.createElement("div");
+      subWrap.className = "pose-group-" + (ns||"v14");
+
+      Object.keys(sub).forEach(subTitle => {
+        const subDetails = document.createElement("details");
+        subDetails.open = false;
+
+        const subSummary = document.createElement("summary");
+        subSummary.textContent = subTitle;
+        subSummary.style.cssText = "font-weight:700; padding:10px 12px; margin:8px 0; background:#ffffff; border:1px solid #e6e7ee; border-radius:12px;";
+
+        subDetails.appendChild(subSummary);
+
+        const items = sub[subTitle] || [];
+        const box = document.createElement("div");
+        box.style.cssText = "display:grid; grid-template-columns: 1fr; gap:10px; padding:10px 6px 2px 6px;";
+
+        items.forEach(it => {
+          const label = document.createElement("label");
+          label.style.cssText = "display:flex; align-items:flex-start; gap:10px; padding:10px; border:1px solid #e6e7ee; border-radius:12px; background:#fff;";
+          const cb = document.createElement("input");
+          cb.type = "checkbox";
+          cb.dataset.en = it.en;
+          cb.style.cssText = "width:20px; height:20px;";
+          const span = document.createElement("span");
+          span.textContent = it.ja;
+          span.style.cssText = "font-size:0.98em; line-height:1.2; white-space:normal; word-break:keep-all; overflow-wrap:anywhere;";
+          label.appendChild(cb);
+          label.appendChild(span);
+          box.appendChild(label);
+        });
+
+        subDetails.appendChild(box);
+        subWrap.appendChild(subDetails);
+      });
+
+      mainDetails.appendChild(subWrap);
+      root.appendChild(mainDetails);
+    });
+  }
+
+  const API = {
+    initUI(container){
+      // reset the section UI completely
+      container.innerHTML = "";
+
+      const root = document.createElement("div");
+      root.id = "pose-master-root";
+      container.appendChild(root);
+
+      // --- Pose group layout (mobile: 1 column, desktop: 2 columns) ---
+      (function(){
+        const id = "pose-group-layout-style";
+        if (document.getElementById(id)) return;
+        const st = document.createElement("style");
+        st.id = id;
+        st.textContent = `
+          #pose-master-root details{width:100%;}
+          #pose-master-root [class^="pose-group-"]{display:grid; grid-template-columns:1fr; gap:10px;}
+          @media (min-width: 820px){
+            #pose-master-root [class^="pose-group-"]{grid-template-columns:1fr 1fr;}
+          }
+        `;
+        document.head.appendChild(st);
+      })();
+
+      // Completed -> Body Structure -> R Mood (gated)
+      renderCategories(root, POSE_COMPLETED, "v14-completed");
+      renderCategories(root, POSE_STAGE1_BODY, "v14-body");
+
+      // R Mood (gated)
+
+      if (IS_R18_UNLOCKED){
+        renderCategories(root, POSE_STAGE4_R, "v14-r");
+      } else {
+        // keep a subtle hint without exposing content
+        const hint = document.createElement("div");
+        hint.style.cssText = "margin:10px 0 0 0; font-size:0.86em; color:#888;";
+        hint.textContent = "🔒 艶・ムード は R-18シークレットモードONの時だけ表示されます（quality_preset側のトグルに連動）";
+        root.appendChild(hint);
+      }
+
+      // expose renderer for pose_r18 (v13) to mount into pose-master-root
+      window.__POSE_RENDERER = renderCategories;
+
+      // debug
+      try { console.log("POSE v14 LOADED"); } catch(e){}
+    },
+
+    getTags(){
+      const tags = [];
+      const root = document.getElementById("pose-master-root");
+      if(!root) return tags;
+      root.querySelectorAll("input[type='checkbox']:checked").forEach(cb => tags.push(cb.dataset.en));
+      return tags;
+    }
+  };
+
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
+})();
+
+
+// =====================================================
+// STAGE1 COMPLETED POSES BLOCK v24
+// =====================================================
+
+const STAGE1_COMPLETED_POSES = [
+  "idle standing natural",
+  "idle relaxed stance",
+  "one hand on hip standing",
+  "arms behind back standing",
+  "single leg weight shift",
+  "leaning against wall",
+  "light turn over shoulder",
+  "tiptoe standing pose",
+  "arms crossed standing",
+  "hair brushing pose",
+  "dash ready stance",
+  "melee combat stance",
+  "ranged combat stance",
+  "pre-strike pose",
+  "post-strike follow through",
+  "kick freeze frame",
+  "jump apex pose",
+  "landing stance",
+  "defensive guard stance",
+  "evasive side step",
+  "floating idle pose",
+  "mid-air suspended pose",
+  "gravity reversed stance",
+  "wall standing pose",
+  "ceiling standing pose",
+  "one point aerial balance",
+  "mid-flip freeze",
+  "inverted floating pose"
+];
+
+console.log("STAGE1 COMPLETED POSES v24 LOADED");
