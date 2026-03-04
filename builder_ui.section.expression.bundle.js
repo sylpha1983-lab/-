@@ -106,9 +106,6 @@
   window.__registerPromptPart(KEY, VERSION, API);
 })();
 
-})();
-
-(function(){
 // --- builder_ui.section.expression.v2.js ---
 (function(){
   "use strict";
@@ -140,7 +137,6 @@
       { ja: "非対称な目", en: "asymmetrical eyes" }, { ja: "眠そうな目", en: "sleepy eyes" }
     ],
     "👁️ 瞳孔・ハイライト (Pupils & Highlights)": [
-      // 形状・シンボル
       { ja: "ハート目", en: "heart-shaped pupils" }, { ja: "星目", en: "star-shaped pupils" },
       { ja: "ダイヤ目", en: "diamond-shaped pupils" }, { ja: "しいたけ目", en: "symbol-shaped pupils" },
       { ja: "花の瞳孔 (フラワー)", en: "flower-shaped pupils" }, { ja: "桜の瞳孔", en: "cherry blossom-shaped pupils" },
@@ -148,13 +144,10 @@
       { ja: "歯車の瞳孔 (ギア)", en: "gear-shaped pupils" }, { ja: "ターゲット (照準)", en: "target eyes" },
       { ja: "ボタン目", en: "button eyes" }, { ja: "グリッチ (ノイズ)", en: "glitch eyes" },
       { ja: "ぐるぐる目 (スパイラル)", en: "spiral eyes" }, { ja: "波紋・輪廻眼", en: "ringed eyes" },
-      // 動物的
       { ja: "猫目 (縦長瞳孔)", en: "slit pupils" }, { ja: "ヤギ目 (横長瞳孔)", en: "horizontal pupils" },
       { ja: "四角い瞳孔", en: "rectangular pupils" }, { ja: "三角の瞳孔", en: "triangle pupils" },
-      // 状態・サイズ
       { ja: "散瞳 (デカ目)", en: "dilated pupils" }, { ja: "収縮 (極小)", en: "small pupils, constricted pupils" },
       { ja: "瞳孔なし", en: "no pupils" },
-      // ハイライト・虚無
       { ja: "ハイライトなし", en: "empty eyes" }, { ja: "生気のない目", en: "lifeless eyes" },
       { ja: "死んだ目", en: "dead eyes" }, { ja: "濁った目", en: "dull eyes" },
       { ja: "虚無の目 (ベタ塗り)", en: "void eyes" }, { ja: "目元の影", en: "shadow over eyes" }
@@ -189,20 +182,15 @@
   };
 
   const DICT = {
-    // Colors
     "red eyes": "赤目", "blue eyes": "青目", "green eyes": "緑目", "yellow eyes": "黄目", 
     "pink eyes": "ピンク目", "purple eyes": "紫目", "brown eyes": "茶目", "orange eyes": "オレンジ目", 
     "black eyes": "黒目", "white eyes": "白目", "grey eyes": "灰目", "gold eyes": "金目", "silver eyes": "銀目", 
     "crimson eyes": "真紅の瞳", "amber eyes": "琥珀色の瞳", "heterochromia": "オッドアイ", 
     "heterochromia blue and red": "赤青オッドアイ", "gradient eyes": "グラデーション瞳", 
     "multicolored eyes": "多色瞳", "glowing eyes": "輝く目", "galaxy eyes": "宇宙の瞳",
-    
-    // Shapes
     "tsurime": "ツリ目", "tareme": "タレ目", "jitome": "ジト目", "sanpaku": "三白眼", 
     "closed eyes": "閉じた目", "one eye closed": "片目閉じ", "squinting": "細めた目", 
     "wide eyes": "見開き目", "asymmetrical eyes": "非対称な目", "sleepy eyes": "眠そうな目",
-    
-    // Pupils
     "heart-shaped pupils": "ハート目", "star-shaped pupils": "星目", "diamond-shaped pupils": "ダイヤ目",
     "symbol-shaped pupils": "しいたけ目", "flower-shaped pupils": "花の瞳孔", "cherry blossom-shaped pupils": "桜の瞳孔",
     "cross-shaped pupils": "十字瞳孔", "x-shaped pupils": "×印瞳孔", "gear-shaped pupils": "歯車瞳孔",
@@ -210,17 +198,11 @@
     "spiral eyes": "ぐるぐる目", "ringed eyes": "波紋眼", "slit pupils": "猫目", "horizontal pupils": "ヤギ目",
     "rectangular pupils": "四角い瞳孔", "triangle pupils": "三角瞳孔", "dilated pupils": "散瞳",
     "small pupils": "収縮瞳孔", "no pupils": "瞳孔なし",
-    
-    // Highlights & Void
     "empty eyes": "ハイライトなし", "lifeless eyes": "生気のない目", "dead eyes": "死んだ目", 
     "dull eyes": "濁った目", "void eyes": "虚無の目", "shadow over eyes": "目元の影",
-    
-    // Gaze
     "looking at viewer": "カメラ目線", "looking away": "よそ見", "looking back": "振り返り", 
     "sideways glance": "横目", "looking up": "見上げ", "looking down": "見下ろし", 
     "eye contact": "アイコンタクト", "peeking": "覗き見", "averting eyes": "目を逸らす", "looking afar": "遠くを見る",
-    
-    // Mouth & Effects
     "open mouth": "開口", "closed mouth": "閉口", "parted lips": "半開き", "pout": "むくれ", 
     "tongue out": "舌出し", "cat mouth": "猫口", "triangle mouth": "三角口", "fangs": "牙", 
     "shark teeth": "ギザ歯", "clenched teeth": "食いしばり", "lipstick": "リップ",
@@ -239,7 +221,6 @@
       const root = document.createElement("div");
       root.className = "expression-v2-container";
 
-      // ヘルパー: サブカテゴリー作成
       const createSubCat = (title, items) => {
         const details = document.createElement("details");
         details.className = "expression-cat";
@@ -251,7 +232,6 @@
         details.appendChild(summary);
         const content = document.createElement("div");
         
-        // 最下層を強制的に2列グリッドにする
         content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(2, 1fr); gap:6px;";
         
         items.forEach(item => {
@@ -267,7 +247,6 @@
         return details;
       };
 
-      // 1. 目カテゴリー（親）を作成
       const eyesRoot = document.createElement("details");
       eyesRoot.className = "expression-root-eyes";
       eyesRoot.style.cssText = "margin-bottom:10px; border:2px solid #89CFF0; border-radius:6px; background:#fff;";
@@ -276,26 +255,21 @@
 
       const eyesSummary = document.createElement("summary");
       eyesSummary.textContent = "👁️ 目・瞳・視線 (Eyes)";
-      // ★修正: 背景を標準的なグレーに戻し、Flexboxでセンター揃えにする
       eyesSummary.style.cssText = "font-weight:bold; padding:10px; cursor:pointer; font-size:1.1em; color:#333; background:#f9f9f9; display:flex; align-items:center; list-style:none; outline:none;";
       eyesRoot.appendChild(eyesSummary);
 
       const eyesContent = document.createElement("div");
-      
-      // 親フォルダー直下の並びを1列（縦積み）にする
       eyesContent.style.padding = "10px";
       eyesContent.style.display = "flex";
       eyesContent.style.flexDirection = "column";
       eyesContent.style.gap = "8px";
       
-      // 目サブカテゴリーを追加
       Object.entries(EYES_DATA).forEach(([cat, items]) => {
         eyesContent.appendChild(createSubCat(cat, items));
       });
       eyesRoot.appendChild(eyesContent);
       root.appendChild(eyesRoot);
 
-      // 2. その他（口・漫符）を追加
       Object.entries(OTHER_DATA).forEach(([cat, items]) => {
         root.appendChild(createSubCat(cat, items));
       });
@@ -316,14 +290,14 @@
   window.__registerPromptPart(KEY, VERSION, API);
 })();
 
-})();
-
-(function(){
 // --- builder_ui.section.expression.v3.js ---
 (function(){
   "use strict";
-  const VERSION = 3; // 統合版: ニュアンス & アクション
+  const VERSION = 3; // 統合版: ニュアンス & アクション + ガン詰めR-18シークレット
   const KEY = "expression";
+
+  // ★ シークレットモード判定
+  const IS_UNLOCKED = localStorage.getItem("MY_SECRET_UNLOCK") === "true";
 
   const EXPRESSION_DATA = {
     "😏 ニュアンス・性格 (Nuance)": [
@@ -345,6 +319,60 @@
     ]
   };
 
+  // ==========================================
+  // ★ R-18（シークレット）専用 ガン詰め表情データ
+  // ==========================================
+  const SECRET_EXPRESSION_DATA = {
+    "🤪 恍惚・快楽 (Ecstasy)": [
+      { ja: "アヘ顔 (強)", en: "ahegao:1.3" }, 
+      { ja: "白目・上転", en: "rolling eyes" }, 
+      { ja: "涎・よだれ", en: "drooling" },
+      { ja: "長い舌出し", en: "tongue out:1.2" }, 
+      { ja: "だらしなく開いた口", en: "mouth wide open, gaping" },
+      { ja: "V字眉毛 (困り眉)", en: "v-shaped eyebrows" },
+      { ja: "快楽堕ち", en: "pleasure face, euphoric expression" },
+      { ja: "発情・欲情", en: "in heat, lustful expression" }
+    ],
+    "🥴 酩酊・洗脳・催眠 (Mind Alteration)": [
+      { ja: "酔っ払い (酩酊)", en: "drunk, flushed from alcohol, tipsy" },
+      { ja: "催眠・洗脳", en: "hypnotized, mind control" },
+      { ja: "ぐるぐる目", en: "swirl eyes" },
+      { ja: "焦点の合わない目", en: "unfocused eyes, glazed eyes" },
+      { ja: "トランス状態", en: "trance, blank stare" },
+      { ja: "思考放棄", en: "empty mind, drooling" }
+    ],
+    "😈 下品・メスガキ・挑発 (Vulgar & Provocative)": [
+      { ja: "下品な笑み", en: "lewd smile, vulgar expression" },
+      { ja: "メスガキスマイル", en: "smug face, mocking smile, bratty" },
+      { ja: "淫らな誘惑", en: "seductive gaze, inviting look" },
+      { ja: "舌なめずり", en: "licking lips" },
+      { ja: "卑しい顔", en: "naughty face, perverted smile" }
+    ],
+    "🥺 苦痛・羞恥・涙 (Pain & Shame)": [
+      { ja: "涙目・号泣", en: "tears, crying uncontrollably" },
+      { ja: "激しい赤面", en: "heavy blush, flushed face" },
+      { ja: "懇願・許しを乞う", en: "begging expression" },
+      { ja: "羞恥に耐える", en: "embarrassed, looking away shyly" },
+      { ja: "屈辱・悔し泣き", en: "humiliation, frustrated tears" },
+      { ja: "苦悶・痛み", en: "painful expression, grimace" },
+      { ja: "歯を食いしばる", en: "clenched teeth, biting lip" }
+    ],
+    "👀 狂気・虚無の瞳 (Broken Eyes)": [
+      { ja: "ハイライト消滅", en: "empty eyes, no pupil highlights" },
+      { ja: "レイプ目・虚無", en: "vacant eyes, glassy eyes" },
+      { ja: "ハート目", en: "heart-shaped pupils" },
+      { ja: "ピンクに染まった瞳", en: "pink eyes, love struck" },
+      { ja: "精神崩壊", en: "mind break, broken expression" }
+    ],
+    "👄 吐息・口元の状態 (Mouth Status)": [
+      { ja: "激しい息・荒い息", en: "heavy breathing, panting" },
+      { ja: "滴るよだれの糸", en: "stringy saliva, saliva trail" },
+      { ja: "何かを咥えている", en: "something in mouth" },
+      { ja: "咽ぶ・えづく", en: "gagging, choking" },
+      { ja: "顔面まみれ", en: "messy face" }
+    ]
+  };
+
   const DICT = {
     "smug": "ドヤ顔", "disdain": "軽蔑", "seductive smile": "誘惑笑い", "yandere": "ヤンデレ",
     "ahegao": "アヘ顔/恍惚", "despair": "絶望", "crazy": "狂気", "panicked": "パニック",
@@ -352,7 +380,26 @@
     "eating": "食べる", "drinking": "飲む", "sleeping": "寝る", "yawning": "あくび",
     "kissing": "キス", "blowing kiss": "投げキッス", "wink": "ウインク", "shouting": "叫ぶ",
     "licking": "舐める", "chewing": "噛む", "hand on chin": "あごに手",
-    "head resting on hand": "頬杖", "shushing": "シーッ"
+    "head resting on hand": "頬杖", "shushing": "シーッ",
+
+    // ★ R-18用 拡張翻訳辞書
+    "ahegao:1.3": "アヘ顔(強)", "rolling eyes": "白目/上転", "drooling": "よだれ",
+    "tongue out:1.2": "長い舌出し", "mouth wide open, gaping": "だらしない口", "v-shaped eyebrows": "V字眉毛",
+    "pleasure face, euphoric expression": "快楽堕ち", "in heat, lustful expression": "発情",
+    "drunk, flushed from alcohol, tipsy": "酔っ払い", "hypnotized, mind control": "催眠・洗脳",
+    "swirl eyes": "ぐるぐる目", "unfocused eyes, glazed eyes": "焦点の合わない目",
+    "trance, blank stare": "トランス", "empty mind, drooling": "思考放棄",
+    "lewd smile, vulgar expression": "下品な笑み", "smug face, mocking smile, bratty": "メスガキスマイル",
+    "seductive gaze, inviting look": "淫らな誘惑", "licking lips": "舌なめずり",
+    "naughty face, perverted smile": "卑しい顔",
+    "tears, crying uncontrollably": "号泣", "heavy blush, flushed face": "激しい赤面", 
+    "begging expression": "懇願", "embarrassed, looking away shyly": "羞恥", 
+    "humiliation, frustrated tears": "屈辱", "painful expression, grimace": "苦痛顔",
+    "clenched teeth, biting lip": "食いしばり", "empty eyes, no pupil highlights": "ハイライト消滅",
+    "vacant eyes, glassy eyes": "レイプ目", "heart-shaped pupils": "ハート目",
+    "pink eyes, love struck": "ピンク瞳", "mind break, broken expression": "精神崩壊", 
+    "heavy breathing, panting": "激しい息", "stringy saliva, saliva trail": "よだれの糸", 
+    "something in mouth": "咥える", "gagging, choking": "えづく", "messy face": "顔面まみれ"
   };
 
   const API = {
@@ -362,15 +409,26 @@
       let parent = document.querySelector("#list-expression");
       if (!parent) return;
 
-      const createCat = (title, items) => {
+      const createCat = (title, items, isSecret = false) => {
         const details = document.createElement("details");
         details.className = "expression-cat";
-        details.style.cssText = "margin-bottom:6px; border:1px solid #eee; border-radius:4px; background:#fff;";
+        
+        // ★ シークレット時は赤っぽい枠線
+        const borderColor = isSecret ? "#ffb3b3" : "#eee";
+        details.style.cssText = `margin-bottom:6px; border:1px solid ${borderColor}; border-radius:4px; background:#fff;`;
         details.open = false; 
 
         const summary = document.createElement("summary");
-        summary.textContent = title;
-        summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#f9f9f9; color:#555;";
+        
+        // ★ シークレット時は見た目を変更
+        if (isSecret) {
+          summary.innerHTML = `${title} <span style="font-size:0.8em; color:#d9534f;">(R-18)</span>`;
+          summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#fff0f0; color:#d9534f;";
+        } else {
+          summary.innerHTML = `${title}`;
+          summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#f9f9f9; color:#555;";
+        }
+        
         details.appendChild(summary);
 
         const content = document.createElement("div");
@@ -384,7 +442,8 @@
           cb.style.marginRight = "6px";
           cb.dataset.val = item.en;
           label.appendChild(cb);
-          label.appendChild(document.createTextNode(`${item.ja} / ${item.en}`));
+          label.appendChild(document.createTextNode(`${item.ja}`));
+          label.title = item.en;
           content.appendChild(label);
         });
         details.appendChild(content);
@@ -394,9 +453,17 @@
       const root = document.createElement("div");
       root.className = "expression-v3-container";
       
+      // 1. 通常カテゴリーの追加
       Object.entries(EXPRESSION_DATA).forEach(([cat, items]) => {
-        root.appendChild(createCat(cat, items));
+        root.appendChild(createCat(cat, items, false));
       });
+
+      // 2. ★ シークレットモードONの時だけ、R-18カテゴリーを追加
+      if (IS_UNLOCKED) {
+        Object.entries(SECRET_EXPRESSION_DATA).forEach(([cat, items]) => {
+          root.appendChild(createCat(cat, items, true));
+        });
+      }
 
       const contentArea = parent.querySelector(".section-content") || parent;
       contentArea.appendChild(root);
@@ -413,6 +480,5 @@
 
   window.__registerPromptPart(KEY, VERSION, API);
 })();
-
 })();
 

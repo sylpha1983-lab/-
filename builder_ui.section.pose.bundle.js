@@ -349,42 +349,7 @@
         { ja: "洗脳", en: "mind control" }
       ]
     },
-    "🔞 センシティブ・フェティッシュ (Risqué & Fetish)": {
-      "露出・ずらす (Aside)": [
-        { ja: "パンツずらし", en: "panties aside, pulling panties aside" },
-        { ja: "ブラずらし", en: "bra aside" },
-        { ja: "水着ずらし", en: "swimsuit aside, bikini aside" },
-        { ja: "前垂れずらし (Maebari)", en: "pelvic curtain aside" }, // ★追加
-        { ja: "Tバックずらし", en: "thong aside" }, // ★追加
-        { ja: "ふんどしずらし", en: "fundoshi aside" }, // ★追加
-        { ja: "胸元を広げる", en: "pulling shirt open" },
-        { ja: "スカートめくり", en: "skirt flip" }
-      ],
-      "ハプニング・事故": [
-        { ja: "ラッキースケベ", en: "accidental pervert" },
-        { ja: "偶然の露出", en: "accidental exposure" },
-        { ja: "事故 (Accident)", en: "accident" },
-        { ja: "服が破れる", en: "torn clothes" }
-      ],
-      "お仕置き・暴力": [
-        { ja: "スパンキング", en: "spanking, spanked" },
-        { ja: "お尻の叩かれた跡", en: "spanked, red butt" },
-        { ja: "両手拘束", en: "hands tied behind back" },
-        { ja: "縛り (亀甲)", en: "shibari" },
-        { ja: "踏まれる", en: "being stepped on" }
-      ],
-      "犯罪的・背徳": [
-        { ja: "覗き見 (Voyeurism)", en: "voyeurism, peeping" },
-        { ja: "盗む (Theft)", en: "theft, stealing" },
-        { ja: "浮気現場", en: "cheating" }
-      ],
-      "露出・アングル": [
-        { ja: "お尻突き出し", en: "top-down bottom-up" },
-        { ja: "M字開脚", en: "m-shaped legs" },
-        { ja: "チラ見せ", en: "flashing" }
-      ]
-    }
-  };
+    };
 
   const API = {
     initUI() {
@@ -433,7 +398,6 @@
 })();
 
 })();
-
 (function(){
 // --- builder_ui.section.pose.v3.js ---
 (function(){
@@ -799,7 +763,6 @@
 })();
 
 })();
-
 (function(){
 // --- builder_ui.section.pose.v6.js ---
 (function(){
@@ -1068,9 +1031,7 @@
         { ja: "もがく", en: "struggling" }
       ],
       "入浴・水": [
-        { ja: "入浴する", en: "bathing" },
-        { ja: "混浴", en: "mixed-sex bathing" }, // ★復活
-        { ja: "体を洗う", en: "washing body" },
+        { ja: "入浴する", en: "bathing" },        { ja: "体を洗う", en: "washing body" },
         { ja: "体を乾かす/拭く", en: "drying, holding towel" }, // ★復活
         { ja: "水しぶき", en: "splashing" },
         { ja: "滴る (Wet)", en: "dripping, wet" }
@@ -1144,7 +1105,6 @@
 })();
 
 })();
-
 (function(){
 // --- builder_ui.section.pose.v9.js ---
 (function(){
@@ -1156,26 +1116,7 @@
   const IS_R18_UNLOCKED = localStorage.getItem("MY_SECRET_UNLOCK") === "true";
 
   const POSE_DATA_TOUCH = {
-    "💆 自己接触・頭部 (Self Touch: Head)": {
-      "髪・頭": [
-        { ja: "頭に手を置く", en: "hand on own head" },
-        { ja: "頭を抱える (両手)", en: "hands on own head" },
-        { ja: "片手後頭部", en: "arm behind head" },
-        { ja: "額に手を当てる", en: "hand on own forehead" },
-        { ja: "髪を持つ/遊ぶ", en: "holding own hair, playing with own hair" }
-      ],
-      "顔・耳": [
-        { ja: "顔に手を当てる", en: "hand on own face" },
-        { ja: "頬をかく/つねる", en: "scratching cheek, pinching own cheek" },
-        { ja: "顔を覆う (恥)", en: "covering face" },
-        { ja: "耳を塞ぐ", en: "covering own ears" }
-      ],
-      "口元": [
-        { ja: "口に手を当てる", en: "hand to own mouth" },
-        { ja: "指を口に入れる/噛む", en: "finger in own mouth, biting own finger" },
-        { ja: "指を顎に (思考)", en: "finger to own chin" }
-      ]
-    },
+    
     "👗 服の調整・着脱 (Clothing Adjustment)": {
       "めくる・持ち上げる": [
         { ja: "服をめくる (Lift)", en: "clothes lift" },
@@ -1202,39 +1143,8 @@
         { ja: "ジッパーを下ろす", en: "unzipping" }
       ]
     },
-    "👙 自己接触・体幹 (Self Touch: Body)": {
-      "胸・首": [
-        { ja: "胸を隠す (手ブラ)", en: "covering breasts" },
-        { ja: "乳首隠し", en: "covering nipples" },
-        { ja: "胸を持ち上げる", en: "breast lift" },
-        { ja: "胸を寄せる", en: "breasts squeezed together" },
-        { ja: "谷間に腕を挟む", en: "arm between breasts" }
-      ],
-      "腹・腰・腕": [
-        { ja: "お腹に手を当てる", en: "hand on own stomach" },
-        { ja: "お腹を掴む", en: "belly grab" },
-        { ja: "腰に腕を回す", en: "arm across waist" }
-      ]
-    },
-    "🔞 自己愛撫・R18 (Self Pleasure & R18)": {
-      "露出・アピール": [
-        { ja: "チラ見せ", en: "flashing" },
-        { ja: "体を見せる", en: "presenting" }
-      ],
-      "胸・セクシー": [
-        { ja: "セルフ乳揉み", en: "grabbing own breast" },
-        { ja: "ブラに手を入れる", en: "hand in bra" }
-      ],
-      "下半身・股間": [
-        { ja: "お尻を持ち上げる", en: "ass support" },
-        { ja: "股間を掴む", en: "crotch grab" },
-        { ja: "パンツの中に手", en: "hand in own panties" },
-        { ja: "脚の間に手", en: "hand between legs" },
-        { ja: "腕を脚の間に挟む", en: "arm between legs" },
-        { ja: "局所を隠す", en: "covering privates" }
-      ]
-    }
-  };
+    
+    };
 
   const API = {
     initUI() {
@@ -1360,54 +1270,12 @@
         { ja: "服の下に手", en: "hand under clothes" }
       ]
     },
-    "🔞 特殊接触・前戯 (Fetish & Foreplay)": {
-      "性的アクション": [
-        { ja: "服を脱がす", en: "assisted exposure, undressing another" },
-        { ja: "他人の服をめくる", en: "lifting another's clothes, skirt flip" },
-        { ja: "キスする", en: "kissing, kiss" },
-        { ja: "あーん (餌付け)", en: "feeding" },
-        { ja: "授乳する", en: "breastfeeding" },
-        { ja: "乳首をつまむ", en: "nipple tweak" },
-        { ja: "股間をこすりつける", en: "grinding, humping" },
-        { ja: "またがる (服あり)", en: "straddling" }
-      ],
-      "愛撫・接触": [
-        { ja: "他人の胸を揉む", en: "grabbing another's breast" },
-        { ja: "背後から胸揉み", en: "grabbing from behind, breast grab" },
-        { ja: "お尻を掴む", en: "grabbing another's ass" },
-        { ja: "股間を掴む", en: "crotch grab" },
-        { ja: "パンツに手を入れる", en: "hand in another's panties" }
-      ]
-    },
+    
     
     // ------------------------------------
-    // R-18 性交ポーズ (Sex Positions)
     // ※誘導ワードは Quality Preset へ移動しました
     // ------------------------------------
-    "🔞 性交・本番体位 (Sex Positions: Intense)": {
-      "騎乗位系 (Woman on Top)": [
-        { ja: "騎乗位 (Cowgirl)", en: "(cowgirl position:1.3)" },
-        { ja: "背面騎乗位 (Reverse)", en: "(reverse cowgirl position:1.3)" },
-        { ja: "対面座位 (Upright)", en: "(upright straddle:1.3)" },
-        { ja: "背面座位 (Reverse Upright)", en: "(reverse upright straddle:1.3)" },
-        { ja: "M字騎乗位 (Squatting)", en: "(squatting cowgirl:1.3)" },
-        { ja: "回転騎乗位 (Spinning)", en: "(spinning cowgirl:1.3)" }
-      ],
-      "基本・バック系": [
-        { ja: "正常位 (Missionary)", en: "(missionary:1.3)" },
-        { ja: "正常位 (足上げ)", en: "(missionary), (legs up:1.3)" },
-        { ja: "バック (Doggy)", en: "(doggystyle:1.3)" },
-        { ja: "立位バック (Standing)", en: "(standing doggystyle), (bent over:1.3)" },
-        { ja: "側位 (Spoon)", en: "(spooning sex:1.3)" }
-      ],
-      "ハード・特殊": [
-        { ja: "プレス (Mating Press)", en: "(mating press:1.3)" },
-        { ja: "だいしゅきホールド", en: "(leg lock:1.3)" },
-        { ja: "駅弁 (Standing Carry)", en: "(standing sex), (lifting partner:1.3)" },
-        { ja: "パイルドライバー", en: "(piledriver position:1.3)" }
-      ]
-    }
-  };
+    };
 
   const API = {
     initUI() {
@@ -1684,67 +1552,103 @@
   const IS_R18_UNLOCKED = localStorage.getItem("MY_SECRET_UNLOCK") === "true";
 
   // データ構造は v1 のレンダラーが解釈できる 2階層構造 { 大カテ: { 小カテ: [] } } を維持
+  
+  // R-18ブロック（2階層: { 大カテゴリ: { 小カテゴリ: [ {ja,en}, ... ] } }）
+  // ※UIロジックは変更せず、表示は "IS_R18_UNLOCKED" のときのみ。
   const POSE_DATA_R18 = {
-    "🔞 恥辱・露出ポーズ (Exposed & Shame)": {
-      "開脚・露出": [
-        { ja: "M字開脚", en: "m-shaped posture, legs spread wide, knees raised" },
-        { ja: "大股開き", en: "legs spread, spread legs, open legs" },
-        { ja: "マンすじ見せつけ", en: "presenting pussy, spread legs, grabbing own legs" },
-        { ja: "お尻突き出し (バック)", en: "bent over, presenting ass, doggystyle pose, arched back" }
+    
+
+    "接触特化 (Contact)": {
+      "壁": [
+        { ja: "壁にもたれ、顔を寄せる", en: "leaning against wall, close faces" },
+        { ja: "壁際で腕を回す", en: "arm around waist, against wall" },
+        { ja: "壁に押し付け", en: "pinned against wall, back to wall" },
+        { ja: "壁に手をつく", en: "hands on wall, leaning forward" }
       ],
-      "チラリズム・屈辱": [
-        { ja: "スカート捲り上げ", en: "skirt lifted, holding skirt up, exposing panties" },
-        { ja: "くぱぁ (手で広げる)", en: "spreading pussy, fingers spreading pussy" },
-        { ja: "胸見せ (たくし上げ)", en: "lifting shirt, showing breasts, arms up" },
-        { ja: "四つん地べた (土下座)", en: "on all fours, head down, submission pose" }
-      ]
-    },
-    "⛓️ 拘束・無力化 (Bound & Helpless)": {
-      "ロープ・物理": [
-        { ja: "後ろ手拘束", en: "arms tied behind back, hands bound behind back" },
-        { ja: "吊り下げ (サスペンション)", en: "suspension, hanging, arms tied up" },
-        { ja: "腕を頭の後ろで拘束", en: "arms tied behind head" },
-        { ja: "海老反り拘束", en: "hogtie, arched back, bound wrists and ankles" },
-        { ja: "椅子に縛られる", en: "tied to chair, struggling" },
-        { ja: "壁に張り付け", en: "pinned to wall, crucified pose" }
+      "床": [
+        { ja: "床座りで寄り添う", en: "sitting on floor, leaning on partner" },
+        { ja: "床で抱きしめる", en: "hugging while on floor" },
+        { ja: "床に押し付け", en: "pinned to floor, pinned down" },
+        { ja: "床に手・肘をつく", en: "hands on floor, elbows on floor" }
       ],
-      "触手・異形": [
-        { ja: "触手拘束 (全身)", en: "tentacle restraint, bound by tentacles, suspended by tentacles" },
-        { ja: "スライム拘束 (埋没)", en: "stuck in slime, sinking in slime, unable to move" }
+      "物体": [
+        { ja: "ソファに沈み込む", en: "sinking into sofa, relaxed" },
+        { ja: "ベッド端に腰掛ける", en: "sitting on bed edge" },
+        { ja: "椅子にもたれる", en: "leaning on chair" },
+        { ja: "机・手すりにもたれる", en: "leaning on table, leaning on railing" }
+      ],
+      "密着": [
+        { ja: "頬を寄せる", en: "cheek-to-cheek" },
+        { ja: "耳元で囁く", en: "whispering, close to ear" },
+        { ja: "手を絡める", en: "interlaced fingers, holding hands" },
+        { ja: "密着", en: "close contact, pressed together" },
+        { ja: "背中合わせ", en: "back-to-back" }
       ]
     },
-    "🪟 密着・圧迫シチュエーション (Pressed & Compressed)": {
-      "ガラス・壁": [
-        { ja: "ガラス押し付け (全身)", en: "pressed against glass, flattened breasts" },
-        { ja: "顔面プレス (窓)", en: "face pressed against glass, face smeared, open mouth" },
-        { ja: "お尻押し付け", en: "butt pressed against glass, spread ass" },
-        { ja: "床に押し付けられる", en: "pinned to floor, pinned down" },
-        { ja: "壁ドン (受け)", en: "pinned against wall, back to wall" },
-        { ja: "股間押し付け (グラインド)", en: "grinding crotch, pressing hips" }
+
+    "主従構図 (Power Dynamics)": {
+      "支配": [
+        { ja: "上から見下ろす構図", en: "dominant angle, looking down" },
+        { ja: "壁ドン（攻め）", en: "kabedon, pinning against wall" }
+      ],
+      "服従": [
+        { ja: "ひざまずく", en: "kneeling, submissive posture" },
+        { ja: "頭を下げる", en: "head down, submissive" }
+      ],
+      "拘束": [
+        { ja: "後ろ手拘束", en: "hands bound behind back" },
+        { ja: "椅子に固定", en: "tied to chair, restrained" }
       ]
     },
-    "🤪 絶頂・限界反応 (Climax & Body)": {
-      "絶頂アクション": [
-        { ja: "背中を反らす (イキ顔)", en: "arched back, head back, mouth open" },
-        { ja: "足の指を丸める", en: "curling toes, foot spasm" },
-        { ja: "痙攣・ビクビク", en: "body spasms, trembling, shaking" },
-        { ja: "シーツを掴む", en: "grabbing sheets, clenching hands" },
-        { ja: "白目・アヘ顔", en: "rolling eyes, ahegao, tongue out" },
-        { ja: "ダブルピース (絶頂)", en: "double peace sign, ahegao" },
-        { ja: "脱力・ぐったり", en: "limp body, exhausted, lying on back, after sex" }
+
+    "完成ポーズ：立ち (Standing)": {
+      "挑発": [
+        { ja: "腰に手を当て挑発", en: "hands on hips, provocative stance" },
+        { ja: "肩越しに振り返り", en: "looking over shoulder" }
+      ],
+      },
+
+    "完成ポーズ：座り (Seated)": {
+      "誘い": [
+        { ja: "前のめりで座る", en: "seated, leaning forward" },
+        { ja: "脚を組んで座る", en: "seated, legs crossed" }
+      ],
+      "崩し": [
+        { ja: "ソファにもたれ", en: "seated, lounging on sofa" },
+        { ja: "片肘つき", en: "seated, propped on elbow" }
+      ]
+    },
+
+    "完成ポーズ：横臥 (Lying)": {
+      "誘い": [
+        { ja: "うつ伏せで振り返る", en: "lying on stomach, looking back" },
+        { ja: "仰向けで腕を上げる", en: "lying on back, arms up" }
+      ],
+      "無防備": [
+        { ja: "脱力", en: "limp body, relaxed" },
+        { ja: "目を潤ませる", en: "teary eyes, watery eyes" }
+      ]
+    },
+
+    "完成ポーズ：行動 (Movement)": {
+      "接近": [
+        { ja: "近寄る", en: "approaching, stepping closer" },
+        { ja: "手招き", en: "beckoning" }
+      ],
+      "押し倒し": [
+        { ja: "押し倒す（構図）", en: "pinning down, pushing down" },
+        { ja: "押し倒される（構図）", en: "being pinned down" }
       ]
     }
   };
 
   const DICT = {
-    "m-shaped posture": "M字開脚", "legs spread wide": "大股開き", "presenting pussy": "秘部見せ",
-    "bent over": "前屈(バック)", "presenting ass": "お尻見せ", "skirt lifted": "スカート捲り",
-    "spreading pussy": "くぱぁ", "lifting shirt": "服たくし上げ", "arms tied behind back": "後ろ手拘束",
+    "m-shaped posture": "M字開脚", "legs spread wide": "大股開き","bent over": "前屈(バック)", "presenting ass": "お尻見せ", "skirt lifted": "スカート捲り",
+"lifting shirt": "服たくし上げ", "arms tied behind back": "後ろ手拘束",
     "suspension": "吊り下げ", "arms tied behind head": "頭後ろ拘束", "hogtie": "海老反り拘束",
     "tied to chair": "椅子拘束", "pinned to wall": "張り付け", "tentacle restraint": "触手拘束",
     "stuck in slime": "スライム拘束", "pressed against glass": "ガラス押し付け", "face pressed against glass": "顔面プレス",
-    "butt pressed against glass": "お尻プレス", "pinned to floor": "床ドン(受)", "pinned against wall": "壁ドン(受)",
-    "grinding crotch": "股間押し付け", "curling toes": "足指カール", "body spasms": "痙攣",
+    "butt pressed against glass": "お尻プレス", "pinned to floor": "床ドン(受)", "pinned against wall": "壁ドン(受)","curling toes": "足指カール", "body spasms": "痙攣",
     "grabbing sheets": "シーツを掴む", "rolling eyes": "白目", "double peace sign": "ダブルピース",
     "limp body": "脱力"
   };
@@ -1775,7 +1679,7 @@
         const separator = document.createElement("div");
         separator.id = "pose-v13-separator";
         separator.style.cssText = "margin: 20px 0 10px 0; border-top: 2px dashed #d00; text-align: center;";
-        separator.innerHTML = "<span style='background:#fff0f0; padding:0 10px; color:#d00; font-weight:bold; font-size:0.9em; display:inline-block; transform:translateY(-12px);'>▼ R-18 POSES (v13 Fetish)</span>";
+        separator.innerHTML = "<span style='background:#fff0f0; padding:0 10px; color:#d00; font-weight:bold; font-size:0.9em; display:inline-block; transform:translateY(-12px);'>🔴 R-18</span>";
         root.appendChild(separator);
 
         // レンダラー呼び出し
@@ -1805,9 +1709,6 @@
 })();
 
 })();
-
-
-
 (function(){
 // --- builder_ui.section.pose.v14.js ---
 (function(){
@@ -1873,7 +1774,17 @@
       { ja: "腕を背中に回す（背中見せ）", en: "standing pose, arms behind back, back view emphasis" },
       { ja: "かかと浮かせ（軽やか）", en: "standing pose, heels slightly lifted, light stance" },
       { ja: "足をクロスして立つ（モデル）", en: "standing pose, legs crossed, model stance" },
-      { ja: "つま先を外に開く（バレエ風）", en: "standing pose, toes turned out, ballet-inspired" },],
+      { ja: "つま先を外に開く（バレエ風）", en: "standing pose, toes turned out, ballet-inspired" },
+      { ja: "腕組み（自然）", en: "standing pose, arms crossed, casual" },
+      { ja: "ポケットに手（片手）", en: "standing pose, one hand in pocket, casual" },
+      { ja: "ポケットに手（両手）", en: "standing pose, hands in pockets, relaxed" },
+      { ja: "つま先立ち（背伸び）", en: "standing pose, tiptoe stretch" },
+      { ja: "両手を後ろで組む（休め）", en: "standing at ease, hands behind back, relaxed" },
+      { ja: "足幅を広げて立つ（安定化）", en: "standing with wide stance, stable posture" },
+      { ja: "柱にもたれかかる", en: "leaning against a pillar, standing casually" },
+      { ja: "片足を壁につけて立つ", en: "standing with one foot resting on wall, casual" },
+      { ja: "つま先をトントンする", en: "tapping foot, standing impatiently" }
+],
     "挨拶": [
       { ja: "軽く手を振る（挨拶）", en: "standing pose, waving hand, friendly greeting" },
       { ja: "軽いお辞儀（挨拶）", en: "standing pose, small bow, polite greeting" },
@@ -1910,7 +1821,17 @@
       { ja: "カーテシー（深め）", en: "deep curtsy, elegant" },
       { ja: "カーテシー（片手で裾をつまむ）", en: "curtsy, one hand holding skirt hem" },
       { ja: "貴婦人の会釈（首＋肩だけ）", en: "lady's nod, subtle bow, refined" },
-      { ja: "舞踏会の挨拶（片手を広げる）", en: "ballroom greeting, one arm extended, graceful" },],
+      { ja: "舞踏会の挨拶（片手を広げる）", en: "ballroom greeting, one arm extended, graceful" },
+      { ja: "手を振る（片手）", en: "standing pose, waving, friendly greeting" },
+      { ja: "敬礼", en: "salute, formal greeting" },
+      { ja: "お辞儀（丁寧）", en: "bowing politely, formal greeting" },
+      { ja: "カーテシー（ドレス）", en: "curtsy, dress etiquette pose" },
+      { ja: "両手で大きく手を振る", en: "waving both hands enthusiastically, standing greeting" },
+      { ja: "帽子を取って胸に当てる（敬意）", en: "taking off hat and placing over heart, polite bow" },
+      { ja: "深々と頭を下げる（謝罪/感謝）", en: "bowing deeply, formal apology or deep gratitude" },
+      { ja: "投げキッス（挨拶）", en: "blowing a kiss, playful greeting" },
+      { ja: "片手を軽く上げて応える", en: "raising one hand in response, casual hello" }
+],
     "仕草": [
       { ja: "髪をかき上げる（仕草）", en: "standing pose, brushing hair, casual gesture" },
       { ja: "軽く振り返る（仕草）", en: "standing pose, looking over shoulder, subtle twist" },
@@ -1944,7 +1865,21 @@
       { ja: "スカートの裾を整える（ドレス）", en: "gesture, adjusting skirt hem, dress" },
       { ja: "裾を軽く持ち上げる（段差）", en: "gesture, lifting skirt slightly, stepping" },
       { ja: "胸の前で手を重ねる（おしとやか）", en: "gesture, hands folded at chest, demure" },
-      { ja: "両手を前で重ねる（淑女）", en: "gesture, hands folded in front, lady-like" },],
+      { ja: "両手を前で重ねる（淑女）", en: "gesture, hands folded in front, lady-like" },
+      { ja: "片手ピース", en: "one-hand peace sign" },
+      { ja: "両手ピース", en: "two-hand peace sign" },
+      { ja: "指ハート（片手）", en: "finger heart gesture, one hand" },
+      { ja: "両手ハート", en: "hands forming a heart shape" },
+      { ja: "両手フレーム", en: "hands forming a frame, camera framing gesture" },
+      { ja: "狐サイン（指）", en: "fox hand sign gesture" },
+      { ja: "親指を立てる", en: "thumbs up gesture" },
+      { ja: "シャカサイン（親指＋小指）", en: "shaka sign, thumb and pinky extended" },
+      { ja: "両手でガッツポーズ", en: "double fist pump, standing, excited victory" },
+      { ja: "腕を上に伸ばして背伸び", en: "stretching arms upwards, full body stretch" },
+      { ja: "首の後ろに手を当てる", en: "hand behind neck, standing, awkward or relaxed" },
+      { ja: "胸元を抑える（安堵）", en: "hand on chest, sigh of relief, standing" },
+      { ja: "額の汗を拭う", en: "wiping sweat from forehead, standing gesture" }
+],
     "対人": [
       { ja: "握手（対人）", en: "standing pose, handshake, interpersonal interaction" },
       { ja: "肩を叩く（対人）", en: "standing pose, patting shoulder, interpersonal interaction" },
@@ -1978,7 +1913,17 @@
       { ja: "壁ドン（近距離）", en: "interaction, kabedon, close distance" },
       { ja: "相手を抱き止める", en: "interaction, catching someone, protective" },
       { ja: "ハグ（優しく）", en: "interaction, gentle hug" },
-      { ja: "集合写真ポーズ（肩寄せ）", en: "interaction, group photo pose, shoulders close" },],
+      { ja: "集合写真ポーズ（肩寄せ）", en: "interaction, group photo pose, shoulders close" },
+      { ja: "握手を求める", en: "offering handshake, interaction" },
+      { ja: "ハイタッチ", en: "high five, interaction" },
+      { ja: "拳を合わせる", en: "fist bump, interaction" },
+      { ja: "肩に手を置く（親しみ）", en: "hand on partner's shoulder, friendly interaction" },
+      { ja: "肩を組む（横並び）", en: "arms around each other's shoulders, standing side by side" },
+      { ja: "背中合わせで立つ", en: "standing back to back, partners, trust" },
+      { ja: "向かい合って手を取る", en: "standing face to face, holding both hands, intimate" },
+      { ja: "相手の服の裾を掴む", en: "grabbing partner's hem, standing, shy interaction" },
+      { ja: "頭を撫でる（立位）", en: "patting partner's head, standing interaction" }
+],
     "演出": [
       { ja: "モデル立ち（演出）", en: "model pose, stylish stance, contrapposto" },
       { ja: "白鳥のポーズ（ダンス）", en: "dance pose, one leg raised, tiptoe contact, elegant weight shift" },
@@ -2014,9 +1959,18 @@
       { ja: "ヒーローポーズ（胸張り）", en: "cinematic, hero pose, chest out" },
       { ja: "風を受ける（髪なびき）", en: "cinematic, wind-swept hair, dramatic" },
       { ja: "片膝を軽く曲げてお辞儀（舞台）", en: "cinematic, stage bow, slight knee bend" },
-      { ja: "光に向かって手を伸ばす", en: "cinematic, reaching toward light" },]
+      { ja: "光に向かって手を伸ばす", en: "cinematic, reaching toward light" },
+      { ja: "勝利ポーズ（拳を上げる）", en: "victory pose, fist raised" },
+      { ja: "モデル立ち（片脚クロス）", en: "model stance, legs crossed" },
+      { ja: "プレゼン（手を広げる）", en: "presenting gesture, arms open" },
+      { ja: "指差し（決め）", en: "dramatic pointing, hero pose" },
+      { ja: "逆光に立つシルエット", en: "standing in backlight, silhouette pose, cinematic lighting" },
+      { ja: "武器を地面に突き立てて立つ", en: "standing with weapon planted in ground, epic stance" },
+      { ja: "強風に向かって立つ", en: "standing against strong wind, hair blowing violently, dramatic" },
+      { ja: "スポットライトを浴びて両手を広げる", en: "standing under spotlight with arms wide open, stage presence" },
+      { ja: "空を見上げて覚醒", en: "looking up at sky, awakening pose, cinematic" }
+]
   },
-
   "✅ 完成ポーズ：🪑 座り (Seated)": {
     "ニュートラル": [
       { ja: "椅子座り（ニュートラル）", en: "sitting pose, neutral seated posture" },
@@ -2041,7 +1995,17 @@
       { ja: "膝の上で手を重ねる", en: "seated pose, hands folded on lap" },
       { ja: "背筋を伸ばして正面", en: "seated pose, straight back, front-facing" },
       { ja: "床座り（正座風）", en: "seated pose, kneeling-seiza style" },
-      { ja: "床座り（あぐら）", en: "seated pose, cross-legged on floor" },],
+      { ja: "床座り（あぐら）", en: "seated pose, cross-legged on floor" },
+      { ja: "椅子に浅く座る", en: "seated pose, sitting on the edge of a chair" },
+      { ja: "脚を組む", en: "seated pose, legs crossed" },
+      { ja: "膝を揃える", en: "seated pose, knees together, elegant" },
+      { ja: "背もたれにもたれる", en: "seated pose, leaning back on chair" },
+      { ja: "椅子に深く腰掛ける（リラックス）", en: "sitting deep in chair, relaxed posture" },
+      { ja: "床にべたん座り（W座り）", en: "w-sitting on floor, cute posture" },
+      { ja: "足を投げ出して座る", en: "sitting with legs stretched out lazily" },
+      { ja: "膝を立てて座る", en: "sitting with knees up, casual" },
+      { ja: "椅子の上で体育座り", en: "sitting with knees hugged on chair" }
+],
     "仕草": [
       { ja: "足組み（仕草）", en: "sitting pose, legs crossed, composed" },
       { ja: "頬杖（仕草）", en: "sitting pose, chin resting on hand, thoughtful" },
@@ -2072,7 +2036,17 @@
       { ja: "片手を口元（微笑み）", en: "seated gesture, hand near mouth, soft smile" },
       { ja: "手を膝に置いて前傾", en: "seated gesture, leaning forward, hands on knees" },
       { ja: "足を組む（堂々）", en: "seated gesture, legs crossed, confident" },
-      { ja: "両手を胸の前で合わせる（お願い）", en: "seated gesture, hands together, pleading" },],
+      { ja: "両手を胸の前で合わせる（お願い）", en: "seated gesture, hands together, pleading" },
+      { ja: "頬杖", en: "resting chin on hand, thoughtful" },
+      { ja: "手を膝に置く", en: "hands resting on knees, composed" },
+      { ja: "スマホを見る", en: "looking at smartphone, casual" },
+      { ja: "髪を整える", en: "adjusting hair while seated" },
+      { ja: "伸びをする（座り）", en: "stretching arms while seated" },
+      { ja: "靴紐を結ぶ（座り）", en: "tying shoelaces while seated" },
+      { ja: "頬杖をついて退屈そうに", en: "resting chin on hands, looking bored, seated" },
+      { ja: "うつむいて考え込む", en: "looking down, deep in thought, seated" },
+      { ja: "両手で顔を覆う（座り）", en: "covering face with both hands, seated" }
+],
     "対人": [
       { ja: "前屈みで会話（対人）", en: "sitting pose, leaning forward, talking to someone" },
       { ja: "座ったまま手を振る（対人）", en: "sitting pose, waving hand, interpersonal greeting" },
@@ -2096,7 +2070,16 @@
       { ja: "隣に座って見上げる", en: "interaction, sitting beside, looking up" },
       { ja: "座ったまま手を振る", en: "interaction, wave while seated" },
       { ja: "肩にもたれる（甘え）", en: "interaction, leaning on shoulder, affectionate" },
-      { ja: "肘で軽くつつく（笑）", en: "interaction, playful elbow poke" },],
+      { ja: "肘で軽くつつく（笑）", en: "interaction, playful elbow poke" },
+      { ja: "隣に座るスペースを作る", en: "patting the seat beside, inviting" },
+      { ja: "相手に身を乗り出す", en: "leaning forward toward partner, engaged" },
+      { ja: "肘をついて会話", en: "talking with elbow on table, casual conversation" },
+      { ja: "向かい合って座る（テーブル越し）", en: "sitting across from each other at table" },
+      { ja: "隣の人の肩に頭を乗せる", en: "resting head on partner's shoulder, seated" },
+      { ja: "背中合わせで座る（床）", en: "sitting back-to-back on floor" },
+      { ja: "膝枕（する側）", en: "giving a lap pillow, seated" },
+      { ja: "膝枕（される側）", en: "receiving a lap pillow, lying on lap" }
+],
     "演出": [
       { ja: "祈り座り（演出）", en: "kneeling pose, hands together, prayer" },
       { ja: "戦術座り（演出）", en: "seated tactical pose, calm readiness" },
@@ -2118,7 +2101,16 @@
       { ja: "前傾で告白（真剣）", en: "cinematic seated, leaning forward, confession" },
       { ja: "片足を組んで微笑む（貴族）", en: "cinematic seated, aristocratic smile, legs crossed" },
       { ja: "床座りで祈る（静謐）", en: "cinematic seated, praying on floor, serene" },
-      { ja: "ドレスで椅子に優雅に座る", en: "cinematic seated, elegant dress sitting, graceful" },]
+      { ja: "ドレスで椅子に優雅に座る", en: "cinematic seated, elegant dress sitting, graceful" },
+      { ja: "玉座に座る", en: "sitting on a throne, regal" },
+      { ja: "脚を組んで女王座り", en: "queen-like seated pose, legs crossed confidently" },
+      { ja: "椅子に逆向きで座る", en: "sitting backwards on a chair, edgy" },
+      { ja: "王座で足を組む（見下ろし）", en: "crossing legs on throne, looking down regally" },
+      { ja: "崩れ落ちた玉座に座る", en: "sitting on a ruined throne, dramatic" },
+      { ja: "暗がりで椅子に座る", en: "sitting on a chair in the dark, mysterious" },
+      { ja: "光の差し込む窓辺に座る", en: "sitting by window with sunlight streaming in" },
+      { ja: "武器を膝に置いて座る", en: "sitting with weapon resting on lap" }
+]
   },
 
   "✅ 完成ポーズ：🛏 横臥 (Lying)": {
@@ -2136,7 +2128,17 @@
       { ja: "うつ伏せ（肘つき）", en: "lying prone, propped on elbows" },
       { ja: "横向き（丸く）", en: "lying on side, curled slightly" },
       { ja: "横向き（伸びる）", en: "lying on side, stretched out" },
-      { ja: "大の字（リラックス）", en: "lying spread-eagle, relaxed" },],
+      { ja: "大の字（リラックス）", en: "lying spread-eagle, relaxed" },
+      { ja: "横向きで丸まる", en: "lying on side, curled up" },
+      { ja: "仰向けで手を組む", en: "lying on back, hands folded on chest" },
+      { ja: "うつ伏せでリラックス", en: "lying on stomach, relaxed" },
+      { ja: "枕に抱きつく", en: "hugging a pillow, cozy" },
+      { ja: "大の字に寝転がる", en: "lying spread-eagle, completely relaxed" },
+      { ja: "うつ伏せで足をバタバタ", en: "lying on stomach, kicking feet playfully" },
+      { ja: "横向きで膝を少し曲げる", en: "lying on side, knees slightly bent, comfortable" },
+      { ja: "仰向けで両手を頭の後ろに", en: "lying on back, hands behind head, resting" },
+      { ja: "クッションに埋もれて寝る", en: "sleeping buried in cushions" }
+],
     "感情": [
       { ja: "星空を見る（感情）", en: "lying on back, gazing at the sky, dreamy mood" },
       { ja: "落ち込み横臥（感情）", en: "lying down, curled slightly, depressed mood" },
@@ -2159,7 +2161,13 @@
       { ja: "天井を見つめる（虚無）", en: "lying on back, staring at ceiling, emptiness" },
       { ja: "星を見る仰向け（夢）", en: "lying on back, looking at stars, dreamy" },
       { ja: "抱き枕のように腕を抱える（寂しさ）", en: "lying, hugging arms like a pillow, lonely" },
-      { ja: "膝を抱えて横臥（不安）", en: "lying, hugging knees, anxious" },],
+      { ja: "膝を抱えて横臥（不安）", en: "lying, hugging knees, anxious" },
+      { ja: "シーツを握りしめる（横臥）", en: "gripping bedsheets, lying down, tense" },
+      { ja: "うつ伏せで顔を伏せる（号泣）", en: "face buried in pillow, crying, lying on stomach" },
+      { ja: "仰向けで静かに涙を流す", en: "lying on back, silently crying" },
+      { ja: "横向きで微笑みながら見つめる", en: "lying on side, smiling and looking at viewer" },
+      { ja: "放心状態で横たわる", en: "lying completely spaced out, empty expression" }
+],
     "演出": [
       { ja: "傷つき倒れ（演出）", en: "fallen down, injured, dramatic" },
       { ja: "崩れ落ち（演出）", en: "collapsing on the ground, exhausted, dramatic" },
@@ -2175,9 +2183,16 @@
       { ja: "傷つき倒れ（手を伸ばす）", en: "cinematic, wounded collapse, reaching hand" },
       { ja: "床に崩れ落ちる（劇的）", en: "cinematic, dramatic fall to floor" },
       { ja: "抱き寄せられて横臥（救済）", en: "cinematic, lying while being held, rescued" },
-      { ja: "ベッドで気絶（ドレスの裾広がり）", en: "cinematic, fainted on bed, dress skirt spread" },]
+      { ja: "ベッドで気絶（ドレスの裾広がり）", en: "cinematic, fainted on bed, dress skirt spread" },
+      { ja: "ベッドでのびをする", en: "stretching on bed, morning vibe" },
+      { ja: "シーツに包まれる", en: "wrapped in sheets, cinematic" },
+      { ja: "水面に浮かぶ（仰向け）", en: "floating on water surface, lying on back" },
+      { ja: "花畑で眠る", en: "sleeping in a field of flowers, peaceful" },
+      { ja: "瓦礫の上に倒れ伏す", en: "collapsed on rubble, battle aftermath" },
+      { ja: "血だまりに倒れる", en: "lying in a pool of blood, dramatic cinematic" },
+      { ja: "魔法陣の上で横たわる", en: "lying inside a glowing magic circle" }
+]
   },
-
   "✅ 完成ポーズ：🚶 行動 (Movement)": {
     "軽移動": [
       { ja: "歩く（軽移動）", en: "walking pose, casual steps" },
@@ -2193,7 +2208,13 @@
       { ja: "ゆっくり歩く（自然）", en: "walking slowly, natural gait" },
       { ja: "小さく歩く（控えめ）", en: "walking with small steps, modest" },
       { ja: "つま先歩き（忍び）", en: "tiptoe walking, sneaking" },
-      { ja: "スキップ（軽快）", en: "skipping, playful" },],
+      { ja: "スキップ（軽快）", en: "skipping, playful" },
+      { ja: "後ろ歩き", en: "walking backward" },
+      { ja: "横歩き（カニ歩き）", en: "side stepping, walking sideways" },
+      { ja: "散歩（リラックス）", en: "strolling, relaxed walking" },
+      { ja: "水たまりを避ける歩き", en: "stepping over puddle, walking carefully" },
+      { ja: "足踏み", en: "marching in place" }
+    ],
     "移動": [
       { ja: "走る（移動）", en: "running pose, forward motion" },
       { ja: "小走り（ジョグ）", en: "jogging pose, light run" },
@@ -2208,7 +2229,12 @@
       { ja: "ジョギング", en: "jogging" },
       { ja: "走る（腕振り）", en: "running, arms pumping" },
       { ja: "走り出し（スタート）", en: "running start, launching" },
-      { ja: "全力疾走（フォーム）", en: "sprinting, athletic form" },],
+      { ja: "全力疾走（フォーム）", en: "sprinting, athletic form" },
+      { ja: "駆け足", en: "dashing, quick run" },
+      { ja: "障害物を避けて走る", en: "running dodging obstacles" },
+      { ja: "並んで走る", en: "running side by side" },
+      { ja: "振り返りながら走る", en: "running while looking back" }
+    ],
     "強移動": [
       { ja: "ダッシュ開始（強移動）", en: "sprint start pose, explosive motion" },
       { ja: "ダッシュ中（前傾）", en: "sprinting, forward lean, powerful strides" },
@@ -2223,7 +2249,12 @@
       { ja: "ダッシュ（前傾）", en: "dash, forward lean, fast" },
       { ja: "突進（一直線）", en: "charging forward, straight rush" },
       { ja: "ステップイン（踏み込み）", en: "step-in, driving forward" },
-      { ja: "滑り込み（急停止）", en: "power slide stop, skidding" },],
+      { ja: "滑り込み（急停止）", en: "power slide stop, skidding" },
+      { ja: "猛ダッシュ", en: "mad dash, intense sprinting" },
+      { ja: "スライディング", en: "sliding on ground, high speed" },
+      { ja: "壁蹴りジャンプ", en: "wall jump, parkour" },
+      { ja: "タックル（強移動）", en: "body tackle, charging impact" }
+    ],
     "空中": [
       { ja: "ジャンプ（空中）", en: "jumping pose, airborne moment" },
       { ja: "空中ひねり", en: "mid-air twist, dynamic rotation" },
@@ -2239,7 +2270,12 @@
       { ja: "ジャンプ（膝曲げ）", en: "jumping, knees bent" },
       { ja: "跳躍（両足たたむ）", en: "leaping, legs tucked" },
       { ja: "空中ひねり（スピン）", en: "mid-air twist, spinning" },
-      { ja: "着地直前（脚伸ばし）", en: "mid-air before landing, legs extended" },],
+      { ja: "着地直前（脚伸ばし）", en: "mid-air before landing, legs extended" },
+      { ja: "空中回転（縦）", en: "front flip, somersault in air" },
+      { ja: "スーパーヒーロー着地", en: "superhero landing, dynamic impact" },
+      { ja: "空中で武器を構える", en: "aiming weapon in mid-air" },
+      { ja: "落下姿勢（スカイダイブ）", en: "freefall pose, skydiving posture" }
+    ],
     "回避": [
       { ja: "スライド回避（回避）", en: "sliding dodge pose, evasive movement" },
       { ja: "バックステップ（回避）", en: "backstep dodge, evasive" },
@@ -2255,7 +2291,12 @@
       { ja: "回避ロール（前転）", en: "dodge roll, forward roll" },
       { ja: "サイドステップ回避", en: "sidestep dodge" },
       { ja: "後方ステップ回避", en: "backstep dodge" },
-      { ja: "しゃがみ回避（低姿勢）", en: "crouch dodge, low stance" },],
+      { ja: "しゃがみ回避（低姿勢）", en: "crouch dodge, low stance" },
+      { ja: "バックフリップ回避", en: "backflip dodge, evasive acrobatics" },
+      { ja: "ダッキング（頭を下げる）", en: "ducking, dodging attack" },
+      { ja: "スウェー（上体をそらす）", en: "sway back, leaning back to dodge" },
+      { ja: "側転回避", en: "cartwheel dodge" }
+    ],
     "戦闘：構え": [
       { ja: "戦闘構え（基本）", en: "combat stance, ready" },
       { ja: "戦闘構え（戦闘）", en: "combat stance, ready to fight" },
@@ -2263,6 +2304,9 @@
       { ja: "抜刀（戦闘）", en: "drawing weapon, quick draw" },
       { ja: "射撃姿勢（小物なし）", en: "combat stance, aiming pose (no prop)" },
       { ja: "射撃構え（両手）", en: "aiming stance, two-handed" },
+      { ja: "低い姿勢の構え", en: "low combat stance, crouching stance" },
+      { ja: "武器を背後に隠す構え", en: "hiding weapon behind back stance" },
+      { ja: "挑発的な構え", en: "provocative combat stance, beckoning enemy" }
     ],
     "戦闘：攻撃": [
       { ja: "斬撃動作（戦闘）", en: "slashing motion, dynamic attack" },
@@ -2276,6 +2320,10 @@
       { ja: "蹴り（前蹴り）", en: "kick, front kick" },
       { ja: "回し蹴り（戦闘）", en: "roundhouse kick, dynamic strike" },
       { ja: "戦闘：回し蹴り", en: "combat action, roundhouse kick" },
+      { ja: "連続パンチ", en: "rapid punches, flurry of blows" },
+      { ja: "兜割り（振り下ろし）", en: "overhead strike, strong downward slash" },
+      { ja: "回転斬り", en: "spinning slash, whirlwind attack" },
+      { ja: "アッパーカット", en: "uppercut punch, rising strike" }
     ],
     "戦闘：防御": [
       { ja: "構え（防御）", en: "defensive stance, guard up" },
@@ -2283,12 +2331,19 @@
       { ja: "戦闘：ガード構え", en: "combat stance, guard up, defensive posture" },
       { ja: "受け流し（戦闘）", en: "deflecting motion, counter-ready" },
       { ja: "回避しながらガード", en: "guarding while dodging, defensive move" },
+      { ja: "クロスガード", en: "cross guard, blocking with both arms" },
+      { ja: "武器で防ぐ", en: "blocking with weapon, parrying" },
+      { ja: "シールドを構える", en: "shielding stance, holding up shield" },
+      { ja: "片手で受け止める", en: "catching attack with one hand" }
     ],
     "戦闘：被弾": [
       { ja: "戦闘：被弾よろけ", en: "hit reaction, staggering backward" },
       { ja: "被弾よろけ", en: "hit reaction, staggering" },
       { ja: "被弾（膝をつく）", en: "hit reaction, dropping to one knee" },
       { ja: "被弾（のけぞり）", en: "hit reaction, recoiling backward" },
+      { ja: "吹き飛ばされ", en: "knocked back, flying through air" },
+      { ja: "壁に激突", en: "slammed into wall, hit reaction" },
+      { ja: "膝をついて耐える", en: "enduring hit on one knee, struggling" }
     ],
     "激動": [
       { ja: "突進（激動）", en: "charging forward, aggressive rush" },
@@ -2306,7 +2361,11 @@
       { ja: "吹き飛ばされる", en: "knocked back, flying" },
       { ja: "転倒（つまずき）", en: "tripping and falling" },
       { ja: "滑り落ちる", en: "slipping down" },
-      { ja: "崩れ落ち（膝から）", en: "collapsing to knees" },]
+      { ja: "崩れ落ち（膝から）", en: "collapsing to knees" },
+      { ja: "大爆発から逃げる", en: "running from explosion, dramatic action" },
+      { ja: "地面が揺れてよろける", en: "staggering from earthquake, losing footing" },
+      { ja: "突風に耐える", en: "bracing against strong wind" }
+    ]
   }
 
 };
@@ -2619,7 +2678,7 @@ const POSE_STAGE1_BODY = {
 
   }
 };
-const POSE_STAGE2_ACTION = {
+  const POSE_STAGE2_ACTION = {
     "🟡 STAGE 2：アクション・非日常 (Action)": {
       "移動・運動": [
         { ja: "ダッシュ", en: "sprinting" },
@@ -2650,13 +2709,149 @@ const POSE_STAGE2_ACTION = {
     }
   };
 
-  // ---------- Stage 4: R-ish (non-explicit) - gated ----------
-  const POSE_STAGE4_R = {
-    "🔴 STAGE 4：艶・ムード (R Mood)": {
-      "ムード": [
-        { ja: "誘惑ポーズ（ムード）", en: "seductive pose" },
-        { ja: "視線で誘う", en: "inviting gaze" },
-        { ja: "身体のライン強調", en: "accentuating body lines" },
+  // ---------- R-18 (hidden unless unlocked) ----------
+  // 2階層構造 { 大カテ: { 小カテ: [] } } を維持（renderCategories構造は現行方式のまま）
+  // OFF時は存在を匂わせない（C方針）
+  const POSE_R18 = {
+    "🔴 R-18": {
+      // --- 上位概念（完成ポーズの上位版） ---
+      "接触特化：壁": [
+        { ja: "壁に手をつく", en: "hands on wall" },
+        { ja: "壁に背中を預ける", en: "back against wall" },
+        { ja: "壁際に追い詰める構図", en: "cornering pose at wall" },
+        { ja: "壁にもたれ見下ろし", en: "leaning on wall, looking down" },
+      ],
+      "接触特化：床": [
+        { ja: "床に手をつく", en: "hands on floor" },
+        { ja: "床にひざをつく", en: "kneeling on floor" },
+        { ja: "床に肘をつく", en: "elbows on floor" },
+        { ja: "床に崩れ落ちる", en: "slumping onto floor" },
+      ],
+      "接触特化：物体": [
+        { ja: "手すりにもたれる", en: "leaning on railing" },
+        { ja: "机に腰掛ける", en: "sitting on desk" },
+        { ja: "椅子の背に手を置く", en: "hand on chair back" },
+        { ja: "段差に座る", en: "sitting on ledge" },
+      ],
+
+      "主従構図：主導": [
+        { ja: "導く立ち姿", en: "leading stance" },
+        { ja: "手を取って誘導", en: "guiding by hand" },
+        { ja: "一歩踏み込む", en: "stepping in" },
+        { ja: "見下ろす視線", en: "looking down with intent" },
+      ],
+      "主従構図：従属": [
+        { ja: "上目遣い", en: "looking up" },
+        { ja: "体をすくめる", en: "shrinking posture" },
+        { ja: "手を胸元に寄せる", en: "hands held close to chest" },
+        { ja: "受け身の姿勢", en: "receptive posture" },
+      ],
+      "主従構図：緊張": [
+        { ja: "距離が近い", en: "close distance tension" },
+        { ja: "息がかかる距離", en: "breath-close distance" },
+        { ja: "指先が触れそう", en: "fingertips almost touching" },
+        { ja: "一瞬の沈黙", en: "a moment of silence" },
+      ],
+
+      // --- 完成ポーズ（R-18側：上位版） ---
+      "完成ポーズ：立ち": [
+        { ja: "誘惑の立ち", en: "seductive standing pose" },
+        { ja: "腰をひねる立ち", en: "standing, hip twist" },
+        { ja: "肩越しに振り返る", en: "looking back over shoulder" },
+        { ja: "脚をクロスして立つ", en: "standing with crossed legs" },
+        { ja: "距離ゼロで向き合う", en: "standing face-to-face, zero distance" },
+        { ja: "相手の顎に手を添える", en: "hand on partner's chin, intimate" },
+        { ja: "背後から抱き寄せる", en: "pulling close from behind, embrace" },
+        { ja: "壁に押し付ける立ち姿", en: "standing, pinning against wall" },
+        { ja: "服の裾を掴む（立ち）", en: "standing, grabbing hem of clothes" },
+        { ja: "背中を密着させる", en: "standing, pressing backs together" },
+        { ja: "耳元へ顔を寄せる（立ち）", en: "standing, leaning face to ear" },
+        { ja: "ネクタイを引く（立ち）", en: "standing, pulling necktie" },
+        { ja: "M字開脚（立位）", en: "standing m-shaped posture, presenting pussy, spread legs" },
+        { ja: "立ちバック（前屈み）", en: "standing, bent over, presenting ass, from behind" },
+        { ja: "服をたくし上げる", en: "lifting shirt, revealing breasts" },
+        { ja: "スカートをまくる", en: "skirt lift, revealing panties" },
+        { ja: "下着を下ろす", en: "pulling down panties, half-pulled down panties" }, 
+        { ja: "I字バランス（開脚）", en: "standing split, i-shaped balance, presenting pussy" },
+        { ja: "立ちバック（壁手つき）", en: "bent over, hands on wall, presenting ass" },
+        { ja: "片脚を絡みつける", en: "standing, one leg raised, wrapping leg around waist" },
+        { ja: "お尻を突き出す（立ち）", en: "sticking out ass, standing, bent over" },
+        { ja: "胸を押し付ける", en: "pressing breasts against, pressing against partner" }  
+      ],
+      "完成ポーズ：座り": [
+        { ja: "椅子に深く座る", en: "deep seated pose" },
+        { ja: "脚を組む座り", en: "seated, legs crossed" },
+        { ja: "前のめり座り", en: "seated, leaning forward" },
+        { ja: "片脚を上げる座り", en: "seated, one leg raised" },
+        { ja: "膝の上に座る", en: "sitting on someone's lap" },
+        { ja: "椅子にもたれて誘う", en: "leaning back on chair, inviting" },
+        { ja: "相手を跨ぐように座る", en: "sitting straddling partner" },
+        { ja: "床座りで相手にもたれる", en: "sitting on floor, leaning heavily on partner" },
+        { ja: "膝の上で抱きつく", en: "sitting on lap, hugging tightly" },
+        { ja: "後ろから抱きかかえて座る", en: "sitting, embracing from behind" },
+        { ja: "机の上に座って見下ろす", en: "sitting on desk looking down, dominant" }, 
+        { ja: "M字開脚（座り）", en: "seated, m-shaped posture, legs spread wide" },
+        { ja: "対面座位（密着）", en: "seated, facing partner, straddling, mating press" },
+        { ja: "顔面騎乗", en: "face sitting, facesitting" },
+        { ja: "パイズリ（座り）", en: "paizuri, breast massage, breast sex" },
+        { ja: "手淫（座り）", en: "handjob, grabbing penis, seated" }, 
+        { ja: "背面座位（後背位）", en: "sitting on partner's lap, facing away, reverse cowgirl" },
+        { ja: "ぺたん座り（前傾・尻見せ）", en: "w-sitting, bent over, presenting ass" },
+        { ja: "机の縁に座る（開脚）", en: "sitting on edge of desk, legs spread wide" },
+        { ja: "ヤンキー座り（開脚）", en: "squatting, open legs, presenting pussy" },
+        { ja: "脚を肩に掛けられる（座り）", en: "seated, legs on partner's shoulders" }
+      ],
+      "完成ポーズ：横臥": [
+        { ja: "横向きに寝る（誘惑）", en: "lying on side, alluring" },
+        { ja: "仰向けで腕を上げる", en: "lying on back, arms raised" },
+        { ja: "うつ伏せで振り返る", en: "lying on stomach, looking back" },
+        { ja: "膝を立てて横臥", en: "lying, knees up" },
+        { ja: "枕元で寄り添う", en: "lying close, cuddling by pillow" },
+        { ja: "指を絡める", en: "intertwined fingers, intimate" },
+        { ja: "覆いかぶさる（横臥）", en: "lying on top of partner" },
+        { ja: "シーツを握りしめる", en: "lying, gripping bedsheets tightly" },
+        { ja: "押し倒された体勢", en: "lying, pinned down posture" },
+        { ja: "腕枕で寄り添う", en: "lying on partner's arm, cuddling" },
+        { ja: "うつ伏せで相手を見上げる", en: "lying on stomach looking up at partner" }, 
+        { ja: "正常位", en: "missionary position, lying on back, mating press" },
+        { ja: "騎乗位", en: "cowgirl position, straddling partner, riding" },
+        { ja: "背面騎乗位", en: "reverse cowgirl position" },
+        { ja: "四つん這い（バック）", en: "doggy style, all fours, presenting ass" },
+        { ja: "フェラチオ（横臥）", en: "fellatio, lying down, blowjob" },
+        { ja: "クンニリングス（横臥）", en: "cunnilingus, lying down, pussy eating" },
+        { ja: "拘束状態（横臥）", en: "bound, tied up, lying down, hogtie" }, 
+        { ja: "仰向け開脚（大の字）", en: "lying on back, legs spread wide, open eagle" },
+        { ja: "仰向け（脚を胸に寄せる）", en: "lying on back, legs pulled back, knees to chest, presenting pussy" },
+        { ja: "うつ伏せ（腰上げ）", en: "lying on stomach, hips raised, prone bone posture" },
+        { ja: "横向き（片脚上げ）", en: "lying on side, one leg raised, side-lying sex" },
+        { ja: "ベッドの端（脚垂らし）", en: "lying on edge of bed, legs dangling" }
+      ],
+      "完成ポーズ：行動": [
+        { ja: "近づく一歩", en: "a step closer" },
+        { ja: "距離を詰める", en: "closing the distance" },
+        { ja: "壁際へ誘導", en: "guiding toward the wall" },
+        { ja: "静かに覆いかぶさる", en: "slowly looming over" },
+        { ja: "手を引いて連れ出す", en: "leading by the hand" },
+        { ja: "耳元で囁く", en: "whispering near the ear" },
+        { ja: "引き寄せる動作", en: "pulling partner closer" },
+        { ja: "押し倒す動作", en: "pushing partner down" },
+        { ja: "服を脱がせる仕草", en: "gesture of undressing partner" },
+        { ja: "視線を絡ませながら近づく", en: "approaching while locking eyes" },
+        { ja: "顎をクイッと持ち上げる", en: "lifting partner's chin, ago-kui" }, 
+        { ja: "挿入", en: "insertion, penetration, sex" },
+        { ja: "指挿入", en: "fingering, pussy fingering" },
+        { ja: "ペニスによる振動挿入", en: "(Rape, vaginal penetration and vibratory intercourse with a thick penis)" },
+        { ja: "スライム触手挿入", en: "(slime tentacle inserted deeply)" },
+        { ja: "あそこを見せる", en: "(show off pussy)" },
+        { ja: "くぱぁ", en: "(spread pussy)" },
+        { ja: "ディープキス", en: "french kiss, deep kiss, saliva trail" },
+        { ja: "胸を激しく揉む", en: "groping breasts, grabbing breasts, breast squeeze" },
+        { ja: "お尻を揉む", en: "groping ass, grabbing ass" }, 
+        { ja: "腰を振る・擦り合わせる", en: "thrusting hips, grinding" },
+        { ja: "体を反らす（快感）", en: "arching back, flinching" },
+        { ja: "太ももをすり合わせる", en: "squeezing thighs together, rubbing thighs" },
+        { ja: "後ろ手を伸ばす（相手を引く）", en: "reaching back, pulling partner, back to back" },
+        { ja: "這い寄る（四つん這い）", en: "crawling, crawling towards viewer" }
       ],
     }
   };
@@ -2759,16 +2954,11 @@ const POSE_STAGE2_ACTION = {
       renderCategories(root, POSE_COMPLETED, "v14-completed");
       renderCategories(root, POSE_STAGE1_BODY, "v14-body");
 
-      // R Mood (gated)
+      // R-18 (hidden unless unlocked)
 
       if (IS_R18_UNLOCKED){
-        renderCategories(root, POSE_STAGE4_R, "v14-r");
-      } else {
-        // keep a subtle hint without exposing content
-        const hint = document.createElement("div");
-        hint.style.cssText = "margin:10px 0 0 0; font-size:0.86em; color:#888;";
-        hint.textContent = "🔒 艶・ムード は R-18シークレットモードONの時だけ表示されます（quality_preset側のトグルに連動）";
-        root.appendChild(hint);
+        try { root.appendChild(makeSeparator("🔴 R-18", "#d33", "#fff0f0")); } catch(e){}
+        renderCategories(root, POSE_R18, "v14-r18");
       }
 
       // expose renderer for pose_r18 (v13) to mount into pose-master-root

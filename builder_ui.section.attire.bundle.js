@@ -3646,3 +3646,136 @@ wrap.appendChild(title);
     document.addEventListener("DOMContentLoaded", boot);
   }
 })();
+// --- builder_ui.section.attire.v22.js ---
+(function(){
+  "use strict";
+  const VERSION = 22; // 拡張パックS (限界突破R-18・フェティッシュ全部乗せ)
+  const KEY = "attire";
+
+  // ★ シークレットモード判定
+  const IS_UNLOCKED = localStorage.getItem("MY_SECRET_UNLOCK") === "true";
+
+  const ATTIRE_DATA = {
+    "🤯 極限着衣崩れ・チラリズム (Extreme Disheveled)": [
+      { ja: "片乳出し", en: "one breast exposed, clothes slipping off" },
+      { ja: "パンツ片足引っ掛け", en: "panties around one leg" },
+      { ja: "ジッパー半開き", en: "zipper half down, skirt unzipped" },
+      { ja: "ボタン弾け飛び", en: "buttons popping off, clothes bursting open" },
+      { ja: "ノーブラ浮き出し", en: "no bra, nipples visible through clothes, tight shirt" },
+      { ja: "パンチラ (風・動き)", en: "upskirt, panties visible" },
+      { ja: "服ビリビリ (大破)", en: "heavily torn clothes, almost naked" }
+    ],
+    "⛓️ 限界拘束・洗脳 (Hardcore Bondage & Mind Control)": [
+      { ja: "洗脳奴隷の首輪", en: "mind control collar, slave collar, glowing runes, blank stare" },
+      { ja: "リード付き首輪", en: "collar and leash, held by leash" },
+      { ja: "重厚な鎖と枷", en: "heavy metal shackles, chains, chained to wall" },
+      { ja: "スプレッダーバー", en: "spreader bar, spread legs, metal cuffs" },
+      { ja: "真空ベッド", en: "vacuum bed bondage, latex, sealed" },
+      { ja: "完全感覚遮断", en: "sensory deprivation, blindfold, headphones, gag" },
+      { ja: "吊り下げ拘束", en: "suspension bondage, hoisted up" }
+    ],
+    "🧞‍♀️ 異世界・スレイブ (Fantasy Dark/Slave)": [
+      { ja: "奴隷のボロ布", en: "slave rags, dirty clothes, iron collar" },
+      { ja: "淫魔の過激アーマー", en: "revealing succubus armor, demonic motifs, barely clothed" },
+      { ja: "金属ビキニ", en: "metal bikini armor, chainmail bikini" },
+      { ja: "透視魔法の服", en: "x-ray magic, clothes partly transparent, magical glow" },
+      { ja: "娼館の踊り子服", en: "harem dancer outfit, revealing silk, gold chains" },
+      { ja: "生贄の祭祀服", en: "sacrificial maiden outfit, sheer white fabric, bound" }
+    ],
+    "👙 変態ランジェリー (Abnormal Lingerie)": [
+      { ja: "Vストリング", en: "v-string, extremely thin thong" },
+      { ja: "パールショーツ", en: "pearl thong" },
+      { ja: "マイクロ貝殻ブラ", en: "tiny shell bra, pasties size" },
+      { ja: "葉っぱ一枚", en: "single leaf covering, nature's clothes" },
+      { ja: "全身網タイツ", en: "bodystocking, fishnet body suit" },
+      { ja: "穴あき全身網タイツ", en: "crotchless bodystocking, torn fishnets" },
+      { ja: "極細紐パン", en: "micro string panties" }
+    ],
+    "🐙 異種姦・生体侵食+ (Alien & Parasite)": [
+      { ja: "スライム半溶解服", en: "clothes melted by slime, partially transparent, sticky clothes" },
+      { ja: "触手コルセット", en: "tentacle laced corset, living restraints" },
+      { ja: "膨満腹強調スーツ", en: "tight clothes highlighting pregnant belly, stomach bulge" },
+      { ja: "寄生植物の蔦", en: "parasitic plant clothes, vines wrapping body, flower blooming from body" },
+      { ja: "異形の粘液コート", en: "alien mucus coating, slimy layer" }
+    ]
+  };
+
+  const DICT = {
+    "one breast exposed": "片乳出し", "panties around one leg": "片足パンツ", "zipper half down": "ジッパー半開き",
+    "buttons popping off": "ボタン弾け", "nipples visible through clothes": "ノーブラ浮き出し",
+    "mind control collar": "洗脳の首輪", "slave collar": "奴隷の首輪", "collar and leash": "リード付き首輪",
+    "heavy metal shackles": "重厚な枷", "spreader bar": "スプレッダーバー", "vacuum bed bondage": "真空ベッド",
+    "sensory deprivation": "感覚遮断", "slave rags": "奴隷のボロ布", "revealing succubus armor": "過激サキュバスアーマー",
+    "metal bikini armor": "金属ビキニ", "x-ray magic": "透視魔法", "harem dancer outfit": "娼館踊り子服",
+    "v-string": "Vストリング", "pearl thong": "パールショーツ", "tiny shell bra": "極小貝殻ブラ",
+    "single leaf covering": "葉っぱ一枚", "bodystocking": "ボディストッキング", "crotchless bodystocking": "穴あき全身網タイツ",
+    "clothes melted by slime": "スライム溶解服", "tentacle laced corset": "触手コルセット",
+    "tight clothes highlighting pregnant belly": "膨満腹強調服", "parasitic plant clothes": "寄生植物の服"
+  };
+
+  const API = {
+    initUI(container) {
+      if (!IS_UNLOCKED) return;
+      if (window.__outputTranslation) window.__outputTranslation.register(DICT);
+
+      const mount = (retry = 0) => {
+        let parent = document.querySelector("#list-attire");
+        if (!parent) { 
+          if (retry < 50) setTimeout(() => mount(retry + 1), 100);
+          return; 
+        }
+
+        // 重複防止
+        if (parent.querySelector(".attire-v22-container")) return;
+
+        const createCat = (title, items) => {
+          const details = document.createElement("details");
+          details.className = "attire-cat attire-r18-max";
+          // 限界突破用により過激な色枠に
+          details.style.cssText = "margin-bottom:6px; border:2px solid #ff0055; border-radius:6px; background:#fff;";
+          const summary = document.createElement("summary");
+          summary.textContent = title;
+          summary.style.cssText = "font-weight:bold; padding:8px 10px; cursor:pointer; background:#fff0f5; color:#cc0044;";
+          details.appendChild(summary);
+          const content = document.createElement("div");
+          content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:6px;";
+          items.forEach(item => {
+            const label = document.createElement("label");
+            label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer;";
+            const cb = document.createElement("input");
+            cb.type = "checkbox"; cb.dataset.en = item.en; cb.style.marginRight = "6px";
+            label.appendChild(cb); label.appendChild(document.createTextNode(`${item.ja}`));
+            label.title = item.en; // 英語はツールチップで表示
+            content.appendChild(label);
+          });
+          details.appendChild(content);
+          return details;
+        };
+
+        const root = document.createElement("div");
+        root.className = "attire-v22-container";
+        
+        const sep = document.createElement("div");
+        sep.style.cssText = "margin:20px 0 10px 0; border-top:2px dashed #ff0055; text-align:center; color:#ff0055; font-size:0.9em; font-weight:bold;";
+        sep.textContent = "🔥 R-18 限界突破・マニアック (Max Fetish) 🔥"; 
+        
+        root.appendChild(sep);
+        Object.entries(ATTIRE_DATA).forEach(([cat, items]) => root.appendChild(createCat(cat, items)));
+        
+        const contentArea = parent.querySelector(".section-content") || parent;
+        contentArea.appendChild(root);
+      };
+
+      mount();
+    },
+    getTags() {
+      const tags = [];
+      const root = document.querySelector(".attire-v22-container");
+      if(root) {
+        root.querySelectorAll("input:checked").forEach(cb => tags.push(cb.dataset.en));
+      }
+      return tags;
+    }
+  };
+  window.__registerPromptPart(KEY, VERSION, API);
+})();

@@ -112,9 +112,7 @@
 
   window.__registerPromptPart(KEY, VERSION, API);
 })();
-})();
 
-(function(){
 // --- builder_ui.section.effect.v2.js ---
 (function(){
   "use strict";
@@ -174,7 +172,6 @@
       { ja: "空気の波紋", en: "ripples in air" },
       { ja: "歪み波", en: "distortion waves" },
       { ja: "エネルギー歪み", en: "energy distortion" },
-      // ★修正: 翻訳漏れを防ぐため分割
       { ja: "空気の歪み", en: "air distortion" },
       { ja: "陽炎 (Heat Haze)", en: "heat haze" }
     ],
@@ -287,14 +284,14 @@
   window.__registerPromptPart(KEY, VERSION, API);
 })();
 
-})();
-
-(function(){
 // --- builder_ui.section.effect.v3.js ---
 (function(){
   "use strict";
-  const VERSION = 3; // 拡張パック: デジタル・UI・画面演出 (完成版)
+  const VERSION = 3; // 拡張パック: デジタル・UI・画面演出 + R-18シークレット
   const KEY = "effect";
+
+  // ★ シークレットモード判定
+  const IS_UNLOCKED = localStorage.getItem("MY_SECRET_UNLOCK") === "true";
 
   const CATEGORIES = {
     "📺 配信・実況・SNS (Stream & Social)": [
@@ -302,7 +299,6 @@
       { ja: "YouTube風 (再生画面)", en: "youtube interface, video player, progress bar, play button, red accent" },
       { ja: "Twitch風 (紫/ゲーミング)", en: "twitch interface, purple theme, live chat overlay, facecam frame, gamer room" },
       { ja: "ニコニコ風 (流れる文字)", en: "niconico, danmaku, scrolling text overlay, many comments on screen" },
-      // ★TikTok修正: スマホ本体が出ないよう、UIパーツのみを指定
       { ja: "TikTok風 (縦動画UI)", en: "tiktok interface, vertical video, social media app, music note icon, heart button, share icon, ui overlay" },
       { ja: "コメント欄オーバーレイ", en: "comment stream, chat log, text overlay, live reaction" },
       { ja: "ウェブカメラ枠 (ワイプ)", en: "webcam window, picture in picture, facecam, rectangle frame" },
@@ -324,7 +320,7 @@
       { ja: "ドット絵・レトロゲー", en: "pixel art, 8-bit, 16-bit, retro game style" },
       { ja: "ガチャ画面風", en: "gacha screen, summon result, ssr, rarity stars" }
     ],
-      "🪩 ホログラフィック (Holographic)": [
+    "🪩 ホログラフィック (Holographic)": [
       { ja: "投影ホロ（存在）", en: "holographic projection, hologram, semi-transparent body, glowing edges, volumetric light body" },
       { ja: "投影ホロUI（HUD/AR）", en: "holographic ui, floating UI panels, AR interface, translucent interface, holographic screen" },
       { ja: "素材ホロ（虹色反射）", en: "holographic material, iridescent surface, holographic foil, prismatic reflections, rainbow diffraction, thin film interference" },
@@ -333,9 +329,8 @@
       { ja: "デジタルグリッド", en: "digital grid, wireframe overlay, data lines" },
       { ja: "クロマティック・トレイル", en: "chromatic light trails, spectral highlights, color separation glow" },
       { ja: "ネオングロー", en: "neon glow, emissive lighting, cyberpunk glow" }
-
     ],
-"📹 モニター・画質演出 (Screen Artifacts)": [
+    "📹 モニター・画質演出 (Screen Artifacts)": [
       { ja: "VHS (ビデオテープ風)", en: "vhs artifacts, tracking error, magnetic tape noise, 90s footage" },
       { ja: "グリッチ (バグ・ノイズ)", en: "glitch art, datamoshing, digital distortion, corrupted image" },
       { ja: "砂嵐・スタティック", en: "static noise, television snow, grainy texture" },
@@ -345,31 +340,46 @@
       { ja: "魚眼レンズ", en: "fisheye lens, distorted view, gopro footage" }
     ],
     "🖼️ 枠・フレーム (Frames)": [
-      // ★レターボックス強化: 強調構文と映画用語を追加
       { ja: "レターボックス (映画枠)", en: "letterbox, (black bars:1.4), movie screencap, cinematic aspect ratio, widescreen, anamorphic lens, 2.35:1" },
       { ja: "ポラロイド枠", en: "polaroid frame, instant photo border" },
       { ja: "スマホ画面越し", en: "view through smartphone, phone camera interface, rec button" }
     ]
   };
 
+  // ==========================================
+  // ★ R-18（シークレット）専用エフェクト
+  // ==========================================
+  const SECRET_CATEGORIES = {
+    "💕 魅惑の空気感・吐息 (Sensual Atmosphere)": [
+      { ja: "ピンクの吐息", en: "pink breath" },
+      { ja: "白く霞んだ吐息", en: "foggy breath trails" },
+      { ja: "熱気・湯気", en: "steamy, hot atmosphere" },
+      { ja: "ピンク色の空気感", en: "pink atmosphere" },
+      { ja: "官能的な照明", en: "sensual lighting" },
+      { ja: "エロティックな空間", en: "erotic atmosphere" }
+    ],
+    "✨ 漫画的演出・パーティクル (Sensual Particles)": [
+      { ja: "♡のパーティクル", en: "heart particles" },
+      { ja: "浮かぶ♡マーク", en: "floating hearts" },
+      { ja: "♡型の吐息の跡", en: "smeared heart-shaped breath patches" },
+      { ja: "あえぎ声 (文字浮かび)", en: "erotic moan text floating" },
+      { ja: "愛のオーラ", en: "love aura" },
+      { ja: "魅惑的な輝き", en: "seductive glow" }
+    ]
+  };
+
   const DICT = {
-    // 配信・SNS系
     "livestream": "配信画面", "live streaming interface": "配信UI", "overlay": "オーバーレイ", "viewer count": "視聴者数",
     "youtube interface": "YouTube風UI", "video player": "動画プレーヤー", "progress bar": "進行バー", "play button": "再生ボタン", "red accent": "赤アクセント",
     "twitch interface": "Twitch風UI", "purple theme": "紫テーマ", "live chat overlay": "チャット欄", "facecam frame": "顔出し枠", "gamer room": "ゲーミング部屋",
     "niconico": "ニコニコ", "danmaku": "弾幕", "scrolling text overlay": "流れるコメント", "many comments on screen": "画面コメント",
-    
-    // TikTok関連
     "tiktok interface": "TikTok風UI", "vertical video": "縦動画", "social media app": "SNSアプリ", "music note icon": "音符アイコン", "heart button": "いいねボタン", "share icon": "シェアボタン", "ui overlay": "UI表示",
-    
     "comment stream": "コメント欄", "chat log": "チャットログ", "text overlay": "テキスト表示", "live reaction": "リアクション",
     "webcam window": "ワイプ枠", "picture in picture": "PinP", "facecam": "顔出し", "rectangle frame": "長方形枠",
     "instagram interface": "インスタ風UI", "social media post": "SNS投稿", "heart icon": "ハートアイコン", "smartphone screen": "スマホ画面",
     "mirror selfie": "鏡越し自撮り", "holding phone": "スマホ持ち", "phone screen reflection": "画面反射",
     "fake screenshot": "フェイクスクショ", "screen capture": "キャプチャ", "user interface": "UI",
     "vtuber": "VTuber", "virtual youtuber": "バーチャルYouTuber", "2d avatar": "2Dアバター", "anime avatar": "アニメアバター",
-
-    // ゲーム系
     "gameplay screenshot": "ゲーム画面", "in-game ui": "ゲームUI", "video game mechanics": "ゲームシステム",
     "hud": "HUD", "heads-up display": "ヘッドアップディスプレイ", "futuristic ui": "未来風UI", "sci-fi interface": "SF風UI",
     "health bar": "体力ゲージ", "life gauge": "HPバー", "status bar": "ステータスバー", "game icons": "ゲームアイコン",
@@ -379,8 +389,6 @@
     "visual novel style": "ノベルゲー風", "dating sim interface": "恋愛シムUI", "text box at bottom": "下部テキスト枠",
     "pixel art": "ドット絵", "8-bit": "8bit", "16-bit": "16bit", "retro game style": "レトロゲー風",
     "gacha screen": "ガチャ画面", "summon result": "召喚結果", "ssr": "SSR", "rarity stars": "レアリティ星",
-
-    // モニター・画質系
     "vhs artifacts": "VHSノイズ", "tracking error": "トラッキングエラー", "magnetic tape noise": "磁気テープノイズ", "90s footage": "90年代映像",
     "glitch art": "グリッチ", "datamoshing": "データモッシュ", "digital distortion": "デジタル歪み", "corrupted image": "破損画像",
     "static noise": "砂嵐", "television snow": "TVノイズ", "grainy texture": "粒子感",
@@ -388,12 +396,15 @@
     "cctv overlay": "監視カメラ枠", "security camera": "防犯カメラ", "night vision": "暗視", "rec icon": "RECアイコン", "monochrome": "モノクロ",
     "lowres": "低解像度", "jpeg artifacts": "JPEGノイズ", "compression noise": "圧縮ノイズ", "blurry": "ピンボケ",
     "fisheye lens": "魚眼レンズ", "distorted view": "歪んだ視界", "gopro footage": "GoPro映像",
-
-    // フレーム
     "letterbox": "レターボックス", "(black bars:1.4)": "黒帯(強)", "movie screencap": "映画スクショ風", "cinematic aspect ratio": "シネマ比率", "widescreen": "ワイドスクリーン", "anamorphic lens": "アナモルフィックレンズ", "2.35:1": "シネスコ",
-    "black bars": "黒帯",
-    "polaroid frame": "ポラロイド枠", "instant photo border": "インスタント写真枠",
-    "view through smartphone": "スマホ画面越し", "phone camera interface": "カメラインターフェース", "rec button": "録画ボタン"
+    "black bars": "黒帯", "polaroid frame": "ポラロイド枠", "instant photo border": "インスタント写真枠",
+    "view through smartphone": "スマホ画面越し", "phone camera interface": "カメラインターフェース", "rec button": "録画ボタン",
+    
+    // ★ R-18用の翻訳辞書を追加
+    "pink breath": "ピンクの吐息", "foggy breath trails": "白く霞んだ吐息", "steamy": "湯気", "hot atmosphere": "熱気", 
+    "pink atmosphere": "ピンク色の空気感", "sensual lighting": "官能的な照明", "erotic atmosphere": "エロティックな空間",
+    "heart particles": "♡のパーティクル", "floating hearts": "浮かぶ♡マーク", "smeared heart-shaped breath patches": "♡型の吐息の跡", 
+    "erotic moan text floating": "あえぎ声(文字)", "love aura": "愛のオーラ", "seductive glow": "魅惑的な輝き"
   };
 
   const API = {
@@ -406,15 +417,24 @@
       const root = document.createElement("div");
       root.className = "effect-v3-container";
 
-      const createCat = (title, items) => {
+      const createCat = (title, items, isSecret = false) => {
         const details = document.createElement("details");
         details.className = "effect-cat";
-        details.style.cssText = "margin-bottom:6px; border:1px solid #dcdcdc; border-radius:4px; background:#fff;";
+        
+        // シークレットの場合は枠線を赤っぽく
+        const borderColor = isSecret ? "#ffb3b3" : "#dcdcdc";
+        details.style.cssText = `margin-bottom:6px; border:1px solid ${borderColor}; border-radius:4px; background:#fff;`;
         details.open = false; 
 
         const summary = document.createElement("summary");
-        summary.innerHTML = `${title} <span style="font-size:0.8em; color:#20c997;">(UI)</span>`;
-        summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#f0fff9; color:#0c855a;";
+        
+        if (isSecret) {
+          summary.innerHTML = `${title} <span style="font-size:0.8em; color:#d9534f;">(R-18)</span>`;
+          summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#fff0f0; color:#d9534f;";
+        } else {
+          summary.innerHTML = `${title} <span style="font-size:0.8em; color:#20c997;">(UI)</span>`;
+          summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#f0fff9; color:#0c855a;";
+        }
         details.appendChild(summary);
 
         const content = document.createElement("div");
@@ -430,7 +450,6 @@
           cb.style.marginRight = "6px";
           
           label.appendChild(cb);
-          // 日本語のみ表示（マウスオーバーで英語）
           label.appendChild(document.createTextNode(`${item.ja}`));
           label.title = item.en;
           content.appendChild(label);
@@ -439,9 +458,17 @@
         return details;
       };
 
+      // 1. 通常のエフェクトカテゴリを描画
       Object.entries(CATEGORIES).forEach(([cat, items]) => {
-        root.appendChild(createCat(cat, items));
+        root.appendChild(createCat(cat, items, false));
       });
+
+      // 2. シークレットモードONの時だけ、R-18カテゴリを描画
+      if (IS_UNLOCKED) {
+        Object.entries(SECRET_CATEGORIES).forEach(([cat, items]) => {
+          root.appendChild(createCat(cat, items, true));
+        });
+      }
 
       const contentArea = parent.querySelector(".section-content") || parent;
       contentArea.appendChild(root);
@@ -458,6 +485,5 @@
 
   window.__registerPromptPart(KEY, VERSION, API);
 })();
-
 })();
 

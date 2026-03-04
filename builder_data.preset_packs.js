@@ -1597,17 +1597,87 @@
 
           { label: "🐙 触手基本セット", val: "(tentacles), (slime), (mucus), (living tentacles), (bioluminescent), (thick tentacle), (slimy texture), (wriggling)" },
           { label: "🐙 生体スーツ・モノキニ", val: "(living monokini), (tentacle suit), (slime bodysuit), (pulsing texture), (fused with skin), (translucent slime), (jelly fabric), (glowing seams), (clinging tightly)" },
-          { label: "🐙 スライム拘束", val: "(slime suit attack), (slime groping breasts), (slime sucking nipples), (arms locked behind back), (bound by slime), (unable to resist)" }
+          { label: "🐙 スライム拘束", val: "(slime suit attack), (slime groping breasts), (slime sucking nipples), (arms locked behind back), (bound by slime), (unable to resist)" }, 
+          { label: "触手迷宮の最下層", val: "(dungeon depths), (fleshy walls), (bioluminescent flora), (glowing pools of slime), (creepy atmosphere), (tentacles lurking in shadows)" },
+          { label: "サイバーパンクの歓楽街", val: "(cyberpunk red light district), (neon signs), (holographic girls), (dirty alleyway), (rain), (puddles reflecting neon), (futuristic slum)" },
+          { label: "廃ビル・無法地帯のアジト", val: "(abandoned building), (ruined interior), (graffiti), (dirty mattress on floor), (dim street light through broken window), (dusty air), (dangerous atmosphere)" },
+          { label: "マジックミラーの取調室", val: "(interrogation room), (two-way mirror), (metal table), (dim fluorescent light), (concrete walls), (voyeurism), (cramped space)" },
+          { label: "豪華なハーレムテント", val: "(harem tent), (middle eastern style), (silk pillows), (sheer curtains), (incense burner), (gold decorations), (warm sensual lighting)" }, 
+          { label: "培養水槽の中 (SF・洗脳)", val: "(inside a glass test tube), (filled with glowing green liquid), (bubbles), (cables attached to body), (breathing mask), (sci-fi laboratory), (dim lighting)" },
+          { label: "深夜の無人電車 (痴漢・露出)", val: "(empty train at midnight), (flickering fluorescent light), (moving scenery outside window), (hanging straps), (train interior), (suspenseful atmosphere)" },
+          { label: "ゴシック廃教会 (儀式・陵辱)", val: "(abandoned gothic church), (moonlight shining through broken stained glass), (dust particles), (ruined altar), (creepy shadows), (sacred but corrupted)" },
+          { label: "夜のVIPプール (ラグジュアリー)", val: "(night pool), (jacuzzi), (steam), (underwater lighting), (luxury hotel), (floating rose petals), (wet deck), (romantic but erotic)" },
+          { label: "魔王城の深部・寝室 (ファンタジー)", val: "(demon lord's bedchamber), (gothic architecture), (red silk bed canopy), (candles), (skulls), (luxurious but ominous), (dark fantasy)" },
+          { label: "魔法陣の地下室 (生贄)", val: "(underground basement), (glowing magic circle on the floor), (dusty air), (grimoires scattered), (stone walls), (ritual setting), (eerie glow)" },
+          { label: "淫魔の森 (異界)", val: "(succubus forest), (glowing mushrooms), (pink mist), (twisted vines), (spores floating), (aphrodisiac atmosphere), (otherworldly)" },
+          { label: "スラム街のゴミ捨て場", val: "(slum alleyway), (trash bags), (chainlink fence), (rain), (puddles reflecting neon), (dirty aesthetic), (dangerous area)" },
+          { label: "宇宙船のキャビン (無重力)", val: "(spaceship cabin), (stars outside window), (zero gravity environment), (floating objects), (holographic screens), (sci-fi interior)" },
+          { label: "ボロボロの公衆トイレ", val: "(dirty public restroom), (graffiti on walls), (flickering light), (broken mirror), (dirty tiles), (cramped stall), (grungy aesthetic)" }
         ];
 
-        // 🔞 なりきりおすすめセット（R-18）
+                        // 🔞 なりきりおすすめセット（R-18）
         // - 体位は「ポーズ」側に統合済みのため、ここでは出さない
-        var roleplayChildren = []; // 将来拡張用（今は空のまま）
+        var roleplayChildren = [
+          { label: "アスモデウス (色欲の悪魔)", val: "(lust demon), (asmodeus), (revealing dark outfit), (demon horns), (succubus wings), (heart-shaped pupils), (seductive smile), (bewitching aura), (glowing tattoos)" },
+          { label: "サキュバス (夢魔)", val: "(succubus), (micro bikini), (demon tail), (heart-shaped tail), (womb tattoo), (bat wings), (lewd expression), (fangs)" },
+          { label: "高級娼婦・花魁", val: "(courtesan), (oiran), (disheveled kimono), (bare shoulders), (kiseru), (heavy makeup), (alluring gaze), (sensual atmosphere)" },
+          { label: "悪堕ちシスター", val: "(corrupted nun), (revealing habit), (see-through clothes), (inverted cross), (lewd smile), (rosary), (mind break)" },
+          { label: "敗北した姫騎士", val: "(defeated knight), (princess knight), (broken armor), (torn clothes), (humiliation), (messy hair), (dirt on skin), (despair)" },
+          { label: "くノ一 (潜入・捕縛)", val: "(kunoichi), (ninja outfit), (fishnet armor), (thighhighs), (bound), (struggling), (ninja mask pulled down)" },
+          { label: "闇医者・マッドサイエンティスト", val: "(mad scientist), (unbuttoned lab coat), (underboob), (holding glowing syringe), (crazy smile), (stethoscope), (messy hair)" },
+          { label: "地雷系・病みかわ女子", val: "(jirai kei), (yamikawaii), (heavy makeup), (under-eye makeup), (dark circles), (oversized hoodie), (choker), (frilled skirt), (platform boots), (holding plushie), (mental instability)" },
+          { label: "アンドロイド娼婦 (SF)", val: "(android), (cyberpunk courtesan), (glowing artificial skin), (mechanical joints), (barcode tattoo), (latex bodysuit), (holographic accessories), (subservient expression)" },
+          { label: "ダークエルフの女戦士", val: "(dark elf), (dark skin), (white hair), (long pointed ears), (revealing leather armor), (tribal tattoos), (arrogant smile), (muscular female)" },
+          { label: "魅惑の占い師", val: "(fortune teller), (gypsy outfit), (veil), (lots of jewelry), (gold bangles), (cleavage), (mysterious smile), (crystal ball), (incense smoke)" },
+          { label: "女スパイ・エージェント", val: "(female spy), (secret agent), (tight black leather catsuit), (unzipped zipper), (holding silenced pistol), (tactical harness), (confident smirk)" },
+          { label: "妖艶な未亡人", val: "(widow), (mourning dress), (black veil), (black lace lingerie showing), (mature female), (melancholic expression), (seductive glance), (tears)" }, 
+          { label: "逆バニーガール (露出狂)", val: "(reverse bunny suit), (crotchless tights), (bare breasts), (pasties), (bunny ears), (bowtie), (shameless), (lewd smile)" },
+          { label: "魔法少女・堕ち (絶望)", val: "(magical girl), (corrupted), (broken wand), (torn magical outfit), (dark aura), (tears), (despair), (mind break), (blank stare)" },
+          { label: "吸血鬼の真祖 (ゴシック)", val: "(vampire lord), (gothic lolita), (fangs), (blood on lips), (red glowing eyes), (pale skin), (bat wings), (arrogant smile), (nobility)" },
+          { label: "ギャル・ビッチ (現代)", val: "(gyaru), (blonde hair), (heavy makeup), (tanned skin), (messy school uniform), (loose socks), (piercings), (sticking out tongue), (bitchy)" },
+          { label: "獣人・ケモミミ奴隷", val: "(beast girl), (wolf ears), (fluffy tail), (collar and leash), (bell choker), (subservient expression), (animalistic behavior), (kneeling)" },
+          { label: "女怪盗 (潜入・ピンチ)", val: "(phantom thief), (cat mask pulled down), (tight black leather catsuit), (holding stolen jewel), (sweat), (breathing heavily), (caught)" },
+          { label: "エイリアン娘 (人外SF)", val: "(alien girl), (blue skin), (sci-fi suit), (glowing markings), (tentacle hair), (non-human eyes), (curious expression)" },
+          { label: "サメ娘・モンスター (海洋)", val: "(shark girl), (mermaid elements), (gills), (sharp teeth), (wet skin), (scales on body), (predatory smile), (fin)" },
+          { label: "サディスティック女王様", val: "(dominatrix), (leather corset), (high heels), (holding whip), (stepping on viewer), (sadistic smile), (looking down on viewer), (dominant)" },
+          { label: "ポンコツ悪魔メイド", val: "(demon maid), (french maid outfit), (succubus wings), (clumsy), (no panties), (spilled water), (embarrassed), (tearful eyes)" }
 
-        var placeChildren = placeAndSituation;
+        ];
 
-        // 🎵 ペア（R-18）：現状データが無い場合は空（将来追加用）
-        var pair = [];
+        // 既存の場所に加えて新規場所を追加
+        var placeChildren = placeAndSituation.concat([
+          { label: "触手迷宮の最下層", val: "(dungeon depths), (fleshy walls), (bioluminescent flora), (glowing pools of slime), (creepy atmosphere), (tentacles lurking in shadows)" },
+          { label: "サイバーパンクの歓楽街", val: "(cyberpunk red light district), (neon signs), (holographic girls), (dirty alleyway), (rain), (puddles reflecting neon), (futuristic slum)" },
+          { label: "廃ビル・無法地帯のアジト", val: "(abandoned building), (ruined interior), (graffiti), (dirty mattress on floor), (dim street light through broken window), (dusty air), (dangerous atmosphere)" },
+          { label: "マジックミラーの取調室", val: "(interrogation room), (two-way mirror), (metal table), (dim fluorescent light), (concrete walls), (voyeurism), (cramped space)" },
+          { label: "豪華なハーレムテント", val: "(harem tent), (middle eastern style), (silk pillows), (sheer curtains), (incense burner), (gold decorations), (warm sensual lighting)" }
+        ]);
+
+        // 🎵 おすすめ組み合わせ（Roleplay × Situation）
+        var pair = [
+          { label: "サキュバス × 夢魔の搾精空間", val: "(succubus), (micro bikini), (dream world), (pink fog), (floating heart particles:1.2), (glowing bed), (seductive pose), (magical atmosphere), (soft focus)" },
+          { label: "娼婦 × サイバーパンク路地裏", val: "(courtesan), (revealing cyberpunk outfit), (cyberpunk city), (neon lights), (dark alley), (leaning against wall), (smoking), (waiting for customer), (rain), (wet skin)" },
+          { label: "悪堕ちシスター × 穢された祭壇", val: "(corrupted nun), (revealing habit), (desecrated altar), (red candles), (blood stains), (dark ritual), (gothic church), (sinful), (moonlight through stained glass)" },
+          { label: "バニーガール × VIPカジノ", val: "(bunny girl suit), (fishnet tights), (vip casino room), (roulette table), (champagne glass), (dim luxury lighting), (cigar smoke), (adult atmosphere)" },
+          { label: "女教師 × 放課後の秘密の補習", val: "(female teacher), (tight suit), (unbuttoned shirt), (glasses), (empty classroom), (sunset), (orange sky), (sitting on desk), (seductive gaze), (after school)" },
+          { label: "地雷系女子 × ネオン輝くトー横", val: "(jirai kei), (oversized hoodie), (heavy makeup), (cyberpunk alleyway), (neon street lights), (rainy night), (squatting), (looking up at viewer), (dirty aesthetic), (lonely)" },
+          { label: "アンドロイド娼婦 × カプセルホテル", val: "(android courtesan), (latex bodysuit), (glowing mechanical parts), (futuristic capsule bed), (neon pink and blue lighting), (cables attached to body), (charging mode), (sci-fi)" },
+          { label: "女スパイ × レーザートラップ拘束", val: "(female spy), (tight leather catsuit), (high-tech vault), (red laser grid), (dodging lasers), (sweat), (stretching body), (dynamic tension), (mission impossible style)" },
+          { label: "ダークエルフ × オークの地下牢（敗北）", val: "(dark elf warrior), (torn leather armor), (dark skin), (dirty body), (orc dungeon), (chains on wrists), (torches), (despair), (looking away in shame), (cruel fate)" },
+          { label: "魅惑の占い師 × 香煙漂う怪しい天幕", val: "(fortune teller), (cleavage), (gypsy clothes), (dimly lit tent), (purple magic smoke), (incense), (crystal ball glowing), (seductive gaze), (mystical atmosphere)" },
+          { label: "未亡人 × 昭和レトロな和室（背徳）", val: "(mature widow), (black kimono pulled down), (tatami room), (shoji screen), (moonlight casting shadows), (retro japanese setting), (melancholic but aroused), (secret affair)" }, 
+{ label: "アスモデウス × 淫靡な深紅の霧 (七つの大罪)", val: "(asmodeus), (lust demon), (bewitching alluring posture:1.1), (intoxicating gaze:1.3), (glossy wet lips), (dewy skin), (sweat glistening on collarbone), (intricately detailed sheer black lace attire), (dark silk draping), (steamy deep reddish atmosphere), (glowing pink pheromone mist), (floating dust motes), (cinematic lighting), (dramatic chiaroscuro), (neon pink rim lighting), (volumetric lighting)" }, 
+          { label: "魔法少女 × 培養水槽 (堕ち・改造)", val: "(corrupted magical girl), (broken wand), (inside a glass test tube), (filled with glowing green liquid), (tentacles wrapping around body), (bubbles), (mind break), (blank stare)" },
+          { label: "ギャル × 深夜の無人電車 (痴漢・露出)", val: "(gyaru), (tanned skin), (messy school uniform), (empty train at midnight), (lifting skirt), (flickering fluorescent light), (blushing), (biting lip), (secretive)" },
+          { label: "吸血鬼の真祖 × ゴシック廃教会 (儀式)", val: "(vampire lord), (fangs), (blood on lips), (abandoned gothic church), (moonlight shining through broken stained glass), (lying on ruined altar), (seductive gaze), (gothic atmosphere)" },
+          { label: "獣人娘 × 魔王城の寝室 (ペット)", val: "(beast girl), (wolf ears), (collar and leash), (demon lord's bedchamber), (red silk bed), (kneeling), (subservient expression), (waiting for master)" },
+          { label: "女怪盗 × スラム街の路地裏 (逃亡・拘束)", val: "(phantom thief), (tight leather suit), (cat mask pulled down), (slum alleyway), (rain), (pinned against the wall), (breathing heavily), (caught), (despair)" },
+          { label: "エイリアン娘 × 宇宙船のキャビン (無重力)", val: "(alien girl), (blue skin), (glowing markings), (spaceship cabin), (zero gravity environment), (floating), (stars outside window), (sci-fi erotica)" },
+          { label: "女王様 × 夜のVIPプール (調教)", val: "(dominatrix), (leather corset), (holding whip), (night pool), (underwater lighting), (stepping on someone), (sadistic smile), (luxury atmosphere)" },
+          { label: "逆バニー × ボロボロの公衆トイレ (待機)", val: "(reverse bunny suit), (crotchless tights), (dirty public restroom), (graffiti), (sitting on toilet closed lid), (waiting for customer), (lewd expression), (grungy)" },
+          { label: "サメ娘 × 淫魔の森 (異種姦・発情)", val: "(shark girl), (sharp teeth), (wet skin), (succubus forest), (glowing mushrooms), (pink mist), (mating press), (animalistic lust), (drooling)" },
+          { label: "悪魔メイド × 魔法陣の地下室 (儀式失敗)", val: "(demon maid), (french maid outfit), (torn clothes), (underground basement), (glowing magic circle on the floor), (bound with glowing chains), (scared expression), (tears)" }
+        ];
 
         packs[parentKey] = [
           { title_ja: "🎭 なりきり", title_en: "Roleplay", children: roleplayChildren },
@@ -1615,6 +1685,7 @@
           { title_ja: "🎵 おすすめ組み合わせ", title_en: "Roleplay × Situation", children: pair },
           { title_ja: "📐 おすすめ構図", title_en: "Recommended Compositions", children: compArr }
         ];
+
       } catch (e) {}
     })();
 
