@@ -1085,6 +1085,22 @@
     { label: "スチームパンク技工士 / Steampunk Artificer", val: "steampunk artificer, gear workshop, brass goggles, steam, three-quarter", desc: "場所: 歯車工房 / 構図: three-quarter, steam" },
     { label: "空賊 / Sky Pirate", val: "sky pirate, airship deck, wind, flag, wide angle", desc: "場所: 飛空艇甲板 / 構図: wide, sky" },
 ],
+    // --- ↓この部分を追加↓ ---
+    "🎭 なりきりおすすめセット｜職業・なりきり（王道キャラ） (Famous Characters)": [
+      { label: "初音ミク (Miku)", val: "hatsune miku, vocaloid, twintails, teal hair, futuristic outfit", desc: "ツインテールの歌姫" },
+      { label: "アリス (Alice)", val: "alice in wonderland, blonde hair, blue dress, white apron, hairband", desc: "不思議の国のアリス" },
+      { label: "赤ずきん (Red Riding Hood)", val: "little red riding hood, red hood, red cape, basket", desc: "童話の赤ずきん" },
+      { label: "シャーロック・ホームズ", val: "sherlock holmes, deerstalker, pipe, trench coat", desc: "名探偵" },
+      { label: "ドラキュラ伯爵", val: "count dracula, vampire, black cape, formal suit, fangs", desc: "吸血鬼" },
+      { label: "フランケンシュタイン", val: "frankenstein's monster, bolts in neck, stitches, green skin, giant", desc: "人造人間" }
+    ],
+    "🎭 なりきりおすすめセット｜職業・なりきり（概念コスプレ） (Conceptual Cosplay)": [
+      { label: "眼帯の戦闘メイド (2B風)", val: "(blindfold:1.2), (black gothic dress:1.1), (white short hair), (black thighhighs), (thigh cutout), (black gloves), (sword)", desc: "名前を出さずに2B風" },
+      { label: "金髪の騎士王 (セイバー風)", val: "(blonde hair), (braided bun), (blue dress), (silver armor), (gauntlets), (holding glowing sword), (knight king)", desc: "名前を出さずにセイバー風" },
+      { label: "白髪の魔法使い (フリーレン風)", val: "(white twintails), (pointy ears), (white cape), (gold earrings), (holding staff), (flat chest), (calm expression)", desc: "名前を出さずにフリーレン風" },
+      { label: "黒髪の暗殺者 (ヨル風)", val: "(black hair), (hairband), (black backless dress), (red inside dress), (thigh-high boots), (golden stilettos weapons), (red eyes)", desc: "名前を出さずにヨル風" },
+      { label: "星眼のアイドル (アイ風)", val: "(purple hair), (star-shaped pupils:1.2), (idol outfit), (microphone), (sparkling eyes), (vibrant colors), (charismatic smile)", desc: "名前を出さずにアイ風" }
+    ],
 
   "🎭 なりきりおすすめセット｜神獣・伝説なりきり (Mythic Beasts)": [
     
@@ -1653,8 +1669,81 @@
           { label: "豪華なハーレムテント", val: "(harem tent), (middle eastern style), (silk pillows), (sheer curtains), (incense burner), (gold decorations), (warm sensual lighting)" }
         ]);
 
+        // 🥵 吐息・生理反応 (Physiological Reactions)
+        var physiologicalReactions = [
+          { label: "🥵 激しい息・荒い呼吸", val: "(heavy breathing), (panting), (gasping), (heaving chest), (sweat)", desc: "疲労や興奮による荒い息遣い" },
+          { label: "🥵 ピンクの吐息・熱気", val: "(hot breath), (pink sigh), (warm breath), (parted lips), (flushed face), (aroused)", desc: "甘い吐息・火照った顔" },
+          { label: "🤤 涎・だらしない口元", val: "(drooling), (saliva trail), (messy lips), (tongue out), (glazed eyes)", desc: "理性が飛んだ状態" },
+          { label: "💦 発汗・火照り", val: "(heavy sweat), (glistening skin), (flushed body), (red skin), (feverish)", desc: "全身の熱気と汗" },
+          { label: "💓 鼓動・胸の高鳴り", val: "(hand on chest), (tight chest), (blushing intensely), (nervous sweat), (heartbeat)", desc: "緊張や高揚感" },
+          { label: "🫧 涙目・潤んだ瞳", val: "(watery eyes), (tears accumulating), (glossy eyes), (pleading eyes)", desc: "感極まった表情の強調" }
+        ];
+
+        // 🔞 雰囲気・空間エフェクト (Atmosphere & Effects)
+        var adultAtmosphere = [
+          { label: "🌫️ 淫靡なピンクの霧", val: "(pink fog), (glowing pink mist), (aphrodisiac atmosphere), (floating dust motes), (dreamy lighting)", desc: "サキュバスや夢魔の空間" },
+          { label: "♨️ 濃密な湯気・熱気", val: "(heavy steam), (condensation), (wet environment), (sauna-like heat), (hazy atmosphere)", desc: "風呂場や密室の湿度" },
+          { label: "✨ 怪しい発光・体液光", val: "(bioluminescent glow), (neon pink and blue lighting), (glowing bodily fluids), (dark cinematic lighting)", desc: "SFや触手、魔界の光源" },
+          { label: "🕯️ 退廃的な薄暗さ", val: "(dimly lit), (candlelight), (heavy shadows), (sultry atmosphere), (decadent mood)", desc: "地下室や夜の密室" },
+          { label: "💜 魅了のオーラ", val: "(charming aura), (floating heart particles:1.2), (magical pheromones), (soft focus), (ethereal glow)", desc: "空間全体に漂う魅了効果" },
+          { label: "⛓️ 閉塞感・圧迫感", val: "(claustrophobic atmosphere), (cramped space), (distorted perspective), (dutch angle), (high contrast)", desc: "逃げ場のない状況の演出" }
+        ];
+
+        // 🕰️ 状態変化・事前事後 (Time & State Changes)
+        var adultTimeProgression = [
+          { label: "⏳ 事前：ゆっくりと脱ぐ", val: "(slowly undressing), (unbuttoning shirt), (half-slipped off shoulder), (anticipation), (blush)", desc: "行為の前の焦らし" },
+          { label: "⏳ 事前：服の乱れ", val: "(messy clothes), (clothes falling off), (revealing skin), (bra strap slipping), (disheveled)", desc: "無防備になりかけの状態" },
+          { label: "⏳ 最中：乱れる髪と服", val: "(messy hair), (sweat), (disheveled clothes), (intense action), (dynamic tension)", desc: "ピーク時の乱れ" },
+          { label: "⏳ 事後：心地よい余韻", val: "(afterglow), (cuddling in bed), (messy hair), (soft breathing), (gentle smile), (relaxed)", desc: "終わった後の甘い空気" },
+          { label: "⏳ 事後：朝のまどろみ", val: "(morning after), (tangled bedsheets), (sunlight through window), (oversized shirt), (sleepy eyes)", desc: "シーツにくるまった翌朝" },
+          { label: "⏳ 事後：疲労と放心", val: "(exhausted), (mind break), (heavy breathing), (smudged makeup), (messy room), (lying on back)", desc: "激しかった後の放心状態" }
+        ];
+
+        // 💘 属性ギャップ・陥落 (Gap Moe & Submission)
+        var adultGapMoe = [
+          { label: "🐥 小動物・純真キャラの陥落", val: "(trembling small body), (ruffled fluffy feathers:1.2), (teary upward glance), (trying to hide face), (soft whimper), (helpless)", desc: "ふわふわした小鳥のような子の無防備な乱れ" },
+          { label: "👑 気高いキャラの敗北", val: "(broken pride), (helpless expression), (tears of frustration), (trembling lips), (messy elegant clothes)", desc: "プライドが高い子の屈服" },
+          { label: "🧊 クールキャラのデレ", val: "(melting expression), (unusually affectionate), (clinging tightly), (heavy blush), (needing attention)", desc: "普段冷たい子の甘えた姿" },
+          { label: "⚔️ 強気キャラの懇願", val: "(begging), (looking up pleadingly), (desperate expression), (weakened resistance), (submissive)", desc: "余裕をなくしてすがる姿" },
+          { label: "🌸 お姉さんキャラの余裕喪失", val: "(lost composure), (panicking), (sweating heavily), (wide-eyed), (messy mature aura)", desc: "大人びたキャラの焦り" }
+        ];
+
+        // 🧴 肌の質感・密着 (Skin & Body Contact)
+        var adultSkinContact = [
+          { label: "🧴 肌の質感：オイル・汗", val: "(glistening skin), (baby oil), (sweat droplets on collarbone), (wet skin), (shiny body)", desc: "テカテカ・ツヤツヤの肌" },
+          { label: "🧴 服の質感：透け・濡れ", val: "(wet transparent fabric), (see-through clothes), (clinging wet shirt), (visible underwear)", desc: "濡れ透け・張り付き" },
+          { label: "🫂 密着：強い抱擁", val: "(tight embrace), (skin to skin), (pressing bodies together), (body heat), (hugging tightly)", desc: "肌と肌の密着感" },
+          { label: "🫂 密着：指先の絡み", val: "(interlocking fingers), (holding hands tightly), (grasping bedsheets), (tense hands)", desc: "手元の感情表現" },
+          { label: "🫂 体勢：またがり", val: "(straddling), (sitting on lap), (hands on hips), (dominant posture), (close proximity)", desc: "密着した騎乗・膝上" }
+        ];
+
+        // 👁️ 視線・駆け引き (Sensual Gaze)
+        var adultGaze = [
+          { label: "👁️ 視線：上目遣い・懇願", val: "(looking up at viewer), (teary eyes), (pleading gaze), (puppy eyes), (sweet look)", desc: "甘えるような上目遣い" },
+          { label: "👁️ 視線：恥じらい・目逸らし", val: "(looking away coyly), (avoiding eye contact), (heavy blush), (shy downward glance)", desc: "照れて目を合わせられない" },
+          { label: "👁️ 視線：誘惑・挑発", val: "(seductive stare), (looking at viewer playfully), (parted lips), (half-closed eyes), (confident smirk)", desc: "余裕のある誘い" },
+          { label: "👁️ 視線：見下す・冷たい", val: "(looking down on viewer), (cold gaze), (disdainful stare), (half-lidded eyes), (arrogant)", desc: "サディスティック・ご褒美" },
+          { label: "👁️ 視線：虚ろ・焦点が合わない", val: "(vacant gaze), (unfocused eyes), (looking into the distance), (mind break), (glazed eyes)", desc: "理性が飛んだ瞳" }
+        ];
+
+        // 👙 露出・見せつけ仕草 (Revealing Gestures)
+        var adultRevealing = [
+          { label: "👙 胸元を見せる・開く", val: "(pulling down clothes), (showing cleavage), (deep neckline), (breast emphasis), (seductive pose)", desc: "服を引っ張って谷間を見せる" },
+          { label: "👙 服まくり (上)・下乳", val: "(lifting shirt), (underboob), (showing stomach), (midriff), (exposed torso)", desc: "シャツを捲り上げる" },
+          { label: "👙 スカートまくり・チラ見せ", val: "(lifting skirt), (showing panties), (thigh emphasis), (one hand on skirt), (flirtatious)", desc: "スカートの裾をつまんで上げる" },
+          { label: "👙 衣服ずり落ち・半脱ぎ", val: "(clothes slipping down), (half-slipped off shoulder), (pants down), (careless dressing), (exposed hips)", desc: "肩や腰から服が落ちかけている状態" },
+          { label: "👙 股開き・誘惑ポーズ", val: "(spreading legs), (m-leg pose), (inviting posture), (hands on thighs), (sitting with legs apart)", desc: "脚を開いて誘うような姿勢" },
+          { label: "👙 わき見せ・バンザイ", val: "(arms up), (stretching arms), (showing armpits), (hands behind head), (chest emphasis)", desc: "両手を上げて無防備な胸元と脇を見せる" },
+          { label: "👙 見せつけ・誇示", val: "(presenting to viewer), (arched back), (body emphasis), (shameless), (lewd pose)", desc: "自身の身体を強調して見せつける" }
+        ];
+
         // 🎵 おすすめ組み合わせ（Roleplay × Situation）
         var pair = [
+{ label: "シマエナガ娘の陥落 × 密室の熱気", val: "(idol-style outfit), (down feather texture:1.2), (trembling small body), (ruffled fluffy feathers:1.2), (heavy breathing), (teary upward glance), (tight embrace), (sweat droplets on collarbone), (pink fog), (soft focus)", desc: "純真な鳥っ娘のギャップと密着" },
+          { label: "女騎士の敗北 × 屈辱の視線", val: "(defeated knight), (broken armor), (broken pride), (tears of frustration), (looking up at viewer), (pleading gaze), (messy hair), (heavy sweat), (dimly lit)", desc: "気高いキャラが余裕をなくす瞬間" },
+          { label: "クーデレ女子 × 事後の甘い余韻", val: "(expressionless girl:0.8), (melting expression), (cuddling in bed), (afterglow), (skin to skin), (interlocking fingers), (looking away coyly), (morning after), (soft lighting)", desc: "普段クールな子のギャップと肌の温もり" },
+          { label: "スライム拘束 × 虚ろな瞳", val: "(tentacles), (slime suit attack), (bound by slime), (claustrophobic atmosphere), (vacant gaze), (mind break), (drooling), (heavy breathing), (dark cinematic lighting)", desc: "理性が飛んだ絶望とエフェクト" },
+          { label: "サキュバス × 淫靡な霧と誘惑", val: "(succubus), (micro bikini), (aphrodisiac atmosphere), (pink fog), (seductive stare), (parted lips), (straddling), (glistening skin), (floating heart particles:1.2)", desc: "空間エフェクトと視線の王道コンボ" },
           { label: "サキュバス × 夢魔の搾精空間", val: "(succubus), (micro bikini), (dream world), (pink fog), (floating heart particles:1.2), (glowing bed), (seductive pose), (magical atmosphere), (soft focus)" },
           { label: "娼婦 × サイバーパンク路地裏", val: "(courtesan), (revealing cyberpunk outfit), (cyberpunk city), (neon lights), (dark alley), (leaning against wall), (smoking), (waiting for customer), (rain), (wet skin)" },
           { label: "悪堕ちシスター × 穢された祭壇", val: "(corrupted nun), (revealing habit), (desecrated altar), (red candles), (blood stains), (dark ritual), (gothic church), (sinful), (moonlight through stained glass)" },
@@ -1682,6 +1771,13 @@
         packs[parentKey] = [
           { title_ja: "🎭 なりきり", title_en: "Roleplay", children: roleplayChildren },
           { title_ja: "🏩 ロケーション（R-18）", title_en: "Locations (R-18)", children: placeChildren },
+          { title_ja: "🥵 吐息・生理反応", title_en: "Physiological Reactions", children: physiologicalReactions },
+          { title_ja: "🔞 雰囲気・空間効果", title_en: "Atmosphere & Effects", children: adultAtmosphere },
+          { title_ja: "🕰️ 状態変化（事前・事後）", title_en: "Time & State Changes", children: adultTimeProgression },
+          { title_ja: "💘 ギャップ・陥落", title_en: "Gap Moe & Submission", children: adultGapMoe },
+          { title_ja: "🧴 肌の質感・密着", title_en: "Skin & Contact", children: adultSkinContact },
+          { title_ja: "👁️ 視線・駆け引き", title_en: "Sensual Gaze", children: adultGaze },
+          { title_ja: "👙 露出・見せつけ仕草", title_en: "Revealing Gestures", children: adultRevealing },
           { title_ja: "🎵 おすすめ組み合わせ", title_en: "Roleplay × Situation", children: pair },
           { title_ja: "📐 おすすめ構図", title_en: "Recommended Compositions", children: compArr }
         ];

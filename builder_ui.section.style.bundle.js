@@ -343,8 +343,7 @@
 
   // ===== 中身は完全に元のまま =====
   const STYLE_DATA = {
-        "🧸 ホビー・立体スタイル (Hobby & Figures)": [
-      
+    "🧸 ホビー・立体スタイル (Hobby & Figures)": [
       { ja: "ねんどろいど風", en: "nendoroid style, super deformed figure, big head small body, glossy plastic" },
       { ja: "フィギュア風", en: "figure style, collectible figure, detailed sculpt, painted, manufactured look" },
       { ja: "PVCフィギュア風", en: "PVC figure style, glossy PVC material, painted figure, premium collectible" },
@@ -361,8 +360,8 @@
       { ja: "回転台ショット", en: "turntable shot, 360 product view, centered composition" },
       { ja: "マクロ塗装ディテール", en: "macro shot, paintwork details, decals, clear coat, tiny scratches" },
       { ja: "トイ写真風", en: "toy photography, miniature diorama, shallow depth of field" }
-    
-    ],"🎁 商品化・グッズ化 (Merch & Productization)": [
+    ],
+    "🎁 商品化・グッズ化 (Merch & Productization)": [
       { ja: "商品パッケージ風", en: "retail product packaging, box art, blister pack, branding labels, barcode, sealed plastic window" },
       { ja: "ブラインドボックス玩具風", en: "blind box toy, collectible series packaging, small boxed figure, mystery box" },
       { ja: "ガチャカプセル玩具風", en: "gacha capsule toy, capsule packaging, prize toy, small collectible" },
@@ -375,18 +374,36 @@
       { ja: "クリスタルドーム展示風", en: "crystal dome display, acrylic dome case, premium collectible display" },
       { ja: "スノードーム風", en: "snow globe display, glass sphere, swirling particles, miniature diorama inside" },
       { ja: "ホログラム投影展示風", en: "hologram projection display, volumetric light, floating holographic figure, sci-fi showcase" }
-    ]
-,"🧸 ちびキャラ (Chibi Characters)": [
-  {"ja":"ちびキャラ","en":"chibi character, super deformed"},
-  {"ja":"SDキャラ","en":"SD character, super deformed"},
-  {"ja":"2頭身","en":"two-head-tall proportions"},
-  {"ja":"3頭身","en":"three-head-tall proportions"},
-  {"ja":"デフォルメ強め","en":"strongly deformed proportions"},
-  {"ja":"ぷにキャラ","en":"puni chibi, soft round chibi"},
-  {"ja":"マスコット風","en":"mascot style, cute simplified chibi"},
-  {"ja":"幼児体型（ちび）","en":"childlike chibi proportions, big head small body"}
-],
-
+    ],
+    "🧸 ちびキャラ (Chibi Characters)": [
+      {"ja":"ちびキャラ","en":"chibi character, super deformed"},
+      {"ja":"SDキャラ","en":"SD character, super deformed"},
+      {"ja":"2頭身","en":"two-head-tall proportions"},
+      {"ja":"3頭身","en":"three-head-tall proportions"},
+      {"ja":"デフォルメ強め","en":"strongly deformed proportions"},
+      {"ja":"ぷにキャラ","en":"puni chibi, soft round chibi"},
+      {"ja":"マスコット風","en":"mascot style, cute simplified chibi"},
+      {"ja":"幼児体型（ちび）","en":"childlike chibi proportions, big head small body"}
+    ],
+    "🎨 イラストの塗り・仕上げ (Coloring Styles)": [
+      { ja: "アニメ塗り (影少なめ)", en: "cel shading, flat color, solid shading, anime coloring, clear lines" },
+      { ja: "ギャルゲ塗り・エロゲ塗り", en: "visual novel style, galge style, soft shading, glossy skin, detailed hair shading, blush" },
+      { ja: "ブラシ塗り (厚塗り寄り)", en: "brush shading, semi-realistic anime style, painterly rendering, blended shading" },
+      { ja: "水彩風アニメ塗り", en: "watercolor anime style, soft colors, transparent shading, color bleeding effect" },
+      { ja: "ソシャゲ風 (高密度・キラキラ)", en: "gacha game style, highly detailed shading, sparkling highlights, rich colors, ultra-detailed" }
+    ],
+    "🛏️ メディア・グッズレイアウト (Otaku Media Formats)": [
+      { ja: "抱き枕カバー風", en: "dakimakura design, body pillow cover, vertical composition, lying down, looking at viewer, top-down perspective, full body" },
+      { ja: "ASMRサムネイル風", en: "ASMR cover art, close up on face, whispering, holding dummy head mic, soft warm lighting, intimate distance" },
+      { ja: "TCG（トレカ）風", en: "trading card game illustration, ultra-detailed, dynamic pose, magic effects, character focus, card border frame" },
+      { ja: "VTuber三面図・設定画", en: "character design sheet, concept art, three-sided view, front back side view, white background, color palette" },
+      { ja: "Live2Dパーツ分け風", en: "Live2D model template, separated parts, neutral t-pose, symmetrical, facing forward, vtuber asset" }
+    ],
+    "📺 年代別メディアの質感 (Retro Media Aesthetic)": [
+      { ja: "90年代セル画アニメ", en: "90s anime style, cel animation, vhs artifact, retro anime aesthetic, slightly muted colors, soft bloom" },
+      { ja: "2000年代美少女ゲーム風", en: "2000s visual novel style, nostalgic anime art, early 2000s digital art, classic galge, text box overlay" },
+      { ja: "ブラウン管テレビ (CRT)", en: "crt tv display, scanlines, chromatic aberration, rgb shift, retro gaming aesthetic, distorted edges" }
+    ],
     "🎤 MMD・3DダンスCG セット (MMD / Dance CG)": [
       { ja: "style: MMD風", en: "style: MMD style, miku miku dance, 3D anime character, dance pose" },
       { ja: "style: セルルック3D", en: "style: cel-shaded 3D, toon shader, anime 3D render" },
@@ -442,7 +459,6 @@
       { ja: "ティルトシフト (ミニチュア)", en: "tilt-shift, miniature effect, blur top and bottom, high angle" }
     ]
   };
-
   const DICT = {
     "vaporwave": "ヴェイパーウェイヴ", "synthwave": "シンセウェイヴ", "lo-fi aesthetic": "ローファイ",
     "cottagecore": "コテージコア", "dark academia": "ダークアカデミア", "goblincore": "ゴブリンコア",
@@ -474,10 +490,24 @@
     "cel-shaded 3D": "セルルック3D",
     "toon shader": "トゥーンシェーダ",
     "concert stage lighting": "ステージライト",
-    "concert atmosphere": "ライブ会場の空気感"
-
+    "concert atmosphere": "ライブ会場の空気感",
+    "cel shading": "アニメ塗り",
+    "visual novel style": "ギャルゲ塗り",
+    "galge style": "エロゲ塗り",
+    "brush shading": "ブラシ塗り",
+    "watercolor anime style": "水彩風アニメ塗り",
+    "gacha game style": "ソシャゲ風",
+    "dakimakura design": "抱き枕カバー風",
+    "body pillow cover": "抱き枕カバー",
+    "ASMR cover art": "ASMRサムネイル風",
+    "trading card game illustration": "TCG風",
+    "character design sheet": "設定画・三面図",
+    "Live2D model template": "Live2Dパーツ分け風",
+    "90s anime style": "90年代セル画",
+    "retro anime aesthetic": "レトロアニメ",
+    "2000s visual novel style": "2000年代美少女ゲーム風",
+    "crt tv display": "ブラウン管テレビ (CRT)"
   };
-  // ===== 中身ここまで =====
 
   function resolveRoot(container){
     return container || document.querySelector("#list-style");

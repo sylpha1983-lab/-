@@ -387,6 +387,7 @@
       { id: "creatures", label: "12. 生物・動物 (Creatures)" },
       { id: "texture", label: "13. 素材・質感 (Material/Texture)" },
       { id: "pose", label: "14. ポーズ・構図 (Pose)" },
+      { id: "body_focus", label: "🔍 部位強調・フェチ (Body Focus)" },
       { id: "narrative", label: "15. ストーリー・行動 (Narrative)" },
       { id: "composition", label: "16. 構図・設計 (Composition)" },
       { id: "camera", label: "17. カメラ・レンズ (Camera/Lens)" },

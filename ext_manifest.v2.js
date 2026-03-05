@@ -41,6 +41,7 @@ window.EXT_MANIFEST = [
   "builder_ui.section.presets.bundle.js",
   "builder_ui.preview_sync.v1.js",
   "builder_ui.visualsync.v4.js",
+  "builder_ui.section.body_focus.bundle.js",
   "ext_autosave.js",
   "ext_detector.js",
   "ext_floating_panel.js",
@@ -54,4 +55,6 @@ window.EXT_MANIFEST = [
   "ext_i18n_tools.js",
   "ext_i18n_tooltip.js",
   "ext_i18n_yakuguid_panel.js",
+  "ext_r18_theme.js",
+  "ext_character_input.js",
 ];
