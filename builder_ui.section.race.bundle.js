@@ -14,10 +14,6 @@
       { ja: "ダークエルフ", en: "dark elf" }, { ja: "ドワーフ", en: "dwarf" }, 
       { ja: "ハーフリング/小人", en: "halfling" }, { ja: "巨人", en: "giant" },
       { ja: "オーク", en: "orc" }, { ja: "ゴブリン", en: "goblin" }
-    ],
-    "神聖・邪悪 (Holy & Evil)": [
-      { ja: "天使", en: "angel" }, { ja: "堕天使", en: "fallen angel" },
-      { ja: "悪魔", en: "demon" }, { ja: "サキュバス", en: "succubus" }
     ]
   };
 
@@ -75,7 +71,7 @@
         details.style.cssText = "margin-bottom:6px; border:1px solid #ccc; border-radius:4px; background:#fff;";
         const summary = document.createElement("summary");
         summary.textContent = title;
-        summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#f9f9f9; color:#555;";
+        summary.style.cssText = "padding:8px 10px; cursor:pointer; font-weight:bold;";
         details.appendChild(summary);
         const content = document.createElement("div");
         content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(130px, 1fr)); gap:8px;";
@@ -205,10 +201,10 @@
       const createCat = (target, title, items) => {
         const details = document.createElement("details");
         details.className = "race-cat";
-        details.style.cssText = "margin-bottom:6px; border:1px solid #eee; border-radius:4px; background:#fff;";
+        details.style.cssText = "margin-bottom:8px; border:1px solid #ddd; border-radius:6px; background:#fafafa;";
         const summary = document.createElement("summary");
         summary.textContent = title;
-        summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#f9f9f9; color:#555;";
+        summary.style.cssText = "padding:8px 10px; cursor:pointer; font-weight:bold;";
         details.appendChild(summary);
         const content = document.createElement("div");
         content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(130px, 1fr)); gap:8px;";
@@ -328,10 +324,10 @@
       const createCat = (title, items) => {
         const details = document.createElement("details");
         details.className = "race-cat";
-        details.style.cssText = "margin-bottom:6px; border:1px solid #eee; border-radius:4px; background:#fff;";
+        details.style.cssText = "margin-bottom:8px; border:1px solid #ddd; border-radius:6px; background:#fafafa;";
         const summary = document.createElement("summary");
         summary.textContent = title;
-        summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#f9f9f9; color:#555;";
+        summary.style.cssText = "padding:8px 10px; cursor:pointer; font-weight:bold;";
         details.appendChild(summary);
         const content = document.createElement("div");
         content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:8px;";
@@ -441,30 +437,44 @@
     ]
   };// --- Parts (Support): subtle add-ons to complement Full Sets ---
 const PARTS_DATA_3 = {
-  "🧩 パーツ（補助）角・突起 (Horns & Spikes)": [
+  "🦄 角・突起 (Horns & Spikes)": [
     { ja: "小さな角（控えめ）", en: "small horns, subtle horns" },
     { ja: "短い角", en: "short horns" },
     { ja: "曲がった角（控えめ）", en: "curved horns, subtle" },
     { ja: "一本角（控えめ）", en: "single horn, subtle" },
     { ja: "棘（小）", en: "small spikes, subtle spikes" }
   ],
-  "🧩 パーツ（補助）尾 (Tail)": [
+  "👤 頭部パーツ (Head Parts)": [
+    { ja: "触角（細）", en: "thin antennae, delicate antennae" },
+    { ja: "昆虫触角", en: "insect antennae" },
+    { ja: "角ばった触角", en: "segmented antennae" },
+    { ja: "額の第三の目", en: "third eye on forehead" },
+    { ja: "追加の目（頬まわり）", en: "extra eyes on face, extra eyes near cheeks" },
+    { ja: "発光する瞳", en: "glowing eyes" },
+    { ja: "縦長の瞳孔", en: "vertical slit pupils" },
+    { ja: "蛇髪（控えめ）", en: "snake hair, subtle medusa hair" },
+    { ja: "ひれ耳（頭部）", en: "head fins, fin-like ears" },
+    { ja: "鰭冠・頭頂ヒレ", en: "crest fin, head crest fin" },
+    { ja: "エラ飾り（頬）", en: "gill fins on cheeks, cheek fins" },
+    { ja: "牙（長め）", en: "long fangs" }
+  ],
+  "🦊 尾 (Tail)": [
     { ja: "細い尻尾", en: "thin tail" },
     { ja: "長い尻尾（控えめ）", en: "long tail, subtle" },
     { ja: "悪魔尾（先端スペード・控えめ）", en: "spade tail, subtle" },
     { ja: "獣尾（控えめ）", en: "fluffy tail, subtle" }
   ],
-  "🧩 パーツ（補助）鱗・模様 (Scales - Partial)": [
+  "🦎 鱗・模様 (Scales - Partial)": [
     { ja: "局所鱗（頬/首/肩）", en: "subtle scales, partial scales, scales on cheeks, scales on neck, scales on shoulders" },
     { ja: "鱗模様（控えめ）", en: "scale pattern, subtle" },
     { ja: "虹彩鱗（控えめ）", en: "iridescent scales, subtle" }
   ],
-  "🧩 パーツ（補助）ヒレ・鰓 (Fins & Gills)": [
+  "🐟 ヒレ・鰓 (Fins & Gills)": [
     { ja: "背びれ（小）", en: "small dorsal fin" },
     { ja: "耳ヒレ（控えめ）", en: "ear fins, delicate fins" },
     { ja: "鰓（控えめ）", en: "gill slits, subtle" }
   ],
-  "🧩 パーツ（補助）触手 (Tentacles - Subtle)": [
+  "🐙 触手 (Tentacles - Subtle)": [
     { ja: "小さな触手（髪飾り風）", en: "small tentacles, hair-like tentacles, subtle tentacles" },
     { ja: "触手の尾（控えめ）", en: "tentacle tail, subtle" },
     { ja: "浮遊触手（控えめ）", en: "floating tentacle appendages, subtle" }
@@ -483,7 +493,7 @@ const PARTS_DATA_3 = {
       const createCat = (target, title, items) => {
         const details = document.createElement("details");
         details.className = "race-cat";
-        details.style.cssText = "margin-bottom:6px; border:1px solid #eee; border-radius:4px; background:#fff;";
+        details.style.cssText = "margin-bottom:8px; border:1px solid #ddd; border-radius:6px; background:#fafafa;";
 
         const summary = document.createElement("summary");
         summary.textContent = title;
@@ -688,12 +698,12 @@ const PARTS_DATA_3 = {
       // ★ご要望対応: 翼コレクション全体を折りたたみ（初期閉じ）にする
       const wingsContainer = document.createElement("details");
       wingsContainer.className = "race-wings-container";
-      wingsContainer.style.cssText = "margin-bottom:10px; border:2px dashed #bbb; border-radius:6px; background:#fff;";
+      wingsContainer.style.cssText = "margin-bottom:8px; border:1px solid #ddd; border-radius:6px; background:#fafafa;";
       wingsContainer.open = false; // ★閉じた状態でスタート
 
       const mainSummary = document.createElement("summary");
-      mainSummary.textContent = "🦇 Wings Collection (翼・ウィング)";
-      mainSummary.style.cssText = "font-weight:bold; padding:10px; cursor:pointer; background:#eee; color:#333; font-size:1.0em;";
+      mainSummary.textContent = "🪽 Wings Collection (翼・ウィング)";
+      mainSummary.style.cssText = "padding:8px 10px; cursor:pointer; font-weight:bold;";
       wingsContainer.appendChild(mainSummary);
 
       const contentWrapper = document.createElement("div");
@@ -702,10 +712,10 @@ const PARTS_DATA_3 = {
       const createCat = (title, items) => {
         const details = document.createElement("details");
         details.className = "race-cat";
-        details.style.cssText = "margin-bottom:6px; border:1px solid #eee; border-radius:4px; background:#fff;";
+        details.style.cssText = "margin-bottom:8px; border:1px solid #ddd; border-radius:6px; background:#fafafa;";
         const summary = document.createElement("summary");
         summary.textContent = title;
-        summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#f9f9f9; color:#555;";
+        summary.style.cssText = "padding:8px 10px; cursor:pointer; font-weight:bold;";
         details.appendChild(summary);
         const content = document.createElement("div");
         content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:8px;";
@@ -735,3 +745,1508 @@ const PARTS_DATA_3 = {
 
 })();
 
+
+
+(function(){
+// --- builder_ui.section.race.v6.js ---
+(function(){
+  "use strict";
+  const VERSION = 6;
+  const KEY = "race";
+
+  const MARINE_PARTS_DATA = {
+    "🦈 海洋パーツ (Marine Traits)": [
+      { ja: "背びれ", en: "prominent dorsal fin" },
+      { ja: "大型の背びれ", en: "large dorsal fin" },
+      { ja: "鮫の尾", en: "thick muscular shark tail" },
+      { ja: "しなる鮫尾", en: "powerful shark tail" },
+      { ja: "鰓裂", en: "gill slits" },
+      { ja: "首の鰓裂", en: "gill slits on neck" },
+      { ja: "鋸歯状の歯列", en: "rows of serrated teeth" },
+      { ja: "鮫の歯", en: "shark teeth" },
+      { ja: "鮫肌", en: "rough dermal denticles texture" },
+      { ja: "控えめな鱗肌", en: "subtle body scales" },
+      { ja: "捕食者の目", en: "predatory eyes" },
+      { ja: "捕食者の笑み", en: "predatory shark smile" },
+      { ja: "水棲オーラ", en: "aquatic creature aura" },
+      { ja: "頂点捕食者の気配", en: "apex predator aura" }
+    ]
+  };
+
+  const DICT = {
+    "prominent dorsal fin": "背びれ",
+    "large dorsal fin": "大型の背びれ",
+    "thick muscular shark tail": "鮫の尾",
+    "powerful shark tail": "しなる鮫尾",
+    "gill slits": "鰓裂",
+    "gill slits on neck": "首の鰓裂",
+    "rows of serrated teeth": "鋸歯状の歯列",
+    "shark teeth": "鮫の歯",
+    "rough dermal denticles texture": "鮫肌",
+    "subtle body scales": "控えめな鱗肌",
+    "predatory eyes": "捕食者の目",
+    "predatory shark smile": "捕食者の笑み",
+    "aquatic creature aura": "水棲オーラ",
+    "apex predator aura": "頂点捕食者の気配"
+  };
+
+  const API = {
+    initUI() {
+      if (window.__outputTranslation) window.__outputTranslation.register(DICT);
+      const partsRoot = document.getElementById("race-root-parts-content");
+      if (!partsRoot) return;
+      if (partsRoot.querySelector('.race-marine-container')) return;
+
+      const marineContainer = document.createElement("details");
+      marineContainer.className = "race-marine-container";
+      marineContainer.style.cssText = "margin-bottom:10px; border:2px dashed #63b3ed; border-radius:6px; background:#fff;";
+      marineContainer.open = false;
+
+      const mainSummary = document.createElement("summary");
+      mainSummary.textContent = "🦈 Marine Traits Collection (海洋パーツ)";
+      mainSummary.style.cssText = "font-weight:bold; padding:10px; cursor:pointer; background:#e6f4ff; color:#234; font-size:1.0em;";
+      marineContainer.appendChild(mainSummary);
+
+      const contentWrapper = document.createElement("div");
+      contentWrapper.style.padding = "10px";
+
+      const createCat = (title, items) => {
+        const details = document.createElement("details");
+        details.className = "race-cat";
+        details.style.cssText = "margin-bottom:6px; border:1px solid #d7ebff; border-radius:4px; background:#fff;";
+        const summary = document.createElement("summary");
+        summary.textContent = title;
+        summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#f5fbff; color:#345;";
+        details.appendChild(summary);
+        const content = document.createElement("div");
+        content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:8px;";
+        items.forEach(item => {
+          const label = document.createElement("label");
+          label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer;";
+          const cb = document.createElement("input");
+          cb.type = "checkbox";
+          cb.style.marginRight = "6px";
+          cb.dataset.val = item.en;
+          label.appendChild(cb);
+          label.appendChild(document.createTextNode(item.ja));
+          label.title = item.en;
+          content.appendChild(label);
+        });
+        details.appendChild(content);
+        return details;
+      };
+
+      Object.entries(MARINE_PARTS_DATA).forEach(([cat, items]) => {
+        contentWrapper.appendChild(createCat(cat, items));
+      });
+
+      marineContainer.appendChild(contentWrapper);
+
+      const wingsContainer = partsRoot.querySelector('.race-wings-container');
+      if (wingsContainer && wingsContainer.parentNode === partsRoot) {
+        partsRoot.insertBefore(marineContainer, wingsContainer);
+      } else {
+        partsRoot.appendChild(marineContainer);
+      }
+    },
+    getTags() { return []; }
+  };
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
+
+})();
+
+
+(function(){
+// --- builder_ui.section.race.v7.js ---
+(function(){
+  "use strict";
+  const VERSION = 7;
+  const KEY = "race";
+
+  const DRAGON_PARTS_DATA = {
+    "🐉 竜パーツ (Dragon Traits)": [
+      { ja: "竜の角", en: "dragon horns" },
+      { ja: "大型の竜角", en: "large dragon horns" },
+      { ja: "湾曲した竜角", en: "curved dragon horns" },
+      { ja: "竜の翼", en: "dragon wings" },
+      { ja: "大型の竜翼", en: "large dragon wings" },
+      { ja: "革質の竜翼", en: "leathery dragon wings" },
+      { ja: "竜の尾", en: "dragon tail" },
+      { ja: "長い竜尾", en: "long dragon tail" },
+      { ja: "先端の尖った竜尾", en: "spaded dragon tail" },
+      { ja: "竜鱗", en: "dragon scales" },
+      { ja: "結晶の竜鱗", en: "crystalline dragon scales" },
+      { ja: "発光する竜眼", en: "glowing dragon eyes" },
+      { ja: "縦長の竜瞳", en: "slit pupils" },
+      { ja: "竜のオーラ", en: "draconic aura" },
+      { ja: "古竜の気配", en: "ancient dragon presence" }
+    ]
+  };
+
+  const DICT = {
+    "dragon horns": "竜の角",
+    "large dragon horns": "大型の竜角",
+    "curved dragon horns": "湾曲した竜角",
+    "dragon wings": "竜の翼",
+    "large dragon wings": "大型の竜翼",
+    "leathery dragon wings": "革質の竜翼",
+    "dragon tail": "竜の尾",
+    "long dragon tail": "長い竜尾",
+    "spaded dragon tail": "先端の尖った竜尾",
+    "dragon scales": "竜鱗",
+    "crystalline dragon scales": "結晶の竜鱗",
+    "glowing dragon eyes": "発光する竜眼",
+    "slit pupils": "縦長の竜瞳",
+    "draconic aura": "竜のオーラ",
+    "ancient dragon presence": "古竜の気配"
+  };
+
+  const API = {
+    initUI() {
+      if (window.__outputTranslation) window.__outputTranslation.register(DICT);
+      const partsRoot = document.getElementById("race-root-parts-content");
+      if (!partsRoot) return;
+      if (partsRoot.querySelector('.race-dragon-container')) return;
+
+      const dragonContainer = document.createElement("details");
+      dragonContainer.className = "race-dragon-container";
+      dragonContainer.style.cssText = "margin-bottom:10px; border:2px dashed #9f7aea; border-radius:6px; background:#fff;";
+      dragonContainer.open = false;
+
+      const mainSummary = document.createElement("summary");
+      mainSummary.textContent = "🐉 Dragon Traits Collection (竜パーツ)";
+      mainSummary.style.cssText = "font-weight:bold; padding:10px; cursor:pointer; background:#f3ecff; color:#3b2b59; font-size:1.0em;";
+      dragonContainer.appendChild(mainSummary);
+
+      const contentWrapper = document.createElement("div");
+      contentWrapper.style.padding = "10px";
+
+      const createCat = (title, items) => {
+        const details = document.createElement("details");
+        details.className = "race-cat";
+        details.style.cssText = "margin-bottom:6px; border:1px solid #e5dbff; border-radius:4px; background:#fff;";
+        const summary = document.createElement("summary");
+        summary.textContent = title;
+        summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#faf7ff; color:#4d3b75;";
+        details.appendChild(summary);
+        const content = document.createElement("div");
+        content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:8px;";
+        items.forEach(item => {
+          const label = document.createElement("label");
+          label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer;";
+          const cb = document.createElement("input");
+          cb.type = "checkbox";
+          cb.style.marginRight = "6px";
+          cb.dataset.val = item.en;
+          label.appendChild(cb);
+          label.appendChild(document.createTextNode(item.ja));
+          label.title = item.en;
+          content.appendChild(label);
+        });
+        details.appendChild(content);
+        return details;
+      };
+
+      Object.entries(DRAGON_PARTS_DATA).forEach(([cat, items]) => {
+        contentWrapper.appendChild(createCat(cat, items));
+      });
+
+      dragonContainer.appendChild(contentWrapper);
+
+      const marineContainer = partsRoot.querySelector('.race-marine-container');
+      const wingsContainer = partsRoot.querySelector('.race-wings-container');
+      if (marineContainer && marineContainer.parentNode === partsRoot) {
+        partsRoot.insertBefore(dragonContainer, marineContainer.nextSibling);
+      } else if (wingsContainer && wingsContainer.parentNode === partsRoot) {
+        partsRoot.insertBefore(dragonContainer, wingsContainer);
+      } else {
+        partsRoot.appendChild(dragonContainer);
+      }
+    },
+    getTags() { return []; }
+  };
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
+
+})();
+
+
+(function(){
+// --- builder_ui.section.race.v8.js ---
+(function(){
+  "use strict";
+  const VERSION = 8;
+  const KEY = "race";
+
+  const CELESTIAL_PARTS_DATA = {
+    "😇 天使パーツ (Celestial Traits)": [
+      { ja: "光輪", en: "halo" },
+      { ja: "壊れた光輪", en: "broken halo" },
+      { ja: "天使の翼", en: "angel wings" },
+      { ja: "白い羽翼", en: "white feathered wings" },
+      { ja: "聖なる羽", en: "holy feathers" },
+      { ja: "神聖なオーラ", en: "divine aura" },
+      { ja: "聖印", en: "holy sigils" },
+      { ja: "神々しい瞳", en: "radiant holy eyes" },
+      { ja: "天使の気配", en: "celestial presence" }
+    ],
+    "👑 天使位階パーツ (Celestial Rank Traits)": [
+      { ja: "多重光輪", en: "multiple halo rings" },
+      { ja: "層状光輪", en: "layered halo rings" },
+      { ja: "王冠状光輪", en: "crown halo" },
+      { ja: "6枚翼", en: "6 wings" },
+      { ja: "多翼の天使", en: "many-winged angel" },
+      { ja: "燃える聖翼", en: "burning holy wings" },
+      { ja: "審判の神眼", en: "divine judgment eyes" },
+      { ja: "浮遊する聖印", en: "floating holy sigils" },
+      { ja: "玉座の光輪", en: "throne halo ring" },
+      { ja: "熾天の威光", en: "seraphic radiance" }
+    ]
+  };
+
+  const DEMON_PARTS_DATA = {
+    "😈 悪魔パーツ (Demonic Traits)": [
+      { ja: "悪魔の角", en: "demon horns" },
+      { ja: "大型の悪魔角", en: "large demon horns" },
+      { ja: "湾曲した悪魔角", en: "curved demon horns" },
+      { ja: "コウモリ翼", en: "bat wings" },
+      { ja: "大型のコウモリ翼", en: "large bat wings" },
+      { ja: "悪魔の尾", en: "demon tail" },
+      { ja: "スペード状の悪魔尾", en: "spade demon tail" },
+      { ja: "発光する魔眼", en: "glowing demonic eyes" },
+      { ja: "縦長の魔瞳", en: "demonic slit pupils" },
+      { ja: "悪魔のオーラ", en: "demonic aura" },
+      { ja: "地獄火の気配", en: "hellfire aura" },
+      { ja: "禍々しい気配", en: "dark demonic presence" }
+    ],
+    "👑 悪魔位階パーツ (Infernal Rank Traits)": [
+      { ja: "王冠状の悪魔角", en: "crown-like demon horns" },
+      { ja: "深淵の巨角", en: "abyssal giant horns" },
+      { ja: "魔王級の翼", en: "demon king wings" },
+      { ja: "黒き堕天翼", en: "black fallen wings" },
+      { ja: "砕けた堕天光輪", en: "shattered fallen halo" },
+      { ja: "地獄の王の魔眼", en: "hell sovereign eyes" },
+      { ja: "浮遊する呪印", en: "floating curse sigils" },
+      { ja: "深淵王の威圧", en: "abyssal sovereign presence" },
+      { ja: "魔炎の外套", en: "hellfire mantle" },
+      { ja: "大悪魔の気配", en: "archdemon presence" }
+    ]
+  };
+
+  const DICT = {
+    "halo": "光輪",
+    "broken halo": "壊れた光輪",
+    "angel wings": "天使の翼",
+    "white feathered wings": "白い羽翼",
+    "holy feathers": "聖なる羽",
+    "divine aura": "神聖なオーラ",
+    "holy sigils": "聖印",
+    "radiant holy eyes": "神々しい瞳",
+    "celestial presence": "天使の気配",
+    "multiple halo rings": "多重光輪",
+    "layered halo rings": "層状光輪",
+    "crown halo": "王冠状光輪",
+    "6 wings": "6枚翼",
+    "many-winged angel": "多翼の天使",
+    "burning holy wings": "燃える聖翼",
+    "divine judgment eyes": "審判の神眼",
+    "floating holy sigils": "浮遊する聖印",
+    "throne halo ring": "玉座の光輪",
+    "seraphic radiance": "熾天の威光",
+    "demon horns": "悪魔の角",
+    "large demon horns": "大型の悪魔角",
+    "curved demon horns": "湾曲した悪魔角",
+    "bat wings": "コウモリ翼",
+    "large bat wings": "大型のコウモリ翼",
+    "demon tail": "悪魔の尾",
+    "spade demon tail": "スペード状の悪魔尾",
+    "glowing demonic eyes": "発光する魔眼",
+    "demonic slit pupils": "縦長の魔瞳",
+    "demonic aura": "悪魔のオーラ",
+    "hellfire aura": "地獄火の気配",
+    "dark demonic presence": "禍々しい気配",
+    "crown-like demon horns": "王冠状の悪魔角",
+    "abyssal giant horns": "深淵の巨角",
+    "demon king wings": "魔王級の翼",
+    "black fallen wings": "黒き堕天翼",
+    "shattered fallen halo": "砕けた堕天光輪",
+    "hell sovereign eyes": "地獄の王の魔眼",
+    "floating curse sigils": "浮遊する呪印",
+    "abyssal sovereign presence": "深淵王の威圧",
+    "hellfire mantle": "魔炎の外套",
+    "archdemon presence": "大悪魔の気配"
+  };
+
+  const API = {
+    initUI() {
+      if (window.__outputTranslation) window.__outputTranslation.register(DICT);
+      const partsRoot = document.getElementById("race-root-parts-content");
+      if (!partsRoot) return;
+      if (partsRoot.querySelector('.race-celestial-demonic-container')) return;
+
+      const groupContainer = document.createElement("details");
+      groupContainer.className = "race-celestial-demonic-container race-demon-container";
+      groupContainer.style.cssText = "margin-bottom:10px; border:2px dashed #e2a7d6; border-radius:6px; background:#fff; width:100%; box-sizing:border-box;";
+      groupContainer.open = false;
+
+      const mainSummary = document.createElement("summary");
+      mainSummary.textContent = "😇😈 Celestial/Abyssal Traits Collection (天使・悪魔パーツ)";
+      mainSummary.style.cssText = "font-weight:bold; padding:10px; cursor:pointer; background:#fff6fb; color:#5f2f55; font-size:1.0em; word-break:break-word; overflow-wrap:anywhere;";
+      groupContainer.appendChild(mainSummary);
+
+      const contentWrapper = document.createElement("div");
+      contentWrapper.style.padding = "10px";
+
+      const createCat = (title, items, theme) => {
+        const details = document.createElement("details");
+        details.className = "race-cat";
+        details.style.cssText = `margin-bottom:8px; border:1px solid ${theme.border}; border-radius:4px; background:#fff; width:100%; box-sizing:border-box;`;
+        const summary = document.createElement("summary");
+        summary.textContent = title;
+        summary.style.cssText = `font-weight:bold; padding:6px 10px; cursor:pointer; background:${theme.summaryBg}; color:${theme.summaryColor}; word-break:break-word; overflow-wrap:anywhere;`;
+        details.appendChild(summary);
+        const content = document.createElement("div");
+        content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:8px;";
+        items.forEach(item => {
+          const label = document.createElement("label");
+          label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer; word-break:break-word; overflow-wrap:anywhere;";
+          const cb = document.createElement("input");
+          cb.type = "checkbox";
+          cb.style.marginRight = "6px";
+          cb.dataset.val = item.en;
+          label.appendChild(cb);
+          label.appendChild(document.createTextNode(item.ja));
+          label.title = item.en;
+          content.appendChild(label);
+        });
+        details.appendChild(content);
+        return details;
+      };
+
+      const celestialTheme = { border: '#d9dfff', summaryBg: '#f7f9ff', summaryColor: '#334a8a' };
+      const demonicTheme = { border: '#ffd7d7', summaryBg: '#fff7f7', summaryColor: '#7a3333' };
+
+      Object.entries(CELESTIAL_PARTS_DATA).forEach(([cat, items]) => {
+        contentWrapper.appendChild(createCat(cat, items, celestialTheme));
+      });
+      Object.entries(DEMON_PARTS_DATA).forEach(([cat, items]) => {
+        contentWrapper.appendChild(createCat(cat, items, demonicTheme));
+      });
+
+      groupContainer.appendChild(contentWrapper);
+
+      const dragonContainer = partsRoot.querySelector('.race-dragon-container');
+      const wingsContainer = partsRoot.querySelector('.race-wings-container');
+      if (dragonContainer && dragonContainer.parentNode === partsRoot) {
+        partsRoot.insertBefore(groupContainer, dragonContainer.nextSibling);
+      } else if (wingsContainer && wingsContainer.parentNode === partsRoot) {
+        partsRoot.insertBefore(groupContainer, wingsContainer);
+      } else {
+        partsRoot.appendChild(groupContainer);
+      }
+    },
+    getTags() { return []; }
+  };
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
+
+})();
+
+(function(){
+// --- builder_ui.section.race.v9.js ---
+(function(){
+  "use strict";
+  const VERSION = 9;
+  const KEY = "race";
+
+  const VAMPIRE_PARTS_DATA = {
+    "🦇 吸血鬼パーツ (Vampire Traits)": [
+      { ja: "吸血牙", en: "vampire fangs" },
+      { ja: "長い吸血牙", en: "long vampire fangs" },
+      { ja: "青白い吸血肌", en: "pale vampire skin" },
+      { ja: "赤い吸血眼", en: "crimson vampire eyes" },
+      { ja: "妖しい吸血眼", en: "mesmerizing vampire eyes" },
+      { ja: "コウモリ翼", en: "bat wings" },
+      { ja: "大型のコウモリ翼", en: "large bat wings" },
+      { ja: "貴族的な闇オーラ", en: "dark noble aura" },
+      { ja: "血への渇き", en: "bloodlust aura" },
+      { ja: "夜の支配者の気配", en: "lord of the night presence" }
+    ]
+  };
+
+  const DICT = {
+    "vampire fangs": "吸血牙",
+    "long vampire fangs": "長い吸血牙",
+    "pale vampire skin": "青白い吸血肌",
+    "crimson vampire eyes": "赤い吸血眼",
+    "mesmerizing vampire eyes": "妖しい吸血眼",
+    "dark noble aura": "貴族的な闇オーラ",
+    "bloodlust aura": "血への渇き",
+    "lord of the night presence": "夜の支配者の気配"
+  };
+
+  const API = {
+    initUI() {
+      if (window.__outputTranslation) window.__outputTranslation.register(DICT);
+      const partsRoot = document.getElementById("race-root-parts-content");
+      if (!partsRoot) return;
+      if (partsRoot.querySelector('.race-vampire-container')) return;
+
+      const vampireContainer = document.createElement("details");
+      vampireContainer.className = "race-vampire-container";
+      vampireContainer.style.cssText = "margin-bottom:10px; border:2px dashed #7b4fa1; border-radius:6px; background:#fff;";
+      vampireContainer.open = false;
+
+      const mainSummary = document.createElement("summary");
+      mainSummary.textContent = "🦇 Vampire Traits Collection (吸血鬼パーツ)";
+      mainSummary.style.cssText = "font-weight:bold; padding:10px; cursor:pointer; background:#f7f0ff; color:#40205f; font-size:1.0em;";
+      vampireContainer.appendChild(mainSummary);
+
+      const contentWrapper = document.createElement("div");
+      contentWrapper.style.padding = "10px";
+
+      const createCat = (title, items) => {
+        const details = document.createElement("details");
+        details.className = "race-cat";
+        details.style.cssText = "margin-bottom:6px; border:1px solid #eadcff; border-radius:4px; background:#fff;";
+        const summary = document.createElement("summary");
+        summary.textContent = title;
+        summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#fcf9ff; color:#5b3b77;";
+        details.appendChild(summary);
+        const content = document.createElement("div");
+        content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:8px;";
+        items.forEach(item => {
+          const label = document.createElement("label");
+          label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer;";
+          const cb = document.createElement("input");
+          cb.type = "checkbox";
+          cb.style.marginRight = "6px";
+          cb.dataset.val = item.en;
+          label.appendChild(cb);
+          label.appendChild(document.createTextNode(item.ja));
+          label.title = item.en;
+          content.appendChild(label);
+        });
+        details.appendChild(content);
+        return details;
+      };
+
+      Object.entries(VAMPIRE_PARTS_DATA).forEach(([cat, items]) => {
+        contentWrapper.appendChild(createCat(cat, items));
+      });
+
+      vampireContainer.appendChild(contentWrapper);
+
+      const demonContainer = partsRoot.querySelector('.race-demon-container');
+      const wingsContainer = partsRoot.querySelector('.race-wings-container');
+      if (demonContainer && demonContainer.parentNode === partsRoot) {
+        partsRoot.insertBefore(vampireContainer, demonContainer.nextSibling);
+      } else if (wingsContainer && wingsContainer.parentNode === partsRoot) {
+        partsRoot.insertBefore(vampireContainer, wingsContainer);
+      } else {
+        partsRoot.appendChild(vampireContainer);
+      }
+    },
+    getTags() { return []; }
+  };
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
+
+})();
+
+
+(function(){
+// --- builder_ui.section.race.v10.js ---
+(function(){
+  "use strict";
+  const VERSION = 10;
+  const KEY = "race";
+
+  const SERPENT_PARTS_DATA = {
+    "🐍 蛇鱗パーツ (Serpent Traits)": [
+      { ja: "蛇鱗", en: "snake scales" },
+      { ja: "控えめな蛇鱗", en: "subtle snake scales" },
+      { ja: "蛇の下半身", en: "snake lower body" },
+      { ja: "長い蛇尾", en: "long serpentine tail" },
+      { ja: "蛇の巻き付き", en: "coiled serpent body" },
+      { ja: "二股の舌", en: "forked tongue" },
+      { ja: "爬虫類の目", en: "reptilian eyes" },
+      { ja: "縦長の蛇瞳", en: "serpent slit pupils" },
+      { ja: "メデューサの蛇髪", en: "medusa hair snakes" },
+      { ja: "首元の蛇鱗", en: "snake scales on neck" },
+      { ja: "冷血のオーラ", en: "cold-blooded aura" },
+      { ja: "蛇の気配", en: "serpent aura" },
+      { ja: "石化の魔性", en: "petrifying presence" }
+    ]
+  };
+
+  const DICT = {
+    "snake scales": "蛇鱗",
+    "subtle snake scales": "控えめな蛇鱗",
+    "snake lower body": "蛇の下半身",
+    "long serpentine tail": "長い蛇尾",
+    "coiled serpent body": "蛇の巻き付き",
+    "forked tongue": "二股の舌",
+    "reptilian eyes": "爬虫類の目",
+    "serpent slit pupils": "縦長の蛇瞳",
+    "medusa hair snakes": "メデューサの蛇髪",
+    "snake scales on neck": "首元の蛇鱗",
+    "cold-blooded aura": "冷血のオーラ",
+    "serpent aura": "蛇の気配",
+    "petrifying presence": "石化の魔性"
+  };
+
+  const API = {
+    initUI() {
+      if (window.__outputTranslation) window.__outputTranslation.register(DICT);
+      const partsRoot = document.getElementById("race-root-parts-content");
+      if (!partsRoot) return;
+      if (partsRoot.querySelector('.race-serpent-container')) return;
+
+      const serpentContainer = document.createElement("details");
+      serpentContainer.className = "race-serpent-container";
+      serpentContainer.style.cssText = "margin-bottom:10px; border:2px dashed #5bb37b; border-radius:6px; background:#fff;";
+      serpentContainer.open = false;
+
+      const mainSummary = document.createElement("summary");
+      mainSummary.textContent = "🐍 Serpent Traits Collection (蛇鱗パーツ)";
+      mainSummary.style.cssText = "font-weight:bold; padding:10px; cursor:pointer; background:#eefcf2; color:#20482d; font-size:1.0em;";
+      serpentContainer.appendChild(mainSummary);
+
+      const contentWrapper = document.createElement("div");
+      contentWrapper.style.padding = "10px";
+
+      const createCat = (title, items) => {
+        const details = document.createElement("details");
+        details.className = "race-cat";
+        details.style.cssText = "margin-bottom:6px; border:1px solid #d7f0df; border-radius:4px; background:#fff;";
+        const summary = document.createElement("summary");
+        summary.textContent = title;
+        summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#f8fff9; color:#2f6340;";
+        details.appendChild(summary);
+        const content = document.createElement("div");
+        content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:8px;";
+        items.forEach(item => {
+          const label = document.createElement("label");
+          label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer;";
+          const cb = document.createElement("input");
+          cb.type = "checkbox";
+          cb.style.marginRight = "6px";
+          cb.dataset.val = item.en;
+          label.appendChild(cb);
+          label.appendChild(document.createTextNode(item.ja));
+          label.title = item.en;
+          content.appendChild(label);
+        });
+        details.appendChild(content);
+        return details;
+      };
+
+      Object.entries(SERPENT_PARTS_DATA).forEach(([cat, items]) => {
+        contentWrapper.appendChild(createCat(cat, items));
+      });
+
+      serpentContainer.appendChild(contentWrapper);
+
+      const vampireContainer = partsRoot.querySelector('.race-vampire-container');
+      const wingsContainer = partsRoot.querySelector('.race-wings-container');
+      if (vampireContainer && vampireContainer.parentNode === partsRoot) {
+        partsRoot.insertBefore(serpentContainer, vampireContainer.nextSibling);
+      } else if (wingsContainer && wingsContainer.parentNode === partsRoot) {
+        partsRoot.insertBefore(serpentContainer, wingsContainer);
+      } else {
+        partsRoot.appendChild(serpentContainer);
+      }
+    },
+    getTags() { return []; }
+  };
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
+
+})();
+
+
+(function(){
+// --- builder_ui.section.race.v11.js ---
+(function(){
+  "use strict";
+  const VERSION = 11;
+  const KEY = "race";
+
+  function textOfSummary(node){
+    const sum = node && node.querySelector(':scope > summary');
+    return sum ? (sum.textContent || '').trim() : '';
+  }
+
+  function getBySummaryContains(root, needle){
+    return Array.from(root.children).find(el => textOfSummary(el).includes(needle)) || null;
+  }
+
+  function ensureOrder(root, nodes){
+    const frag = document.createDocumentFragment();
+    const used = new Set();
+    nodes.forEach(node => {
+      if (node && node.parentNode === root && !used.has(node)) {
+        frag.appendChild(node);
+        used.add(node);
+      }
+    });
+    Array.from(root.children).forEach(node => {
+      if (!used.has(node)) frag.appendChild(node);
+    });
+    root.appendChild(frag);
+  }
+
+  const API = {
+    initUI() {
+      const partsRoot = document.getElementById('race-root-parts-content');
+      if (!partsRoot) return;
+
+      const marine = partsRoot.querySelector('.race-marine-container');
+      const dragon = partsRoot.querySelector('.race-dragon-container');
+      const demon = partsRoot.querySelector('.race-demon-container');
+      const vampire = partsRoot.querySelector('.race-vampire-container');
+      const serpent = partsRoot.querySelector('.race-serpent-container');
+      const wings = partsRoot.querySelector('.race-wings-container');
+
+      const skinTypes = getBySummaryContains(partsRoot, '肌の色・スキン属性');
+      const skinColors = getBySummaryContains(partsRoot, '肌色・スキンカラー');
+      const scales = getBySummaryContains(partsRoot, '鱗・模様');
+      const horns = getBySummaryContains(partsRoot, '角・突起');
+      const ears = getBySummaryContains(partsRoot, '耳パーツ');
+      const bodyTraits = getBySummaryContains(partsRoot, '特殊な肉体パーツ');
+      const finsGills = getBySummaryContains(partsRoot, 'ヒレ・鰓');
+      const tentacles = getBySummaryContains(partsRoot, '触手');
+      const tailOnly = getBySummaryContains(partsRoot, '尻尾パーツ');
+      const animalTraits = getBySummaryContains(partsRoot, '動物的特徴');
+      const auxTail = getBySummaryContains(partsRoot, 'パーツ（補助） 尾');
+
+      ensureOrder(partsRoot, [
+        marine,
+        dragon,
+        demon,
+        vampire,
+        serpent,
+        skinTypes,
+        skinColors,
+        scales,
+        horns,
+        ears,
+        bodyTraits,
+        finsGills,
+        tentacles,
+        tailOnly,
+        animalTraits,
+        auxTail,
+        wings
+      ]);
+    },
+    getTags() { return []; }
+  };
+
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
+})();
+
+
+(function(){
+// --- builder_ui.section.race.v12.js ---
+(function(){
+  "use strict";
+  const VERSION = 12;
+  const KEY = "race";
+
+  function textOfSummary(node){
+    const sum = node && node.querySelector(':scope > summary');
+    return sum ? (sum.textContent || '').trim() : '';
+  }
+
+  function getBySummaryContains(root, needle){
+    return Array.from(root.children).find(el => textOfSummary(el).includes(needle)) || null;
+  }
+
+  function getContentBox(details){
+    return details ? details.querySelector(':scope > div') : null;
+  }
+
+  function makeLabel(item, checked){
+    const label = document.createElement('label');
+    label.style.cssText = 'display:flex; align-items:center; font-size:0.9em; cursor:pointer;';
+    const cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.dataset.en = item.en;
+    cb.style.marginRight = '6px';
+    if (checked) cb.checked = true;
+    label.appendChild(cb);
+    label.appendChild(document.createTextNode(item.ja));
+    return label;
+  }
+
+  function collectState(...detailsNodes){
+    const state = new Map();
+    detailsNodes.forEach(details => {
+      const box = getContentBox(details);
+      if (!box) return;
+      box.querySelectorAll('label').forEach(label => {
+        const cb = label.querySelector('input[type="checkbox"]');
+        if (!cb) return;
+        const en = (cb.dataset.en || cb.dataset.val || '').trim();
+        if (!en) return;
+        const ja = label.textContent.trim();
+        if (!state.has(en)) state.set(en, { ja, checked: !!cb.checked });
+        else if (cb.checked) state.get(en).checked = true;
+      });
+    });
+    return state;
+  }
+
+  function fillBox(details, items, state){
+    const box = getContentBox(details);
+    if (!box) return;
+    box.innerHTML = '';
+    items.forEach(item => {
+      const st = state.get(item.en);
+      box.appendChild(makeLabel(item, !!(st && st.checked)));
+    });
+  }
+
+  const SKIN_COLORS = [
+    { ja: '褐色肌', en: 'dark skin' },
+    { ja: '日焼け肌', en: 'tanned skin' },
+    { ja: '色白', en: 'pale skin' },
+    { ja: 'アルビノ', en: 'albino' },
+    { ja: '異色肌', en: 'colored skin' },
+    { ja: '青肌', en: 'blue skin' },
+    { ja: '緑肌', en: 'green skin' },
+    { ja: '赤肌', en: 'red skin' },
+    { ja: '紫肌', en: 'purple skin' },
+    { ja: '灰色の肌', en: 'grey skin' }
+  ];
+
+  const SKIN_TRAITS = [
+    { ja: '金属肌', en: 'metallic skin' },
+    { ja: '光沢肌', en: 'glossy skin' },
+    { ja: '濡れた肌', en: 'wet skin' },
+    { ja: 'オイリー肌', en: 'oily skin' },
+    { ja: '半透明肌', en: 'translucent skin' },
+    { ja: '結晶肌', en: 'crystalline skin' },
+    { ja: '石肌', en: 'stone skin' },
+    { ja: 'なめらかな肌', en: 'smooth skin' },
+    { ja: 'ざらついた肌', en: 'rough skin' }
+  ];
+
+  const API = {
+    initUI() {
+      const partsRoot = document.getElementById('race-root-parts-content');
+      if (!partsRoot) return;
+
+      const skinTraits = getBySummaryContains(partsRoot, '肌の色・スキン属性')
+        || getBySummaryContains(partsRoot, 'スキン属性');
+      const skinColors = getBySummaryContains(partsRoot, '肌色・スキンカラー')
+        || getBySummaryContains(partsRoot, 'スキンカラー');
+      if (!skinTraits || !skinColors) return;
+
+      const state = collectState(skinTraits, skinColors);
+
+      const traitsSummary = skinTraits.querySelector(':scope > summary');
+      const colorsSummary = skinColors.querySelector(':scope > summary');
+      if (traitsSummary) traitsSummary.textContent = '🧬 スキン属性 (Skin Traits)';
+      if (colorsSummary) colorsSummary.textContent = '🎨 スキンカラー (Skin Colors)';
+
+      fillBox(skinTraits, SKIN_TRAITS, state);
+      fillBox(skinColors, SKIN_COLORS, state);
+    },
+    getTags() { return []; }
+  };
+
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
+
+})();
+
+
+(function(){
+// --- builder_ui.section.race.v14.js ---
+(function(){
+  "use strict";
+  const VERSION = 14;
+  const KEY = "race";
+
+  const EYE_TRAITS_DATA = {
+    "👁 Eye Traits (目パーツ)": [
+      { ja: "発光する目", en: "glowing eyes" },
+      { ja: "赤い発光眼", en: "glowing red eyes" },
+      { ja: "青い発光眼", en: "glowing blue eyes" },
+      { ja: "金色の瞳", en: "golden eyes" },
+      { ja: "虹彩異色", en: "heterochromia" },
+      { ja: "縦長の瞳孔", en: "vertical slit pupils" },
+      { ja: "爬虫類の瞳", en: "reptilian eyes" },
+      { ja: "猫の瞳", en: "catlike eyes" },
+      { ja: "蛇の眼差し", en: "serpentine gaze" },
+      { ja: "悪魔の瞳", en: "demonic eyes" },
+      { ja: "吸血鬼の赤眼", en: "crimson vampire eyes" },
+      { ja: "竜眼", en: "draconic eyes" },
+      { ja: "複眼", en: "compound eyes" },
+      { ja: "追加の目", en: "multiple eyes" },
+      { ja: "額の第三の目", en: "third eye on forehead" },
+      { ja: "石化の魔眼", en: "petrifying eyes" },
+      { ja: "星の瞳", en: "starry eyes" },
+      { ja: "機械眼", en: "cybernetic eye" }
+    ]
+  };
+
+  const DICT = {
+    "glowing eyes": "発光する目",
+    "glowing red eyes": "赤い発光眼",
+    "glowing blue eyes": "青い発光眼",
+    "golden eyes": "金色の瞳",
+    "heterochromia": "虹彩異色",
+    "vertical slit pupils": "縦長の瞳孔",
+    "reptilian eyes": "爬虫類の瞳",
+    "catlike eyes": "猫の瞳",
+    "serpentine gaze": "蛇の眼差し",
+    "demonic eyes": "悪魔の瞳",
+    "crimson vampire eyes": "吸血鬼の赤眼",
+    "draconic eyes": "竜眼",
+    "compound eyes": "複眼",
+    "multiple eyes": "追加の目",
+    "third eye on forehead": "額の第三の目",
+    "petrifying eyes": "石化の魔眼",
+    "starry eyes": "星の瞳",
+    "cybernetic eye": "機械眼"
+  };
+
+  function textOfSummary(node){
+    const sum = node && node.querySelector(':scope > summary');
+    return sum ? (sum.textContent || '').trim() : '';
+  }
+
+  function getBySummaryContains(root, needle){
+    return Array.from(root.children).find(el => textOfSummary(el).includes(needle)) || null;
+  }
+
+  const API = {
+    initUI() {
+      if (window.__outputTranslation) window.__outputTranslation.register(DICT);
+      const partsRoot = document.getElementById('race-root-parts-content');
+      if (!partsRoot) return;
+      if (partsRoot.querySelector('.race-eye-container')) return;
+
+      const eyeContainer = document.createElement('details');
+      eyeContainer.className = 'race-eye-container';
+      eyeContainer.style.cssText = 'margin-bottom:8px; border:1px solid #ddd; border-radius:6px; background:#fafafa;';
+      eyeContainer.open = false;
+
+      const mainSummary = document.createElement('summary');
+      mainSummary.textContent = '👁 目パーツ (Eye Traits Collection)';
+      mainSummary.style.cssText = 'padding:8px 10px; cursor:pointer; font-weight:bold;';
+      eyeContainer.appendChild(mainSummary);
+
+      const contentWrapper = document.createElement('div');
+      contentWrapper.style.padding = '10px';
+
+      Object.entries(EYE_TRAITS_DATA).forEach(([cat, items]) => {
+        const details = document.createElement('details');
+        details.className = 'race-cat';
+        details.style.cssText = 'margin-bottom:8px; border:1px solid #ddd; border-radius:6px; background:#fafafa;';
+
+        const summary = document.createElement('summary');
+        summary.textContent = cat;
+        summary.style.cssText = 'padding:8px 10px; cursor:pointer; font-weight:bold;';
+        details.appendChild(summary);
+
+        const content = document.createElement('div');
+        content.style.cssText = 'padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:8px;';
+        items.forEach(item => {
+          const label = document.createElement('label');
+          label.style.cssText = 'display:flex; align-items:center; font-size:0.9em; cursor:pointer;';
+          const cb = document.createElement('input');
+          cb.type = 'checkbox';
+          cb.style.marginRight = '6px';
+          cb.dataset.val = item.en;
+          label.appendChild(cb);
+          label.appendChild(document.createTextNode(item.ja));
+          label.title = item.en;
+          content.appendChild(label);
+        });
+        details.appendChild(content);
+        contentWrapper.appendChild(details);
+      });
+
+      eyeContainer.appendChild(contentWrapper);
+
+      const headParts = getBySummaryContains(partsRoot, '頭部パーツ');
+      const ears = getBySummaryContains(partsRoot, '耳パーツ');
+      if (headParts && headParts.nextSibling) {
+        partsRoot.insertBefore(eyeContainer, headParts.nextSibling);
+      } else if (ears) {
+        partsRoot.insertBefore(eyeContainer, ears);
+      } else {
+        partsRoot.appendChild(eyeContainer);
+      }
+    },
+    getTags() { return []; }
+  };
+
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
+})();
+
+
+(function(){
+(function(){
+  "use strict";
+  const VERSION = 15;
+  const KEY = "race";
+
+  const MOUTH_TRAITS_DATA = {
+    "🦷 Mouth Traits Collection (口パーツ)": [
+      { ja: "牙", en: "fangs" },
+      { ja: "吸血牙", en: "vampire fangs" },
+      { ja: "長く鋭い牙", en: "long sharp fangs" },
+      { ja: "獣牙", en: "beast fangs" },
+      { ja: "悪魔の牙", en: "demon fangs" },
+      { ja: "竜牙", en: "dragon fangs" },
+      { ja: "爬虫類の歯", en: "reptilian teeth" },
+      { ja: "鮫の歯", en: "shark teeth" },
+      { ja: "鋸歯状の歯", en: "serrated teeth" },
+      { ja: "針のような歯", en: "needle teeth" },
+      { ja: "複数列の歯", en: "multiple rows of teeth" },
+      { ja: "発光する口内", en: "glowing mouth" },
+      { ja: "炎を宿す口", en: "fiery breath mouth" },
+      { ja: "毒液を滴らせる牙", en: "venom dripping fangs" },
+      { ja: "二股の蛇舌", en: "forked serpent tongue" },
+      { ja: "長い悪魔の舌", en: "long demon tongue" },
+      { ja: "怪物の大顎", en: "monster maw" },
+      { ja: "裂けた顎", en: "split jaw" }
+    ]
+  };
+
+  function pickHelpers() {
+    const H = window.__BUILDER_RACE_UI_HELPERS__ || {};
+    return {
+      textOfSummary: H.textOfSummary || (el => ((el && el.querySelector && el.querySelector(':scope > summary')) || {}).textContent || ''),
+      getBySummaryContains: H.getBySummaryContains || ((root, needle) => Array.from(root.children).find(el => (((el && el.querySelector && el.querySelector(':scope > summary')) || {}).textContent || '').includes(needle)) || null),
+      appendPromptCheckbox: H.appendPromptCheckbox || ((wrap, item) => {
+        const label = document.createElement('label');
+        label.style.cssText = 'display:block; margin:6px 0;';
+        const input = document.createElement('input');
+        input.type = 'checkbox';
+        input.dataset.tagJa = item.ja;
+        input.dataset.tagEn = item.en;
+        input.style.marginRight = '6px';
+        label.appendChild(input);
+        label.appendChild(document.createTextNode(item.ja));
+        wrap.appendChild(label);
+      })
+    };
+  }
+
+  const API = {
+    render(root) {
+      if (!root || root.querySelector('[data-race-mouth-v15="1"]')) return;
+      const partsRoot = root.querySelector('.race-parts-root, .parts-root') || root;
+      const { getBySummaryContains, appendPromptCheckbox } = pickHelpers();
+
+      const mouthContainer = document.createElement('details');
+      mouthContainer.dataset.raceMouthV15 = '1';
+      mouthContainer.className = 'race-mouth-container';
+      mouthContainer.style.cssText = 'margin-bottom:10px; border:2px dashed #f6ad55; border-radius:6px; background:#fff;';
+      mouthContainer.open = false;
+
+      const mainSummary = document.createElement('summary');
+      mainSummary.textContent = '🦷 Mouth Traits Collection (口パーツ)';
+      mainSummary.style.cssText = 'font-weight:bold; padding:10px; cursor:pointer; background:#fff8f0; color:#633; font-size:1.0em;';
+      mouthContainer.appendChild(mainSummary);
+
+      const contentWrapper = document.createElement('div');
+      contentWrapper.style.padding = '10px';
+
+      Object.entries(MOUTH_TRAITS_DATA).forEach(([cat, items]) => {
+        const details = document.createElement('details');
+        details.className = 'race-cat';
+        details.style.cssText = 'margin-bottom:8px; border:1px solid #ddd; border-radius:6px; background:#fafafa;';
+        const summary = document.createElement('summary');
+        summary.textContent = cat;
+        summary.style.cssText = 'padding:8px 10px; cursor:pointer; font-weight:bold;';
+        details.appendChild(summary);
+        const content = document.createElement('div');
+        content.style.cssText = 'padding:8px 10px;';
+        items.forEach(item => appendPromptCheckbox(content, item));
+        details.appendChild(content);
+        contentWrapper.appendChild(details);
+      });
+
+      mouthContainer.appendChild(contentWrapper);
+
+      const eye = getBySummaryContains(partsRoot, 'Eye Traits');
+      const ears = getBySummaryContains(partsRoot, '耳パーツ');
+      const horns = getBySummaryContains(partsRoot, '角・突起');
+      if (eye && eye.nextSibling) {
+        partsRoot.insertBefore(mouthContainer, eye.nextSibling);
+      } else if (ears) {
+        partsRoot.insertBefore(mouthContainer, ears);
+      } else if (horns) {
+        partsRoot.insertBefore(mouthContainer, horns);
+      } else {
+        partsRoot.appendChild(mouthContainer);
+      }
+    },
+    getTags() { return []; }
+  };
+
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
+})();
+
+
+(function(){
+// --- builder_ui.section.race.v18.js ---
+(function(){
+  "use strict";
+  const VERSION = 18;
+  const KEY = "race";
+
+  function getSummaryText(el){
+    const s = el && el.querySelector ? el.querySelector(':scope > summary') : null;
+    return (s ? s.textContent : el?.textContent || '').trim();
+  }
+
+  function pickNodes(root, matchers){
+    const pool = Array.from(root.children);
+    const picked = [];
+    for (const matcher of matchers){
+      const idx = pool.findIndex(el => matcher(getSummaryText(el), el));
+      if (idx >= 0){
+        picked.push(pool[idx]);
+        pool.splice(idx, 1);
+      }
+    }
+    return picked;
+  }
+
+  function makeSection(title, color, openDefault){
+    const wrap = document.createElement('section');
+    wrap.className = 'race-group-block';
+    wrap.style.cssText = [
+      'display:block',
+      'width:100%',
+      'max-width:none',
+      'box-sizing:border-box',
+      'margin:0 0 12px 0',
+      'border:2px solid ' + color,
+      'border-radius:12px',
+      'background:#fff',
+      'overflow:hidden'
+    ].join(';');
+
+    const head = document.createElement('button');
+    head.type = 'button';
+    head.setAttribute('aria-expanded', openDefault ? 'true' : 'false');
+    head.style.cssText = [
+      'display:flex',
+      'align-items:center',
+      'justify-content:space-between',
+      'gap:10px',
+      'width:100%',
+      'padding:10px 12px',
+      'font-weight:700',
+      'font-size:1.02em',
+      'line-height:1.35',
+      'color:#333',
+      'background:' + color + '18',
+      'border:0',
+      'text-align:left',
+      'cursor:pointer',
+      'word-break:break-word'
+    ].join(';');
+
+    const titleSpan = document.createElement('span');
+    titleSpan.textContent = title;
+    titleSpan.style.cssText = [
+      'flex:1 1 auto',
+      'min-width:0',
+      'white-space:normal',
+      'word-break:break-word',
+      'overflow-wrap:anywhere'
+    ].join(';');
+
+    const chevron = document.createElement('span');
+    chevron.textContent = openDefault ? '▼' : '▶';
+    chevron.style.cssText = [
+      'flex:0 0 auto',
+      'font-size:0.95em',
+      'line-height:1',
+      'opacity:0.9'
+    ].join(';');
+
+    const body = document.createElement('div');
+    body.className = 'race-group-body';
+    body.style.cssText = [
+      'display:' + (openDefault ? 'block' : 'none'),
+      'width:100%',
+      'max-width:none',
+      'box-sizing:border-box',
+      'padding:10px',
+      'overflow:hidden'
+    ].join(';');
+
+    head.addEventListener('click', () => {
+      const open = body.style.display !== 'none';
+      body.style.display = open ? 'none' : 'block';
+      chevron.textContent = open ? '▶' : '▼';
+      head.setAttribute('aria-expanded', open ? 'false' : 'true');
+    });
+
+    head.appendChild(titleSpan);
+    head.appendChild(chevron);
+    wrap.appendChild(head);
+    wrap.appendChild(body);
+    return {wrap, body};
+  }
+
+  function normalizeChild(el){
+    if (!el || !el.style) return;
+    el.style.width = '100%';
+    el.style.maxWidth = 'none';
+    el.style.boxSizing = 'border-box';
+    el.style.marginBottom = '10px';
+    const summary = el.querySelector(':scope > summary');
+    if (summary){
+      summary.style.whiteSpace = 'normal';
+      summary.style.wordBreak = 'break-word';
+      summary.style.overflowWrap = 'anywhere';
+      summary.style.lineHeight = '1.3';
+    }
+    el.querySelectorAll('label, span, div').forEach(node => {
+      if (!node.style) return;
+      node.style.wordBreak = 'break-word';
+      node.style.overflowWrap = 'anywhere';
+    });
+  }
+
+  const API = {
+    initUI(){
+      setTimeout(() => {
+        const partsRoot = document.getElementById('race-root-parts-content');
+        if (!partsRoot) return;
+        if (partsRoot.dataset.speciesReorgDone === '18') return;
+        partsRoot.dataset.speciesReorgDone = '18';
+
+        // remove old reorg wrappers if any
+        Array.from(partsRoot.querySelectorAll(':scope > .race-group-block')).forEach(n => n.remove());
+
+        const all = Array.from(partsRoot.children).filter(el => !el.classList.contains('race-group-block'));
+        if (!all.length) return;
+
+        const speciesMatchers = [
+          t => t.includes('Marine Traits') || t.includes('海洋パーツ'),
+          t => t.includes('Dragon Traits') || t.includes('竜パーツ'),
+          t => t.includes('Celestial/Abyssal Traits') || t.includes('天使・悪魔パーツ') || t.includes('Demonic Traits') || t.includes('悪魔パーツ') || t.includes('Celestial Traits') || t.includes('天使パーツ'),
+          t => t.includes('Vampire Traits') || t.includes('吸血鬼パーツ'),
+          t => t.includes('Serpent Traits') || t.includes('蛇鱗パーツ'),
+          t => t.includes('Beast Traits') || t.includes('獣系パーツ'),
+          t => t.includes('Insect Traits') || t.includes('昆虫パーツ') || t.includes('昆虫種族パーツ'),
+        ];
+        const headMatchers = [
+          t => t.includes('Head Parts') || t.includes('頭部パーツ'),
+          t => t.includes('Eye Traits') || t.includes('目パーツ'),
+          t => t.includes('Mouth Traits') || t.includes('口パーツ'),
+          t => t.includes('Ears Only') || t.includes('耳パーツ'),
+          t => t.includes('Horns & Spikes') || t.includes('角・突起'),
+        ];
+        const bodyMatchers = [
+          t => t.includes('Skin Traits') || t.includes('スキン属性') || t.includes('肌の色・スキン属性'),
+          t => t.includes('Skin Colors') || t.includes('スキンカラー') || t.includes('肌色・スキンカラー'),
+          t => t.includes('Scales - Partial') || t.includes('鱗・模様'),
+          t => t.includes('Wings Collection') || t.includes('翼・ウィング'),
+          t => t.includes('Body Traits') || t.includes('特殊な肉体パーツ'),
+          t => t.includes('Animal Traits') || t.includes('動物的特徴'),
+          t => t.includes('Fins & Gills') || t.includes('ヒレ・鰓'),
+          t => t.includes('Tentacles - Subtle') || t.includes('触手'),
+          t => t.includes('Tail Only') || t.includes('尻尾パーツ'),
+          t => t.includes('パーツ（補助）尾') || (t.includes('Tail)') && t.includes('補助')),
+        ];
+
+        const speciesNodes = pickNodes(partsRoot, speciesMatchers);
+        const headNodes = pickNodes(partsRoot, headMatchers);
+        const bodyNodes = pickNodes(partsRoot, bodyMatchers);
+        const remaining = Array.from(partsRoot.children).filter(el => !speciesNodes.includes(el) && !headNodes.includes(el) && !bodyNodes.includes(el));
+
+        partsRoot.innerHTML = '';
+        partsRoot.style.display = 'block';
+        partsRoot.style.width = '100%';
+        partsRoot.style.maxWidth = 'none';
+        partsRoot.style.boxSizing = 'border-box';
+
+        const appendSection = (title, color, nodes, openDefault) => {
+          if (!nodes.length) return;
+          const sec = makeSection(title, color, openDefault === true);
+          nodes.forEach(n => {
+            normalizeChild(n);
+            sec.body.appendChild(n);
+          });
+          partsRoot.appendChild(sec.wrap);
+        };
+
+        appendSection('🧬 種族パーツ (Species Traits)', '#4CAF50', speciesNodes, false);
+        appendSection('🧠 頭部・顔パーツ (Head & Face)', '#7E57C2', headNodes, false);
+        appendSection('🧍 身体・付属パーツ (Body & Attachments)', '#26A69A', bodyNodes, false);
+        appendSection('🧩 その他パーツ (Misc Parts)', '#90A4AE', remaining, false);
+      }, 140);
+    },
+    getTags(){ return []; }
+  };
+
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
+})();
+
+
+(function(){
+// --- builder_ui.section.race.v19.beast.js ---
+(function(){
+  "use strict";
+  const VERSION = 19;
+  const KEY = "race";
+
+  const BEAST_PARTS_DATA = {
+    "🐾 獣系パーツ (Beast Traits)": [
+      { ja: "獣耳", en: "animal ears" },
+      { ja: "狐耳", en: "fox ears" },
+      { ja: "狼耳", en: "wolf ears" },
+      { ja: "猫耳", en: "cat ears" },
+      { ja: "獣の牙", en: "beast fangs" },
+      { ja: "獣の爪", en: "beast claws" },
+      { ja: "狐尾", en: "fox tail" },
+      { ja: "複数の狐尾", en: "multiple fox tails" },
+      { ja: "狼尾", en: "wolf tail" },
+      { ja: "猫尾", en: "cat tail" },
+      { ja: "獣脚", en: "digitigrade legs" },
+      { ja: "肉球の手", en: "paw hands" },
+      { ja: "肉球の足", en: "paw feet" },
+      { ja: "獣の瞳", en: "feral eyes" },
+      { ja: "野性のオーラ", en: "wild beast aura" },
+      { ja: "獣化の気配", en: "bestial presence" }
+    ]
+  };
+
+  const DICT = {
+    "animal ears": "獣耳",
+    "fox ears": "狐耳",
+    "wolf ears": "狼耳",
+    "cat ears": "猫耳",
+    "beast fangs": "獣の牙",
+    "beast claws": "獣の爪",
+    "fox tail": "狐尾",
+    "multiple fox tails": "複数の狐尾",
+    "wolf tail": "狼尾",
+    "cat tail": "猫尾",
+    "digitigrade legs": "獣脚",
+    "paw hands": "肉球の手",
+    "paw feet": "肉球の足",
+    "feral eyes": "獣の瞳",
+    "wild beast aura": "野性のオーラ",
+    "bestial presence": "獣化の気配"
+  };
+
+  const API = {
+    initUI() {
+      if (window.__outputTranslation) window.__outputTranslation.register(DICT);
+      const partsRoot = document.getElementById("race-root-parts-content");
+      if (!partsRoot) return;
+      if (partsRoot.querySelector('.race-beast-container')) return;
+
+      const beastContainer = document.createElement("details");
+      beastContainer.className = "race-beast-container";
+      beastContainer.style.cssText = "margin-bottom:10px; border:2px dashed #8bc34a; border-radius:6px; background:#fff; width:100%; box-sizing:border-box;";
+      beastContainer.open = false;
+
+      const mainSummary = document.createElement("summary");
+      mainSummary.textContent = "🐾 Beast Traits Collection (獣系パーツ)";
+      mainSummary.style.cssText = "font-weight:bold; padding:10px; cursor:pointer; background:#f3fde7; color:#335522; font-size:1.0em; word-break:break-word; overflow-wrap:anywhere;";
+      beastContainer.appendChild(mainSummary);
+
+      const contentWrapper = document.createElement("div");
+      contentWrapper.style.padding = "10px";
+
+      const createCat = (title, items) => {
+        const details = document.createElement("details");
+        details.className = "race-cat";
+        details.style.cssText = "margin-bottom:6px; border:1px solid #d9efbe; border-radius:4px; background:#fff; width:100%; box-sizing:border-box;";
+        const summary = document.createElement("summary");
+        summary.textContent = title;
+        summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#fbfff6; color:#46622b; word-break:break-word; overflow-wrap:anywhere;";
+        details.appendChild(summary);
+        const content = document.createElement("div");
+        content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:8px;";
+        items.forEach(item => {
+          const label = document.createElement("label");
+          label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer; word-break:break-word; overflow-wrap:anywhere;";
+          const cb = document.createElement("input");
+          cb.type = "checkbox";
+          cb.style.marginRight = "6px";
+          cb.dataset.val = item.en;
+          label.appendChild(cb);
+          label.appendChild(document.createTextNode(item.ja));
+          label.title = item.en;
+          content.appendChild(label);
+        });
+        details.appendChild(content);
+        return details;
+      };
+
+      Object.entries(BEAST_PARTS_DATA).forEach(([cat, items]) => {
+        contentWrapper.appendChild(createCat(cat, items));
+      });
+
+      beastContainer.appendChild(contentWrapper);
+
+      const serpentContainer = partsRoot.querySelector('.race-serpent-container');
+      const wingsContainer = partsRoot.querySelector('.race-wings-container');
+      if (serpentContainer && serpentContainer.parentNode === partsRoot) {
+        if (serpentContainer.nextSibling) {
+          partsRoot.insertBefore(beastContainer, serpentContainer.nextSibling);
+        } else {
+          partsRoot.appendChild(beastContainer);
+        }
+      } else if (wingsContainer && wingsContainer.parentNode === partsRoot) {
+        partsRoot.insertBefore(beastContainer, wingsContainer);
+      } else {
+        partsRoot.appendChild(beastContainer);
+      }
+    },
+    getTags(){ return []; }
+  };
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
+})();
+
+
+(function(){
+// --- builder_ui.section.race.v20.insect.js ---
+(function(){
+  "use strict";
+  const VERSION = 20;
+  const KEY = "race";
+
+  const INSECT_PARTS_DATA = {
+    "🦋 昆虫パーツ (Insect Traits)": [
+      { ja: "昆虫触角", en: "insect antennae" },
+      { ja: "蝶の触角", en: "butterfly antennae" },
+      { ja: "蛾の触角", en: "moth antennae" },
+      { ja: "複眼", en: "compound eyes" },
+      { ja: "昆虫の顎", en: "insect mandibles" },
+      { ja: "甲殻質の外殻", en: "chitin exoskeleton" },
+      { ja: "節のある昆虫脚", en: "segmented insect limbs" },
+      { ja: "甲虫の羽", en: "beetle wing covers" },
+      { ja: "透明な昆虫翅", en: "transparent insect wings" },
+      { ja: "蝶の翅", en: "butterfly wings" },
+      { ja: "蛾の翅", en: "moth wings" },
+      { ja: "蜂の翅", en: "wasp wings" },
+      { ja: "昆虫の腹部", en: "insect abdomen" },
+      { ja: "昆虫の尾節", en: "insect tail segments" },
+      { ja: "昆虫の気配", en: "insect aura" },
+      { ja: "女王蜂の気配", en: "queen bee aura" },
+      { ja: "カマキリの鎌腕", en: "mantis scythe arms" },
+      { ja: "蜘蛛脚風の補助肢", en: "spider-like auxiliary limbs" },
+      { ja: "玉虫色の外殻", en: "iridescent exoskeleton" },
+      { ja: "発光する昆虫翅", en: "glowing insect wings" }
+    ]
+  };
+
+  const DICT = {
+    "insect antennae": "昆虫触角",
+    "butterfly antennae": "蝶の触角",
+    "moth antennae": "蛾の触角",
+    "compound eyes": "複眼",
+    "insect mandibles": "昆虫の顎",
+    "chitin exoskeleton": "甲殻質の外殻",
+    "segmented insect limbs": "節のある昆虫脚",
+    "beetle wing covers": "甲虫の羽",
+    "transparent insect wings": "透明な昆虫翅",
+    "butterfly wings": "蝶の翅",
+    "moth wings": "蛾の翅",
+    "wasp wings": "蜂の翅",
+    "insect abdomen": "昆虫の腹部",
+    "insect tail segments": "昆虫の尾節",
+    "insect aura": "昆虫の気配",
+    "queen bee aura": "女王蜂の気配",
+    "mantis scythe arms": "カマキリの鎌腕",
+    "spider-like auxiliary limbs": "蜘蛛脚風の補助肢",
+    "iridescent exoskeleton": "玉虫色の外殻",
+    "glowing insect wings": "発光する昆虫翅"
+  };
+
+  const API = {
+    initUI() {
+      if (window.__outputTranslation) window.__outputTranslation.register(DICT);
+      const partsRoot = document.getElementById("race-root-parts-content");
+      if (!partsRoot) return;
+      if (partsRoot.querySelector('.race-insect-container')) return;
+
+      const insectContainer = document.createElement("details");
+      insectContainer.className = "race-insect-container";
+      insectContainer.style.cssText = "margin-bottom:10px; border:2px dashed #66bb6a; border-radius:6px; background:#fff; width:100%; box-sizing:border-box;";
+      insectContainer.open = false;
+
+      const mainSummary = document.createElement("summary");
+      mainSummary.textContent = "🦋 Insect Traits Collection (昆虫パーツ)";
+      mainSummary.style.cssText = "font-weight:bold; padding:10px; cursor:pointer; background:#f3fff4; color:#2f5a35; font-size:1.0em; word-break:break-word; overflow-wrap:anywhere;";
+      insectContainer.appendChild(mainSummary);
+
+      const contentWrapper = document.createElement("div");
+      contentWrapper.style.padding = "10px";
+
+      const createCat = (title, items) => {
+        const details = document.createElement("details");
+        details.className = "race-cat";
+        details.style.cssText = "margin-bottom:6px; border:1px solid #d5ecd7; border-radius:4px; background:#fff; width:100%; box-sizing:border-box;";
+        const summary = document.createElement("summary");
+        summary.textContent = title;
+        summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#fbfffb; color:#3f6244; word-break:break-word; overflow-wrap:anywhere;";
+        details.appendChild(summary);
+        const content = document.createElement("div");
+        content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:8px;";
+        items.forEach(item => {
+          const label = document.createElement("label");
+          label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer; word-break:break-word; overflow-wrap:anywhere;";
+          const cb = document.createElement("input");
+          cb.type = "checkbox";
+          cb.style.marginRight = "6px";
+          cb.dataset.val = item.en;
+          label.appendChild(cb);
+          label.appendChild(document.createTextNode(item.ja));
+          label.title = item.en;
+          content.appendChild(label);
+        });
+        details.appendChild(content);
+        return details;
+      };
+
+      Object.entries(INSECT_PARTS_DATA).forEach(([cat, items]) => {
+        contentWrapper.appendChild(createCat(cat, items));
+      });
+
+      insectContainer.appendChild(contentWrapper);
+
+      const beastContainer = partsRoot.querySelector('.race-beast-container');
+      const wingsContainer = partsRoot.querySelector('.race-wings-container');
+      if (beastContainer && beastContainer.parentNode === partsRoot) {
+        if (beastContainer.nextSibling) {
+          partsRoot.insertBefore(insectContainer, beastContainer.nextSibling);
+        } else {
+          partsRoot.appendChild(insectContainer);
+        }
+      } else if (wingsContainer && wingsContainer.parentNode === partsRoot) {
+        partsRoot.insertBefore(insectContainer, wingsContainer);
+      } else {
+        partsRoot.appendChild(insectContainer);
+      }
+    },
+    getTags(){ return []; }
+  };
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
+})();

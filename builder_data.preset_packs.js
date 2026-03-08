@@ -1099,10 +1099,59 @@
       { label: "金髪の騎士王 (セイバー風)", val: "(blonde hair), (braided bun), (blue dress), (silver armor), (gauntlets), (holding glowing sword), (knight king)", desc: "名前を出さずにセイバー風" },
       { label: "白髪の魔法使い (フリーレン風)", val: "(white twintails), (pointy ears), (white cape), (gold earrings), (holding staff), (flat chest), (calm expression)", desc: "名前を出さずにフリーレン風" },
       { label: "黒髪の暗殺者 (ヨル風)", val: "(black hair), (hairband), (black backless dress), (red inside dress), (thigh-high boots), (golden stilettos weapons), (red eyes)", desc: "名前を出さずにヨル風" },
-      { label: "星眼のアイドル (アイ風)", val: "(purple hair), (star-shaped pupils:1.2), (idol outfit), (microphone), (sparkling eyes), (vibrant colors), (charismatic smile)", desc: "名前を出さずにアイ風" }
+      { label: "星眼のアイドル (アイ風)", val: "(purple hair), (star-shaped pupils:1.2), (idol outfit), (microphone), (sparkling eyes), (vibrant colors), (charismatic smile)", desc: "名前を出さずにアイ風" }, 
+{ label: "ブラックマジシャンガール", val: "dark magician girl, blonde hair, pink and blue magic hat, pink and blue wizard outfit, pink capelet, magic wand, hexagram pendant", desc: "遊戯王：伝説の魔導師" },
+      { label: "リアス・グレモリー", val: "rias gremory, crimson long hair, blue eyes, high school uniform, black devil wings, voluptuous figure", desc: "ハイスクールD×D：紅髪の滅殺姫" },
+      { label: "ララ・デビルーク", val: "lala satalin deviluke, pink long hair, green eyes, slender, pointed devil tail with heart tip, innocent smile", desc: "To LOVEる：デビルーク星の第一王女" },
+      { label: "金色の闇 (ヤミ)", val: "golden darkness, blonde hair in long twin braids, black gothic dress, red eyes, hair as weapons, expressionless", desc: "To LOVEる：宇宙最高の暗殺者" },
+      { label: "レム (Rem)", val: "rem (re:zero), blue short hair, large blue eyes, maid outfit, pink flower hair ornament, dedicated expression", desc: "Re:ゼロ：ロズワール邸のメイド" },
+      { label: "セイバー (Saber)", val: "artoria pendragon, blonde hair, braided bun, blue dress, silver plate armor, holding invisible sword, regal aura", desc: "Fate：騎士王" },
+      { label: "ラム (Ram)", val: "ram (re:zero), pink short hair, large pink eyes, maid outfit, purple hair clip, sharp gaze", desc: "Re:ゼロ：毒舌な姉メイド" }
     ],
 
-  "🎭 なりきりおすすめセット｜神獣・伝説なりきり (Mythic Beasts)": [
+  
+"🎭 なりきりおすすめセット｜職業・なりきり（天界｜固有名） (Celestial Named Personas)": [
+    { label: "🟨 ✦G ガブリエル / Gabriel", val: "gabriel motif, archangel of annunciation, divine messenger, heavenly proclamation, radiant white wings, layered halo rings, luminous trumpet motif, sacred scrolls, serene authority, holy revelation aura", desc: "固有名 / 神託と伝令の大天使像 / 関連: ✦G 神託の伝令・大天使級" },
+    { label: "🟧 ✦M ミカエル / Michael", val: "archangel michael motif, heavenly commander, divine judgment, six wings, radiant halo crown, celestial armor, sacred execution blade, holy war standard, overwhelming authority, victorious divine presence", desc: "固有名 / 天の軍勢を率いる大天使長像 / 関連: ✦M 天界の使徒長・熾天級" },
+    { label: "🟩 ✦R ラファエル / Raphael", val: "archangel raphael motif, holy healer, sacred restoration, healing light, blessing aura, gentle halo glow, restoration sigils, pure feathers, merciful divinity, pilgrimage guardian", desc: "固有名 / 癒やしと加護の大天使像 / 関連: ✦R 聖域の守護者・智天級" },
+    { label: "🟠 ✦U ウリエル / Uriel", val: "archangel uriel motif, divine flame, sacred wisdom, burning halo, judgment fire, scripture of light, solemn celestial presence, revelation fire, radiant severity", desc: "固有名 / 炎と叡智を帯びる天使像 / 関連: ✦U 審判の執行者・座天級" }
+  ],
+
+"🎭 なりきりおすすめセット｜職業・なりきり（天界｜役職・称号） (Celestial Titles)": [
+    { label: "🟨 ✦G 神託の伝令 / Oracle Messenger", val: "oracle messenger, divine message bearer, luminous scrolls, sacred whisper, halo light, annunciation motif, calm reverence, revelation script aura", desc: "役職・称号 / 神意を届ける者 / 関連: ✦G ガブリエル・大天使級" },
+    { label: "🟧 ✦M 天界の使徒長 / Heavenly Apostle Commander", val: "heavenly apostle commander, divine envoy leader, sacred decree, radiant authority, celestial hierarchy, holy mandate, heavenly command regalia, proclamation standard, commander halo authority", desc: "役職・称号 / 天界の伝令長 / 関連: ✦M ミカエル・熾天級" },
+    { label: "🟩 ✦R 聖域の守護者 / Guardian of the Sanctuary", val: "guardian of the sanctuary, holy protector, sacred barrier, divine vigilance, temple light, sanctum key motif, solemn protection, consecrated defense aura", desc: "役職・称号 / 神域を守る守護位 / 関連: ✦R ラファエル・智天級" },
+    { label: "🟠 ✦U 審判の執行者 / Executor of Judgment", val: "executor of divine judgment, blazing halo, radiant authority, sacred sentence, celestial tribunal, execution blade motif, overwhelming holy presence, law of heaven aura", desc: "役職・称号 / 裁きの執行位 / 関連: ✦U ウリエル・座天級" }
+  ],
+
+"🎭 なりきりおすすめセット｜職業・なりきり（天界｜格・位階） (Celestial Rank)": [
+    { label: "🟨 ✦G 大天使級 / Archangel Class", val: "archangel-class being, divine authority, layered halo rings, large holy wings, sacred command presence, heavenly regalia, upper celestial hierarchy", desc: "格・位階 / 上位の天使格 / 関連: ✦G ガブリエル・神託の伝令" },
+    { label: "🟧 ✦M 熾天級 / Seraphic Class", val: "seraphic-class being, six wings, burning holy feathers, blazing halo crown, highest celestial fervor, living flame of worship, supreme holy authority", desc: "格・位階 / 最上位の灼熱聖性 / 関連: ✦M ミカエル・天界の使徒長" },
+    { label: "🟩 ✦R 智天級 / Cherubic Class", val: "cherubic-class being, sacred wisdom, layered wings, luminous many-eye motif, divine understanding aura, guardian intellect, serene heavenly knowledge", desc: "格・位階 / 叡智と守護を帯びる高位格 / 関連: ✦R ラファエル・聖域の守護者" },
+    { label: "🟠 ✦U 座天級 / Throne Class", val: "throne-class being, wheel of light motif, celestial tribunal gravity, burning judgment aura, solemn heavenly law, radiant orbiting sigils, throne halo ring", desc: "格・位階 / 裁きと権威を宿す座天格 / 関連: ✦U ウリエル・審判の執行者" }
+  ],
+
+"🎭 なりきりおすすめセット｜職業・なりきり（深淵｜固有名） (Infernal Named Personas)": [
+    { label: "🟪 ✦L ルシフェル / Lucifer", val: "lucifer motif, supreme fallen angel, black wings, broken halo, fallen morning star motif, supreme beauty, abyssal pride, corrupted divinity, fallen sovereign aura, tragic radiance", desc: "固有名 / 堕天した光の王像 / 関連: ✦L 堕天の王・堕天使上位種" },
+    { label: "🟥 ✦S サタン / Satan", val: "satan motif, infernal ruler, abyssal authority, demon king aura, infernal throne dominion, overwhelming dark presence, hell sovereign sigils, absolute rebellion, sovereign menace", desc: "固有名 / 深淵の支配者像 / 関連: ✦S 冥府の支配者・魔王級" },
+    { label: "🟫 ✦B ベルゼブブ / Beelzebub", val: "beelzebub motif, archdemon lord, decadent infernal nobility, infernal wings, demonic prestige, abyssal decadence, lord of corruption, dark aristocratic aura, banquet of ruin motif", desc: "固有名 / 大悪魔貴族像 / 関連: ✦B 深淵の統治者・大悪魔級" }
+  ],
+
+"🎭 なりきりおすすめセット｜職業・なりきり（深淵｜役職・称号） (Infernal Titles)": [
+    { label: "🟪 ✦L 堕天の王 / King of the Fallen", val: "king of the fallen, broken halo, black feathered wings, abyssal crown, fallen majesty, corrupted radiance, throne of ruin motif, fallen dominion aura", desc: "役職・称号 / 堕天勢力の王 / 関連: ✦L ルシフェル・堕天使上位種" },
+    { label: "🟥 ✦S 冥府の支配者 / Ruler of the Underworld", val: "ruler of the underworld, infernal throne, abyssal flames, sovereign darkness, fearsome authority, hell dominion, underworld scepter motif, deathly imperial aura", desc: "役職・称号 / 冥府の統治者 / 関連: ✦S サタン・魔王級" },
+    { label: "🟫 ✦B 深淵の統治者 / Abyssal Sovereign", val: "abyssal sovereign, dark aura mantle, floating curse sigils, oppressive pressure, infernal command, abyssal seal authority, lord of the deep dark, decadent abyssal regalia", desc: "役職・称号 / 深淵を治める者 / 関連: ✦B ベルゼブブ・大悪魔級" },
+    { label: "🟫 ✦B 奈落の大公 / Grand Duke of the Abyss", val: "grand duke of the abyss, demon nobility, crown-like horns, abyssal prestige, aristocratic darkness, infernal heraldry, abyss court regalia, decadent court menace", desc: "役職・称号 / 深淵貴族の最高位 / 関連: ✦B ベルゼブブ・大悪魔級" }
+  ],
+
+"🎭 なりきりおすすめセット｜職業・なりきり（深淵｜格・位階） (Infernal Rank)": [
+    { label: "🟪 ✦L 堕天使上位種 / High Fallen Angel Class", val: "high fallen angel class, corrupted halo, black holy wings, broken divinity, tragic majesty, abyssal grace, fallen star symbolism, ruined holiness", desc: "格・位階 / 上位堕天使格 / 関連: ✦L ルシフェル・堕天の王" },
+    { label: "🟥 ✦S 魔王級 / Demon King Class", val: "demon-king-class being, massive demonic wings, infernal crown horns, abyssal pressure, sovereign dark aura, infernal throne authority, world-ending menace", desc: "格・位階 / 魔王級の格 / 関連: ✦S サタン・冥府の支配者" },
+    { label: "🟫 ✦B 大悪魔級 / Archdemon Class", val: "archdemon-class being, infernal mantle, abyss nobility, corrupted regalia, overwhelming demonic prestige, lord of corruption aura, abyssal court menace", desc: "格・位階 / 大悪魔の高位威圧 / 関連: ✦B ベルゼブブ・深淵の統治者" },
+    { label: "🟪 ✦L 深淵君主級 / Abyssal Lord Class", val: "abyssal-lord-class being, infernal mantle, dark command aura, floating curse seals, sovereign underworld presence, abyssal seal authority, hellbound majesty", desc: "格・位階 / 深淵君主の威圧 / 関連: ✦L ルシフェル・堕天の王" }
+  ],
+
+"🎭 なりきりおすすめセット｜神獣・伝説なりきり (Mythic Beasts)": [
     
 {
   label: "青龍 / Seiryu",
@@ -1510,66 +1559,140 @@
   // UI側（builder_ui.section.preset_packs.bundle.js）は item.children のネスト表示に対応。
   // ここでは既存の「平置きキー」を参照して親→子→チェック群にまとめる。
   // =============================================================================
-  (function buildRoleplayRecommendedSets(){
-    try {
-      var parentKey = "🎭 なりきりおすすめセット (Roleplay Recommended Sets)";
-      if (packs[parentKey]) return; // already built
+  
+(function buildRoleplayRecommendedSets(){
+  try {
+    var parentKey = "🎭 なりきりおすすめセット (Roleplay Recommended Sets)";
+    if (packs[parentKey]) return; // already built
 
-      // 1) 🎭 なりきり：既存の「職業・なりきり（〜）」平置きカテゴリを収集
-      var roleplayChildren = [];
-      var k1s = Object.keys(packs);
-      for (var i = 0; i < k1s.length; i++) {
-        var k = k1s[i];
-        if (k.indexOf("🎭 なりきりおすすめセット｜職業・なりきり") === 0 &&
-            Object.prototype.toString.call(packs[k]) === "[object Array]") {
-          roleplayChildren.push({
-            title_ja: k.replace(/^🎭 なりきりおすすめセット｜/,"").replace(/ \(.+?\)$/,""),
-            title_en: (k.match(/\((.*?)\)$/)||[])[1] || "",
-            children: packs[k]
+    var roleplayChildren = [];
+    var k1s = Object.keys(packs);
+
+    function matchArray(key) {
+      return Object.prototype.toString.call(packs[key]) === "[object Array]";
+    }
+
+    function buildGroupedRoleplay(parentJa, parentEn, defs) {
+      var children = [];
+      for (var i = 0; i < defs.length; i++) {
+        var def = defs[i];
+        if (matchArray(def.key)) {
+          children.push({
+            title_ja: def.title_ja,
+            title_en: def.title_en,
+            children: packs[def.key]
           });
         }
       }
-
-      // 1b) 神獣・伝説なりきり：特別枠
-      var mythicKey = "🎭 なりきりおすすめセット｜神獣・伝説なりきり (Mythic Beasts)";
-      if (Object.prototype.toString.call(packs[mythicKey]) === "[object Array]") {
-        roleplayChildren.push({ title_ja: "神獣・伝説なりきり", title_en: "Mythic Beasts", children: packs[mythicKey] });
+      if (children.length) {
+        roleplayChildren.push({
+          title_ja: parentJa,
+          title_en: parentEn,
+          children: children
+        });
       }
+    }
 
-      // 2) 📍 場所・状況：シチュエーションパック（オブジェクト）を子サブグループ化
-      var situationChildren = [];
-      var sitKey = "🌆 シチュエーションパック (Situation Packs)";
-      var sitObj = packs[sitKey];
-      if (sitObj && typeof sitObj === "object") {
-        var k2s = Object.keys(sitObj);
-        for (var j = 0; j < k2s.length; j++) {
-          var sk = k2s[j];
-          if (Object.prototype.toString.call(sitObj[sk]) === "[object Array]") {
-            situationChildren.push({
-              title_ja: sk,
-              title_en: "",
-              children: sitObj[sk]
-            });
-          }
+    var groupedKeys = {
+      celestial_named: "🎭 なりきりおすすめセット｜職業・なりきり（天界｜固有名） (Celestial Named Personas)",
+      celestial_titles: "🎭 なりきりおすすめセット｜職業・なりきり（天界｜役職・称号） (Celestial Titles)",
+      celestial_rank: "🎭 なりきりおすすめセット｜職業・なりきり（天界｜格・位階） (Celestial Rank)",
+      infernal_named: "🎭 なりきりおすすめセット｜職業・なりきり（深淵｜固有名） (Infernal Named Personas)",
+      infernal_titles: "🎭 なりきりおすすめセット｜職業・なりきり（深淵｜役職・称号） (Infernal Titles)",
+      infernal_rank: "🎭 なりきりおすすめセット｜職業・なりきり（深淵｜格・位階） (Infernal Rank)",
+      mythic: "🎭 なりきりおすすめセット｜神獣・伝説なりきり (Mythic Beasts)"
+    };
+
+    function appendFlatRoleplay(key) {
+      if (!matchArray(key)) return;
+      roleplayChildren.push({
+        title_ja: key.replace(/^🎭 なりきりおすすめセット｜/,"").replace(/ \(.+?\)$/,""),
+        title_en: (key.match(/\((.*?)\)$/)||[])[1] || "",
+        children: packs[key]
+      });
+    }
+
+    // 普通 → 特殊 の流れで固定。天界/深淵は神獣の直前に置く。
+    appendFlatRoleplay("🎭 なりきりおすすめセット｜職業・なりきり（現代） (Modern Jobs)");
+    appendFlatRoleplay("🎭 なりきりおすすめセット｜職業・なりきり（未来/サイバーパンク） (Future & Cyber Jobs)");
+    appendFlatRoleplay("🎭 なりきりおすすめセット｜職業・なりきり（ファンタジー/スチーム） (Fantasy & Steam Jobs)");
+    appendFlatRoleplay("🎭 なりきりおすすめセット｜職業・なりきり（王道キャラ） (Famous Characters)");
+    appendFlatRoleplay("🎭 なりきりおすすめセット｜職業・なりきり（概念コスプレ） (Conceptual Cosplay)");
+
+    buildGroupedRoleplay("職業・なりきり（天界）", "Celestial Roleplay", [
+      { key: groupedKeys.celestial_named, title_ja: "👤 固有名", title_en: "Named Personas" },
+      { key: groupedKeys.celestial_titles, title_ja: "🏛 役職・称号", title_en: "Titles" },
+      { key: groupedKeys.celestial_rank, title_ja: "👑 格・位階", title_en: "Rank" }
+    ]);
+
+    buildGroupedRoleplay("職業・なりきり（深淵）", "Infernal Roleplay", [
+      { key: groupedKeys.infernal_named, title_ja: "👤 固有名", title_en: "Named Personas" },
+      { key: groupedKeys.infernal_titles, title_ja: "🏛 役職・称号", title_en: "Titles" },
+      { key: groupedKeys.infernal_rank, title_ja: "👑 格・位階", title_en: "Rank" }
+    ]);
+
+    if (matchArray(groupedKeys.mythic)) {
+      roleplayChildren.push({ title_ja: "神獣・伝説なりきり", title_en: "Mythic Beasts", children: packs[groupedKeys.mythic] });
+    }
+
+    var usedRoleplayKeys = {};
+    usedRoleplayKeys[groupedKeys.celestial_named] = true;
+    usedRoleplayKeys[groupedKeys.celestial_titles] = true;
+    usedRoleplayKeys[groupedKeys.celestial_rank] = true;
+    usedRoleplayKeys[groupedKeys.infernal_named] = true;
+    usedRoleplayKeys[groupedKeys.infernal_titles] = true;
+    usedRoleplayKeys[groupedKeys.infernal_rank] = true;
+    usedRoleplayKeys[groupedKeys.mythic] = true;
+    usedRoleplayKeys["🎭 なりきりおすすめセット｜職業・なりきり（現代） (Modern Jobs)"] = true;
+    usedRoleplayKeys["🎭 なりきりおすすめセット｜職業・なりきり（未来/サイバーパンク） (Future & Cyber Jobs)"] = true;
+    usedRoleplayKeys["🎭 なりきりおすすめセット｜職業・なりきり（ファンタジー/スチーム） (Fantasy & Steam Jobs)"] = true;
+    usedRoleplayKeys["🎭 なりきりおすすめセット｜職業・なりきり（王道キャラ） (Famous Characters)"] = true;
+    usedRoleplayKeys["🎭 なりきりおすすめセット｜職業・なりきり（概念コスプレ） (Conceptual Cosplay)"] = true;
+
+    for (var i = 0; i < k1s.length; i++) {
+      var k = k1s[i];
+      if (k.indexOf("🎭 なりきりおすすめセット｜職業・なりきり") !== 0) continue;
+      if (!matchArray(k)) continue;
+      if (usedRoleplayKeys[k]) continue;
+      roleplayChildren.push({
+        title_ja: k.replace(/^🎭 なりきりおすすめセット｜/,"").replace(/ \(.+?\)$/,""),
+        title_en: (k.match(/\((.*?)\)$/)||[])[1] || "",
+        children: packs[k]
+      });
+    }
+
+    var situationChildren = [];
+    var sitKey = "🌆 シチュエーションパック (Situation Packs)";
+    var sitObj = packs[sitKey];
+    if (sitObj && typeof sitObj === "object") {
+      var k2s = Object.keys(sitObj);
+      for (var j = 0; j < k2s.length; j++) {
+        var sk = k2s[j];
+        if (Object.prototype.toString.call(sitObj[sk]) === "[object Array]") {
+          situationChildren.push({
+            title_ja: sk,
+            title_en: "",
+            children: sitObj[sk]
+          });
         }
       }
+    }
 
-      // 3) 🎵 おすすめ組み合わせ：既存のおすすめペアを参照
-      var pairKey = "🎭 なりきりおすすめセット｜おすすめ組み合わせ（なりきり×場所） (Roleplay × Situation)";
-      var pairArr = (Object.prototype.toString.call(packs[pairKey]) === "[object Array]") ? packs[pairKey] : [];
+    var pairKey = "🎭 なりきりおすすめセット｜おすすめ組み合わせ（なりきり×場所） (Roleplay × Situation)";
+    var pairArr = matchArray(pairKey) ? packs[pairKey] : [];
 
-      // 4) 📐 おすすめ構図：既存の構図プリセットを参照
-      var compKey = "📐 おすすめ構図 (Recommended Compositions)";
-      var compArr = (Object.prototype.toString.call(packs[compKey]) === "[object Array]") ? packs[compKey] : [];
+    var compKey = "📐 おすすめ構図 (Recommended Compositions)";
+    var compArr = matchArray(compKey) ? packs[compKey] : [];
 
-      packs[parentKey] = [
-        { title_ja: "🎭 なりきり", title_en: "Roleplay", children: roleplayChildren },
-        { title_ja: "📍 場所・状況", title_en: "Place & Situation", children: situationChildren },
-        { title_ja: "🎵 おすすめ組み合わせ", title_en: "Roleplay × Situation", children: pairArr },
-        { title_ja: "📐 おすすめ構図", title_en: "Recommended Compositions", children: compArr }
-      ];
-    } catch (e) {}
-  })();
+    packs[parentKey] = [
+      { title_ja: "🎭 なりきり", title_en: "Roleplay", children: roleplayChildren },
+      { title_ja: "📍 場所・状況", title_en: "Place & Situation", children: situationChildren },
+      { title_ja: "🎵 おすすめ組み合わせ", title_en: "Roleplay × Situation", children: pairArr },
+      { title_ja: "📐 おすすめ構図", title_en: "Recommended Compositions", children: compArr }
+    ];
+  } catch (e) {}
+})();
+
 
 
   // 2. R-18 (シークレットモード) 判定
@@ -1654,7 +1777,7 @@
           { label: "獣人・ケモミミ奴隷", val: "(beast girl), (wolf ears), (fluffy tail), (collar and leash), (bell choker), (subservient expression), (animalistic behavior), (kneeling)" },
           { label: "女怪盗 (潜入・ピンチ)", val: "(phantom thief), (cat mask pulled down), (tight black leather catsuit), (holding stolen jewel), (sweat), (breathing heavily), (caught)" },
           { label: "エイリアン娘 (人外SF)", val: "(alien girl), (blue skin), (sci-fi suit), (glowing markings), (tentacle hair), (non-human eyes), (curious expression)" },
-          { label: "サメ娘・モンスター (海洋)", val: "(shark girl), (mermaid elements), (gills), (sharp teeth), (wet skin), (scales on body), (predatory smile), (fin)" },
+          { label: "サメ娘・モンスター (海洋)", val: "(shark girl:1.2), (prominent dorsal fin:1.2), (thick muscular shark tail:1.2), (rows of serrated teeth:1.15), (predatory eyes:1.1), (gill slits:1.15), (rough dermal denticles texture:1.1), (apex predator aura:1.1), (wet skin), (true biological fusion), (not cosplay)" },
           { label: "サディスティック女王様", val: "(dominatrix), (leather corset), (high heels), (holding whip), (stepping on viewer), (sadistic smile), (looking down on viewer), (dominant)" },
           { label: "ポンコツ悪魔メイド", val: "(demon maid), (french maid outfit), (succubus wings), (clumsy), (no panties), (spilled water), (embarrassed), (tearful eyes)" }
 

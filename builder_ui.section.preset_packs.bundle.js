@@ -80,6 +80,14 @@
     return { id: id, titleJa: titleJa, titleEn: titleEn, icon: icon, items: items };
   }
 
+  function getGridColumns() {
+    try {
+      if (window.matchMedia && window.matchMedia("(max-width: 760px)").matches) return "minmax(0, 1fr)";
+      if (window.innerWidth && window.innerWidth <= 760) return "minmax(0, 1fr)";
+    } catch (e) {}
+    return "repeat(2, minmax(0, 1fr))";
+  }
+
   function normalizeItem(it) {
     var id = safeText(it.id || it.key || it.pack_id || it.name || it.label || "");
     var titleJa = safeText(it.title_ja || it.ja || it.title || it.label || "Item");
@@ -143,7 +151,7 @@
     var content = document.createElement("div");
     content.className = "preset-pack-items";
     content.style.cssText =
-      "padding:12px; display:grid; grid-template-columns:repeat(2, 1fr); gap:10px;"
+      "padding:12px; display:grid; grid-template-columns:" + getGridColumns() + "; gap:10px;"
     // --- Nested subgroup support (1-2 levels) ---
     function buildSubGroupUI(sub, depth) {
       depth = depth || 0;
@@ -196,7 +204,7 @@
       d.appendChild(s);
 
       var body = document.createElement("div");
-      body.style.cssText = "padding:12px; display:grid; grid-template-columns:repeat(2, 1fr); gap:10px;";
+      body.style.cssText = "padding:12px; display:grid; grid-template-columns:" + getGridColumns() + "; gap:10px;";
 
       // If this subgroup contains subgroups (2nd level), render them as nested details.
       var subChildren = (sub.children && Object.prototype.toString.call(sub.children) === "[object Array]") ? sub.children : null;
@@ -227,7 +235,7 @@
           var label2 = document.createElement("label");
           label2.className = "preset-pack-card";
           label2.style.cssText =
-            "display:flex; gap:10px; align-items:flex-start;" +
+            "display:flex; gap:10px; align-items:flex-start; min-width:0;" +
             "padding:10px 10px; border-radius:12px; cursor:pointer;" +
             "border:1px solid rgba(0,0,0,0.10); background:#fff;" +
             "box-shadow:0 1px 0 rgba(0,0,0,0.04);";
@@ -240,24 +248,24 @@
           try { cb2.setAttribute("data-tags", JSON.stringify(it2.tags || [])); } catch (e2) { cb2.setAttribute("data-tags", "[]"); }
 
           var info2 = document.createElement("div");
-          info2.style.cssText = "display:flex; flex-direction:column; gap:2px;";
+          info2.style.cssText = "display:flex; flex-direction:column; gap:2px; min-width:0; flex:1 1 auto;";
 
           var h2 = document.createElement("div");
-          h2.style.cssText = "font-weight:900; font-size:13px; line-height:1.2;";
+          h2.style.cssText = "font-weight:900; font-size:13px; line-height:1.25; word-break:keep-all; overflow-wrap:anywhere;";
           h2.appendChild(document.createTextNode(it2.titleJa));
 
           info2.appendChild(h2);
 
           if (it2.titleEn) {
             var he2 = document.createElement("div");
-            he2.style.cssText = "font-weight:800; font-size:12px; color:rgba(0,0,0,0.55);";
+            he2.style.cssText = "font-weight:800; font-size:12px; color:rgba(0,0,0,0.55); word-break:break-word; overflow-wrap:anywhere;";
             he2.appendChild(document.createTextNode("(" + it2.titleEn + ")"));
             info2.appendChild(he2);
           }
 
           if (it2.subJa || it2.subEn) {
             var sub2 = document.createElement("div");
-            sub2.style.cssText = "font-size:12px; color:rgba(0,0,0,0.62); line-height:1.25;";
+            sub2.style.cssText = "font-size:12px; color:rgba(0,0,0,0.62); line-height:1.3; word-break:keep-all; overflow-wrap:anywhere;";
             sub2.appendChild(document.createTextNode(it2.subJa || it2.subEn));
             info2.appendChild(sub2);
           }
@@ -310,7 +318,7 @@
       var label = document.createElement("label");
       label.className = "preset-pack-card";
       label.style.cssText =
-        "display:flex; gap:10px; align-items:flex-start;" +
+        "display:flex; gap:10px; align-items:flex-start; min-width:0;" +
         "padding:10px 10px; border-radius:12px; cursor:pointer;" +
         "border:1px solid rgba(0,0,0,0.10); background:#fff;" +
         "box-shadow:0 1px 0 rgba(0,0,0,0.04);";
@@ -343,7 +351,7 @@
       textWrap.style.cssText = "display:flex; flex-direction:column; gap:3px; min-width:0;";
 
       var main = document.createElement("div");
-      main.style.cssText = "font-weight:800; color:#222; line-height:1.15;";
+      main.style.cssText = "font-weight:800; color:#222; line-height:1.25; word-break:keep-all; overflow-wrap:anywhere;";
       var mainTitle = item.titleEn ? (item.titleJa + " (" + item.titleEn + ")") : item.titleJa;
       main.appendChild(document.createTextNode(mainTitle));
 
@@ -352,7 +360,7 @@
       var subText = item.subEn ? (item.subJa + " (" + item.subEn + ")") : item.subJa;
       if (subText && subText.replace(/\s/g, "") !== "") {
         var sub = document.createElement("div");
-        sub.style.cssText = "font-size:0.9em; font-weight:650; color:rgba(0,0,0,0.60); line-height:1.15;";
+        sub.style.cssText = "font-size:0.9em; font-weight:650; color:rgba(0,0,0,0.60); line-height:1.25; word-break:keep-all; overflow-wrap:anywhere;";
         sub.appendChild(document.createTextNode(subText));
         textWrap.appendChild(sub);
       }
