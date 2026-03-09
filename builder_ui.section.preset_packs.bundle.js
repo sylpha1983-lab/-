@@ -95,7 +95,10 @@
     var subJa = safeText(it.subtitle_ja || it.desc_ja || it.sub_ja || it.desc || "");
     var subEn = safeText(it.subtitle_en || it.desc_en || it.sub_en || "");
     var tags = ensureArray(it.tags || it.values || it.val || it.prompt || []);
-    return { id: id, titleJa: titleJa, titleEn: titleEn, subJa: subJa, subEn: subEn, tags: tags, type: safeText(it.type || ""), leftLabel: safeText(it.leftLabel || ""), rightLabel: safeText(it.rightLabel || ""), children: (it.children && Object.prototype.toString.call(it.children) === "[object Array]") ? it.children : null };
+    var childNodes = null;
+    if (it.children && Object.prototype.toString.call(it.children) === "[object Array]") childNodes = it.children;
+    else if (it.items && Object.prototype.toString.call(it.items) === "[object Array]") childNodes = it.items;
+    return { id: id, titleJa: titleJa, titleEn: titleEn, subJa: subJa, subEn: subEn, tags: tags, type: safeText(it.type || ""), leftLabel: safeText(it.leftLabel || ""), rightLabel: safeText(it.rightLabel || ""), children: childNodes };
   }
 
   function buildGroupUI(group) {
@@ -151,7 +154,8 @@
     var content = document.createElement("div");
     content.className = "preset-pack-items";
     content.style.cssText =
-      "padding:12px; display:grid; grid-template-columns:" + getGridColumns() + "; gap:10px;"
+      "padding:12px; display:grid; grid-template-columns:" + getGridColumns() + "; gap:10px;";
+
     // --- Nested subgroup support (1-2 levels) ---
     function buildSubGroupUI(sub, depth) {
       depth = depth || 0;
@@ -207,8 +211,11 @@
       body.style.cssText = "padding:12px; display:grid; grid-template-columns:" + getGridColumns() + "; gap:10px;";
 
       // If this subgroup contains subgroups (2nd level), render them as nested details.
-      var subChildren = (sub.children && Object.prototype.toString.call(sub.children) === "[object Array]") ? sub.children : null;
-      if (subChildren && subChildren.length > 0 && subChildren[0] && subChildren[0].children) {
+      var subChildren = null;
+      if (sub.children && Object.prototype.toString.call(sub.children) === "[object Array]") subChildren = sub.children;
+      else if (sub.items && Object.prototype.toString.call(sub.items) === "[object Array]") subChildren = sub.items;
+      var firstSub = (subChildren && subChildren.length > 0) ? normalizeItem(subChildren[0]) : null;
+      if (subChildren && firstSub && firstSub.children) {
         for (var ii = 0; ii < subChildren.length; ii++) {
           body.appendChild(buildSubGroupUI(subChildren[ii], depth + 1));
         }

@@ -10,215 +10,417 @@
   // 1. 基本パック（全ユーザーに表示されるデータ）
   const packs = {
   "🌆 シチュエーションパック (Situation Packs)": {
-"🌆 シチュエーションパック｜🌺 自然・絶景 (Nature)": [
+"🌆 シチュエーションパック｜🌺 自然・絶景 (Nature)": {
+      "☀️ 青空・草原": [
+        {"label": "風が抜ける青空の草原", "val": "(blue sky), (white clouds), (vast grassland), (wind), (open field), (bright daylight), (nature scene), (fresh atmosphere)"},
+        {"label": "夏の陽射しが強い草原", "val": "(summer grassland), (strong sunlight), (blue sky), (green field), (heat haze), (open nature), (bright summer scene)"},
+        {"label": "夕暮れに染まる草原", "val": "(sunset grassland), (golden hour), (orange sky), (windy field), (nature), (melancholic atmosphere), (open landscape)"},
+        {"label": "花が混じる穏やかな草原", "val": "(flowering grassland), (gentle breeze), (blue sky), (soft sunlight), (peaceful nature), (beautiful scenery)"}
+      ],
+      "🌲 森・木漏れ日": [
+        {"label": "木漏れ日が揺れる森", "val": "(forest), (sunbeams through trees), (leaf shadows), (greenery), (peaceful woodland), (soft natural light), (nature path)"},
+        {"label": "朝霧の漂う森", "val": "(misty forest), (morning fog), (trees), (soft light), (quiet atmosphere), (nature), (mysterious woodland)"},
+        {"label": "雨上がりのしっとりした森", "val": "(forest after rain), (wet leaves), (moss), (soft light), (humid air), (quiet nature scene)"},
+        {"label": "深い静けさの森の小道", "val": "(forest path), (deep woods), (calm atmosphere), (tree shadows), (nature trail), (stillness)"}
+      ],
+      "🌊 海・ビーチ": [
+        {"label": "陽光がまぶしい昼のビーチ", "val": "(sunny beach), (ocean), (white sand), (waves), (summer sunlight), (bright seaside), (vacation mood)"},
+        {"label": "夕焼けに染まる海辺", "val": "(sunset beach), (orange sky), (ocean horizon), (waves), (golden light), (romantic seaside scene)"},
+        {"label": "曇天の静かな海辺", "val": "(cloudy beach), (calm ocean), (gray sky), (quiet seaside), (melancholic atmosphere), (windy shore)"},
+        {"label": "南国感のある明るいビーチ", "val": "(tropical beach), (palm trees), (turquoise ocean), (white sand), (bright sunlight), (summer paradise)"}
+      ],
+      "🌌 星空・夜空": [
+        {"label": "星が降るような夜空", "val": "(starry sky), (milky way), (clear night), (countless stars), (beautiful night scenery), (quiet atmosphere)"},
+        {"label": "流れ星が走る夜空", "val": "(night sky), (shooting star), (stars), (dark blue sky), (magical atmosphere), (beautiful scenery)"},
+        {"label": "月明かりの静かな夜空", "val": "(moonlit night), (stars), (quiet night sky), (soft moonlight), (calm atmosphere), (beautiful scene)"},
+        {"label": "夜風の強い高台の星空", "val": "(starry sky from hilltop), (windy night), (vast sky), (silhouette), (night atmosphere), (beautiful stars)"}
+      ],
+      "🌸 桜並木": [
+        {"label": "花びらが舞う桜並木", "val": "(cherry blossom avenue), (falling petals), (spring), (pink flowers), (pathway), (beautiful scenery), (breeze)"},
+        {"label": "春の光に包まれた桜道", "val": "(sakura path), (spring sunlight), (pink blossoms), (soft light), (peaceful atmosphere), (beautiful spring scene)"},
+        {"label": "夕暮れに染まる桜並木", "val": "(sunset cherry blossoms), (orange light), (petals), (spring evening), (romantic atmosphere), (pathway)"},
+        {"label": "雨上がりのしっとりした桜並木", "val": "(cherry blossoms after rain), (wet path), (pink petals), (soft cloudy light), (quiet spring atmosphere)"}
+      ],
+      "❄️ 雪景色": [
+        {"label": "しんしんと雪が降る景色", "val": "(snowy landscape), (snowfall), (winter), (white ground), (quiet atmosphere), (cold air), (beautiful winter scene)"},
+        {"label": "晴れた朝の雪景色", "val": "(snowy morning), (clear winter sky), (sunlight on snow), (fresh snow), (cold brightness), (winter nature)"},
+        {"label": "夕暮れの青い雪景色", "val": "(winter dusk), (snow-covered field), (blue evening light), (cold atmosphere), (quiet snow scene)"},
+        {"label": "吹雪前の緊張感ある雪原", "val": "(snowfield), (approaching blizzard), (gray winter sky), (strong wind), (harsh cold), (dramatic winter atmosphere)"}
+      ]
+    },
+    
+    "📍 スポット・お店 (Spots)": {
+      "🎤 アイドルステージ": [
+        {"label": "開演直前のアイドルステージ", "val": "(idol stage before performance), (empty spotlight), (concert venue), (stage lights), (microphone stand), (anticipation), (showtime atmosphere)", "links": ["シネマティック"]},
+        {"label": "歓声に包まれるライブステージ", "val": "(idol live stage), (cheering crowd), (stage lights), (sparkles), (performance energy), (cinematic glow)", "links": ["シネマティック"]},
+        {"label": "リハーサル中のステージ", "val": "(idol stage rehearsal), (practice lighting), (empty seats), (microphone), (backstage mood), (performance preparation)"},
+        {"label": "終演後の静かなステージ", "val": "(empty idol stage), (after concert), (dim stage lights), (quiet venue), (lingering glow), (post-show atmosphere)"}
+      ],
+      "☕ おしゃれカフェ": [
+        {"label": "朝の静かなカフェ", "val": "(morning café), (soft sunlight), (window seat), (coffee), (calm atmosphere), (cozy interior), (quiet scene)"},
+        {"label": "窓際で過ごす午後のカフェ", "val": "(afternoon café), (window seat), (soft daylight), (dessert plate), (cozy modern café), (relaxed atmosphere)"},
+        {"label": "雨の日のしっとりしたカフェ", "val": "(rainy day café), (window raindrops), (warm indoor light), (coffee cup), (quiet mood), (cozy atmosphere)"},
+        {"label": "閉店前の落ち着いたカフェ", "val": "(late evening café), (dim warm lighting), (few customers), (quiet interior), (closing time mood), (calm atmosphere)"}
+      ],
+      "🍸 バー・パブ": [
+        {"label": "開店直後の静かなバー", "val": "(bar counter), (freshly opened bar), (bottles on shelves), (dim lighting), (quiet atmosphere), (adult mood)"},
+        {"label": "ネオンに染まる夜のバー", "val": "(night bar), (neon reflections), (cocktail glass), (dim lighting), (cinematic bar vibes), (adult atmosphere)", "links": ["シネマティック"]},
+        {"label": "客で賑わうパブ", "val": "(busy pub), (warm lights), (crowded bar), (laughter), (glasses), (lively atmosphere)"},
+        {"label": "深夜の静かなカウンターバー", "val": "(late night bar), (quiet counter), (single cocktail), (low light), (deep shadows), (solitary atmosphere)"}
+      ],
+      "🏪 コンビニ": [
+        {"label": "深夜のコンビニ", "val": "(convenience store at night), (bright fluorescent light), (quiet store), (snack shelves), (late night atmosphere), (modern japan)"},
+        {"label": "雨上がりのコンビニ前", "val": "(convenience store entrance), (after rain), (wet pavement), (neon reflections), (night street), (urban atmosphere)"},
+        {"label": "明るい昼のコンビニ", "val": "(daytime convenience store), (bright interior), (shelves of snacks), (casual daily life), (clean modern store)"},
+        {"label": "誰もいない静かなコンビニ通路", "val": "(empty convenience store aisle), (fluorescent light), (quiet atmosphere), (late night), (shelves), (stillness)"}
+      ],
+      "📚 図書館": [
+        {"label": "静寂に包まれた図書館", "val": "(library), (bookshelves), (quiet atmosphere), (silence), (reading desks), (soft light)"},
+        {"label": "夕方の図書館", "val": "(library at dusk), (warm sunset light), (bookshelves), (quiet reading space), (calm atmosphere)"},
+        {"label": "窓際読書の図書館", "val": "(library window seat), (sunlight through window), (open book), (dust particles), (peaceful reading atmosphere)"},
+        {"label": "書架の間に立つ図書館", "val": "(library stacks), (tall bookshelves), (narrow aisle), (quiet atmosphere), (academic mood)"}
+      ],
+      "🏥 病院・病室": [
+        {"label": "昼の静かな病室", "val": "(hospital room), (daylight through window), (white bed), (medical equipment), (clean atmosphere), (quiet scene)"},
+        {"label": "夜の病室", "val": "(hospital room at night), (dim medical light), (white curtain), (quiet atmosphere), (solitary mood)"},
+        {"label": "診察前の白い診察室", "val": "(medical examination room), (sterile white interior), (medical tools), (clean atmosphere), (clinical mood)"},
+        {"label": "廊下まで静まり返った病院", "val": "(hospital corridor), (quiet atmosphere), (sterile light), (empty hall), (clean floor), (stillness)"}
+      ],
+      "💕 デートスポット": [
+        {"label": "夜景の見えるデートスポット", "val": "(romantic night view), (city lights), (beautiful scenery), (date atmosphere), (special evening mood)"},
+        {"label": "夕暮れの待ち合わせスポット", "val": "(meeting spot at sunset), (soft evening light), (romantic anticipation), (urban date mood)"},
+        {"label": "イルミネーションに包まれるデートスポット", "val": "(illumination date spot), (glowing lights), (romantic atmosphere), (sparkles), (night date scene)"},
+        {"label": "静かな水辺のデートスポット", "val": "(riverside date spot), (night lights reflected on water), (quiet romantic atmosphere), (gentle breeze), (beautiful scenery)"}
+      ]
+    },
+    "🏫 学園・青春 (School)": {
+      "🏫 教室・授業風景": [
+        {"label": "昼の光が差す教室", "val": "(classroom), (school desks), (blackboard), (sunlight through window), (afternoon), (school life), (chalk dust), (bright classroom)"},
+        {"label": "夕暮れに染まる放課後の教室", "val": "(classroom), (sunset), (orange sky), (long shadows), (after school), (empty classroom), (nostalgic), (quiet atmosphere)"},
+        {"label": "授業直前のざわめく教室", "val": "(classroom before class), (school desks), (students chatting), (morning light), (school atmosphere), (lively classroom)"},
+        {"label": "小テスト前の緊張感ある教室", "val": "(classroom), (test papers), (quiet tension), (school desks), (serious atmosphere), (exam before start), (academic mood)"}
+      ],
+      "🪟 廊下・階段・校内": [
+        {"label": "昼休みの明るい廊下", "val": "(school hallway), (daylight), (classroom doors), (clean floor), (lunch break), (school atmosphere), (bright corridor)"},
+        {"label": "夕方の静かな廊下", "val": "(school hallway at dusk), (sunset light), (empty corridor), (quiet atmosphere), (after school), (nostalgic mood)"},
+        {"label": "踊り場に光が差す階段", "val": "(school staircase), (sunlight through window), (landing), (quiet school interior), (calm atmosphere), (daily school scene)"},
+        {"label": "昇降口の朝", "val": "(school entrance), (shoe lockers), (morning light), (arrival at school), (fresh school morning), (daily life)"}
+      ],
+      "🌤 屋上・校舎上": [
+        {"label": "青空の下の学校屋上", "val": "(school rooftop), (fence), (blue sky), (clouds), (windy), (city view in distance), (lunch time), (freedom)"},
+        {"label": "放課後の風が吹く屋上", "val": "(school rooftop at dusk), (after school), (orange sky), (wind blowing), (fence), (nostalgic atmosphere), (quiet rooftop)"},
+        {"label": "昼休みに賑わう屋上", "val": "(school rooftop), (lunchtime), (bright sky), (casual school atmosphere), (open air), (youthful energy)"},
+        {"label": "雨上がりの静かな屋上", "val": "(school rooftop after rain), (wet floor), (cloudy sky opening), (fence), (cool breeze), (quiet reflective mood)"}
+      ],
+      "🏀 体育館・運動場": [
+        {"label": "昼の体育館", "val": "(school gymnasium), (basketball court), (varnished wood floor), (indoor sports), (volleyball net), (high ceiling), (daytime)"},
+        {"label": "部活中の活気ある体育館", "val": "(school gymnasium), (club activity), (echoing voices), (sports atmosphere), (active movement), (after school), (energetic scene)"},
+        {"label": "朝練前の静かなグラウンド", "val": "(school मैदान), (school athletic field), (early morning), (track lines), (cool air), (quiet before practice), (sports field)"},
+        {"label": "夕焼けの校庭", "val": "(schoolyard at sunset), (sports field), (orange sky), (empty ground), (after club activities), (nostalgic atmosphere)"}
+      ],
+      "📚 図書室・部室": [
+        {"label": "静かな学校図書室", "val": "(school library), (bookshelves), (quiet atmosphere), (reading desks), (soft daylight), (academic mood), (calm school interior)"},
+        {"label": "夕方の誰もいない図書室", "val": "(school library at dusk), (warm sunset light), (empty reading room), (bookshelves), (quiet atmosphere), (after school)"},
+        {"label": "活動準備中の部室", "val": "(club room), (school club activity), (equipment on shelves), (after school), (lived-in atmosphere), (preparation scene)"},
+        {"label": "放課後の文化部室", "val": "(school club room), (after school), (posters on wall), (desks and chairs), (quiet youth atmosphere), (creative school scene)"}
+      ]
+    },
+    "🏠 家・日常 (Home)": {
+      "🛋 リビング": [
+        {"label": "朝日が差す静かなリビング", "val": "(morning living room), (soft sunlight through window), (quiet home atmosphere), (sofa), (coffee table), (warm indoor light), (calm mood), (peaceful daily life)"},
+        {"label": "くつろぎの午後リビング", "val": "(afternoon living room), (cozy sofa), (soft daylight), (relaxed home atmosphere), (coffee table), (calm daily life), (comfortable interior), (gentle sunlight)"},
+        {"label": "テレビの光に照らされる夜のリビング", "val": "(night living room), (tv glow), (dim indoor lighting), (sofa), (quiet evening), (cozy atmosphere), (relaxed home scene), (darkened room)"},
+        {"label": "来客前の整ったリビング", "val": "(tidy living room), (organized sofa area), (clean coffee table), (welcoming atmosphere), (bright interior), (prepared for guests), (neat home scene)"},
+        {"label": "散らかった休日のリビング", "val": "(casual living room), (lazy holiday atmosphere), (messy sofa), (blanket), (snacks on table), (relaxed daily life), (natural indoor clutter)"},
+        {"label": "読書に沈む静かなリビング", "val": "(quiet living room), (reading atmosphere), (soft indoor light), (books on table), (calm sofa corner), (peaceful home scene), (relaxing silence)"}
+      ],
+      "🍳 キッチン": [
+        {"label": "朝食準備中のキッチン", "val": "(morning kitchen), (breakfast preparation), (soft daylight), (cooking utensils), (fresh ingredients), (homey atmosphere), (busy but warm)"},
+        {"label": "深夜の静かなキッチン", "val": "(late night kitchen), (dim light), (quiet indoor atmosphere), (small lamp light), (silent home scene), (midnight stillness)"},
+        {"label": "調理中の活気あるキッチン", "val": "(active kitchen), (cooking in progress), (steam), (cutting board), (ingredients on counter), (lively home cooking scene), (busy hands atmosphere)"},
+        {"label": "後片付け後の静かなキッチン", "val": "(clean kitchen), (after cooking), (washed dishes), (neat counter), (quiet atmosphere), (orderly home interior), (settled silence)"},
+        {"label": "焼き菓子の香るキッチン", "val": "(baking kitchen), (sweet pastry aroma), (warm oven light), (cozy home baking), (soft indoor warmth), (freshly baked treats)"},
+        {"label": "ひとり夜食を作るキッチン", "val": "(midnight kitchen), (making late night snack), (quiet solitude), (soft fridge light), (casual home scene), (gentle tired atmosphere)"}
+      ],
+      "🛏 ベッドルーム": [
+        {"label": "朝の寝起きのベッドルーム", "val": "(morning bedroom), (bed), (soft sunlight), (sleepy atmosphere), (rumpled sheets), (quiet waking up), (private room)"},
+        {"label": "夜更けの静かなベッドルーム", "val": "(late night bedroom), (dim bedside light), (quiet room), (deep night atmosphere), (calm private space), (soft shadows)"},
+        {"label": "読書中のベッドルーム", "val": "(bedroom reading scene), (book in hand), (soft lamp light), (calm private room), (peaceful night), (cozy bed atmosphere)"},
+        {"label": "雨の日の薄暗いベッドルーム", "val": "(rainy day bedroom), (dim natural light), (cloudy window), (quiet moody room), (soft shadows), (calm indoor gloom)"},
+        {"label": "眠る前の柔らかなベッドルーム", "val": "(bedroom before sleep), (warm bedside light), (soft blankets), (quiet night), (gentle private atmosphere), (calm resting mood)"},
+        {"label": "休日にだらけるベッドルーム", "val": "(lazy bedroom), (holiday mood), (messy sheets), (relaxed private space), (slow morning), (casual indoor comfort)"}
+      ],
+      "🍵 和室": [
+        {"label": "朝の光が差す静かな和室", "val": "(morning japanese room), (tatami mats), (shoji sunlight), (quiet traditional atmosphere), (soft natural light), (peaceful washitsu)"},
+        {"label": "障子越しに光がにじむ和室", "val": "(washitsu), (shoji-filtered light), (tatami mats), (soft light), (peaceful traditional room)"},
+        {"label": "茶器のある落ち着いた和室", "val": "(traditional japanese room), (tea set), (tatami), (calm atmosphere), (quiet elegant interior)"},
+        {"label": "雨音を聞くしっとりした和室", "val": "(rainy japanese room), (shoji screen), (tatami), (quiet rain atmosphere), (traditional calm)"}
+      ],
+      "🛁 バスルーム": [
+        {"label": "朝の明るいバスルーム", "val": "(bright bathroom), (morning light), (clean tiles), (fresh atmosphere), (bathroom interior)"},
+        {"label": "湯気の満ちる夜のバスルーム", "val": "(bathroom at night), (steam-filled room), (warm light), (quiet atmosphere), (relaxing bath scene)"},
+        {"label": "入浴後の静かなバスルーム", "val": "(bathroom after bath), (humid air), (quiet room), (warm atmosphere), (clean interior)"},
+        {"label": "白い光の清潔なバスルーム", "val": "(clean bathroom), (white light), (tiles), (fresh atmosphere), (minimal interior)"}
+      ]
+    },
+    
+    "🌆 シチュエーションパック｜🏙 都会・ストリート (City)": [
       {
-        "label": "青空・草原",
-        "val": "(blue sky), (white clouds), (green field), (grass), (wind), (open space), (nature), (bright sunlight)"
-      },
-      {
-        "label": "森・木漏れ日",
-        "val": "(forest), (trees), (sunbeams), (leaf shadows), (nature path), (peaceful), (greenery), (moss)"
-      },
-      {
-        "label": "海・ビーチ",
-        "val": "(beach), (ocean), (waves), (white sand), (horizon), (summer), (tropical), (palm trees)"
-      },
-      {
-        "label": "星空・夜空",
-        "val": "(starry sky), (milky way), (night), (shooting star), (silhouette), (beautiful scenery), (universe)"
-      },
-      {
-        "label": "桜並木",
-        "val": "(cherry blossoms), (sakura), (falling petals), (pink flowers), (spring), (park), (pathway)"
-      },
-      {
-        "label": "雪景色",
-        "val": "(snowy landscape), (winter), (snowing), (white ground), (cold breath), (frost), (frozen lake)"
-      }
-    ],
-    "📍 スポット・お店 (Spots)": [
-      {
-        "label": "アイドルステージ",
-        "val": "(idol focus), (live concert), (stage lights), (sparkles), (soft ambient stage illumination), (cinematic glow), (performance)",
-        "links": [
-          "シネマティック"
+        "label": "🏙 都市中心・高層街区",
+        "items": [
+          {
+            "label": "高層ビルに囲まれた都市中心部",
+            "val": "(city center), (skyscrapers), (glass buildings), (wide avenue), (modern urban atmosphere), (daytime), (clean cityscape)",
+            "links": ["都会"]
+          },
+          {
+            "label": "ガラス街に朝日が差すビジネス街",
+            "val": "(business district), (morning sunlight), (glass towers), (office street), (fresh urban air), (commuter mood), (modern architecture)",
+            "links": ["朝", "都会"]
+          },
+          {
+            "label": "夕暮れの高架と都市スカイライン",
+            "val": "(city skyline), (elevated road), (sunset glow), (urban silhouette), (warm dusk light), (modern metropolis), (beautiful evening city)",
+            "links": ["夕方", "都会"]
+          }
         ]
       },
       {
-        "label": "おしゃれカフェ",
-        "val": "(cozy modern café), (indoor), (window seat), (coffee), (sweets), (string lights), (decorations), (bokeh)",
-        "links": [
-          "ボケ"
+        "label": "🚦 路地裏・雑踏・交差点",
+        "items": [
+          {
+            "label": "人波が流れるスクランブル交差点",
+            "val": "(scramble crossing), (crowd), (busy intersection), (billboards), (urban rush), (modern city), (street energy)",
+            "links": ["都会"]
+          },
+          {
+            "label": "雨に濡れたネオン街の裏路地",
+            "val": "(rainy alley), (neon reflections), (wet pavement), (backstreet), (vending machine), (urban night), (moody atmosphere)",
+            "links": ["夜", "雨", "都会"]
+          },
+          {
+            "label": "雑踏に飲まれる繁華街の通り",
+            "val": "(downtown street), (crowded city), (shop signs), (pedestrians), (busy urban atmosphere), (commercial district), (street noise)",
+            "links": ["都会"]
+          }
         ]
       },
       {
-        "label": "バー・パブ",
-        "val": "(bar counter), (bottles on shelves), (dim lighting), (bartender), (cocktail), (glass), (jazz bar vibes), (adult atmosphere)",
-        "links": [
-          "シネマティック"
+        "label": "🛍 商業エリア・交通スポット",
+        "items": [
+          {
+            "label": "ショーウィンドウが並ぶ都会の買い物通り",
+            "val": "(shopping street), (show windows), (fashion district), (stylish storefronts), (urban commercial area), (daytime), (city atmosphere)",
+            "links": ["都会"]
+          },
+          {
+            "label": "駅前ロータリーで待ち合わせる都会の時間",
+            "val": "(station plaza), (roundabout), (meeting spot), (urban station front), (pedestrians), (city lifestyle), (public transport hub)",
+            "links": ["都会"]
+          },
+          {
+            "label": "揺れるつり革と窓景色の通勤電車内",
+            "val": "(inside train), (hanging straps), (window reflection), (commuting), (urban transit), (passing city scenery), (public transportation)",
+            "links": ["都会"]
+          }
         ]
       },
       {
-        "label": "コンビニ",
-        "val": "(convenience store), (bright fluorescent light), (shelves of snacks), (refrigerator), (night shift), (modern japan)"
-      },
-      {
-        "label": "図書館",
-        "val": "(library), (bookshelves), (quiet atmosphere), (reading), (sunlight through window), (dust particles), (studying)"
-      },
-      {
-        "label": "病院・病室",
-        "val": "(hospital room), (white bed), (medical equipment), (clean atmosphere), (sterile), (curtain), (window)"
-      },
-      {
-        "label": "デートスポット",
-        "val": "(date night), (romantic atmosphere), (city lights), (holding hands), (blush), (fashionable clothes), (restaurant), (dinner)"
-      }
-    ],
-    "🏫 学園・青春 (School)": [
-      {
-        "label": "教室 (昼)",
-        "val": "(classroom), (school desks), (blackboard), (sunlight through window), (afternoon), (school life), (chalk dust)"
-      },
-      {
-        "label": "教室 (夕方)",
-        "val": "(classroom), (sunset), (orange sky), (shadows), (melancholic), (after school), (empty classroom), (nostalgic)"
-      },
-      {
-        "label": "屋上",
-        "val": "(school rooftop), (fence), (blue sky), (clouds), (windy), (city view in distance), (lunch time), (freedom)"
-      },
-      {
-        "label": "体育館",
-        "val": "(school gymnasium), (basketball court), (varnished wood floor), (indoor sports), (volleyball net), (high ceiling)"
-      }
-    ],
-    "🏠 家・日常 (Home)": [
-      {
-        "label": "リビング",
-        "val": "(modern living room), (sofa), (tv), (carpet), (cozy atmosphere), (indoor plant), (sunlight), (relaxing)"
-      },
-      {
-        "label": "キッチン",
-        "val": "(kitchen), (cooking), (apron), (refrigerator), (vegetables), (sink), (morning light), (breakfast preparation)"
-      },
-      {
-        "label": "ベッドルーム",
-        "val": "(bedroom), (bed), (messy sheets), (pillows), (curtains), (morning), (waking up), (pajamas), (private space)"
-      },
-      {
-        "label": "和室",
-        "val": "(japanese room), (tatami mats), (shoji screen), (kotatsu), (cushion), (tea), (calm atmosphere), (traditional)"
-      },
-      {
-        "label": "バスルーム",
-        "val": "(bathroom), (bathtub), (steam), (tiles), (mirror), (shampoo bottles), (relaxing bath), (wet skin)"
-      }
-    ],
-    "🏙️ 都会・ストリート (City)": [
-      {
-        "label": "渋谷・交差点",
-        "val": "(shibuya crossing), (crowd), (skyscrapers), (billboards), (neon signs), (modern city), (busy street), (daytime)"
-      },
-      {
-        "label": "サイバーパンク街",
-        "val": "(cyberpunk city), (neon lights), (holograms), (rain), (wet street), (futuristic), (night), (flying cars)"
-      },
-      {
-        "label": "路地裏",
-        "val": "(back alley), (dim lighting), (vending machine), (trash cans), (pipes), (stray cat), (urban exploration), (graffiti)"
-      },
-      {
-        "label": "夜景・ビル街",
-        "val": "(night city view), (skyscraper), (office lights), (highway), (car lights), (bokeh), (beautiful scenery)"
-      },
-      {
-        "label": "電車内",
-        "val": "(inside train), (hanging straps), (seats), (window reflection), (commuting), (passing scenery)"
-      }
-    ],
-    "🌆 シチュエーションパック｜🎉 イベント・行事 (Events)": [
-      {
-        "label": "クリスマス",
-        "val": "(santa costume), (christmas tree), (holding gift box), (snowy background), (lights and ornaments), (happy smile), (winter holiday)"
-      },
-      {
-        "label": "ハロウィン",
-        "val": "(witch costume), (holding pumpkin), (jack-o'-lantern), (bats), (purple and orange theme), (spooky castle background), (magic hat)"
-      },
-      {
-        "label": "ウェディング",
-        "val": "(wedding dress), (holding bouquet), (church interior), (white veil), (stained glass), (happy tears), (marriage ceremony), (pure white)"
-      },
-      {
-        "label": "温泉旅行",
-        "val": "(wearing yukata), (onsen), (steam), (open air bath), (wooden bucket), (relaxing), (flushed face), (night scenery)",
-        "links": [
-          "和風"
+        "label": "🌃 夜景・ネオン・アンダーグラウンド",
+        "items": [
+          {
+            "label": "街の灯りが広がる高層ビル街の夜景",
+            "val": "(night city view), (skyscrapers), (office lights), (highway lights), (urban bokeh), (beautiful city night), (metropolitan atmosphere)",
+            "links": ["夜", "都会"]
+          },
+          {
+            "label": "ネオンに染まる深夜の繁華街",
+            "val": "(neon downtown), (midnight city), (bright signs), (nightlife district), (glowing streets), (urban night atmosphere), (vivid neon)",
+            "links": ["夜", "都会"]
+          },
+          {
+            "label": "サイバーパンク調の裏通りナイトシーン",
+            "val": "(cyberpunk backstreet), (holograms), (rain), (wet street), (futuristic neon), (dark urban alley), (night scene)",
+            "links": ["夜", "SF", "都会"]
+          }
         ]
       }
     ],
+    "🌆 シチュエーションパック｜🎉 イベント・行事 (Event)": {
+      "🎄 季節イベント": [
+        {"label": "イルミネーションに包まれるクリスマスの夜", "val": "(christmas night), (illuminations), (christmas tree), (gift box), (winter holiday), (sparkling lights), (festive atmosphere), (happy smile)"},
+        {"label": "雪の中で迎える聖夜のクリスマス", "val": "(snowy christmas), (falling snow), (christmas decorations), (soft winter light), (holy night mood), (cozy holiday atmosphere)"},
+        {"label": "賑やかな仮装ハロウィンパーティー", "val": "(halloween party), (witch costume), (jack-o'-lantern), (purple and orange decorations), (spooky cute atmosphere), (party mood)"},
+        {"label": "怪しげな夜のハロウィン街歩き", "val": "(halloween night street), (pumpkin lanterns), (dark town), (bats), (misty atmosphere), (mysterious seasonal event)"}
+      ],
+      "💍 儀式・祝祭": [
+        {"label": "光に満ちたチャペルウェディング", "val": "(wedding ceremony), (church interior), (white veil), (holding bouquet), (stained glass), (pure white), (solemn happy atmosphere)"},
+        {"label": "祝福に包まれる披露宴の瞬間", "val": "(wedding reception), (flower decorations), (elegant hall), (celebration), (joyful smiles), (formal festive atmosphere)"},
+        {"label": "神前式の厳かな婚礼", "val": "(traditional wedding ceremony), (formal kimono), (sacred atmosphere), (ceremonial hall), (quiet solemnity), (ritual celebration)", "links": ["和風"]},
+        {"label": "記念日の華やかなセレモニー", "val": "(anniversary celebration), (decorated venue), (commemorative atmosphere), (flowers), (special event mood), (festive elegance)"}
+      ],
+      "♨ 旅行・行楽": [
+        {"label": "浴衣で歩く温泉街の夕暮れ", "val": "(onsen town at dusk), (wearing yukata), (lantern lights), (traditional street), (travel atmosphere), (warm evening mood)", "links": ["和風"]},
+        {"label": "湯気に包まれる露天風呂の夜", "val": "(open air bath), (onsen), (steam), (night scenery), (relaxing), (quiet travel mood), (wooden bucket)", "links": ["和風"]},
+        {"label": "旅館で迎える静かな朝", "val": "(traditional inn morning), (soft daylight), (tatami room), (travel stay), (peaceful atmosphere), (calm vacation scene)", "links": ["和風"]},
+        {"label": "祭り帰りの余韻が残る夜道", "val": "(festival night aftermath), (lantern glow), (quiet road), (lingering excitement), (summer event mood), (gentle night air)"}
+      ]
+    },
     "🌆 シチュエーションパック｜💕 デート・恋愛 (Date)": [
       {
-        "label": "水族館デート",
-        "val": "(aquarium date), (looking at fish), (blue ambient light), (reflection on glass), (romantic atmosphere), (walking together), (happy expression)",
-        "links": [
-          "デートスポット"
+        "label": "🐟 水辺・館内デート",
+        "items": [
+          {
+            "label": "青い光に包まれる水族館デート",
+            "val": "(aquarium date), (looking at fish), (blue ambient light), (reflection on glass), (romantic atmosphere), (walking together), (happy expression)",
+            "links": [
+              "デートスポット"
+            ]
+          },
+          {
+            "label": "静かな展示前で見つめ合う水族館の夜",
+            "val": "(aquarium interior), (quiet exhibit hall), (soft blue glow), (couple standing close), (gentle eye contact), (romantic silence), (date atmosphere)",
+            "links": [
+              "デートスポット",
+              "夜"
+            ]
+          }
         ]
       },
       {
-        "label": "映画館デート",
-        "val": "(movie theater), (sitting next to each other), (eating popcorn), (dim lighting), (screen light reflecting on face), (intimate moment), (date night)",
-        "links": [
-          "デートスポット"
+        "label": "🎬 屋内エンタメデート",
+        "items": [
+          {
+            "label": "映画館で肩が触れるデートの時間",
+            "val": "(movie theater), (sitting next to each other), (eating popcorn), (dim lighting), (screen light reflecting on face), (intimate moment), (date night)",
+            "links": [
+              "デートスポット"
+            ]
+          },
+          {
+            "label": "上映後に余韻を抱えたロビーで語り合う",
+            "val": "(cinema lobby), (after movie), (soft poster lights), (talking quietly), (lingering emotions), (romantic atmosphere), (close distance)",
+            "links": [
+              "デートスポット"
+            ]
+          }
         ]
       },
       {
-        "label": "遊園地・観覧車",
-        "val": "(amusement park date), (ferris wheel in background), (holding crepe), (colorful lights), (happy smile), (vibrant atmosphere), (casual clothes)"
+        "label": "🎡 遊園地・おでかけデート",
+        "items": [
+          {
+            "label": "観覧車を背に笑い合う遊園地デート",
+            "val": "(amusement park date), (ferris wheel in background), (holding crepe), (colorful lights), (happy smile), (vibrant atmosphere), (casual clothes)",
+            "links": [
+              "デートスポット"
+            ]
+          },
+          {
+            "label": "夕暮れの遊園地で手を引く帰り道",
+            "val": "(amusement park at dusk), (walking together), (holding hands), (warm sunset light), (afterglow sky), (romantic date), (gentle smiles)",
+            "links": [
+              "夕方",
+              "デートスポット"
+            ]
+          }
+        ]
       },
       {
-        "label": "夜景・展望台",
-        "val": "(observation deck), (night city view), (sparkling city lights), (leaning on railing), (romantic mood), (couple atmosphere), (elegant)",
-        "links": [
-          "夜"
+        "label": "🌃 夜景・ムードデート",
+        "items": [
+          {
+            "label": "街の灯りを見下ろす展望台デート",
+            "val": "(observation deck), (night city view), (sparkling city lights), (leaning on railing), (romantic mood), (couple atmosphere), (elegant)",
+            "links": [
+              "夜"
+            ]
+          },
+          {
+            "label": "夜風の中で距離が縮まる展望台の時間",
+            "val": "(night breeze), (observation deck date), (city lights below), (close distance), (soft hair movement), (romantic tension), (quiet confession mood)",
+            "links": [
+              "夜",
+              "デートスポット"
+            ]
+          }
         ]
       }
     ],
-    "🕰️ 時代・年代 (Eras)": [
-      {
-        "label": "古代エジプト",
-        "val": "ancient egypt"
-      },
-      {
-        "label": "古代ギリシャ",
-        "val": "ancient greek"
-      },
-      {
-        "label": "中世ヨーロッパ",
-        "val": "medieval era"
-      },
-      {
-        "label": "大正ロマン",
-        "val": "taisho roman"
-      },
-      {
-        "label": "昭和レトロ",
-        "val": "showa era style"
-      },
-      {
-        "label": "バブル時代 (80s)",
-        "val": "bubble era"
-      },
-      {
-        "label": "サイバーパンク未来",
-        "val": "cyberpunk future"
-      },
-      {
-        "label": "ポストアポカリプス",
-        "val": "post-apocalyptic"
-      }
-    ]
+    "🌆 シチュエーションパック｜😇 天界の舞台・状況 (Celestial Scenes)": [
+      { "label": "天上神殿", "val": "celestial temple, radiant marble, divine columns, white gold architecture, holy glow, sacred atmosphere", "desc": "天界の中心神殿" },
+      { "label": "雲上の神域", "val": "cloud realm, heavenly sky, floating islands, radiant mist, divine atmosphere, vast sky", "desc": "雲海の上の神域" },
+      { "label": "審判の神殿", "val": "judgment temple, colossal pillars, sacred court, divine tribunal, blazing holy light, solemn atmosphere", "desc": "裁きと権威の舞台" },
+      { "label": "玉座の間", "val": "celestial throne room, divine throne, halo light, sacred banners, radiant floor, holy majesty", "desc": "王権と威光の中心" },
+      { "label": "啓示の塔", "val": "tower of revelation, sacred scripture, floating sigils, heavenly windows, golden light", "desc": "神託と啓示の塔" },
+      { "label": "神託を告げる瞬間", "val": "divine proclamation, heavenly messenger, sacred scroll, radiant feathers, solemn delivery", "desc": "神託・伝令の瞬間" },
+      { "label": "加護を授ける場面", "val": "granting blessing, holy light, gentle aura, hands extended, miracle atmosphere", "desc": "慈悲と癒しの演出" },
+      { "label": "天軍出陣の前", "val": "heavenly army departure, sacred standard, radiant armor, wings spread, battle-ready archangel", "desc": "天の軍勢を率いる前触れ" },
+      { "label": "審判を見下ろす", "val": "overlooking judgment, divine authority, sacred law, blazing halo, stern celestial gaze", "desc": "高位存在の裁き" },
+      { "label": "静かな降臨", "val": "serene descent, falling feathers, radiant light shaft, divine stillness, holy arrival", "desc": "静謐な神聖降臨" }
+    ],
+    "🌆 シチュエーションパック｜😈 深淵の舞台・状況 (Infernal Scenes)": [
+      { "label": "奈落の玉座", "val": "abyssal throne, infernal palace, dark majesty, black flames, cursed banners, oppressive atmosphere", "desc": "深淵支配者の王座" },
+      { "label": "冥府の宮殿", "val": "underworld palace, obsidian hall, infernal court, crimson glow, deathly grandeur", "desc": "冥府の中心宮殿" },
+      { "label": "崩れた神殿跡", "val": "ruined holy temple, broken pillars, fallen halo fragments, ash, corrupted sanctity", "desc": "堕天と破滅の象徴" },
+      { "label": "黒炎の祭壇", "val": "black flame altar, infernal sigils, cursed fire, sacrificial aura, abyssal ritual", "desc": "深淵儀式の舞台" },
+      { "label": "虚無の回廊", "val": "void corridor, endless darkness, floating curse seals, abyssal silence, surreal emptiness", "desc": "深淵君主の通廊" },
+      { "label": "堕天の降臨", "val": "fallen angel descent, broken halo, black wings spread, tragic radiance, ruined divinity", "desc": "光が堕ちる瞬間" },
+      { "label": "軍勢を従える", "val": "commanding infernal legion, abyssal authority, demonic court, dark banners, overwhelming dominance", "desc": "深淵の王の支配" },
+      { "label": "契約を迫る瞬間", "val": "forbidden contract, infernal whisper, seductive menace, curse sigils, looming darkness", "desc": "誘惑と支配の交渉" },
+      { "label": "破滅の宣告", "val": "proclaiming ruin, hell sovereign aura, black fire, world-ending menace, apocalyptic presence", "desc": "終焉を告げる場面" },
+      { "label": "冥府を見下ろす", "val": "overlooking underworld, abyssal dominion, dark throne aura, infernal skyline, blood moon", "desc": "支配者の俯瞰" }
+    ],
+    "🕰️ 時代・年代 (Eras)": {
+      "𓂀 古代エジプト": [
+        {"label": "砂と神殿の古代エジプト", "val": "(ancient egypt), (desert), (stone temple), (golden sunlight), (sand), (monumental atmosphere)"},
+        {"label": "王墓の気配が漂う古代エジプト", "val": "(ancient egypt tomb atmosphere), (stone walls), (hieroglyphs), (golden ornaments), (solemn air)"},
+        {"label": "ナイルの陽光に包まれた古代エジプト", "val": "(ancient egypt by the nile), (sunlight), (river), (warm wind), (historic scenery)"},
+        {"label": "黄金装飾の儀式空間", "val": "(ancient egypt ritual hall), (golden ornaments), (pillars), (sacred atmosphere), (ceremonial scene)"}
+      ],
+      "🏛 古代ギリシャ": [
+        {"label": "白亜の神殿が立つ古代ギリシャ", "val": "(ancient greece), (marble temple), (white columns), (clear sky), (classical atmosphere)"},
+        {"label": "神話彫像に囲まれた古代ギリシャ", "val": "(ancient greek plaza), (statues), (marble), (mythic atmosphere), (open classical space)"},
+        {"label": "青空と列柱の古代ギリシャ", "val": "(ancient greece), (blue sky), (stone columns), (sunlight), (classical architecture)"},
+        {"label": "大理石広場の古代都市", "val": "(ancient greek city square), (marble floor), (columns), (classical urban scenery)"}
+      ],
+      "⚔ 中世ヨーロッパ": [
+        {"label": "石畳と城壁の中世ヨーロッパ", "val": "(medieval europe), (stone street), (castle walls), (old town), (historic atmosphere)"},
+        {"label": "蝋燭と木造家具の中世室内", "val": "(medieval interior), (candlelight), (wooden furniture), (warm shadows), (historic room)"},
+        {"label": "城下町の賑わう中世ヨーロッパ", "val": "(medieval town), (market street), (stone buildings), (lively historic atmosphere)"},
+        {"label": "重厚な礼拝堂の中世空間", "val": "(medieval chapel), (candlelight), (stone walls), (solemn atmosphere), (gothic mood)"}
+      ],
+      "📚 大正ロマン": [
+        {"label": "ステンドグラスと洋館の大正ロマン", "val": "(taisho roman), (stained glass), (western-style mansion), (retro elegance), (soft light)"},
+        {"label": "書斎と和洋折衷の大正ロマン", "val": "(taisho study), (japanese-western interior), (books), (retro atmosphere), (warm light)"},
+        {"label": "夕暮れの袴姿が映える大正ロマン", "val": "(taisho roman at dusk), (retro street), (warm sunset light), (nostalgic elegance)"},
+        {"label": "文学と喫茶の香る大正空間", "val": "(taisho café), (books), (retro interior), (soft light), (literary atmosphere)"}
+      ],
+      "📺 昭和レトロ": [
+        {"label": "ちゃぶ台のある昭和の居間", "val": "(showa retro living room), (low table), (old television), (warm nostalgic light), (retro home)"},
+        {"label": "夕焼けが差す昭和の街角", "val": "(showa retro street), (sunset), (old town), (nostalgic atmosphere), (retro japan)"},
+        {"label": "古びた学校と夕暮れの昭和", "val": "(showa school at dusk), (old classroom), (warm evening light), (nostalgic atmosphere)"},
+        {"label": "商店街の灯りが残る昭和レトロ", "val": "(showa shopping street), (retro signs), (warm night lights), (nostalgic urban scene)"}
+      ],
+      "💎 バブル時代 (80s)": [
+        {"label": "ネオンと高級感のバブル時代", "val": "(bubble era), (neon lights), (luxury atmosphere), (80s japan), (glamorous urban night)"},
+        {"label": "豪華ホテルラウンジのバブル空間", "val": "(luxury hotel lounge), (bubble era style), (gold accents), (rich atmosphere), (80s glamour)"},
+        {"label": "華やかな夜景とバブル都市", "val": "(80s city night view), (glittering skyline), (bubble era atmosphere), (urban luxury)"},
+        {"label": "派手な照明の大人の夜空間", "val": "(80s nightlife), (flashy lights), (adult atmosphere), (retro luxury), (bubble era mood)"}
+      ],
+      "🌐 サイバーパンク未来": [
+        {"label": "雨とネオンのサイバーパンク未来", "val": "(cyberpunk future), (rain), (neon lights), (wet street), (dark city), (futuristic atmosphere)"},
+        {"label": "高層広告に囲まれた未来都市", "val": "(futuristic megacity), (holographic ads), (skyscrapers), (cyberpunk atmosphere), (urban density)"},
+        {"label": "路地裏のサイバー夜景", "val": "(cyberpunk alley), (neon reflections), (night), (futuristic slum), (wet pavement)"},
+        {"label": "ホログラムが漂う未来空間", "val": "(cyberpunk interior), (holograms), (blue neon glow), (futuristic room), (high-tech atmosphere)"}
+      ],
+      "☣ ポストアポカリプス": [
+        {"label": "崩壊都市に風が吹く終末世界", "val": "(post-apocalyptic city), (ruins), (wind), (desolation), (broken buildings), (end of civilization)"},
+        {"label": "荒野と残骸のポストアポカリプス", "val": "(post-apocalyptic wasteland), (scrap remains), (dust), (empty landscape), (survival atmosphere)"},
+        {"label": "廃墟に灯りが残る終末の夜", "val": "(ruined city at night), (faint lights), (collapse), (quiet desolation), (post-apocalyptic mood)"},
+        {"label": "文明崩壊後の静かな空気", "val": "(after the collapse), (silent ruins), (gray sky), (stillness), (end-of-world atmosphere)"}
+      ]
+    }
   },
   "🎭 なりきりパック (Roleplay Packs)": {
     "👨‍🏭 現代職業 (Modern Jobs)": [
@@ -1151,6 +1353,42 @@
     { label: "🟪 ✦L 深淵君主級 / Abyssal Lord Class", val: "abyssal-lord-class being, infernal mantle, dark command aura, floating curse seals, sovereign underworld presence, abyssal seal authority, hellbound majesty", desc: "格・位階 / 深淵君主の威圧 / 関連: ✦L ルシフェル・堕天の王" }
   ],
 
+"🎭 なりきりおすすめセット｜おすすめ組み合わせ（天界） (Celestial Combos)": [
+    { label: "✦G ガブリエル × 神託降臨", val: "gabriel motif, archangel of annunciation, divine proclamation, sacred scroll, luminous trumpet motif, serene descent, radiant light shaft, holy revelation aura", desc: "神託を告げる降臨" },
+    { label: "✦M ミカエル × 天軍出陣", val: "archangel michael motif, heavenly commander, six wings, celestial armor, sacred execution blade, holy war standard, heavenly army departure, victorious divine presence", desc: "聖戦の指揮官" },
+    { label: "✦R ラファエル × 加護の奇跡", val: "archangel raphael motif, holy healer, sacred restoration, healing light, blessing aura, granting blessing, miracle atmosphere, gentle halo glow", desc: "癒しと加護の完成形" },
+    { label: "✦U ウリエル × 審判の炎", val: "archangel uriel motif, divine flame, judgment fire, throne halo ring, sacred scripture, overlooking judgment, blazing holy light, radiant severity", desc: "裁きの炎と権威" },
+    { label: "✦M 熾天級 × 玉座の間", val: "seraph-class being, living flame of worship, radiant halo crown, many wings, celestial throne room, divine throne, sacred banners, holy majesty", desc: "高位天使の荘厳" },
+    { label: "✦G 大天使級 × 雲上神域", val: "archangel-class being, layered halo rings, radiant white wings, cloud realm, floating islands, divine atmosphere, heavenly vastness", desc: "王道の天界イメージ" }
+  ],
+
+"🎭 なりきりおすすめセット｜おすすめ組み合わせ（深淵） (Infernal Combos)": [
+    { label: "✦L ルシフェル × 堕天降臨", val: "lucifer motif, supreme fallen angel, broken halo, black wings, fallen morning star motif, fallen angel descent, tragic radiance, ruined divinity", desc: "堕天の象徴的瞬間" },
+    { label: "✦S サタン × 奈落の玉座", val: "satan motif, infernal ruler, abyssal authority, demon king aura, abyssal throne, infernal palace, hell sovereign sigils, overwhelming dark presence", desc: "冥府支配者の完成形" },
+    { label: "✦B ベルゼブブ × 退廃宮殿", val: "beelzebub motif, archdemon lord, decadent infernal nobility, infernal wings, underworld palace, infernal court, banquet of ruin motif, dark aristocratic aura", desc: "退廃と魔界貴族性" },
+    { label: "✦S 魔王級 × 黒炎祭壇", val: "demon-king-class being, infernal crown horns, massive demonic wings, black flame altar, cursed fire, apocalyptic pressure, infernal throne authority", desc: "王級の破滅感" },
+    { label: "✦L 堕天使上位種 × 崩れた神殿", val: "high fallen angel class, corrupted halo, black holy wings, ruined holy temple, broken pillars, ash, tragic majesty, fallen star symbolism", desc: "堕天の美と崩壊" },
+    { label: "✦L 深淵君主級 × 虚無の回廊", val: "abyssal-lord-class being, floating curse seals, void corridor, endless darkness, hellbound majesty, sovereign underworld presence", desc: "最奥の深淵君主" }
+  ],
+
+"📐 おすすめ構図｜😇 天界向け (Celestial Compositions)": [
+    { title_ja: "天界：正面降臨", title_en: "Celestial: frontal descent", val: "frontal descent composition, centered symmetry, radiant backlight", desc: "神聖な降臨の正面構図" },
+    { title_ja: "天界：荘厳中央", title_en: "Celestial: majestic center", val: "majestic centered composition, cathedral-like symmetry, halo emphasis", desc: "威光を中央で見せる" },
+    { title_ja: "天界：背後光輪", title_en: "Celestial: halo back framing", val: "back halo framing, radiant silhouette, sacred symmetry", desc: "光輪と背光を活かす" },
+    { title_ja: "天界：六翼展開", title_en: "Celestial: wings spread", val: "full wing spread composition, expansive framing, divine scale", desc: "多翼・六翼の迫力" },
+    { title_ja: "天界：玉座正面", title_en: "Celestial: throne front", val: "throne front composition, low angle, sacred authority", desc: "玉座と権威を見せる" },
+    { title_ja: "天界：加護の包囲", title_en: "Celestial: blessing embrace", val: "embracing blessing composition, gentle light, protective framing", desc: "慈悲と癒しの構図" }
+  ],
+
+"📐 おすすめ構図｜😈 深淵向け (Infernal Compositions)": [
+    { title_ja: "深淵：王座支配", title_en: "Infernal: throne dominion", val: "throne dominion composition, low angle, oppressive framing", desc: "支配者としての威圧" },
+    { title_ja: "深淵：堕天降臨", title_en: "Infernal: fallen descent", val: "fallen descent composition, broken halo silhouette, dramatic backlight", desc: "堕天の劇的演出" },
+    { title_ja: "深淵：黒翼包囲", title_en: "Infernal: black wings surround", val: "black wings surrounding frame, dark vignette, enclosed menace", desc: "黒翼と圧迫感を見せる" },
+    { title_ja: "深淵：奈落見下ろし", title_en: "Infernal: abyss overlook", val: "abyss overlook composition, high throne viewpoint, infernal scale", desc: "冥府を見下ろす俯瞰" },
+    { title_ja: "深淵：背光破滅", title_en: "Infernal: ruin backlight", val: "ruin backlight composition, black flame silhouette, apocalyptic framing", desc: "終焉感を強める" },
+    { title_ja: "深淵：呪印展開", title_en: "Infernal: curse sigil spread", val: "curse sigil spread composition, diagonal force, infernal energy burst", desc: "呪印と魔力を見せる" }
+  ],
+
 "🎭 なりきりおすすめセット｜神獣・伝説なりきり (Mythic Beasts)": [
     
 {
@@ -1664,31 +1902,79 @@
     var situationChildren = [];
     var sitKey = "🌆 シチュエーションパック (Situation Packs)";
     var sitObj = packs[sitKey];
+
+    function cleanSituationTitle(key) {
+      return String(key || "")
+        .replace(/^🌆 シチュエーションパック｜/, "")
+        .replace(/^📍 /, "")
+        .replace(/ \(.+?\)$/, "");
+    }
+
+    function toSituationNode(title, value) {
+      if (Object.prototype.toString.call(value) === "[object Array]") {
+        return {
+          title_ja: cleanSituationTitle(title),
+          title_en: "",
+          children: value
+        };
+      }
+      if (value && typeof value === "object") {
+        var keys = Object.keys(value);
+        var nestedChildren = [];
+        for (var i2 = 0; i2 < keys.length; i2++) {
+          var childNode = toSituationNode(keys[i2], value[keys[i2]]);
+          if (childNode) nestedChildren.push(childNode);
+        }
+        return {
+          title_ja: cleanSituationTitle(title),
+          title_en: "",
+          children: nestedChildren
+        };
+      }
+      return null;
+    }
+
     if (sitObj && typeof sitObj === "object") {
       var k2s = Object.keys(sitObj);
       for (var j = 0; j < k2s.length; j++) {
-        var sk = k2s[j];
-        if (Object.prototype.toString.call(sitObj[sk]) === "[object Array]") {
-          situationChildren.push({
-            title_ja: sk,
-            title_en: "",
-            children: sitObj[sk]
-          });
-        }
+        var node = toSituationNode(k2s[j], sitObj[k2s[j]]);
+        if (node) situationChildren.push(node);
       }
     }
 
+    var pairChildren = [];
     var pairKey = "🎭 なりきりおすすめセット｜おすすめ組み合わせ（なりきり×場所） (Roleplay × Situation)";
-    var pairArr = matchArray(pairKey) ? packs[pairKey] : [];
+    if (matchArray(pairKey)) {
+      pairChildren.push({ title_ja: "汎用おすすめ", title_en: "General Picks", children: packs[pairKey] });
+    }
+    var celestialPairKey = "🎭 なりきりおすすめセット｜おすすめ組み合わせ（天界） (Celestial Combos)";
+    if (matchArray(celestialPairKey)) {
+      pairChildren.push({ title_ja: "😇 天界おすすめ", title_en: "Celestial Combos", children: packs[celestialPairKey] });
+    }
+    var infernalPairKey = "🎭 なりきりおすすめセット｜おすすめ組み合わせ（深淵） (Infernal Combos)";
+    if (matchArray(infernalPairKey)) {
+      pairChildren.push({ title_ja: "😈 深淵おすすめ", title_en: "Infernal Combos", children: packs[infernalPairKey] });
+    }
 
+    var compChildren = [];
     var compKey = "📐 おすすめ構図 (Recommended Compositions)";
-    var compArr = matchArray(compKey) ? packs[compKey] : [];
+    if (matchArray(compKey)) {
+      compChildren.push({ title_ja: "基本構図", title_en: "Core Compositions", children: packs[compKey] });
+    }
+    var celestialCompKey = "📐 おすすめ構図｜😇 天界向け (Celestial Compositions)";
+    if (matchArray(celestialCompKey)) {
+      compChildren.push({ title_ja: "😇 天界向け構図", title_en: "Celestial Compositions", children: packs[celestialCompKey] });
+    }
+    var infernalCompKey = "📐 おすすめ構図｜😈 深淵向け (Infernal Compositions)";
+    if (matchArray(infernalCompKey)) {
+      compChildren.push({ title_ja: "😈 深淵向け構図", title_en: "Infernal Compositions", children: packs[infernalCompKey] });
+    }
 
     packs[parentKey] = [
       { title_ja: "🎭 なりきり", title_en: "Roleplay", children: roleplayChildren },
       { title_ja: "📍 場所・状況", title_en: "Place & Situation", children: situationChildren },
-      { title_ja: "🎵 おすすめ組み合わせ", title_en: "Roleplay × Situation", children: pairArr },
-      { title_ja: "📐 おすすめ構図", title_en: "Recommended Compositions", children: compArr }
+      { title_ja: "🎵 おすすめ組み合わせ", title_en: "Roleplay × Situation", children: pairChildren },
+      { title_ja: "📐 おすすめ構図", title_en: "Recommended Compositions", children: compChildren }
     ];
   } catch (e) {}
 })();
