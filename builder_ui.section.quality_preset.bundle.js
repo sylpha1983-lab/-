@@ -204,6 +204,16 @@ cb.addEventListener("change", () => {
     note.textContent = "※ モデルによって不要な場合があるので、必要な時だけON。女/男はそれぞれ1つだけ選択（同時に女+男はOK）。";
     box.appendChild(note);
 
+    const rec = document.createElement("div");
+    rec.style.cssText = "margin:10px 0 8px; padding:10px 12px; border-radius:12px; border:1px solid rgba(22,163,74,.26); background:rgba(236,253,245,.96); color:#166534; font-size:12px; line-height:1.55;";
+    rec.innerHTML = '<div style="font-weight:800; margin-bottom:2px;">推奨（最適化対応）</div><div>1girl / 1boy / 1girl + 1boy を主軸に各種最適化ロジックを組んでいます。単体キャラと男女ペアはこちらを推奨。</div>';
+    box.appendChild(rec);
+
+    const exp = document.createElement("div");
+    exp.style.cssText = "margin:0 0 10px; padding:10px 12px; border-radius:12px; border:1px solid rgba(217,119,6,.28); background:rgba(255,247,237,.98); color:#9a3412; font-size:12px; line-height:1.55;";
+    exp.innerHTML = '<div style="font-weight:800; margin-bottom:2px;">実験枠（非推奨・各種最適化対応外）</div><div>2girls / 2boys 以上の多人数構成は、ペア補助・役割補正など各種最適化ロジックの対応外です。使えますが、結果はモデル相性に強く左右されます。</div>';
+    box.appendChild(exp);
+
     const mkRow = (label, items, groupClass) => {
   const row = document.createElement("div");
   row.style.display = "flex";
@@ -229,6 +239,8 @@ cb.addEventListener("change", () => {
 
   const makePill = (it) => {
     const id = it.key;
+    const isRecommended = /^(1girl|1boy)$/.test(it.val || "");
+    const isExperimental = /^(?:[2-9]girls|[2-9]boys)$/.test(it.val || "");
 
     const lab = document.createElement("label");
     lab.style.display = "inline-flex";
@@ -241,6 +253,13 @@ cb.addEventListener("change", () => {
     lab.style.cursor = "pointer";
     lab.style.userSelect = "none";
     lab.style.minWidth = "140px";
+    if (isRecommended) {
+      lab.style.background = "linear-gradient(180deg, rgba(236,253,245,.98), rgba(240,253,250,.98))";
+      lab.style.borderColor = "rgba(22,163,74,.30)";
+    } else if (isExperimental) {
+      lab.style.background = "linear-gradient(180deg, rgba(255,247,237,.98), rgba(255,251,235,.98))";
+      lab.style.borderColor = "rgba(217,119,6,.30)";
+    }
 
     const cb = document.createElement("input");
     cb.type = "checkbox";
@@ -256,13 +275,34 @@ cb.addEventListener("change", () => {
     meta.style.lineHeight = "1.1";
 
     const t = document.createElement("div");
+    t.style.display = "flex";
+    t.style.alignItems = "center";
+    t.style.flexWrap = "wrap";
+    t.style.gap = "6px";
     t.style.fontWeight = "700";
-    t.textContent = it.label;
+
+    const titleTxt = document.createElement("span");
+    titleTxt.textContent = it.label;
+    t.appendChild(titleTxt);
+
+    if (isRecommended) {
+      const badge = document.createElement("span");
+      badge.textContent = "推奨";
+      badge.style.cssText = "display:inline-flex; align-items:center; padding:2px 7px; border-radius:999px; background:rgba(22,163,74,.12); color:#166534; border:1px solid rgba(22,163,74,.22); font-size:10px; font-weight:800; letter-spacing:.02em;";
+      t.appendChild(badge);
+    } else if (isExperimental) {
+      const badge = document.createElement("span");
+      badge.textContent = "実験";
+      badge.style.cssText = "display:inline-flex; align-items:center; padding:2px 7px; border-radius:999px; background:rgba(217,119,6,.12); color:#9a3412; border:1px solid rgba(217,119,6,.22); font-size:10px; font-weight:800; letter-spacing:.02em;";
+      t.appendChild(badge);
+    }
 
     const ds = document.createElement("div");
     ds.style.fontSize = "12px";
-    ds.style.opacity = "0.75";
-    ds.textContent = it.desc;
+    ds.style.opacity = "0.82";
+    ds.textContent = isRecommended
+      ? (it.desc + " / 最適化対応")
+      : (isExperimental ? (it.desc + " / 最適化対応外") : it.desc);
 
     meta.appendChild(t);
     meta.appendChild(ds);

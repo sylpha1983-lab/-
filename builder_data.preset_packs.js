@@ -347,30 +347,50 @@
         ]
       }
     ],
-    "🌆 シチュエーションパック｜😇 天界の舞台・状況 (Celestial Scenes)": [
-      { "label": "天上神殿", "val": "celestial temple, radiant marble, divine columns, white gold architecture, holy glow, sacred atmosphere", "desc": "天界の中心神殿" },
-      { "label": "雲上の神域", "val": "cloud realm, heavenly sky, floating islands, radiant mist, divine atmosphere, vast sky", "desc": "雲海の上の神域" },
-      { "label": "審判の神殿", "val": "judgment temple, colossal pillars, sacred court, divine tribunal, blazing holy light, solemn atmosphere", "desc": "裁きと権威の舞台" },
-      { "label": "玉座の間", "val": "celestial throne room, divine throne, halo light, sacred banners, radiant floor, holy majesty", "desc": "王権と威光の中心" },
-      { "label": "啓示の塔", "val": "tower of revelation, sacred scripture, floating sigils, heavenly windows, golden light", "desc": "神託と啓示の塔" },
-      { "label": "神託を告げる瞬間", "val": "divine proclamation, heavenly messenger, sacred scroll, radiant feathers, solemn delivery", "desc": "神託・伝令の瞬間" },
-      { "label": "加護を授ける場面", "val": "granting blessing, holy light, gentle aura, hands extended, miracle atmosphere", "desc": "慈悲と癒しの演出" },
-      { "label": "天軍出陣の前", "val": "heavenly army departure, sacred standard, radiant armor, wings spread, battle-ready archangel", "desc": "天の軍勢を率いる前触れ" },
-      { "label": "審判を見下ろす", "val": "overlooking judgment, divine authority, sacred law, blazing halo, stern celestial gaze", "desc": "高位存在の裁き" },
-      { "label": "静かな降臨", "val": "serene descent, falling feathers, radiant light shaft, divine stillness, holy arrival", "desc": "静謐な神聖降臨" }
-    ],
-    "🌆 シチュエーションパック｜😈 深淵の舞台・状況 (Infernal Scenes)": [
-      { "label": "奈落の玉座", "val": "abyssal throne, infernal palace, dark majesty, black flames, cursed banners, oppressive atmosphere", "desc": "深淵支配者の王座" },
-      { "label": "冥府の宮殿", "val": "underworld palace, obsidian hall, infernal court, crimson glow, deathly grandeur", "desc": "冥府の中心宮殿" },
-      { "label": "崩れた神殿跡", "val": "ruined holy temple, broken pillars, fallen halo fragments, ash, corrupted sanctity", "desc": "堕天と破滅の象徴" },
-      { "label": "黒炎の祭壇", "val": "black flame altar, infernal sigils, cursed fire, sacrificial aura, abyssal ritual", "desc": "深淵儀式の舞台" },
-      { "label": "虚無の回廊", "val": "void corridor, endless darkness, floating curse seals, abyssal silence, surreal emptiness", "desc": "深淵君主の通廊" },
-      { "label": "堕天の降臨", "val": "fallen angel descent, broken halo, black wings spread, tragic radiance, ruined divinity", "desc": "光が堕ちる瞬間" },
-      { "label": "軍勢を従える", "val": "commanding infernal legion, abyssal authority, demonic court, dark banners, overwhelming dominance", "desc": "深淵の王の支配" },
-      { "label": "契約を迫る瞬間", "val": "forbidden contract, infernal whisper, seductive menace, curse sigils, looming darkness", "desc": "誘惑と支配の交渉" },
-      { "label": "破滅の宣告", "val": "proclaiming ruin, hell sovereign aura, black fire, world-ending menace, apocalyptic presence", "desc": "終焉を告げる場面" },
-      { "label": "冥府を見下ろす", "val": "overlooking underworld, abyssal dominion, dark throne aura, infernal skyline, blood moon", "desc": "支配者の俯瞰" }
-    ],
+    "🌆 シチュエーションパック｜😇 天界の舞台・状況 (Celestial Scenes)": {
+      "☁ 神殿・聖域": [
+        { "label": "🟨 ✦G 神託が降りる白亜の聖堂", "val": "gabriel motif, oracle messenger atmosphere, white marble sanctuary, sacred scrolls, radiant altar, heavenly proclamation, soft golden halo light, solemn divine silence", "desc": "✦G / ガブリエル系の神託聖堂 / 関連: 神託の伝令・大天使級" },
+        { "label": "🟩 ✦R 癒やしの光が満ちる聖域", "val": "raphael motif, guardian of the sanctuary, healing light, sacred barrier, white sanctuary, blessing aura, restorative glow, merciful divine atmosphere", "desc": "✦R / ラファエル系の治癒聖域 / 関連: 聖域の守護者・智天級" },
+        { "label": "🟨 ✦G 雲上神域の静かな祈りの間", "val": "gabriel motif, cloud sanctuary, quiet prayer hall, luminous feathers, celestial mist, revelation hush, sacred serenity, white-gold heaven architecture", "desc": "✦G / 雲上神域の静謐空間 / 関連: ガブリエル・神託の伝令" }
+      ],
+      "✨ 玉座・啓示": [
+        { "label": "🟨 ✦G 啓示が満ちる光の玉座間", "val": "gabriel motif, celestial throne room, revelation light, sacred decree, halo rings, holy banners, divine radiance, luminous throne atmosphere", "desc": "✦G / 神意が満ちる玉座の間 / 関連: ガブリエル・大天使級" },
+        { "label": "🟠 ✦U 知恵の炎が灯る啓示の塔", "val": "uriel motif, tower of revelation, divine flame, sacred wisdom, burning scripture, radiant severity, heavenly windows, golden fire of insight", "desc": "✦U / ウリエル系の啓示塔 / 関連: 審判の執行者・座天級" },
+        { "label": "🟠 ✦U 審理の火が揺らぐ裁きの法廷", "val": "uriel motif, celestial tribunal, judgment fire, throne halo ring, sacred sentence, blazing holy light, solemn law of heaven, radiant authority", "desc": "✦U / 裁きの権威が満ちる法廷 / 関連: ウリエル・審判の執行者" }
+      ],
+      "⚔ 審判・軍勢": [
+        { "label": "🟧 ✦M 天軍出陣を告げる戦神殿", "val": "michael motif, heavenly army departure, celestial armor, sacred execution blade, holy war standard, triumphant authority, radiant command, war temple of heaven", "desc": "✦M / ミカエル系の出陣神殿 / 関連: 天界の使徒長・熾天級" },
+        { "label": "🟧 ✦M 勝利の旗が揺れる軍議の回廊", "val": "michael motif, war council hall, victory banners, celestial command corridor, armored angels, radiant authority, disciplined formation, divine battle preparation", "desc": "✦M / 軍勢統率の回廊 / 関連: ミカエル・天界の使徒長" },
+        { "label": "🟠 ✦U 審判を見下ろす天の高座", "val": "uriel motif, overlooking judgment, high celestial seat, blazing halo, divine law, stern heavenly gaze, tribunal atmosphere, sacred authority", "desc": "✦U / 審判を見下ろす高位座 / 関連: ウリエル・座天級" }
+      ],
+      "🕊 降臨・祝福": [
+        { "label": "🟨 ✦G 静かな神託降臨", "val": "gabriel motif, serene descent, heavenly messenger, radiant light shaft, sacred scroll, falling feathers, holy revelation aura, tranquil annunciation", "desc": "✦G / 神託と降臨の象徴場面 / 関連: ガブリエル・神託の伝令" },
+        { "label": "🟩 ✦R 加護を授ける慈光の場", "val": "raphael motif, granting blessing, healing light, miracle atmosphere, gentle aura, hands extended, sacred restoration, merciful divinity", "desc": "✦R / 加護と癒やしの祝福空間 / 関連: ラファエル・聖域の守護者" },
+        { "label": "🟧 ✦M 勝利祝福に包まれる凱旋の間", "val": "michael motif, celestial triumph hall, victory blessing, radiant banners, heavenly army return, sacred celebration, divine authority, triumphant holy glow", "desc": "✦M / 戦勝と祝福の凱旋空間 / 関連: ミカエル・熾天級" }
+      ]
+    },
+    "🌆 シチュエーションパック｜😈 深淵の舞台・状況 (Infernal Scenes)": {
+      "🕳 奈落・冥府": [
+        { "label": "🟥 ✦S 奈落を見下ろす黒き玉座", "val": "satan motif, abyssal throne, infernal palace, black flames, underworld dominion, sovereign menace, cursed banners, oppressive abyss atmosphere", "desc": "✦S / サタン系の奈落玉座 / 関連: 冥府の支配者・魔王級" },
+        { "label": "🟪 ✦L 光が砕け落ちた奈落の裂け目", "val": "lucifer motif, abyssal chasm, broken halo fragments, fallen morning star, tragic radiance, ruined divinity, black wings, fallen sanctity", "desc": "✦L / ルシフェル系の堕光奈落 / 関連: 堕天の王・堕天使上位種" },
+        { "label": "🟫 ✦B 退廃の香りが漂う冥府宮殿", "val": "beelzebub motif, underworld palace, decadent infernal nobility, abyssal court, dark aristocratic aura, banquet of ruin motif, crimson gloom, infernal prestige", "desc": "✦B / ベルゼブブ系の冥府宮殿 / 関連: 深淵の統治者・大悪魔級" }
+      ],
+      "🔥 祭壇・契約": [
+        { "label": "🟥 ✦S 黒炎が燃え盛る破滅の祭壇", "val": "satan motif, black flame altar, infernal sigils, cursed fire, apocalyptic pressure, demonic court aura, world-ending menace, infernal ritual", "desc": "✦S / サタン系の黒炎祭壇 / 関連: サタン・魔王級" },
+        { "label": "🟪 ✦L 禁断の契約を迫る深淵の間", "val": "lucifer motif, forbidden contract, infernal whisper, seductive menace, curse sigils, looming darkness, fallen beauty, abyssal temptation", "desc": "✦L / ルシフェル系の契約空間 / 関連: ルシフェル・堕天の王" },
+        { "label": "🟫 ✦B 供儀の香が満ちる腐宴祭壇", "val": "beelzebub motif, decadent altar, infernal banquet, corruption aura, sacrificial luxury, abyssal decadence, dark feast atmosphere, lord of corruption", "desc": "✦B / ベルゼブブ系の退廃祭壇 / 関連: ベルゼブブ・大悪魔級" }
+      ],
+      "⛓ 支配・軍勢": [
+        { "label": "🟥 ✦S 深淵軍勢を従える謁見室", "val": "satan motif, commanding infernal legion, abyssal authority, dark banners, throne dominion, overwhelming dominance, infernal court, sovereign darkness", "desc": "✦S / 軍勢支配の謁見室 / 関連: 冥府の支配者・サタン" },
+        { "label": "🟫 ✦B 奈落貴族が集う深淵回廊", "val": "beelzebub motif, abyssal court corridor, infernal nobility, aristocratic darkness, decadent procession, abyss heraldry, oppressive luxury, dark prestige", "desc": "✦B / 深淵貴族の回廊 / 関連: 奈落の大公・ベルゼブブ" },
+        { "label": "🟪 ✦L 反逆の威光が満ちる堕天の玉座間", "val": "lucifer motif, throne of ruin, broken halo, black feathered wings, fallen majesty, corrupted radiance, abyssal crown, tragic sovereign aura", "desc": "✦L / 反逆と威光の玉座間 / 関連: ルシフェル・深淵君主級" }
+      ],
+      "🌑 堕天・終焉": [
+        { "label": "🟪 ✦L 堕天の降臨が刻まれる崩壊神殿", "val": "lucifer motif, fallen angel descent, ruined holy temple, broken pillars, ash, tragic radiance, fallen star symbolism, ruined holiness", "desc": "✦L / 堕天降臨の象徴空間 / 関連: ルシフェル・堕天使上位種" },
+        { "label": "🟥 ✦S 破滅の宣告が響く終焉空間", "val": "satan motif, proclaiming ruin, black fire, world-ending menace, infernal throne authority, apocalyptic presence, sovereign darkness, hellbound decree", "desc": "✦S / サタン系の終焉宣告空間 / 関連: サタン・魔王級" },
+        { "label": "🟫 ✦B 虚無と腐蝕が漂う深淵の最奥", "val": "beelzebub motif, abyssal void, corruption fog, endless darkness, infernal decadence, lord of corruption aura, surreal emptiness, deepest abyss", "desc": "✦B / ベルゼブブ系の最奥深淵 / 関連: ベルゼブブ・深淵の統治者" }
+      ]
+    },
     "🕰️ 時代・年代 (Eras)": {
       "𓂀 古代エジプト": [
         {"label": "砂と神殿の古代エジプト", "val": "(ancient egypt), (desert), (stone temple), (golden sunlight), (sand), (monumental atmosphere)"},
@@ -1395,22 +1415,46 @@
   label: "青龍 / Seiryu",
   val: "seiryu beastkin, true eastern dragon fusion entity, mythic divine creature, not humanoid cosplay, biological dragon anatomy as primary form, eastern dragon god presence, humanoid girl with a clearly human face (no animal muzzle), long azure dragon horns sweeping backward, large flowing dragon tail covered in blue-green scales, scaled skin along arms, back, thighs (azure dragon scales), dragon claws on hands and feet, ethereal whisker-like tendrils near the face, glowing cyan dragon eyes accent, wind and cloud aura swirling around the body, not cosplay, true eastern dragon fusion form",
   desc: "四神：東・青龍（東洋龍融合）"
-},
+}
+,
+    {
+      label: "青龍（ペア補助） / Seiryu (Pair Helper)",
+      val: "(male seiryu dragon prince robes), (female seiryu dragon shrine dress), (paired seiryu duo), (azure eastern dragon aura), (storm clouds), (wind and cloud currents), (jade lightning), (sacred sky stage), (long dragon silhouette), (divine eastern myth tension)",
+      desc: "男女ペア向け補助語つき青龍神演出"
+    },
 {
   label: "白虎 / Byakko",
   val: "byakko beastkin, humanoid girl with a clearly human face (no animal muzzle), thick white tiger fur covering body, bold black tiger stripes clearly visible, tiger ears and sharp feline fangs, powerful digitigrade tiger legs, long striped tiger tail, clawed hands and feet, piercing golden predator eyes accent, ferocious guardian beast aura, not cosplay, true white tiger fusion form",
   desc: "四神：西・白虎（白虎融合）"
-},
+}
+,
+    {
+      label: "白虎（ペア補助） / Byakko (Pair Helper)",
+      val: "(male byakko white tiger warrior attire), (female byakko sacred beast dress), (paired byakko duo), (white tiger guardian aura), (moonlit stone court), (wind-swept fur), (golden predator glow), (sacred beast stance), (battle tension), (divine fang presence)",
+      desc: "男女ペア向け補助語つき白虎守護演出"
+    },
 {
   label: "朱雀 / Suzaku",
   val: "suzaku beastkin, humanoid girl with a clearly human face (no animal beak), large fiery bird wings spreading from her back, feathered arms with red and gold plumage, long flowing tail feathers like flames, subtle feather textures across shoulders and hips, embers floating around the body, crimson glowing eyes accent, sacred fire bird aura, not cosplay, true divine bird fusion form",
   desc: "四神：南・朱雀（火鳥融合）"
-},
+}
+,
+    {
+      label: "朱雀（ペア補助） / Suzaku (Pair Helper)",
+      val: "(male suzaku flame prince attire), (female suzaku vermilion feather dress), (paired suzaku duo), (sacred fire bird aura), (crimson sky stage), (embers and feathers), (burning wing silhouette), (sunlit shrine glow), (rebirth flames), (divine bird tension)",
+      desc: "男女ペア向け補助語つき朱雀聖火演出"
+    },
 {
   label: "麒麟 / Qilin",
   val: "qilin beastkin, humanoid girl with a clearly human face (no animal muzzle), single curved qilin horn on the forehead, scaled body with soft golden and jade tones, deer-like digitigrade legs with glowing hooves, lion-like tail with flowing fur, subtle flame and cloud motifs along the body, gentle luminous eyes accent, sacred auspicious beast aura, not cosplay, true qilin fusion form",
   desc: "四神：中央・麒麟（瑞獣融合）"
-},
+}
+,
+    {
+      label: "麒麟（ペア補助） / Qilin (Pair Helper)",
+      val: "(male qilin noble prince robes), (female qilin auspicious maiden dress), (paired qilin duo), (sacred qilin aura), (jade and gold glow), (cloud motifs), (holy hooves light), (auspicious court stage), (gentle divine wind), (blessed mythic atmosphere)",
+      desc: "男女ペア向け補助語つき麒麟瑞獣演出"
+    },
 {
       label: "バハムート / Bahamut",
       val: "bahamut beastkin, humanoid girl with a clearly human face (no animal muzzle), massive backward-curving dragon horns, large draconic wings fully visible, long dragon tail, iridescent scaled skin on shoulders arms thighs, clawed hands and taloned feet, draconic eye glow accent, ancient dragon deity aura, not cosplay, true beast fusion",
@@ -1424,6 +1468,11 @@
         "calm stern expression, overwhelming divine intimidation"
       ],
       desc: "神獣: 竜王 / 自動シナジー: 神光・威圧・低角度"
+    },
+    {
+      label: "バハムート（ペア補助） / Bahamut (Pair Helper)",
+      val: "(male bahamut dragon prince armor), (female bahamut dragon queen dress), (paired bahamut duo), (cosmic dragon aura), (star temple), (draconic wings), (horned silhouette), (dual dragon presence), (celestial backlight), (mythic scale shimmer)",
+      desc: "男女ペア向け補助語つき神竜ステージ"
     },
     {
       label: "リヴァイアサン / Leviathan",
@@ -1440,6 +1489,11 @@
       desc: "神獣: 海の巨蛇 / 自動シナジー: 深海・水光・静圧"
     },
     {
+      label: "リヴァイアサン（ペア補助） / Leviathan (Pair Helper)",
+      val: "(male leviathan sea prince attire), (female leviathan abyss dress), (paired leviathan duo), (deep sea stage), (bioluminescent water glow), (ocean mist), (serpentine sea aura), (wet reflections), (abyssal lighting), (mythic tide presence)",
+      desc: "男女ペア向け補助語つき深海神獣演出"
+    },
+    {
       label: "オロチ / Orochi",
       val: "orochi beastkin, humanoid girl with a clearly human face (no animal muzzle), eight serpentine tails or necks emerging from back as living appendages, shimmering snake scales across skin, forked-tongue smile accent, reptilian slit-eye glow accent, coiling tail wraps around body, cursed shrine serpent deity aura, not cosplay, true multi-serpent fusion",
       synergy_tags: [
@@ -1452,6 +1506,11 @@
         "emotionless smile, unsettling serenity"
       ],
       desc: "神獣: 八岐大蛇 / 自動シナジー: 霧・禁忌・多重気配"
+    },
+    {
+      label: "オロチ（ペア補助） / Orochi (Pair Helper)",
+      val: "(male orochi shrine prince attire), (female orochi shrine maiden dress), (paired orochi duo), (cursed shrine), (night fog), (multi-serpent aura), (taboo miasma), (shrine lantern glow), (ancient curse atmosphere), (ritual tension)",
+      desc: "男女ペア向け補助語つき八岐大蛇演出"
     },
     {
       label: "ヒュドラ / Hydra",
@@ -1468,6 +1527,11 @@
       desc: "神獣: 多頭竜 / 自動シナジー: 沼・毒霧・再生の気配"
     },
     {
+      label: "ヒュドラ（ペア補助） / Hydra (Pair Helper)",
+      val: "(male hydra poison prince armor), (female hydra toxic queen dress), (paired hydra duo), (swamp ruins), (poison mist), (regeneration aura), (many-headed serpent presence), (wet stone reflections), (toxic green glow), (relentless mythic tension)",
+      desc: "男女ペア向け補助語つき多頭竜演出"
+    },
+    {
       label: "フェンリル / Fenrir",
       val: "full body fusion with Fenrir, humanoid girl with a clearly human face (no animal muzzle), skin transforming into silver wolf fur, fur naturally covering chest waist hips, luminous wolf ears, wolf-like limbs with sharp claws, digitigrade wolf legs, fluffy wolf tail, moonlit wolf eyes glow accent, primal wolf god lunar aura, not cosplay, true beast fusion",
       synergy_tags: [
@@ -1480,6 +1544,12 @@
         "calm but feral expression, overwhelming lunar aura"
       ],
       desc: "神獣: 巨狼 / 自動シナジー: 月夜・氷・終末の気配"
+    }
+,
+    {
+      label: "フェンリル（ペア補助） / Fenrir (Pair Helper)",
+      val: "(male fenrir wolf prince armor), (female fenrir moonlit wolf queen attire), (paired fenrir duo), (silver wolf aura), (winter night stage), (drifting snow), (lunar backlight), (feral stance), (cold mist), (mythic wolf tension)",
+      desc: "男女ペア向け補助語つき巨狼神獣演出"
     },
     {
       label: "ヨルムンガンド / Jormungandr",
@@ -1494,6 +1564,12 @@
         "detached prophecy gaze, unstoppable doom"
       ],
       desc: "神獣: 世界蛇 / 自動シナジー: 終末スケール・地平線"
+    }
+,
+    {
+      label: "ヨルムンガンド（ペア補助） / Jormungandr (Pair Helper)",
+      val: "(male jormungandr sea prince armor), (female jormungandr world-serpent empress dress), (paired jormungandr duo), (world serpent aura), (ocean storm stage), (coiling tail silhouette), (sea-green scales), (apocalyptic tide), (rune glow), (endless serpent tension)",
+      desc: "男女ペア向け補助語つき世界蛇演出"
     },
     {
       label: "クラーケン / Kraken",
@@ -1508,6 +1584,12 @@
         "quiet menace, hungry patience"
       ],
       desc: "深海神獣クラーケン（センシティブ回避・生物的表現）"
+    }
+,
+    {
+      label: "クラーケン（ペア補助） / Kraken (Pair Helper)",
+      val: "(male kraken abyss prince attire), (female kraken deep-sea queen dress), (paired kraken duo), (abyssal tentacle aura), (sunken ruins), (wet reflections), (deep ocean glow), (ink mist), (cephalopod silhouette), (mythic abyss tension)",
+      desc: "男女ペア向け補助語つき深海怪神演出"
     },
     {
       label: "フェニックス / Phoenix",
@@ -1522,6 +1604,12 @@
         "serene smile, unburning confidence"
       ],
       desc: "神獣: 不死鳥 / 自動シナジー: 再生・残光・朝焼け"
+    }
+,
+    {
+      label: "フェニックス（ペア補助） / Phoenix (Pair Helper)",
+      val: "(male phoenix flame king attire), (female phoenix rebirth empress dress), (paired phoenix duo), (rebirth fire aura), (burning sky temple), (embers and feathers), (golden flame wings), (sunfire backlight), (immortal blaze), (resurrection tension)",
+      desc: "男女ペア向け補助語つき不死鳥演出"
     },
     {
       label: "ケルベロス / Cerberus",
@@ -1536,6 +1624,12 @@
         "cold glare, loyal menace"
       ],
       desc: "神獣: 冥府の番犬 / 自動シナジー: 境界・鎖・監視"
+    }
+,
+    {
+      label: "ケルベロス（ペア補助） / Cerberus (Pair Helper)",
+      val: "(male cerberus underworld prince armor), (female cerberus infernal queen dress), (paired cerberus duo), (hellhound aura), (gates of the underworld), (chain motifs), (embers and smoke), (three-headed hound presence), (crimson underlight), (infernal guard tension)",
+      desc: "男女ペア向け補助語つき冥界番犬演出"
     },
     {
       label: "グリフォン / Griffin",
@@ -1550,6 +1644,12 @@
         "noble focused gaze, heroic calm"
       ],
       desc: "神獣: 鷲獅子 / 自動シナジー: 山頂・風・守護"
+    }
+,
+    {
+      label: "グリフォン（ペア補助） / Griffin (Pair Helper)",
+      val: "(male griffin sky knight armor), (female griffin royal feather dress), (paired griffin duo), (griffin guardian aura), (cliffside palace), (wind currents), (feather storm), (golden sky backlight), (regal predator silhouette), (aerial myth tension)",
+      desc: "男女ペア向け補助語つき天空獣演出"
     },
     {
       label: "スフィンクス / Sphinx",
@@ -1564,6 +1664,12 @@
         "silent riddle smile, timeless authority"
       ],
       desc: "神獣: 砂漠の守護 / 自動シナジー: 古代遺跡・沈黙"
+    }
+,
+    {
+      label: "スフィンクス（ペア補助） / Sphinx (Pair Helper)",
+      val: "(male sphinx desert prince robes), (female sphinx ancient queen dress), (paired sphinx duo), (desert guardian aura), (ancient ruins), (golden sand wind), (hieroglyph glow), (sunset backlight), (enigmatic myth tension), (sacred riddle atmosphere)",
+      desc: "男女ペア向け補助語つき砂漠守護演出"
     },
     {
       label: "ベヒーモス / Behemoth",
@@ -1578,6 +1684,12 @@
         "slow breathing menace, unmovable dominance"
       ],
       desc: "神獣: 地の巨獣 / 自動シナジー: 震動・砂塵・重量"
+    }
+,
+    {
+      label: "ベヒーモス（ペア補助） / Behemoth (Pair Helper)",
+      val: "(male behemoth earth king armor), (female behemoth colossal queen dress), (paired behemoth duo), (colossal beast aura), (earth-cracking stage), (dust storm), (stone debris), (massive horn silhouette), (heavy ground impact), (mythic titan tension)",
+      desc: "男女ペア向け補助語つき巨獣王演出"
     },
   ],
     
@@ -1792,6 +1904,56 @@
 
   };
 
+  function __ppNormalizePairBaseLabel(label) {
+    return String(label || "")
+      .replace(/\s*\/.*$/, "")
+      .replace(/（ペア補助）.*$/, "")
+      .replace(/\(Pair Helper\).*$/, "")
+      .trim();
+  }
+
+  function __ppMakePairHelperItem(item, adultFlag) {
+    if (!item || typeof item !== "object" || !item.label || !item.val) return null;
+    if (item.type === "pair_header") return null;
+    if (/ペア補助|Pair Helper/.test(String(item.label))) return null;
+    var base = __ppNormalizePairBaseLabel(item.label);
+    var core = String(item.val || "").trim().replace(/,+\s*$/, "");
+    var helperCore = adultFlag
+      ? "(1girl:1.2), (1boy:1.2), (adult paired roleplay), (paired duo), (two-person chemistry), (body proximity), (mutual gaze), (tension between two), (duo composition)"
+      : "(1girl:1.2), (1boy:1.2), (paired duo), (male counterpart), (female counterpart), (two-person interaction), (mutual gaze), (duo composition), (themed pair staging)";
+    var val = helperCore + (core ? ", " + core : "");
+    return {
+      label: base + "（ペア補助） / " + base + " (Pair Helper)",
+      val: val,
+      desc: (adultFlag ? "男女ペア向け補助語つき成人向けなりきり演出" : "男女ペア向け補助語つきなりきり演出") + " / " + base
+    };
+  }
+
+  function __ppWithPairHelpers(arr, adultFlag) {
+    if (Object.prototype.toString.call(arr) !== "[object Array]") return arr;
+    var out = [];
+    var seen = Object.create(null);
+    for (var i = 0; i < arr.length; i++) {
+      var item = arr[i];
+      out.push(item);
+      if (!item || typeof item !== "object") continue;
+      if (item.type === "pair_header") continue;
+      var helper = __ppMakePairHelperItem(item, adultFlag);
+      if (!helper) continue;
+      var base = __ppNormalizePairBaseLabel(item.label);
+      if (seen[base]) continue;
+      var next = arr[i + 1];
+      if (next && typeof next === "object" && /ペア補助|Pair Helper/.test(String(next.label || "")) && __ppNormalizePairBaseLabel(next.label) === base) {
+        seen[base] = true;
+        continue;
+      }
+      out.push(helper);
+      seen[base] = true;
+    }
+    return out;
+  }
+
+
   // =============================================================================
   // 🎭 なりきりおすすめセット (Roleplay Recommended Sets) - nested (minimal change)
   // UI側（builder_ui.section.preset_packs.bundle.js）は item.children のネスト表示に対応。
@@ -1815,10 +1977,12 @@
       for (var i = 0; i < defs.length; i++) {
         var def = defs[i];
         if (matchArray(def.key)) {
+          var childItems = packs[def.key];
+          if (def.pairHelpers !== false) childItems = __ppWithPairHelpers(childItems, false);
           children.push({
             title_ja: def.title_ja,
             title_en: def.title_en,
-            children: packs[def.key]
+            children: childItems
           });
         }
       }
@@ -1846,7 +2010,7 @@
       roleplayChildren.push({
         title_ja: key.replace(/^🎭 なりきりおすすめセット｜/,"").replace(/ \(.+?\)$/,""),
         title_en: (key.match(/\((.*?)\)$/)||[])[1] || "",
-        children: packs[key]
+        children: __ppWithPairHelpers(packs[key], false)
       });
     }
 
@@ -1860,17 +2024,17 @@
     buildGroupedRoleplay("職業・なりきり（天界）", "Celestial Roleplay", [
       { key: groupedKeys.celestial_named, title_ja: "👤 固有名", title_en: "Named Personas" },
       { key: groupedKeys.celestial_titles, title_ja: "🏛 役職・称号", title_en: "Titles" },
-      { key: groupedKeys.celestial_rank, title_ja: "👑 格・位階", title_en: "Rank" }
+      { key: groupedKeys.celestial_rank, title_ja: "👑 格・位階", title_en: "Rank", pairHelpers: false }
     ]);
 
     buildGroupedRoleplay("職業・なりきり（深淵）", "Infernal Roleplay", [
       { key: groupedKeys.infernal_named, title_ja: "👤 固有名", title_en: "Named Personas" },
       { key: groupedKeys.infernal_titles, title_ja: "🏛 役職・称号", title_en: "Titles" },
-      { key: groupedKeys.infernal_rank, title_ja: "👑 格・位階", title_en: "Rank" }
+      { key: groupedKeys.infernal_rank, title_ja: "👑 格・位階", title_en: "Rank", pairHelpers: false }
     ]);
 
     if (matchArray(groupedKeys.mythic)) {
-      roleplayChildren.push({ title_ja: "神獣・伝説なりきり", title_en: "Mythic Beasts", children: packs[groupedKeys.mythic] });
+      roleplayChildren.push({ title_ja: "神獣・伝説なりきり", title_en: "Mythic Beasts", children: __ppWithPairHelpers(packs[groupedKeys.mythic], false) });
     }
 
     var usedRoleplayKeys = {};
@@ -2042,7 +2206,7 @@
 
                         // 🔞 なりきりおすすめセット（R-18）
         // - 体位は「ポーズ」側に統合済みのため、ここでは出さない
-        var roleplayChildren = [
+        var adultRoleplayBase = [
           { label: "アスモデウス (色欲の悪魔)", val: "(lust demon), (asmodeus), (revealing dark outfit), (demon horns), (succubus wings), (heart-shaped pupils), (seductive smile), (bewitching aura), (glowing tattoos)" },
           { label: "サキュバス (夢魔)", val: "(succubus), (micro bikini), (demon tail), (heart-shaped tail), (womb tattoo), (bat wings), (lewd expression), (fangs)" },
           { label: "高級娼婦・花魁", val: "(courtesan), (oiran), (disheveled kimono), (bare shoulders), (kiseru), (heavy makeup), (alluring gaze), (sensual atmosphere)" },
@@ -2055,7 +2219,7 @@
           { label: "ダークエルフの女戦士", val: "(dark elf), (dark skin), (white hair), (long pointed ears), (revealing leather armor), (tribal tattoos), (arrogant smile), (muscular female)" },
           { label: "魅惑の占い師", val: "(fortune teller), (gypsy outfit), (veil), (lots of jewelry), (gold bangles), (cleavage), (mysterious smile), (crystal ball), (incense smoke)" },
           { label: "女スパイ・エージェント", val: "(female spy), (secret agent), (tight black leather catsuit), (unzipped zipper), (holding silenced pistol), (tactical harness), (confident smirk)" },
-          { label: "妖艶な未亡人", val: "(widow), (mourning dress), (black veil), (black lace lingerie showing), (mature female), (melancholic expression), (seductive glance), (tears)" }, 
+          { label: "妖艶な未亡人", val: "(widow), (mourning dress), (black veil), (black lace lingerie showing), (mature female), (melancholic expression), (seductive glance), (tears)" },
           { label: "逆バニーガール (露出狂)", val: "(reverse bunny suit), (crotchless tights), (bare breasts), (pasties), (bunny ears), (bowtie), (shameless), (lewd smile)" },
           { label: "魔法少女・堕ち (絶望)", val: "(magical girl), (corrupted), (broken wand), (torn magical outfit), (dark aura), (tears), (despair), (mind break), (blank stare)" },
           { label: "吸血鬼の真祖 (ゴシック)", val: "(vampire lord), (gothic lolita), (fangs), (blood on lips), (red glowing eyes), (pale skin), (bat wings), (arrogant smile), (nobility)" },
@@ -2064,12 +2228,84 @@
           { label: "女怪盗 (潜入・ピンチ)", val: "(phantom thief), (cat mask pulled down), (tight black leather catsuit), (holding stolen jewel), (sweat), (breathing heavily), (caught)" },
           { label: "エイリアン娘 (人外SF)", val: "(alien girl), (blue skin), (sci-fi suit), (glowing markings), (tentacle hair), (non-human eyes), (curious expression)" },
           { label: "サメ娘・モンスター (海洋)", val: "(shark girl:1.2), (prominent dorsal fin:1.2), (thick muscular shark tail:1.2), (rows of serrated teeth:1.15), (predatory eyes:1.1), (gill slits:1.15), (rough dermal denticles texture:1.1), (apex predator aura:1.1), (wet skin), (true biological fusion), (not cosplay)" },
-          { label: "サディスティック女王様", val: "(dominatrix), (leather corset), (high heels), (holding whip), (stepping on viewer), (sadistic smile), (looking down on viewer), (dominant)" },
-          { label: "ポンコツ悪魔メイド", val: "(demon maid), (french maid outfit), (succubus wings), (clumsy), (no panties), (spilled water), (embarrassed), (tearful eyes)" }
-
+          { label: "サディスティック女王様", val: "(dominatrix), (leather corset), (high heels), (holding whip), (stepping on viewer), (sadistic smile), (floor pov), (mistress)" },
+          { label: "ポンコツ悪魔メイド", val: "(demon maid), (maid headdress), (frilly apron), (small demon horns), (heart tail), (clumsy smile), (embarrassed), (trying to seduce)" }
         ];
 
-        // 既存の場所に加えて新規場所を追加
+        function __pickAdultRoleplayByLabels(src, labels) {
+          if (Object.prototype.toString.call(src) !== "[object Array]") return [];
+          var map = Object.create(null);
+          for (var i = 0; i < src.length; i++) {
+            var item = src[i];
+            if (!item || typeof item !== "object") continue;
+            map[String(item.label || "")] = item;
+          }
+          var out = [];
+          for (var j = 0; j < labels.length; j++) {
+            var it = map[labels[j]];
+            if (it) out.push(it);
+          }
+          return out;
+        }
+
+        var roleplayChildren = [
+          {
+            title_ja: "😈 悪魔・魔性",
+            title_en: "Demons & Temptresses",
+            children: __ppWithPairHelpers(__pickAdultRoleplayByLabels(adultRoleplayBase, [
+              "アスモデウス (色欲の悪魔)",
+              "サキュバス (夢魔)",
+              "サディスティック女王様",
+              "ポンコツ悪魔メイド"
+            ]), true)
+          },
+          {
+            title_ja: "🏰 ダークファンタジー",
+            title_en: "Dark Fantasy",
+            children: __ppWithPairHelpers(__pickAdultRoleplayByLabels(adultRoleplayBase, [
+              "悪堕ちシスター",
+              "敗北した姫騎士",
+              "ダークエルフの女戦士",
+              "魅惑の占い師",
+              "魔法少女・堕ち (絶望)",
+              "吸血鬼の真祖 (ゴシック)",
+              "獣人・ケモミミ奴隷"
+            ]), true)
+          },
+          {
+            title_ja: "🕵️ 潜入・裏社会",
+            title_en: "Infiltration & Underworld",
+            children: __ppWithPairHelpers(__pickAdultRoleplayByLabels(adultRoleplayBase, [
+              "高級娼婦・花魁",
+              "くノ一 (潜入・捕縛)",
+              "闇医者・マッドサイエンティスト",
+              "女スパイ・エージェント",
+              "女怪盗 (潜入・ピンチ)"
+            ]), true)
+          },
+          {
+            title_ja: "🌆 現代・退廃",
+            title_en: "Modern Decadence",
+            children: __ppWithPairHelpers(__pickAdultRoleplayByLabels(adultRoleplayBase, [
+              "地雷系・病みかわ女子",
+              "妖艶な未亡人",
+              "逆バニーガール (露出狂)",
+              "ギャル・ビッチ (現代)"
+            ]), true)
+          },
+          {
+            title_ja: "🤖 SF・人外",
+            title_en: "Sci-Fi & Nonhuman",
+            children: __ppWithPairHelpers(__pickAdultRoleplayByLabels(adultRoleplayBase, [
+              "アンドロイド娼婦 (SF)",
+              "エイリアン娘 (人外SF)",
+              "サメ娘・モンスター (海洋)"
+            ]), true)
+          }
+        ];
+
+        roleplayChildren = __ppWithPairHelpers(roleplayChildren, true);
+
         var placeChildren = placeAndSituation.concat([
           { label: "触手迷宮の最下層", val: "(dungeon depths), (fleshy walls), (bioluminescent flora), (glowing pools of slime), (creepy atmosphere), (tentacles lurking in shadows)" },
           { label: "サイバーパンクの歓楽街", val: "(cyberpunk red light district), (neon signs), (holographic girls), (dirty alleyway), (rain), (puddles reflecting neon), (futuristic slum)" },
@@ -2078,7 +2314,6 @@
           { label: "豪華なハーレムテント", val: "(harem tent), (middle eastern style), (silk pillows), (sheer curtains), (incense burner), (gold decorations), (warm sensual lighting)" }
         ]);
 
-        // 🥵 吐息・生理反応 (Physiological Reactions)
         var physiologicalReactions = [
           { label: "🥵 激しい息・荒い呼吸", val: "(heavy breathing), (panting), (gasping), (heaving chest), (sweat)", desc: "疲労や興奮による荒い息遣い" },
           { label: "🥵 ピンクの吐息・熱気", val: "(hot breath), (pink sigh), (warm breath), (parted lips), (flushed face), (aroused)", desc: "甘い吐息・火照った顔" },
@@ -2088,7 +2323,6 @@
           { label: "🫧 涙目・潤んだ瞳", val: "(watery eyes), (tears accumulating), (glossy eyes), (pleading eyes)", desc: "感極まった表情の強調" }
         ];
 
-        // 🔞 雰囲気・空間エフェクト (Atmosphere & Effects)
         var adultAtmosphere = [
           { label: "🌫️ 淫靡なピンクの霧", val: "(pink fog), (glowing pink mist), (aphrodisiac atmosphere), (floating dust motes), (dreamy lighting)", desc: "サキュバスや夢魔の空間" },
           { label: "♨️ 濃密な湯気・熱気", val: "(heavy steam), (condensation), (wet environment), (sauna-like heat), (hazy atmosphere)", desc: "風呂場や密室の湿度" },
@@ -2098,7 +2332,6 @@
           { label: "⛓️ 閉塞感・圧迫感", val: "(claustrophobic atmosphere), (cramped space), (distorted perspective), (dutch angle), (high contrast)", desc: "逃げ場のない状況の演出" }
         ];
 
-        // 🕰️ 状態変化・事前事後 (Time & State Changes)
         var adultTimeProgression = [
           { label: "⏳ 事前：ゆっくりと脱ぐ", val: "(slowly undressing), (unbuttoning shirt), (half-slipped off shoulder), (anticipation), (blush)", desc: "行為の前の焦らし" },
           { label: "⏳ 事前：服の乱れ", val: "(messy clothes), (clothes falling off), (revealing skin), (bra strap slipping), (disheveled)", desc: "無防備になりかけの状態" },
@@ -2108,7 +2341,6 @@
           { label: "⏳ 事後：疲労と放心", val: "(exhausted), (mind break), (heavy breathing), (smudged makeup), (messy room), (lying on back)", desc: "激しかった後の放心状態" }
         ];
 
-        // 💘 属性ギャップ・陥落 (Gap Moe & Submission)
         var adultGapMoe = [
           { label: "🐥 小動物・純真キャラの陥落", val: "(trembling small body), (ruffled fluffy feathers:1.2), (teary upward glance), (trying to hide face), (soft whimper), (helpless)", desc: "ふわふわした小鳥のような子の無防備な乱れ" },
           { label: "👑 気高いキャラの敗北", val: "(broken pride), (helpless expression), (tears of frustration), (trembling lips), (messy elegant clothes)", desc: "プライドが高い子の屈服" },
@@ -2117,7 +2349,6 @@
           { label: "🌸 お姉さんキャラの余裕喪失", val: "(lost composure), (panicking), (sweating heavily), (wide-eyed), (messy mature aura)", desc: "大人びたキャラの焦り" }
         ];
 
-        // 🧴 肌の質感・密着 (Skin & Body Contact)
         var adultSkinContact = [
           { label: "🧴 肌の質感：オイル・汗", val: "(glistening skin), (baby oil), (sweat droplets on collarbone), (wet skin), (shiny body)", desc: "テカテカ・ツヤツヤの肌" },
           { label: "🧴 服の質感：透け・濡れ", val: "(wet transparent fabric), (see-through clothes), (clinging wet shirt), (visible underwear)", desc: "濡れ透け・張り付き" },
@@ -2126,7 +2357,6 @@
           { label: "🫂 体勢：またがり", val: "(straddling), (sitting on lap), (hands on hips), (dominant posture), (close proximity)", desc: "密着した騎乗・膝上" }
         ];
 
-        // 👁️ 視線・駆け引き (Sensual Gaze)
         var adultGaze = [
           { label: "👁️ 視線：上目遣い・懇願", val: "(looking up at viewer), (teary eyes), (pleading gaze), (puppy eyes), (sweet look)", desc: "甘えるような上目遣い" },
           { label: "👁️ 視線：恥じらい・目逸らし", val: "(looking away coyly), (avoiding eye contact), (heavy blush), (shy downward glance)", desc: "照れて目を合わせられない" },
@@ -2135,7 +2365,6 @@
           { label: "👁️ 視線：虚ろ・焦点が合わない", val: "(vacant gaze), (unfocused eyes), (looking into the distance), (mind break), (glazed eyes)", desc: "理性が飛んだ瞳" }
         ];
 
-        // 👙 露出・見せつけ仕草 (Revealing Gestures)
         var adultRevealing = [
           { label: "👙 胸元を見せる・開く", val: "(pulling down clothes), (showing cleavage), (deep neckline), (breast emphasis), (seductive pose)", desc: "服を引っ張って谷間を見せる" },
           { label: "👙 服まくり (上)・下乳", val: "(lifting shirt), (underboob), (showing stomach), (midriff), (exposed torso)", desc: "シャツを捲り上げる" },
@@ -2146,9 +2375,8 @@
           { label: "👙 見せつけ・誇示", val: "(presenting to viewer), (arched back), (body emphasis), (shameless), (lewd pose)", desc: "自身の身体を強調して見せつける" }
         ];
 
-        // 🎵 おすすめ組み合わせ（Roleplay × Situation）
         var pair = [
-{ label: "シマエナガ娘の陥落 × 密室の熱気", val: "(idol-style outfit), (down feather texture:1.2), (trembling small body), (ruffled fluffy feathers:1.2), (heavy breathing), (teary upward glance), (tight embrace), (sweat droplets on collarbone), (pink fog), (soft focus)", desc: "純真な鳥っ娘のギャップと密着" },
+          { label: "シマエナガ娘の陥落 × 密室の熱気", val: "(idol-style outfit), (down feather texture:1.2), (trembling small body), (ruffled fluffy feathers:1.2), (heavy breathing), (teary upward glance), (tight embrace), (sweat droplets on collarbone), (pink fog), (soft focus)", desc: "純真な鳥っ娘のギャップと密着" },
           { label: "女騎士の敗北 × 屈辱の視線", val: "(defeated knight), (broken armor), (broken pride), (tears of frustration), (looking up at viewer), (pleading gaze), (messy hair), (heavy sweat), (dimly lit)", desc: "気高いキャラが余裕をなくす瞬間" },
           { label: "クーデレ女子 × 事後の甘い余韻", val: "(expressionless girl:0.8), (melting expression), (cuddling in bed), (afterglow), (skin to skin), (interlocking fingers), (looking away coyly), (morning after), (soft lighting)", desc: "普段クールな子のギャップと肌の温もり" },
           { label: "スライム拘束 × 虚ろな瞳", val: "(tentacles), (slime suit attack), (bound by slime), (claustrophobic atmosphere), (vacant gaze), (mind break), (drooling), (heavy breathing), (dark cinematic lighting)", desc: "理性が飛んだ絶望とエフェクト" },
@@ -2163,8 +2391,8 @@
           { label: "女スパイ × レーザートラップ拘束", val: "(female spy), (tight leather catsuit), (high-tech vault), (red laser grid), (dodging lasers), (sweat), (stretching body), (dynamic tension), (mission impossible style)" },
           { label: "ダークエルフ × オークの地下牢（敗北）", val: "(dark elf warrior), (torn leather armor), (dark skin), (dirty body), (orc dungeon), (chains on wrists), (torches), (despair), (looking away in shame), (cruel fate)" },
           { label: "魅惑の占い師 × 香煙漂う怪しい天幕", val: "(fortune teller), (cleavage), (gypsy clothes), (dimly lit tent), (purple magic smoke), (incense), (crystal ball glowing), (seductive gaze), (mystical atmosphere)" },
-          { label: "未亡人 × 昭和レトロな和室（背徳）", val: "(mature widow), (black kimono pulled down), (tatami room), (shoji screen), (moonlight casting shadows), (retro japanese setting), (melancholic but aroused), (secret affair)" }, 
-{ label: "アスモデウス × 淫靡な深紅の霧 (七つの大罪)", val: "(asmodeus), (lust demon), (bewitching alluring posture:1.1), (intoxicating gaze:1.3), (glossy wet lips), (dewy skin), (sweat glistening on collarbone), (intricately detailed sheer black lace attire), (dark silk draping), (steamy deep reddish atmosphere), (glowing pink pheromone mist), (floating dust motes), (cinematic lighting), (dramatic chiaroscuro), (neon pink rim lighting), (volumetric lighting)" }, 
+          { label: "未亡人 × 昭和レトロな和室（背徳）", val: "(mature widow), (black kimono pulled down), (tatami room), (shoji screen), (moonlight casting shadows), (retro japanese setting), (melancholic but aroused), (secret affair)" },
+          { label: "アスモデウス × 淫靡な深紅の霧 (七つの大罪)", val: "(asmodeus), (lust demon), (bewitching alluring posture:1.1), (intoxicating gaze:1.3), (glossy wet lips), (dewy skin), (sweat glistening on collarbone), (intricately detailed sheer black lace attire), (dark silk draping), (steamy deep reddish atmosphere), (glowing pink pheromone mist), (floating dust motes), (cinematic lighting), (dramatic chiaroscuro), (neon pink rim lighting), (volumetric lighting)" },
           { label: "魔法少女 × 培養水槽 (堕ち・改造)", val: "(corrupted magical girl), (broken wand), (inside a glass test tube), (filled with glowing green liquid), (tentacles wrapping around body), (bubbles), (mind break), (blank stare)" },
           { label: "ギャル × 深夜の無人電車 (痴漢・露出)", val: "(gyaru), (tanned skin), (messy school uniform), (empty train at midnight), (lifting skirt), (flickering fluorescent light), (blushing), (biting lip), (secretive)" },
           { label: "吸血鬼の真祖 × ゴシック廃教会 (儀式)", val: "(vampire lord), (fangs), (blood on lips), (abandoned gothic church), (moonlight shining through broken stained glass), (lying on ruined altar), (seductive gaze), (gothic atmosphere)" },
@@ -2191,7 +2419,7 @@
           { title_ja: "📐 おすすめ構図", title_en: "Recommended Compositions", children: compArr }
         ];
 
-      } catch (e) {}
+      } catch (e) { console.error("[Preset Packs] buildAdultRoleplayRecommendedSets failed", e); }
     })();
 
   }

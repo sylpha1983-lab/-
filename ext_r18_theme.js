@@ -31,7 +31,7 @@
   setInterval(() => {
     if (localStorage.getItem("MY_SECRET_UNLOCK") !== "true") return;
 
-    const r18Markers = ["🔞", "🏩", "🥵", "🌫️", "♨️", "🕯️", "💜", "⛓️", "⏳", "💘", "🧴", "🫂", "👁️", "サキュバス", "悪堕ち", "スライム拘束"];
+    const r18Markers = ["🔞"];
 
     // 画面内のすべての要素をチェック
     const elements = document.querySelectorAll('*');

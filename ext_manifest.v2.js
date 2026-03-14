@@ -57,4 +57,6 @@ window.EXT_MANIFEST = [
   "ext_i18n_yakuguid_panel.js",
   "ext_r18_theme.js",
   "ext_character_input.js",
+  "ext_attire_role_engine.js",
+  "ext_pair_helper_guard.js",
 ];

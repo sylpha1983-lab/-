@@ -443,6 +443,37 @@
         groupsRaw = filtered;
       }
 
+      // Bring Roleplay Recommended Sets near the top so they are visible without deep scrolling.
+      try {
+        var pinned = [];
+        var rest = [];
+        for (var rp = 0; rp < groupsRaw.length; rp++) {
+          var grp = groupsRaw[rp];
+          var tt = safeText((grp && (grp.title_ja || grp.titleJa || grp.title)) || "");
+          if (tt.indexOf("🎭 なりきりおすすめセット (Roleplay Recommended Sets)") === 0 ||
+              tt.indexOf("なりきりおすすめセット (Roleplay Recommended Sets)") === 0 ||
+              tt.indexOf("🔞 なりきりおすすめセット (Adult Roleplay Recommended Sets)") === 0) {
+            pinned.push(grp);
+          } else {
+            rest.push(grp);
+          }
+        }
+        if (pinned.length) {
+          var insertAt = 0;
+          for (var ra = 0; ra < rest.length; ra++) {
+            var rt = safeText((rest[ra] && (rest[ra].title_ja || rest[ra].titleJa || rest[ra].title)) || "");
+            if (rt.indexOf("🎭 表情演出プリセット (Expression FX Packs)") === 0 || rt.indexOf("表情演出プリセット") === 0) {
+              insertAt = ra;
+              break;
+            }
+            insertAt = ra + 1;
+          }
+          var head = rest.slice(0, insertAt);
+          var tail = rest.slice(insertAt);
+          groupsRaw = head.concat(pinned, tail);
+        }
+      } catch (eReorder) {}
+
 
       if (!groupsRaw || groupsRaw.length === 0) {
         mount.appendChild(
