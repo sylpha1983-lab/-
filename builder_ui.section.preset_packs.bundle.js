@@ -443,56 +443,58 @@
         groupsRaw = filtered;
       }
 
-      // Bring Roleplay Recommended Sets near the top and place Adult Expression FX right after normal Expression FX when unlocked.
+      // Reorder key shelves: roleplay -> linked expression support -> expression packs.
       try {
-        var pinned = [];
-        var adultExpr = [];
-        var rest = [];
-        for (var rp = 0; rp < groupsRaw.length; rp++) {
-          var grp = groupsRaw[rp];
-          var tt = safeText((grp && (grp.title_ja || grp.titleJa || grp.title)) || "");
-          if (tt.indexOf("🎭 なりきりおすすめセット (Roleplay Recommended Sets)") === 0 ||
-              tt.indexOf("なりきりおすすめセット (Roleplay Recommended Sets)") === 0 ||
-              tt.indexOf("🔞 なりきりおすすめセット (Adult Roleplay Recommended Sets)") === 0) {
-            pinned.push(grp);
-          } else if (tt.indexOf("🔞 R-18 表情演出プリセット (Adult Expression FX Packs)") === 0) {
-            adultExpr.push(grp);
-          } else {
-            rest.push(grp);
-          }
+        function titleOf(g) {
+          return safeText((g && (g.title_ja || g.titleJa || g.title)) || "");
         }
-
-        var reordered = rest.slice();
-
-        if (adultExpr.length) {
-          var exprIdx = -1;
-          for (var ex = 0; ex < reordered.length; ex++) {
-            var et = safeText((reordered[ex] && (reordered[ex].title_ja || reordered[ex].titleJa || reordered[ex].title)) || "");
-            if (et.indexOf("🎭 表情演出プリセット (Expression FX Packs)") === 0 || et.indexOf("表情演出プリセット") === 0) {
-              exprIdx = ex;
-              break;
+        function takeByPrefix(arr, prefixes) {
+          var taken = [];
+          var rest = [];
+          for (var ti = 0; ti < arr.length; ti++) {
+            var tg = arr[ti];
+            var tt = titleOf(tg);
+            var hit = false;
+            for (var pj = 0; pj < prefixes.length; pj++) {
+              if (tt.indexOf(prefixes[pj]) === 0) { hit = true; break; }
             }
+            if (hit) taken.push(tg); else rest.push(tg);
           }
-          if (exprIdx >= 0) reordered.splice.apply(reordered, [exprIdx + 1, 0].concat(adultExpr));
-          else reordered = adultExpr.concat(reordered);
+          return { taken: taken, rest: rest };
         }
 
-        if (pinned.length) {
-          var insertAt = 0;
-          for (var ra = 0; ra < reordered.length; ra++) {
-            var rt = safeText((reordered[ra] && (reordered[ra].title_ja || reordered[ra].titleJa || reordered[ra].title)) || "");
-            if (rt.indexOf("🎭 表情演出プリセット (Expression FX Packs)") === 0 || rt.indexOf("表情演出プリセット") === 0) {
-              insertAt = ra;
-              break;
-            }
-            insertAt = ra + 1;
-          }
-          var head = reordered.slice(0, insertAt);
-          var tail = reordered.slice(insertAt);
-          groupsRaw = head.concat(pinned, tail);
-        } else {
-          groupsRaw = reordered;
-        }
+        var stage0 = groupsRaw.slice();
+
+        var normalRole = takeByPrefix(stage0, [
+          "🎭 なりきりおすすめセット (Roleplay Recommended Sets)",
+          "なりきりおすすめセット (Roleplay Recommended Sets)"
+        ]);
+        var adultRole = takeByPrefix(normalRole.rest, [
+          "🔞 なりきりおすすめセット (Adult Roleplay Recommended Sets)"
+        ]);
+        var normalExpr = takeByPrefix(adultRole.rest, [
+          "🎭 表情演出プリセット (Expression FX Packs)",
+          "表情演出プリセット"
+        ]);
+        var normalSupport = takeByPrefix(normalExpr.rest, [
+          "🎭 なりきり連動・表情補助 (Roleplay-linked Expression Support)",
+          "なりきり連動・表情補助 (Roleplay-linked Expression Support)"
+        ]);
+        var adultExpr = takeByPrefix(normalSupport.rest, [
+          "🔞 R-18 表情演出プリセット (Adult Expression FX Packs)"
+        ]);
+        var adultSupport = takeByPrefix(adultExpr.rest, [
+          "🔞 なりきり連動・表情補助 (Adult Roleplay-linked Expression Support)"
+        ]);
+
+        groupsRaw = []
+          .concat(normalRole.taken)
+          .concat(adultRole.taken)
+          .concat(normalExpr.taken)
+          .concat(normalSupport.taken)
+          .concat(adultExpr.taken)
+          .concat(adultSupport.taken)
+          .concat(adultSupport.rest.slice());
       } catch (eReorder) {}
 
 
