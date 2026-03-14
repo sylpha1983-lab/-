@@ -443,9 +443,10 @@
         groupsRaw = filtered;
       }
 
-      // Bring Roleplay Recommended Sets near the top so they are visible without deep scrolling.
+      // Bring Roleplay Recommended Sets near the top and place Adult Expression FX right after normal Expression FX when unlocked.
       try {
         var pinned = [];
+        var adultExpr = [];
         var rest = [];
         for (var rp = 0; rp < groupsRaw.length; rp++) {
           var grp = groupsRaw[rp];
@@ -454,23 +455,43 @@
               tt.indexOf("なりきりおすすめセット (Roleplay Recommended Sets)") === 0 ||
               tt.indexOf("🔞 なりきりおすすめセット (Adult Roleplay Recommended Sets)") === 0) {
             pinned.push(grp);
+          } else if (tt.indexOf("🔞 R-18 表情演出プリセット (Adult Expression FX Packs)") === 0) {
+            adultExpr.push(grp);
           } else {
             rest.push(grp);
           }
         }
+
+        var reordered = rest.slice();
+
+        if (adultExpr.length) {
+          var exprIdx = -1;
+          for (var ex = 0; ex < reordered.length; ex++) {
+            var et = safeText((reordered[ex] && (reordered[ex].title_ja || reordered[ex].titleJa || reordered[ex].title)) || "");
+            if (et.indexOf("🎭 表情演出プリセット (Expression FX Packs)") === 0 || et.indexOf("表情演出プリセット") === 0) {
+              exprIdx = ex;
+              break;
+            }
+          }
+          if (exprIdx >= 0) reordered.splice.apply(reordered, [exprIdx + 1, 0].concat(adultExpr));
+          else reordered = adultExpr.concat(reordered);
+        }
+
         if (pinned.length) {
           var insertAt = 0;
-          for (var ra = 0; ra < rest.length; ra++) {
-            var rt = safeText((rest[ra] && (rest[ra].title_ja || rest[ra].titleJa || rest[ra].title)) || "");
+          for (var ra = 0; ra < reordered.length; ra++) {
+            var rt = safeText((reordered[ra] && (reordered[ra].title_ja || reordered[ra].titleJa || reordered[ra].title)) || "");
             if (rt.indexOf("🎭 表情演出プリセット (Expression FX Packs)") === 0 || rt.indexOf("表情演出プリセット") === 0) {
               insertAt = ra;
               break;
             }
             insertAt = ra + 1;
           }
-          var head = rest.slice(0, insertAt);
-          var tail = rest.slice(insertAt);
+          var head = reordered.slice(0, insertAt);
+          var tail = reordered.slice(insertAt);
           groupsRaw = head.concat(pinned, tail);
+        } else {
+          groupsRaw = reordered;
         }
       } catch (eReorder) {}
 

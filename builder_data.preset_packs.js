@@ -896,47 +896,124 @@
     ],
 
   "🎭 表情演出プリセット (Expression FX Packs)": [
-  { type: "header", id: "fx_hdr_joy", label: "😊 喜び・笑い", desc: "喜び／笑い" },
-      { label: "喜び演出セット", desc: "笑顔＋輝き瞳", val: "happy, smile, shining_eyes, sparkling_eyes" },
-      { label: "無邪気演出セット", desc: "きゃっ＋目きら", val: "happy, open_mouth, wide-eyed, sparkling_eyes" },
-      { label: "爆笑演出セット", desc: "大笑い＋涙目", val: "laughing, open_mouth, tears_in_eyes" },
-      { label: "照れ笑い演出セット", desc: "赤面＋笑顔＋目逸らし", val: "blush, nervous_smile, looking_away, shy" },
-  
-  
-  { type: "header", id: "fx_hdr_anger", label: "🔥 怒り・狂気", desc: "怒り／狂気" },
-      { label: "怒り演出セット", desc: "眉圧＋歯噛み＋睨み", val: "angry, furrowed_brow, clenched_teeth, glaring" },
-      { label: "狂気演出セット", desc: "瞳開き＋不穏な笑み", val: "crazy_eyes, wide-eyed, evil_smile, stare" },
-  
-  { type: "header", id: "fx_hdr_panic", label: "⚡ 焦り・パニック", desc: "焦り／動揺／驚き" },
-      { label: "焦る演出セット", desc: "焦る＋目を見開く＋汗", val: "panic, wide-eyed, sweat, sweatdrop" },
-      { label: "動揺演出セット", desc: "動揺＋目が泳ぐ＋汗", val: "nervous, blank_stare, sweatdrop, sweating" },
-      { label: "驚き演出セット", desc: "驚き＋目見開き＋口開け", val: "surprised, wide-eyed, open_mouth, gasp" },
-  
-  { type: "header", id: "fx_hdr_fear", label: "🕯 恐怖・怯え", desc: "恐怖／怯え／泣き" },
-      { label: "怯え演出セット", desc: "怯える＋震える＋涙目", val: "scared, trembling, watery_eyes, tears_in_eyes" },
-      { label: "泣き演出セット", desc: "泣き＋嗚咽＋涙", val: "crying, sobbing, streaming_tears, trembling_lips" },
-  
-  { type: "header", id: "fx_hdr_disdain", label: "🧊 嫌悪・軽蔑", desc: "嫌悪／軽蔑" },
-      { label: "嫌悪演出セット", desc: "嫌悪＋軽蔑＋目細め", val: "disgust, contempt, squinting, glaring" },
-  
-  { type: "header", id: "fx_hdr_restraint", label: "🫧 我慢・抑制", desc: "我慢／強がり／疲労" },
-      { label: "我慢演出セット", desc: "唇噛み＋歯噛み＋緊張", val: "restrained, biting_lip, clenched_teeth, nervous_sweat" },
-      { label: "強がり演出セット", desc: "強気＋涙目＋目逸らし", val: "forced_smile, watery_eyes, looking_away, trembling_lips" },
-      { label: "疲労演出セット", desc: "虚ろ目＋ため息＋汗", val: "tired, glazed_eyes, sigh, sweating" },
-  
-  { type: "header", id: "fx_hdr_shy", label: "🌸 恥・照れ・誘惑", desc: "恥／照れ／誘惑" },
-      { label: "照れ演出セット", desc: "全顔赤面＋目逸らし", val: "bashful, full-face_blush, looking_away, shy" },
-      { label: "恥演出セット", desc: "鼻赤＋汗＋視線逸らし", val: "embarrassed, nose_blush, sweatdrop, looking_away" },
-      { label: "誘惑演出セット", desc: "誘う＋視線＋唇", val: "seductive_smile, half-closed_eyes, parted_lips, stare" },
-  
-  { type: "header", id: "fx_hdr_sleepy", label: "💤 眠気・脱力", desc: "眠気／脱力" },
-      { label: "眠気演出セット", desc: "とろ目＋口半開き", val: "sleepy_eyes, half-closed_eyes, open_mouth, tired" },
-  
-  { type: "header", id: "fx_hdr_r18", label: "🔞 R-18 心理（非露骨）", desc: "露骨ではなく心理寄り" },
-      { label: "抑圧演出セット", desc: "視線逸らし＋汗＋口元固め", val: "suppressed_heat, looking_away, sweatdrop, trembling_lips" },
-      { label: "背徳演出セット", desc: "ためらい＋赤面＋目逸らし", val: "forbidden, full-face_blush, looking_away, nervous" },
-      { label: "支配演出セット", desc: "強い視線＋眉圧＋緊張", val: "dominant, glare, furrowed_brow, nervous_sweat" },
-      { label: "従属演出セット", desc: "伏し目＋赤面＋震え", val: "submissive, downcast_eyes, blush, trembling" }
+      {
+        title_ja: "😊 喜び・笑い",
+        title_en: "Joy & Laughter",
+        items: [
+          { id: "fx_joy_happy", label: "喜び演出セット", desc: "笑顔＋輝き瞳", val: "happy, smile, shining_eyes, sparkling_eyes" },
+          { id: "fx_joy_innocent", label: "無邪気演出セット", desc: "きゃっ＋目きら", val: "happy, open_mouth, wide-eyed, sparkling_eyes" },
+          { id: "fx_joy_laugh", label: "爆笑演出セット", desc: "大笑い＋涙目", val: "laughing, open_mouth, tears_in_eyes" },
+          { id: "fx_joy_tease", label: "いたずら笑い演出セット", desc: "にやり＋片目細め", val: "playful_smile, smirk, narrowed_eyes, teasing" },
+          { id: "fx_joy_shy", label: "照れ笑い演出セット", desc: "赤面＋笑顔＋目逸らし", val: "blush, nervous_smile, looking_away, shy" }
+        ]
+      },
+      {
+        title_ja: "🔥 怒り・狂気",
+        title_en: "Anger & Madness",
+        items: [
+          { id: "fx_anger_basic", label: "怒り演出セット", desc: "眉圧＋歯噛み＋睨み", val: "angry, furrowed_brow, clenched_teeth, glaring" },
+          { id: "fx_anger_silent", label: "静かな怒気演出セット", desc: "無表情気味＋鋭い視線", val: "cold_anger, expressionless, sharp_eyes, glare" },
+          { id: "fx_anger_burst", label: "激昂演出セット", desc: "叫び＋目見開き＋血走り", val: "rage, shouting, wide-eyed, bloodshot_eyes" },
+          { id: "fx_anger_mad", label: "狂気演出セット", desc: "瞳開き＋不穏な笑み", val: "crazy_eyes, wide-eyed, evil_smile, stare" }
+        ]
+      },
+      {
+        title_ja: "⚡ 焦り・パニック",
+        title_en: "Panic & Agitation",
+        items: [
+          { id: "fx_panic_hurry", label: "焦る演出セット", desc: "焦る＋目を見開く＋汗", val: "panic, wide-eyed, sweat, sweatdrop" },
+          { id: "fx_panic_shaken", label: "動揺演出セット", desc: "動揺＋目が泳ぐ＋汗", val: "nervous, blank_stare, sweatdrop, sweating" },
+          { id: "fx_panic_surprise", label: "驚き演出セット", desc: "驚き＋目見開き＋口開け", val: "surprised, wide-eyed, open_mouth, gasp" },
+          { id: "fx_panic_cornered", label: "追い詰められ演出セット", desc: "息荒い＋瞳揺れ＋汗", val: "cornered, shaky_eyes, heavy_breathing, sweating" }
+        ]
+      },
+      {
+        title_ja: "🕯 恐怖・怯え",
+        title_en: "Fear & Trembling",
+        items: [
+          { id: "fx_fear_scared", label: "怯え演出セット", desc: "怯える＋震える＋涙目", val: "scared, trembling, watery_eyes, tears_in_eyes" },
+          { id: "fx_fear_cry", label: "泣き演出セット", desc: "泣き＋嗚咽＋涙", val: "crying, sobbing, streaming_tears, trembling_lips" },
+          { id: "fx_fear_frozen", label: "硬直恐怖演出セット", desc: "青ざめ＋息止まり＋瞳固定", val: "frozen_in_fear, pale_face, held_breath, fixed_stare" },
+          { id: "fx_fear_break", label: "涙堪え崩れ演出セット", desc: "耐える＋潤み＋崩れかけ", val: "holding_back_tears, watery_eyes, trembling_lips, fearful" }
+        ]
+      },
+      {
+        title_ja: "🧊 嫌悪・軽蔑",
+        title_en: "Disgust & Contempt",
+        items: [
+          { id: "fx_disgust_basic", label: "嫌悪演出セット", desc: "嫌悪＋軽蔑＋目細め", val: "disgust, contempt, squinting, glaring" },
+          { id: "fx_disgust_cold", label: "冷笑軽蔑演出セット", desc: "薄笑い＋見下し", val: "contempt, cold_smile, looking_down_on, half-lidded_eyes" },
+          { id: "fx_disgust_avert", label: "拒絶演出セット", desc: "顔背け＋眉寄せ＋不快", val: "rejection, looking_away, disgust, furrowed_brow" }
+        ]
+      },
+      {
+        title_ja: "🫧 我慢・抑制",
+        title_en: "Restraint & Endurance",
+        items: [
+          { id: "fx_restraint_endure", label: "我慢演出セット", desc: "唇噛み＋歯噛み＋緊張", val: "restrained, biting_lip, clenched_teeth, nervous_sweat" },
+          { id: "fx_restraint_brave", label: "強がり演出セット", desc: "強気＋涙目＋目逸らし", val: "forced_smile, watery_eyes, looking_away, trembling_lips" },
+          { id: "fx_restraint_fatigue", label: "疲労演出セット", desc: "虚ろ目＋ため息＋汗", val: "tired, glazed_eyes, sigh, sweating" },
+          { id: "fx_restraint_resolve", label: "耐え抜き演出セット", desc: "汗＋真顔＋視線固定", val: "enduring, serious, sweating, fixed_gaze" }
+        ]
+      },
+      {
+        title_ja: "🌸 恥・照れ・誘惑",
+        title_en: "Shyness & Seduction",
+        items: [
+          { id: "fx_shy_blush", label: "照れ演出セット", desc: "全顔赤面＋目逸らし", val: "bashful, full-face_blush, looking_away, shy" },
+          { id: "fx_shy_embarrassed", label: "恥演出セット", desc: "鼻赤＋汗＋視線逸らし", val: "embarrassed, nose_blush, sweatdrop, looking_away" },
+          { id: "fx_shy_flustered", label: "しどろもどろ演出セット", desc: "口ごもり＋赤面＋目泳ぎ", val: "flustered, blush, nervous, darting_eyes" },
+          { id: "fx_shy_seduce", label: "誘惑演出セット", desc: "誘う＋視線＋唇", val: "seductive_smile, half-closed_eyes, parted_lips, stare" },
+          { id: "fx_shy_tempt", label: "挑発演出セット", desc: "余裕笑い＋流し目", val: "smirk, bedroom_eyes, teasing, confident" }
+        ]
+      },
+      {
+        title_ja: "💤 眠気・脱力",
+        title_en: "Sleepy & Limp",
+        items: [
+          { id: "fx_sleepy_drowsy", label: "眠気演出セット", desc: "とろ目＋口半開き", val: "sleepy_eyes, half-closed_eyes, open_mouth, tired" },
+          { id: "fx_sleepy_blank", label: "脱力演出セット", desc: "虚脱＋焦点薄い目", val: "exhausted, unfocused_eyes, slack_expression, tired" },
+          { id: "fx_sleepy_yawn", label: "あくび演出セット", desc: "あくび＋涙目＋眠そう", val: "yawning, watery_eyes, sleepy, relaxed" }
+        ]
+      },
+      {
+        title_ja: "🪞 無感情・冷淡",
+        title_en: "Blank & Cold",
+        items: [
+          { id: "fx_blank_expressionless", label: "無表情演出セット", desc: "感情薄い＋視線固定", val: "expressionless, blank_stare, still_face, emotionless" },
+          { id: "fx_blank_cold", label: "冷淡演出セット", desc: "半目＋温度低めの視線", val: "cold_eyes, half-lidded_eyes, indifferent, calm" },
+          { id: "fx_blank_doll", label: "人形めいた演出セット", desc: "瞳静止＋表情欠落", val: "doll-like, fixed_stare, expressionless, glassy_eyes" }
+        ]
+      },
+      {
+        title_ja: "✨ 決意・覚醒",
+        title_en: "Resolve & Awakening",
+        items: [
+          { id: "fx_resolve_determined", label: "決意演出セット", desc: "真顔＋鋭い瞳＋口元締め", val: "determined, serious, sharp_eyes, firm_mouth" },
+          { id: "fx_resolve_awaken", label: "覚醒演出セット", desc: "光る瞳＋覚悟＋集中", val: "awakened, glowing_eyes, focused, intense" },
+          { id: "fx_resolve_heroic", label: "英雄覚悟演出セット", desc: "逆境前進＋強い視線", val: "heroic, resolute, fearless, intense_gaze" }
+        ]
+      },
+      {
+        title_ja: "🌧 泣き・情緒崩壊",
+        title_en: "Meltdown & Breakdown",
+        items: [
+          { id: "fx_breakdown_silent", label: "静かな落涙演出セット", desc: "無言＋涙一筋", val: "silent_tears, downcast_eyes, melancholy, fragile" },
+          { id: "fx_breakdown_burst", label: "感情崩壊演出セット", desc: "泣き叫び＋涙＋震え", val: "emotional_breakdown, crying, shouting, trembling" },
+          { id: "fx_breakdown_numb", label: "燃え尽き演出セット", desc: "涙跡＋無表情＋虚脱", val: "burned_out, tear_streaks, expressionless, exhausted" }
+        ]
+      },
+      {
+        title_ja: "🌙 艶めき・背徳心理",
+        title_en: "Suggestive Psychology",
+        items: [
+          { id: "fx_r18_suppressed", label: "抑圧演出セット", desc: "視線逸らし＋汗＋口元固め", val: "suppressed_heat, looking_away, sweatdrop, trembling_lips" },
+          { id: "fx_r18_forbidden", label: "背徳演出セット", desc: "ためらい＋赤面＋目逸らし", val: "forbidden, full-face_blush, looking_away, nervous" },
+          { id: "fx_r18_dom", label: "支配演出セット", desc: "強い視線＋眉圧＋緊張", val: "dominant, glare, furrowed_brow, nervous_sweat" },
+          { id: "fx_r18_sub", label: "従属演出セット", desc: "伏し目＋赤面＋震え", val: "submissive, downcast_eyes, blush, trembling" },
+          { id: "fx_r18_yearn", label: "渇望演出セット", desc: "潤んだ瞳＋熱のこもる視線", val: "longing, watery_eyes, parted_lips, heated_gaze" }
+        ]
+      }
     ],
   "📸 写真系エフェクトパック (Photo Effect Packs)": [
         { label: "映画調（Anamorphic Film）", desc: "王道フィルム", val: "(cinematic lighting), (anamorphic lens flare), (subtle film grain), (soft contrast curve), (teal-orange color grading)" },
@@ -2154,6 +2231,66 @@
     // - 旧: NSFW/体位/Hロケ/男女/表情/触手 をトップ階層にも出していた（重複・散らかりの原因）
     // - 新: それらは「🔞 なりきりおすすめセット > 📍 場所・状況」に統合
     // - NSFWフラグは品質・設定側へ移設（preset_packs からは除去）
+
+    (function buildAdultExpressionFxPacks(){
+      try {
+        var adultExprKey = "🔞 R-18 表情演出プリセット (Adult Expression FX Packs)";
+        if (packs[adultExprKey]) return;
+
+        packs[adultExprKey] = [
+          {
+            title_ja: "🤪 快楽・絶頂",
+            title_en: "Pleasure & Climax",
+            items: [
+              { id: "r18_fx_ahegao", label: "あへ顔演出セット", desc: "あへ顔＋舌出し＋涎", val: "(ahegao:1.3), (rolling eyes), (tongue out), (drooling), (v-shaped eyebrows)" },
+              { id: "r18_fx_ecstasy", label: "快楽堕ち演出セット", desc: "赤面＋恍惚＋涙", val: "(pleasure face), (blush), (slobber), (euphoric tears), (ecstatic expression)" },
+              { id: "r18_fx_orgasm", label: "絶頂震え演出セット", desc: "震え＋反り＋瞳蕩け", val: "(orgasm), (girl trembling in climax:1.5), (shaking), (arched back), (toes curling), (spasms)" },
+              { id: "r18_fx_melt", label: "とろ顔演出セット", desc: "半目＋熱っぽい息＋潤み", val: "(melting expression), (half-closed eyes), (parted lips), (flushed face), (watery eyes), (heavy breathing)" }
+            ]
+          },
+          {
+            title_ja: "💘 誘惑・挑発",
+            title_en: "Seduction & Tease",
+            items: [
+              { id: "r18_fx_seduce", label: "誘惑視線演出セット", desc: "流し目＋唇開き＋笑み", val: "(seductive stare), (half-closed eyes), (parted lips), (confident smirk)" },
+              { id: "r18_fx_heart", label: "ハート目演出セット", desc: "恋慕＋瞳ハート", val: "(heart-shaped pupils), (pink eyes), (infatuated), (love struck)" },
+              { id: "r18_fx_dom", label: "支配挑発演出セット", desc: "見下ろし＋余裕笑い", val: "(looking down on viewer), (cold gaze), (disdainful stare), (arrogant), (smirk)" },
+              { id: "r18_fx_invite", label: "誘い込み演出セット", desc: "上目遣い＋指先＋熱視線", val: "(inviting gaze), (looking up), (bedroom eyes), (parted lips), (teasing)" }
+            ]
+          },
+          {
+            title_ja: "😳 羞恥・背徳",
+            title_en: "Shame & Forbidden",
+            items: [
+              { id: "r18_fx_shame", label: "羞恥赤面演出セット", desc: "全顔赤面＋視線逸らし", val: "(full-face blush), (looking away coyly), (avoiding eye contact), (shy downward glance)" },
+              { id: "r18_fx_forbidden", label: "背徳ためらい演出セット", desc: "躊躇＋汗＋震え唇", val: "(forbidden), (nervous), (sweatdrop), (trembling lips), (looking away)" },
+              { id: "r18_fx_exposed", label: "見られ羞恥演出セット", desc: "羞恥＋焦り＋涙目", val: "(embarrassed), (watery eyes), (flushed face), (panic), (covering body)" },
+              { id: "r18_fx_begshy", label: "恥じらい懇願演出セット", desc: "潤み目＋小さく乞う", val: "(tears), (blushing), (looking up), (begging), (humiliation)" }
+            ]
+          },
+          {
+            title_ja: "😭 服従・懇願",
+            title_en: "Submission & Pleading",
+            items: [
+              { id: "r18_fx_plead", label: "懇願演出セット", desc: "涙＋縋る視線＋開き唇", val: "(crying), (begging), (teary eyes), (desperate expression), (parted lips)" },
+              { id: "r18_fx_submissive", label: "従属演出セット", desc: "伏し目＋赤面＋震え", val: "(submissive), (downcast eyes), (blush), (trembling), (obedient)" },
+              { id: "r18_fx_broken", label: "心折れ演出セット", desc: "虚ろ＋涙跡＋無抵抗", val: "(broken expression), (vacant eyes), (tear streaks), (slack expression), (mind break)" },
+              { id: "r18_fx_cornered", label: "追い詰め懇願演出セット", desc: "恐怖＋息荒い＋助け求め", val: "(cornered), (fearful), (heavy breathing), (watery eyes), (pleading)" }
+            ]
+          },
+          {
+            title_ja: "🫠 虚脱・放心",
+            title_en: "Blankness & Afterglow",
+            items: [
+              { id: "r18_fx_vacant", label: "虚ろ目演出セット", desc: "焦点外れ＋理性薄れ", val: "(vacant eyes), (unfocused eyes), (looking into the distance), (glazed eyes)" },
+              { id: "r18_fx_afterglow", label: "事後放心演出セット", desc: "脱力＋乱れ髪＋余韻", val: "(after sex), (exhausted), (messy hair), (slack expression), (heavy breathing)" },
+              { id: "r18_fx_numb", label: "燃え尽き演出セット", desc: "涙跡＋無表情＋ぐったり", val: "(burned out), (tear streaks), (expressionless), (exhausted), (limp body)" },
+              { id: "r18_fx_trance", label: "陶酔呆然演出セット", desc: "半目＋口半開き＋夢見心地", val: "(entranced), (half-closed eyes), (open mouth), (dazed), (blushing)" }
+            ]
+          }
+        ];
+      } catch (e) { console.error("[Preset Packs] buildAdultExpressionFxPacks failed", e); }
+    })();
 
     (function buildAdultRoleplayRecommendedSets(){
       try {

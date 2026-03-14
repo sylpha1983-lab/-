@@ -1549,7 +1549,7 @@ cb.addEventListener("change", () => {
 (function(){
   "use strict";
   const VERSION = 10; // R-18専用 (Fixed & Lightweight v3)
-  const DISABLE_R18_QUALITY = true;
+  const DISABLE_R18_QUALITY = false;
   if (DISABLE_R18_QUALITY) {
     // R-18 was moved out of Quality Presets into the Preset Packs section.
     return;
@@ -1620,7 +1620,7 @@ cb.addEventListener("change", () => {
       { label: "クリ責め", val: "(clitoris stimulation), (rubbing clit), (fingering), (pearl)" },
       { label: "ダブルピース・アヘ顔", val: "(double peace sign), (ahegao), (rolling eyes), (tongue out), (mind break), (drooling)" }
     ],
-    "🤪 R-18 表情・精神 (Expressions)": [
+    "🔞 R-18 表情カテゴリー (Adult Expressions)": [
       { label: "あへ顔", val: "(ahegao:1.3), (rolling eyes), (tongue out), (drooling), (v-shaped eyebrows)" },
       { label: "ハート目", val: "(heart-shaped pupils), (pink eyes), (infatuated), (love struck)" },
       { label: "虚ろ目・レイプ目", val: "(vacant eyes), (empty eyes), (no pupil highlights), (glassy eyes), (mind break), (broken expression)" },
