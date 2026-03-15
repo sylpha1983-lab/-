@@ -1254,6 +1254,59 @@
           }
         ]
       }
+,
+{
+  title_ja: "😳 漫符連動",
+  title_en: "Face Effects Sync",
+  children: [
+    {
+      title_ja: "😊 喜び＋漫符",
+      title_en: "Joy + Face Effects",
+      children: [
+        { id: "fx_face_joy_blush", label: "ときめき喜び演出セット", desc: "笑顔＋赤面＋輝き瞳", val: "happy, smile, blush, shining_eyes, sparkling_eyes" },
+        { id: "fx_face_laugh_tears", label: "泣き笑い爆笑演出セット", desc: "大笑い＋涙目＋頬染め", val: "laughing, open_mouth, tearing up, blush, sparkling_eyes" },
+        { id: "fx_face_joy_sweat", label: "無邪気どたばた演出セット", desc: "きゃっ＋汗＋目きら", val: "happy, open_mouth, wide-eyed, flying sweatdrops, sparkling_eyes" }
+      ]
+    },
+    {
+      title_ja: "🌸 照れ＋漫符",
+      title_en: "Shyness + Face Effects",
+      children: [
+        { id: "fx_face_shy_basic", label: "王道照れ演出セット", desc: "赤面＋目逸らし＋もじもじ", val: "bashful, blush, looking_away, shy, nervous_smile" },
+        { id: "fx_face_shy_heavy", label: "限界照れ演出セット", desc: "激しい赤面＋汗＋目逸らし", val: "embarrassed, heavy blush, flying sweatdrops, looking_away, trembling_lips" },
+        { id: "fx_face_shy_shadow", label: "気まずさ暗転演出セット", desc: "顔に影＋汗＋固まる", val: "awkward, shadow over face, flying sweatdrops, blank_stare, frozen" }
+      ]
+    },
+    {
+      title_ja: "💢 怒り＋漫符",
+      title_en: "Anger + Face Effects",
+      children: [
+        { id: "fx_face_anger_vein", label: "怒りマーク演出セット", desc: "怒り＋怒りマーク＋歯噛み", val: "angry, anger vein, furrowed_brow, clenched_teeth, glaring" },
+        { id: "fx_face_anger_shadow", label: "静かな激怒演出セット", desc: "顔に影＋睨み＋圧", val: "cold_anger, shadow over face, sharp_eyes, glare, dark pressure" },
+        { id: "fx_face_anger_sweat", label: "苛立ち沸騰演出セット", desc: "怒気＋汗＋こめかみ圧", val: "irritated, flying sweatdrops, narrowed_eyes, tense face, clenched jaw" }
+      ]
+    },
+    {
+      title_ja: "😭 泣き＋漫符",
+      title_en: "Crying + Face Effects",
+      children: [
+        { id: "fx_face_cry_tears", label: "涙目泣き演出セット", desc: "涙目＋震え唇＋赤面", val: "tearing up, watery_eyes, trembling_lips, blush, sad" },
+        { id: "fx_face_cry_stream", label: "感情決壊演出セット", desc: "泣き＋汗＋呼吸乱れ", val: "crying, streaming_tears, flying sweatdrops, sobbing, trembling" },
+        { id: "fx_face_cry_sigh", label: "ため息泣き演出セット", desc: "ため息＋涙目＋力の抜け", val: "tearing up, sigh, downcast_eyes, exhausted, trembling_lips" }
+      ]
+    },
+    {
+      title_ja: "🌫 不穏＋漫符",
+      title_en: "Uncanny + Face Effects",
+      children: [
+        { id: "fx_face_uncanny_shadow", label: "不穏影顔演出セット", desc: "顔に影＋無表情＋圧", val: "shadow over face, blank_stare, eerie composure, unsettling, stillness" },
+        { id: "fx_face_uncanny_blue", label: "青ざめ異常演出セット", desc: "青ざめ＋焦点ずれ＋不穏", val: "blue lines on face, misfocused eyes, uncanny, unstable, uneasy" },
+        { id: "fx_face_uncanny_drool", label: "虚脱異常演出セット", desc: "よだれ＋虚ろ目＋理性薄れ", val: "drooling, vacant eyes, unfocused gaze, trance, abnormal" }
+      ]
+    }
+  ]
+}
+
     ],
   "📸 写真系エフェクトパック (Photo Effect Packs)": [
         { label: "映画調（Anamorphic Film）", desc: "王道フィルム", val: "(cinematic lighting), (anamorphic lens flare), (subtle film grain), (soft contrast curve), (teal-orange color grading)" },
@@ -2605,6 +2658,50 @@
               }
             ]
           }
+,
+{
+  title_ja: "😳 漫符連動",
+  title_en: "Face Effects Sync",
+  children: [
+    {
+      title_ja: "🤍 純愛＋漫符",
+      title_en: "Tender + Face Effects",
+      children: [
+        { id: "r18_fx_face_tender_blush", label: "甘々赤面演出セット", desc: "やわらかい赤面＋見つめ合い", val: "(loving gaze), (soft blush), (gentle smile), (watery eyes), (locked eyes)" },
+        { id: "r18_fx_face_tender_tears", label: "切な涙目演出セット", desc: "涙目＋頬染め＋切ない微笑み", val: "(tearing up), (soft blush), (sad smile), (yearning), (parted lips)" },
+        { id: "r18_fx_face_tender_sigh", label: "安堵ため息演出セット", desc: "ため息＋脱力＋安心しきり", val: "(completely at ease), (sigh), (gentle smile), (relaxed body), (warm eyes)" }
+      ]
+    },
+    {
+      title_ja: "🥀 背徳＋漫符",
+      title_en: "Forbidden + Face Effects",
+      children: [
+        { id: "r18_fx_face_forbid_heavyblush", label: "羞恥赤面強化演出セット", desc: "激しい赤面＋視線逸らし＋汗", val: "(full-face blush), (heavy blush), (looking away coyly), (flying sweatdrops), (embarrassed)" },
+        { id: "r18_fx_face_forbid_shadow", label: "禁忌影顔演出セット", desc: "顔に影＋背徳＋ためらい", val: "(forbidden), (shadow over face), (looking away), (trembling lips), (nervous)" },
+        { id: "r18_fx_face_forbid_sweat", label: "露見焦り強化演出セット", desc: "周囲警戒＋汗＋赤面", val: "(almost caught), (aware of being watched), (flying sweatdrops), (blushing), (panic)" }
+      ]
+    },
+    {
+      title_ja: "⛓ 支配/服従＋漫符",
+      title_en: "Dominance/Submissive + Face Effects",
+      children: [
+        { id: "r18_fx_face_dom_vein", label: "支配怒気演出セット", desc: "怒りマーク＋見下し＋強圧", val: "(dominant), (anger vein), (looking down), (glare), (furrowed_brow)" },
+        { id: "r18_fx_face_sub_tears", label: "服従涙目演出セット", desc: "涙目＋赤面＋逆らえない", val: "(submissive), (tearing up), (blush), (downcast eyes), (trembling)" },
+        { id: "r18_fx_face_sub_sweat", label: "懇願汗演出セット", desc: "汗＋懇願＋震え唇", val: "(pleading), (flying sweatdrops), (trembling lips), (watery eyes), (nervous)" }
+      ]
+    },
+    {
+      title_ja: "🛏 事後＋漫符",
+      title_en: "Afterglow + Face Effects",
+      children: [
+        { id: "r18_fx_face_after_blush", label: "余韻赤面演出セット", desc: "事後＋頬染め＋微熱", val: "(afterglow), (soft blush), (half-closed eyes), (warm breath), (satisfied expression)" },
+        { id: "r18_fx_face_after_shadow", label: "虚脱影顔演出セット", desc: "顔に影＋放心＋脱力", val: "(spent), (shadow over face), (vacant eyes), (slack expression), (limp)" },
+        { id: "r18_fx_face_after_drool", label: "放心よだれ演出セット", desc: "よだれ＋虚ろ目＋余熱", val: "(afterglow), (drooling), (unfocused gaze), (slack expression), (heavy breathing)" }
+      ]
+    }
+  ]
+}
+
         ];
       } catch (e) { console.error("[Preset Packs] buildAdultExpressionFxPacks failed", e); }
     })();
