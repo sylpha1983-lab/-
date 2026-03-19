@@ -59,10 +59,43 @@
     "🍱 食べ物・飲み物 / 🍽️ 料理ジャンル別 / 🍰 デザート": { icon: "🍰", items: [{ ja: "ジェラート", en: "gelato" }, { ja: "フローズンヨーグルト", en: "frozen yogurt" }, { ja: "アイスキャンディー", en: "ice pop" }, { ja: "アイスバー", en: "ice bar" }, { ja: "アイスサンド", en: "ice cream sandwich" }, { ja: "かき氷", en: "shaved ice" }, { ja: "フローズンフルーツ", en: "frozen fruit" }, { ja: "グラニテ", en: "granita" }, { ja: "セミフレッド", en: "semifreddo" }, { ja: "フローズンケーキ", en: "frozen cake" }, { ja: "アイスモナカ", en: "ice cream monaka" }, { ja: "フローズンカスタード", en: "frozen custard" }, { ja: "フローズンムース", en: "frozen mousse" }, { ja: "羊羹", en: "yokan" }, { ja: "水羊羹", en: "mizu yokan" }, { ja: "最中", en: "monaka" }, { ja: "大福", en: "daifuku" }, { ja: "いちご大福", en: "strawberry daifuku" }, { ja: "柏餅", en: "kashiwa mochi" }, { ja: "草餅", en: "kusa mochi" }, { ja: "わらび餅", en: "warabi mochi" }, { ja: "ういろう", en: "uiro" }, { ja: "きんつば", en: "kintsuba" }, { ja: "練り切り", en: "nerikiri" }, { ja: "落雁", en: "rakugan" }, { ja: "饅頭", en: "manju" }, { ja: "桜餅", en: "sakura mochi" }, { ja: "ショートケーキ", en: "shortcake" }, { ja: "チョコレートケーキ", en: "chocolate cake" }, { ja: "チーズケーキ", en: "cheesecake" }, { ja: "モンブラン", en: "mont blanc" }, { ja: "ロールケーキ", en: "roll cake" }, { ja: "パンケーキ", en: "pancakes" }, { ja: "ワッフル", en: "waffles" }, { ja: "ドーナツ", en: "donuts" }, { ja: "マカロン", en: "macarons" }, { ja: "シュークリーム", en: "cream puff" }, { ja: "プリン", en: "pudding" }, { ja: "ティラミス", en: "tiramisu" }, { ja: "ババロア", en: "bavarois" }, { ja: "ムース", en: "mousse" }, { ja: "ゼリー", en: "jelly" }, { ja: "フルーツタルト", en: "fruit tart" }, { ja: "アップルパイ", en: "apple pie" }, { ja: "チェリーパイ", en: "cherry pie" }, { ja: "ブラウニー", en: "brownie" }, { ja: "クッキー", en: "cookies" }, { ja: "アイスクリーム", en: "ice cream" }, { ja: "ソフトクリーム", en: "soft serve" }, { ja: "シャーベット", en: "sorbet" }, { ja: "パフェ", en: "parfait" }, { ja: "あんみつ", en: "anmitsu" }, { ja: "たい焼き", en: "taiyaki" }, { ja: "どら焼き", en: "dorayaki" }] },
     "🍱 食べ物・飲み物 / 🥤 飲み物 / カフェ・甘味": { icon: "☕", items: [{ ja: "カフェラテ", en: "caffe latte" }, { ja: "カプチーノ", en: "cappuccino" }, { ja: "エスプレッソ", en: "espresso" }, { ja: "アメリカーノ", en: "americano" }, { ja: "カフェモカ", en: "cafe mocha" }, { ja: "キャラメルラテ", en: "caramel latte" }, { ja: "バニララテ", en: "vanilla latte" }, { ja: "抹茶ラテ", en: "matcha latte" }, { ja: "チャイ", en: "chai" }, { ja: "ミルクティー", en: "milk tea" }, { ja: "タピオカミルクティー", en: "bubble milk tea" }, { ja: "ココア", en: "cocoa" }, { ja: "ホットチョコレート", en: "hot chocolate" }, { ja: "フラッペ", en: "frappe" }, { ja: "シェイク", en: "milkshake" }, { ja: "スムージー", en: "smoothie" }, { ja: "フルーツスムージー", en: "fruit smoothie" }, { ja: "ヨーグルトドリンク", en: "yogurt drink" }, { ja: "フロート", en: "float" }, { ja: "コーラフロート", en: "cola float" }, { ja: "クリームソーダ", en: "cream soda" }] },
     "🎸 音楽・趣味・その他 (Hobbies)": { isTarget: true, items: [{ ja: "マイク", en: "microphone" }, { ja: "ギター", en: "guitar" }, { ja: "ベース", en: "bass guitar" }, { ja: "ヴァイオリン", en: "violin" }, { ja: "ドラムスティック", en: "drumsticks" }, { ja: "スケッチブック", en: "sketchbook" }, { ja: "筆/ブラシ", en: "paintbrush" }, { ja: "パレット", en: "palette" }, { ja: "ゲームコントローラー", en: "game controller" }, { ja: "トランプ", en: "playing cards" }, { ja: "タバコ", en: "cigarette" }, { ja: "キセル", en: "kiseru" }] },
-    "🤲 アイテムの状態・動作 (Item Actions)": {
+    "🤲 アイテムの状態・動作 / 🤝 保持・提示": {
       isAction: true,
       items: [
-        { ja: "手に持つ (基本)", en: "holding" }, { ja: "両手で持つ", en: "holding with both hands" }, { ja: "握りしめる (強く)", en: "gripping" }, { ja: "抱きしめる (ハグ)", en: "hugging" }, { ja: "抱える (腕に)", en: "carrying" }, { ja: "口にくわえる", en: "in mouth" }, { ja: "噛む/かじりつく", en: "biting" }, { ja: "舐める", en: "licking" }, { ja: "食べる", en: "eating" }, { ja: "飲む", en: "drinking" }, { ja: "背負う", en: "on back" }, { ja: "腰に下げる", en: "on belt" }, { ja: "頭に乗せる", en: "on head" }, { ja: "差し出す", en: "offering" }, { ja: "見せる", en: "showing" }, { ja: "落とす", en: "dropping" }, { ja: "拾う", en: "picking up" }, { ja: "ポケットに入れる", en: "in pocket" }
+        { ja: "手に持つ (基本)", en: "holding" },
+        { ja: "両手で持つ", en: "holding with both hands" },
+        { ja: "握りしめる (強く)", en: "gripping" },
+        { ja: "抱きしめる (ハグ)", en: "hugging" },
+        { ja: "抱える (腕に)", en: "carrying" },
+        { ja: "差し出す", en: "offering" },
+        { ja: "見せる", en: "showing" },
+        { ja: "落とす", en: "dropping" },
+        { ja: "拾う", en: "picking up" }
+      ]
+    },
+    "🤲 アイテムの状態・動作 / 🍽 食事・口元": {
+      isAction: true,
+      items: [
+        { ja: "口にくわえる", en: "in mouth" },
+        { ja: "噛む/かじりつく", en: "biting" },
+        { ja: "舐める", en: "licking" },
+        { ja: "食べる", en: "eating" },
+        { ja: "飲む", en: "drinking" },
+        { ja: "手掴みで食べる", en: "eating with hands" },
+        { ja: "指でつまんで食べる", en: "eating with fingers" },
+        { ja: "箸で食べる", en: "eating with chopsticks" },
+        { ja: "フォークで食べる", en: "eating with fork" },
+        { ja: "スプーンで食べる", en: "eating with spoon" },
+        { ja: "ナイフとフォークで食べる", en: "eating with knife and fork" }
+      ]
+    },
+    "🤲 アイテムの状態・動作 / 👒 装着・配置": {
+      isAction: true,
+      items: [
+        { ja: "背負う", en: "on back" },
+        { ja: "腰に下げる", en: "on belt" },
+        { ja: "頭に乗せる", en: "on head" },
+        { ja: "ポケットに入れる", en: "in pocket" }
       ]
     },
     // 食感・食材系も保持
@@ -83,10 +116,10 @@
         { ja: "手錠", en: "handcuffs" }, { ja: "亀甲縛り（縄）", en: "kikkou shibari, rope bondage" }, { ja: "目隠し", en: "blindfold" }, { ja: "ボールガグ（猿ぐつわ）", en: "ball gag" }, { ja: "リングガグ", en: "ring gag" }, { ja: "奴隷の首輪", en: "slave collar" }, { ja: "トゲ付き首輪", en: "spiked collar" }, { ja: "首輪とリード", en: "collar and leash" }, { ja: "手枷 / 足枷", en: "shackles" }, { ja: "拘束衣（ストレートジャケット）", en: "straitjacket" }, { ja: "拘束ベルト（BDSM）", en: "bondage belts" }, { ja: "三角木馬", en: "wooden horse, pillory" }
       ]
     },
-    "🐙 R-18: 触手・スライム (Tentacles & Slime)": {
+    "🐙 R-18: 触手・スライム・生物 (Tentacles & Slime)": {
       isTarget: true,
       items: [
-        { ja: "触手（基本）", en: "tentacles" }, { ja: "巨大な触手", en: "giant tentacles" }, { ja: "吸盤のある触手", en: "suction cup tentacles" }, { ja: "スライム触手", en: "slime tentacles" }, { ja: "スライム触手搾乳装置", en: "(Slime Tentacle Milking Device)" }, { ja: "機械の触手 (ケーブル)", en: "mechanical tentacles, cables" }, { ja: "植物の蔓による拘束", en: "vine bondage" }, { ja: "透明な触手", en: "transparent tentacles" }, { ja: "体に絡みつく触手", en: "tentacles wrapping around body" }, { ja: "スライム（生物）", en: "slime (monster)" }, { ja: "体にまとわりつくスライム", en: "slime covering body" }, { ja: "粘液 / ネバネバした液体", en: "viscous liquid, sticky slime" }, { ja: "クモの巣（拘束）", en: "spider web bondage" }, { ja: "寄生生物", en: "parasite" }, { ja: "蟲・ワームの群れ", en: "worms, swarming insects" }, { ja: "生いた肉壁", en: "living flesh wall" }
+        { ja: "触手（基本）", en: "tentacles" }, { ja: "巨大な触手", en: "giant tentacles" }, { ja: "吸盤のある触手", en: "suction cup tentacles" }, { ja: "スライム触手", en: "slime tentacles" }, { ja: "スライム触手搾乳装置", en: "(Slime Tentacle Milking Device)" }, { ja: "機械の触手 (ケーブル)", en: "mechanical tentacles, cables" }, { ja: "植物の蔓による拘束", en: "vine bondage" }, { ja: "透明な触手", en: "transparent tentacles" }, { ja: "体に絡みつく触手", en: "tentacles wrapping around body" }, { ja: "スライム（生物）", en: "slime (monster)" }, { ja: "体にまとわりつくスライム", en: "slime covering body" }, { ja: "粘液 / ネバネバした液体", en: "viscous liquid, sticky slime" }, { ja: "クモの巣（拘束）", en: "spider web bondage" }, { ja: "寄生生物", en: "parasite" }, { ja: "蟲・ワームの群れ", en: "worms, swarming insects" }, { ja: "生いた肉壁", en: "living flesh wall" }, { ja: "ペニス", en: "penis" }
       ]
     },
     "🔞 R-18: 特殊装飾・印 (Marks & Piercings)": {
@@ -98,6 +131,7 @@
     "🤲 R-18: 動作・状態 (Secret Actions)": {
       isAction: true,
       items: [
+        { ja: "膣に挿入、性行為", en: "in pussy, sex" },
         { ja: "深く挿入", en: "inserted deeply" },
         { ja: "最奥まで", en: "bottoming out" },
         { ja: "半挿入", en: "half-inserted" },
@@ -156,7 +190,12 @@
         details.appendChild(content); mount.appendChild(details);
       };
 
-      itemActionEntries.forEach(([catName, catData]) => renderCategory(catName, catData, section));
+      if (itemActionEntries.length) {
+        const actionRoot = document.createElement("details");
+        const actionSum = document.createElement("summary"); actionSum.textContent = "🤲 アイテムの状態・動作"; actionRoot.appendChild(actionSum);
+        itemActionEntries.forEach(([k, cat]) => renderCategory(k.split(" / ").pop(), cat, actionRoot));
+        section.appendChild(actionRoot);
+      }
       otherEntries.forEach(([catName, catData]) => renderCategory(catName, catData, section));
 
       if (foodEntries.length) {
@@ -195,7 +234,7 @@
       if (actionTags.length > 0 && targetTags.length > 0) {
         actionTags.forEach(action => {
           targetTags.forEach(target => {
-            const suffixActions = ["in mouth", "on back", "on belt", "on head", "in pocket", "inserted deeply", "vibrating", "constricting", "wrapping around", "covered in slime"];
+            const suffixActions = ["in mouth", "on back", "on belt", "on head", "in pocket", "in pussy, sex", "inserted deeply", "vibrating", "constricting", "wrapping around", "covered in slime"];
             if (suffixActions.includes(action)) {
               finalTags.push(`${target} ${action}`); 
             } else {
