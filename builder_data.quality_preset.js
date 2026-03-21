@@ -149,8 +149,43 @@
     ]
   };
   window.__QP_DB.secret = {
-    label: "✨SECRET・究極艶 (Portra 400)", 
-    val: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.5), (anime-realism blend:1.4), (cinematic lighting:1.4), (ray tracing), (subsurface scattering), (global illumination), (physically based rendering), (unreal engine 5), (lumen reflections), (nanite geometry), (8k uhd), (octane render), (realistic lighting), (shiny hair), (glossy hair), (Kodak Portra 400), (low contrast)",
-    links: ["基本・最高画質", "光沢/ツヤ肌", "Shiny Skin", "シネマティック", "Cinematic", "UE5", "PBR", "整った顔立ち", "Perfect Face"]
+    label: "✨SECRET・究極艶（セット）", 
+    val: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4), (anime-realism blend:1.4), (semi-realistic rendering:1.2), (cinematic lighting:1.4), (ray tracing:1.3), (subsurface scattering:1.3), (global illumination:1.3), (physically based rendering:1.3), (unreal engine 5:1.2), (octane render:1.2), (lumen reflections:1.2), (nanite geometry:1.1), (realistic lighting:1.2), (shiny hair:1.4), (glossy hair:1.4), (specular sharp highlights:1.3), (high contrast specular edges:1.3), (strong rim lighting:1.4), (backlight glow:1.3), (light wrapping around body:1.3), (separate material response), (different reflectivity for skin and clothing), (glossy coated fabric:1.4), (mirror-like costume highlights:1.3), (volumetric lighting:1.3), (light particles in air), (spark-like bokeh lights), (stage-like luminous background), (cinematic portrait crop), (close-up upper body focus), (Kodak Portra 400), (low contrast)",
+    links: ["基本・最高画質", "光沢/ツヤ肌", "Specular", "Rim Light", "Material", "シネマティック", "Cinematic", "UE5", "PBR", "Perfect Face"]
+  };
+  window.__QP_DB.cg_anime_glow = {
+    label: "✨CGアニメ艶彩",
+    desc: "とりあえずCGっぽく綺麗にしたい時向け",
+    val: "(masterpiece:1.3), (best quality:1.3), (ultra high resolution:1.3), (CG animation:1.5), (anime style:1.2), (anime-realism blend:1.3), (semi-realistic rendering:1.2), (intricate details:1.3), (realistic textures:1.2), (extremely detailed skin, face, hair, background:1.2), (refined shading:1.2), (clean lineart), (soft natural lighting:1.2), (transparent glow:1.1), (ethereal pastel haze:1.1), (cinematic lighting:1.2), (global illumination:1.1), (ambient occlusion:1.1), (ray tracing-inspired effects:1.1), (depth haze:1.1), (UHD, ultra-sharp details:1.2), (vivid anime-like colors:1.2), (shiny hair:1.1), (subtle skin glow:1.1), (drifting particle lights:1.1), (soft bokeh sparkles:1.1), (subtle colored light reflection in air:1.1), (cinematic framing:1.1), (depth of field:1.1), (high-quality image:1.3)",
+    links: ["CG Animation", "Anime-Realism", "Refined Shading", "Clean Lineart", "Global Illumination", "Ambient Occlusion", "Ray Tracing FX", "Soft Glow", "Bokeh", "Cinematic" ]
+  };
+  window.__QP_DB.cg_anime_glow_soft = {
+    label: "✨CGアニメ艶彩・柔光版",
+    desc: "ふんわり甘くしたい時向け",
+    val: "(masterpiece:1.3), (best quality:1.3), (ultra high resolution:1.3), (CG animation:1.4), (anime style:1.2), (anime-realism blend:1.25), (semi-realistic rendering:1.2), (intricate details:1.25), (realistic textures:1.15), (extremely detailed skin, face, hair, background:1.2), (refined shading:1.2), (clean lineart), (soft natural lighting:1.3), (transparent glow:1.2), (ethereal pastel haze:1.2), (cinematic lighting:1.2), (global illumination:1.15), (ambient occlusion:1.05), (ray tracing-inspired effects:1.05), (depth haze:1.15), (UHD, ultra-sharp details:1.2), (vivid anime-like colors:1.2), (shiny hair:1.1), (subtle skin glow:1.15), (drifting particle lights:1.15), (soft bokeh sparkles:1.15), (subtle colored light reflection in air:1.15), (cinematic framing:1.1), (depth of field:1.1), (high-quality image:1.3)",
+    links: ["CG Animation", "Soft Glow", "Pastel Haze", "Global Illumination", "Particle Lights", "Bokeh", "Soft Skin Glow", "Cinematic" ]
+  };
+  window.__QP_DB.cg_anime_glow_hard = {
+    label: "✨CGアニメ艶彩・硬質版",
+    desc: "面と材質を締めたい時向け",
+    val: "(masterpiece:1.35), (best quality:1.35), (ultra high resolution:1.3), (CG animation:1.5), (anime style:1.15), (anime-realism blend:1.35), (semi-realistic rendering:1.25), (intricate details:1.3), (realistic textures:1.2), (extremely detailed skin, face, hair, background:1.2), (refined shading:1.3), (clean lineart), (cinematic lighting:1.3), (global illumination:1.15), (ambient occlusion:1.15), (ray tracing-inspired effects:1.15), (depth haze:1.05), (specular control:1.1), (clean material separation:1.1), (UHD, ultra-sharp details:1.25), (vivid anime-like colors:1.2), (shiny hair:1.15), (subtle skin glow:1.05), (drifting particle lights:1.05), (soft bokeh sparkles:1.05), (subtle colored light reflection in air:1.05), (cinematic framing:1.15), (depth of field:1.1), (high-quality image:1.3)",
+    links: ["CG Animation", "Anime-Realism", "Refined Shading", "AO", "Ray Tracing FX", "Material Separation", "Sharper Details", "Cinematic" ]
+  };
+  window.__QP_DB.cg_anime_glow_warm = {
+    label: "✨CGアニメ艶彩・暖色夕景版",
+    desc: "教室・夕日・赤面・恋愛イベント向け",
+    val: "(masterpiece:1.3), (best quality:1.3), (ultra high resolution:1.3), (CG animation:1.45), (anime style:1.2), (anime-realism blend:1.3), (semi-realistic rendering:1.2), (intricate details:1.25), (realistic textures:1.15), (extremely detailed skin, face, hair, background:1.2), (refined shading:1.2), (clean lineart), (soft natural lighting:1.25), (golden hour lighting:1.3), (warm backlight glow:1.2), (sunset amber haze:1.2), (cinematic lighting:1.2), (global illumination:1.15), (ambient occlusion:1.05), (ray tracing-inspired effects:1.05), (depth haze:1.15), (UHD, ultra-sharp details:1.2), (vivid anime-like colors:1.2), (shiny hair:1.1), (subtle skin glow:1.15), (drifting particle lights:1.15), (soft bokeh sparkles:1.15), (warm light bloom:1.15), (gold dust in air:1.1), (cinematic framing:1.1), (depth of field:1.1), (high-quality image:1.3)",
+    links: ["CG Animation", "Golden Hour", "Warm Backlight", "Sunset Haze", "Particle Lights", "Warm Bloom", "Soft Skin Glow", "Cinematic" ]
+  };
+  window.__QP_DB.cg_anime_glow_cool = {
+    label: "✨CGアニメ艶彩・青白クール版",
+    desc: "夜・青照明・黒衣装・クール顔向け",
+    val: "(masterpiece:1.35), (best quality:1.35), (ultra high resolution:1.3), (CG animation:1.5), (anime style:1.15), (anime-realism blend:1.35), (semi-realistic rendering:1.25), (intricate details:1.3), (realistic textures:1.2), (extremely detailed skin, face, hair, background:1.2), (refined shading:1.3), (clean lineart), (cinematic lighting:1.3), (cool rim lighting:1.2), (blue-white glow:1.2), (cold atmospheric haze:1.15), (global illumination:1.15), (ambient occlusion:1.15), (ray tracing-inspired effects:1.15), (depth haze:1.05), (specular control:1.1), (clean material separation:1.1), (UHD, ultra-sharp details:1.25), (vivid anime-like colors:1.15), (shiny hair:1.15), (subtle skin glow:1.05), (drifting particle lights:1.1), (soft bokeh sparkles:1.05), (cool light bloom:1.1), (crisp luminous air:1.1), (cinematic framing:1.15), (depth of field:1.1), (high-quality image:1.3)",
+    links: ["CG Animation", "Cool Rim Light", "Blue-White Glow", "Cold Haze", "AO", "Material Separation", "Sharper Details", "Cinematic" ]
+  };
+  window.__QP_DB.secret_limitbreak = {
+    label: "✨SECRET・究極艶（リミットブレイク）",
+    val: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4), (anime-realism blend:1.4), (cinematic lighting:1.5), (ray tracing:1.4), (subsurface scattering:1.4), (global illumination:1.4), (physically based rendering:1.3), (unreal engine 5:1.2), (octane render:1.2), (shiny hair:1.4), (glossy hair:1.4), (specular sharp highlights:1.4), (high contrast specular edges:1.4), (hard glossy reflections:1.3), (strong rim lighting:1.4), (backlight glow:1.4), (light wrapping around body:1.3), (separate material response), (different reflectivity for skin and clothing), (glossy coated fabric:1.5), (mirror-like costume highlights:1.4), (volumetric lighting:1.3), (light particles in air), (spark-like bokeh lights), (stage-like luminous background), (cinematic portrait crop), (close-up upper body focus), (liquid surface tension effect:1.3), (light bleeding through wet skin:1.3), (dynamic light interaction), (Kodak Portra 400), (low contrast)",
+    links: ["基本・最高画質", "光沢/ツヤ肌", "Limit Break", "Specular", "Wet Light", "Material", "シネマティック", "Cinematic", "UE5", "PBR"]
   };
 })();
