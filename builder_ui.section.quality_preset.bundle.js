@@ -1984,6 +1984,282 @@ cb.addEventListener("change", () => {
   ];
 
 
+  const OUTFIT_DETAIL_DATA = [
+    {
+      label: "Ornate Embroidery & Trim",
+      val: "(intricate outfit details:1.3), (highly detailed costume:1.3), (ornate clothing design:1.2), (elaborate embroidery:1.3), (ornamental brocade:1.2), (golden thread embroidery:1.2), (luxurious decorative patterns:1.2), (elaborate trim), (tassel ornaments), (ceremonial costume embellishments:1.2)",
+      desc: "刺繍・模様・房飾りを増やして豪華衣装へ寄せたい時向け"
+    },
+    {
+      label: "Glossy Fabric & Satin Tension",
+      val: "(glossy fabric texture:1.3), (silky sheen:1.2), (satin-like reflections:1.2), (tight fabric tension:1.2), (smooth reflective cloth:1.2), (specular fabric highlights:1.2), (form-fitting costume:1.2), (light-catching folds), (luxurious shine on clothing)",
+      desc: "光沢布や密着素材の艶と張りを強めたい時向け"
+    },
+    {
+      label: "Couture Structure & Tailored Fit",
+      val: "(couture-level costume detail:1.3), (tailored garment construction:1.2), (refined garment structure:1.2), (refined silhouette:1.2), (structured costume silhouette), (precise seam lines), (detailed seams and stitching:1.2), (carefully fitted clothing), (designer costume quality)",
+      desc: "高級仕立ての構造美や服の完成度を上げたい時向け"
+    },
+    {
+      label: "Metal Ornaments & Hybrid Parts",
+      val: "(decorative metal fittings:1.2), (ornate shoulder armor), (engraved metallic ornament:1.2), (gold-trimmed costume parts), (metal and fabric hybrid design:1.2), (regal armor accents), (polished decorative metal), (ornamental clasps and emblems), (ceremonial armor decoration)",
+      desc: "金属装飾や肩当てなど布とパーツの融合感を足したい時向け"
+    },
+    {
+      label: "Hair Ornaments & Costume Jewelry",
+      val: "(elaborate hair ornaments:1.2), (ornate chest accessory), (decorative brooches), (tassel earrings), (flower ornaments), (traditional knot decorations), (jewel ornaments), (luxury accessory layering), (intricate costume jewelry:1.2)",
+      desc: "髪飾り・胸飾り・宝飾小物まで豪華に盛りたい時向け"
+    },
+    {
+      label: "Luxury Ceremonial China Dress",
+      val: "(intricate outfit details:1.3), (highly detailed costume:1.3), (ornate clothing design:1.2), (elaborate embroidery:1.3), (golden thread embroidery:1.2), (ornamental brocade:1.2), (glossy fabric texture:1.3), (silky sheen:1.2), (satin-like reflections:1.2), (form-fitting costume:1.2), (tight fabric tension:1.2), (decorative metal fittings:1.2), (ornate shoulder armor), (gold-trimmed costume parts), (elaborate hair ornaments:1.2), (ornate chest accessory), (tassel ornaments), (ceremonial costume embellishments:1.2), (luxurious decorative patterns:1.2)",
+      desc: "豪華チャイナや儀礼衣装を一発で濃くしたい時向け"
+    }
+  ];
+
+
+  const MATERIAL_TEXTURE_DATA = [
+    {
+      label: "Silk & Satin Luxe Finish",
+      val: "(silk fabric sheen:1.3), (satin-like reflections:1.3), (smooth luxury fabric:1.2), (soft directional sheen:1.2), (light-catching fabric gloss), (silky surface flow), (refined reflective cloth)",
+      desc: "シルクやサテンの高級な艶と滑らかさを強めたい時向け"
+    },
+    {
+      label: "Velvet & Soft Nap Richness",
+      val: "(velvet pile texture:1.3), (deep light-absorbing fabric:1.2), (plush velvet surface:1.2), (soft directional sheen:1.2), (rich crushed velvet highlights:1.2), (low specular luxury fabric)",
+      desc: "ベルベットや起毛布の深みと高級感を出したい時向け"
+    },
+    {
+      label: "Leather & Glossy Enamel Surface",
+      val: "(leather texture:1.2), (polished leather sheen:1.2), (glossy enamel surface:1.3), (hard glossy reflections:1.2), (structured shiny material), (reflective premium leather finish)",
+      desc: "レザーやエナメルの硬質な光沢と張りを足したい時向け"
+    },
+    {
+      label: "Latex & Rubber Skin-tight Shine",
+      val: "(latex texture:1.3), (rubber shine:1.3), (skin-tight glossy material:1.2), (strong specular highlights on clothing:1.2), (tight reflective surface), (liquid-like fabric gloss)",
+      desc: "ラテックスやラバーの密着感と強い反射を出したい時向け"
+    },
+    {
+      label: "Lace & Sheer Delicate Transparency",
+      val: "(lace texture:1.2), (delicate lace details:1.2), (sheer fabric transparency:1.2), (soft translucent cloth:1.2), (fine mesh texture), (elegant see-through layers)",
+      desc: "レースやシースルー素材の繊細さと透け感を強めたい時向け"
+    },
+    {
+      label: "Denim & Knit Casual Texture",
+      val: "(denim texture:1.2), (woven cotton feel:1.1), (knit fabric texture:1.2), (casual cloth surface), (soft everyday garment texture), (natural fabric grain)",
+      desc: "デニムやニットなど日常服の布感を自然に濃くしたい時向け"
+    }
+  ];
+
+  const SILHOUETTE_VOLUME_DATA = [
+    {
+      label: "Waistline & Body Contour",
+      val: "(defined waistline:1.2), (cinched waist silhouette:1.2), (body-hugging contour), (elegant torso shape), (refined body line)",
+      desc: "ウエストの締まりや身体のラインを美しく見せたい時向け"
+    },
+    {
+      label: "Bust Form & Structured Bodice",
+      val: "(structured bodice), (bust contour emphasis:1.2), (tailored chest fit), (three-dimensional bust silhouette), (refined upper-body shaping)",
+      desc: "胸元の立体感や仕立ての良い上半身シルエットを出したい時向け"
+    },
+    {
+      label: "Skirt Spread & Hem Volume",
+      val: "(skirt volume:1.2), (flared hem silhouette:1.2), (layered skirt spread), (graceful hem expansion), (elegant lower silhouette)",
+      desc: "スカートの広がりや裾の美しいボリュームを足したい時向け"
+    },
+    {
+      label: "Shoulder Shape & Armor Tension",
+      val: "(structured shoulder line:1.2), (broad elegant shoulders), (armor-like shoulder tension), (defined upper silhouette), (firm garment structure)",
+      desc: "肩幅や肩装甲の張りを整えて上半身を強く見せたい時向け"
+    },
+    {
+      label: "Drape & Fabric Fall",
+      val: "(weighted fabric drape:1.2), (elegant fabric fall), (soft cascading folds), (natural cloth drop), (rich formal gown draping:1.2)",
+      desc: "布の落ち感やドレープの美しさを強めたい時向け"
+    },
+    {
+      label: "Tailored Structure & 3D Cut",
+      val: "(three-dimensional tailoring:1.2), (structured costume silhouette:1.2), (architectural garment form), (carefully fitted clothing), (refined silhouette:1.2)",
+      desc: "立体裁断っぽい構造美や服全体の完成度を上げたい時向け"
+    }
+  ];
+
+  const ACCESSORY_DENSITY_DATA = [
+    {
+      label: "Brooches & Emblems",
+      val: "(decorative brooches), (ornamental badges), (emblems on costume), (luxury accessory accents), (formal insignia details)",
+      desc: "ブローチや紋章を足して格やテーマ性を上げたい時向け"
+    },
+    {
+      label: "Chains, Belts & Buckles",
+      val: "(decorative chains), (belt ornaments), (ornate buckles), (layered belt accessories), (metal fastening details)",
+      desc: "チェーンやベルト装飾で密度と情報量を増やしたい時向け"
+    },
+    {
+      label: "Tassels, Frills & Trim Parts",
+      val: "(tassel ornaments), (frill accents), (decorative trim parts), (layered ornamental edges), (costume detail add-ons)",
+      desc: "房飾りやフリルパーツで衣装を華やかにしたい時向け"
+    },
+    {
+      label: "Jewels & Gem Accents",
+      val: "(jewel ornaments), (gem accents on costume), (decorative gemstones), (luxury jewel details), (sparkling accessory highlights)",
+      desc: "宝石やきらめく装飾で上級衣装感を出したい時向け"
+    },
+    {
+      label: "Hair, Ear & Head Accessories",
+      val: "(elaborate hair ornaments:1.2), (head accessories), (ornamental earrings), (decorative headpiece), (formal hair adornments)",
+      desc: "髪飾りや耳飾りで推し感やヒロイン感を強めたい時向け"
+    },
+    {
+      label: "Accessory Density Full Boost",
+      val: "(decorative brooches), (ornamental badges), (decorative chains), (belt ornaments), (ornate buckles), (tassel ornaments), (frill accents), (jewel ornaments), (decorative gemstones), (elaborate hair ornaments:1.2), (ornamental earrings), (luxury accessory layering)",
+      desc: "付属装飾を一気に増やして衣装の物足りなさを埋めたい時向け"
+    }
+  ];
+
+  const FOCAL_DETAIL_DATA = [
+    {
+      label: "Chestline & Bust Adornment",
+      val: "(ornate chest accessory), (decorated neckline), (bustline detailing), (centerpiece on chest), (upper-body focal ornament)",
+      desc: "胸元を主役にして印象の焦点を作りたい時向け"
+    },
+    {
+      label: "Collar & Neck Design",
+      val: "(intricate collar design), (decorated neckline), (ornamental neck trim), (structured collar details), (elegant throat adornment)",
+      desc: "襟や首まわりの意匠を強めて上品に見せたい時向け"
+    },
+    {
+      label: "Sleeves & Cuff Motifs",
+      val: "(decorative sleeves), (ornate cuffs), (sleeve embroidery), (structured sleeve silhouette), (elegant arm detailing)",
+      desc: "袖の意匠や手首まわりを盛って手元の印象を強めたい時向け"
+    },
+    {
+      label: "Waist & Hip Accent",
+      val: "(waist ornament), (hip accessory accents), (belt centerpiece), (decorated waistline), (midsection focal detail)",
+      desc: "腰まわりのアクセントを強めてシルエットの芯を作りたい時向け"
+    },
+    {
+      label: "Hem, Skirt Edge & Lower Detail",
+      val: "(decorated hem), (skirt edge embroidery), (lower garment trim), (ornamental hemline), (flowing lower detail)",
+      desc: "裾やスカート縁を主役にして下半身の完成度を上げたい時向け"
+    },
+    {
+      label: "Shoulder, Gloves & Footwear Focus",
+      val: "(ornate shoulder armor), (shoulder ornaments), (decorative gloves), (embellished footwear), (accented costume extremities)",
+      desc: "肩・手袋・足元など端の見せ場を強めたい時向け"
+    }
+  ];
+
+  const WORLDBUILDING_OUTFIT_DATA = [
+    {
+      label: "Royal & Ceremonial Regalia",
+      val: "(royal costume design:1.2), (ceremonial costume embellishments:1.2), (regal ornamentation), (noble formalwear), (luxury court attire)",
+      desc: "王族や儀礼服らしい格と豪華さを出したい時向け"
+    },
+    {
+      label: "Temple & Sacred Vestments",
+      val: "(sacred garment design), (temple vestments), (holy ceremonial attire), (ritual cloth ornament), (divine clothing details)",
+      desc: "宗教・神殿衣装っぽい神聖さや儀式感を足したい時向け"
+    },
+    {
+      label: "Military Dress & Parade Uniform",
+      val: "(military dress uniform), (formal parade attire), (regal armor accents), (decorated uniform trim), (ceremonial military details)",
+      desc: "軍装ドレスや式典制服の威厳を強めたい時向け"
+    },
+    {
+      label: "Imperial Chinese Courtwear",
+      val: "(imperial chinese costume), (ornamental brocade), (golden thread embroidery:1.2), (court robe detailing), (ceremonial chinese attire)",
+      desc: "中華宮廷服の格調高い世界観を濃くしたい時向け"
+    },
+    {
+      label: "Traditional Japanese Ritual Wear",
+      val: "(traditional ritual kimono), (formal japanese ceremonial wear), (elegant layered sleeves), (ornamental knot details), (sacred japanese attire)",
+      desc: "和風儀式服や神事衣装らしい空気を出したい時向け"
+    },
+    {
+      label: "Sci-Fi Suit & Mechanical Dress",
+      val: "(futuristic bodysuit design), (sci-fi garment structure), (mechanical costume details), (techwear silhouette), (high-tech clothing accents)",
+      desc: "未来SFスーツや機械装飾ドレスへ寄せたい時向け"
+    },
+    {
+      label: "Mage Robe & Arcane Garment",
+      val: "(arcane robe design), (mage garment details), (mystic clothing layers), (magical costume ornament), (sorcerous formalwear)",
+      desc: "魔導士ローブや神秘衣装として物語性を足したい時向け"
+    }
+  ];
+
+  const AGED_WORN_DATA = [
+    {
+      label: "Worn Fabric & Lived-in Texture",
+      val: "(worn fabric), (lived-in texture), (softened cloth folds), (used garment feel), (natural wear on clothing)",
+      desc: "新品すぎる服を少し使い込まれた質感にしたい時向け"
+    },
+    {
+      label: "Subtle Wrinkles & Soft Creases",
+      val: "(subtle wrinkles), (soft fabric creases), (natural garment folding), (realistic cloth compression), (casual wear lines)",
+      desc: "自然なシワや折れを加えて平面感を減らしたい時向け"
+    },
+    {
+      label: "Polished Edges & Gentle Aging",
+      val: "(polished edges), (gentle fabric aging), (softened trim), (slightly worn finish), (mature cloth texture)",
+      desc: "端の馴染みや穏やかな経年感で世界に溶け込ませたい時向け"
+    },
+    {
+      label: "Slight Fraying & Battle-worn Trim",
+      val: "(slight fraying), (battle-worn trim), (weathered cloth details), (used edge texture), (adventurer clothing wear)",
+      desc: "旅や戦いを経た衣装らしい歴戦感を足したい時向け"
+    },
+    {
+      label: "Lived-in Formalwear",
+      val: "(lived-in texture), (refined aged fabric), (softened luxurious cloth), (used formal garment), (real-world costume wear)",
+      desc: "高級服の格を保ったまま生活感や使用感を混ぜたい時向け"
+    }
+  ];
+
+  const PATTERN_MOTIF_DATA = [
+    {
+      label: "Floral Pattern & Decorative Bloom",
+      val: "(floral pattern), (decorative flower motifs), (embroidered blooms), (ornamental botanical details), (elegant floral costume design)",
+      desc: "花柄や花モチーフで華やかさを足したい時向け"
+    },
+    {
+      label: "Brocade & Luxury Weave",
+      val: "(ornamental brocade:1.2), (luxurious decorative patterns:1.2), (woven motif cloth), (rich fabric patterning), (formal textile motifs)",
+      desc: "織り模様や高級布の柄を強めたい時向け"
+    },
+    {
+      label: "Geometric & Modern Motif",
+      val: "(geometric motif), (modern patterned cloth), (precise costume pattern lines), (structured repeating design), (graphic textile accents)",
+      desc: "幾何学模様やモダンな柄でスタイリッシュにしたい時向け"
+    },
+    {
+      label: "Celestial & Star Motif",
+      val: "(celestial motif), (star pattern), (moon and star ornament), (cosmic textile design), (night-sky costume details)",
+      desc: "星や月のモチーフで幻想感や宇宙感を足したい時向け"
+    },
+    {
+      label: "Dragon & Mythic Emblem",
+      val: "(dragon motif), (mythic emblem pattern), (beast insignia), (legendary ornament design), (powerful symbolic cloth details)",
+      desc: "龍紋や神話的紋章で強い世界観を出したい時向け"
+    },
+    {
+      label: "Snowflake & Winter Motif",
+      val: "(snowflake pattern), (winter textile motifs), (icy ornament details), (frost-themed costume design), (crystalline pattern work)",
+      desc: "雪柄や氷モチーフで冬らしい意匠を足したい時向け"
+    },
+    {
+      label: "Lace Pattern & Delicate Mesh",
+      val: "(lace pattern), (intricate lace design), (mesh motif detailing), (delicate patterned transparency), (ornamental lace surface)",
+      desc: "レース柄や繊細な網目模様を強めたい時向け"
+    },
+    {
+      label: "Tribal & Ancient Symbol Pattern",
+      val: "(tribal pattern), (ancient symbol motifs), (ethnic textile design), (ritual pattern accents), (primitive ornamental markings)",
+      desc: "部族柄や古代紋様で呪術感や異文化感を出したい時向け"
+    }
+  ];
+
+
   // ========================================================
   // 🏪 Commercial Product Mode (adds "productization" pressure; additive, no replacement)
   // ========================================================
@@ -2204,6 +2480,14 @@ cb.addEventListener("change", () => {
         conFine.appendChild(window.__QP_UTILS.createSubAccordion("🎨 色味・パレット (Color Palette)", COLOR_PALETTE_DATA));
         conFine.appendChild(window.__QP_UTILS.createSubAccordion("💎 瞳・髪の装飾 (Eye & Hair Ornament)", ORNAMENT_DATA));
         conFine.appendChild(window.__QP_UTILS.createSubAccordion("🌫 雰囲気ブースト (Atmosphere Booster)", ATMOSPHERE_DATA));
+        conFine.appendChild(window.__QP_UTILS.createSubAccordion("👗 衣装ディテール特化 (Outfit Detail)", OUTFIT_DETAIL_DATA));
+        conFine.appendChild(window.__QP_UTILS.createSubAccordion("🧵 素材質感特化 (Material Texture Focus)", MATERIAL_TEXTURE_DATA));
+        conFine.appendChild(window.__QP_UTILS.createSubAccordion("📐 シルエット・立体感特化 (Silhouette & Volume)", SILHOUETTE_VOLUME_DATA));
+        conFine.appendChild(window.__QP_UTILS.createSubAccordion("💎 装飾小物・宝飾特化 (Accessory Density)", ACCESSORY_DENSITY_DATA));
+        conFine.appendChild(window.__QP_UTILS.createSubAccordion("🎯 衣装の見せ場特化 (Focal Detail)", FOCAL_DETAIL_DATA));
+        conFine.appendChild(window.__QP_UTILS.createSubAccordion("🏛 世界観衣装ブースト (Worldbuilding Outfit)", WORLDBUILDING_OUTFIT_DATA));
+        conFine.appendChild(window.__QP_UTILS.createSubAccordion("🕰 使用感・経年表現 (Aged & Worn)", AGED_WORN_DATA));
+        conFine.appendChild(window.__QP_UTILS.createSubAccordion("🧿 模様・パターン特化 (Pattern & Motif)", PATTERN_MOTIF_DATA));
 
         // Insert before NEG trigger if exists, else append
         const negWrap = document.getElementById("qp-neg-trigger-wrap");

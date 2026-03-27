@@ -44,6 +44,322 @@
   ];
 
 
+
+  const SECRET_SCENE_FACE_DATA = {
+    "🔞 高揚・熱感 (Secret Heat & Arousal Faces)": [
+      { ja: "熱っぽい顔", en: "heavy blush, parted lips, watery eyes, heated expression" },
+      { ja: "高揚うるみ顔", en: "watery eyes, flushed cheeks, excited expression, trembling lips" },
+      { ja: "火照り顔", en: "flushed face, half-lidded eyes, soft open mouth, warm expression" },
+      { ja: "息荒れ顔", en: "panting, parted lips, flushed cheeks, unsteady breathing" }
+    ],
+    "🔞 恥じらい・照れ艶 (Secret Blushing & Shy Faces)": [
+      { ja: "艶照れ顔", en: "shy blush, moist eyes, embarrassed smile, sensual expression" },
+      { ja: "恥じらい顔", en: "looking away, deep blush, trembling lips, shy expression" },
+      { ja: "目逸らし艶顔", en: "averted gaze, soft blush, half-lidded eyes, bashful expression" },
+      { ja: "赤面うるみ顔", en: "heavy blush, watery eyes, parted lips, flustered face" }
+    ],
+    "🔞 余裕・誘い (Secret Tempting Faces)": [
+      { ja: "誘い笑顔", en: "seductive smile, inviting gaze, half-lidded eyes, soft blush" },
+      { ja: "艶視線顔", en: "sultry gaze, half-lidded eyes, glossy lips, teasing expression" },
+      { ja: "甘い誘い顔", en: "gentle smile, inviting look, warm blush, alluring expression" },
+      { ja: "余裕艶顔", en: "confident smile, calm gaze, seductive composure, soft blush" }
+    ],
+    "🔞 我慢・揺らぎ (Secret Restraint Faces)": [
+      { ja: "我慢顔", en: "biting lip, trembling face, flushed cheeks, restrained expression" },
+      { ja: "こらえ顔", en: "clenched expression, watery eyes, blushing, trying to endure" },
+      { ja: "乱れかけ顔", en: "shaky breath, unfocused eyes, flushed face, wavering composure" },
+      { ja: "崩れ寸前顔", en: "teary eyes, trembling lips, heavy blush, on-the-edge expression" }
+    ],
+    "🔞 とろけ・夢心地 (Secret Melting Faces)": [
+      { ja: "艶とろ顔", en: "dreamy eyes, soft blush, parted lips, melting expression" },
+      { ja: "夢心地艶顔", en: "blissful face, half-lidded eyes, warm blush, dreamy expression" },
+      { ja: "うるみとろ顔", en: "watery eyes, relaxed smile, flushed face, melting look" },
+      { ja: "溶け顔", en: "slack expression, dreamy smile, soft blush, dazed face" }
+    ],
+    "🔞 余韻・満ち足り (Secret Afterglow Faces)": [
+      { ja: "余韻顔", en: "dazed smile, flushed cheeks, relaxed eyes, lingering afterglow" },
+      { ja: "満ち足り顔", en: "satisfied smile, soft blush, relaxed face, fulfilled expression" },
+      { ja: "力抜け顔", en: "slack shoulders, half-lidded eyes, loose expression, exhausted bliss" },
+      { ja: "静かな満足顔", en: "calm smile, soft blush, peaceful satisfied expression" }
+    ],
+    "🔞 いたずら・挑発 (Secret Teasing & Provocative Faces)": [
+      { ja: "挑発顔", en: "provocative smirk, daring gaze, teasing expression, half-lidded eyes" },
+      { ja: "いたずら艶顔", en: "playful smile, sultry eyes, mischievous expression, soft blush" },
+      { ja: "からかい艶顔", en: "teasing grin, alluring gaze, amused expression, warm blush" },
+      { ja: "仕掛け顔", en: "scheming smile, seductive eyes, playful provocation, confident expression" }
+    ],
+    "🔞 支配・主導 (Secret Dominant Faces)": [
+      { ja: "支配顔", en: "dominant gaze, composed smile, controlling presence, half-lidded eyes" },
+      { ja: "主導顔", en: "confident expression, steady gaze, leading presence, calm smile" },
+      { ja: "見下し艶顔", en: "condescending smile, sultry eyes, superior expression, teasing dominance" },
+      { ja: "優位顔", en: "victorious smirk, confident gaze, superior composure, dominant expression" }
+    ],
+    "🔞 うるみ・涙目 (Secret Watery & Teary Faces)": [
+      { ja: "うるみ顔", en: "watery eyes, trembling lashes, soft blush, emotional expression" },
+      { ja: "涙目艶顔", en: "teary eyes, flushed cheeks, parted lips, sensual glossy expression" },
+      { ja: "潤み見上げ顔", en: "upturned watery eyes, soft blush, pleading glossy look" },
+      { ja: "泣き艶顔", en: "tearful eyes, trembling lips, heavy blush, emotionally melted expression" }
+    ],
+    "🔞 息乱れ・呼吸感 (Secret Breathless Faces)": [
+      { ja: "息乱れ顔", en: "uneven breathing, parted lips, flushed face, dazed expression" },
+      { ja: "荒息顔", en: "panting, trembling shoulders, open mouth, heated blush" },
+      { ja: "呼吸熱顔", en: "hot breath, half-lidded eyes, flushed cheeks, unsteady expression" },
+      { ja: "吐息顔", en: "soft exhale, relaxed lips, dreamy eyes, warm blush" }
+    ],
+    "🔞 視線・見つめ (Secret Gazing Faces)": [
+      { ja: "見上げ艶顔", en: "upward sultry gaze, moist eyes, soft blush, inviting expression" },
+      { ja: "見つめ艶顔", en: "locked gaze, half-lidded eyes, glossy lips, intense allure" },
+      { ja: "流し目艶顔", en: "side glance, teasing eyes, soft smile, sensual expression" },
+      { ja: "離せない顔", en: "unbroken gaze, entranced eyes, flushed face, unable to look away" }
+    ],
+    "🔞 口元・微開き (Secret Lips & Parted Mouth Faces)": [
+      { ja: "口半開き顔", en: "slightly open mouth, dazed eyes, soft blush, breathless expression" },
+      { ja: "唇震え顔", en: "trembling lips, watery eyes, flushed cheeks, wavering composure" },
+      { ja: "噛み唇顔", en: "biting lip, heated blush, half-lidded eyes, restrained desire" },
+      { ja: "声漏れ顔", en: "parted lips, shaky breath, trembling expression, flushed face" }
+    ],
+    "🔞 受け・委ね (Secret Yielding Faces)": [
+      { ja: "委ね顔", en: "surrendered expression, relaxed eyes, soft blush, trusting face" },
+      { ja: "身任せ顔", en: "letting-go expression, half-lidded eyes, warm blush, passive surrender" },
+      { ja: "逆らえない顔", en: "helpless gaze, trembling lips, flushed cheeks, unable to resist" },
+      { ja: "力抜け委ね顔", en: "loosened posture, slack lips, watery eyes, fully yielding expression" }
+    ],
+    "🔞 余裕崩れ (Secret Composure Breaking Faces)": [
+      { ja: "余裕崩れ顔", en: "cracking smirk, shaken gaze, flushed face, composure slipping" },
+      { ja: "強気崩れ顔", en: "broken bravado, trembling lips, heated blush, confidence falling apart" },
+      { ja: "平静失い顔", en: "lost composure, unfocused eyes, uneven breathing, flushed cheeks" },
+      { ja: "表情乱れ顔", en: "disturbed expression, watery eyes, trembling mouth, emotional breakdown" }
+    ],
+    "🔞 🔥 焦り・寸前 (Secret Instinctive Urgency)": [
+      { ja: "焦らし顔", en: "restless eyes, flushed face, desperate heat, drooling, panting" },
+      { ja: "張りつめ顔", en: "tense expression, focused eyes, biting lip, restrained heat" },
+      { ja: "寸前硬直顔", en: "frozen in pleasure, rolling eyes, trembling lips, stiffened body, mindless heat" },
+      { ja: "息止め顔", en: "holding breath, flushed cheeks, intense eyes, stiffened posture" }
+    ],
+    "🔞 ⚔ 反撃・主導奪取 (Secret Lecherous Takeover)": [
+      { ja: "反撃笑顔", en: "lewd smile, dominant gaze, predatory smirk, flushed face" },
+      { ja: "主導奪取顔", en: "confident expression, steady gaze, leading presence, calm smile" },
+      { ja: "逆転余裕顔", en: "victorious smirk, confident gaze, superior composure, dominant expression" },
+      { ja: "仕返し顔", en: "naughty grin, possessive look, teasing dominance, heavy breath" }
+    ],
+    "🔞 🫀 執着深化 (Secret Obsessive Lust)": [
+      { ja: "離したくない顔", en: "clinging expression, lustful gaze, desperate attachment, heavy blush" },
+      { ja: "強い執着顔", en: "intense obsession, dilated pupils, predatory eyes, deep desire" },
+      { ja: "逃がさない顔", en: "unbroken gaze, entranced eyes, flushed face, unable to look away" },
+      { ja: "目で縛る顔", en: "locked-on gaze, dilated pupils, predatory eyes, intense desire" }
+    ],
+    "🔞 👑 満足・優位 (Secret Corrupted Satisfaction)": [
+      { ja: "満足勝ち顔", en: "satisfied smirk, blissful daze, euphoric dominance, flushed face" },
+      { ja: "優位確信顔", en: "confident lewd smile, superior look, heavy breathing, mocking eyes" },
+      { ja: "してやったり顔", en: "smug grin, satisfied eyes, playful confidence, triumphant expression" },
+      { ja: "勝ち気満足顔", en: "confident smirk, steady gaze, relaxed face, certain victory expression" }
+    ]
+  };
+
+  const SCENE_FACE_DATA = {
+    "🌶 食リアクション (Food Reaction Faces)": [
+      { ja: "辛い顔", en: "full-face blush, flushed face, tearing up, sweat beads, steam from face, tongue out, open mouth, shock lines" },
+      { ja: "美味すぎて昇天顔", en: "sparkles on face, watery eyes, soft smile, rosy cheeks, floating hearts, blissful expression" },
+      { ja: "酸っぱすぎる顔", en: "puckered lips, watery eyes, sweatdrop, confusion lines, shocked expression" },
+      { ja: "熱すぎる顔", en: "full-face blush, steam from face, panic sweat, open mouth, shock lines" },
+      { ja: "激辛悶絶顔", en: "full-face blush, tearing up, streaming tears, sweat beads, steam from face, tongue out, mouth wide open, agony, shock lines" },
+      { ja: "美味感涙顔", en: "watery eyes, tearing up, blissful expression, soft smile, rosy cheeks, floating hearts, sparkles on face" },
+      { ja: "熱々涙目顔", en: "full-face blush, watery eyes, tearing up, steam from face, panic sweat, open mouth, shock lines" },
+      { ja: "酸っぱしわ顔", en: "puckered lips, wrinkled face, watery eyes, squeezed eyes, confusion lines, shocked expression" },
+      { ja: "苦味崩壊顔", en: "grimace, twisted face, disgust, squeezed eyes, tongue out, stress lines, shock lines" }
+    ],
+    "🎭 キャラ性・演技 (Character & Dramatic Faces)": [
+      { ja: "悪役顔", en: "evil face, sinister grin, wicked smirk, triumphant expression, plotting expression, narrowed eyes, cold gaze, shadowed eyes" },
+      { ja: "勝者の顔", en: "smug smile, half-lidded eyes, confident look, triumphant expression" },
+      { ja: "小悪魔の顔", en: "smirk, teasing look, half-lidded eyes, sparkle effect around face" },
+      { ja: "企み顔", en: "plotting expression, narrowed eyes, smirk, shadow over eyes" },
+      { ja: "冷酷悪役顔", en: "cold gaze, emotionless face, narrowed eyes, shadowed eyes, villainous aura, intimidating expression" },
+      { ja: "狂気悪役顔", en: "manic grin, crazy eyes, wide eyes, twitching face, unhinged expression, shadow over face" },
+      { ja: "悪役余裕顔", en: "sinister grin, half-lidded eyes, smug smile, composed expression, cold gaze" },
+      { ja: "勝者余裕顔", en: "smug smile, half-lidded eyes, confident look, victorious expression, relaxed face" },
+      { ja: "小悪魔あざと顔", en: "teasing smile, smug face, half-lidded eyes, playful wink, flirtatious expression" },
+      { ja: "企み成就顔", en: "triumphant smirk, narrowed eyes, satisfied expression, villain smile, shadow over eyes" }
+    ],
+    "⚠ トラブル・出来事 (Situation Faces)": [
+      { ja: "バレた時の顔", en: "panic sweat, shock lines, averted gaze, embarrassment lines, wide eyes" },
+      { ja: "ホラー遭遇顔", en: "pale face, shock lines, wide eyes, trembling, sweatdrop" },
+      { ja: "体調不良顔", en: "pale face, blank face, dark circles under eyes, runny nose" },
+      { ja: "やらかし顔", en: "sweatdrop, confusion lines, embarrassed expression, averted gaze" },
+      { ja: "バレ硬直顔", en: "wide eyes, frozen expression, panic sweat, shock lines, stiff face" },
+      { ja: "失態青ざめ顔", en: "pale face, panic sweat, embarrassed expression, confusion lines, shock lines" },
+      { ja: "ホラー絶叫顔", en: "screaming, wide eyes, pale face, trembling, shock lines, terror" },
+      { ja: "寝不足限界顔", en: "dark circles under eyes, half-closed eyes, exhausted face, pale face, messy expression" },
+      { ja: "不調ぐったり顔", en: "pale face, droopy eyes, dark circles under eyes, blank face, exhausted expression" }
+    ],
+    "🍽 食リアクション・拡張 (Expanded Food Reaction Faces)": [
+      { ja: "幸福満面顔", en: "big smile, glowing face, soft blush, sparkling eyes, blissful expression, happy aura" },
+      { ja: "一口感動顔", en: "wide eyes, soft smile, watery eyes, sparkles on face, amazed expression, rosy cheeks" },
+      { ja: "口福とろけ顔", en: "melted smile, half-lidded eyes, rosy cheeks, blissful expression, dreamy face" },
+      { ja: "猫舌困り顔", en: "panic sweat, pursed lips, watery eyes, troubled face, steam from face, flustered expression" },
+      { ja: "甘味とろけ顔", en: "soft smile, dreamy eyes, rosy cheeks, blissful expression, floating hearts, relaxed face" },
+      { ja: "爆食夢中顔", en: "focused eyes, puffed cheeks, eager expression, messy mouth, intense eating face, lively expression" }
+    ],
+    "😳 照れ・気まずさ (Embarrassed & Awkward Faces)": [
+      { ja: "気まず笑い顔", en: "awkward smile, averted gaze, sweatdrop, embarrassed expression, stiff face" },
+      { ja: "誤魔化し笑顔", en: "forced smile, shifting eyes, sweatdrop, nervous grin, embarrassed face" },
+      { ja: "目逸らし赤面顔", en: "heavy blush, looking away, shy expression, lips pressed together, flustered face" },
+      { ja: "褒められ照れ顔", en: "soft blush, shy smile, sparkling eyes, embarrassed expression, looking away" },
+      { ja: "見られ硬直顔", en: "wide eyes, frozen smile, embarrassment lines, stiff face, panic sweat" },
+      { ja: "言葉詰まり顔", en: "open mouth, hesitant expression, averted gaze, blush, nervous face, awkward pause" }
+    ],
+    "😱 パニック・事故 (Panic & Mishap Faces)": [
+      { ja: "大惨事直前顔", en: "panic sweat, wide eyes, alarmed expression, shock lines, tense face" },
+      { ja: "完全フリーズ顔", en: "blank stare, frozen expression, wide eyes, stiff face, shock lines" },
+      { ja: "現実逃避顔", en: "empty smile, unfocused eyes, blank face, soul leaving body, awkward calm" },
+      { ja: "修羅場突入顔", en: "sweat beads, gritted teeth, tense eyes, panic expression, crisis face" },
+      { ja: "大汗焦り顔", en: "heavy sweat, flustered expression, wide eyes, panic face, trembling" },
+      { ja: "泣き寸前顔", en: "watery eyes, trembling lips, panicked face, holding back tears, shocked expression" }
+    ],
+    "😈 悪役・企み (Villain & Plotting Faces)": [
+      { ja: "薄笑い悪役顔", en: "thin smile, cold gaze, half-lidded eyes, villainous expression, shadow over eyes" },
+      { ja: "見下し顔", en: "disdainful expression, lowered eyelids, slight smirk, cold gaze, superior attitude" },
+      { ja: "愉悦悪役顔", en: "sadistic smile, delighted eyes, sinister grin, cruel amusement, villainous aura" },
+      { ja: "黒幕満足顔", en: "satisfied smirk, shadowed eyes, composed expression, mastermind vibe, cold confidence" },
+      { ja: "計画通り顔", en: "knowing grin, narrowed eyes, smug smile, plotting expression, satisfied face" },
+      { ja: "勝利確信顔", en: "confident smirk, steady gaze, relaxed face, certain victory expression, intimidating calm" }
+    ],
+    "💤 疲労・不調 (Fatigue & Sickly Faces)": [
+      { ja: "徹夜死に顔", en: "dark circles under eyes, lifeless eyes, exhausted face, pale face, empty expression" },
+      { ja: "眠気限界顔", en: "half-closed eyes, drooping eyelids, yawning face, sleepy expression, tired blush" },
+      { ja: "集中切れ顔", en: "blank stare, tired eyes, slack mouth, worn-out face, mental fatigue" },
+      { ja: "熱っぽい顔", en: "flushed face, droopy eyes, weak expression, feverish blush, exhausted face" },
+      { ja: "力尽き顔", en: "empty eyes, exhausted expression, pale face, limp face, drained energy" },
+      { ja: "虚ろ疲労顔", en: "vacant eyes, dark circles under eyes, pale face, weak expression, listless face" }
+    ],
+    "👻 ホラー・恐怖 (Horror & Fear Faces)": [
+      { ja: "血の気引き顔", en: "pale face, trembling lips, wide eyes, fear expression, blood draining from face" },
+      { ja: "青ざめ凝視顔", en: "staring eyes, pale face, frozen fear, tense face, shock lines" },
+      { ja: "息呑み顔", en: "sharp inhale, wide eyes, frozen mouth, tense expression, sudden fear" },
+      { ja: "声失い顔", en: "silent scream, wide eyes, pale face, trembling, speechless terror" },
+      { ja: "震え固まり顔", en: "shaking, frozen body, fearful eyes, pale face, stiff expression" },
+      { ja: "背筋凍る顔", en: "cold sweat, horrified eyes, pale face, tense mouth, terror, dread" }
+    ],
+    "💘 魅了・小悪魔 (Seductive & Teasing Faces)": [
+      { ja: "じっと誘惑顔", en: "seductive gaze, half-lidded eyes, slight smile, inviting look, alluring expression" },
+      { ja: "甘え上目顔", en: "upturned eyes, soft blush, pleading smile, cute expression, affectionate face" },
+      { ja: "からかい笑顔", en: "teasing smile, playful eyes, smug face, light blush, mischievous expression" },
+      { ja: "流し目誘惑顔", en: "side glance, seductive smile, half-lidded eyes, alluring look, teasing expression" },
+      { ja: "見透かし笑顔", en: "knowing smile, half-lidded eyes, calm gaze, teasing confidence, smug expression" },
+      { ja: "思わせぶり顔", en: "ambiguous smile, soft gaze, slight blush, flirtatious expression, unreadable charm" }
+    ],
+    "🏆 勝利・達成 (Victory & Achievement Faces)": [
+      { ja: "完全勝利顔", en: "triumphant smile, proud face, confident eyes, victory expression, composed confidence" },
+      { ja: "してやったり顔", en: "smug grin, satisfied eyes, playful confidence, triumphant expression, relaxed face" },
+      { ja: "ドヤ満足顔", en: "smug smile, raised chin, confident look, satisfied expression, prideful face" },
+      { ja: "会心笑み顔", en: "knowing smile, confident eyes, fulfilled expression, soft smirk, success face" },
+      { ja: "任務完了顔", en: "calm smile, relieved expression, steady eyes, composed face, mission accomplished vibe" },
+      { ja: "逆転勝利顔", en: "victorious grin, intense eyes, relieved confidence, triumphant face, comeback energy" }    ],
+    "💗 好意・ときめき (Affection & Heartflutter Faces)": [
+      { ja: "好き漏れ顔", en: "soft blush, shy smile, eyes full of affection, flustered expression, heartwarming gaze" },
+      { ja: "ときめき顔", en: "sparkling eyes, soft blush, lips slightly parted, enchanted expression, heart-throbbing look" },
+      { ja: "胸きゅん顔", en: "warm blush, shining eyes, touched expression, gentle smile, overwhelmed with affection" },
+      { ja: "恋うっとり顔", en: "half-lidded dreamy eyes, soft blush, relaxed smile, lovestruck expression, dreamy face" },
+      { ja: "会えて嬉しい顔", en: "bright smile, watery eyes, joyful blush, relieved expression, happiness overflowing" },
+      { ja: "見つめ照れ顔", en: "looking into someone's eyes, shy blush, nervous smile, flustered expression, bashful face" }
+    ],
+    "😊 喜び・幸福 (Joy & Happiness Faces)": [
+      { ja: "嬉しさ満開顔", en: "full smile, glowing face, sparkling eyes, cheerful blush, happiness overflowing" },
+      { ja: "幸福満面顔", en: "radiant smile, soft blush, warm eyes, deeply happy expression, blissful face" },
+      { ja: "ご満悦顔", en: "satisfied smile, proud but soft expression, relaxed eyes, content face" },
+      { ja: "報われ顔", en: "relieved smile, teary eyes, soft blush, fulfilled expression, emotional satisfaction" },
+      { ja: "褒められ嬉し顔", en: "bashful smile, bright eyes, soft blush, pleased expression, happy reaction to praise" },
+      { ja: "しみじみ幸せ顔", en: "gentle smile, calm eyes, soft blush, peaceful happiness, quietly fulfilled expression" }
+    ],
+    "✨ 期待・きらめき (Expectation & Sparkling Faces)": [
+      { ja: "目輝き顔", en: "sparkling eyes, excited smile, eager expression, bright face, lively anticipation" },
+      { ja: "期待満ち顔", en: "hopeful eyes, soft smile, uplifted expression, bright anticipation, gentle excitement" },
+      { ja: "わくわく顔", en: "wide sparkling eyes, excited smile, eager expression, energetic anticipation" },
+      { ja: "胸高鳴り顔", en: "slightly parted lips, bright eyes, soft blush, thrilled expression, heart-racing face" },
+      { ja: "待ちきれない顔", en: "restless excitement, shining eyes, eager smile, impatient anticipation, lively face" },
+      { ja: "希望きらめき顔", en: "radiant eyes, hopeful smile, soft glow, inspired expression, shining anticipation" }
+    ],
+    "🥺 甘え・お願い (Pleading & Needy Faces)": [
+      { ja: "甘え上目顔", en: "puppy eyes, needy gaze, slightly upward eyes, soft pleading expression, tender dependence" },
+      { ja: "おねだり顔", en: "begging face, asking expression, hopeful eyes, slightly pouting lips, cute request" },
+      { ja: "お願い顔", en: "pleading expression, earnest eyes, gentle asking face, soft hopeful look" },
+      { ja: "拗ね甘え顔", en: "sulky needy face, pouting lips, clingy expression, soft eyes, playful dependence" },
+      { ja: "かまって顔", en: "attention-seeking face, needy expression, expectant eyes, subtle pout, wanting affection" },
+      { ja: "許して顔", en: "sorry pleading face, apologetic eyes, timid begging expression, soft vulnerable look" }
+    ],
+    "🤝 信頼・安心 (Trust & Relief Faces)": [
+      { ja: "安心しきり顔", en: "fully relieved face, relaxed expression, gentle calm eyes, soft smile, feeling safe" },
+      { ja: "信頼まなざし顔", en: "trusting gaze, warm eyes, sincere gentle expression, soft relaxed face" },
+      { ja: "ほっと安堵顔", en: "relieved face, soft exhale expression, calm relaxed features, quiet comfort" },
+      { ja: "任せきり顔", en: "relying expression, trusting face, calm dependence, soft smile, leaving it to someone" },
+      { ja: "守られ安心顔", en: "protected relieved face, safe expression, softened eyes, gentle comfort" },
+      { ja: "心許し顔", en: "opened-heart expression, trusting relaxed face, gentle smile, emotional ease" }
+    ],
+    "🌸 癒やし・穏やか (Healing & Peaceful Faces)": [
+      { ja: "癒やし微笑顔", en: "healing smile, gentle eyes, soft peaceful expression, calm warmth" },
+      { ja: "穏やか微笑顔", en: "calm smile, relaxed eyes, serene expression, quiet tenderness" },
+      { ja: "やさし包み顔", en: "embracing gentle face, warm eyes, soft caring expression, soothing presence" },
+      { ja: "見守り笑顔", en: "watching-over smile, kind eyes, calm supportive expression, soft warmth" },
+      { ja: "ほのぼの顔", en: "cozy peaceful face, gentle smile, relaxed features, heartwarming mood" },
+      { ja: "安らぎ満ち顔", en: "restful expression, peaceful eyes, soft smile, filled with comfort" }
+    ],
+    "🎁 驚き・感激 (Surprise & Deep Emotion Faces)": [
+      { ja: "感激うるみ顔", en: "moved teary eyes, touched expression, trembling smile, emotional warmth" },
+      { ja: "うれし驚き顔", en: "happy surprise face, widened shining eyes, open smile, bright reaction" },
+      { ja: "思わず息呑み顔", en: "gasping in amazement, breath-catching expression, widened eyes, emotional shock" },
+      { ja: "胸打たれ顔", en: "deeply moved face, soft stunned eyes, emotional silence, touched expression" },
+      { ja: "言葉失い顔", en: "speechless emotional face, stunned eyes, trembling lips, overwhelmed feeling" },
+      { ja: "贈り物感激顔", en: "gift-received emotional face, watery eyes, grateful smile, overwhelmed happiness" }
+    ],
+    "🙌 達成・開放感 (Achievement & Release Faces)": [
+      { ja: "やり切り顔", en: "accomplished face, relieved smile, loosened tension, fulfilled expression" },
+      { ja: "達成満面顔", en: "achievement-filled smile, bright satisfied face, proud joy, fulfilled look" },
+      { ja: "解放安堵顔", en: "released relief face, deep exhale, softened eyes, tension finally gone" },
+      { ja: "勝ち抜き顔", en: "survived-and-won face, confident relief, strong satisfied expression" },
+      { ja: "終わった顔", en: "it's finally over face, exhausted relief, slackened tension, liberated expression" },
+      { ja: "報酬待ち顔", en: "reward-awaiting grin, excited relief, satisfied expectation, playful confidence" }
+    ],
+    "🤲 受け止め・包容 (Acceptance & Embrace Faces)": [
+      { ja: "受け止め微笑顔", en: "accepting gentle smile, soft eyes, warm understanding expression" },
+      { ja: "包み込み顔", en: "embracing face, caring eyes, protective smile, soft emotional warmth" },
+      { ja: "大丈夫顔", en: "it's okay face, calm reassuring eyes, gentle supportive smile" },
+      { ja: "寄り添い顔", en: "close comforting face, tender gaze, empathetic smile, quiet support" },
+      { ja: "許し受容顔", en: "forgiving accepting face, softened eyes, kind expression, emotional openness" },
+      { ja: "静か肯定顔", en: "quiet affirming face, calm smile, understanding eyes, peaceful approval" }
+    ],
+    "🤍 切なさ・余韻 (Bittersweet & Lingering Faces)": [
+      { ja: "切なみ顔", en: "bittersweet face, fragile eyes, quiet ache, soft emotional tremble" },
+      { ja: "名残惜し顔", en: "reluctant-to-part face, lingering gaze, soft sadness, tender restraint" },
+      { ja: "しんみり顔", en: "wistful face, softened eyes, quiet reflection, subdued emotion" },
+      { ja: "遠い目余韻顔", en: "lingering distant gaze face, reflective eyes, emotional afterglow, quiet memory" },
+      { ja: "言えない想い顔", en: "unspoken feelings face, hesitant lips, moist eyes, hidden affection" },
+      { ja: "余韻うるみ顔", en: "teary lingering emotion face, shimmering eyes, emotional aftertaste, quiet depth" }
+    ],
+    "🔥 闘志・気合 (Fighting Spirit & Determination Faces)": [
+      { ja: "闘志燃え顔", en: "burning fighting spirit face, fierce eyes, heated resolve, battle-ready expression" },
+      { ja: "気合満ち顔", en: "determination-filled face, focused eyes, gathered spirit, intense readiness" },
+      { ja: "やる気全開顔", en: "fully fired-up face, energetic eyes, pumped-up mood, eager intensity" },
+      { ja: "勝負顔", en: "game face, sharpened stare, serious focus, ready-to-win expression" },
+      { ja: "食いしばり気合顔", en: "gritted-teeth determination face, tensed jaw, stubborn will, pushing forward" },
+      { ja: "本気突入顔", en: "serious-mode face, locked-in eyes, total commitment, full-intensity expression" }
+    ],
+    "🫠 とろけ・夢見心地 (Melting & Dreamy Faces)": [
+      { ja: "とろけ顔", en: "melting face, softened eyes, dissolved tension, blissful warmth" },
+      { ja: "夢見心地顔", en: "dreamy bliss face, hazy eyes, floating mood, gentle happiness" },
+      { ja: "うっとりとろ顔", en: "entranced melting face, heavy-lidded eyes, sweet daze, soft surrender" },
+      { ja: "幸せとろ顔", en: "happily melted face, loosened smile, warm comfort, glowing contentment" },
+      { ja: "ぽやぽや顔", en: "fluffy absent-minded face, softened focus, airy mood, gentle blankness" },
+      { ja: "甘夢うっとり顔", en: "sweet dreamy entranced face, rosy calm, drifting bliss, tender fascination" }
+    ],
+    "🌀 混乱・処理落ち (Confusion & Brain Lag Faces)": [
+      { ja: "処理落ち顔", en: "brain-lag face, frozen thinking, delayed reaction, overloaded expression" },
+      { ja: "混乱ぐるぐる顔", en: "swirling confusion face, dizzy thoughts, spinning focus, mental overload" },
+      { ja: "情報過多顔", en: "too-much-information face, overwhelmed eyes, crowded thoughts, sensory overload" },
+      { ja: "理解追いつか顔", en: "can't-keep-up face, lost processing, delayed understanding, stunned confusion" },
+      { ja: "思考停止顔", en: "thought-stopped face, blank stare, halted mind, unable to process" },
+      { ja: "混線ぽかん顔", en: "cross-wired blank face, dazed confusion, open-mouthed pause, tangled thoughts" }
+    ]
+  };
+
   const DICT = {
     "smile": "笑顔", "happy": "幸せ", "laughing": "大笑い", "light smile": "微笑み",
     "angry": "怒り", "furious": "激怒", "sad": "悲しい", "crying": "泣く",
@@ -71,46 +387,49 @@
       }
 
       const ensureTopGroups = () => {
-        let contentArea = parent.querySelector(".section-content");
-        if (!contentArea) {
-          contentArea = document.createElement("div");
-          contentArea.className = "section-content";
-          parent.appendChild(contentArea);
-        }
+  let contentArea = parent.querySelector(".section-content");
+  if (!contentArea) {
+    contentArea = document.createElement("div");
+    contentArea.className = "section-content";
+    parent.appendChild(contentArea);
+  }
 
-        let wrapper = contentArea.querySelector('.expression-top-groups');
-        if (!wrapper) {
-          wrapper = document.createElement('div');
-          wrapper.className = 'expression-top-groups';
-          wrapper.style.cssText = 'display:flex; flex-direction:column; gap:10px;';
+  let wrapper = contentArea.querySelector('.expression-top-groups');
+  if (!wrapper) {
+    wrapper = document.createElement('div');
+    wrapper.className = 'expression-top-groups';
+    wrapper.style.cssText = 'display:flex; flex-direction:column; gap:10px;';
+    contentArea.appendChild(wrapper);
+  }
 
-          const makeTopGroup = (cls, title, border, bg) => {
-            const details = document.createElement('details');
-            details.className = `expression-top-group ${cls}`;
-            details.open = false;
-            details.style.cssText = `margin-bottom:4px; border:2px solid ${border}; border-radius:8px; background:#fff; overflow:hidden;`;
+  const makeTopGroup = (cls, title, border, bg) => {
+    let details = wrapper.querySelector(`.${cls}`);
+    if (!details) {
+      details = document.createElement('details');
+      details.className = `expression-top-group ${cls}`;
+      details.open = false;
+      details.style.cssText = `margin-bottom:4px; border:2px solid ${border}; border-radius:8px; background:#fff; overflow:hidden;`;
 
-            const summary = document.createElement('summary');
-            summary.textContent = title;
-            summary.style.cssText = `font-weight:bold; padding:10px 12px; cursor:pointer; font-size:1.08em; color:#333; background:${bg}; list-style:none; outline:none;`;
-            details.appendChild(summary);
+      const summary = document.createElement('summary');
+      summary.textContent = title;
+      summary.style.cssText = `font-weight:bold; padding:10px 12px; cursor:pointer; font-size:1.08em; color:#333; background:${bg}; list-style:none; outline:none;`;
+      details.appendChild(summary);
 
-            const inner = document.createElement('div');
-            inner.className = 'expression-top-group-content';
-            inner.style.cssText = 'padding:10px; display:flex; flex-direction:column; gap:8px;';
-            details.appendChild(inner);
-            return details;
-          };
+      const inner = document.createElement('div');
+      inner.className = 'expression-top-group-content';
+      inner.style.cssText = 'padding:10px; display:flex; flex-direction:column; gap:8px;';
+      details.appendChild(inner);
+      wrapper.appendChild(details);
+    }
+    return details.querySelector('.expression-top-group-content');
+  };
 
-          wrapper.appendChild(makeTopGroup('expression-top-emotion', '😊 感情設計 (Emotion Design)', '#d9c6ff', '#faf7ff'));
-          wrapper.appendChild(makeTopGroup('expression-top-facial', '🧩 顔パーツ・演出 (Facial Parts & FX)', '#bfe3ff', '#f5fbff'));
-          contentArea.appendChild(wrapper);
-        }
-        return {
-          emotion: wrapper.querySelector('.expression-top-emotion .expression-top-group-content'),
-          facial: wrapper.querySelector('.expression-top-facial .expression-top-group-content')
-        };
-      };
+  return {
+    emotion: makeTopGroup('expression-top-emotion', '😊 感情設計 (Emotion Design)', '#d9c6ff', '#faf7ff'),
+    facial: makeTopGroup('expression-top-facial', '🧩 顔パーツ・演出 (Facial Parts & FX)', '#bfe3ff', '#f5fbff'),
+    scene: makeTopGroup('expression-top-scene', '🎬 シーン顔 (Scene Faces)', '#ffd59e', '#fff8ef')
+  };
+};
 
       const createCat = (title, items) => {
         const details = document.createElement("details");
@@ -149,18 +468,35 @@
         root.appendChild(createCat(cat, items));
       });
 
+      const sceneRoot = document.createElement("div");
+      sceneRoot.className = "expression-scene-container";
+      if (IS_UNLOCKED && typeof SECRET_SCENE_FACE_DATA !== "undefined") {
+        Object.entries(SECRET_SCENE_FACE_DATA).forEach(([cat, items]) => {
+          sceneRoot.appendChild(createCat(cat, items, true));
+        });
+      }
+      Object.entries(SCENE_FACE_DATA).forEach(([cat, items]) => {
+        sceneRoot.appendChild(createCat(cat, items, false));
+      });
+
       const groups = ensureTopGroups();
       groups.emotion.appendChild(root);
       if (!groups.facial.querySelector('.expression-v2-container')) {
         groups.facial.appendChild(facialRoot);
       }
+      if (!groups.scene.querySelector('.expression-scene-container')) {
+        groups.scene.appendChild(sceneRoot);
+      }
     },
 
     getTags() {
       const tags = [];
-      document.querySelectorAll(".expression-v1-container input[type='checkbox']:checked").forEach(cb => {
-        tags.push(cb.dataset.val);
-      });
+      const parent = document.querySelector("#list-expression");
+      if (parent) {
+        parent.querySelectorAll("input[type='checkbox']:checked").forEach(cb => {
+          if (cb.dataset && cb.dataset.val) tags.push(cb.dataset.val);
+        });
+      }
       return tags;
     }
   };
@@ -317,46 +653,49 @@
       if (!parent) return; 
 
       const ensureTopGroups = () => {
-        let contentArea = parent.querySelector(".section-content");
-        if (!contentArea) {
-          contentArea = document.createElement("div");
-          contentArea.className = "section-content";
-          parent.appendChild(contentArea);
-        }
+  let contentArea = parent.querySelector(".section-content");
+  if (!contentArea) {
+    contentArea = document.createElement("div");
+    contentArea.className = "section-content";
+    parent.appendChild(contentArea);
+  }
 
-        let wrapper = contentArea.querySelector('.expression-top-groups');
-        if (!wrapper) {
-          wrapper = document.createElement('div');
-          wrapper.className = 'expression-top-groups';
-          wrapper.style.cssText = 'display:flex; flex-direction:column; gap:10px;';
+  let wrapper = contentArea.querySelector('.expression-top-groups');
+  if (!wrapper) {
+    wrapper = document.createElement('div');
+    wrapper.className = 'expression-top-groups';
+    wrapper.style.cssText = 'display:flex; flex-direction:column; gap:10px;';
+    contentArea.appendChild(wrapper);
+  }
 
-          const makeTopGroup = (cls, title, border, bg) => {
-            const details = document.createElement('details');
-            details.className = `expression-top-group ${cls}`;
-            details.open = false;
-            details.style.cssText = `margin-bottom:4px; border:2px solid ${border}; border-radius:8px; background:#fff; overflow:hidden;`;
+  const makeTopGroup = (cls, title, border, bg) => {
+    let details = wrapper.querySelector(`.${cls}`);
+    if (!details) {
+      details = document.createElement('details');
+      details.className = `expression-top-group ${cls}`;
+      details.open = false;
+      details.style.cssText = `margin-bottom:4px; border:2px solid ${border}; border-radius:8px; background:#fff; overflow:hidden;`;
 
-            const summary = document.createElement('summary');
-            summary.textContent = title;
-            summary.style.cssText = `font-weight:bold; padding:10px 12px; cursor:pointer; font-size:1.08em; color:#333; background:${bg}; list-style:none; outline:none;`;
-            details.appendChild(summary);
+      const summary = document.createElement('summary');
+      summary.textContent = title;
+      summary.style.cssText = `font-weight:bold; padding:10px 12px; cursor:pointer; font-size:1.08em; color:#333; background:${bg}; list-style:none; outline:none;`;
+      details.appendChild(summary);
 
-            const inner = document.createElement('div');
-            inner.className = 'expression-top-group-content';
-            inner.style.cssText = 'padding:10px; display:flex; flex-direction:column; gap:8px;';
-            details.appendChild(inner);
-            return details;
-          };
+      const inner = document.createElement('div');
+      inner.className = 'expression-top-group-content';
+      inner.style.cssText = 'padding:10px; display:flex; flex-direction:column; gap:8px;';
+      details.appendChild(inner);
+      wrapper.appendChild(details);
+    }
+    return details.querySelector('.expression-top-group-content');
+  };
 
-          wrapper.appendChild(makeTopGroup('expression-top-emotion', '😊 感情設計 (Emotion Design)', '#d9c6ff', '#faf7ff'));
-          wrapper.appendChild(makeTopGroup('expression-top-facial', '🧩 顔パーツ・演出 (Facial Parts & FX)', '#bfe3ff', '#f5fbff'));
-          contentArea.appendChild(wrapper);
-        }
-        return {
-          emotion: wrapper.querySelector('.expression-top-emotion .expression-top-group-content'),
-          facial: wrapper.querySelector('.expression-top-facial .expression-top-group-content')
-        };
-      };
+  return {
+    emotion: makeTopGroup('expression-top-emotion', '😊 感情設計 (Emotion Design)', '#d9c6ff', '#faf7ff'),
+    facial: makeTopGroup('expression-top-facial', '🧩 顔パーツ・演出 (Facial Parts & FX)', '#bfe3ff', '#f5fbff'),
+    scene: makeTopGroup('expression-top-scene', '🎬 シーン顔 (Scene Faces)', '#ffd59e', '#fff8ef')
+  };
+};
 
       const root = document.createElement("div");
       root.className = "expression-v2-container";
@@ -460,9 +799,12 @@
 
     getTags() {
       const tags = [];
-      document.querySelectorAll(".expression-v2-container input[type='checkbox']:checked").forEach(cb => {
-        tags.push(cb.dataset.val);
-      });
+      const parent = document.querySelector("#list-expression");
+      if (parent) {
+        parent.querySelectorAll("input[type='checkbox']:checked").forEach(cb => {
+          if (cb.dataset && cb.dataset.val) tags.push(cb.dataset.val);
+        });
+      }
       return tags;
     }
   };
@@ -593,7 +935,11 @@
       { ja: "💞 幸福余韻束", en: "relieved smile, soft eyes, rosy cheeks" },
       { ja: "🕊 許し束", en: "soft eyes, relieved smile, watery eyes" },
       { ja: "🫠 余韻放心束", en: "spaced-out face, saliva trail, soft panting" },
-      { ja: "🫥 余裕崩れ束", en: "forced smile, nervous sweat, unfocused eyes" }
+      { ja: "🫥 余裕崩れ束", en: "forced smile, nervous sweat, unfocused eyes" },
+      { ja: "🔞 🔥 焦り寸前束", en: "restless eyes, flushed face, desperate heat, drooling, panting" },
+      { ja: "🔞 ⚔ 反撃奪取束", en: "lewd smile, dominant gaze, predatory smirk, flushed face, heavy breath" },
+      { ja: "🔞 🫀 執着深化束", en: "clinging expression, lustful gaze, dilated pupils, desperate attachment" },
+      { ja: "🔞 👑 満足優位束", en: "satisfied smirk, blissful daze, euphoric dominance, flushed face, mocking eyes" }
     ]
   };
 
@@ -682,6 +1028,322 @@
     ]
   };
 
+  const SECRET_SCENE_FACE_DATA = {
+    "🔞 高揚・熱感 (Secret Heat & Arousal Faces)": [
+      { ja: "熱っぽい顔", en: "heavy blush, parted lips, watery eyes, heated expression" },
+      { ja: "高揚うるみ顔", en: "watery eyes, flushed cheeks, excited expression, trembling lips" },
+      { ja: "火照り顔", en: "flushed face, half-lidded eyes, soft open mouth, warm expression" },
+      { ja: "息荒れ顔", en: "panting, parted lips, flushed cheeks, unsteady breathing" }
+    ],
+    "🔞 恥じらい・照れ艶 (Secret Blushing & Shy Faces)": [
+      { ja: "艶照れ顔", en: "shy blush, moist eyes, embarrassed smile, sensual expression" },
+      { ja: "恥じらい顔", en: "looking away, deep blush, trembling lips, shy expression" },
+      { ja: "目逸らし艶顔", en: "averted gaze, soft blush, half-lidded eyes, bashful expression" },
+      { ja: "赤面うるみ顔", en: "heavy blush, watery eyes, parted lips, flustered face" }
+    ],
+    "🔞 余裕・誘い (Secret Tempting Faces)": [
+      { ja: "誘い笑顔", en: "seductive smile, inviting gaze, half-lidded eyes, soft blush" },
+      { ja: "艶視線顔", en: "sultry gaze, half-lidded eyes, glossy lips, teasing expression" },
+      { ja: "甘い誘い顔", en: "gentle smile, inviting look, warm blush, alluring expression" },
+      { ja: "余裕艶顔", en: "confident smile, calm gaze, seductive composure, soft blush" }
+    ],
+    "🔞 我慢・揺らぎ (Secret Restraint Faces)": [
+      { ja: "我慢顔", en: "biting lip, trembling face, flushed cheeks, restrained expression" },
+      { ja: "こらえ顔", en: "clenched expression, watery eyes, blushing, trying to endure" },
+      { ja: "乱れかけ顔", en: "shaky breath, unfocused eyes, flushed face, wavering composure" },
+      { ja: "崩れ寸前顔", en: "teary eyes, trembling lips, heavy blush, on-the-edge expression" }
+    ],
+    "🔞 とろけ・夢心地 (Secret Melting Faces)": [
+      { ja: "艶とろ顔", en: "dreamy eyes, soft blush, parted lips, melting expression" },
+      { ja: "夢心地艶顔", en: "blissful face, half-lidded eyes, warm blush, dreamy expression" },
+      { ja: "うるみとろ顔", en: "watery eyes, relaxed smile, flushed face, melting look" },
+      { ja: "溶け顔", en: "slack expression, dreamy smile, soft blush, dazed face" }
+    ],
+    "🔞 余韻・満ち足り (Secret Afterglow Faces)": [
+      { ja: "余韻顔", en: "dazed smile, flushed cheeks, relaxed eyes, lingering afterglow" },
+      { ja: "満ち足り顔", en: "satisfied smile, soft blush, relaxed face, fulfilled expression" },
+      { ja: "力抜け顔", en: "slack shoulders, half-lidded eyes, loose expression, exhausted bliss" },
+      { ja: "静かな満足顔", en: "calm smile, soft blush, peaceful satisfied expression" }
+    ],
+    "🔞 いたずら・挑発 (Secret Teasing & Provocative Faces)": [
+      { ja: "挑発顔", en: "provocative smirk, daring gaze, teasing expression, half-lidded eyes" },
+      { ja: "いたずら艶顔", en: "playful smile, sultry eyes, mischievous expression, soft blush" },
+      { ja: "からかい艶顔", en: "teasing grin, alluring gaze, amused expression, warm blush" },
+      { ja: "仕掛け顔", en: "scheming smile, seductive eyes, playful provocation, confident expression" }
+    ],
+    "🔞 支配・主導 (Secret Dominant Faces)": [
+      { ja: "支配顔", en: "dominant gaze, composed smile, controlling presence, half-lidded eyes" },
+      { ja: "主導顔", en: "confident expression, steady gaze, leading presence, calm smile" },
+      { ja: "見下し艶顔", en: "condescending smile, sultry eyes, superior expression, teasing dominance" },
+      { ja: "優位顔", en: "victorious smirk, confident gaze, superior composure, dominant expression" }
+    ],
+    "🔞 うるみ・涙目 (Secret Watery & Teary Faces)": [
+      { ja: "うるみ顔", en: "watery eyes, trembling lashes, soft blush, emotional expression" },
+      { ja: "涙目艶顔", en: "teary eyes, flushed cheeks, parted lips, sensual glossy expression" },
+      { ja: "潤み見上げ顔", en: "upturned watery eyes, soft blush, pleading glossy look" },
+      { ja: "泣き艶顔", en: "tearful eyes, trembling lips, heavy blush, emotionally melted expression" }
+    ],
+    "🔞 息乱れ・呼吸感 (Secret Breathless Faces)": [
+      { ja: "息乱れ顔", en: "uneven breathing, parted lips, flushed face, dazed expression" },
+      { ja: "荒息顔", en: "panting, trembling shoulders, open mouth, heated blush" },
+      { ja: "呼吸熱顔", en: "hot breath, half-lidded eyes, flushed cheeks, unsteady expression" },
+      { ja: "吐息顔", en: "soft exhale, relaxed lips, dreamy eyes, warm blush" }
+    ],
+    "🔞 視線・見つめ (Secret Gazing Faces)": [
+      { ja: "見上げ艶顔", en: "upward sultry gaze, moist eyes, soft blush, inviting expression" },
+      { ja: "見つめ艶顔", en: "locked gaze, half-lidded eyes, glossy lips, intense allure" },
+      { ja: "流し目艶顔", en: "side glance, teasing eyes, soft smile, sensual expression" },
+      { ja: "離せない顔", en: "unbroken gaze, entranced eyes, flushed face, unable to look away" }
+    ],
+    "🔞 口元・微開き (Secret Lips & Parted Mouth Faces)": [
+      { ja: "口半開き顔", en: "slightly open mouth, dazed eyes, soft blush, breathless expression" },
+      { ja: "唇震え顔", en: "trembling lips, watery eyes, flushed cheeks, wavering composure" },
+      { ja: "噛み唇顔", en: "biting lip, heated blush, half-lidded eyes, restrained desire" },
+      { ja: "声漏れ顔", en: "parted lips, shaky breath, trembling expression, flushed face" }
+    ],
+    "🔞 受け・委ね (Secret Yielding Faces)": [
+      { ja: "委ね顔", en: "surrendered expression, relaxed eyes, soft blush, trusting face" },
+      { ja: "身任せ顔", en: "letting-go expression, half-lidded eyes, warm blush, passive surrender" },
+      { ja: "逆らえない顔", en: "helpless gaze, trembling lips, flushed cheeks, unable to resist" },
+      { ja: "力抜け委ね顔", en: "loosened posture, slack lips, watery eyes, fully yielding expression" }
+    ],
+     "🔞 余裕崩れ (Secret Composure Breaking Faces)": [
+      { ja: "余裕崩れ顔", en: "cracking smirk, shaken gaze, flushed face, composure slipping" },
+      { ja: "強気崩れ顔", en: "broken bravado, trembling lips, heated blush, confidence falling apart" },
+      { ja: "平静失い顔", en: "lost composure, unfocused eyes, uneven breathing, flushed cheeks" },
+      { ja: "表情乱れ顔", en: "disturbed expression, watery eyes, trembling mouth, emotional breakdown" }
+    ],
+    "🔞 🔥 焦り・寸前 (Secret Instinctive Urgency)": [
+      { ja: "焦らし顔", en: "restless eyes, flushed face, desperate heat, drooling, panting" },
+      { ja: "張りつめ顔", en: "tense expression, focused eyes, biting lip, restrained heat" },
+      { ja: "寸前硬直顔", en: "frozen in pleasure, rolling eyes, trembling lips, stiffened body, mindless heat" },
+      { ja: "息止め顔", en: "holding breath, flushed cheeks, intense eyes, stiffened posture" }
+    ],
+    "🔞 ⚔ 反撃・主導奪取 (Secret Lecherous Takeover)": [
+      { ja: "反撃笑顔", en: "lewd smile, dominant gaze, predatory smirk, flushed face" },
+      { ja: "主導奪取顔", en: "confident expression, steady gaze, leading presence, calm smile" },
+      { ja: "逆転余裕顔", en: "victorious smirk, confident gaze, superior composure, dominant expression" },
+      { ja: "仕返し顔", en: "naughty grin, possessive look, teasing dominance, heavy breath" }
+    ],
+    "🔞 🫀 執着深化 (Secret Obsessive Lust)": [
+      { ja: "離したくない顔", en: "clinging expression, lustful gaze, desperate attachment, heavy blush" },
+      { ja: "強い執着顔", en: "intense obsession, dilated pupils, predatory eyes, deep desire" },
+      { ja: "逃がさない顔", en: "unbroken gaze, entranced eyes, flushed face, unable to look away" },
+      { ja: "目で縛る顔", en: "locked-on gaze, dilated pupils, predatory eyes, intense desire" }
+    ],
+    "🔞 👑 満足・優位 (Secret Corrupted Satisfaction)": [
+      { ja: "満足勝ち顔", en: "satisfied smirk, blissful daze, euphoric dominance, flushed face" },
+      { ja: "優位確信顔", en: "confident lewd smile, superior look, heavy breathing, mocking eyes" },
+      { ja: "してやったり顔", en: "smug grin, satisfied eyes, playful confidence, triumphant expression" },
+      { ja: "勝ち気満足顔", en: "confident smirk, steady gaze, relaxed face, certain victory expression" }
+    ]
+  };
+
+
+  const SCENE_FACE_DATA = {
+    "🌶 食リアクション (Food Reaction Faces)": [
+      { ja: "辛い顔", en: "full-face blush, flushed face, tearing up, sweat beads, steam from face, tongue out, open mouth, shock lines" },
+      { ja: "美味すぎて昇天顔", en: "sparkles on face, watery eyes, soft smile, rosy cheeks, floating hearts, blissful expression" },
+      { ja: "酸っぱすぎる顔", en: "puckered lips, watery eyes, sweatdrop, confusion lines, shocked expression" },
+      { ja: "熱すぎる顔", en: "full-face blush, steam from face, panic sweat, open mouth, shock lines" },
+      { ja: "激辛悶絶顔", en: "full-face blush, tearing up, streaming tears, sweat beads, steam from face, tongue out, mouth wide open, agony, shock lines" },
+      { ja: "美味感涙顔", en: "watery eyes, tearing up, blissful expression, soft smile, rosy cheeks, floating hearts, sparkles on face" },
+      { ja: "熱々涙目顔", en: "full-face blush, watery eyes, tearing up, steam from face, panic sweat, open mouth, shock lines" },
+      { ja: "酸っぱしわ顔", en: "puckered lips, wrinkled face, watery eyes, squeezed eyes, confusion lines, shocked expression" },
+      { ja: "苦味崩壊顔", en: "grimace, twisted face, disgust, squeezed eyes, tongue out, stress lines, shock lines" }
+    ],
+    "🎭 キャラ性・演技 (Character & Dramatic Faces)": [
+      { ja: "悪役顔", en: "evil face, sinister grin, wicked smirk, triumphant expression, plotting expression, narrowed eyes, cold gaze, shadowed eyes" },
+      { ja: "勝者の顔", en: "smug smile, half-lidded eyes, confident look, triumphant expression" },
+      { ja: "小悪魔の顔", en: "smirk, teasing look, half-lidded eyes, sparkle effect around face" },
+      { ja: "企み顔", en: "plotting expression, narrowed eyes, smirk, shadow over eyes" },
+      { ja: "冷酷悪役顔", en: "cold gaze, emotionless face, narrowed eyes, shadowed eyes, villainous aura, intimidating expression" },
+      { ja: "狂気悪役顔", en: "manic grin, crazy eyes, wide eyes, twitching face, unhinged expression, shadow over face" },
+      { ja: "悪役余裕顔", en: "sinister grin, half-lidded eyes, smug smile, composed expression, cold gaze" },
+      { ja: "勝者余裕顔", en: "smug smile, half-lidded eyes, confident look, victorious expression, relaxed face" },
+      { ja: "小悪魔あざと顔", en: "teasing smile, smug face, half-lidded eyes, playful wink, flirtatious expression" },
+      { ja: "企み成就顔", en: "triumphant smirk, narrowed eyes, satisfied expression, villain smile, shadow over eyes" }
+    ],
+    "⚠ トラブル・出来事 (Situation Faces)": [
+      { ja: "バレた時の顔", en: "panic sweat, shock lines, averted gaze, embarrassment lines, wide eyes" },
+      { ja: "ホラー遭遇顔", en: "pale face, shock lines, wide eyes, trembling, sweatdrop" },
+      { ja: "体調不良顔", en: "pale face, blank face, dark circles under eyes, runny nose" },
+      { ja: "やらかし顔", en: "sweatdrop, confusion lines, embarrassed expression, averted gaze" },
+      { ja: "バレ硬直顔", en: "wide eyes, frozen expression, panic sweat, shock lines, stiff face" },
+      { ja: "失態青ざめ顔", en: "pale face, panic sweat, embarrassed expression, confusion lines, shock lines" },
+      { ja: "ホラー絶叫顔", en: "screaming, wide eyes, pale face, trembling, shock lines, terror" },
+      { ja: "寝不足限界顔", en: "dark circles under eyes, half-closed eyes, exhausted face, pale face, messy expression" },
+      { ja: "不調ぐったり顔", en: "pale face, droopy eyes, dark circles under eyes, blank face, exhausted expression" }
+    ],
+    "🍽 食リアクション・拡張 (Expanded Food Reaction Faces)": [
+      { ja: "幸福満面顔", en: "big smile, glowing face, soft blush, sparkling eyes, blissful expression, happy aura" },
+      { ja: "一口感動顔", en: "wide eyes, soft smile, watery eyes, sparkles on face, amazed expression, rosy cheeks" },
+      { ja: "口福とろけ顔", en: "melted smile, half-lidded eyes, rosy cheeks, blissful expression, dreamy face" },
+      { ja: "猫舌困り顔", en: "panic sweat, pursed lips, watery eyes, troubled face, steam from face, flustered expression" },
+      { ja: "甘味とろけ顔", en: "soft smile, dreamy eyes, rosy cheeks, blissful expression, floating hearts, relaxed face" },
+      { ja: "爆食夢中顔", en: "focused eyes, puffed cheeks, eager expression, messy mouth, intense eating face, lively expression" }
+    ],
+    "😳 照れ・気まずさ (Embarrassed & Awkward Faces)": [
+      { ja: "気まず笑い顔", en: "awkward smile, averted gaze, sweatdrop, embarrassed expression, stiff face" },
+      { ja: "誤魔化し笑顔", en: "forced smile, shifting eyes, sweatdrop, nervous grin, embarrassed face" },
+      { ja: "目逸らし赤面顔", en: "heavy blush, looking away, shy expression, lips pressed together, flustered face" },
+      { ja: "褒められ照れ顔", en: "soft blush, shy smile, sparkling eyes, embarrassed expression, looking away" },
+      { ja: "見られ硬直顔", en: "wide eyes, frozen smile, embarrassment lines, stiff face, panic sweat" },
+      { ja: "言葉詰まり顔", en: "open mouth, hesitant expression, averted gaze, blush, nervous face, awkward pause" }
+    ],
+    "😱 パニック・事故 (Panic & Mishap Faces)": [
+      { ja: "大惨事直前顔", en: "panic sweat, wide eyes, alarmed expression, shock lines, tense face" },
+      { ja: "完全フリーズ顔", en: "blank stare, frozen expression, wide eyes, stiff face, shock lines" },
+      { ja: "現実逃避顔", en: "empty smile, unfocused eyes, blank face, soul leaving body, awkward calm" },
+      { ja: "修羅場突入顔", en: "sweat beads, gritted teeth, tense eyes, panic expression, crisis face" },
+      { ja: "大汗焦り顔", en: "heavy sweat, flustered expression, wide eyes, panic face, trembling" },
+      { ja: "泣き寸前顔", en: "watery eyes, trembling lips, panicked face, holding back tears, shocked expression" }
+    ],
+    "😈 悪役・企み (Villain & Plotting Faces)": [
+      { ja: "薄笑い悪役顔", en: "thin smile, cold gaze, half-lidded eyes, villainous expression, shadow over eyes" },
+      { ja: "見下し顔", en: "disdainful expression, lowered eyelids, slight smirk, cold gaze, superior attitude" },
+      { ja: "愉悦悪役顔", en: "sadistic smile, delighted eyes, sinister grin, cruel amusement, villainous aura" },
+      { ja: "黒幕満足顔", en: "satisfied smirk, shadowed eyes, composed expression, mastermind vibe, cold confidence" },
+      { ja: "計画通り顔", en: "knowing grin, narrowed eyes, smug smile, plotting expression, satisfied face" },
+      { ja: "勝利確信顔", en: "confident smirk, steady gaze, relaxed face, certain victory expression, intimidating calm" }
+    ],
+    "💤 疲労・不調 (Fatigue & Sickly Faces)": [
+      { ja: "徹夜死に顔", en: "dark circles under eyes, lifeless eyes, exhausted face, pale face, empty expression" },
+      { ja: "眠気限界顔", en: "half-closed eyes, drooping eyelids, yawning face, sleepy expression, tired blush" },
+      { ja: "集中切れ顔", en: "blank stare, tired eyes, slack mouth, worn-out face, mental fatigue" },
+      { ja: "熱っぽい顔", en: "flushed face, droopy eyes, weak expression, feverish blush, exhausted face" },
+      { ja: "力尽き顔", en: "empty eyes, exhausted expression, pale face, limp face, drained energy" },
+      { ja: "虚ろ疲労顔", en: "vacant eyes, dark circles under eyes, pale face, weak expression, listless face" }
+    ],
+    "👻 ホラー・恐怖 (Horror & Fear Faces)": [
+      { ja: "血の気引き顔", en: "pale face, trembling lips, wide eyes, fear expression, blood draining from face" },
+      { ja: "青ざめ凝視顔", en: "staring eyes, pale face, frozen fear, tense face, shock lines" },
+      { ja: "息呑み顔", en: "sharp inhale, wide eyes, frozen mouth, tense expression, sudden fear" },
+      { ja: "声失い顔", en: "silent scream, wide eyes, pale face, trembling, speechless terror" },
+      { ja: "震え固まり顔", en: "shaking, frozen body, fearful eyes, pale face, stiff expression" },
+      { ja: "背筋凍る顔", en: "cold sweat, horrified eyes, pale face, tense mouth, terror, dread" }
+    ],
+    "💘 魅了・小悪魔 (Seductive & Teasing Faces)": [
+      { ja: "じっと誘惑顔", en: "seductive gaze, half-lidded eyes, slight smile, inviting look, alluring expression" },
+      { ja: "甘え上目顔", en: "upturned eyes, soft blush, pleading smile, cute expression, affectionate face" },
+      { ja: "からかい笑顔", en: "teasing smile, playful eyes, smug face, light blush, mischievous expression" },
+      { ja: "流し目誘惑顔", en: "side glance, seductive smile, half-lidded eyes, alluring look, teasing expression" },
+      { ja: "見透かし笑顔", en: "knowing smile, half-lidded eyes, calm gaze, teasing confidence, smug expression" },
+      { ja: "思わせぶり顔", en: "ambiguous smile, soft gaze, slight blush, flirtatious expression, unreadable charm" }
+    ],
+    "🏆 勝利・達成 (Victory & Achievement Faces)": [
+      { ja: "完全勝利顔", en: "triumphant smile, proud face, confident eyes, victory expression, composed confidence" },
+      { ja: "してやったり顔", en: "smug grin, satisfied eyes, playful confidence, triumphant expression, relaxed face" },
+      { ja: "ドヤ満足顔", en: "smug smile, raised chin, confident look, satisfied expression, prideful face" },
+      { ja: "会心笑み顔", en: "knowing smile, confident eyes, fulfilled expression, soft smirk, success face" },
+      { ja: "任務完了顔", en: "calm smile, relieved expression, steady eyes, composed face, mission accomplished vibe" },
+      { ja: "逆転勝利顔", en: "victorious grin, intense eyes, relieved confidence, triumphant face, comeback energy" }    ],
+    "💗 好意・ときめき (Affection & Heartflutter Faces)": [
+      { ja: "好き漏れ顔", en: "soft blush, shy smile, eyes full of affection, flustered expression, heartwarming gaze" },
+      { ja: "ときめき顔", en: "sparkling eyes, soft blush, lips slightly parted, enchanted expression, heart-throbbing look" },
+      { ja: "胸きゅん顔", en: "warm blush, shining eyes, touched expression, gentle smile, overwhelmed with affection" },
+      { ja: "恋うっとり顔", en: "half-lidded dreamy eyes, soft blush, relaxed smile, lovestruck expression, dreamy face" },
+      { ja: "会えて嬉しい顔", en: "bright smile, watery eyes, joyful blush, relieved expression, happiness overflowing" },
+      { ja: "見つめ照れ顔", en: "looking into someone's eyes, shy blush, nervous smile, flustered expression, bashful face" }
+    ],
+    "😊 喜び・幸福 (Joy & Happiness Faces)": [
+      { ja: "嬉しさ満開顔", en: "full smile, glowing face, sparkling eyes, cheerful blush, happiness overflowing" },
+      { ja: "幸福満面顔", en: "radiant smile, soft blush, warm eyes, deeply happy expression, blissful face" },
+      { ja: "ご満悦顔", en: "satisfied smile, proud but soft expression, relaxed eyes, content face" },
+      { ja: "報われ顔", en: "relieved smile, teary eyes, soft blush, fulfilled expression, emotional satisfaction" },
+      { ja: "褒められ嬉し顔", en: "bashful smile, bright eyes, soft blush, pleased expression, happy reaction to praise" },
+      { ja: "しみじみ幸せ顔", en: "gentle smile, calm eyes, soft blush, peaceful happiness, quietly fulfilled expression" }
+    ],
+    "✨ 期待・きらめき (Expectation & Sparkling Faces)": [
+      { ja: "目輝き顔", en: "sparkling eyes, excited smile, eager expression, bright face, lively anticipation" },
+      { ja: "期待満ち顔", en: "hopeful eyes, soft smile, uplifted expression, bright anticipation, gentle excitement" },
+      { ja: "わくわく顔", en: "wide sparkling eyes, excited smile, eager expression, energetic anticipation" },
+      { ja: "胸高鳴り顔", en: "slightly parted lips, bright eyes, soft blush, thrilled expression, heart-racing face" },
+      { ja: "待ちきれない顔", en: "restless excitement, shining eyes, eager smile, impatient anticipation, lively face" },
+      { ja: "希望きらめき顔", en: "radiant eyes, hopeful smile, soft glow, inspired expression, shining anticipation" }
+    ],
+    "🥺 甘え・お願い (Pleading & Needy Faces)": [
+      { ja: "甘え上目顔", en: "puppy eyes, needy gaze, slightly upward eyes, soft pleading expression, tender dependence" },
+      { ja: "おねだり顔", en: "begging face, asking expression, hopeful eyes, slightly pouting lips, cute request" },
+      { ja: "お願い顔", en: "pleading expression, earnest eyes, gentle asking face, soft hopeful look" },
+      { ja: "拗ね甘え顔", en: "sulky needy face, pouting lips, clingy expression, soft eyes, playful dependence" },
+      { ja: "かまって顔", en: "attention-seeking face, needy expression, expectant eyes, subtle pout, wanting affection" },
+      { ja: "許して顔", en: "sorry pleading face, apologetic eyes, timid begging expression, soft vulnerable look" }
+    ],
+    "🤝 信頼・安心 (Trust & Relief Faces)": [
+      { ja: "安心しきり顔", en: "fully relieved face, relaxed expression, gentle calm eyes, soft smile, feeling safe" },
+      { ja: "信頼まなざし顔", en: "trusting gaze, warm eyes, sincere gentle expression, soft relaxed face" },
+      { ja: "ほっと安堵顔", en: "relieved face, soft exhale expression, calm relaxed features, quiet comfort" },
+      { ja: "任せきり顔", en: "relying expression, trusting face, calm dependence, soft smile, leaving it to someone" },
+      { ja: "守られ安心顔", en: "protected relieved face, safe expression, softened eyes, gentle comfort" },
+      { ja: "心許し顔", en: "opened-heart expression, trusting relaxed face, gentle smile, emotional ease" }
+    ],
+    "🌸 癒やし・穏やか (Healing & Peaceful Faces)": [
+      { ja: "癒やし微笑顔", en: "healing smile, gentle eyes, soft peaceful expression, calm warmth" },
+      { ja: "穏やか微笑顔", en: "calm smile, relaxed eyes, serene expression, quiet tenderness" },
+      { ja: "やさし包み顔", en: "embracing gentle face, warm eyes, soft caring expression, soothing presence" },
+      { ja: "見守り笑顔", en: "watching-over smile, kind eyes, calm supportive expression, soft warmth" },
+      { ja: "ほのぼの顔", en: "cozy peaceful face, gentle smile, relaxed features, heartwarming mood" },
+      { ja: "安らぎ満ち顔", en: "restful expression, peaceful eyes, soft smile, filled with comfort" }
+    ],
+    "🎁 驚き・感激 (Surprise & Deep Emotion Faces)": [
+      { ja: "感激うるみ顔", en: "moved teary eyes, touched expression, trembling smile, emotional warmth" },
+      { ja: "うれし驚き顔", en: "happy surprise face, widened shining eyes, open smile, bright reaction" },
+      { ja: "思わず息呑み顔", en: "gasping in amazement, breath-catching expression, widened eyes, emotional shock" },
+      { ja: "胸打たれ顔", en: "deeply moved face, soft stunned eyes, emotional silence, touched expression" },
+      { ja: "言葉失い顔", en: "speechless emotional face, stunned eyes, trembling lips, overwhelmed feeling" },
+      { ja: "贈り物感激顔", en: "gift-received emotional face, watery eyes, grateful smile, overwhelmed happiness" }
+    ],
+    "🙌 達成・開放感 (Achievement & Release Faces)": [
+      { ja: "やり切り顔", en: "accomplished face, relieved smile, loosened tension, fulfilled expression" },
+      { ja: "達成満面顔", en: "achievement-filled smile, bright satisfied face, proud joy, fulfilled look" },
+      { ja: "解放安堵顔", en: "released relief face, deep exhale, softened eyes, tension finally gone" },
+      { ja: "勝ち抜き顔", en: "survived-and-won face, confident relief, strong satisfied expression" },
+      { ja: "終わった顔", en: "it's finally over face, exhausted relief, slackened tension, liberated expression" },
+      { ja: "報酬待ち顔", en: "reward-awaiting grin, excited relief, satisfied expectation, playful confidence" }
+    ],
+    "🤲 受け止め・包容 (Acceptance & Embrace Faces)": [
+      { ja: "受け止め微笑顔", en: "accepting gentle smile, soft eyes, warm understanding expression" },
+      { ja: "包み込み顔", en: "embracing face, caring eyes, protective smile, soft emotional warmth" },
+      { ja: "大丈夫顔", en: "it's okay face, calm reassuring eyes, gentle supportive smile" },
+      { ja: "寄り添い顔", en: "close comforting face, tender gaze, empathetic smile, quiet support" },
+      { ja: "許し受容顔", en: "forgiving accepting face, softened eyes, kind expression, emotional openness" },
+      { ja: "静か肯定顔", en: "quiet affirming face, calm smile, understanding eyes, peaceful approval" }
+    ],
+    "🤍 切なさ・余韻 (Bittersweet & Lingering Faces)": [
+      { ja: "切なみ顔", en: "bittersweet face, fragile eyes, quiet ache, soft emotional tremble" },
+      { ja: "名残惜し顔", en: "reluctant-to-part face, lingering gaze, soft sadness, tender restraint" },
+      { ja: "しんみり顔", en: "wistful face, softened eyes, quiet reflection, subdued emotion" },
+      { ja: "遠い目余韻顔", en: "lingering distant gaze face, reflective eyes, emotional afterglow, quiet memory" },
+      { ja: "言えない想い顔", en: "unspoken feelings face, hesitant lips, moist eyes, hidden affection" },
+      { ja: "余韻うるみ顔", en: "teary lingering emotion face, shimmering eyes, emotional aftertaste, quiet depth" }
+    ],
+    "🔥 闘志・気合 (Fighting Spirit & Determination Faces)": [
+      { ja: "闘志燃え顔", en: "burning fighting spirit face, fierce eyes, heated resolve, battle-ready expression" },
+      { ja: "気合満ち顔", en: "determination-filled face, focused eyes, gathered spirit, intense readiness" },
+      { ja: "やる気全開顔", en: "fully fired-up face, energetic eyes, pumped-up mood, eager intensity" },
+      { ja: "勝負顔", en: "game face, sharpened stare, serious focus, ready-to-win expression" },
+      { ja: "食いしばり気合顔", en: "gritted-teeth determination face, tensed jaw, stubborn will, pushing forward" },
+      { ja: "本気突入顔", en: "serious-mode face, locked-in eyes, total commitment, full-intensity expression" }
+    ],
+    "🫠 とろけ・夢見心地 (Melting & Dreamy Faces)": [
+      { ja: "とろけ顔", en: "melting face, softened eyes, dissolved tension, blissful warmth" },
+      { ja: "夢見心地顔", en: "dreamy bliss face, hazy eyes, floating mood, gentle happiness" },
+      { ja: "うっとりとろ顔", en: "entranced melting face, heavy-lidded eyes, sweet daze, soft surrender" },
+      { ja: "幸せとろ顔", en: "happily melted face, loosened smile, warm comfort, glowing contentment" },
+      { ja: "ぽやぽや顔", en: "fluffy absent-minded face, softened focus, airy mood, gentle blankness" },
+      { ja: "甘夢うっとり顔", en: "sweet dreamy entranced face, rosy calm, drifting bliss, tender fascination" }
+    ],
+    "🌀 混乱・処理落ち (Confusion & Brain Lag Faces)": [
+      { ja: "処理落ち顔", en: "brain-lag face, frozen thinking, delayed reaction, overloaded expression" },
+      { ja: "混乱ぐるぐる顔", en: "swirling confusion face, dizzy thoughts, spinning focus, mental overload" },
+      { ja: "情報過多顔", en: "too-much-information face, overwhelmed eyes, crowded thoughts, sensory overload" },
+      { ja: "理解追いつか顔", en: "can't-keep-up face, lost processing, delayed understanding, stunned confusion" },
+      { ja: "思考停止顔", en: "thought-stopped face, blank stare, halted mind, unable to process" },
+      { ja: "混線ぽかん顔", en: "cross-wired blank face, dazed confusion, open-mouthed pause, tangled thoughts" }
+    ]
+  };
+
   const DICT = {
     "smug": "ドヤ顔", "disdain": "軽蔑", "seductive smile": "誘惑笑い", "yandere": "ヤンデレ",
     "ahegao": "アヘ顔/恍惚", "despair": "絶望", "crazy": "狂気", "panicked": "パニック",
@@ -719,46 +1381,49 @@
       if (!parent) return;
 
       const ensureTopGroups = () => {
-        let contentArea = parent.querySelector(".section-content");
-        if (!contentArea) {
-          contentArea = document.createElement("div");
-          contentArea.className = "section-content";
-          parent.appendChild(contentArea);
-        }
+  let contentArea = parent.querySelector(".section-content");
+  if (!contentArea) {
+    contentArea = document.createElement("div");
+    contentArea.className = "section-content";
+    parent.appendChild(contentArea);
+  }
 
-        let wrapper = contentArea.querySelector('.expression-top-groups');
-        if (!wrapper) {
-          wrapper = document.createElement('div');
-          wrapper.className = 'expression-top-groups';
-          wrapper.style.cssText = 'display:flex; flex-direction:column; gap:10px;';
+  let wrapper = contentArea.querySelector('.expression-top-groups');
+  if (!wrapper) {
+    wrapper = document.createElement('div');
+    wrapper.className = 'expression-top-groups';
+    wrapper.style.cssText = 'display:flex; flex-direction:column; gap:10px;';
+    contentArea.appendChild(wrapper);
+  }
 
-          const makeTopGroup = (cls, title, border, bg) => {
-            const details = document.createElement('details');
-            details.className = `expression-top-group ${cls}`;
-            details.open = false;
-            details.style.cssText = `margin-bottom:4px; border:2px solid ${border}; border-radius:8px; background:#fff; overflow:hidden;`;
+  const makeTopGroup = (cls, title, border, bg) => {
+    let details = wrapper.querySelector(`.${cls}`);
+    if (!details) {
+      details = document.createElement('details');
+      details.className = `expression-top-group ${cls}`;
+      details.open = false;
+      details.style.cssText = `margin-bottom:4px; border:2px solid ${border}; border-radius:8px; background:#fff; overflow:hidden;`;
 
-            const summary = document.createElement('summary');
-            summary.textContent = title;
-            summary.style.cssText = `font-weight:bold; padding:10px 12px; cursor:pointer; font-size:1.08em; color:#333; background:${bg}; list-style:none; outline:none;`;
-            details.appendChild(summary);
+      const summary = document.createElement('summary');
+      summary.textContent = title;
+      summary.style.cssText = `font-weight:bold; padding:10px 12px; cursor:pointer; font-size:1.08em; color:#333; background:${bg}; list-style:none; outline:none;`;
+      details.appendChild(summary);
 
-            const inner = document.createElement('div');
-            inner.className = 'expression-top-group-content';
-            inner.style.cssText = 'padding:10px; display:flex; flex-direction:column; gap:8px;';
-            details.appendChild(inner);
-            return details;
-          };
+      const inner = document.createElement('div');
+      inner.className = 'expression-top-group-content';
+      inner.style.cssText = 'padding:10px; display:flex; flex-direction:column; gap:8px;';
+      details.appendChild(inner);
+      wrapper.appendChild(details);
+    }
+    return details.querySelector('.expression-top-group-content');
+  };
 
-          wrapper.appendChild(makeTopGroup('expression-top-emotion', '😊 感情設計 (Emotion Design)', '#d9c6ff', '#faf7ff'));
-          wrapper.appendChild(makeTopGroup('expression-top-facial', '🧩 顔パーツ・演出 (Facial Parts & FX)', '#bfe3ff', '#f5fbff'));
-          contentArea.appendChild(wrapper);
-        }
-        return {
-          emotion: wrapper.querySelector('.expression-top-emotion .expression-top-group-content'),
-          facial: wrapper.querySelector('.expression-top-facial .expression-top-group-content')
-        };
-      };
+  return {
+    emotion: makeTopGroup('expression-top-emotion', '😊 感情設計 (Emotion Design)', '#d9c6ff', '#faf7ff'),
+    facial: makeTopGroup('expression-top-facial', '🧩 顔パーツ・演出 (Facial Parts & FX)', '#bfe3ff', '#f5fbff'),
+    scene: makeTopGroup('expression-top-scene', '🎬 シーン顔 (Scene Faces)', '#ffd59e', '#fff8ef')
+  };
+};
 
       const createCat = (title, items, isSecret = false) => {
         const details = document.createElement("details");
@@ -858,6 +1523,7 @@
       };
 
       const facialRoot = document.createElement("div");
+      facialRoot.className = "expression-facial-container";
       facialRoot.className = "expression-v2-container";
       const eyesRoot = document.createElement("details");
       eyesRoot.className = "expression-root-eyes";
@@ -898,18 +1564,35 @@
         });
       }
 
+      const sceneRoot = document.createElement("div");
+      sceneRoot.className = "expression-scene-container";
+      if (IS_UNLOCKED && typeof SECRET_SCENE_FACE_DATA !== "undefined") {
+        Object.entries(SECRET_SCENE_FACE_DATA).forEach(([cat, items]) => {
+          sceneRoot.appendChild(createCat(cat, items, true));
+        });
+      }
+      Object.entries(SCENE_FACE_DATA).forEach(([cat, items]) => {
+        sceneRoot.appendChild(createCat(cat, items, false));
+      });
+
       const groups = ensureTopGroups();
       groups.emotion.appendChild(root);
       if (!groups.facial.querySelector('.expression-v2-container')) {
         groups.facial.appendChild(facialRoot);
       }
+      if (!groups.scene.querySelector('.expression-scene-container')) {
+        groups.scene.appendChild(sceneRoot);
+      }
     },
 
     getTags() {
       const tags = [];
-      document.querySelectorAll(".expression-v3-container input[type='checkbox']:checked").forEach(cb => {
-        tags.push(cb.dataset.val);
-      });
+      const parent = document.querySelector("#list-expression");
+      if (parent) {
+        parent.querySelectorAll("input[type='checkbox']:checked").forEach(cb => {
+          if (cb.dataset && cb.dataset.val) tags.push(cb.dataset.val);
+        });
+      }
       return tags;
     }
   };

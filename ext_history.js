@@ -237,6 +237,84 @@
     `;
   }
 
+  const HISTORY_BTN_DEFAULT_LABEL = '📜 履歴';
+
+  function resetHistoryButtonLabel() {
+    try {
+      const btn = document.getElementById('footer-history-btn');
+      if (btn) btn.textContent = HISTORY_BTN_DEFAULT_LABEL;
+    } catch (e) {}
+  }
+
+  const HISTORY_RESTORE_TOAST_MS = 3000;
+
+  function ensureHistoryRestoreToastStyles() {
+    try {
+      if (document.getElementById('history-restore-toast-style')) return;
+      const style = document.createElement('style');
+      style.id = 'history-restore-toast-style';
+      style.textContent = `
+        @keyframes historyRestoreToastInOut {
+          0%   { opacity:0; transform:translateX(-50%) translateY(8px); }
+          8%   { opacity:1; transform:translateX(-50%) translateY(0); }
+          78%  { opacity:1; transform:translateX(-50%) translateY(0); }
+          100% { opacity:0; transform:translateX(-50%) translateY(6px); }
+        }
+        #history-restore-toast {
+          position:fixed;
+          left:50%;
+          bottom:90px;
+          transform:translateX(-50%);
+          background:rgba(0,0,0,.88);
+          color:#fff;
+          padding:10px 14px;
+          border-radius:10px;
+          font-size:13px;
+          z-index:99999;
+          max-width:92vw;
+          box-sizing:border-box;
+          text-align:center;
+          line-height:1.35;
+          box-shadow:0 6px 20px rgba(0,0,0,.28);
+          pointer-events:none;
+          opacity:0;
+          will-change:opacity,transform;
+        }
+      `;
+      document.head.appendChild(style);
+    } catch (e) {}
+  }
+
+  function showHistoryRestoreToast(restoredCount) {
+    try {
+      ensureHistoryRestoreToastStyles();
+      if (!window.__historyRestoreToastCtl) window.__historyRestoreToastCtl = {};
+      const ctl = window.__historyRestoreToastCtl;
+      if (ctl.timer) { clearTimeout(ctl.timer); ctl.timer = null; }
+      if (ctl.node && ctl.node.parentNode) {
+        ctl.node.remove();
+        ctl.node = null;
+      }
+
+      const toast = document.createElement('div');
+      toast.id = 'history-restore-toast';
+      toast.textContent = `履歴から ${Number(restoredCount) || 0}件復元しました`;
+      document.body.appendChild(toast);
+      ctl.node = toast;
+
+      try { void toast.offsetWidth; } catch (e) {}
+      toast.style.animation = `historyRestoreToastInOut ${HISTORY_RESTORE_TOAST_MS}ms ease forwards`;
+
+      const cleanup = () => {
+        if (ctl.node === toast) ctl.node = null;
+        if (toast.parentNode) toast.remove();
+      };
+
+      toast.addEventListener('animationend', cleanup, { once: true });
+      ctl.timer = setTimeout(cleanup, HISTORY_RESTORE_TOAST_MS + 120);
+    } catch (e) {}
+  }
+
   function createHistoryUI() {
     const genBtn = document.getElementById('genBtn');
     if (!genBtn) return;
@@ -246,7 +324,7 @@
 
     const btn = document.createElement('button');
     btn.id = 'footer-history-btn';
-    btn.textContent = '📜 履歴';
+    btn.textContent = HISTORY_BTN_DEFAULT_LABEL;
     btn.title = '生成履歴を表示します';
     btn.style.cursor = 'pointer';
 
@@ -330,14 +408,7 @@
           out.value = item.text || '';
           window.__historyRestoring = false;
 
-          try {
-            const note = document.getElementById('footer-search-btn');
-            if (note) {
-              const oldText = note.textContent;
-              note.textContent = `復元 ${restoredCount}件`;
-              setTimeout(() => { note.textContent = oldText; }, 1000);
-            }
-          } catch (e) {}
+          showHistoryRestoreToast(restoredCount);
 
           menu.style.display = 'none';
         };

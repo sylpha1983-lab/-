@@ -159,16 +159,339 @@
   .linked-flash { animation: linked-flash-anim 1.5s ease-out; border-radius: 4px; }
 
   #active-category-floater { position: fixed; top: 15px; right: 15px; z-index: 10000; display: flex; flex-direction: column; align-items: flex-end; }
-  #floater-btn { background: rgba(0, 123, 255, 0.95); color: white; padding: 8px 16px; border-radius: 30px; font-weight: bold; box-shadow: 0 4px 12px rgba(0,0,0,0.3); cursor: pointer; border: 2px solid rgba(255,255,255,0.2); backdrop-filter: blur(4px); transition: all 0.2s; display: none; align-items: center; gap: 6px; font-size: 0.9em; }
-  #floater-btn:active { transform: scale(0.95); }
+  #floater-btn {
+    background: linear-gradient(135deg, rgba(36, 127, 255, 0.96), rgba(79, 157, 255, 0.96));
+    color: white;
+    padding: 10px 16px;
+    border-radius: 30px;
+    font-weight: bold;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.22);
+    cursor: pointer;
+    border: 2px solid rgba(255,255,255,0.22);
+    backdrop-filter: blur(4px);
+    transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9em;
+    user-select: none;
+  }
+  #floater-btn:hover { box-shadow: 0 10px 22px rgba(0,0,0,0.22); transform: translateY(-1px); }
+  #floater-btn:active { transform: scale(0.96); }
   #floater-btn.show { display: flex; animation: slideDown 0.3s ease; }
-  #floater-list { display: none; background: white; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); margin-top: 10px; width: 280px; max-height: 60vh; overflow-y: auto; border: 1px solid #ddd; animation: fadeIn 0.2s ease; }
+  #floater-btn .floater-count {
+    min-width: 1.8em;
+    height: 1.8em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 6px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.2);
+    font-size: 0.86em;
+  }
+  #floater-list {
+    display: none;
+    background: rgba(255,255,255,0.98);
+    border-radius: 14px;
+    box-shadow: 0 14px 36px rgba(0,0,0,0.2);
+    margin-top: 10px;
+    width: min(86vw, 330px);
+    max-height: min(68vh, 560px);
+    overflow-y: auto;
+    border: 1px solid rgba(0,0,0,0.08);
+    animation: fadeIn 0.2s ease;
+    overscroll-behavior: contain;
+  }
   #floater-list.open { display: block; }
-  .floater-header { padding: 8px 12px; background: #f8f9fa; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 0.85em; color: #555; }
-  .close-all-btn { background: #dc3545; color: white; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 0.9em; }
-  .floater-item { padding: 8px 12px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; font-size: 0.9em; }
-  .floater-item:last-child { border-bottom: none; }
-  .item-close-btn { background: #eee; border: none; color: #666; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1em; margin-left: 8px; }
+  .floater-header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding: 10px 12px;
+    background: rgba(248,249,250,0.96);
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    font-size: 0.85em;
+    color: #555;
+    backdrop-filter: blur(6px);
+  }
+  .floater-header-meta { display:flex; flex-direction:column; gap:2px; }
+  .floater-header-meta small { font-size:0.82em; color:#6b7280; font-weight:600; }
+  .close-all-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 0.88em;
+    white-space: nowrap;
+  }
+  #floater-items { padding: 6px; }
+  .floater-item {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.92em;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.18s, border-color 0.18s, transform 0.18s;
+    margin-bottom: 6px;
+    box-sizing: border-box;
+  }
+  .floater-item:hover { background: #f6faff; border-color: #cfe2ff; transform: translateX(-1px); }
+  .floater-item:last-child { margin-bottom: 0; }
+  .floater-item.active { background: #edf4ff; border-color: #9cc3ff; }
+  .floater-item.is-open .floater-item-status { background: #dff5e8; color: #18794e; }
+  .floater-item.has-checks { border-color: #f4d58d; background: #fffaf0; }
+  .floater-item-status.has-checks { background: #fff0c7; color: #946200; }
+  .floater-block { padding: 8px 6px 0; }
+  .floater-block + .floater-block { padding-top: 0; }
+  .floater-block-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    padding: 0 6px 8px;
+    font-size: 0.84em;
+    font-weight: 800;
+    color: #374151;
+  }
+  .floater-block-title small {
+    font-size: 0.82em;
+    font-weight: 700;
+    color: #6b7280;
+  }
+  .floater-divider {
+    height: 1px;
+    margin: 6px 6px 8px;
+    background: linear-gradient(90deg, rgba(0,0,0,0.05), rgba(0,0,0,0.02));
+  }
+  .floater-empty {
+    margin: 0 6px 6px;
+    padding: 10px 12px;
+    border: 1px dashed #d7dce3;
+    border-radius: 10px;
+    background: #fbfcfe;
+    color: #667085;
+    font-size: 0.88em;
+    line-height: 1.45;
+  }
+  .floater-item-text {
+    flex: 1;
+    min-width: 0;
+    font-weight: 700;
+    color: #243041;
+    line-height: 1.35;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .floater-item-status {
+    flex: 0 0 auto;
+    border-radius: 999px;
+    background: #eef2f7;
+    color: #4b5563;
+    padding: 4px 8px;
+    font-size: 0.78em;
+    font-weight: 700;
+  }
+  details.accordion-wrap.toc-target { scroll-margin-top: 84px; }
+  .toc-jump-highlight {
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.18), 0 10px 24px rgba(74,144,226,0.12);
+    transition: box-shadow 0.28s ease;
+    border-radius: 10px;
+  }
+  #floater-checked-items { padding: 6px; }
+  .floater-tools {
+    padding: 0 6px 8px;
+    display: grid;
+    gap: 8px;
+  }
+  .floater-search-row,
+  .floater-sort-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .floater-search-input {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #d4dbe5;
+    border-radius: 10px;
+    background: #fff;
+    padding: 10px 12px;
+    font-size: 0.88em;
+    color: #243041;
+  }
+  .floater-search-input:focus {
+    outline: none;
+    border-color: #8cb7ff;
+    box-shadow: 0 0 0 3px rgba(74,144,226,0.12);
+  }
+  .floater-sort-label {
+    font-size: 0.8em;
+    font-weight: 800;
+    color: #5b6472;
+  }
+  .floater-sort-btn {
+    border: 1px solid #d9e2ef;
+    background: #fff;
+    color: #4a5565;
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 0.78em;
+    font-weight: 800;
+    cursor: pointer;
+  }
+  .floater-sort-btn.active {
+    background: #eef5ff;
+    border-color: #9cc3ff;
+    color: #235dbb;
+  }
+  .floater-search-meta {
+    font-size: 0.78em;
+    color: #6b7280;
+    font-weight: 700;
+  }
+  .floater-checked-card {
+    margin: 0 0 10px;
+    padding: 0;
+    border: 1px solid #f0d9a6;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #fffdf7, #fff8eb);
+    overflow: hidden;
+  }
+  .floater-checked-card .floater-item {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+  }
+  .floater-checked-card .floater-item:hover {
+    transform: none;
+    background: rgba(255,255,255,0.45);
+    border-color: transparent;
+  }
+  .floater-subtree {
+    padding: 0 8px 8px;
+  }
+  .floater-subgroup-details {
+    margin-top: 6px;
+    border: 1px solid #f2e3bd;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.55);
+    overflow: hidden;
+  }
+  .floater-subgroup-details summary {
+    list-style: none;
+  }
+  .floater-subgroup-details summary::-webkit-details-marker {
+    display: none;
+  }
+  .floater-subgroup-btn,
+  .floater-leaf-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    border: 1px solid transparent;
+    background: #fff;
+    cursor: pointer;
+    text-align: left;
+    box-sizing: border-box;
+  }
+  .floater-subgroup-btn {
+    margin: 6px 0 0;
+    padding: 9px 10px;
+    border-radius: 10px;
+    background: #fffaf3;
+    border-color: #f2e3bd;
+  }
+  .floater-subgroup-btn:hover {
+    background: #fff4dd;
+    border-color: #e7c97a;
+  }
+  .floater-subgroup-details[open] > .floater-subgroup-btn {
+    background: #fff4dd;
+    border-color: #e7c97a;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .floater-subgroup-text {
+    flex: 1;
+    min-width: 0;
+    font-size: 0.86em;
+    font-weight: 700;
+    color: #5c4716;
+    line-height: 1.35;
+  }
+  .floater-subgroup-status {
+    flex: 0 0 auto;
+    border-radius: 999px;
+    background: #fff0c7;
+    color: #946200;
+    padding: 4px 8px;
+    font-size: 0.75em;
+    font-weight: 800;
+  }
+  .floater-subgroup-caret {
+    flex: 0 0 auto;
+    font-size: 0.8em;
+    color: #946200;
+    margin-left: 2px;
+  }
+  .floater-leaf-list {
+    margin: 4px 0 0;
+    padding: 0 0 0 10px;
+    border-left: 2px solid rgba(148,98,0,0.12);
+  }
+  .floater-leaf-btn {
+    margin: 4px 0 0;
+    padding: 7px 10px;
+    border-radius: 8px;
+    font-size: 0.83em;
+    color: #394150;
+  }
+  .floater-leaf-btn:hover {
+    background: #f6faff;
+    border-color: #cfe2ff;
+  }
+  .floater-leaf-text {
+    flex: 1;
+    min-width: 0;
+    line-height: 1.35;
+    color: #334155;
+  }
+  .floater-leaf-icon {
+    flex: 0 0 auto;
+    font-size: 0.8em;
+    color: #94a3b8;
+  }
+  .floater-hit-mark {
+    background: linear-gradient(180deg, rgba(255,241,118,0.82), rgba(255,224,102,0.92));
+    color: inherit;
+    padding: 0 0.14em;
+    border-radius: 0.28em;
+    box-shadow: 0 0 0 1px rgba(180,120,0,0.06);
+  }
+  @media (max-width: 700px) {
+    #active-category-floater { top: 76px; right: 10px; }
+    #floater-btn { padding: 8px 14px; font-size: 0.84em; }
+    #floater-list { width: min(90vw, 320px); }
+  }
   
   /* --- UI Tweak Test: Accordion readability (Food & Drink etc.) --- */
   details.accordion-wrap > .section-content{
@@ -268,8 +591,15 @@
     if (contentNodes.length === 0) return;
 
     const details = document.createElement("details");
-    details.className = "accordion-wrap";
+    details.className = "accordion-wrap toc-target";
     details.open = false;
+
+    const sectionKey = (container.id || "")
+      .replace(/^list-/, "")
+      .replace(/[^a-zA-Z0-9_-]/g, "-") || "section";
+    if (!details.id) details.id = `toc-${sectionKey}`;
+    details.dataset.sectionKey = sectionKey;
+    details.dataset.sectionLabel = label;
 
     const summary = document.createElement("summary");
     summary.className = "section-summary";
@@ -278,6 +608,7 @@
     summary.style.alignItems = "center";
 
     const labelSpan = document.createElement("span");
+    labelSpan.className = "section-summary-label";
     labelSpan.textContent = "▶ " + label;
     summary.appendChild(labelSpan);
 
@@ -911,19 +1242,48 @@ function applyCommercialDefaults(){
     document.execCommand("copy");
   }
 
+
   function initFloater() {
     if (document.getElementById("active-category-floater")) return;
 
     const floater = document.createElement("div");
     floater.id = "active-category-floater";
     floater.innerHTML = `
-      <div id="floater-btn">📂 開いている項目 <span id="open-count">0</span></div>
+      <div id="floater-btn">📚 目次 <span id="open-count" class="floater-count">0</span></div>
       <div id="floater-list">
         <div class="floater-header">
-          <span>開いているカテゴリー</span>
+          <div class="floater-header-meta">
+            <span>ショートカット目次</span>
+            <small>使用中カテゴリー・小カテゴリ・項目名までここから飛べます</small>
+          </div>
           <button class="close-all-btn">🗑️ 全て閉じる</button>
         </div>
-        <div id="floater-items"></div>
+        <div class="floater-tools">
+          <div class="floater-search-row">
+            <input id="floater-search" class="floater-search-input" type="search" placeholder="チェック済み項目を検索（カテゴリ / 小カテゴリ / 項目名）">
+          </div>
+          <div class="floater-sort-row">
+            <span class="floater-sort-label">項目順:</span>
+            <button type="button" class="floater-sort-btn active" data-sort-mode="added">追加順</button>
+            <button type="button" class="floater-sort-btn" data-sort-mode="name">名前順</button>
+            <span id="floater-search-meta" class="floater-search-meta"></span>
+          </div>
+        </div>
+        <div class="floater-block">
+          <div class="floater-block-title">
+            <span>✅ 使用中のカテゴリー</span>
+            <small>件数順 / 小カテゴリ / 項目名</small>
+          </div>
+          <div id="floater-checked-items"></div>
+        </div>
+        <div class="floater-divider"></div>
+        <div class="floater-block">
+          <div class="floater-block-title">
+            <span>📚 全カテゴリー目次</span>
+            <small>件数バッジ付き</small>
+          </div>
+          <div id="floater-items"></div>
+        </div>
       </div>
     `;
     document.body.appendChild(floater);
@@ -931,47 +1291,465 @@ function applyCommercialDefaults(){
     const floaterBtn = document.getElementById("floater-btn");
     const floaterList = document.getElementById("floater-list");
     const itemsContainer = document.getElementById("floater-items");
+    const checkedItemsContainer = document.getElementById("floater-checked-items");
     const openCountSpan = document.getElementById("open-count");
     const closeAllBtn = floater.querySelector(".close-all-btn");
+    const floaterSearch = document.getElementById("floater-search");
+    const floaterSearchMeta = document.getElementById("floater-search-meta");
+    const sortButtons = Array.from(floater.querySelectorAll(".floater-sort-btn"));
+
+    let autoIdSeq = 0;
+    let checkedStampSeq = 0;
+    const FLOATER_STATE_KEY = "shima_builder_floater_state_v2";
+    const defaultFloaterState = { sortMode: "added", search: "", subgroupOpen: {}, checkedOrder: {} };
+    const loadFloaterState = () => {
+      try {
+        const raw = localStorage.getItem(FLOATER_STATE_KEY);
+        if (!raw) return Object.assign({}, defaultFloaterState);
+        const parsed = JSON.parse(raw);
+        return {
+          sortMode: parsed && parsed.sortMode === "name" ? "name" : "added",
+          search: typeof parsed?.search === "string" ? parsed.search : "",
+          subgroupOpen: parsed && parsed.subgroupOpen && typeof parsed.subgroupOpen === "object" ? parsed.subgroupOpen : {},
+          checkedOrder: parsed && parsed.checkedOrder && typeof parsed.checkedOrder === "object" ? parsed.checkedOrder : {}
+        };
+      } catch (_) {
+        return Object.assign({}, defaultFloaterState);
+      }
+    };
+    const floaterState = loadFloaterState();
+    let itemSortMode = floaterState.sortMode;
+    const checkedStampMap = new WeakMap();
+    const nextAutoId = (prefix) => `${prefix}-${++autoIdSeq}`;
+    const persistFloaterState = () => {
+      try {
+        localStorage.setItem(FLOATER_STATE_KEY, JSON.stringify({
+          sortMode: itemSortMode,
+          search: floaterSearch ? floaterSearch.value : "",
+          subgroupOpen: floaterState.subgroupOpen || {},
+          checkedOrder: floaterState.checkedOrder || {}
+        }));
+      } catch (_) {}
+    };
+
+    const assignStableId = (el, prefix) => {
+      if (!el) return "";
+      if (!el.id) el.id = nextAutoId(prefix || "toc-node");
+      return el.id;
+    };
+
+    const normalizeForSearch = (text) => String(text || "").toLowerCase().replace(/\s+/g, " ").trim();
+    const escapeHtml = (str) => String(str || "").replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
+    const escapeRegExp = (str) => String(str || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const highlightText = (text, query) => {
+      const safe = escapeHtml(text || "");
+      const normalized = normalizeForSearch(query);
+      if (!normalized) return safe;
+      const parts = normalized.split(" ").filter(Boolean);
+      if (!parts.length) return safe;
+      const pattern = new RegExp(`(${parts.map(escapeRegExp).join("|")})`, "ig");
+      return safe.replace(pattern, '<mark class="floater-hit-mark">$1</mark>');
+    };
+    const setHighlightedText = (el, text, query, prefix) => {
+      if (!el) return;
+      el.innerHTML = `${escapeHtml(prefix || "")}${highlightText(text, query)}`;
+    };
+
+    const stampCheckedBox = (cb) => {
+      if (!cb || !cb.checked) return;
+      const det = cb.closest("details.accordion-wrap") || cb.closest("details");
+      const persistKey = getCheckboxPersistKey(cb, det);
+      if (floaterState.checkedOrder && persistKey && floaterState.checkedOrder[persistKey]) {
+        checkedStampMap.set(cb, floaterState.checkedOrder[persistKey]);
+        checkedStampSeq = Math.max(checkedStampSeq, floaterState.checkedOrder[persistKey]);
+        return;
+      }
+      if (!checkedStampMap.has(cb)) {
+        const next = ++checkedStampSeq;
+        checkedStampMap.set(cb, next);
+        if (persistKey) {
+          floaterState.checkedOrder[persistKey] = next;
+          persistFloaterState();
+        }
+      }
+    };
+
+    const getTopLevelSections = () =>
+      Array.from(document.querySelectorAll("#sections > .section > details.accordion-wrap"));
+
+    const getOpenDetails = () =>
+      Array.from(document.querySelectorAll("details.qp-main-acc[open], details.accordion-wrap[open], details.subgroup[open], details.qp-sub-acc[open], details.subgroup-details[open]"));
+
+    const getCheckedCount = (det) => {
+      if (!det) return 0;
+      return det.querySelectorAll('input[type="checkbox"]:checked').length;
+    };
+
+    const cleanTitle = (raw, fallback) =>
+      String(raw || fallback || "カテゴリー")
+        .replace(/[▶▼]/g, "")
+        .replace(/🗑️\s*クリア/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+
+    const getSectionTitle = (det) => {
+      const labelEl = det.querySelector(":scope > summary .section-summary-label");
+      const summary = det.querySelector(":scope > summary");
+      return cleanTitle(labelEl ? labelEl.textContent : summary ? summary.textContent : "カテゴリー", "カテゴリー");
+    };
+
+    const getDetailTitle = (detail, fallback) => {
+      if (!detail) return fallback || "小カテゴリ";
+      const summary = detail.querySelector(":scope > summary");
+      return cleanTitle(summary ? summary.textContent : detail.dataset.sectionLabel || detail.getAttribute("aria-label") || fallback || "小カテゴリ", fallback || "小カテゴリ");
+    };
+
+    const getCheckboxLabel = (cb) => {
+      if (!cb) return "";
+      let label = "";
+      if (cb.dataset && cb.dataset.label) label = cb.dataset.label;
+      if (!label) {
+        const host = cb.closest("label") || cb.parentElement;
+        label = host ? host.textContent : "";
+      }
+      label = cleanTitle(label, (cb.dataset && (cb.dataset.ja || cb.dataset.en)) || cb.value || "項目");
+      if (label.includes("/")) label = label.split("/")[0].trim();
+      return label || (cb.dataset && (cb.dataset.ja || cb.dataset.en)) || cb.value || "項目";
+    };
+
+    const getItemTarget = (cb) => {
+      const label = cb.closest("label");
+      if (label) return label;
+      if (cb.parentElement) return cb.parentElement;
+      return cb;
+    };
+    const getCheckboxPersistKey = (cb, det) => {
+      const sectionId = assignStableId(det || cb.closest("details.accordion-wrap") || cb.closest("details"), "toc-sec");
+      const subgroupPath = [];
+      let cur = cb.parentElement;
+      while (cur && cur !== det) {
+        if (cur.tagName === "DETAILS") subgroupPath.push(getDetailTitle(cur, "小カテゴリ"));
+        cur = cur.parentElement;
+      }
+      subgroupPath.reverse();
+      return [sectionId, subgroupPath.join(">"), getCheckboxLabel(cb), cb.value || ""].join("::");
+    };
+
+    const openAncestors = (node) => {
+      let cur = node;
+      while (cur && cur !== document.body) {
+        if (cur.tagName === "DETAILS") cur.open = true;
+        cur = cur.parentElement;
+      }
+    };
+
+    const pulseTarget = (node) => {
+      if (!node) return;
+      node.classList.remove("toc-jump-highlight");
+      void node.offsetWidth;
+      node.classList.add("toc-jump-highlight");
+      setTimeout(() => node.classList.remove("toc-jump-highlight"), 1600);
+    };
+
+    const scrollToNode = (node) => {
+      if (!node) return;
+      openAncestors(node);
+      const target = node;
+      const top = target.getBoundingClientRect().top + window.scrollY - 78;
+      window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+      pulseTarget(target);
+      floaterList.classList.remove("open");
+      setTimeout(updateList, 80);
+    };
+
+    const createItemButton = (det, title, checkedCount, openedIds) => {
+      const itemBtn = document.createElement("button");
+      itemBtn.type = "button";
+      itemBtn.className = "floater-item";
+      itemBtn.dataset.targetId = det.id;
+      if (openedIds.has(det.id)) itemBtn.classList.add("is-open");
+      if (checkedCount > 0) itemBtn.classList.add("has-checks");
+
+      const text = document.createElement("span");
+      text.className = "floater-item-text";
+      setHighlightedText(text, title, floaterSearch ? floaterSearch.value : "");
+
+      const status = document.createElement("span");
+      status.className = "floater-item-status";
+      if (checkedCount > 0) {
+        status.classList.add("has-checks");
+        status.textContent = `${checkedCount}件`;
+      } else {
+        status.textContent = det.open ? "OPEN" : "GO";
+      }
+
+      itemBtn.appendChild(text);
+      itemBtn.appendChild(status);
+      itemBtn.addEventListener("click", () => scrollToNode(det));
+      return itemBtn;
+    };
+
+    const buildCheckedSectionData = (det, title, checkedCount) => {
+      const groups = new Map();
+
+      Array.from(det.querySelectorAll('input[type="checkbox"]:checked')).forEach((cb, idx) => {
+        const groupDetails = [];
+        let cur = cb.parentElement;
+        while (cur && cur !== det) {
+          if (cur.tagName === "DETAILS") groupDetails.push(cur);
+          cur = cur.parentElement;
+        }
+        groupDetails.reverse();
+
+        const smallGroups = groupDetails.filter((x) => x && x !== det);
+        const deepestGroup = smallGroups.length ? smallGroups[smallGroups.length - 1] : null;
+        const subgroupTitle = smallGroups.length
+          ? smallGroups.map((x) => getDetailTitle(x, "小カテゴリ")).filter(Boolean).join(" › ")
+          : "このカテゴリー直下";
+
+        const subgroupTarget = deepestGroup || det;
+        const subgroupKey = smallGroups.length
+          ? smallGroups.map((x) => assignStableId(x, "toc-sub")).join("|")
+          : `root::${det.id}`;
+
+        if (!groups.has(subgroupKey)) {
+          groups.set(subgroupKey, {
+            key: subgroupKey,
+            title: subgroupTitle,
+            count: 0,
+            depth: smallGroups.length,
+            target: subgroupTarget,
+            items: []
+          });
+        }
+
+        const entry = groups.get(subgroupKey);
+        entry.count += 1;
+
+        const itemTarget = getItemTarget(cb);
+        assignStableId(itemTarget, "toc-item");
+
+        stampCheckedBox(cb);
+        const persistKey = getCheckboxPersistKey(cb, det);
+        entry.items.push({
+          label: getCheckboxLabel(cb),
+          target: itemTarget,
+          sortIndex: idx,
+          addedAt: checkedStampMap.get(cb) || (floaterState.checkedOrder && floaterState.checkedOrder[persistKey]) || idx,
+          persistKey,
+          searchText: normalizeForSearch(`${title} ${subgroupTitle} ${getCheckboxLabel(cb)}`)
+        });
+      });
+
+      const grouped = Array.from(groups.values()).map((group) => {
+        const seen = new Set();
+        group.items = group.items
+          .filter((item) => {
+            const key = `${item.label}::${assignStableId(item.target, "toc-item")}`;
+            if (seen.has(key)) return false;
+            seen.add(key);
+            return true;
+          });
+        group.searchText = normalizeForSearch(`${title} ${group.title} ${group.items.map((x) => x.label).join(" ")}`);
+        return group;
+      });
+
+      grouped.sort((a, b) => b.count - a.count || a.depth - b.depth || a.title.localeCompare(b.title, "ja"));
+
+      return { det, title, checkedCount, groups: grouped };
+    };
+
+    const createSubgroupButton = (group, detailsEl) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "floater-subgroup-btn";
+
+      const text = document.createElement("span");
+      text.className = "floater-subgroup-text";
+      setHighlightedText(text, group.title, floaterSearch ? floaterSearch.value : "", "↳ ");
+
+      const status = document.createElement("span");
+      status.className = "floater-subgroup-status";
+      status.textContent = `${group.count}件`;
+
+      const caret = document.createElement("span");
+      caret.className = "floater-subgroup-caret";
+      caret.textContent = detailsEl && detailsEl.open ? "▾" : "▸";
+
+      btn.appendChild(text);
+      btn.appendChild(status);
+      btn.appendChild(caret);
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (detailsEl) {
+          detailsEl.open = !detailsEl.open;
+          caret.textContent = detailsEl.open ? "▾" : "▸";
+        }
+      });
+      btn.addEventListener("dblclick", (e) => {
+        e.preventDefault();
+        scrollToNode(group.target);
+      });
+      return btn;
+    };
+
+    const createLeafButton = (item) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "floater-leaf-btn";
+
+      const text = document.createElement("span");
+      text.className = "floater-leaf-text";
+      setHighlightedText(text, item.label, floaterSearch ? floaterSearch.value : "", "・");
+
+      const icon = document.createElement("span");
+      icon.className = "floater-leaf-icon";
+      icon.textContent = "GO";
+
+      btn.appendChild(text);
+      btn.appendChild(icon);
+      btn.addEventListener("click", () => scrollToNode(item.target));
+      return btn;
+    };
+
+    const getSubgroupPersistKey = (sectionData, group) => `${sectionData.det.id}::${group.key}`;
+
+    const createCheckedSectionCard = (sectionData, openedIds) => {
+      const card = document.createElement("div");
+      card.className = "floater-checked-card";
+      card.appendChild(createItemButton(sectionData.det, sectionData.title, sectionData.checkedCount, openedIds));
+
+      const subtree = document.createElement("div");
+      subtree.className = "floater-subtree";
+
+      sectionData.groups.forEach((group) => {
+        const subgroupDetails = document.createElement("details");
+        subgroupDetails.className = "floater-subgroup-details";
+        const subgroupPersistKey = getSubgroupPersistKey(sectionData, group);
+        const savedOpen = Object.prototype.hasOwnProperty.call(floaterState.subgroupOpen || {}, subgroupPersistKey)
+          ? !!floaterState.subgroupOpen[subgroupPersistKey]
+          : null;
+        subgroupDetails.open = savedOpen !== null ? savedOpen : (sectionData.groups.length <= 2 || group.count >= 2);
+        const summary = document.createElement("summary");
+        summary.appendChild(createSubgroupButton(group, subgroupDetails));
+        subgroupDetails.appendChild(summary);
+        subgroupDetails.addEventListener("toggle", () => {
+          floaterState.subgroupOpen[subgroupPersistKey] = !!subgroupDetails.open;
+          persistFloaterState();
+        });
+
+        const itemList = document.createElement("div");
+        itemList.className = "floater-leaf-list";
+        group.items.forEach((item) => itemList.appendChild(createLeafButton(item)));
+        subgroupDetails.appendChild(itemList);
+        subtree.appendChild(subgroupDetails);
+      });
+
+      card.appendChild(subtree);
+      return card;
+    };
+
+    const updateActiveMarker = () => {
+      const sections = getTopLevelSections();
+      if (!sections.length) return;
+
+      let activeId = "";
+      let bestScore = Number.POSITIVE_INFINITY;
+      sections.forEach((det) => {
+        const rect = det.getBoundingClientRect();
+        if (rect.bottom < 80) return;
+        const score = Math.abs(rect.top - 110);
+        if (score < bestScore) {
+          bestScore = score;
+          activeId = det.id;
+        }
+      });
+
+      floater
+        .querySelectorAll(".floater-item[data-target-id]")
+        .forEach((btn) => btn.classList.toggle("active", btn.dataset.targetId === activeId));
+    };
 
     const updateList = () => {
-      const openedDetails = Array.from(
-        document.querySelectorAll("details.qp-main-acc[open], details.accordion-wrap[open]")
-      );
-      const count = openedDetails.length;
-      openCountSpan.textContent = count;
+      const openedIds = new Set(getOpenDetails().map((det) => det.id).filter(Boolean));
+      const sections = getTopLevelSections();
+      const checkedSections = [];
+      let totalCheckedCount = 0;
+      const query = normalizeForSearch(floaterSearch ? floaterSearch.value : "");
 
-      if (count > 0) {
-        floaterBtn.classList.add("show");
-        itemsContainer.innerHTML = "";
+      floaterBtn.classList.add("show");
+      itemsContainer.innerHTML = "";
+      checkedItemsContainer.innerHTML = "";
 
-        openedDetails.forEach((det) => {
-          const summary = det.querySelector("summary");
-          const title = summary
-            ? summary.textContent.replace(/[▶▼]/g, "").trim()
-            : "カテゴリー";
+      sections.forEach((det, idx) => {
+        if (!det.id) det.id = `toc-auto-${idx + 1}`;
 
-          const itemDiv = document.createElement("div");
-          itemDiv.className = "floater-item";
-          itemDiv.innerHTML = `<span>${title}</span>`;
+        const title = getSectionTitle(det);
+        const checkedCount = getCheckedCount(det);
+        totalCheckedCount += checkedCount;
 
-          const closeBtn = document.createElement("button");
-          closeBtn.className = "item-close-btn";
-          closeBtn.innerHTML = "×";
-          closeBtn.onclick = (e) => {
-            e.stopPropagation();
-            det.querySelectorAll("details").forEach((d) => d.removeAttribute("open"));
-            det.removeAttribute("open");
-            setTimeout(updateList, 50);
-          };
+        itemsContainer.appendChild(createItemButton(det, title, checkedCount, openedIds));
+        if (checkedCount > 0) checkedSections.push(buildCheckedSectionData(det, title, checkedCount));
+      });
 
-          itemDiv.appendChild(closeBtn);
-          itemsContainer.appendChild(itemDiv);
+      checkedSections.forEach((sectionData) => {
+        sectionData.groups = sectionData.groups
+          .map((group) => {
+            let items = group.items.slice();
+            if (itemSortMode === "name") {
+              items.sort((a, b) => a.label.localeCompare(b.label, "ja") || a.addedAt - b.addedAt);
+            } else {
+              items.sort((a, b) => a.addedAt - b.addedAt || a.sortIndex - b.sortIndex);
+            }
+            if (query) items = items.filter((item) => item.searchText.includes(query));
+            return Object.assign({}, group, {
+              items,
+              count: items.length,
+              searchText: group.searchText
+            });
+          })
+          .filter((group) => group.count > 0 && (!query || group.searchText.includes(query) || group.items.length > 0));
+        sectionData.checkedCount = sectionData.groups.reduce((sum, group) => sum + group.count, 0);
+      });
+
+      let filteredCheckedSections = checkedSections.filter((sectionData) => {
+        const sectionText = normalizeForSearch(`${sectionData.title} ${sectionData.groups.map((x) => x.title).join(" ")}`);
+        return sectionData.checkedCount > 0 && (!query || sectionText.includes(query) || sectionData.groups.length > 0);
+      });
+
+      filteredCheckedSections.sort((a, b) => b.checkedCount - a.checkedCount || a.title.localeCompare(b.title, "ja"));
+
+      openCountSpan.textContent = filteredCheckedSections.length;
+      floaterBtn.title = filteredCheckedSections.length
+        ? `チェック済みカテゴリー: ${filteredCheckedSections.length} / チェック数: ${totalCheckedCount}`
+        : "チェック済みカテゴリーはまだありません";
+      if (floaterSearchMeta) {
+        floaterSearchMeta.textContent = query
+          ? `${filteredCheckedSections.length}カテゴリ / ${filteredCheckedSections.reduce((sum, sec) => sum + sec.checkedCount, 0)}件ヒット`
+          : `全${checkedSections.length}カテゴリ / ${totalCheckedCount}件`;
+      }
+
+      if (filteredCheckedSections.length) {
+        filteredCheckedSections.forEach((sectionData) => {
+          checkedItemsContainer.appendChild(createCheckedSectionCard(sectionData, openedIds));
         });
       } else {
-        floaterBtn.classList.remove("show");
-        floaterList.classList.remove("open");
+        const empty = document.createElement("div");
+        empty.className = "floater-empty";
+        empty.textContent = query
+          ? "検索に一致するチェック済み項目がありません。"
+          : "まだチェックはありません。選択が入ると、ここに件数順のショートカットが並びます。";
+        checkedItemsContainer.appendChild(empty);
       }
+
+      if (!sections.length) {
+        const empty = document.createElement("div");
+        empty.className = "floater-empty";
+        empty.textContent = "カテゴリーを読み込み中です…";
+        itemsContainer.appendChild(empty);
+      }
+
+      updateActiveMarker();
     };
 
     const sectionsRoot = document.getElementById("sections");
@@ -982,9 +1760,23 @@ function applyCommercialDefaults(){
           if (
             e.target.tagName === "DETAILS" &&
             (e.target.classList.contains("qp-main-acc") ||
-              e.target.classList.contains("accordion-wrap"))
+              e.target.classList.contains("accordion-wrap") ||
+              e.target.classList.contains("subgroup") ||
+              e.target.classList.contains("qp-sub-acc") ||
+              e.target.classList.contains("subgroup-details"))
           ) {
             setTimeout(updateList, 50);
+          }
+        },
+        true
+      );
+
+      sectionsRoot.addEventListener(
+        "change",
+        (e) => {
+          if (e.target && e.target.matches && e.target.matches('input[type="checkbox"]')) {
+            if (e.target.checked) stampCheckedBox(e.target);
+            setTimeout(updateList, 20);
           }
         },
         true
@@ -993,20 +1785,60 @@ function applyCommercialDefaults(){
 
     floaterBtn.addEventListener("click", () => {
       floaterList.classList.toggle("open");
+      if (floaterList.classList.contains("open")) updateList();
     });
 
-    closeAllBtn.addEventListener("click", () => {
-      document
-        .querySelectorAll("details.qp-main-acc[open], details.accordion-wrap[open]")
-        .forEach((det) => {
-          det.querySelectorAll("details").forEach((d) => d.removeAttribute("open"));
-          det.removeAttribute("open");
+    if (floaterSearch) {
+      floaterSearch.value = floaterState.search || "";
+      floaterSearch.addEventListener("input", () => {
+        persistFloaterState();
+        updateList();
+      });
+    }
+    sortButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        itemSortMode = btn.dataset.sortMode || "added";
+        sortButtons.forEach((x) => x.classList.toggle("active", x === btn));
+        persistFloaterState();
+        updateList();
+      });
+    });
+
+    closeAllBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const sectionsRootEl = document.getElementById("sections");
+      if (sectionsRootEl) {
+        Array.from(sectionsRootEl.querySelectorAll("details[open]"))
+          .sort((a, b) => b.querySelectorAll("details").length - a.querySelectorAll("details").length)
+          .forEach((det) => det.removeAttribute("open"));
+      }
+
+      floater.querySelectorAll("details.subgroup-details[open]").forEach((det) => det.removeAttribute("open"));
+      if (floaterState && floaterState.subgroupOpen && typeof floaterState.subgroupOpen === "object") {
+        Object.keys(floaterState.subgroupOpen).forEach((key) => {
+          floaterState.subgroupOpen[key] = false;
         });
-      setTimeout(updateList, 50);
+        persistFloaterState();
+      }
+
+      setTimeout(updateList, 30);
     });
 
+    document.addEventListener("click", (e) => {
+      if (!floater.contains(e.target)) floaterList.classList.remove("open");
+    });
+
+    window.addEventListener("scroll", () => updateActiveMarker(), { passive: true });
+    window.addEventListener("resize", () => updateActiveMarker());
+    window.addEventListener("promptPartMounted", () => setTimeout(updateList, 60));
+    window.addEventListener("beforeunload", () => {});
+
+    sortButtons.forEach((x) => x.classList.toggle("active", (x.dataset.sortMode || "added") === itemSortMode));
     setTimeout(updateList, 500);
   }
+
 
   function init() {
     if (!document.getElementById("builder-core-style")) {

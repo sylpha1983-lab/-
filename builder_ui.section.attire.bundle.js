@@ -3998,3 +3998,239 @@ wrap.appendChild(title);
   };
   window.__registerPromptPart(KEY, VERSION, API);
 })();
+
+
+(function(){
+  "use strict";
+  const VERSION = 23; // チャイナ服特化コレクション
+  const KEY = "attire";
+
+  const CHINA_ATTIRE_DATA = {
+    "🐉 チャイナ基本シルエット (Core Cheongsam Silhouettes)": [
+      { ja: "王道チャイナドレス", en: "cheongsam, chinese clothes" },
+      { ja: "クラシック旗袍", en: "classic cheongsam, traditional chinese dress" },
+      { ja: "モダン旗袍", en: "modern cheongsam, fashion qipao" },
+      { ja: "ミニチャイナ", en: "short cheongsam, mini qipao" },
+      { ja: "ロングチャイナ", en: "long cheongsam, floor-length qipao" },
+      { ja: "ハイウエスト旗袍", en: "high-waist cheongsam" },
+      { ja: "ボディライン強調旗袍", en: "fitted cheongsam, body-hugging qipao" },
+      { ja: "Aライン中華ドレス", en: "a-line cheongsam" },
+      { ja: "マーメイド旗袍", en: "mermaid cheongsam" },
+      { ja: "マント付き中華ドレス", en: "cheongsam with cape" },
+      { ja: "羽織付きチャイナ", en: "cheongsam with sheer outer robe" },
+      { ja: "レイヤード旗袍", en: "layered cheongsam, double-layer qipao" }
+    ],
+    "✂️ スリット・丈・攻め形状 (Slits, Length & Bold Cuts)": [
+      { ja: "ハイスリットチャイナ", en: "cheongsam, high slit" },
+      { ja: "両脚スリット旗袍", en: "double slit cheongsam" },
+      { ja: "深スリットミニチャイナ", en: "short cheongsam, high slit, thighs" },
+      { ja: "前開きスリット旗袍", en: "front slit cheongsam" },
+      { ja: "サイドカット旗袍", en: "cheongsam with side cutout" },
+      { ja: "ウエストカット旗袍", en: "cheongsam with waist cutout" },
+      { ja: "胸開きチャイナ", en: "cheongsam, cleavage cutout" },
+      { ja: "肩見せチャイナ", en: "bare shoulders, cheongsam" },
+      { ja: "背中開き旗袍", en: "backless cheongsam" },
+      { ja: "横乳チャイナ", en: "china dress, sideboob" },
+      { ja: "太もも魅せ旗袍", en: "china dress, thighs, high slit" },
+      { ja: "攻めチャイナ雛形", en: "bare shoulders, china dress, chinese clothes, short dress, cleavage cutout, sideboob, thighs" }
+    ],
+    "🧵 襟・袖・上半身ディテール (Collar, Sleeves & Upper Details)": [
+      { ja: "立ち襟チャイナ", en: "mandarin collar cheongsam" },
+      { ja: "低め襟旗袍", en: "low mandarin collar cheongsam" },
+      { ja: "ノースリーブ旗袍", en: "sleeveless cheongsam" },
+      { ja: "半袖チャイナ", en: "short-sleeve cheongsam" },
+      { ja: "長袖チャイナ", en: "long-sleeve cheongsam" },
+      { ja: "透け袖中華ドレス", en: "cheongsam with sheer sleeves" },
+      { ja: "パフ袖チャイナ", en: "puff-sleeve cheongsam" },
+      { ja: "オフショル旗袍", en: "off-shoulder cheongsam" },
+      { ja: "ワンショルダーチャイナ", en: "one-shoulder cheongsam" },
+      { ja: "胸元キーホール旗袍", en: "keyhole cheongsam" },
+      { ja: "チャイナボタン強調", en: "frog buttons, cheongsam" },
+      { ja: "お団子髪セット向け", en: "hair bun, cheongsam" }
+    ],
+    "🪭 素材・色・柄・装飾 (Materials, Colors & Ornament)": [
+      { ja: "赤金チャイナ", en: "red and gold cheongsam" },
+      { ja: "黒金チャイナ", en: "black and gold cheongsam" },
+      { ja: "純白旗袍", en: "white cheongsam" },
+      { ja: "翡翠グリーン旗袍", en: "jade green cheongsam" },
+      { ja: "深紅シルクチャイナ", en: "deep crimson silk cheongsam" },
+      { ja: "サテン旗袍", en: "satin cheongsam" },
+      { ja: "シルク旗袍", en: "silk cheongsam" },
+      { ja: "ベルベット中華ドレス", en: "velvet cheongsam" },
+      { ja: "レース重ねチャイナ", en: "lace-trimmed cheongsam" },
+      { ja: "刺繍鳳凰チャイナ", en: "phoenix embroidery cheongsam" },
+      { ja: "刺繍龍紋旗袍", en: "dragon embroidery cheongsam" },
+      { ja: "花柄チャイナ", en: "floral cheongsam" },
+      { ja: "牡丹柄旗袍", en: "peony pattern cheongsam" },
+      { ja: "竹柄中華ドレス", en: "bamboo motif cheongsam" },
+      { ja: "流紋光沢チャイナ", en: "glossy cheongsam, reflective silk" }
+    ],
+    "🌙 派生・融合チャイナ (Hybrid & Themed Chinese Looks)": [
+      { ja: "ゴシックチャイナ", en: "gothic cheongsam" },
+      { ja: "ロリィタチャイナ", en: "qi-lolita, chinese lolita dress" },
+      { ja: "メイドチャイナ", en: "maid cheongsam" },
+      { ja: "バニーチャイナ", en: "chinese style bunny outfit, qipao-inspired bunny silhouette" },
+      { ja: "サイバーチャイナ", en: "cyber cheongsam" },
+      { ja: "テックウェア旗袍", en: "techwear cheongsam" },
+      { ja: "武侠ヒロインチャイナ", en: "wuxia heroine outfit, cheongsam" },
+      { ja: "仙女風チャイナ", en: "xianxia-inspired cheongsam" },
+      { ja: "宮廷中華ドレス", en: "chinese ceremonial outfit" },
+      { ja: "漢服ミックス旗袍", en: "hanfu-inspired cheongsam" },
+      { ja: "近未来ネオン旗袍", en: "futuristic cheongsam, neon accents" },
+      { ja: "雪国チャイナ", en: "winter cheongsam, fur trim" }
+    ],
+    "👠 合わせ技パーツ (Pairing Parts for Cheongsam Looks)": [
+      { ja: "網タイツ合わせ", en: "cheongsam, fishnet pantyhose" },
+      { ja: "パンスト合わせ", en: "cheongsam, pantyhose" },
+      { ja: "ニーハイ合わせ", en: "cheongsam, thighhighs" },
+      { ja: "ハイヒール合わせ", en: "cheongsam, high heels" },
+      { ja: "チャイナシューズ合わせ", en: "cheongsam, chinese shoes" },
+      { ja: "簪・髪飾り合わせ", en: "cheongsam, ornate hairpin" },
+      { ja: "扇子合わせ", en: "cheongsam, folding fan" },
+      { ja: "手袋合わせ", en: "cheongsam, long gloves" }
+    ]
+  };
+
+  const DICT = {
+    "cheongsam, chinese clothes": "王道チャイナドレス",
+    "classic cheongsam, traditional chinese dress": "クラシック旗袍",
+    "modern cheongsam, fashion qipao": "モダン旗袍",
+    "short cheongsam, mini qipao": "ミニチャイナ",
+    "long cheongsam, floor-length qipao": "ロングチャイナ",
+    "high-waist cheongsam": "ハイウエスト旗袍",
+    "fitted cheongsam, body-hugging qipao": "ボディライン強調旗袍",
+    "a-line cheongsam": "Aライン中華ドレス",
+    "mermaid cheongsam": "マーメイド旗袍",
+    "cheongsam with cape": "マント付き中華ドレス",
+    "cheongsam with sheer outer robe": "羽織付きチャイナ",
+    "layered cheongsam, double-layer qipao": "レイヤード旗袍",
+    "cheongsam, high slit": "ハイスリットチャイナ",
+    "double slit cheongsam": "両脚スリット旗袍",
+    "short cheongsam, high slit, thighs": "深スリットミニチャイナ",
+    "front slit cheongsam": "前開きスリット旗袍",
+    "cheongsam with side cutout": "サイドカット旗袍",
+    "cheongsam with waist cutout": "ウエストカット旗袍",
+    "cheongsam, cleavage cutout": "胸開きチャイナ",
+    "bare shoulders, cheongsam": "肩見せチャイナ",
+    "backless cheongsam": "背中開き旗袍",
+    "china dress, sideboob": "横乳チャイナ",
+    "china dress, thighs, high slit": "太もも魅せ旗袍",
+    "bare shoulders, china dress, chinese clothes, short dress, cleavage cutout, sideboob, thighs": "攻めチャイナ雛形",
+    "mandarin collar cheongsam": "立ち襟チャイナ",
+    "low mandarin collar cheongsam": "低め襟旗袍",
+    "sleeveless cheongsam": "ノースリーブ旗袍",
+    "short-sleeve cheongsam": "半袖チャイナ",
+    "long-sleeve cheongsam": "長袖チャイナ",
+    "cheongsam with sheer sleeves": "透け袖中華ドレス",
+    "puff-sleeve cheongsam": "パフ袖チャイナ",
+    "off-shoulder cheongsam": "オフショル旗袍",
+    "one-shoulder cheongsam": "ワンショルダーチャイナ",
+    "keyhole cheongsam": "胸元キーホール旗袍",
+    "frog buttons, cheongsam": "チャイナボタン強調",
+    "hair bun, cheongsam": "お団子髪セット向け",
+    "red and gold cheongsam": "赤金チャイナ",
+    "black and gold cheongsam": "黒金チャイナ",
+    "white cheongsam": "純白旗袍",
+    "jade green cheongsam": "翡翠グリーン旗袍",
+    "deep crimson silk cheongsam": "深紅シルクチャイナ",
+    "satin cheongsam": "サテン旗袍",
+    "silk cheongsam": "シルク旗袍",
+    "velvet cheongsam": "ベルベット中華ドレス",
+    "lace-trimmed cheongsam": "レース重ねチャイナ",
+    "phoenix embroidery cheongsam": "刺繍鳳凰チャイナ",
+    "dragon embroidery cheongsam": "刺繍龍紋旗袍",
+    "floral cheongsam": "花柄チャイナ",
+    "peony pattern cheongsam": "牡丹柄旗袍",
+    "bamboo motif cheongsam": "竹柄中華ドレス",
+    "glossy cheongsam, reflective silk": "流紋光沢チャイナ",
+    "gothic cheongsam": "ゴシックチャイナ",
+    "qi-lolita, chinese lolita dress": "ロリィタチャイナ",
+    "maid cheongsam": "メイドチャイナ",
+    "chinese style bunny outfit, qipao-inspired bunny silhouette": "バニーチャイナ",
+    "cyber cheongsam": "サイバーチャイナ",
+    "techwear cheongsam": "テックウェア旗袍",
+    "wuxia heroine outfit, cheongsam": "武侠ヒロインチャイナ",
+    "xianxia-inspired cheongsam": "仙女風チャイナ",
+    "chinese ceremonial outfit": "宮廷中華ドレス",
+    "hanfu-inspired cheongsam": "漢服ミックス旗袍",
+    "futuristic cheongsam, neon accents": "近未来ネオン旗袍",
+    "winter cheongsam, fur trim": "雪国チャイナ",
+    "cheongsam, fishnet pantyhose": "網タイツ合わせ",
+    "cheongsam, pantyhose": "パンスト合わせ",
+    "cheongsam, thighhighs": "ニーハイ合わせ",
+    "cheongsam, high heels": "ハイヒール合わせ",
+    "cheongsam, chinese shoes": "チャイナシューズ合わせ",
+    "cheongsam, ornate hairpin": "簪・髪飾り合わせ",
+    "cheongsam, folding fan": "扇子合わせ",
+    "cheongsam, long gloves": "手袋合わせ"
+  };
+
+  const API = {
+    initUI(container) {
+      const mount = (retry = 0) => {
+        const parent = document.querySelector("#list-attire") || container;
+        if (!parent) {
+          if (retry < 50) setTimeout(() => mount(retry + 1), 100);
+          return;
+        }
+        if (parent.querySelector(".attire-v23-container")) return;
+
+        const root = document.createElement("div");
+        root.className = "attire-v23-container";
+
+        const sep = document.createElement("div");
+        sep.style.cssText = "margin:18px 0 10px 0; border-top:1px dashed #cc3344; text-align:center; color:#aa2233; font-size:0.88em; font-weight:bold;";
+        sep.textContent = "🐉 チャイナ服特化コレクション (v23) 🐉";
+        root.appendChild(sep);
+
+        const makeCategory = (title, items) => {
+          const details = document.createElement("details");
+          details.className = "attire-cat attire-v23-cat";
+          details.style.cssText = "margin-bottom:6px; border:1px solid #e8d3d8; border-radius:8px; background:#fff; overflow:hidden;";
+
+          const summary = document.createElement("summary");
+          summary.textContent = title;
+          summary.style.cssText = "font-weight:bold; padding:8px 10px; cursor:pointer; background:#fff7f8;";
+          details.appendChild(summary);
+
+          const content = document.createElement("div");
+          content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:6px;";
+
+          items.forEach(item => {
+            const label = document.createElement("label");
+            label.style.cssText = "display:flex; align-items:center; gap:6px; font-size:0.9em; cursor:pointer; line-height:1.25;";
+            const cb = document.createElement("input");
+            cb.type = "checkbox";
+            cb.dataset.en = item.en;
+            label.appendChild(cb);
+            label.appendChild(document.createTextNode(item.ja));
+            label.title = item.en;
+            content.appendChild(label);
+          });
+
+          details.appendChild(content);
+          return details;
+        };
+
+        Object.entries(CHINA_ATTIRE_DATA).forEach(([cat, items]) => {
+          root.appendChild(makeCategory(cat, items));
+        });
+
+        const contentArea = parent.querySelector(".section-content") || parent;
+        contentArea.appendChild(root);
+
+        if (window.__outputTranslation) {
+          window.__outputTranslation.register(DICT);
+        }
+      };
+      mount();
+    },
+    getTags() {
+      const tags = [];
+      document.querySelectorAll(".attire-v23-container input[type='checkbox']:checked").forEach(cb => tags.push(cb.dataset.en));
+      return tags;
+    }
+  };
+
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
