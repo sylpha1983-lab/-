@@ -4000,234 +4000,1513 @@ wrap.appendChild(title);
 })();
 
 
+// --- builder_ui.section.attire.v23.js ---
 (function(){
   "use strict";
-  const VERSION = 23; // チャイナ服特化コレクション
+  const VERSION = 23;
   const KEY = "attire";
 
-  const CHINA_ATTIRE_DATA = {
-    "🐉 チャイナ基本シルエット (Core Cheongsam Silhouettes)": [
-      { ja: "王道チャイナドレス", en: "cheongsam, chinese clothes" },
-      { ja: "クラシック旗袍", en: "classic cheongsam, traditional chinese dress" },
-      { ja: "モダン旗袍", en: "modern cheongsam, fashion qipao" },
-      { ja: "ミニチャイナ", en: "short cheongsam, mini qipao" },
-      { ja: "ロングチャイナ", en: "long cheongsam, floor-length qipao" },
-      { ja: "ハイウエスト旗袍", en: "high-waist cheongsam" },
-      { ja: "ボディライン強調旗袍", en: "fitted cheongsam, body-hugging qipao" },
-      { ja: "Aライン中華ドレス", en: "a-line cheongsam" },
-      { ja: "マーメイド旗袍", en: "mermaid cheongsam" },
-      { ja: "マント付き中華ドレス", en: "cheongsam with cape" },
-      { ja: "羽織付きチャイナ", en: "cheongsam with sheer outer robe" },
-      { ja: "レイヤード旗袍", en: "layered cheongsam, double-layer qipao" }
-    ],
-    "✂️ スリット・丈・攻め形状 (Slits, Length & Bold Cuts)": [
-      { ja: "ハイスリットチャイナ", en: "cheongsam, high slit" },
-      { ja: "両脚スリット旗袍", en: "double slit cheongsam" },
-      { ja: "深スリットミニチャイナ", en: "short cheongsam, high slit, thighs" },
-      { ja: "前開きスリット旗袍", en: "front slit cheongsam" },
-      { ja: "サイドカット旗袍", en: "cheongsam with side cutout" },
-      { ja: "ウエストカット旗袍", en: "cheongsam with waist cutout" },
-      { ja: "胸開きチャイナ", en: "cheongsam, cleavage cutout" },
-      { ja: "肩見せチャイナ", en: "bare shoulders, cheongsam" },
-      { ja: "背中開き旗袍", en: "backless cheongsam" },
-      { ja: "横乳チャイナ", en: "china dress, sideboob" },
-      { ja: "太もも魅せ旗袍", en: "china dress, thighs, high slit" },
-      { ja: "攻めチャイナ雛形", en: "bare shoulders, china dress, chinese clothes, short dress, cleavage cutout, sideboob, thighs" }
-    ],
-    "🧵 襟・袖・上半身ディテール (Collar, Sleeves & Upper Details)": [
-      { ja: "立ち襟チャイナ", en: "mandarin collar cheongsam" },
-      { ja: "低め襟旗袍", en: "low mandarin collar cheongsam" },
-      { ja: "ノースリーブ旗袍", en: "sleeveless cheongsam" },
-      { ja: "半袖チャイナ", en: "short-sleeve cheongsam" },
-      { ja: "長袖チャイナ", en: "long-sleeve cheongsam" },
-      { ja: "透け袖中華ドレス", en: "cheongsam with sheer sleeves" },
-      { ja: "パフ袖チャイナ", en: "puff-sleeve cheongsam" },
-      { ja: "オフショル旗袍", en: "off-shoulder cheongsam" },
-      { ja: "ワンショルダーチャイナ", en: "one-shoulder cheongsam" },
-      { ja: "胸元キーホール旗袍", en: "keyhole cheongsam" },
-      { ja: "チャイナボタン強調", en: "frog buttons, cheongsam" },
-      { ja: "お団子髪セット向け", en: "hair bun, cheongsam" }
-    ],
-    "🪭 素材・色・柄・装飾 (Materials, Colors & Ornament)": [
-      { ja: "赤金チャイナ", en: "red and gold cheongsam" },
-      { ja: "黒金チャイナ", en: "black and gold cheongsam" },
-      { ja: "純白旗袍", en: "white cheongsam" },
-      { ja: "翡翠グリーン旗袍", en: "jade green cheongsam" },
-      { ja: "深紅シルクチャイナ", en: "deep crimson silk cheongsam" },
-      { ja: "サテン旗袍", en: "satin cheongsam" },
-      { ja: "シルク旗袍", en: "silk cheongsam" },
-      { ja: "ベルベット中華ドレス", en: "velvet cheongsam" },
-      { ja: "レース重ねチャイナ", en: "lace-trimmed cheongsam" },
-      { ja: "刺繍鳳凰チャイナ", en: "phoenix embroidery cheongsam" },
-      { ja: "刺繍龍紋旗袍", en: "dragon embroidery cheongsam" },
-      { ja: "花柄チャイナ", en: "floral cheongsam" },
-      { ja: "牡丹柄旗袍", en: "peony pattern cheongsam" },
-      { ja: "竹柄中華ドレス", en: "bamboo motif cheongsam" },
-      { ja: "流紋光沢チャイナ", en: "glossy cheongsam, reflective silk" }
-    ],
-    "🌙 派生・融合チャイナ (Hybrid & Themed Chinese Looks)": [
-      { ja: "ゴシックチャイナ", en: "gothic cheongsam" },
-      { ja: "ロリィタチャイナ", en: "qi-lolita, chinese lolita dress" },
-      { ja: "メイドチャイナ", en: "maid cheongsam" },
-      { ja: "バニーチャイナ", en: "chinese style bunny outfit, qipao-inspired bunny silhouette" },
-      { ja: "サイバーチャイナ", en: "cyber cheongsam" },
-      { ja: "テックウェア旗袍", en: "techwear cheongsam" },
-      { ja: "武侠ヒロインチャイナ", en: "wuxia heroine outfit, cheongsam" },
-      { ja: "仙女風チャイナ", en: "xianxia-inspired cheongsam" },
-      { ja: "宮廷中華ドレス", en: "chinese ceremonial outfit" },
-      { ja: "漢服ミックス旗袍", en: "hanfu-inspired cheongsam" },
-      { ja: "近未来ネオン旗袍", en: "futuristic cheongsam, neon accents" },
-      { ja: "雪国チャイナ", en: "winter cheongsam, fur trim" }
-    ],
-    "👠 合わせ技パーツ (Pairing Parts for Cheongsam Looks)": [
-      { ja: "網タイツ合わせ", en: "cheongsam, fishnet pantyhose" },
-      { ja: "パンスト合わせ", en: "cheongsam, pantyhose" },
-      { ja: "ニーハイ合わせ", en: "cheongsam, thighhighs" },
-      { ja: "ハイヒール合わせ", en: "cheongsam, high heels" },
-      { ja: "チャイナシューズ合わせ", en: "cheongsam, chinese shoes" },
-      { ja: "簪・髪飾り合わせ", en: "cheongsam, ornate hairpin" },
-      { ja: "扇子合わせ", en: "cheongsam, folding fan" },
-      { ja: "手袋合わせ", en: "cheongsam, long gloves" }
-    ]
-  };
+  const DATA = [
+    {
+      title: "👘 チャイナ服特化コレクション",
+      children: [
+        {
+          title: "👑 王道チャイナ",
+          children: [
+            {
+              title: "💋 色気寄り",
+              items: [
+                { ja: "艶感シルク旗袍", en: "lustrous silk cheongsam, glossy silk china dress" },
+                { ja: "深紅の色香旗袍", en: "deep crimson cheongsam, seductive chinese dress" },
+                { ja: "肩見せ上品色気旗袍", en: "bare shoulders, elegant sensual cheongsam" },
+                { ja: "胸元カット旗袍", en: "cleavage cutout cheongsam, china dress" },
+                { ja: "太腿魅せハイスリット旗袍", en: "high slit cheongsam, thighs" },
+                { ja: "横乳寄せスリム旗袍", en: "sideboob, slim fit cheongsam" },
+                { ja: "攻め雛形チャイナ", en: "bare shoulders, china dress, chinese clothes, short dress, cleavage cutout, sideboob, thighs" },
+                { ja: "濡れ光沢チャイナ", en: "wet sheen cheongsam, glossy chinese clothes" },
+                { ja: "刺繍入り妖艶旗袍", en: "sensual embroidered cheongsam, fitted silhouette" },
+                { ja: "黒金の夜香旗袍", en: "black and gold cheongsam, alluring nightwear style" }
+              ]
+            },
+            {
+              title: "🌸 上品寄り",
+              items: [
+                { ja: "白磁の端正旗袍", en: "porcelain white cheongsam, refined chinese dress" },
+                { ja: "翡翠飾り旗袍", en: "jade ornament cheongsam" },
+                { ja: "金刺繍の品格旗袍", en: "gold embroidered elegant cheongsam" },
+                { ja: "高襟ロング旗袍", en: "high collar long cheongsam" },
+                { ja: "花鳥刺繍の礼節旗袍", en: "floral bird embroidery cheongsam, graceful chinese clothes" },
+                { ja: "淡金の宮花旗袍", en: "pale gold cheongsam, noble chinese dress" },
+                { ja: "青磁色の品雅旗袍", en: "celadon cheongsam, elegant silhouette" },
+                { ja: "真珠飾りの端麗旗袍", en: "pearl decorated cheongsam, refined chinese fashion" }
+              ]
+            },
+            {
+              title: "🕊 清楚寄り",
+              items: [
+                { ja: "淡雪の清楚旗袍", en: "soft white modest cheongsam" },
+                { ja: "薄桃の可憐旗袍", en: "light pink innocent cheongsam" },
+                { ja: "水色の爽やか旗袍", en: "light blue fresh cheongsam" },
+                { ja: "小花刺繍の清純旗袍", en: "small floral embroidery cheongsam, pure style" },
+                { ja: "控えめスリット旗袍", en: "modest slit cheongsam" },
+                { ja: "白花模様の涼感旗袍", en: "white floral pattern cheongsam, airy chinese dress" },
+                { ja: "青白磁の整然旗袍", en: "blue white porcelain inspired cheongsam" },
+                { ja: "薄紗レイヤーの清廉旗袍", en: "light sheer layered cheongsam, clean silhouette" }
+              ]
+            },
+            {
+              title: "🎊 祝祭寄り",
+              children: [
+                {
+                  title: "🧧 春節",
+                  items: [
+                    { ja: "春節の慶紅旗袍", en: "spring festival red cheongsam" },
+                    { ja: "金龍祝賀旗袍", en: "golden dragon celebration cheongsam" },
+                    { ja: "爆竹色彩の賀正旗袍", en: "festive firecracker color cheongsam" },
+                    { ja: "瑞雲刺繍の新春旗袍", en: "auspicious cloud embroidered cheongsam" },
+                    { ja: "福字飾りの華麗旗袍", en: "fortune character decorated cheongsam" }
+                  ]
+                },
+                {
+                  title: "🏮 灯籠祭",
+                  items: [
+                    { ja: "灯籠祭の朱灯旗袍", en: "lantern festival cheongsam, vermilion glow" },
+                    { ja: "提灯光の夜祭旗袍", en: "night festival cheongsam, lantern light" },
+                    { ja: "金灯刺繍の夜宴旗袍", en: "gold lantern embroidered cheongsam" },
+                    { ja: "流灯模様の幻想旗袍", en: "floating lantern motif cheongsam" },
+                    { ja: "夜風に揺れる薄紗灯祭旗袍", en: "sheer lantern festival cheongsam in night breeze" }
+                  ]
+                },
+                {
+                  title: "💍 婚礼",
+                  children: [
+                    {
+                      title: "🏯 王朝婚礼",
+                      items: [
+                        { ja: "王朝婚礼の鳳凰旗袍", en: "dynastic wedding cheongsam, phoenix embroidery" },
+                        { ja: "皇妃風婚礼ロング旗袍", en: "imperial consort style wedding cheongsam" },
+                        { ja: "龍鳳双喜の王朝礼装", en: "dragon phoenix wedding dress, dynastic ceremonial cheongsam" },
+                        { ja: "金珠垂飾の宮廷婚礼旗袍", en: "palace wedding cheongsam, gold bead tassels" },
+                        { ja: "玉飾り王朝花嫁旗袍", en: "jade adorned dynastic bridal cheongsam" }
+                      ]
+                    },
+                    {
+                      title: "🏘 民間婚礼",
+                      items: [
+                        { ja: "民間婚礼の紅金旗袍", en: "traditional folk wedding cheongsam, red and gold" },
+                        { ja: "町娘花嫁の祝福旗袍", en: "town bride celebration cheongsam" },
+                        { ja: "家紋刺繍の嫁入り旗袍", en: "family crest embroidered bridal cheongsam" },
+                        { ja: "温かな祝宴の婚礼旗袍", en: "warm banquet wedding cheongsam" },
+                        { ja: "白花髪飾りの素朴花嫁旗袍", en: "simple bridal cheongsam with white floral hair ornament" }
+                      ]
+                    },
+                    {
+                      title: "💎 豪奢花嫁",
+                      items: [
+                        { ja: "豪奢宝飾の花嫁旗袍", en: "luxurious jeweled bridal cheongsam" },
+                        { ja: "真珠ヴェール重ね旗袍", en: "bridal cheongsam with pearl veil layers" },
+                        { ja: "長い引き裾の豪華婚礼旗袍", en: "opulent wedding cheongsam with long train" },
+                        { ja: "金刺繍総張りの王美花嫁旗袍", en: "fully gold embroidered majestic bridal cheongsam" },
+                        { ja: "宝玉ベルトの煌めき婚礼旗袍", en: "gem belt bridal cheongsam, glittering wedding style" }
+                      ]
+                    },
+                    {
+                      title: "🥀 悲恋婚礼",
+                      items: [
+                        { ja: "悲恋の薄紅婚礼旗袍", en: "tragic romance wedding cheongsam, pale crimson" },
+                        { ja: "雨夜の花嫁旗袍", en: "rainy night bridal cheongsam, melancholic elegance" },
+                        { ja: "散った花弁の未練婚礼旗袍", en: "fallen petals bridal cheongsam, lingering sorrow" },
+                        { ja: "仄暗い灯下の悲哀花嫁旗袍", en: "gloomy bridal cheongsam under dim lanterns" },
+                        { ja: "血紅の契り婚礼旗袍", en: "blood red vow bridal cheongsam, tragic wedding mood" }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  title: "🎭 舞踏会",
+                  children: [
+                    {
+                      title: "🎭 仮面舞踏会",
+                      items: [
+                        { ja: "仮面舞踏会旗袍", en: "masquerade ball cheongsam" },
+                        { ja: "羽根仮面の夜宴旗袍", en: "feather mask evening cheongsam" },
+                        { ja: "黒レース仮面の秘宴旗袍", en: "black lace mask secret ball cheongsam" },
+                        { ja: "仮面リボン付き舞会旗袍", en: "ballroom cheongsam with masquerade ribbon mask" },
+                        { ja: "仮面と長手袋の貴婦人旗袍", en: "masquerade lady cheongsam with long gloves" }
+                      ]
+                    },
+                    {
+                      title: "🏰 宮廷夜会",
+                      items: [
+                        { ja: "宮廷夜会の光沢旗袍", en: "court evening gala cheongsam" },
+                        { ja: "シャンデリア光沢の夜会旗袍", en: "chandelier sheen evening cheongsam" },
+                        { ja: "宝石胸飾りの夜宴旗袍", en: "jewel brooch court party cheongsam" },
+                        { ja: "ドレープ裾の宮廷舞会旗袍", en: "court ball cheongsam with draped hem" },
+                        { ja: "舞踏会用グローブ旗袍", en: "ballroom gloves with cheongsam" }
+                      ]
+                    },
+                    {
+                      title: "🌍 西洋融合",
+                      children: [
+                        {
+                          title: "🦇 ゴシック融合",
+                          children: [
+                            {
+                              title: "⛪ 聖堂寄り",
+                              items: [
+                                { ja: "聖堂装飾の荘厳旗袍", en: "cathedral-inspired gothic cheongsam" },
+                                { ja: "ステンドグラス彩の礼拝旗袍", en: "stained glass gothic cheongsam" },
+                                { ja: "修道院レースの静謐旗袍", en: "monastic lace gothic cheongsam" },
+                                { ja: "聖歌隊風ハイカラー旗袍", en: "choir-inspired high collar gothic cheongsam" },
+                                { ja: "祭壇金刺繍の聖堂旗袍", en: "altar gold embroidery gothic cheongsam" }
+                              ]
+                            },
+                            {
+                              title: "🦇 吸血貴族寄り",
+                              children: [
+                                {
+                                  title: "🏰 古城夜宴",
+                                  items: [
+                                    { ja: "古城夜宴の紅黒旗袍", en: "red and black cheongsam for a castle night banquet" },
+                                    { ja: "夜城貴婦人の長裾旗袍", en: "castle noblewoman long hem gothic cheongsam" },
+                                    { ja: "古城シャンデリアの夜宴旗袍", en: "gothic cheongsam under a castle chandelier" },
+                                    { ja: "蝋燭灯の晩餐旗袍", en: "candlelit banquet gothic cheongsam" },
+                                    { ja: "古城階段を降りる貴族旗袍", en: "aristocratic gothic cheongsam descending a castle stair" }
+                                  ]
+                                },
+                                {
+                                  title: "🌹 血薔薇",
+                                  items: [
+                                    { ja: "血薔薇コルセット旗袍", en: "blood rose corseted gothic cheongsam" },
+                                    { ja: "赤薔薇刺繍の吸血貴族旗袍", en: "vampiric noble cheongsam with crimson rose embroidery" },
+                                    { ja: "棘薔薇飾りの妖艶旗袍", en: "alluring gothic cheongsam with thorn rose ornament" },
+                                    { ja: "血露薔薇の胸元旗袍", en: "gothic cheongsam with blood-dewed rose bust detail" },
+                                    { ja: "深紅花弁を纏う夜会旗袍", en: "gothic party cheongsam draped in deep crimson petals" }
+                                  ]
+                                },
+                                {
+                                  title: "⚰ 棺の花嫁",
+                                  children: [
+                                    {
+                                      title: "🤍 純白喪花嫁",
+                                      items: [
+                                        { ja: "純白喪花嫁の旗袍", en: "pure white mourning bride cheongsam" },
+                                        { ja: "白百合を抱く喪花嫁旗袍", en: "mourning bridal cheongsam holding white lilies" },
+                                        { ja: "白肌を際立てる追悼花嫁旗袍", en: "memorial bride cheongsam emphasizing pale skin" },
+                                        { ja: "静かな献花の純白旗袍", en: "pure white cheongsam for a silent floral offering" },
+                                        { ja: "薄氷のような喪色花嫁旗袍", en: "mourning bride cheongsam like thin ice" }
+                                      ]
+                                    },
+                                    {
+                                      title: "🖤 黒ヴェール花嫁",
+                                      items: [
+                                        { ja: "黒ヴェール合わせの棺姫旗袍", en: "coffin princess cheongsam with black veil" },
+                                        { ja: "黒レース喪花嫁旗袍", en: "mourning bride cheongsam with black lace" },
+                                        { ja: "夜霧を纏う黒ヴェール旗袍", en: "black veil cheongsam wrapped in night mist" },
+                                        { ja: "漆黒の誓いを宿す花嫁旗袍", en: "bridal cheongsam bearing a jet-black vow" },
+                                        { ja: "棺前に立つ黒帳花嫁旗袍", en: "black draped bridal cheongsam standing before a coffin" }
+                                      ]
+                                    },
+                                    {
+                                      title: "⛓ 封印契約花嫁",
+                                      items: [
+                                        { ja: "封印棺の契約花嫁旗袍", en: "sealed coffin contract bride cheongsam" },
+                                        { ja: "封蝋の契約文を帯びた花嫁旗袍", en: "bridal cheongsam bearing a sealed contract scroll" },
+                                        { ja: "呪印が胸元に刻まれた契約花嫁旗袍", en: "contract bride cheongsam marked with a cursed sigil on the chest" },
+                                        { ja: "古い盟約に縛られた花嫁旗袍", en: "bridal cheongsam bound by an ancient pact" },
+                                        { ja: "鍵飾りを下げた封印花嫁旗袍", en: "sealed bride cheongsam with a hanging key ornament" }
+                                      ]
+                                    },
+                                    {
+                                      title: "💤 永眠の姫",
+                                      items: [
+                                        { ja: "永眠の誓いを宿す花嫁旗袍", en: "bridal gothic cheongsam bearing an oath of eternal sleep" },
+                                        { ja: "眠り姫めいた棺花嫁旗袍", en: "coffin bride cheongsam like a sleeping princess" },
+                                        { ja: "微睡みの微笑を湛えた永眠旗袍", en: "eternal sleep cheongsam with a drowsy smile" },
+                                        { ja: "夢と葬送の境に立つ花嫁旗袍", en: "bridal cheongsam standing between dream and requiem" },
+                                        { ja: "静かな永眠室の姫君旗袍", en: "princess cheongsam in a quiet chamber of eternal sleep" }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  title: "🌙 月下貴族",
+                                  children: [
+                                    {
+                                      title: "🌌 月光露台",
+                                      items: [
+                                        { ja: "蒼月の露台に立つ貴族旗袍", en: "aristocratic cheongsam standing on a blue moon terrace" },
+                                        { ja: "月光を浴びる銀縁旗袍", en: "silver-trim gothic cheongsam bathed in moonlight" },
+                                        { ja: "欄干にもたれる月下夜会旗袍", en: "moonlit soirée cheongsam leaning on a terrace balustrade" },
+                                        { ja: "星灯りを受ける露台貴婦人旗袍", en: "terrace noblewoman cheongsam lit by starlight" },
+                                        { ja: "大理石露台の月光社交旗袍", en: "moonlight social cheongsam on a marble terrace" }
+                                      ]
+                                    },
+                                    {
+                                      title: "🌫 夜霧庭園",
+                                      items: [
+                                        { ja: "夜霧庭園の貴族旗袍", en: "aristocratic cheongsam in a night-mist garden" },
+                                        { ja: "薔薇園に沈む月下旗袍", en: "moonlit cheongsam sinking into a rose garden" },
+                                        { ja: "霧と生垣の回廊旗袍", en: "gothic cheongsam in a hedge corridor filled with mist" },
+                                        { ja: "月霧の噴水庭園旗袍", en: "moon-mist fountain garden cheongsam" },
+                                        { ja: "夜露を帯びた庭園夜会旗袍", en: "garden soirée cheongsam touched by night dew" }
+                                      ]
+                                    },
+                                    {
+                                      title: "💎 蒼月宝飾",
+                                      items: [
+                                        { ja: "蒼月宝石の首飾り旗袍", en: "cheongsam with blue moon gemstone necklace" },
+                                        { ja: "青銀宝飾の貴族夜宴旗袍", en: "aristocratic banquet cheongsam with blue-silver jewelry" },
+                                        { ja: "月石胸飾りの妖美旗袍", en: "bewitching cheongsam with a moonstone breast ornament" },
+                                        { ja: "宝冠と耳飾りの月下貴族旗袍", en: "moonlit noble cheongsam with jeweled crown and earrings" },
+                                        { ja: "蒼月の宝珠を宿す夜会旗袍", en: "party cheongsam bearing a blue moon jewel" }
+                                      ]
+                                    },
+                                    {
+                                      title: "🩸 血月夜宴",
+                                      children: [
+                                        {
+                                          title: "🍽 禁断晩餐",
+                                          items: [
+                                            { ja: "禁断晩餐の血月旗袍", en: "blood moon cheongsam for a forbidden banquet" },
+                                            { ja: "黒燭台に囲まれた晩餐旗袍", en: "banquet cheongsam surrounded by black candelabras" },
+                                            { ja: "深紅の皿が並ぶ夜宴旗袍", en: "night banquet cheongsam before a table of crimson plates" },
+                                            { ja: "古城晩餐会の貴婦人旗袍", en: "noblewoman cheongsam for an ancient castle supper" },
+                                            { ja: "禁じられた祝杯を待つ夜会旗袍", en: "soirée cheongsam awaiting a forbidden toast" }
+                                          ]
+                                        },
+                                        {
+                                          title: "🍷 血杯儀式",
+                                          items: [
+                                            { ja: "血杯儀式の深紅旗袍", en: "crimson cheongsam for a blood chalice ritual" },
+                                            { ja: "儀式杯を捧げる吸血旗袍", en: "vampiric cheongsam offering a ritual goblet" },
+                                            { ja: "赤い杯と宝飾胸元の夜宴旗袍", en: "blood moon banquet cheongsam with a red chalice and jeweled breastpiece" },
+                                            { ja: "祭壇前の血杯契約旗袍", en: "blood chalice pact cheongsam before an altar" },
+                                            { ja: "紅酒めく儀式光を宿す旗袍", en: "ritual cheongsam infused with wine-red ceremonial light" }
+                                          ]
+                                        },
+                                        {
+                                          title: "💃 紅月舞踏",
+                                          items: [
+                                            { ja: "紅月舞踏の舞会旗袍", en: "ballroom cheongsam for a crimson moon dance" },
+                                            { ja: "血月の円舞曲を踊る旗袍", en: "cheongsam dancing a waltz beneath the blood moon" },
+                                            { ja: "深紅ドレープの舞踏会旗袍", en: "ballroom cheongsam with deep crimson drapes" },
+                                            { ja: "紅月ステップを描く夜会旗袍", en: "soirée cheongsam tracing steps under the crimson moon" },
+                                            { ja: "血色シャンデリアの舞姫旗袍", en: "dancing cheongsam beneath blood-colored chandeliers" }
+                                          ]
+                                        },
+                                        {
+                                          title: "👑 夜宴の支配者",
+                                          children: [
+                                            {
+                                              title: "👸 玉座の女主人",
+                                              items: [
+                                                { ja: "玉座の女主人たる血月旗袍", en: "blood moon cheongsam of the mistress upon the throne" },
+                                                { ja: "王座に座す夜宴女主人旗袍", en: "night banquet cheongsam for a hostess seated upon the throne" },
+                                                { ja: "深紅玉座に映える支配者旗袍", en: "dominating cheongsam shining against a crimson throne" },
+                                                { ja: "貴族を跪かせる玉座旗袍", en: "throne cheongsam that makes nobles kneel" },
+                                                { ja: "冠と長手袋の玉座女主人旗袍", en: "throne mistress cheongsam with a crown and long gloves" }
+                                              ]
+                                            },
+                                            {
+                                              title: "👁 宴の支配眼差し",
+                                              items: [
+                                                { ja: "宴を黙らせる支配眼差し旗袍", en: "cheongsam with a commanding gaze that silences the banquet" },
+                                                { ja: "一瞥で従わせる夜宴旗袍", en: "night banquet cheongsam that subdues with a single glance" },
+                                                { ja: "視線だけで命じる血月旗袍", en: "blood moon cheongsam that commands by gaze alone" },
+                                                { ja: "妖艶な眼差しで支配する貴婦人旗袍", en: "noblewoman cheongsam ruling with a bewitching stare" },
+                                                { ja: "微笑と冷眼を湛えた支配者旗袍", en: "dominating cheongsam bearing both a smile and a cold gaze" }
+                                              ]
+                                            },
+                                            {
+                                              title: "🍷 契約の杯",
+                                              children: [
+                                                {
+                                                  title: "🤝 血盟の乾杯",
+                                                  items: [
+                                                    { ja: "血盟の乾杯を交わす血月旗袍", en: "blood moon cheongsam sharing a toast of blood alliance" },
+                                                    { ja: "深紅の盃で血盟を結ぶ夜宴旗袍", en: "night banquet cheongsam forging a blood alliance with crimson goblets" },
+                                                    { ja: "誓いの乾杯を捧げる貴族旗袍", en: "noble cheongsam offering a ceremonial toast of oath" },
+                                                    { ja: "杯を掲げて盟約を刻む支配者旗袍", en: "dominating cheongsam raising a goblet to engrave an alliance" },
+                                                    { ja: "血の契りを祝う夜宴の乾杯旗袍", en: "night banquet cheongsam celebrating a blood-bound pact with a toast" }
+                                                  ]
+                                                },
+                                                {
+                                                  title: "☠ 儀礼の毒杯",
+                                                  children: [
+                                                    {
+                                                      title: "🍯 甘毒の乾杯",
+                                                      items: [
+                                                        { ja: "甘毒の乾杯を誘う血月旗袍", en: "blood moon cheongsam inviting a sweetly poisoned toast" },
+                                                        { ja: "甘い微笑で甘毒を差し出す夜宴旗袍", en: "night banquet cheongsam offering sweet poison with a gentle smile" },
+                                                        { ja: "蜜の香りを帯びた毒杯旗袍", en: "poison-cup cheongsam carrying the scent of honey" },
+                                                        { ja: "甘露に紛れた毒を宿す契約旗袍", en: "pact cheongsam harboring poison hidden in nectar" },
+                                                        { ja: "優雅な乾杯に死を混ぜる貴婦人旗袍", en: "noblewoman cheongsam mixing death into an elegant toast" }
+                                                      ]
+                                                    },
+                                                    {
+                                                      title: "🥈 銀盃の毒",
+                                                      items: [
+                                                        { ja: "銀盃に毒を沈めた血月旗袍", en: "blood moon cheongsam with poison sunk into a silver cup" },
+                                                        { ja: "銀の盃を捧げる毒杯儀礼旗袍", en: "ceremonial poison-cup cheongsam presenting a silver goblet" },
+                                                        { ja: "冷たい銀光に毒を隠す夜宴旗袍", en: "night banquet cheongsam hiding poison in cold silver gleam" },
+                                                        { ja: "銀盃の縁に死をなぞる契約旗袍", en: "pact cheongsam tracing death along the rim of a silver cup" },
+                                                        { ja: "磨かれた銀杯に沈黙の毒を満たす旗袍", en: "cheongsam filling a polished silver chalice with silent poison" }
+                                                      ]
+                                                    },
+                                                    {
+                                                      title: "💋 接吻前の毒杯",
+                                                      children: [
+                                                        {
+                                                          title: "🍷 誘惑の一口",
+                                                          items: [
+                                                            { ja: "誘惑の一口を差し出す血月旗袍", en: "blood moon cheongsam offering a seductive first sip" },
+                                                            { ja: "ひと口だけと囁く毒杯旗袍", en: "poison-cup cheongsam whispering just one sip" },
+                                                            { ja: "艶やかな指先で一口を誘う夜宴旗袍", en: "night banquet cheongsam inviting a sip with alluring fingertips" },
+                                                            { ja: "甘い香りで杯口へ誘導する契約旗袍", en: "pact cheongsam luring one toward the rim with a sweet scent" },
+                                                            { ja: "最初の一口に罠を溶かす貴婦人旗袍", en: "noblewoman cheongsam dissolving a trap into the very first sip" }
+                                                          ]
+                                                        },
+                                                        {
+                                                          title: "👄 唇寸前",
+                                                          items: [
+                                                            { ja: "唇寸前で毒杯を止める血月旗袍", en: "blood moon cheongsam halting the poison cup just before the lips" },
+                                                            { ja: "触れそうで触れない距離の毒杯旗袍", en: "poison-cup cheongsam at a distance where lips almost touch" },
+                                                            { ja: "杯縁を唇寸前に掲げる夜宴旗袍", en: "night banquet cheongsam lifting the rim just shy of the lips" },
+                                                            { ja: "口づけの直前で揺れる契約毒杯旗袍", en: "pact poison-cup cheongsam wavering at the instant before a kiss" },
+                                                            { ja: "唇の熱を測るように迫る前奏旗袍", en: "prelude cheongsam pressing close as if measuring the warmth of lips" }
+                                                          ]
+                                                        },
+                                                        {
+                                                          title: "🕸 甘やかな罠",
+                                                          children: [
+                                                            {
+                                                              title: "🍯 蜜囁き",
+                                                              items: [
+                                                                { ja: "蜜囁きで毒へ誘う血月旗袍", en: "blood moon cheongsam luring one toward poison with honeyed whispers" },
+                                                                { ja: "耳元で甘く囁く毒杯旗袍", en: "poison-cup cheongsam whispering sweetly at the ear" },
+                                                                { ja: "囁きだけで警戒を溶かす夜宴旗袍", en: "night banquet cheongsam melting caution by whisper alone" },
+                                                                { ja: "甘言を絡めて杯へ導く契約旗袍", en: "pact cheongsam twining sweet words to guide one to the cup" },
+                                                                { ja: "蜜のような声で心をほどく貴婦人旗袍", en: "noblewoman cheongsam loosening the heart with a honey-like voice" }
+                                                              ]
+                                                            },
+                                                            {
+                                                              title: "🤗 抱擁誘導",
+                                                              items: [
+                                                                { ja: "抱擁へ導く甘罠の血月旗袍", en: "blood moon cheongsam of a sweet trap steering one into an embrace" },
+                                                                { ja: "腕の中へ誘って毒杯を差し出す夜宴旗袍", en: "night banquet cheongsam drawing one into her arms before offering a poison cup" },
+                                                                { ja: "寄り添う距離で罠を閉じる契約旗袍", en: "pact cheongsam closing the trap at a nestling distance" },
+                                                                { ja: "温もりを餌に近づかせる毒杯旗袍", en: "poison-cup cheongsam luring closer with warmth as bait" },
+                                                                { ja: "抱き寄せる気配で逃げ道を奪う貴婦人旗袍", en: "noblewoman cheongsam stealing every escape with the promise of a pull close" }
+                                                              ]
+                                                            },
+                                                            {
+                                                              title: "🙂 微笑毒",
+                                                              children: [
+                                                                {
+                                                                  title: "🤍 無垢な笑み",
+                                                                  items: [
+                                                                    { ja: "無垢な笑みで毒を隠す血月旗袍", en: "blood moon cheongsam hiding poison behind an innocent smile" },
+                                                                    { ja: "少女めいた微笑で警戒を解く夜宴旗袍", en: "night banquet cheongsam undoing caution with a girlish smile" },
+                                                                    { ja: "澄んだ目元に毒意を沈めた契約旗袍", en: "pact cheongsam sinking lethal intent into clear-eyed softness" },
+                                                                    { ja: "やわらかな微笑みの奥に罠を忍ばせる毒杯旗袍", en: "poison-cup cheongsam hiding a trap behind a gentle smile" },
+                                                                    { ja: "無垢さを仮面にした甘毒の貴婦人旗袍", en: "sweet-poison noblewoman cheongsam using innocence as a mask" }
+                                                                  ]
+                                                                },
+                                                                {
+                                                                  title: "👒 貴婦人の慈悲",
+                                                                  items: [
+                                                                    { ja: "慈悲深げな笑みで毒を勧める血月旗袍", en: "blood moon cheongsam offering poison with a smile of seeming mercy" },
+                                                                    { ja: "救済めいた微笑を浮かべる夜宴旗袍", en: "night banquet cheongsam wearing a smile that resembles salvation" },
+                                                                    { ja: "優雅な慈悲の仮面を被る契約旗袍", en: "pact cheongsam donning the mask of elegant mercy" },
+                                                                    { ja: "穏やかな眼差しで杯を差し出す毒杯旗袍", en: "poison-cup cheongsam presenting the cup with a calm gaze" },
+                                                                    { ja: "許しを装って従属を招く貴婦人旗袍", en: "noblewoman cheongsam feigning forgiveness to invite submission" }
+                                                                  ]
+                                                                },
+                                                                {
+                                                                  title: "⚖ 処罰の予告",
+                                                                  items: [
+                                                                    { ja: "微笑の奥で処罰を告げる血月旗袍", en: "blood moon cheongsam announcing punishment behind a smile" },
+                                                                    { ja: "笑みの端で運命を宣告する夜宴旗袍", en: "night banquet cheongsam sentencing fate at the corner of a smile" },
+                                                                    { ja: "穏やかな表情で裁きを忍ばせる契約旗袍", en: "pact cheongsam concealing judgment within a composed expression" },
+                                                                    { ja: "優しい声色で終わりを予告する毒杯旗袍", en: "poison-cup cheongsam foretelling the end in a gentle tone" },
+                                                                    { ja: "微笑だけで恐怖を植えつける貴婦人旗袍", en: "noblewoman cheongsam planting fear with nothing but a smile" }
+                                                                  ]
+                                                                },
+                                                                {
+                                                                  title: "💋 甘やかな命令",
+                                                                  children: [
+                                                                    {
+                                                                      title: "🥂 飲みなさい",
+                                                                      items: [
+                                                                        { ja: "飲みなさいと甘く命じる血月旗袍", en: "blood moon cheongsam sweetly commanding one to drink" },
+                                                                        { ja: "盃を口元へ導き飲ませる夜宴旗袍", en: "night banquet cheongsam guiding the cup to the lips and making one drink" },
+                                                                        { ja: "やさしい声で飲酒を命じる契約旗袍", en: "pact cheongsam ordering the drink in a gentle voice" },
+                                                                        { ja: "逆らえぬ微笑で盃を傾けさせる毒杯旗袍", en: "poison-cup cheongsam making the chalice tilt beneath an irresistible smile" },
+                                                                        { ja: "一口ずつ従わせる貴婦人旗袍", en: "noblewoman cheongsam drawing obedience sip by sip" }
+                                                                      ]
+                                                                    },
+                                                                    {
+                                                                      title: "👣 近づきなさい",
+                                                                      items: [
+                                                                        { ja: "近づきなさいと囁く血月旗袍", en: "blood moon cheongsam whispering come closer" },
+                                                                        { ja: "歩み寄りを命じる夜宴旗袍", en: "night banquet cheongsam commanding an approach" },
+                                                                        { ja: "逃がさぬ声色で距離を詰めさせる契約旗袍", en: "pact cheongsam closing the distance with an inescapable tone" },
+                                                                        { ja: "指先ひとつで招き寄せる毒杯旗袍", en: "poison-cup cheongsam beckoning with a single finger" },
+                                                                        { ja: "足を止めさせぬ甘命令の貴婦人旗袍", en: "noblewoman cheongsam using sweet orders that never let the feet stop" }
+                                                                      ]
+                                                                    },
+                                                                    {
+                                                                      title: "🧎 跪きなさい",
+                                                                      children: [
+                                                                        {
+                                                                          title: "👑 玉座前の服従",
+                                                                          items: [
+                                                                            { ja: "玉座前で跪く血月旗袍", en: "blood moon cheongsam kneeling before the throne" },
+                                                                            { ja: "玉座に向けて膝を折らせる夜宴旗袍", en: "night banquet cheongsam making one kneel toward the throne" },
+                                                                            { ja: "王座の気配で服従を刻む契約旗袍", en: "pact cheongsam engraving submission through the aura of the throne" },
+                                                                            { ja: "玉座前の静寂で従わせる毒杯旗袍", en: "poison-cup cheongsam forcing obedience in the silence before the throne" },
+                                                                            { ja: "深紅の王座前で忠誠を誓わせる貴婦人旗袍", en: "noblewoman cheongsam making one swear loyalty before the crimson throne" }
+                                                                          ]
+                                                                        },
+                                                                        {
+                                                                          title: "🍷 盃前の忠誠",
+                                                                          items: [
+                                                                            { ja: "盃前で跪かせる血月旗袍", en: "blood moon cheongsam making one kneel before the cup" },
+                                                                            { ja: "盃へ忠誠を捧げさせる夜宴旗袍", en: "night banquet cheongsam demanding loyalty be offered to the chalice" },
+                                                                            { ja: "杯の前で膝を折らせる契約旗袍", en: "pact cheongsam making one kneel before the goblet" },
+                                                                            { ja: "毒杯を見上げたまま従属させる毒杯旗袍", en: "poison-cup cheongsam subjugating one while they stare up at the poisoned cup" },
+                                                                            { ja: "盃の誓いと共に忠義を刻む貴婦人旗袍", en: "noblewoman cheongsam engraving loyalty together with the oath of the cup" }
+                                                                          ]
+                                                                        },
+                                                                        {
+                                                                          title: "👁 視線で跪かせる",
+                                                                          items: [
+                                                                            { ja: "視線だけで跪かせる血月旗袍", en: "blood moon cheongsam making one kneel with nothing but a gaze" },
+                                                                            { ja: "一瞥で膝を折らせる夜宴旗袍", en: "night banquet cheongsam making one kneel with a single glance" },
+                                                                            { ja: "言葉なく服従を命じる契約旗袍", en: "pact cheongsam ordering obedience without a word" },
+                                                                            { ja: "冷ややかな視線で屈服を刻む毒杯旗袍", en: "poison-cup cheongsam engraving submission through a cold gaze" },
+                                                                            { ja: "眼差しだけで忠誠を奪う貴婦人旗袍", en: "noblewoman cheongsam stealing loyalty with nothing but her eyes" }
+                                                                          ]
+                                                                        },
+                                                                        {
+                                                                          title: "🕊 儀礼の接近",
+                                                                          children: [
+                                                                            {
+                                                                              title: "💮 口づけの許可",
+                                                                              items: [
+                                                                                { ja: "口づけを許す血月旗袍", en: "blood moon cheongsam granting permission for a kiss" },
+                                                                                { ja: "静かな頷きで口づけを許す夜宴旗袍", en: "night banquet cheongsam allowing a kiss with a quiet nod" },
+                                                                                { ja: "儀礼として口づけを受け入れる契約旗袍", en: "pact cheongsam accepting a kiss as a formal rite" },
+                                                                                { ja: "緊張の沈黙の中で口づけを許す貴婦人旗袍", en: "noblewoman cheongsam permitting a kiss amid tense silence" },
+                                                                                { ja: "視線でそっと口づけを許す宮廷旗袍", en: "court cheongsam softly permitting a kiss through a gaze" }
+                                                                              ]
+                                                                            },
+                                                                            {
+                                                                              title: "✨ 唇の褒美",
+                                                                              items: [
+                                                                                { ja: "唇の褒美をほのめかす血月旗袍", en: "blood moon cheongsam hinting at the reward of lips" },
+                                                                                { ja: "微笑みとともに褒美を与える夜宴旗袍", en: "night banquet cheongsam granting a reward with a smile" },
+                                                                                { ja: "儀礼の終わりに褒美を授ける契約旗袍", en: "pact cheongsam bestowing a reward at the end of the rite" },
+                                                                                { ja: "緊張をほどく褒美の口づけを示す貴婦人旗袍", en: "noblewoman cheongsam offering a relieving kiss as a reward" },
+                                                                                { ja: "祝福のように唇の褒美を与える宮廷旗袍", en: "court cheongsam granting the reward of lips like a blessing" }
+                                                                              ]
+                                                                            },
+                                                                            {
+                                                                              title: "🌙 跪いたまま見上げる",
+                                                                              items: [
+                                                                                { ja: "跪いたまま見上げる血月旗袍", en: "blood moon cheongsam viewed from an upturned kneeling gaze" },
+                                                                                { ja: "見上げる視線を受け止める夜宴旗袍", en: "night banquet cheongsam receiving an upward gaze" },
+                                                                                { ja: "静かな距離で見上げられる契約旗袍", en: "pact cheongsam being looked up at across a quiet distance" },
+                                                                                { ja: "月灯りの下で見上げる貴婦人旗袍", en: "noblewoman cheongsam looked up to beneath moonlight" },
+                                                                                { ja: "言葉なく見上げられる宮廷旗袍", en: "court cheongsam beheld upward in silence" }
+                                                                              ]
+                                                                            },
+                                                                            {
+                                                                              title: "🕊 赦しとしての接吻",
+                                                                              children: [
+                                                                                {
+                                                                                  title: "🤝 和解の印",
+                                                                                  items: [
+                                                                                    { ja: "和解の印として交わされる口づけ旗袍", en: "cheongsam with a kiss exchanged as a mark of reconciliation" },
+                                                                                    { ja: "争いの終わりを告げる和解の口づけ旗袍", en: "cheongsam with a reconciling kiss that signals the end of conflict" },
+                                                                                    { ja: "静かな停戦を示す和解の印の旗袍", en: "cheongsam bearing a kiss-mark of reconciliation that signals a quiet truce" },
+                                                                                    { ja: "夜宴の緊張を解く和解の口づけ旗袍", en: "night banquet cheongsam with a reconciling kiss easing the tension" },
+                                                                                    { ja: "契約の場をやわらげる和解の印の旗袍", en: "pact cheongsam with a kiss-mark of reconciliation softening the scene" }
+                                                                                  ]
+                                                                                },
+                                                                                {
+                                                                                  title: "⚜ 儀礼の赦免",
+                                                                                  items: [
+                                                                                    { ja: "儀礼の赦免として授けられる口づけ旗袍", en: "cheongsam with a kiss bestowed as ceremonial absolution" },
+                                                                                    { ja: "宮廷儀礼の赦免を思わせる口づけ旗袍", en: "court cheongsam evoking a kiss of ceremonial pardon" },
+                                                                                    { ja: "罪を解くしるしとしての赦免の旗袍", en: "cheongsam with a pardoning sign that symbolically lifts blame" },
+                                                                                    { ja: "厳かな赦しを宿す儀礼口づけの旗袍", en: "cheongsam carrying a solemn kiss of ritual forgiveness" },
+                                                                                    { ja: "夜会の空気を変える赦免の口づけ旗袍", en: "cheongsam with a pardoning kiss that shifts the mood of the soirée" }
+                                                                                  ]
+                                                                                },
+                                                                                {
+                                                                                  title: "🌙 月下の和睦",
+                                                                                  children: [
+                                                                                    {
+                                                                                      title: "🕊 露台の停戦",
+                                                                                      items: [
+                                                                                        { ja: "露台の停戦を告げる和睦の旗袍", en: "cheongsam announcing a truce upon the terrace" },
+                                                                                        { ja: "欄干越しに交わされる停戦の口づけ旗袍", en: "cheongsam with a truce-kiss exchanged across the terrace railing" },
+                                                                                        { ja: "夜露の露台に立つ停戦の宮廷旗袍", en: "court cheongsam standing on a dewlit terrace of truce" },
+                                                                                        { ja: "静かな露台で争いを解く和睦の旗袍", en: "cheongsam resolving conflict upon a quiet terrace" },
+                                                                                        { ja: "露台の月影に包まれた停戦の旗袍", en: "cheongsam wrapped in terrace moonshadows of truce" }
+                                                                                      ]
+                                                                                    },
+                                                                                    {
+                                                                                      title: "🌕 月光の誓い直し",
+                                                                                      items: [
+                                                                                        { ja: "月光の下で誓いを結び直す和睦の旗袍", en: "cheongsam renewing a vow beneath moonlight" },
+                                                                                        { ja: "蒼い月光に照らされる誓い直しの旗袍", en: "cheongsam illuminated by blue moonlight for a renewed vow" },
+                                                                                        { ja: "夜会の果てに誓いを結び直す宮廷旗袍", en: "court cheongsam renewing a promise at the end of the soirée" },
+                                                                                        { ja: "月影を証人にした和睦の誓約旗袍", en: "vow-bound cheongsam taking the moonshadow as witness" },
+                                                                                        { ja: "月灯りの静寂で契りを編み直す旗袍", en: "cheongsam reweaving a pledge in moonlit silence" }
+                                                                                      ]
+                                                                                    },
+                                                                                    {
+                                                                                      title: "🌬 夜風の和解",
+                                                                                      items: [
+                                                                                        { ja: "夜風に溶ける和解の口づけ旗袍", en: "cheongsam with a reconciling kiss dissolving into the night breeze" },
+                                                                                        { ja: "頬を撫でる夜風とともに和らぐ旗袍", en: "cheongsam softening along with the caress of the night wind" },
+                                                                                        { ja: "風に揺れる髪越しに和解を交わす旗袍", en: "cheongsam exchanging reconciliation through hair stirred by the wind" },
+                                                                                        { ja: "庭園の夜風をまとった和睦の旗袍", en: "cheongsam draped in the garden's night breeze of accord" },
+                                                                                        { ja: "静かな風音にほどける月夜の緊張旗袍", en: "cheongsam easing moonlit tension into the hush of the wind" }
+                                                                                      ]
+                                                                                    },
+                                                                                    {
+                                                                                      title: "🔵 蒼月の沈黙",
+                                                                                      children: [
+                                                                                        {
+                                                                                          title: "👁 視線だけの赦し",
+                                                                                          items: [
+                                                                                            { ja: "視線だけの赦しを宿す蒼月旗袍", en: "blue-moon cheongsam bearing forgiveness through gaze alone" },
+                                                                                            { ja: "一言もなく赦しを伝える視線の旗袍", en: "cheongsam conveying forgiveness through a wordless gaze" },
+                                                                                            { ja: "見つめ合うだけで和らぐ蒼月の宮廷旗袍", en: "court cheongsam softening into accord through mutual glances under a blue moon" },
+                                                                                            { ja: "瞳の静けさで赦しを示す和睦の旗袍", en: "reconciliation cheongsam signaling forgiveness through the calm of the eyes" },
+                                                                                            { ja: "視線の余韻だけが残る蒼月の旗袍", en: "blue-moon cheongsam leaving only the afterglow of a gaze" }
+                                                                                          ]
+                                                                                        },
+                                                                                        {
+                                                                                          title: "🔷 青い余韻",
+                                                                                          children: [
+                                                                                            {
+                                                                                              title: "🌕 月光の残響",
+                                                                                              children: [
+                                                                                                {
+                                                                                                  title: "🌗 月輪の反射",
+                                                                                                  items: [
+                                                                                                    { ja: "月輪の反射を纏う蒼月旗袍", en: "blue-moon cheongsam draped in the reflection of the lunar halo" },
+                                                                                                    { ja: "円環の月光を映す和解旗袍", en: "reconciliation cheongsam reflecting ringed moonlight" },
+                                                                                                    { ja: "月輪のきらめきが裾に回る宮廷旗袍", en: "court cheongsam with the glimmer of a lunar halo circling its hem" },
+                                                                                                    { ja: "欄干に返る月輪光を映した旗袍", en: "cheongsam reflecting lunar-halo light bouncing off the balustrade" },
+                                                                                                    { ja: "青白い月輪の反射を抱く夜宴旗袍", en: "night-banquet cheongsam holding the reflection of a pale lunar halo" }
+                                                                                                  ]
+                                                                                                },
+                                                                                                {
+                                                                                                  title: "♨ 青白い残熱",
+                                                                                                  items: [
+                                                                                                    { ja: "青白い残熱を宿す蒼月旗袍", en: "blue-moon cheongsam holding a pale residual warmth" },
+                                                                                                    { ja: "冷たい月光の奥に熱を残す和解旗袍", en: "reconciliation cheongsam leaving warmth beneath cold moonlight" },
+                                                                                                    { ja: "消え切らない青い残熱を帯びた宮廷旗袍", en: "court cheongsam carrying an undying pale-blue warmth" },
+                                                                                                    { ja: "静けさの底に熱を沈めた夜宴旗袍", en: "night-banquet cheongsam with warmth sunk beneath stillness" },
+                                                                                                    { ja: "月光の後に残るぬくもりを秘めた旗袍", en: "cheongsam hiding the warmth left after moonlight" }
+                                                                                                  ]
+                                                                                                },
+                                                                                                {
+                                                                                                  title: "💧 露に滲む光",
+                                                                                                  children: [
+                                                                                                    {
+                                                                                                      title: "💎 露珠の月映り",
+                                                                                                      children: [
+                                                                                                        {
+                                                                                                          title: "🌙 月輪の滴",
+                                                                                                          items: [
+                                                                                                            { ja: "月輪の滴を揺らす蒼月旗袍", en: "blue-moon cheongsam swaying with droplets of the lunar halo" },
+                                                                                                            { ja: "露玉の中に月輪を沈めた和解旗袍", en: "reconciliation cheongsam sinking a moon halo into dew gems" },
+                                                                                                            { ja: "滴る月環を胸元に宿す宮廷旗袍", en: "court cheongsam bearing dripping moon rings across the chest" },
+                                                                                                            { ja: "裾先に月輪の滴を連ねた夜宴旗袍", en: "night-banquet cheongsam lined with lunar-halo droplets along the hem" },
+                                                                                                            { ja: "一粒ごとに月輪が宿る露光旗袍", en: "dewlit cheongsam with a lunar halo resting in every single drop" }
+                                                                                                          ]
+                                                                                                        },
+                                                                                                        {
+                                                                                                          title: "🥈 銀露の反射",
+                                                                                                          items: [
+                                                                                                            { ja: "銀露の反射を散らす蒼月旗袍", en: "blue-moon cheongsam scattering reflections of silver dew" },
+                                                                                                            { ja: "銀露のひかりを縫い込んだ和解旗袍", en: "reconciliation cheongsam stitched with the glow of silver dew" },
+                                                                                                            { ja: "露面の銀反射が袖に走る宮廷旗袍", en: "court cheongsam with silver reflections racing across its sleeves" },
+                                                                                                            { ja: "夜露の銀返しを裾に宿す夜宴旗袍", en: "night-banquet cheongsam bearing silver returns of night dew at the hem" },
+                                                                                                            { ja: "白銀の露反射で輪郭が浮く旗袍", en: "cheongsam whose outline rises through silver dew reflections" }
+                                                                                                          ]
+                                                                                                        },
+                                                                                                        {
+                                                                                                          title: "🪞 しずくの鏡",
+                                                                                                          children: [
+                                                                                                            {
+                                                                                                              title: "🌙 月を返す鏡露",
+                                                                                                              items: [
+                                                                                                                { ja: "月を返す鏡露を散らす蒼月旗袍", en: "blue-moon cheongsam scattering mirror-dew that returns the moon" },
+                                                                                                                { ja: "鏡露に月輪を返す和解旗袍", en: "reconciliation cheongsam reflecting a lunar halo through mirror dew" },
+                                                                                                                { ja: "胸元の鏡露が月相を返す宮廷旗袍", en: "court cheongsam whose chest mirror-dew returns the phases of the moon" },
+                                                                                                                { ja: "裾先の鏡露が月景を返す夜宴旗袍", en: "night-banquet cheongsam with hemline mirror-dew returning the moonlit scene" },
+                                                                                                                { ja: "ひとしずくごとに月を返す鏡露旗袍", en: "mirror-dew cheongsam returning the moon from every single droplet" }
+                                                                                                              ]
+                                                                                                            },
+                                                                                                            {
+                                                                                                              title: "🌀 歪む月景",
+                                                                                                              children: [
+                                                                                                                {
+                                                                                                                  title: "🌊 ゆがむ水月",
+                                                                                                                  items: [
+                                                                                                                    { ja: "ゆがむ水月を宿す蒼月旗袍", en: "blue-moon cheongsam bearing a water-moon warped by ripples" },
+                                                                                                                    { ja: "露鏡の水月が揺れて崩れる和解旗袍", en: "reconciliation cheongsam with a water-moon in dew mirrors trembling out of shape" },
+                                                                                                                    { ja: "胸元にゆがむ水月を浮かべる宮廷旗袍", en: "court cheongsam floating a warped water-moon across the chest" },
+                                                                                                                    { ja: "裾の露面で水月が波打つ夜宴旗袍", en: "night-banquet cheongsam with a water-moon rippling across dew at the hem" },
+                                                                                                                    { ja: "しずくの奥で水月がゆがみ続ける旗袍", en: "cheongsam where the water-moon keeps warping deep inside each droplet" }
+                                                                                                                  ]
+                                                                                                                },
+                                                                                                                {
+                                                                                                                  title: "🫧 波紋の月像",
+                                                                                                                  items: [
+                                                                                                                    { ja: "波紋の月像を散らす蒼月旗袍", en: "blue-moon cheongsam scattering lunar images shaped by ripples" },
+                                                                                                                    { ja: "露珠の波紋に月像が揺れる和解旗袍", en: "reconciliation cheongsam with moon-images wavering in ripples across dew beads" },
+                                                                                                                    { ja: "胸元へ波紋の月像を重ねる宮廷旗袍", en: "court cheongsam layering ripple-born moon-images over the chest" },
+                                                                                                                    { ja: "波紋で砕けた月像を裾に映す夜宴旗袍", en: "night-banquet cheongsam reflecting moon-images broken by ripples at the hem" },
+                                                                                                                    { ja: "滴るたびに月像が波紋でほどける旗袍", en: "cheongsam whose moon-images loosen into ripples with every falling drop" }
+                                                                                                                  ]
+                                                                                                                },
+                                                                                                                {
+                                                                                                                  title: "🫠 崩れる反映",
+                                                                                                                  items: [
+                                                                                                                    { ja: "崩れる反映を抱く蒼月旗袍", en: "blue-moon cheongsam holding collapsing reflections" },
+                                                                                                                    { ja: "露鏡の反映が崩れ落ちる和解旗袍", en: "reconciliation cheongsam where reflections in dew mirrors crumble away" },
+                                                                                                                    { ja: "胸元で月の反映がほどける宮廷旗袍", en: "court cheongsam with moon reflections unraveling across the chest" },
+                                                                                                                    { ja: "裾先の露反映が崩れる夜宴旗袍", en: "night-banquet cheongsam with dew reflections collapsing at the hemline" },
+                                                                                                                    { ja: "しずくの底で反映が静かに崩れる旗袍", en: "cheongsam where reflections quietly cave in at the bottom of each droplet" }
+                                                                                                                  ]
+                                                                                                                },
+                                                                                                                {
+                                                                                                                  title: "👁 幻視の揺らぎ",
+                                                                                                                  children: [
+                                                                                                                    {
+                                                                                                                      title: "🌫 見えてはいけない月",
+                                                                                                                      items: [
+                                                                                                                        { ja: "見えてはいけない月を宿す蒼月旗袍", en: "blue-moon cheongsam bearing a moon that should never be seen" },
+                                                                                                                        { ja: "露の奥に禁じられた月が滲む和解旗袍", en: "reconciliation cheongsam with a forbidden moon seeping behind the dew" },
+                                                                                                                        { ja: "胸元に見えてはいけない月影を抱く宮廷旗袍", en: "court cheongsam cradling an unseen moon-shadow across the chest" },
+                                                                                                                        { ja: "裾先の露鏡に禁月が浮かぶ夜宴旗袍", en: "night-banquet cheongsam with a forbidden moon rising in dew mirrors at the hem" },
+                                                                                                                        { ja: "一滴ごとに秘された月を閉じた旗袍", en: "cheongsam sealing a hidden moon into every single drop" }
+                                                                                                                      ]
+                                                                                                                    },
+                                                                                                                    {
+                                                                                                                      title: "🫧 露越しの幻月",
+                                                                                                                      items: [
+                                                                                                                        { ja: "露越しの幻月をまとう蒼月旗袍", en: "blue-moon cheongsam draped in an illusory moon seen through dew" },
+                                                                                                                        { ja: "しずく越しの幻月が揺らめく和解旗袍", en: "reconciliation cheongsam with an illusory moon wavering through droplets" },
+                                                                                                                        { ja: "胸元の露珠に幻月を閉じ込めた宮廷旗袍", en: "court cheongsam trapping an illusory moon inside dew-beads at the chest" },
+                                                                                                                        { ja: "裾の露面で幻月がほどける夜宴旗袍", en: "night-banquet cheongsam where an illusory moon loosens across dew at the hem" },
+                                                                                                                        { ja: "露の膜ごと幻月を抱く旗袍", en: "cheongsam holding an illusory moon within the very film of dew" }
+                                                                                                                      ]
+                                                                                                                    },
+                                                                                                                    {
+                                                                                                                      title: "👁‍🗨 月視の錯覚",
+                                                                                                                      items: [
+                                                                                                                        { ja: "月視の錯覚を帯びた蒼月旗袍", en: "blue-moon cheongsam carrying the illusion of lunar sight" },
+                                                                                                                        { ja: "月を見るたび錯覚が深まる和解旗袍", en: "reconciliation cheongsam deepening the illusion whenever the moon is seen" },
+                                                                                                                        { ja: "胸元で月視がずれる宮廷旗袍", en: "court cheongsam with moon-sight slipping out of alignment across the chest" },
+                                                                                                                        { ja: "露鏡のたびに月視が狂う夜宴旗袍", en: "night-banquet cheongsam where every dew mirror distorts lunar sight" },
+                                                                                                                        { ja: "視線の奥に月の錯覚を沈めた旗袍", en: "cheongsam sinking a lunar illusion deep behind the gaze" }
+                                                                                                                      ]
+                                                                                                                    },
+                                                                                                                    {
+                                                                                                                      title: "🕯 静かな月狂い",
+                                                                                                                      children: [
+                                                                                                                        {
+                                                                                                                          title: "🤫 微笑の狂香",
+                                                                                                                          children: [
+                                                                                                                            {
+                                                                                                                              title: "🌸 笑みに潜む香毒",
+                                                                                                                              items: [
+                                                                                                                                { ja: "笑みに潜む香毒を忍ばせた蒼月旗袍", en: "blue-moon cheongsam hiding fragrant poison inside its smile" },
+                                                                                                                                { ja: "露光の奥で香毒がほどける和解旗袍", en: "reconciliation cheongsam with fragrant poison loosening behind dewlight" },
+                                                                                                                                { ja: "胸元に笑みの香毒を沈める宮廷旗袍", en: "court cheongsam sinking poisonous fragrance from a smile into the chest" },
+                                                                                                                                { ja: "袖先から香毒の余韻が漂う夜宴旗袍", en: "night-banquet cheongsam trailing the after-scent of fragrant poison from the cuffs" },
+                                                                                                                                { ja: "やさしい笑顔に香毒を隠した旗袍", en: "cheongsam hiding fragrant poison inside a gentle smile" }
+                                                                                                                              ]
+                                                                                                                            },
+                                                                                                                            {
+                                                                                                                              title: "🫦 囁きの芳香",
+                                                                                                                              items: [
+                                                                                                                                { ja: "囁きの芳香を唇に宿す蒼月旗袍", en: "blue-moon cheongsam placing whispered perfume upon the lips" },
+                                                                                                                                { ja: "露越しの囁きが芳香へ変わる和解旗袍", en: "reconciliation cheongsam where a whisper through dew becomes perfume" },
+                                                                                                                                { ja: "胸元に囁きの芳香を落とす宮廷旗袍", en: "court cheongsam dropping whispered fragrance onto the chest" },
+                                                                                                                                { ja: "耳元へ芳香の囁きを残す夜宴旗袍", en: "night-banquet cheongsam leaving perfumed whispers by the ear" },
+                                                                                                                                { ja: "囁くだけで香りが広がる旗袍", en: "cheongsam whose fragrance spreads with only a whisper" }
+                                                                                                                              ]
+                                                                                                                            },
+                                                                                                                            {
+                                                                                                                              title: "😌 甘い錯香",
+                                                                                                                              items: [
+                                                                                                                                { ja: "甘い錯香で理性を鈍らせる蒼月旗袍", en: "blue-moon cheongsam dulling reason with a sweet false fragrance" },
+                                                                                                                                { ja: "露の甘さが錯香へ変わる和解旗袍", en: "reconciliation cheongsam where dew sweetness turns into false perfume" },
+                                                                                                                                { ja: "胸元に甘い錯香を漂わせる宮廷旗袍", en: "court cheongsam letting sweet false fragrance drift across the chest" },
+                                                                                                                                { ja: "微笑むたび錯香が深まる夜宴旗袍", en: "night-banquet cheongsam whose false sweetness deepens with every smile" },
+                                                                                                                                { ja: "やわらかな香りで判断を狂わせる旗袍", en: "cheongsam deranging judgment through a soft sweet scent" }
+                                                                                                                              ]
+                                                                                                                            },
+                                                                                                                            {
+                                                                                                                              title: "☠ 微毒の口づけ香",
+                                                                                                                              items: [
+                                                                                                                                { ja: "微毒の口づけ香を宿した蒼月旗袍", en: "blue-moon cheongsam holding the scent of a faintly poisonous kiss" },
+                                                                                                                                { ja: "露の唇に微毒が残る和解旗袍", en: "reconciliation cheongsam with faint poison lingering on dewy lips" },
+                                                                                                                                { ja: "胸元で口づけ香が毒へ変わる宮廷旗袍", en: "court cheongsam where kiss-fragrance turns poisonous at the chest" },
+                                                                                                                                { ja: "近づくほど微毒の香りが濃くなる夜宴旗袍", en: "night-banquet cheongsam whose faint poisonous scent thickens the closer one comes" },
+                                                                                                                                { ja: "やさしい口元に微毒を隠した旗袍", en: "cheongsam hiding faint poison at a gentle mouth" }
+                                                                                                                              ]
+                                                                                                                            }
+                                                                                                                          ]
+                                                                                                                        },
+                                                                                                                        {
+                                                                                                                          title: "🌙 月酔いの静脈",
+                                                                                                                          items: [
+                                                                                                                            { ja: "月酔いの静脈を走らせる蒼月旗袍", en: "blue-moon cheongsam coursed through by veins of lunar intoxication" },
+                                                                                                                            { ja: "露の底で月酔いが脈打つ和解旗袍", en: "reconciliation cheongsam where moon-drunk pulses beat beneath the dew" },
+                                                                                                                            { ja: "胸元に月酔いの静脈を刻む宮廷旗袍", en: "court cheongsam engraved with the veins of lunar intoxication across the chest" },
+                                                                                                                            { ja: "裾のしずくへ月酔いが流れ込む夜宴旗袍", en: "night-banquet cheongsam with lunar intoxication flowing into the droplets at the hem" },
+                                                                                                                            { ja: "静脈のように月酔いを巡らせる旗袍", en: "cheongsam letting lunar intoxication circulate like quiet veins" }
+                                                                                                                          ]
+                                                                                                                        },
+                                                                                                                        {
+                                                                                                                          title: "🕯 無音の月熱",
+                                                                                                                          items: [
+                                                                                                                            { ja: "無音の月熱を灯した蒼月旗袍", en: "blue-moon cheongsam lit by a silent lunar fever" },
+                                                                                                                            { ja: "露灯りの内で月熱がこもる和解旗袍", en: "reconciliation cheongsam holding a lunar fever within dew-lit stillness" },
+                                                                                                                            { ja: "胸元で無音の月熱を燃やす宮廷旗袍", en: "court cheongsam burning with a silent lunar heat at the chest" },
+                                                                                                                            { ja: "足元の露気に月熱が沈む夜宴旗袍", en: "night-banquet cheongsam with lunar fever sinking into the dewy air around the feet" },
+                                                                                                                            { ja: "ことばもなく月熱だけ残す旗袍", en: "cheongsam leaving behind nothing but silent lunar fever" }
+                                                                                                                          ]
+                                                                                                                        },
+                                                                                                                        {
+                                                                                                                          title: "🫧 狂いを呑む露",
+                                                                                                                          items: [
+                                                                                                                            { ja: "狂いを呑む露をまとった蒼月旗袍", en: "blue-moon cheongsam wrapped in dew that swallows madness" },
+                                                                                                                            { ja: "月狂いを露が吸い上げる和解旗袍", en: "reconciliation cheongsam where dew drinks up lunar madness" },
+                                                                                                                            { ja: "胸元の露珠が狂いを呑み込む宮廷旗袍", en: "court cheongsam whose dew-beads swallow madness at the chest" },
+                                                                                                                            { ja: "裾のしずくへ狂いが沈んでいく夜宴旗袍", en: "night-banquet cheongsam with madness sinking into the droplets at the hem" },
+                                                                                                                            { ja: "露の中へ月狂いを封じた旗袍", en: "cheongsam sealing lunar madness into the dew itself" }
+                                                                                                                          ]
+                                                                                                                        }
+                                                                                                                      ]
+                                                                                                                    }
+                                                                                                                  ]
+                                                                                                                }
+                                                                                                              ]
+                                                                                                            },
+                                                                                                            {
+                                                                                                              title: "🔄 揺れる反照",
+                                                                                                              items: [
+                                                                                                                { ja: "揺れる反照を散らす蒼月旗袍", en: "blue-moon cheongsam scattering trembling reflections" },
+                                                                                                                { ja: "反照の揺らぎを抱く和解旗袍", en: "reconciliation cheongsam holding the shimmer of trembling reflected light" },
+                                                                                                                { ja: "胸元に揺れる反照が遊ぶ宮廷旗袍", en: "court cheongsam with trembling reflected glints playing across the chest" },
+                                                                                                                { ja: "袖先の露光が揺れる反照を返す夜宴旗袍", en: "night-banquet cheongsam whose cuff dewlight returns trembling reflections" },
+                                                                                                                { ja: "しずくごとに反照が揺れる鏡露旗袍", en: "mirror-dew cheongsam with reflected light trembling in every droplet" }
+                                                                                                              ]
+                                                                                                            },
+                                                                                                            {
+                                                                                                              title: "💥 砕ける月面",
+                                                                                                              items: [
+                                                                                                                { ja: "砕ける月面を映す蒼月旗袍", en: "blue-moon cheongsam reflecting a shattering lunar surface" },
+                                                                                                                { ja: "露鏡の中で月面が砕ける和解旗袍", en: "reconciliation cheongsam where the moon's surface shatters inside dew mirrors" },
+                                                                                                                { ja: "砕けた月面の破光を抱く宮廷旗袍", en: "court cheongsam holding the fractured light of a broken moon surface" },
+                                                                                                                { ja: "裾先の鏡露に月面の破片が散る夜宴旗袍", en: "night-banquet cheongsam with fragments of the moon surface scattering in mirror dew at the hem" },
+                                                                                                                { ja: "砕ける月面を滴の底に沈めた旗袍", en: "cheongsam sinking a shattering moon surface to the bottom of each droplet" }
+                                                                                                              ]
+                                                                                                            }
+                                                                                                          ]
+                                                                                                        },
+                                                                                                        {
+                                                                                                          title: "🌘 月影を抱く露",
+                                                                                                          items: [
+                                                                                                            { ja: "月影を抱く露に濡れる蒼月旗袍", en: "blue-moon cheongsam dampened by dew holding moon shadows" },
+                                                                                                            { ja: "月影の露気を帯びた和解旗袍", en: "reconciliation cheongsam carrying dew-laden moon shadows" },
+                                                                                                            { ja: "影月を小露に閉じ込めた宮廷旗袍", en: "court cheongsam trapping the shadowed moon inside tiny beads of dew" },
+                                                                                                            { ja: "露ごとに月影が揺れる夜宴旗袍", en: "night-banquet cheongsam with moon shadows trembling in each bead of dew" },
+                                                                                                            { ja: "淡い月影を抱いた露光が残る旗袍", en: "cheongsam left with dewlight embracing a faint moon shadow" }
+                                                                                                          ]
+                                                                                                        }
+                                                                                                      ]
+                                                                                                    },
+                                                                                                    {
+                                                                                                      title: "🔹 しずくの青灯",
+                                                                                                      items: [
+                                                                                                        { ja: "しずくの青灯を揺らす蒼月旗袍", en: "blue-moon cheongsam swaying with blue lamps in droplets" },
+                                                                                                        { ja: "露滴ごとに青灯が灯る和解旗袍", en: "reconciliation cheongsam where blue lights glow in every dew drop" },
+                                                                                                        { ja: "青い灯を宿した露が胸元に滲む宮廷旗袍", en: "court cheongsam with dew holding blue light seeping across the chest" },
+                                                                                                        { ja: "露台の青灯を滴に映す夜宴旗袍", en: "night-banquet cheongsam reflecting terrace blue lamps in droplets" },
+                                                                                                        { ja: "青光のしずくが袖先に残る旗袍", en: "cheongsam with blue-lit droplets lingering at the cuffs" }
+                                                                                                      ]
+                                                                                                    },
+                                                                                                    {
+                                                                                                      title: "🌫 朝前の湿光",
+                                                                                                      items: [
+                                                                                                        { ja: "朝前の湿光をまとう蒼月旗袍", en: "blue-moon cheongsam wrapped in damp light before dawn" },
+                                                                                                        { ja: "夜明け前の湿った光を含む和解旗袍", en: "reconciliation cheongsam filled with moist light before daybreak" },
+                                                                                                        { ja: "露気を含んだ薄明の青を宿す宮廷旗袍", en: "court cheongsam bearing dawn-blue light thick with dew" },
+                                                                                                        { ja: "朝前の空気にしめる光を引く夜宴旗袍", en: "night-banquet cheongsam trailing light dampened by pre-dawn air" },
+                                                                                                        { ja: "湿った薄光が裾に沈む旗袍", en: "cheongsam with damp faint light sinking into its hem" }
+                                                                                                      ]
+                                                                                                    },
+                                                                                                    {
+                                                                                                      title: "💧 溶ける夜露",
+                                                                                                      items: [
+                                                                                                        { ja: "溶ける夜露に染まる蒼月旗袍", en: "blue-moon cheongsam dyed by melting night dew" },
+                                                                                                        { ja: "夜露の溶け際をまとった和解旗袍", en: "reconciliation cheongsam draped in the melting edge of night dew" },
+                                                                                                        { ja: "露がほどける気配を映す宮廷旗袍", en: "court cheongsam reflecting the feeling of dew loosening away" },
+                                                                                                        { ja: "月光にほどける夜露を抱く夜宴旗袍", en: "night-banquet cheongsam embracing night dew loosening under moonlight" },
+                                                                                                        { ja: "溶けかけた露光が足元に残る旗袍", en: "cheongsam with dissolving dewlit glow lingering at the feet" }
+                                                                                                      ]
+                                                                                                    }
+                                                                                                  ]
+                                                                                                },
+                                                                                                {
+                                                                                                  title: "🌠 遠ざかる余光",
+                                                                                                  items: [
+                                                                                                    { ja: "遠ざかる余光を追う蒼月旗袍", en: "blue-moon cheongsam chasing receding afterlight" },
+                                                                                                    { ja: "去りゆく月光の尾を引く和解旗袍", en: "reconciliation cheongsam trailing the tail of departing moonlight" },
+                                                                                                    { ja: "遠のく青光を背に残す宮廷旗袍", en: "court cheongsam leaving distant blue light at its back" },
+                                                                                                    { ja: "余光だけが残る露台の夜宴旗袍", en: "night-banquet cheongsam on a terrace where only afterlight remains" },
+                                                                                                    { ja: "月が退いたあとの名残を抱く旗袍", en: "cheongsam holding traces left after the moon has withdrawn" }
+                                                                                                  ]
+                                                                                                }
+                                                                                              ]
+                                                                                            },
+                                                                                            {
+                                                                                              title: "🔵 青灯の静脈",
+                                                                                              items: [
+                                                                                                { ja: "青灯の静脈を走らせる蒼月旗袍", en: "blue-moon cheongsam coursed through by blue lamplight veins" },
+                                                                                                { ja: "青い灯りの脈動を秘めた夜宴旗袍", en: "night-banquet cheongsam holding the pulse of blue lamplight" },
+                                                                                                { ja: "静かな青灯が胸元を縫う宮廷旗袍", en: "court cheongsam with quiet blue lamplight stitching across the chest" },
+                                                                                                { ja: "青灯の細い流れを帯びる和睦旗袍", en: "reconciliation cheongsam carrying a slender current of blue lamplight" },
+                                                                                                { ja: "灯影の静脈が揺れる蒼月の旗袍", en: "blue-moon cheongsam with veins of lamp-shadow swaying softly" }
+                                                                                              ]
+                                                                                            },
+                                                                                            {
+                                                                                              title: "🌫 露台に残る気配",
+                                                                                              items: [
+                                                                                                { ja: "露台に残る気配をまとう蒼月旗袍", en: "blue-moon cheongsam cloaked in a lingering terrace presence" },
+                                                                                                { ja: "去ったあとの空気が漂う和睦旗袍", en: "reconciliation cheongsam with the lingering air of someone departed" },
+                                                                                                { ja: "欄干越しの余韻を残す夜宴旗袍", en: "night-banquet cheongsam leaving an afterglow across the balustrade" },
+                                                                                                { ja: "露台の静けさに気配だけ残す宮廷旗袍", en: "court cheongsam leaving only a presence in the terrace stillness" },
+                                                                                                { ja: "振り返った気配が夜気に溶ける蒼月旗袍", en: "blue-moon cheongsam with the trace of a turning glance dissolving into the night air" }
+                                                                                              ]
+                                                                                            },
+                                                                                            {
+                                                                                              title: "♾ 消えない和睦",
+                                                                                              items: [
+                                                                                                { ja: "消えない和睦を宿す蒼月旗袍", en: "blue-moon cheongsam bearing an unvanishing reconciliation" },
+                                                                                                { ja: "静かな和睦の余韻が続く夜宴旗袍", en: "night-banquet cheongsam where the quiet afterglow of reconciliation endures" },
+                                                                                                { ja: "赦しの空気が消えずに残る宮廷旗袍", en: "court cheongsam where the air of forgiveness never fully fades" },
+                                                                                                { ja: "和解のぬくもりを長く引く蒼月旗袍", en: "blue-moon cheongsam trailing the warmth of reconciliation for a long time" },
+                                                                                                { ja: "月影の下で消えない和睦を示す旗袍", en: "cheongsam showing an unfading reconciliation beneath moonshadow" }
+                                                                                              ]
+                                                                                            }
+                                                                                          ]
+                                                                                        },
+                                                                                        {
+                                                                                          title: "🌒 月影の停滞",
+                                                                                          items: [
+                                                                                            { ja: "月影の停滞に沈む蒼月旗袍", en: "blue-moon cheongsam sinking into the stillness of lunar shadow" },
+                                                                                            { ja: "言葉の止まった露台に立つ和睦の旗袍", en: "reconciliation cheongsam standing on a terrace where words have halted" },
+                                                                                            { ja: "動かぬ月影の下で息を潜める旗袍", en: "cheongsam holding its breath beneath an unmoving lunar shadow" },
+                                                                                            { ja: "停滞した時間をまとう蒼月の宮廷旗袍", en: "court cheongsam draped in the suspended time of a blue moon" },
+                                                                                            { ja: "月影に留め置かれた沈黙の和解旗袍", en: "silent reconciliation cheongsam held in place by lunar shadow" }
+                                                                                          ]
+                                                                                        },
+                                                                                        {
+                                                                                          title: "🫧 触れずに解ける緊張",
+                                                                                          items: [
+                                                                                            { ja: "触れずに解ける緊張をまとう蒼月旗袍", en: "blue-moon cheongsam wearing a tension that dissolves without touch" },
+                                                                                            { ja: "距離を保ったまま和らぐ夜宴の旗袍", en: "night-banquet cheongsam softening while keeping its distance" },
+                                                                                            { ja: "指先も触れずにほどける沈黙の旗袍", en: "silent cheongsam easing apart without even fingertips meeting" },
+                                                                                            { ja: "緊張だけが静かにほどけていく和睦の旗袍", en: "reconciliation cheongsam where only the tension quietly unwinds" },
+                                                                                            { ja: "無接触のまま余韻を残す蒼月の旗袍", en: "blue-moon cheongsam leaving an afterglow without contact" }
+                                                                                          ]
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                },
+                                                                                {
+                                                                                  title: "🫧 沈黙の許し",
+                                                                                  items: [
+                                                                                    { ja: "沈黙の許しを示す口づけ旗袍", en: "cheongsam with a kiss expressing silent forgiveness" },
+                                                                                    { ja: "言葉なく赦しを伝える静謐な旗袍", en: "quiet cheongsam conveying forgiveness without words" },
+                                                                                    { ja: "視線だけで許しが満ちる夜宴旗袍", en: "night banquet cheongsam filled with forgiveness through nothing but a gaze" },
+                                                                                    { ja: "声を失うほど静かな赦しの契約旗袍", en: "pact cheongsam bearing a forgiveness so quiet it silences speech" },
+                                                                                    { ja: "余韻だけを残す沈黙の和解旗袍", en: "cheongsam with a silent reconciliation leaving only afterglow" }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    },
+                                                                    {
+                                                                      title: "💤 眠りなさい",
+                                                                      items: [
+                                                                        { ja: "眠りなさいと甘く告げる血月旗袍", en: "blood moon cheongsam softly saying go to sleep" },
+                                                                        { ja: "まぶたを重くする声を宿す夜宴旗袍", en: "night banquet cheongsam carrying a voice that weighs down the eyelids" },
+                                                                        { ja: "盃の香りで眠りへ誘う契約旗袍", en: "pact cheongsam lulling one to sleep with the scent of the cup" },
+                                                                        { ja: "やさしい命令で意識を沈める毒杯旗袍", en: "poison-cup cheongsam sinking awareness with a gentle command" },
+                                                                        { ja: "眠りを赦しとして与える貴婦人旗袍", en: "noblewoman cheongsam granting sleep as an act of mercy" }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              title: "🌫 接近の香り",
+                                                              items: [
+                                                                { ja: "接近の香りを纏う血月旗袍", en: "blood moon cheongsam wrapped in the scent of approach" },
+                                                                { ja: "香りで距離を縮める夜宴旗袍", en: "night banquet cheongsam narrowing the distance through fragrance" },
+                                                                { ja: "花香に毒意を溶かした契約旗袍", en: "pact cheongsam dissolving venomous intent into floral perfume" },
+                                                                { ja: "近づくほど甘く満ちる毒杯旗袍", en: "poison-cup cheongsam growing sweeter the closer one comes" },
+                                                                { ja: "香りの尾で心を絡め取る貴婦人旗袍", en: "noblewoman cheongsam ensnaring the heart with the trailing tail of her scent" }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          title: "🥂 最後の乾杯",
+                                                          items: [
+                                                            { ja: "最後の乾杯を捧げる血月旗袍", en: "blood moon cheongsam offering the final toast" },
+                                                            { ja: "終幕前の一杯を差し出す夜宴旗袍", en: "night banquet cheongsam presenting one last cup before the curtain falls" },
+                                                            { ja: "別れの口づけより先に掲げる契約旗袍", en: "pact cheongsam raising a cup before a farewell kiss" },
+                                                            { ja: "最後の乾杯に沈黙の毒を満たす旗袍", en: "cheongsam filling the final toast with silent poison" },
+                                                            { ja: "終わりを祝うように微笑む毒杯旗袍", en: "poison-cup cheongsam smiling as though celebrating the end" }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    },
+                                                    {
+                                                      title: "🙂 微笑む処刑杯",
+                                                      items: [
+                                                        { ja: "微笑む処刑杯を差し出す血月旗袍", en: "blood moon cheongsam offering an execution cup with a smile" },
+                                                        { ja: "穏やかな笑顔で死を渡す夜宴旗袍", en: "night banquet cheongsam handing over death with a calm smile" },
+                                                        { ja: "処刑の瞬間を隠す微笑毒杯旗袍", en: "smiling poison-cup cheongsam concealing the moment of execution" },
+                                                        { ja: "優美な所作で終焉を告げる契約旗袍", en: "pact cheongsam announcing the end with graceful gestures" },
+                                                        { ja: "笑みの奥で命を裁く貴婦人旗袍", en: "noblewoman cheongsam judging life behind a smile" }
+                                                      ]
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  title: "🕯 杯に沈む誓約",
+                                                  items: [
+                                                    { ja: "杯に沈む誓約を宿す血月旗袍", en: "blood moon cheongsam bearing an oath sinking into the cup" },
+                                                    { ja: "盃の底に契約文を沈めた夜宴旗袍", en: "night banquet cheongsam with a contract sunk to the bottom of the goblet" },
+                                                    { ja: "静かな乾杯に永い誓約を封じる旗袍", en: "cheongsam sealing a long oath within a silent toast" },
+                                                    { ja: "杯影に揺れる約定を映す貴族旗袍", en: "noble cheongsam reflecting a trembling promise in the shadow of a goblet" },
+                                                    { ja: "蝋燭灯の下で誓いを沈める契約旗袍", en: "pact cheongsam sinking a vow beneath candlelight" }
+                                                  ]
+                                                },
+                                                {
+                                                  title: "⛓ 主従契約の盃",
+                                                  items: [
+                                                    { ja: "主従契約の盃を掲げる血月旗袍", en: "blood moon cheongsam raising the goblet of master-servant contract" },
+                                                    { ja: "盃を交わして従属を刻む夜宴旗袍", en: "night banquet cheongsam marking subservience through shared goblets" },
+                                                    { ja: "契約の杯で忠誠を縛る女主人旗袍", en: "mistress cheongsam binding loyalty through the contractual cup" },
+                                                    { ja: "膝を折る貴族へ盃を下す支配旗袍", en: "dominating cheongsam lowering a goblet to kneeling nobles" },
+                                                    { ja: "深紅の盃で主従を結ぶ貴婦人旗袍", en: "noblewoman cheongsam joining master and servant with a crimson goblet" }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              title: "⛓ 貴族従属",
+                                              items: [
+                                                { ja: "貴族を従える血月支配旗袍", en: "blood moon dominion cheongsam that subjugates the nobles" },
+                                                { ja: "従者を引き連れる夜宴旗袍", en: "night banquet cheongsam followed by attendants" },
+                                                { ja: "膝を折る貴族たちの中心に立つ旗袍", en: "cheongsam standing at the center of nobles brought to their knees" },
+                                                { ja: "従属の視線を浴びる女主人旗袍", en: "mistress cheongsam bathed in the gaze of subservience" },
+                                                { ja: "夜宴の列を支配する貴婦人旗袍", en: "noblewoman cheongsam ruling over the lines of the night banquet" }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              title: "🥀 退廃葬花寄り",
+                              items: [
+                                { ja: "葬花レースの退廃旗袍", en: "funereal floral decadent cheongsam" },
+                                { ja: "枯薔薇刺繍の哀艶旗袍", en: "withered rose decadent gothic cheongsam" },
+                                { ja: "色褪せた黒絹の退廃旗袍", en: "faded black silk decadent cheongsam" },
+                                { ja: "喪失感をまとう薄闇旗袍", en: "gloom-laden decadent gothic cheongsam" },
+                                { ja: "追憶ドレープの葬宴旗袍", en: "memorial draped decadent cheongsam" }
+                              ]
+                            },
+                            {
+                              title: "🎭 漆黒舞台寄り",
+                              items: [
+                                { ja: "漆黒舞台の演劇旗袍", en: "jet-black stage gothic cheongsam" },
+                                { ja: "舞台幕飾りのドラマ旗袍", en: "dramatic stage curtain gothic cheongsam" },
+                                { ja: "スポットライト映えの夜幕旗袍", en: "spotlit gothic stage cheongsam" },
+                                { ja: "黒羽装飾の劇場旗袍", en: "black feather theater gothic cheongsam" },
+                                { ja: "退廃ショーガール融合旗袍", en: "decadent showgirl fusion cheongsam" }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          title: "🌹 ロココ融合",
+                          items: [
+                            { ja: "ロココ刺繍融合旗袍", en: "rococo embroidered fusion cheongsam" },
+                            { ja: "薔薇房飾りの宮花旗袍", en: "rose tassel rococo cheongsam" },
+                            { ja: "フリル裾の貴婦人旗袍", en: "lady rococo cheongsam with frilled hem" },
+                            { ja: "淡金装飾の甘美旗袍", en: "sweet rococo cheongsam with pale gold ornament" },
+                            { ja: "優雅リボン胸元の社交旗袍", en: "society cheongsam with elegant ribbon bust detail" }
+                          ]
+                        },
+                        {
+                          title: "🕰 ヴィクトリア融合",
+                          items: [
+                            { ja: "ヴィクトリア襟融合旗袍", en: "victorian collar fusion cheongsam" },
+                            { ja: "バッスル裾アレンジ旗袍", en: "bustle hem fusion cheongsam" },
+                            { ja: "くるみボタン列の端正旗袍", en: "prim button row victorian cheongsam" },
+                            { ja: "レースアップ背面の夜会旗袍", en: "back lace-up victorian evening cheongsam" },
+                            { ja: "貴族夫人風ロング旗袍", en: "aristocratic lady long cheongsam" }
+                          ]
+                        },
+                        {
+                          title: "🥂 モダン社交",
+                          items: [
+                            { ja: "モダン社交クラブ旗袍", en: "modern social club cheongsam" },
+                            { ja: "アールデコ装飾旗袍", en: "art deco inspired cheongsam" },
+                            { ja: "シルク手袋合わせの都会旗袍", en: "urban cheongsam with silk gloves" },
+                            { ja: "スリム夜会ライン旗袍", en: "sleek evening line cheongsam" },
+                            { ja: "カクテルパーティー融合旗袍", en: "cocktail party fusion cheongsam" }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      title: "🕯 退廃ロマン",
+                      items: [
+                        { ja: "退廃ロマンの薄闇旗袍", en: "decadent romantic twilight cheongsam" },
+                        { ja: "くすみ薔薇の夜会旗袍", en: "dusky rose ballroom cheongsam" },
+                        { ja: "退色金刺繍の古城旗袍", en: "faded gold embroidery old castle cheongsam" },
+                        { ja: "哀愁ドレープの退廃舞踏旗袍", en: "melancholic draped decadent ball cheongsam" },
+                        { ja: "蝋燭灯に沈む夜宴旗袍", en: "candlelit decadent evening cheongsam" }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          title: "🔥 攻めチャイナ",
+          children: [
+            {
+              title: "✂ スリット・丈・カット",
+              items: [
+                { ja: "超ハイスリット旗袍", en: "ultra high slit cheongsam" },
+                { ja: "ショート丈チャイナ", en: "short dress cheongsam" },
+                { ja: "アシンメトリー裾チャイナ", en: "asymmetrical hem cheongsam" },
+                { ja: "サイドカット旗袍", en: "side cutout cheongsam" },
+                { ja: "背中開きチャイナ", en: "open back cheongsam" }
+              ]
+            },
+            {
+              title: "🫦 肌見せ・ボディライン",
+              items: [
+                { ja: "密着ボディライン旗袍", en: "skin tight cheongsam, body line emphasis" },
+                { ja: "谷間強調チャイナ", en: "cleavage emphasis cheongsam" },
+                { ja: "肩落ちチャイナ", en: "off shoulder cheongsam" },
+                { ja: "横乳見せチャイナ", en: "sideboob cheongsam" },
+                { ja: "脚長見せミニ旗袍", en: "leggy mini cheongsam" }
+              ]
+            },
+            {
+              title: "🔗 合わせ技パーツ",
+              items: [
+                { ja: "ガーターベルト合わせ", en: "cheongsam with garter belt" },
+                { ja: "レース手袋合わせ", en: "cheongsam with lace gloves" },
+                { ja: "網タイツ合わせ", en: "cheongsam with fishnet stockings" },
+                { ja: "ヒールブーツ合わせ", en: "cheongsam with heeled boots" },
+                { ja: "チョーカー合わせ", en: "cheongsam with choker" }
+              ]
+            }
+          ]
+        },
+        {
+          title: "🎀 中華ロリ・可変系",
+          children: [
+            {
+              title: "🍬 甘ロリ寄り",
+              items: [
+                { ja: "甘ロリ中華ドレス", en: "sweet lolita chinese dress" },
+                { ja: "リボン多め中華ロリ", en: "ribbon heavy chinese lolita dress" },
+                { ja: "パステル旗袍ロリ", en: "pastel cheongsam lolita" },
+                { ja: "フリルエプロン旗袍", en: "frilled apron cheongsam" },
+                { ja: "ドームスカート中華ロリ", en: "dome skirt chinese lolita" }
+              ]
+            },
+            {
+              title: "🎐 フリル・装飾強化",
+              items: [
+                { ja: "フリル重ね旗袍", en: "layered frill cheongsam" },
+                { ja: "房飾りたっぷりチャイナ", en: "tassel heavy chinese dress" },
+                { ja: "花飾り強化中華ロリ", en: "flower ornament chinese lolita" },
+                { ja: "レース袖チャイナ", en: "lace sleeve cheongsam" },
+                { ja: "丸襟フリルチャイナ", en: "rounded collar frilled chinese dress" }
+              ]
+            },
+            {
+              title: "🪄 ミニ・可変アレンジ",
+              items: [
+                { ja: "ミニ丈中華ロリ", en: "mini chinese lolita dress" },
+                { ja: "ケープ付きチャイナ", en: "capelet cheongsam" },
+                { ja: "セパレート風中華ドレス", en: "separate style chinese dress" },
+                { ja: "ジャンパースカート風旗袍", en: "jumper skirt inspired cheongsam" },
+                { ja: "猫耳アレンジ中華ロリ", en: "cat ear styled chinese lolita dress" }
+              ]
+            }
+          ]
+        },
+        {
+          title: "⚡ サイバー・近未来チャイナ",
+          children: [
+            {
+              title: "🌃 ネオン都市系",
+              items: [
+                { ja: "ネオン縁取り旗袍", en: "neon trimmed cheongsam" },
+                { ja: "ホログラム旗袍", en: "holographic cheongsam" },
+                { ja: "雨街反射チャイナ", en: "rain soaked cyberpunk cheongsam" },
+                { ja: "発光ライン中華服", en: "glowing line chinese dress" },
+                { ja: "ブラックネオン夜都旗袍", en: "black neon night city cheongsam" }
+              ]
+            },
+            {
+              title: "🤖 テック素材・機械装飾",
+              items: [
+                { ja: "カーボン質感旗袍", en: "carbon texture cheongsam" },
+                { ja: "メカ飾りチャイナ", en: "mechanical ornament cheongsam" },
+                { ja: "LED留め具旗袍", en: "led clasp cheongsam" },
+                { ja: "装甲片付きチャイナ", en: "armored piece cheongsam" },
+                { ja: "回路刺繍チャイナ", en: "circuit embroidery cheongsam" }
+              ]
+            },
+            {
+              title: "🎤 未来ステージ系",
+              items: [
+                { ja: "ライブ衣装風チャイナ", en: "stage performer cheongsam" },
+                { ja: "アイドル近未来旗袍", en: "futuristic idol cheongsam" },
+                { ja: "DJアレンジ中華服", en: "dj styled chinese dress" },
+                { ja: "ショーガール風旗袍", en: "showgirl style cheongsam" },
+                { ja: "レーザー光沢チャイナ", en: "laser sheen cheongsam" }
+              ]
+            }
+          ]
+        },
+        {
+          title: "🏯 宮廷・武侠・仙界チャイナ",
+          children: [
+            {
+              title: "👑 宮廷・礼装",
+              items: [
+                { ja: "龍鳳宮廷旗袍", en: "dragon phoenix palace cheongsam" },
+                { ja: "皇妃風ロング旗袍", en: "imperial consort long cheongsam" },
+                { ja: "金刺繍の祝宴旗袍", en: "gold embroidered banquet cheongsam" },
+                { ja: "白金の清雅礼装旗袍", en: "white gold ceremonial cheongsam" },
+                { ja: "鳳羽マント付き旗袍", en: "cheongsam with phoenix feather cape" }
+              ]
+            },
+            {
+              title: "⚔ 武侠・戦装束",
+              children: [
+                {
+                  title: "🗡 剣士",
+                  items: [
+                    { ja: "剣士旗袍", en: "swordswoman cheongsam" },
+                    { ja: "長剣携えた武侠チャイナ", en: "wuxia cheongsam with long sword" },
+                    { ja: "軽甲片付き剣士旗袍", en: "light armored swordswoman cheongsam" },
+                    { ja: "決闘用スリム旗袍", en: "duelist slim cheongsam" },
+                    { ja: "流派刺繍の剣士装", en: "school embroidered swordswoman chinese outfit" }
+                  ]
+                },
+                {
+                  title: "🕶 刺客",
+                  children: [
+                    {
+                      title: "🌙 夜潜み",
+                      items: [
+                        { ja: "夜潜み刺客旗袍", en: "night stealth assassin cheongsam" },
+                        { ja: "黒紅の夜刃チャイナ", en: "black red night blade cheongsam" },
+                        { ja: "闇に溶ける薄布旗袍", en: "shadow blending sheer assassin cheongsam" },
+                        { ja: "静音靴合わせ刺客旗袍", en: "assassin cheongsam with silent shoes" },
+                        { ja: "屋根渡り用軽装旗袍", en: "light rooftop assassin cheongsam" }
+                      ]
+                    },
+                    {
+                      title: "☠ 毒術",
+                      items: [
+                        { ja: "毒術仕込みの刺客旗袍", en: "poison craft assassin cheongsam" },
+                        { ja: "毒針隠し袖チャイナ", en: "hidden poison needle sleeve cheongsam" },
+                        { ja: "薬香漂う暗器旗袍", en: "assassin cheongsam with medicinal poison scent" },
+                        { ja: "翡翠毒瓶の帯飾り旗袍", en: "jade poison vial belt ornament cheongsam" },
+                        { ja: "紫煙毒使い旗袍", en: "violet smoke poison user cheongsam" }
+                      ]
+                    },
+                    {
+                      title: "🎭 仮面",
+                      items: [
+                        { ja: "仮面の暗殺旗袍", en: "masked assassin cheongsam" },
+                        { ja: "半面飾りの無表情旗袍", en: "half mask assassin cheongsam" },
+                        { ja: "狐面潜入チャイナ", en: "fox mask infiltration cheongsam" },
+                        { ja: "金細工仮面の夜会刺客旗袍", en: "gold filigree masked assassin cheongsam" },
+                        { ja: "笑わぬ仮面舞踏刺客旗袍", en: "expressionless masquerade assassin cheongsam" }
+                      ]
+                    },
+                    {
+                      title: "🏛 宮廷暗殺",
+                      children: [
+                        {
+                          title: "🧹 侍女擬装",
+                          items: [
+                            { ja: "侍女擬装の暗殺旗袍", en: "maid disguise palace assassin cheongsam" },
+                            { ja: "給仕姿の仕込み刃旗袍", en: "serving maid disguise cheongsam with hidden blade" },
+                            { ja: "静かな廊下を歩く侍女旗袍", en: "silent corridor maid disguise cheongsam" },
+                            { ja: "盆の下に刃を隠す宮仕え旗袍", en: "palace attendant cheongsam hiding blade under tray" },
+                            { ja: "白手袋の侍女偽装旗袍", en: "white glove maid disguise assassin cheongsam" }
+                          ]
+                        },
+                        {
+                          title: "🍷 宴席潜入",
+                          items: [
+                            { ja: "宴席潜入の暗殺旗袍", en: "banquet infiltration assassin cheongsam" },
+                            { ja: "盃を運ぶ夜宴旗袍", en: "banquet server assassin cheongsam" },
+                            { ja: "楽舞紛れの潜入旗袍", en: "festival dancer infiltration cheongsam" },
+                            { ja: "笑顔で近づく祝宴刺客旗袍", en: "smiling banquet assassin cheongsam" },
+                            { ja: "金杯の影に潜む旗袍", en: "assassin cheongsam hiding among golden goblets" }
+                          ]
+                        },
+                        {
+                          title: "🌫 毒香",
+                          items: [
+                            { ja: "毒香をまとう暗殺旗袍", en: "poison perfume assassin cheongsam" },
+                            { ja: "香炉仕込みの宮廷旗袍", en: "palace cheongsam with hidden poison incense" },
+                            { ja: "花香に紛れた毒使い旗袍", en: "flower scented poison assassin cheongsam" },
+                            { ja: "扇子で毒香を流す旗袍", en: "cheongsam spreading poison perfume with fan" },
+                            { ja: "淡い香煙の悲艶旗袍", en: "faint fragrant smoke assassin cheongsam" }
+                          ]
+                        },
+                        {
+                          title: "👑 玉座接近",
+                          items: [
+                            { ja: "玉座接近の暗殺旗袍", en: "throne approach assassin cheongsam" },
+                            { ja: "王前に侍る密命旗袍", en: "royal audience secret mission cheongsam" },
+                            { ja: "拝謁用礼装に偽装した旗袍", en: "audience ceremonial disguise assassin cheongsam" },
+                            { ja: "御前の一礼から刃へ移る旗袍", en: "assassin cheongsam shifting from bow to blade" },
+                            { ja: "玉階を上る静謐な旗袍", en: "silent assassin cheongsam ascending throne steps" }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  title: "⛩ 門派",
+                  items: [
+                    { ja: "門派刺繍の修練旗袍", en: "sect embroidered training cheongsam" },
+                    { ja: "山門流の修練チャイナ", en: "mountain sect training chinese dress" },
+                    { ja: "師姉風の武門旗袍", en: "senior disciple wuxia cheongsam" },
+                    { ja: "流派帯布の戦装束旗袍", en: "school sash battle cheongsam" },
+                    { ja: "道場決戦チャイナ", en: "dojo duel cheongsam" }
+                  ]
+                },
+                {
+                  title: "🦂 妖艶戦装束",
+                  items: [
+                    { ja: "妖艶戦装束旗袍", en: "sensual battle cheongsam" },
+                    { ja: "黒紫の魅惑戦旗袍", en: "black purple alluring battle cheongsam" },
+                    { ja: "脚甲付き高機動旗袍", en: "high mobility cheongsam with leg armor" },
+                    { ja: "長手袋の決闘旗袍", en: "duel cheongsam with long gloves" },
+                    { ja: "裂帛の舞う戦姫旗袍", en: "battle princess cheongsam with fluttering cloth" }
+                  ]
+                }
+              ]
+            },
+            {
+              title: "☁ 仙界・神仙幻想",
+              items: [
+                { ja: "仙女風ふわり旗袍", en: "xianxia fairy cheongsam" },
+                { ja: "雲紋の仙界礼装", en: "cloud pattern celestial cheongsam" },
+                { ja: "月光薄紗チャイナ", en: "moonlight sheer chinese dress" },
+                { ja: "蓮華仙衣チャイナ", en: "lotus celestial chinese dress" },
+                { ja: "天宮の羽衣チャイナ", en: "heavenly robe inspired cheongsam" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ];
 
-  const DICT = {
-    "cheongsam, chinese clothes": "王道チャイナドレス",
-    "classic cheongsam, traditional chinese dress": "クラシック旗袍",
-    "modern cheongsam, fashion qipao": "モダン旗袍",
-    "short cheongsam, mini qipao": "ミニチャイナ",
-    "long cheongsam, floor-length qipao": "ロングチャイナ",
-    "high-waist cheongsam": "ハイウエスト旗袍",
-    "fitted cheongsam, body-hugging qipao": "ボディライン強調旗袍",
-    "a-line cheongsam": "Aライン中華ドレス",
-    "mermaid cheongsam": "マーメイド旗袍",
-    "cheongsam with cape": "マント付き中華ドレス",
-    "cheongsam with sheer outer robe": "羽織付きチャイナ",
-    "layered cheongsam, double-layer qipao": "レイヤード旗袍",
-    "cheongsam, high slit": "ハイスリットチャイナ",
-    "double slit cheongsam": "両脚スリット旗袍",
-    "short cheongsam, high slit, thighs": "深スリットミニチャイナ",
-    "front slit cheongsam": "前開きスリット旗袍",
-    "cheongsam with side cutout": "サイドカット旗袍",
-    "cheongsam with waist cutout": "ウエストカット旗袍",
-    "cheongsam, cleavage cutout": "胸開きチャイナ",
-    "bare shoulders, cheongsam": "肩見せチャイナ",
-    "backless cheongsam": "背中開き旗袍",
-    "china dress, sideboob": "横乳チャイナ",
-    "china dress, thighs, high slit": "太もも魅せ旗袍",
-    "bare shoulders, china dress, chinese clothes, short dress, cleavage cutout, sideboob, thighs": "攻めチャイナ雛形",
-    "mandarin collar cheongsam": "立ち襟チャイナ",
-    "low mandarin collar cheongsam": "低め襟旗袍",
-    "sleeveless cheongsam": "ノースリーブ旗袍",
-    "short-sleeve cheongsam": "半袖チャイナ",
-    "long-sleeve cheongsam": "長袖チャイナ",
-    "cheongsam with sheer sleeves": "透け袖中華ドレス",
-    "puff-sleeve cheongsam": "パフ袖チャイナ",
-    "off-shoulder cheongsam": "オフショル旗袍",
-    "one-shoulder cheongsam": "ワンショルダーチャイナ",
-    "keyhole cheongsam": "胸元キーホール旗袍",
-    "frog buttons, cheongsam": "チャイナボタン強調",
-    "hair bun, cheongsam": "お団子髪セット向け",
-    "red and gold cheongsam": "赤金チャイナ",
-    "black and gold cheongsam": "黒金チャイナ",
-    "white cheongsam": "純白旗袍",
-    "jade green cheongsam": "翡翠グリーン旗袍",
-    "deep crimson silk cheongsam": "深紅シルクチャイナ",
-    "satin cheongsam": "サテン旗袍",
-    "silk cheongsam": "シルク旗袍",
-    "velvet cheongsam": "ベルベット中華ドレス",
-    "lace-trimmed cheongsam": "レース重ねチャイナ",
-    "phoenix embroidery cheongsam": "刺繍鳳凰チャイナ",
-    "dragon embroidery cheongsam": "刺繍龍紋旗袍",
-    "floral cheongsam": "花柄チャイナ",
-    "peony pattern cheongsam": "牡丹柄旗袍",
-    "bamboo motif cheongsam": "竹柄中華ドレス",
-    "glossy cheongsam, reflective silk": "流紋光沢チャイナ",
-    "gothic cheongsam": "ゴシックチャイナ",
-    "qi-lolita, chinese lolita dress": "ロリィタチャイナ",
-    "maid cheongsam": "メイドチャイナ",
-    "chinese style bunny outfit, qipao-inspired bunny silhouette": "バニーチャイナ",
-    "cyber cheongsam": "サイバーチャイナ",
-    "techwear cheongsam": "テックウェア旗袍",
-    "wuxia heroine outfit, cheongsam": "武侠ヒロインチャイナ",
-    "xianxia-inspired cheongsam": "仙女風チャイナ",
-    "chinese ceremonial outfit": "宮廷中華ドレス",
-    "hanfu-inspired cheongsam": "漢服ミックス旗袍",
-    "futuristic cheongsam, neon accents": "近未来ネオン旗袍",
-    "winter cheongsam, fur trim": "雪国チャイナ",
-    "cheongsam, fishnet pantyhose": "網タイツ合わせ",
-    "cheongsam, pantyhose": "パンスト合わせ",
-    "cheongsam, thighhighs": "ニーハイ合わせ",
-    "cheongsam, high heels": "ハイヒール合わせ",
-    "cheongsam, chinese shoes": "チャイナシューズ合わせ",
-    "cheongsam, ornate hairpin": "簪・髪飾り合わせ",
-    "cheongsam, folding fan": "扇子合わせ",
-    "cheongsam, long gloves": "手袋合わせ"
-  };
+  const DICT = {};
+  (function buildDict(nodes){
+    nodes.forEach(node => {
+      if (node.items) node.items.forEach(item => { DICT[item.en] = item.ja; });
+      if (node.children) buildDict(node.children);
+    });
+  })(DATA);
+
+  function createItemLabel(item){
+    const label = document.createElement("label");
+    label.style.cssText = "display:flex; align-items:center; font-size:0.92em; cursor:pointer; line-height:1.35;";
+    const cb = document.createElement("input");
+    cb.type = "checkbox";
+    cb.dataset.en = item.en;
+    cb.style.marginRight = "6px";
+    label.appendChild(cb);
+    label.appendChild(document.createTextNode(item.ja));
+    label.title = item.en;
+    return label;
+  }
+
+  function createNode(node, depth){
+    const details = document.createElement("details");
+    details.className = "attire-v23-node attire-cat";
+    details.dataset.depth = String(depth);
+    details.open = false;
+    const border = depth === 0 ? "#cc3355" : depth === 1 ? "#d98ca0" : depth === 2 ? "#e7b8c5" : "#f0d5dc";
+    const bg = depth === 0 ? "#fff8fb" : depth === 1 ? "#fffafb" : "#fffdfd";
+    details.style.cssText = `margin:6px 0; border:1px solid ${border}; border-radius:8px; background:${bg}; overflow:hidden; width:100%; max-width:100%; box-sizing:border-box;`;
+
+    const summary = document.createElement("summary");
+    summary.className = "attire-v23-summary";
+    summary.textContent = node.title;
+    summary.title = node.title;
+    summary.style.cssText = `font-weight:${depth <= 1 ? '700' : '600'}; padding:${depth === 0 ? '10px 12px' : '8px 10px'}; cursor:pointer; list-style:none; background:${bg}; color:#7a2239;`;
+    details.appendChild(summary);
+
+    const body = document.createElement("div");
+    body.className = "attire-v23-body";
+    body.style.cssText = "padding:8px 10px 10px; width:100%; max-width:100%; box-sizing:border-box;";
+
+    if (node.items && node.items.length) {
+      const grid = document.createElement("div");
+      grid.className = "attire-v23-grid";
+      grid.style.cssText = "display:grid; grid-template-columns:repeat(auto-fill, minmax(165px, 1fr)); gap:6px; width:100%;";
+      node.items.forEach(item => grid.appendChild(createItemLabel(item)));
+      body.appendChild(grid);
+    }
+    if (node.children && node.children.length) {
+      node.children.forEach(child => body.appendChild(createNode(child, depth + 1)));
+    }
+    details.appendChild(body);
+    return details;
+  }
 
   const API = {
-    initUI(container) {
+    initUI() {
+      if (window.__outputTranslation) window.__outputTranslation.register(DICT);
       const mount = (retry = 0) => {
-        const parent = document.querySelector("#list-attire") || container;
+        const parent = document.querySelector("#list-attire");
         if (!parent) {
-          if (retry < 50) setTimeout(() => mount(retry + 1), 100);
+          if (retry < 60) setTimeout(() => mount(retry + 1), 100);
           return;
         }
         if (parent.querySelector(".attire-v23-container")) return;
 
         const root = document.createElement("div");
         root.className = "attire-v23-container";
+        root.style.cssText = "display:block; width:100%; max-width:100%; box-sizing:border-box;";
 
         const sep = document.createElement("div");
-        sep.style.cssText = "margin:18px 0 10px 0; border-top:1px dashed #cc3344; text-align:center; color:#aa2233; font-size:0.88em; font-weight:bold;";
-        sep.textContent = "🐉 チャイナ服特化コレクション (v23) 🐉";
+        sep.style.cssText = "margin:18px 0 10px; border-top:2px solid #e6a7b7; text-align:center; color:#b23b5b; font-size:0.95em; font-weight:700;";
+        sep.textContent = "👘 チャイナ服特化コレクション v23";
         root.appendChild(sep);
 
-        const makeCategory = (title, items) => {
-          const details = document.createElement("details");
-          details.className = "attire-cat attire-v23-cat";
-          details.style.cssText = "margin-bottom:6px; border:1px solid #e8d3d8; border-radius:8px; background:#fff; overflow:hidden;";
+        const stack = document.createElement("div");
+        stack.className = "attire-v23-stack";
+        stack.style.cssText = "display:block; width:100%; max-width:100%; box-sizing:border-box;";
+        DATA.forEach(node => stack.appendChild(createNode(node, 0)));
+        root.appendChild(stack);
 
-          const summary = document.createElement("summary");
-          summary.textContent = title;
-          summary.style.cssText = "font-weight:bold; padding:8px 10px; cursor:pointer; background:#fff7f8;";
-          details.appendChild(summary);
-
-          const content = document.createElement("div");
-          content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:6px;";
-
-          items.forEach(item => {
-            const label = document.createElement("label");
-            label.style.cssText = "display:flex; align-items:center; gap:6px; font-size:0.9em; cursor:pointer; line-height:1.25;";
-            const cb = document.createElement("input");
-            cb.type = "checkbox";
-            cb.dataset.en = item.en;
-            label.appendChild(cb);
-            label.appendChild(document.createTextNode(item.ja));
-            label.title = item.en;
-            content.appendChild(label);
-          });
-
-          details.appendChild(content);
-          return details;
-        };
-
-        Object.entries(CHINA_ATTIRE_DATA).forEach(([cat, items]) => {
-          root.appendChild(makeCategory(cat, items));
-        });
+        const styleId = "attire-v23-mobile-style";
+        const styleCss = `
+.attire-v23-container, .attire-v23-container * { box-sizing:border-box; }
+.attire-v23-container { display:block !important; width:100% !important; max-width:100% !important; }
+.attire-v23-container > .attire-v23-stack { display:block !important; width:100% !important; max-width:100% !important; }
+.attire-v23-container .attire-v23-node { display:block !important; width:100% !important; max-width:100% !important; min-width:0 !important; }
+.attire-v23-container .attire-v23-summary { display:block; width:100%; min-width:0; }
+.attire-v23-container .attire-v23-body { display:block !important; width:100% !important; max-width:100% !important; min-width:0 !important; grid-template-columns:1fr !important; grid-auto-flow:row !important; }
+.attire-v23-container details[open] > .attire-v23-body { display:block !important; grid-template-columns:1fr !important; grid-auto-flow:row !important; }
+.attire-v23-container .attire-v23-body > .attire-v23-node { display:block !important; width:100% !important; max-width:100% !important; }
+.attire-v23-container .attire-v23-grid { width:100% !important; max-width:100% !important; }
+@media (max-width: 640px) {
+  .attire-v23-container { padding-left:0 !important; padding-right:0 !important; }
+  .attire-v23-container > .attire-v23-stack { display:block !important; grid-template-columns:1fr !important; }
+  .attire-v23-container > .attire-v23-stack > .attire-v23-node { width:100% !important; }
+  .attire-v23-container .attire-v23-grid { display:grid !important; grid-template-columns:1fr !important; grid-auto-flow:row !important; }
+  .attire-v23-container .attire-v23-body { padding:6px 8px 8px !important; }
+  .attire-v23-container .attire-v23-node[data-depth="2"] > .attire-v23-body,
+  .attire-v23-container .attire-v23-node[data-depth="3"] > .attire-v23-body,
+  .attire-v23-container .attire-v23-node[data-depth="4"] > .attire-v23-body,
+  .attire-v23-container .attire-v23-node[data-depth="5"] > .attire-v23-body,
+  .attire-v23-container .attire-v23-node[data-depth="6"] > .attire-v23-body,
+  .attire-v23-container .attire-v23-node[data-depth="7"] > .attire-v23-body,
+  .attire-v23-container .attire-v23-node[data-depth="8"] > .attire-v23-body,
+  .attire-v23-container .attire-v23-node[data-depth="9"] > .attire-v23-body,
+  .attire-v23-container .attire-v23-node[data-depth="10"] > .attire-v23-body { padding-left:6px !important; padding-right:6px !important; }
+  .attire-v23-container .attire-v23-node[data-depth="2"] > .attire-v23-summary,
+  .attire-v23-container .attire-v23-node[data-depth="3"] > .attire-v23-summary,
+  .attire-v23-container .attire-v23-node[data-depth="4"] > .attire-v23-summary,
+  .attire-v23-container .attire-v23-node[data-depth="5"] > .attire-v23-summary,
+  .attire-v23-container .attire-v23-node[data-depth="6"] > .attire-v23-summary,
+  .attire-v23-container .attire-v23-node[data-depth="7"] > .attire-v23-summary,
+  .attire-v23-container .attire-v23-node[data-depth="8"] > .attire-v23-summary,
+  .attire-v23-container .attire-v23-node[data-depth="9"] > .attire-v23-summary,
+  .attire-v23-container .attire-v23-node[data-depth="10"] > .attire-v23-summary { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+}
+        `;
+        if (!document.getElementById(styleId)) {
+          const style = document.createElement("style");
+          style.id = styleId;
+          style.textContent = styleCss;
+          document.head.appendChild(style);
+        }
+        const host = parent.closest('.attire-v21-shima');
+        if (host && host.shadowRoot && !host.shadowRoot.querySelector('#' + styleId)) {
+          const shadowStyle = document.createElement('style');
+          shadowStyle.id = styleId;
+          shadowStyle.textContent = styleCss;
+          host.shadowRoot.appendChild(shadowStyle);
+        }
 
         const contentArea = parent.querySelector(".section-content") || parent;
         contentArea.appendChild(root);
-
-        if (window.__outputTranslation) {
-          window.__outputTranslation.register(DICT);
-        }
       };
       mount();
     },
     getTags() {
       const tags = [];
-      document.querySelectorAll(".attire-v23-container input[type='checkbox']:checked").forEach(cb => tags.push(cb.dataset.en));
+      const root = document.querySelector(".attire-v23-container");
+      if (!root) return tags;
+      root.querySelectorAll("input:checked").forEach(cb => tags.push(cb.dataset.en));
       return tags;
     }
   };
