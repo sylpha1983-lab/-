@@ -4724,82 +4724,19 @@ wrap.appendChild(title);
                                                                                                                     },
                                                                                                                     {
                                                                                                                       title: "🕯 静かな月狂い",
-                                                                                                                      children: [
-                                                                                                                        {
-                                                                                                                          title: "🤫 微笑の狂香",
-                                                                                                                          children: [
-                                                                                                                            {
-                                                                                                                              title: "🌸 笑みに潜む香毒",
-                                                                                                                              items: [
-                                                                                                                                { ja: "笑みに潜む香毒を忍ばせた蒼月旗袍", en: "blue-moon cheongsam hiding fragrant poison inside its smile" },
-                                                                                                                                { ja: "露光の奥で香毒がほどける和解旗袍", en: "reconciliation cheongsam with fragrant poison loosening behind dewlight" },
-                                                                                                                                { ja: "胸元に笑みの香毒を沈める宮廷旗袍", en: "court cheongsam sinking poisonous fragrance from a smile into the chest" },
-                                                                                                                                { ja: "袖先から香毒の余韻が漂う夜宴旗袍", en: "night-banquet cheongsam trailing the after-scent of fragrant poison from the cuffs" },
-                                                                                                                                { ja: "やさしい笑顔に香毒を隠した旗袍", en: "cheongsam hiding fragrant poison inside a gentle smile" }
-                                                                                                                              ]
-                                                                                                                            },
-                                                                                                                            {
-                                                                                                                              title: "🫦 囁きの芳香",
-                                                                                                                              items: [
-                                                                                                                                { ja: "囁きの芳香を唇に宿す蒼月旗袍", en: "blue-moon cheongsam placing whispered perfume upon the lips" },
-                                                                                                                                { ja: "露越しの囁きが芳香へ変わる和解旗袍", en: "reconciliation cheongsam where a whisper through dew becomes perfume" },
-                                                                                                                                { ja: "胸元に囁きの芳香を落とす宮廷旗袍", en: "court cheongsam dropping whispered fragrance onto the chest" },
-                                                                                                                                { ja: "耳元へ芳香の囁きを残す夜宴旗袍", en: "night-banquet cheongsam leaving perfumed whispers by the ear" },
-                                                                                                                                { ja: "囁くだけで香りが広がる旗袍", en: "cheongsam whose fragrance spreads with only a whisper" }
-                                                                                                                              ]
-                                                                                                                            },
-                                                                                                                            {
-                                                                                                                              title: "😌 甘い錯香",
-                                                                                                                              items: [
-                                                                                                                                { ja: "甘い錯香で理性を鈍らせる蒼月旗袍", en: "blue-moon cheongsam dulling reason with a sweet false fragrance" },
-                                                                                                                                { ja: "露の甘さが錯香へ変わる和解旗袍", en: "reconciliation cheongsam where dew sweetness turns into false perfume" },
-                                                                                                                                { ja: "胸元に甘い錯香を漂わせる宮廷旗袍", en: "court cheongsam letting sweet false fragrance drift across the chest" },
-                                                                                                                                { ja: "微笑むたび錯香が深まる夜宴旗袍", en: "night-banquet cheongsam whose false sweetness deepens with every smile" },
-                                                                                                                                { ja: "やわらかな香りで判断を狂わせる旗袍", en: "cheongsam deranging judgment through a soft sweet scent" }
-                                                                                                                              ]
-                                                                                                                            },
-                                                                                                                            {
-                                                                                                                              title: "☠ 微毒の口づけ香",
-                                                                                                                              items: [
-                                                                                                                                { ja: "微毒の口づけ香を宿した蒼月旗袍", en: "blue-moon cheongsam holding the scent of a faintly poisonous kiss" },
-                                                                                                                                { ja: "露の唇に微毒が残る和解旗袍", en: "reconciliation cheongsam with faint poison lingering on dewy lips" },
-                                                                                                                                { ja: "胸元で口づけ香が毒へ変わる宮廷旗袍", en: "court cheongsam where kiss-fragrance turns poisonous at the chest" },
-                                                                                                                                { ja: "近づくほど微毒の香りが濃くなる夜宴旗袍", en: "night-banquet cheongsam whose faint poisonous scent thickens the closer one comes" },
-                                                                                                                                { ja: "やさしい口元に微毒を隠した旗袍", en: "cheongsam hiding faint poison at a gentle mouth" }
-                                                                                                                              ]
-                                                                                                                            }
-                                                                                                                          ]
-                                                                                                                        },
-                                                                                                                        {
-                                                                                                                          title: "🌙 月酔いの静脈",
-                                                                                                                          items: [
-                                                                                                                            { ja: "月酔いの静脈を走らせる蒼月旗袍", en: "blue-moon cheongsam coursed through by veins of lunar intoxication" },
-                                                                                                                            { ja: "露の底で月酔いが脈打つ和解旗袍", en: "reconciliation cheongsam where moon-drunk pulses beat beneath the dew" },
-                                                                                                                            { ja: "胸元に月酔いの静脈を刻む宮廷旗袍", en: "court cheongsam engraved with the veins of lunar intoxication across the chest" },
-                                                                                                                            { ja: "裾のしずくへ月酔いが流れ込む夜宴旗袍", en: "night-banquet cheongsam with lunar intoxication flowing into the droplets at the hem" },
-                                                                                                                            { ja: "静脈のように月酔いを巡らせる旗袍", en: "cheongsam letting lunar intoxication circulate like quiet veins" }
-                                                                                                                          ]
-                                                                                                                        },
-                                                                                                                        {
-                                                                                                                          title: "🕯 無音の月熱",
-                                                                                                                          items: [
-                                                                                                                            { ja: "無音の月熱を灯した蒼月旗袍", en: "blue-moon cheongsam lit by a silent lunar fever" },
-                                                                                                                            { ja: "露灯りの内で月熱がこもる和解旗袍", en: "reconciliation cheongsam holding a lunar fever within dew-lit stillness" },
-                                                                                                                            { ja: "胸元で無音の月熱を燃やす宮廷旗袍", en: "court cheongsam burning with a silent lunar heat at the chest" },
-                                                                                                                            { ja: "足元の露気に月熱が沈む夜宴旗袍", en: "night-banquet cheongsam with lunar fever sinking into the dewy air around the feet" },
-                                                                                                                            { ja: "ことばもなく月熱だけ残す旗袍", en: "cheongsam leaving behind nothing but silent lunar fever" }
-                                                                                                                          ]
-                                                                                                                        },
-                                                                                                                        {
-                                                                                                                          title: "🫧 狂いを呑む露",
-                                                                                                                          items: [
-                                                                                                                            { ja: "狂いを呑む露をまとった蒼月旗袍", en: "blue-moon cheongsam wrapped in dew that swallows madness" },
-                                                                                                                            { ja: "月狂いを露が吸い上げる和解旗袍", en: "reconciliation cheongsam where dew drinks up lunar madness" },
-                                                                                                                            { ja: "胸元の露珠が狂いを呑み込む宮廷旗袍", en: "court cheongsam whose dew-beads swallow madness at the chest" },
-                                                                                                                            { ja: "裾のしずくへ狂いが沈んでいく夜宴旗袍", en: "night-banquet cheongsam with madness sinking into the droplets at the hem" },
-                                                                                                                            { ja: "露の中へ月狂いを封じた旗袍", en: "cheongsam sealing lunar madness into the dew itself" }
-                                                                                                                          ]
-                                                                                                                        }
+                                                                                                                      items: [
+                                                                                                                        { ja: "微笑に潜む狂香をまとう月夜旗袍", en: "moonlit cheongsam draped in madness hidden inside a smile" },
+                                                                                                                        { ja: "囁きの芳香が静かに侵食する蒼月旗袍", en: "blue-moon cheongsam quietly eroded by the perfume of whispers" },
+                                                                                                                        { ja: "無音の月熱を宿した夜宴旗袍", en: "night-banquet cheongsam carrying a soundless lunar fever" },
+                                                                                                                        { ja: "狂いを呑む露気をまとった和解旗袍", en: "reconciliation cheongsam wrapped in dew-haze that swallows madness" },
+                                                                                                                        { ja: "月酔いの静脈が透ける薄光旗袍", en: "dimly lit cheongsam showing the translucent veins of lunar intoxication" },
+                                                                                                                        { ja: "甘い錯香と微毒の気配を含む月露旗袍", en: "moon-dew cheongsam carrying sweet false fragrance and the hint of subtle poison" },
+                                                                                                                        { ja: "接吻の余韻が狂香へ変わる静月旗袍", en: "still-moon cheongsam where the aftertaste of a kiss turns into maddening fragrance" },
+                                                                                                                        { ja: "痺れを呑んだ青い吐息の夜露旗袍", en: "night-dew cheongsam with blue breath that has swallowed numbness" },
+                                                                                                                        { ja: "月痺の伝流が静脈を這う蒼光旗袍", en: "pale-blue cheongsam with lunar numb-current crawling along its veins" },
+                                                                                                                        { ja: "脈打つ月電が理性を侵す宮廷旗袍", en: "court cheongsam whose pulsing lunar current invades reason" },
+                                                                                                                        { ja: "青い余震だけを残して知覚を沈める旗袍", en: "cheongsam sinking perception and leaving only blue aftershocks" },
+                                                                                                                        { ja: "香りと痺れと露光が溶け合う深月旗袍", en: "deep-moon cheongsam where fragrance, numbness, and dewlight melt together" }
                                                                                                                       ]
                                                                                                                     }
                                                                                                                   ]
@@ -5360,7 +5297,1099 @@ wrap.appendChild(title);
               ]
             }
           ]
+        },
+        {
+          title: "🧵 柄・紋様特化",
+          children: [
+            {
+              title: "🐉 龍紋",
+              items: [
+                { ja: "金龍舞う王朝旗袍", en: "imperial cheongsam with dancing golden dragon motif" },
+                { ja: "蒼龍刺繍の月夜旗袍", en: "moonlit cheongsam with azure dragon embroidery" },
+                { ja: "黒地に龍影走る旗袍", en: "black cheongsam with shadow dragon pattern" },
+                { ja: "双龍絡む祝宴旗袍", en: "banquet cheongsam with entwined twin dragons" },
+                { ja: "龍鱗意匠の重厚旗袍", en: "heavy cheongsam with dragon scale design" }
+              ]
+            },
+            {
+              title: "🕊 鳳凰・仙禽紋",
+              items: [
+                { ja: "鳳凰羽刺繍の宮廷旗袍", en: "palace cheongsam with phoenix feather embroidery" },
+                { ja: "仙禽舞う天衣旗袍", en: "celestial cheongsam with dancing divine bird motifs" },
+                { ja: "白鳳の気配を宿す礼装旗袍", en: "ceremonial cheongsam bearing the aura of a white phoenix" },
+                { ja: "金鳳織りの祝福旗袍", en: "celebratory cheongsam woven with golden phoenix patterns" },
+                { ja: "羽影流れる仙界旗袍", en: "celestial cheongsam with flowing feather-shadow motifs" }
+              ]
+            },
+            {
+              title: "☁ 雲雷・幾何紋",
+              items: [
+                { ja: "瑞雲文様の典雅旗袍", en: "elegant cheongsam with auspicious cloud patterns" },
+                { ja: "雷文帯びる端正旗袍", en: "refined cheongsam with thunder-pattern trim" },
+                { ja: "渦雲と幾何線の近代旗袍", en: "modern cheongsam with swirling cloud and geometric lines" },
+                { ja: "青銀雷紋の冷麗旗袍", en: "cool blue-silver cheongsam with thunder motifs" },
+                { ja: "雲階を描く連続文様旗袍", en: "cheongsam with repeating cloud-step motifs" }
+              ]
+            },
+            {
+              title: "🌸 花鳥・蓮梅紋",
+              items: [
+                { ja: "蓮華刺繍の清雅旗袍", en: "graceful cheongsam with lotus embroidery" },
+                { ja: "梅花散らす冬朝旗袍", en: "winter dawn cheongsam scattered with plum blossom motifs" },
+                { ja: "花鳥画風の彩絹旗袍", en: "colored silk cheongsam with bird-and-flower painting motifs" },
+                { ja: "白蓮と青花の静謐旗袍", en: "serene cheongsam with white lotus and blue floral motifs" },
+                { ja: "蝶と小禽の庭園旗袍", en: "garden cheongsam with butterflies and small bird patterns" }
+              ]
+            },
+            {
+              title: "🌙 月紋・呪紋",
+              items: [
+                { ja: "月輪紋を宿す蒼月旗袍", en: "blue moon cheongsam bearing circular moon sigils" },
+                { ja: "符紋が裾を巡る秘儀旗袍", en: "ritual cheongsam with talismanic patterns circling the hem" },
+                { ja: "呪符意匠の夜宴旗袍", en: "evening banquet cheongsam with talisman-inspired motifs" },
+                { ja: "月影札が連なる妖装旗袍", en: "bewitching cheongsam with chained moon-shadow talismans" },
+                { ja: "紺金の秘月紋旗袍", en: "navy and gold cheongsam with secret moon emblems" }
+              ]
+            }
+          ]
+        },
+        {
+          title: "🔘 留め具・盤扣特化",
+          children: [
+            {
+              title: "🪢 伝統盤扣",
+              items: [
+                { ja: "白絹に並ぶ伝統盤扣旗袍", en: "white silk cheongsam with classic pankou buttons" },
+                { ja: "端正な連続盤扣の正統旗袍", en: "orthodox cheongsam with neat rows of pankou closures" },
+                { ja: "高襟を締める古典盤扣旗袍", en: "high collar cheongsam secured with classical pankou" },
+                { ja: "黒地に映える玉色盤扣旗袍", en: "black cheongsam accented with jade-toned pankou" },
+                { ja: "月白の静けさを留める盤扣旗袍", en: "moon-white cheongsam fastened with serene pankou closures" }
+              ]
+            },
+            {
+              title: "💎 宝石・装飾留め",
+              items: [
+                { ja: "宝石留め具が胸元に灯る旗袍", en: "cheongsam with jeweled clasps glowing at the chest" },
+                { ja: "翡翠盤扣の宮廷旗袍", en: "palace cheongsam with jade pankou closures" },
+                { ja: "真珠留めの清雅旗袍", en: "graceful cheongsam with pearl fasteners" },
+                { ja: "蒼石バックルの月下旗袍", en: "moonlit cheongsam with blue gemstone buckles" },
+                { ja: "金飾留め具の祝宴旗袍", en: "banquet cheongsam with ornate golden clasp details" }
+              ]
+            },
+            {
+              title: "⛓ 鎖・連結金具",
+              items: [
+                { ja: "鎖留めが揺れる妖装旗袍", en: "bewitching cheongsam with swaying chain fasteners" },
+                { ja: "連結金具の攻装旗袍", en: "aggressive cheongsam with linked metal fasteners" },
+                { ja: "銀鎖が胸元を渡る夜宴旗袍", en: "evening cheongsam with silver chains crossing the chest" },
+                { ja: "細鎖盤扣の退廃旗袍", en: "decadent cheongsam with fine-chain pankou closures" },
+                { ja: "拘束感を帯びる連結留め旗袍", en: "cheongsam with interconnected clasps creating a restrained silhouette" }
+              ]
+            },
+            {
+              title: "🦋 結び・蝶飾り",
+              items: [
+                { ja: "蝶結び留めの可憐旗袍", en: "lovely cheongsam with butterfly-knot closures" },
+                { ja: "花結び盤扣の祝祭旗袍", en: "festival cheongsam with floral-knot pankou details" },
+                { ja: "房飾り結びの少女旗袍", en: "maiden cheongsam with tassel-knot fasteners" },
+                { ja: "紅紐が揺れる結び留め旗袍", en: "cheongsam with red cord knot fasteners swaying softly" },
+                { ja: "繊細な組紐留めの中華ロリ旗袍", en: "china-lolita cheongsam with delicate braided cord closures" }
+              ]
+            },
+            {
+              title: "🤖 近未来ロック留め",
+              items: [
+                { ja: "発光盤扣のサイバー旗袍", en: "cyber cheongsam with luminous pankou locks" },
+                { ja: "磁気ロック留めの近未来旗袍", en: "futuristic cheongsam with magnetic lock fasteners" },
+                { ja: "機械式バックルの戦術旗袍", en: "tactical cheongsam with mechanical buckles" },
+                { ja: "ホログラム留め具の都市旗袍", en: "city cheongsam with holographic clasp details" },
+                { ja: "青光ロックが走る機装旗袍", en: "mechanized cheongsam marked by blue-light locking hardware" }
+              ]
+            }
+          ]
+        },
+        {
+          title: "🪡 生地・質感特化",
+          children: [
+            {
+              title: "✨ 絹光沢・艶布",
+              items: [
+                { ja: "月光を滑る絹艶旗袍", en: "silk sheen cheongsam gliding under moonlight" },
+                { ja: "艶やかな絹光沢の宮廷旗袍", en: "palace cheongsam with glossy silk luster" },
+                { ja: "柔光を返す真絹旗袍", en: "pure silk cheongsam reflecting soft light" },
+                { ja: "しっとり艶布の夜宴旗袍", en: "evening cheongsam in moist lustrous fabric" },
+                { ja: "青光を含む絹艶チャイナ", en: "silken chinese dress with bluish sheen" }
+              ]
+            },
+            {
+              title: "🏛 重厚織り・ブロケード",
+              items: [
+                { ja: "金糸ブロケードの王朝旗袍", en: "dynastic cheongsam in gold-thread brocade" },
+                { ja: "重厚織りの玉座礼装旗袍", en: "throne ceremonial cheongsam in heavy woven fabric" },
+                { ja: "厚織り紋布の宮廷チャイナ", en: "palace chinese dress in thick patterned weave" },
+                { ja: "密織り刺繍の典雅旗袍", en: "elegant cheongsam with densely woven embroidery" },
+                { ja: "重布が落ちる威厳旗袍", en: "majestic cheongsam with heavy draping cloth" }
+              ]
+            },
+            {
+              title: "🌫 薄紗・透け布レイヤー",
+              items: [
+                { ja: "薄紗を重ねた月下旗袍", en: "moonlit cheongsam layered with sheer gauze" },
+                { ja: "透け布袖の幻影旗袍", en: "phantom cheongsam with translucent fabric sleeves" },
+                { ja: "薄霧をまとう軽紗チャイナ", en: "light gauze chinese dress wrapped in mist" },
+                { ja: "二重紗の儀礼旗袍", en: "ritual cheongsam with double sheer layers" },
+                { ja: "露を含む透布の静謐旗袍", en: "serene cheongsam in dew-kissed translucent cloth" }
+              ]
+            },
+            {
+              title: "💧 濡れ布・湿光質感",
+              items: [
+                { ja: "しっとり濡れ布の蒼月旗袍", en: "blue-moon cheongsam in softly wet fabric" },
+                { ja: "湿光を宿す夜露旗袍", en: "night-dew cheongsam holding damp luminous sheen" },
+                { ja: "露に沈む濡れ絹チャイナ", en: "wet silk chinese dress sinking into dew" },
+                { ja: "肌に貼りつく湿布旗袍", en: "cheongsam with damp fabric clinging to the skin" },
+                { ja: "濡れ光沢が揺れる和解旗袍", en: "reconciliation cheongsam with wavering wet gloss" }
+              ]
+            },
+            {
+              title: "🔮 未来素材・発光織布",
+              items: [
+                { ja: "発光織布の近未来旗袍", en: "futuristic cheongsam in luminous woven fabric" },
+                { ja: "ホログラム布の都市チャイナ", en: "urban chinese dress in hologram fabric" },
+                { ja: "青光線維が走る機装旗袍", en: "mechanized cheongsam threaded with blue luminous fibers" },
+                { ja: "偏光素材のサイバー旗袍", en: "cyber cheongsam in iridescent polarized material" },
+                { ja: "月色LED織りの電子旗袍", en: "electronic cheongsam with moon-hued LED weave" }
+              ]
+            }
+          ]
         }
+,
+        {
+          title: "🫶 袖・肩構造特化",
+          children: [
+            {
+              title: "👘 袖シルエット",
+              items: [
+                { ja: "広袖が揺れる月華旗袍", en: "moonlit cheongsam with flowing wide sleeves" },
+                { ja: "細袖で締めた端正旗袍", en: "refined cheongsam with sleek narrow sleeves" },
+                { ja: "長袖が静かに落ちる宮廷旗袍", en: "palace cheongsam with gracefully falling long sleeves" },
+                { ja: "半袖で軽やかな春節旗袍", en: "light spring festival cheongsam with short sleeves" },
+                { ja: "無袖で輪郭映える高襟旗袍", en: "high-collar sleeveless cheongsam with clean silhouette" }
+              ]
+            },
+            {
+              title: "🌫 透け袖・薄紗袖",
+              items: [
+                { ja: "薄紗袖が霞む月影旗袍", en: "moon-shadow cheongsam with misty sheer sleeves" },
+                { ja: "透け袖を重ねた夜宴旗袍", en: "evening cheongsam layered with transparent sleeves" },
+                { ja: "青光を宿すシアー袖旗袍", en: "cheongsam with blue-glowing sheer sleeves" },
+                { ja: "花影透ける絹紗袖チャイナ", en: "silk gauze sleeve chinese dress with floral shadows" },
+                { ja: "仙気を引く薄紗長袖旗袍", en: "celestial cheongsam with airy gauze long sleeves" }
+              ]
+            },
+            {
+              title: "⚔ 武侠・仙袖",
+              items: [
+                { ja: "武侠袖を帯びた剣舞旗袍", en: "sword-dance cheongsam with wuxia sleeves" },
+                { ja: "仙袖が尾を引く天界旗袍", en: "heavenly cheongsam with trailing celestial sleeves" },
+                { ja: "戦装に寄せた機動袖チャイナ", en: "combat-inspired chinese dress with agile sleeves" },
+                { ja: "広がる仙袖の月白旗袍", en: "moon-white cheongsam with expanding immortal sleeves" },
+                { ja: "風を斬る武袖の黒旗袍", en: "black cheongsam with wind-cutting martial sleeves" }
+              ]
+            },
+            {
+              title: "💠 肩構造・肩飾り",
+              items: [
+                { ja: "肩章を添えた儀礼旗袍", en: "ceremonial cheongsam with shoulder insignia" },
+                { ja: "肩飾りで締める宮廷チャイナ", en: "palace chinese dress tightened by shoulder ornaments" },
+                { ja: "片肩強調の非対称旗袍", en: "asymmetrical cheongsam emphasizing one shoulder" },
+                { ja: "肩珠が連なる祝宴旗袍", en: "banquet cheongsam with cascading shoulder jewels" },
+                { ja: "装甲肩を備えた近未来旗袍", en: "near-future cheongsam with armored shoulders" }
+              ]
+            },
+            {
+              title: "🪽 垂れ袖・後引き袖",
+              items: [
+                { ja: "垂れ袖が流れる青月旗袍", en: "blue-moon cheongsam with flowing draped sleeves" },
+                { ja: "後引き袖を持つ夜宴礼装旗袍", en: "evening ceremonial cheongsam with trailing sleeves" },
+                { ja: "袖先が長く残る妖装旗袍", en: "bewitching cheongsam with lingering sleeve ends" },
+                { ja: "長く尾を引く薄袖チャイナ", en: "sheer-sleeved chinese dress with long trailing ends" },
+                { ja: "舞踏で翻る後引き袖旗袍", en: "dance cheongsam with fluttering train-like sleeves" }
+              ]
+            }
+          ]
+        },
+        {
+          title: "🪄 裾レイヤー特化",
+          children: [
+            {
+              title: "🩰 二重裾・重ね裾",
+              items: [
+                { ja: "二重裾が揺れる礼装旗袍", en: "formal cheongsam with fluttering double hems" },
+                { ja: "重ね裾で厚みを出す宮廷旗袍", en: "palace cheongsam thickened by layered hems" },
+                { ja: "内裾が覗く上品旗袍", en: "elegant cheongsam with a peeking inner hem" },
+                { ja: "二枚裾で広がる祝祭チャイナ", en: "festive chinese dress with spreading double-layer hem" },
+                { ja: "重層裾の静月旗袍", en: "calm moon cheongsam with multi-tiered hem" }
+              ]
+            },
+            {
+              title: "🌫 透け下布・霧裾",
+              items: [
+                { ja: "霧布が漂う薄裾旗袍", en: "soft-hem cheongsam with drifting mist fabric" },
+                { ja: "透け下布を引く月影旗袍", en: "moon-shadow cheongsam trailing sheer underlayers" },
+                { ja: "霞裾が滲む和解旗袍", en: "reconciliation cheongsam with hazy dissolving hem" },
+                { ja: "薄紗裾が重なる仙衣旗袍", en: "celestial cheongsam layered with gauze hems" },
+                { ja: "青霧が沈む下布チャイナ", en: "chinese dress with blue mist sinking into the under-hem" }
+              ]
+            },
+            {
+              title: "🎐 房飾り・前垂れ",
+              items: [
+                { ja: "房飾りが揺れる祝宴旗袍", en: "banquet cheongsam with swaying tassel ornaments" },
+                { ja: "前垂れを添えた武侠旗袍", en: "wuxia cheongsam with a decorative front panel" },
+                { ja: "玉房飾りが連なる宮廷旗袍", en: "palace cheongsam with cascading jade tassels" },
+                { ja: "長い前垂れを持つ儀礼旗袍", en: "ceremonial cheongsam with a long front drape" },
+                { ja: "腰房が踊る中華ロリ旗袍", en: "chinese loli cheongsam with dancing waist tassels" }
+              ]
+            },
+            {
+              title: "🏯 宮廷トレーン・引き裾",
+              items: [
+                { ja: "引き裾を曳く王朝旗袍", en: "dynastic cheongsam with a trailing hem" },
+                { ja: "宮廷トレーンが伸びる礼装旗袍", en: "formal cheongsam with an extended palace train" },
+                { ja: "階段に流れる長裾チャイナ", en: "long-hem chinese dress flowing across stairs" },
+                { ja: "夜宴に映える引き裾旗袍", en: "evening cheongsam with a striking trailing train" },
+                { ja: "王座へ続く後裾の宮装旗袍", en: "court cheongsam with a rear hem leading toward the throne" }
+              ]
+            },
+            {
+              title: "🤖 装甲裾・未来層",
+              items: [
+                { ja: "装甲パネル裾の近未来旗袍", en: "near-future cheongsam with armored hem panels" },
+                { ja: "発光層が走る機装裾チャイナ", en: "mechanized chinese dress with glowing layered hem" },
+                { ja: "ホログラム下裾を重ねた都市旗袍", en: "city cheongsam layered with holographic under-hem" },
+                { ja: "分割裾が光るサイバー旗袍", en: "cyber cheongsam with illuminated segmented hems" },
+                { ja: "金属裾で締めた機械調チャイナ", en: "machine-toned chinese dress tightened by metallic hem details" }
+              ]
+            }
+          ]
+        },
+        {
+          title: "👑 頭部アクセ連動特化",
+          children: [
+            {
+              title: "🌸 花飾り・簪",
+              items: [
+                { ja: "簪連動の王道旗袍", en: "classic cheongsam with coordinated kanzashi hairpin" },
+                { ja: "花簪を添えた祝祭旗袍", en: "festive cheongsam with floral kanzashi ornament" },
+                { ja: "玉簪が映える宮廷旗袍", en: "palace cheongsam highlighted by jade hairpin" },
+                { ja: "白花髪飾りの清楚旗袍", en: "neat cheongsam with white floral hair ornament" },
+                { ja: "黒花簪の艶夜旗袍", en: "alluring night cheongsam with black floral kanzashi" }
+              ]
+            },
+            {
+              title: "💎 玉飾り・額飾り",
+              items: [
+                { ja: "玉飾り揺れる上品旗袍", en: "elegant cheongsam with swaying jade ornaments" },
+                { ja: "額飾り付きの月下旗袍", en: "moonlit cheongsam with forehead ornament" },
+                { ja: "珠飾りで整えた宮廷旗袍", en: "court cheongsam arranged with bead adornments" },
+                { ja: "宝飾額飾りの夜宴旗袍", en: "evening cheongsam with jeweled forehead accessory" },
+                { ja: "青玉飾りの蒼月旗袍", en: "blue moon cheongsam with blue jade ornament" }
+              ]
+            },
+            {
+              title: "👑 小皇冠・ティアラ",
+              items: [
+                { ja: "小皇冠を添えた宮廷旗袍", en: "palace cheongsam with a small crown" },
+                { ja: "ティアラ融合の夜会旗袍", en: "ballroom cheongsam fused with a tiara" },
+                { ja: "王女風小皇冠チャイナ", en: "princess-like chinese dress with mini crown" },
+                { ja: "月輪ティアラの月下旗袍", en: "moon halo tiara cheongsam" },
+                { ja: "宝石冠付きの祝宴旗袍", en: "banquet cheongsam with jeweled mini crown" }
+              ]
+            },
+            {
+              title: "🤖 近未来ヘッドギア",
+              items: [
+                { ja: "サイバー角飾り付き旗袍", en: "cheongsam with cyber horn accessories" },
+                { ja: "発光ヘッドギア連動チャイナ", en: "chinese dress coordinated with luminous headgear" },
+                { ja: "近未来輪飾りの旗袍", en: "cheongsam with futuristic ring headpiece" },
+                { ja: "機械花飾りのネオン旗袍", en: "neon cheongsam with mechanical floral headpiece" },
+                { ja: "ホログラム簪サイバー旗袍", en: "cyber cheongsam with holographic hairpin" }
+              ]
+            },
+            {
+              title: "🕊 仙界・儀礼頭飾り",
+              items: [
+                { ja: "仙環を戴く白月旗袍", en: "white moon cheongsam with celestial halo ornament" },
+                { ja: "儀礼羽飾りの仙界旗袍", en: "celestial cheongsam with ritual feather ornament" },
+                { ja: "薄絹ベール付きの和解旗袍", en: "reconciliation cheongsam with sheer veil" },
+                { ja: "月礼冠を添えた静宴旗袍", en: "quiet ceremonial cheongsam with moon ritual crown" },
+                { ja: "聖堂寄り頭飾りの仙女旗袍", en: "celestial maiden cheongsam with chapel-like head ornament" }
+              ]
+            }
+          ]
+        },
+        {
+          title: "🧦 パンスト・タイツ特化",
+          children: [
+            {
+              title: "🖤 黒パンスト・黒タイツ",
+              items: [
+                { ja: "黒パンスト合わせの夜会旗袍", en: "evening cheongsam with black pantyhose" },
+                { ja: "黒タイツで締めた高襟旗袍", en: "high collar cheongsam tightened by black tights" },
+                { ja: "艶黒レッグラインの攻め旗袍", en: "bold cheongsam with glossy black leg line" },
+                { ja: "漆黒脚線の月下旗袍", en: "moonlit cheongsam with jet-black leg silhouette" },
+                { ja: "黒脚衣融合の密着旗袍", en: "form-fitting cheongsam fused with black legwear" }
+              ]
+            },
+            {
+              title: "🕸 網タイツ・編み脚衣",
+              items: [
+                { ja: "網タイツ合わせの攻め旗袍", en: "bold cheongsam with fishnet stockings" },
+                { ja: "細網脚衣の妖装旗袍", en: "alluring cheongsam with fine fishnet legwear" },
+                { ja: "格子脚線を見せる夜宴旗袍", en: "evening cheongsam showing lattice leg lines" },
+                { ja: "編み脚衣の退廃旗袍", en: "decadent cheongsam with mesh legwear" },
+                { ja: "網脚衣融合のサイバー旗袍", en: "cyber cheongsam fused with fishnet legwear" }
+              ]
+            },
+            {
+              title: "🎀 ガーター・ストッキング",
+              items: [
+                { ja: "ガーターストッキング合わせ旗袍", en: "cheongsam with garter stockings" },
+                { ja: "太腿ガーターの攻め旗袍", en: "bold cheongsam with thigh garter" },
+                { ja: "レース留め脚衣の夜宴旗袍", en: "evening cheongsam with lace-fastened stockings" },
+                { ja: "脚飾り連動ガータ旗袍", en: "cheongsam with coordinated garter leg accessories" },
+                { ja: "宝飾ガーターの宮廷旗袍", en: "palace cheongsam with jeweled garter" }
+              ]
+            },
+            {
+              title: "💥 破れ・乱れ脚衣",
+              items: [
+                { ja: "破れパンストの退廃旗袍", en: "decadent cheongsam with torn pantyhose" },
+                { ja: "伝線タイツの崩し旗袍", en: "disheveled cheongsam with laddered tights" },
+                { ja: "裂け脚衣の漆黒旗袍", en: "jet-black cheongsam with ripped legwear" },
+                { ja: "乱れストッキングの夜更け旗袍", en: "late-night cheongsam with disordered stockings" },
+                { ja: "戦後めいた傷み脚衣の旗袍", en: "cheongsam with battle-worn damaged stockings" }
+              ]
+            },
+            {
+              title: "✨ 装飾脚線・発光脚衣",
+              items: [
+                { ja: "刺繍パンストの上品旗袍", en: "elegant cheongsam with embroidered pantyhose" },
+                { ja: "星紋タイツの蒼月旗袍", en: "blue moon cheongsam with star-pattern tights" },
+                { ja: "発光脚衣の近未来旗袍", en: "futuristic cheongsam with luminous legwear" },
+                { ja: "呪紋脚線の月下旗袍", en: "moonlit cheongsam with sigil-pattern legwear" },
+                { ja: "青光レッグラインのサイバー旗袍", en: "cyber cheongsam with blue luminous leg lines" }
+              ]
+            }
+          ]
+        },
+        {
+          title: "🪢 刺繍・縁取り・装飾線特化",
+          children: [
+            {
+              title: "🧵 金糸・銀糸刺繍",
+              items: [
+                { ja: "金糸刺繍が走る宮廷旗袍", en: "palace cheongsam threaded with gold embroidery" },
+                { ja: "銀糸模様を浮かべた月下旗袍", en: "moonlit cheongsam traced with silver embroidery" },
+                { ja: "金銀刺繍を重ねた祝宴旗袍", en: "banquet cheongsam layered with gold and silver embroidery" },
+                { ja: "細密刺繍を宿す高襟旗袍", en: "high collar cheongsam bearing intricate embroidery" },
+                { ja: "刺繍光沢が映える王道旗袍", en: "classic cheongsam highlighted by embroidered sheen" }
+              ]
+            },
+            {
+              title: "🌸 花刺繍・植物装飾線",
+              items: [
+                { ja: "花刺繍を這わせた春庭旗袍", en: "spring garden cheongsam covered with floral embroidery" },
+                { ja: "蔓草装飾線が伸びる仙界旗袍", en: "celestial cheongsam with vine-like decorative lines" },
+                { ja: "蓮刺繍が裾を巡る清麗旗袍", en: "pure cheongsam with lotus embroidery circling the hem" },
+                { ja: "梅枝刺繍を添えた雪月旗袍", en: "snow-moon cheongsam accented by plum branch embroidery" },
+                { ja: "花鳥風の装飾線を引く上品旗袍", en: "elegant cheongsam drawn with floral-bird decorative lines" }
+              ]
+            },
+            {
+              title: "〰 縁取り・パイピング",
+              items: [
+                { ja: "濃色パイピングで締めた旗袍", en: "cheongsam tightened with dark contrast piping" },
+                { ja: "金縁取りを効かせた夜宴旗袍", en: "evening cheongsam accented with gold edging" },
+                { ja: "白縁パイピングの清楚旗袍", en: "pure cheongsam with white piped edges" },
+                { ja: "二重縁取りの宮廷旗袍", en: "palace cheongsam with double-edged trim" },
+                { ja: "青光パイピングの未来旗袍", en: "futuristic cheongsam with blue luminous piping" }
+              ]
+            },
+            {
+              title: "🔶 切替線・構造ライン",
+              items: [
+                { ja: "構造切替線が映える攻め旗袍", en: "bold cheongsam highlighted by structural seam lines" },
+                { ja: "身体をなぞる縦ライン旗袍", en: "cheongsam with vertical lines tracing the body" },
+                { ja: "脇切替を強調した密着旗袍", en: "form-fitting cheongsam emphasizing side seam transitions" },
+                { ja: "幾何ラインで組んだサイバー旗袍", en: "cyber cheongsam assembled with geometric linework" },
+                { ja: "分割構造線の近未来旗袍", en: "near-future cheongsam with segmented structural lines" }
+              ]
+            },
+            {
+              title: "✨ 宝飾線・発光装飾線",
+              items: [
+                { ja: "宝石縁取りが光る宮廷旗袍", en: "palace cheongsam glowing with jeweled trim" },
+                { ja: "発光装飾線が走る都市旗袍", en: "city cheongsam crossed by luminous decorative lines" },
+                { ja: "月光を帯びる装飾線の蒼月旗袍", en: "blue moon cheongsam with moonlit ornamental lines" },
+                { ja: "呪紋発光線を宿す秘儀旗袍", en: "ritual cheongsam bearing glowing sigil lines" },
+                { ja: "ネオン縁取りのサイバー旗袍", en: "cyber cheongsam edged with neon trim" }
+              ]
+            }
+          ]
+        },
+      {
+        label: "🎎 腰まわり・帯飾り・房飾り特化",
+        children: [
+          {
+            label: "🎀 帯飾り・結び布",
+            items: [
+              "ornamental sash accents on chinese dress, decorative tied waist ribbons, elegant waist bow accents, layered sash drape details, refined tied fabric waist ornament",
+              "hanfu-inspired waist sash accents for qipao, flowing tied waist cloth, decorative layered obi-like chinese sash, ribboned waist drape on qipao, elegant soft waist fastening cloth",
+              "luxury waist ribbon ornament on qipao, gemstone-centered sash knot, ornate tied waist silk, ceremonial waist binding cloth, refined hanging waist ribbon tails",
+              "cute waist bow accents for chinese lolita qipao, petite tied sash details, sweet ribboned waist ornament, layered cute waist ties, playful ornamental side bow on qipao",
+              "cyber chinese waist belt cloth fusion, luminous tied sash panels, techwear-inspired waist drape, futuristic ribbon harness sash, glowing waist knot ornament"
+            ]
+          },
+          {
+            label: "🧿 玉飾り・腰飾り",
+            items: [
+              "jade waist ornaments on qipao, hanging jade pendants at the hip, elegant waist gemstone tassel, carved jade waist drop, refined chinese jade hip accessory",
+              "gem-adorned waist chains for qipao, crystal waist ornaments, hanging jewel hip charms, luxury gemstone waist drape, moonlit jewel pendants at the waist",
+              "palace-style chinese waist jewels, ceremonial hip ornament clusters, imperial jade tassels, ornate gemstone waist insignia, regal waist accessory set",
+              "xianxia-inspired spiritual waist charms, floating bead talismans at the hip, celestial jade pendants, sacred waist ornament strings, ethereal gem drops at the waist",
+              "cyber jade fusion waist accessories, holographic bead ornaments, neon gemstone hip charms, futuristic chinese waist jewel chains, luminous pendants around the waist"
+            ]
+          },
+          {
+            label: "🎐 房飾り・揺れ装飾",
+            items: [
+              "long tassel ornaments on chinese dress, swaying tassel hip details, elegant hanging silk tassels, refined ornamental fringe at the waist, ceremonial tassel movement accents",
+              "short clustered tassels on qipao, layered tassel bunches, decorative knot tassels, playful swaying waist fringe, soft silk tassel ornaments",
+              "luxury palace tassel decorations, gold-thread hanging tassels, royal waist fringe ornaments, formal ceremonial swinging tassels, imperial decorative tassel drops",
+              "martial-arts-inspired tassel accessories, swift-moving tied tassels, weapon-like waist fringe, disciplined ornamental tassels, wuxia hip tassel accents",
+              "cyber tassel strips and luminous fringe, futuristic hanging ornament cords, glowing decorative strands at the waist, high-tech tassel motion details, neon fringe hip ornaments"
+            ]
+          },
+          {
+            label: "⛓ 腰鎖・チェーン装飾",
+            items: [
+              "ornamental waist chains on qipao, fine-linked hip chains, elegant side waist chain drape, refined metallic waist adornment, luxury chain ornament around the hips",
+              "double-layer waist chain accessories, cross-draped hip chains, chain-linked side ornaments, decorative chinese metal waist drape, jewelry-like waist chain layering",
+              "gothic chinese waist chains, dark metallic hip adornment, moonlit chain tassels, decadent chain details on qipao, alluring side chain ornament",
+              "martial and ceremonial chain waist ornaments, disciplined linked metal details, emblem-bearing chain sash, structured chain belt accents, formal chain-bound chinese waist design",
+              "cyber chain harness accents for qipao, luminous metal links, futuristic hip chain rigging, neon-linked waist ornament, techwear-inspired side chain drape"
+            ]
+          },
+          {
+            label: "🌸 横垂れ・サイドドレープ",
+            items: [
+              "side drape fabric on chinese dress, elegant hip-hanging cloth panels, flowing side waist drapes, graceful asymmetrical side fabric, refined qipao side fall",
+              "double side drape layers, split side cloth ornaments, decorative hanging hip panels, soft layered side veils, balanced ornamental waist draping",
+              "palace side drape extensions, regal hanging cloth at the hips, ceremonial long side panels, luxurious side train accents, imperial asymmetrical waist drape",
+              "xianxia floating side drapes, ethereal waist veils, spiritual cloth ribbons hanging from the hips, light drifting side fabric, celestial hip drape accents",
+              "cyber side panel drapes, luminous hanging fabric strips, futuristic waist cloth extensions, holographic side fall, techwear-inspired ornamental side drape"
+            ]
+          }
+        ]
+      },
+      {
+        label: "👠 足元・靴特化",
+        children: [
+          {
+            label: "👠 華奢ヒール・上品靴",
+            items: [
+              "elegant high heels for qipao, refined slim heels, graceful chinese formal footwear, delicate pointed heels, luxury evening heels for chinese dress",
+              "ankle-strap heels for qipao, refined feminine heel silhouette, polished formal chinese pumps, sophisticated moonlit heels, slender ceremonial footwear",
+              "gem-adorned high heels with chinese dress, crystal-decorated pumps, regal heeled shoes, jewel-tipped elegant footwear, palace evening heels",
+              "lace-accented dress heels for chinese lolita qipao, cute refined pumps, ribboned heeled shoes, sweet formal heel design, ornamental petite heels",
+              "sleek modern heels with cyber qipao, metallic pointed pumps, futuristic heeled footwear, glowing accent heels, high-tech formal shoes"
+            ]
+          },
+          {
+            label: "🥾 ブーツ・武侠足装",
+            items: [
+              "wuxia boots with qipao, fitted martial boots, elegant combat footwear for chinese dress, disciplined long boots, agile warrior-style boots",
+              "heeled ankle boots for qipao, refined short boots, structured side-zip boots, fashionable fitted boot silhouette, sleek chinese modern boots",
+              "palace riding boots with ceremonial qipao, regal leather boots, formal high boots, structured imperial footwear, luxury boot styling for chinese dress",
+              "xianxia spirit boots, ethereal long boots, light ornamental warrior footwear, celestial boot silhouette, floating-robe-compatible boots",
+              "cyber combat boots with qipao, armored futuristic boots, neon-accented high boots, techwear-inspired footwear, sleek tactical chinese boots"
+            ]
+          },
+          {
+            label: "🩰 ロリ靴・可憐足元",
+            items: [
+              "cute mary jane shoes for chinese lolita qipao, petite ribbon shoes, sweet rounded-toe footwear, adorable ornamental strap shoes, doll-like chinese dress shoes",
+              "frilled ankle shoes, lace-trimmed lolita footwear, cute heeled mary janes, soft pastel ornamental shoes, decorative small-heel shoes",
+              "flower-ornament shoes for qipao, blossom-accented petite footwear, girlish chinese-inspired pumps, sweet festive shoes, cute floral strap footwear",
+              "tiny platform shoes for playful qipao styling, compact decorative shoes, charming ribboned platform footwear, cute elevated sole shoes, sweet doll-fashion footwear",
+              "fantasy-cute chinese shoes, moonlit lolita heels, dreamy petite footwear, ornamental fairy-like qipao shoes, whimsical delicate shoes"
+            ]
+          },
+          {
+            label: "🤖 近未来フットウェア",
+            items: [
+              "cyber shoes with qipao, futuristic sleek footwear, luminous chinese dress shoes, metallic streamlined heels, glowing accent footwear",
+              "holographic heels for cyber qipao, neon-edged pumps, reflective techwear shoes, futuristic formal footwear, light-reactive shoe surfaces",
+              "armored footwear with cyber chinese dress, segmented tech boots, high-tech ankle footwear, structured sci-fi shoe silhouette, sleek synthetic boots",
+              "glowing sole footwear for futuristic qipao, luminous heel accents, light-emitting ceremonial shoes, sci-fi evening footwear, neon sole dress shoes",
+              "minimalist future chinese shoes, clean angular footwear, silver-blue futuristic pumps, advanced material shoe finish, elegant sci-fi footwear"
+            ]
+          },
+          {
+            label: "✨ 足飾り・アンクレット",
+            items: [
+              "anklets with qipao, elegant ankle jewelry, refined chain anklets, delicate ornamental ankle accessories, graceful chinese dress foot jewelry",
+              "jade anklets and ankle charms, hanging gemstone ankle ornaments, moonlit ankle jewelry, luxury ankle accessories, ceremonial anklet details",
+              "tassel anklets for chinese dress, swaying ankle ornaments, silk-thread ankle decorations, playful decorative anklets, fine dangling ankle jewelry",
+              "gothic ankle chains with qipao, dark elegant ankle ornamentation, chain-linked ankle accessories, moonlit metal anklets, alluring foot jewelry",
+              "cyber anklet devices with futuristic qipao, glowing ankle rings, holographic foot jewelry, luminous ankle accessories, techwear-inspired ankle adornment"
+            ]
+          }
+        ]
+      },
+      {
+        title: "🧤 手袋・腕飾り・袖先アクセ",
+        children: [
+          {
+            title: "🧤 手袋・グローブ",
+            items: [
+              { ja: "上品な手袋付き旗袍", en: "elegant gloves with qipao" },
+              { ja: "レース手袋のチャイナ", en: "qipao with lace gloves" },
+              { ja: "ロンググローブ旗袍", en: "qipao with long gloves" },
+              { ja: "可憐な短手袋付きチャイナ", en: "chinese dress with cute short gloves" },
+              { ja: "近未来グローブ連動旗袍", en: "qipao with futuristic gloves" }
+            ]
+          },
+          {
+            title: "💍 腕輪・バングル",
+            items: [
+              { ja: "玉腕輪付き旗袍", en: "qipao with jade bangles" },
+              { ja: "金腕輪の宮廷チャイナ", en: "palace chinese dress with gold bangles" },
+              { ja: "宝石腕飾り付き旗袍", en: "qipao with gemstone bracelets" },
+              { ja: "重ね腕輪チャイナ", en: "chinese dress with layered bangles" },
+              { ja: "近未来リストバンド付き旗袍", en: "qipao with futuristic wrist bands" }
+            ]
+          },
+          {
+            title: "🎀 袖口飾り・カフス装飾",
+            items: [
+              { ja: "袖口飾り付き旗袍", en: "qipao with decorative sleeve cuffs" },
+              { ja: "刺繍カフスのチャイナ", en: "chinese dress with embroidered cuffs" },
+              { ja: "レース袖口の旗袍", en: "qipao with lace cuff accents" },
+              { ja: "宝石カフスの宮廷旗袍", en: "palace qipao with jewel-set cuffs" },
+              { ja: "近未来カフスモジュール旗袍", en: "qipao with futuristic cuff modules" }
+            ]
+          },
+          {
+            title: "⛓ 腕鎖・連結アクセ",
+            items: [
+              { ja: "腕鎖付き旗袍", en: "qipao with arm chains" },
+              { ja: "指輪連結チェーンのチャイナ", en: "chinese dress with bracelet-to-ring chains" },
+              { ja: "上腕飾り付き旗袍", en: "qipao with upper-arm ornaments" },
+              { ja: "退廃的な腕鎖チャイナ", en: "decadent chinese dress with gothic arm chains" },
+              { ja: "近未来アームリンク旗袍", en: "qipao with futuristic arm-link accessories" }
+            ]
+          },
+          {
+            title: "🌸 指先・爪先アクセ",
+            items: [
+              { ja: "指先飾り付き旗袍", en: "qipao with fingertip accessories" },
+              { ja: "玉指輪のチャイナ", en: "chinese dress with jade rings" },
+              { ja: "爪先装飾が映える旗袍", en: "qipao with elegant nail ornaments" },
+              { ja: "宮廷爪飾り付き旗袍", en: "palace qipao with ornamental nail guards" },
+              { ja: "近未来フィンガーアクセ旗袍", en: "qipao with futuristic fingertip accessories" }
+            ]
+          }
+        ]
+      },
+      {
+        title: "🌫 香り・湯気・演出アクセ連動",
+        children: [
+          {
+            title: "🌸 香り立つ花気・香粉",
+            items: [
+              { ja: "花香をまとう旗袍", en: "qipao wrapped in floral fragrance" },
+              { ja: "香粉の気配が漂うチャイナ", en: "chinese dress with drifting cosmetic powder scent" },
+              { ja: "梅香が立つ旗袍", en: "qipao with plum fragrance rising" },
+              { ja: "蓮香を帯びた月下チャイナ", en: "moonlit chinese dress carrying lotus fragrance" },
+              { ja: "花気に包まれる旗袍", en: "qipao enveloped in floral aura" }
+            ]
+          },
+          {
+            title: "♨ 湯気・熱気・湿光演出",
+            items: [
+              { ja: "湯気に包まれる旗袍", en: "qipao wrapped in steam" },
+              { ja: "熱気を含む湿光チャイナ", en: "damp-glow chinese dress with warm vapor" },
+              { ja: "露熱の立つ旗袍", en: "qipao with rising dewy heat" },
+              { ja: "温泉気配の月下チャイナ", en: "moonlit chinese dress with hot-spring atmosphere" },
+              { ja: "蒸気越しに映える旗袍", en: "qipao glowing through steam" }
+            ]
+          },
+          {
+            title: "🕯 香煙・線香・儀礼の煙",
+            items: [
+              { ja: "香煙に揺れる旗袍", en: "qipao wavering in incense smoke" },
+              { ja: "線香の煙をまとうチャイナ", en: "chinese dress wrapped in incense-stick smoke" },
+              { ja: "儀礼の煙に包まれる旗袍", en: "qipao enveloped in ceremonial smoke" },
+              { ja: "香炉の気配が漂う旗袍", en: "qipao with the presence of a censer drifting around" },
+              { ja: "薄煙越しの宮廷旗袍", en: "palace qipao seen through thin smoke" }
+            ]
+          },
+          {
+            title: "✨ 発光粉・月塵・微粒子",
+            items: [
+              { ja: "月塵を散らす旗袍", en: "qipao scattering moon dust" },
+              { ja: "発光粉が舞うチャイナ", en: "chinese dress with glowing powder in the air" },
+              { ja: "微粒子に縁取られる旗袍", en: "qipao outlined by floating particles" },
+              { ja: "光粉の尾を引く月下チャイナ", en: "moonlit chinese dress trailing luminous powder" },
+              { ja: "きらめく微粒子演出の旗袍", en: "qipao with sparkling particle effects" }
+            ]
+          },
+          {
+            title: "🪭 扇・香袋・演出小物連動",
+            items: [
+              { ja: "香袋を添えた旗袍", en: "qipao paired with a scented sachet" },
+              { ja: "扇と香気が連動するチャイナ", en: "chinese dress synchronized with a fan and fragrance" },
+              { ja: "香扇を持つ月下旗袍", en: "moonlit qipao holding a scented fan" },
+              { ja: "小物の香り演出付き旗袍", en: "qipao with prop-linked fragrance effects" },
+              { ja: "扇先に香煙が残るチャイナ", en: "chinese dress with incense smoke lingering at the fan tip" }
+            ]
+          }
+        ]
+      },
+      {
+        title: "🦢 首元・襟足・喉元特化",
+        children: [
+          {
+            title: "🧷 高襟・立ち襟調整",
+            items: [
+              { ja: "高襟を強調した旗袍", en: "qipao with emphasized high collar" },
+              { ja: "立ち襟が主役のチャイナ", en: "chinese dress with stand collar as focal point" },
+              { ja: "首元を引き締める高襟旗袍", en: "high-collar qipao tightening the neckline" },
+              { ja: "禁欲感のある立ち襟チャイナ", en: "restrained stand-collar chinese dress" },
+              { ja: "端正な喉元を見せる高襟旗袍", en: "high-collar qipao showing a poised throat line" }
+            ]
+          },
+          {
+            title: "🌙 襟足・うなじ映え",
+            items: [
+              { ja: "襟足が映える旗袍", en: "qipao highlighting the nape line" },
+              { ja: "うなじ見せの月下チャイナ", en: "moonlit chinese dress with visible nape" },
+              { ja: "後ろ襟が美しいうなじ旗袍", en: "qipao with beautiful rear collar and nape" },
+              { ja: "襟足に視線が落ちるチャイナ", en: "chinese dress drawing attention to the nape" },
+              { ja: "まとめ髪と相性の良い襟足旗袍", en: "nape-focused qipao that pairs with an updo" }
+            ]
+          },
+          {
+            title: "💎 喉元装飾・ネックライン中央",
+            items: [
+              { ja: "喉元宝飾付き旗袍", en: "qipao with jeweled throat ornament" },
+              { ja: "首元中央飾りのチャイナ", en: "chinese dress with central neck ornament" },
+              { ja: "ネックライン宝石留め旗袍", en: "qipao with gemstone clasp at neckline" },
+              { ja: "喉元に月飾りを置くチャイナ", en: "chinese dress with moon ornament at the throat" },
+              { ja: "首元一点主役の装飾旗袍", en: "decorative qipao with single focal neck ornament" }
+            ]
+          },
+          {
+            title: "🪽 開き襟・抜け感首元",
+            items: [
+              { ja: "開き襟の抜け感旗袍", en: "qipao with open collar and airy neckline" },
+              { ja: "柔らかい首元を見せるチャイナ", en: "chinese dress showing a soft neckline" },
+              { ja: "首元に余白のある旗袍", en: "qipao with breathing space at the neckline" },
+              { ja: "低め襟で抜け感を出すチャイナ", en: "lower-collar chinese dress with relaxed openness" },
+              { ja: "色気を抑えて品を残す開き襟旗袍", en: "open-collar qipao keeping elegance over overt allure" }
+            ]
+          },
+          {
+            title: "⛓ 首鎖・チョーカー連動",
+            items: [
+              { ja: "首鎖と連動する旗袍", en: "qipao coordinated with neck chain" },
+              { ja: "チョーカー映えのチャイナ", en: "chinese dress that highlights a choker" },
+              { ja: "喉元鎖飾り付き旗袍", en: "qipao with throat chain ornament" },
+              { ja: "首輪風アクセと噛み合うチャイナ", en: "chinese dress that pairs with collar-like accessories" },
+              { ja: "装飾鎖が喉元に落ちる旗袍", en: "qipao with decorative chain falling at the throat" }
+            ]
+          }
+        ]
+      },
+      {
+        title: "🎯 胸元中央装飾・前立て中央線",
+        children: [
+          {
+            title: "💠 胸元中央モチーフ",
+            items: [
+              { ja: "胸元中央に飾りを置く旗袍", en: "qipao with central chest ornament" },
+              { ja: "中央宝飾主役のチャイナ", en: "chinese dress centered on a jewel ornament" },
+              { ja: "胸元一点主役の旗袍", en: "qipao with a single focal chest embellishment" },
+              { ja: "前面中央に月章を置くチャイナ", en: "chinese dress with a moon emblem at center front" },
+              { ja: "胸元留め具主役の装飾旗袍", en: "decorative qipao focused on central chest clasp" }
+            ]
+          },
+          {
+            title: "📏 前立て中央線・縦ライン",
+            items: [
+              { ja: "前立て中央線を強調した旗袍", en: "qipao with emphasized central placket line" },
+              { ja: "縦線が映えるチャイナ", en: "chinese dress with a striking vertical front line" },
+              { ja: "中央縦ライン主役の旗袍", en: "qipao focused on central vertical line" },
+              { ja: "前面を整える中央線チャイナ", en: "chinese dress with a structuring center line" },
+              { ja: "視線を落とす縦導線の旗袍", en: "qipao with a vertical guide line drawing the eye downward" }
+            ]
+          },
+          {
+            title: "🔘 中央留め・連続盤扣",
+            items: [
+              { ja: "中央連続盤扣の旗袍", en: "qipao with continuous central pankou closures" },
+              { ja: "胸元から縦に並ぶ留め具チャイナ", en: "chinese dress with closures aligned down the center chest" },
+              { ja: "中央金具列が主役の旗袍", en: "qipao focused on a row of central metal fittings" },
+              { ja: "前立て盤扣を強調したチャイナ", en: "chinese dress emphasizing pankou along the front placket" },
+              { ja: "中央留めが映える整列旗袍", en: "orderly qipao with eye-catching central clasps" }
+            ]
+          },
+          {
+            title: "🧵 切替線・前面構造ライン",
+            items: [
+              { ja: "前面構造線を見せる旗袍", en: "qipao showing front structural seam lines" },
+              { ja: "胸元切替が美しいチャイナ", en: "chinese dress with beautiful bust-line paneling" },
+              { ja: "前面切替線主役の旗袍", en: "qipao focused on front panel transition lines" },
+              { ja: "構造的な前立てラインのチャイナ", en: "chinese dress with structured placket line design" },
+              { ja: "縫製線が映える旗袍", en: "qipao with visible elegant construction lines" }
+            ]
+          },
+          {
+            title: "✨ 中央発光線・未来前立て",
+            items: [
+              { ja: "中央発光ライン旗袍", en: "qipao with luminous central line" },
+              { ja: "未来前立てを持つチャイナ", en: "chinese dress with futuristic front placket" },
+              { ja: "胸元中央が光る旗袍", en: "qipao with glowing center chest line" },
+              { ja: "縦発光導線のサイバーチャイナ", en: "cyber chinese dress with vertical luminous guide line" },
+              { ja: "前面に光脈が走る旗袍", en: "qipao with a glowing pulse line across the front" }
+            ]
+          }
+        ]
+      },
+      {
+        title: "⛓ 背面金具・背中チェーン特化",
+        children: [
+          {
+            title: "🔗 背面チェーン渡し",
+            items: [
+              { ja: "背中にチェーンを渡す旗袍", en: "qipao with chain crossing the back" },
+              { ja: "背面連結鎖付きチャイナ", en: "chinese dress with connected back chains" },
+              { ja: "背中縦チェーン装飾旗袍", en: "qipao with vertical chain decoration on the back" },
+              { ja: "背面に細鎖を垂らすチャイナ", en: "chinese dress with thin chains hanging down the back" },
+              { ja: "後ろ姿主役の背面鎖旗袍", en: "rear-view qipao focused on back chain ornamentation" }
+            ]
+          },
+          {
+            title: "🪙 背面金具・バッククラスプ",
+            items: [
+              { ja: "背面金具留めの旗袍", en: "qipao fastened with back metal clasps" },
+              { ja: "バッククラスプ主役のチャイナ", en: "chinese dress centered on back clasp hardware" },
+              { ja: "背中留め具が映える旗袍", en: "qipao with eye-catching back fasteners" },
+              { ja: "後ろ金具列のあるチャイナ", en: "chinese dress with a row of rear metal fittings" },
+              { ja: "背面装甲金具付き旗袍", en: "qipao with armored hardware on the back" }
+            ]
+          },
+          {
+            title: "🖤 拘束感・ハーネス背面",
+            items: [
+              { ja: "背面ハーネス付き旗袍", en: "qipao with back harness structure" },
+              { ja: "拘束感のある背中装飾チャイナ", en: "chinese dress with restrained tension in back ornamentation" },
+              { ja: "背面ベルト連動旗袍", en: "qipao linked with back belt structure" },
+              { ja: "ハーネス寄せの後ろ姿チャイナ", en: "rear-view chinese dress leaning into harness styling" },
+              { ja: "背面拘束線が走る旗袍", en: "qipao with restraining lines running across the back" }
+            ]
+          },
+          {
+            title: "🤖 近未来背面ユニット",
+            items: [
+              { ja: "近未来背面ユニット旗袍", en: "qipao with futuristic back unit" },
+              { ja: "発光背面金具のチャイナ", en: "chinese dress with glowing rear hardware" },
+              { ja: "背中デバイス連動旗袍", en: "qipao linked with a back device unit" },
+              { ja: "機械背面装飾付きチャイナ", en: "chinese dress with mechanical rear ornamentation" },
+              { ja: "サイバー背面チェーン旗袍", en: "cyber qipao with rear chain system" }
+            ]
+          },
+          {
+            title: "🌙 月下背面装飾・退廃鎖",
+            items: [
+              { ja: "月下に映える背面鎖旗袍", en: "moonlit qipao with decorative back chains" },
+              { ja: "退廃鎖を背負うチャイナ", en: "chinese dress bearing decadent back chains" },
+              { ja: "香煙と相性の良い背面金具旗袍", en: "back-hardware qipao that pairs with incense smoke" },
+              { ja: "背徳感ある後ろ鎖チャイナ", en: "chinese dress with alluring forbidden rear chains" },
+              { ja: "夜宴向け背面装飾旗袍", en: "back-adorned qipao for night banquets" }
+            ]
+          }
+        ]
+      },
+      {
+        title: "🍁 季節別チャイナ調整",
+        children: [
+          {
+            title: "🌸 春の軽やか調整",
+            items: [
+              { ja: "春風向け軽やか旗袍", en: "light spring-breeze qipao" },
+              { ja: "花見向け春旗袍", en: "spring qipao for blossom viewing" },
+              { ja: "薄手春色チャイナ", en: "lightweight spring-colored chinese dress" },
+              { ja: "梅桃寄せの春旗袍", en: "spring qipao leaning toward plum and peach tones" },
+              { ja: "やわらかな春光を受ける旗袍", en: "qipao receiving soft spring light" }
+            ]
+          },
+          {
+            title: "☀ 夏の涼感・透け感調整",
+            items: [
+              { ja: "夏向け涼感旗袍", en: "cool-feel qipao for summer" },
+              { ja: "薄紗で抜ける夏チャイナ", en: "summer chinese dress opened up with sheer gauze" },
+              { ja: "湿光が似合う夏旗袍", en: "summer qipao suited to damp glow" },
+              { ja: "水辺向けの軽装チャイナ", en: "light chinese dress for waterside scenes" },
+              { ja: "蒸し暑さを逃がす夏旗袍", en: "summer qipao designed to release humid heat" }
+            ]
+          },
+          {
+            title: "🍂 秋の重ね・深色調整",
+            items: [
+              { ja: "秋色の深みを持つ旗袍", en: "qipao with deep autumn coloring" },
+              { ja: "重ね布が映える秋チャイナ", en: "autumn chinese dress enhanced by layered fabric" },
+              { ja: "乾いた風に合う旗袍", en: "qipao suited to dry autumn wind" },
+              { ja: "紅葉寄せの秋旗袍", en: "autumn qipao leaning into maple tones" },
+              { ja: "落ち着いた秋光を受けるチャイナ", en: "chinese dress receiving calm autumn light" }
+            ]
+          },
+          {
+            title: "❄ 冬の厚み・防寒調整",
+            items: [
+              { ja: "冬向け厚手旗袍", en: "thick winter qipao" },
+              { ja: "防寒寄せの冬チャイナ", en: "winter chinese dress leaning toward warmth retention" },
+              { ja: "毛皮合わせが似合う旗袍", en: "qipao that pairs well with fur" },
+              { ja: "冷気に映える冬月旗袍", en: "winter moon qipao that stands out in cold air" },
+              { ja: "重厚布で包む冬チャイナ", en: "winter chinese dress wrapped in heavy fabric" }
+            ]
+          },
+          {
+            title: "🌦 梅雨・湿季・夜露調整",
+            items: [
+              { ja: "湿季向け旗袍", en: "qipao for wet season" },
+              { ja: "夜露が似合うチャイナ", en: "chinese dress suited to night dew" },
+              { ja: "濡れ布演出向け旗袍", en: "qipao suited to wet-cloth staging" },
+              { ja: "梅雨の薄煙が似合うチャイナ", en: "chinese dress that suits rainy-season haze" },
+              { ja: "湿光と相性の良い旗袍", en: "qipao that pairs well with damp glow" }
+            ]
+          }
+        ]
+      },
+      {
+        title: "🎨 色系統別チャイナ調整",
+        children: [
+          {
+            title: "⚪ 白・銀・月光系",
+            items: [
+              { ja: "白銀月光旗袍", en: "silver-white moonlight qipao" },
+              { ja: "白基調の上品チャイナ", en: "elegant chinese dress with a white base" },
+              { ja: "銀刺繍が映える旗袍", en: "qipao highlighted by silver embroidery" },
+              { ja: "蒼白月光を帯びるチャイナ", en: "chinese dress carrying pale moonlight tones" },
+              { ja: "雪光寄せの白旗袍", en: "white qipao leaning toward snowlight" }
+            ]
+          },
+          {
+            title: "🔴 赤・朱・血月系",
+            items: [
+              { ja: "朱赤旗袍", en: "vermilion qipao" },
+              { ja: "血月色のチャイナ", en: "blood-moon colored chinese dress" },
+              { ja: "紅金寄せの祝祭旗袍", en: "festive qipao leaning into crimson and gold" },
+              { ja: "深紅主役の攻めチャイナ", en: "aggressive chinese dress centered on deep crimson" },
+              { ja: "赤と黒を噛ませた旗袍", en: "qipao combining red and black" }
+            ]
+          },
+          {
+            title: "🔵 青・蒼・夜露系",
+            items: [
+              { ja: "蒼月旗袍", en: "blue-moon qipao" },
+              { ja: "夜露色のチャイナ", en: "night-dew colored chinese dress" },
+              { ja: "青銀寄せの旗袍", en: "qipao leaning into blue and silver" },
+              { ja: "深蒼主役の月下チャイナ", en: "moonlit chinese dress centered on deep blue" },
+              { ja: "冷色で整えた旗袍", en: "qipao balanced in cool color tones" }
+            ]
+          },
+          {
+            title: "🟢 玉・緑・翡翠系",
+            items: [
+              { ja: "翡翠色の旗袍", en: "jade-colored qipao" },
+              { ja: "深緑主役のチャイナ", en: "chinese dress centered on deep green" },
+              { ja: "玉飾りと噛み合う緑旗袍", en: "green qipao that pairs with jade ornaments" },
+              { ja: "青緑寄せの宮廷チャイナ", en: "palace chinese dress leaning into blue-green tones" },
+              { ja: "草木気配のある緑旗袍", en: "green qipao with a vegetal mood" }
+            ]
+          },
+          {
+            title: "⚫ 黒・紫・退廃系",
+            items: [
+              { ja: "漆黒旗袍", en: "jet-black qipao" },
+              { ja: "黒紫退廃チャイナ", en: "black-purple decadent chinese dress" },
+              { ja: "闇夜寄せの旗袍", en: "qipao leaning into midnight tones" },
+              { ja: "紫煙が似合う黒チャイナ", en: "black chinese dress suited to violet smoke" },
+              { ja: "退廃夜宴向けの黒旗袍", en: "black qipao for decadent night banquets" }
+            ]
+          }
+        ]
+      },
+      {
+        title: "🔥 攻めチャイナ設定",
+        children: [
+          {
+            title: "✂ スリット・丈・カット設定",
+            items: [
+              { ja: "超ハイスリット旗袍", en: "ultra high slit cheongsam" },
+              { ja: "ショート丈チャイナ", en: "short dress cheongsam" },
+              { ja: "アシンメトリー裾チャイナ", en: "asymmetrical hem cheongsam" },
+              { ja: "両脚見せスリット旗袍", en: "double side slit qipao" },
+              { ja: "極端に脚線を見せる旗袍", en: "leg-emphasis qipao with extreme exposure line" }
+            ]
+          },
+          {
+            title: "💋 肌見せ・ボディライン設定",
+            items: [
+              { ja: "密着ボディライン旗袍", en: "body-hugging qipao" },
+              { ja: "谷間強調チャイナ", en: "cleavage-emphasis chinese dress" },
+              { ja: "肩落ちチャイナ", en: "off-shoulder chinese dress" },
+              { ja: "横乳見せチャイナ", en: "side-bust reveal chinese dress" },
+              { ja: "脚長見せミニ旗袍", en: "leg-lengthening mini qipao" }
+            ]
+          },
+          {
+            title: "🎛 攻めチャイナ合わせ技",
+            items: [
+              { ja: "深スリット＋密着旗袍", en: "high-slit plus body-hugging qipao" },
+              { ja: "肩落ち＋谷間強調チャイナ", en: "off-shoulder plus cleavage-emphasis chinese dress" },
+              { ja: "横乳見せ＋ミニ丈旗袍", en: "side-bust reveal plus mini-length qipao" },
+              { ja: "脚長見せ＋深スリットチャイナ", en: "leg-lengthening plus high-slit chinese dress" },
+              { ja: "密着＋高露出の攻め旗袍", en: "body-hugging high-exposure aggressive qipao" }
+            ]
+          },
+          {
+            title: "🖤 夜宴・退廃寄せの攻め設定",
+            items: [
+              { ja: "夜宴向け攻め旗袍", en: "aggressive qipao for night banquets" },
+              { ja: "退廃感のある攻めチャイナ", en: "decadent aggressive chinese dress" },
+              { ja: "背徳感を帯びた旗袍", en: "qipao with a forbidden decadent mood" },
+              { ja: "月下に映える攻め旗袍", en: "aggressive qipao glowing under moonlight" },
+              { ja: "香煙と相性の良い攻めチャイナ", en: "aggressive chinese dress that pairs well with incense smoke" }
+            ]
+          },
+          {
+            title: "🤖 近未来・拘束感寄せの攻め設定",
+            items: [
+              { ja: "近未来攻め旗袍", en: "futuristic aggressive qipao" },
+              { ja: "ハーネス寄せ攻めチャイナ", en: "harness-leaning aggressive chinese dress" },
+              { ja: "拘束感のある攻め旗袍", en: "aggressive qipao with restrained tension" },
+              { ja: "金具強調の攻めチャイナ", en: "aggressive chinese dress with emphasized metal fittings" },
+              { ja: "サイバー高露出旗袍", en: "cyber high-exposure qipao" }
+            ]
+          },
+{
+            title: "✂ スリット境界・脚見せ調整",
+            items: [
+              { ja: "脚見せ境界を整えた旗袍", en: "qipao with controlled leg exposure boundary" },
+              { ja: "上品な脚見せスリット旗袍", en: "elegant slit qipao with refined leg reveal" },
+              { ja: "太ももラインを調整したチャイナ", en: "chinese dress with adjusted thigh-line reveal" },
+              { ja: "控えめ脚見せの旗袍", en: "qipao with modest leg exposure" },
+              { ja: "動くと脚線が映えるスリット旗袍", en: "slit qipao whose leg line appears beautifully in motion" }
+            ]
+          },
+          {
+            title: "🩳 インナーショーツ・見え防止",
+            items: [
+              { ja: "見え防止インナー入り旗袍", en: "qipao with anti-exposure inner shorts" },
+              { ja: "高スリット対応インナーショーツ", en: "inner shorts for high-slit qipao" },
+              { ja: "レース縁の見え防止インナー", en: "lace-trim anti-exposure inner layer" },
+              { ja: "動作に強い下層インナー旗袍", en: "qipao with movement-safe inner layer" },
+              { ja: "近未来インナーショーツ付き旗袍", en: "qipao with futuristic inner shorts" }
+            ]
+          },
+          {
+            title: "🩲 ペチコート・下層布",
+            items: [
+              { ja: "ペチコート入り旗袍", en: "qipao with a petticoat layer" },
+              { ja: "レース下層布のチャイナ", en: "chinese dress with lace underlayer cloth" },
+              { ja: "薄紗の下層布を重ねた旗袍", en: "qipao layered with sheer underskirt cloth" },
+              { ja: "宮廷風下層スカート旗袍", en: "palace-style qipao with inner skirt structure" },
+              { ja: "仙気が漂う下層布付き旗袍", en: "qipao with ethereal drifting underskirt cloth" }
+            ]
+          },
+          {
+            title: "🌫 透け境界・布越し脚線",
+            items: [
+              { ja: "布越し脚線が映る旗袍", en: "qipao with leg silhouette seen through fabric" },
+              { ja: "透け境界を持つスリットチャイナ", en: "slit chinese dress with transparent boundary panel" },
+              { ja: "薄布越しに脚線が浮かぶ旗袍", en: "qipao with leg line faintly visible through thin cloth" },
+              { ja: "半透明下裾のチャイナ", en: "chinese dress with semi-transparent lower hem" },
+              { ja: "未来透けパネル付き旗袍", en: "qipao with futuristic translucent lower panels" }
+            ]
+          },
+          {
+            title: "🪡 ガーター接続・脚飾り連動",
+            items: [
+              { ja: "ガーター連動旗袍", en: "qipao with garter-linked lower structure" },
+              { ja: "脚飾り接続のスリットチャイナ", en: "slit chinese dress linked to leg accessories" },
+              { ja: "レースガーター付き旗袍", en: "qipao with lace garter integration" },
+              { ja: "チェーンガーター連動チャイナ", en: "chinese dress with chain garter linkage" },
+              { ja: "近未来脚ハーネス接続旗袍", en: "qipao connected to futuristic leg harness" }
+            ]
+          },
+{
+            title: "🎗 背面カット・背中開き",
+            items: [
+              { ja: "背中開きの旗袍", en: "open-back qipao" },
+              { ja: "背面しずく開きチャイナ", en: "teardrop back-cut chinese dress" },
+              { ja: "深背面スリット旗袍", en: "deep back-slit qipao" },
+              { ja: "背中見せ月光旗袍", en: "moonlit back-reveal qipao" },
+              { ja: "上品な背面開きチャイナ", en: "elegant back-open chinese dress" }
+            ]
+          },
+          {
+            title: "🎀 後ろ結び・背面装飾",
+            items: [
+              { ja: "背面大リボン旗袍", en: "qipao with large back ribbon" },
+              { ja: "後ろ結び帯飾りチャイナ", en: "back-tied sash ornament chinese dress" },
+              { ja: "背面房飾り付き旗袍", en: "qipao with back tassel ornament" },
+              { ja: "後ろ垂れ布付きチャイナ", en: "chinese dress with back drape cloth" },
+              { ja: "背面結び目主役旗袍", en: "back-knot focal qipao" }
+            ]
+          },
+          {
+            title: "🫧 後ろ髪・うなじ連動",
+            items: [
+              { ja: "うなじ映え旗袍", en: "nape-emphasized qipao" },
+              { ja: "背面髪流れ連動チャイナ", en: "back-flowing-hair synchronized chinese dress" },
+              { ja: "後ろ姿映えのまとめ髪旗袍", en: "updo-enhanced rear-view qipao" },
+              { ja: "うなじ見せ後ろ姿チャイナ", en: "rear-view chinese dress with exposed nape" },
+              { ja: "背中に流れる髪と旗袍", en: "hair flowing over the back with qipao" }
+            ]
+          },
+          {
+            title: "🌙 後ろ裾・引き姿シルエット",
+            items: [
+              { ja: "後ろ裾が流れる旗袍", en: "qipao with flowing rear hem" },
+              { ja: "後ろ引き裾の月光チャイナ", en: "moonlit chinese dress with trailing back hem" },
+              { ja: "歩行で揺れる後ろ裾旗袍", en: "rear hem-swaying qipao while walking" },
+              { ja: "背面シルエット重視の旗袍", en: "qipao focused on rear silhouette" },
+              { ja: "後ろ姿が美しい長裾チャイナ", en: "long-hem chinese dress with beautiful back view" }
+            ]
+          },
+          {
+            title: "👣 振り向き・歩き去り演出",
+            items: [
+              { ja: "振り向きざまの旗袍姿", en: "qipao pose while glancing back" },
+              { ja: "歩き去る後ろ姿チャイナ", en: "walking-away rear-view chinese dress" },
+              { ja: "退き際が映える旗袍", en: "qipao with a striking retreating silhouette" },
+              { ja: "去り際の月下チャイナ", en: "moonlit chinese dress in the moment of leaving" },
+              { ja: "振り返り主役の後ろ姿旗袍", en: "rear-view qipao centered on a turning glance" }
+            ]
+          }
+        ]
+      }
+
       ]
     }
   ];
@@ -5373,18 +6402,231 @@ wrap.appendChild(title);
     });
   })(DATA);
 
-  function createItemLabel(item){
+  
+  const CHINA_PRESETS = [
+    {
+      title: "🌙 王道月光チャイナ",
+      desc: "白銀・月光・高襟でまとめた、静かな王道寄りの完成例。",
+      items: ["白銀月光旗袍", "白基調の上品チャイナ", "高襟を強調した旗袍", "中央連続盤扣の旗袍", "銀刺繍が映える旗袍", "花香をまとう旗袍"]
+    },
+    {
+      title: "👑 宮廷祝宴チャイナ",
+      desc: "礼装・金刺繍・中央装飾を寄せた、格式高い祝宴向けセット。",
+      items: ["龍鳳宮廷旗袍", "金刺繍の祝宴旗袍", "中央連続盤扣の旗袍", "胸元中央に飾りを置く旗袍", "金糸・銀糸刺繍", "後ろ裾が流れる旗袍"]
+    },
+    {
+      title: "🎀 中華ロリ祝祭チャイナ",
+      desc: "甘ロリ・リボン・フリル・花飾りを束ねた可憐寄りセット。",
+      items: ["甘ロリ中華ドレス", "リボン多め中華ロリ", "フリル重ね旗袍", "花飾り強化中華ロリ", "花飾り・簪", "可憐な丸頭ヒール"] 
+    },
+    {
+      title: "⚡ 近未来ネオンチャイナ",
+      desc: "ネオン・ホログラム・未来前立てを軸にしたサイバー完成例。",
+      items: ["ネオン縁取り旗袍", "ホログラム旗袍", "中央発光ライン旗袍", "近未来背面ユニット旗袍", "近未来ヘッドギア", "近未来フットウェア"]
+    },
+    {
+      title: "🖤 退廃夜宴チャイナ",
+      desc: "黒紫・香煙・背面鎖でまとめた、夜宴向けの退廃セット。",
+      items: ["黒紫退廃チャイナ", "漆黒旗袍", "月下に映える背面鎖旗袍", "香煙に揺れる旗袍", "退廃夜宴向けの黒旗袍", "黒パンスト・黒タイツ"]
+    },
+    {
+      title: "🟢 翡翠宮装チャイナ",
+      desc: "翡翠色と玉飾りを基調にした、上品で静かな宮装セット。",
+      items: ["翡翠色の旗袍", "玉飾りと噛み合う緑旗袍", "玉飾り・腰飾り", "翡翠飾り旗袍", "高襟を強調した旗袍", "花刺繍・植物装飾線"]
+    }
+  ];
+
+  let __v23PresetApplying = false;
+
+  function clearChinaPresetUI(root){
+    if(!root) return;
+    root.querySelectorAll('.attire-v23-preset-checkbox').forEach(function(cb){ cb.checked = false; });
+  }
+
+  function openAncestorsForCheckbox(cb){
+    if(!cb) return;
+    let el = cb.parentElement;
+    while(el){
+      if(el.tagName && el.tagName.toLowerCase() === 'details'){
+        el.open = true;
+      }
+      el = el.parentElement;
+    }
+  }
+
+  function applyChinaPreset(root, preset, sourceCheckbox){
+    if(!root || !preset) return;
+    __v23PresetApplying = true;
+
+    const real = Array.from(root.querySelectorAll('.attire-v23-real-checkbox'));
+    real.forEach(function(cb){ cb.checked = false; });
+
+    const map = new Map();
+    real.forEach(function(cb){
+      const key = cb.dataset.ja || '';
+      if(key && !map.has(key)) map.set(key, cb);
+    });
+
+    const matched = [];
+    preset.items.forEach(function(name){
+      const cb = map.get(name);
+      if(cb){
+        cb.checked = true;
+        matched.push(cb);
+      }
+    });
+
+    matched.forEach(function(cb){
+      openAncestorsForCheckbox(cb);
+    });
+
+    clearChinaPresetUI(root);
+    if(sourceCheckbox) sourceCheckbox.checked = true;
+
+    __v23PresetApplying = false;
+  }
+
+  function createPresetSectionNode(){
+    const details = document.createElement("details");
+    details.className = "attire-v23-node attire-cat attire-v23-group-section is-preset";
+    details.open = false;
+    details.style.cssText = "margin:8px 0; border:1px solid #d79c4a; border-radius:10px; background:#fffaf3; overflow:hidden; width:100%; max-width:100%; box-sizing:border-box;";
+
+    const summary = document.createElement("summary");
+    summary.className = "attire-v23-summary attire-v23-group-summary is-preset";
+    summary.textContent = "🧧 チャイナ特化セット / China Presets";
+    summary.title = "🧧 チャイナ特化セット / China Presets";
+    summary.style.cssText = "font-weight:800; padding:10px 12px; cursor:pointer; list-style:none; color:#8a5321; background:#fff5e8;";
+    details.appendChild(summary);
+
+    const body = document.createElement("div");
+    body.className = "attire-v23-body attire-v23-group-body is-preset";
+    body.style.cssText = "padding:8px 10px 10px; width:100%; max-width:100%; box-sizing:border-box;";
+
+    const info = document.createElement("div");
+    info.className = "attire-v23-info-block is-preset";
+    info.innerHTML = '<div class="attire-v23-info-badge is-preset">PRESET</div><div class="attire-v23-info-title">まずは完成例から入る</div><div class="attire-v23-info-desc">チェックを入れると下のチャイナ棚へ連動で実チェックが入る。下の棚を手動で触ると、セットのチェック表示は外れて自由編集モードへ戻る。</div>';
+    body.appendChild(info);
+
+    const grid = document.createElement("div");
+    grid.className = "attire-v23-grid attire-v23-preset-grid";
+    grid.style.cssText = "display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:8px; width:100%;";
+
+    CHINA_PRESETS.forEach(function(preset){
+      const card = document.createElement('label');
+      card.className = 'attire-v23-preset-card';
+      card.style.cssText = 'display:block; border:1px solid #e3c08a; border-radius:10px; background:#fffdf8; padding:10px 12px; cursor:pointer;';
+
+      const top = document.createElement('div');
+      top.style.cssText = 'display:flex; align-items:flex-start; gap:8px;';
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.className = 'attire-v23-preset-checkbox';
+      cb.style.marginTop = '3px';
+      cb.dataset.presetTitle = preset.title;
+      const textWrap = document.createElement('div');
+      textWrap.style.cssText = 'min-width:0;';
+      const ttl = document.createElement('div');
+      ttl.style.cssText = 'font-weight:800; color:#8a5321; font-size:13px; margin-bottom:4px;';
+      ttl.textContent = preset.title;
+      const desc = document.createElement('div');
+      desc.style.cssText = 'font-size:12px; line-height:1.5; color:#7c6450;';
+      desc.textContent = preset.desc;
+
+      cb.addEventListener('change', function(){
+        const root = details.closest('.attire-v23-container');
+        if(!root) return;
+        if(cb.checked){
+          applyChinaPreset(root, preset, cb);
+        } else if(!__v23PresetApplying){
+          cb.checked = false;
+        }
+      });
+
+      textWrap.appendChild(ttl);
+      textWrap.appendChild(desc);
+      top.appendChild(cb);
+      top.appendChild(textWrap);
+      card.appendChild(top);
+      grid.appendChild(card);
+    });
+
+    body.appendChild(grid);
+    details.appendChild(body);
+    return details;
+  }
+
+function createItemLabel(item){
+    const ja = (item && typeof item === 'object') ? (item.ja || item.label || item.title || item.en || '') : String(item || '');
+    const en = (item && typeof item === 'object') ? (item.en || item.ja || item.label || item.title || '') : String(item || '');
+
     const label = document.createElement("label");
     label.style.cssText = "display:flex; align-items:center; font-size:0.92em; cursor:pointer; line-height:1.35;";
     const cb = document.createElement("input");
     cb.type = "checkbox";
-    cb.dataset.en = item.en;
+    cb.className = "attire-v23-real-checkbox";
+    cb.dataset.en = en;
+    cb.dataset.ja = ja;
     cb.style.marginRight = "6px";
+    cb.addEventListener('change', function(){
+      if(__v23PresetApplying) return;
+      const root = label.closest('.attire-v23-container');
+      if(root) clearChinaPresetUI(root);
+    });
     label.appendChild(cb);
-    label.appendChild(document.createTextNode(item.ja));
-    label.title = item.en;
+    label.appendChild(document.createTextNode(ja));
+    label.title = en;
     return label;
   }
+
+
+  function createInfoBlock(kind, title, desc){
+    const box = document.createElement('div');
+    box.className = 'attire-v23-info-block ' + (kind === 'customize' ? 'is-customize' : 'is-base');
+    const badge = document.createElement('div');
+    badge.className = 'attire-v23-info-badge';
+    badge.textContent = kind === 'customize' ? 'CUSTOMIZE' : 'BASE';
+    const h = document.createElement('div');
+    h.className = 'attire-v23-info-title';
+    h.textContent = title;
+    const p = document.createElement('div');
+    p.className = 'attire-v23-info-desc';
+    p.textContent = desc;
+    box.appendChild(badge);
+    box.appendChild(h);
+    box.appendChild(p);
+    return box;
+  }
+
+
+  function createGroupedSectionNode(kind, title, desc, children){
+    const details = document.createElement("details");
+    details.className = "attire-v23-node attire-cat attire-v23-group-section " + (kind === 'customize' ? 'is-customize' : 'is-base');
+    details.open = false;
+    details.style.cssText = "margin:8px 0; border:1px solid " + (kind === 'customize' ? '#b48bd2' : '#d98ca0') + "; border-radius:10px; background:" + (kind === 'customize' ? '#fcf8ff' : '#fffafb') + "; overflow:hidden; width:100%; max-width:100%; box-sizing:border-box;";
+
+    const summary = document.createElement("summary");
+    summary.className = "attire-v23-summary attire-v23-group-summary " + (kind === 'customize' ? 'is-customize' : 'is-base');
+    summary.textContent = title;
+    summary.title = title;
+    summary.style.cssText = "font-weight:800; padding:10px 12px; cursor:pointer; list-style:none; color:" + (kind === 'customize' ? '#6f4b95' : '#7a2239') + "; background:" + (kind === 'customize' ? '#f7f0ff' : '#fff8fb') + ";";
+    details.appendChild(summary);
+
+    const body = document.createElement("div");
+    body.className = "attire-v23-body attire-v23-group-body " + (kind === 'customize' ? 'is-customize' : 'is-base');
+    body.style.cssText = "padding:8px 10px 10px; width:100%; max-width:100%; box-sizing:border-box;";
+    body.appendChild(createInfoBlock(kind, kind === 'customize' ? '後がけで仕上げる' : 'まずは方向性を決める', desc));
+
+    const grid = document.createElement('div');
+    grid.className = 'attire-v23-grid attire-v23-group-grid ' + (kind === 'customize' ? 'is-customize' : 'is-base');
+    grid.style.cssText = 'display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:8px; width:100%;';
+    children.forEach(child => grid.appendChild(createNode(child, 1)));
+    body.appendChild(grid);
+
+    details.appendChild(body);
+    return details;
+  }
+
 
   function createNode(node, depth){
     const details = document.createElement("details");
@@ -5397,8 +6639,9 @@ wrap.appendChild(title);
 
     const summary = document.createElement("summary");
     summary.className = "attire-v23-summary";
-    summary.textContent = node.title;
-    summary.title = node.title;
+    const nodeTitle = node.title || node.label || '';
+    summary.textContent = nodeTitle;
+    summary.title = nodeTitle;
     summary.style.cssText = `font-weight:${depth <= 1 ? '700' : '600'}; padding:${depth === 0 ? '10px 12px' : '8px 10px'}; cursor:pointer; list-style:none; background:${bg}; color:#7a2239;`;
     details.appendChild(summary);
 
@@ -5414,7 +6657,25 @@ wrap.appendChild(title);
       body.appendChild(grid);
     }
     if (node.children && node.children.length) {
-      node.children.forEach(child => body.appendChild(createNode(child, depth + 1)));
+      if (depth === 0 && node.title === '👘 チャイナ服特化コレクション' && node.children.length > 5) {
+        body.appendChild(createPresetSectionNode());
+        body.appendChild(createGroupedSectionNode(
+          'base',
+          '🎐 チャイナベース / Base Collection',
+          '王道・ロリ・サイバー・宮廷など、チャイナ服そのものの方向性を決める棚。最初に世界観やシルエットの土台を選ぶ。',
+          node.children.slice(0, 5).filter(function(child){
+            return (child && (child.title || child.label || '')) !== '🔥 攻めチャイナ';
+          })
+        ));
+        body.appendChild(createGroupedSectionNode(
+          'customize',
+          '🛠 カスタマイズ項目 / Customization',
+          '柄・留め具・生地など、選んだチャイナベースへ後がけして完成度を上げる調整棚。ベース選択のあとに重ねる用途。',
+          node.children.slice(5)
+        ));
+      } else {
+        node.children.forEach(child => body.appendChild(createNode(child, depth + 1)));
+      }
     }
     details.appendChild(body);
     return details;
@@ -5457,6 +6718,23 @@ wrap.appendChild(title);
 .attire-v23-container details[open] > .attire-v23-body { display:block !important; grid-template-columns:1fr !important; grid-auto-flow:row !important; }
 .attire-v23-container .attire-v23-body > .attire-v23-node { display:block !important; width:100% !important; max-width:100% !important; }
 .attire-v23-container .attire-v23-grid { width:100% !important; max-width:100% !important; }
+
+.attire-v23-group-section.is-customize { box-shadow:0 0 0 1px rgba(144,112,188,.06) inset; }
+
+.attire-v23-group-section.is-preset { box-shadow:0 0 0 1px rgba(215,156,74,.08) inset; }
+.attire-v23-group-body.is-preset { background:rgba(255,250,244,.9); }
+.attire-v23-info-block.is-preset { background:linear-gradient(180deg, rgba(255,252,247,.98), rgba(255,248,238,.95)); border-color:rgba(215,156,74,.28); }
+.attire-v23-info-badge.is-preset { background:rgba(215,156,74,.16); color:#8a5321; }
+.attire-v23-preset-card:hover { background:#fff8ef; }
+
+.attire-v23-group-summary { font-size:13px; }
+.attire-v23-group-grid { margin-top:6px; }
+.attire-v23-group-body.is-customize { background:rgba(252,248,255,.88); }
+.attire-v23-info-block { margin:0 0 12px; padding:10px 12px; border-radius:12px; border:1px solid rgba(180,110,130,.28); background:linear-gradient(180deg, rgba(255,252,253,.96), rgba(252,246,249,.92)); }
+.attire-v23-info-block.is-customize { background:linear-gradient(180deg, rgba(250,248,255,.98), rgba(244,239,255,.95)); border-color:rgba(135,110,180,.26); }
+.attire-v23-info-badge { display:inline-block; margin-bottom:6px; padding:2px 8px; border-radius:999px; background:rgba(160,120,190,.12); color:#7a4f9b; font-size:11px; font-weight:800; letter-spacing:.06em; }
+.attire-v23-info-title { font-size:13px; font-weight:800; color:#7d334e; margin-bottom:4px; }
+.attire-v23-info-desc { font-size:12px; line-height:1.5; color:#7f6671; }
 @media (max-width: 640px) {
   .attire-v23-container { padding-left:0 !important; padding-right:0 !important; }
   .attire-v23-container > .attire-v23-stack { display:block !important; grid-template-columns:1fr !important; }
