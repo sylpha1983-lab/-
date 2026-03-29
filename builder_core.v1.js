@@ -784,6 +784,18 @@
     });
 
     window.dispatchEvent(new Event("promptPartMounted"));
+      try{
+        if (id === "attire" && window.__normalizeAttireLayout){
+          const __attireRoot = document.getElementById("list-attire") || container;
+          window.__normalizeAttireLayout(__attireRoot);
+          setTimeout(function(){
+            try{
+              if (window.__normalizeAttireLayout) window.__normalizeAttireLayout(__attireRoot);
+            }catch(_){}
+          }, 50);
+        }
+      }catch(_){}
+
   }
 
   window.__triggerUIMount = attemptMount;

@@ -6,7 +6,7 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
 // --- builder_ui.section.attire.v1.js ---
 (function(){
   "use strict";
-  const VERSION = 1; // 現代ファッション基本編 (ドレス・スカート形状強化版)
+  const VERSION = 3; // 現代ファッション基本編 (ドレス・スカート形状強化版)
   const KEY = "attire";
 
   const CATEGORIES = {
@@ -68,10 +68,217 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
     ]
   };
 
+
+  
+  window.__normalizeAttireLayout = window.__normalizeAttireLayout || function(parent){
+    try{
+      const root = (parent && parent.querySelector)
+        ? (parent.querySelector(".section-content") || parent)
+        : (document.querySelector("#list-attire .section-content") || document.getElementById("list-attire"));
+      if (!root) return;
+      if (root.__attireNormalizing) return;
+      root.__attireNormalizing = true;
+
+      const existingNormalDivider = root.querySelector("#__attire_normal_divider__");
+      if (existingNormalDivider){
+        existingNormalDivider.remove();
+      }
+      const existingNormalGroup = root.querySelector("#__attire_normal_group__");
+      if (existingNormalGroup){
+        const existingBody = existingNormalGroup.querySelector(".attire-normal-group-body");
+        if (existingBody){
+          Array.from(existingBody.children || []).forEach(function(child){
+            root.insertBefore(child, existingNormalGroup);
+          });
+        }
+        existingNormalGroup.remove();
+      }
+
+      const children = Array.from(root.children || []);
+      const special = [];
+      const normal = [];
+      const gender = [];
+      const r18 = [];
+
+      function getText(el){
+        return (el && el.textContent ? el.textContent : "").replace(/\s+/g, " ").trim();
+      }
+      function isSpecialNode(el){
+        if (!el) return false;
+        if (el.id === "__attire_special_top_zone__" || el.id === "__attire_r18_last_zone__") return false;
+        if (el.matches && (el.matches(".attire-v21-shima") || el.matches(".attire-v23-container") || el.matches("[class*='attire-v23']"))) return true;
+        const txt = getText(el);
+        return txt.includes("シマエナガ・コレクション")
+          || txt.includes("チャイナ服特化コレクション")
+          || txt.includes("アイドル衣装特化コレクション")
+          || txt.includes("攻め・スペシャル")
+          || txt.includes("特化コレクション");
+      }
+      function isR18Node(el){
+        if (!el) return false;
+        if (el.id === "__attire_r18_last_zone__") return true;
+        if (el.id === "__attire_special_top_zone__") return false;
+        if (el.matches && (el.matches(".attire-v17-container") || el.matches(".attire-v22-container") || el.matches(".attire-r18"))) return true;
+        const txt = getText(el);
+        return txt.includes("R-18")
+          || txt.includes("NSFW")
+          || txt.includes("限界突破")
+          || txt.includes("フェティッシュ")
+          || txt.includes("完全露出")
+          || txt.includes("ボンテージ");
+      }
+      function isGenderNode(el){
+        if (!el) return false;
+        if (el.id === "__attire_special_top_zone__" || el.id === "__attire_r18_last_zone__") return false;
+        const txt = getText(el);
+        return txt.includes("男性専用") || txt.includes("女性専用") || txt.includes("Male Only") || txt.includes("Female Only");
+      }
+
+      children.forEach(function(el){
+        if (!el) return;
+        if (el.id === "__attire_normal_group__" || (el.classList && el.classList.contains("attire-normal-group"))) return;
+        if (el.id === "__attire_special_top_zone__" || el.id === "__attire_r18_last_zone__") return;
+        if (isSpecialNode(el)) special.push(el);
+        else if (isR18Node(el)) r18.push(el);
+        else if (isGenderNode(el)) gender.push(el);
+        else normal.push(el);
+      });
+
+      special.forEach(function(el){ if (el) root.appendChild(el); });
+
+      if (normal.length){
+        const normalDivider = document.createElement("div");
+        normalDivider.id = "__attire_normal_divider__";
+        normalDivider.className = "attire-normal-divider";
+        normalDivider.style.cssText = "display:flex;align-items:center;gap:10px;width:100%;max-width:100%;margin:14px 0 8px;color:#9b6f7d;font-weight:700;box-sizing:border-box;";
+        const dividerLineL = document.createElement("span");
+        dividerLineL.style.cssText = "flex:1;height:1px;background:#e6d7dd;display:block;";
+        const dividerLabel = document.createElement("span");
+        dividerLabel.textContent = "👗 通常衣装";
+        dividerLabel.style.cssText = "white-space:nowrap;font-size:14px;letter-spacing:0.02em;";
+        const dividerLineR = document.createElement("span");
+        dividerLineR.style.cssText = "flex:1;height:1px;background:#e6d7dd;display:block;";
+        normalDivider.appendChild(dividerLineL);
+        normalDivider.appendChild(dividerLabel);
+        normalDivider.appendChild(dividerLineR);
+        root.appendChild(normalDivider);
+
+        const normalWrap = document.createElement("details");
+        normalWrap.id = "__attire_normal_group__";
+        normalWrap.className = "attire-normal-group";
+        normalWrap.open = false;
+        normalWrap.style.cssText = "display:block;width:100%;max-width:100%;margin:0 0 8px;border:1px solid #e5d8de;border-radius:12px;background:#fff;overflow:hidden;box-sizing:border-box;";
+
+        const normalSummary = document.createElement("summary");
+        normalSummary.textContent = "👗 一般カテゴリー / General Attire";
+        normalSummary.style.cssText = "display:list-item;cursor:pointer;list-style:none;font-weight:700;color:#8b6674;background:#faf6f8;padding:10px 12px;";
+        normalWrap.appendChild(normalSummary);
+
+        const normalBody = document.createElement("div");
+        normalBody.className = "attire-normal-group-body";
+        normalBody.style.cssText = "display:block;width:100%;max-width:100%;padding:8px 0 2px;box-sizing:border-box;";
+        normal.forEach(function(el){
+          if (!el) return;
+          el.style.width = "100%";
+          el.style.maxWidth = "100%";
+          el.style.boxSizing = "border-box";
+          normalBody.appendChild(el);
+        });
+        normalWrap.appendChild(normalBody);
+        root.appendChild(normalWrap);
+      }
+
+      gender.forEach(function(el){ if (el) root.appendChild(el); });
+      r18.forEach(function(el){ if (el) root.appendChild(el); });
+    }catch(_){}
+    finally{
+      try{
+        const root = (parent && parent.querySelector)
+          ? (parent.querySelector(".section-content") || parent)
+          : (document.querySelector("#list-attire .section-content") || document.getElementById("list-attire"));
+        if (root) root.__attireNormalizing = false;
+      }catch(_){}
+    }
+  };
+
+  window.__ensureAttireNormalObserver = window.__ensureAttireNormalObserver || function(parent){
+    try{
+      const root = (parent && parent.querySelector)
+        ? (parent.querySelector(".section-content") || parent)
+        : (document.querySelector("#list-attire .section-content") || document.getElementById("list-attire"));
+      if (!root || root.__attireNormalObserverInstalled) return;
+      let scheduled = false;
+      const run = function(){
+        if (scheduled) return;
+        scheduled = true;
+        requestAnimationFrame(function(){
+          scheduled = false;
+          try{ window.__normalizeAttireLayout(root); }catch(_){}
+        });
+      };
+      const obs = new MutationObserver(function(){
+        if (root.__attireNormalizing) return;
+        run();
+      });
+      obs.observe(root, { childList: true });
+      root.__attireNormalObserverInstalled = true;
+      root.__attireNormalObserver = obs;
+      setTimeout(run, 0);
+      setTimeout(run, 120);
+      setTimeout(run, 500);
+    }catch(_){}
+  };
+
+window.__attireEnsureZones = window.__attireEnsureZones || function(parent){
+    const contentArea = (parent && parent.querySelector) ? (parent.querySelector(".section-content") || parent) : parent;
+    if (!contentArea) return { contentArea: parent, specialZone: null, r18Zone: null };
+
+    let specialZone = contentArea.querySelector("#__attire_special_top_zone__");
+    if (!specialZone){
+      specialZone = document.createElement("div");
+      specialZone.id = "__attire_special_top_zone__";
+      specialZone.style.cssText = "display:block; width:100%;";
+      if (contentArea.firstChild && contentArea.insertBefore) contentArea.insertBefore(specialZone, contentArea.firstChild);
+      else contentArea.appendChild(specialZone);
+    } else if (contentArea.firstChild !== specialZone && contentArea.insertBefore) {
+      contentArea.insertBefore(specialZone, contentArea.firstChild);
+    }
+
+    let r18Zone = contentArea.querySelector("#__attire_r18_last_zone__");
+    if (!r18Zone){
+      r18Zone = document.createElement("div");
+      r18Zone.id = "__attire_r18_last_zone__";
+      r18Zone.style.cssText = "display:block; width:100%;";
+      contentArea.appendChild(r18Zone);
+    } else if (contentArea.lastChild !== r18Zone) {
+      contentArea.appendChild(r18Zone);
+    }
+
+    if (!contentArea.__attireZoneObserver){
+      const observer = new MutationObserver(function(){
+        try{
+          if (contentArea.firstChild !== specialZone && contentArea.insertBefore){
+            contentArea.insertBefore(specialZone, contentArea.firstChild);
+          }
+          if (contentArea.lastChild !== r18Zone){
+            contentArea.appendChild(r18Zone);
+          }
+        }catch(_){}
+      });
+      observer.observe(contentArea, { childList: true });
+      contentArea.__attireZoneObserver = observer;
+    }
+
+    return { contentArea, specialZone, r18Zone };
+  };
+
+  try{ window.__ensureAttireNormalObserver(document.getElementById("list-attire") || document.body); }catch(_){}
+
   const API = {
     initUI(container) {
       const parent = document.querySelector("#list-attire") || container;
-      parent.innerHTML = ""; 
+      const existing = parent.querySelector(".attire-v1-container");
+      if (existing) existing.remove();
 
       const section = document.createElement("div");
       section.className = "attire-v1-container";
@@ -134,7 +341,7 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
 // --- builder_ui.section.attire.v2.js ---
 (function(){
   "use strict";
-  const VERSION = 2; // 制服・職業・スポーツ (大幅増量版)
+  const VERSION = 7; // 制服・職業・スポーツ (大幅増量版)
   const KEY = "attire";
 
   const CATEGORIES = {
@@ -160,11 +367,11 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
       { ja: "手術着 (スクラブ)", en: "scrubs" }, { ja: "白衣 (ドクター)", en: "lab coat" },
       { ja: "聴診器", en: "stethoscope" }, { ja: "眼帯 (医療用)", en: "medical eyepatch" }
     ],
-    "🎉 エンタメ・衣装 (Entertainment)": [
+    "🎉 汎用エンタメ・舞台衣装 (General Performance)": [
       { ja: "メイド服", en: "maid apron" }, { ja: "クラシックメイド", en: "long maid dress" },
       { ja: "バニーガール", en: "bunny suit" }, { ja: "レースクイーン", en: "race queen" },
-      { ja: "チアリーダー", en: "cheerleader" }, { ja: "アイドル衣装", en: "idol clothes" },
-      { ja: "サンタコス", en: "santa costume" }, { ja: "チャイナドレス", en: "cheongsam" }
+      { ja: "チアリーダー", en: "cheerleader" }, { ja: "シンプルなアイドル衣装", en: "simple idol outfit" },
+      { ja: "チャイナドレス", en: "cheongsam" }
     ],
     "🏅 スポーツ・競技 (Sports/Athletics)": [
       { ja: "スポーツウェア", en: "sportswear" }, { ja: "ジャージ", en: "track suit" },
@@ -251,7 +458,7 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
 // --- builder_ui.section.attire.v3.js ---
 (function(){
   "use strict";
-  const VERSION = 3; // ファンタジー・民族・現代スタイル (統合版)
+  const VERSION = 10; // ファンタジー・民族・現代スタイル (統合版)
   const KEY = "attire";
 
   const CATEGORIES = {
@@ -520,7 +727,7 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
 // --- builder_ui.section.attire.v5.js ---
 (function(){
   "use strict";
-  const VERSION = 5; // 拡張パックE (デザイン詳細・柄)
+  const VERSION = 17; // 拡張パックE (デザイン詳細・柄)
   const KEY = "attire";
 
   const ATTIRE_DATA = {
@@ -621,8 +828,7 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
       Object.entries(ATTIRE_DATA).forEach(([cat, items]) => {
         root.appendChild(createCat(cat, items));
       });
-
-      const contentArea = parent.querySelector(".section-content") || parent;
+const contentArea = parent.querySelector(".section-content") || parent;
       contentArea.appendChild(root);
     },
 
@@ -644,7 +850,7 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
 // --- builder_ui.section.attire.v6.js ---
 (function(){
   "use strict";
-  const VERSION = 6; // 拡張パックF (状態・ダメージ・着こなし)
+  const VERSION = 18; // 拡張パックF (状態・ダメージ・着こなし)
   const KEY = "attire";
 
   // ★ 素材(Leather等)や質感(Shiny等)を削除し、状態異常に特化
@@ -755,7 +961,7 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
 // --- builder_ui.section.attire.v7.js ---
 (function(){
   "use strict";
-  const VERSION = 7; // 拡張パックG (ファッション系統・サブカル)
+  const VERSION = 15; // 拡張パックG (ファッション系統・サブカル)
   const KEY = "attire";
 
   const ATTIRE_DATA = {
@@ -844,20 +1050,34 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
       };
 
       const root = document.createElement("div");
-      root.className = "attire-v7-container";
+      root.className = "attire-v15-container";
       
+      const sep = document.createElement("div");
+      sep.style.cssText = "margin:14px 0 10px 0; border-top:1px dashed #d8d8d8; text-align:center; color:#8f7286; font-size:0.82em;";
+      sep.textContent = "▼ サブカル・派生ファッション ▼";
+      root.appendChild(sep);
+
       Object.entries(ATTIRE_DATA).forEach(([cat, items]) => {
         root.appendChild(createCat(cat, items));
       });
 
-      // v1のコンテナに追加
       const contentArea = parent.querySelector(".section-content") || parent;
-      contentArea.appendChild(root);
+      const afterModern = contentArea.querySelector(".attire-v3-container");
+      const beforeSeasonal = contentArea.querySelector(".attire-v20-container");
+      if (afterModern && afterModern.nextSibling) {
+        contentArea.insertBefore(root, afterModern.nextSibling);
+      } else if (afterModern) {
+        contentArea.appendChild(root);
+      } else if (beforeSeasonal) {
+        contentArea.insertBefore(root, beforeSeasonal);
+      } else {
+        contentArea.appendChild(root);
+      }
     },
 
     getTags() {
       const tags = [];
-      document.querySelectorAll(".attire-v7-container input[type='checkbox']:checked").forEach(cb => {
+      document.querySelectorAll(".attire-v15-container input[type='checkbox']:checked").forEach(cb => {
         tags.push(cb.dataset.en);
       });
       return tags;
@@ -872,7 +1092,7 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
 // --- builder_ui.section.attire.v8.js ---
 (function(){
   "use strict";
-  const VERSION = 8; // 拡張パックH (SF・戦術・特殊衣装)
+  const VERSION = 11; // 拡張パックH (SF・戦術・特殊衣装)
   const KEY = "attire";
 
   // ★ 小物(ゴーグル等)は accessories.v1.js に移動し、スーツ本体のみ残す
@@ -972,7 +1192,7 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
 // --- builder_ui.section.attire.v9.js ---
 (function(){
   "use strict";
-  const VERSION = 9; // 拡張パックI (フットウェア・レッグウェア詳細)
+  const VERSION = 5; // 拡張パックI (フットウェア・レッグウェア詳細)
   const KEY = "attire";
 
   // ★ 帽子や髪飾りは accessories.v1.js に任せ、足元詳細に特化
@@ -1061,7 +1281,7 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
 // --- builder_ui.section.attire.v10.js ---
 (function(){
   "use strict";
-  const VERSION = 10; // 拡張パックJ (部屋着・スポーツ・コスプレ詳細)
+  const VERSION = 8; // 拡張パックJ (部屋着・スポーツ・コスプレ詳細)
   const KEY = "attire";
 
   const ATTIRE_DATA = {
@@ -1085,7 +1305,7 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
       { ja: "ミニスカポリス", en: "police miniskirt" }, { ja: "ナース (ミニ)", en: "nurse dress" },
       { ja: "メイド (ミニ)", en: "maid mini dress" }, { ja: "フレンチメイド", en: "french maid" },
       { ja: "シスター (ミニ)", en: "nun mini habit" }, { ja: "チャイナ (スリット)", en: "china dress high slit" },
-      { ja: "サンタ (ビキニ)", en: "santa bikini" }, { ja: "くノ一 (忍者)", en: "kunoichi" }
+      { ja: "くノ一 (忍者)", en: "kunoichi" }
     ],
     "👙 水着・露出高め (Swimwear+)": [
       { ja: "マイクロビキニ", en: "micro bikini" }, { ja: "スリングショット", en: "slingshot swimsuit" },
@@ -1168,7 +1388,7 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
 // --- builder_ui.section.attire.v11.js ---
 (function(){
   "use strict";
-  const VERSION = 11; // 拡張パックK (ネイル・手元特化)
+  const VERSION = 6; // 拡張パックK (ネイル・手元特化)
   const KEY = "attire";
 
   // ★ 小物・武器・マスクは accessories.v1.js に任せ、手元・ネイルに特化
@@ -1397,7 +1617,7 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
 // --- builder_ui.section.attire.v13.js ---
 (function(){
   "use strict";
-  const VERSION = 13; // 拡張パックM (労働・和カジュアル・人生)
+  const VERSION = 9; // 拡張パックM (労働・和カジュアル・人生)
   const KEY = "attire";
 
   const CATEGORIES = {
@@ -1508,7 +1728,7 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
 // --- builder_ui.section.attire.v14.js ---
 (function(){
   "use strict";
-  const VERSION = 14; // 拡張パックN (カラーパレット・配色)
+  const VERSION = 19; // 拡張パックN (カラーパレット・配色)
   const KEY = "attire";
 
   const ATTIRE_DATA = {
@@ -1622,7 +1842,7 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
 // --- builder_ui.section.attire.v15.js ---
 (function(){
   "use strict";
-  const VERSION = 15; // 拡張パックO (全身コーデ・セットプリセット)
+  const VERSION = 20; // 拡張パックO (全身コーデ・セットプリセット)
   const KEY = "attire";
 
   const ATTIRE_DATA = {
@@ -1780,7 +2000,7 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
 // --- builder_ui.section.attire.v16.js ---
 (function(){
   "use strict";
-  const VERSION = 16; // 拡張パックP (拡張コーデセット: サブカル・イベント・人外)
+  const VERSION = 21; // 拡張パックP (拡張コーデセット: サブカル・イベント・人外)
   const KEY = "attire";
 
   const ATTIRE_DATA = {
@@ -1791,9 +2011,9 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
       { label: "スチームパンクセット (Steam)", val: "steampunk, corset, gears, goggles, brown leather, boots, brass accessories" },
       { label: "サイバーパンクセット (Cyber)", val: "cyberpunk, techwear, neon lights, jacket, bodysuit, futuristic visor, mechanical parts" }
     ],
-    "💍 イベント・ステージ衣装セット (Event/Stage Sets)": [
+    "💍 イベント・ステージ汎用セット (General Stage Sets)": [
       { label: "ウェディングセット (Bride)", val: "wedding dress, white, veil, bouquet, tiara, jewelry, church background" },
-      { label: "アイドル衣装セット (Idol)", val: "idol clothes, shiny, frills, microphone, stage lights, energetic pose, ribbon" },
+      { label: "ライトアイドルセット (Idol Entry)", val: "simple idol outfit, shiny accents, frills, microphone, stage lights, ribbon, performance-ready" },
       { label: "レースクイーンセット (RQ)", val: "race queen, highleg, umbrella, boots, cap, circuit background" },
       { label: "チアリーダーセット (Cheer)", val: "cheerleader, pom poms, crop top, miniskirt, sneakers, energetic" },
       { label: "バレリーナセット (Ballet)", val: "ballet tutu, ballet shoes, tights, bun hair, elegant pose, stage" }
@@ -1913,7 +2133,7 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
 // --- builder_ui.section.attire.v17.js ---
 (function(){
   "use strict";
-  const VERSION = 17; // 拡張パックR (R-18/NSFW特化・Syntax Fixed)
+  const VERSION = 22; // 拡張パックR (R-18/NSFW特化・Syntax Fixed)
   const KEY = "attire";
 
   const ATTIRE_DATA = {
@@ -2056,8 +2276,26 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
         
         root.appendChild(sep);
         Object.entries(ATTIRE_DATA).forEach(([cat, items]) => root.appendChild(createCat(cat, items)));
+        const endDividerWrap = document.createElement("div");
+        endDividerWrap.className = "attire-special-to-normal";
+        endDividerWrap.style.cssText = "display:block; width:100%; margin:10px 0 8px;";
+
+        const endDivider = document.createElement("div");
+        endDivider.className = "attire-special-end-divider";
+        endDivider.style.cssText = "border-top:1px solid #ead4db; width:100%; margin:0 0 6px;";
+        endDividerWrap.appendChild(endDivider);
+
+        const normalLabel = document.createElement("div");
+        normalLabel.className = "attire-normal-group-label";
+        normalLabel.textContent = "👗 通常衣装";
+        normalLabel.style.cssText = "color:#9b7280; font-size:0.76em; font-weight:700; letter-spacing:0.02em; text-align:left; padding:0 2px;";
+        endDividerWrap.appendChild(normalLabel);
+
+        root.appendChild(endDividerWrap);
+
         const contentArea = parent.querySelector(".section-content") || parent;
         contentArea.appendChild(root);
+        try{ window.__normalizeAttireLayout(contentArea || parent); }catch(_){}
       };
 
       mount(); // 実行
@@ -2080,7 +2318,7 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
 // --- builder_ui.section.attire.v18.js ---
 (function(){
   "use strict";
-  const VERSION = 18; // 拡張パックQ (セクシー・コスプレ・トレンド)
+  const VERSION = 16; // 拡張パックQ (セクシー・コスプレ・トレンド)
   const KEY = "attire";
 
   const ATTIRE_DATA = {
@@ -2200,7 +2438,7 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
 // --- builder_ui.section.attire.v19.js ---
 (function(){
   "use strict";
-  const VERSION = 19; // 拡張パックQ (年代別・レトロ・歴史的スタイル)
+  const VERSION = 13; // 拡張パックQ (年代別・レトロ・歴史的スタイル)
   const KEY = "attire";
 
   const ATTIRE_DATA = {
@@ -2307,30 +2545,1021 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
 // --- builder_ui.section.attire.v20.js ---
 (function(){
   "use strict";
-  const VERSION = 20; // 節分・鬼 (日本伝承イベント)
+  const VERSION = 14; // 行事・季節衣装 (Seasonal & Event Attire)
   const KEY = "attire";
 
   const ATTIRE_DATA = {
-    "👹 節分・鬼衣装 (Setsubun Oni Attire)": [
-      { ja: "鬼の衣装 (オニコス)", en: "oni costume" },
-      { ja: "鬼の羽織", en: "oni haori" },
-      { ja: "鬼の着物", en: "oni kimono" },
-      { ja: "鬼の腹掛け", en: "oni haragake" },
-      { ja: "鬼のふんどし", en: "oni fundoshi" }
-    ],
-    "🐯 虎柄・鬼パンツ (Tiger Stripes)": [
-      { ja: "虎柄 (タイガープリント)", en: "tiger print" },
-      { ja: "虎縞 (タイガーストライプ)", en: "tiger stripes" },
-      { ja: "虎柄のふんどし", en: "tiger-striped fundoshi" },
-      { ja: "虎柄の腰布", en: "tiger-striped loincloth" },
-      { ja: "虎柄のパンツ", en: "tiger-striped pants" }
+    title: "👹 節分・鬼衣装特化コレクション",
+    children: [
+      {
+        title: "👹 鬼衣装セット / Oni Presets",
+        children: [
+          { title: "🔴 赤鬼セット", items: [
+            { ja: "赤鬼衣装セット", en: "red oni outfit set" },
+            { ja: "赤鬼の角と虎柄セット", en: "red oni horns and tiger-stripe set" },
+            { ja: "赤鬼の節分コスチューム", en: "red oni setsubun costume" }
+          ]},
+          { title: "🔵 青鬼セット", items: [
+            { ja: "青鬼衣装セット", en: "blue oni outfit set" },
+            { ja: "青鬼の角と虎柄セット", en: "blue oni horns and tiger-stripe set" },
+            { ja: "青鬼の節分コスチューム", en: "blue oni setsubun costume" }
+          ]},
+          { title: "🎀 鬼娘セット", items: [
+            { ja: "鬼娘コスチュームセット", en: "oni girl costume set" },
+            { ja: "可愛い鬼娘節分衣装", en: "cute oni girl setsubun outfit" },
+            { ja: "姫鬼アレンジセット", en: "princess oni arrangement set" }
+          ]},
+          { title: "🏮 祭り鬼セット", items: [
+            { ja: "祭り鬼衣装セット", en: "festival oni outfit set" },
+            { ja: "和風妖怪鬼セット", en: "japanese yokai oni set" },
+            { ja: "豆まき祭礼鬼セット", en: "bean-throwing ceremonial oni set" }
+          ]}
+        ]
+      },
+      {
+        title: "🩲 鬼衣装ベース / Base Collection",
+        children: [
+          { title: "🐯 虎柄ベース", items: [
+            { ja: "虎柄鬼パンツ", en: "tiger-striped oni pants" },
+            { ja: "虎柄ふんどし", en: "tiger-striped fundoshi" },
+            { ja: "虎柄の腰布", en: "tiger-striped loincloth" }
+          ]},
+          { title: "👘 和装鬼ベース", items: [
+            { ja: "鬼の羽織", en: "oni haori" },
+            { ja: "鬼の着物", en: "oni kimono" },
+            { ja: "鬼の腹掛け", en: "oni haragake" }
+          ]},
+          { title: "👙 鬼娘ベース", items: [
+            { ja: "虎柄ブラトップ", en: "tiger-striped bra top" },
+            { ja: "虎柄ビキニ鬼衣装", en: "tiger-striped bikini oni outfit" },
+            { ja: "鬼姫ミニ着物ベース", en: "mini oni princess kimono base" }
+          ]},
+          { title: "😈 軽装・変化球", items: [
+            { ja: "ミニ鬼コス", en: "mini oni costume" },
+            { ja: "着ぐるみ鬼", en: "oni mascot outfit" },
+            { ja: "ポップ鬼衣装", en: "pop oni outfit" }
+          ]}
+        ]
+      },
+      {
+        title: "🛠 鬼カスタマイズ / Customization",
+        children: [
+          { title: "👹 角・虎柄 / Horns & Stripes", items: [
+            { ja: "大きな鬼角", en: "large oni horns" },
+            { ja: "片角アレンジ", en: "single horn arrangement" },
+            { ja: "強めの虎柄", en: "bold tiger stripes" }
+          ]},
+          { title: "👘 布・シルエット / Fabric & Silhouette", items: [
+            { ja: "毛皮トリム追加", en: "fur trim addition" },
+            { ja: "和布の重ね", en: "layered japanese cloth" },
+            { ja: "破れ表現", en: "torn fabric effect" }
+          ]},
+          { title: "🩹 露出・フィット / Exposure & Fit", items: [
+            { ja: "肩出し鬼衣装", en: "off-shoulder oni outfit" },
+            { ja: "腹見せ鬼コス", en: "midriff-baring oni costume" },
+            { ja: "脚見せ鬼アレンジ", en: "leg-revealing oni arrangement" }
+          ]},
+          { title: "🔔 装飾 / Ornaments", items: [
+            { ja: "房飾り付き帯", en: "obi with tassel ornaments" },
+            { ja: "鈴付き鬼装飾", en: "oni decoration with bells" },
+            { ja: "金具付き鬼ベルト", en: "oni belt with metal fittings" }
+          ]}
+        ]
+      },
+      {
+        title: "😈 鬼設定 / Mood & Role",
+        children: [
+          { title: "💢 ムード / Mood", items: [
+            { ja: "怖い赤鬼", en: "scary red oni" },
+            { ja: "いたずら鬼", en: "mischievous oni" },
+            { ja: "照れ鬼", en: "bashful oni" }
+          ]},
+          { title: "🎭 役割 / Role", items: [
+            { ja: "豆まき鬼役", en: "bean-throwing oni role" },
+            { ja: "祭礼鬼", en: "ceremonial oni" },
+            { ja: "守り神風の鬼", en: "guardian-spirit oni" }
+          ]},
+          { title: "🎀 鬼娘ニュアンス / Feminine Vibe", items: [
+            { ja: "妖艶な鬼姫", en: "seductive oni princess" },
+            { ja: "可愛い鬼娘", en: "cute oni girl" },
+            { ja: "宴会鬼娘", en: "party oni girl" }
+          ]},
+          { title: "🏮 舞台・場面 / Stage & Scene", items: [
+            { ja: "節分ステージ鬼", en: "setsubun stage oni" },
+            { ja: "宴会場の鬼コス", en: "oni costume for banquet hall" },
+            { ja: "和祭り背景向け鬼衣装", en: "oni outfit for japanese festival backdrop" }
+          ]}
+        ]
+      },
+      {
+        title: "🎅 サンタ衣装特化コレクション",
+        children: [
+          {
+            title: "🎅 サンタ衣装セット / Santa Presets",
+            children: [
+              { title: "🎄 王道サンタ", items: [
+                { ja: "王道サンタ衣装セット", en: "classic santa outfit set" },
+                { ja: "赤白ファー付きサンタセット", en: "red and white fur-trimmed santa set" },
+                { ja: "聖夜向けサンタコスチューム", en: "holy-night santa costume" }
+              ]},
+              { title: "✨ 可愛いサンタ", items: [
+                { ja: "可愛いミニサンタセット", en: "cute mini santa set" },
+                { ja: "ふわもこサンタコーデ", en: "fluffy santa coordination" },
+                { ja: "リボン多めの可愛いサンタ", en: "cute santa with abundant ribbons" }
+              ]},
+              { title: "💃 セクシーサンタ", items: [
+                { ja: "セクシーサンタ衣装セット", en: "sexy santa outfit set" },
+                { ja: "サンタビキニアレンジセット", en: "santa bikini arrangement set" },
+                { ja: "脚見せサンタコーデ", en: "leg-revealing santa coordination" }
+              ]},
+              { title: "🌨 雪夜サンタ", items: [
+                { ja: "雪夜のサンタ衣装セット", en: "snowy-night santa outfit set" },
+                { ja: "ケープ付き冬サンタ", en: "winter santa with cape" },
+                { ja: "雪景色向けサンタドレス", en: "santa dress for snowy scenery" }
+              ]}
+            ]
+          },
+          {
+            title: "🧥 サンタ衣装ベース / Base Collection",
+            children: [
+              { title: "🎅 基本ベース", items: [
+                { ja: "サンタコス", en: "santa costume" },
+                { ja: "ロングサンタドレス", en: "long santa dress" },
+                { ja: "ワンピース型サンタ衣装", en: "one-piece santa outfit" }
+              ]},
+              { title: "👙 露出高めベース", items: [
+                { ja: "サンタ (ビキニ)", en: "santa bikini" },
+                { ja: "ミニサンタ衣装", en: "mini santa outfit" },
+                { ja: "肩出しサンタドレス", en: "off-shoulder santa dress" }
+              ]},
+              { title: "🧣 冬装備ベース", items: [
+                { ja: "ケープ付きサンタ", en: "santa with cape" },
+                { ja: "ファー付きサンタ衣装", en: "fur-trimmed santa outfit" },
+                { ja: "パンツスタイルサンタ", en: "pants-style santa outfit" }
+              ]},
+              { title: "👑 変化球ベース", items: [
+                { ja: "姫系サンタ衣装", en: "princess-style santa outfit" },
+                { ja: "ステージ映えサンタ", en: "stage-ready santa outfit" },
+                { ja: "ゴージャスサンタドレス", en: "gorgeous santa dress" }
+              ]}
+            ]
+          },
+          {
+            title: "🎀 サンタカスタマイズ / Customization",
+            children: [
+              { title: "🎩 帽子・ファー / Hat & Fur", items: [
+                { ja: "大きなサンタ帽", en: "large santa hat" },
+                { ja: "ふわふわファートリム", en: "fluffy fur trim" },
+                { ja: "ケープ追加", en: "cape addition" }
+              ]},
+              { title: "🎗 リボン・ベルト / Ribbon & Belt", items: [
+                { ja: "大リボン追加", en: "oversized ribbon addition" },
+                { ja: "太ベルト強調", en: "accentuated wide belt" },
+                { ja: "鈴付きリボン", en: "ribbon with bells" }
+              ]},
+              { title: "🩹 露出・フィット / Exposure & Fit", items: [
+                { ja: "肩出しサンタ", en: "off-shoulder santa" },
+                { ja: "脚見せサンタ", en: "leg-revealing santa" },
+                { ja: "タイトなサンタシルエット", en: "tight santa silhouette" }
+              ]},
+              { title: "🥾 手袋・ブーツ / Gloves & Boots", items: [
+                { ja: "ロンググローブ追加", en: "long gloves addition" },
+                { ja: "もこもこブーツ", en: "fluffy boots" },
+                { ja: "冬用厚手手袋", en: "thick winter gloves" }
+              ]}
+            ]
+          },
+          {
+            title: "🎄 サンタ設定 / Mood & Scene",
+            children: [
+              { title: "😊 ムード / Mood", items: [
+                { ja: "優しい配り役サンタ", en: "gentle gift-giving santa" },
+                { ja: "いたずらサンタ", en: "mischievous santa" },
+                { ja: "聖夜の姫サンタ", en: "holy-night princess santa" }
+              ]},
+              { title: "🎭 役割 / Role", items: [
+                { ja: "プレゼント配達サンタ", en: "gift-delivery santa" },
+                { ja: "パーティーサンタ", en: "party santa" },
+                { ja: "ステージサンタ", en: "stage santa" }
+              ]},
+              { title: "❄ 場面 / Scene", items: [
+                { ja: "雪景色のサンタ", en: "santa in snowy scenery" },
+                { ja: "暖炉前のサンタ", en: "santa in front of fireplace" },
+                { ja: "深夜配達のサンタ", en: "late-night delivery santa" }
+              ]},
+              { title: "🎁 小物演出 / Props", items: [
+                { ja: "プレゼント袋付き", en: "with gift sack" },
+                { ja: "キャンディケイン付き", en: "with candy cane" },
+                { ja: "ベル飾り付き", en: "with bell ornaments" }
+              ]}
+            ]
+          }
+        ]
+      },
+      {
+        title: "🎃 ハロウィン衣装特化コレクション",
+        children: [
+          {
+            title: "🎃 ハロウィン衣装セット / Halloween Presets",
+            children: [
+              { title: "🎃 カボチャ・ランタン", items: [
+                { ja: "ジャック・オー・ランタンセット", en: "jack-o-lantern outfit set" },
+                { ja: "カボチャモンスター衣装", en: "pumpkin monster outfit" },
+                { ja: "パンプキンドレスセット", en: "pumpkin dress set" }
+              ]},
+              { title: "👻 ゴースト・ホラー", items: [
+                { ja: "幽霊娘セット", en: "ghost girl set" },
+                { ja: "ミイラ衣装セット", en: "mummy outfit set" },
+                { ja: "フランケンシュタインセット", en: "frankenstein outfit set" }
+              ]},
+              { title: "🧛 夜の怪物", items: [
+                { ja: "ドラキュラセット", en: "dracula outfit set" },
+                { ja: "死神セット", en: "grim reaper outfit set" },
+                { ja: "骸骨セット", en: "skeleton outfit set" }
+              ]},
+              { title: "🧙 可愛い仮装", items: [
+                { ja: "魔女セット", en: "witch outfit set" },
+                { ja: "黒猫ハロウィンセット", en: "black cat halloween set" },
+                { ja: "キョンシーセット", en: "jiangshi outfit set" }
+              ]}
+            ]
+          },
+          {
+            title: "👗 ハロウィン衣装ベース / Base Collection",
+            children: [
+              { title: "🎃 モンスターベース", items: [
+                { ja: "カボチャドレス", en: "pumpkin dress" },
+                { ja: "おばけシーツ風衣装", en: "ghost-sheet style outfit" },
+                { ja: "ミイラ包帯衣装", en: "mummy bandage outfit" }
+              ]},
+              { title: "🧛 ダークベース", items: [
+                { ja: "ドラキュラマント", en: "dracula cape" },
+                { ja: "フランケン衣装", en: "frankenstein outfit" },
+                { ja: "死神ローブ", en: "grim reaper robe" }
+              ]},
+              { title: "🎀 可愛い仮装ベース", items: [
+                { ja: "ハロウィンメイド", en: "halloween maid outfit" },
+                { ja: "ハロウィンナース", en: "halloween nurse outfit" },
+                { ja: "ハロウィンバニー", en: "halloween bunny outfit" }
+              ]},
+              { title: "🀄 東洋ホラーベース", items: [
+                { ja: "キョンシー衣装", en: "jiangshi outfit" },
+                { ja: "中華ホラー衣装", en: "chinese horror outfit" },
+                { ja: "霊符付きキョンシー服", en: "jiangshi outfit with talisman" }
+              ]}
+            ]
+          },
+          {
+            title: "🛠 ハロウィンカスタマイズ / Customization",
+            children: [
+              { title: "🎃 モチーフ装飾 / Motifs", items: [
+                { ja: "カボチャ飾り", en: "pumpkin ornaments" },
+                { ja: "コウモリ飾り", en: "bat ornaments" },
+                { ja: "蜘蛛の巣レース", en: "spiderweb lace" }
+              ]},
+              { title: "🦇 変身パーツ / Monster Parts", items: [
+                { ja: "牙追加", en: "fangs added" },
+                { ja: "羽追加", en: "wings added" },
+                { ja: "猫耳追加", en: "cat ears added" }
+              ]},
+              { title: "🩹 露出・破れ / Exposure & Damage", items: [
+                { ja: "肩出しハロウィン", en: "off-shoulder halloween outfit" },
+                { ja: "脚見せハロウィン", en: "leg-revealing halloween outfit" },
+                { ja: "破れ裾", en: "torn hem" }
+              ]},
+              { title: "🎨 配色・発光 / Color & Glow", items: [
+                { ja: "オレンジ×黒配色", en: "orange and black palette" },
+                { ja: "紫×黒配色", en: "purple and black palette" },
+                { ja: "怪しいグロー演出", en: "eerie glow effect" }
+              ]}
+            ]
+          },
+          {
+            title: "🌙 ハロウィン設定 / Mood & Scene",
+            children: [
+              { title: "😈 ムード / Mood", items: [
+                { ja: "いたずら好きハロウィン娘", en: "mischievous halloween girl" },
+                { ja: "可愛いおばけ娘", en: "cute ghost girl" },
+                { ja: "吸血鬼の姫", en: "vampire princess" }
+              ]},
+              { title: "🎭 役割 / Role", items: [
+                { ja: "お菓子配り役", en: "candy-giving role" },
+                { ja: "夜のパレード役", en: "night parade role" },
+                { ja: "ゴシック屋敷の令嬢", en: "lady of the gothic mansion" }
+              ]},
+              { title: "🏰 場面 / Scene", items: [
+                { ja: "墓場の花嫁", en: "bride of the graveyard" },
+                { ja: "深夜の仮装ステージ", en: "late-night costume stage" },
+                { ja: "月夜のハロウィン街", en: "moonlit halloween street" }
+              ]},
+              { title: "🍬 小物演出 / Props", items: [
+                { ja: "キャンディバケツ付き", en: "with candy bucket" },
+                { ja: "トリックオアトリート看板", en: "trick-or-treat sign" },
+                { ja: "ランタン提灯付き", en: "with lantern prop" }
+              ]}
+            ]
+          }
+        ]
+      },
+      {
+        title: "🍫 バレンタイン衣装特化コレクション",
+        children: [
+          {
+            title: "🍫 バレンタイン衣装セット / Valentine Presets",
+            children: [
+              { title: "💝 王道バレンタイン", items: [
+                { ja: "王道バレンタイン衣装セット", en: "classic valentine outfit set" },
+                { ja: "ハートいっぱいバレンタインセット", en: "heart-filled valentine set" },
+                { ja: "赤とチョコ色の王道コーデ", en: "classic red and chocolate valentine coordination" },
+                { ja: "メルトチョコレート衣装セット", en: "melt chocolate valentine outfit" }
+              ]},
+              { title: "🍓 甘ロリ・可愛い系", items: [
+                { ja: "甘ロリバレンタインセット", en: "sweet lolita valentine set" },
+                { ja: "いちごモチーフバレンタイン", en: "strawberry motif valentine outfit" },
+                { ja: "フリル多めの可愛いバレンタイン", en: "frill-rich cute valentine outfit" }
+              ]},
+              { title: "😈 小悪魔・攻め系", items: [
+                { ja: "小悪魔バレンタインセット", en: "little-devil valentine set" },
+                { ja: "大人っぽいバレンタインコーデ", en: "mature valentine coordination" },
+                { ja: "攻め気味のハートドレス", en: "assertive heart dress" }
+              ]},
+              { title: "🍰 手作り・お仕事系", items: [
+                { ja: "手作りチョコ娘セット", en: "handmade chocolate girl set" },
+                { ja: "ショコラティエ風セット", en: "chocolatier-style set" },
+                { ja: "メイドバレンタインセット", en: "maid valentine set" }
+              ]}
+            ]
+          },
+          {
+            title: "🎀 バレンタイン衣装ベース / Base Collection",
+            children: [
+              { title: "👗 基本ベース", items: [
+                { ja: "チョコ色ワンピース", en: "chocolate-colored one-piece dress" },
+                { ja: "赤リボンドレス", en: "red ribbon dress" },
+                { ja: "ミニバレンタインドレス", en: "mini valentine dress" },
+                { ja: "リボンボディ", en: "ribbon body" }
+              ]},
+              { title: "🍳 エプロン・調理系", items: [
+                { ja: "ハートエプロン", en: "heart apron" },
+                { ja: "パティシエ服", en: "pastry chef outfit" },
+                { ja: "チョコ作りエプロンコーデ", en: "apron coordination for chocolate making" }
+              ]},
+              { title: "🏫 学園・日常ベース", items: [
+                { ja: "甘め制服アレンジ", en: "sweet school uniform arrangement" },
+                { ja: "放課後バレンタイン制服", en: "after-school valentine uniform" },
+                { ja: "カフェ店員風バレンタイン服", en: "cafe staff-style valentine outfit" }
+              ]},
+              { title: "🎂 変化球ベース", items: [
+                { ja: "ハート柄パーティードレス", en: "heart-pattern party dress" },
+                { ja: "ショコラカラー姫ドレス", en: "chocolate-color princess dress" },
+                { ja: "ラッピング風ワンピース", en: "gift-wrap style one-piece dress" },
+                { ja: "チョコスライムボディ", en: "chocolate slime body" },
+                { ja: "ダークチョコボディスーツ", en: "dark chocolate bodysuit" },
+                { ja: "全身チョコ融合衣装", en: "body fused with chocolate" },
+                { ja: "液状ウエスト衣装", en: "liquid-like waist outfit" },
+                { ja: "メルトチョコ肌ベース", en: "melt chocolate skin base" }
+              ]}
+            ]
+          },
+          {
+            title: "🍓 バレンタインカスタマイズ / Customization",
+            children: [
+              { title: "💗 ハート・柄 / Hearts & Patterns", items: [
+                { ja: "ハート飾り", en: "heart ornaments" },
+                { ja: "チョコレート柄", en: "chocolate pattern" },
+                { ja: "いちごモチーフ", en: "strawberry motif" }
+              ]},
+              { title: "🎀 リボン・包装 / Ribbon & Wrapping", items: [
+                { ja: "包装リボン", en: "wrapping ribbon" },
+                { ja: "ラッピング箱付き", en: "with gift wrapping box" },
+                { ja: "ギフトタグ付き", en: "with gift tag" }
+              ]},
+              { title: "🎨 色・質感 / Color & Texture", items: [
+                { ja: "赤×茶配色", en: "red and brown palette" },
+                { ja: "ココア色", en: "cocoa color" },
+                { ja: "チョコ光沢感", en: "chocolate gloss texture" },
+                { ja: "溶けチョコ光沢", en: "melting chocolate gloss" },
+                { ja: "融解チョコ肌", en: "melting chocolate skin" },
+                { ja: "ぬるりとした表面反射", en: "slick reflective surface" },
+                { ja: "クリアコート反射", en: "clearcoat reflections" },
+                { ja: "粗さ変化のあるチョコ質感", en: "roughness variation chocolate texture" },
+                { ja: "ダークチョコ配色", en: "dark chocolate palette" },
+                { ja: "艶髪・グロッシーヘア", en: "shiny glossy hair" },
+                { ja: "甘い光沢ハイライト", en: "sweet glossy highlights" }
+              ]},
+              { title: "🍫 演出・仕上げ / Effects", items: [
+                { ja: "溶けチョコ演出", en: "melting chocolate effect" },
+                { ja: "甘い湯気演出", en: "sweet steam effect" },
+                { ja: "ハート飛び演出", en: "floating hearts effect" },
+                { ja: "チョコ融合表現", en: "chocolate fusion effect" },
+                { ja: "粘性ボディライン", en: "viscous body silhouette" }
+              ]}
+            ]
+          },
+          {
+            title: "💌 バレンタイン設定 / Mood & Scene",
+            children: [
+              { title: "😊 ムード / Mood", items: [
+                { ja: "照れ渡し", en: "bashful gift-giving" },
+                { ja: "本命チョコの緊張感", en: "nervousness before giving true-love chocolate" },
+                { ja: "義理チョコ風の軽さ", en: "casual obligation-chocolate vibe" },
+                { ja: "不安げな微笑み", en: "nervous smile" },
+                { ja: "視線そらし", en: "looking away" },
+                { ja: "恥じらい", en: "shy" }
+              ]},
+              { title: "🎭 役割 / Role", items: [
+                { ja: "渡す直前", en: "just before giving the gift" },
+                { ja: "隠し持っている", en: "secretly carrying chocolate" },
+                { ja: "カフェ販売役", en: "cafe sales role" }
+              ]},
+              { title: "🏫 場面 / Scene", items: [
+                { ja: "放課後告白シーン", en: "after-school confession scene" },
+                { ja: "キッチン手作りシーン", en: "kitchen handmade chocolate scene" },
+                { ja: "バレンタイン売り場の前", en: "in front of valentine display stand" },
+                { ja: "居心地の良い現代カフェ", en: "cozy modern café" },
+                { ja: "窓際席", en: "window seat" },
+                { ja: "コーヒーとスイーツ", en: "coffee and sweets" },
+                { ja: "光のガーランド", en: "string lights" },
+                { ja: "飾りつけ", en: "decorations" }
+              ]},
+              { title: "🎁 小物演出 / Props", items: [
+                { ja: "チョコ箱付き", en: "with chocolate box" },
+                { ja: "ハート風船付き", en: "with heart balloons" },
+                { ja: "プレゼント袋付き", en: "with gift bag" }
+              ]}
+            ]
+          }
+        ]
+      },
+      {
+        title: "🤍 ホワイトデー衣装特化コレクション",
+        children: [
+          {
+            title: "🤍 ホワイトデー衣装セット / White Day Presets",
+            children: [
+              { title: "🤍 王道ホワイトデー", items: [
+                { ja: "王道ホワイトデー衣装セット", en: "classic white day outfit set" },
+                { ja: "上品ホワイトデーセット", en: "elegant white day set" },
+                { ja: "花束ホワイトデーセット", en: "bouquet white day set" }
+              ]},
+              { title: "🍪 クッキー特別枠", items: [
+                { ja: "アイシングクッキー衣装セット", en: "icing cookie outfit set" },
+                { ja: "シュガークッキーギフトセット", en: "sugar cookie gift set" },
+                { ja: "焼き菓子プリンセスセット", en: "baked sweets princess set" },
+                { ja: "クッキーラッピングドレスセット", en: "cookie wrapping dress set" }
+              ]},
+              { title: "🎀 可愛い・清楚系", items: [
+                { ja: "ミントリボンホワイトデー", en: "mint ribbon white day outfit" },
+                { ja: "レース清楚ホワイトデー", en: "lace pure white day outfit" },
+                { ja: "パステルギフト風ホワイトデー", en: "pastel gift-style white day outfit" }
+              ]},
+              { title: "☕ カフェ・返礼系", items: [
+                { ja: "カフェ返礼ホワイトデーセット", en: "cafe return-gift white day set" },
+                { ja: "焼き菓子ギフトコーデ", en: "baked sweets gift coordination" },
+                { ja: "午後の窓辺ホワイトデー", en: "afternoon window-seat white day outfit" }
+              ]}
+            ]
+          },
+          {
+            title: "🎀 ホワイトデー衣装ベース / Base Collection",
+            children: [
+              { title: "👗 基本ベース", items: [
+                { ja: "白ワンピース", en: "white one-piece dress" },
+                { ja: "白×水色ドレス", en: "white and light blue dress" },
+                { ja: "ミントリボンドレス", en: "mint ribbon dress" }
+              ]},
+              { title: "🍪 クッキーベース", items: [
+                { ja: "クッキー生地ドレス", en: "cookie dough dress" },
+                { ja: "ビスケット風ワンピース", en: "biscuit-style one-piece dress" },
+                { ja: "アイシングライン衣装", en: "icing line outfit" },
+                { ja: "シュガークッキーボディ", en: "sugar cookie body" },
+                { ja: "焼き色ベージュドレス", en: "baked beige dress" }
+              ]},
+              { title: "🏫 学園・日常ベース", items: [
+                { ja: "放課後ホワイトデー制服", en: "after-school white day uniform" },
+                { ja: "カフェ店員風ホワイトデー服", en: "cafe staff-style white day outfit" },
+                { ja: "ギフト渡し用お返しコーデ", en: "return-gift giving coordination" }
+              ]},
+              { title: "💐 上品・贈答ベース", items: [
+                { ja: "レース付き清楚ドレス", en: "lace-trimmed pure dress" },
+                { ja: "花束持ちホワイトデードレス", en: "bouquet-carrying white day dress" },
+                { ja: "ギフトボックス姫ドレス", en: "gift box princess dress" }
+              ]}
+            ]
+          },
+          {
+            title: "🍪 ホワイトデーカスタマイズ / Customization",
+            children: [
+              { title: "🍪 クッキー装飾 / Cookie Details", items: [
+                { ja: "白アイシング装飾", en: "white icing decoration" },
+                { ja: "ハート型クッキー飾り", en: "heart cookie ornaments" },
+                { ja: "星型クッキー飾り", en: "star cookie ornaments" },
+                { ja: "クッキー縁取り", en: "cookie edge trim" }
+              ]},
+              { title: "🍬 砂糖・焼き菓子感 / Sugar & Baked Texture", items: [
+                { ja: "粉砂糖感", en: "powdered sugar texture" },
+                { ja: "焼き色グラデーション", en: "baked color gradient" },
+                { ja: "サクほろ質感", en: "crisp crumbly texture" },
+                { ja: "パステル糖衣", en: "pastel sugar coating" }
+              ]},
+              { title: "🎀 包装・贈答 / Wrapping & Gift", items: [
+                { ja: "白リボン", en: "white ribbon" },
+                { ja: "水色リボン", en: "light blue ribbon" },
+                { ja: "ギフトボックス", en: "gift box" },
+                { ja: "ラッピングタグ", en: "wrapping tag" }
+              ]},
+              { title: "✨ 上品仕上げ / Elegant Finish", items: [
+                { ja: "パール飾り", en: "pearl ornaments" },
+                { ja: "ミント配色", en: "mint palette" },
+                { ja: "白×金アクセント", en: "white and gold accents" },
+                { ja: "軽い光沢", en: "soft glossy finish" }
+              ]}
+            ]
+          },
+          {
+            title: "💐 ホワイトデー設定 / Mood & Scene",
+            children: [
+              { title: "😊 ムード / Mood", items: [
+                { ja: "柔らかな笑顔", en: "gentle smile" },
+                { ja: "上品な照れ", en: "elegant shyness" },
+                { ja: "ありがとうの余韻", en: "lingering gratitude" }
+              ]},
+              { title: "🎭 役割 / Role", items: [
+                { ja: "お返しを渡す直前", en: "just before giving the return gift" },
+                { ja: "花束と一緒に渡す", en: "giving together with bouquet" },
+                { ja: "焼き菓子ギフトを差し出す", en: "offering baked sweets gift" }
+              ]},
+              { title: "🏫 場面 / Scene", items: [
+                { ja: "放課後の返礼シーン", en: "after-school return gift scene" },
+                { ja: "カフェ窓辺", en: "café window seat" },
+                { ja: "春の午後", en: "spring afternoon" },
+                { ja: "午後の窓辺ホワイトデー", en: "afternoon window-seat white day" }
+              ]},
+              { title: "🎁 小物演出 / Props", items: [
+                { ja: "クッキー缶付き", en: "with cookie tin" },
+                { ja: "マカロン小箱付き", en: "with macaron gift box" },
+                { ja: "花束と紙袋", en: "bouquet and paper gift bag" }
+              ]}
+            ]
+          }
+        ]
+      },
+      {
+        title: "🎍 正月衣装特化コレクション",
+        children: [
+          {
+            title: "🎍 正月衣装セット / New Year Presets",
+            children: [
+              { title: "🎍 晴れ着・祝い装束", items: [
+                { ja: "王道晴れ着セット", en: "classic new year haregi set" },
+                { ja: "祝いの赤白晴れ着", en: "red and white celebratory haregi" },
+                { ja: "華やかな正月和装セット", en: "gorgeous new year japanese outfit set" }
+              ]},
+              { title: "⛩ 初詣・神社参り", items: [
+                { ja: "初詣セット", en: "first shrine visit set" },
+                { ja: "神社参り和装セット", en: "shrine visit japanese outfit set" },
+                { ja: "冬神社の正月コーデ", en: "new year coordination for winter shrine" }
+              ]},
+              { title: "🕊 巫女・清楚系", items: [
+                { ja: "巫女風正月セット", en: "miko-style new year set" },
+                { ja: "清楚な白赤和装", en: "pure white and red japanese outfit" },
+                { ja: "祈願風お正月衣装", en: "prayer-inspired new year outfit" }
+              ]},
+              { title: "✨ 縁起・祝福系", items: [
+                { ja: "縁起物いっぱいセット", en: "good-luck ornament new year set" },
+                { ja: "門松と映える祝い衣装", en: "celebratory outfit that shines with kadomatsu" },
+                { ja: "福を呼ぶ正月装い", en: "new year attire that invites good fortune" }
+              ]}
+            ]
+          },
+          {
+            title: "👘 正月衣装ベース / Base Collection",
+            children: [
+              { title: "👘 晴れ着ベース", items: [
+                { ja: "正月晴れ着", en: "new year haregi" },
+                { ja: "振袖ベース", en: "furisode base" },
+                { ja: "祝い帯つき着物", en: "kimono with celebratory obi" }
+              ]},
+              { title: "⛩ 神社・初詣ベース", items: [
+                { ja: "初詣和装", en: "first shrine visit outfit" },
+                { ja: "冬神社参拝衣装", en: "winter shrine worship outfit" },
+                { ja: "羽織付き初詣コーデ", en: "first shrine visit coordination with haori" }
+              ]},
+              { title: "🕊 巫女ベース", items: [
+                { ja: "巫女服ベース", en: "miko attire base" },
+                { ja: "白赤の巫女風衣装", en: "white and red miko-style outfit" },
+                { ja: "祈祷風和装ベース", en: "prayer-style japanese outfit base" }
+              ]},
+              { title: "🎀 祝い装飾ベース", items: [
+                { ja: "赤白リボン和装", en: "red and white ribbon japanese outfit" },
+                { ja: "金縁飾りの和装", en: "gold-trimmed japanese outfit" },
+                { ja: "祝賀模様入りドレス和装", en: "dress-like japanese outfit with celebratory patterns" }
+              ]}
+            ]
+          },
+          {
+            title: "✨ 正月カスタマイズ / Customization",
+            children: [
+              { title: "🎀 祝い色・帯 / Festive Colors & Obi", items: [
+                { ja: "祝いの赤白配色", en: "red and white celebratory palette" },
+                { ja: "金の差し色", en: "gold accent color" },
+                { ja: "華やかな帯結び", en: "ornate obi knot" },
+                { ja: "透け感ある飾り帯", en: "decorative translucent obi" }
+              ]},
+              { title: "🎍 縁起物装飾 / Good Luck Ornaments", items: [
+                { ja: "門松モチーフ", en: "kadomatsu motif" },
+                { ja: "破魔矢飾り", en: "hamaya ornament" },
+                { ja: "羽子板モチーフ", en: "hagoita motif" },
+                { ja: "福袋風アクセント", en: "lucky bag accent" }
+              ]},
+              { title: "🌸 柄・質感 / Pattern & Texture", items: [
+                { ja: "梅柄", en: "plum blossom pattern" },
+                { ja: "松竹梅模様", en: "pine bamboo plum pattern" },
+                { ja: "和紙風質感", en: "washi paper texture" },
+                { ja: "絹の光沢", en: "silk gloss" }
+              ]},
+              { title: "💡 小物・仕上げ / Props & Finish", items: [
+                { ja: "提灯小物", en: "lantern accessory" },
+                { ja: "和傘アクセント", en: "japanese umbrella accent" },
+                { ja: "鈴飾り", en: "bell ornament" },
+                { ja: "祝賀の紙吹雪", en: "celebratory confetti" }
+              ]}
+            ]
+          },
+          {
+            title: "🌅 正月設定 / Mood & Scene",
+            children: [
+              { title: "😊 ムード / Mood", items: [
+                { ja: "新年の晴れやかさ", en: "bright new year mood" },
+                { ja: "上品な微笑み", en: "elegant smile" },
+                { ja: "静かな祈り", en: "quiet prayer" }
+              ]},
+              { title: "🎭 役割 / Role", items: [
+                { ja: "初詣の参拝者", en: "first shrine visit worshipper" },
+                { ja: "巫女役", en: "miko role" },
+                { ja: "新年の迎え手", en: "welcomer of the new year" }
+              ]},
+              { title: "⛩ 場面 / Scene", items: [
+                { ja: "神社の参道", en: "shrine approach" },
+                { ja: "鳥居の前", en: "in front of torii gate" },
+                { ja: "門松の並ぶ玄関先", en: "entrance lined with kadomatsu" },
+                { ja: "朝の初詣", en: "morning first shrine visit" }
+              ]},
+              { title: "🎁 小物演出 / Props", items: [
+                { ja: "破魔矢を持つ", en: "holding a hamaya arrow" },
+                { ja: "羽子板を持つ", en: "holding a hagoita paddle" },
+                { ja: "おみくじ付き", en: "with omikuji fortune slip" },
+                { ja: "門松背景", en: "with kadomatsu backdrop" }
+              ]}
+            ]
+          }
+        ]
+      },
+      {
+        title: "🏮 夏祭り衣装特化コレクション",
+        children: [
+          {
+            title: "🏮 夏祭り衣装セット / Summer Festival Presets",
+            children: [
+              { title: "👘 浴衣・王道", items: [
+                { ja: "王道夏祭り浴衣セット", en: "classic summer festival yukata set" },
+                { ja: "花火映え浴衣セット", en: "fireworks-enhancing yukata set" },
+                { ja: "涼やか夏夜の祭り衣装", en: "cool summer-night festival outfit" }
+              ]},
+              { title: "🎆 花火・夜祭り", items: [
+                { ja: "花火見物セット", en: "fireworks-viewing outfit set" },
+                { ja: "夜店映え祭りコーデ", en: "night-stall festival coordination" },
+                { ja: "灯りに映える夏祭り装い", en: "summer festival attire glowing in lantern light" }
+              ]},
+              { title: "🍎 屋台・食べ歩き", items: [
+                { ja: "屋台歩きセット", en: "festival stall-walking set" },
+                { ja: "りんご飴祭りコーデ", en: "candied apple festival coordination" },
+                { ja: "食べ歩き向け夏祭り衣装", en: "summer festival outfit for eating while walking" }
+              ]},
+              { title: "🐟 金魚すくい・遊戯", items: [
+                { ja: "金魚すくいセット", en: "goldfish scooping outfit set" },
+                { ja: "縁日遊びコーデ", en: "festival game booth coordination" },
+                { ja: "射的・遊戯向け祭り衣装", en: "festival outfit for shooting gallery and games" }
+              ]}
+            ]
+          },
+          {
+            title: "👘 夏祭り衣装ベース / Base Collection",
+            children: [
+              { title: "👘 浴衣ベース", items: [
+                { ja: "夏祭り浴衣", en: "summer festival yukata" },
+                { ja: "花火柄浴衣", en: "firework-pattern yukata" },
+                { ja: "涼風浴衣ベース", en: "cool-breeze yukata base" }
+              ]},
+              { title: "🏮 法被・祭り装束", items: [
+                { ja: "法被", en: "happi coat" },
+                { ja: "祭り半纏", en: "festival hanten" },
+                { ja: "ねじり鉢巻き祭り装束", en: "festival outfit with twisted headband" }
+              ]},
+              { title: "🍡 屋台・歩き回りベース", items: [
+                { ja: "屋台歩き和装", en: "stall-walking japanese outfit" },
+                { ja: "食べ歩きしやすい祭り衣装", en: "festival outfit suited for eating while walking" },
+                { ja: "軽装夏祭りコーデ", en: "lightweight summer festival coordination" }
+              ]},
+              { title: "🎇 遊戯・縁日ベース", items: [
+                { ja: "金魚すくい向け浴衣", en: "yukata for goldfish scooping" },
+                { ja: "縁日遊戯向け和装", en: "japanese outfit for festival games" },
+                { ja: "射的向け祭りコーデ", en: "festival coordination for shooting gallery" }
+              ]}
+            ]
+          },
+          {
+            title: "✨ 夏祭りカスタマイズ / Customization",
+            children: [
+              { title: "🎆 花火・夜光 / Fireworks & Night Lights", items: [
+                { ja: "花火柄", en: "firework pattern" },
+                { ja: "夜空グラデーション", en: "night-sky gradient" },
+                { ja: "提灯光ハイライト", en: "lantern-light highlights" },
+                { ja: "きらめきラメ", en: "sparkling glitter" }
+              ]},
+              { title: "🍎 屋台小物 / Festival Stall Props", items: [
+                { ja: "りんご飴", en: "candied apple" },
+                { ja: "チョコバナナ", en: "chocolate banana" },
+                { ja: "綿あめ", en: "cotton candy" },
+                { ja: "たこ焼き舟皿", en: "takoyaki boat tray" }
+              ]},
+              { title: "🐟 遊び小物 / Game Booth Props", items: [
+                { ja: "金魚袋", en: "goldfish bag" },
+                { ja: "ポイ", en: "goldfish scooping paper scoop" },
+                { ja: "射的景品", en: "shooting gallery prize" },
+                { ja: "ヨーヨー風船", en: "yo-yo balloon" }
+              ]},
+              { title: "🎀 帯・飾り / Obi & Accessories", items: [
+                { ja: "大きな帯結び", en: "large obi knot" },
+                { ja: "飾り紐アクセント", en: "decorative cord accent" },
+                { ja: "うちわ", en: "uchiwa fan" },
+                { ja: "髪飾りの花火モチーフ", en: "firework motif hair ornament" }
+              ]}
+            ]
+          },
+          {
+            title: "🌙 夏祭り設定 / Mood & Scene",
+            children: [
+              { title: "😊 ムード / Mood", items: [
+                { ja: "夏夜の高揚感", en: "summer night excitement" },
+                { ja: "少しはしゃいだ笑顔", en: "slightly excited smile" },
+                { ja: "夜風に揺れる", en: "swaying in the night breeze" }
+              ]},
+              { title: "🎭 役割 / Role", items: [
+                { ja: "屋台めぐり役", en: "festival stall wanderer" },
+                { ja: "花火見物役", en: "fireworks viewer" },
+                { ja: "縁日遊び役", en: "festival game player" }
+              ]},
+              { title: "🏮 場面 / Scene", items: [
+                { ja: "提灯の並ぶ夜店通り", en: "night stall street lined with lanterns" },
+                { ja: "花火の上がる川辺", en: "riverside with fireworks" },
+                { ja: "金魚すくいの屋台前", en: "in front of a goldfish scooping stall" },
+                { ja: "夏祭り会場の真ん中", en: "in the center of the summer festival venue" }
+              ]},
+              { title: "🎁 小物演出 / Props", items: [
+                { ja: "りんご飴を持つ", en: "holding a candied apple" },
+                { ja: "うちわを持つ", en: "holding an uchiwa fan" },
+                { ja: "金魚袋を持つ", en: "holding a goldfish bag" },
+                { ja: "花火の火花背景", en: "fireworks spark backdrop" }
+              ]}
+            ]
+          }
+        ]
+      },
+      {
+        title: "🌕 お月見衣装特化コレクション",
+        children: [
+          {
+            title: "🌕 お月見衣装セット / Moon Viewing Presets",
+            children: [
+              { title: "🌕 月夜・王道", items: [
+                { ja: "王道お月見衣装セット", en: "classic moon viewing outfit set" },
+                { ja: "月見に映える和装セット", en: "japanese outfit set that shines at moon viewing" },
+                { ja: "月光をまとうお月見装い", en: "moonlight-clad moon viewing attire" }
+              ]},
+              { title: "🎑 すすき・秋夜", items: [
+                { ja: "すすき月見セット", en: "susuki moon-viewing set" },
+                { ja: "秋夜の月見和装", en: "autumn night moon-viewing japanese outfit" },
+                { ja: "静かな秋空お月見コーデ", en: "quiet autumn sky moon-viewing coordination" }
+              ]},
+              { title: "🍡 和菓子・縁側", items: [
+                { ja: "縁側お月見セット", en: "engawa moon-viewing set" },
+                { ja: "月見団子と映える和装", en: "japanese outfit that pairs with moon-viewing dango" },
+                { ja: "和菓子添えお月見衣装", en: "moon-viewing outfit with japanese sweets" }
+              ]},
+              { title: "✨ 幻想・月姫", items: [
+                { ja: "月姫風お月見セット", en: "moon princess-inspired moon-viewing set" },
+                { ja: "幻想月見ドレス", en: "fantasy moon-viewing dress" },
+                { ja: "月下美人のお月見装い", en: "moonlit beauty moon-viewing attire" }
+              ]}
+            ]
+          },
+          {
+            title: "👘 お月見衣装ベース / Base Collection",
+            children: [
+              { title: "👘 和装ベース", items: [
+                { ja: "お月見浴衣", en: "moon-viewing yukata" },
+                { ja: "秋柄和装", en: "autumn-pattern japanese outfit" },
+                { ja: "月見向け和風ドレス", en: "japanese-style dress for moon viewing" }
+              ]},
+              { title: "🌕 月モチーフベース", items: [
+                { ja: "月光ドレス", en: "moonlight dress" },
+                { ja: "月模様ワンピース", en: "moon-pattern one-piece dress" },
+                { ja: "夜空グラデ着物", en: "night-sky gradient kimono" }
+              ]},
+              { title: "🎑 秋夜ベース", items: [
+                { ja: "すすき飾り和装", en: "susuki-decorated japanese outfit" },
+                { ja: "縁側向け和装ベース", en: "japanese outfit base for engawa setting" },
+                { ja: "静かな秋夜の和装", en: "quiet autumn-night japanese outfit" }
+              ]},
+              { title: "🍡 和菓子ベース", items: [
+                { ja: "月見団子モチーフ衣装", en: "dango motif outfit" },
+                { ja: "和菓子色ドレス", en: "japanese sweets color dress" },
+                { ja: "甘味処風お月見コーデ", en: "moon-viewing coordination inspired by sweet shop" }
+              ]}
+            ]
+          },
+          {
+            title: "✨ お月見カスタマイズ / Customization",
+            children: [
+              { title: "🌕 月・星装飾 / Moon & Stars", items: [
+                { ja: "月モチーフ飾り", en: "moon motif ornaments" },
+                { ja: "星のきらめき", en: "star sparkle accents" },
+                { ja: "月光ハイライト", en: "moonlight highlights" },
+                { ja: "夜空グラデーション", en: "night-sky gradient" }
+              ]},
+              { title: "🎑 秋飾り / Autumn Accents", items: [
+                { ja: "すすき飾り", en: "susuki ornaments" },
+                { ja: "秋草模様", en: "autumn grass pattern" },
+                { ja: "銀の箔感", en: "silver foil accents" },
+                { ja: "薄布の涼感", en: "cool sheer fabric feel" }
+              ]},
+              { title: "🍡 和菓子・小物 / Sweets & Props", items: [
+                { ja: "月見団子小物", en: "moon-viewing dango prop" },
+                { ja: "和菓子包み", en: "wrapped japanese sweets" },
+                { ja: "盆皿アクセント", en: "tray accent" },
+                { ja: "茶器小物", en: "tea set accessory" }
+              ]},
+              { title: "🎀 帯・仕上げ / Obi & Finish", items: [
+                { ja: "月柄帯", en: "moon-pattern obi" },
+                { ja: "金銀帯飾り", en: "gold and silver obi ornaments" },
+                { ja: "上品な帯結び", en: "elegant obi knot" },
+                { ja: "静かな光沢感", en: "subtle glossy finish" }
+              ]}
+            ]
+          },
+          {
+            title: "🌌 お月見設定 / Mood & Scene",
+            children: [
+              { title: "😊 ムード / Mood", items: [
+                { ja: "静かな見上げ", en: "quiet upward gaze" },
+                { ja: "少し切ない微笑み", en: "slightly wistful smile" },
+                { ja: "秋夜の落ち着き", en: "calm autumn night mood" }
+              ]},
+              { title: "🎭 役割 / Role", items: [
+                { ja: "月を眺める人", en: "moon gazer" },
+                { ja: "縁側で待つ人", en: "one waiting on the engawa" },
+                { ja: "和菓子を供える役", en: "one offering japanese sweets" }
+              ]},
+              { title: "🏮 場面 / Scene", items: [
+                { ja: "縁側の月見", en: "moon viewing on the engawa" },
+                { ja: "すすき野原の月夜", en: "moonlit susuki field" },
+                { ja: "月の見える庭先", en: "garden with visible moon" },
+                { ja: "秋夜の静かな庭", en: "quiet autumn night garden" }
+              ]},
+              { title: "🎁 小物演出 / Props", items: [
+                { ja: "月見団子付き", en: "with moon-viewing dango" },
+                { ja: "すすき束付き", en: "with bundle of susuki" },
+                { ja: "和傘添え", en: "with japanese umbrella" },
+                { ja: "行灯の灯り", en: "andon lantern light" }
+              ]}
+            ]
+          }
+        ]
+      },
+      {
+        title: "🥚 イースター衣装特化コレクション",
+        children: [
+          {
+            title: "🥚 イースター衣装セット / Easter Presets",
+            children: [
+              { title: "🐰 うさぎ・王道", items: [
+                { ja: "王道イースターセット", en: "classic easter outfit set" },
+                { ja: "うさ耳イースターセット", en: "bunny-ear easter outfit set" },
+                { ja: "春色イースターコーデ", en: "spring-color easter coordination" }
+              ]},
+              { title: "🥚 エッグ・パステル", items: [
+                { ja: "イースターエッグセット", en: "easter egg outfit set" },
+                { ja: "パステルエッグドレス", en: "pastel egg dress set" },
+                { ja: "カラフルエッグ祭りコーデ", en: "colorful egg festival coordination" }
+              ]},
+              { title: "🌸 春花・可愛い系", items: [
+                { ja: "春花イースターセット", en: "spring flower easter set" },
+                { ja: "レース清楚イースター", en: "lace pure easter outfit" },
+                { ja: "花冠うさぎコーデ", en: "flower-crown bunny coordination" }
+              ]},
+              { title: "✨ 幻想・スイーツ寄り", items: [
+                { ja: "メルヘンイースターセット", en: "fairytale easter set" },
+                { ja: "スイーツイースターコーデ", en: "sweets-inspired easter coordination" },
+                { ja: "春の祝祭ドレス", en: "spring celebration dress" }
+              ]}
+            ]
+          },
+          {
+            title: "👗 イースター衣装ベース / Base Collection",
+            children: [
+              { title: "🐰 うさぎベース", items: [
+                { ja: "うさ耳ドレス", en: "bunny-ear dress" },
+                { ja: "うさぎモチーフワンピース", en: "rabbit motif one-piece dress" },
+                { ja: "白うさぎ風衣装", en: "white rabbit-inspired outfit" }
+              ]},
+              { title: "🥚 エッグベース", items: [
+                { ja: "エッグ柄ドレス", en: "egg-pattern dress" },
+                { ja: "パステルエッグワンピース", en: "pastel egg one-piece dress" },
+                { ja: "カラフルエッグスカート", en: "colorful egg skirt" }
+              ]},
+              { title: "🌸 春花ベース", items: [
+                { ja: "春花レースドレス", en: "spring flower lace dress" },
+                { ja: "花冠つきワンピース", en: "one-piece dress with flower crown" },
+                { ja: "花びらモチーフ衣装", en: "petal motif outfit" }
+              ]},
+              { title: "🎀 清楚・祝祭ベース", items: [
+                { ja: "白×パステルドレス", en: "white and pastel dress" },
+                { ja: "祝祭リボンドレス", en: "celebration ribbon dress" },
+                { ja: "レース付き春ワンピ", en: "spring one-piece dress with lace" }
+              ]}
+            ]
+          },
+          {
+            title: "✨ イースターカスタマイズ / Customization",
+            children: [
+              { title: "🥚 エッグ装飾 / Egg Details", items: [
+                { ja: "イースターエッグ飾り", en: "easter egg ornaments" },
+                { ja: "たまご柄", en: "egg pattern" },
+                { ja: "カラフルシェル模様", en: "colorful shell pattern" },
+                { ja: "金彩エッグアクセント", en: "gold-accent egg detail" }
+              ]},
+              { title: "🐰 うさぎパーツ / Bunny Parts", items: [
+                { ja: "うさ耳", en: "bunny ears" },
+                { ja: "しっぽ飾り", en: "tail ornament" },
+                { ja: "ふわふわファー", en: "fluffy fur trim" },
+                { ja: "うさぎ足元アクセント", en: "rabbit-foot style accent" }
+              ]},
+              { title: "🌸 春花・レース / Spring Flowers & Lace", items: [
+                { ja: "春花刺繍", en: "spring flower embroidery" },
+                { ja: "パステル花柄", en: "pastel floral pattern" },
+                { ja: "レースフリル", en: "lace frills" },
+                { ja: "花冠飾り", en: "flower crown ornament" }
+              ]},
+              { title: "🎨 配色・質感 / Color & Texture", items: [
+                { ja: "パステル配色", en: "pastel palette" },
+                { ja: "白×ミント配色", en: "white and mint palette" },
+                { ja: "白×ピンク配色", en: "white and pink palette" },
+                { ja: "やわらかな光沢", en: "soft glossy finish" }
+              ]}
+            ]
+          },
+          {
+            title: "🌷 イースター設定 / Mood & Scene",
+            children: [
+              { title: "😊 ムード / Mood", items: [
+                { ja: "春の祝祭感", en: "spring celebration mood" },
+                { ja: "やわらかな笑顔", en: "gentle smile" },
+                { ja: "軽やかな高揚感", en: "light festive excitement" }
+              ]},
+              { title: "🎭 役割 / Role", items: [
+                { ja: "エッグ運び役", en: "egg-carrying role" },
+                { ja: "春祭りの案内役", en: "spring festival guide role" },
+                { ja: "花束とうさぎの祝祭役", en: "festive role with bouquet and bunny" }
+              ]},
+              { title: "🌸 場面 / Scene", items: [
+                { ja: "花畑のイースター", en: "easter in a flower field" },
+                { ja: "春庭の祝祭会場", en: "spring garden celebration venue" },
+                { ja: "エッグハント会場", en: "egg hunt venue" },
+                { ja: "やわらかな朝の庭先", en: "soft morning garden scene" }
+              ]},
+              { title: "🎁 小物演出 / Props", items: [
+                { ja: "イースターバスケット", en: "easter basket" },
+                { ja: "エッグハント小物", en: "egg hunt props" },
+                { ja: "花束付き", en: "with bouquet" },
+                { ja: "リボン結びのたまご", en: "ribbon-tied eggs" }
+              ]}
+            ]
+          }
+        ]
+      }
     ]
   };
 
   const DICT = {};
-  Object.values(ATTIRE_DATA).flat().forEach(item => {
-    if (item.en && item.ja) DICT[item.en] = item.ja;
-  });
+  (function collectDict(node){
+    if (!node) return;
+    if (Array.isArray(node)) { node.forEach(collectDict); return; }
+    if (node.items) {
+      node.items.forEach(item => { if (item.en && item.ja) DICT[item.en] = item.ja; });
+    }
+    if (node.children) collectDict(node.children);
+  })(ATTIRE_DATA);
 
   const API = {
     initUI(container) {
@@ -2343,33 +3572,41 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
       const existing = parent.querySelector(".attire-v20-container");
       if (existing) existing.remove();
 
-      const createCat = (title, items) => {
+      const createNode = (node, depth = 0) => {
         const details = document.createElement("details");
         details.className = "attire-cat";
-        details.style.cssText = "margin-bottom:6px; border:1px solid #eee; border-radius:4px; background:#fff;";
         details.open = false;
+        details.style.cssText = "margin-bottom:8px; border:1px solid #e7ddd3; border-radius:10px; background:#fff;";
 
         const summary = document.createElement("summary");
-        summary.textContent = title;
-        summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#fff8f0; color:#7a3b00;";
+        summary.textContent = node.title;
+        summary.style.cssText = "font-weight:bold; padding:8px 12px; cursor:pointer; background:#fff8f0; color:#7a3b00;";
         details.appendChild(summary);
 
-        const content = document.createElement("div");
-        content.style.cssText = "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:6px;";
+        const body = document.createElement("div");
+        body.style.cssText = "padding:8px; display:block;";
 
-        items.forEach(item => {
-          const label = document.createElement("label");
-          label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer;";
-          const cb = document.createElement("input");
-          cb.type = "checkbox";
-          cb.dataset.en = item.en;
-          cb.style.marginRight = "6px";
-          label.appendChild(cb);
-          label.appendChild(document.createTextNode(`${item.ja} / ${item.en}`));
-          content.appendChild(label);
-        });
+        if (node.children) {
+          node.children.forEach(child => body.appendChild(createNode(child, depth + 1)));
+        }
+        if (node.items) {
+          const grid = document.createElement("div");
+          grid.style.cssText = "display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:6px;";
+          node.items.forEach(item => {
+            const label = document.createElement("label");
+            label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer;";
+            const cb = document.createElement("input");
+            cb.type = "checkbox";
+            cb.dataset.en = item.en;
+            cb.style.marginRight = "6px";
+            label.appendChild(cb);
+            label.appendChild(document.createTextNode(`${item.ja} / ${item.en}`));
+            grid.appendChild(label);
+          });
+          body.appendChild(grid);
+        }
 
-        details.appendChild(content);
+        details.appendChild(body);
         return details;
       };
 
@@ -2378,12 +3615,29 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
 
       const sep = document.createElement("div");
       sep.style.cssText = "margin:15px 0 10px 0; border-top:1px dashed #cc9; text-align:center; color:#a66; font-size:0.8em;";
-      sep.textContent = "▼ 節分・鬼 (v20) ▼";
+      sep.textContent = "▼ 行事・季節衣装 (Seasonal & Event Attire) ▼";
       root.appendChild(sep);
 
-      Object.entries(ATTIRE_DATA).forEach(([cat, items]) => {
-        root.appendChild(createCat(cat, items));
-      });
+      const note = document.createElement("div");
+      note.style.cssText = "margin:0 0 8px; color:#9a7a66; font-size:0.76em; text-align:center;";
+      note.textContent = "節分・鬼 / サンタ / ハロウィン などの季節イベント衣装をまとめる器";
+      root.appendChild(note);
+
+      const children = ATTIRE_DATA.children || [];
+      if (children.length >= 4) {
+        const oniGroup = {
+          title: "👹 節分・鬼衣装特化コレクション",
+          children: children.slice(0, 4)
+        };
+        root.appendChild(createNode(oniGroup));
+        children.slice(4).forEach(child => {
+          root.appendChild(createNode(child));
+        });
+      } else {
+        children.forEach(child => {
+          root.appendChild(createNode(child));
+        });
+      }
 
       const contentArea = parent.querySelector(".section-content") || parent;
       contentArea.appendChild(root);
@@ -2402,7 +3656,7 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
 // --- builder_ui.section.attire.v21.js ---
 (function(){
   "use strict";
-  const VERSION = 21; // シマエナガ・コレクション (特別衣装セット拡張)
+  const VERSION = 1; // シマエナガ・コレクション (特別衣装セット拡張)
   const KEY = "attire";
 
   // 56 curated Shima-enaga themed outfit sets (JA title + short EN label + full prompt tag)
@@ -2944,6 +4198,12 @@ const API = {
 
       const wrap = document.createElement("div");
       wrap.className = "attire-v21-shima";
+
+      const specialLabel = document.createElement("div");
+      specialLabel.className = "attire-special-group-label";
+      specialLabel.textContent = "🧩 特化コレクション";
+      specialLabel.style.cssText = "margin:6px 0 10px; padding:0 2px; color:#9b7280; font-size:0.78em; font-weight:700; letter-spacing:0.02em;";
+      wrap.appendChild(specialLabel);
 
       // Hood state selector
       const hoodBox = document.createElement("div");
@@ -3613,13 +4873,9 @@ wrap.appendChild(title);
     }));
   }
 
-      // prepend to top so it doesn't get buried by older versions
-      if (contentArea.firstChild) if(contentArea && contentArea.insertBefore){
-        contentArea.insertBefore(wrap, contentArea.firstChild);
-      } else if(listRoot && listRoot.appendChild){
-        listRoot.appendChild(wrap);
-      }
-      else contentArea.appendChild(wrap);
+      contentArea.appendChild(wrap);
+      try{ window.__normalizeAttireLayout(contentArea || listRoot || document.getElementById("list-attire") || document.body); }catch(_){}
+      try{ window.__ensureAttireNormalObserver(contentArea || listRoot || document.getElementById("list-attire") || document.body); }catch(_){}
     },
 
     getTags(){
@@ -3873,7 +5129,7 @@ wrap.appendChild(title);
 // --- builder_ui.section.attire.v22.js ---
 (function(){
   "use strict";
-  const VERSION = 22; // 拡張パックS (限界突破R-18・フェティッシュ全部乗せ)
+  const VERSION = 23; // 拡張パックS (限界突破R-18・フェティッシュ全部乗せ)
   const KEY = "attire";
 
   // ★ シークレットモード判定
@@ -3988,6 +5244,7 @@ wrap.appendChild(title);
         
         const contentArea = parent.querySelector(".section-content") || parent;
         contentArea.appendChild(root);
+        try{ window.__normalizeAttireLayout(contentArea || parent); }catch(_){}
       };
 
       mount();
@@ -4008,7 +5265,7 @@ wrap.appendChild(title);
 // --- builder_ui.section.attire.v23.js ---
 (function(){
   "use strict";
-  const VERSION = 23;
+  const VERSION = 2;
   const KEY = "attire";
 
   const DATA = [
@@ -6484,6 +7741,351 @@ wrap.appendChild(title);
             { ja: "鋭い印象を持つ未来系アイドル衣装", en: "future-style idol outfit with a sharp impression" }
           ] }
         ]
+      },
+      {
+        title: "🎼 曲調・ジャンル別アイドル設定",
+        children: [
+          {
+            title: "🍭 ポップ・電波曲系",
+            items: [
+              { ja: "ポップ電波曲向けアイドル衣装", en: "idol outfit for pop denpa songs" },
+              { ja: "カラフル跳ね感のあるライブ衣装", en: "live outfit with colorful bouncy energy" },
+              { ja: "元気な高音曲向けアイドル服", en: "idol costume for energetic high-tone songs" },
+              { ja: "明るくはじけるステージ衣装", en: "bright and bursting stage outfit" },
+              { ja: "キュートな電波曲映えアイドル衣装", en: "cute idol outfit suited for denpa-style songs" }
+            ]
+          },
+          {
+            title: "🌙 バラード・儚い系",
+            items: [
+              { ja: "儚いバラード向けアイドル衣装", en: "idol outfit for fragile ballads" },
+              { ja: "月光バラード映えのステージ衣装", en: "stage outfit suited for moonlit ballads" },
+              { ja: "しっとり歌唱向けアイドル服", en: "idol costume for moist emotional singing" },
+              { ja: "静かな余韻を残すライブ衣装", en: "live outfit leaving a quiet afterglow" },
+              { ja: "透明感のあるバラード衣装", en: "ballad outfit with a transparent delicate feel" }
+            ]
+          },
+          {
+            title: "⚡ EDM・デジタル系",
+            items: [
+              { ja: "EDM向けサイバーアイドル衣装", en: "cyber idol outfit for EDM tracks" },
+              { ja: "デジタルビート映えのライブ服", en: "live costume suited for digital beats" },
+              { ja: "発光演出が噛むEDM衣装", en: "EDM outfit that pairs with luminous stage effects" },
+              { ja: "高速曲向け近未来アイドル衣装", en: "futuristic idol outfit for high-tempo songs" },
+              { ja: "電子音に映えるステージ衣装", en: "stage outfit that shines with electronic sound" }
+            ]
+          },
+          {
+            title: "🎸 ロック・煽り系",
+            items: [
+              { ja: "ロック曲向けアイドル衣装", en: "idol outfit for rock songs" },
+              { ja: "煽り全開のライブステージ衣装", en: "full-hype live stage outfit" },
+              { ja: "観客を煽る動きに強い衣装", en: "outfit suited to hyping up the crowd" },
+              { ja: "熱量高めのロックアイドル服", en: "high-intensity rock idol costume" },
+              { ja: "ギター映えする攻めライブ衣装", en: "aggressive live outfit that pairs with guitar presence" }
+            ]
+          },
+          {
+            title: "🖤 ダーク・ゴシック系",
+            items: [
+              { ja: "ダーク曲向けアイドル衣装", en: "idol outfit for dark songs" },
+              { ja: "ゴシック寄せの病みライブ衣装", en: "dark-live outfit leaning gothic" },
+              { ja: "深夜公演向けの退廃アイドル服", en: "decadent idol costume for late-night performances" },
+              { ja: "黒基調のダークステージ衣装", en: "dark stage outfit with black-dominant styling" },
+              { ja: "闇曲に映える病みかわ衣装", en: "dark-cute outfit that suits shadowy songs" }
+            ]
+          },
+          {
+            title: "🌸 和風・祭り曲系",
+            items: [
+              { ja: "和風曲向けアイドル衣装", en: "idol outfit for Japanese-style songs" },
+              { ja: "祭り曲映えのライブ衣装", en: "live outfit suited for festival songs" },
+              { ja: "和モダン寄せのステージ服", en: "stage costume leaning Japanese modern style" },
+              { ja: "和楽器と噛み合うアイドル衣装", en: "idol outfit that pairs with traditional instruments" },
+              { ja: "花吹雪と相性の良い和風ライブ服", en: "Japanese-style live outfit that pairs well with flower-petal effects" }
+            ]
+          },
+          {
+            title: "👑 アンセム・大団円系",
+            items: [
+              { ja: "アンセム曲向けアイドル衣装", en: "idol outfit for anthem-style songs" },
+              { ja: "大団円ラスト映えのライブ衣装", en: "live outfit suited for grand finale moments" },
+              { ja: "全員歌唱に強いステージ衣装", en: "stage outfit suited for full-group singing" },
+              { ja: "サビ映えする王道アイドル服", en: "classic idol costume that shines during the chorus" },
+              { ja: "終盤で光る大舞台向け衣装", en: "outfit for large stages that shines in the finale" }
+            ]
+          }
+        ]
+      },
+      {
+        title: "🎭 役割別アイドルポジション設定",
+        children: [
+          {
+            title: "👑 センター主役",
+            items: [
+              { ja: "センター主役向けアイドル衣装", en: "idol outfit for center lead position" },
+              { ja: "視線を集めるセンター衣装", en: "center outfit that draws all attention" },
+              { ja: "主役感の強いステージ衣装", en: "stage outfit with strong lead presence" },
+              { ja: "中央配置で映えるアイドル服", en: "idol costume that shines in center formation" },
+              { ja: "サビの主役に噛むセンター衣装", en: "center outfit suited for chorus focal moments" }
+            ]
+          },
+          {
+            title: "🎀 かわいい担当",
+            items: [
+              { ja: "かわいい担当向けアイドル衣装", en: "idol outfit for the cute member role" },
+              { ja: "愛嬌強めのステージ衣装", en: "stage outfit with strong charm and cuteness" },
+              { ja: "甘さを前面に出すアイドル服", en: "idol costume pushing sweetness to the front" },
+              { ja: "笑顔映えするかわいい衣装", en: "cute outfit that shines with smiling expressions" },
+              { ja: "ファンサ向けの愛らしいライブ服", en: "adorable live costume suited for fan service" }
+            ]
+          },
+          {
+            title: "❄ クール担当",
+            items: [
+              { ja: "クール担当向けアイドル衣装", en: "idol outfit for the cool member role" },
+              { ja: "冷たい美しさを持つステージ衣装", en: "stage outfit with a cold elegant beauty" },
+              { ja: "鋭い印象のクールアイドル服", en: "cool idol costume with a sharp impression" },
+              { ja: "無表情映えするライブ衣装", en: "live outfit that suits an expressionless cool mood" },
+              { ja: "青白照明に噛むクール衣装", en: "cool outfit that pairs with pale blue lighting" }
+            ]
+          },
+          {
+            title: "🔥 煽り・熱狂担当",
+            items: [
+              { ja: "煽り担当向けアイドル衣装", en: "idol outfit for hype and crowd-pumping role" },
+              { ja: "熱狂を引き上げるライブ衣装", en: "live outfit that raises crowd excitement" },
+              { ja: "動きが大きく映えるステージ服", en: "stage outfit that suits big energetic movements" },
+              { ja: "観客との応酬に強いアイドル服", en: "idol costume suited for engaging the audience" },
+              { ja: "攻め動作が決まる煽り衣装", en: "hype-role outfit that fits aggressive stage gestures" }
+            ]
+          },
+          {
+            title: "🖤 病み・影担当",
+            items: [
+              { ja: "病み担当向けアイドル衣装", en: "idol outfit for the dark or unstable member role" },
+              { ja: "影の強いステージ衣装", en: "stage outfit with a strong shadowy presence" },
+              { ja: "儚い病み感を持つアイドル服", en: "idol costume carrying fragile dark-cute emotion" },
+              { ja: "深夜感を背負うライブ衣装", en: "live outfit carrying a late-night mood" },
+              { ja: "闇曲で際立つ影担当衣装", en: "shadow-role outfit that stands out in dark songs" }
+            ]
+          },
+          {
+            title: "🌟 エース・実力派担当",
+            items: [
+              { ja: "エース格向けアイドル衣装", en: "idol outfit for ace-class member role" },
+              { ja: "実力派主張のステージ衣装", en: "stage outfit showing strong skill-focused presence" },
+              { ja: "歌唱力映えするアイドル服", en: "idol costume that suits strong vocal performance" },
+              { ja: "安定感を感じさせるエース衣装", en: "ace outfit that conveys stability and strength" },
+              { ja: "頼もしさが出る実力派ライブ服", en: "competent live costume with a reliable aura" }
+            ]
+          },
+          {
+            title: "🫧 儚げ・透明感担当",
+            items: [
+              { ja: "儚げ担当向けアイドル衣装", en: "idol outfit for fragile transparent member role" },
+              { ja: "透明感主役のステージ衣装", en: "stage outfit centered on transparency and delicacy" },
+              { ja: "淡く溶けるようなアイドル服", en: "idol costume that feels pale and dissolving" },
+              { ja: "静かな歌唱に寄る儚げ衣装", en: "fragile outfit suited to quiet singing" },
+              { ja: "余韻が似合う透明感ライブ服", en: "transparent-feel live costume suited to lingering emotion" }
+            ]
+          }
+        ]
+      },
+      {
+        title: "🏟 ライブ会場規模・ステージ条件別",
+        children: [
+          {
+            title: "🎤 小箱・近距離ライブ",
+            items: [
+              { ja: "小箱ライブ向けアイドル衣装", en: "idol outfit for intimate live houses" },
+              { ja: "近距離ファンサ向けステージ衣装", en: "stage outfit for close-range fan service" },
+              { ja: "小規模会場で映えるアイドル服", en: "idol costume that works in small venues" },
+              { ja: "距離の近さを活かすライブ衣装", en: "live outfit that benefits from close audience distance" },
+              { ja: "密度高めの小箱向け衣装", en: "small-venue outfit with dense visual details" }
+            ]
+          },
+          {
+            title: "🌟 ホール・中規模公演",
+            items: [
+              { ja: "ホール公演向けアイドル衣装", en: "idol outfit for hall-scale performances" },
+              { ja: "中規模会場でバランスの良いステージ衣装", en: "well-balanced stage outfit for mid-size venues" },
+              { ja: "照明映えと視認性を両立する衣装", en: "outfit balancing visibility and lighting response" },
+              { ja: "客席全体に届くホール向け衣装", en: "hall-performance outfit readable across the whole audience" },
+              { ja: "安定感のある中規模ライブ服", en: "stable live costume for medium venue stages" }
+            ]
+          },
+          {
+            title: "🏟 アリーナ・大舞台",
+            items: [
+              { ja: "アリーナ向けアイドル衣装", en: "idol outfit for arena-scale performances" },
+              { ja: "大舞台で映えるセンター衣装", en: "center-stage outfit that shines on large stages" },
+              { ja: "遠目でも埋もれないライブ衣装", en: "live outfit that remains visible from afar" },
+              { ja: "大規模照明に耐えるステージ服", en: "stage costume that stands up to large-scale lighting" },
+              { ja: "広い会場で主張できるアイドル衣装", en: "idol costume that asserts presence in huge venues" }
+            ]
+          },
+          {
+            title: "📺 TV・配信・収録向け",
+            items: [
+              { ja: "TV出演向けアイドル衣装", en: "idol outfit for television appearances" },
+              { ja: "配信映えするステージ衣装", en: "stage outfit that looks good on livestreams" },
+              { ja: "カメラ寄りに強いアイドル服", en: "idol costume that works well in camera close-ups" },
+              { ja: "画面越しで映える収録向け衣装", en: "recording outfit that reads well through the screen" },
+              { ja: "アップ撮影に耐える精密ライブ衣装", en: "detailed live outfit suitable for close-up shots" }
+            ]
+          },
+          {
+            title: "🎆 野外・フェス・大型イベント",
+            items: [
+              { ja: "野外ライブ向けアイドル衣装", en: "idol outfit for outdoor live performances" },
+              { ja: "フェス映えする開放型ステージ衣装", en: "open-feel stage outfit suited for festivals" },
+              { ja: "風と光に強いアイドル服", en: "idol costume that works with wind and daylight" },
+              { ja: "大型イベント向けの派手映え衣装", en: "flashy idol outfit for large events" },
+              { ja: "空間負けしない野外ライブ服", en: "outdoor live costume that doesn't get lost in open space" }
+            ]
+          },
+          {
+            title: "🌙 深夜・特別公演・演出強め",
+            items: [
+              { ja: "深夜公演向けアイドル衣装", en: "idol outfit for late-night performances" },
+              { ja: "特別公演映えの演出強め衣装", en: "strongly staged outfit for special performances" },
+              { ja: "夜照明に噛むライブステージ服", en: "live stage costume suited to night lighting" },
+              { ja: "濃い演出向けの特別衣装", en: "special outfit for dense theatrical staging" },
+              { ja: "一夜限り感を持つ公演向け衣装", en: "performance outfit with a one-night-only feeling" }
+            ]
+          }
+        ]
+      },
+      {
+        title: "🎬 ステージ状態変化",
+        children: [
+          {
+            title: "✨ 開演前・整った状態",
+            items: [
+              { ja: "開演前の整ったアイドル衣装", en: "idol outfit in pristine pre-show condition" },
+              { ja: "乱れのない開幕前ステージ衣装", en: "pre-opening stage outfit without any disorder" },
+              { ja: "完璧に整えられた本番前衣装", en: "perfectly arranged costume before the show" },
+              { ja: "初手の清潔感があるライブ衣装", en: "live outfit with fresh opening cleanliness" },
+              { ja: "本番前の静かな完成状態の衣装", en: "costume in calm complete condition before performance" }
+            ]
+          },
+          {
+            title: "🎤 1曲目・フルパワー状態",
+            items: [
+              { ja: "1曲目から全開のアイドル衣装", en: "idol outfit at full power from the first song" },
+              { ja: "開幕直後に映えるライブ衣装", en: "live outfit that shines right after opening" },
+              { ja: "初曲の勢いを持つステージ衣装", en: "stage outfit carrying the momentum of the first track" },
+              { ja: "ライブ序盤で強く光る衣装", en: "costume that shines strongly in the early live phase" },
+              { ja: "最初のサビで決まるアイドル服", en: "idol costume that lands in the first chorus" }
+            ]
+          },
+          {
+            title: "💦 中盤・汗と熱気が乗る状態",
+            items: [
+              { ja: "汗と熱気が乗ったアイドル衣装", en: "idol outfit carrying sweat and stage heat" },
+              { ja: "ライブ中盤の熱を帯びた衣装", en: "costume heated by the middle section of the live" },
+              { ja: "動きの余韻が出るステージ衣装", en: "stage outfit showing the aftereffect of movement" },
+              { ja: "中盤で少し馴染んだライブ衣装", en: "live outfit slightly settled in by mid-performance" },
+              { ja: "熱量が衣装に移ったアイドル服", en: "idol costume infused with performance intensity" }
+            ]
+          },
+          {
+            title: "🎉 終盤・紙吹雪・乱れ込み",
+            items: [
+              { ja: "終盤の紙吹雪を浴びたアイドル衣装", en: "idol outfit covered in confetti near the finale" },
+              { ja: "ライブ終盤で少し乱れた衣装", en: "costume slightly disordered by the late live phase" },
+              { ja: "熱狂終盤に映えるステージ衣装", en: "stage outfit that shines in the heated final section" },
+              { ja: "走り切った余韻を残すライブ服", en: "live costume carrying the feeling of having gone all out" },
+              { ja: "ラスト直前の高揚感ある衣装", en: "costume with excitement right before the ending" }
+            ]
+          },
+          {
+            title: "🌙 アンコール後・少し崩れた余韻",
+            items: [
+              { ja: "アンコール後の余韻を持つアイドル衣装", en: "idol outfit carrying the afterglow of the encore" },
+              { ja: "少し崩れたまま美しいライブ衣装", en: "live outfit still beautiful in slight disarray" },
+              { ja: "終演後の柔らかさが出たステージ衣装", en: "stage costume softened after the performance" },
+              { ja: "一夜の熱を残したアイドル服", en: "idol costume retaining the heat of one night" },
+              { ja: "最後の挨拶に似合う余韻衣装", en: "afterglow costume suited to the final greeting" }
+            ]
+          }
+        ]
+      },
+      {
+        title: "🎨 色系統別アイドル調整",
+        children: [
+          {
+            title: "💕 ピンク・姫甘系",
+            items: [
+              { ja: "ピンク姫系アイドル衣装", en: "pink princess-style idol outfit" },
+              { ja: "甘さ主役のピンクライブ衣装", en: "pink live outfit centered on sweetness" },
+              { ja: "桜色に寄せたアイドル服", en: "idol costume leaning into cherry blossom pink" },
+              { ja: "姫かわ配色のステージ衣装", en: "stage outfit with princess-cute color balance" },
+              { ja: "桃色主役のキュート衣装", en: "cute costume centered on peach-pink tones" }
+            ]
+          },
+          {
+            title: "🤍 白・青・透明感系",
+            items: [
+              { ja: "白青透明感アイドル衣装", en: "white-blue transparent-feel idol outfit" },
+              { ja: "氷光を帯びたステージ衣装", en: "stage outfit carrying icy light tones" },
+              { ja: "青白照明に噛むアイドル服", en: "idol costume suited to pale blue lighting" },
+              { ja: "白基調の儚げライブ衣装", en: "fragile live outfit with a white base" },
+              { ja: "透明感主役のクール衣装", en: "cool costume centered on transparency" }
+            ]
+          },
+          {
+            title: "🖤 黒・紫・病みかわ系",
+            items: [
+              { ja: "黒紫病みかわアイドル衣装", en: "black-purple dark-cute idol outfit" },
+              { ja: "紫煙が似合うダークライブ衣装", en: "dark live outfit suited to violet haze" },
+              { ja: "黒主役の病みステージ衣装", en: "dark-cute stage costume centered on black" },
+              { ja: "夜色寄せのアイドル服", en: "idol costume leaning into night colors" },
+              { ja: "退廃感を持つ黒紫衣装", en: "black-purple costume with decadent mood" }
+            ]
+          },
+          {
+            title: "❤️ 赤・金・センター系",
+            items: [
+              { ja: "赤金センターアイドル衣装", en: "red-gold center idol outfit" },
+              { ja: "主役感のある紅金ステージ衣装", en: "crimson-gold stage outfit with lead presence" },
+              { ja: "サビ映えする赤主役ライブ衣装", en: "red-centered live outfit that shines in choruses" },
+              { ja: "熱量高めの赤金アイドル服", en: "red-gold idol costume with high intensity" },
+              { ja: "祝祭感のあるセンター衣装", en: "center outfit with festive grandeur" }
+            ]
+          },
+          {
+            title: "💙 青・銀・サイバー系",
+            items: [
+              { ja: "青銀サイバーアイドル衣装", en: "blue-silver cyber idol outfit" },
+              { ja: "ネオン青を噛ませたライブ衣装", en: "live outfit accented with neon blue" },
+              { ja: "青銀発光のステージ衣装", en: "blue-silver luminous stage costume" },
+              { ja: "電子音映えする寒色アイドル服", en: "cool-tone idol costume suited to electronic sound" },
+              { ja: "未来感のある青銀衣装", en: "blue-silver outfit with futuristic feel" }
+            ]
+          },
+          {
+            title: "🌈 虹色・多色キラキラ系",
+            items: [
+              { ja: "虹色キラキラアイドル衣装", en: "rainbow sparkling idol outfit" },
+              { ja: "多色照明に負けないライブ衣装", en: "live outfit that holds up under multicolor lighting" },
+              { ja: "カラフル主役のステージ衣装", en: "stage costume centered on colorful impact" },
+              { ja: "きらめき多色のアイドル服", en: "multicolor glittering idol costume" },
+              { ja: "祝祭感の強い虹色ライブ衣装", en: "rainbow live outfit with strong festive mood" }
+            ]
+          },
+          {
+            title: "💎 白金・ディーヴァ系",
+            items: [
+              { ja: "白金ディーヴァ衣装", en: "white-gold diva outfit" },
+              { ja: "高級感のある白金ステージ衣装", en: "luxurious white-gold stage costume" },
+              { ja: "宝石映えする白金ライブ衣装", en: "white-gold live outfit that suits jewel accents" },
+              { ja: "気品主役のディーヴァ服", en: "diva costume centered on elegance" },
+              { ja: "大人っぽい白金アイドル衣装", en: "mature white-gold idol outfit" }
+            ]
+          }
+        ]
       }
       ]
     }];
@@ -6737,8 +8339,8 @@ function createItemLabel(item){
         root.style.cssText = "display:block; width:100%; max-width:100%; box-sizing:border-box;";
 
         const sep = document.createElement("div");
-        sep.style.cssText = "margin:18px 0 10px; border-top:2px solid #e6a7b7; text-align:center; color:#b23b5b; font-size:0.95em; font-weight:700;";
-        sep.textContent = "👘 チャイナ服特化コレクション v23";
+        sep.style.cssText = "display:none;";
+        sep.textContent = "";
         root.appendChild(sep);
 
         const stack = document.createElement("div");
@@ -6822,6 +8424,7 @@ function createItemLabel(item){
 
         const contentArea = parent.querySelector(".section-content") || parent;
         contentArea.appendChild(root);
+        try{ window.__normalizeAttireLayout(contentArea || parent); }catch(_){}
       };
       mount();
     },

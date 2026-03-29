@@ -511,6 +511,17 @@
 
       const mountPoint = parent.querySelector(".section-content") || parent;
       mountPoint.appendChild(root);
+    try{
+      if (window.__normalizeAttireLayout){
+        window.__normalizeAttireLayout(mountPoint || parent || document.getElementById("list-attire"));
+        setTimeout(function(){
+          try{
+            if (window.__normalizeAttireLayout) window.__normalizeAttireLayout(mountPoint || parent || document.getElementById("list-attire"));
+          }catch(_){}
+        }, 50);
+      }
+    }catch(_){}
+
 
       if (window.__outputTranslation && typeof window.__outputTranslation.register === "function") {
         const dict = {};
