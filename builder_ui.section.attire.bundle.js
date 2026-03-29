@@ -98,7 +98,12 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
           const cb = document.createElement("input");
           cb.type = "checkbox";
           cb.dataset.en = item.en;
-          label.appendChild(cb);
+          cb.addEventListener('change', function(){
+      if(__v23PresetApplying) return;
+      const root = label.closest('.attire-v23-container');
+      if(root) clearPresetUI(root);
+    });
+    label.appendChild(cb);
           label.appendChild(document.createTextNode(`${item.ja} / ${item.en}`));
           content.appendChild(label);
         });
@@ -6392,7 +6397,96 @@ wrap.appendChild(title);
 
       ]
     }
-  ];
+  
+,
+    {
+      title: "🎤 アイドル衣装特化コレクション",
+      children: [
+        { title: "🌟 王道アイドル", children: [
+          { title: "✨ キラキラ王道", items: [{ ja: "キラキラ王道アイドル衣装", en: "sparkling classic idol costume" }, { ja: "王道フリルステージ衣装", en: "classic frilled stage costume" }, { ja: "光沢感のある王道アイドル衣装", en: "glossy classic idol outfit" }, { ja: "センター映え王道ドレス", en: "center-worthy classic idol dress" }, { ja: "笑顔映えの王道ステージ衣装", en: "smile-enhancing classic stage costume" }] },
+          { title: "💎 清楚・上品", items: [{ ja: "清楚系アイドル衣装", en: "pure elegant idol outfit" }, { ja: "上品な白基調アイドルドレス", en: "elegant white-based idol dress" }, { ja: "控えめジュエルの上品衣装", en: "elegant costume with restrained jewels" }, { ja: "透明感重視のアイドル衣装", en: "transparent airy idol outfit" }, { ja: "柔光に映える清楚ステージ衣装", en: "pure stage costume glowing in soft light" }] },
+          { title: "🌈 ポップ・元気", items: [{ ja: "元気系ポップアイドル衣装", en: "energetic pop idol outfit" }, { ja: "カラフル配色のライブ衣装", en: "colorful live costume" }, { ja: "動きやすいポップステージ衣装", en: "mobile pop stage costume" }, { ja: "明るい配色の王道アイドル服", en: "bright-colored classic idol costume" }, { ja: "跳ねる印象の元気アイドル衣装", en: "bouncy energetic idol outfit" }] },
+          { title: "🎶 センター映え", items: [{ ja: "センター主役のアイドル衣装", en: "idol outfit designed for center position" }, { ja: "スポットライト映えステージ衣装", en: "spotlight-enhancing stage costume" }, { ja: "視線集中型アイドルドレス", en: "gaze-attracting idol dress" }, { ja: "中央映えの対称デザイン衣装", en: "symmetrical outfit that shines at center" }, { ja: "王道センターポジション衣装", en: "classic center-position idol costume" }] },
+          { title: "☁ 透明感・柔光", items: [{ ja: "柔光に溶けるアイドル衣装", en: "idol costume melting into soft light" }, { ja: "透明感重視の白青アイドル服", en: "white-blue idol outfit focused on transparency" }, { ja: "ふわ光ベールのステージ衣装", en: "stage costume with soft glowing veil" }, { ja: "空気感のある軽やかアイドル衣装", en: "airy lightweight idol outfit" }, { ja: "淡色グラデの透明系ドレス", en: "transparent-style dress with pale gradient" }] }
+        ] },
+        { title: "🎀 甘ロリ・姫系アイドル", children: [
+          { title: "🎀 リボン姫", items: [{ ja: "リボン姫系アイドル衣装", en: "ribbon princess idol outfit" }, { ja: "大リボン主役の姫ドレス", en: "princess dress focused on oversized ribbons" }, { ja: "甘ロリステージ衣装", en: "sweet lolita stage costume" }, { ja: "姫袖とリボンのアイドル服", en: "idol costume with princess sleeves and ribbons" }, { ja: "可憐な姫系ライブ衣装", en: "delicate princess-style live costume" }] },
+          { title: "🍰 フリル甘め", items: [{ ja: "フリル多めの甘ロリアイドル衣装", en: "sweet idol outfit with abundant frills" }, { ja: "段フリルスカートの姫衣装", en: "princess outfit with tiered frill skirt" }, { ja: "ケーキみたいな甘ロリドレス", en: "cake-like sweet lolita dress" }, { ja: "ふわふわフリルのステージ衣装", en: "stage costume with fluffy frills" }, { ja: "砂糖菓子風アイドルドレス", en: "sugar-candy style idol dress" }] },
+          { title: "🩷 パステル可憐", items: [{ ja: "パステル姫系アイドル衣装", en: "pastel princess idol outfit" }, { ja: "淡色配色の甘ロリ衣装", en: "sweet lolita outfit in pale colors" }, { ja: "桜色メインの可憐ドレス", en: "delicate dress centered on cherry-blossom pink" }, { ja: "ふんわり色調の姫ステージ衣装", en: "soft-toned princess stage costume" }, { ja: "ぬいぐるみ感のある可愛い衣装", en: "cute outfit with plush-like softness" }] },
+          { title: "👑 ティアラ・王女感", items: [{ ja: "ティアラ付きアイドル衣装", en: "idol outfit with tiara" }, { ja: "王女感のあるアイドルドレス", en: "idol dress with princess-like nobility" }, { ja: "宝石ティアラ主役のステージ衣装", en: "stage costume centered on a jeweled tiara" }, { ja: "ロイヤルガーリーなライブ服", en: "royal girly live outfit" }, { ja: "気高い姫系センター衣装", en: "noble princess-style center costume" }] },
+          { title: "🧸 ドール・ぬいぐるみ感", items: [{ ja: "ドール風アイドル衣装", en: "doll-like idol outfit" }, { ja: "ぬいぐるみ感のある甘ロリ服", en: "sweet lolita outfit with plush-toy softness" }, { ja: "球体関節人形みたいな姫ドレス", en: "princess dress like a ball-jointed doll" }, { ja: "可動人形感のあるステージ衣装", en: "stage costume with articulated doll feel" }, { ja: "愛玩感のある可憐アイドル衣装", en: "adorably delicate idol outfit" }] }
+        ] },
+        { title: "👑 高級・ディーヴァ系アイドル", children: [
+          { title: "💠 宝石主役", items: [{ ja: "宝石主役のディーヴァ衣装", en: "diva outfit centered on jewels" }, { ja: "高級宝飾アイドルドレス", en: "luxury jewel idol dress" }, { ja: "胸元宝飾が強いステージ衣装", en: "stage costume with strong chest jewel emphasis" }, { ja: "ジュエルラインが走るライブ服", en: "live outfit traced by jewel lines" }, { ja: "ラグジュアリーな宝石装飾衣装", en: "luxurious jewel-ornamented costume" }] },
+          { title: "🥂 夜会・高級感", items: [{ ja: "夜会風ディーヴァ衣装", en: "soirée-style diva outfit" }, { ja: "上質サテンの高級ステージ衣装", en: "premium satin high-class stage costume" }, { ja: "シャンパン映えのライブドレス", en: "live dress that suits a champagne mood" }, { ja: "艶やかな高級感のアイドル服", en: "idol costume with glossy luxury" }, { ja: "洗練された大人ディーヴァ衣装", en: "sophisticated mature diva outfit" }] },
+          { title: "🖤 モノトーン豪華", items: [{ ja: "黒白基調の高級アイドル衣装", en: "luxury idol outfit in monochrome" }, { ja: "モノトーンディーヴァドレス", en: "monochrome diva dress" }, { ja: "白黒宝飾のステージ衣装", en: "stage costume with black-white jewel accents" }, { ja: "気品ある黒ドレス系アイドル服", en: "noble black-dress idol outfit" }, { ja: "漆黒と銀の高級ライブ衣装", en: "luxury live costume in jet black and silver" }] },
+          { title: "🌹 大人セクシー", items: [{ ja: "大人セクシーなディーヴァ衣装", en: "mature sexy diva outfit" }, { ja: "曲線美を活かす高級アイドル服", en: "luxury idol costume enhancing body curves" }, { ja: "艶っぽい夜ステージドレス", en: "sensual night-stage dress" }, { ja: "落ち着いた色香のライブ衣装", en: "live outfit with composed allure" }, { ja: "視線を奪う大人ディーヴァ服", en: "mature diva costume that steals attention" }] },
+          { title: "🏛 クラシカル女王", items: [{ ja: "クラシカル女王系アイドル衣装", en: "classical queen-style idol outfit" }, { ja: "重厚感あるロイヤルディーヴァ服", en: "royal diva costume with gravitas" }, { ja: "王座映えの高級ステージドレス", en: "high-class stage dress worthy of a throne" }, { ja: "荘厳な女王シルエット衣装", en: "majestic queen-silhouette costume" }, { ja: "古典豪華なライブドレス", en: "classically luxurious live dress" }] }
+        ] },
+        { title: "⚡ サイバー・近未来アイドル", children: [
+          { title: "💡 ネオン発光", items: [{ ja: "ネオン発光アイドル衣装", en: "neon glowing idol outfit" }, { ja: "LEDラインの近未来ステージ衣装", en: "futuristic stage costume with LED lines" }, { ja: "発光縁取りサイバーアイドル服", en: "cyber idol costume with luminous trim" }, { ja: "電飾が走るライブ衣装", en: "live costume traced by electric lights" }, { ja: "ネオン映えセンター衣装", en: "center costume that shines in neon" }] },
+          { title: "🔷 メタリック・未来素材", items: [{ ja: "メタリック素材のアイドル衣装", en: "idol outfit with metallic materials" }, { ja: "未来繊維のサイバードレス", en: "cyber dress made of future textile" }, { ja: "ホログラム質感のライブ衣装", en: "live costume with hologram texture" }, { ja: "硬質光沢の近未来アイドル服", en: "futuristic idol costume with hard glossy finish" }, { ja: "高反射のステージスーツ", en: "high-reflective stage suit" }] },
+          { title: "🎛 機材連動", items: [{ ja: "ヘッドセット連動のサイバー衣装", en: "cyber outfit linked to a headset" }, { ja: "マイクアーム付き近未来服", en: "futuristic outfit with microphone arm" }, { ja: "デバイス内蔵アイドル衣装", en: "idol outfit with built-in devices" }, { ja: "機材と噛み合うネオンライブ服", en: "neon live outfit coordinated with equipment" }, { ja: "舞台装置連動のセンター衣装", en: "center costume linked with stage devices" }] },
+          { title: "🌀 デジタル・ホログラム", items: [{ ja: "ホログラム重ねのアイドル衣装", en: "idol outfit layered with holograms" }, { ja: "デジタル粒子を帯びるライブ服", en: "live costume carrying digital particles" }, { ja: "透過パネル付きサイバー衣装", en: "cyber outfit with translucent panels" }, { ja: "情報表示風の未来ステージ服", en: "future stage costume like an information display" }, { ja: "仮想感のある近未来アイドル服", en: "futuristic idol costume with virtual feel" }] },
+          { title: "🌃 夜景・都市光", items: [{ ja: "都市夜景映えサイバー衣装", en: "cyber outfit suited to city nightscape" }, { ja: "夜光に負けないネオン衣装", en: "neon outfit that stands against city lights" }, { ja: "深夜ライブ向け未来服", en: "future outfit for late-night live stages" }, { ja: "電脳都市感のあるアイドル衣装", en: "idol outfit with cyber city mood" }, { ja: "蒼い夜光を受けるステージ服", en: "stage costume receiving blue night light" }] }
+        ] },
+        { title: "🖤 ダーク・病みかわアイドル", children: [
+          { title: "🖤 病みかわ", items: [{ ja: "病みかわアイドル衣装", en: "yamikawa idol outfit" }, { ja: "黒ピンク配色の病みかわ服", en: "yamikawa costume in black and pink" }, { ja: "かわいさと闇を混ぜたライブ衣装", en: "live outfit blending cuteness and darkness" }, { ja: "ぬい傷風装飾の病みアイドル服", en: "dark idol costume with stitched-plush styling" }, { ja: "甘さの奥に毒を持つステージ衣装", en: "stage costume with poison beneath sweetness" }] },
+          { title: "⛓ ダーク拘束感", items: [{ ja: "チェーン付きダークアイドル衣装", en: "dark idol outfit with chains" }, { ja: "拘束感のある病みステージ服", en: "dark stage costume with restrained tension" }, { ja: "ハーネス寄せのダーク衣装", en: "dark idol costume leaning into harness styling" }, { ja: "金具強めの病みかわライブ服", en: "yamikawa live costume with emphasized hardware" }, { ja: "夜鎖モチーフのアイドル服", en: "idol outfit using nocturnal chain motifs" }] },
+          { title: "🌙 深夜感・退廃感", items: [{ ja: "深夜ライブ向けダーク衣装", en: "dark outfit for late-night live performances" }, { ja: "退廃感あるアイドルドレス", en: "idol dress with decadent mood" }, { ja: "月下で映える病みかわ衣装", en: "yamikawa outfit that shines under moonlight" }, { ja: "香煙が似合うダークライブ服", en: "dark live costume suited to incense smoke" }, { ja: "夜に溶ける退廃ステージ衣装", en: "decadent stage costume dissolving into the night" }] },
+          { title: "🥀 ゴシック寄り", items: [{ ja: "ゴシック寄せのダークアイドル衣装", en: "gothic-leaning dark idol outfit" }, { ja: "黒レース主体の病み衣装", en: "dark outfit centered on black lace" }, { ja: "荘厳ゴシックなライブドレス", en: "majestic gothic live dress" }, { ja: "退廃ゴシック姫袖衣装", en: "decadent gothic outfit with princess sleeves" }, { ja: "教会光に映えるダークアイドル服", en: "dark idol costume glowing in chapel light" }] },
+          { title: "🩸 ダークセンター映え", items: [{ ja: "闇センター主役のアイドル衣装", en: "dark center-focused idol outfit" }, { ja: "視線を刺す病みかわセンター服", en: "center costume with piercing yamikawa allure" }, { ja: "中央映えする退廃ライブ衣装", en: "decadent live outfit that commands center" }, { ja: "黒赤中心の主役ドレス", en: "center-stage dress in black and red" }, { ja: "静かな狂気を帯びるセンター衣装", en: "center outfit carrying quiet madness" }] }
+        ] },
+        { title: "👗 シルエット・スカート特化", children: [{ title: "🎂 段スカート・広がり", items: [{ ja: "段スカートのアイドル衣装", en: "idol outfit with tiered skirt" }, { ja: "ふんわり広がるステージスカート", en: "flared stage skirt" }, { ja: "ボリューム大のライブスカート", en: "high-volume live skirt" }, { ja: "回転映えの広がりスカート", en: "spinning-friendly wide skirt" }, { ja: "王道フレアのアイドル服", en: "classic flared idol costume" }] }, { title: "✂ 前後差・アシメ裾", items: [{ ja: "前後差スカートのアイドル衣装", en: "idol costume with high-low skirt" }, { ja: "アシンメトリー裾のライブ服", en: "live outfit with asymmetrical hem" }, { ja: "片側長裾のステージ衣装", en: "stage costume with one-sided long hem" }, { ja: "斜め裾のセンター衣装", en: "center costume with diagonal hem" }, { ja: "動きで映える変形スカート", en: "deformed skirt that shines in motion" }] }, { title: "🪽 後ろ引き・ミニ前裾", items: [{ ja: "後ろ引きスカートのアイドル衣装", en: "idol outfit with trailing back skirt" }, { ja: "前短後長のステージ服", en: "front-short back-long stage costume" }, { ja: "脚見せ前裾のライブ衣装", en: "live costume with leg-revealing front hem" }, { ja: "引き裾ミニのアイドルドレス", en: "idol dress with trailing mini front" }, { ja: "センター映えのトレーン付き衣装", en: "center-worthy costume with train" }] }, { title: "🫧 軽やかレイヤー", items: [{ ja: "軽やかレイヤースカート", en: "light layered skirt" }, { ja: "空気を含む薄布スカート", en: "airy thin-fabric skirt" }, { ja: "透け重ねのステージ裾", en: "stage hem with sheer layering" }, { ja: "風に浮くアイドルスカート", en: "idol skirt floating in the wind" }, { ja: "柔らかい段重ねのライブ裾", en: "soft tiered live hem" }] }, { title: "🔺 構造的シルエット", items: [{ ja: "構造的シルエットのアイドル衣装", en: "idol outfit with structured silhouette" }, { ja: "幾何ラインのスカート衣装", en: "skirt costume with geometric lines" }, { ja: "立体裁断のステージ服", en: "stage costume with sculptural tailoring" }, { ja: "輪郭が強いライブシルエット", en: "live silhouette with strong contour" }, { ja: "形そのものが主役のアイドル衣装", en: "idol outfit whose shape itself is the focal point" }] }] },
+        { title: "🧵 生地・質感特化", children: [{ title: "✨ サテン・シルク光沢", items: [{ ja: "サテン光沢のアイドル衣装", en: "idol outfit with satin sheen" }, { ja: "シルク感のあるステージドレス", en: "stage dress with silk feel" }, { ja: "艶布主体のライブ衣装", en: "live costume centered on glossy fabric" }, { ja: "光沢面が美しいアイドル服", en: "idol costume with beautiful glossy surfaces" }, { ja: "なめらか光沢のセンター衣装", en: "center costume with smooth sheen" }] }, { title: "🌫 チュール・オーガンジー", items: [{ ja: "チュール重ねのアイドル衣装", en: "idol outfit layered with tulle" }, { ja: "オーガンジーの透け感ドレス", en: "dress with organza transparency" }, { ja: "薄布が重なるライブ衣装", en: "live costume with layered sheer fabric" }, { ja: "ベール感のあるステージ服", en: "stage costume with veiled texture" }, { ja: "軽やか透け布のアイドル衣装", en: "idol outfit with airy sheer cloth" }] }, { title: "💎 スパンコール・反射素材", items: [{ ja: "スパンコール煌めき衣装", en: "sequined sparkling costume" }, { ja: "反射素材のライブ衣装", en: "live costume with reflective materials" }, { ja: "光粒が散るステージドレス", en: "stage dress scattering light particles" }, { ja: "鏡面寄りのアイドル服", en: "idol costume leaning into mirror-like shine" }, { ja: "照明を返すキラキラ衣装", en: "sparkling outfit that reflects stage lights" }] }, { title: "🖤 レザー・硬質素材", items: [{ ja: "レザー調のアイドル衣装", en: "idol outfit with leather-like texture" }, { ja: "硬質素材のダークライブ服", en: "dark live costume with rigid materials" }, { ja: "艶黒レザー寄りステージ衣装", en: "stage costume leaning into glossy black leather" }, { ja: "ハード質感のサイバー服", en: "cyber costume with hard material feel" }, { ja: "金具映えする硬質アイドル衣装", en: "idol outfit with rigid materials that suit hardware" }] }, { title: "🔮 未来素材・ホログラム布", items: [{ ja: "未来素材のアイドル衣装", en: "idol outfit made of futuristic materials" }, { ja: "ホログラム布のサイバー服", en: "cyber costume with hologram fabric" }, { ja: "偏光質感のステージ衣装", en: "stage costume with iridescent texture" }, { ja: "発光織布のライブドレス", en: "live dress with luminous woven cloth" }, { ja: "近未来反射布のアイドル衣装", en: "idol outfit with futuristic reflective fabric" }] }] },
+        { title: "✨ 装飾・ジュエル・スパンコール", children: [{ title: "💎 胸元ジュエル", items: [{ ja: "胸元ジュエルのアイドル衣装", en: "idol outfit with chest jewels" }, { ja: "中央宝飾主役のステージ衣装", en: "stage costume centered on jewel ornament" }, { ja: "胸元に宝石が集まるライブ服", en: "live costume with gemstones gathered at the chest" }, { ja: "ネックライン宝飾のドレス", en: "dress with jeweled neckline" }, { ja: "胸元きらめき強化アイドル服", en: "idol costume with enhanced chest sparkle" }] }, { title: "🌟 星粒・きらめき散布", items: [{ ja: "星粒きらめきのアイドル衣装", en: "idol outfit with starry sparkle" }, { ja: "細かい光粒を散らしたライブ服", en: "live costume scattered with tiny light particles" }, { ja: "微細ジュエルが散るステージ衣装", en: "stage costume scattered with fine jewels" }, { ja: "星屑風のきらめきドレス", en: "sparkling dress like stardust" }, { ja: "全体に光点が散るアイドル衣装", en: "idol outfit with luminous points all over" }] }, { title: "🪩 スパンコール強化", items: [{ ja: "スパンコール強化アイドル衣装", en: "idol outfit with strong sequin presence" }, { ja: "光盤みたいに輝くライブ服", en: "live costume shining like disco mirrors" }, { ja: "反射片が多いステージ衣装", en: "stage costume with many reflective pieces" }, { ja: "踊りで光るスパンコールドレス", en: "sequined dress that flashes while dancing" }, { ja: "照明返しの強いアイドル服", en: "idol costume with strong light return" }] }, { title: "👑 王冠・紋章装飾", items: [{ ja: "王冠モチーフのアイドル衣装", en: "idol outfit with crown motif" }, { ja: "紋章入りディーヴァドレス", en: "diva dress with emblem motifs" }, { ja: "ロイヤル宝飾のライブ衣装", en: "live costume with royal jewel decorations" }, { ja: "気高い紋章ラインのステージ服", en: "stage costume with noble emblem lines" }, { ja: "女王感を出す装飾アイドル衣装", en: "ornamented idol costume giving queenly presence" }] }, { title: "⚡ 発光装飾・LEDライン", items: [{ ja: "発光装飾付きアイドル衣装", en: "idol outfit with luminous decorations" }, { ja: "LEDラインのステージドレス", en: "stage dress with LED lines" }, { ja: "電飾ジュエルのライブ衣装", en: "live costume with electrified jewel accents" }, { ja: "ネオン縁飾りのアイドル服", en: "idol costume with neon trim decoration" }, { ja: "未来感のある発光宝飾衣装", en: "luminous jeweled costume with futuristic feel" }] }] },
+        { title: "🎀 リボン・フリル・レース", children: [{ title: "🎀 大リボン・結び", items: [{ ja: "大リボン主役のアイドル衣装", en: "idol outfit focused on large ribbons" }, { ja: "背中大リボンのステージ服", en: "stage costume with oversized back ribbon" }, { ja: "胸元結びリボンのライブ衣装", en: "live costume with bow at the chest" }, { ja: "腰リボン強化アイドル服", en: "idol costume with emphasized waist ribbons" }, { ja: "サイド結びが映える衣装", en: "costume with striking side bow ties" }] }, { title: "🍰 フリル層", items: [{ ja: "フリル層が厚いアイドル衣装", en: "idol outfit with thick frill layering" }, { ja: "胸元フリルのステージ服", en: "stage costume with chest frills" }, { ja: "袖先フリルのライブ衣装", en: "live costume with frilled sleeve ends" }, { ja: "スカートフリル多めのアイドル服", en: "idol costume with abundant skirt frills" }, { ja: "甘さ全振りのフリルドレス", en: "frill dress pushed fully toward sweetness" }] }, { title: "🕊 レース重ね", items: [{ ja: "レース重ねのアイドル衣装", en: "idol outfit layered with lace" }, { ja: "黒レースのダークライブ服", en: "dark live costume with black lace" }, { ja: "白レースの清楚ステージ衣装", en: "pure stage costume with white lace" }, { ja: "袖透けレースのドレス", en: "dress with sheer lace sleeves" }, { ja: "繊細レース主体のアイドル服", en: "idol costume centered on delicate lace" }] }, { title: "🌸 可憐装飾ミックス", items: [{ ja: "リボンとレースの可憐衣装", en: "delicate outfit mixing ribbons and lace" }, { ja: "花飾り入り姫系ステージ服", en: "princess stage costume with floral ornaments" }, { ja: "フリルと宝飾の甘いライブ服", en: "sweet live costume mixing frills and jewels" }, { ja: "可愛い要素を詰めたアイドル衣装", en: "idol outfit packed with cute elements" }, { ja: "愛らしさ重視の装飾ドレス", en: "decorative dress focused on loveliness" }] }, { title: "🖤 病みかわ装飾", items: [{ ja: "黒リボン病みかわアイドル衣装", en: "yamikawa idol outfit with black ribbons" }, { ja: "黒レースとハートのライブ服", en: "live costume with black lace and hearts" }, { ja: "毒かわフリルのステージ衣装", en: "stage costume with poisonous-cute frills" }, { ja: "甘さの中に闇があるアイドル服", en: "idol costume mixing sweetness with darkness" }, { ja: "鎖とリボンの病みかわ衣装", en: "yamikawa costume combining chains and ribbons" }] }] },
+        { title: "🦵 脚・ニーハイ・タイツ", children: [{ title: "🧦 ニーハイ・オーバーニー", items: [{ ja: "ニーハイ合わせのアイドル衣装", en: "idol outfit paired with knee-highs" }, { ja: "オーバーニー映えステージ服", en: "stage costume that suits over-knees" }, { ja: "絶対領域を作るライブ衣装", en: "live costume creating a zettai-ryoiki effect" }, { ja: "脚線を強調するニーハイ衣装", en: "idol costume emphasizing leg lines with knee-highs" }, { ja: "リボン付きニーハイのアイドル服", en: "idol costume with ribboned knee-highs" }] }, { title: "🕸 網・レースタイツ", items: [{ ja: "レースタイツのアイドル衣装", en: "idol outfit with lace tights" }, { ja: "網タイツ寄せのダークライブ服", en: "dark live costume leaning into fishnets" }, { ja: "脚飾り重視のタイツ衣装", en: "tights-focused costume emphasizing leg decoration" }, { ja: "透け脚線のステージ服", en: "stage costume with semi-sheer leg lines" }, { ja: "細かい網目のアイドルタイツ", en: "idol tights with fine mesh" }] }, { title: "🎀 ガーター・脚飾り", items: [{ ja: "ガーター付きアイドル衣装", en: "idol outfit with garters" }, { ja: "脚飾り主役のライブ服", en: "live costume focused on leg ornaments" }, { ja: "太ももアクセが映えるステージ衣装", en: "stage costume highlighting thigh accessories" }, { ja: "脚帯が主役のダークアイドル服", en: "dark idol costume focused on thigh bands" }, { ja: "チェーン脚飾りの病みかわ衣装", en: "yamikawa costume with chain leg ornaments" }] }, { title: "✨ 脚線強調・光演出", items: [{ ja: "脚線強調のアイドル衣装", en: "idol outfit emphasizing leg lines" }, { ja: "照明で脚が映えるライブ服", en: "live costume making legs stand out under lights" }, { ja: "発光ライン入りレッグ衣装", en: "legwear outfit with glowing lines" }, { ja: "サイバー脚線のステージ衣装", en: "stage costume with cyber leg lines" }, { ja: "細見え重視のレッグデザイン", en: "leg design focused on a slim silhouette" }] }, { title: "👠 脚と靴の連動", items: [{ ja: "脚と靴が一体感あるアイドル衣装", en: "idol outfit with coordinated legwear and shoes" }, { ja: "ニーハイとブーツ連動のライブ服", en: "live costume linking knee-highs with boots" }, { ja: "脚飾りとヒールが噛み合う衣装", en: "costume coordinating leg ornaments with heels" }, { ja: "足元まで統一感のあるステージ服", en: "stage costume with coherence down to the feet" }, { ja: "脚線から足先まで流れるアイドル衣装", en: "idol outfit flowing from leg line to toe" }] }] },
+        { title: "👑 頭部アクセ・髪飾り", children: [{ title: "👑 ティアラ・王冠", items: [{ ja: "ティアラ付きアイドル衣装", en: "idol outfit with tiara" }, { ja: "王冠モチーフのアイドル衣装", en: "idol outfit with crown motif" }, { ja: "小王冠が映えるライブ服", en: "live costume that highlights a mini crown" }, { ja: "ロイヤル系ヘッドアクセ衣装", en: "royal head-accessory idol outfit" }, { ja: "女王感を出す頭飾り付き衣装", en: "idol costume with headpiece enhancing queenly aura" }] }, { title: "🌸 花飾り・リボン髪飾り", items: [{ ja: "花飾り付きアイドル衣装", en: "idol outfit with floral headpiece" }, { ja: "大リボン髪飾りのライブ服", en: "live costume with oversized ribbon hair accessory" }, { ja: "両サイド髪飾りのステージ衣装", en: "stage costume with twin side hair ornaments" }, { ja: "姫系ヘアアクセが映える衣装", en: "idol outfit suiting princess-style hair accessories" }, { ja: "花とリボンを混ぜた頭飾り衣装", en: "idol costume with mixed floral and ribbon head ornaments" }] }, { title: "⚡ サイバーヘッドギア", items: [{ ja: "サイバーヘッドギア付き衣装", en: "idol outfit with cyber headgear" }, { ja: "発光カチューシャの近未来服", en: "futuristic outfit with luminous headband" }, { ja: "デバイス耳飾りのライブ衣装", en: "live costume with device-like ear ornaments" }, { ja: "ネオンヘッドアクセのステージ服", en: "stage costume with neon head accessory" }, { ja: "近未来バイザー系アイドル衣装", en: "idol outfit with futuristic visor styling" }] }, { title: "🖤 ダーク髪飾り", items: [{ ja: "黒薔薇髪飾りのダーク衣装", en: "dark idol outfit with black rose hair accessory" }, { ja: "病みかわヘッドアクセのライブ服", en: "yamikawa live costume with dark head accessory" }, { ja: "鎖混じりの髪飾りステージ衣装", en: "stage costume with chain-mixed hair ornament" }, { ja: "闇色リボンのアイドル服", en: "idol outfit with dark-toned ribbons" }, { ja: "退廃感ある頭飾りの衣装", en: "idol costume with decadent headpiece" }] }, { title: "✨ 額飾り・顔まわり装飾", items: [{ ja: "額飾り付きアイドル衣装", en: "idol outfit with forehead ornament" }, { ja: "顔まわり宝飾のライブ服", en: "live costume with face-framing jewel ornaments" }, { ja: "こめかみ装飾のステージ衣装", en: "stage costume with temple ornaments" }, { ja: "頬横チェーンのアイドル服", en: "idol outfit with side-face chains" }, { ja: "視線を集める顔まわりアクセ衣装", en: "idol costume with eye-catching face accessories" }] }] },
+        { title: "🎤 マイク・ヘッドセット・機材連動", children: [{ title: "🎤 ハンドマイク映え", items: [{ ja: "ハンドマイク映えのアイドル衣装", en: "idol outfit that suits a handheld microphone" }, { ja: "マイクを持って完成するライブ服", en: "live costume completed by holding a microphone" }, { ja: "歌唱ポーズ映えステージ衣装", en: "stage costume that shines in singing poses" }, { ja: "片手マイク前提のアイドル服", en: "idol outfit designed for one-hand mic performance" }, { ja: "ボーカル主役のマイク連動衣装", en: "microphone-linked outfit focused on the vocalist" }] }, { title: "🎧 ヘッドセット・インカム", items: [{ ja: "ヘッドセット付きアイドル衣装", en: "idol outfit with headset" }, { ja: "インカム連動のステージ衣装", en: "stage costume coordinated with in-ear comms" }, { ja: "両手を空けるライブ服", en: "live costume designed for hands-free performance" }, { ja: "ダンス寄りヘッドセット衣装", en: "dance-focused idol outfit with headset" }, { ja: "サイバーインカムの近未来服", en: "futuristic outfit with cyber in-ear mic" }] }, { title: "🔊 スピーカー・音波演出", items: [{ ja: "音波演出と噛み合うアイドル衣装", en: "idol outfit that pairs with soundwave effects" }, { ja: "スピーカー映えのライブ服", en: "live costume suited to speaker visuals" }, { ja: "低音強めステージ演出衣装", en: "stage outfit suited to bass-heavy effects" }, { ja: "音圧のあるライブ映え衣装", en: "costume that shines with strong sound pressure" }, { ja: "音波ライン付きサイバー衣装", en: "cyber costume with soundwave lines" }] }, { title: "💡 舞台装置リンク", items: [{ ja: "舞台装置と連動するアイドル衣装", en: "idol outfit linked with stage devices" }, { ja: "昇降演出向けステージ衣装", en: "stage costume suited to lift effects" }, { ja: "可動パネル映えのライブ服", en: "live costume matching moving panel effects" }, { ja: "大型モニター背景と噛み合う衣装", en: "costume coordinating with large monitor backdrops" }, { ja: "演出連動のセンター衣装", en: "center costume coordinated with special effects" }] }, { title: "🤖 近未来機材融合", items: [{ ja: "未来機材融合アイドル衣装", en: "idol outfit fused with futuristic equipment" }, { ja: "マイクアーム一体のサイバー服", en: "cyber costume integrated with microphone arm" }, { ja: "背面デバイス連動ステージ衣装", en: "stage costume linked to a rear device" }, { ja: "情報表示機材と噛み合う衣装", en: "costume coordinated with HUD-like devices" }, { ja: "機材ごとデザインされたアイドル服", en: "idol costume designed together with performance gear" }] }] },
+        { title: "💡 ライト・紙吹雪・ステージ演出", children: [{ title: "✨ スポットライト映え", items: [{ ja: "スポットライト映えアイドル衣装", en: "idol outfit that shines under spotlight" }, { ja: "逆光で輪郭が立つライブ服", en: "live costume with silhouette in backlight" }, { ja: "照明を受けて完成するステージ衣装", en: "stage costume completed by lighting" }, { ja: "強光に負けない中心衣装", en: "center costume that holds up under strong light" }, { ja: "ハイライトが走るアイドル服", en: "idol outfit streaked by highlights" }] }, { title: "🎉 紙吹雪・グリッター", items: [{ ja: "紙吹雪映えのアイドル衣装", en: "idol outfit that shines with confetti" }, { ja: "グリッター演出向けライブ服", en: "live costume for glitter effects" }, { ja: "舞い散る光片と噛み合う衣装", en: "costume coordinated with floating light fragments" }, { ja: "祝祭感のあるステージドレス", en: "stage dress with celebratory mood" }, { ja: "ラストサビ映えの華やか衣装", en: "glamorous outfit for the final chorus" }] }, { title: "🌫 スモーク・霧演出", items: [{ ja: "スモーク映えのアイドル衣装", en: "idol outfit that suits smoke effects" }, { ja: "薄霧の中で光るライブ服", en: "live costume glowing in thin fog" }, { ja: "霧幕を裂くステージ衣装", en: "stage costume cutting through mist" }, { ja: "湿光と相性の良いアイドル服", en: "idol outfit that pairs with damp glow" }, { ja: "神秘感を増す霧演出衣装", en: "costume enhanced by mystical fog effects" }] }, { title: "🔥 熱狂・観客光", items: [{ ja: "観客光を受けるアイドル衣装", en: "idol outfit receiving crowd light" }, { ja: "ライブ熱狂を背負うステージ服", en: "stage costume carrying live-show frenzy" }, { ja: "歓声に負けない主役衣装", en: "main-character outfit that stands against roaring cheers" }, { ja: "ペンライト海に映えるライブ服", en: "live costume suited to a sea of penlights" }, { ja: "熱量を増幅するアイドル衣装", en: "idol outfit amplifying crowd energy" }] }, { title: "🌌 幻想・星空演出", items: [{ ja: "星空演出と噛み合うアイドル衣装", en: "idol outfit matching starry-sky effects" }, { ja: "幻想光の中で映えるステージ服", en: "stage costume shining in fantasy light" }, { ja: "月光寄りのロマンチックライブ衣装", en: "romantic live outfit leaning into moonlight" }, { ja: "きらめく夜空演出向けドレス", en: "dress for sparkling night-sky staging" }, { ja: "夢見感のあるアイドル衣装", en: "dreamlike idol outfit" }] }] },
+        {
+        title: "💋 攻めアイドル設定",
+        children: [
+          { title: "✂ 露出・カット強調", items: [
+            { ja: "高露出寄せの攻めアイドル衣装", en: "aggressive idol outfit with high exposure styling" },
+            { ja: "サイドカット入りライブ衣装", en: "live outfit with side-cut design" },
+            { ja: "脚見せ強調の攻めアイドル服", en: "aggressive idol costume emphasizing leg reveal" },
+            { ja: "肩見せ寄せの挑発アイドル衣装", en: "provocative idol outfit with exposed shoulders" },
+            { ja: "大胆なカットラインのステージ衣装", en: "stage outfit with bold cut lines" }
+          ] },
+          { title: "💎 密着・ボディライン強調", items: [
+            { ja: "密着シルエットの攻めアイドル衣装", en: "body-hugging aggressive idol outfit" },
+            { ja: "ボディライン主役のステージ衣装", en: "stage outfit focused on body line" },
+            { ja: "腰線が映える攻めアイドル服", en: "aggressive idol costume emphasizing waistline" },
+            { ja: "曲線を拾うフィット衣装", en: "fitted costume tracing body curves" },
+            { ja: "体のラインを見せるライブ衣装", en: "live outfit showing the body silhouette" }
+          ] },
+          { title: "🔥 熱狂・ライブ挑発設定", items: [
+            { ja: "煽りに強い攻めアイドル衣装", en: "aggressive idol outfit suited for hyping the crowd" },
+            { ja: "熱狂ライブ向けの挑発衣装", en: "provocative costume for frenzied live performances" },
+            { ja: "観客を射抜く攻めステージ服", en: "aggressive stage outfit that pierces the audience" },
+            { ja: "挑発的な煽り動作が映える衣装", en: "outfit that suits provocative hype gestures" },
+            { ja: "ライブ熱量を増す攻めアイドル服", en: "aggressive idol costume that increases live intensity" }
+          ] },
+          { title: "🖤 ダーク・背徳寄せ", items: [
+            { ja: "背徳感を帯びた攻めアイドル衣装", en: "aggressive idol outfit with forbidden undertones" },
+            { ja: "黒主体の攻めダーク衣装", en: "black-dominant aggressive dark idol outfit" },
+            { ja: "深夜感のある挑発ライブ衣装", en: "provocative live outfit with late-night mood" },
+            { ja: "鎖と相性の良い攻め衣装", en: "aggressive costume that pairs well with chain motifs" },
+            { ja: "病み感を薄く混ぜた攻めアイドル服", en: "aggressive idol costume with a hint of dark-cute mood" }
+          ] },
+          { title: "⚡ 近未来・ユニット攻め設定", items: [
+            { ja: "近未来寄せの攻めアイドル衣装", en: "aggressive idol outfit with futuristic styling" },
+            { ja: "発光装飾で攻めるライブ衣装", en: "live outfit pushing aggressive appeal with luminous decorations" },
+            { ja: "サイバー強めの挑発アイドル服", en: "provocative idol costume with strong cyber flavor" },
+            { ja: "ユニット映えする攻めステージ衣装", en: "aggressive stage outfit that works well for idol units" },
+            { ja: "鋭い印象を持つ未来系アイドル衣装", en: "future-style idol outfit with a sharp impression" }
+          ] }
+        ]
+      }
+      ]
+    }];
 
   const DICT = {};
   (function buildDict(nodes){
@@ -6403,159 +6497,104 @@ wrap.appendChild(title);
   })(DATA);
 
   
-  const CHINA_PRESETS = [
-    {
-      title: "🌙 王道月光チャイナ",
-      desc: "白銀・月光・高襟でまとめた、静かな王道寄りの完成例。",
-      items: ["白銀月光旗袍", "白基調の上品チャイナ", "高襟を強調した旗袍", "中央連続盤扣の旗袍", "銀刺繍が映える旗袍", "花香をまとう旗袍"]
+
+  const SPECIAL_COLLECTIONS = {
+    "👘 チャイナ服特化コレクション": {
+      presetTitle: "🧧 チャイナ特化セット / China Presets",
+      presetDescTitle: "まずは完成例から入る",
+      presetDesc: "チェックを入れると下のチャイナ棚へ連動で実チェックが入る。下の棚を手動で触ると、セットのチェック表示は外れて自由編集モードへ戻る。",
+      baseTitle: "🎐 チャイナベース / Base Collection",
+      baseDesc: "王道・ロリ・サイバー・宮廷など、チャイナ服そのものの方向性を決める棚。最初に世界観やシルエットの土台を選ぶ。",
+      customizeTitle: "🛠 カスタマイズ項目 / Customization",
+      customizeDesc: "柄・留め具・生地など、選んだチャイナベースへ後がけして完成度を上げる調整棚。ベース選択のあとに重ねる用途。",
+      baseChildren: function(children){ return children.slice(0, 5).filter(function(child){ return (child && (child.title || child.label || '')) !== '🔥 攻めチャイナ'; }); },
+      customizeChildren: function(children){ return children.slice(5); },
+      presets: [
+        { title: "🌙 王道月光チャイナ", desc: "白銀・月光・高襟でまとめた、静かな王道寄りの完成例。", items: ["白銀月光旗袍", "白基調の上品チャイナ", "高襟を強調した旗袍", "中央連続盤扣の旗袍", "銀刺繍が映える旗袍", "花香をまとう旗袍"] },
+        { title: "👑 宮廷祝宴チャイナ", desc: "礼装・金刺繍・中央装飾を寄せた、格式高い祝宴向けセット。", items: ["龍鳳宮廷旗袍", "金刺繍の祝宴旗袍", "中央連続盤扣の旗袍", "胸元中央に飾りを置く旗袍", "金糸・銀糸刺繍", "後ろ裾が流れる旗袍"] },
+        { title: "🎀 中華ロリ祝祭チャイナ", desc: "甘ロリ・リボン・フリル・花飾りを束ねた可憐寄りセット。", items: ["甘ロリ中華ドレス", "リボン多め中華ロリ", "フリル重ね旗袍", "花飾り強化中華ロリ", "花飾り・簪", "可憐な丸頭ヒール"] },
+        { title: "⚡ 近未来ネオンチャイナ", desc: "ネオン・ホログラム・未来前立てを軸にしたサイバー完成例。", items: ["ネオン縁取り旗袍", "ホログラム旗袍", "中央発光ライン旗袍", "近未来背面ユニット旗袍", "近未来ヘッドギア", "近未来フットウェア"] },
+        { title: "🖤 退廃夜宴チャイナ", desc: "黒紫・香煙・背面鎖でまとめた、夜宴向けの退廃セット。", items: ["黒紫退廃チャイナ", "漆黒旗袍", "月下に映える背面鎖旗袍", "香煙に揺れる旗袍", "退廃夜宴向けの黒旗袍", "黒パンスト・黒タイツ"] },
+        { title: "🟢 翡翠宮装チャイナ", desc: "翡翠色と玉飾りを基調にした、上品で静かな宮装セット。", items: ["翡翠色の旗袍", "玉飾りと噛み合う緑旗袍", "玉飾り・腰飾り", "翡翠飾り旗袍", "高襟を強調した旗袍", "花刺繍・植物装飾線"] }
+      ]
     },
-    {
-      title: "👑 宮廷祝宴チャイナ",
-      desc: "礼装・金刺繍・中央装飾を寄せた、格式高い祝宴向けセット。",
-      items: ["龍鳳宮廷旗袍", "金刺繍の祝宴旗袍", "中央連続盤扣の旗袍", "胸元中央に飾りを置く旗袍", "金糸・銀糸刺繍", "後ろ裾が流れる旗袍"]
-    },
-    {
-      title: "🎀 中華ロリ祝祭チャイナ",
-      desc: "甘ロリ・リボン・フリル・花飾りを束ねた可憐寄りセット。",
-      items: ["甘ロリ中華ドレス", "リボン多め中華ロリ", "フリル重ね旗袍", "花飾り強化中華ロリ", "花飾り・簪", "可憐な丸頭ヒール"] 
-    },
-    {
-      title: "⚡ 近未来ネオンチャイナ",
-      desc: "ネオン・ホログラム・未来前立てを軸にしたサイバー完成例。",
-      items: ["ネオン縁取り旗袍", "ホログラム旗袍", "中央発光ライン旗袍", "近未来背面ユニット旗袍", "近未来ヘッドギア", "近未来フットウェア"]
-    },
-    {
-      title: "🖤 退廃夜宴チャイナ",
-      desc: "黒紫・香煙・背面鎖でまとめた、夜宴向けの退廃セット。",
-      items: ["黒紫退廃チャイナ", "漆黒旗袍", "月下に映える背面鎖旗袍", "香煙に揺れる旗袍", "退廃夜宴向けの黒旗袍", "黒パンスト・黒タイツ"]
-    },
-    {
-      title: "🟢 翡翠宮装チャイナ",
-      desc: "翡翠色と玉飾りを基調にした、上品で静かな宮装セット。",
-      items: ["翡翠色の旗袍", "玉飾りと噛み合う緑旗袍", "玉飾り・腰飾り", "翡翠飾り旗袍", "高襟を強調した旗袍", "花刺繍・植物装飾線"]
+    "🎤 アイドル衣装特化コレクション": {
+      presetTitle: "🎼 アイドル完成セット / Idol Presets",
+      presetDescTitle: "まずはライブ完成例から入る",
+      presetDesc: "チェックを入れると下のアイドル棚へ連動で実チェックが入る。下の棚を手動で触ると、セットのチェック表示は外れて自由編集モードへ戻る。",
+      baseTitle: "🎀 アイドルベース / Base Collection",
+      baseDesc: "まずは王道・甘ロリ・ディーヴァ・サイバー・ダークなど、アイドル衣装の土台となる方向性を選ぶ。",
+      customizeTitle: "🛠 アイドルカスタマイズ / Customization",
+      customizeDesc: "スカート・素材・装飾・脚・頭部アクセ・機材連動など、ベースに後がけして完成度を上げる。",
+      settingTitle: "💋 アイドル設定 / Attack & Mood",
+      settingDesc: "攻め・高露出・熱狂・挑発など、衣装そのものではなく見せ方や温度を上乗せする設定棚。ベース選択後に必要な時だけ足す。",
+      baseChildren: function(children){ return children.slice(0, 5); },
+      customizeChildren: function(children){ return children.slice(5).filter(function(child){ return (child && (child.title || child.label || '')) !== '💋 攻めアイドル設定'; }); },
+      settingChildren: function(children){ return children.filter(function(child){ return (child && (child.title || child.label || '')) === '💋 攻めアイドル設定'; }); },
+      presets: [
+        { title: "🌟 王道キラキラセンター", desc: "王道・センター・きらめき・マイクをまっすぐ束ねた、最初に触りやすい完成セット。", items: ["キラキラ王道アイドル衣装", "センター主役のアイドル衣装", "スポットライト映えステージ衣装", "胸元ジュエルのアイドル衣装", "スパンコール煌めき衣装", "ハンドマイク映えのアイドル衣装", "王道フレアのアイドル服"] },
+        { title: "🎀 甘ロリ姫系アイドル", desc: "甘ロリ・姫・フリル・ティアラを素直にまとめた、可憐寄りの完成セット。", items: ["リボン姫系アイドル衣装", "フリル多めの甘ロリアイドル衣装", "パステル姫系アイドル衣装", "ティアラ付きアイドル衣装", "大リボン主役のアイドル衣装", "花飾り付きアイドル衣装", "ふんわり広がるステージスカート"] },
+        { title: "⚡ ネオンサイバーアイドル", desc: "ネオン・未来素材・ヘッドセット・機材連動まで噛ませた近未来セット。", items: ["ネオン発光アイドル衣装", "未来素材のアイドル衣装", "サイバーヘッドギア付き衣装", "ヘッドセット付きアイドル衣装", "発光装飾付きアイドル衣装", "マイクアーム一体のサイバー服", "都市夜景映えサイバー衣装"] },
+        { title: "🖤 病みかわダークアイドル", desc: "病みかわ・黒レース・鎖・深夜感をまとめた、暗めで映える完成セット。", items: ["病みかわアイドル衣装", "黒レース主体の病み衣装", "チェーン付きダークアイドル衣装", "深夜ライブ向けダーク衣装", "病みかわヘッドアクセのライブ服", "スモーク映えのアイドル衣装", "黒リボン病みかわアイドル衣装"] },
+        { title: "👑 高級ディーヴァ系", desc: "宝石・夜会・モノトーン豪華を寄せた、大人っぽい主役用セット。", items: ["宝石主役のディーヴァ衣装", "夜会風ディーヴァ衣装", "モノトーンディーヴァドレス", "胸元ジュエルのアイドル衣装", "王冠モチーフのアイドル衣装", "上質サテンの高級ステージ衣装", "高反射のステージスーツ"] },
+        { title: "🔥 爆発ライブ熱狂アイドル", desc: "ポップ・脚線・ライト・紙吹雪まで入れた、ライブ会場で強い完成セット。", items: ["元気系ポップアイドル衣装", "熱狂型の攻めアイドル衣装", "観客光を受けるアイドル衣装", "ニーハイ合わせのアイドル衣装", "照明で脚が映えるライブ服", "紙吹雪映えのアイドル衣装", "ボーカル主役のマイク連動衣装"] }
+      ]
     }
-  ];
+  };
 
   let __v23PresetApplying = false;
 
-  function clearChinaPresetUI(root){
-    if(!root) return;
-    root.querySelectorAll('.attire-v23-preset-checkbox').forEach(function(cb){ cb.checked = false; });
-  }
-
-  function openAncestorsForCheckbox(cb){
-    if(!cb) return;
-    let el = cb.parentElement;
-    while(el){
-      if(el.tagName && el.tagName.toLowerCase() === 'details'){
-        el.open = true;
-      }
-      el = el.parentElement;
-    }
-  }
-
-  function applyChinaPreset(root, preset, sourceCheckbox){
+  function clearPresetUI(root){ if(!root) return; root.querySelectorAll('.attire-v23-preset-checkbox').forEach(function(cb){ cb.checked = false; }); }
+  function openAncestorsForCheckbox(cb){ if(!cb) return; let el = cb.parentElement; while(el){ if(el.tagName && el.tagName.toLowerCase() === 'details') el.open = true; el = el.parentElement; } }
+  function applyPreset(root, preset, sourceCheckbox){
     if(!root || !preset) return;
     __v23PresetApplying = true;
-
     const real = Array.from(root.querySelectorAll('.attire-v23-real-checkbox'));
     real.forEach(function(cb){ cb.checked = false; });
-
     const map = new Map();
-    real.forEach(function(cb){
-      const key = cb.dataset.ja || '';
-      if(key && !map.has(key)) map.set(key, cb);
-    });
-
+    real.forEach(function(cb){ const key = cb.dataset.ja || ''; if(key && !map.has(key)) map.set(key, cb); });
     const matched = [];
-    preset.items.forEach(function(name){
-      const cb = map.get(name);
-      if(cb){
-        cb.checked = true;
-        matched.push(cb);
-      }
-    });
-
-    matched.forEach(function(cb){
-      openAncestorsForCheckbox(cb);
-    });
-
-    clearChinaPresetUI(root);
+    preset.items.forEach(function(name){ const cb = map.get(name); if(cb){ cb.checked = true; matched.push(cb); } });
+    matched.forEach(openAncestorsForCheckbox);
+    clearPresetUI(root);
     if(sourceCheckbox) sourceCheckbox.checked = true;
-
     __v23PresetApplying = false;
   }
-
-  function createPresetSectionNode(){
+  function createPresetSectionNode(config){
     const details = document.createElement("details");
     details.className = "attire-v23-node attire-cat attire-v23-group-section is-preset";
     details.open = false;
     details.style.cssText = "margin:8px 0; border:1px solid #d79c4a; border-radius:10px; background:#fffaf3; overflow:hidden; width:100%; max-width:100%; box-sizing:border-box;";
-
     const summary = document.createElement("summary");
     summary.className = "attire-v23-summary attire-v23-group-summary is-preset";
-    summary.textContent = "🧧 チャイナ特化セット / China Presets";
-    summary.title = "🧧 チャイナ特化セット / China Presets";
+    summary.textContent = config.presetTitle;
+    summary.title = config.presetTitle;
     summary.style.cssText = "font-weight:800; padding:10px 12px; cursor:pointer; list-style:none; color:#8a5321; background:#fff5e8;";
     details.appendChild(summary);
-
     const body = document.createElement("div");
     body.className = "attire-v23-body attire-v23-group-body is-preset";
     body.style.cssText = "padding:8px 10px 10px; width:100%; max-width:100%; box-sizing:border-box;";
-
     const info = document.createElement("div");
     info.className = "attire-v23-info-block is-preset";
-    info.innerHTML = '<div class="attire-v23-info-badge is-preset">PRESET</div><div class="attire-v23-info-title">まずは完成例から入る</div><div class="attire-v23-info-desc">チェックを入れると下のチャイナ棚へ連動で実チェックが入る。下の棚を手動で触ると、セットのチェック表示は外れて自由編集モードへ戻る。</div>';
+    info.innerHTML = '<div class="attire-v23-info-badge is-preset">PRESET</div><div class="attire-v23-info-title">'+config.presetDescTitle+'</div><div class="attire-v23-info-desc">'+config.presetDesc+'</div>';
     body.appendChild(info);
-
     const grid = document.createElement("div");
     grid.className = "attire-v23-grid attire-v23-preset-grid";
     grid.style.cssText = "display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:8px; width:100%;";
-
-    CHINA_PRESETS.forEach(function(preset){
+    config.presets.forEach(function(preset){
       const card = document.createElement('label');
       card.className = 'attire-v23-preset-card';
       card.style.cssText = 'display:block; border:1px solid #e3c08a; border-radius:10px; background:#fffdf8; padding:10px 12px; cursor:pointer;';
-
-      const top = document.createElement('div');
-      top.style.cssText = 'display:flex; align-items:flex-start; gap:8px;';
-      const cb = document.createElement('input');
-      cb.type = 'checkbox';
-      cb.className = 'attire-v23-preset-checkbox';
-      cb.style.marginTop = '3px';
-      cb.dataset.presetTitle = preset.title;
-      const textWrap = document.createElement('div');
-      textWrap.style.cssText = 'min-width:0;';
-      const ttl = document.createElement('div');
-      ttl.style.cssText = 'font-weight:800; color:#8a5321; font-size:13px; margin-bottom:4px;';
-      ttl.textContent = preset.title;
-      const desc = document.createElement('div');
-      desc.style.cssText = 'font-size:12px; line-height:1.5; color:#7c6450;';
-      desc.textContent = preset.desc;
-
-      cb.addEventListener('change', function(){
-        const root = details.closest('.attire-v23-container');
-        if(!root) return;
-        if(cb.checked){
-          applyChinaPreset(root, preset, cb);
-        } else if(!__v23PresetApplying){
-          cb.checked = false;
-        }
-      });
-
-      textWrap.appendChild(ttl);
-      textWrap.appendChild(desc);
-      top.appendChild(cb);
-      top.appendChild(textWrap);
-      card.appendChild(top);
-      grid.appendChild(card);
+      const top = document.createElement('div'); top.style.cssText = 'display:flex; align-items:flex-start; gap:8px;';
+      const cb = document.createElement('input'); cb.type = 'checkbox'; cb.className = 'attire-v23-preset-checkbox'; cb.style.marginTop = '3px'; cb.dataset.presetTitle = preset.title;
+      const textWrap = document.createElement('div'); textWrap.style.cssText = 'min-width:0;';
+      const ttl = document.createElement('div'); ttl.style.cssText = 'font-weight:800; color:#8a5321; font-size:13px; margin-bottom:4px;'; ttl.textContent = preset.title;
+      const desc = document.createElement('div'); desc.style.cssText = 'font-size:12px; line-height:1.5; color:#7c6450;'; desc.textContent = preset.desc;
+      cb.addEventListener('change', function(){ const root = details.closest('.attire-v23-container'); if(!root) return; if(cb.checked){ applyPreset(root, preset, cb); } else if(!__v23PresetApplying) { cb.checked = false; } });
+      textWrap.appendChild(ttl); textWrap.appendChild(desc); top.appendChild(cb); top.appendChild(textWrap); card.appendChild(top); grid.appendChild(card);
     });
-
-    body.appendChild(grid);
-    details.appendChild(body);
-    return details;
+    body.appendChild(grid); details.appendChild(body); return details;
   }
-
 function createItemLabel(item){
     const ja = (item && typeof item === 'object') ? (item.ja || item.label || item.title || item.en || '') : String(item || '');
     const en = (item && typeof item === 'object') ? (item.en || item.ja || item.label || item.title || '') : String(item || '');
@@ -6600,25 +6639,31 @@ function createItemLabel(item){
 
 
   function createGroupedSectionNode(kind, title, desc, children){
+    const palette = kind === 'customize'
+      ? { cls: 'is-customize', border: '#b48bd2', bg: '#fcf8ff', summaryBg: '#f7f0ff', color: '#6f4b95', infoTitle: '後がけで仕上げる' }
+      : kind === 'setting'
+      ? { cls: 'is-setting', border: '#d58aa0', bg: '#fff7fa', summaryBg: '#fff1f5', color: '#9a3857', infoTitle: '見せ方と温度を足す' }
+      : { cls: 'is-base', border: '#d98ca0', bg: '#fffafb', summaryBg: '#fff8fb', color: '#7a2239', infoTitle: 'まずは方向性を決める' };
+
     const details = document.createElement("details");
-    details.className = "attire-v23-node attire-cat attire-v23-group-section " + (kind === 'customize' ? 'is-customize' : 'is-base');
+    details.className = "attire-v23-node attire-cat attire-v23-group-section " + palette.cls;
     details.open = false;
-    details.style.cssText = "margin:8px 0; border:1px solid " + (kind === 'customize' ? '#b48bd2' : '#d98ca0') + "; border-radius:10px; background:" + (kind === 'customize' ? '#fcf8ff' : '#fffafb') + "; overflow:hidden; width:100%; max-width:100%; box-sizing:border-box;";
+    details.style.cssText = "margin:8px 0; border:1px solid " + palette.border + "; border-radius:10px; background:" + palette.bg + "; overflow:hidden; width:100%; max-width:100%; box-sizing:border-box;";
 
     const summary = document.createElement("summary");
-    summary.className = "attire-v23-summary attire-v23-group-summary " + (kind === 'customize' ? 'is-customize' : 'is-base');
+    summary.className = "attire-v23-summary attire-v23-group-summary " + palette.cls;
     summary.textContent = title;
     summary.title = title;
-    summary.style.cssText = "font-weight:800; padding:10px 12px; cursor:pointer; list-style:none; color:" + (kind === 'customize' ? '#6f4b95' : '#7a2239') + "; background:" + (kind === 'customize' ? '#f7f0ff' : '#fff8fb') + ";";
+    summary.style.cssText = "font-weight:800; padding:10px 12px; cursor:pointer; list-style:none; color:" + palette.color + "; background:" + palette.summaryBg + ";";
     details.appendChild(summary);
 
     const body = document.createElement("div");
-    body.className = "attire-v23-body attire-v23-group-body " + (kind === 'customize' ? 'is-customize' : 'is-base');
+    body.className = "attire-v23-body attire-v23-group-body " + palette.cls;
     body.style.cssText = "padding:8px 10px 10px; width:100%; max-width:100%; box-sizing:border-box;";
-    body.appendChild(createInfoBlock(kind, kind === 'customize' ? '後がけで仕上げる' : 'まずは方向性を決める', desc));
+    body.appendChild(createInfoBlock(kind, palette.infoTitle, desc));
 
     const grid = document.createElement('div');
-    grid.className = 'attire-v23-grid attire-v23-group-grid ' + (kind === 'customize' ? 'is-customize' : 'is-base');
+    grid.className = 'attire-v23-grid attire-v23-group-grid ' + palette.cls;
     grid.style.cssText = 'display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:8px; width:100%;';
     children.forEach(child => grid.appendChild(createNode(child, 1)));
     body.appendChild(grid);
@@ -6657,22 +6702,17 @@ function createItemLabel(item){
       body.appendChild(grid);
     }
     if (node.children && node.children.length) {
-      if (depth === 0 && node.title === '👘 チャイナ服特化コレクション' && node.children.length > 5) {
-        body.appendChild(createPresetSectionNode());
-        body.appendChild(createGroupedSectionNode(
-          'base',
-          '🎐 チャイナベース / Base Collection',
-          '王道・ロリ・サイバー・宮廷など、チャイナ服そのものの方向性を決める棚。最初に世界観やシルエットの土台を選ぶ。',
-          node.children.slice(0, 5).filter(function(child){
-            return (child && (child.title || child.label || '')) !== '🔥 攻めチャイナ';
-          })
-        ));
-        body.appendChild(createGroupedSectionNode(
-          'customize',
-          '🛠 カスタマイズ項目 / Customization',
-          '柄・留め具・生地など、選んだチャイナベースへ後がけして完成度を上げる調整棚。ベース選択のあとに重ねる用途。',
-          node.children.slice(5)
-        ));
+      const specialConfig = depth === 0 ? SPECIAL_COLLECTIONS[node.title] : null;
+      if (specialConfig && node.children.length > 5) {
+        body.appendChild(createPresetSectionNode(specialConfig));
+        body.appendChild(createGroupedSectionNode('base', specialConfig.baseTitle, specialConfig.baseDesc, specialConfig.baseChildren(node.children)));
+        body.appendChild(createGroupedSectionNode('customize', specialConfig.customizeTitle, specialConfig.customizeDesc, specialConfig.customizeChildren(node.children)));
+        if (specialConfig.settingTitle && typeof specialConfig.settingChildren === 'function') {
+          const settingChildren = specialConfig.settingChildren(node.children);
+          if (settingChildren && settingChildren.length) {
+            body.appendChild(createGroupedSectionNode('setting', specialConfig.settingTitle, specialConfig.settingDesc || '', settingChildren));
+          }
+        }
       } else {
         node.children.forEach(child => body.appendChild(createNode(child, depth + 1)));
       }
@@ -6720,6 +6760,11 @@ function createItemLabel(item){
 .attire-v23-container .attire-v23-grid { width:100% !important; max-width:100% !important; }
 
 .attire-v23-group-section.is-customize { box-shadow:0 0 0 1px rgba(144,112,188,.06) inset; }
+
+.attire-v23-group-section.is-setting { box-shadow:0 0 0 1px rgba(191,82,112,.08) inset; }
+.attire-v23-group-body.is-setting { background:rgba(255,246,249,.92); }
+.attire-v23-group-summary.is-setting { background:#fff1f5; color:#9a3857; }
+
 
 .attire-v23-group-section.is-preset { box-shadow:0 0 0 1px rgba(215,156,74,.08) inset; }
 .attire-v23-group-body.is-preset { background:rgba(255,250,244,.9); }
