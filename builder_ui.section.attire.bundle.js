@@ -2,6 +2,30 @@
 const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small round white long-tailed bushtit, very compact round upper-body silhouette, noticeably small and fluffy proportions, snow-white and charcoal-black signature palette, bold symmetrical black circular eye-ring markings as a visible motif (patch/embroidery/print), tiny subtle beak motif detail, small subtle feather crest accent, long narrow avian tail feathers made of multiple thin layered plumes, thin elegant bird tail fan structure, not mammal tail, minimal decorative feather accents, no animal ears, no large angel wings, no giant feather spread, balanced proportions, bird-like but wearable";
 // Contains 20 versions stacked in ascending order.
 
+
+(function(){
+  try{
+    if (!document.getElementById("__attire_r18_raw_hide_style__")) {
+      const st = document.createElement("style");
+      st.id = "__attire_r18_raw_hide_style__";
+      st.textContent = `
+#list-attire .attire-v17-container,
+#list-attire .attire-v22-container,
+#list-attire .attire-r18 {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+#list-attire #__attire_r18_last_zone__ {
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+`;
+      document.head.appendChild(st);
+    }
+  }catch(_){}
+})();
 (function(){
 // --- builder_ui.section.attire.v1.js ---
 (function(){
@@ -70,12 +94,39 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
 
 
   
+  window.__injectAttireRawR18HideStyle = window.__injectAttireRawR18HideStyle || function(){
+    try{
+      if (document.getElementById("__attire_raw_r18_hide_style__")) return;
+      const st = document.createElement("style");
+      st.id = "__attire_raw_r18_hide_style__";
+      st.textContent = `
+#list-attire.attire-r18-ready > .attire-v17-container,
+#list-attire.attire-r18-ready > .attire-v22-container,
+#list-attire.attire-r18-ready > .attire-r18,
+#list-attire .section-content > .attire-v17-container,
+#list-attire .section-content > .attire-v22-container,
+#list-attire .section-content > .attire-r18 {
+  display: none !important;
+}
+`;
+      document.head.appendChild(st);
+    }catch(_){}
+  };
+
   window.__normalizeAttireLayout = window.__normalizeAttireLayout || function(parent){
     try{
       const root = (parent && parent.querySelector)
         ? (parent.querySelector(".section-content") || parent)
         : (document.querySelector("#list-attire .section-content") || document.getElementById("list-attire"));
       if (!root) return;
+      const IS_SECRET_UNLOCKED = (function(){
+        try{ return localStorage.getItem("MY_SECRET_UNLOCK") === "true"; }catch(_){ return false; }
+      })();
+      try{ if (window.__injectAttireRawR18HideStyle) window.__injectAttireRawR18HideStyle(); }catch(_){}
+      try{
+        const host = document.getElementById("list-attire");
+        if (host && IS_SECRET_UNLOCKED) host.classList.add("attire-r18-ready");
+      }catch(_){}
       if (root.__attireNormalizing) return;
       root.__attireNormalizing = true;
 
@@ -92,6 +143,45 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
           });
         }
         existingNormalGroup.remove();
+      }
+      const existingR18Zone = root.querySelector("#__attire_r18_last_zone__");
+      if (existingR18Zone){
+        const groupedBodies = existingR18Zone.querySelectorAll(".attire-r18-parent-body");
+        groupedBodies.forEach(function(body){
+          Array.from(body.children || []).forEach(function(child){
+            if (child && child.classList && child.classList.contains("attire-r18-collection")) return;
+            root.insertBefore(child, existingR18Zone);
+          });
+        });
+        existingR18Zone.remove();
+      }
+
+      if (!IS_SECRET_UNLOCKED){
+        Array.from(root.children || []).forEach(function(el){
+          if (!el) return;
+          const txt = (el && el.textContent ? el.textContent : "").replace(/\s+/g, " ").trim();
+          const cls = (el.className || "").toString();
+          const looksR18 =
+            (el.id === "__attire_r18_last_zone__")
+            || /attire-v17-container|attire-v22-container|attire-r18/.test(cls)
+            || txt.includes("R-18")
+            || txt.includes("NSFW")
+            || txt.includes("限界突破")
+            || txt.includes("フェティッシュ")
+            || txt.includes("完全露出")
+            || txt.includes("ボンテージ")
+            || txt.includes("拘束")
+            || txt.includes("露出・裸系")
+            || txt.includes("ランジェリー・特殊インナー")
+            || txt.includes("着崩し・チラリズム")
+            || txt.includes("異形・寄生・生体系")
+            || txt.includes("侵食・寄生特化コレクション")
+            || txt.includes("汚れ・液体系特化コレクション")
+            || txt.includes("女王・支配者特化コレクション");
+          if (looksR18 && el.parentNode === root) {
+            el.remove();
+          }
+        });
       }
 
       const children = Array.from(root.children || []);
@@ -189,7 +279,3520 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
       }
 
       gender.forEach(function(el){ if (el) root.appendChild(el); });
-      r18.forEach(function(el){ if (el) root.appendChild(el); });
+
+      const r18CollectionDefs = {
+        "👗 着崩し・チラリズム": [
+          {
+            title: "👗 着崩れ誘惑特化コレクション",
+            description: "脱ぎ切らず、崩れ切らず、ぎりぎりで保たれた着衣の色気を深掘りする専用コレクション",
+            presets: [
+              { title: "💋 事故っぽい肩落ち誘惑", items: [
+                { ja: "肩落ちルーズニット", en: "slipping off shoulder sweater, loose neckline" },
+                { ja: "胸元ゆるみシャツ", en: "partially unbuttoned shirt, loose cleavage" },
+                { ja: "ずれた肩紐", en: "slipped shoulder straps, unstable fit" },
+                { ja: "乱れた裾と皺", en: "rumpled hem, wrinkled fabric, messy drape" }
+              ]},
+              { title: "🔥 はだけ寸前フロントオープン", items: [
+                { ja: "前全開寸前シャツ", en: "shirt hanging open, almost fully exposed" },
+                { ja: "前開きガウン", en: "loosely opened gown, front parted" },
+                { ja: "ボタン弾けブラウス", en: "blouse with buttons popping open, strained fabric" },
+                { ja: "引っ張られた服の張力", en: "fabric pulled taut, stretched clothing tension" }
+              ]},
+              { title: "🩲 下着見え・片脱ぎルック", items: [
+                { ja: "片紐ずれランジェリー", en: "lingerie strap slipped off, underwear peeking" },
+                { ja: "見せ下着チラ見え", en: "visible lingerie under disheveled clothes" },
+                { ja: "片脱ぎワンピース", en: "half removed dress, one side slipping down" },
+                { ja: "脱ぎかけタイツ", en: "pantyhose half peeled down, disheveled legs" }
+              ]}
+            ],
+            baseGroups: [
+              { title: "🪡 肩落ち・胸元崩れ", items: [
+                { ja: "肩落ちルーズニット", en: "slipping off shoulder sweater, loose neckline" },
+                { ja: "胸元ゆるみシャツ", en: "partially unbuttoned shirt, loose cleavage" },
+                { ja: "片側ずり落ちトップス", en: "one side slipped top, uneven neckline" },
+                { ja: "胸元だけ開いたドレス", en: "dress loosened around bust, accidental reveal" },
+                { ja: "崩れたオフショルトップス", en: "disheveled off-shoulder top, fallen neckline" }
+              ]},
+              { title: "🫦 はだけ・前開き", items: [
+                { ja: "前全開寸前シャツ", en: "shirt hanging open, almost fully exposed" },
+                { ja: "はだけた着物", en: "disheveled kimono, front slipping open" },
+                { ja: "前開きガウン", en: "loosely opened gown, front parted" },
+                { ja: "ボタン弾けブラウス", en: "blouse with buttons popping open, strained fabric" },
+                { ja: "脱ぎかけジャケット", en: "half removed jacket, slipping from shoulders" }
+              ]}
+            ],
+            customizeGroups: [
+              { title: "🩲 下着見え・片脱ぎ", items: [
+                { ja: "片紐ずれランジェリー", en: "lingerie strap slipped off, underwear peeking" },
+                { ja: "見せ下着チラ見え", en: "visible lingerie under disheveled clothes" },
+                { ja: "片脱ぎワンピース", en: "half removed dress, one side slipping down" },
+                { ja: "腰掛けショーツ見え", en: "panties peeking above low-worn clothes" },
+                { ja: "脱ぎかけタイツ", en: "pantyhose half peeled down, disheveled legs" }
+              ]},
+              { title: "👠 乱れたシルエット", items: [
+                { ja: "片袖だけ落ちた服", en: "one sleeve fallen down, asymmetric disheveled wear" },
+                { ja: "ずれた裾のミニドレス", en: "misaligned hem mini dress, disturbed silhouette" },
+                { ja: "腰で止まった脱ぎかけ衣装", en: "partially stripped outfit caught at the waist" },
+                { ja: "ずれたストッキング合わせ", en: "slipped stockings, messy hosiery styling" },
+                { ja: "胸元と裾だけ乱れた礼装", en: "formal wear disturbed at bust and hem" }
+              ]}
+            ],
+            settingGroups: [
+              { title: "🎀 着崩れ演出設定", items: [
+                { ja: "乱れた裾と皺", en: "rumpled hem, wrinkled fabric, messy drape" },
+                { ja: "引っ張られた服の張力", en: "fabric pulled taut, stretched clothing tension" },
+                { ja: "ずれた肩紐", en: "slipped shoulder straps, unstable fit" },
+                { ja: "脱ぎかけ途中の空気", en: "mid-undressing atmosphere, interrupted dressing" },
+                { ja: "着衣の限界保持", en: "barely staying on clothes, precarious outfit" }
+              ]}
+            ]
+
+          },
+          {
+            title: "📐 極小露出・食い込み特化コレクション",
+            description: "極小布地、食い込み、深いカット、ぎりぎり覆う構造など“面積の小ささそのものが武器になる衣装”を深掘りする専用コレクション",
+            presets: [
+              { title: "🩱 マイクロカバー完成セット", items: [
+                { ja: "極小布地トップ", en: "micro cloth top, minimal coverage" },
+                { ja: "極小布地ボトム", en: "micro cloth bottom, minimal fabric" },
+                { ja: "際どい面積感", en: "dangerously tiny coverage, barely-there fabric" },
+                { ja: "見せるための最小構造", en: "minimum structure designed for display, barely-held outfit" }
+              ]},
+              { title: "📏 ハイレグ食い込みセット", items: [
+                { ja: "極端なハイレグライン", en: "extreme high-leg line, aggressive cut" },
+                { ja: "食い込み強調ライン", en: "deep wedgie line, emphasized contour" },
+                { ja: "腰骨を見せる深いカット", en: "deep cut exposing the hip bones" },
+                { ja: "脚の付け根まで攻めた輪郭", en: "daring cut toward the upper thighs, boundary-pushing silhouette" }
+              ]},
+              { title: "🔺 サイド開放セット", items: [
+                { ja: "脇が開いた極小衣装", en: "open-side micro outfit, exposed side cut" },
+                { ja: "細いストラップだけで支える", en: "held only by thin straps, minimal support" },
+                { ja: "胸元を浅く覆う布", en: "shallow covering over the bust, minimal concealment" },
+                { ja: "危うい保持感のある構造", en: "precarious holding structure, unstable coverage" }
+              ]}
+            ],
+            baseGroups: [
+              { title: "📐 極小面積・深いカット", items: [
+                { ja: "極小布地トップ", en: "micro cloth top, minimal coverage" },
+                { ja: "極小布地ボトム", en: "micro cloth bottom, minimal fabric" },
+                { ja: "極端なハイレグライン", en: "extreme high-leg line, aggressive cut" },
+                { ja: "腰骨を見せる深いカット", en: "deep cut exposing the hip bones" },
+                { ja: "脇が開いた極小衣装", en: "open-side micro outfit, exposed side cut" }
+              ]},
+              { title: "🔻 危ういカバー構造", items: [
+                { ja: "細いストラップだけで支える", en: "held only by thin straps, minimal support" },
+                { ja: "胸元を浅く覆う布", en: "shallow covering over the bust, minimal concealment" },
+                { ja: "ギリギリ覆う前布", en: "barely-covering front panel, minimal modesty" },
+                { ja: "横から大きく開いた構造", en: "widely open side structure, daring silhouette" },
+                { ja: "限界まで削った布面積", en: "fabric area reduced to the limit, ultra-minimal outfit" }
+              ]}
+            ],
+            customizeGroups: [
+              { title: "📏 食い込み・境界強調", items: [
+                { ja: "食い込み強調ライン", en: "deep wedgie line, emphasized contour" },
+                { ja: "脚の付け根まで攻めた輪郭", en: "daring cut toward the upper thighs, boundary-pushing silhouette" },
+                { ja: "腰回りの細ストラップ追加", en: "thin strap accents around the hips, precarious framing" },
+                { ja: "露出境界を強調する縁取り", en: "edge lines emphasizing the boundary of exposure" },
+                { ja: "視線を集めるV字カット", en: "attention-drawing V-cut, provocative silhouette" }
+              ]},
+              { title: "🪶 危うい保持アレンジ", items: [
+                { ja: "ずれそうで保たれている布", en: "fabric on the verge of slipping, yet holding" },
+                { ja: "片側だけ不安定な支え", en: "support unstable on one side, asymmetrical hold" },
+                { ja: "結び目が小さい保持構造", en: "tiny knot support structure, fragile hold" },
+                { ja: "見せるために削ぎ落とした構成", en: "stripped-down structure built for display" },
+                { ja: "保持点の少ない危険な衣装", en: "dangerous low-support outfit, minimal anchor points" }
+              ]}
+            ],
+            settingGroups: [
+              { title: "🔥 極小露出演出設定", items: [
+                { ja: "際どい面積感", en: "dangerously tiny coverage, barely-there fabric" },
+                { ja: "見せるための最小構造", en: "minimum structure designed for display, barely-held outfit" },
+                { ja: "危うい保持感のある構造", en: "precarious holding structure, unstable coverage" },
+                { ja: "露出境界を攻めた衣装感", en: "boundary-pushing exposure styling, daring costume presence" },
+                { ja: "布であることを保った限界感", en: "limit-pushing while still remaining clothing, edge-of-coverage feel" }
+              ]}
+            ]
+
+          },
+          {
+            title: "🩱 危うい保持・ずれ限界特化コレクション",
+            description: "今にも外れそう、ほどけそう、こぼれそう。それでも辛うじて保たれている“保持の危うさ”を深掘りする専用コレクション",
+            presets: [
+              { title: "🎀 片側ずれ限界セット", items: [
+                { ja: "片側だけずれたトップス", en: "top shifted to one side, asymmetrical slippage" },
+                { ja: "肩紐一本で保つ服", en: "outfit held by a single strap, unstable support" },
+                { ja: "危うい保持感", en: "precarious hold, barely staying in place" },
+                { ja: "今にも外れそうな緊張", en: "tension as if about to slip free, imminent wardrobe failure" }
+              ]},
+              { title: "🪢 ゆるんだ結び目セット", items: [
+                { ja: "ほどけかけた結び", en: "loosening knot, nearly undone tie" },
+                { ja: "緩んだリボン固定", en: "loosened ribbon fastening, unstable hold" },
+                { ja: "結び目だけで保つ衣装", en: "outfit held only by knots, fragile support" },
+                { ja: "保持限界のテンション", en: "tension at the limit of support, strain in the fabric" }
+              ]},
+              { title: "📎 最小支持セット", items: [
+                { ja: "支点が少ない衣装", en: "low-anchor outfit, minimal support points" },
+                { ja: "細い金具で保つ構造", en: "held by tiny hardware, thin clasp support" },
+                { ja: "引っ張られた布の張力", en: "stretched fabric tension, pulled to the limit" },
+                { ja: "ずれそうで保たれている", en: "on the verge of slipping, yet still held in place" }
+              ]}
+            ],
+            baseGroups: [
+              { title: "🧷 不安定な固定", items: [
+                { ja: "肩紐一本で保つ服", en: "outfit held by a single strap, unstable support" },
+                { ja: "結び目だけで保つ衣装", en: "outfit held only by knots, fragile support" },
+                { ja: "支点が少ない衣装", en: "low-anchor outfit, minimal support points" },
+                { ja: "細い金具で保つ構造", en: "held by tiny hardware, thin clasp support" },
+                { ja: "小さな留め具だけで支える", en: "supported only by tiny fasteners, fragile hold" }
+              ]},
+              { title: "↘ ずれ・滑り落ち寸前", items: [
+                { ja: "片側だけずれたトップス", en: "top shifted to one side, asymmetrical slippage" },
+                { ja: "ずれかけた胸元布", en: "bust fabric slipping out of place, unstable coverage" },
+                { ja: "腰で止まる脱げかけ衣装", en: "almost-fallen outfit caught at the waist" },
+                { ja: "ほどけかけた結び", en: "loosening knot, nearly undone tie" },
+                { ja: "今にも外れそうな固定具", en: "fasteners seeming ready to come undone" }
+              ]}
+            ],
+            customizeGroups: [
+              { title: "📏 張力・保持限界", items: [
+                { ja: "保持限界のテンション", en: "tension at the limit of support, strain in the fabric" },
+                { ja: "引っ張られた布の張力", en: "stretched fabric tension, pulled to the limit" },
+                { ja: "布が耐えている感じ", en: "sense of fabric barely enduring the strain" },
+                { ja: "滑り落ちを止める細帯", en: "thin bands stopping the slide, last-point support" },
+                { ja: "固定点に負荷が集中する", en: "stress concentrated on support points, fragile balance" }
+              ]},
+              { title: "🎀 ゆるみ・片寄りアレンジ", items: [
+                { ja: "緩んだリボン固定", en: "loosened ribbon fastening, unstable hold" },
+                { ja: "片側だけ露出が進んだ形", en: "exposure progressing on only one side, asymmetric reveal" },
+                { ja: "均衡が崩れた衣装バランス", en: "off-balance outfit hold, uneven structure" },
+                { ja: "今にも落ちる肩紐", en: "strap about to fall, edge-of-slip styling" },
+                { ja: "ずれそうで保たれている", en: "on the verge of slipping, yet still held in place" }
+              ]}
+            ],
+            settingGroups: [
+              { title: "⚠ 保持限界演出設定", items: [
+                { ja: "危うい保持感", en: "precarious hold, barely staying in place" },
+                { ja: "今にも外れそうな緊張", en: "tension as if about to slip free, imminent wardrobe failure" },
+                { ja: "保持限界のテンション", en: "tension at the limit of support, strain in the fabric" },
+                { ja: "均衡が崩れかけた衣装感", en: "costume balance on the verge of collapse, unstable hold" },
+                { ja: "ぎりぎりで保たれる色気", en: "sensuality sustained only by the finest margin" }
+              ]}
+            ]
+          }
+        ],
+        "🩲 ランジェリー・特殊インナー": [
+          {
+            title: "🩲 高級ランジェリー特化コレクション",
+            description: "下着というより装飾美。レース、宝飾、ガーターまで含めて“見せるための高級ランジェリー”をまとめた専用コレクション",
+            presets: [
+              { title: "💎 宝飾ブー ドワールセット", items: [
+                { ja: "宝飾ランジェリー", en: "jewel lingerie, gem decorated underwear" },
+                { ja: "パールチェーンインナー", en: "pearl chain lingerie, ornamented underwear" },
+                { ja: "黒金の高級下着", en: "black and gold luxury lingerie, premium innerwear" },
+                { ja: "香水めいた気配", en: "perfumed boudoir atmosphere, intimate elegance" }
+              ]},
+              { title: "🤍 ブライダル白ランジェリー", items: [
+                { ja: "ブライダルランジェリー", en: "bridal lingerie, pure white luxury underwear" },
+                { ja: "シルクスリップ", en: "silk slip lingerie, glossy luxury innerwear" },
+                { ja: "上品な透け感", en: "elegant transparency, refined sensuality" },
+                { ja: "繊細な刺繍装飾", en: "delicate embroidery details, haute lingerie" }
+              ]},
+              { title: "🖤 ガーター主役セット", items: [
+                { ja: "ガーターベルトセット", en: "garter belt lingerie set, thigh straps" },
+                { ja: "編み上げコルセット", en: "lace-up corset lingerie, waist cincher" },
+                { ja: "ストッキング一体ランジェリー", en: "lingerie with stockings, coordinated hosiery" },
+                { ja: "密着する高級素材", en: "luxury fabric clinging to body, premium texture" }
+              ]}
+            ],
+            baseGroups: [
+              { title: "🩰 レース・フリル", items: [
+                { ja: "総レースランジェリー", en: "luxury lace lingerie, floral lace set" },
+                { ja: "フリルたっぷりベビードール", en: "frilled babydoll lingerie, delicate frills" },
+                { ja: "透けレースガウン", en: "sheer lace robe, elegant lingerie gown" },
+                { ja: "花柄刺繍ブラセット", en: "embroidered floral lingerie set, luxury details" },
+                { ja: "リボン飾りランジェリー", en: "ribbon decorated lingerie, refined innerwear" }
+              ]},
+              { title: "🧷 ガーター・コルセット", items: [
+                { ja: "ガーターベルトセット", en: "garter belt lingerie set, thigh straps" },
+                { ja: "ビスチェランジェリー", en: "bustier lingerie, fitted innerwear" },
+                { ja: "編み上げコルセット", en: "lace-up corset lingerie, waist cincher" },
+                { ja: "ストッキング一体ランジェリー", en: "lingerie with stockings, coordinated hosiery" },
+                { ja: "サテンコルセットドレスインナー", en: "satin corset inner dress, elegant bondage-lite" }
+              ]}
+            ],
+            customizeGroups: [
+              { title: "💎 ジュエリー・ブライダル", items: [
+                { ja: "宝飾ランジェリー", en: "jewel lingerie, gem decorated underwear" },
+                { ja: "パールチェーンインナー", en: "pearl chain lingerie, ornamented underwear" },
+                { ja: "ブライダルランジェリー", en: "bridal lingerie, pure white luxury underwear" },
+                { ja: "シルクスリップ", en: "silk slip lingerie, glossy luxury innerwear" },
+                { ja: "黒金の高級下着", en: "black and gold luxury lingerie, premium innerwear" }
+              ]},
+              { title: "👠 見せる下着アレンジ", items: [
+                { ja: "見せるガーターストラップ", en: "display garter straps, visible lingerie styling" },
+                { ja: "腰飾りつきランジェリー", en: "lingerie with waist jewelry accents" },
+                { ja: "太腿チェーン付きインナー", en: "innerwear with thigh chains" },
+                { ja: "胸元ジュエル追加", en: "jewel accents on bustline lingerie" },
+                { ja: "透けガウン重ね", en: "layered sheer robe over lingerie" }
+              ]}
+            ],
+            settingGroups: [
+              { title: "🌹 色気演出設定", items: [
+                { ja: "上品な透け感", en: "elegant transparency, refined sensuality" },
+                { ja: "密着する高級素材", en: "luxury fabric clinging to body, premium texture" },
+                { ja: "繊細な刺繍装飾", en: "delicate embroidery details, haute lingerie" },
+                { ja: "香水めいた気配", en: "perfumed boudoir atmosphere, intimate elegance" },
+                { ja: "下着見せを前提にした装飾", en: "display lingerie styling, made to be seen" }
+              ]}
+            ]
+          },
+          {
+            title: "👑 夜の高級衣装特化コレクション",
+            description: "夜会服、宝飾チャイナ、儀礼衣装、光沢ガウンなど“高級な夜の装い”をR-18寄りの衣装美として深掘りする専用コレクション",
+            presets: [
+              { title: "🍷 夜会ドレスセット", items: [
+                { ja: "深紅の夜会ドレス", en: "crimson evening gown, luxurious formal dress" },
+                { ja: "黒サテンのロングドレス", en: "black satin long gown, elegant formalwear" },
+                { ja: "肩出しの高級礼装", en: "off-shoulder luxury formalwear, glamorous night attire" },
+                { ja: "宝石が散る夜会空気", en: "gem-lit ballroom atmosphere, luxury night ambience" }
+              ]},
+              { title: "🐉 宝飾チャイナセット", items: [
+                { ja: "宝飾チャイナドレス", en: "jewel-decorated qipao, luxury china dress" },
+                { ja: "金刺繍の光沢チャイナ", en: "glossy qipao with gold embroidery" },
+                { ja: "房飾りと胸元宝飾", en: "tassel accents and jeweled bust ornament" },
+                { ja: "宮廷めいた赤金の気配", en: "red-and-gold palace aura, regal oriental glamour" }
+              ]},
+              { title: "🕯 儀礼ガウンセット", items: [
+                { ja: "透けガウン重ねの礼装", en: "formalwear layered with sheer gown, sensual luxury" },
+                { ja: "シルクガウンを羽織った夜着", en: "silk gown over elegant night attire" },
+                { ja: "香水めいた密室の気配", en: "perfumed private room atmosphere, intimate luxury" },
+                { ja: "高級布の重い落ち感", en: "heavy drape of expensive fabric, couture fall" }
+              ]}
+            ],
+            baseGroups: [
+              { title: "👗 夜会服・高級ドレス", items: [
+                { ja: "深紅の夜会ドレス", en: "crimson evening gown, luxurious formal dress" },
+                { ja: "黒サテンのロングドレス", en: "black satin long gown, elegant formalwear" },
+                { ja: "スリット入り高級ドレス", en: "luxury slit gown, glamorous formal dress" },
+                { ja: "肩出しの高級礼装", en: "off-shoulder luxury formalwear, glamorous night attire" },
+                { ja: "ベルベット夜会服", en: "velvet evening dress, rich formalwear" }
+              ]},
+              { title: "🏮 宝飾チャイナ・宮廷衣装", items: [
+                { ja: "宝飾チャイナドレス", en: "jewel-decorated qipao, luxury china dress" },
+                { ja: "金刺繍の光沢チャイナ", en: "glossy qipao with gold embroidery" },
+                { ja: "宮廷風スリット礼装", en: "palace-style slit formalwear, regal qipao" },
+                { ja: "房飾りと胸元宝飾", en: "tassel accents and jeweled bust ornament" },
+                { ja: "赤金の儀礼チャイナ", en: "red-and-gold ceremonial qipao, regal glamour" }
+              ]}
+            ],
+            customizeGroups: [
+              { title: "💎 宝飾・高級アクセント", items: [
+                { ja: "胸元ジュエル追加", en: "jewel accents on bustline, luxury ornament" },
+                { ja: "肩飾り付き夜会服", en: "evening gown with shoulder ornaments" },
+                { ja: "腰飾りチェーン追加", en: "waist chain accents, formal luxury styling" },
+                { ja: "透けガウン重ね", en: "layered sheer gown over formalwear" },
+                { ja: "宝石のきらめき追加", en: "extra gemstone sparkle, ballroom luxury" }
+              ]},
+              { title: "🧵 高級布・ドレープ強化", items: [
+                { ja: "シルクの落ち感を強化", en: "enhanced silk drape, elegant fabric fall" },
+                { ja: "サテン反射を強調", en: "accentuated satin reflections, rich gloss" },
+                { ja: "ベルベットの吸光感", en: "light-absorbing velvet richness, deep luxury fabric" },
+                { ja: "重い裾の流れ", en: "heavy flowing hem, formal gown movement" },
+                { ja: "高級仕立ての立体感", en: "couture-level structure, premium tailored silhouette" }
+              ]}
+            ],
+            settingGroups: [
+              { title: "🌙 夜の高級感設定", items: [
+                { ja: "宝石が散る夜会空気", en: "gem-lit ballroom atmosphere, luxury night ambience" },
+                { ja: "宮廷めいた赤金の気配", en: "red-and-gold palace aura, regal oriental glamour" },
+                { ja: "香水めいた密室の気配", en: "perfumed private room atmosphere, intimate luxury" },
+                { ja: "高級布の重い落ち感", en: "heavy drape of expensive fabric, couture fall" },
+                { ja: "上品なのに妖しい夜の色気", en: "elegant yet seductive nocturnal glamour" }
+              ]}
+            ]
+          },
+          {
+            title: "🩶 艶素材・密着特化コレクション",
+            description: "露出ではなく、素材そのものの粘度と反射で攻める。光沢、薄膜、濡れ布、密着感を束ねた専用コレクション",
+            presets: [
+              { title: "🖤 ラテックス主役セット", items: [
+                { ja: "黒ラテックスボディスーツ", en: "black latex bodysuit, mirror gloss" },
+                { ja: "光沢ラバーランジェリー", en: "glossy rubber lingerie, slick highlight" },
+                { ja: "強いハイライト反射", en: "strong specular highlights, reflective material" },
+                { ja: "皮膚に吸い付く質感", en: "vacuum-like cling texture, suction fit" }
+              ]},
+              { title: "💧 濡れ布透け感セット", items: [
+                { ja: "濡れシャツ密着", en: "wet shirt clinging to skin, transparency" },
+                { ja: "濡れた薄絹ドレス", en: "wet thin silk dress, clinging drape" },
+                { ja: "水滴つきシースルー布", en: "see-through fabric with droplets, wet sheen" },
+                { ja: "艶と汗の境界が曖昧", en: "gloss merging with sweat sheen, slick surface" }
+              ]},
+              { title: "🫧 第二皮膚セット", items: [
+                { ja: "極薄ボディストッキング", en: "ultra-thin bodystocking, second-skin fit" },
+                { ja: "半透明ボディフィルム", en: "semi-transparent body film, second skin" },
+                { ja: "薄膜で包んだような密閉感", en: "sealed in a thin membrane, wrapped body feel" },
+                { ja: "光で輪郭が浮く素材", en: "light-revealed contours, glossy silhouette" }
+              ]}
+            ],
+            baseGroups: [
+              { title: "✨ ラテックス・グロス", items: [
+                { ja: "黒ラテックスボディスーツ", en: "black latex bodysuit, mirror gloss" },
+                { ja: "濡れたPVCドレス", en: "wet pvc dress, reflective synthetic shine" },
+                { ja: "光沢ラバーランジェリー", en: "glossy rubber lingerie, slick highlight" },
+                { ja: "全身ぴったりメタリック布", en: "skin-tight metallic fabric, body hugging" },
+                { ja: "オイル光沢インナー", en: "oil gloss innerwear, liquid shine" }
+              ]},
+              { title: "💧 濡れ布・透け素材", items: [
+                { ja: "濡れシャツ密着", en: "wet shirt clinging to skin, transparency" },
+                { ja: "濡れた薄絹ドレス", en: "wet thin silk dress, clinging drape" },
+                { ja: "半透明ボディフィルム", en: "semi-transparent body film, second skin" },
+                { ja: "水滴つきシースルー布", en: "see-through fabric with droplets, wet sheen" },
+                { ja: "濡れストッキング密着", en: "wet stockings clinging tightly, glossy legs" }
+              ]}
+            ],
+            customizeGroups: [
+              { title: "🫧 薄膜・ボディライン", items: [
+                { ja: "極薄ボディストッキング", en: "ultra-thin bodystocking, second-skin fit" },
+                { ja: "肌に貼り付く極薄布", en: "ultra thin fabric stuck to skin" },
+                { ja: "輪郭が浮く密着トップス", en: "body contour top, silhouette emphasized" },
+                { ja: "張り付くシアーインナー", en: "clinging sheer innerwear, translucent fit" },
+                { ja: "ぴったり密着ワンピ", en: "skin-tight dress, every curve defined" }
+              ]},
+              { title: "🔧 密着レイヤー追加", items: [
+                { ja: "濡れガウン重ね", en: "wet glossy robe layered over body" },
+                { ja: "透明手袋と薄膜袖", en: "transparent gloves and membrane sleeves" },
+                { ja: "ボディチェーン上から密着布", en: "clinging fabric over body chains" },
+                { ja: "反射が走る脚部カバー", en: "reflective leg covers, glossy lower body" },
+                { ja: "薄膜フード付き密着衣装", en: "skin-tight outfit with thin membrane hood" }
+              ]}
+            ],
+            settingGroups: [
+              { title: "🔮 素材演出設定", items: [
+                { ja: "強いハイライト反射", en: "strong specular highlights, reflective material" },
+                { ja: "皮膚に吸い付く質感", en: "vacuum-like cling texture, suction fit" },
+                { ja: "光で輪郭が浮く素材", en: "light-revealed contours, glossy silhouette" },
+                { ja: "艶と汗の境界が曖昧", en: "gloss merging with sweat sheen, slick surface" },
+                { ja: "薄膜で包んだような密閉感", en: "sealed in a thin membrane, wrapped body feel" }
+              ]}
+            ]
+          }
+        ],
+        "🔞 露出・裸系": [
+          {
+            title: "🔞 露出・裸系特化コレクション",
+            description: "大胆な露出、無防備な素肌、極小布地、ぎりぎりの面積感までをまとめて深掘りする専用コレクション",
+            presets: [
+              { title: "🫧 無防備露出セット", items: [
+                { ja: "完全露出ボディ", en: "fully exposed body, complete nude presentation" },
+                { ja: "無防備な素肌感", en: "unguarded bare skin feel, vulnerable body" },
+                { ja: "羞恥を伴う露出感", en: "embarrassed exposed atmosphere, vulnerable nudity" },
+                { ja: "見られている意識", en: "awareness of being watched, exposed tension" }
+              ]},
+              { title: "📐 極小布地セット", items: [
+                { ja: "極小布地トップ", en: "micro cloth top, minimal coverage" },
+                { ja: "極小布地ボトム", en: "micro cloth bottom, minimal fabric" },
+                { ja: "際どい面積感", en: "dangerously tiny coverage, barely-there fabric" },
+                { ja: "食い込み強調ライン", en: "deep wedgie line, exposed body contour" }
+              ]},
+              { title: "💋 誘惑裸体セット", items: [
+                { ja: "裸体を主役にした演出", en: "nude body as the focal point, exposed styling" },
+                { ja: "艶やかな肌見せ", en: "glossy skin reveal, sensual nude glow" },
+                { ja: "大胆な見せ方", en: "bold display style, fearless exposure" },
+                { ja: "恥じらい混じりの挑発", en: "shy yet provocative exposure, alluring conflict" }
+              ]}
+            ],
+            baseGroups: [
+              { title: "🫧 裸体・全身露出", items: [
+                { ja: "完全露出ボディ", en: "fully exposed body, complete nude presentation" },
+                { ja: "裸体を主役にした演出", en: "nude body as the focal point, exposed styling" },
+                { ja: "全身肌見せシルエット", en: "full-body skin reveal silhouette, exposed figure" },
+                { ja: "無防備な素肌感", en: "unguarded bare skin feel, vulnerable body" },
+                { ja: "潔く隠さない構図", en: "nothing-hidden composition, fully revealed body" }
+              ]},
+              { title: "📐 極小布地・面積感", items: [
+                { ja: "極小布地トップ", en: "micro cloth top, minimal coverage" },
+                { ja: "極小布地ボトム", en: "micro cloth bottom, minimal fabric" },
+                { ja: "際どい面積感", en: "dangerously tiny coverage, barely-there fabric" },
+                { ja: "食い込み強調ライン", en: "deep wedgie line, exposed body contour" },
+                { ja: "ほとんど布のない拘束布地", en: "barely-there restraint cloth, minimal fabric wrap" }
+              ]}
+            ],
+            customizeGroups: [
+              { title: "💋 誘惑アクセント", items: [
+                { ja: "艶やかな肌見せ", en: "glossy skin reveal, sensual nude glow" },
+                { ja: "裸体を飾るアクセント", en: "decorative accents on nude body, sensual staging" },
+                { ja: "見せるためのポーズ強調", en: "posed to display the body, exhibition styling" },
+                { ja: "視線を集める腰元演出", en: "waist-focused revealing accent, attention drawing" },
+                { ja: "肌に沿う細い飾り紐", en: "thin decorative strings tracing the body" }
+              ]},
+              { title: "🫣 羞恥・無防備調整", items: [
+                { ja: "羞恥を伴う露出感", en: "embarrassed exposed atmosphere, vulnerable nudity" },
+                { ja: "見られている意識", en: "awareness of being watched, exposed tension" },
+                { ja: "無防備な肌見せ", en: "unguarded skin reveal, defenseless exposure" },
+                { ja: "恥じらい混じりの挑発", en: "shy yet provocative exposure, alluring conflict" },
+                { ja: "隠しきれない露出", en: "unable to fully hide the body, partial concealment failure" }
+              ]}
+            ],
+            settingGroups: [
+              { title: "🔞 露出演出設定", items: [
+                { ja: "大胆な見せ方", en: "bold display style, fearless exposure" },
+                { ja: "肌の面積を主役にする", en: "skin area as focal point, body-centered composition" },
+                { ja: "露出と羞恥の両立", en: "balance of exposure and embarrassment" },
+                { ja: "あえて隠さない態度", en: "deliberately unhidden attitude, confident reveal" },
+                { ja: "裸体の解放感", en: "sense of nude liberation, freed skin exposure" }
+              ]}
+            ]
+          },
+          {
+            title: "👙 裂け・破損寸前・限界衣装特化コレクション",
+            description: "引き伸ばし、ほつれ、破れかけ、縫い目の限界など“壊れそうで壊れない衣装の危うさ”を深掘りする専用コレクション",
+            presets: [
+              { title: "🧵 縫い目限界セット", items: [
+                { ja: "縫い目が悲鳴を上げるトップス", en: "top with seams at their breaking point, strained stitching" },
+                { ja: "張力で歪んだドレス", en: "dress distorted by tension, stretched silhouette" },
+                { ja: "布が限界まで引かれた構造", en: "fabric pulled to its absolute limit, stressed structure" },
+                { ja: "今にも裂けそうな緊張感", en: "tension as if it could tear at any moment" }
+              ]},
+              { title: "✂ 破れかけセット", items: [
+                { ja: "一部だけ裂けた衣装", en: "outfit torn in only one area, partial damage" },
+                { ja: "ほつれた縁のミニドレス", en: "mini dress with frayed edges, damaged finish" },
+                { ja: "脇だけ裂けたタイト服", en: "tight outfit torn at the side, stressed seam" },
+                { ja: "無理に保たれた破損寸前の服", en: "outfit barely holding together, on the verge of tearing" }
+              ]},
+              { title: "🪡 張力破綻寸前セット", items: [
+                { ja: "引き伸ばされた布地", en: "fabric stretched to the extreme, over-tensioned cloth" },
+                { ja: "胸元で耐えるボタン", en: "buttons straining at the bustline, near-failure hold" },
+                { ja: "張力で浮く縫い目", en: "seams lifting under tension, stress lines visible" },
+                { ja: "壊れそうで壊れない保持感", en: "a held-together-at-the-edge feeling, almost-failing support" }
+              ]}
+            ],
+            baseGroups: [
+              { title: "🧵 張力・縫い目の限界", items: [
+                { ja: "縫い目が悲鳴を上げるトップス", en: "top with seams at their breaking point, strained stitching" },
+                { ja: "張力で歪んだドレス", en: "dress distorted by tension, stretched silhouette" },
+                { ja: "引き伸ばされた布地", en: "fabric stretched to the extreme, over-tensioned cloth" },
+                { ja: "張力で浮く縫い目", en: "seams lifting under tension, stress lines visible" },
+                { ja: "胸元で耐えるボタン", en: "buttons straining at the bustline, near-failure hold" }
+              ]},
+              { title: "✂ 破れ・ほつれ寸前", items: [
+                { ja: "一部だけ裂けた衣装", en: "outfit torn in only one area, partial damage" },
+                { ja: "ほつれた縁のミニドレス", en: "mini dress with frayed edges, damaged finish" },
+                { ja: "脇だけ裂けたタイト服", en: "tight outfit torn at the side, stressed seam" },
+                { ja: "裂けかけたストッキング", en: "stockings close to tearing, stressed hosiery" },
+                { ja: "無理に保たれた破損寸前の服", en: "outfit barely holding together, on the verge of tearing" }
+              ]}
+            ],
+            customizeGroups: [
+              { title: "🪡 限界テンション強化", items: [
+                { ja: "布が限界まで引かれた構造", en: "fabric pulled to its absolute limit, stressed structure" },
+                { ja: "張力で浮く縫い目", en: "seams lifting under tension, stress lines visible" },
+                { ja: "引っ張られて歪む裾", en: "hem distorted by pulling tension, warped edge" },
+                { ja: "保たれているだけの固定", en: "fastening that only barely holds, fragile support" },
+                { ja: "限界まで耐える衣装面", en: "garment surface enduring at the limit, stressed material" }
+              ]},
+              { title: "✂ 破損寸前アレンジ", items: [
+                { ja: "裂け目を強調する縁取り", en: "edging that emphasizes tears, accentuated damage lines" },
+                { ja: "ほつれを残した高級布", en: "luxury fabric with visible fraying, elegant damage" },
+                { ja: "部分的な破断感", en: "partial rupture feel, localized structural failure" },
+                { ja: "今にも切れそうな細帯", en: "thin strap about to snap, dangerous hold" },
+                { ja: "壊れそうで壊れない衣装感", en: "garment that seems ready to fail, yet still endures" }
+              ]}
+            ],
+            settingGroups: [
+              { title: "⚡ 限界衣装ムード設定", items: [
+                { ja: "今にも裂けそうな緊張感", en: "tension as if it could tear at any moment" },
+                { ja: "壊れそうで壊れない保持感", en: "a held-together-at-the-edge feeling, almost-failing support" },
+                { ja: "服が物語を抱えた損傷感", en: "damage that still keeps the garment's story alive" },
+                { ja: "戦いの余韻を残す衣装", en: "garment carrying the aftermath of conflict, lingering damage" },
+                { ja: "限界で保たれる背徳感", en: "decadence sustained only at the breaking edge" }
+              ]}
+            ]
+          }
+        ],
+        "⛓ 拘束・支配": [
+          {
+            title: "⛓ 女王・支配者特化コレクション",
+            description: "縛る側、命じる側、見下ろす側の役割美学を深掘りする専用コレクション。女王、冷酷支配者、誘惑主導まで衣装としてまとめる",
+            presets: [
+              { title: "👑 女王様完成セット", items: [
+                { ja: "漆黒ボンデージ女王", en: "black bondage queen outfit, commanding dominatrix look" },
+                { ja: "ハイヒール支配者", en: "high-heel dominator outfit, strict authority" },
+                { ja: "首輪と鎖の高圧セット", en: "collar and chain command set, oppressive dominance" },
+                { ja: "冷酷な女王の気配", en: "cruel queen atmosphere, cold authority" }
+              ]},
+              { title: "🖤 冷酷支配者セット", items: [
+                { ja: "硬質レザー支配服", en: "hard leather dominator wear, severe control" },
+                { ja: "エナメル拘束ドレス", en: "patent bondage dress, glossy restraint fashion" },
+                { ja: "命令のためのロンググローブ", en: "long command gloves, strict mistress styling" },
+                { ja: "無慈悲な視線設定", en: "merciless gaze setting, dominant authority" }
+              ]},
+              { title: "💋 誘惑主導セット", items: [
+                { ja: "誘惑する支配者ドレス", en: "seductive dominator dress, teasing authority" },
+                { ja: "脚線を見せる拘束スタイル", en: "bondage styling emphasizing legs, alluring control" },
+                { ja: "ガーター付き支配インナー", en: "dominator innerwear with garters, controlled seduction" },
+                { ja: "命令しながら誘う空気", en: "tempting while commanding, dominant seduction mood" }
+              ]}
+            ],
+            baseGroups: [
+              { title: "🖤 ボンデージ・拘束ベース", items: [
+                { ja: "漆黒ボンデージボディスーツ", en: "black bondage bodysuit, tight restraint base" },
+                { ja: "レザーハーネス衣装", en: "leather harness outfit, dominant structure" },
+                { ja: "拘束ベルト付きドレス", en: "dress with restraint belts, severe silhouette" },
+                { ja: "エナメル拘束インナー", en: "patent restraint innerwear, glossy fit" },
+                { ja: "首輪一体型支配服", en: "collar integrated dominator wear, control motif" }
+              ]},
+              { title: "👠 女王・支配者シルエット", items: [
+                { ja: "高圧コルセットドレス", en: "authoritative corset dress, strict waistline" },
+                { ja: "ハイヒール支配スタイル", en: "high-heel dominator style, superior posture" },
+                { ja: "女王様ロンググローブ", en: "queen long gloves, commanding elegance" },
+                { ja: "マント付き冷酷礼装", en: "cruel ceremonial cape outfit, ruler-like presence" },
+                { ja: "命令者のタイトスカート", en: "commander tight skirt, strict dominant silhouette" }
+              ]}
+            ],
+            customizeGroups: [
+              { title: "⛓ 首輪・鎖・ハーネス", items: [
+                { ja: "金具つき首輪", en: "metal collar with fittings, control accessory" },
+                { ja: "胸元ハーネス追加", en: "chest harness added, bondage accent" },
+                { ja: "太腿ベルト追加", en: "thigh straps added, dominant restraint styling" },
+                { ja: "鎖アクセサリー装飾", en: "chain accessories, oppressive decoration" },
+                { ja: "手首拘束バンド", en: "wrist restraint bands, strict cuff styling" }
+              ]},
+              { title: "🔧 素材・圧の強化", items: [
+                { ja: "レザー光沢強化", en: "enhanced leather gloss, hard reflective control wear" },
+                { ja: "エナメル反射追加", en: "added patent reflections, slick dominator shine" },
+                { ja: "硬質シルエット化", en: "hardened silhouette, severe outfit structure" },
+                { ja: "ガーター支配化", en: "garters turned into dominator styling" },
+                { ja: "高圧アクセサリー追加", en: "high-pressure accessories added, authority ornaments" }
+              ]}
+            ],
+            settingGroups: [
+              { title: "🧠 支配者ムード設定", items: [
+                { ja: "高圧的な空気", en: "overbearing atmosphere, oppressive authority" },
+                { ja: "命令を前提にした立ち姿", en: "command-ready stance, dominant bearing" },
+                { ja: "冷酷で無慈悲な印象", en: "cold and merciless impression, strict domination" },
+                { ja: "誘惑しながら主導する", en: "leading while seducing, controlled temptation" },
+                { ja: "絶対的優位の演出", en: "absolute superiority staging, total command" }
+              ]}
+            ]
+          },
+          {
+            title: "⛓ 首輪・ハーネス・固定具衣装特化コレクション",
+            description: "首輪、胸元ハーネス、腰ベルト、手首足首の固定具など“装着物としての支配感”を衣装として深掘りする専用コレクション",
+            presets: [
+              { title: "🔗 首輪主役セット", items: [
+                { ja: "金具つき首輪", en: "metal-fitted collar, dominant accessory" },
+                { ja: "首輪一体型ドレス", en: "dress integrated with a collar, controlled silhouette" },
+                { ja: "首元に視線を集める構造", en: "structure drawing attention to the neck, controlled framing" },
+                { ja: "装着感の強い支配アクセント", en: "dominant accessory with a strong sense of being worn" }
+              ]},
+              { title: "🖤 ハーネス衣装セット", items: [
+                { ja: "胸元ハーネス衣装", en: "chest harness outfit, bondage-inspired fashion" },
+                { ja: "ボディストラップドレス", en: "body-strap dress, controlled contour lines" },
+                { ja: "腰ベルト主導のシルエット", en: "silhouette led by waist belts, structured restraint styling" },
+                { ja: "金具で締まる衣装感", en: "outfit tightened by hardware, controlled costume feel" }
+              ]},
+              { title: "🧷 手首足首固定具セット", items: [
+                { ja: "手首拘束バンド", en: "wrist restraint bands, styled cuffs" },
+                { ja: "足首ストラップ装飾", en: "ankle strap ornaments, restraint-inspired accents" },
+                { ja: "太腿ベルト追加", en: "thigh straps added, dominant restraint styling" },
+                { ja: "身体の可動域を意識させる固定感", en: "fixing accents suggesting controlled movement range" }
+              ]}
+            ],
+            baseGroups: [
+              { title: "🔗 首輪・ネック固定", items: [
+                { ja: "金具つき首輪", en: "metal-fitted collar, dominant accessory" },
+                { ja: "首輪一体型ドレス", en: "dress integrated with a collar, controlled silhouette" },
+                { ja: "チョーカー型固定具", en: "choker-style restraint fitting, controlled neck accessory" },
+                { ja: "首元を縁取る支配ベルト", en: "dominant belt framing the neck, control motif" },
+                { ja: "首元ロック付き装飾", en: "neck ornament with locking motif, restraint fashion" }
+              ]},
+              { title: "🖤 ハーネス・ボディストラップ", items: [
+                { ja: "胸元ハーネス衣装", en: "chest harness outfit, bondage-inspired fashion" },
+                { ja: "ボディストラップドレス", en: "body-strap dress, controlled contour lines" },
+                { ja: "腰ベルト主導のシルエット", en: "silhouette led by waist belts, structured restraint styling" },
+                { ja: "交差ストラップ衣装", en: "cross-strap outfit, constraining line work" },
+                { ja: "金具で締まる衣装感", en: "outfit tightened by hardware, controlled costume feel" }
+              ]}
+            ],
+            customizeGroups: [
+              { title: "🧷 手首・足首・太腿アクセント", items: [
+                { ja: "手首拘束バンド", en: "wrist restraint bands, styled cuffs" },
+                { ja: "足首ストラップ装飾", en: "ankle strap ornaments, restraint-inspired accents" },
+                { ja: "太腿ベルト追加", en: "thigh straps added, dominant restraint styling" },
+                { ja: "グローブ固定具追加", en: "glove restraint fittings added, dressed control motif" },
+                { ja: "脚線を区切る支配ベルト", en: "dominant belts dividing the leg line, controlled emphasis" }
+              ]},
+              { title: "⚙ 金具・固定具強化", items: [
+                { ja: "バックル追加", en: "extra buckles, stronger restraint styling" },
+                { ja: "リング金具追加", en: "ring hardware added, bondage fashion detail" },
+                { ja: "細い鎖アクセント", en: "thin chain accents, controlled luxury detail" },
+                { ja: "装着感を強める金属感", en: "metallic presence enhancing the feeling of being fitted" },
+                { ja: "身体に沿う締結ライン", en: "fastening lines following the body, controlled silhouette" }
+              ]}
+            ],
+            settingGroups: [
+              { title: "⛓ 固定具衣装ムード設定", items: [
+                { ja: "装着感の強い支配アクセント", en: "dominant accessory with a strong sense of being worn" },
+                { ja: "身体の可動域を意識させる固定感", en: "fixing accents suggesting controlled movement range" },
+                { ja: "衣装そのものが拘束具に見える", en: "the outfit itself reads like a restraint device" },
+                { ja: "冷たい支配アクセサリー感", en: "cold dominant accessory feel, strict costume pressure" },
+                { ja: "見た瞬間に空気を変える固定具", en: "fixing elements that change the atmosphere at first glance" }
+              ]}
+            ]
+          },
+          {
+            title: "👠 支配者・女王・高圧衣装特化コレクション",
+            description: "強いヒール、冷たい高級感、高圧的なシルエットなど“格で圧する支配衣装”を深掘りする専用コレクション",
+            presets: [
+              { title: "👑 冷酷女王完成セット", items: [
+                { ja: "高圧コルセットドレス", en: "authoritative corset dress, strict waistline" },
+                { ja: "女王様ロンググローブ", en: "queen long gloves, commanding elegance" },
+                { ja: "強いヒールの支配者", en: "dominator with severe heels, superior bearing" },
+                { ja: "冷たい高級感で見下ろす空気", en: "cold luxury used to look down on others, severe elegance" }
+              ]},
+              { title: "🖤 支配礼装セット", items: [
+                { ja: "マント付き冷酷礼装", en: "cruel ceremonial cape outfit, ruler-like presence" },
+                { ja: "命令者のタイトスカート", en: "commander tight skirt, strict dominant silhouette" },
+                { ja: "高級ベルト主導の礼装", en: "formalwear led by luxury belts, controlling silhouette" },
+                { ja: "絶対的優位を感じさせる仕立て", en: "tailoring that communicates absolute superiority" }
+              ]},
+              { title: "💋 妖艶支配セット", items: [
+                { ja: "誘惑する支配者ドレス", en: "seductive dominator dress, teasing authority" },
+                { ja: "脚線を見せる支配礼装", en: "dominant formalwear emphasizing the legs" },
+                { ja: "高圧ヒールと長手袋", en: "severe heels and long gloves, dominant luxury" },
+                { ja: "品位と威圧が同居する衣装感", en: "an outfit where elegance and intimidation coexist" }
+              ]}
+            ],
+            baseGroups: [
+              { title: "👠 ヒール・ロンググローブ・圧", items: [
+                { ja: "強いヒールの支配者", en: "dominator with severe heels, superior bearing" },
+                { ja: "女王様ロンググローブ", en: "queen long gloves, commanding elegance" },
+                { ja: "高圧コルセットドレス", en: "authoritative corset dress, strict waistline" },
+                { ja: "脚線を見せる支配礼装", en: "dominant formalwear emphasizing the legs" },
+                { ja: "肩で圧する高級礼装", en: "luxury formalwear that dominates with shoulder presence" }
+              ]},
+              { title: "👑 女王・礼装・高級感", items: [
+                { ja: "マント付き冷酷礼装", en: "cruel ceremonial cape outfit, ruler-like presence" },
+                { ja: "命令者のタイトスカート", en: "commander tight skirt, strict dominant silhouette" },
+                { ja: "高級ベルト主導の礼装", en: "formalwear led by luxury belts, controlling silhouette" },
+                { ja: "宝飾を抑えた冷たい王侯感", en: "restrained jewels, cold aristocratic dominance" },
+                { ja: "見下ろすための上位衣装", en: "high-rank attire meant to look down upon others" }
+              ]}
+            ],
+            customizeGroups: [
+              { title: "🖤 高圧アクセサリー", items: [
+                { ja: "高圧アクセサリー追加", en: "high-pressure accessories added, authority ornaments" },
+                { ja: "長手袋の存在感強化", en: "enhanced presence of long gloves, elegant severity" },
+                { ja: "ヒールの威圧感を強化", en: "enhanced intimidation from heels, superior stance" },
+                { ja: "肩章・装飾の格上感", en: "epaulettes and ornaments that raise the sense of rank" },
+                { ja: "腰回りの支配的ベルト", en: "dominant waist belts, commanding body framing" }
+              ]},
+              { title: "👑 仕立て・シルエット強化", items: [
+                { ja: "硬質シルエット化", en: "hardened silhouette, severe outfit structure" },
+                { ja: "高級仕立ての立体感", en: "couture-level structure, premium tailored silhouette" },
+                { ja: "首から脚まで通る支配ライン", en: "a commanding line running from neck to legs" },
+                { ja: "視線を支配する縦シルエット", en: "vertical silhouette that dominates the viewer's gaze" },
+                { ja: "衣装だけで圧を出す設計", en: "a design that exerts pressure through clothing alone" }
+              ]}
+            ],
+            settingGroups: [
+              { title: "👠 高圧女王ムード設定", items: [
+                { ja: "冷たい高級感で見下ろす空気", en: "cold luxury used to look down on others, severe elegance" },
+                { ja: "絶対的優位を感じさせる仕立て", en: "tailoring that communicates absolute superiority" },
+                { ja: "品位と威圧が同居する衣装感", en: "an outfit where elegance and intimidation coexist" },
+                { ja: "露出より格で圧する支配感", en: "dominance achieved through rank rather than exposure" },
+                { ja: "視線を従わせる衣装の威圧", en: "the outfit's intimidation that forces the gaze to submit" }
+              ]}
+            ]
+          },
+          {
+            title: "💋 高級背徳ランジェリー特化コレクション",
+            description: "漆黒レース、深紅ランジェリー、宝飾ガーター、コルセット密着など“高級感と背徳感が同居するランジェリー”を深掘りする専用コレクション",
+            presets: [
+              { title: "🖤 漆黒レース完成セット", items: [
+                { ja: "漆黒レースランジェリー", en: "jet-black lace lingerie, decadent luxury" },
+                { ja: "透ける黒レース", en: "sheer black lace, elegant erotic transparency" },
+                { ja: "黒ガーター主導", en: "black garter-led styling, decadent framing" },
+                { ja: "高級背徳の空気", en: "luxurious decadent mood, elegant corruption" }
+              ]},
+              { title: "❤️ 深紅コルセットセット", items: [
+                { ja: "深紅ランジェリー", en: "deep crimson lingerie, luxurious seduction" },
+                { ja: "高圧コルセット", en: "tight corset, severe shaping luxury" },
+                { ja: "宝飾ガーター", en: "jeweled garters, rich decadent accents" },
+                { ja: "退廃高級感", en: "decadent luxury, aristocratic corruption" }
+              ]},
+              { title: "✨ 宝飾シアーランジェリーセット", items: [
+                { ja: "宝飾ランジェリー", en: "jeweled lingerie, ornate intimacy" },
+                { ja: "シアーグローブ追加", en: "sheer gloves added, refined erotic styling" },
+                { ja: "高級ストッキング", en: "luxury stockings, polished sensual finish" },
+                { ja: "品のある背徳感", en: "elegant sense of taboo, refined decadence" }
+              ]}
+            ],
+            baseGroups: [
+              { title: "🩲 レース・コルセット・テディ", items: [
+                { ja: "漆黒レースランジェリー", en: "jet-black lace lingerie, decadent luxury" },
+                { ja: "深紅ランジェリー", en: "deep crimson lingerie, luxurious seduction" },
+                { ja: "高圧コルセット", en: "tight corset, severe shaping luxury" },
+                { ja: "テディ型ボディランジェリー", en: "teddy-style body lingerie, intimate silhouette" },
+                { ja: "高級ボディスーツランジェリー", en: "luxury bodysuit lingerie, sculpted allure" }
+              ]},
+              { title: "✨ 宝飾・シアー・グローブ", items: [
+                { ja: "宝飾ランジェリー", en: "jeweled lingerie, ornate intimacy" },
+                { ja: "宝飾ガーター", en: "jeweled garters, rich decadent accents" },
+                { ja: "シアーグローブ追加", en: "sheer gloves added, refined erotic styling" },
+                { ja: "高級ストッキング", en: "luxury stockings, polished sensual finish" },
+                { ja: "透ける黒レース", en: "sheer black lace, elegant erotic transparency" }
+              ]}
+            ],
+            customizeGroups: [
+              { title: "💎 背徳アクセント強化", items: [
+                { ja: "黒ガーター主導", en: "black garter-led styling, decadent framing" },
+                { ja: "宝石付き留め具", en: "jewel-set fasteners, luxurious restraint detail" },
+                { ja: "胸元に寄る宝飾ライン", en: "jewel lines guiding the gaze toward the bust" },
+                { ja: "太腿を飾る高級バンド", en: "luxury thigh bands, decadent framing" },
+                { ja: "退廃色の差し色", en: "decadent color accents, rich forbidden elegance" }
+              ]},
+              { title: "🪞 素材・密着感調整", items: [
+                { ja: "しなやかな密着シルエット", en: "supple body-hugging silhouette, luxurious fit" },
+                { ja: "滑らかなサテン裏地感", en: "smooth satin lining feel, intimate luxury" },
+                { ja: "肌を縁取るレース輪郭", en: "lace edges tracing the skin, elegant temptation" },
+                { ja: "控えめな艶で高級に見せる", en: "subtle sheen for a high-end finish" },
+                { ja: "柔らかな透けの重なり", en: "layered soft transparency, refined sensuality" }
+              ]}
+            ],
+            settingGroups: [
+              { title: "🌙 背徳ムード設定", items: [
+                { ja: "高級背徳の空気", en: "luxurious decadent mood, elegant corruption" },
+                { ja: "退廃高級感", en: "decadent luxury, aristocratic corruption" },
+                { ja: "品のある背徳感", en: "elegant sense of taboo, refined decadence" },
+                { ja: "露骨ではなく危険な色気", en: "dangerous sensuality without becoming vulgar" },
+                { ja: "近寄りがたい高級感", en: "untouchable high-end aura, forbidden allure" }
+              ]}
+            ]
+          },
+          {
+            title: "🔥 露出境界・見せつけ衣装特化コレクション",
+            description: "胸元、腰回り、背中、脚線など“どこを見せるか”を設計して視線を誘導する、見せつけ前提の衣装を深掘りする専用コレクション",
+            presets: [
+              { title: "🔻 胸元集中セット", items: [
+                { ja: "胸元集中カット", en: "bust-focused cut, attention-guiding opening" },
+                { ja: "胸元を縁取る深いV字", en: "deep V framing the cleavage, provocative focus" },
+                { ja: "視線を胸元へ誘導する縁取り", en: "edge lines guiding the gaze toward the bust" },
+                { ja: "見せるために計算された上半身", en: "upper-body design calculated for display" }
+              ]},
+              { title: "↘ 腰回り・サイド見せセット", items: [
+                { ja: "腰骨見せカット", en: "hip-bone reveal cut, suggestive side opening" },
+                { ja: "サイド開放シルエット", en: "side-open silhouette, gaze-guiding exposure" },
+                { ja: "腰回りに細い視線誘導ライン", en: "thin visual lines emphasizing the waist and hips" },
+                { ja: "横から見せつける構造", en: "side-display structure, provocative framing" }
+              ]},
+              { title: "🦵 脚線・背中見せセット", items: [
+                { ja: "脚見せスリット衣装", en: "leg-showing slit outfit, dramatic reveal" },
+                { ja: "背中見せドレス", en: "back-reveal dress, display-focused elegance" },
+                { ja: "視線を脚へ流す縦ライン", en: "vertical lines drawing the eye down the legs" },
+                { ja: "観賞前提の挑発シルエット", en: "teasing silhouette designed to be looked at" }
+              ]}
+            ],
+            baseGroups: [
+              { title: "🔻 胸元・腰回り・背中の見せ場", items: [
+                { ja: "胸元集中カット", en: "bust-focused cut, attention-guiding opening" },
+                { ja: "胸元を縁取る深いV字", en: "deep V framing the cleavage, provocative focus" },
+                { ja: "腰骨見せカット", en: "hip-bone reveal cut, suggestive side opening" },
+                { ja: "背中見せドレス", en: "back-reveal dress, display-focused elegance" },
+                { ja: "サイド開放シルエット", en: "side-open silhouette, gaze-guiding exposure" }
+              ]},
+              { title: "🦵 脚線・スリット・視線導線", items: [
+                { ja: "脚見せスリット衣装", en: "leg-showing slit outfit, dramatic reveal" },
+                { ja: "脚線を拾うタイトライン", en: "tight lines emphasizing the legs" },
+                { ja: "視線を脚へ流す縦ライン", en: "vertical lines drawing the eye down the legs" },
+                { ja: "歩くたびに開くカットライン", en: "cut lines that open with movement, staged display" },
+                { ja: "観賞前提の挑発シルエット", en: "teasing silhouette designed to be looked at" }
+              ]}
+            ],
+            customizeGroups: [
+              { title: "🎯 視線誘導アクセント", items: [
+                { ja: "視線を胸元へ誘導する縁取り", en: "edge lines guiding the gaze toward the bust" },
+                { ja: "腰回りに細い視線誘導ライン", en: "thin visual lines emphasizing the waist and hips" },
+                { ja: "背中へ視線を集める開き方", en: "back openings that gather the gaze" },
+                { ja: "脚線を強調する縁取り", en: "trim emphasizing the leg line, display styling" },
+                { ja: "見せ場を区切る細ストラップ", en: "thin straps defining the showcase area" }
+              ]},
+              { title: "🔥 見せつけ感強化", items: [
+                { ja: "見せるために計算された上半身", en: "upper-body design calculated for display" },
+                { ja: "横から見せつける構造", en: "side-display structure, provocative framing" },
+                { ja: "観賞前提の立体裁断", en: "tailoring intended for deliberate display" },
+                { ja: "挑発的な境界線の処理", en: "provocative handling of the exposure boundary" },
+                { ja: "脚と背中を主役にする設計", en: "design that makes the legs and back the stars" }
+              ]}
+            ],
+            settingGroups: [
+              { title: "💋 見せつけムード設定", items: [
+                { ja: "観賞させるための衣装感", en: "an outfit made to be looked at" },
+                { ja: "露出境界を武器にする空気", en: "an atmosphere that weaponizes the boundary of exposure" },
+                { ja: "視線を操る挑発感", en: "teasing control over where the gaze lands" },
+                { ja: "品を残した見せつけ感", en: "show-off sensuality that still keeps elegance" },
+                { ja: "無言で見ろと言う衣装", en: "an outfit that silently commands attention" }
+              ]}
+            ]
+          }
+        ]
+      };
+
+
+      let __v24PresetApplying = false;
+      let __v24QualityPresetApplying = false;
+
+      function clearR18CollectionPresetUI(root){
+        if (!root) return;
+        root.querySelectorAll('.attire-r18-preset-checkbox').forEach(function(cb){ cb.checked = false; });
+      }
+
+      function clearR18CollectionQualityPresetUI(root){
+        if (!root) return;
+        root.querySelectorAll('.attire-r18-quality-preset-checkbox').forEach(function(cb){ cb.checked = false; });
+      }
+
+      function getR18GeneratedQualityHost(root){
+        if (!root) return null;
+        let host = root.querySelector('.attire-r18-generated-quality-host');
+        if (!host){
+          host = document.createElement('div');
+          host.className = 'attire-r18-generated-quality-host';
+          host.style.display = 'none';
+          root.appendChild(host);
+        }
+        return host;
+      }
+
+      function clearR18GeneratedQualityOutputs(root){
+        if (!root) return;
+        root.querySelectorAll('.attire-r18-generated-quality-host').forEach(function(host){ host.remove(); });
+      }
+
+      function clearR18CollectionRealChecks(root, mode){
+        if (!root) return;
+        const targetMode = mode || 'all';
+        root.querySelectorAll('.attire-r18-real-checkbox').forEach(function(cb){
+          const isQuality = (cb.dataset.r18kind || 'main') === 'quality';
+          if (targetMode === 'all'
+            || (targetMode === 'main' && !isQuality)
+            || (targetMode === 'quality' && isQuality)) {
+            cb.checked = false;
+          }
+        });
+        if (targetMode === 'all' || targetMode === 'quality') clearR18GeneratedQualityOutputs(root);
+      }
+
+      function resetR18CollectionPresetState(root){
+        if (!root) return;
+        clearR18CollectionPresetUI(root);
+        clearR18CollectionQualityPresetUI(root);
+        clearR18CollectionRealChecks(root, 'all');
+      }
+
+      function resetR18CollectionQualityState(root){
+        if (!root) return;
+        clearR18CollectionQualityPresetUI(root);
+        clearR18CollectionRealChecks(root, 'quality');
+      }
+
+      function openAncestorsForR18Checkbox(cb){
+        if (!cb) return;
+        let el = cb.parentElement;
+        while (el){
+          if (el.tagName && el.tagName.toLowerCase() === 'details') el.open = true;
+          el = el.parentElement;
+        }
+      }
+
+      function normalizeR18PresetItems(items){
+        return (items || []).map(function(entry){
+          if (typeof entry === 'string') {
+            return { ja: entry, en: entry };
+          }
+          if (entry && typeof entry === 'object') {
+            return {
+              ja: String(entry.ja || entry.label || entry.title || ''),
+              en: String(entry.en || entry.ja || entry.label || entry.title || '')
+            };
+          }
+          const txt = String(entry || '');
+          return { ja: txt, en: txt };
+        }).filter(function(entry){ return entry.ja; });
+      }
+
+      function applyR18CollectionPreset(root, preset, sourceCheckbox){
+        if (!root || !preset) return;
+        __v24PresetApplying = true;
+        resetR18CollectionPresetState(root);
+        const real = Array.from(root.querySelectorAll('.attire-r18-real-checkbox:not([data-r18kind="quality"])'));
+        const map = new Map();
+        real.forEach(function(cb){
+          const key = cb.dataset.ja || '';
+          if (key && !map.has(key)) map.set(key, cb);
+        });
+        const matched = [];
+        normalizeR18PresetItems(preset.items).forEach(function(item){
+          const cb = map.get(item.ja);
+          if (cb){
+            cb.checked = true;
+            matched.push(cb);
+          }
+        });
+        matched.forEach(openAncestorsForR18Checkbox);
+        clearR18CollectionPresetUI(root);
+        if (sourceCheckbox) sourceCheckbox.checked = true;
+        __v24PresetApplying = false;
+      }
+
+      function applyR18CollectionQualityPreset(root, preset, sourceCheckbox){
+        if (!root || !preset) return;
+        __v24QualityPresetApplying = true;
+        resetR18CollectionQualityState(root);
+        const real = Array.from(root.querySelectorAll('.attire-r18-real-checkbox[data-r18kind="quality"]'));
+        const map = new Map();
+        real.forEach(function(cb){
+          const key = cb.dataset.ja || '';
+          if (key && !map.has(key)) map.set(key, cb);
+        });
+        const matched = [];
+        const generated = [];
+        normalizeR18PresetItems(preset.items).forEach(function(item){
+          const cb = map.get(item.ja);
+          if (cb){
+            cb.checked = true;
+            matched.push(cb);
+          } else if (item.en) {
+            generated.push(item);
+          }
+        });
+        if (generated.length){
+          const host = getR18GeneratedQualityHost(root);
+          generated.forEach(function(item){
+            const cb = document.createElement('input');
+            cb.type = 'checkbox';
+            cb.className = 'attire-r18-real-checkbox attire-r18-generated-quality-output';
+            cb.dataset.en = item.en;
+            cb.dataset.ja = item.ja;
+            cb.dataset.r18src = 'v24';
+            cb.dataset.r18kind = 'quality';
+            cb.checked = true;
+            host.appendChild(cb);
+          });
+        }
+        matched.forEach(openAncestorsForR18Checkbox);
+        clearR18CollectionQualityPresetUI(root);
+        if (sourceCheckbox) sourceCheckbox.checked = true;
+        __v24QualityPresetApplying = false;
+      }
+
+      function createR18CollectionNode(collection){
+        if (!collection || !collection.title) return null;
+
+        function createItemGrid(items, itemKind){
+          const grid = document.createElement("div");
+          grid.className = "attire-r18-collection-grid";
+          grid.style.cssText = "padding:8px;display:grid;grid-template-columns:repeat(auto-fill, minmax(180px, 1fr));gap:6px;";
+          (items || []).forEach(function(item){
+            const label = document.createElement("label");
+            label.style.cssText = "display:flex;align-items:flex-start;gap:6px;font-size:0.9em;cursor:pointer;line-height:1.4;";
+            const cb = document.createElement("input");
+            cb.type = "checkbox";
+            cb.className = "attire-r18-real-checkbox";
+            cb.dataset.en = item.en;
+            cb.dataset.ja = item.ja;
+            cb.dataset.r18src = "v24";
+            cb.dataset.r18kind = itemKind || "main";
+            cb.style.marginTop = "2px";
+            cb.addEventListener('change', function(){
+              if (__v24PresetApplying || __v24QualityPresetApplying) return;
+              const root = label.closest('.attire-r18-collection');
+              if (!root) return;
+              if ((itemKind || "main") === "quality") {
+                clearR18CollectionQualityPresetUI(root);
+                clearR18GeneratedQualityOutputs(root);
+              } else clearR18CollectionPresetUI(root);
+            });
+            label.appendChild(cb);
+            label.appendChild(document.createTextNode(item.ja + " / " + item.en));
+            grid.appendChild(label);
+          });
+          return grid;
+        }
+
+        function createQualityPresetSection(title, presets, tone){
+          const details = document.createElement("details");
+          details.className = "attire-r18-collection-section is-quality-preset";
+          details.open = false;
+          details.style.cssText = "display:block;width:100%;max-width:100%;margin:0 10px 8px;border:1px solid #e8dcf6;border-radius:10px;background:#fff;overflow:hidden;box-sizing:border-box;";
+          const summary = document.createElement("summary");
+          summary.textContent = title + " [" + ((presets || []).length) + "]";
+          summary.style.cssText = "display:list-item;cursor:pointer;list-style:none;font-weight:800;color:" + (tone || "#8d5aa8") + ";background:#faf7ff;padding:10px 12px;";
+          details.appendChild(summary);
+
+          const body = document.createElement("div");
+          body.className = "attire-r18-collection-section-body is-quality-preset";
+          body.style.cssText = "display:block;width:100%;max-width:100%;padding:8px 10px 10px;box-sizing:border-box;";
+
+          const info = document.createElement('div');
+          info.style.cssText = 'margin:0 0 8px;padding:8px 10px;border-radius:8px;background:#faf7ff;color:#6e5a8e;font-size:12px;line-height:1.5;';
+          info.textContent = '新しいクオリティセットを選んだ瞬間に、前のクオリティセット状態とその連動チェックは一度リセットされ、新しいクオリティセット基準で再構築される。';
+          body.appendChild(info);
+
+          const grid = document.createElement('div');
+          grid.className = 'attire-r18-quality-preset-grid';
+          grid.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));gap:8px;width:100%;';
+          (presets || []).forEach(function(preset){
+            const card = document.createElement('label');
+            card.className = 'attire-r18-quality-preset-card';
+            card.style.cssText = 'display:block;border:1px solid #eadff7;border-radius:10px;background:#fff;cursor:pointer;padding:10px 12px;';
+
+            const top = document.createElement('div');
+            top.style.cssText = 'display:flex;align-items:flex-start;gap:8px;';
+            const cb = document.createElement('input');
+            cb.type = 'checkbox';
+            cb.className = 'attire-r18-quality-preset-checkbox';
+            cb.style.marginTop = '3px';
+            cb.addEventListener('change', function(){
+              if (__v24QualityPresetApplying) return;
+              const root = card.closest('.attire-r18-collection');
+              if (!cb.checked){
+                if (root) resetR18CollectionQualityState(root);
+                return;
+              }
+              if (root) applyR18CollectionQualityPreset(root, preset, cb);
+            });
+
+            const textWrap = document.createElement('div');
+            textWrap.style.cssText = 'display:block;min-width:0;';
+            const ttl = document.createElement('div');
+            ttl.textContent = preset.title;
+            ttl.style.cssText = 'font-weight:800;color:#7e4fa6;margin:0 0 4px;';
+            const desc = document.createElement('div');
+            const preview = normalizeR18PresetItems(preset.items).slice(0, 2).map(function(it){ return it.ja + " / " + it.en; }).join(' | ');
+            desc.textContent = preview;
+            desc.style.cssText = 'font-size:12px;line-height:1.5;color:#7a687b;word-break:break-word;';
+            textWrap.appendChild(ttl); textWrap.appendChild(desc); top.appendChild(cb); top.appendChild(textWrap); card.appendChild(top); grid.appendChild(card);
+          });
+          body.appendChild(grid);
+          details.appendChild(body);
+          return details;
+        }
+
+        function createPresetSection(title, presets, tone){
+          const details = document.createElement("details");
+          details.className = "attire-r18-collection-section is-preset";
+          details.open = false;
+          details.style.cssText = "display:block;width:100%;max-width:100%;margin:0 10px 8px;border:1px solid #efd6df;border-radius:10px;background:#fff;overflow:hidden;box-sizing:border-box;";
+          const summary = document.createElement("summary");
+          summary.textContent = title + " [" + ((presets || []).length) + "]";
+          summary.style.cssText = "display:list-item;cursor:pointer;list-style:none;font-weight:800;color:" + (tone || "#b0436a") + ";background:#fff8fa;padding:10px 12px;";
+          details.appendChild(summary);
+
+          const body = document.createElement("div");
+          body.className = "attire-r18-collection-section-body is-preset";
+          body.style.cssText = "display:block;width:100%;max-width:100%;padding:8px 10px 10px;box-sizing:border-box;";
+
+          const info = document.createElement('div');
+          info.style.cssText = 'margin:0 0 8px;padding:8px 10px;border-radius:8px;background:#fff7fa;color:#8e5b6d;font-size:12px;line-height:1.5;';
+          info.textContent = '新しい完成セットを選んだ瞬間に、前の完成セット状態とその連動チェックは一度リセットされ、新しい完成セット基準で再構築される。';
+          body.appendChild(info);
+
+          const grid = document.createElement('div');
+          grid.className = 'attire-r18-preset-grid';
+          grid.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));gap:8px;width:100%;';
+          (presets || []).forEach(function(preset){
+            const card = document.createElement('label');
+            card.className = 'attire-r18-preset-card';
+            card.style.cssText = 'display:block;border:1px solid #e7bfd0;border-radius:10px;background:#fffdf8;padding:10px 12px;cursor:pointer;';
+            const top = document.createElement('div'); top.style.cssText = 'display:flex;align-items:flex-start;gap:8px;';
+            const cb = document.createElement('input'); cb.type = 'checkbox'; cb.className = 'attire-r18-preset-checkbox'; cb.style.marginTop = '3px'; cb.dataset.presetTitle = preset.title;
+            const textWrap = document.createElement('div'); textWrap.style.cssText = 'min-width:0;';
+            const ttl = document.createElement('div'); ttl.style.cssText = 'font-weight:800;color:#8a5321;font-size:13px;margin-bottom:4px;'; ttl.textContent = preset.title;
+            const desc = document.createElement('div'); desc.style.cssText = 'font-size:12px;line-height:1.5;color:#7c6450;';
+            desc.textContent = preset.desc || normalizeR18PresetItems(preset.items).slice(0,2).map(function(item){
+              return item.ja + " / " + item.en;
+            }).join('  |  ');
+            cb.addEventListener('change', function(){
+              const root = card.closest('.attire-r18-collection');
+              if (!root) return;
+              if (cb.checked){
+                applyR18CollectionPreset(root, preset, cb);
+              } else if (!__v24PresetApplying) {
+                __v24PresetApplying = true;
+                const real = Array.from(root.querySelectorAll('.attire-r18-real-checkbox'));
+                real.forEach(function(realCb){ realCb.checked = false; });
+                clearR18CollectionPresetUI(root);
+                __v24PresetApplying = false;
+              }
+            });
+            textWrap.appendChild(ttl); textWrap.appendChild(desc); top.appendChild(cb); top.appendChild(textWrap); card.appendChild(top); grid.appendChild(card);
+          });
+          body.appendChild(grid);
+          details.appendChild(body);
+          return details;
+        }
+
+        function createGroupedSection(title, groups, tone, itemKind){
+          const details = document.createElement("details");
+          details.className = "attire-r18-collection-section";
+          details.open = false;
+          details.style.cssText = "display:block;width:100%;max-width:100%;margin:0 10px 8px;border:1px solid #efd6df;border-radius:10px;background:#fff;overflow:hidden;box-sizing:border-box;";
+          const summary = document.createElement("summary");
+          let count = 0;
+          (groups || []).forEach(function(g){ count += Array.isArray(g.items) ? g.items.length : 0; });
+          summary.textContent = title + " [" + count + "]";
+          summary.style.cssText = "display:list-item;cursor:pointer;list-style:none;font-weight:800;color:" + (tone || "#9a4965") + ";background:#fff8fa;padding:10px 12px;";
+          details.appendChild(summary);
+
+          const body = document.createElement("div");
+          body.className = "attire-r18-collection-section-body";
+          body.style.cssText = "display:block;width:100%;max-width:100%;padding:8px 0 2px;box-sizing:border-box;";
+          (groups || []).forEach(function(group){
+            const groupWrap = document.createElement("details");
+            groupWrap.className = "attire-r18-collection-group";
+            groupWrap.open = false;
+            groupWrap.style.cssText = "display:block;width:calc(100% - 20px);max-width:calc(100% - 20px);margin:0 10px 8px;border:1px solid #f5d8e2;border-radius:9px;background:#fff;overflow:hidden;box-sizing:border-box;";
+            const groupSummary = document.createElement("summary");
+            const groupCount = Array.isArray(group.items) ? group.items.length : 0;
+            groupSummary.textContent = group.title + " [" + groupCount + "]";
+            groupSummary.style.cssText = "display:list-item;cursor:pointer;list-style:none;font-weight:700;color:#9a4965;background:#fff8fa;padding:9px 12px;";
+            groupWrap.appendChild(groupSummary);
+            groupWrap.appendChild(createItemGrid(group.items || [], itemKind));
+            body.appendChild(groupWrap);
+          });
+          details.appendChild(body);
+          return details;
+        }
+
+        const wrap = document.createElement("details");
+        wrap.className = "attire-r18-collection";
+        wrap.open = false;
+        wrap.style.cssText = "display:block;width:100%;max-width:100%;margin:0 0 8px;border:1px solid #efbfd0;border-radius:10px;background:#fffdfa;overflow:hidden;box-sizing:border-box;";
+
+        const summary = document.createElement("summary");
+        summary.textContent = collection.title;
+        summary.style.cssText = "display:list-item;cursor:pointer;list-style:none;font-weight:800;color:#b0436a;background:#fff3f7;padding:10px 12px;";
+        wrap.appendChild(summary);
+
+        const body = document.createElement("div");
+        body.className = "attire-r18-collection-body";
+        body.style.cssText = "display:block;width:100%;max-width:100%;padding:8px 0 4px;box-sizing:border-box;";
+
+        if (collection.description){
+          const desc = document.createElement("div");
+          desc.className = "attire-r18-collection-desc";
+          desc.textContent = collection.description;
+          desc.style.cssText = "margin:0 10px 8px;padding:8px 10px;border-radius:8px;background:#fff7fa;color:#8e5b6d;font-size:12px;line-height:1.5;";
+          body.appendChild(desc);
+        }
+
+        body.appendChild(createPresetSection("🎯 完成セット", collection.presets || [], "#b0436a"));
+        body.appendChild(createGroupedSection("🧱 ベース", collection.baseGroups || [], "#8e5670"));
+        body.appendChild(createGroupedSection("🛠 カスタマイズ", collection.customizeGroups || [], "#9a4965"));
+        body.appendChild(createGroupedSection("⚙️ 設定", collection.settingGroups || [], "#a34c72"));
+        if (Array.isArray(collection.qualityPresets) && collection.qualityPresets.length){
+          body.appendChild(createQualityPresetSection("🧪 クオリティ完成セット", collection.qualityPresets || [], "#7e4fa6"));
+        }
+        if (Array.isArray(collection.qualityGroups) && collection.qualityGroups.length){
+          body.appendChild(createGroupedSection("🧪 完成セット別クオリティ", collection.qualityGroups || [], "#8d5aa8", "quality"));
+        }
+
+        wrap.appendChild(body);
+        return wrap;
+      }
+
+      const r18ParentDefs = [
+        { title: "🔞 露出・裸系", match: function(txt){ return txt.includes("完全露出") || txt.includes("裸") || txt.includes("極小露出") || txt.includes("食い込み"); }, subgroups: [
+          { title: "🫧 完全露出・裸", match: function(txt){ return txt.includes("完全露出") || txt.includes("Nude & Naked"); } },
+          { title: "📐 極小露出・食い込み", match: function(txt){ return txt.includes("極小露出") || txt.includes("食い込み") || txt.includes("Extreme Exposure"); } }
+        ] },
+        { title: "🩲 ランジェリー・特殊インナー", match: function(txt){ return txt.includes("ランジェリー") || txt.includes("特殊インナー"); }, subgroups: [
+          { title: "🩰 ランジェリー", match: function(txt){ return txt.includes("ランジェリー") || txt.includes("Lingerie & Inner"); } },
+          { title: "🧪 特殊インナー・変態系", match: function(txt){ return txt.includes("変態ランジェリー") || txt.includes("特殊インナー") || txt.includes("Abnormal Lingerie"); } }
+        ] },
+        { title: "⛓ 拘束・支配", match: function(txt){ return txt.includes("ボンテージ") || txt.includes("拘束") || txt.includes("洗脳") || txt.includes("スレイブ") || txt.includes("slave"); }, subgroups: [
+          { title: "⛓ ボンテージ・拘束", match: function(txt){ return txt.includes("ボンテージ") || txt.includes("Hard Bondage"); } },
+          { title: "🧠 洗脳・支配", match: function(txt){ return txt.includes("洗脳") || txt.includes("Mind Control"); } },
+          { title: "🧞‍♀️ スレイブ・従属", match: function(txt){ return txt.includes("スレイブ") || txt.includes("slave") || txt.includes("Fantasy Dark/Slave"); } }
+        ] },
+        { title: "💧 汚れ・液体系", match: function(txt){ return txt.includes("汚濁") || txt.includes("液体") || txt.includes("濡れ") || txt.includes("泥") || txt.includes("オイル"); }, subgroups: [
+          { title: "💦 汚濁・液体まみれ", match: function(txt){ return txt.includes("汚濁") || txt.includes("液体") || txt.includes("Messy & Fluids"); } }
+        ] },
+        { title: "👗 着崩し・チラリズム", match: function(txt){ return txt.includes("チラリズム") || txt.includes("着衣崩れ") || txt.includes("着崩し") || txt.includes("裸＋α") || txt.includes("脱衣"); }, subgroups: [
+          { title: "👗 裸＋α・チラリズム", match: function(txt){ return txt.includes("裸＋α") || txt.includes("チラリズム") || txt.includes("Naked + X"); } },
+          { title: "💥 極限着衣崩れ", match: function(txt){ return txt.includes("着衣崩れ") || txt.includes("Extreme Disheveled") || txt.includes("着崩し"); } }
+        ] },
+        { title: "🧬 異形・寄生・生体系", match: function(txt){ return txt.includes("侵食") || txt.includes("生体") || txt.includes("Alien") || txt.includes("Parasite") || txt.includes("異種") || txt.includes("寄生") || txt.includes("スライム") || txt.includes("触手") || txt.includes("粘液"); }, subgroups: [
+          { title: "🐙 侵食・生体スーツ", match: function(txt){ return txt.includes("侵食・生体スーツ") || txt.includes("Living & Parasitic Suits"); } },
+          { title: "🪱 異種・寄生侵食+", match: function(txt){ return txt.includes("異種姦") || txt.includes("生体侵食+") || txt.includes("Alien & Parasite"); } }
+        ] },
+        { title: "🔥 限界突破・マニアック", match: function(txt){ return txt.includes("異世界") || txt.includes("マニアック") || txt.includes("Max Fetish") || txt.includes("限界突破"); }, subgroups: [
+          { title: "🔥 異世界・マニアック", match: function(txt){ return txt.includes("異世界") || txt.includes("Max Fetish") || txt.includes("限界突破") || txt.includes("マニアック"); } }
+        ] }
+      ];
+
+      const r18Groups = new Map();
+      r18ParentDefs.forEach(function(def){ r18Groups.set(def.title, []); });
+
+      function getR18LeafNodes(el){
+        if (!el) return [];
+        if (el.tagName === "DETAILS") return [el];
+        return Array.from(el.children || []).filter(function(child){
+          return child && child.tagName === "DETAILS";
+        });
+      }
+
+      r18.forEach(function(el){
+        getR18LeafNodes(el).forEach(function(node){
+          const txt = getText(node);
+          const def = r18ParentDefs.find(function(entry){ return entry.match(txt); }) || r18ParentDefs[r18ParentDefs.length - 1];
+          r18Groups.get(def.title).push(node);
+        });
+        if (el && el.parentNode === root) {
+          el.remove();
+        }
+      });
+
+        const r18TopExtraCollections = [
+          {
+            title: "🧬 侵食・寄生特化コレクション",
+            description: "寄生、侵食、生体スーツ、異物侵入、粘液、同化進行までをまとめて深掘りする専用コレクション",
+            presets: [
+              { title: "🫧 生体スーツ融合セット", items: [
+                { ja: "生きた有機膜の融合", en: "living organic membrane fused to skin" },
+                { ja: "生体組織から育つ寄生膜", en: "parasitic membrane grown from living tissue" },
+                { ja: "半透明の生体バイオ膜", en: "semi-translucent biofilm" },
+                { ja: "濡れた有機表面", en: "soft wet organic surface" },
+                { ja: "肉感のある膜質感", en: "flesh-like membrane texture" },
+                { ja: "膜下に走る脈模様", en: "subtle vein patterns beneath the membrane" },
+                { ja: "表面下を動く有機繊維", en: "organic fibers moving under the surface" },
+                { ja: "不均一な生体表面", en: "uneven living surface" },
+                { ja: "呼吸するような膜の起伏", en: "breathing living suit texture" },
+                { ja: "人工素材ではない生体膜", en: "not latex, not rubber, not synthetic suit" }
+              ]},
+              { title: "🐙 触手侵食セット", items: [
+                { ja: "触手が体表に巻き付く", en: "tentacles coiling around the body surface" },
+                { ja: "拘束と侵食が同時進行", en: "restraint and invasion progressing together" },
+                { ja: "触手スーツ", en: "tentacle suit, tentacles wrapped around body, living clothes" },
+                { ja: "触手コルセット", en: "tentacle laced corset, living restraints" },
+                { ja: "拘束スライム", en: "bound by slime, slime covering body, melting clothes" },
+                { ja: "粘液で濡れた侵食跡", en: "invasion traces soaked with viscous slime" },
+                { ja: "異物侵入の不穏な気配", en: "ominous sense of alien penetration" }
+              ]},
+              { title: "🖤 同化進行セット", items: [
+                { ja: "皮膚に広がる侵食模様", en: "corruption patterns spreading across the skin" },
+                { ja: "部分的に生体化した衣装", en: "partially bio-transformed clothing" },
+                { ja: "抵抗しながら進む同化", en: "assimilation progressing amid resistance" },
+                { ja: "生体的な不気味さ", en: "organic eeriness, uncanny biological horror" }
+              ]},
+              { title: "🔥 侵食強化版", items: [
+                { ja: "全身へ強まる侵食", en: "corruption intensifying across the body" },
+                { ja: "皮膚と衣装を侵す生体模様", en: "invasive organic patterns spreading wider over skin and clothing" },
+                { ja: "攻撃的に進む生体同化", en: "bio-assimilation advancing aggressively" },
+                { ja: "胸・腰・肩・太腿へ伸びる根脈", en: "root-like veins crawling over chest, waist, shoulders and thighs" },
+                { ja: "衣装を侵食し再構成する寄生体", en: "parasitic growth overtaking more of the outfit" },
+                { ja: "生体組織に食われ変形した衣装", en: "clothing partially consumed and re-formed by living tissue" },
+                { ja: "拡大した侵食線", en: "spreading corruption lines" },
+                { ja: "広域化した侵食面", en: "enlarged invasive surface coverage" },
+                { ja: "止まらない有機侵食", en: "organic erosion progressing without stopping" },
+                { ja: "不気味で美しい変質", en: "eerie biological elegance" },
+                { ja: "静かだが圧倒的な変容", en: "quiet but overwhelming transformation" },
+                { ja: "不可逆な同化", en: "irreversible assimilation" }
+              ]},
+              { title: "🫀 根脈露出版", items: [
+                { ja: "露出した根脈構造", en: "exposed root-vein structures emerging over the body" },
+                { ja: "目に見える有機血管模様", en: "visible organic vascular patterns" },
+                { ja: "皮膚上へせり出す寄生蔦", en: "raised parasitic tendrils spreading outside the skin" },
+                { ja: "衣装と肉体を貫く生体根", en: "bio-roots surfacing through clothing and flesh" },
+                { ja: "胴体と腕に絡む分岐根脈", en: "branching vein-like growth wrapping around torso and arms" },
+                { ja: "露出した生体繊維網", en: "exposed living fiber network" },
+                { ja: "全身を這う根の格子", en: "organic root lattice visible across the body" },
+                { ja: "外層を破って現れる生体経路", en: "biological pathways breaking through the outer layer" },
+                { ja: "不穏だが美しい内部露出", en: "unsettling but beautiful exposed anatomy motifs" },
+                { ja: "根脈露出の侵食", en: "invasive root exposure" },
+                { ja: "衣装構造と絡む生体蔓", en: "living tendrils intertwining with outfit structure" }
+              ]},
+              { title: "💥 衣装崩壊版", items: [
+                { ja: "寄生で崩れる衣装構造", en: "outfit breaking down under parasitic assimilation" },
+                { ja: "ほどけ壊れる衣装", en: "clothing structure collapsing and unraveling" },
+                { ja: "生体骨格に置き換わる裂け目", en: "torn sections replaced by living organic framework" },
+                { ja: "生体繊維で辛うじて成立する衣装", en: "shredded costume supported by invasive bio-fibers" },
+                { ja: "生体侵食で開いた欠損", en: "exposed gaps formed by biological erosion" },
+                { ja: "寄生組織に乗っ取られる縫い目", en: "broken seams overtaken by parasitic tissue" },
+                { ja: "崩れた衣装シルエット", en: "partially collapsed garment silhouette" },
+                { ja: "有機糸で保たれる残骸衣装", en: "organic strands holding together the remains of the outfit" },
+                { ja: "侵食による衣装崩壊", en: "corrupted costume disintegration" },
+                { ja: "生体成長による衣装侵蝕", en: "erosion of clothing by living growth" },
+                { ja: "危うく美しい生体衣装", en: "unstable but beautiful bio-constructed outfit" },
+                { ja: "同化で崩落する衣装", en: "irreversible outfit collapse through assimilation" }
+              ]},
+              { title: "🌿 寄生植物同化セット", items: [
+                { ja: "寄生植物の蔦", en: "parasitic plant clothes, vines wrapping body, flower blooming from body" },
+                { ja: "花弁状の触手服", en: "petal-shaped tentacle motifs, anemone patterns" },
+                { ja: "胸元や腰元への寄生進行", en: "parasitic progression around chest and waist" },
+                { ja: "不可逆な変質の空気", en: "atmosphere of irreversible transformation" }
+              ]},
+              { title: "🫗 半透明ゼリー侵食セット", items: [
+                { ja: "半透明ゼリースーツ", en: "semi-transparent jelly suit, glowing internal organs view" },
+                { ja: "スライムボディスーツ", en: "slime bodysuit, translucent slime, fusing with skin" },
+                { ja: "スライム半溶解服", en: "clothes melted by slime, partially transparent, sticky clothes" },
+                { ja: "異形の粘液コート", en: "alien mucus coating, slimy layer" }
+              ]}
+            ],
+            baseGroups: [
+              { title: "🧫 生体スーツ・寄生膜", items: [
+                { ja: "生きた有機膜の融合", en: "living organic membrane fused to skin" },
+                { ja: "生体組織から育つ寄生膜", en: "parasitic membrane grown from living tissue" },
+                { ja: "薄い生体膜で覆われた肌", en: "skin covered in a thin living membrane" },
+                { ja: "服が生き物のように同化", en: "clothes assimilating like a living organism" },
+                { ja: "半透明の生体バイオ膜", en: "semi-translucent biofilm" },
+                { ja: "膜下に走る脈模様", en: "subtle vein patterns beneath the membrane" },
+                { ja: "表面下を動く有機繊維", en: "organic fibers moving under the surface" },
+                { ja: "不均一な生体表面", en: "uneven living surface" },
+                { ja: "呼吸するような膜の起伏", en: "breathing living suit texture" },
+                { ja: "肉感のある膜質感", en: "flesh-like membrane texture" },
+                { ja: "人工素材ではない生体膜", en: "not latex, not rubber, not synthetic suit" }
+              ]},
+              { title: "🐙 触手・異物侵食", items: [
+                { ja: "触手が体表に巻き付く", en: "tentacles coiling around the body surface" },
+                { ja: "異物侵入の不穏な気配", en: "ominous sense of alien penetration" },
+                { ja: "体内へ侵食する異形触手", en: "aberrant tentacles invading inward" },
+                { ja: "口元や首元への生体侵食", en: "bio-invasion around mouth and neck" },
+                { ja: "拘束と侵食が同時進行", en: "restraint and invasion progressing together" }
+              ]}
+            ],
+            customizeGroups: [
+              { title: "🫧 粘液・光沢追加", items: [
+                { ja: "粘液を伴う生体光沢", en: "bio-gloss with viscous slime sheen" },
+                { ja: "糸を引く粘液", en: "stringy slime, viscous secretion trails" },
+                { ja: "ぬめる反射の強化", en: "enhanced slimy reflections, slick highlights" },
+                { ja: "粘液で濡れた侵食跡", en: "invasion traces soaked with viscous slime" },
+                { ja: "湿った生体質感の追加", en: "added damp organic texture, moist bio-surface" },
+                { ja: "スライム半溶解服", en: "clothes melted by slime, partially transparent, sticky clothes" },
+                { ja: "異形の粘液コート", en: "alien mucus coating, slimy layer" }
+              ]},
+              { title: "🧩 侵食進行・部位変化", items: [
+                { ja: "皮膚に広がる侵食模様", en: "corruption patterns spreading across the skin" },
+                { ja: "部分的に生体化した衣装", en: "partially bio-transformed clothing" },
+                { ja: "四肢へ進む侵食", en: "invasion spreading into the limbs" },
+                { ja: "胸元や腰元への寄生進行", en: "parasitic progression around chest and waist" },
+                { ja: "生体器官めいた装飾の追加", en: "added organ-like ornaments, biological appendages" },
+                { ja: "花弁状の触手服", en: "petal-shaped tentacle motifs, anemone patterns" },
+                { ja: "寄生植物の蔦", en: "parasitic plant clothes, vines wrapping body, flower blooming from body" },
+                { ja: "膨満腹強調スーツ", en: "tight clothes highlighting swollen belly, stomach bulge" }
+              ]},
+              { title: "🔥 侵食派生セット拡張", items: [
+                { ja: "全身へ強まる侵食", en: "corruption intensifying across the body" },
+                { ja: "皮膚と衣装を侵す生体模様", en: "invasive organic patterns spreading wider over skin and clothing" },
+                { ja: "攻撃的に進む生体同化", en: "bio-assimilation advancing aggressively" },
+                { ja: "胸・腰・肩・太腿へ伸びる根脈", en: "root-like veins crawling over chest, waist, shoulders and thighs" },
+                { ja: "衣装を侵食し再構成する寄生体", en: "parasitic growth overtaking more of the outfit" },
+                { ja: "生体組織に食われ変形した衣装", en: "clothing partially consumed and re-formed by living tissue" },
+                { ja: "拡大した侵食線", en: "spreading corruption lines" },
+                { ja: "広域化した侵食面", en: "enlarged invasive surface coverage" },
+                { ja: "露出した根脈構造", en: "exposed root-vein structures emerging over the body" },
+                { ja: "目に見える有機血管模様", en: "visible organic vascular patterns" },
+                { ja: "皮膚上へせり出す寄生蔦", en: "raised parasitic tendrils spreading outside the skin" },
+                { ja: "衣装と肉体を貫く生体根", en: "bio-roots surfacing through clothing and flesh" },
+                { ja: "胴体と腕に絡む分岐根脈", en: "branching vein-like growth wrapping around torso and arms" },
+                { ja: "露出した生体繊維網", en: "exposed living fiber network" },
+                { ja: "全身を這う根の格子", en: "organic root lattice visible across the body" },
+                { ja: "外層を破って現れる生体経路", en: "biological pathways breaking through the outer layer" },
+                { ja: "寄生で崩れる衣装構造", en: "outfit breaking down under parasitic assimilation" },
+                { ja: "ほどけ壊れる衣装", en: "clothing structure collapsing and unraveling" },
+                { ja: "生体骨格に置き換わる裂け目", en: "torn sections replaced by living organic framework" },
+                { ja: "生体繊維で辛うじて成立する衣装", en: "shredded costume supported by invasive bio-fibers" },
+                { ja: "生体侵食で開いた欠損", en: "exposed gaps formed by biological erosion" },
+                { ja: "寄生組織に乗っ取られる縫い目", en: "broken seams overtaken by parasitic tissue" },
+                { ja: "崩れた衣装シルエット", en: "partially collapsed garment silhouette" },
+                { ja: "有機糸で保たれる残骸衣装", en: "organic strands holding together the remains of the outfit" }
+              ]}
+            ],
+            settingGroups: [
+              { title: "⚙️ 侵食演出設定", items: [
+                { ja: "抵抗しながら進む同化", en: "assimilation progressing amid resistance" },
+                { ja: "支配されていく感覚", en: "sense of being overtaken and controlled" },
+                { ja: "侵食進行を見せる演出", en: "staging that shows the progression of corruption" },
+                { ja: "生体的な不気味さ", en: "organic eeriness, uncanny biological horror" },
+                { ja: "不可逆な変質の空気", en: "atmosphere of irreversible transformation" },
+                { ja: "生体スーツが意思を持つ演出", en: "the living suit behaves as if it has its own will" },
+                { ja: "寄生が静かに進む空気", en: "an atmosphere of quiet parasitic progression" },
+                { ja: "粘液と侵食が同時に強まる演出", en: "slime and corruption intensifying at the same time" },
+                { ja: "止まらない有機侵食", en: "organic erosion progressing without stopping" },
+                { ja: "不気味で美しい変質", en: "eerie biological elegance" },
+                { ja: "静かだが圧倒的な変容", en: "quiet but overwhelming transformation" },
+                { ja: "不可逆な同化", en: "irreversible assimilation" },
+                { ja: "不穏だが美しい内部露出", en: "unsettling but beautiful exposed anatomy motifs" },
+                { ja: "根脈露出の侵食", en: "invasive root exposure" },
+                { ja: "衣装構造と絡む生体蔓", en: "living tendrils intertwining with outfit structure" },
+                { ja: "侵食による衣装崩壊", en: "corrupted costume disintegration" },
+                { ja: "生体成長による衣装侵蝕", en: "erosion of clothing by living growth" },
+                { ja: "危うく美しい生体衣装", en: "unstable but beautiful bio-constructed outfit" },
+                { ja: "同化で崩落する衣装", en: "irreversible outfit collapse through assimilation" }
+              ]}
+            ],
+            qualityPresets: [
+              { title: "🫧 生体スーツ融合セット用クオリティセット（基準版）", items: [
+                { ja: "生きた有機膜の融合", en: "living organic membrane fused to skin" },
+                { ja: "半透明の生体バイオ膜", en: "semi-translucent biofilm" },
+                { ja: "濡れた有機表面", en: "wet organic surface, not latex, not rubber" },
+                { ja: "柔らかな生体光沢", en: "soft living tissue sheen" },
+                { ja: "肉感のある膜質感", en: "flesh-like membrane texture" },
+                { ja: "膜内に見える脈模様", en: "subtle vein patterns inside the suit" },
+                { ja: "表面下を動く有機繊維", en: "organic fibers moving under the surface" },
+                { ja: "生体組織から育つ寄生スーツ", en: "parasitic suit grown from living tissue" },
+                { ja: "生体同化で形成されたボディスーツ", en: "bodysuit formed by biological assimilation" },
+                { ja: "人工素材ではない生体膜", en: "slime-like bio membrane instead of synthetic material" },
+                { ja: "不均一な有機表面", en: "uneven organic surface" },
+                { ja: "呼吸するような膜の起伏", en: "breathing living suit texture" },
+                { ja: "高品質補正", en: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4)" },
+                { ja: "控えめな物理ベース質感", en: "(physically based rendering:1.15), (realistic lighting:1.15)" },
+                { ja: "皮膚透過散乱", en: "(subsurface scattering:1.3)" },
+                { ja: "映画的ライティング", en: "(cinematic lighting:1.3), (ray tracing:1.2), (global illumination:1.2), (volumetric lighting:1.2)" },
+                { ja: "髪の艶と光沢", en: "(shiny hair:1.35), (glossy hair:1.35)" }
+              ]},
+              { title: "🫧 生体スーツ融合セット用クオリティセット（基準版） Ver.2（基準採用）", items: [
+                { ja: "生きた有機膜の融合", en: "living organic membrane fused to skin" },
+                { ja: "生体組織から育つ寄生膜", en: "parasitic membrane grown from living tissue" },
+                { ja: "半透明の生体バイオ膜", en: "semi-translucent biofilm" },
+                { ja: "濡れた有機表面", en: "wet organic surface" },
+                { ja: "柔らかな生体光沢", en: "soft living tissue sheen" },
+                { ja: "肉感のある膜質感", en: "flesh-like membrane texture" },
+                { ja: "膜下に走る脈模様", en: "subtle vein patterns beneath the membrane" },
+                { ja: "表面下を動く有機繊維", en: "organic fibers moving under the surface" },
+                { ja: "不均一な生体表面", en: "uneven living surface" },
+                { ja: "呼吸するような膜の起伏", en: "breathing living suit texture" },
+                { ja: "生体同化で形成された生体被膜", en: "biological sheath formed by assimilation" },
+                { ja: "人工素材ではない生体膜", en: "slime-like bio membrane instead of synthetic material, not latex, not rubber, not synthetic suit" },
+                { ja: "高品質補正", en: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4)" },
+                { ja: "さらに抑えた物理ベース質感", en: "(physically based rendering:1.1), (realistic lighting:1.1)" },
+                { ja: "皮膚透過散乱", en: "(subsurface scattering:1.3)" },
+                { ja: "抑えめ映画的ライティング", en: "(cinematic lighting:1.25), (ray tracing:1.15), (global illumination:1.15), (volumetric lighting:1.15)" },
+                { ja: "やや控えめな髪の艶", en: "(shiny hair:1.3), (glossy hair:1.3)" }
+              ]},
+              { title: "🧬 第二皮膚・外皮置換特化クオリティセット", items: [
+                { ja: "第二の皮膚としての生体膜", en: "second-skin biological membrane" },
+                { ja: "外皮を置換する生体被膜", en: "living membrane replacing outer skin" },
+                { ja: "半液状の有機被膜", en: "semi-liquid organic sheath" },
+                { ja: "透明な生体表皮", en: "transparent living epidermis" },
+                { ja: "膜越しに見える内部組織", en: "inner tissue visible through the membrane" },
+                { ja: "体の起伏に張り付く被膜", en: "membrane stretched over body contours" },
+                { ja: "有機的な表面張力", en: "organic surface tension" },
+                { ja: "濡れた生体の透過感", en: "wet living translucency" },
+                { ja: "生きた有機膜の融合", en: "living organic membrane fused to skin" },
+                { ja: "生体組織から育つ寄生膜", en: "parasitic membrane grown from living tissue" },
+                { ja: "人工素材ではない生体膜", en: "not latex, not rubber, not synthetic suit" },
+                { ja: "高品質補正", en: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4)" },
+                { ja: "さらに抑えた物理ベース質感", en: "(physically based rendering:1.05), (realistic lighting:1.05)" },
+                { ja: "皮膚透過散乱", en: "(subsurface scattering:1.3)" },
+                { ja: "抑えめ映画的ライティング", en: "(cinematic lighting:1.2), (ray tracing:1.1), (global illumination:1.1), (volumetric lighting:1.1)" },
+                { ja: "控えめな髪の艶", en: "(shiny hair:1.25), (glossy hair:1.25)" }
+              ]},
+              { title: "🐙 触手侵食セット用クオリティセット", items: [
+                { ja: "有機的な不気味さ", en: "organic eeriness" },
+                { ja: "肌と衣装が一体化した侵食", en: "skin and costume partially fused by parasitic growth" },
+                { ja: "縫い目へ食い込む蔦", en: "vines piercing into clothing seams" },
+                { ja: "強い縁光と逆光", en: "(strong rim lighting:1.3), (backlight glow:1.2)" },
+                { ja: "火花状ボケ光", en: "(spark-like bokeh lights)" }
+              ]},
+              { title: "🖤 同化進行セット用クオリティセット", items: [
+                { ja: "植物組織と肉体の融合", en: "plant tissue fused with flesh" },
+                { ja: "皮膚下に走る根脈", en: "root-like veins spreading under skin" },
+                { ja: "逃げ場なく進む不可逆変質", en: "irreversible biological transformation, quiet but inescapable parasitic progression" },
+                { ja: "中距離・上半身から腰まで", en: "mid shot, upper body to waist visible" },
+                { ja: "映画的ライティング", en: "(cinematic lighting:1.35), (ray tracing:1.25), (global illumination:1.25), (volumetric lighting:1.25)" }
+              ]},
+              { title: "🌿 寄生植物同化セット用クオリティセット", items: [
+                { ja: "寄生植物同化", en: "parasitic plant assimilation" },
+                { ja: "植物組織と肉体の融合", en: "plant tissue fused with flesh" },
+                { ja: "布を侵食置換する有機組織", en: "organic overgrowth replacing fabric" },
+                { ja: "肌と衣装が一体化した侵食", en: "skin and costume partially fused by parasitic growth" },
+                { ja: "縫い目へ食い込む蔦", en: "vines piercing into clothing seams" },
+                { ja: "皮膚下に走る根脈", en: "root-like veins spreading under skin" },
+                { ja: "胸元と腰元への寄生進行", en: "parasitic progression around chest and waist" },
+                { ja: "花弁状の触手意匠", en: "petal-shaped tentacle motifs" },
+                { ja: "侵食組織から咲く花", en: "flowers erupting from invasive plant tissue" },
+                { ja: "融合スーツから伸びる開花", en: "blooming flowers growing through fused organic suit" },
+                { ja: "棘のある蔦が体へ巻き付く", en: "thorny vines wrapping body" },
+                { ja: "蔦に覆われるボディスーツ", en: "bodysuit overgrown by parasitic vines" },
+                { ja: "逃げ場なく進む不可逆変質", en: "irreversible biological transformation, quiet but inescapable parasitic progression" },
+                { ja: "有機的な不気味さ", en: "organic eeriness" },
+                { ja: "中距離・上半身から腰まで", en: "mid shot, upper body to waist visible" },
+                { ja: "アニメリアル寄り描画", en: "(anime-realism blend:1.35), (semi-realistic rendering:1.2)" },
+                { ja: "物理ベース質感", en: "(physically based rendering:1.25), (realistic lighting:1.2)" },
+                { ja: "髪の艶と光沢", en: "(shiny hair:1.35), (glossy hair:1.35)" },
+                { ja: "強い縁光と逆光", en: "(strong rim lighting:1.3), (backlight glow:1.2)" },
+                { ja: "映画的ライティング", en: "(cinematic lighting:1.35), (ray tracing:1.25), (global illumination:1.25), (volumetric lighting:1.25)" },
+                { ja: "皮膚透過散乱", en: "(subsurface scattering:1.25)" },
+                { ja: "火花状ボケ光", en: "(spark-like bokeh lights)" },
+                { ja: "高品質補正", en: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4)" }
+              ]},
+              { title: "🫗 半透明ゼリー侵食セット用クオリティセット（基準版）", items: [
+                { ja: "物理ベース質感", en: "(physically based rendering:1.25), (realistic lighting:1.2)" },
+                { ja: "皮膚透過散乱", en: "(subsurface scattering:1.25)" },
+                { ja: "髪の艶と光沢", en: "(shiny hair:1.35), (glossy hair:1.35)" },
+                { ja: "映画的ライティング", en: "(cinematic lighting:1.35), (ray tracing:1.25), (global illumination:1.25), (volumetric lighting:1.25)" },
+                { ja: "火花状ボケ光", en: "(spark-like bokeh lights)" },
+                { ja: "高品質補正", en: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4)" }
+              ]},
+              { title: "🫗 半透明ゼリー侵食セット用クオリティセット（初版）", items: [
+                { ja: "スライムで溶けた衣装", en: "clothes melted by slime" },
+                { ja: "部分的な半透明化", en: "partially transparent" },
+                { ja: "粘着する衣服", en: "sticky clothes" },
+                { ja: "異質粘液の被膜", en: "alien mucus coating" },
+                { ja: "ぬめるゼリー層", en: "slimy layer" },
+                { ja: "髪の艶と光沢", en: "(shiny hair:1.35), (glossy hair:1.35)" },
+                { ja: "物理ベース質感", en: "(physically based rendering:1.25), (realistic lighting:1.2)" },
+                { ja: "高品質補正", en: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4)" },
+                { ja: "皮膚透過散乱", en: "(subsurface scattering:1.3)" },
+                { ja: "映画的ライティング", en: "(cinematic lighting:1.3), (ray tracing:1.2), (global illumination:1.2), (volumetric lighting:1.2)" },
+                { ja: "火花状ボケ光", en: "(spark-like bokeh lights)" }
+              ]},
+              { title: "🫗 半透明ゼリー侵食セット用クオリティセット Ver.2（基準採用）", items: [
+                { ja: "衣服へ広がるゼラチン層", en: "gelatinous layer spreading over clothing" },
+                { ja: "半液状のゼリー膜", en: "semi-liquid jelly film" },
+                { ja: "透明なスライム膜", en: "transparent slime membrane" },
+                { ja: "ねっとりした半透明被膜", en: "gooey translucent coating" },
+                { ja: "ゲルへ溶けかけた衣服", en: "clothing partially dissolved into gel" },
+                { ja: "布のひだに伸びるスライム", en: "stretching slime between fabric folds" },
+                { ja: "粘性のある透明残留膜", en: "viscous transparent residue" },
+                { ja: "濡れたゼリー光沢", en: "wet jelly sheen" },
+                { ja: "柔らかなゼラチン質感", en: "soft gelatin texture" },
+                { ja: "体の周囲に溜まるスライム", en: "slime pooling around the body" },
+                { ja: "スライムで溶けた衣装", en: "clothes melted by slime" },
+                { ja: "部分的な半透明化", en: "partially transparent" },
+                { ja: "粘着する衣服", en: "sticky clothes" },
+                { ja: "異質粘液の被膜", en: "alien mucus coating" },
+                { ja: "ぬめるゼリー層", en: "slimy layer" },
+                { ja: "髪の艶と光沢", en: "(shiny hair:1.35), (glossy hair:1.35)" },
+                { ja: "物理ベース質感", en: "(physically based rendering:1.25), (realistic lighting:1.2)" },
+                { ja: "高品質補正", en: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4)" },
+                { ja: "皮膚透過散乱", en: "(subsurface scattering:1.3)" },
+                { ja: "映画的ライティング", en: "(cinematic lighting:1.3), (ray tracing:1.2), (global illumination:1.2), (volumetric lighting:1.2)" },
+                { ja: "火花状ボケ光", en: "(spark-like bokeh lights)" }
+              ]},
+              { title: "🐙 触手侵食セット用クオリティ（初版）", items: [
+                { ja: "体表に巻き付く触手", en: "tentacles coiling around the body surface" },
+                { ja: "異物侵入の不穏さ", en: "ominous sense of alien penetration" },
+                { ja: "拘束と侵食の同時進行", en: "restraint and invasion progressing together" },
+                { ja: "粘液を帯びた侵食痕", en: "invasion traces soaked with viscous slime" },
+                { ja: "生体侵食で癒着する皮膚と衣装", en: "skin and costume partially fused by parasitic growth" },
+                { ja: "衣装の縫い目へ入り込む蔓", en: "vines piercing into clothing seams" },
+                { ja: "有機的不気味さ", en: "organic eeriness" },
+                { ja: "強いリムライト", en: "(strong rim lighting:1.3)" },
+                { ja: "背面発光", en: "(backlight glow:1.2)" },
+                { ja: "火花状ボケ光", en: "(spark-like bokeh lights)" }
+              ]},
+              { title: "🐙 触手侵食セット用クオリティ Ver.2（基準採用）", items: [
+                { ja: "皮膚と衣装に残るぬめり痕", en: "slick tentacle residue on skin and clothing" },
+                { ja: "吸盤痕のような侵食痕", en: "suction-mark-like invasion traces" },
+                { ja: "巻き圧で歪む布", en: "coiling pressure deforming fabric" },
+                { ja: "四肢に食い込む粘液圧迫", en: "slimy compression around wrapped limbs" },
+                { ja: "縫い目へ締め込む触手", en: "tentacles tightening into clothing seams" },
+                { ja: "接触後に残る有機残留膜", en: "wet organic residue left by contact" },
+                { ja: "巻かれた箇所から進む侵食", en: "gradual corruption spreading from wrapped areas" },
+                { ja: "侵食で崩れる衣装輪郭", en: "costume distorted by invasive coiling" },
+                { ja: "動きに沿って走る粘液の筋", en: "glossy slime trails following tentacle movement" },
+                { ja: "身体に刻まれる異物圧痕", en: "alien grip marks on the body" },
+                { ja: "体表に巻き付く触手", en: "tentacles coiling around the body surface" },
+                { ja: "異物侵入の不穏さ", en: "ominous sense of alien penetration" },
+                { ja: "拘束と侵食の同時進行", en: "restraint and invasion progressing together" },
+                { ja: "粘液を帯びた侵食痕", en: "invasion traces soaked with viscous slime" },
+                { ja: "生体侵食で癒着する皮膚と衣装", en: "skin and costume partially fused by parasitic growth" },
+                { ja: "衣装の縫い目へ入り込む蔓", en: "vines piercing into clothing seams" },
+                { ja: "有機的不気味さ", en: "organic eeriness" },
+                { ja: "強いリムライト", en: "(strong rim lighting:1.3)" },
+                { ja: "背面発光", en: "(backlight glow:1.2)" },
+                { ja: "火花状ボケ光", en: "(spark-like bokeh lights)" }
+              ]},
+              { title: "🧬 浸食同化セット用クオリティ（初版）", items: [
+                { ja: "皮膚に広がる侵食模様", en: "corruption patterns spreading across the skin" },
+                { ja: "部分的に生体化した衣装", en: "partially bio-transformed clothing" },
+                { ja: "抵抗の中で進む同化", en: "assimilation progressing amid resistance" },
+                { ja: "有機的不気味さ", en: "organic eeriness" },
+                { ja: "生物的な不気味さ", en: "uncanny biological horror" },
+                { ja: "肉へ融合する植物組織", en: "plant tissue fused with flesh" },
+                { ja: "皮膚下に広がる根脈", en: "root-like veins spreading under skin" },
+                { ja: "不可逆の生体変質", en: "irreversible biological transformation" },
+                { ja: "静かで逃れられない寄生進行", en: "quiet but inescapable parasitic progression" },
+                { ja: "胸元から腰までの中距離構図", en: "mid shot, upper body to waist visible" },
+                { ja: "シネマティック照明", en: "(cinematic lighting:1.3)" },
+                { ja: "レイトレーシング", en: "(ray tracing:1.2)" },
+                { ja: "グローバルイルミネーション", en: "(global illumination:1.2)" },
+                { ja: "ボリューメトリックライティング", en: "(volumetric lighting:1.2)" }
+              ]},
+              { title: "🧬 浸食同化セット用クオリティ Ver.2", items: [
+                { ja: "皮膚に広がる侵食模様", en: "corruption patterns spreading across the skin" },
+                { ja: "部分的に生体化した衣装", en: "partially bio-transformed clothing" },
+                { ja: "抵抗の中で進む同化", en: "assimilation progressing amid resistance" },
+                { ja: "有機的不気味さ", en: "organic eeriness" },
+                { ja: "生物的な不気味さ", en: "uncanny biological horror" },
+                { ja: "肉へ融合する植物組織", en: "plant tissue fused with flesh" },
+                { ja: "皮膚下に広がる根脈", en: "root-like veins spreading under skin" },
+                { ja: "不可逆の生体変質", en: "irreversible biological transformation" },
+                { ja: "静かで逃れられない寄生進行", en: "quiet but inescapable parasitic progression" },
+                { ja: "衣装と肉の境界崩壊", en: "cloth-flesh boundary dissolving" },
+                { ja: "縫い目を置換する有機繊維", en: "organic fibers replacing seams" },
+                { ja: "衣装構造を乗っ取る生体組織", en: "living tissue overtaking garment structure" },
+                { ja: "衣装の縁から伸びる根脈", en: "root-like growth crawling from collar and seams" },
+                { ja: "生体組織に変わる布端", en: "fabric edges mutating into organic tissue" },
+                { ja: "胸元から腰までの中距離構図", en: "mid shot, upper body to waist visible" },
+                { ja: "シネマティック照明", en: "(cinematic lighting:1.3)" },
+                { ja: "レイトレーシング", en: "(ray tracing:1.2)" },
+                { ja: "グローバルイルミネーション", en: "(global illumination:1.2)" },
+                { ja: "ボリューメトリックライティング", en: "(volumetric lighting:1.2)" }
+              ]},
+              { title: "🔥 侵食強化版用クオリティ補助", items: [
+                { ja: "侵食密度の増大", en: "dense corruption spread" },
+                { ja: "侵入性の有機過成長", en: "invasive organic overgrowth" },
+                { ja: "表面積を食う侵食", en: "corruption consuming more surface area" },
+                { ja: "皮膚と衣装の境界崩壊", en: "skin-clothing boundary dissolving" },
+                { ja: "拡大する寄生被覆", en: "expanding parasitic coverage" },
+                { ja: "這い広がる有機支配", en: "creeping organic takeover" },
+                { ja: "厚みを増す侵食層", en: "thickened corruption density" },
+                { ja: "有機ディテール強化", en: "(intricate organic details:1.2)" },
+                { ja: "生体質感の密度補強", en: "(dense biological texture:1.2)" },
+                { ja: "皮膚透過散乱", en: "(subsurface scattering:1.25)" },
+                { ja: "映画的ライティング", en: "(cinematic lighting:1.2)" },
+                { ja: "柔らかな影の奥行き", en: "(soft shadow depth:1.15)" }
+              ]},
+              { title: "🫀 根脈露出版用クオリティ補助", items: [
+                { ja: "露出した根脈格子", en: "exposed root-vein lattice" },
+                { ja: "目に見える有機血管網", en: "visible organic vascular network" },
+                { ja: "緻密な根脈フィラメント", en: "intricate root-vein filaments" },
+                { ja: "分岐する生体ライン", en: "branching biological lines" },
+                { ja: "血管状の有機網", en: "vein-like organic webbing" },
+                { ja: "精密に露出する根構造", en: "finely exposed root structure" },
+                { ja: "優美な血管模様", en: "elegant vascular patterns" },
+                { ja: "繊細な寄生フィラメント", en: "delicate parasitic filaments" },
+                { ja: "線描の精度強化", en: "(intricate linework:1.25)" },
+                { ja: "有機模様の高密度描写", en: "(ultra-detailed organic patterns:1.25)" },
+                { ja: "血管ディテール焦点", en: "(sharp focus on vascular details:1.2)" },
+                { ja: "高コントラスト縁光", en: "(high contrast rim light:1.15)" },
+                { ja: "微細描写補強", en: "(micro-detail rendering:1.2)" }
+              ]},
+              { title: "💥 衣装崩壊版用クオリティ補助", items: [
+                { ja: "崩れる衣装構造", en: "outfit structure collapsing" },
+                { ja: "裂けていく布", en: "fabric tearing apart" },
+                { ja: "ほどける生体衣装", en: "unraveling organic clothing" },
+                { ja: "裂け端の強調", en: "shredded garment edges" },
+                { ja: "崩落する縫い目", en: "collapsing seams" },
+                { ja: "ほつれた生体布", en: "frayed bio-fabric" },
+                { ja: "壊れた衣装シルエット", en: "broken silhouette" },
+                { ja: "崩壊する衣装構造", en: "disintegrating clothing structure" },
+                { ja: "布損傷ディテール", en: "(dynamic fabric damage detail:1.25)" },
+                { ja: "裂け端の描写強化", en: "(torn edge detailing:1.2)" },
+                { ja: "劇的ライティング", en: "(dramatic lighting:1.2)" },
+                { ja: "被写界深度", en: "(depth of field:1.1)" },
+                { ja: "構造コントラスト", en: "(structural contrast:1.15)" }
+              ]}
+            ],
+            qualityGroups: [
+              { title: "🫧 生体スーツ融合セット用クオリティ（基準版）", items: [
+                { ja: "生きた有機膜の融合", en: "living organic membrane fused to skin" },
+                { ja: "半透明の生体バイオ膜", en: "semi-translucent biofilm" },
+                { ja: "濡れた有機表面", en: "wet organic surface, not latex, not rubber" },
+                { ja: "柔らかな生体光沢", en: "soft living tissue sheen" },
+                { ja: "肉感のある膜質感", en: "flesh-like membrane texture" },
+                { ja: "膜内に見える脈模様", en: "subtle vein patterns inside the suit" },
+                { ja: "表面下を動く有機繊維", en: "organic fibers moving under the surface" },
+                { ja: "生体組織から育つ寄生スーツ", en: "parasitic suit grown from living tissue" },
+                { ja: "生体同化で形成されたボディスーツ", en: "bodysuit formed by biological assimilation" },
+                { ja: "人工素材ではない生体膜", en: "slime-like bio membrane instead of synthetic material" },
+                { ja: "不均一な有機表面", en: "uneven organic surface" },
+                { ja: "呼吸するような膜の起伏", en: "breathing living suit texture" },
+                { ja: "高品質補正", en: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4)" },
+                { ja: "控えめな物理ベース質感", en: "(physically based rendering:1.15), (realistic lighting:1.15)" },
+                { ja: "皮膚透過散乱", en: "(subsurface scattering:1.3)" },
+                { ja: "映画的ライティング", en: "(cinematic lighting:1.3), (ray tracing:1.2), (global illumination:1.2), (volumetric lighting:1.2)" },
+                { ja: "髪の艶と光沢", en: "(shiny hair:1.35), (glossy hair:1.35)" }
+              ]},
+              { title: "🫧 生体スーツ融合セット用クオリティ Ver.2（基準採用）", items: [
+                { ja: "生きた有機膜の融合", en: "living organic membrane fused to skin" },
+                { ja: "生体組織から育つ寄生膜", en: "parasitic membrane grown from living tissue" },
+                { ja: "半透明の生体バイオ膜", en: "semi-translucent biofilm" },
+                { ja: "濡れた有機表面", en: "wet organic surface" },
+                { ja: "柔らかな生体光沢", en: "soft living tissue sheen" },
+                { ja: "肉感のある膜質感", en: "flesh-like membrane texture" },
+                { ja: "膜下に走る脈模様", en: "subtle vein patterns beneath the membrane" },
+                { ja: "表面下を動く有機繊維", en: "organic fibers moving under the surface" },
+                { ja: "不均一な生体表面", en: "uneven living surface" },
+                { ja: "呼吸するような膜の起伏", en: "breathing living suit texture" },
+                { ja: "生体同化で形成された生体被膜", en: "biological sheath formed by assimilation" },
+                { ja: "人工素材ではない生体膜", en: "slime-like bio membrane instead of synthetic material, not latex, not rubber, not synthetic suit" },
+                { ja: "高品質補正", en: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4)" },
+                { ja: "さらに抑えた物理ベース質感", en: "(physically based rendering:1.1), (realistic lighting:1.1)" },
+                { ja: "皮膚透過散乱", en: "(subsurface scattering:1.3)" },
+                { ja: "抑えめ映画的ライティング", en: "(cinematic lighting:1.25), (ray tracing:1.15), (global illumination:1.15), (volumetric lighting:1.15)" },
+                { ja: "やや控えめな髪の艶", en: "(shiny hair:1.3), (glossy hair:1.3)" }
+              ]},
+              { title: "🧬 第二皮膚・外皮置換特化クオリティ", items: [
+                { ja: "第二の皮膚としての生体膜", en: "second-skin biological membrane" },
+                { ja: "外皮を置換する生体被膜", en: "living membrane replacing outer skin" },
+                { ja: "半液状の有機被膜", en: "semi-liquid organic sheath" },
+                { ja: "透明な生体表皮", en: "transparent living epidermis" },
+                { ja: "膜越しに見える内部組織", en: "inner tissue visible through the membrane" },
+                { ja: "体の起伏に張り付く被膜", en: "membrane stretched over body contours" },
+                { ja: "有機的な表面張力", en: "organic surface tension" },
+                { ja: "濡れた生体の透過感", en: "wet living translucency" },
+                { ja: "生きた有機膜の融合", en: "living organic membrane fused to skin" },
+                { ja: "生体組織から育つ寄生膜", en: "parasitic membrane grown from living tissue" },
+                { ja: "人工素材ではない生体膜", en: "not latex, not rubber, not synthetic suit" },
+                { ja: "高品質補正", en: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4)" },
+                { ja: "さらに抑えた物理ベース質感", en: "(physically based rendering:1.05), (realistic lighting:1.05)" },
+                { ja: "皮膚透過散乱", en: "(subsurface scattering:1.3)" },
+                { ja: "抑えめ映画的ライティング", en: "(cinematic lighting:1.2), (ray tracing:1.1), (global illumination:1.1), (volumetric lighting:1.1)" },
+                { ja: "控えめな髪の艶", en: "(shiny hair:1.25), (glossy hair:1.25)" }
+              ]},
+              { title: "🫗 半透明ゼリー侵食セット用クオリティ（基準版）", items: [
+                { ja: "物理ベース質感", en: "(physically based rendering:1.25), (realistic lighting:1.2)" },
+                { ja: "皮膚透過散乱", en: "(subsurface scattering:1.25)" },
+                { ja: "髪の艶と光沢", en: "(shiny hair:1.35), (glossy hair:1.35)" },
+                { ja: "映画的ライティング", en: "(cinematic lighting:1.35), (ray tracing:1.25), (global illumination:1.25), (volumetric lighting:1.25)" },
+                { ja: "火花状ボケ光", en: "(spark-like bokeh lights)" },
+                { ja: "高品質補正", en: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4)" }
+              ]},
+              { title: "🫗 半透明ゼリー侵食セット用クオリティ（初版）", items: [
+                { ja: "スライムで溶けた衣装", en: "clothes melted by slime" },
+                { ja: "部分的な半透明化", en: "partially transparent" },
+                { ja: "粘着する衣服", en: "sticky clothes" },
+                { ja: "異質粘液の被膜", en: "alien mucus coating" },
+                { ja: "ぬめるゼリー層", en: "slimy layer" },
+                { ja: "髪の艶と光沢", en: "(shiny hair:1.35), (glossy hair:1.35)" },
+                { ja: "物理ベース質感", en: "(physically based rendering:1.25), (realistic lighting:1.2)" },
+                { ja: "高品質補正", en: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4)" },
+                { ja: "皮膚透過散乱", en: "(subsurface scattering:1.3)" },
+                { ja: "映画的ライティング", en: "(cinematic lighting:1.3), (ray tracing:1.2), (global illumination:1.2), (volumetric lighting:1.2)" },
+                { ja: "火花状ボケ光", en: "(spark-like bokeh lights)" }
+              ]},
+              { title: "🫗 半透明ゼリー侵食セット用クオリティ Ver.2（基準採用）", items: [
+                { ja: "衣服へ広がるゼラチン層", en: "gelatinous layer spreading over clothing" },
+                { ja: "半液状のゼリー膜", en: "semi-liquid jelly film" },
+                { ja: "透明なスライム膜", en: "transparent slime membrane" },
+                { ja: "ねっとりした半透明被膜", en: "gooey translucent coating" },
+                { ja: "ゲルへ溶けかけた衣服", en: "clothing partially dissolved into gel" },
+                { ja: "布のひだに伸びるスライム", en: "stretching slime between fabric folds" },
+                { ja: "粘性のある透明残留膜", en: "viscous transparent residue" },
+                { ja: "濡れたゼリー光沢", en: "wet jelly sheen" },
+                { ja: "柔らかなゼラチン質感", en: "soft gelatin texture" },
+                { ja: "体の周囲に溜まるスライム", en: "slime pooling around the body" },
+                { ja: "スライムで溶けた衣装", en: "clothes melted by slime" },
+                { ja: "部分的な半透明化", en: "partially transparent" },
+                { ja: "粘着する衣服", en: "sticky clothes" },
+                { ja: "異質粘液の被膜", en: "alien mucus coating" },
+                { ja: "ぬめるゼリー層", en: "slimy layer" },
+                { ja: "髪の艶と光沢", en: "(shiny hair:1.35), (glossy hair:1.35)" },
+                { ja: "物理ベース質感", en: "(physically based rendering:1.25), (realistic lighting:1.2)" },
+                { ja: "高品質補正", en: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4)" },
+                { ja: "皮膚透過散乱", en: "(subsurface scattering:1.3)" },
+                { ja: "映画的ライティング", en: "(cinematic lighting:1.3), (ray tracing:1.2), (global illumination:1.2), (volumetric lighting:1.2)" },
+                { ja: "火花状ボケ光", en: "(spark-like bokeh lights)" }
+              ]},
+              { title: "🐙 触手侵食セット用クオリティ（初版）", items: [
+                { ja: "体表に巻き付く触手", en: "tentacles coiling around the body surface" },
+                { ja: "異物侵入の不穏さ", en: "ominous sense of alien penetration" },
+                { ja: "拘束と侵食の同時進行", en: "restraint and invasion progressing together" },
+                { ja: "粘液を帯びた侵食痕", en: "invasion traces soaked with viscous slime" },
+                { ja: "生体侵食で癒着する皮膚と衣装", en: "skin and costume partially fused by parasitic growth" },
+                { ja: "衣装の縫い目へ入り込む蔓", en: "vines piercing into clothing seams" },
+                { ja: "有機的不気味さ", en: "organic eeriness" },
+                { ja: "強いリムライト", en: "(strong rim lighting:1.3)" },
+                { ja: "背面発光", en: "(backlight glow:1.2)" },
+                { ja: "火花状ボケ光", en: "(spark-like bokeh lights)" }
+              ]},
+              { title: "🐙 触手侵食セット用クオリティ Ver.2（基準採用）", items: [
+                { ja: "皮膚と衣装に残るぬめり痕", en: "slick tentacle residue on skin and clothing" },
+                { ja: "吸盤痕のような侵食痕", en: "suction-mark-like invasion traces" },
+                { ja: "巻き圧で歪む布", en: "coiling pressure deforming fabric" },
+                { ja: "四肢に食い込む粘液圧迫", en: "slimy compression around wrapped limbs" },
+                { ja: "縫い目へ締め込む触手", en: "tentacles tightening into clothing seams" },
+                { ja: "接触後に残る有機残留膜", en: "wet organic residue left by contact" },
+                { ja: "巻かれた箇所から進む侵食", en: "gradual corruption spreading from wrapped areas" },
+                { ja: "侵食で崩れる衣装輪郭", en: "costume distorted by invasive coiling" },
+                { ja: "動きに沿って走る粘液の筋", en: "glossy slime trails following tentacle movement" },
+                { ja: "身体に刻まれる異物圧痕", en: "alien grip marks on the body" },
+                { ja: "体表に巻き付く触手", en: "tentacles coiling around the body surface" },
+                { ja: "異物侵入の不穏さ", en: "ominous sense of alien penetration" },
+                { ja: "拘束と侵食の同時進行", en: "restraint and invasion progressing together" },
+                { ja: "粘液を帯びた侵食痕", en: "invasion traces soaked with viscous slime" },
+                { ja: "生体侵食で癒着する皮膚と衣装", en: "skin and costume partially fused by parasitic growth" },
+                { ja: "衣装の縫い目へ入り込む蔓", en: "vines piercing into clothing seams" },
+                { ja: "有機的不気味さ", en: "organic eeriness" },
+                { ja: "強いリムライト", en: "(strong rim lighting:1.3)" },
+                { ja: "背面発光", en: "(backlight glow:1.2)" },
+                { ja: "火花状ボケ光", en: "(spark-like bokeh lights)" }
+              ]},
+              { title: "🧬 浸食同化セット用クオリティ（初版）", items: [
+                { ja: "皮膚に広がる侵食模様", en: "corruption patterns spreading across the skin" },
+                { ja: "部分的に生体化した衣装", en: "partially bio-transformed clothing" },
+                { ja: "抵抗の中で進む同化", en: "assimilation progressing amid resistance" },
+                { ja: "有機的不気味さ", en: "organic eeriness" },
+                { ja: "生物的な不気味さ", en: "uncanny biological horror" },
+                { ja: "肉へ融合する植物組織", en: "plant tissue fused with flesh" },
+                { ja: "皮膚下に広がる根脈", en: "root-like veins spreading under skin" },
+                { ja: "不可逆の生体変質", en: "irreversible biological transformation" },
+                { ja: "静かで逃れられない寄生進行", en: "quiet but inescapable parasitic progression" },
+                { ja: "胸元から腰までの中距離構図", en: "mid shot, upper body to waist visible" },
+                { ja: "シネマティック照明", en: "(cinematic lighting:1.3)" },
+                { ja: "レイトレーシング", en: "(ray tracing:1.2)" },
+                { ja: "グローバルイルミネーション", en: "(global illumination:1.2)" },
+                { ja: "ボリューメトリックライティング", en: "(volumetric lighting:1.2)" }
+              ]},
+              { title: "🧬 浸食同化セット用クオリティ Ver.2", items: [
+                { ja: "皮膚に広がる侵食模様", en: "corruption patterns spreading across the skin" },
+                { ja: "部分的に生体化した衣装", en: "partially bio-transformed clothing" },
+                { ja: "抵抗の中で進む同化", en: "assimilation progressing amid resistance" },
+                { ja: "有機的不気味さ", en: "organic eeriness" },
+                { ja: "生物的な不気味さ", en: "uncanny biological horror" },
+                { ja: "肉へ融合する植物組織", en: "plant tissue fused with flesh" },
+                { ja: "皮膚下に広がる根脈", en: "root-like veins spreading under skin" },
+                { ja: "不可逆の生体変質", en: "irreversible biological transformation" },
+                { ja: "静かで逃れられない寄生進行", en: "quiet but inescapable parasitic progression" },
+                { ja: "衣装と肉の境界崩壊", en: "cloth-flesh boundary dissolving" },
+                { ja: "縫い目を置換する有機繊維", en: "organic fibers replacing seams" },
+                { ja: "衣装構造を乗っ取る生体組織", en: "living tissue overtaking garment structure" },
+                { ja: "衣装の縁から伸びる根脈", en: "root-like growth crawling from collar and seams" },
+                { ja: "生体組織に変わる布端", en: "fabric edges mutating into organic tissue" },
+                { ja: "胸元から腰までの中距離構図", en: "mid shot, upper body to waist visible" },
+                { ja: "シネマティック照明", en: "(cinematic lighting:1.3)" },
+                { ja: "レイトレーシング", en: "(ray tracing:1.2)" },
+                { ja: "グローバルイルミネーション", en: "(global illumination:1.2)" },
+                { ja: "ボリューメトリックライティング", en: "(volumetric lighting:1.2)" }
+              ]},
+              { title: "🌿 寄生植物同化セット用クオリティ", items: [
+                { ja: "寄生植物同化", en: "parasitic plant assimilation" },
+                { ja: "植物組織と肉体の融合", en: "plant tissue fused with flesh" },
+                { ja: "布を侵食置換する有機組織", en: "organic overgrowth replacing fabric" },
+                { ja: "肌と衣装が一体化した侵食", en: "skin and costume partially fused by parasitic growth" },
+                { ja: "縫い目へ食い込む蔦", en: "vines piercing into clothing seams" },
+                { ja: "皮膚下に走る根脈", en: "root-like veins spreading under skin" },
+                { ja: "胸元と腰元への寄生進行", en: "parasitic progression around chest and waist" },
+                { ja: "花弁状の触手意匠", en: "petal-shaped tentacle motifs" },
+                { ja: "侵食組織から咲く花", en: "flowers erupting from invasive plant tissue" },
+                { ja: "融合スーツから伸びる開花", en: "blooming flowers growing through fused organic suit" },
+                { ja: "棘のある蔦が体へ巻き付く", en: "thorny vines wrapping body" },
+                { ja: "蔦に覆われるボディスーツ", en: "bodysuit overgrown by parasitic vines" },
+                { ja: "逃げ場なく進む不可逆変質", en: "irreversible biological transformation, quiet but inescapable parasitic progression" },
+                { ja: "有機的な不気味さ", en: "organic eeriness" },
+                { ja: "中距離・上半身から腰まで", en: "mid shot, upper body to waist visible" },
+                { ja: "アニメリアル寄り描画", en: "(anime-realism blend:1.35), (semi-realistic rendering:1.2)" },
+                { ja: "物理ベース質感", en: "(physically based rendering:1.25), (realistic lighting:1.2)" },
+                { ja: "髪の艶と光沢", en: "(shiny hair:1.35), (glossy hair:1.35)" },
+                { ja: "強い縁光と逆光", en: "(strong rim lighting:1.3), (backlight glow:1.2)" },
+                { ja: "映画的ライティング", en: "(cinematic lighting:1.35), (ray tracing:1.25), (global illumination:1.25), (volumetric lighting:1.25)" },
+                { ja: "皮膚透過散乱", en: "(subsurface scattering:1.25)" },
+                { ja: "火花状ボケ光", en: "(spark-like bokeh lights)" },
+                { ja: "高品質補正", en: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4)" }
+              ]}
+            ]
+          },
+          {
+            title: "💧 汚れ・液体系特化コレクション",
+            description: "濡れ、液体付着、汚れ、てかり、混濁感までをまとめて深掘りする専用コレクション",
+            presets: [
+              { title: "💦 濡れ艶セット", items: [
+                { ja: "濡れた肌の光沢", en: "wet skin gloss, reflective moisture" },
+                { ja: "水滴つきボディ", en: "droplets on body, fresh wet shine" },
+                { ja: "濡れ布の貼り付き", en: "wet cloth clinging to skin" },
+                { ja: "しっとりした艶感", en: "moist glossy finish, slick body sheen" }
+              ]},
+              { title: "🖤 汚濁まみれセット", items: [
+                { ja: "液体まみれの肌", en: "skin smeared with fluid, messy coating" },
+                { ja: "汚れの付着", en: "stained with grime, dirty attachment" },
+                { ja: "混濁したてかり", en: "murky gloss, dirty reflective sheen" },
+                { ja: "乱れた汚れ演出", en: "chaotic dirt styling, messy contamination" },
+                { ja: "白濁液まみれ", en: "covered in white liquid, sticky texture" }
+              ]},
+              { title: "🫧 オイル密着セット", items: [
+                { ja: "オイル光沢肌", en: "oiled glossy skin, slick highlights" },
+                { ja: "てかる密着感", en: "slick clingy shine, body-hugging fluid" },
+                { ja: "滑るような表面反射", en: "slippery surface reflection, wet sheen" },
+                { ja: "液体で輪郭が強調された肌", en: "body contours emphasized by liquid coating" }
+              ]}
+            ],
+            baseGroups: [
+              { title: "💦 濡れ・水滴", items: [
+                { ja: "濡れた肌の光沢", en: "wet skin gloss, reflective moisture" },
+                { ja: "水滴つきボディ", en: "droplets on body, fresh wet shine" },
+                { ja: "濡れ布の貼り付き", en: "wet cloth clinging to skin" },
+                { ja: "しっとりした艶感", en: "moist glossy finish, slick body sheen" },
+                { ja: "滴る水の筋", en: "trickling water streaks, sliding moisture lines" },
+                { ja: "濡れ透け (激)", en: "soaked clothes, wet transparency, clinging to skin" }
+              ]},
+              { title: "🖤 汚れ・混濁", items: [
+                { ja: "液体まみれの肌", en: "skin smeared with fluid, messy coating" },
+                { ja: "汚れの付着", en: "stained with grime, dirty attachment" },
+                { ja: "泥汚れの広がり", en: "spreading mud stains, dirty body marks" },
+                { ja: "混濁したてかり", en: "murky gloss, dirty reflective sheen" },
+                { ja: "乱れた汚れ演出", en: "chaotic dirt styling, messy contamination" }
+              ]}
+            ],
+            customizeGroups: [
+              { title: "🫧 オイル・粘度追加", items: [
+                { ja: "オイル光沢肌", en: "oiled glossy skin, slick highlights" },
+                { ja: "てかる密着感", en: "slick clingy shine, body-hugging fluid" },
+                { ja: "滑るような表面反射", en: "slippery surface reflection, wet sheen" },
+                { ja: "液体で輪郭が強調された肌", en: "body contours emphasized by liquid coating" },
+                { ja: "ぬめる質感追加", en: "slimy texture added, viscous surface effect" }
+              ]},
+              { title: "🧴 汚れ方の調整", items: [
+                { ja: "部分的な汚れ付着", en: "partial staining, localized grime" },
+                { ja: "全身まみれの汚れ", en: "full-body dirty coating, complete contamination" },
+                { ja: "水と汚れの混在", en: "mix of water and dirt, layered mess" },
+                { ja: "服にも広がる液体跡", en: "fluid stains spreading onto clothes" },
+                { ja: "乱雑な飛び散り跡", en: "chaotic splatter marks, scattered fluid stains" },
+                { ja: "精液まみれの服", en: "bukkake on clothes, cum on clothes, stained clothes" },
+                { ja: "破れたストッキング", en: "torn pantyhose, laddered tights" }
+              ]}
+            ],
+            settingGroups: [
+              { title: "💧 液体系演出設定", items: [
+                { ja: "濡れと汚れの境界を曖昧にする", en: "blur the border between wetness and dirt" },
+                { ja: "光を拾う液体膜", en: "light-catching liquid film, reflective coating" },
+                { ja: "背徳的な汚濁感", en: "decadent dirty atmosphere, forbidden contamination" },
+                { ja: "混濁した艶を強調", en: "accentuate murky gloss, impure sheen" },
+                { ja: "乱れた液体跡を残す", en: "leave messy liquid traces, chaotic residue" }
+              ]}
+            ]
+          },
+          {
+            title: "⛓ 艶拘束・支配進行特化コレクション",
+            description: "締め付け、支配、見せつけ、湿った光沢、拘束の進行感を、生体膜寄りの艶と一緒に深掘りする専用コレクション",
+            presets: [
+              { title: "🔞 艶拘束・支配進行セット", desc: "艶膜の拘束が首元・胸元・腰まわりへ進み、命令と羞恥が混ざる主導支配寄りの完成セット", items: [
+                { ja: "首元を締める生体拘束", en: "organic restraint tightening around the neck" },
+                { ja: "胸元へ絡み込む艶膜拘束", en: "glossy membrane restraint wrapping around the chest" },
+                { ja: "腰まわりを固定する粘膜束", en: "mucosal restraint fixing the waist in place" },
+                { ja: "湿った拘束膜の食い込み", en: "wet restraint membrane pressing into the body" },
+                { ja: "粘膜めいた濡れた光沢", en: "wet sheen like living mucosal membrane, not latex, not rubber" },
+                { ja: "拘束が進行していく途中段階", en: "mid-progression stage of restraint advancing across the body" },
+                { ja: "首・胸・腰へ支配が進行する演出", en: "staging of domination advancing across neck, chest and waist" },
+                { ja: "命令で姿勢を固定された空気", en: "an atmosphere of posture fixed by command" },
+                { ja: "見せつけるための拘束構図", en: "display-oriented restraint composition" },
+                { ja: "羞恥を伴う支配進行", en: "domination progression accompanied by humiliation" }
+              ] }
+            ],
+            baseGroups: [
+              { title: "⛓ 艶拘束・支配進行", items: [
+                { ja: "首元を締める生体拘束", en: "organic restraint tightening around the neck" },
+                { ja: "胸元へ絡み込む艶膜拘束", en: "glossy membrane restraint wrapping around the chest" },
+                { ja: "腰まわりを固定する粘膜束", en: "mucosal restraint fixing the waist in place" },
+                { ja: "四肢へ伝う拘束膜", en: "restraining membrane trailing along the limbs" },
+                { ja: "姿勢を固定する生体バインド", en: "living bind that fixes the pose" },
+                { ja: "体表へ張り付く拘束層", en: "restraint layer clinging to the body surface" },
+                { ja: "湿った拘束膜の食い込み", en: "wet restraint membrane pressing into the body" },
+                { ja: "呼吸に合わせて締まる生体束", en: "living restraint tightening with each breath" },
+                { ja: "首・胸・腰へ伸びる拘束ライン", en: "binding lines stretching across neck, chest and waist" },
+                { ja: "主導権を示す拘束姿勢", en: "restrained posture that implies control and leadership" }
+              ] }
+            ],
+            customizeGroups: [
+              { title: "💋 艶拘束・支配演出", items: [
+                { ja: "粘膜めいた濡れた光沢", en: "wet sheen like living mucosal membrane, not latex, not rubber" },
+                { ja: "生体膜寄りのぬめる反射", en: "slick reflections closer to living bio-membrane than latex" },
+                { ja: "胸元の締め上げ強調", en: "emphasized constriction around the chest" },
+                { ja: "腰の拘束圧を強める", en: "stronger restraint pressure around the waist" },
+                { ja: "首元に集まる支配の焦点", en: "dominant focal tension gathering around the throat" },
+                { ja: "拘束が進行していく途中段階", en: "mid-progression stage of restraint advancing across the body" },
+                { ja: "見せつけるための拘束構図", en: "display-oriented restraint composition" },
+                { ja: "見下ろしで圧をかける構図", en: "downward-looking composition that adds pressure" },
+                { ja: "密着しながら支配する絡み方", en: "close-contact wrapping that dominates while clinging" },
+                { ja: "光を拾う湿膜の縁取り", en: "light-catching edges of a wet living membrane" }
+              ] }
+            ],
+            settingGroups: [
+              { title: "⚙️ 支配進行・羞恥・見せつけ設定", items: [
+                { ja: "首・胸・腰へ支配が進行する演出", en: "staging of domination advancing across neck, chest and waist" },
+                { ja: "命令で姿勢を固定された空気", en: "an atmosphere of posture fixed by command" },
+                { ja: "羞恥を伴う支配進行", en: "domination progression accompanied by humiliation" },
+                { ja: "見せつけ前提の支配感", en: "domination presented for display" },
+                { ja: "拒めない拘束の意思", en: "a sense of inescapable will within the restraint" },
+                { ja: "女王的な主導圧", en: "queen-like leading pressure" },
+                { ja: "静かに進む拘束支配", en: "quietly advancing restraint and domination" },
+                { ja: "同化寸前の密着拘束", en: "clinging restraint on the verge of assimilation" },
+                { ja: "濡れた生体拘束の背徳感", en: "decadent atmosphere of wet biological restraint" },
+                { ja: "支配を誇示する見せつけ感", en: "showy flaunting of domination" }
+              ] }
+            ],
+            qualityPresets: [
+              { title: "⛓ 艶拘束・支配進行用クオリティセット（基準版）", items: [
+                { ja: "首元を締める生体拘束", en: "organic restraint tightening around the neck" },
+                { ja: "胸元へ絡み込む艶膜拘束", en: "glossy membrane restraint wrapping around the chest" },
+                { ja: "腰まわりを固定する粘膜束", en: "mucosal restraint fixing the waist in place" },
+                { ja: "湿った拘束膜の食い込み", en: "wet restraint membrane pressing into the body" },
+                { ja: "粘膜めいた濡れた光沢", en: "wet sheen like living mucosal membrane, not latex, not rubber" },
+                { ja: "生体膜寄りのぬめる反射", en: "slick reflections closer to living bio-membrane than latex" },
+                { ja: "首・胸・腰へ支配が進行する演出", en: "staging of domination advancing across neck, chest and waist" },
+                { ja: "命令で姿勢を固定された空気", en: "an atmosphere of posture fixed by command" },
+                { ja: "見せつけるための拘束構図", en: "display-oriented restraint composition" },
+                { ja: "羞恥を伴う支配進行", en: "domination progression accompanied by humiliation" },
+                { ja: "生体膜寄りの湿潤光沢", en: "wet glossy surface closer to living bio-membrane, not latex, not rubber" },
+                { ja: "粘膜的な半透明反射", en: "semi-translucent mucosal reflections" },
+                { ja: "湿った締め付け痕の陰影", en: "shading on damp constriction marks" },
+                { ja: "高品質補正", en: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4)" },
+                { ja: "湿潤映画光", en: "(cinematic lighting:1.25), (volumetric lighting:1.15), (global illumination:1.15)" },
+                { ja: "生体膜向け質感補正", en: "(subsurface scattering:1.25), (specular highlights:1.15), (soft wet sheen:1.2)" }
+              ]},
+              { title: "👑 支配強化版用クオリティセット", items: [
+                { ja: "首元を締める生体拘束", en: "organic restraint tightening around the neck" },
+                { ja: "胸元の締め上げ強調", en: "emphasized constriction around the chest" },
+                { ja: "腰の拘束圧を強める", en: "stronger restraint pressure around the waist" },
+                { ja: "首元に集まる支配の焦点", en: "dominant focal tension gathering around the throat" },
+                { ja: "見下ろしで圧をかける構図", en: "downward-looking composition that adds pressure" },
+                { ja: "命令で姿勢を固定された空気", en: "an atmosphere of posture fixed by command" },
+                { ja: "見せつけ前提の支配感", en: "domination presented for display" },
+                { ja: "拒めない拘束の意思", en: "a sense of inescapable will within the restraint" },
+                { ja: "女王的な主導圧", en: "queen-like leading pressure" },
+                { ja: "支配を誇示する見せつけ感", en: "showy flaunting of domination" },
+                { ja: "首元・胸元・腰まわりの強い陰影", en: "strong shading around neck, chest and waist" },
+                { ja: "食い込みを拾う皮膚陰影", en: "skin shading that accentuates pressure and indentation" },
+                { ja: "拘束陰影の強化", en: "(dramatic shading:1.2), (contact shadows:1.2), (depth of field:1.1)" },
+                { ja: "強い視線誘導", en: "strong eye guidance toward throat, chest, and waist restraints" },
+                { ja: "高品質補正", en: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4)" },
+                { ja: "支配映画光", en: "(cinematic lighting:1.3), (rim lighting:1.2), (dramatic contrast:1.15)" }
+              ]},
+              { title: "🫧 生体膜深化版用クオリティセット", items: [
+                { ja: "粘膜めいた濡れた光沢", en: "wet sheen like living mucosal membrane, not latex, not rubber" },
+                { ja: "生体膜寄りのぬめる反射", en: "slick reflections closer to living bio-membrane than latex" },
+                { ja: "密着しながら支配する絡み方", en: "close-contact wrapping that dominates while clinging" },
+                { ja: "光を拾う湿膜の縁取り", en: "light-catching edges of a wet living membrane" },
+                { ja: "同化寸前の密着拘束", en: "clinging restraint on the verge of assimilation" },
+                { ja: "濡れた生体拘束の背徳感", en: "decadent atmosphere of wet biological restraint" },
+                { ja: "静かに進む拘束支配", en: "quietly advancing restraint and domination" },
+                { ja: "生体膜寄りの湿潤光沢", en: "wet glossy surface closer to living bio-membrane, not latex, not rubber" },
+                { ja: "粘膜的な半透明反射", en: "semi-translucent mucosal reflections" },
+                { ja: "抑制されたラバー感", en: "reduced latex feel, suppressed synthetic rubber impression" },
+                { ja: "湿った締め付け痕の陰影", en: "shading on damp constriction marks" },
+                { ja: "生体膜向け質感補正", en: "(subsurface scattering:1.25), (specular highlights:1.15), (soft wet sheen:1.2)" },
+                { ja: "半透明の膜光", en: "(translucent membrane glow:1.2), (soft backlighting:1.15)" },
+                { ja: "高品質補正", en: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4)" },
+                { ja: "湿潤映画光", en: "(cinematic lighting:1.25), (volumetric lighting:1.15), (global illumination:1.15)" },
+                { ja: "生きた膜の表面感", en: "living biofilm surface, breathing organic sheen, mucosal skin film" }
+              ]},
+              { title: "⛓ 艶拘束・支配進行用クオリティセット（基準版） Ver.2", items: [
+                { ja: "首元を締める生体拘束", en: "organic restraint tightening around the neck" },
+                { ja: "胸元へ絡み込む艶膜拘束", en: "glossy membrane restraint wrapping around the chest" },
+                { ja: "腰まわりを固定する粘膜束", en: "mucosal restraint fixing the waist in place" },
+                { ja: "拘束膜が体表へ溶け込む中間段階", en: "intermediate stage of restraint membrane partially assimilating into the body surface" },
+                { ja: "湿った拘束膜の食い込み", en: "wet restraint membrane pressing into the body" },
+                { ja: "ラバー感を抑えた生体膜艶", en: "bio-membrane gloss with reduced latex feel, less synthetic rubber impression" },
+                { ja: "柔らかい半透明の粘膜反射", en: "soft semi-translucent mucosal reflections" },
+                { ja: "首・胸・腰へ支配が進行する演出", en: "staging of domination advancing across neck, chest and waist" },
+                { ja: "命令で姿勢を固定された空気", en: "an atmosphere of posture fixed by command" },
+                { ja: "見せつけるための拘束構図", en: "display-oriented restraint composition" },
+                { ja: "湿った締め付け痕の陰影", en: "shading on damp constriction marks" },
+                { ja: "食い込みを拾う柔らかい皮膚陰影", en: "soft skin shading that accentuates pressure and indentation" },
+                { ja: "高品質補正", en: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4)" },
+                { ja: "湿膜映画光Ver.2", en: "(cinematic lighting:1.23), (volumetric lighting:1.12), (soft contact shadows:1.12), (global illumination:1.12)" },
+                { ja: "生体膜向け質感補正Ver.2", en: "(subsurface scattering:1.28), (soft specular highlights:1.12), (moist organic sheen:1.24), (translucent skin film:1.18)" },
+                { ja: "中間膜の表面感", en: "partially assimilated membrane surface, moist organic film, living sheath on skin" }
+              ]},
+              { title: "🫧 生体膜深化版用クオリティセット Ver.2", items: [
+                { ja: "膜そのものが締め上げる拘束", en: "living membrane itself tightening and restraining the body" },
+                { ja: "胴体へ巻き付いて固定する生体膜", en: "organic membrane wrapping around the torso and fixing posture" },
+                { ja: "半透明の膜が食い込む拘束", en: "semi-translucent membrane constriction pressing into the body" },
+                { ja: "粘膜めいた濡れた光沢", en: "wet sheen like living mucosal membrane, not latex, not rubber" },
+                { ja: "生体膜寄りのぬめる反射", en: "slick reflections closer to living bio-membrane than latex" },
+                { ja: "密着しながら支配する絡み方", en: "close-contact wrapping that dominates while clinging" },
+                { ja: "膜の縁が光を拾う半透明感", en: "semi-translucent membrane edges catching light" },
+                { ja: "同化寸前の密着拘束", en: "clinging restraint on the verge of assimilation" },
+                { ja: "濡れた生体拘束の背徳感", en: "decadent atmosphere of wet biological restraint" },
+                { ja: "静かに進む拘束支配", en: "quietly advancing restraint and domination" },
+                { ja: "生体膜が姿勢まで固定する", en: "living membrane binding and fixing the posture itself" },
+                { ja: "抑制されたラバー感", en: "reduced latex feel, suppressed synthetic rubber impression" },
+                { ja: "湿った締め付け痕の陰影", en: "shading on damp constriction marks" },
+                { ja: "生体膜向け質感補正Ver.2", en: "(subsurface scattering:1.32), (soft specular highlights:1.1), (moist organic sheen:1.28), (translucent membrane glow:1.24), (living biofilm texture:1.22)" },
+                { ja: "膜拘束向け映画光Ver.2", en: "(cinematic lighting:1.22), (soft backlighting:1.18), (volumetric lighting:1.1), (global illumination:1.1)" },
+                { ja: "生きた拘束膜の表面感", en: "living restraint membrane, wet biofilm constriction, organic sheath binding posture" }
+              ]},
+              { title: "🫧 生体膜深化版用クオリティセット Ver.3", items: [
+                { ja: "膜が衣装ではなく拘束体そのもの", en: "the membrane itself is the restraint body, not clothing" },
+                { ja: "胸・腹・腰を保持する半透明生体膜", en: "semi-translucent living membrane holding the chest, abdomen and waist in place" },
+                { ja: "姿勢まで支配する有機的な巻き付き", en: "organic wrapping that controls the posture itself" },
+                { ja: "膜が食い込みながら固定する胴体拘束", en: "torso restraint where the membrane presses in and fixes the body" },
+                { ja: "器具より生体膜が主役の拘束", en: "restraint led by living membrane rather than belts or devices" },
+                { ja: "ぬめる生体反射", en: "slick living bio-membrane reflections, not latex, not rubber" },
+                { ja: "柔らかい半透明の膜縁", en: "soft semi-translucent membrane edges glowing under light" },
+                { ja: "湿った皮膜が体表へ馴染む", en: "wet organic film adhering naturally to the body surface" },
+                { ja: "生体膜が抱き締めるように締める", en: "living membrane tightening like a wet organic embrace" },
+                { ja: "有機的な保持で逃がさない", en: "organic holding force that does not let the body escape" },
+                { ja: "濡れた膜の圧で静かに支配が進む", en: "domination quietly advances through the pressure of wet living membrane" },
+                { ja: "膜そのものが姿勢を保持する", en: "the membrane itself maintains and fixes the posture" },
+                { ja: "ラバー感をさらに後退", en: "further reduced latex feel, pushed away from synthetic rubber" },
+                { ja: "締め付け痕を拾う柔らかな湿膜陰影", en: "soft wet membrane shading emphasizing pressure marks and constriction" },
+                { ja: "生体膜向け質感補正Ver.3", en: "(subsurface scattering:1.34), (soft specular highlights:1.08), (moist organic sheen:1.32), (translucent membrane glow:1.28), (living biofilm texture:1.28), (semi-translucent organic restraint membrane:1.26)" },
+                { ja: "膜拘束向け映画光Ver.3", en: "(cinematic lighting:1.2), (soft backlighting:1.2), (volumetric lighting:1.08), (global illumination:1.08), (rim light through translucent membrane:1.16)" },
+                { ja: "生きた拘束膜が体を保持する表面感", en: "living restraint membrane holding the body, wet biofilm constriction, organic sheath maintaining posture" }
+              ]},
+              { title: "🧬 生体粘膜拘束派生 Ver.1", items: [
+                { ja: "粘性のある生体膜が拘束体として機能する", en: "viscous living membrane functioning as the restraint body itself" },
+                { ja: "赤みを帯びた粘膜拘束が胸・腹・腰へ絡みつく", en: "reddish mucosal restraint coiling around the chest, abdomen, and waist" },
+                { ja: "艶と粘度を伴う生体拘束のうねり", en: "organic restraint undulation with sheen and viscosity" },
+                { ja: "半液状の拘束膜が四肢を抱え込む", en: "semi-fluid restraint membrane engulfing the limbs" },
+                { ja: "粘る拘束体が姿勢を奪って保持する", en: "clingy restraint body stealing posture and holding it in place" },
+                { ja: "器具より生体粘膜が主役の拘束", en: "restraint led by living mucosal mass rather than belts or devices" },
+                { ja: "ぬめる膜縁と粘性ハイライト", en: "slick membrane edges and viscous organic highlights" },
+                { ja: "赤い粘膜反射", en: "reddish mucosal reflections, wet biofilm sheen" },
+                { ja: "湿った粘膜束が身体を包囲する", en: "wet mucosal bundles surrounding the body" },
+                { ja: "柔らかい生体拘束が逃がさない", en: "soft biological restraint that quietly prevents escape" },
+                { ja: "肌へ馴染む粘膜拘束の食い込み", en: "mucosal restraint blending into skin with soft pressure marks" },
+                { ja: "有機粘膜の圧で締め付け痕を残す", en: "organic mucosal pressure leaving damp constriction marks" },
+                { ja: "半液状拘束体への誘導", en: "steer toward semi-fluid biological restraint instead of plain glossy suit" },
+                { ja: "生体粘膜拘束向け質感補正Ver.4", en: "(subsurface scattering:1.34), (soft specular highlights:1.08), (moist organic sheen:1.36), (living biofilm texture:1.32), (viscous mucosal membrane:1.3), (wet semi-fluid restraint surface:1.28)" },
+                { ja: "粘膜拘束向け映画光Ver.4", en: "(cinematic lighting:1.2), (soft backlighting:1.18), (volumetric lighting:1.08), (global illumination:1.08), (organic rim glow:1.16)" },
+                { ja: "粘る生体拘束が身体を包囲する表面感", en: "clingy living mucosal restraint surrounding the body, semi-fluid biofilm constriction, organic mass maintaining posture" }
+              ]},
+              { title: "🤍 半透明拘束膜特化 Ver.4", items: [
+                { ja: "白い半透明拘束膜を最優先", en: "white semi-translucent restraint membrane as the absolute priority" },
+                { ja: "薄い白膜が拘束体そのもの", en: "thin pale restraint membrane itself, not clothing, not latex, not catsuit, not glossy rubber" },
+                { ja: "半透明の白膜が胸・腹・腰を静かに保持する", en: "semi-translucent white membrane quietly holding the chest, abdomen, and waist in place" },
+                { ja: "白い薄膜が腕から胴へ柔らかく巻き付く", en: "pale thin membrane softly wrapping from the arms into the torso" },
+                { ja: "柔らかな白膜の張力で姿勢を保たれる", en: "posture maintained by the gentle tension of translucent white membrane" },
+                { ja: "器具より薄い有機膜が主役の拘束", en: "thin organic membrane restraint takes priority over belts or devices" },
+                { ja: "白膜の縁だけが淡く光を拾う", en: "only the pale membrane edges softly catching light" },
+                { ja: "乳白色の湿った膜反射", en: "milky wet membrane reflections, soft biofilm sheen, no harsh synthetic gloss" },
+                { ja: "白い薄膜が肌へ馴染みながら食い込む", en: "white thin membrane pressing into the body while blending into skin" },
+                { ja: "静かな拘束保持", en: "quiet immobilization by thin living membrane" },
+                { ja: "肌に溶ける白い半透明拘束膜", en: "white semi-translucent restraint membrane melting into the skin surface" },
+                { ja: "柔らかな白膜圧で締め付け痕を残す", en: "soft pale membrane pressure leaving gentle constriction marks" },
+                { ja: "黒艶スーツ化を強く抑制", en: "strongly avoid black glossy bodysuit look, avoid red latex, avoid catsuit direction" },
+                { ja: "半透明拘束膜向け質感補正Ver.4", en: "(subsurface scattering:1.38), (soft specular highlights:1.02), (moist organic sheen:1.3), (translucent membrane glow:1.36), (living biofilm texture:1.28), (milky semi-translucent restraint membrane:1.36), (wet translucent restraint surface:1.34), (thin pale organic film:1.32)" },
+                { ja: "白膜拘束向け映画光Ver.4", en: "(cinematic lighting:1.14), (soft backlighting:1.26), (volumetric lighting:1.04), (global illumination:1.08), (rim light through pale translucent membrane:1.26), (soft diffused highlights:1.2), (gentle milky bloom:1.14)" },
+                { ja: "白い生体薄膜が身体を保持する表面感", en: "pale living thin restraint membrane holding the body, semi-translucent biofilm constriction, soft organic sheath maintaining posture" }
+              ]},
+              { title: "🤍 半透明拘束膜特化 Ver.5", items: [
+                { ja: "白い半透明拘束膜だけを主役にする", en: "white translucent restraint membrane only, make the pale living film the main subject" },
+                { ja: "薄い乳白膜が衣装ではなく拘束体そのもの", en: "thin milky restraint film as the restraint body itself, not outfit, not rope, not harness, not latex" },
+                { ja: "白い有機薄膜が胸・腹・腰を包んで保持する", en: "pale organic thin membrane wrapping and holding the chest, abdomen, and waist" },
+                { ja: "白い半透明膜が腕から胴へ静かに伸びる", en: "white semi-translucent membrane quietly extending from the arms into the torso" },
+                { ja: "薄膜の張力だけで姿勢が維持される", en: "posture maintained only by the gentle tension of the thin translucent membrane" },
+                { ja: "縛るより包んで保持する", en: "hold and immobilize by wrapping rather than by tying" },
+                { ja: "器具拘束とロープ拘束を大きく抑える", en: "strongly avoid rope restraint, avoid harness restraint, avoid gear-driven bondage look" },
+                { ja: "黒艶スーツと赤ラテックス方向を切る", en: "avoid black glossy catsuit look, avoid red latex direction, avoid exposed display restraint" },
+                { ja: "白膜の縁だけが柔らかく透けて光る", en: "only the edges of the pale membrane softly glowing through translucency" },
+                { ja: "乳白色の薄膜が肌へ溶けながら食い込む", en: "milky translucent thin membrane melting into skin while leaving soft pressure" },
+                { ja: "白い半透明拘束膜の静かな固定", en: "quiet immobilization by white semi-translucent living restraint membrane" },
+                { ja: "薄い白膜が皮膚感と一体化する", en: "thin pale membrane integrating with the skin surface instead of reading as clothing" },
+                { ja: "半透明拘束膜向け質感補正Ver.5", en: "(subsurface scattering:1.4), (soft specular highlights:1.0), (moist organic sheen:1.24), (translucent membrane glow:1.4), (living biofilm texture:1.24), (milky semi-translucent restraint membrane:1.42), (wet translucent restraint surface:1.36), (thin pale organic film:1.38), (soft diffused highlights:1.18)" },
+                { ja: "白膜拘束向け映画光Ver.5", en: "(cinematic lighting:1.08), (soft backlighting:1.3), (volumetric lighting:1.02), (global illumination:1.08), (rim light through pale translucent membrane:1.3), (gentle milky bloom:1.18), (quiet studio shadow:1.06)" },
+                { ja: "白い生体薄膜が身体を包んで逃がさない表面感", en: "pale living thin restraint membrane surrounding the body, semi-translucent biofilm immobilization, soft organic sheath holding posture without rope or harness" }
+              ]},
+            ],
+            qualityGroups: [
+              { title: "⛓ 艶拘束・支配進行用クオリティ補助", items: [
+                { ja: "生体膜寄りの湿潤光沢", en: "wet glossy surface closer to living bio-membrane, not latex, not rubber" },
+                { ja: "粘膜的な半透明反射", en: "semi-translucent mucosal reflections" },
+                { ja: "湿った締め付け痕の陰影", en: "shading on damp constriction marks" },
+                { ja: "首元・胸元・腰まわりの強い陰影", en: "strong shading around neck, chest and waist" },
+                { ja: "食い込みを拾う皮膚陰影", en: "skin shading that accentuates pressure and indentation" },
+                { ja: "抑制されたラバー感", en: "reduced latex feel, suppressed synthetic rubber impression" },
+                { ja: "高品質補正", en: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4)" },
+                { ja: "生体膜向け質感補正", en: "(subsurface scattering:1.25), (specular highlights:1.15), (soft wet sheen:1.2)" },
+                { ja: "拘束陰影の強化", en: "(dramatic shading:1.2), (contact shadows:1.2), (depth of field:1.1)" },
+                { ja: "湿潤映画光", en: "(cinematic lighting:1.25), (volumetric lighting:1.15), (global illumination:1.15)" }
+              ] }
+            ]
+          },{
+            title: "💜 魅了の首輪・魔力支配特化コレクション",
+            description: "魅了に抗う顔、深浸食で呑まれる顔、不穏に崩れる顔まで“首輪を核にした魅了支配の段階差”を深掘りする専用コレクション",
+            presets: [
+              { title: "💗 可愛い系魅了セット", items: [
+                { ja: "きらきら可愛いハート瞳", en: "cute sparkling heart-shaped pupils" },
+                { ja: "うるんだ恋色の瞳", en: "moist romantic eyes with soft heart highlights" },
+                { ja: "やさしい赤面", en: "soft blush, cute heart-eyed look" },
+                { ja: "可愛い恋の空気感", en: "sweet heart-themed atmosphere, adorable romantic tone" }
+              ]},
+              { title: "❤️ ガチ魅了状態セット", items: [
+                { ja: "深く侵食された魅了視線", en: "entranced corrupted stare" },
+                { ja: "深紅のハート瞳発光", en: "glowing red heart-shaped pupils, crimson eyeball illumination" },
+                { ja: "[Full-Face Blush:1.4]", en: "[Full-Face Blush:1.4]" },
+                { ja: "乱れた呼吸", en: "breath unsteady beneath the pressure of the binding spell" },
+                { ja: "呪術的な愛情の気配", en: "intimate cursed glow, stronger arcane charm corruption" }
+              ]},
+              { title: "🖤 不穏系魅了セット", items: [
+                { ja: "空虚に崩れる視線", en: "faintly vacant eyes, unfocused eyes" },
+                { ja: "乱れた表情", en: "disturbed expression" },
+                { ja: "抗いで揺れる理性", en: "trying to endure, shaky breath, wavering composure" },
+                { ja: "不穏な魅了崩壊", en: "intimate cursed glow, unwilling enchantment, emotional breakdown" }
+              ]},
+              { title: "🩵 魅了抵抗中セット", items: [
+                { ja: "乱れた表情", en: "disturbed expression" },
+                { ja: "潤んだ瞳", en: "watery eyes" },
+                { ja: "震える口元", en: "trembling mouth" },
+                { ja: "感情崩壊の兆し", en: "emotional breakdown" }
+              ]},
+              { title: "❤️ ガチ魅了状態・深浸食セット", items: [
+                { ja: "深く侵食された魅了視線", en: "entranced corrupted stare" },
+                { ja: "深浸食の呪われた愛情", en: "cursed affection, deeper enchantment sink" },
+                { ja: "深紅のハート瞳発光", en: "glowing red heart-shaped pupils, crimson eyeball illumination" },
+                { ja: "深部侵食の儀式光", en: "dark magical background, low-key ritual lighting, intimate cursed glow" }
+              ]},
+              { title: "🩸 不穏系魅了・抗い崩壊セット", items: [
+                { ja: "噛みしめる抵抗表情", en: "restrained expression, clenched expression, biting lip" },
+                { ja: "抗いで揺れる理性", en: "trying to endure, shaky breath, wavering composure" },
+                { ja: "空虚に崩れる視線", en: "faintly vacant eyes, unfocused eyes" },
+                { ja: "不穏な魅了崩壊", en: "intimate cursed glow, unwilling enchantment, emotional breakdown" }
+              ]}
+            ],
+            baseGroups: [
+              { title: "⛓ 魅了首輪・呪具本体", items: [
+                { ja: "黒鋼の厚い支配首輪", en: "thick blacksteel control collar" },
+                { ja: "古代制御紋が刻まれた首輪", en: "engraved with an ancient control crest" },
+                { ja: "露出した拘束ロック機構", en: "locking mechanism exposed" },
+                { ja: "首輪へ埋め込まれた魔導ロック", en: "magical lock embedded in the collar" },
+                { ja: "首輪そのものが主制御装置", en: "collar as the primary control device" }
+              ]},
+              { title: "🔮 魔力回路・術式同期", items: [
+                { ja: "首筋へ広がる術式線", en: "sigils spreading across the neck and collarbone" },
+                { ja: "皮膚へ刻まれる魔力回路", en: "mana circuits etched into skin" },
+                { ja: "喉元へ埋め込まれた魔導流", en: "arcane flow embedded along the throat" },
+                { ja: "首輪脈動が身体へ融け込む", en: "collar pulse fusing into the body" },
+                { ja: "首輪核と同期する光", en: "eyes casting a deep red shine synchronized with the collar’s beating core" }
+              ]},
+              { title: "👁 瞳の魅了変化", items: [
+                { ja: "赤発光のハート瞳孔", en: "(Red glowing heart-shaped pupils:1.4)" },
+                { ja: "瞳に浮かぶ魔術ハート紋", en: "arcane heart sigils in the eyes" },
+                { ja: "きらきら可愛いハート瞳", en: "cute sparkling heart-shaped pupils" },
+                { ja: "うるんだ恋色の瞳", en: "moist romantic eyes with soft heart highlights" },
+                { ja: "首輪と同期する眼光", en: "collar-linked eye glow" },
+                { ja: "深く侵食された魅了視線", en: "entranced corrupted stare" },
+                { ja: "深紅のハート瞳発光", en: "glowing red heart-shaped pupils, crimson eyeball illumination" },
+                { ja: "空虚に崩れる視線", en: "faintly vacant eyes, unfocused eyes" }
+              ]}
+            ],
+            customizeGroups: [
+              { title: "😳 抵抗・羞恥・快楽混線", items: [
+                { ja: "[Full-Face Blush:1.4]", en: "[Full-Face Blush:1.4]" },
+                { ja: "震える唇", en: "trembling lips" },
+                { ja: "涙を含んだ瞳", en: "tear-bright eyes" },
+                { ja: "意志と魅了の狭間の視線", en: "a gaze torn between will and enchantment" },
+                { ja: "乱れた呼吸", en: "breath unsteady beneath the pressure of the binding spell" }
+              ]},
+              { title: "💧 発汗・湿度・涎", items: [
+                { ja: "汗ばむ肌", en: "sweat beading from the strain of resisting the spell" },
+                { ja: "儀式光に濡れる肌", en: "damp skin shimmering beneath ritual light" },
+                { ja: "潤んだ瞳", en: "(Moist Eyes:1.2)" },
+                { ja: "官能的な涎", en: "(Sensual Drool:1.4)" },
+                { ja: "艶のある表情", en: "(Sensual Expression:1.3)" }
+              ]},
+              { title: "✨ 発光紋様・粒子演出", items: [
+                { ja: "頬に浮かぶ術式紋", en: "subtle sigil-patterns glowing on the cheeks" },
+                { ja: "漂う魔力粒子", en: "drifting mana particles" },
+                { ja: "瞳と首輪を包む赤い光", en: "a faint red aura enveloping both eyes and the collar" },
+                { ja: "呪術的な愛情の気配", en: "intimate cursed glow, stronger arcane charm corruption" },
+                { ja: "ハート粒子", en: "(heart particles:1.3)" }
+              ]},
+              { title: "💗 かわいいハート瞳アレンジ", items: [
+                { ja: "可愛い恋の空気感", en: "sweet heart-themed atmosphere, adorable romantic tone" },
+                { ja: "恋するうるみ目", en: "soft lovestruck eyes, cute romantic sparkle" },
+                { ja: "やさしい赤面", en: "soft blush, cute heart-eyed look" },
+                { ja: "柔らかいハート演出", en: "cute heart particles, gentle affection glow" },
+                { ja: "ロマンチックな可愛さ", en: "reduced cursed tone, stronger cute romance tone" }
+              ]},
+              { title: "🩵 本命 / 魅了抵抗中アレンジ", items: [
+                { ja: "乱れた表情", en: "disturbed expression" },
+                { ja: "潤んだ瞳", en: "watery eyes" },
+                { ja: "震える口元", en: "trembling mouth" },
+                { ja: "感情崩壊の兆し", en: "emotional breakdown" },
+                { ja: "耐えようとする理性", en: "trying to endure, shaky breath, wavering composure" }
+              ]},
+              { title: "❤️ 深浸食・呪術侵食アレンジ", items: [
+                { ja: "深浸食の呪われた愛情", en: "cursed affection, deeper enchantment sink" },
+                { ja: "深部侵食の儀式光", en: "dark magical background, low-key ritual lighting, intimate cursed glow" },
+                { ja: "魅了崩壊の湿度", en: "[Full-Face Blush:1.4], (Moist Eyes:1.2), damp skin shimmering beneath ritual light" },
+                { ja: "深部まで侵す魅了熱", en: "flushed cheeks touched by arcane heat, unwilling enchantment" },
+                { ja: "深い術式粒子", en: "drifting mana particles, heart particles:1.3" }
+              ]},
+              { title: "🩸 不穏系魅了・抗い崩壊アレンジ", items: [
+                { ja: "噛みしめる抵抗表情", en: "restrained expression, clenched expression, biting lip" },
+                { ja: "抗いで揺れる理性", en: "trying to endure, shaky breath, wavering composure" },
+                { ja: "理性を裂く魅了熱", en: "breath unsteady beneath the pressure of the binding spell, fierce internal conflict under enchantment" },
+                { ja: "壊れかけの感情線", en: "disturbed expression, emotional breakdown, tear-bright eyes" },
+                { ja: "不穏な魅了残響", en: "unwilling enchantment, corrupted longing, entranced stare" }
+              ]}
+            ],
+            settingGroups: [
+              { title: "📿 魅了進行設定", items: [
+                { ja: "呪文へ抗うほど熱を持つ", en: "flushed cheeks touched by arcane heat" },
+                { ja: "抵抗で深まる魅了", en: "fierce internal conflict under enchantment" },
+                { ja: "不本意な魅了の進行", en: "unwilling enchantment" },
+                { ja: "呪われた愛情への変質", en: "corrupted longing" },
+                { ja: "見つめるほど深まる支配", en: "entranced stare" }
+              ]},
+              { title: "🫀 首輪脈動・支配同期設定", items: [
+                { ja: "首輪核の鼓動", en: "the collar’s beating core" },
+                { ja: "首輪から広がる儀式光", en: "emitting ritual light from the collar itself" },
+                { ja: "ホログラム術式の展開", en: "holographic sigil-lines unfolding from the collar" },
+                { ja: "身体へ流れ込む同期波", en: "ritual synchronization etched into the neck" },
+                { ja: "赤い魔力脈動", en: "veins of red mana-circuits pulsing around a crimson heartstone core" }
+              ]},
+              { title: "🩵 本命 / 抵抗崩れ設定", items: [
+                { ja: "理性の縁で耐える", en: "a gaze torn between will and enchantment" },
+                { ja: "崩れかけた感情制御", en: "disturbed expression, emotional breakdown" },
+                { ja: "耐えるほど乱れる呼吸", en: "breath unsteady beneath the pressure of the binding spell" },
+                { ja: "涙で揺れる抵抗", en: "watery eyes, tear-bright eyes" },
+                { ja: "噛みしめる崩壊前夜", en: "trembling mouth, trying to endure" }
+              ]},
+              { title: "❤️ 深浸食 / 呪術侵食設定", items: [
+                { ja: "深部まで沈む魅了", en: "deeper enchantment sink, entranced corrupted stare" },
+                { ja: "呪われた愛情への沈降", en: "cursed affection, corrupted longing" },
+                { ja: "深部儀式光の包囲", en: "dark magical background, low-key ritual lighting, intimate cursed glow" },
+                { ja: "抗うほど侵食が進む", en: "fierce internal conflict under enchantment, unwilling enchantment" },
+                { ja: "深浸食の胸核反応", en: "heartstone core reaction, crimson heartstone pulse" }
+              ]},
+              { title: "🩸 不穏系魅了 / 抗い崩壊設定", items: [
+                { ja: "理性を裂く魅了の圧", en: "breath unsteady beneath the pressure of the binding spell, entranced stare" },
+                { ja: "抗いで歪む口元", en: "clenched expression, biting lip, trembling mouth" },
+                { ja: "空虚へ崩れる直前", en: "faintly vacant eyes, unfocused eyes" },
+                { ja: "不穏に濁る感情", en: "unwilling enchantment, corrupted longing, emotional breakdown" },
+                { ja: "抗い崩壊の汗と涙", en: "watery eyes, tear-bright eyes, sweat beading from the strain of resisting the spell" }
+              ]}
+            ],
+            qualityPresetSectionTitle: "🧪 完成クオリティセット",
+            qualityGroupsSectionTitle: "🎛 完成セット別クオリティ微調整",
+            qualityPresets: [
+              { title: "💗 可愛い系魅了用完成クオリティ", items: [
+                { ja: "可愛い系の画質と光", en: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4), (anime-realism blend:1.35), (semi-realistic rendering:1.2), (realistic lighting:1.25), (cinematic lighting:1.3), (ray tracing:1.25), (global illumination:1.25), (subsurface scattering:1.2), (cinematic portrait crop), (close-up upper body focus)" },
+                { ja: "可愛い系の首輪と色", en: "wearing a cursed blacksteel charm collar tightly bound around her neck, ornamental locking ring, glowing pink-violet charm core, softly pulsing sigils, subtle magical glow around the collar, delicate arcane reflections near the throat" },
+                { ja: "可愛い系の瞳と表情", en: "(Red glowing heart-shaped pupils:1.15), (Red glowing heart-shaped pupils:1.25), glassy moist eyes, tear-bright eyes, slightly unfocused gaze, soft blush, flushed cheeks, slightly parted lips, breath softly unsteady, shy but enchanted expression, a cute face gently melting under magical charm, sweet fascination, tender enchantment, visible charm effect in her eyes" },
+                { ja: "可愛い系の仕上げ", en: "soft magical atmosphere, romantic cursed glow, cute enchanted mood" }
+              ]},
+              { title: "❤️ ガチ魅了状態用完成クオリティ", items: [
+                { ja: "ガチ魅了の瞳孔", en: "glowing red heart-shaped pupils, crimson eyeball illumination, arcane heart sigils in the eyes" },
+                { ja: "ガチ魅了の顔面", en: "[Full-Face Blush:1.4], (Moist Eyes:1.2), trembling lips, tear-bright eyes, damp skin shimmering beneath ritual light" },
+                { ja: "ガチ魅了の空気", en: "entranced corrupted stare, cursed affection, faintly vacant eyes, intimate cursed glow" },
+                { ja: "ガチ魅了の仕上げ", en: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4), (cinematic lighting:1.4), (ray tracing:1.3), (subsurface scattering:1.3), (global illumination:1.3), (volumetric lighting:1.3)" }
+              ]},
+              { title: "🖤 不穏系魅了用完成クオリティ", items: [
+                { ja: "不穏系の画質と闇", en: "(Masterpiece:1.5), (Premium Quality:1.5), (Ultra High Definition:1.5), (Fusion of Animation and Realism:1.3), (Hyper-Realistic Rendering:1.25), (Arcane Domination:1.4), (Hollow Eyes:1.45), (Cinematic Lighting:1.35), (Soft Ambient Light:1.2), (Volumetric Lighting:1.3), (Cursed, Eerie Aura:1.3)" },
+                { ja: "不穏系の首輪と瞳", en: "wearing a collar forged from enchanted blacksteel, embedded with a dark ritual core glowing crimson-purple, ominous sigil-lines pulsing around the collar, runic tendrils spreading into the neck and collarbone, (Red glowing heart-shaped pupils:1.25), (Red glowing heart-shaped pupils:1.35), crimson eyeball illumination, eyes casting a dim cursed red shine" },
+                { ja: "不穏系の表情崩壊", en: "disturbed expression, watery eyes, trembling mouth, emotional breakdown, trying to endure, restrained expression, clenched expression, shaky breath, wavering composure, faintly vacant eyes, fear mixed with attraction, unwilling fascination, ominous magical pressure" },
+                { ja: "不穏系の仕上げ", en: "(Moist Eyes:1.2), (No Pupil Glow:1.2), (No Pupil Highlight:1.2), (Glassy Sensual Eyes:1.2), low-key ritual lighting, dark magical background, reduced bright idol lighting, close-up face focus" }
+              ]},
+              { title: "🩵 魅了抵抗中用完成クオリティ", items: [
+                { ja: "画質と材質", en: "(Masterpiece:1.5), (Premium Quality:1.5), (Ultra High Definition:1.5), (8K, UHD, IMAX Grade), (Fusion of Animation and Realism:1.3), (Hyper-Realistic Rendering:1.3), (Cinematic Lighting:1.4), (Soft Ambient Light:1.3), (Global Illumination via Ray Tracing), (Top-Down Angle:1.3), (Dramatic Sense of Depth), (Volumetric Lighting:1.3), (High Dynamic Range, drifting mana particles, ethereal sky diffusion)" },
+                { ja: "首輪と術式", en: "wearing a collar forged from enchanted blacksteel, set with a purple amethyst burning with inner arcane fire, veins of red mana-circuits pulsing around a crimson core, emitting ritual light from its heartstone, holographic sigil-lines unfolding like silent incantations, engraved with an ancient control crest, locking mechanism exposed, runic tendrils inscribed with ancient sigils, merging at the base of the neck, fusing with the wearer’s mana-flow, resonating with the collar’s pulse" },
+                { ja: "抗う顔面描写", en: "(Red glowing heart-shaped pupils:1.3), (Red glowing heart-shaped pupils:1.4), reflective luminous pupils, neon-like inner glimmer, crimson eyeball illumination, eyes casting a deep red shine synchronized with the collar’s beating core, a faint red aura enveloping both eyes and the collar, subtle sigil-patterns glowing on the cheeks, flushed cheeks touched by arcane heat, sweat beading from the strain of resisting the spell, damp skin shimmering beneath ritual light, an expression of fierce internal conflict, trembling lips, tear-bright eyes, [Full-Face Blush:1.4], a gaze torn between will and enchantment, breath unsteady beneath the pressure of the binding spell, disturbed expression, watery eyes, trembling mouth, emotional breakdown, trying to endure, wavering composure, restrained expression, clenched expression" },
+                { ja: "仕上げ", en: "(Moist Eyes:1.2), (Half-Open Eyes:1.2), a beautiful maiden's face with faintly vacant eyes, (No Pupil Glow:1.2), (No Pupil Highlight:1.2), (Glassy Sensual Eyes:1.2), close-up face focus" }
+              ]},
+              { title: "❤️ ガチ魅了状態・深浸食用完成クオリティ", items: [
+                { ja: "画質とレンダリング", en: "(anime-realism blend:1.4), (semi-realistic rendering:1.2), (physically based rendering:1.3), (lumen reflections:1.2), (nanite geometry:1.1), (realistic lighting:1.2), (shiny hair:1.4), (glossy hair:1.4), (specular sharp highlights:1.3), (high contrast specular edges:1.3), (strong rim lighting:1.4), (backlight glow:1.3), (light wrapping around body:1.3), (separate material response), (different reflectivity for skin and clothing), (glossy coated fabric:1.4), (mirror-like costume highlights:1.3), (light particles in air), (stage-like luminous background), (cinematic portrait crop), (close-up upper body focus), (Kodak Portra 400), (low contrast)" },
+                { ja: "深浸食の暗部光", en: "(Red glowing heart-shaped pupils:1.4), arcane heart sigils in the eyes, collar-linked eye glow, (low-key ritual lighting:1.35), dark magical background, reduced stage glow, reduced bright idol lighting" },
+                { ja: "深浸食の顔面描写", en: "[Full-Face Blush:1.4], (Moist Eyes:1.2), trembling lips, tear-bright eyes, damp skin shimmering beneath ritual light, close-up face focus, glowing red heart-shaped pupils, crimson eyeball illumination, entranced corrupted stare, cursed affection, faintly vacant eyes, intimate cursed glow, disturbed expression, watery eyes, trembling mouth, emotional breakdown" },
+                { ja: "深浸食の仕上げ", en: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4), (cinematic lighting:1.4), (ray tracing:1.3), (subsurface scattering:1.3), (global illumination:1.3), (unreal engine 5:1.2), (octane render:1.2), (volumetric lighting:1.3), (spark-like bokeh lights)" }
+              ]},
+              { title: "🩸 不穏系魅了・抗い崩壊用完成クオリティ", items: [
+                { ja: "画質と光", en: "(Masterpiece:1.5), (Premium Quality:1.5), (Ultra High Definition:1.5), (8K, UHD, IMAX Grade), (Fusion of Animation and Realism:1.3), (Hyper-Realistic Rendering:1.25), (Arcane Domination:1.4), (Hollow Eyes:1.45), (Cinematic Lighting:1.35), (Soft Ambient Light:1.2), (Global Illumination via Ray Tracing), (Dramatic Sense of Depth), (Volumetric Lighting:1.3), (Cursed, Eerie Aura:1.3), (High Dynamic Range, drifting mana particles, ethereal sky diffusion)" },
+                { ja: "不穏魅了の首輪と瞳", en: "wearing a collar forged from enchanted blacksteel, embedded with a dark ritual core glowing crimson-purple, engraved with an ancient control crest, locking mechanism exposed, ominous sigil-lines pulsing around the collar, runic tendrils spreading into the neck and collarbone, fusing with the wearer’s mana-flow against her will, (Red glowing heart-shaped pupils:1.25), (Red glowing heart-shaped pupils:1.35), crimson eyeball illumination, reflective luminous pupils, eyes casting a dim cursed red shine, a faint red aura enveloping both eyes and the collar, subtle sigil-patterns glowing on the cheeks" },
+                { ja: "崩壊寸前の表情", en: "flushed cheeks touched by arcane heat, sweat beading from the strain of resisting the spell, tear-bright eyes, trembling lips, [Full-Face Blush:1.4], a gaze torn between will and enchantment, disturbed expression, watery eyes, trembling mouth, emotional breakdown, trying to endure, restrained expression, clenched expression, shaky breath, wavering composure, faintly vacant eyes, fear mixed with attraction, unwilling fascination, ominous magical pressure" },
+                { ja: "仕上げ", en: "(Moist Eyes:1.2), a beautiful maiden's face with faintly vacant eyes, (No Pupil Glow:1.2), (No Pupil Highlight:1.2), (Glassy Sensual Eyes:1.2), low-key ritual lighting, dark magical background, reduced bright idol lighting, close-up face focus" }
+              ]},
+            ],
+            qualityGroups: [
+              { title: "💗 可愛い系魅了用クオリティ調整", items: [
+                { ja: "可愛いハート瞳", en: "cute sparkling heart-shaped pupils, moist romantic eyes with soft heart highlights" },
+                { ja: "恋色のうるみ", en: "watery eyes, soft lovestruck eyes, cute romantic sparkle" },
+                { ja: "やさしい赤面", en: "soft blush, flushed cheeks, slightly parted lips" },
+                { ja: "ロマンチックな光", en: "soft magical atmosphere, romantic cursed glow, sweet heart-themed atmosphere" }
+              ]},
+              { title: "❤️ ガチ魅了状態用クオリティ調整", items: [
+                { ja: "ガチ魅了の瞳孔", en: "glowing red heart-shaped pupils, crimson eyeball illumination, arcane heart sigils in the eyes" },
+                { ja: "ガチ魅了の熱", en: "[Full-Face Blush:1.4], trembling lips, tear-bright eyes, breath unsteady beneath the pressure of the binding spell" },
+                { ja: "ガチ魅了の気配", en: "entranced corrupted stare, cursed affection, intimate cursed glow" },
+                { ja: "ガチ魅了のレンダリング", en: "(cinematic lighting:1.4), (ray tracing:1.3), (subsurface scattering:1.3), (global illumination:1.3)" }
+              ]},
+              { title: "🖤 不穏系魅了用クオリティ調整", items: [
+                { ja: "不穏な目", en: "faintly vacant eyes, unfocused eyes, watery eyes, tear-bright eyes" },
+                { ja: "抗う表情", en: "disturbed expression, restrained expression, clenched expression, biting lip" },
+                { ja: "崩れかけの理性", en: "trying to endure, shaky breath, wavering composure, emotional breakdown" },
+                { ja: "不穏な呪術光", en: "low-key ritual lighting, dark magical background, intimate cursed glow, unwilling enchantment" }
+              ]},
+              { title: "🩵 魅了抵抗中用クオリティ調整", items: [
+                { ja: "抗い崩れ顔", en: "disturbed expression, watery eyes, trembling mouth, emotional breakdown" },
+                { ja: "理性を保つ抵抗", en: "trying to endure, shaky breath, wavering composure" },
+                { ja: "顔面の湿度", en: "[Full-Face Blush:1.4], (Moist Eyes:1.2), tear-bright eyes" },
+                { ja: "術に抗う熱", en: "a gaze torn between will and enchantment, breath unsteady beneath the pressure of the binding spell" }
+              ]},
+              { title: "❤️ ガチ魅了状態・深浸食用クオリティ調整", items: [
+                { ja: "深浸食の瞳孔", en: "glowing red heart-shaped pupils, crimson eyeball illumination, arcane heart sigils in the eyes" },
+                { ja: "深浸食の空気", en: "dark magical background, low-key ritual lighting, intimate cursed glow" },
+                { ja: "呪われた愛情", en: "entranced corrupted stare, cursed affection, faintly vacant eyes" },
+                { ja: "重いレンダリング", en: "(ray tracing:1.3), (subsurface scattering:1.3), (global illumination:1.3), (volumetric lighting:1.3), (unreal engine 5:1.2), (octane render:1.2)" }
+              ]},
+              { title: "🩸 不穏系魅了・抗い崩壊用クオリティ調整", items: [
+                { ja: "抗いで歪む顔", en: "restrained expression, clenched expression, biting lip, disturbed expression" },
+                { ja: "崩壊寸前の目", en: "watery eyes, tear-bright eyes, unfocused eyes, faintly vacant eyes" },
+                { ja: "不穏魅了の熱", en: "cursed affection, intimate cursed glow, breath unsteady beneath the pressure of the binding spell" },
+                { ja: "赤面と湿度", en: "[Full-Face Blush:1.4], damp skin shimmering beneath ritual light, sweat beading from the strain of resisting the spell" }
+              ]}
+            ]
+          
+          },{
+            title: "🪬 呪印・刻印露出特化コレクション",
+            description: "衣装の裂け目、透け、発光、肌へ走る呪印と刻印を主役にして“露出そのものが術式化している状態”を深掘りする専用コレクション",
+            presets: [
+              { title: "🔥 呪印露出・抗いセット", items: [
+                { ja: "胸元に走る発光呪印", en: "glowing curse sigils running across the chest" },
+                { ja: "腹部へ浮かぶ術式刻印", en: "arcane seal appearing across the abdomen" },
+                { ja: "透けた衣装の切れ目", en: "slit translucent outfit exposing marked skin" },
+                { ja: "抗いで乱れる視線", en: "disturbed resisting stare under glowing curse marks" }
+              ]},
+              { title: "💜 呪印侵食・快堕ちセット", items: [
+                { ja: "肌へ沈む侵食呪印", en: "corrupting curse marks sinking into the skin" },
+                { ja: "下腹部へ広がる発光刻印", en: "glowing engraved sigils spreading across the lower abdomen" },
+                { ja: "濡れた透け布", en: "wet translucent cloth clinging over marked skin" },
+                { ja: "快堕ちへ沈む表情", en: "melting expression sinking into cursed pleasure" }
+              ]},
+              { title: "✝️ 神聖刻印・背徳化セット", items: [
+                { ja: "神聖紋が堕ちて滲む", en: "holy sigils falling into profane glowing corruption" },
+                { ja: "白布の裂け目から見える刻印", en: "engraved marks revealed through torn white ritual cloth" },
+                { ja: "祈祷具と術式輪", en: "ritual implements and luminous ceremonial sigil rings" },
+                { ja: "背徳に揺れる巫女表情", en: "sacred maiden expression wavering into forbidden corruption" }
+              ]}
+            ],
+            baseGroups: [
+              { title: "👗 露出衣装の土台", items: [
+                { ja: "透けた衣装の切れ目", en: "slit translucent outfit exposing marked skin" },
+                { ja: "白布の裂け目から見える刻印", en: "engraved marks revealed through torn white ritual cloth" },
+                { ja: "濡れた透け布", en: "wet translucent cloth clinging over marked skin" },
+                { ja: "胸元に走る発光呪印", en: "glowing curse sigils running across the chest" },
+                { ja: "腹部へ浮かぶ術式刻印", en: "arcane seal appearing across the abdomen" },
+                { ja: "下腹部へ広がる発光刻印", en: "glowing engraved sigils spreading across the lower abdomen" }
+              ]},
+              { title: "🪬 呪印・刻印の核", items: [
+                { ja: "肌へ沈む侵食呪印", en: "corrupting curse marks sinking into the skin" },
+                { ja: "神聖紋が堕ちて滲む", en: "holy sigils falling into profane glowing corruption" },
+                { ja: "首筋へ浮かぶ所有刻印", en: "ownership sigils glowing along the neck" },
+                { ja: "太腿へ走る契約紋", en: "contract marks running along the thigh" },
+                { ja: "乳下へ沿う連鎖刻印", en: "linked sigils tracing beneath the bust" },
+                { ja: "腰骨を縁取る呪術紋", en: "curse markings framing the hip line" }
+              ]}
+            ],
+            customizeGroups: [
+              { title: "💡 発光・透け・裂けアレンジ", items: [
+                { ja: "透け布越しに浮かぶ発光紋", en: "glowing sigils visible through translucent cloth" },
+                { ja: "裂け目から漏れる術式光", en: "arcane light leaking through torn openings" },
+                { ja: "発光縁で強調された切れ目", en: "slits emphasized by glowing edges" },
+                { ja: "肌と布の境界で滲む呪印", en: "curse marks bleeding across the border between skin and cloth" },
+                { ja: "発光密度の高い腹部刻印", en: "dense glowing sigils concentrated over the abdomen" }
+              ]},
+              { title: "😳 感情・堕ち方アレンジ", items: [
+                { ja: "抗いで乱れる視線", en: "disturbed resisting stare under glowing curse marks" },
+                { ja: "快堕ちへ沈む表情", en: "melting expression sinking into cursed pleasure" },
+                { ja: "背徳に揺れる巫女表情", en: "sacred maiden expression wavering into forbidden corruption" },
+                { ja: "刻印熱で崩れる赤面", en: "full-face blush caused by glowing curse heat" },
+                { ja: "濡れた瞳と震える口元", en: "watery eyes and trembling mouth under ritual exposure" }
+              ]}
+            ],
+            settingGroups: [
+              { title: "⚙️ 呪印進行・露出設定", items: [
+                { ja: "露出そのものが術式化する", en: "the exposed skin itself behaves like an active ritual surface" },
+                { ja: "刻印が熱を持って脈打つ", en: "engraved sigils throb with heated arcane pulses" },
+                { ja: "衣装と肌が一体化して侵食する", en: "cloth and skin merging into one cursed invasive surface" },
+                { ja: "見えるほど堕ちていく羞恥", en: "visible exposure deepening shame and corruption" },
+                { ja: "術式輪が身体を囲って支配する", en: "ceremonial sigil rings surrounding the body in ritual control" },
+                { ja: "祈祷具と術式輪", en: "ritual implements and luminous ceremonial sigil rings" }
+              ]}
+            ],
+            qualityPresets: [
+              { title: "🔥 呪印露出・抗い用完成クオリティ", items: [
+                { ja: "発光呪印の視認性を上げる", en: "glowing curse marks clearly readable across exposed skin" },
+                { ja: "肌と布の質感差を強める", en: "strong separation between bare skin sheen and fabric texture" },
+                { ja: "透け布の縁光を強める", en: "glowing edge light through translucent cloth slits" },
+                { ja: "露出と刻印の焦点を寄せる", en: "focus composition on exposed marked skin and torn openings" }
+              ]},
+              { title: "💜 呪印侵食・快堕ち用完成クオリティ", items: [
+                { ja: "発光呪印の視認性を上げる", en: "glowing curse marks clearly readable across exposed skin" },
+                { ja: "肌と布の質感差を強める", en: "strong separation between bare skin sheen and fabric texture" },
+                { ja: "儀式寄りの暗部光", en: "low-key ritual lighting with ominous curse glow" },
+                { ja: "呪印熱の赤面を強める", en: "enhanced blush and heated skin under glowing sigils" }
+              ]},
+              { title: "✝️ 神聖刻印・背徳化用完成クオリティ", items: [
+                { ja: "儀式寄りの暗部光", en: "low-key ritual lighting with ominous curse glow" },
+                { ja: "神聖布と堕ちた刻印の対比", en: "strong contrast between sacred cloth and profane glowing marks" },
+                { ja: "肌と布の質感差を強める", en: "strong separation between bare skin sheen and fabric texture" },
+                { ja: "露出と刻印の焦点を寄せる", en: "focus composition on exposed marked skin and torn openings" }
+              ]}
+            ],
+            qualityGroups: [
+              { title: "🪬 呪印・刻印露出用クオリティ調整", items: [
+                { ja: "発光呪印の視認性を上げる", en: "glowing curse marks clearly readable across exposed skin" },
+                { ja: "肌と布の質感差を強める", en: "strong separation between bare skin sheen and fabric texture" },
+                { ja: "透け布の縁光を強める", en: "glowing edge light through translucent cloth slits" },
+                { ja: "儀式寄りの暗部光", en: "low-key ritual lighting with ominous curse glow" },
+                { ja: "露出と刻印の焦点を寄せる", en: "focus composition on exposed marked skin and torn openings" },
+                { ja: "神聖布と堕ちた刻印の対比", en: "strong contrast between sacred cloth and profane glowing marks" },
+                { ja: "呪印熱の赤面を強める", en: "enhanced blush and heated skin under glowing sigils" }
+              ]}
+            ]
+          },
+
+          {
+            title: "🧬 生体スーツ・拘束スーツ特化コレクション",
+            description: "ぴっちり密着する生体スーツ、拘束構造、発光ライン、半侵食の境界を主役にして“衣装そのものが支配装置へ変質していく状態”を深掘りする専用コレクション",
+            presets: [
+              { title: "⛓ 密着拘束スーツセット", items: [
+                { ja: "ぴっちり密着する黒い拘束スーツ", en: "skin-tight black restraint suit tightly hugging the body" },
+                { ja: "胸部と腰部を締める拘束構造", en: "restraint structures cinching the bust and waist" },
+                { ja: "継ぎ目が食い込む密着圧", en: "seam pressure biting into the skin" },
+                { ja: "拘束に抗う乱れ顔", en: "disturbed face resisting tight restraint" }
+              ]},
+              { title: "🫧 半侵食バイオスーツセット", items: [
+                { ja: "生体質感の半侵食スーツ", en: "semi-invasive bio-suit with living surface texture" },
+                { ja: "首筋と脇腹へ走る発光ライン", en: "glowing lines running along the neck and flanks" },
+                { ja: "肌と融合しかけた継ぎ目", en: "seams half-fused into the skin" },
+                { ja: "侵食に揺らぐ表情", en: "wavering expression under creeping invasion" }
+              ]},
+              { title: "📡 命令受信スーツセット", items: [
+                { ja: "命令波を流す発光コア", en: "glowing command core transmitting control pulses" },
+                { ja: "神経へ沿う制御ライン", en: "control lines tracing along the nerves" },
+                { ja: "従属姿勢を強いる装甲拘束", en: "armored restraint forcing submissive posture" },
+                { ja: "命令に抗う視線", en: "gaze struggling against imposed commands" }
+              ]}
+            ],
+            baseGroups: [
+              { title: "🖤 密着スーツの土台", items: [
+                { ja: "ぴっちり密着する黒い拘束スーツ", en: "skin-tight black restraint suit tightly hugging the body" },
+                { ja: "生体質感の半侵食スーツ", en: "semi-invasive bio-suit with living surface texture" },
+                { ja: "薄膜ラバーの密着表面", en: "membrane-like rubber surface clinging to the body" },
+                { ja: "拘束に使われる装甲布", en: "armored fabric built for restraint" },
+                { ja: "胸部と腰部を締める拘束構造", en: "restraint structures cinching the bust and waist" },
+                { ja: "従属姿勢を強いる装甲拘束", en: "armored restraint forcing submissive posture" }
+              ]},
+              { title: "🧬 発光ライン・侵食核", items: [
+                { ja: "首筋と脇腹へ走る発光ライン", en: "glowing lines running along the neck and flanks" },
+                { ja: "神経へ沿う制御ライン", en: "control lines tracing along the nerves" },
+                { ja: "命令波を流す発光コア", en: "glowing command core transmitting control pulses" },
+                { ja: "肌と融合しかけた継ぎ目", en: "seams half-fused into the skin" },
+                { ja: "継ぎ目が食い込む密着圧", en: "seam pressure biting into the skin" },
+                { ja: "皮膚下で脈打つ侵食ライン", en: "invasive lines pulsing beneath the skin" }
+              ]}
+            ],
+            customizeGroups: [
+              { title: "✨ 発光・継ぎ目アレンジ", items: [
+                { ja: "発光密度の高い胸部ライン", en: "dense luminous lines concentrated over the chest" },
+                { ja: "腹部で分岐する制御紋", en: "control sigils branching across the abdomen" },
+                { ja: "継ぎ目から漏れる光", en: "light leaking out from the seams" },
+                { ja: "食い込みを強調する縁取り", en: "accent lines emphasizing pressure and indentation" },
+                { ja: "半透明スーツ越しに見える脈動", en: "visible pulsing seen through translucent suit material" }
+              ]},
+              { title: "😳 拘束・侵食アレンジ", items: [
+                { ja: "拘束に抗う乱れ顔", en: "disturbed face resisting tight restraint" },
+                { ja: "侵食に揺らぐ表情", en: "wavering expression under creeping invasion" },
+                { ja: "命令に抗う視線", en: "gaze struggling against imposed commands" },
+                { ja: "圧迫で乱れる呼吸", en: "uneven breathing under constricting pressure" },
+                { ja: "密着熱で崩れる赤面", en: "full-face blush caused by invasive suit heat" }
+              ]}
+            ],
+            settingGroups: [
+              { title: "⚙️ 侵食・拘束進行設定", items: [
+                { ja: "衣装そのものが支配装置化する", en: "the suit itself behaves like an active control device" },
+                { ja: "半侵食が皮膚境界を越える", en: "semi-invasive material crossing the boundary of the skin" },
+                { ja: "発光ラインが命令に同期する", en: "glowing lines synchronizing with transmitted commands" },
+                { ja: "密着圧で従属姿勢へ矯正される", en: "body posture forced into submission by constricting pressure" },
+                { ja: "継ぎ目の脈動が感情を乱す", en: "pulsing seams disturbing breath and emotion" },
+                { ja: "拘束熱が理性を削る", en: "restraint heat gradually eroding composure" }
+              ]}
+            ],
+            qualityPresets: [
+              { title: "⛓ 密着拘束スーツ用完成クオリティ", items: [
+                { ja: "密着圧の立体感を強める", en: "strong dimensional emphasis on tight restraint pressure" },
+                { ja: "スーツ光沢と肌質感を分ける", en: "clear separation between glossy suit material and skin texture" },
+                { ja: "継ぎ目の食い込みを見せる", en: "seam indentation clearly visible against the body" },
+                { ja: "拘束点へ視線を寄せる", en: "focus composition on restraint points and pressure zones" }
+              ]},
+              { title: "🫧 半侵食バイオスーツ用完成クオリティ", items: [
+                { ja: "侵食ラインの脈動を強める", en: "enhanced pulsing of invasive luminous lines" },
+                { ja: "肌と生体素材の融合感を強める", en: "strong fusion between living suit material and skin" },
+                { ja: "半透明越しの脈動を見せる", en: "visible pulsing beneath translucent bio-material" },
+                { ja: "低照度で侵食光を際立たせる", en: "low-key lighting emphasizing invasive glow" }
+              ]},
+              { title: "📡 命令受信スーツ用完成クオリティ", items: [
+                { ja: "命令コアの視認性を上げる", en: "command core clearly visible as the control source" },
+                { ja: "神経ラインを身体へ沿わせる", en: "control lines tracing naturally along the body" },
+                { ja: "拘束構造と装甲感を強める", en: "stronger restraint structure and armored tension" },
+                { ja: "支配命令の圧を暗部光で見せる", en: "ominous low-key lighting emphasizing imposed control" }
+              ]}
+            ],
+            qualityGroups: [
+              { title: "🧬 生体スーツ・拘束スーツ用クオリティ調整", items: [
+                { ja: "密着圧の立体感を強める", en: "strong dimensional emphasis on tight restraint pressure" },
+                { ja: "スーツ光沢と肌質感を分ける", en: "clear separation between glossy suit material and skin texture" },
+                { ja: "継ぎ目の食い込みを見せる", en: "seam indentation clearly visible against the body" },
+                { ja: "侵食ラインの脈動を強める", en: "enhanced pulsing of invasive luminous lines" },
+                { ja: "肌と生体素材の融合感を強める", en: "strong fusion between living suit material and skin" },
+                { ja: "半透明越しの脈動を見せる", en: "visible pulsing beneath translucent bio-material" },
+                { ja: "命令コアの視認性を上げる", en: "command core clearly visible as the control source" },
+                { ja: "支配命令の圧を暗部光で見せる", en: "ominous low-key lighting emphasizing imposed control" }
+              ]}
+            ]
+          }
+,
+          {
+            title: "⛩ 儀式巫女・堕ち神官特化コレクション",
+            description: "清儀の巫女装束、堕ちた神官衣、裂けた神聖布、祭具、術式、祈りと背徳が混ざる“神聖が崩れ落ちる瞬間”を衣装主役で深掘りする専用コレクション",
+            presets: [
+              { title: "🤍 清儀の巫女・抗いセット", items: [
+                { ja: "白と朱を基調にした儀式巫女装束", en: "ritual shrine maiden attire in white and crimson" },
+                { ja: "神聖布の裂け目から覗く刻印肌", en: "marked skin revealed through torn sacred cloth" },
+                { ja: "祈りを崩さず抗う乱れ顔", en: "disturbed face struggling to maintain prayerful composure" },
+                { ja: "周囲を巡る薄い神聖術式輪", en: "faint sacred ritual circles orbiting around her" }
+              ]},
+              { title: "🖤 堕ち神官・背徳化セット", items: [
+                { ja: "黒と金を基調にした堕ち神官衣", en: "fallen cleric attire in black and gold" },
+                { ja: "胸元へ浮かぶ背徳の神印", en: "profane holy sigils glowing across the chest" },
+                { ja: "神聖意匠が堕ちて変質した装飾", en: "sacred ornaments corrupted into profane regalia" },
+                { ja: "堕ちに抗う揺らいだ表情", en: "wavering expression resisting corrupted devotion" }
+              ]},
+              { title: "🕯 儀式供物・神聖崩落セット", items: [
+                { ja: "供物めいた儀式衣装", en: "ritual offering-like ceremonial attire" },
+                { ja: "肌へ落ちる術式の光片", en: "falling ritual light fragments touching the skin" },
+                { ja: "崩れた祈り顔と汗ばむ肌", en: "broken prayerful face with damp skin" },
+                { ja: "祭壇光に照らされた神聖崩落", en: "holy collapse illuminated by altar light" }
+              ]}
+            ],
+            baseGroups: [
+              { title: "👘 神聖衣装の土台", items: [
+                { ja: "白と朱を基調にした儀式巫女装束", en: "ritual shrine maiden attire in white and crimson" },
+                { ja: "黒と金を基調にした堕ち神官衣", en: "fallen cleric attire in black and gold" },
+                { ja: "供物めいた儀式衣装", en: "ritual offering-like ceremonial attire" },
+                { ja: "胸元が裂けた神聖衣装", en: "sacred garment torn open at the chest" },
+                { ja: "透ける薄布を重ねた祭服", en: "ceremonial robes layered with translucent sacred veils" },
+                { ja: "崩れかけた清浄な装束シルエット", en: "pure ceremonial silhouette beginning to collapse" }
+              ]},
+              { title: "✝️ 刻印・祭具・術式核", items: [
+                { ja: "神聖布の裂け目から覗く刻印肌", en: "marked skin revealed through torn sacred cloth" },
+                { ja: "胸元へ浮かぶ背徳の神印", en: "profane holy sigils glowing across the chest" },
+                { ja: "周囲を巡る薄い神聖術式輪", en: "faint sacred ritual circles orbiting around her" },
+                { ja: "肌へ落ちる術式の光片", en: "falling ritual light fragments touching the skin" },
+                { ja: "数珠・聖印・祭具装飾", en: "prayer beads, holy emblems, and ritual instrument ornaments" },
+                { ja: "神聖意匠が堕ちて変質した装飾", en: "sacred ornaments corrupted into profane regalia" }
+              ]}
+            ],
+            customizeGroups: [
+              { title: "✨ 裂け・透け・発光アレンジ", items: [
+                { ja: "裂け目から覗く肌を強調する", en: "emphasize exposed skin glimpsed through torn openings" },
+                { ja: "薄布越しに刻印光を透かす", en: "show glowing sigils through translucent ritual fabric" },
+                { ja: "祭壇光で神聖布を透けさせる", en: "altar light shining through sacred cloth" },
+                { ja: "胸元印の発光を主役にする", en: "make the glowing chest sigil the visual centerpiece" },
+                { ja: "背徳化した金装飾を増やす", en: "increase corrupted gold ceremonial ornaments" }
+              ]},
+              { title: "😳 祈り・堕ち・抗いアレンジ", items: [
+                { ja: "祈りを崩さず抗う乱れ顔", en: "disturbed face struggling to maintain prayerful composure" },
+                { ja: "堕ちに抗う揺らいだ表情", en: "wavering expression resisting corrupted devotion" },
+                { ja: "崩れた祈り顔と汗ばむ肌", en: "broken prayerful face with damp skin" },
+                { ja: "信仰と背徳の間で震える唇", en: "trembling lips caught between faith and corruption" },
+                { ja: "神聖さを保とうとして崩れる目線", en: "faltering gaze trying to preserve sacred dignity" }
+              ]}
+            ],
+            settingGroups: [
+              { title: "⚙️ 儀式進行・堕ち設定", items: [
+                { ja: "祈りの最中に神聖衣装が崩れ始める", en: "sacred attire beginning to collapse in the middle of prayer" },
+                { ja: "術式光が衣装と肌の境界を侵す", en: "ritual light eroding the boundary between garment and skin" },
+                { ja: "神聖意匠が背徳意匠へ変質する", en: "sacred motifs transforming into profane ornamentation" },
+                { ja: "祭壇の光が堕落を照らし出す", en: "altar light revealing holy corruption" },
+                { ja: "信仰を守ろうとして理性が揺らぐ", en: "composure wavering while trying to cling to faith" },
+                { ja: "供物化した衣装が儀式の中心になる", en: "the offering-like ceremonial attire becoming the ritual focal point" }
+              ]}
+            ],
+            qualityPresets: [
+              { title: "🤍 清儀の巫女用完成クオリティ", items: [
+                { ja: "白布と肌の透け感を丁寧に出す", en: "careful translucency between white ritual cloth and skin" },
+                { ja: "清浄な祭壇光を柔らかく当てる", en: "soft altar lighting over the pure ceremonial costume" },
+                { ja: "裂けた神聖布と赤面の対比を強める", en: "strong contrast between torn sacred cloth and heated blush" },
+                { ja: "祈り顔へ焦点を寄せる", en: "focus tightly on the prayerful resisting face" }
+              ]},
+              { title: "🖤 堕ち神官用完成クオリティ", items: [
+                { ja: "黒金衣装と背徳光を強める", en: "emphasize black-and-gold attire with profane luminous accents" },
+                { ja: "胸元印を明確に見せる", en: "make the glowing chest sigil clearly visible" },
+                { ja: "低照度で堕落の艶を出す", en: "low-key lighting emphasizing fallen sacred glamour" },
+                { ja: "背徳化した装飾の重量感を出す", en: "strong visual weight in corrupted ceremonial ornaments" }
+              ]},
+              { title: "🕯 儀式供物用完成クオリティ", items: [
+                { ja: "術式輪と供物衣装の一体感を強める", en: "strong integration of ritual circles and offering attire" },
+                { ja: "祭壇光の逆光を強める", en: "strong altar backlight and ritual glow" },
+                { ja: "汗と熱を神聖崩落の演出にする", en: "use sweat and heat as part of the sacred collapse" },
+                { ja: "儀式中心に置かれた感を強調する", en: "emphasize the subject being placed at the ritual center" }
+              ]}
+            ],
+            qualityGroups: [
+              { title: "⛩ 儀式巫女・堕ち神官用クオリティ調整", items: [
+                { ja: "白布と肌の透け感を丁寧に出す", en: "careful translucency between white ritual cloth and skin" },
+                { ja: "清浄な祭壇光を柔らかく当てる", en: "soft altar lighting over the pure ceremonial costume" },
+                { ja: "黒金衣装と背徳光を強める", en: "emphasize black-and-gold attire with profane luminous accents" },
+                { ja: "胸元印を明確に見せる", en: "make the glowing chest sigil clearly visible" },
+                { ja: "術式輪と供物衣装の一体感を強める", en: "strong integration of ritual circles and offering attire" },
+                { ja: "祭壇光の逆光を強める", en: "strong altar backlight and ritual glow" },
+                { ja: "裂けた神聖布と赤面の対比を強める", en: "strong contrast between torn sacred cloth and heated blush" },
+                { ja: "信仰と背徳の落差を見せる", en: "show a strong contrast between sanctity and profane collapse" }
+              ]}
+            ]
+          },
+
+          {
+            title: "🐉 淫紋チャイナ・呪術ドレス特化コレクション",
+            description: "チャイナ服や呪術ドレスを主役に、発光する淫紋、裂けた布地、宮廷的装飾、呪術意匠を絡めて“華やかさと背徳が同居するR-18衣装”を深掘りする専用コレクション",
+            presets: [
+              { title: "🀄 淫紋チャイナ・抗いセット", items: [
+                { ja: "深紅のスリットチャイナドレス", en: "crimson slit qipao dress" },
+                { ja: "首筋と腹部へ浮かぶ発光淫紋", en: "glowing lust sigils appearing on the neck and abdomen" },
+                { ja: "裾と胸元が乱れた戦いの痕", en: "disturbed hem and bustline showing signs of struggle" },
+                { ja: "理性を保とうとする乱れ顔", en: "disturbed face trying to preserve composure" }
+              ]},
+              { title: "👗 呪術ドレス・快堕ちセット", items: [
+                { ja: "黒と紫の呪術ドレス", en: "black and violet cursed ritual dress" },
+                { ja: "胸元から広がる発光淫紋", en: "luminous lust sigils spreading from the chest" },
+                { ja: "透ける布越しに見える侵食紋", en: "invasive sigils visible through translucent fabric" },
+                { ja: "快楽に揺らぐ恍惚顔", en: "entranced expression wavering under pleasure" }
+              ]},
+              { title: "🏯 宮廷妖艶・背徳セット", items: [
+                { ja: "金刺繍の宮廷チャイナドレス", en: "palatial qipao dress with gold embroidery" },
+                { ja: "太腿と鎖骨を走る紅い呪紋", en: "red cursed markings running along the thigh and collarbone" },
+                { ja: "宝飾と呪術が融合した胸飾り", en: "ornamented chest jewel fused with arcane magic" },
+                { ja: "高貴さの奥で揺らぐ背徳の笑み", en: "forbidden smile wavering beneath noble poise" }
+              ]},
+              { title: "🌙 月下妖紋チャイナセット", items: [
+                { ja: "金刺繍の宮廷チャイナドレス", en: "palatial qipao dress with gold embroidery" },
+                { ja: "太腿と鎖骨を走る紅い呪紋", en: "red cursed markings running along the thigh and collarbone" },
+                { ja: "羞恥と妖艶が混ざる視線", en: "gaze mixing shame with seductive corruption" },
+                { ja: "高貴さの奥で揺らぐ背徳の笑み", en: "forbidden smile wavering beneath noble poise" }
+              ]},
+              { title: "🦋 薄絹透け呪術ドレスセット", items: [
+                { ja: "黒と紫の呪術ドレス", en: "black and violet cursed ritual dress" },
+                { ja: "透け感のある薄布レイヤー", en: "light translucent fabric layers" },
+                { ja: "透ける布越しに見える侵食紋", en: "invasive sigils visible through translucent fabric" },
+                { ja: "布越しの発光紋を見せる", en: "show glowing markings through the fabric" }
+              ]},
+              { title: "👑 宮廷堕華ドレスセット", items: [
+                { ja: "金刺繍の宮廷チャイナドレス", en: "palatial qipao dress with gold embroidery" },
+                { ja: "宝飾と呪術が融合した胸飾り", en: "ornamented chest jewel fused with arcane magic" },
+                { ja: "高貴さと背徳が同時に滲み出る", en: "nobility and depravity leaking out at the same time" },
+                { ja: "高貴さの奥で揺らぐ背徳の笑み", en: "forbidden smile wavering beneath noble poise" }
+              ]},
+              { title: "🌹 紅蓮呪花チャイナセット", items: [
+                { ja: "深紅のスリットチャイナドレス", en: "crimson slit qipao dress" },
+                { ja: "胸元から広がる発光淫紋", en: "luminous lust sigils spreading from the chest" },
+                { ja: "衣装全体へ走る妖艶な発光線", en: "seductive glowing lines running across the entire outfit" },
+                { ja: "熱に浮かされた濃い赤面", en: "heavy blush overwhelmed by ritual heat" }
+              ]}
+            ]
+            ,
+            baseGroups: [
+              { title: "👘 チャイナ・ドレスの土台", items: [
+                { ja: "深紅のスリットチャイナドレス", en: "crimson slit qipao dress" },
+                { ja: "漆黒の光沢チャイナドレス", en: "jet-black glossy qipao dress" },
+                { ja: "白金の神聖チャイナドレス", en: "white-and-gold sacred qipao dress" },
+                { ja: "金刺繍の宮廷チャイナドレス", en: "palatial qipao dress with gold embroidery" },
+                { ja: "黒と紫の呪術ドレス", en: "black and violet cursed ritual dress" },
+                { ja: "透け感のある薄布レイヤー", en: "light translucent fabric layers" },
+                { ja: "胸元を強調する立体裁断", en: "structured tailoring emphasizing the bustline" },
+                { ja: "脚線を見せる深いスリット", en: "deep slit revealing the leg line" },
+                { ja: "腰を締める高位の帯構造", en: "high-rank waist structure tightening the silhouette" },
+                { ja: "袖口へ重なる宮廷布飾り", en: "layered court fabric ornaments at the cuffs" },
+                { ja: "肩を落とした崩しチャイナ構造", en: "off-shoulder loosened qipao structure" },
+                { ja: "胸下を締める呪術コルセット帯", en: "cursed corset sash tightening beneath the bust" },
+                { ja: "腰から流れる後ろ布の尾", en: "flowing rear fabric tails from the waist" },
+                { ja: "片脚だけを覗かせる非対称裾", en: "asymmetrical hem exposing only one leg" },
+                { ja: "乳間を囲う高襟フロント構造", en: "high-collar front structure framing the cleavage" },
+                { ja: "骨盤へ沿う密着スカートライン", en: "tight skirt line tracing the pelvis" },
+                { ja: "細金具で留めた開閉式前立て", en: "front placket fastened by fine metallic clasps" },
+                { ja: "裂けかけた高位礼装チャイナ", en: "high-class ceremonial qipao on the verge of tearing" },
+                { ja: "下腹へ落ちる二重腹帯構造", en: "double abdominal sashes falling toward the lower belly" },
+                { ja: "骨盤を抱く低腰チャイナ帯", en: "low-waist qipao sash hugging the pelvis" },
+                { ja: "へそ下を囲う逆三角布飾り", en: "inverted triangular cloth ornament framing the lower abdomen" },
+                { ja: "腰骨を強調する切り込み前裾", en: "front hem cuts emphasizing the hip bones" },
+                { ja: "下腹を透かせる細帯窓構造", en: "narrow window-like band structure revealing the lower abdomen" },
+                { ja: "骨盤線をなぞる密着前垂れ", en: "tight front drape tracing the pelvic line" }
+              ]},
+              { title: "🪬 淫紋・宝飾・呪術核", items: [
+                { ja: "首筋と腹部へ浮かぶ発光淫紋", en: "glowing lust sigils appearing on the neck and abdomen" },
+                { ja: "胸元から広がる発光淫紋", en: "luminous lust sigils spreading from the chest" },
+                { ja: "太腿と鎖骨を走る紅い呪紋", en: "red cursed markings running along the thigh and collarbone" },
+                { ja: "透ける布越しに見える侵食紋", en: "invasive sigils visible through translucent fabric" },
+                { ja: "宝飾と呪術が融合した胸飾り", en: "ornamented chest jewel fused with arcane magic" },
+                { ja: "衣装全体へ走る妖艶な発光線", en: "seductive glowing lines running across the entire outfit" },
+                { ja: "へそ下へ落ちる呪術垂飾", en: "ritual pendant hanging toward the lower abdomen" },
+                { ja: "背中へ回り込む発光文様", en: "glowing patterns wrapping around to the back" },
+                { ja: "乳間を縦に走る淫紋ライン", en: "lust-sigil line running vertically between the breasts" },
+                { ja: "骨盤を囲う妖光リング", en: "seductive luminous ring circling the pelvis" },
+                { ja: "胸下へ二重に灯る支配紋", en: "double domination marks glowing beneath the bust" },
+                { ja: "首輪と同期する喉元の呪印", en: "throat sigil synchronized with the collar" },
+                { ja: "太腿内側へ浮く秘匿紋", en: "hidden sigils surfacing on the inner thigh" },
+                { ja: "腰骨へ噛みつくような淫紋", en: "lust sigils biting into the hip bones" },
+                { ja: "肩口から腕へ落ちる支配文様", en: "domination patterns descending from the shoulders to the arms" },
+                { ja: "乳房下で明滅する呪術核", en: "ritual core flickering beneath the breasts" },
+                { ja: "胸中央で脈打つ妖光宝石", en: "seductive gemstone pulsing at the center of the chest" },
+                { ja: "下腹部で封印が崩れる発光核", en: "glowing seal-core collapsing at the lower abdomen" },
+                { ja: "へそ周りを囲う封印環", en: "seal-ring encircling the navel area" },
+                { ja: "骨盤中央に集まる崩壊紋", en: "collapse sigils gathering at the center of the pelvis" },
+                { ja: "腰帯の内側で脈打つ隠し核", en: "hidden core pulsing beneath the inner waist sash" },
+                { ja: "下腹へ枝分かれする支配線", en: "domination lines branching across the lower abdomen" },
+                { ja: "鼠径部へ落ちる封印文字列", en: "seal scripts descending toward the groin" },
+                { ja: "骨盤輪郭へ沿う微光紋", en: "faint luminous sigils tracing the pelvic outline" }
+              ]}
+            ],
+            customizeGroups: [
+              { title: "✨ 裂け・透け・発光アレンジ", items: [
+                { ja: "胸元の裂けを強調する", en: "emphasize torn openings around the bustline" },
+                { ja: "太腿スリットをさらに深くする", en: "deepen the thigh slit further" },
+                { ja: "布越しの発光紋を見せる", en: "show glowing markings through the fabric" },
+                { ja: "刺繍へ妖光を混ぜる", en: "blend arcane glow into the embroidery" },
+                { ja: "肌に食い込む装飾縁を強める", en: "strengthen ornamental edges pressing into the skin" },
+                { ja: "胸下へ垂れる装飾鎖を増やす", en: "increase ornamental chains hanging beneath the bust" },
+                { ja: "脇腹の透けを強める", en: "strengthen translucency along the flanks" },
+                { ja: "腰から背へ回る布流れを増やす", en: "increase flowing fabric wrapping from the waist to the back" },
+                { ja: "高襟まわりの発光縁を追加する", en: "add glowing trim around the high collar" },
+                { ja: "乳間をなぞる光線を濃くする", en: "intensify glowing lines tracing the cleavage" },
+                { ja: "太腿に映る呪紋反射を増やす", en: "increase reflected sigil light on the thigh" },
+                { ja: "裾の破れから肌を覗かせる", en: "reveal skin through torn hems" },
+                { ja: "肩と鎖骨の露出を強める", en: "increase exposure around the shoulders and collarbone" },
+                { ja: "胸飾りから脈打つ光を伸ばす", en: "extend pulsing light from the chest ornament" },
+                { ja: "背中側の発光ラインを増やす", en: "increase glowing lines along the back" },
+                { ja: "腰回りへ宝飾垂飾を重ねる", en: "layer ornamented pendants around the waist" },
+                { ja: "下腹窓の露出境界を広げる", en: "widen the exposed boundary of the lower-abdomen window" },
+                { ja: "へそ下の垂飾をさらに長く落とす", en: "extend the lower-abdomen pendant farther downward" },
+                { ja: "骨盤帯の食い込みを強める", en: "strengthen the indentation of the pelvic sash" },
+                { ja: "鼠径部へ流れる光筋を増やす", en: "increase glowing streaks descending toward the groin" },
+                { ja: "下腹前垂れを薄く透かせる", en: "make the lower-abdomen front drape thinner and more translucent" },
+                { ja: "骨盤周りの布流れを危うく崩す", en: "destabilize the fabric flow around the pelvis" }
+              ]},
+              { title: "😳 妖艶・堕ち・抗いアレンジ", items: [
+                { ja: "理性を保とうとする乱れ顔", en: "disturbed face trying to preserve composure" },
+                { ja: "快楽に揺らぐ恍惚顔", en: "entranced expression wavering under pleasure" },
+                { ja: "高貴さの奥で揺らぐ背徳の笑み", en: "forbidden smile wavering beneath noble poise" },
+                { ja: "熱に浮かされた濃い赤面", en: "heavy blush overwhelmed by ritual heat" },
+                { ja: "唇と視線が崩れる艶顔", en: "seductive face with trembling lips and wavering gaze" },
+                { ja: "羞恥と妖艶が混ざる視線", en: "gaze mixing shame with seductive corruption" },
+                { ja: "背徳感で乱れる息遣い", en: "breathing disturbed by forbidden pleasure" },
+                { ja: "堕ちを拒みきれない抗い顔", en: "resisting face unable to fully reject corruption" },
+                { ja: "高揚と羞恥が同居するとろみ顔", en: "melted expression balancing arousal and embarrassment" },
+                { ja: "呪術熱で焦点が揺れる目", en: "eyes losing focus under cursed ritual heat" },
+                { ja: "唇の端だけ崩れる耐え顔", en: "enduring face with only the corner of the lips collapsing" },
+                { ja: "目元が潤み続ける堕ち顔", en: "corrupted expression with continuously watery eyes" },
+                { ja: "誇りを残したまま崩れる表情", en: "expression collapsing while still retaining pride" },
+                { ja: "快落寸前の上目づかい", en: "upturned gaze on the verge of surrender" },
+                { ja: "視線を逸らしきれない背徳顔", en: "forbidden expression unable to look away" },
+                { ja: "妖艶さが滲む半開きの唇", en: "half-open lips leaking seductive corruption" },
+                { ja: "下腹の熱を耐える食いしばり顔", en: "clenched face enduring heat gathering in the lower abdomen" },
+                { ja: "骨盤の脈動に視線が揺らぐ顔", en: "expression with gaze wavering from pulsing at the pelvis" },
+                { ja: "へそ下の封印崩れに息を乱す顔", en: "face losing breath as the seal breaks beneath the navel" },
+                { ja: "羞恥で腹を守りきれない崩れ顔", en: "collapsing face unable to protect the lower abdomen from shame" }
+              ]}
+            ],
+            settingGroups: [
+              { title: "⚙️ 呪術進行・露出設定", items: [
+                { ja: "衣装そのものが呪術媒体化する", en: "the outfit itself behaves as a cursed ritual medium" },
+                { ja: "淫紋が胸元から全身へ広がる", en: "lust sigils spread from the chest across the body" },
+                { ja: "スリットと裂け目が露出境界を押し広げる", en: "slits and tears push the boundary of exposure" },
+                { ja: "宝飾が支配の核として脈動する", en: "ornamental jewels pulse as the core of domination" },
+                { ja: "高貴さと背徳が同時に滲み出る", en: "nobility and depravity leaking out at the same time" },
+                { ja: "術式光が肌と布の境界を曖昧にする", en: "ritual light blurs the boundary between skin and fabric" },
+                { ja: "胸元の核が感情と同期する", en: "the chest core synchronizes with emotional corruption" },
+                { ja: "露出部位ごとに呪紋密度が増す", en: "sigil density increasing around each exposed zone" },
+                { ja: "衣装の豪華さが背徳感を増幅する", en: "the luxurious attire amplifying the sense of depravity" },
+                { ja: "首筋から下腹へ支配波が降りる", en: "waves of domination descending from the neck to the lower abdomen" },
+                { ja: "胸下で封印が綻び始める", en: "the seal beginning to fray beneath the bust" },
+                { ja: "背中の呪紋が衣装越しに透ける", en: "back sigils showing through the garment" },
+                { ja: "装飾鎖が身体の動きに追従する", en: "ornamental chains following the motion of the body" },
+                { ja: "宝玉の脈動で視線と表情が乱れる", en: "jewel pulses disturbing gaze and expression" },
+                { ja: "肌に沿って発光線が増殖する", en: "glowing lines multiplying along the skin" },
+                { ja: "衣装の裂けが進行に応じて広がる", en: "tears in the outfit widening with progression" },
+                { ja: "宮廷礼装が背徳衣装へ変質する", en: "court attire mutating into depraved ceremonial wear" },
+                { ja: "呪術核が快楽と羞恥を同時増幅する", en: "ritual cores amplifying pleasure and shame at once" },
+                { ja: "下腹の封印核が全身支配の起点になる", en: "the lower-abdomen seal core becoming the origin of full-body domination" },
+                { ja: "骨盤輪郭に沿って支配紋が閉じる", en: "domination sigils sealing along the outline of the pelvis" },
+                { ja: "へそ下の崩壊点から熱が噴き上がる", en: "heat surging upward from the collapse point beneath the navel" },
+                { ja: "下腹窓の露出が進行段階を示す", en: "the lower-abdomen opening indicating the stage of progression" }
+              ]}
+            ],
+            qualityPresets: [
+              { title: "🀄 淫紋チャイナ用完成クオリティ", items: [
+                { ja: "スリットと脚線を美しく見せる", en: "beautiful emphasis on the slit and leg line" },
+                { ja: "発光淫紋を肌上で鮮明に出す", en: "lust sigils rendered sharply over the skin" },
+                { ja: "布と肌の反射差を強める", en: "strong contrast between fabric and skin reflectivity" },
+                { ja: "チャイナ装飾を細密に見せる", en: "intricate qipao ornamentation clearly visible" }
+              ]},
+              { title: "👗 呪術ドレス用完成クオリティ", items: [
+                { ja: "胸元の発光核を主役にする", en: "make the glowing chest core the visual centerpiece" },
+                { ja: "透け布越しの侵食紋を見せる", en: "show invasive sigils through translucent dress fabric" },
+                { ja: "低照度で呪術光を際立たせる", en: "low-key lighting emphasizing cursed ritual glow" },
+                { ja: "恍惚顔と艶光を両立する", en: "balance entranced expression with seductive glossy light" }
+              ]},
+              { title: "🏯 宮廷妖艶用完成クオリティ", items: [
+                { ja: "宮廷刺繍と宝飾を豪華に見せる", en: "luxurious emphasis on court embroidery and jewelry" },
+                { ja: "高貴な陰影と背徳の赤光を両立する", en: "balance noble shadows with forbidden crimson glow" },
+                { ja: "太腿と鎖骨の呪紋を見せる", en: "show cursed markings along the thigh and collarbone" },
+                { ja: "顔と胸飾りへ視線を集める", en: "focus attention on the face and chest ornament" }
+              ]},
+              { title: "🌙 月下妖紋用完成クオリティ", items: [
+                { ja: "宮廷刺繍と宝飾を豪華に見せる", en: "luxurious emphasis on court embroidery and jewelry" },
+                { ja: "高貴な陰影と背徳の赤光を両立する", en: "balance noble shadows with forbidden crimson glow" },
+                { ja: "顔と胸飾りへ視線を集める", en: "focus attention on the face and chest ornament" },
+                { ja: "骨盤周りの淫紋密度を高める", en: "increase lust-sigil density around the pelvis" }
+              ]},
+              { title: "🦋 薄絹透け呪術用完成クオリティ", items: [
+                { ja: "透け布越しの侵食紋を見せる", en: "show invasive sigils through translucent dress fabric" },
+                { ja: "低照度で呪術光を際立たせる", en: "low-key lighting emphasizing cursed ritual glow" },
+                { ja: "布と肌の反射差を強める", en: "strong contrast between fabric and skin reflectivity" },
+                { ja: "胸下の鎖と垂飾を見せる", en: "show ornamental chains and pendants below the bust" }
+              ]},
+              { title: "👑 宮廷堕華用完成クオリティ", items: [
+                { ja: "宮廷刺繍と宝飾を豪華に見せる", en: "luxurious emphasis on court embroidery and jewelry" },
+                { ja: "顔と胸飾りへ視線を集める", en: "focus attention on the face and chest ornament" },
+                { ja: "高貴な陰影と背徳の赤光を両立する", en: "balance noble shadows with forbidden crimson glow" },
+                { ja: "骨盤周りの淫紋密度を高める", en: "increase lust-sigil density around the pelvis" }
+              ]},
+              { title: "🌹 紅蓮呪花用完成クオリティ", items: [
+                { ja: "花弁裾の燃える赤光を強める", en: "enhance burning crimson light on petal-cut hems" },
+                { ja: "花芯型の発光核を鮮明に見せる", en: "show flower-core luminous nodes with sharp clarity" },
+                { ja: "熱暴走する赤面と呪光を両立する", en: "balance overheating blush with intense cursed glow" },
+                { ja: "胸元の咲き広がる紋様へ視線を寄せる", en: "focus attention on blooming sigils spreading across the bust" }
+              ]},
+              { title: "🕯️ 封印綻び礼装用完成クオリティ", items: [
+                { ja: "胸元の発光核を主役にする", en: "make the glowing chest core the visual centerpiece" },
+                { ja: "高襟と胸飾りの金属感を強める", en: "strengthen metallic rendering of the high collar and chest ornament" },
+                { ja: "王族級の礼装陰影を濃く出す", en: "render royal-grade ceremonial shadows with greater depth" },
+                { ja: "高貴な陰影と背徳の赤光を両立する", en: "balance noble shadows with forbidden crimson glow" }
+              ]},
+              { title: "💎 宝飾支配用完成クオリティ", items: [
+                { ja: "宝飾の脈動光を強く見せる", en: "show strong pulsing light from the ornaments" },
+                { ja: "顔と胸飾りへ視線を集める", en: "focus attention on the face and chest ornament" },
+                { ja: "宮廷刺繍と宝飾を豪華に見せる", en: "luxurious emphasis on court embroidery and jewelry" },
+                { ja: "高襟と胸飾りの金属感を強める", en: "strengthen metallic rendering of the high collar and chest ornament" }
+              ]},
+              { title: "🩸 下腹封印崩壊用完成クオリティ", items: [
+                { ja: "下腹の発光核を主役に引き上げる", en: "elevate the lower-abdomen glowing core into a main focal point" },
+                { ja: "へそ下の封印崩れを鮮明に見せる", en: "show the seal collapse beneath the navel with sharp clarity" },
+                { ja: "骨盤輪郭と支配光を同時に立てる", en: "emphasize the pelvic outline and domination glow together" },
+                { ja: "下腹窓の露出と布端を綺麗に見せる", en: "beautifully show the lower-abdomen opening and its fabric edges" }
+              ]},
+              { title: "👠 背徳開脚スリット用完成クオリティ", items: [
+                { ja: "スリットと脚線を美しく見せる", en: "beautiful emphasis on the slit and leg line" },
+                { ja: "太腿と鎖骨の呪紋を見せる", en: "show cursed markings along the thigh and collarbone" },
+                { ja: "太腿に映る呪紋反射を増やす", en: "increase reflected sigil light on the thigh" },
+                { ja: "肩と鎖骨の露出を綺麗に見せる", en: "beautifully show shoulder and collarbone exposure" }
+              ]},
+              { title: "🔗 胸下鎖垂飾用完成クオリティ", items: [
+                { ja: "胸下の鎖と垂飾を見せる", en: "show ornamental chains and pendants below the bust" },
+                { ja: "胸元の発光核を主役にする", en: "make the glowing chest core the visual centerpiece" },
+                { ja: "高襟と胸飾りの金属感を強める", en: "strengthen metallic rendering of the high collar and chest ornament" },
+                { ja: "胸下の鎖と垂飾を見せる", en: "show ornamental chains and pendants below the bust" }
+              ]},
+              { title: "🫦 半開き堕艶用完成クオリティ", items: [
+                { ja: "視線の艶と涙の反射を強める", en: "strengthen glossy gaze and tear reflections" },
+                { ja: "呪紋の赤光と肌の白さを対比する", en: "contrast crimson sigil glow against pale skin" },
+                { ja: "顔と胸飾りへ視線を集める", en: "focus attention on the face and chest ornament" },
+                { ja: "低照度で呪術光を際立たせる", en: "low-key lighting emphasizing cursed ritual glow" }
+              ]}
+            ]
+            ,
+            qualityGroups: [
+              { title: "🐉 淫紋チャイナ・呪術ドレス用クオリティ調整", items: [
+                { ja: "スリットと脚線を美しく見せる", en: "beautiful emphasis on the slit and leg line" },
+                { ja: "発光淫紋を肌上で鮮明に出す", en: "lust sigils rendered sharply over the skin" },
+                { ja: "布と肌の反射差を強める", en: "strong contrast between fabric and skin reflectivity" },
+                { ja: "透け布越しの侵食紋を見せる", en: "show invasive sigils through translucent dress fabric" },
+                { ja: "低照度で呪術光を際立たせる", en: "low-key lighting emphasizing cursed ritual glow" },
+                { ja: "宮廷刺繍と宝飾を豪華に見せる", en: "luxurious emphasis on court embroidery and jewelry" },
+                { ja: "高貴な陰影と背徳の赤光を両立する", en: "balance noble shadows with forbidden crimson glow" },
+                { ja: "顔と胸飾りへ視線を集める", en: "focus attention on the face and chest ornament" },
+                { ja: "胸下の鎖と垂飾を見せる", en: "show ornamental chains and pendants below the bust" },
+                { ja: "骨盤周りの淫紋密度を高める", en: "increase lust-sigil density around the pelvis" },
+                { ja: "胸元の発光核を主役にする", en: "make the glowing chest core the visual centerpiece" },
+                { ja: "肩と鎖骨の露出を綺麗に見せる", en: "beautifully show shoulder and collarbone exposure" },
+                { ja: "高襟と胸飾りの金属感を強める", en: "strengthen metallic rendering of the high collar and chest ornament" },
+                { ja: "透け布と刺繍の階層差を見せる", en: "show depth layering between sheer fabric and embroidery" },
+                { ja: "呪紋の赤光と肌の白さを対比する", en: "contrast crimson sigil glow against pale skin" },
+                { ja: "宝飾の脈動光を強く見せる", en: "show strong pulsing light from the ornaments" },
+                { ja: "視線の艶と涙の反射を強める", en: "strengthen glossy gaze and tear reflections" },
+                { ja: "腰回りの装飾と布流れを見せる", en: "show waist ornaments and flowing fabric movement" },
+                { ja: "下腹の発光核を主役に引き上げる", en: "elevate the lower-abdomen glowing core into a main focal point" },
+                { ja: "へそ下の封印崩れを鮮明に見せる", en: "show the seal collapse beneath the navel with sharp clarity" },
+                { ja: "骨盤輪郭と支配光を同時に立てる", en: "emphasize the pelvic outline and domination glow together" },
+                { ja: "下腹窓の露出と布端を綺麗に見せる", en: "beautifully show the lower-abdomen opening and its fabric edges" }
+              ]}
+            ]
+          },
+
+          {
+            title: "⛓ 奴隷装飾・所有印特化コレクション",
+            description: "首輪だけに寄せず、主従章、所有印、鎖装飾、拘束意匠を衣装側へ強く噛ませて“着ているだけで誰の所有物かが視覚で伝わる支配衣装”を深掘りする専用コレクション",
+            presets: [
+              { title: "🔗 所有印露出・抗いセット", items: [
+                { ja: "所有章が胸元に刻まれた拘束衣装", en: "restraint outfit marked by a visible ownership crest over the chest" },
+                { ja: "主従を示す鎖装飾", en: "chain ornaments signaling master-servant ownership" },
+                { ja: "肌へ食い込む所有印", en: "ownership mark pressed visibly into the skin" },
+                { ja: "従属に抗う乱れ顔", en: "disturbed face resisting imposed ownership" }
+              ]},
+              { title: "👑 主従礼装・従属化セット", items: [
+                { ja: "高位の主人に仕える礼装", en: "ceremonial attire for serving a high-ranking master" },
+                { ja: "胸元で輝く所有紋章", en: "glowing ownership emblem at the chest" },
+                { ja: "腰と首を繋ぐ装飾鎖", en: "ornamental chains linking the neck and waist" },
+                { ja: "従属を受け入れ始めた表情", en: "expression beginning to accept subordination" }
+              ]},
+              { title: "🩸 支配礼装・完全所有セット", items: [
+                { ja: "黒と紅の支配礼装", en: "black and crimson domination regalia" },
+                { ja: "全身へ広がる所有紋", en: "ownership sigils spreading across the body" },
+                { ja: "装飾拘束が衣装と一体化する", en: "ornamental restraints fused directly into the attire" },
+                { ja: "完全所有を示す恍惚と崩壊の顔", en: "face showing entrancement and collapse under complete possession" }
+              ]}
+            ],
+            baseGroups: [
+              { title: "🖤 所有衣装の土台", items: [
+                { ja: "所有章が胸元に刻まれた拘束衣装", en: "restraint outfit marked by a visible ownership crest over the chest" },
+                { ja: "高位の主人に仕える礼装", en: "ceremonial attire for serving a high-ranking master" },
+                { ja: "黒と紅の支配礼装", en: "black and crimson domination regalia" },
+                { ja: "肌へ食い込む革と金具の装飾", en: "leather and metal ornamentation pressing into the skin" },
+                { ja: "装飾拘束が衣装と一体化する", en: "ornamental restraints fused directly into the attire" },
+                { ja: "腰と首を繋ぐ装飾鎖", en: "ornamental chains linking the neck and waist" }
+              ]},
+              { title: "🪙 所有印・主従章・鎖核", items: [
+                { ja: "胸元で輝く所有紋章", en: "glowing ownership emblem at the chest" },
+                { ja: "全身へ広がる所有紋", en: "ownership sigils spreading across the body" },
+                { ja: "主従を示す鎖装飾", en: "chain ornaments signaling master-servant ownership" },
+                { ja: "肌へ食い込む所有印", en: "ownership mark pressed visibly into the skin" },
+                { ja: "首輪と衣装を繋ぐ金属環", en: "metal rings linking collar hardware into the outfit" },
+                { ja: "命令札のように揺れる所有タグ", en: "ownership tags swaying like command plates" }
+              ]}
+            ],
+            customizeGroups: [
+              { title: "✨ 装飾拘束・金具アレンジ", items: [
+                { ja: "胸元の金具構造を強める", en: "strengthen metallic restraint structures around the bust" },
+                { ja: "鎖と環の数を増やす", en: "increase the number of chains and rings" },
+                { ja: "腰から太腿へ垂れる従属鎖", en: "subordination chains hanging from the waist to the thigh" },
+                { ja: "金属縁が肌へ食い込む表現", en: "metal edges visibly pressing into the skin" },
+                { ja: "主従章を大型化する", en: "enlarge the master-servant emblem as a centerpiece" }
+              ]},
+              { title: "😳 従属・抗い・崩れアレンジ", items: [
+                { ja: "従属に抗う乱れ顔", en: "disturbed face resisting imposed ownership" },
+                { ja: "従属を受け入れ始めた表情", en: "expression beginning to accept subordination" },
+                { ja: "完全所有を示す恍惚と崩壊の顔", en: "face showing entrancement and collapse under complete possession" },
+                { ja: "命令で揺らぐ視線", en: "wavering gaze under command pressure" },
+                { ja: "所有印の熱で崩れる赤面", en: "heavy blush collapsing under the heat of the ownership mark" }
+              ]}
+            ],
+            settingGroups: [
+              { title: "⚙️ 所有進行・主従設定", items: [
+                { ja: "衣装全体が所有の証として機能する", en: "the outfit itself functioning as proof of ownership" },
+                { ja: "主従章が命令核として脈動する", en: "the master-servant crest pulsing as the command core" },
+                { ja: "所有印が肌へ広がり理性を削る", en: "ownership marks spreading across the skin and eroding composure" },
+                { ja: "装飾拘束が姿勢を矯正する", en: "ornamental restraints forcing posture into obedience" },
+                { ja: "華やかな礼装が支配道具へ変質する", en: "formal attire transforming into an instrument of domination" },
+                { ja: "見た瞬間に所有関係が伝わる", en: "the ownership hierarchy instantly visible at a glance" }
+              ]}
+            ],
+            qualityPresets: [
+              { title: "🔗 所有印露出用完成クオリティ", items: [
+                { ja: "所有印を肌上で鮮明に見せる", en: "ownership marks rendered sharply over the skin" },
+                { ja: "装飾金具と肌の圧差を強める", en: "strong contrast between metallic hardware and compressed skin" },
+                { ja: "胸元の所有章へ視線を集める", en: "focus attention on the ownership crest over the chest" },
+                { ja: "露出境界と鎖装飾を明確に見せる", en: "clearly show exposure boundaries and chain ornamentation" }
+              ]},
+              { title: "👑 主従礼装用完成クオリティ", items: [
+                { ja: "礼装の高級感を強める", en: "enhance the luxurious quality of the ceremonial outfit" },
+                { ja: "主従章と装飾鎖を豪華に見せる", en: "show master-servant emblems and ornamental chains in a lavish way" },
+                { ja: "上品さと従属感を両立する", en: "balance elegance with unmistakable subordination" },
+                { ja: "顔と胸元の印象を両方立てる", en: "emphasize both the face and the chest ornaments" }
+              ]},
+              { title: "🩸 完全所有用完成クオリティ", items: [
+                { ja: "全身へ広がる所有紋を強める", en: "strengthen ownership sigils spreading across the body" },
+                { ja: "支配礼装の黒紅コントラストを強める", en: "enhance the black-crimson contrast of domination regalia" },
+                { ja: "装飾拘束の一体化を見せる", en: "show ornamental restraints fused seamlessly into the attire" },
+                { ja: "恍惚崩壊顔と支配光を両立する", en: "balance collapse under entrancement with ominous domination glow" }
+              ]}
+            ],
+            qualityGroups: [
+              { title: "⛓ 奴隷装飾・所有印用クオリティ調整", items: [
+                { ja: "所有印を肌上で鮮明に見せる", en: "ownership marks rendered sharply over the skin" },
+                { ja: "装飾金具と肌の圧差を強める", en: "strong contrast between metallic hardware and compressed skin" },
+                { ja: "胸元の所有章へ視線を集める", en: "focus attention on the ownership crest over the chest" },
+                { ja: "露出境界と鎖装飾を明確に見せる", en: "clearly show exposure boundaries and chain ornamentation" },
+                { ja: "主従章と装飾鎖を豪華に見せる", en: "show master-servant emblems and ornamental chains in a lavish way" },
+                { ja: "上品さと従属感を両立する", en: "balance elegance with unmistakable subordination" },
+                { ja: "全身へ広がる所有紋を強める", en: "strengthen ownership sigils spreading across the body" },
+                { ja: "恍惚崩壊顔と支配光を両立する", en: "balance collapse under entrancement with ominous domination glow" }
+              ]}
+            ]
+          },
+
+          {
+            title: "🫧 触手・粘液汚染衣装特化コレクション",
+            description: "触手や粘液によって衣装そのものが濡れ、裂け、まとわりつき、異物へ変質していく見え方を主役にした“汚染進行型のR-18衣装”を深掘りする専用コレクション",
+            presets: [
+              { title: "🫧 粘液汚染・抗いセット", items: [
+                { ja: "粘液で濡れた破損衣装", en: "damaged outfit soaked in clinging slime" },
+                { ja: "肌と布の境界にまとわりつく粘液膜", en: "slimy membrane clinging to the boundary between skin and fabric" },
+                { ja: "汚染を振り払おうとする乱れ顔", en: "disturbed face trying to shake off the contamination" },
+                { ja: "濡れた布が身体へ張りつく圧", en: "wet fabric pressure tightly adhering to the body" }
+              ]},
+              { title: "🦑 触手拘束・侵食衣装セット", items: [
+                { ja: "触手に引き裂かれた拘束衣装", en: "restraint outfit torn open by grasping tentacles" },
+                { ja: "布地へ食い込む触手の巻き付き", en: "tentacles coiling tightly into the fabric" },
+                { ja: "侵食に呑まれ始めた表情", en: "expression beginning to be consumed by invasive restraint" },
+                { ja: "裂け目から見える粘液光", en: "viscous glow visible through torn openings" }
+              ]},
+              { title: "🧪 異物化・半変質衣装セット", items: [
+                { ja: "衣装が異物化し始めた半変質状態", en: "half-transformed attire beginning to turn into an alien substance" },
+                { ja: "皮膚と融合しかけた汚染布", en: "contaminated fabric beginning to fuse with the skin" },
+                { ja: "変質進行に揺らぐ抗い顔", en: "wavering face resisting progressive transformation" },
+                { ja: "衣装全体を走るぬめる発光脈", en: "slick luminous pulses running across the entire outfit" }
+              ]}
+            ],
+            baseGroups: [
+              { title: "👗 汚染衣装の土台", items: [
+                { ja: "粘液で濡れた破損衣装", en: "damaged outfit soaked in clinging slime" },
+                { ja: "触手に引き裂かれた拘束衣装", en: "restraint outfit torn open by grasping tentacles" },
+                { ja: "衣装が異物化し始めた半変質状態", en: "half-transformed attire beginning to turn into an alien substance" },
+                { ja: "濡れた布が身体へ張りつく圧", en: "wet fabric pressure tightly adhering to the body" },
+                { ja: "粘液に浸された透け布レイヤー", en: "translucent fabric layers soaked in invasive slime" },
+                { ja: "裂け目の多い汚染スーツ地", en: "contaminated suit material full of torn openings" }
+              ]},
+              { title: "🧬 触手・粘液・変質核", items: [
+                { ja: "肌と布の境界にまとわりつく粘液膜", en: "slimy membrane clinging to the boundary between skin and fabric" },
+                { ja: "布地へ食い込む触手の巻き付き", en: "tentacles coiling tightly into the fabric" },
+                { ja: "裂け目から見える粘液光", en: "viscous glow visible through torn openings" },
+                { ja: "皮膚と融合しかけた汚染布", en: "contaminated fabric beginning to fuse with the skin" },
+                { ja: "衣装全体を走るぬめる発光脈", en: "slick luminous pulses running across the entire outfit" },
+                { ja: "縫い目を侵食する異物の脈動", en: "alien pulsation consuming the seams" }
+              ]}
+            ],
+            customizeGroups: [
+              { title: "✨ 裂け・濡れ・粘着アレンジ", items: [
+                { ja: "胸元の裂け目を強調する", en: "emphasize torn openings across the bustline" },
+                { ja: "太腿へ垂れる粘液糸を増やす", en: "increase viscous strands dripping over the thigh" },
+                { ja: "濡れ光沢と透け感を強める", en: "strengthen wet gloss and translucent cling" },
+                { ja: "触手の巻き付き密度を上げる", en: "increase the density of tentacle coiling" },
+                { ja: "粘液膜が肌へ広がる表現", en: "show the slime membrane spreading further over the skin" }
+              ]},
+              { title: "😳 汚染・侵食・崩れアレンジ", items: [
+                { ja: "汚染を振り払おうとする乱れ顔", en: "disturbed face trying to shake off the contamination" },
+                { ja: "侵食に呑まれ始めた表情", en: "expression beginning to be consumed by invasive restraint" },
+                { ja: "変質進行に揺らぐ抗い顔", en: "wavering face resisting progressive transformation" },
+                { ja: "粘着熱で崩れる濃い赤面", en: "heavy blush collapsing under adhesive invasive heat" },
+                { ja: "ぬめる息と視線の乱れ", en: "slick disturbed breathing and wavering gaze" }
+              ]}
+            ],
+            settingGroups: [
+              { title: "⚙️ 汚染進行・変質設定", items: [
+                { ja: "衣装そのものが汚染媒体化する", en: "the outfit itself becoming a medium for contamination" },
+                { ja: "触手が衣装構造へ食い込む", en: "tentacles digging directly into the structure of the outfit" },
+                { ja: "粘液膜が布と肌の境界を消す", en: "slime membranes erasing the boundary between skin and fabric" },
+                { ja: "異物化が衣装全体へ進行する", en: "alien transformation progressing across the entire attire" },
+                { ja: "濡れと拘束が一体化していく", en: "wetness and restraint fusing into one invasive state" },
+                { ja: "見た瞬間に汚染進行が伝わる", en: "the progression of contamination instantly visible at a glance" }
+              ]}
+            ],
+            qualityPresets: [
+              { title: "🫧 粘液汚染用完成クオリティ", items: [
+                { ja: "濡れ光沢と布の張りつきを強める", en: "enhance wet gloss and fabric clinging to the body" },
+                { ja: "粘液膜を肌上で鮮明に見せる", en: "render slime membranes sharply over the skin" },
+                { ja: "露出境界の透け感を強める", en: "strengthen translucency along exposed fabric boundaries" },
+                { ja: "顔と胸元の汚染点へ視線を寄せる", en: "focus attention on contamination points around the face and chest" }
+              ]},
+              { title: "🦑 触手拘束用完成クオリティ", items: [
+                { ja: "触手の巻き付き圧を強める", en: "enhance the pressure of tentacles coiling around the outfit" },
+                { ja: "裂けた布と拘束点を鮮明に見せる", en: "clearly show torn fabric and tight restraint points" },
+                { ja: "暗部光で侵食感を強める", en: "use low-key lighting to strengthen the invasive atmosphere" },
+                { ja: "拘束の起点へ視線を集める", en: "focus attention on the origin points of the restraint" }
+              ]},
+              { title: "🧪 半変質衣装用完成クオリティ", items: [
+                { ja: "異物化した布の質感を強める", en: "enhance the alien texture of transforming fabric" },
+                { ja: "発光脈を衣装全体で見せる", en: "show luminous pulses across the full outfit" },
+                { ja: "肌との融合境界を鮮明にする", en: "clarify the fusion boundary between outfit and skin" },
+                { ja: "変質進行の不穏さを色で強める", en: "enhance the unease of transformation through ominous color shifts" }
+              ]}
+            ],
+            qualityGroups: [
+              { title: "🫧 触手・粘液汚染衣装用クオリティ調整", items: [
+                { ja: "濡れ光沢と布の張りつきを強める", en: "enhance wet gloss and fabric clinging to the body" },
+                { ja: "粘液膜を肌上で鮮明に見せる", en: "render slime membranes sharply over the skin" },
+                { ja: "露出境界の透け感を強める", en: "strengthen translucency along exposed fabric boundaries" },
+                { ja: "触手の巻き付き圧を強める", en: "enhance the pressure of tentacles coiling around the outfit" },
+                { ja: "裂けた布と拘束点を鮮明に見せる", en: "clearly show torn fabric and tight restraint points" },
+                { ja: "暗部光で侵食感を強める", en: "use low-key lighting to strengthen the invasive atmosphere" },
+                { ja: "異物化した布の質感を強める", en: "enhance the alien texture of transforming fabric" },
+                { ja: "肌との融合境界を鮮明にする", en: "clarify the fusion boundary between outfit and skin" }
+              ]}
+            ]
+          }
+
+        ];
+
+
+      const hasR18Nodes = IS_SECRET_UNLOCKED && (
+        Array.from(r18Groups.values()).some(function(nodes){ return nodes && nodes.length; }) ||
+        (Array.isArray(r18TopExtraCollections) && r18TopExtraCollections.length > 0)
+      );
+      if (hasR18Nodes){
+        const r18Zone = document.createElement("div");
+        r18Zone.id = "__attire_r18_last_zone__";
+        r18Zone.className = "attire-r18-zone";
+        r18Zone.style.cssText = "display:block;width:100%;max-width:100%;margin:14px 0 0;box-sizing:border-box;";
+
+        const r18Divider = document.createElement("div");
+        r18Divider.className = "attire-r18-divider";
+        r18Divider.style.cssText = "display:flex;align-items:center;gap:10px;width:100%;max-width:100%;margin:0 0 10px;color:#c23a68;font-weight:800;box-sizing:border-box;";
+        const r18LineL = document.createElement("span");
+        r18LineL.style.cssText = "flex:1;height:2px;background:#f1b8c8;display:block;";
+        const r18Label = document.createElement("span");
+        r18Label.textContent = "⚠️ R-18 / NSFW";
+        r18Label.style.cssText = "white-space:nowrap;font-size:14px;letter-spacing:0.02em;";
+        const r18LineR = document.createElement("span");
+        r18LineR.style.cssText = "flex:1;height:2px;background:#f1b8c8;display:block;";
+        r18Divider.appendChild(r18LineL);
+        r18Divider.appendChild(r18Label);
+        r18Divider.appendChild(r18LineR);
+        r18Zone.appendChild(r18Divider);
+
+        const topCollectionDefs = [];
+        r18ParentDefs.forEach(function(def){
+          const collectionDefs = r18CollectionDefs[def.title] || [];
+          if (!collectionDefs.length) return;
+          topCollectionDefs.push({ def: def, collectionDefs: collectionDefs });
+        });
+
+        const preGroupedTopExtraCollections = Array.isArray(r18TopExtraCollections)
+          ? r18TopExtraCollections.slice()
+          : [];
+
+        function appendR18CollectionGroupLabel(kind){
+          const label = document.createElement("div");
+          label.className = "attire-r18-collection-group-label attire-r18-collection-group-label-" + kind;
+          const text = kind === "theme"
+            ? "🧬 テーマ特化コレクション"
+            : (kind === "outfit" ? "👗 衣装系コレクション" : "🔥 状態・見え方系コレクション");
+          const color = kind === "theme" ? "#9a5c7a" : (kind === "outfit" ? "#a36a7c" : "#b24d66");
+          label.textContent = text;
+          label.style.cssText = "margin:6px 0 10px;padding:0 2px;color:" + color + ";font-size:0.78em;font-weight:800;letter-spacing:0.02em;";
+          r18Zone.appendChild(label);
+        }
+
+        function classifyR18CollectionTitle(title){
+          const t = String(title || "");
+          if (
+            t.includes("侵食・寄生特化コレクション") ||
+            t.includes("汚れ・液体系特化コレクション") ||
+            t.includes("艶拘束・支配進行特化コレクション") ||
+            t.includes("魅了の首輪・魔力支配特化コレクション")
+          ) return "theme";
+          if (
+            t.includes("呪印・刻印露出特化コレクション") ||
+            t.includes("生体スーツ・拘束スーツ特化コレクション") ||
+            t.includes("儀式巫女・堕ち神官特化コレクション") ||
+            t.includes("淫紋チャイナ・呪術ドレス特化コレクション") ||
+            t.includes("奴隷装飾・所有印特化コレクション") ||
+            t.includes("触手・粘液汚染衣装特化コレクション")
+          ) return "outfit";
+          if (
+            t.includes("高級ランジェリー特化コレクション") ||
+            t.includes("夜着・私室衣装特化コレクション") ||
+            t.includes("夜の高級衣装特化コレクション") ||
+            t.includes("艶素材・密着特化コレクション") ||
+            t.includes("首輪・ハーネス・固定具衣装特化コレクション") ||
+            t.includes("支配者・女王・高圧衣装特化コレクション") ||
+            t.includes("高級背徳ランジェリー特化コレクション")
+          ) return "outfit";
+          return "state";
+        }
+
+        if (topCollectionDefs.length){
+          const groupedCollections = { theme: [], outfit: [], state: [] };
+          preGroupedTopExtraCollections.forEach(function(collection){
+            const kind = classifyR18CollectionTitle(collection && collection.title);
+            groupedCollections[kind].push(collection);
+          });
+
+          topCollectionDefs.forEach(function(entry){
+            (entry.collectionDefs || []).forEach(function(collection){
+              const kind = classifyR18CollectionTitle(collection && collection.title);
+              groupedCollections[kind].push(collection);
+            });
+          });
+
+          function dedupeCollections(list){
+            const seen = new Set();
+            return (list || []).filter(function(collection){
+              const key = String(collection && collection.title || "");
+              if (!key || seen.has(key)) return false;
+              seen.add(key);
+              return true;
+            });
+          }
+
+          function moveCollectionAfter(list, title, afterTitle){
+            const arr = Array.isArray(list) ? list.slice() : [];
+            const idx = arr.findIndex(function(c){ return c && c.title === title; });
+            if (idx === -1) return arr;
+            const target = arr.splice(idx, 1)[0];
+            const afterIdx = arr.findIndex(function(c){ return c && c.title === afterTitle; });
+            if (afterIdx === -1) {
+              arr.unshift(target);
+            } else {
+              arr.splice(afterIdx + 1, 0, target);
+            }
+            return arr;
+          }
+
+          groupedCollections.theme = dedupeCollections(groupedCollections.theme);
+          groupedCollections.outfit = dedupeCollections(groupedCollections.outfit);
+          groupedCollections.state = dedupeCollections(groupedCollections.state);
+          groupedCollections.outfit = moveCollectionAfter(
+            groupedCollections.outfit,
+            "🧬 生体スーツ・拘束スーツ特化コレクション",
+            "🪬 呪印・刻印露出特化コレクション"
+          );
+
+          ["theme", "outfit", "state"].forEach(function(kind){
+            const list = groupedCollections[kind] || [];
+            if (!list.length) return;
+            appendR18CollectionGroupLabel(kind);
+            list.forEach(function(collection){
+              const node = createR18CollectionNode(collection);
+              if (!node) return;
+              node.dataset.collectionTitle = String(collection && collection.title || "");
+              node.style.width = "100%";
+              node.style.maxWidth = "100%";
+              node.style.margin = "0 0 10px";
+              r18Zone.appendChild(node);
+            });
+          });
+
+          const biosuitTitle = "🧬 生体スーツ・拘束スーツ特化コレクション";
+          const biosuitFound = !!r18Zone.querySelector('[data-collection-title="' + biosuitTitle.replace(/"/g, '\"') + '"]');
+          if (!biosuitFound) {
+            const biosuitCollection = preGroupedTopExtraCollections.find(function(c){ return c && c.title === biosuitTitle; });
+            const biosuitNode = createR18CollectionNode(biosuitCollection);
+            if (biosuitNode) {
+              biosuitNode.dataset.collectionTitle = biosuitTitle;
+              biosuitNode.style.width = "100%";
+              biosuitNode.style.maxWidth = "100%";
+              biosuitNode.style.margin = "0 0 10px";
+              const cursemarkNode = r18Zone.querySelector('[data-collection-title="🪬 呪印・刻印露出特化コレクション"]');
+              if (cursemarkNode && cursemarkNode.parentNode) {
+                cursemarkNode.parentNode.insertBefore(biosuitNode, cursemarkNode.nextSibling);
+              } else {
+                r18Zone.appendChild(biosuitNode);
+              }
+            }
+          }
+        }
+
+        function buildR18ParentWrap(def, nodes, collectionDefs){
+          const wrap = document.createElement("details");
+          wrap.className = "attire-r18-parent-group";
+          wrap.open = false;
+          wrap.style.cssText = "display:block;width:100%;max-width:100%;margin:0 0 8px;border:1px solid #f2ccd7;border-radius:12px;background:#fff6f8;overflow:hidden;box-sizing:border-box;";
+
+          const summary = document.createElement("summary");
+          const parentCount = nodes.length + collectionDefs.length;
+          summary.textContent = def.title + " [" + parentCount + "]";
+          summary.style.cssText = "display:list-item;cursor:pointer;list-style:none;font-weight:800;color:#b53a62;background:#fff0f4;padding:10px 12px;";
+          wrap.appendChild(summary);
+
+          const body = document.createElement("div");
+          body.className = "attire-r18-parent-body";
+          body.style.cssText = "display:block;width:100%;max-width:100%;padding:8px 0 2px;box-sizing:border-box;";
+
+          const subgroupDefs = Array.isArray(def.subgroups) ? def.subgroups : [];
+          if (subgroupDefs.length && nodes.length > 1){
+            const subgroupMap = new Map();
+            subgroupDefs.forEach(function(sub){ subgroupMap.set(sub.title, []); });
+            const rest = [];
+            nodes.forEach(function(node){
+              const txt = getText(node);
+              const sub = subgroupDefs.find(function(entry){ return entry.match(txt); });
+              if (sub) subgroupMap.get(sub.title).push(node);
+              else rest.push(node);
+            });
+            if (rest.length) subgroupMap.set("📦 その他", rest);
+
+            Array.from(subgroupMap.entries()).forEach(function(entry){
+              const subTitle = entry[0];
+              const subNodes = entry[1] || [];
+              if (!subNodes.length) return;
+              const subWrap = document.createElement("details");
+              subWrap.className = "attire-r18-subgroup";
+              subWrap.open = false;
+              subWrap.style.cssText = "display:block;width:100%;max-width:100%;margin:0 0 8px;border:1px solid #f7d9e2;border-radius:10px;background:#fff;overflow:hidden;box-sizing:border-box;";
+              const subSummary = document.createElement("summary");
+              subSummary.textContent = subTitle + " [" + subNodes.length + "]";
+              subSummary.style.cssText = "display:list-item;cursor:pointer;list-style:none;font-weight:700;color:#a14966;background:#fff7f9;padding:9px 12px;";
+              subWrap.appendChild(subSummary);
+              const subBody = document.createElement("div");
+              subBody.className = "attire-r18-subgroup-body";
+              subBody.style.cssText = "display:block;width:100%;max-width:100%;padding:6px 0 2px;box-sizing:border-box;";
+              subNodes.forEach(function(node){
+                if (!node) return;
+                node.style.width = "100%";
+                node.style.maxWidth = "100%";
+                node.style.boxSizing = "border-box";
+                subBody.appendChild(node);
+              });
+              subWrap.appendChild(subBody);
+              body.appendChild(subWrap);
+            });
+          } else {
+            nodes.forEach(function(node){
+              if (!node) return;
+              node.style.width = "100%";
+              node.style.maxWidth = "100%";
+              node.style.boxSizing = "border-box";
+              body.appendChild(node);
+            });
+          }
+          collectionDefs.forEach(function(collection){
+            const collectionNode = createR18CollectionNode(collection);
+            if (collectionNode) body.appendChild(collectionNode);
+          });
+          wrap.appendChild(body);
+          return wrap;
+        }
+
+        const deferredLegacyDefs = [];
+        r18ParentDefs.forEach(function(def){
+          const nodes = r18Groups.get(def.title) || [];
+          const collectionDefs = r18CollectionDefs[def.title] || [];
+          if (!nodes.length && !collectionDefs.length) return;
+
+          if (collectionDefs.length) return;
+
+          // 旧「💧 汚れ・液体系」は上段に特化コレクションをミラー追加済みのため、ここでは描画しない
+          if (def.title === "💧 汚れ・液体系") return;
+
+          if (nodes.length <= 1) {
+            deferredLegacyDefs.push({ def: def, nodes: nodes, collectionDefs: collectionDefs });
+            return;
+          }
+          const wrap = buildR18ParentWrap(def, nodes, []);
+          r18Zone.appendChild(wrap);
+        });
+
+        if (deferredLegacyDefs.length){
+          const legacyDivider = document.createElement("div");
+          legacyDivider.className = "attire-r18-legacy-divider";
+          legacyDivider.style.cssText = "display:flex;align-items:center;gap:10px;width:100%;max-width:100%;margin:4px 0 10px;color:#9d6578;font-weight:800;box-sizing:border-box;";
+          const legacyLineL = document.createElement("span");
+          legacyLineL.style.cssText = "flex:1;height:1px;background:#ead6de;display:block;";
+          const legacyLabel = document.createElement("span");
+          legacyLabel.textContent = "📦 既存R-18棚";
+          legacyLabel.style.cssText = "white-space:nowrap;font-size:13px;letter-spacing:0.02em;";
+          const legacyLineR = document.createElement("span");
+          legacyLineR.style.cssText = "flex:1;height:1px;background:#ead6de;display:block;";
+          legacyDivider.appendChild(legacyLineL);
+          legacyDivider.appendChild(legacyLabel);
+          legacyDivider.appendChild(legacyLineR);
+          r18Zone.appendChild(legacyDivider);
+
+          deferredLegacyDefs.forEach(function(entry){
+            const miniWrap = buildR18ParentWrap(entry.def, entry.nodes, []);
+            miniWrap.style.margin = "0 0 8px";
+            r18Zone.appendChild(miniWrap);
+          });
+        }
+
+        root.appendChild(r18Zone);
+      }
     }catch(_){}
     finally{
       try{
@@ -2257,7 +5860,7 @@ const contentArea = parent.querySelector(".section-content") || parent;
             const label = document.createElement("label");
             label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer;";
             const cb = document.createElement("input");
-            cb.type = "checkbox"; cb.dataset.en = item.en; cb.style.marginRight = "6px";
+            cb.type = "checkbox"; cb.dataset.en = item.en; cb.dataset.r18src = "v17"; cb.style.marginRight = "6px";
             label.appendChild(cb); label.appendChild(document.createTextNode(`${item.ja} / ${item.en}`));
             content.appendChild(label);
           });
@@ -2302,10 +5905,7 @@ const contentArea = parent.querySelector(".section-content") || parent;
     },
     getTags() {
       const tags = [];
-      const root = document.querySelector(".attire-v17-container");
-      if(root) {
-        root.querySelectorAll("input:checked").forEach(cb => tags.push(cb.dataset.en));
-      }
+      document.querySelectorAll("input[data-r18src='v17']:checked").forEach(cb => tags.push(cb.dataset.en));
       return tags;
     }
   };
@@ -5223,7 +8823,7 @@ wrap.appendChild(title);
             const label = document.createElement("label");
             label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer;";
             const cb = document.createElement("input");
-            cb.type = "checkbox"; cb.dataset.en = item.en; cb.style.marginRight = "6px";
+            cb.type = "checkbox"; cb.dataset.en = item.en; cb.dataset.r18src = "v22"; cb.style.marginRight = "6px";
             label.appendChild(cb); label.appendChild(document.createTextNode(`${item.ja}`));
             label.title = item.en; // 英語はツールチップで表示
             content.appendChild(label);
@@ -5251,10 +8851,7 @@ wrap.appendChild(title);
     },
     getTags() {
       const tags = [];
-      const root = document.querySelector(".attire-v22-container");
-      if(root) {
-        root.querySelectorAll("input:checked").forEach(cb => tags.push(cb.dataset.en));
-      }
+      document.querySelectorAll("input[data-r18src='v22']:checked").forEach(cb => tags.push(cb.dataset.en));
       return tags;
     }
   };
@@ -8212,7 +11809,7 @@ function createItemLabel(item){
     cb.addEventListener('change', function(){
       if(__v23PresetApplying) return;
       const root = label.closest('.attire-v23-container');
-      if(root) clearChinaPresetUI(root);
+      if(root) clearPresetUI(root);
     });
     label.appendChild(cb);
     label.appendChild(document.createTextNode(ja));
@@ -8437,5 +12034,90 @@ function createItemLabel(item){
     }
   };
 
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
+
+
+(function(){
+  "use strict";
+  const VERSION = 24;
+  const KEY = "attire";
+  const DICT = {
+    "slipping off shoulder sweater, loose neckline": "肩落ちルーズニット",
+    "partially unbuttoned shirt, loose cleavage": "胸元ゆるみシャツ",
+    "one side slipped top, uneven neckline": "片側ずり落ちトップス",
+    "dress loosened around bust, accidental reveal": "胸元だけ開いたドレス",
+    "disheveled off-shoulder top, fallen neckline": "崩れたオフショルトップス",
+    "shirt hanging open, almost fully exposed": "前全開寸前シャツ",
+    "disheveled kimono, front slipping open": "はだけた着物",
+    "loosely opened gown, front parted": "前開きガウン",
+    "blouse with buttons popping open, strained fabric": "ボタン弾けブラウス",
+    "half removed jacket, slipping from shoulders": "脱ぎかけジャケット",
+    "lingerie strap slipped off, underwear peeking": "片紐ずれランジェリー",
+    "visible lingerie under disheveled clothes": "見せ下着チラ見え",
+    "half removed dress, one side slipping down": "片脱ぎワンピース",
+    "panties peeking above low-worn clothes": "腰掛けショーツ見え",
+    "pantyhose half peeled down, disheveled legs": "脱ぎかけタイツ",
+    "rumpled hem, wrinkled fabric, messy drape": "乱れた裾と皺",
+    "fabric pulled taut, stretched clothing tension": "引っ張られた服の張力",
+    "slipped shoulder straps, unstable fit": "ずれた肩紐",
+    "mid-undressing atmosphere, interrupted dressing": "脱ぎかけ途中の空気",
+    "barely staying on clothes, precarious outfit": "着衣の限界保持",
+    "luxury lace lingerie, floral lace set": "総レースランジェリー",
+    "frilled babydoll lingerie, delicate frills": "フリルたっぷりベビードール",
+    "sheer lace robe, elegant lingerie gown": "透けレースガウン",
+    "embroidered floral lingerie set, luxury details": "花柄刺繍ブラセット",
+    "ribbon decorated lingerie, refined innerwear": "リボン飾りランジェリー",
+    "garter belt lingerie set, thigh straps": "ガーターベルトセット",
+    "bustier lingerie, fitted innerwear": "ビスチェランジェリー",
+    "lace-up corset lingerie, waist cincher": "編み上げコルセット",
+    "lingerie with stockings, coordinated hosiery": "ストッキング一体ランジェリー",
+    "satin corset inner dress, elegant bondage-lite": "サテンコルセットドレスインナー",
+    "jewel lingerie, gem decorated underwear": "宝飾ランジェリー",
+    "pearl chain lingerie, ornamented underwear": "パールチェーンインナー",
+    "bridal lingerie, pure white luxury underwear": "ブライダルランジェリー",
+    "silk slip lingerie, glossy luxury innerwear": "シルクスリップ",
+    "black and gold luxury lingerie, premium innerwear": "黒金の高級下着",
+    "elegant transparency, refined sensuality": "上品な透け感",
+    "luxury fabric clinging to body, premium texture": "密着する高級素材",
+    "delicate embroidery details, haute lingerie": "繊細な刺繍装飾",
+    "perfumed boudoir atmosphere, intimate elegance": "香水めいた気配",
+    "display lingerie styling, made to be seen": "下着見せを前提にした装飾",
+    "black latex bodysuit, mirror gloss": "黒ラテックスボディスーツ",
+    "wet pvc dress, reflective synthetic shine": "濡れたPVCドレス",
+    "glossy rubber lingerie, slick highlight": "光沢ラバーランジェリー",
+    "skin-tight metallic fabric, body hugging": "全身ぴったりメタリック布",
+    "oil gloss innerwear, liquid shine": "オイル光沢インナー",
+    "wet shirt clinging to skin, transparency": "濡れシャツ密着",
+    "wet thin silk dress, clinging drape": "濡れた薄絹ドレス",
+    "semi-transparent body film, second skin": "半透明ボディフィルム",
+    "see-through fabric with droplets, wet sheen": "水滴つきシースルー布",
+    "wet stockings clinging tightly, glossy legs": "濡れストッキング密着",
+    "ultra-thin bodystocking, second-skin fit": "極薄ボディストッキング",
+    "ultra thin fabric stuck to skin": "肌に貼り付く極薄布",
+    "body contour top, silhouette emphasized": "輪郭が浮く密着トップス",
+    "clinging sheer innerwear, translucent fit": "張り付くシアーインナー",
+    "skin-tight dress, every curve defined": "ぴったり密着ワンピ",
+    "strong specular highlights, reflective material": "強いハイライト反射",
+    "vacuum-like cling texture, suction fit": "皮膚に吸い付く質感",
+    "light-revealed contours, glossy silhouette": "光で輪郭が浮く素材",
+    "gloss merging with sweat sheen, slick surface": "艶と汗の境界が曖昧",
+    "sealed in a thin membrane, wrapped body feel": "薄膜で包んだような密閉感"
+  };
+
+  const API = {
+    initUI() {
+      try{
+        if (window.__outputTranslation) window.__outputTranslation.register(DICT);
+      }catch(_){ }
+    },
+    getTags() {
+      const tags = [];
+      document.querySelectorAll("input[data-r18src='v24']:checked").forEach(function(cb){
+        if (cb && cb.dataset && cb.dataset.en) tags.push(cb.dataset.en);
+      });
+      return tags;
+    }
+  };
   window.__registerPromptPart(KEY, VERSION, API);
 })();

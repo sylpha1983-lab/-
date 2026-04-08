@@ -1992,7 +1992,7 @@ cb.addEventListener("change", () => {
     },
     {
       label: "Glossy Fabric & Satin Tension",
-      val: "(glossy fabric texture:1.3), (silky sheen:1.2), (satin-like reflections:1.2), (tight fabric tension:1.2), (smooth reflective cloth:1.2), (specular fabric highlights:1.2), (form-fitting costume:1.2), (light-catching folds), (luxurious shine on clothing)",
+      val: "(glossy fabric texture:1.25), (silky sheen:1.15), (satin-like reflections:1.15), (tight fabric tension:1.15), (smooth reflective cloth:1.15), (specular fabric highlights:1.15), (form-fitting costume:1.1), (light-catching folds), (luxurious shine on clothing), (tailored fit)",
       desc: "光沢布や密着素材の艶と張りを強めたい時向け"
     },
     {
@@ -2012,251 +2012,99 @@ cb.addEventListener("change", () => {
     },
     {
       label: "Luxury Ceremonial China Dress",
-      val: "(intricate outfit details:1.3), (highly detailed costume:1.3), (ornate clothing design:1.2), (elaborate embroidery:1.3), (golden thread embroidery:1.2), (ornamental brocade:1.2), (glossy fabric texture:1.3), (silky sheen:1.2), (satin-like reflections:1.2), (form-fitting costume:1.2), (tight fabric tension:1.2), (decorative metal fittings:1.2), (ornate shoulder armor), (gold-trimmed costume parts), (elaborate hair ornaments:1.2), (ornate chest accessory), (tassel ornaments), (ceremonial costume embellishments:1.2), (luxurious decorative patterns:1.2)",
+      val: "(intricate outfit details:1.3), (highly detailed costume:1.3), (ornate clothing design:1.2), (elaborate embroidery:1.3), (golden thread embroidery:1.2), (ornamental brocade:1.2), (glossy fabric texture:1.25), (silky sheen:1.15), (satin-like reflections:1.15), (form-fitting costume:1.1), (tight fabric tension:1.15), (decorative metal fittings:1.2), (ornate shoulder armor), (gold-trimmed costume parts), (elaborate hair ornaments:1.2), (ornate chest accessory), (tassel ornaments), (ceremonial costume embellishments:1.2), (luxurious decorative patterns:1.2)",
       desc: "豪華チャイナや儀礼衣装を一発で濃くしたい時向け"
     }
   ];
 
-
   const MATERIAL_TEXTURE_DATA = [
     {
       label: "Silk & Satin Luxe Finish",
-      val: "(silk fabric sheen:1.3), (satin-like reflections:1.3), (smooth luxury fabric:1.2), (soft directional sheen:1.2), (light-catching fabric gloss), (silky surface flow), (refined reflective cloth)",
+      val: "(silk fabric sheen:1.2), (satin fabric highlights:1.2), (luxury smooth textile:1.15), (soft directional sheen:1.15), (elegant fabric gloss:1.15), (refined cloth reflections:1.1), (tailored formalwear surface), (rich eveningwear finish)",
       desc: "シルクやサテンの高級な艶と滑らかさを強めたい時向け"
     },
     {
       label: "Velvet & Soft Nap Richness",
-      val: "(velvet pile texture:1.3), (deep light-absorbing fabric:1.2), (plush velvet surface:1.2), (soft directional sheen:1.2), (rich crushed velvet highlights:1.2), (low specular luxury fabric)",
+      val: "(velvet pile texture:1.25), (plush velvet surface:1.2), (deep light-absorbing fabric:1.15), (soft directional sheen:1.15), (rich crushed velvet highlights:1.15), (low specular luxury fabric), (weighted velvet drape:1.1)",
       desc: "ベルベットや起毛布の深みと高級感を出したい時向け"
     },
     {
       label: "Leather & Glossy Enamel Surface",
-      val: "(leather texture:1.2), (polished leather sheen:1.2), (glossy enamel surface:1.3), (hard glossy reflections:1.2), (structured shiny material), (reflective premium leather finish)",
+      val: "(leather material finish:1.2), (glossy enamel surface:1.2), (firm polished material:1.15), (hard reflective trim:1.15), (structured glossy outfit surface:1.1), (clean specular edges), (fashion-grade synthetic leather)",
       desc: "レザーやエナメルの硬質な光沢と張りを足したい時向け"
     },
     {
       label: "Latex & Rubber Skin-tight Shine",
-      val: "(latex texture:1.3), (rubber shine:1.3), (skin-tight glossy material:1.2), (strong specular highlights on clothing:1.2), (tight reflective surface), (liquid-like fabric gloss)",
+      val: "(latex clothing sheen:1.2), (rubberized outfit surface:1.2), (skin-tight material tension:1.15), (high gloss contour highlights:1.15), (slick synthetic suit finish:1.1), (controlled specular reflections), (structured fitted costume)",
       desc: "ラテックスやラバーの密着感と強い反射を出したい時向け"
     },
     {
       label: "Lace & Sheer Delicate Transparency",
-      val: "(lace texture:1.2), (delicate lace details:1.2), (sheer fabric transparency:1.2), (soft translucent cloth:1.2), (fine mesh texture), (elegant see-through layers)",
+      val: "(lace detail texture:1.2), (delicate sheer fabric:1.2), (ornamental lace edges:1.15), (subtle transparent cloth layering:1.1), (fine mesh textile detail), (soft translucent garment accents)",
       desc: "レースやシースルー素材の繊細さと透け感を強めたい時向け"
     },
     {
       label: "Denim & Knit Casual Texture",
-      val: "(denim texture:1.2), (woven cotton feel:1.1), (knit fabric texture:1.2), (casual cloth surface), (soft everyday garment texture), (natural fabric grain)",
+      val: "(denim fabric texture:1.2), (knit textile detail:1.2), (casual cloth grain:1.15), (soft everyday fabric folds:1.1), (natural stitched textile surface), (lived-in casual material feel)",
       desc: "デニムやニットなど日常服の布感を自然に濃くしたい時向け"
     }
   ];
 
   const SILHOUETTE_VOLUME_DATA = [
-    {
-      label: "Waistline & Body Contour",
-      val: "(defined waistline:1.2), (cinched waist silhouette:1.2), (body-hugging contour), (elegant torso shape), (refined body line)",
-      desc: "ウエストの締まりや身体のラインを美しく見せたい時向け"
-    },
-    {
-      label: "Bust Form & Structured Bodice",
-      val: "(structured bodice), (bust contour emphasis:1.2), (tailored chest fit), (three-dimensional bust silhouette), (refined upper-body shaping)",
-      desc: "胸元の立体感や仕立ての良い上半身シルエットを出したい時向け"
-    },
-    {
-      label: "Skirt Spread & Hem Volume",
-      val: "(skirt volume:1.2), (flared hem silhouette:1.2), (layered skirt spread), (graceful hem expansion), (elegant lower silhouette)",
-      desc: "スカートの広がりや裾の美しいボリュームを足したい時向け"
-    },
-    {
-      label: "Shoulder Shape & Armor Tension",
-      val: "(structured shoulder line:1.2), (broad elegant shoulders), (armor-like shoulder tension), (defined upper silhouette), (firm garment structure)",
-      desc: "肩幅や肩装甲の張りを整えて上半身を強く見せたい時向け"
-    },
-    {
-      label: "Drape & Fabric Fall",
-      val: "(weighted fabric drape:1.2), (elegant fabric fall), (soft cascading folds), (natural cloth drop), (rich formal gown draping:1.2)",
-      desc: "布の落ち感やドレープの美しさを強めたい時向け"
-    },
-    {
-      label: "Tailored Structure & 3D Cut",
-      val: "(three-dimensional tailoring:1.2), (structured costume silhouette:1.2), (architectural garment form), (carefully fitted clothing), (refined silhouette:1.2)",
-      desc: "立体裁断っぽい構造美や服全体の完成度を上げたい時向け"
-    }
+    { label: "Waist Definition & Tailored Shape", val: "(defined waistline:1.2), (tailored silhouette:1.2), (body-contouring outfit structure:1.15), (cinched waist emphasis), (refined garment fit)", desc: "ウエストの締まりや服全体の形を綺麗に見せたい時向け" },
+    { label: "Bust Structure & Chest Volume", val: "(structured bodice), (chest contour definition:1.2), (three-dimensional bust shaping:1.15), (curved garment tension), (fitted upper-body silhouette)", desc: "胸元の立体感や上半身の造形を強めたい時向け" },
+    { label: "Skirt Spread & Hem Volume", val: "(skirt volume:1.2), (elegant hem flare:1.15), (layered skirt spread), (structured lower silhouette), (dress hem movement)", desc: "スカートの広がりや裾の華やかさを出したい時向け" },
+    { label: "Shoulder Shape & Armor Presence", val: "(defined shoulder silhouette:1.2), (structured shoulder shape), (shoulder armor presence:1.15), (upper-body width balance), (regal shoulder line)", desc: "肩幅や肩装甲の張りで上半身の格を出したい時向け" },
+    { label: "Elegant Draping & Fabric Fall", val: "(elegant draping:1.2), (weighted fabric fall:1.15), (luxurious cloth drop), (soft gravity folds), (formal gown drape)", desc: "布の落ちる感じや重いドレープを見せたい時向け" },
+    { label: "Three-Dimensional Tailoring", val: "(three-dimensional garment construction:1.2), (architectural outfit structure:1.15), (refined pattern cutting), (structured seams), (couture silhouette balance)", desc: "立体裁断っぽい仕立てや衣装の構築感を足したい時向け" }
   ];
 
   const ACCESSORY_DENSITY_DATA = [
-    {
-      label: "Brooches & Emblems",
-      val: "(decorative brooches), (ornamental badges), (emblems on costume), (luxury accessory accents), (formal insignia details)",
-      desc: "ブローチや紋章を足して格やテーマ性を上げたい時向け"
-    },
-    {
-      label: "Chains, Belts & Buckles",
-      val: "(decorative chains), (belt ornaments), (ornate buckles), (layered belt accessories), (metal fastening details)",
-      desc: "チェーンやベルト装飾で密度と情報量を増やしたい時向け"
-    },
-    {
-      label: "Tassels, Frills & Trim Parts",
-      val: "(tassel ornaments), (frill accents), (decorative trim parts), (layered ornamental edges), (costume detail add-ons)",
-      desc: "房飾りやフリルパーツで衣装を華やかにしたい時向け"
-    },
-    {
-      label: "Jewels & Gem Accents",
-      val: "(jewel ornaments), (gem accents on costume), (decorative gemstones), (luxury jewel details), (sparkling accessory highlights)",
-      desc: "宝石やきらめく装飾で上級衣装感を出したい時向け"
-    },
-    {
-      label: "Hair, Ear & Head Accessories",
-      val: "(elaborate hair ornaments:1.2), (head accessories), (ornamental earrings), (decorative headpiece), (formal hair adornments)",
-      desc: "髪飾りや耳飾りで推し感やヒロイン感を強めたい時向け"
-    },
-    {
-      label: "Accessory Density Full Boost",
-      val: "(decorative brooches), (ornamental badges), (decorative chains), (belt ornaments), (ornate buckles), (tassel ornaments), (frill accents), (jewel ornaments), (decorative gemstones), (elaborate hair ornaments:1.2), (ornamental earrings), (luxury accessory layering)",
-      desc: "付属装飾を一気に増やして衣装の物足りなさを埋めたい時向け"
-    }
+    { label: "Brooches & Emblem Details", val: "(decorative brooches:1.2), (ornamental emblems), (formal crest accessory), (luxury chest ornament)", desc: "ブローチや紋章で格を上げたい時向け" },
+    { label: "Chains & Belt Hardware", val: "(decorative chains:1.2), (ornate belt hardware), (fashion buckles), (metal strap accents), (accessory layering)", desc: "チェーンやバックルで情報量を増やしたい時向け" },
+    { label: "Tassels & Hanging Ornaments", val: "(tassel ornaments:1.2), (hanging accessory details), (swaying decorative cords), (luxury tassel accents)", desc: "房飾りや揺れる装飾を足したい時向け" },
+    { label: "Jewels & Gem Inlays", val: "(jewel embellishments:1.2), (gem inlays), (ornamental gemstones), (sparkling accessory accents)", desc: "宝石や輝く飾りを盛りたい時向け" },
+    { label: "Hair & Ear Accessories", val: "(elaborate hair ornaments:1.2), (ornate earrings), (decorative ear accessories), (headpiece accents)", desc: "髪飾りや耳飾りでヒロイン感を出したい時向け" },
+    { label: "Heroine-Grade Ornament Density", val: "(luxury accessory layering:1.2), (ornate costume jewelry:1.2), (heroine-grade detailing), (premium decorative density), (showpiece outfit accents)", desc: "全体の装飾密度を上げて主役級の衣装にしたい時向け" }
   ];
 
-  const FOCAL_DETAIL_DATA = [
-    {
-      label: "Chestline & Bust Adornment",
-      val: "(ornate chest accessory), (decorated neckline), (bustline detailing), (centerpiece on chest), (upper-body focal ornament)",
-      desc: "胸元を主役にして印象の焦点を作りたい時向け"
-    },
-    {
-      label: "Collar & Neck Design",
-      val: "(intricate collar design), (decorated neckline), (ornamental neck trim), (structured collar details), (elegant throat adornment)",
-      desc: "襟や首まわりの意匠を強めて上品に見せたい時向け"
-    },
-    {
-      label: "Sleeves & Cuff Motifs",
-      val: "(decorative sleeves), (ornate cuffs), (sleeve embroidery), (structured sleeve silhouette), (elegant arm detailing)",
-      desc: "袖の意匠や手首まわりを盛って手元の印象を強めたい時向け"
-    },
-    {
-      label: "Waist & Hip Accent",
-      val: "(waist ornament), (hip accessory accents), (belt centerpiece), (decorated waistline), (midsection focal detail)",
-      desc: "腰まわりのアクセントを強めてシルエットの芯を作りたい時向け"
-    },
-    {
-      label: "Hem, Skirt Edge & Lower Detail",
-      val: "(decorated hem), (skirt edge embroidery), (lower garment trim), (ornamental hemline), (flowing lower detail)",
-      desc: "裾やスカート縁を主役にして下半身の完成度を上げたい時向け"
-    },
-    {
-      label: "Shoulder, Gloves & Footwear Focus",
-      val: "(ornate shoulder armor), (shoulder ornaments), (decorative gloves), (embellished footwear), (accented costume extremities)",
-      desc: "肩・手袋・足元など端の見せ場を強めたい時向け"
-    }
+  const FOCAL_PARTS_DATA = [
+    { label: "Chestpiece & Neckline Focus", val: "(ornate neckline design:1.2), (chestpiece detailing:1.2), (decorated bust area), (upper garment focal detail)", desc: "胸元や首まわりを主役にしたい時向け" },
+    { label: "Collar & Shoulder Focus", val: "(decorative collar design:1.2), (shoulder ornament focus), (upper-frame costume accents), (structured neckline framing)", desc: "襟や肩まわりで印象を作りたい時向け" },
+    { label: "Sleeves & Arm Detail Focus", val: "(ornate sleeve details:1.2), (arm accessory focus), (decorated cuffs), (sleeve silhouette emphasis)", desc: "袖や腕の意匠を目立たせたい時向け" },
+    { label: "Waist & Beltline Focus", val: "(waist accessory focus:1.2), (beltline detailing), (midsection ornament emphasis), (cinched waist accents)", desc: "腰回りやベルト周辺を見せ場にしたい時向け" },
+    { label: "Hemline & Lower Detail Focus", val: "(decorated hemline:1.2), (lower garment accents), (skirt edge details), (ornamental lower silhouette)", desc: "裾や下半身側の意匠を強めたい時向け" },
+    { label: "Gloves, Boots & Footwear Focus", val: "(ornate gloves:1.2), (detailed boots), (footwear accents), (hand and foot costume focus)", desc: "手袋や足元で衣装の完成度を上げたい時向け" }
   ];
 
-  const WORLDBUILDING_OUTFIT_DATA = [
-    {
-      label: "Royal & Ceremonial Regalia",
-      val: "(royal costume design:1.2), (ceremonial costume embellishments:1.2), (regal ornamentation), (noble formalwear), (luxury court attire)",
-      desc: "王族や儀礼服らしい格と豪華さを出したい時向け"
-    },
-    {
-      label: "Temple & Sacred Vestments",
-      val: "(sacred garment design), (temple vestments), (holy ceremonial attire), (ritual cloth ornament), (divine clothing details)",
-      desc: "宗教・神殿衣装っぽい神聖さや儀式感を足したい時向け"
-    },
-    {
-      label: "Military Dress & Parade Uniform",
-      val: "(military dress uniform), (formal parade attire), (regal armor accents), (decorated uniform trim), (ceremonial military details)",
-      desc: "軍装ドレスや式典制服の威厳を強めたい時向け"
-    },
-    {
-      label: "Imperial Chinese Courtwear",
-      val: "(imperial chinese costume), (ornamental brocade), (golden thread embroidery:1.2), (court robe detailing), (ceremonial chinese attire)",
-      desc: "中華宮廷服の格調高い世界観を濃くしたい時向け"
-    },
-    {
-      label: "Traditional Japanese Ritual Wear",
-      val: "(traditional ritual kimono), (formal japanese ceremonial wear), (elegant layered sleeves), (ornamental knot details), (sacred japanese attire)",
-      desc: "和風儀式服や神事衣装らしい空気を出したい時向け"
-    },
-    {
-      label: "Sci-Fi Suit & Mechanical Dress",
-      val: "(futuristic bodysuit design), (sci-fi garment structure), (mechanical costume details), (techwear silhouette), (high-tech clothing accents)",
-      desc: "未来SFスーツや機械装飾ドレスへ寄せたい時向け"
-    },
-    {
-      label: "Mage Robe & Arcane Garment",
-      val: "(arcane robe design), (mage garment details), (mystic clothing layers), (magical costume ornament), (sorcerous formalwear)",
-      desc: "魔導士ローブや神秘衣装として物語性を足したい時向け"
-    }
+  const WORLDWEAR_DATA = [
+    { label: "Royal & Ceremonial Attire", val: "(royal attire:1.2), (ceremonial costume:1.2), (regal formalwear), (noble garment design), (courtly embellishments)", desc: "王族や儀礼服のような格式を足したい時向け" },
+    { label: "Temple & Sacred Garments", val: "(sacred garments:1.2), (temple attire), (religious costume motifs), (ritual vestment details), (holy ornamentation)", desc: "宗教・神殿衣装の神聖さを出したい時向け" },
+    { label: "Military Dress & Officer Glamour", val: "(military dress uniform:1.2), (officer-style outfit), (formal military embellishments), (commanding costume design), (regimental trim)", desc: "軍装ドレスや士官服っぽい格を出したい時向け" },
+    { label: "Imperial Chinese Courtwear", val: "(imperial chinese courtwear:1.2), (palace-inspired dress), (ornate eastern ceremonial attire), (court embroidery), (dynastic ornamentation)", desc: "中華宮廷の豪華さを濃くしたい時向け" },
+    { label: "Japanese Ritual & Formal Wear", val: "(japanese ceremonial wear:1.2), (ritual kimono influence), (formal traditional garment motifs), (ornamental japanese dress elements)", desc: "和風儀式服や格式ある和装感を足したい時向け" },
+    { label: "Futuristic Suit & Sci-Fi Regalia", val: "(futuristic suit design:1.2), (science fiction regalia), (advanced synthetic costume parts), (sleek futurewear), (high-tech outfit styling)", desc: "未来SFスーツや近未来衣装へ寄せたい時向け" },
+    { label: "Mage Robe & Arcane Dress", val: "(mage robe details:1.2), (arcane garment motifs), (sorcerous costume accents), (mystic formalwear), (enchanted cloth design)", desc: "魔導士ローブや魔法衣装の物語感を足したい時向け" },
+    { label: "Mechanical Ornament Dress", val: "(mechanical costume accents:1.2), (gear-inspired dress details), (ornamental machine parts), (hybrid ceremonial-tech outfit), (clockwork embellishments)", desc: "機械装飾ドレスやメカ要素入り衣装にしたい時向け" }
   ];
 
-  const AGED_WORN_DATA = [
-    {
-      label: "Worn Fabric & Lived-in Texture",
-      val: "(worn fabric), (lived-in texture), (softened cloth folds), (used garment feel), (natural wear on clothing)",
-      desc: "新品すぎる服を少し使い込まれた質感にしたい時向け"
-    },
-    {
-      label: "Subtle Wrinkles & Soft Creases",
-      val: "(subtle wrinkles), (soft fabric creases), (natural garment folding), (realistic cloth compression), (casual wear lines)",
-      desc: "自然なシワや折れを加えて平面感を減らしたい時向け"
-    },
-    {
-      label: "Polished Edges & Gentle Aging",
-      val: "(polished edges), (gentle fabric aging), (softened trim), (slightly worn finish), (mature cloth texture)",
-      desc: "端の馴染みや穏やかな経年感で世界に溶け込ませたい時向け"
-    },
-    {
-      label: "Slight Fraying & Battle-worn Trim",
-      val: "(slight fraying), (battle-worn trim), (weathered cloth details), (used edge texture), (adventurer clothing wear)",
-      desc: "旅や戦いを経た衣装らしい歴戦感を足したい時向け"
-    },
-    {
-      label: "Lived-in Formalwear",
-      val: "(lived-in texture), (refined aged fabric), (softened luxurious cloth), (used formal garment), (real-world costume wear)",
-      desc: "高級服の格を保ったまま生活感や使用感を混ぜたい時向け"
-    }
+  const WORN_LIVEDIN_DATA = [
+    { label: "Subtle Wrinkles & Soft Wear", val: "(subtle wrinkles:1.2), (softened cloth folds), (slight fabric wear), (natural garment creasing)", desc: "新品すぎない自然な使用感を足したい時向け" },
+    { label: "Worn Fabric & Lived-In Texture", val: "(worn fabric:1.2), (lived-in texture:1.2), (everyday cloth wear), (soft aged textile feel)", desc: "旅や生活に馴染んだ衣装へ寄せたい時向け" },
+    { label: "Polished Edges & Veteran Finish", val: "(polished edges), (handled garment finish), (experienced outfit wear), (refined worn accents)", desc: "使い込まれた端や仕上がりの渋さを出したい時向け" },
+    { label: "Slight Fraying & Time Marks", val: "(slight fraying), (time-worn details), (aged trim accents), (minor wear marks)", desc: "端のほつれや時間の痕跡を少し足したい時向け" },
+    { label: "Battle-Worn Trim", val: "(battle-worn trim:1.2), (weathered costume edges), (veteran garment details), (used formalwear accents)", desc: "歴戦感や戦場帰りの衣装ニュアンスを足したい時向け" }
   ];
 
   const PATTERN_MOTIF_DATA = [
-    {
-      label: "Floral Pattern & Decorative Bloom",
-      val: "(floral pattern), (decorative flower motifs), (embroidered blooms), (ornamental botanical details), (elegant floral costume design)",
-      desc: "花柄や花モチーフで華やかさを足したい時向け"
-    },
-    {
-      label: "Brocade & Luxury Weave",
-      val: "(ornamental brocade:1.2), (luxurious decorative patterns:1.2), (woven motif cloth), (rich fabric patterning), (formal textile motifs)",
-      desc: "織り模様や高級布の柄を強めたい時向け"
-    },
-    {
-      label: "Geometric & Modern Motif",
-      val: "(geometric motif), (modern patterned cloth), (precise costume pattern lines), (structured repeating design), (graphic textile accents)",
-      desc: "幾何学模様やモダンな柄でスタイリッシュにしたい時向け"
-    },
-    {
-      label: "Celestial & Star Motif",
-      val: "(celestial motif), (star pattern), (moon and star ornament), (cosmic textile design), (night-sky costume details)",
-      desc: "星や月のモチーフで幻想感や宇宙感を足したい時向け"
-    },
-    {
-      label: "Dragon & Mythic Emblem",
-      val: "(dragon motif), (mythic emblem pattern), (beast insignia), (legendary ornament design), (powerful symbolic cloth details)",
-      desc: "龍紋や神話的紋章で強い世界観を出したい時向け"
-    },
-    {
-      label: "Snowflake & Winter Motif",
-      val: "(snowflake pattern), (winter textile motifs), (icy ornament details), (frost-themed costume design), (crystalline pattern work)",
-      desc: "雪柄や氷モチーフで冬らしい意匠を足したい時向け"
-    },
-    {
-      label: "Lace Pattern & Delicate Mesh",
-      val: "(lace pattern), (intricate lace design), (mesh motif detailing), (delicate patterned transparency), (ornamental lace surface)",
-      desc: "レース柄や繊細な網目模様を強めたい時向け"
-    },
-    {
-      label: "Tribal & Ancient Symbol Pattern",
-      val: "(tribal pattern), (ancient symbol motifs), (ethnic textile design), (ritual pattern accents), (primitive ornamental markings)",
-      desc: "部族柄や古代紋様で呪術感や異文化感を出したい時向け"
-    }
+    { label: "Floral Pattern & Bloom Motifs", val: "(floral pattern:1.2), (bloom motifs), (flower ornament pattern), (petal-inspired textile design)", desc: "花柄や華やかな植物モチーフを足したい時向け" },
+    { label: "Brocade & Regal Textile Pattern", val: "(brocade pattern:1.2), (regal textile motifs), (ornamental woven pattern), (luxury fabric patterning)", desc: "織り柄や高級生地の模様を強めたい時向け" },
+    { label: "Geometric & Structured Motifs", val: "(geometric motif:1.2), (structured decorative pattern), (clean repeating textile design), (graphic garment motifs)", desc: "幾何学的で整った模様を入れたい時向け" },
+    { label: "Celestial & Star Motifs", val: "(celestial motif:1.2), (star pattern accents), (cosmic decorative symbols), (moon and star garment details)", desc: "星や月の幻想的モチーフを足したい時向け" },
+    { label: "Dragon & Beast Emblems", val: "(dragon motif:1.2), (beast emblem pattern), (mythic creature insignia), (power-symbol garment accents)", desc: "龍紋や獣紋で格や迫力を出したい時向け" },
+    { label: "Snowflake & Winter Pattern", val: "(snowflake pattern:1.2), (winter textile motifs), (frost ornament design), (icy garment accents)", desc: "雪柄や冬の冷たい意匠を入れたい時向け" },
+    { label: "Lace Pattern & Filigree Motifs", val: "(lace pattern:1.2), (filigree motif), (delicate ornamental patterning), (fine decorative lace design)", desc: "レース柄や細密な意匠を強めたい時向け" },
+    { label: "Tribal & Ancient Symbol Pattern", val: "(tribal pattern:1.2), (ancient symbol motifs), (ritual textile markings), (primitive ornamental design)", desc: "部族紋や古代記号で世界観を濃くしたい時向け" }
   ];
 
 
@@ -2484,9 +2332,9 @@ cb.addEventListener("change", () => {
         conFine.appendChild(window.__QP_UTILS.createSubAccordion("🧵 素材質感特化 (Material Texture Focus)", MATERIAL_TEXTURE_DATA));
         conFine.appendChild(window.__QP_UTILS.createSubAccordion("📐 シルエット・立体感特化 (Silhouette & Volume)", SILHOUETTE_VOLUME_DATA));
         conFine.appendChild(window.__QP_UTILS.createSubAccordion("💎 装飾小物・宝飾特化 (Accessory Density)", ACCESSORY_DENSITY_DATA));
-        conFine.appendChild(window.__QP_UTILS.createSubAccordion("🎯 衣装の見せ場特化 (Focal Detail)", FOCAL_DETAIL_DATA));
-        conFine.appendChild(window.__QP_UTILS.createSubAccordion("🏛 世界観衣装ブースト (Worldbuilding Outfit)", WORLDBUILDING_OUTFIT_DATA));
-        conFine.appendChild(window.__QP_UTILS.createSubAccordion("🕰 使用感・経年表現 (Aged & Worn)", AGED_WORN_DATA));
+        conFine.appendChild(window.__QP_UTILS.createSubAccordion("🎯 衣装の見せ場特化 (Focal Parts)", FOCAL_PARTS_DATA));
+        conFine.appendChild(window.__QP_UTILS.createSubAccordion("🏛 世界観衣装ブースト (Worldwear Boost)", WORLDWEAR_DATA));
+        conFine.appendChild(window.__QP_UTILS.createSubAccordion("🕰 使用感・経年表現 (Worn & Lived-In)", WORN_LIVEDIN_DATA));
         conFine.appendChild(window.__QP_UTILS.createSubAccordion("🧿 模様・パターン特化 (Pattern & Motif)", PATTERN_MOTIF_DATA));
 
         // Insert before NEG trigger if exists, else append
@@ -2724,3 +2572,579 @@ wrap.id = "qp-link-presets";
 })();
 })();
 
+
+
+(function(){
+// --- builder_ui.section.quality_preset.v12.js ---
+(function(){
+  "use strict";
+  const VERSION = 12;
+  const KEY = "quality_preset";
+
+  const SPECIAL_COLLECTIONS = [
+    {
+      key: "motion",
+      title: "🏃 動作・アクション特化プリセット",
+      subtitle: "走る・跳ぶ・突進するなど、顔や質感よりも全身の動き・方向・迫力を優先したい時向け",
+      complete: [
+        {
+          key: "motion_fullbody",
+          label: "全身見せ・構図安定セット",
+          val: "full body shot, clear limb visibility, balanced composition, clean silhouette, subject fully visible, stable action framing, readable pose, outfit readability",
+          desc: "全身の形や衣装を崩さず、まず見やすく通したい時向け",
+          links: ["motion_base_fullbody", "motion_cust_stable", "motion_set_beginner"]
+        },
+        {
+          key: "motion_explosive",
+          label: "動作演出・爆発力セット",
+          val: "dynamic action shot, explosive motion, diagonal composition, dramatic perspective, action emphasis, powerful body line, intense movement, energetic frame",
+          desc: "大きく派手な動きや一撃の勢いを見せたい時向け",
+          links: ["motion_base_dynamic", "motion_cust_blur", "motion_set_power"]
+        },
+        {
+          key: "motion_forward",
+          label: "前進・突進セット",
+          val: "forward motion, strong directional movement, leaning forward, aggressive perspective, speed emphasis, momentum, depth toward camera",
+          desc: "前へ出る圧やスピード感を通したい時向け",
+          links: ["motion_base_direction", "motion_cust_perspective", "motion_set_noface"]
+        },
+        {
+          key: "motion_airborne",
+          label: "跳躍・空中動作セット",
+          val: "airborne action, mid-air pose, lifted silhouette, body extension, suspended motion, jump action, aerial energy, dynamic skyward framing",
+          desc: "ジャンプや宙に浮く瞬間を見せたい時向け",
+          links: ["motion_base_air", "motion_cust_upward", "motion_set_nocrop"]
+        }
+      ],
+      base: [
+        { key: "motion_base_fullbody", label: "全身を優先", val: "full body priority, subject fully visible, clean silhouette", desc: "頭から足先まで見せたい時向け" },
+        { key: "motion_base_dynamic", label: "動きの芯を作る", val: "dynamic action, readable pose, strong body line", desc: "まず動いて見える土台を作りたい時向け" },
+        { key: "motion_base_direction", label: "進行方向を明確化", val: "directional movement, forward energy, movement flow", desc: "どちらへ動いているかを分かりやすくしたい時向け" },
+        { key: "motion_base_air", label: "空中姿勢を安定", val: "airborne pose, suspended body, floating action line", desc: "宙に浮いた形を崩しにくくしたい時向け" }
+      ],
+      customize: [
+        { key: "motion_cust_stable", label: "破綻しにくい見せ方", val: "stable framing, proportional limbs, readable action silhouette", desc: "四肢崩れや読みづらさを減らしたい時向け" },
+        { key: "motion_cust_blur", label: "モーションブラー感", val: "motion blur, speed trail, impact streaks", desc: "速度や爆発感を盛りたい時向け" },
+        { key: "motion_cust_perspective", label: "遠近強調", val: "dramatic foreshortening, strong perspective, dynamic depth", desc: "手前と奥の圧を強めたい時向け" },
+        { key: "motion_cust_upward", label: "跳躍の伸びを強調", val: "upward energy, extended body line, vertical lift emphasis", desc: "空へ伸びる勢いを見せたい時向け" }
+      ],
+      settings: [
+        { key: "motion_set_beginner", label: "初心者向け安定寄り", val: "balanced action readability, stable composition", desc: "まず崩れにくさ重視で使いたい時向け" },
+        { key: "motion_set_power", label: "迫力優先", val: "impact priority, action power emphasis", desc: "多少荒くても勢いを優先したい時向け" },
+        { key: "motion_set_noface", label: "顔より動作優先", val: "action priority over portrait, movement first", desc: "顔アップに吸われにくくしたい時向け" },
+        { key: "motion_set_nocrop", label: "手足の欠けを避ける", val: "avoid cropped limbs, keep full action figure in frame", desc: "端で切れやすい構図を避けたい時向け" }
+      ]
+    },
+    {
+      key: "sports",
+      title: "🏊 スポーツ・競技特化プリセット",
+      subtitle: "競泳・競技フォーム・スポーツ瞬間を、顔アップではなくフォームと前進感で通したい時向け",
+      complete: [
+        {
+          key: "sports_butterfly",
+          label: "バタフライ競泳セット",
+          val: "competitive butterfly stroke, both arms recovering simultaneously above the water, chest lifted out of the water, full body swimming form, strong forward motion, powerful splash trail, sports photography angle",
+          desc: "バタフライで両腕同時動作と体幹のうねりを見せたい時向け",
+          links: ["sports_base_form", "sports_cust_splash", "sports_set_actionfirst"]
+        },
+        {
+          key: "sports_freestyle",
+          label: "クロール競泳セット",
+          val: "freestyle swimming stroke, one arm extended forward, streamlined body, body roll, racing lane form, strong water-cutting motion, forward drive",
+          desc: "クロールの流線型や水を切る前進感を見せたい時向け",
+          links: ["sports_base_streamline", "sports_cust_speed", "sports_set_noportrait"]
+        },
+        {
+          key: "sports_form",
+          label: "全身フォーム見せセット",
+          val: "full body athletic form, clear pose readability, balanced sports composition, training posture clarity, body line emphasis, full figure sports shot",
+          desc: "スポーツ全般でフォームや姿勢を綺麗に見せたい時向け",
+          links: ["sports_base_fullbody", "sports_cust_clean", "sports_set_beginner"]
+        },
+        {
+          key: "sports_burst",
+          label: "瞬発スポーツ動作セット",
+          val: "explosive sports action, dynamic takeoff, rapid direction change, athletic burst, intense motion framing, action photography perspective",
+          desc: "短距離・跳躍・瞬発系の競技へ広く使いたい時向け",
+          links: ["sports_base_dynamic", "sports_cust_perspective", "sports_set_power"]
+        }
+      ],
+      base: [
+        { key: "sports_base_form", label: "競技フォームを優先", val: "athletic form priority, readable sports posture, full body sports form", desc: "まずフォームを通したい時向け" },
+        { key: "sports_base_streamline", label: "流線型を優先", val: "streamlined body, clean movement flow, hydrodynamic body line", desc: "水泳やスピード競技で流れを見せたい時向け" },
+        { key: "sports_base_fullbody", label: "全身可視を優先", val: "full figure sports shot, limb visibility, balanced body framing", desc: "体の使い方を見せたい時向け" },
+        { key: "sports_base_dynamic", label: "競技の勢いを作る", val: "sports action energy, explosive athletic movement, direction clarity", desc: "静止ポーズに逃げにくくしたい時向け" }
+      ],
+      customize: [
+        { key: "sports_cust_splash", label: "水しぶき強化", val: "powerful splash, water droplets, splash trail", desc: "競泳らしい水の暴れ方を足したい時向け" },
+        { key: "sports_cust_speed", label: "スピード感強化", val: "speed emphasis, racing motion, momentum streaks", desc: "前進や速度の印象を強めたい時向け" },
+        { key: "sports_cust_clean", label: "フォームの見やすさ強化", val: "clean action silhouette, readable limb placement, stable sports framing", desc: "崩れを減らして見やすくしたい時向け" },
+        { key: "sports_cust_perspective", label: "競技カメラ感", val: "sports photography perspective, trackside angle, dynamic action camera", desc: "会場で撮ったような臨場感を足したい時向け" }
+      ],
+      settings: [
+        { key: "sports_set_beginner", label: "初心者向け安定寄り", val: "stable sports readability, balanced athletic composition", desc: "まず綺麗に競技らしくしたい時向け" },
+        { key: "sports_set_power", label: "躍動優先", val: "athletic intensity priority, action over portrait", desc: "動きの圧を優先したい時向け" },
+        { key: "sports_set_actionfirst", label: "顔よりフォーム優先", val: "form priority over face, action first", desc: "顔アップに吸われにくくしたい時向け" },
+        { key: "sports_set_noportrait", label: "ポートレート化を抑える", val: "avoid portrait framing, avoid close-up crop, keep sports action visible", desc: "接写寄りになりやすい時の補助向け" }
+      ]
+    },
+    {
+      key: "combat",
+      title: "🥊 格闘・戦闘特化プリセット",
+      subtitle: "パンチ・蹴り・組み合い・武器振り抜きなど、ただ立つだけで終わらせず戦闘動作を通したい時向け",
+      complete: [
+        {
+          key: "combat_strike",
+          label: "打撃アクションセット",
+          val: "striking action, punch and kick motion, hip rotation, impact emphasis, aggressive combat framing, dynamic combat pose, attack momentum",
+          desc: "パンチ・キック・踏み込みを見せたい時向け",
+          links: ["combat_base_strike", "combat_cust_impact", "combat_set_actionfirst"]
+        },
+        {
+          key: "combat_grapple",
+          label: "組み技・接触戦セット",
+          val: "grappling motion, body contact, clinch action, close-quarters combat, balance struggle, locked bodies, physical contest",
+          desc: "組みつきや押し合い、近接の密度を出したい時向け",
+          links: ["combat_base_contact", "combat_cust_balance", "combat_set_readable"]
+        },
+        {
+          key: "combat_weapon",
+          label: "武器振り抜きセット",
+          val: "weapon swing motion, follow-through action, directional slash arc, dynamic combat perspective, attack trajectory, battle energy",
+          desc: "剣や槍などの振り抜き動作を見せたい時向け",
+          links: ["combat_base_weapon", "combat_cust_arc", "combat_set_power"]
+        },
+        {
+          key: "combat_standoff",
+          label: "対峙・緊張セット",
+          val: "combat-ready posture, standoff tension, confrontational framing, pre-strike atmosphere, readable distance between opponents, duel mood",
+          desc: "斬り結ぶ直前の緊張や対峙の空気を見せたい時向け",
+          links: ["combat_base_distance", "combat_cust_tension", "combat_set_beginner"]
+        }
+      ],
+      base: [
+        { key: "combat_base_strike", label: "打撃の軸を作る", val: "striking posture, attack line clarity, rotational body action", desc: "打撃の体幹や軸足を見せたい時向け" },
+        { key: "combat_base_contact", label: "接触戦の密度を作る", val: "close body contact, grappling pressure, contested balance", desc: "組み技や密着戦を見せたい時向け" },
+        { key: "combat_base_weapon", label: "武器動作の流れを作る", val: "weapon motion flow, follow-through line, attack direction clarity", desc: "剣戟の流れを通したい時向け" },
+        { key: "combat_base_distance", label: "対峙距離を見せる", val: "combat spacing, duel distance, readable opponent placement", desc: "向かい合う関係性を見せたい時向け" }
+      ],
+      customize: [
+        { key: "combat_cust_impact", label: "衝撃演出", val: "impact burst, strike emphasis, hit shock", desc: "当たりの重さを足したい時向け" },
+        { key: "combat_cust_balance", label: "重心争い強化", val: "balance struggle, weight shift, pushing force", desc: "押し合い・崩し合いの感じを出したい時向け" },
+        { key: "combat_cust_arc", label: "振り抜き軌道強化", val: "attack arc, slash trail, motion trajectory", desc: "武器の軌跡を分かりやすくしたい時向け" },
+        { key: "combat_cust_tension", label: "緊張感強化", val: "high tension atmosphere, pre-impact silence, duel pressure", desc: "ぶつかる前の空気を濃くしたい時向け" }
+      ],
+      settings: [
+        { key: "combat_set_beginner", label: "初心者向け安定寄り", val: "readable combat composition, stable duel framing", desc: "まず見やすく戦闘らしくしたい時向け" },
+        { key: "combat_set_power", label: "迫力優先", val: "combat intensity priority, impact first", desc: "多少荒くても勢いを優先したい時向け" },
+        { key: "combat_set_actionfirst", label: "顔より戦闘優先", val: "combat action priority over face, fight first", desc: "イケ顔ポートレート化を抑えたい時向け" },
+        { key: "combat_set_readable", label: "状況の読みやすさ優先", val: "clear combat readability, understandable body positions", desc: "何が起きているか分かりやすくしたい時向け" }
+      ]
+    },
+    {
+      key: "composition",
+      title: "📸 構図・見せ方特化プリセット",
+      subtitle: "顔寄せ・全身見せ・ローアングル・俯瞰など、切り取り方を完成セットとして一発で選びたい時向け",
+      complete: [
+        {
+          key: "composition_portrait",
+          label: "顔寄せ・上半身セット",
+          val: "cinematic portrait crop, close framing, upper body focus, face emphasis, shallow depth of field, portrait composition",
+          desc: "顔や上半身を主役にしたい時向け",
+          links: ["composition_base_face", "composition_cust_dof", "composition_set_beginner"]
+        },
+        {
+          key: "composition_fullbody",
+          label: "全身見せセット",
+          val: "full body shot, clean silhouette, long shot, subject fully visible, outfit readability, balanced full figure composition",
+          desc: "衣装やポーズ全体を見せたい時向け",
+          links: ["composition_base_fullbody", "composition_cust_clean", "composition_set_nocrop"]
+        },
+        {
+          key: "composition_lowangle",
+          label: "ローアングル映えセット",
+          val: "low angle shot, heroic framing, dramatic perspective, vertical emphasis, powerful presence, upward camera angle",
+          desc: "迫力や存在感を下から煽って見せたい時向け",
+          links: ["composition_base_low", "composition_cust_perspective", "composition_set_power"]
+        },
+        {
+          key: "composition_highangle",
+          label: "俯瞰・俯角セット",
+          val: "high angle shot, top-down feeling, layered depth, delicate spacing, scene overview, downward camera angle",
+          desc: "上から眺める構図や全体の配置を見せたい時向け",
+          links: ["composition_base_high", "composition_cust_layers", "composition_set_readable"]
+        }
+      ],
+      base: [
+        { key: "composition_base_face", label: "顔主役の土台", val: "face emphasis, upper body priority, portrait framing", desc: "顔を主役にしたい時向け" },
+        { key: "composition_base_fullbody", label: "全身主役の土台", val: "full figure priority, complete silhouette, body readability", desc: "全身を主役にしたい時向け" },
+        { key: "composition_base_low", label: "下から煽る土台", val: "low angle framing, upward perspective, towering subject", desc: "下からの迫力を出したい時向け" },
+        { key: "composition_base_high", label: "上から俯瞰する土台", val: "high angle composition, top-down spacing, overview framing", desc: "俯瞰の配置感を作りたい時向け" }
+      ],
+      customize: [
+        { key: "composition_cust_dof", label: "背景ボケ強化", val: "depth of field, bokeh, blurred background", desc: "被写体を前へ出したい時向け" },
+        { key: "composition_cust_clean", label: "見切れ抑制", val: "clean framing, keep full subject visible, no awkward crop", desc: "端で切れにくくしたい時向け" },
+        { key: "composition_cust_perspective", label: "遠近強化", val: "dramatic perspective, depth emphasis, foreshortening", desc: "迫力のある奥行きを足したい時向け" },
+        { key: "composition_cust_layers", label: "前後レイヤー強化", val: "foreground background layering, scene depth, layered composition", desc: "空間の重なりを見せたい時向け" }
+      ],
+      settings: [
+        { key: "composition_set_beginner", label: "初心者向け安定寄り", val: "balanced composition, stable framing", desc: "まず破綻しにくくしたい時向け" },
+        { key: "composition_set_power", label: "迫力優先", val: "dramatic framing priority, intensity over neutrality", desc: "映えを優先したい時向け" },
+        { key: "composition_set_readable", label: "状況の読みやすさ優先", val: "scene readability priority, composition clarity", desc: "何を見せたいか分かりやすくしたい時向け" },
+        { key: "composition_set_nocrop", label: "欠け・切れ抑制", val: "avoid cropped subject, keep full composition readable", desc: "手足や衣装が切れやすい時向け" }
+      ]
+    }
+  ];
+
+  function ensureSpecialCollectionStyles(){
+    if (document.getElementById("qp-special-collections-style")) return;
+    const css = `
+      #qp-special-collections-group{margin:12px 0 16px 0;}
+      #qp-special-collections-group .qp-special-heading{margin:6px 0 8px 0; font-size:12px; font-weight:700; color:#475569;}
+      #qp-special-collections-group .qp-special-guide{margin:0 0 10px 0; padding:10px 12px; border:1px solid #dbe7f5; border-radius:10px; background:#f8fbff; color:#475569; font-size:12px; line-height:1.6;}
+      #qp-special-collections-group .qp-special-collection-summary-note{margin:0 0 8px 0; padding:8px 10px; border:1px solid #e5e7eb; border-radius:10px; background:#ffffff; color:#6b7280; font-size:12px; line-height:1.55;}
+      #qp-special-collections-group .qp-special-collection,
+      #qp-special-collections-group .qp-special-sub{width:100% !important; box-sizing:border-box !important;}
+      #qp-special-collections-group .qp-special-collection-body,
+      #qp-special-collections-group details[open] > .qp-special-collection-body,
+      #qp-special-collections-group .qp-special-collection-list,
+      #qp-special-collections-group details[open] > .qp-special-collection-list{display:block !important; grid-template-columns:1fr !important; grid-auto-flow:row !important; width:100% !important; max-width:100% !important; padding:8px !important; box-sizing:border-box !important;}
+      #qp-special-collections-group .qp-special-collection-list label{display:block !important; width:100% !important; max-width:100% !important; box-sizing:border-box !important; padding:10px 12px !important; margin:0 0 8px 0 !important; border-radius:10px !important; border:1px solid #e5e7eb !important; background:#fff !important;}
+      #qp-special-collections-group .qp-special-collection-list label:last-child{margin-bottom:0 !important;}
+      #qp-special-collections-group .qp-special-collection-list .qp-item-main{display:flex !important; align-items:flex-start !important;}
+      #qp-special-collections-group .qp-special-collection-list .qp-item-desc{display:block !important; margin-top:6px !important; margin-left:28px !important; font-size:11px !important; line-height:1.55 !important; color:#6b7280 !important;}
+      #qp-special-collections-group .qp-special-collection-list input[type="checkbox"]{transform:scale(1.06); margin-right:8px;}
+      #qp-special-collections-group .qp-special-divider{height:1px; border:0; background:linear-gradient(90deg, rgba(148,163,184,0), rgba(148,163,184,.55), rgba(148,163,184,0)); margin:8px 0 10px 0;}
+    `;
+    const style = document.createElement("style");
+    style.id = "qp-special-collections-style";
+    style.textContent = css;
+    document.head.appendChild(style);
+  }
+
+  function createCollectionOption(item, collectionKey, role){
+    const label = document.createElement("label");
+    const main = document.createElement("div");
+    main.className = "qp-item-main";
+    const cb = document.createElement("input");
+    cb.type = "checkbox";
+    cb.dataset.val = item.val || item.en || "";
+    cb.dataset.specialCollectionKey = collectionKey;
+    cb.dataset.specialRole = role;
+    cb.dataset.specialItemKey = item.key || "";
+    if (role === "complete") {
+      cb.dataset.specialComplete = "1";
+      cb.dataset.specialLinks = (item.links || []).join(",");
+    }
+    cb.id = `qp-sc-${collectionKey}-${item.key}`;
+    const textSpan = document.createElement("span");
+    textSpan.className = "qp-item-text";
+    textSpan.textContent = item.label || "";
+    main.appendChild(cb);
+    main.appendChild(textSpan);
+    label.appendChild(main);
+    if (item.desc) {
+      const desc = document.createElement("div");
+      desc.className = "qp-item-desc";
+      desc.textContent = item.desc;
+      label.appendChild(desc);
+    }
+    return label;
+  }
+
+  function createCollectionSubAccordion(collectionKey, title, role, items){
+    const details = document.createElement("details");
+    details.className = "qp-sub-acc qp-special-sub";
+    details.open = false;
+    details.dataset.specialCollectionKey = collectionKey;
+    details.dataset.specialRole = role;
+    const summary = document.createElement("summary");
+    summary.textContent = title;
+    details.appendChild(summary);
+    const body = document.createElement("div");
+    body.className = "qp-special-collection-list";
+    items.forEach(item => body.appendChild(createCollectionOption(item, collectionKey, role)));
+    details.appendChild(body);
+    return details;
+  }
+
+  function createCollectionAccordion(def){
+    const details = document.createElement("details");
+    details.className = "qp-sub-acc qp-special-collection";
+    details.open = false;
+    details.dataset.specialCollectionKey = def.key;
+    const summary = document.createElement("summary");
+    summary.textContent = def.title;
+    details.appendChild(summary);
+
+    const body = document.createElement("div");
+    body.className = "qp-special-collection-body";
+    if (def.subtitle) {
+      const note = document.createElement("div");
+      note.className = "qp-special-collection-summary-note";
+      note.textContent = def.subtitle;
+      body.appendChild(note);
+    }
+    body.appendChild(createCollectionSubAccordion(def.key, "🎯 完成セット", "complete", def.complete || []));
+    body.appendChild(createCollectionSubAccordion(def.key, "🧱 ベース", "base", def.base || []));
+    body.appendChild(createCollectionSubAccordion(def.key, "🎛 カスタマイズ", "customize", def.customize || []));
+    body.appendChild(createCollectionSubAccordion(def.key, "⚙ 設定", "setting", def.settings || []));
+    details.appendChild(body);
+    return details;
+  }
+
+  function wireSpecialCollections(groupRoot, conQuality){
+    if (!groupRoot || groupRoot.dataset.specialCollectionsWired === "1") return;
+    groupRoot.dataset.specialCollectionsWired = "1";
+
+    const checkboxMap = new Map();
+    groupRoot.querySelectorAll('input[type="checkbox"][data-special-item-key]').forEach(cb => {
+      checkboxMap.set(cb.dataset.specialItemKey, cb);
+    });
+
+    const collectionKeys = Array.from(new Set(Array.from(groupRoot.querySelectorAll('[data-special-collection-key]')).map(el => el.dataset.specialCollectionKey).filter(Boolean)));
+    const generalPresetCbs = Array.from(conQuality.querySelectorAll('input[type="checkbox"][data-qp-preset-group="quality-presets"]'));
+    let isApplyingCompleteSet = false;
+
+    function syncVisual(){
+      try { if (window.__VISUAL_SYNC?.updateSelectedList) window.__VISUAL_SYNC.updateSelectedList(); } catch(e){}
+    }
+
+    function getCollectionContainer(key){
+      return groupRoot.querySelector(`details.qp-special-collection[data-special-collection-key="${key}"]`);
+    }
+
+    function getSubAccordion(key, role){
+      const root = getCollectionContainer(key);
+      if (!root) return null;
+      return root.querySelector(`details.qp-special-sub[data-special-role="${role}"]`);
+    }
+
+    function getCompleteCheckboxes(key){
+      return Array.from(groupRoot.querySelectorAll(`input[type="checkbox"][data-special-complete="1"][data-special-collection-key="${key}"]`));
+    }
+
+    function getLowerCheckboxes(key){
+      return Array.from(groupRoot.querySelectorAll(`input[type="checkbox"][data-special-collection-key="${key}"]:not([data-special-complete="1"])`));
+    }
+
+    function clearGeneralQualityPresets(){
+      generalPresetCbs.forEach(cb => {
+        if (cb.checked) {
+          cb.checked = false;
+          cb.dispatchEvent(new Event("change", { bubbles:true }));
+        }
+      });
+    }
+
+    function clearCollectionLinkedState(key){
+      getLowerCheckboxes(key).forEach(cb => {
+        if (cb.checked) {
+          cb.checked = false;
+          cb.dispatchEvent(new Event("change", { bubbles:true }));
+        }
+      });
+    }
+
+    function clearCollectionState(key){
+      getCompleteCheckboxes(key).forEach(cb => {
+        if (cb.checked) {
+          cb.checked = false;
+        }
+      });
+      clearCollectionLinkedState(key);
+    }
+
+    function openCollectionPath(key, linkedKeys){
+      const root = getCollectionContainer(key);
+      if (root) root.open = true;
+      const completeAcc = getSubAccordion(key, "complete");
+      if (completeAcc) completeAcc.open = true;
+      (linkedKeys || []).forEach(itemKey => {
+        const target = checkboxMap.get(itemKey);
+        if (!target) return;
+        const parentDetails = target.closest('details.qp-special-sub');
+        if (parentDetails) parentDetails.open = true;
+      });
+    }
+
+    function applyCompleteSet(cb){
+      const key = cb.dataset.specialCollectionKey;
+      const links = (cb.dataset.specialLinks || "").split(",").map(s => s.trim()).filter(Boolean);
+      if (cb.checked) {
+        isApplyingCompleteSet = true;
+        try {
+          clearGeneralQualityPresets();
+          collectionKeys.forEach(otherKey => {
+            if (otherKey !== key) clearCollectionState(otherKey);
+          });
+          getCompleteCheckboxes(key).forEach(other => {
+            if (other !== cb) other.checked = false;
+          });
+          clearCollectionLinkedState(key);
+          links.forEach(itemKey => {
+            const target = checkboxMap.get(itemKey);
+            if (target && !target.checked) {
+              target.checked = true;
+              target.dispatchEvent(new Event("change", { bubbles:true }));
+            }
+          });
+          openCollectionPath(key, links);
+        } finally {
+          isApplyingCompleteSet = false;
+        }
+      } else {
+        isApplyingCompleteSet = true;
+        try {
+          clearCollectionLinkedState(key);
+        } finally {
+          isApplyingCompleteSet = false;
+        }
+      }
+      syncVisual();
+    }
+
+    groupRoot.querySelectorAll('input[type="checkbox"][data-special-complete="1"]').forEach(cb => {
+      cb.addEventListener("change", () => applyCompleteSet(cb));
+    });
+
+    groupRoot.querySelectorAll('input[type="checkbox"][data-special-role]:not([data-special-complete="1"])').forEach(cb => {
+      cb.addEventListener("change", () => {
+        if (isApplyingCompleteSet) {
+          syncVisual();
+          return;
+        }
+        const key = cb.dataset.specialCollectionKey;
+        const activeComplete = getCompleteCheckboxes(key).find(x => x.checked);
+        if (activeComplete) {
+          activeComplete.checked = false;
+          activeComplete.dispatchEvent(new Event("change", { bubbles:true }));
+        }
+        syncVisual();
+      });
+    });
+
+    generalPresetCbs.forEach(cb => {
+      if (cb.dataset.specialCollectionsHooked === "1") return;
+      cb.dataset.specialCollectionsHooked = "1";
+      cb.addEventListener("change", () => {
+        if (!cb.checked) return;
+        collectionKeys.forEach(key => clearCollectionState(key));
+        syncVisual();
+      });
+    });
+  }
+
+  const API = {
+    initUI(container) {
+      ensureSpecialCollectionStyles();
+      const root = document.getElementById("qp-root-container");
+      const conQuality = document.getElementById("qp-quality-content");
+      if (!root || !conQuality) return;
+      if (document.getElementById("qp-special-collections-group")) {
+        wireSpecialCollections(document.getElementById("qp-special-collections-group"), conQuality);
+        return;
+      }
+
+      const group = document.createElement("div");
+      group.id = "qp-special-collections-group";
+
+      const divider = document.createElement("hr");
+      divider.className = "qp-special-divider";
+      group.appendChild(divider);
+
+      const heading = document.createElement("div");
+      heading.className = "qp-special-heading";
+      heading.textContent = "🧩 特化プリセット";
+      group.appendChild(heading);
+
+      const guide = document.createElement("div");
+      guide.className = "qp-special-guide";
+      guide.textContent = "動作・競技・戦闘・構図のように、通しにくい題材を完成セット基準で組み直す区画です。完成セットを選ぶと同じプリセット内の下位棚を自動で入れ替えます。顔アップや静止ポーズへ吸われやすい時の一発救済向け。";
+      group.appendChild(guide);
+
+      SPECIAL_COLLECTIONS.forEach(def => group.appendChild(createCollectionAccordion(def)));
+
+      const anchor = document.getElementById("qp-link-presets") || document.getElementById("qp-commercial-mode");
+      if (anchor && anchor.parentNode === conQuality) conQuality.insertBefore(group, anchor);
+      else conQuality.appendChild(group);
+
+      wireSpecialCollections(group, conQuality);
+    }
+  };
+
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
+})();
+
+
+(function(){
+// --- builder_ui.section.quality_preset.v13.js ---
+(function(){
+  "use strict";
+  const VERSION = 13;
+  const KEY = "quality_preset";
+
+  function ensureQualitySingleColumnStyles(){
+    if(document.getElementById("qp-quality-singlecolumn-style")) return;
+    const style = document.createElement("style");
+    style.id = "qp-quality-singlecolumn-style";
+    style.textContent = `
+      #qp-quality-content,
+      #qp-quality details[open] > #qp-quality-content,
+      .quality-preset-integrated #qp-quality-content {
+        display:block !important;
+        grid-template-columns:1fr !important;
+        grid-auto-flow:row !important;
+        width:100% !important;
+        max-width:100% !important;
+        box-sizing:border-box !important;
+      }
+      #qp-quality-content > *,
+      #qp-quality-content > details,
+      #qp-quality-content > div {
+        display:block !important;
+        width:100% !important;
+        max-width:100% !important;
+        box-sizing:border-box !important;
+        grid-column:1 / -1 !important;
+      }
+      #qp-quality-content > details.qp-sub-acc,
+      #qp-quality-content > details.qp-subacc,
+      #qp-quality-content > div#qp-special-collections-group {
+        margin-left:0 !important;
+        margin-right:0 !important;
+      }
+      #qp-special-collections-group,
+      #qp-special-collections-group .qp-special-collection,
+      #qp-special-collections-group .qp-special-sub {
+        width:100% !important;
+        max-width:100% !important;
+        box-sizing:border-box !important;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  const API = {
+    initUI(container){
+      ensureQualitySingleColumnStyles();
+      const conQuality = document.getElementById("qp-quality-content");
+      if(!conQuality) return;
+      conQuality.style.display = "block";
+      conQuality.style.width = "100%";
+      Array.from(conQuality.children || []).forEach(el => {
+        try{
+          el.style.display = "block";
+          el.style.width = "100%";
+          el.style.maxWidth = "100%";
+          el.style.boxSizing = "border-box";
+        }catch(e){}
+      });
+    },
+    getTags(){ return []; }
+  };
+
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
+})();

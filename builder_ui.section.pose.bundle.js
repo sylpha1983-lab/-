@@ -170,6 +170,41 @@
         { ja: "壁ドン", en: "kabedon" },
         { ja: "背中合わせ", en: "back-to-back" }
       ]
+    },
+    "🥊 格闘・組み合い": {
+      "🥊 打撃": [
+        { ja: "ジャブ牽制セット", en: "striking complete set, jab feint" },
+        { ja: "ストレート打ち込みセット", en: "striking complete set, straight punch" },
+        { ja: "フック振り抜きセット", en: "striking complete set, hook swing" },
+        { ja: "アッパー突き上げセット", en: "striking complete set, uppercut lift" },
+        { ja: "打撃コンビネーションセット", en: "striking complete set, combo barrage" },
+        { ja: "ガード構えセット", en: "striking complete set, guarded stance" },
+        { ja: "ダッキング回避セット", en: "striking complete set, duck evade" }
+      ],
+      "🦵 キック": [
+        { ja: "前蹴りセット", en: "kicking complete set, front kick" },
+        { ja: "回し蹴りセット", en: "kicking complete set, roundhouse kick" },
+        { ja: "膝蹴りセット", en: "kicking complete set, knee strike" },
+        { ja: "蹴り上げセット", en: "kicking complete set, rising kick" },
+        { ja: "ハイキックセット", en: "kicking complete set, high kick" },
+        { ja: "蹴りからの戻しセット", en: "kicking complete set, kick recovery" }
+      ],
+      "🤼 組み合い": [
+        { ja: "首相撲セット", en: "clinch complete set, neck clinch" },
+        { ja: "組み付き押し合いセット", en: "clinch complete set, tie up push" },
+        { ja: "片腕を差し込むセット", en: "clinch complete set, underhook entry" },
+        { ja: "間合いを詰めるセット", en: "clinch complete set, close distance" },
+        { ja: "密着ガード崩しセット", en: "clinch complete set, close guard break" },
+        { ja: "押さえ込み移行セット", en: "clinch complete set, control transition" }
+      ],
+      "🥋 投げ・崩し": [
+        { ja: "崩し動作セット", en: "throw complete set, off balance entry" },
+        { ja: "腰を入れる投げセット", en: "throw complete set, hip throw entry" },
+        { ja: "引き手で崩すセット", en: "throw complete set, pull and break balance" },
+        { ja: "体勢を崩して倒すセット", en: "throw complete set, break posture takedown" },
+        { ja: "投げ直前の溜めセット", en: "throw complete set, pre throw load" },
+        { ja: "投げ後の残心セット", en: "throw complete set, post throw follow through" }
+      ]
     }
   };
 
@@ -2868,6 +2903,970 @@ const POSE_STAGE1_BODY = {
     return d;
   }
 
+
+  // ---------- Sports Specialized Collection ----------
+  const SPORTS_COLLECTION_TITLE = "🏃 スポーツ動作・競技ポーズ特化コレクション (Sports Action / Athletic Pose Specialized Collection)";
+
+  const SPORTS_COMPLETED = {
+    "⚽ サッカー": [
+      { ja: "ドリブル突破セット", en: "soccer complete set, dribble breakthrough" },
+      { ja: "切り返し突破セット", en: "soccer complete set, cut and turn breakthrough" },
+      { ja: "トラップ保持セット", en: "soccer complete set, trap and keep control" },
+      { ja: "競り合いセット", en: "soccer complete set, physical contest" },
+      { ja: "シュート決定機セット", en: "soccer complete set, shooting chance" },
+      { ja: "ボレーシュートセット", en: "soccer complete set, volley shot" },
+      { ja: "ヘディング競り合いセット", en: "soccer complete set, heading duel" },
+      { ja: "スライディング守備セット", en: "soccer complete set, sliding defense" },
+      { ja: "タックル回避セット", en: "soccer complete set, evade tackle" },
+      { ja: "ゴール直後の雄叫びセット", en: "soccer complete set, post goal celebration" }
+    ],
+    "🏀 バスケットボール": [
+      { ja: "低いドリブル突破セット", en: "basketball complete set, low dribble breakthrough" },
+      { ja: "クロスオーバー突破セット", en: "basketball complete set, crossover breakthrough" },
+      { ja: "ジャンプシュートセット", en: "basketball complete set, jump shot" },
+      { ja: "ステップバックシュートセット", en: "basketball complete set, step back shot" },
+      { ja: "レイアップセット", en: "basketball complete set, layup" },
+      { ja: "ダンク進入セット", en: "basketball complete set, dunk drive" },
+      { ja: "リバウンド空中戦セット", en: "basketball complete set, rebound contest" },
+      { ja: "ディフェンス構えセット", en: "basketball complete set, defensive stance" },
+      { ja: "ブロックジャンプセット", en: "basketball complete set, block jump" },
+      { ja: "ルーズボール飛び込みセット", en: "basketball complete set, loose ball dive" }
+    ],
+    "🏐 バレーボール": [
+      { ja: "助走スパイクセット", en: "volleyball complete set, approach spike" },
+      { ja: "高打点スパイクセット", en: "volleyball complete set, high contact spike" },
+      { ja: "ブロックセット", en: "volleyball complete set, block jump" },
+      { ja: "レシーブセット", en: "volleyball complete set, receive" },
+      { ja: "飛び込みレシーブセット", en: "volleyball complete set, diving receive" },
+      { ja: "トス構築セット", en: "volleyball complete set, set toss" },
+      { ja: "サーブ始動セット", en: "volleyball complete set, serve preparation" },
+      { ja: "ジャンプサーブセット", en: "volleyball complete set, jump serve" }
+    ],
+    "⚾ 野球": [
+      { ja: "打席構えセット", en: "baseball complete set, batter stance" },
+      { ja: "フルスイングセット", en: "baseball complete set, full swing" },
+      { ja: "ミート打撃セット", en: "baseball complete set, contact hit" },
+      { ja: "投球フォームセット", en: "baseball complete set, pitching form" },
+      { ja: "リリース直前セット", en: "baseball complete set, pitch release" },
+      { ja: "捕球送球セット", en: "baseball complete set, catch and throw" },
+      { ja: "内野守備セット", en: "baseball complete set, infield defense" },
+      { ja: "外野フライ追走セット", en: "baseball complete set, chase fly ball" },
+      { ja: "ジャンプキャッチセット", en: "baseball complete set, jump catch" },
+      { ja: "走塁ダッシュセット", en: "baseball complete set, base running dash" },
+      { ja: "走塁スライディングセット", en: "baseball complete set, base running slide" }
+    ],
+    "🥊 格闘・組み合い": {
+      "🥊 打撃": [
+        { ja: "ジャブ牽制セット", en: "striking complete set, jab feint" },
+        { ja: "ストレート打ち込みセット", en: "striking complete set, straight punch" },
+        { ja: "フック振り抜きセット", en: "striking complete set, hook swing" },
+        { ja: "アッパー突き上げセット", en: "striking complete set, uppercut lift" },
+        { ja: "打撃コンビネーションセット", en: "striking complete set, combo barrage" },
+        { ja: "ガード構えセット", en: "striking complete set, guarded stance" },
+        { ja: "ダッキング回避セット", en: "striking complete set, duck evade" }
+      ],
+      "🦵 キック": [
+        { ja: "前蹴りセット", en: "kicking complete set, front kick" },
+        { ja: "回し蹴りセット", en: "kicking complete set, roundhouse kick" },
+        { ja: "膝蹴りセット", en: "kicking complete set, knee strike" },
+        { ja: "蹴り上げセット", en: "kicking complete set, rising kick" },
+        { ja: "ハイキックセット", en: "kicking complete set, high kick" },
+        { ja: "蹴りからの戻しセット", en: "kicking complete set, kick recovery" }
+      ],
+      "🤼 組み合い": [
+        { ja: "首相撲セット", en: "clinch complete set, neck clinch" },
+        { ja: "組み付き押し合いセット", en: "clinch complete set, tie up push" },
+        { ja: "片腕を差し込むセット", en: "clinch complete set, underhook entry" },
+        { ja: "間合いを詰めるセット", en: "clinch complete set, close distance" },
+        { ja: "密着ガード崩しセット", en: "clinch complete set, close guard break" },
+        { ja: "押さえ込み移行セット", en: "clinch complete set, control transition" }
+      ],
+      "🥋 投げ・崩し": [
+        { ja: "崩し動作セット", en: "throw complete set, off balance entry" },
+        { ja: "腰を入れる投げセット", en: "throw complete set, hip throw entry" },
+        { ja: "引き手で崩すセット", en: "throw complete set, pull and break balance" },
+        { ja: "体勢を崩して倒すセット", en: "throw complete set, break posture takedown" },
+        { ja: "投げ直前の溜めセット", en: "throw complete set, pre throw load" },
+        { ja: "投げ後の残心セット", en: "throw complete set, post throw zanshin" }
+      ]
+    },
+    "🏊 水泳・飛び込み": {
+      "🏊 自由形（クロール）": [
+        { ja: "自由形（クロール）スタートダイブセット", en: "freestyle complete set, start dive" },
+        { ja: "自由形（クロール）水面滑走セット", en: "freestyle complete set, waterline glide" },
+        { ja: "自由形（クロール）ストロークセット", en: "freestyle complete set, stroke rhythm" },
+        { ja: "自由形（クロール）高速ピッチセット", en: "freestyle complete set, fast cadence" },
+        { ja: "自由形（クロール）呼吸切替セット", en: "freestyle complete set, side breathing" },
+        { ja: "自由形（クロール）息継ぎ復帰セット", en: "freestyle complete set, breath return" },
+        { ja: "自由形（クロール）ターン進入セット", en: "freestyle complete set, turn entry" },
+        { ja: "自由形（クロール）壁蹴り返しセット", en: "freestyle complete set, wall push off" },
+        { ja: "自由形（クロール）ゴールタッチセット", en: "freestyle complete set, goal touch" },
+        { ja: "自由形（クロール）ラストスパートセット", en: "freestyle complete set, final sprint" }
+      ],
+      "🐸 平泳ぎ": [
+        { ja: "平泳ぎ伸び姿勢セット", en: "breaststroke complete set, glide posture" },
+        { ja: "平泳ぎキックセット", en: "breaststroke complete set, kick push" },
+        { ja: "平泳ぎ掻き込みセット", en: "breaststroke complete set, pull phase" }
+      ],
+      "🌙 背泳ぎ": [
+        { ja: "背泳ぎスタート反りセット", en: "backstroke complete set, start arch" },
+        { ja: "背泳ぎスタート離壁セット", en: "backstroke complete set, wall launch" },
+        { ja: "背泳ぎ浮上姿勢セット", en: "backstroke complete set, surface glide" },
+        { ja: "背泳ぎストロークセット", en: "backstroke complete set, stroke rhythm" },
+        { ja: "背泳ぎロール切替セット", en: "backstroke complete set, body roll switch" },
+        { ja: "背泳ぎ安定巡航セット", en: "backstroke complete set, steady cruise" },
+        { ja: "背泳ぎターン進入セット", en: "backstroke complete set, turn entry" },
+        { ja: "背泳ぎ壁蹴り返しセット", en: "backstroke complete set, wall push off" },
+        { ja: "背泳ぎラストスパートセット", en: "backstroke complete set, final sprint" },
+        { ja: "背泳ぎゴールタッチセット", en: "backstroke complete set, goal touch" }
+      ],
+      "🦋 バタフライ": [
+        { ja: "バタフライ反り上げセット", en: "butterfly complete set, body wave rise" },
+        { ja: "バタフライスタートダイブセット", en: "butterfly complete set, start dive" },
+        { ja: "バタフライ浮上導入セット", en: "butterfly complete set, breakout glide" },
+        { ja: "バタフライ同時ストロークセット", en: "butterfly complete set, double arm stroke" },
+        { ja: "バタフライ高テンポ巡航セット", en: "butterfly complete set, high tempo cruise" },
+        { ja: "バタフライ呼吸浮上セット", en: "butterfly complete set, breathing lift" },
+        { ja: "バタフライキック連動セット", en: "butterfly complete set, dolphin kick rhythm" },
+        { ja: "バタフライターン進入セット", en: "butterfly complete set, turn entry" },
+        { ja: "バタフライ壁蹴り返しセット", en: "butterfly complete set, wall push off" },
+        { ja: "バタフライラストスパートセット", en: "butterfly complete set, final sprint" },
+        { ja: "バタフライゴールタッチセット", en: "butterfly complete set, goal touch" }
+      ],
+      "🤿 飛び込み": [
+        { ja: "飛び込み助走セット", en: "diving complete set, board approach" },
+        { ja: "飛び込み空中抱えセット", en: "diving complete set, aerial tuck" },
+        { ja: "飛び込み空中ひねりセット", en: "diving complete set, aerial twist" },
+        { ja: "飛び込み入水直前セット", en: "diving complete set, pre entry line" }
+      ]
+    }
+  };
+
+  const SPORTS_BASE = [
+    { ja: "ダッシュ", en: "sport athletic movement" },
+    { ja: "スタート姿勢", en: "sport starting stance" },
+    { ja: "前傾姿勢", en: "sport forward lean posture" },
+    { ja: "低い重心", en: "sport low center of gravity" },
+    { ja: "片足軸", en: "sport one leg axis" },
+    { ja: "踏み込み", en: "sport driving step in" },
+    { ja: "身体を開く", en: "sport opening torso" },
+    { ja: "上体をひねる", en: "sport torso twist" },
+    { ja: "ジャンプ", en: "sport jump motion" },
+    { ja: "空中姿勢", en: "sport mid air posture" },
+    { ja: "着地", en: "sport landing posture" },
+    { ja: "構える", en: "sport ready stance" },
+    { ja: "相手と競り合う", en: "sport physical contest posture" },
+    { ja: "ボールに身体を入れる", en: "soccer body shielding posture" },
+    { ja: "低く構えたドリブル姿勢", en: "basketball low dribble posture" },
+    { ja: "片手でボールを運ぶ姿勢", en: "basketball one hand carry posture" },
+    { ja: "横へ踏み出す守備姿勢", en: "basketball lateral defense posture" },
+    { ja: "上へ伸びるシュート姿勢", en: "basketball upward shooting posture" },
+    { ja: "リングへ伸びる空中姿勢", en: "basketball rim attack mid air posture" },
+    { ja: "流線型姿勢", en: "swimming streamlined posture" },
+    { ja: "水面へ突入", en: "swimming water entry posture" },
+    { ja: "助走姿勢", en: "volleyball approach posture" },
+    { ja: "最高打点へ伸びる姿勢", en: "volleyball high contact posture" },
+    { ja: "両手を高く上げるブロック姿勢", en: "volleyball block hands up posture" },
+    { ja: "低いレシーブ姿勢", en: "volleyball low receive posture" },
+    { ja: "トス姿勢", en: "volleyball set posture" },
+    { ja: "サーブ前の静止姿勢", en: "volleyball serve ready posture" },
+    { ja: "打席で構える姿勢", en: "baseball batter ready stance" },
+    { ja: "踏み込みながら打つ姿勢", en: "baseball batting step posture" },
+    { ja: "振り抜き姿勢", en: "baseball swing follow through posture" },
+    { ja: "投球前の溜め姿勢", en: "baseball pitching windup posture" },
+    { ja: "腕を大きく振り下ろす投球姿勢", en: "baseball pitching release posture" },
+    { ja: "捕球体勢", en: "baseball catch posture" },
+    { ja: "送球へ移る姿勢", en: "baseball throw transfer posture" },
+    { ja: "走塁ダッシュ姿勢", en: "baseball base running sprint posture" },
+    { ja: "滑り込む姿勢", en: "baseball sliding posture" },
+    { ja: "上を見ながら走る追球姿勢", en: "baseball tracking fly ball posture" },
+    { ja: "ジャンプして手を伸ばす捕球姿勢", en: "baseball jump catch posture" },
+    { ja: "自由形（クロール）の伸び姿勢", en: "freestyle elongated glide posture" },
+    { ja: "自由形（クロール）の水面滑走姿勢", en: "freestyle waterline glide posture" },
+    { ja: "自由形（クロール）の片腕前伸ばし姿勢", en: "freestyle lead arm reach posture" },
+    { ja: "自由形（クロール）の掻き込み姿勢", en: "freestyle pull phase posture" },
+    { ja: "自由形（クロール）の横呼吸姿勢", en: "freestyle side breathing posture" },
+    { ja: "自由形（クロール）の息継ぎ復帰姿勢", en: "freestyle breath return posture" },
+    { ja: "自由形（クロール）のターン抱え姿勢", en: "freestyle turn tuck posture" },
+    { ja: "自由形（クロール）の壁蹴り返し姿勢", en: "freestyle wall push posture" },
+    { ja: "自由形（クロール）のゴール片手伸ばし姿勢", en: "freestyle goal reach posture" },
+    { ja: "平泳ぎの抱え姿勢", en: "breaststroke tucked recovery posture" },
+    { ja: "平泳ぎの伸び姿勢", en: "breaststroke glide posture" },
+    { ja: "背泳ぎの反り姿勢", en: "backstroke arched float posture" },
+    { ja: "背泳ぎの水面滑走姿勢", en: "backstroke surface glide posture" },
+    { ja: "バタフライの反り上げ姿勢", en: "butterfly wave rise posture" },
+    { ja: "バタフライのスタートダイブ姿勢", en: "butterfly start dive posture" },
+    { ja: "バタフライの浮上導入姿勢", en: "butterfly breakout glide posture" },
+    { ja: "バタフライの同時振り抜き姿勢", en: "butterfly double arm swing posture" },
+    { ja: "バタフライの高テンポ巡航姿勢", en: "butterfly high tempo cruise posture" },
+    { ja: "バタフライの呼吸浮上姿勢", en: "butterfly breathing lift posture" },
+    { ja: "バタフライのドルフィンキック姿勢", en: "butterfly dolphin kick posture" },
+    { ja: "バタフライのターン進入姿勢", en: "butterfly turn entry posture" },
+    { ja: "バタフライの壁蹴り返し姿勢", en: "butterfly wall push posture" },
+    { ja: "バタフライのゴール両手伸ばし姿勢", en: "butterfly goal reach posture" },
+    { ja: "飛び込みの空中抱え姿勢", en: "diving aerial tuck posture" },
+    { ja: "飛び込みの空中ひねり姿勢", en: "diving aerial twist posture" },
+    { ja: "指先から入水する直線姿勢", en: "diving straight line entry posture" },
+    { ja: "格闘の構え", en: "fight ready stance" },
+    { ja: "低い重心の構え", en: "fight low center stance" },
+    { ja: "間合いを取る姿勢", en: "fight measuring distance posture" },
+    { ja: "前へ踏み込む姿勢", en: "fight forward step in posture" },
+    { ja: "腰をひねる打撃姿勢", en: "fight torso twist strike posture" },
+    { ja: "腕を打ち出す姿勢", en: "fight punching extension posture" },
+    { ja: "脚を振り上げる姿勢", en: "fight kick lift posture" },
+    { ja: "脚を畳んで戻す姿勢", en: "fight kick recovery posture" },
+    { ja: "顔を守るガード姿勢", en: "fight high guard posture" },
+    { ja: "上体を沈める回避姿勢", en: "fight ducking evade posture" },
+    { ja: "相手へ密着する姿勢", en: "fight close clinch posture" },
+    { ja: "片腕を差し込む姿勢", en: "fight underhook entry posture" },
+    { ja: "首元を押さえる姿勢", en: "fight neck control posture" },
+    { ja: "相手を引いて崩す姿勢", en: "fight pulling off balance posture" },
+    { ja: "腰を入れる投げ姿勢", en: "fight hip load throw posture" },
+    { ja: "倒し切る投げ姿勢", en: "fight takedown finish posture" }
+  ];
+
+  const SPORTS_CUSTOM = [
+    { ja: "ボールを追う視線", en: "sport eyes tracking the ball" },
+    { ja: "近いボールコントロール", en: "soccer close ball control" },
+    { ja: "切り返し", en: "soccer sharp cut turn" },
+    { ja: "インサイドキック", en: "soccer inside foot kick" },
+    { ja: "シュート振り抜き", en: "soccer shooting follow through" },
+    { ja: "ボレーシュート", en: "soccer volley strike motion" },
+    { ja: "ヘディングへ跳ぶ", en: "soccer heading jump" },
+    { ja: "スライディング守備", en: "soccer sliding defense motion" },
+    { ja: "タックルをかわす", en: "soccer evading tackle" },
+    { ja: "低いドリブル", en: "basketball low dribble" },
+    { ja: "クロスオーバー", en: "basketball crossover move" },
+    { ja: "ジャンプシュート", en: "basketball jump shot form" },
+    { ja: "ステップバック", en: "basketball step back move" },
+    { ja: "レイアップ", en: "basketball layup finish" },
+    { ja: "ダンクへ踏み切る", en: "basketball dunk takeoff" },
+    { ja: "リバウンドで競り合う", en: "basketball rebound contest motion" },
+    { ja: "ディフェンスで横に構える", en: "basketball lateral defensive stance" },
+    { ja: "ブロックへ跳ぶ", en: "basketball block jump motion" },
+    { ja: "ルーズボールへ飛び込む", en: "basketball loose ball dive" },
+    { ja: "接触しながら体勢を保つ", en: "sport maintaining balance through contact" },
+    { ja: "両手でバランスを取る", en: "sport balancing with both arms" },
+    { ja: "ゴール後に拳を握る", en: "soccer clenched fist after goal" },
+    { ja: "歓喜の雄叫び", en: "sport triumphant shout" },
+    { ja: "水をかく", en: "swimming pulling water" },
+    { ja: "壁を蹴り出す", en: "swimming wall push off" },
+    { ja: "スパイク助走", en: "volleyball spike approach" },
+    { ja: "スパイクを振り抜く", en: "volleyball spike swing" },
+    { ja: "最高打点で叩く", en: "volleyball high contact hit" },
+    { ja: "ブロックで両手を上げる", en: "volleyball block hands up" },
+    { ja: "レシーブで腕を入れる", en: "volleyball forearm receive" },
+    { ja: "飛び込みレシーブ", en: "volleyball diving receive" },
+    { ja: "トスを上げる", en: "volleyball setting toss" },
+    { ja: "サーブトス", en: "volleyball serve toss" },
+    { ja: "ジャンプサーブ", en: "volleyball jump serve" },
+    { ja: "バットを引き絞る", en: "baseball load the bat" },
+    { ja: "フルスイングする", en: "baseball full swing motion" },
+    { ja: "ボールをよく見て合わせる", en: "baseball precise contact swing" },
+    { ja: "投球フォームへ入る", en: "baseball entering pitching motion" },
+    { ja: "リリース直前に腕を走らせる", en: "baseball pitch release snap" },
+    { ja: "捕球して素早く握り替える", en: "baseball quick transfer after catch" },
+    { ja: "送球へ体を開く", en: "baseball open body for throw" },
+    { ja: "内野で低く反応する", en: "baseball low infield reaction" },
+    { ja: "外野フライを追う", en: "baseball chasing fly ball" },
+    { ja: "ジャンプキャッチする", en: "baseball jump catch motion" },
+    { ja: "全力でベースを蹴る", en: "baseball explosive base push off" },
+    { ja: "ベースへ滑り込む", en: "baseball base slide motion" },
+    { ja: "自由形（クロール）で水を切る", en: "freestyle slicing through water" },
+    { ja: "自由形（クロール）でピッチを上げる", en: "freestyle fast cadence stroke" },
+    { ja: "自由形（クロール）で横呼吸する", en: "freestyle side breathing motion" },
+    { ja: "自由形（クロール）で息継ぎ後に顔を戻す", en: "freestyle breath return motion" },
+    { ja: "自由形（クロール）でターン進入する", en: "freestyle turn entry motion" },
+    { ja: "自由形（クロール）で壁を強く蹴り返す", en: "freestyle strong wall push off" },
+    { ja: "自由形（クロール）でラストスパートをかける", en: "freestyle final sprint motion" },
+    { ja: "自由形（クロール）で片手を伸ばしてタッチする", en: "freestyle one hand goal touch" },
+    { ja: "平泳ぎで脚を抱えて蹴り出す", en: "breaststroke whip kick motion" },
+    { ja: "平泳ぎで胸を開いて掻く", en: "breaststroke pull and open chest" },
+    { ja: "背泳ぎで仰向けに腕を回す", en: "backstroke arm rotation motion" },
+    { ja: "背泳ぎで水面を滑る", en: "backstroke gliding on surface" },
+    { ja: "バタフライで体幹を波打たせる", en: "butterfly body wave motion" },
+    { ja: "バタフライでスタートダイブする", en: "butterfly start dive motion" },
+    { ja: "バタフライで浮上導入へ入る", en: "butterfly breakout glide motion" },
+    { ja: "バタフライで同時に腕を振り抜く", en: "butterfly double arm recovery" },
+    { ja: "バタフライで高テンポ巡航する", en: "butterfly high tempo cruise" },
+    { ja: "バタフライで呼吸のため胸を浮かせる", en: "butterfly breathing lift motion" },
+    { ja: "バタフライでドルフィンキックを打つ", en: "butterfly dolphin kick rhythm" },
+    { ja: "バタフライでターン進入する", en: "butterfly turn entry motion" },
+    { ja: "バタフライで壁を強く蹴り返す", en: "butterfly wall push off" },
+    { ja: "バタフライでラストスパートをかける", en: "butterfly final sprint motion" },
+    { ja: "バタフライで両手を伸ばしてタッチする", en: "butterfly double hand goal touch" },
+    { ja: "飛び込みで空中抱えを作る", en: "diving create aerial tuck" },
+    { ja: "飛び込みで空中ひねりを入れる", en: "diving apply aerial twist" },
+    { ja: "指先からまっすぐ入水する", en: "diving straight fingertip entry" },
+    { ja: "ジャブを打つ", en: "fight jab strike" },
+    { ja: "ストレートを打ち込む", en: "fight straight punch" },
+    { ja: "フックを振り抜く", en: "fight hook swing" },
+    { ja: "アッパーを突き上げる", en: "fight uppercut lift" },
+    { ja: "打撃を連続でつなぐ", en: "fight striking combination" },
+    { ja: "ガードを高く保つ", en: "fight maintain high guard" },
+    { ja: "ダッキングでかわす", en: "fight ducking evade" },
+    { ja: "前蹴りを放つ", en: "fight front kick strike" },
+    { ja: "回し蹴りを振り抜く", en: "fight roundhouse kick" },
+    { ja: "膝を突き上げる", en: "fight knee strike" },
+    { ja: "蹴り上げる", en: "fight rising kick" },
+    { ja: "ハイキックを放つ", en: "fight high kick" },
+    { ja: "蹴り足を戻して構え直す", en: "fight kick recovery reset" },
+    { ja: "首元を押さえて組む", en: "fight neck clinch control" },
+    { ja: "組み付いて押し込む", en: "fight tie up and drive" },
+    { ja: "片腕を差し込む", en: "fight underhook entry" },
+    { ja: "間合いを一気に詰める", en: "fight close distance burst" },
+    { ja: "密着してガードを崩す", en: "fight close guard break" },
+    { ja: "押さえ込みへ移行する", en: "fight control transition" },
+    { ja: "引き手で崩す", en: "fight pull off balance" },
+    { ja: "腰を入れて投げる", en: "fight hip throw entry" },
+    { ja: "体勢を崩して倒す", en: "fight break posture takedown" },
+    { ja: "投げ前に溜めを作る", en: "fight pre throw load" },
+    { ja: "投げた後も構えを残す", en: "fight post throw follow through" }
+  ];
+
+  const SPORTS_SETTINGS = [
+    { ja: "全力", en: "sport full effort" },
+    { ja: "一瞬の加速", en: "sport burst acceleration" },
+    { ja: "攻め主体", en: "sport attack oriented" },
+    { ja: "守り主体", en: "sport defense oriented" },
+    { ja: "ダイナミック", en: "sport dynamic motion" },
+    { ja: "試合中の緊張感", en: "sport match tension" },
+    { ja: "爆発力", en: "sport explosive power" },
+    { ja: "フォーム重視", en: "sport form focused" },
+    { ja: "競技者らしい自然な体勢", en: "sport natural athlete posture" },
+    { ja: "勝負どころ", en: "sport decisive moment" },
+    { ja: "静かな集中", en: "sport quiet concentration" },
+    { ja: "自由形（クロール）の高速巡航", en: "freestyle high speed cruise" },
+    { ja: "自由形（クロール）の滑らかなフォーム", en: "freestyle smooth form" },
+    { ja: "自由形（クロール）のラストスパート", en: "freestyle last sprint pressure" },
+    { ja: "背泳ぎの安定巡航", en: "backstroke steady cruise" },
+    { ja: "背泳ぎの滑らかなロール", en: "backstroke smooth body roll" },
+    { ja: "背泳ぎの静かな集中", en: "backstroke quiet concentration" },
+    { ja: "背泳ぎのラストスパート", en: "backstroke final sprint pressure" },
+    { ja: "バタフライの爆発的テンポ", en: "butterfly explosive tempo" },
+    { ja: "バタフライの高出力巡航", en: "butterfly power cruise" },
+    { ja: "バタフライの呼吸リフト", en: "butterfly breathing lift timing" },
+    { ja: "バタフライのラストスパート", en: "butterfly final sprint pressure" },
+    { ja: "闘志", en: "fight fighting spirit" },
+    { ja: "牽制", en: "fight probing pressure" },
+    { ja: "間合い勝負", en: "fight distance battle" },
+    { ja: "打撃主体", en: "fight striking focused" },
+    { ja: "蹴り主体", en: "fight kicking focused" },
+    { ja: "組み技主体", en: "fight grappling focused" },
+    { ja: "崩し重視", en: "fight off balance focused" },
+    { ja: "一瞬の反応", en: "fight split second reaction" },
+    { ja: "受け流し", en: "fight evasive deflection" },
+    { ja: "反撃の起点", en: "fight counter opening" },
+    { ja: "一撃必殺の気配", en: "fight finishing blow aura" },
+    { ja: "守り主体（格闘）", en: "fight defense oriented" },
+    { ja: "試合中の緊張感（格闘）", en: "fight match tension" },
+    { ja: "爆発力（格闘）", en: "fight explosive power" },
+    { ja: "フォーム重視（格闘）", en: "fight form focused" },
+    { ja: "勝負どころ（格闘）", en: "fight decisive moment" },
+    { ja: "静かな集中（格闘）", en: "fight quiet concentration" },
+    { ja: "ダイナミック（格闘）", en: "fight dynamic motion" }
+  ];
+
+  const SPORTS_COMPLETE_LINKS = {
+    "soccer complete set, dribble breakthrough": [
+      "sport athletic movement","sport starting stance","sport forward lean posture","sport low center of gravity","sport one leg axis",
+      "sport driving step in","sport eyes tracking the ball","soccer close ball control","soccer sharp cut turn","soccer evading tackle",
+      "sport attack oriented","sport dynamic motion","sport burst acceleration","sport match tension"
+    ],
+    "soccer complete set, cut and turn breakthrough": [
+      "sport low center of gravity","sport one leg axis","sport driving step in","sport torso twist","sport eyes tracking the ball",
+      "soccer sharp cut turn","soccer close ball control","sport maintaining balance through contact","sport attack oriented","sport burst acceleration","sport decisive moment"
+    ],
+    "soccer complete set, trap and keep control": [
+      "sport ready stance","sport one leg axis","soccer body shielding posture","sport eyes tracking the ball","soccer close ball control",
+      "sport maintaining balance through contact","sport natural athlete posture","sport form focused","sport match tension"
+    ],
+    "soccer complete set, physical contest": [
+      "sport physical contest posture","sport low center of gravity","soccer body shielding posture","sport eyes tracking the ball",
+      "sport maintaining balance through contact","sport balancing with both arms","sport explosive power","sport dynamic motion","sport match tension"
+    ],
+    "soccer complete set, shooting chance": [
+      "sport driving step in","sport opening torso","sport torso twist","soccer inside foot kick","soccer shooting follow through",
+      "sport eyes tracking the ball","sport attack oriented","sport explosive power","sport decisive moment","sport dynamic motion"
+    ],
+    "soccer complete set, volley shot": [
+      "sport jump motion","sport mid air posture","soccer volley strike motion","sport eyes tracking the ball","sport balancing with both arms",
+      "sport attack oriented","sport explosive power","sport dynamic motion","sport decisive moment"
+    ],
+    "soccer complete set, heading duel": [
+      "sport jump motion","sport mid air posture","sport physical contest posture","soccer heading jump","sport maintaining balance through contact",
+      "sport explosive power","sport match tension","sport decisive moment"
+    ],
+    "soccer complete set, sliding defense": [
+      "sport low center of gravity","sport driving step in","sport landing posture","soccer sliding defense motion","sport defense oriented",
+      "sport dynamic motion","sport match tension","sport decisive moment"
+    ],
+    "soccer complete set, evade tackle": [
+      "sport athletic movement","sport low center of gravity","sport one leg axis","sport driving step in","soccer sharp cut turn",
+      "soccer evading tackle","soccer close ball control","sport burst acceleration","sport attack oriented","sport dynamic motion"
+    ],
+    "soccer complete set, post goal celebration": [
+      "sport athletic movement","sport clenched fist after goal","sport triumphant shout","sport full effort","sport decisive moment","sport dynamic motion"
+    ],
+    "basketball complete set, low dribble breakthrough": [
+      "sport low center of gravity","basketball low dribble posture","basketball low dribble","basketball crossover move",
+      "sport driving step in","sport eyes tracking the ball","sport attack oriented","sport dynamic motion","sport burst acceleration"
+    ],
+    "basketball complete set, crossover breakthrough": [
+      "sport low center of gravity","basketball low dribble posture","basketball crossover move","sport driving step in",
+      "sport one leg axis","sport balancing with both arms","sport attack oriented","sport burst acceleration","sport decisive moment"
+    ],
+    "basketball complete set, jump shot": [
+      "sport jump motion","sport mid air posture","basketball upward shooting posture","basketball jump shot form",
+      "sport eyes tracking the ball","sport form focused","sport decisive moment","sport quiet concentration"
+    ],
+    "basketball complete set, step back shot": [
+      "sport low center of gravity","basketball step back move","basketball upward shooting posture","basketball jump shot form",
+      "sport one leg axis","sport decisive moment","sport attack oriented","sport dynamic motion"
+    ],
+    "basketball complete set, layup": [
+      "sport jump motion","sport driving step in","basketball rim attack mid air posture","basketball layup finish",
+      "sport eyes tracking the ball","sport dynamic motion","sport attack oriented","sport decisive moment"
+    ],
+    "basketball complete set, dunk drive": [
+      "sport driving step in","sport jump motion","basketball rim attack mid air posture","basketball dunk takeoff",
+      "sport explosive power","sport dynamic motion","sport attack oriented","sport decisive moment"
+    ],
+    "basketball complete set, rebound contest": [
+      "sport jump motion","sport physical contest posture","basketball rebound contest motion","sport maintaining balance through contact",
+      "sport explosive power","sport match tension","sport decisive moment"
+    ],
+    "basketball complete set, defensive stance": [
+      "sport low center of gravity","sport ready stance","basketball lateral defense posture","basketball lateral defensive stance",
+      "sport defense oriented","sport form focused","sport match tension"
+    ],
+    "basketball complete set, block jump": [
+      "sport jump motion","sport mid air posture","basketball block jump motion","sport balancing with both arms",
+      "sport defense oriented","sport explosive power","sport decisive moment"
+    ],
+    "basketball complete set, loose ball dive": [
+      "sport athletic movement","sport driving step in","sport landing posture","basketball loose ball dive",
+      "sport full effort","sport dynamic motion","sport match tension"
+    ],
+    "volleyball complete set, approach spike": [
+      "sport driving step in","volleyball approach posture","sport jump motion","sport mid air posture",
+      "volleyball spike approach","volleyball spike swing","sport explosive power","sport attack oriented","sport dynamic motion"
+    ],
+    "volleyball complete set, high contact spike": [
+      "sport jump motion","sport mid air posture","volleyball high contact posture","volleyball high contact hit",
+      "volleyball spike swing","sport explosive power","sport decisive moment","sport attack oriented"
+    ],
+    "volleyball complete set, block jump": [
+      "sport jump motion","sport mid air posture","volleyball block hands up posture","volleyball block hands up",
+      "sport defense oriented","sport explosive power","sport match tension","sport decisive moment"
+    ],
+    "volleyball complete set, receive": [
+      "sport low center of gravity","sport ready stance","volleyball low receive posture","volleyball forearm receive",
+      "sport form focused","sport defense oriented","sport quiet concentration"
+    ],
+    "volleyball complete set, diving receive": [
+      "sport low center of gravity","sport landing posture","volleyball low receive posture","volleyball diving receive",
+      "sport full effort","sport dynamic motion","sport match tension"
+    ],
+    "volleyball complete set, set toss": [
+      "sport ready stance","volleyball set posture","volleyball setting toss","sport natural athlete posture",
+      "sport form focused","sport quiet concentration"
+    ],
+    "volleyball complete set, serve preparation": [
+      "sport ready stance","volleyball serve ready posture","volleyball serve toss","sport quiet concentration",
+      "sport decisive moment","sport form focused"
+    ],
+    "volleyball complete set, jump serve": [
+      "sport driving step in","sport jump motion","volleyball serve ready posture","volleyball serve toss",
+      "volleyball jump serve","sport explosive power","sport attack oriented","sport decisive moment"
+    ],
+    "baseball complete set, batter stance": [
+      "sport ready stance","sport one leg axis","baseball batter ready stance","baseball load the bat",
+      "sport quiet concentration","sport form focused","sport decisive moment"
+    ],
+    "baseball complete set, full swing": [
+      "sport opening torso","sport torso twist","baseball batting step posture","baseball full swing motion",
+      "baseball swing follow through posture","sport explosive power","sport attack oriented","sport decisive moment"
+    ],
+    "baseball complete set, contact hit": [
+      "sport opening torso","sport one leg axis","baseball batting step posture","baseball precise contact swing",
+      "sport form focused","sport quiet concentration","sport decisive moment"
+    ],
+    "baseball complete set, pitching form": [
+      "sport driving step in","sport torso twist","baseball pitching windup posture","baseball entering pitching motion",
+      "sport explosive power","sport form focused","sport quiet concentration"
+    ],
+    "baseball complete set, pitch release": [
+      "sport driving step in","sport torso twist","baseball pitching release posture","baseball pitch release snap",
+      "sport explosive power","sport decisive moment","sport dynamic motion"
+    ],
+    "baseball complete set, catch and throw": [
+      "sport ready stance","sport one leg axis","baseball catch posture","baseball quick transfer after catch",
+      "baseball throw transfer posture","baseball open body for throw","sport form focused","sport defense oriented"
+    ],
+    "baseball complete set, infield defense": [
+      "sport low center of gravity","sport ready stance","baseball catch posture","baseball low infield reaction",
+      "sport defense oriented","sport match tension","sport decisive moment"
+    ],
+    "baseball complete set, chase fly ball": [
+      "sport athletic movement","baseball tracking fly ball posture","baseball chasing fly ball",
+      "sport full effort","sport dynamic motion","sport match tension"
+    ],
+    "baseball complete set, jump catch": [
+      "sport jump motion","sport mid air posture","baseball jump catch posture","baseball jump catch motion",
+      "sport explosive power","sport decisive moment","sport defense oriented"
+    ],
+    "baseball complete set, base running dash": [
+      "sport athletic movement","sport forward lean posture","baseball base running sprint posture","baseball explosive base push off",
+      "sport burst acceleration","sport dynamic motion","sport decisive moment"
+    ],
+    "baseball complete set, base running slide": [
+      "sport athletic movement","sport landing posture","baseball sliding posture","baseball base slide motion",
+      "sport full effort","sport dynamic motion","sport decisive moment"
+    ],
+    "swimming complete set, start dive": ["sport starting stance","swimming streamlined posture","swimming water entry posture","sport explosive power"],
+    "swimming complete set, underwater stroke": ["swimming streamlined posture","swimming pulling water","sport form focused"],
+    "swimming complete set, wall turn push off": ["swimming wall push off","sport torso twist","sport explosive power"],
+    "swimming complete set, goal touch": ["swimming pulling water","sport decisive moment","sport full effort"],
+    "freestyle complete set, start dive": [
+      "sport starting stance","sport forward lean posture","swimming streamlined posture","swimming water entry posture",
+      "freestyle elongated glide posture","sport explosive power","sport quiet concentration","sport decisive moment"
+    ],
+    "freestyle complete set, stroke rhythm": [
+      "swimming streamlined posture","freestyle elongated glide posture","swimming pulling water","freestyle slicing through water",
+      "sport form focused","sport natural athlete posture","sport dynamic motion"
+    ],
+    "freestyle complete set, side breathing": [
+      "swimming streamlined posture","swimming pulling water","freestyle side breathing posture","freestyle side breathing motion",
+      "sport form focused","sport quiet concentration"
+    ],
+    "freestyle complete set, goal touch": [
+      "swimming pulling water","freestyle elongated glide posture","freestyle goal reach posture","freestyle one hand goal touch",
+      "sport full effort","sport decisive moment","sport burst acceleration","freestyle last sprint pressure"
+    ],
+    "freestyle complete set, waterline glide": [
+      "swimming streamlined posture","freestyle waterline glide posture","freestyle lead arm reach posture",
+      "freestyle slicing through water","freestyle smooth form","sport quiet concentration","sport form focused"
+    ],
+    "freestyle complete set, fast cadence": [
+      "swimming streamlined posture","freestyle pull phase posture","swimming pulling water","freestyle fast cadence stroke",
+      "freestyle high speed cruise","sport full effort","sport burst acceleration","sport dynamic motion"
+    ],
+    "freestyle complete set, breath return": [
+      "freestyle side breathing posture","freestyle breath return posture","freestyle side breathing motion","freestyle breath return motion",
+      "freestyle smooth form","sport form focused","sport quiet concentration"
+    ],
+    "freestyle complete set, turn entry": [
+      "freestyle turn tuck posture","freestyle turn entry motion","sport torso twist","sport decisive moment",
+      "sport burst acceleration","sport match tension"
+    ],
+    "freestyle complete set, wall push off": [
+      "freestyle wall push posture","swimming wall push off","freestyle strong wall push off",
+      "sport burst acceleration","freestyle high speed cruise","sport explosive power"
+    ],
+    "freestyle complete set, final sprint": [
+      "swimming pulling water","freestyle fast cadence stroke","freestyle final sprint motion","freestyle last sprint pressure",
+      "sport full effort","sport decisive moment","sport explosive power"
+    ],
+    "breaststroke complete set, glide posture": [
+      "swimming streamlined posture","breaststroke glide posture","sport form focused","sport natural athlete posture","sport quiet concentration"
+    ],
+    "breaststroke complete set, kick push": [
+      "breaststroke tucked recovery posture","breaststroke whip kick motion","sport form focused","sport dynamic motion","sport burst acceleration"
+    ],
+    "breaststroke complete set, pull phase": [
+      "breaststroke glide posture","breaststroke pull and open chest","swimming pulling water","sport form focused","sport natural athlete posture"
+    ],
+    "backstroke complete set, start arch": [
+      "sport starting stance","backstroke arched float posture","backstroke wall launch posture",
+      "sport explosive power","backstroke quiet concentration","sport decisive moment"
+    ],
+    "backstroke complete set, wall launch": [
+      "backstroke wall launch posture","swimming streamlined posture","backstroke wall launch glide",
+      "sport burst acceleration","sport explosive power","backstroke quiet concentration"
+    ],
+    "backstroke complete set, surface glide": [
+      "backstroke surface glide posture","backstroke gliding on surface","backstroke steady cruise posture",
+      "sport natural athlete posture","backstroke quiet concentration","sport form focused"
+    ],
+    "backstroke complete set, stroke rhythm": [
+      "backstroke shoulder roll posture","backstroke single arm recovery posture","backstroke arm rotation motion",
+      "backstroke alternating stroke","sport form focused","sport dynamic motion","backstroke steady cruise"
+    ],
+    "backstroke complete set, body roll switch": [
+      "backstroke shoulder roll posture","backstroke shoulder roll switch","backstroke arm rotation motion",
+      "backstroke smooth body roll","sport form focused","backstroke quiet concentration"
+    ],
+    "backstroke complete set, steady cruise": [
+      "backstroke steady cruise posture","backstroke gliding on surface","backstroke steady tempo",
+      "backstroke steady cruise","sport natural athlete posture","sport form focused"
+    ],
+    "backstroke complete set, turn entry": [
+      "backstroke turn entry posture","backstroke turn entry","sport torso twist",
+      "sport burst acceleration","sport decisive moment"
+    ],
+    "backstroke complete set, wall push off": [
+      "backstroke wall push off posture","backstroke wall push off","swimming streamlined posture",
+      "sport explosive power","sport burst acceleration","sport decisive moment"
+    ],
+    "backstroke complete set, final sprint": [
+      "backstroke single arm recovery posture","backstroke alternating stroke","backstroke final sprint",
+      "backstroke final sprint pressure","sport full effort","sport burst acceleration","sport decisive moment"
+    ],
+    "backstroke complete set, goal touch": [
+      "backstroke one hand goal reach posture","backstroke one hand goal touch","sport full effort",
+      "sport decisive moment","backstroke final sprint pressure"
+    ],
+    "butterfly complete set, body wave rise": [
+      "butterfly wave rise posture","butterfly body wave motion","swimming pulling water","sport explosive power","sport dynamic motion"
+    ],
+    "butterfly complete set, start dive": [
+      "sport starting stance","sport jump motion","butterfly start dive posture","butterfly start dive motion","sport quiet concentration","sport decisive moment"
+    ],
+    "butterfly complete set, breakout glide": [
+      "butterfly breakout glide posture","butterfly breakout glide motion","swimming streamlined posture","sport form focused","sport quiet concentration"
+    ],
+    "butterfly complete set, double arm stroke": [
+      "butterfly double arm swing posture","butterfly double arm recovery","swimming pulling water","sport form focused","sport decisive moment"
+    ],
+    "butterfly complete set, high tempo cruise": [
+      "butterfly high tempo cruise posture","butterfly double arm recovery","butterfly dolphin kick rhythm","butterfly high tempo cruise","butterfly power cruise","sport full effort"
+    ],
+    "butterfly complete set, breathing lift": [
+      "butterfly wave rise posture","butterfly breathing lift posture","butterfly breathing lift motion","butterfly breathing lift timing","sport explosive power","sport decisive moment"
+    ],
+    "butterfly complete set, dolphin kick rhythm": [
+      "butterfly dolphin kick posture","butterfly dolphin kick rhythm","swimming streamlined posture","sport form focused","butterfly explosive tempo"
+    ],
+    "butterfly complete set, turn entry": [
+      "butterfly turn entry posture","butterfly turn entry motion","sport decisive moment","sport match tension","sport burst acceleration"
+    ],
+    "butterfly complete set, wall push off": [
+      "butterfly wall push posture","butterfly wall push off","swimming streamlined posture","sport explosive power","sport burst acceleration"
+    ],
+    "butterfly complete set, final sprint": [
+      "butterfly high tempo cruise posture","butterfly final sprint motion","butterfly final sprint pressure","sport full effort","sport decisive moment","sport dynamic motion"
+    ],
+    "butterfly complete set, goal touch": [
+      "butterfly goal reach posture","butterfly double hand goal touch","sport full effort","sport decisive moment","butterfly final sprint pressure"
+    ],
+    "diving complete set, board approach": [
+      "sport starting stance","sport driving step in","sport jump motion","sport quiet concentration","sport decisive moment"
+    ],
+    "diving complete set, aerial tuck": [
+      "sport jump motion","sport mid air posture","diving aerial tuck posture","diving create aerial tuck","sport form focused","sport dynamic motion"
+    ],
+    "diving complete set, aerial twist": [
+      "sport jump motion","sport mid air posture","diving aerial twist posture","diving apply aerial twist","sport dynamic motion","sport form focused"
+    ],
+    "diving complete set, pre entry line": [
+      "sport mid air posture","diving straight line entry posture","diving straight fingertip entry","sport quiet concentration","sport decisive moment","sport form focused"
+    ],
+    "striking complete set, jab feint": [
+      "fight ready stance","fight distance management stance","fight high guard posture","fight jab motion","fight fighting spirit","fight probing pressure","fight distance battle"
+    ],
+    "striking complete set, straight punch": [
+      "fight ready stance","fight driving step in posture","fight torso twist striking posture","fight straight punch motion","fight explosive power","fight decisive moment"
+    ],
+    "striking complete set, hook swing": [
+      "fight ready stance","fight torso twist striking posture","fight hook swing motion","fight dynamic motion","fight striking focused"
+    ],
+    "striking complete set, uppercut lift": [
+      "fight ready stance","fight driving step in posture","fight uppercut lift motion","fight explosive power","fight striking focused"
+    ],
+    "striking complete set, combo barrage": [
+      "fight ready stance","fight jab motion","fight straight punch motion","fight combo sequence motion","fight attack oriented","fight fighting spirit"
+    ],
+    "striking complete set, guarded stance": [
+      "fight ready stance","fight high guard posture","fight defense oriented","fight quiet concentration"
+    ],
+    "striking complete set, duck evade": [
+      "fight low center guard posture","fight ducking evade posture","fight ducking evade motion","fight split second reaction","fight evasive deflection"
+    ],
+    "kicking complete set, front kick": [
+      "fight ready stance","fight leg chamber posture","fight front kick motion","fight kicking focused","fight distance battle"
+    ],
+    "kicking complete set, roundhouse kick": [
+      "fight ready stance","fight raised kicking leg posture","fight roundhouse kick motion","fight dynamic motion","fight kicking focused"
+    ],
+    "kicking complete set, knee strike": [
+      "fight close clinch posture","fight knee strike motion","fight explosive power","fight attack oriented"
+    ],
+    "kicking complete set, rising kick": [
+      "fight raised kicking leg posture","fight rising kick motion","fight dynamic motion","fight kicking focused"
+    ],
+    "kicking complete set, high kick": [
+      "fight raised kicking leg posture","fight high kick motion","fight dynamic motion","fight finishing blow aura"
+    ],
+    "kicking complete set, kick recovery": [
+      "fight leg recoil posture","fight kick recoil motion","fight ready stance","fight quiet concentration"
+    ],
+    "grappling complete set, neck clinch": [
+      "fight close clinch posture","fight neck control posture","fight neck clinch pressure","fight grappling focused","fight match tension"
+    ],
+    "grappling complete set, body lock pressure": [
+      "fight close clinch posture","fight body lock drive motion","fight grappling focused","fight attack oriented"
+    ],
+    "grappling complete set, underhook entry": [
+      "fight underhook entry posture","fight underhook entry motion","fight grappling focused","fight counter opening"
+    ],
+    "grappling complete set, rush into range": [
+      "fight distance management stance","fight rush into clinch motion","fight attack oriented","fight split second reaction"
+    ],
+    "grappling complete set, guard break clinch": [
+      "fight close clinch posture","fight guard break clinch motion","fight off balance focused","fight match tension"
+    ],
+    "grappling complete set, transition to pin": [
+      "fight close clinch posture","fight transition to pin motion","fight grappling focused","fight attack oriented"
+    ],
+    "throwing complete set, off balance break": [
+      "fight pull and break balance posture","fight kuzushi break motion","fight off balance focused","fight counter opening"
+    ],
+    "throwing complete set, hip throw entry": [
+      "fight hip throw entry posture","fight hip throw execution motion","fight off balance focused","fight explosive power"
+    ],
+    "throwing complete set, sleeve pull break": [
+      "fight pull and break balance posture","fight sleeve pull break motion","fight off balance focused","fight distance battle"
+    ],
+    "throwing complete set, collapse the stance": [
+      "fight collapse posture motion","fight off balance focused","fight explosive power"
+    ],
+    "throwing complete set, throw setup tension": [
+      "fight hip throw entry posture","fight throw setup tension motion","fight quiet concentration","fight match tension"
+    ],
+    "throwing complete set, zanshin after throw": [
+      "fight throw followthrough posture","fight zanshin follow motion","fight quiet concentration","fight finishing blow aura"
+    ]
+  };
+
+  const SPORTS_SECTION_GROUP_ORDER = ["🏟 共通・汎用","⚽ サッカー","🏀 バスケットボール","🏐 バレーボール","⚾ 野球","🏊 水泳・飛び込み","🥊 格闘・組み合い"];
+
+  function classifySportsTag(en){
+    const key = String(en || "").trim().toLowerCase();
+    const has = (...parts) => parts.some(p => key.includes(p));
+    const starts = (prefix) => key.startsWith(prefix);
+
+    if (starts("soccer ") || has("soccer","inside foot","body shielding","heading duel","volley shot")) return "⚽ サッカー";
+    if (starts("basketball ") || has("basketball","crossover","jump shot","layup","dunk","rebound","rim attack","loose ball")) return "🏀 バスケットボール";
+    if (starts("volleyball ") || has("volleyball","spike","jump serve","setting toss","forearm receive","block hands","high contact")) return "🏐 バレーボール";
+    if (starts("baseball ") || has("baseball","batter","pitching","base running","fly ball","jump catch")) return "⚾ 野球";
+    if (starts("freestyle ") || starts("breaststroke ") || starts("backstroke ") || starts("butterfly ") || starts("diving ") || starts("swimming ") || has("freestyle","breaststroke","backstroke","butterfly","diving","swimming","water entry","streamlined","wall push","goal reach")) return "🏊 水泳・飛び込み";
+    if (starts("fight ") || has("fight","jab","straight punch","roundhouse","uppercut","grappling","clinch","throwing","throw ")) return "🥊 格闘・組み合い";
+    return "🏟 共通・汎用";
+  }
+
+  function buildSportsGroupedItems(items){
+    const grouped = {};
+    SPORTS_SECTION_GROUP_ORDER.forEach(name => grouped[name] = []);
+    (items || []).forEach(it => {
+      const group = classifySportsTag(it && it.en);
+      if (!grouped[group]) grouped[group] = [];
+      grouped[group].push(it);
+    });
+    return grouped;
+  }
+
+  function getSportsBaseGrouped(){ return buildSportsGroupedItems(SPORTS_BASE); }
+  function getSportsCustomGrouped(){ return buildSportsGroupedItems(SPORTS_CUSTOM); }
+  function getSportsSettingsGrouped(){ return buildSportsGroupedItems(SPORTS_SETTINGS); }
+
+  function registerSportsTranslations(){
+    if (!window.__outputTranslation || !window.__outputTranslation.register) return;
+    const dict = {};
+    (function collect(node){
+      if (Array.isArray(node)) {
+        node.forEach(it => {
+          if (it && typeof it === "object" && typeof it.en === "string") dict[it.en] = it.ja;
+          else collect(it);
+        });
+        return;
+      }
+      if (node && typeof node === "object") {
+        Object.values(node).forEach(collect);
+      }
+    })(SPORTS_COMPLETED);
+    [...SPORTS_BASE, ...SPORTS_CUSTOM, ...SPORTS_SETTINGS].forEach(it => dict[it.en] = it.ja);
+    window.__outputTranslation.register(dict);
+  }
+
+  function makeSportsItem(it, role){
+    const label = document.createElement("label");
+    label.style.cssText = "display:flex; align-items:flex-start; gap:10px; padding:10px; border:1px solid #e6e7ee; border-radius:12px; background:#fff;";
+    const cb = document.createElement("input");
+    cb.type = "checkbox";
+    cb.dataset.en = it.en;
+    cb.dataset.sportsRole = role;
+    cb.style.cssText = "width:20px; height:20px;";
+    const span = document.createElement("span");
+    span.textContent = it.ja;
+    span.style.cssText = "font-size:0.98em; line-height:1.2; white-space:normal; word-break:keep-all; overflow-wrap:anywhere;";
+    label.appendChild(cb);
+    label.appendChild(span);
+    return {label, cb};
+  }
+
+  function openSportsAncestors(node){
+    let cur = node && node.parentElement;
+    while(cur){
+      if(cur.tagName === 'DETAILS') cur.open = true;
+      cur = cur.parentElement;
+    }
+  }
+
+  function clearSportsLinked(root){
+    root.querySelectorAll('input[data-sports-linked="1"]').forEach(cb => {
+      cb.checked = false;
+      delete cb.dataset.sportsLinked;
+      delete cb.dataset.sportsSource;
+    });
+  }
+
+  function clearCompletedExcept(root, keepEn){
+    root.querySelectorAll('input[data-sports-role="completed"]').forEach(cb => {
+      if(cb.dataset.en !== keepEn) cb.checked = false;
+    });
+  }
+
+  function applySportsCompleted(root, en){
+    const selected = root.querySelector('input[data-sports-role="completed"][data-en="'+CSS.escape(en)+'"]');
+    const wasChecked = !!(selected && selected.checked);
+    clearCompletedExcept(root, null);
+    clearSportsLinked(root);
+    if (!wasChecked){
+      if (selected) selected.checked = false;
+      return;
+    }
+    if (selected) selected.checked = true;
+    const linked = SPORTS_COMPLETE_LINKS[en] || [];
+    linked.forEach(tag => {
+      const cb = Array.from(root.querySelectorAll('input[data-en]')).find(el =>
+        el.dataset.en === tag && el.dataset.sportsRole !== 'completed'
+      );
+      if(cb){
+        cb.checked = true;
+        cb.dataset.sportsLinked = '1';
+        cb.dataset.sportsSource = en;
+        openSportsAncestors(cb);
+      }
+    });
+    if (selected) openSportsAncestors(selected);
+  }
+
+  function clearSportsCompletedState(root){
+    root.querySelectorAll('input[data-sports-role="completed"]').forEach(cb => { cb.checked = false; });
+    clearSportsLinked(root);
+  }
+
+  function bindSportsLogic(root){
+    root.querySelectorAll('input[data-sports-role="completed"]').forEach(cb => {
+      cb.addEventListener('change', () => {
+        applySportsCompleted(root, cb.dataset.en);
+      });
+    });
+    root.querySelectorAll('input[data-sports-role="base"], input[data-sports-role="custom"], input[data-sports-role="setting"]').forEach(cb => {
+      cb.addEventListener('change', () => {
+        clearSportsCompletedState(root);
+      });
+    });
+  }
+
+  function renderSportsCollection(root){
+    registerSportsTranslations();
+    const outer = document.createElement('details');
+    outer.open = false;
+    const summary = document.createElement('summary');
+    summary.textContent = SPORTS_COLLECTION_TITLE;
+    summary.style.cssText = "font-weight:800; padding:10px 12px; background:#eaf3ff; border:1px solid #cfe0ff; border-radius:12px; margin:10px 0; list-style:none; color:#124ea8;";
+    outer.appendChild(summary);
+    const wrap = document.createElement('div');
+    wrap.className = 'pose-group-sports';
+
+    const completedDetails = document.createElement('details');
+    completedDetails.open = false;
+    const completedSummary = document.createElement('summary');
+    completedSummary.textContent = '完成セット';
+    completedSummary.style.cssText = "font-weight:700; padding:10px 12px; margin:8px 0; background:#ffffff; border:1px solid #e6e7ee; border-radius:12px;";
+    completedDetails.appendChild(completedSummary);
+    const completedWrap = document.createElement('div');
+    completedWrap.style.cssText = 'display:grid; grid-template-columns:1fr; gap:10px; padding:10px 6px 2px 6px;';
+    Object.entries(SPORTS_COMPLETED).forEach(([group, items]) => {
+      const groupDetails = document.createElement('details');
+      groupDetails.open = false;
+      const groupSummary = document.createElement('summary');
+      groupSummary.textContent = group;
+      groupSummary.style.cssText = "font-weight:700; padding:10px 12px; margin:4px 0; background:#fafbff; border:1px dashed #d7ddee; border-radius:12px;";
+      groupDetails.appendChild(groupSummary);
+      const box = document.createElement('div');
+      box.style.cssText = 'display:grid; grid-template-columns:1fr; gap:10px; padding:10px 6px 2px 6px;';
+      if (Array.isArray(items)) {
+        items.forEach(it => {
+          const {label} = makeSportsItem(it, 'completed');
+          box.appendChild(label);
+        });
+      } else {
+        Object.entries(items || {}).forEach(([subgroup, subitems]) => {
+          const subDetails = document.createElement('details');
+          subDetails.open = false;
+          const subSummary = document.createElement('summary');
+          subSummary.textContent = subgroup;
+          subSummary.style.cssText = "font-weight:700; padding:9px 12px; margin:2px 0; background:#ffffff; border:1px solid #e6e7ee; border-radius:12px;";
+          subDetails.appendChild(subSummary);
+          const subBox = document.createElement('div');
+          subBox.style.cssText = 'display:grid; grid-template-columns:1fr; gap:10px; padding:10px 6px 2px 6px;';
+          (subitems || []).forEach(it => {
+            const {label} = makeSportsItem(it, 'completed');
+            subBox.appendChild(label);
+          });
+          subDetails.appendChild(subBox);
+          box.appendChild(subDetails);
+        });
+      }
+      groupDetails.appendChild(box);
+      completedWrap.appendChild(groupDetails);
+    });
+    completedDetails.appendChild(completedWrap);
+    wrap.appendChild(completedDetails);
+
+    function appendGroupedSection(title, groupedItems, role){
+      const details = document.createElement('details');
+      details.open = false;
+      const sum = document.createElement('summary');
+      sum.textContent = title;
+      sum.style.cssText = "font-weight:700; padding:10px 12px; margin:8px 0; background:#ffffff; border:1px solid #e6e7ee; border-radius:12px;";
+      details.appendChild(sum);
+      const box = document.createElement('div');
+      box.style.cssText = 'display:grid; grid-template-columns:1fr; gap:10px; padding:10px 6px 2px 6px;';
+      SPORTS_SECTION_GROUP_ORDER.forEach(group => {
+        const items = groupedItems[group] || [];
+        if (!items.length) return;
+        const groupDetails = document.createElement('details');
+        groupDetails.open = false;
+        const groupSummary = document.createElement('summary');
+        groupSummary.textContent = group;
+        groupSummary.style.cssText = "font-weight:700; padding:9px 12px; margin:2px 0; background:#fafbff; border:1px dashed #d7ddee; border-radius:12px;";
+        groupDetails.appendChild(groupSummary);
+        const groupBox = document.createElement('div');
+        groupBox.style.cssText = 'display:grid; grid-template-columns:1fr; gap:10px; padding:10px 6px 2px 6px;';
+        items.forEach(it => {
+          const {label} = makeSportsItem(it, role);
+          groupBox.appendChild(label);
+        });
+        groupDetails.appendChild(groupBox);
+        box.appendChild(groupDetails);
+      });
+      details.appendChild(box);
+      wrap.appendChild(details);
+    }
+
+    appendGroupedSection('ベース', getSportsBaseGrouped(), 'base');
+    appendGroupedSection('カスタマイズ', getSportsCustomGrouped(), 'custom');
+    appendGroupedSection('設定', getSportsSettingsGrouped(), 'setting');
+
+    outer.appendChild(wrap);
+    root.appendChild(outer);
+    bindSportsLogic(outer);
+  }
+
   // Renderer (compatible with old datasets): {Big:{Small:[{ja,en}]}}
   function renderCategories(root, data, ns){
     Object.keys(data).forEach(bigTitle => {
@@ -2949,6 +3948,9 @@ const POSE_STAGE1_BODY = {
         `;
         document.head.appendChild(st);
       })();
+
+      // Sports specialized collection
+      renderSportsCollection(root);
 
       // Completed -> Body Structure -> R Mood (gated)
       renderCategories(root, POSE_COMPLETED, "v14-completed");

@@ -1421,7 +1421,8 @@
   return {
     emotion: makeTopGroup('expression-top-emotion', '😊 感情設計 (Emotion Design)', '#d9c6ff', '#faf7ff'),
     facial: makeTopGroup('expression-top-facial', '🧩 顔パーツ・演出 (Facial Parts & FX)', '#bfe3ff', '#f5fbff'),
-    scene: makeTopGroup('expression-top-scene', '🎬 シーン顔 (Scene Faces)', '#ffd59e', '#fff8ef')
+    scene: makeTopGroup('expression-top-scene', '🎬 シーン顔 (Scene Faces)', '#ffd59e', '#fff8ef'),
+    r18collections: makeTopGroup('expression-top-r18-collections', '🧠 R-18感情コレクション (R-18 Emotion Collections)', '#f2b6d0', '#fff5fa')
   };
 };
 
@@ -1522,6 +1523,214 @@
         return details;
       };
 
+      const createPlaceholderItems = (prefix) => ([
+        { ja: `仮項目_${prefix}`, en: `placeholder_${prefix}` }
+      ]);
+
+      const createSpecializedCollectionScaffold = () => {
+        const details = document.createElement("details");
+        details.className = "expression-cat expression-r18-specialized-collection";
+        details.style.cssText = "margin-bottom:6px; border:1px solid #f2b6d0; border-radius:6px; background:#fff;";
+        details.open = false;
+
+        const summary = document.createElement("summary");
+        summary.innerHTML = `🧠 精神操作・状態異常特化コレクション <span style="font-size:0.8em; color:#b05a84;">(Mind Control / Status Ailment Specialized Collection)</span>`;
+        summary.style.cssText = "font-weight:bold; padding:8px 10px; cursor:pointer; background:#fff5fa; color:#7b3f5c;";
+        details.appendChild(summary);
+
+        const content = document.createElement("div");
+        content.style.cssText = "padding:8px; display:flex; flex-direction:column; gap:8px;";
+
+        const guide = document.createElement("div");
+        guide.style.cssText = "font-size:0.82em; color:#8a5a73; padding:2px 2px 6px 2px;";
+        guide.textContent = "Complete sets now rebuild Base / Customize / Settings exclusively inside this collection.";
+        content.appendChild(guide);
+
+        const sectionDefs = [
+          {
+            key: "complete_sets",
+            title: "1. 完成セット (Complete Sets)",
+            items: [
+              { ja: "🌀 催眠・洗脳セット", en: "vacant eyes, unfocused eyes, thought cessation, obedient" },
+              { ja: "💗 媚薬・発情セット", en: "heart-shaped pupils, heavy blush, heavy breathing, pleasure surrender" },
+              { ja: "😴 睡眠・無意識セット", en: "closed eyes, slack mouth, droopy eyelids, sleepwalking feel" }
+            ]
+          },
+          {
+            key: "base",
+            title: "2. ベース (Base)",
+            items: [
+              { ja: "ハート目", en: "heart-shaped pupils" },
+              { ja: "虚ろな目", en: "vacant eyes" },
+              { ja: "ぐるぐる目", en: "swirling eyes" },
+              { ja: "睡眠状態", en: "sleeping state" },
+              { ja: "焦点の合わない目", en: "unfocused eyes" },
+              { ja: "ハイライト消失目", en: "lifeless eyes" },
+              { ja: "夢見のような瞳", en: "dreamy eyes" },
+              { ja: "半開きの目", en: "half-closed eyes" },
+              { ja: "力の抜けた口元", en: "slack mouth" }
+            ]
+          },
+          {
+            key: "customize",
+            title: "3. カスタマイズ (Customize)",
+            items: [
+              { ja: "よだれ", en: "drooling" },
+              { ja: "涙目", en: "watery eyes" },
+              { ja: "激しい紅潮", en: "heavy blush" },
+              { ja: "乱れた呼吸", en: "heavy breathing" },
+              { ja: "震える唇", en: "quivering lips" },
+              { ja: "息が漏れる口元", en: "panting mouth" },
+              { ja: "とろけた視線", en: "melted gaze" },
+              { ja: "瞳孔拡大", en: "dilated pupils" },
+              { ja: "眠気で落ちるまぶた", en: "droopy eyelids" },
+              { ja: "表情の崩れ", en: "expression collapse" }
+            ]
+          },
+          {
+            key: "settings",
+            title: "4. 設定 (Settings)",
+            items: [
+              { ja: "従順", en: "obedient" },
+              { ja: "意識混濁", en: "clouded consciousness" },
+              { ja: "快楽堕ち", en: "pleasure surrender" },
+              { ja: "抵抗喪失", en: "loss of resistance" },
+              { ja: "判断力低下", en: "impaired judgment" },
+              { ja: "命令受容", en: "command acceptance" },
+              { ja: "思考停止", en: "thought cessation" },
+              { ja: "夢遊感", en: "sleepwalking feel" },
+              { ja: "快感優先", en: "pleasure priority" },
+              { ja: "正気と崩壊の境界", en: "boundary of sanity and collapse" }
+            ]
+          }
+        ];
+
+        const sectionNodes = new Map();
+        const inputMap = new Map();
+
+        sectionDefs.forEach((section) => {
+          const node = createFacialSubCat(section.title, section.items);
+          node.dataset.collectionRole = section.key;
+          sectionNodes.set(section.key, node);
+          node.querySelectorAll('input[type="checkbox"]').forEach((cb) => {
+            if (cb.dataset && cb.dataset.val) inputMap.set(cb.dataset.val, cb);
+          });
+          content.appendChild(node);
+        });
+
+        const completeSetLinks = {
+          "vacant eyes, unfocused eyes, thought cessation, obedient": [
+            "vacant eyes",
+            "unfocused eyes",
+            "lifeless eyes",
+            "dreamy eyes",
+            "melted gaze",
+            "clouded consciousness",
+            "thought cessation",
+            "obedient"
+          ],
+          "heart-shaped pupils, heavy blush, heavy breathing, pleasure surrender": [
+            "heart-shaped pupils",
+            "heavy blush",
+            "heavy breathing",
+            "quivering lips",
+            "panting mouth",
+            "dilated pupils",
+            "pleasure surrender",
+            "pleasure priority"
+          ],
+          "closed eyes, slack mouth, droopy eyelids, sleepwalking feel": [
+            "slack mouth",
+            "droopy eyelids",
+            "sleepwalking feel"
+          ]
+        };
+
+        const completeSetNode = sectionNodes.get("complete_sets");
+        const lowerSectionKeys = ["base", "customize", "settings"];
+        const setInputs = completeSetNode ? Array.from(completeSetNode.querySelectorAll('input[type="checkbox"]')) : [];
+        const lowerInputs = lowerSectionKeys.flatMap((key) => {
+          const node = sectionNodes.get(key);
+          return node ? Array.from(node.querySelectorAll('input[type="checkbox"]')) : [];
+        });
+
+        let internalUpdate = false;
+        let activeSetInput = null;
+
+        const clearLowerInputs = () => {
+          lowerInputs.forEach((cb) => {
+            cb.checked = false;
+          });
+        };
+
+        const clearSetInputs = (keep = null) => {
+          setInputs.forEach((cb) => {
+            if (cb !== keep) cb.checked = false;
+          });
+        };
+
+        const openLinkedShelves = (vals) => {
+          lowerSectionKeys.forEach((key) => {
+            const node = sectionNodes.get(key);
+            if (!node) return;
+            const hasLinked = Array.from(node.querySelectorAll('input[type="checkbox"]')).some((cb) => vals.includes(cb.dataset.val));
+            if (hasLinked) node.open = true;
+          });
+          details.open = true;
+        };
+
+        const applyCompleteSet = (setCb) => {
+          const vals = completeSetLinks[setCb.dataset.val] || [];
+          internalUpdate = true;
+          clearSetInputs(setCb);
+          clearLowerInputs();
+          setCb.checked = true;
+          vals.forEach((val) => {
+            const target = inputMap.get(val);
+            if (target) target.checked = true;
+          });
+          openLinkedShelves(vals);
+          activeSetInput = setCb;
+          internalUpdate = false;
+        };
+
+        const clearActiveCompleteSet = ({ clearLower = false } = {}) => {
+          internalUpdate = true;
+          if (activeSetInput) activeSetInput.checked = false;
+          if (clearLower) clearLowerInputs();
+          activeSetInput = null;
+          internalUpdate = false;
+        };
+
+        setInputs.forEach((cb) => {
+          cb.addEventListener("change", () => {
+            if (internalUpdate) return;
+            if (cb.checked) {
+              applyCompleteSet(cb);
+            } else if (activeSetInput === cb) {
+              clearActiveCompleteSet({ clearLower: true });
+            }
+          });
+        });
+
+        lowerInputs.forEach((cb) => {
+          cb.addEventListener("change", () => {
+            if (internalUpdate) return;
+            if (activeSetInput) {
+              clearActiveCompleteSet({ clearLower: false });
+            }
+          });
+        });
+
+        const note = document.createElement("div");
+        note.style.cssText = "font-size:0.78em; color:#9a6a82; padding-top:4px; border-top:1px dashed #edc6d8;";
+        note.textContent = "Complete set linkage is scoped to this collection only. Other expression shelves are untouched.";
+        content.appendChild(note);
+
+        details.appendChild(content);
+        return details;
+      };
+
       const facialRoot = document.createElement("div");
       facialRoot.className = "expression-facial-container";
       facialRoot.className = "expression-v2-container";
@@ -1582,6 +1791,9 @@
       }
       if (!groups.scene.querySelector('.expression-scene-container')) {
         groups.scene.appendChild(sceneRoot);
+      }
+      if (IS_UNLOCKED && !groups.r18collections.querySelector('.expression-r18-specialized-collection')) {
+        groups.r18collections.appendChild(createSpecializedCollectionScaffold());
       }
     },
 
