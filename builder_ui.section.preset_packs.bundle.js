@@ -4,7 +4,7 @@
   // =========================================================
 
   var KEY = "preset_packs";
-  var VERSION = 1;
+  var VERSION = 3;
 
   function safeText(v) {
     return (v === null || v === undefined) ? "" : String(v);
@@ -98,7 +98,371 @@
     var childNodes = null;
     if (it.children && Object.prototype.toString.call(it.children) === "[object Array]") childNodes = it.children;
     else if (it.items && Object.prototype.toString.call(it.items) === "[object Array]") childNodes = it.items;
-    return { id: id, titleJa: titleJa, titleEn: titleEn, subJa: subJa, subEn: subEn, tags: tags, type: safeText(it.type || ""), leftLabel: safeText(it.leftLabel || ""), rightLabel: safeText(it.rightLabel || ""), children: childNodes };
+    return { id: id, titleJa: titleJa, titleEn: titleEn, subJa: subJa, subEn: subEn, tags: tags, type: safeText(it.type || ""), leftLabel: safeText(it.leftLabel || ""), rightLabel: safeText(it.rightLabel || ""), children: childNodes, collectionId: safeText(it.collection_id || it.collectionId || ""), collectionRole: safeText(it.collection_role || it.collectionRole || ""), linkedIds: ensureArray(it.linked_ids || it.linkedIds || []), controllerKind: safeText(it.controller_kind || it.controllerKind || "") };
+  }
+
+
+  function ensureMythicRoleplayFusionBalance(db) {
+    try {
+      function isArray(v) { return Object.prototype.toString.call(v) === "[object Array]"; }
+      function titleOf(n) { return safeText((n && (n.title_ja || n.label || n.title || n.ja)) || ""); }
+      function findByTitle(list, title) {
+        if (!isArray(list)) return null;
+        for (var i = 0; i < list.length; i++) { if (titleOf(list[i]) === title) return list[i]; }
+        return null;
+      }
+      function ensureGroup(collectionNode, titleJa, titleEn) {
+        if (!collectionNode || !isArray(collectionNode.children)) return null;
+        for (var i = 0; i < collectionNode.children.length; i++) {
+          if (titleOf(collectionNode.children[i]) === titleJa) {
+            if (!isArray(collectionNode.children[i].children)) collectionNode.children[i].children = [];
+            collectionNode.children[i].title_en = titleEn;
+            return collectionNode.children[i];
+          }
+        }
+        var node = { title_ja: titleJa, title_en: titleEn, children: [] };
+        collectionNode.children.push(node);
+        return node;
+      }
+      function appendUniqueLinkedIds(item, ids) {
+        if (!item) return;
+        if (!isArray(item.linked_ids)) item.linked_ids = isArray(item.linkedIds) ? item.linkedIds.slice() : [];
+        for (var i = 0; i < ids.length; i++) if (item.linked_ids.indexOf(ids[i]) === -1) item.linked_ids.push(ids[i]);
+      }
+      function removeLinkedIds(item, ids) {
+        if (!item || !isArray(item.linked_ids)) return;
+        item.linked_ids = item.linked_ids.filter(function(id) { return ids.indexOf(id) === -1; });
+      }
+      function removeLegacyGroups(collectionNode) {
+        if (!collectionNode || !isArray(collectionNode.children)) return;
+        var deny = {
+          '🧬 融合強化': 1,
+          '🐾 身体部位変化': 1
+        };
+        collectionNode.children = collectionNode.children.filter(function(ch) { return !deny[titleOf(ch)]; });
+      }
+      function normalizeFusionOrder(collectionNode) {
+        if (!collectionNode || !isArray(collectionNode.children)) return;
+        var priority = {
+          '完成セット': 0,
+          '🌫 軽融合': 1,
+          '🐾 軽身体変化': 2,
+          '🧍 人型維持': 3,
+          '🚫 外部神獣抑制': 4,
+          '👑 青龍神格演出': 5,
+          '⛈ 青龍天候・雷演出': 6,
+          '👑 フェニックス神格演出': 5,
+          '🔥 フェニックス再生火羽演出': 6,
+          '👑 グリフォン神格演出': 5,
+          '🪽 グリフォン蒼穹・羽爪演出': 6,
+          '👑 スフィンクス神格演出': 5,
+          '☁ スフィンクス砂碑・神謎演出': 6,
+          '🧬 中融合': 7,
+          '🐾 中身体変化': 8,
+          '🐉 深融合': 9,
+          '🐾 深身体変化': 10,
+          '🤝 ペア補助': 11,
+          'ベース': 12,
+          'カスタマイズ': 13,
+          '設定': 14,
+          'クオリティセット': 15,
+          '実クオリティ項目': 16
+        };
+        collectionNode.children.sort(function(a, b) {
+          var at = titleOf(a), bt = titleOf(b);
+          var av = Object.prototype.hasOwnProperty.call(priority, at) ? priority[at] : 999;
+          var bv = Object.prototype.hasOwnProperty.call(priority, bt) ? priority[bt] : 999;
+          if (av !== bv) return av - bv;
+          return 0;
+        });
+      }
+      var ROLEPLAY_PARENT_KEY = '🎭 なりきりおすすめセット (Roleplay Recommended Sets)';
+      var SPECIAL_TITLE_JA = '🧩 神獣・伝説特化コレクション';
+      var rootArr = db[ROLEPLAY_PARENT_KEY] || db['🎭 なりきりおすすめセット｜神獣・伝説なりきり'] || [];
+      var roleplayRoot = findByTitle(rootArr, '🎭 なりきり') || { children: [] };
+      var specialRoot = findByTitle(roleplayRoot.children, SPECIAL_TITLE_JA);
+      if (!specialRoot || !isArray(specialRoot.children)) return;
+      var defs = [
+        { titleJa:'☯ 四神特化コレクション', prefix:'mythic_four', stems:['seiryu','byakko','suzaku','genbu'] },
+        { titleJa:'🌊 海蛇・深海特化コレクション', prefix:'mythic_sea', stems:['leviathan','jormungandr','kraken'] },
+        { titleJa:'☠ 冥獣・終末獣特化コレクション', prefix:'mythic_doom', stems:['fenrir','cerberus','behemoth'] },
+        { titleJa:'🪽 天空・神鳥特化コレクション', prefix:'mythic_sky', stems:['phoenix','griffin','sphinx'] }
+      ];
+      function removeFusionGroupsOnly(collectionNode) {
+        if (!collectionNode || !isArray(collectionNode.children)) return;
+        var deny = {
+          '🌫 軽融合': 1,
+          '🧬 中融合': 1,
+          '🐉 深融合': 1,
+          '🐾 軽身体変化': 1,
+          '🐾 中身体変化': 1,
+          '🐾 深身体変化': 1,
+          '🧍 人型維持': 1,
+          '🚫 外部神獣抑制': 1,
+          '👑 青龍神格演出': 1,
+          '⛈ 青龍天候・雷演出': 1,
+          '👑 朱雀神格演出': 1,
+          '🔥 朱雀聖火・飛翔演出': 1,
+          '👑 玄武神格演出': 1,
+          '🌫 玄武玄水・蛇霧演出': 1,
+          '👑 麒麟神格演出': 1,
+          '☁ 麒麟瑞雲・祥光演出': 1,
+          '🤝 ペア補助': 0,
+          'ベース': 0,
+          'カスタマイズ': 0,
+          '設定': 0,
+          'クオリティセット': 0,
+          '実クオリティ項目': 0,
+          '完成セット': 0
+        };
+        collectionNode.children = collectionNode.children.filter(function(ch) { return !deny[titleOf(ch)]; });
+      }
+      function speciesShelfStem(title) {
+        if (title === '🐉 青龍') return 'seiryu';
+        if (title === '🐅 白虎') return 'byakko';
+        if (title === '🔥 朱雀') return 'suzaku';
+        if (title === '🐢 玄武') return 'genbu';
+        if (title === '🦌 麒麟') return 'qilin';
+        if (title === '🐍 リヴァイアサン') return 'leviathan';
+        if (title === '🌍 ヨルムンガンド') return 'jormungandr';
+        if (title === '🦑 クラーケン') return 'kraken';
+        if (title === '🐺 フェンリル') return 'fenrir';
+        if (title === '🐶 ケルベロス') return 'cerberus';
+        if (title === '🦬 ベヒーモス') return 'behemoth';
+        if (title === '🔥 フェニックス') return 'phoenix';
+        if (title === '🦅 グリフォン') return 'griffin';
+        if (title === '🦁 スフィンクス') return 'sphinx';
+        return '';
+      }
+      function normalizeCollectionTopOrder(collectionNode) {
+        if (!collectionNode || !isArray(collectionNode.children)) return;
+        var priority = {
+          '🐉 青龍': 0,
+          '🐅 白虎': 1,
+          '🔥 朱雀': 2,
+          '🐢 玄武': 3,
+          '🦌 麒麟': 4,
+          '🐍 リヴァイアサン': 0,
+          '🌍 ヨルムンガンド': 1,
+          '🦑 クラーケン': 2,
+          '🐺 フェンリル': 0,
+          '🐶 ケルベロス': 1,
+          '🦬 ベヒーモス': 2,
+          '🔥 フェニックス': 0,
+          '🦅 グリフォン': 1,
+          '🦁 スフィンクス': 2
+        };
+        collectionNode.children.sort(function(a, b) {
+          var at = titleOf(a), bt = titleOf(b);
+          var av = Object.prototype.hasOwnProperty.call(priority, at) ? priority[at] : 999;
+          var bv = Object.prototype.hasOwnProperty.call(priority, bt) ? priority[bt] : 999;
+          if (av !== bv) return av - bv;
+          return 0;
+        });
+      }
+      for (var gi = 0; gi < defs.length; gi++) {
+        var def = defs[gi];
+        var collectionNode = findByTitle(specialRoot.children, def.titleJa);
+        if (!collectionNode || !isArray(collectionNode.children)) continue;
+
+        var speciesShelves = [];
+        for (var cc = 0; cc < collectionNode.children.length; cc++) {
+          var stemFromShelf = speciesShelfStem(titleOf(collectionNode.children[cc]));
+          if (stemFromShelf) speciesShelves.push({ node: collectionNode.children[cc], stem: stemFromShelf });
+        }
+
+        var targets = [];
+        if (speciesShelves.length) {
+          removeFusionGroupsOnly(collectionNode);
+          normalizeCollectionTopOrder(collectionNode);
+          for (var sh = 0; sh < speciesShelves.length; sh++) {
+            targets.push({ collectionNode: speciesShelves[sh].node, stems: [speciesShelves[sh].stem], prefix: def.prefix, scoped: true });
+          }
+        } else {
+          targets.push({ collectionNode: collectionNode, stems: def.stems.slice(), prefix: def.prefix, scoped: false });
+        }
+
+        for (var tg = 0; tg < targets.length; tg++) {
+          var target = targets[tg];
+          var node = target.collectionNode;
+          if (!node || !isArray(node.children)) continue;
+          removeLegacyGroups(node);
+          ensureGroup(node, '🌫 軽融合', 'Roleplay Fusion');
+          ensureGroup(node, '🧬 中融合', 'Hybrid Fusion');
+          ensureGroup(node, '🐉 深融合', 'Full Fusion');
+          ensureGroup(node, '🐾 軽身体変化', 'Roleplay Body Mutation');
+          ensureGroup(node, '🐾 中身体変化', 'Hybrid Body Mutation');
+          ensureGroup(node, '🐾 深身体変化', 'Full Body Mutation');
+          ensureGroup(node, '🧍 人型維持', 'Humanoid Preservation');
+          ensureGroup(node, '🚫 外部神獣抑制', 'External Beast Suppression');
+          if (target.prefix === 'mythic_four') {
+            if (target.stems[0] === 'seiryu') {
+              ensureGroup(node, '👑 青龍神格演出', 'Seiryu Divine Presence');
+              ensureGroup(node, '⛈ 青龍天候・雷演出', 'Seiryu Storm & Lightning');
+            } else if (target.stems[0] === 'suzaku') {
+              ensureGroup(node, '👑 朱雀神格演出', 'Suzaku Divine Presence');
+              ensureGroup(node, '🔥 朱雀聖火・飛翔演出', 'Suzaku Sacred Flame & Flight');
+            } else if (target.stems[0] === 'genbu') {
+              ensureGroup(node, '👑 玄武神格演出', 'Genbu Divine Presence');
+              ensureGroup(node, '🌫 玄武玄水・蛇霧演出', 'Genbu Blackwater & Serpent Mist');
+            }
+          } else if (target.prefix === 'mythic_sky') {
+            if (target.stems[0] === 'phoenix') {
+              ensureGroup(node, '👑 フェニックス神格演出', 'Phoenix Divine Presence');
+              ensureGroup(node, '🔥 フェニックス再生火羽演出', 'Phoenix Rebirth Ember Wings');
+            } else if (target.stems[0] === 'griffin') {
+              ensureGroup(node, '👑 グリフォン神格演出', 'Griffin Divine Presence');
+              ensureGroup(node, '🪽 グリフォン蒼穹・羽爪演出', 'Griffin Sky Dominion & Talon');
+            } else if (target.stems[0] === 'sphinx') {
+              ensureGroup(node, '👑 スフィンクス神格演出', 'Sphinx Divine Presence');
+              ensureGroup(node, '☁ スフィンクス砂碑・神謎演出', 'Sphinx Sand Monument & Sacred Riddle');
+            }
+          }
+          normalizeFusionOrder(node);
+          var completeBox = findByTitle(node.children, '完成セット');
+          var completeItems = completeBox && isArray(completeBox.children) ? completeBox.children : [];
+          for (var si = 0; si < target.stems.length; si++) {
+            var stem = target.stems[si];
+            var completeId = target.prefix + '_complete_' + stem;
+            var targetComplete = null;
+            for (var ci = 0; ci < completeItems.length; ci++) {
+              if (((completeItems[ci] && completeItems[ci].id) || '') === completeId) { targetComplete = completeItems[ci]; break; }
+            }
+            if (!targetComplete) continue;
+            var roleplayId = target.prefix + '_roleplay_' + stem;
+            var hybridId = target.prefix + '_hybrid_' + stem;
+            var fullId = target.prefix + '_full_' + stem;
+            var roleMutationId = target.prefix + '_role_mutation_' + stem;
+            var hybridMutationId = target.prefix + '_hybrid_mutation_' + stem;
+            var fullMutationId = target.prefix + '_full_mutation_' + stem;
+            var preserveId = target.prefix + '_preserve_' + stem;
+            var suppressId = target.prefix + '_suppress_' + stem;
+            var legacyFusionId = target.prefix + '_fusion_' + stem;
+            var legacyMutationId = target.prefix + '_mutation_' + stem;
+            removeLinkedIds(targetComplete, [legacyFusionId, legacyMutationId, roleplayId, hybridId, fullId, roleMutationId, hybridMutationId, fullMutationId, preserveId, suppressId]);
+            appendUniqueLinkedIds(targetComplete, [roleplayId, roleMutationId, preserveId, suppressId]);
+          }
+        }
+      }
+      if (window.__PP_DB) window.__PP_DB.packs = db;
+      window.PRESET_PACKS_DB = db;
+      window.__PRESET_PACKS_DB = db;
+    } catch (e) {}
+  }
+
+
+  function applyCheckboxVisual(cb) {
+    if (!cb) return;
+    var node = cb;
+    while (node && node.tagName !== "LABEL") node = node.parentNode;
+    if (!node) return;
+    if (cb.checked) {
+      node.style.background = "rgba(0, 140, 255, 0.08)";
+      node.style.borderColor = "rgba(0, 140, 255, 0.35)";
+    } else {
+      node.style.background = "#fff";
+      node.style.borderColor = "rgba(0,0,0,0.10)";
+    }
+  }
+
+  function openAncestorDetails(node) {
+    var cur = node;
+    while (cur) {
+      if (cur.tagName === "DETAILS") cur.open = true;
+      cur = cur.parentNode;
+    }
+  }
+
+  function parseJsonArrayAttr(v) {
+    if (!v) return [];
+    try {
+      var arr = JSON.parse(v);
+      return Object.prototype.toString.call(arr) === "[object Array]" ? arr : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function collectionCheckboxes(root, collectionId, role) {
+    if (!root || !collectionId) return [];
+    var selector = 'input.preset-pack-cb[data-collection-id="' + collectionId.replace(/"/g, '\\"') + '"]';
+    if (role) selector += '[data-collection-role="' + role.replace(/"/g, '\\"') + '"]';
+    var list = root.querySelectorAll(selector);
+    return Array.prototype.slice.call(list || []);
+  }
+
+  function setCheckboxState(cb, checked) {
+    if (!cb) return;
+    cb.checked = !!checked;
+    applyCheckboxVisual(cb);
+  }
+
+  function clearCollectionRoles(root, collectionId, roles, exceptId) {
+    for (var i = 0; i < roles.length; i++) {
+      var boxes = collectionCheckboxes(root, collectionId, roles[i]);
+      for (var j = 0; j < boxes.length; j++) {
+        if (exceptId && boxes[j].getAttribute("data-pack-id") === exceptId) continue;
+        setCheckboxState(boxes[j], false);
+      }
+    }
+  }
+
+  function isExclusivePairRole(role) {
+    return role === "pair_helper" || role === "pair_male" || role === "pair_female" || role === "pair_relation";
+  }
+
+
+  function findCheckboxByPackId(root, packId) {
+    if (!root || !packId) return null;
+    return root.querySelector('input.preset-pack-cb[data-pack-id="' + packId.replace(/"/g, '\\"') + '"]');
+  }
+
+  function applyQualitySetSelection(root, cb, suppressGenerate) {
+    var collectionId = cb.getAttribute("data-collection-id") || "";
+    if (!collectionId) return;
+    clearCollectionRoles(root, collectionId, ["quality_set"], cb.getAttribute("data-pack-id"));
+    clearCollectionRoles(root, collectionId, ["quality_detail"]);
+    if (cb.checked) {
+      setCheckboxState(cb, true);
+      openAncestorDetails(cb);
+      var linked = parseJsonArrayAttr(cb.getAttribute("data-linked-ids"));
+      for (var i = 0; i < linked.length; i++) {
+        var target = findCheckboxByPackId(root, linked[i]);
+        if (!target) continue;
+        setCheckboxState(target, true);
+        openAncestorDetails(target);
+      }
+    } else {
+      setCheckboxState(cb, false);
+    }
+    if (!suppressGenerate && typeof window.generateOutput === "function") window.generateOutput();
+  }
+
+  function applyCompleteSetSelection(root, cb, suppressGenerate) {
+    var collectionId = cb.getAttribute("data-collection-id") || "";
+    if (!collectionId) return;
+    clearCollectionRoles(root, collectionId, ["complete_set"], cb.getAttribute("data-pack-id"));
+    clearCollectionRoles(root, collectionId, ["base", "custom", "customize", "setting", "quality_set", "quality_detail", "pair_helper", "pair_male", "pair_female", "pair_relation"]);
+    if (cb.checked) {
+      setCheckboxState(cb, true);
+      openAncestorDetails(cb);
+      var linked = parseJsonArrayAttr(cb.getAttribute("data-linked-ids"));
+      for (var i = 0; i < linked.length; i++) {
+        var target = findCheckboxByPackId(root, linked[i]);
+        if (!target) continue;
+        var role = target.getAttribute("data-collection-role") || "";
+        if (role === "quality_set") {
+          setCheckboxState(target, true);
+          applyQualitySetSelection(root, target, true);
+        } else {
+          setCheckboxState(target, true);
+        }
+        openAncestorDetails(target);
+      }
+    } else {
+      setCheckboxState(cb, false);
+    }
+    if (!suppressGenerate && typeof window.generateOutput === "function") window.generateOutput();
   }
 
   function buildGroupUI(group) {
@@ -253,6 +617,9 @@
           cb2.style.cssText = "margin-top:3px; width:18px; height:18px;";
           cb2.setAttribute("data-pack-id", it2.id);
           try { cb2.setAttribute("data-tags", JSON.stringify(it2.tags || [])); } catch (e2) { cb2.setAttribute("data-tags", "[]"); }
+          cb2.setAttribute("data-collection-id", it2.collectionId || "");
+          cb2.setAttribute("data-collection-role", it2.collectionRole || "");
+          try { cb2.setAttribute("data-linked-ids", JSON.stringify(it2.linkedIds || [])); } catch (e3) { cb2.setAttribute("data-linked-ids", "[]"); }
 
           var info2 = document.createElement("div");
           info2.style.cssText = "display:flex; flex-direction:column; gap:2px; min-width:0; flex:1 1 auto;";
@@ -277,6 +644,7 @@
             info2.appendChild(sub2);
           }
 
+          applyCheckboxVisual(cb2);
           label2.appendChild(cb2);
           label2.appendChild(info2);
           body.appendChild(label2);
@@ -335,6 +703,9 @@
       cb.className = "preset-pack-cb";
       cb.style.cssText = "margin-top:3px; width:18px; height:18px;";
       cb.setAttribute("data-pack-id", item.id);
+      cb.setAttribute("data-collection-id", item.collectionId || "");
+      cb.setAttribute("data-collection-role", item.collectionRole || "");
+      try { cb.setAttribute("data-linked-ids", JSON.stringify(item.linkedIds || [])); } catch (eLinked) { cb.setAttribute("data-linked-ids", "[]"); }
       // tags を data に詰める（JSON）
       try {
         cb.setAttribute("data-tags", JSON.stringify(item.tags || []));
@@ -372,6 +743,7 @@
         textWrap.appendChild(sub);
       }
 
+      applyCheckboxVisual(cb);
       label.appendChild(cb);
       label.appendChild(textWrap);
 
@@ -412,6 +784,7 @@
       );
 
       var db = getDB();
+      ensureMythicRoleplayFusionBalance(db);
       var groupsRaw = extractGroups(db);
 
 
@@ -512,6 +885,27 @@
       for (var i = 0; i < groupsRaw.length; i++) {
         root.appendChild(buildGroupUI(normalizeGroup(groupsRaw[i])));
       }
+
+      root.addEventListener("change", function (ev) {
+        var target = ev && ev.target;
+        if (!target || !target.className || String(target.className).indexOf("preset-pack-cb") === -1) return;
+        applyCheckboxVisual(target);
+        var collectionId = target.getAttribute("data-collection-id") || "";
+        var role = target.getAttribute("data-collection-role") || "";
+        if (collectionId && role === "complete_set") {
+          applyCompleteSetSelection(root, target, false);
+          return;
+        }
+        if (collectionId && role === "quality_set") {
+          applyQualitySetSelection(root, target, false);
+          return;
+        }
+        if (collectionId && isExclusivePairRole(role) && target.checked) {
+          clearCollectionRoles(root, collectionId, [role], target.getAttribute("data-pack-id"));
+          openAncestorDetails(target);
+        }
+        if (typeof window.generateOutput === "function") window.generateOutput();
+      });
 
       mount.appendChild(root);
     },

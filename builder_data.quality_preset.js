@@ -149,7 +149,7 @@
     ]
   };
   window.__QP_DB.secret = {
-    label: "✨SECRET・究極艶（セット）", 
+    label: "✨SECRET・管理者専用（セット）", 
     val: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4), (anime-realism blend:1.4), (semi-realistic rendering:1.2), (cinematic lighting:1.4), (ray tracing:1.3), (subsurface scattering:1.3), (global illumination:1.3), (physically based rendering:1.3), (unreal engine 5:1.2), (octane render:1.2), (lumen reflections:1.2), (nanite geometry:1.1), (realistic lighting:1.2), (shiny hair:1.4), (glossy hair:1.4), (specular sharp highlights:1.3), (high contrast specular edges:1.3), (strong rim lighting:1.4), (backlight glow:1.3), (light wrapping around body:1.3), (separate material response), (different reflectivity for skin and clothing), (glossy coated fabric:1.4), (mirror-like costume highlights:1.3), (volumetric lighting:1.3), (light particles in air), (spark-like bokeh lights), (stage-like luminous background), (cinematic portrait crop), (close-up upper body focus), (Kodak Portra 400), (low contrast)",
     links: ["基本・最高画質", "光沢/ツヤ肌", "Specular", "Rim Light", "Material", "シネマティック", "Cinematic", "UE5", "PBR", "Perfect Face"]
   };
@@ -184,7 +184,7 @@
     links: ["CG Animation", "Cool Rim Light", "Blue-White Glow", "Cold Haze", "AO", "Material Separation", "Sharper Details", "Cinematic" ]
   };
   window.__QP_DB.secret_limitbreak = {
-    label: "✨SECRET・究極艶（リミットブレイク）",
+    label: "✨SECRET・管理者専用（リミットブレイク）",
     val: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4), (anime-realism blend:1.4), (cinematic lighting:1.5), (ray tracing:1.4), (subsurface scattering:1.4), (global illumination:1.4), (physically based rendering:1.3), (unreal engine 5:1.2), (octane render:1.2), (shiny hair:1.4), (glossy hair:1.4), (specular sharp highlights:1.4), (high contrast specular edges:1.4), (hard glossy reflections:1.3), (strong rim lighting:1.4), (backlight glow:1.4), (light wrapping around body:1.3), (separate material response), (different reflectivity for skin and clothing), (glossy coated fabric:1.5), (mirror-like costume highlights:1.4), (volumetric lighting:1.3), (light particles in air), (spark-like bokeh lights), (stage-like luminous background), (cinematic portrait crop), (close-up upper body focus), (liquid surface tension effect:1.3), (light bleeding through wet skin:1.3), (dynamic light interaction), (Kodak Portra 400), (low contrast)",
     links: ["基本・最高画質", "光沢/ツヤ肌", "Limit Break", "Specular", "Wet Light", "Material", "シネマティック", "Cinematic", "UE5", "PBR"]
   };

@@ -406,6 +406,8 @@
           window.__historyRestoring = true;
           const restoredCount = restoreCheckedItems(item.checkedItems || []);
           out.value = item.text || '';
+          out.dispatchEvent(new Event('input', { bubbles: true }));
+          out.dispatchEvent(new Event('change', { bubbles: true }));
           window.__historyRestoring = false;
 
           showHistoryRestoreToast(restoredCount);

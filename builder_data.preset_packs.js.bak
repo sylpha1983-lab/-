@@ -897,534 +897,725 @@
 
   "🎭 表情演出プリセット (Expression FX Packs)": [
       {
-      title_ja: "🌙 艶めき・背徳心理",
-      title_en: "Suggestive Psychology",
-      items: [
-      { id: "fx_r18_suppressed", label: "抑圧演出セット", desc: "視線逸らし＋汗＋口元固め", val: "suppressed_heat, looking_away, sweatdrop, trembling_lips" },
-      { id: "fx_r18_forbidden", label: "背徳演出セット", desc: "ためらい＋赤面＋目逸らし", val: "forbidden, full-face_blush, looking_away, nervous" },
-      { id: "fx_r18_dom", label: "支配演出セット", desc: "強い視線＋眉圧＋緊張", val: "dominant, glare, furrowed_brow, nervous_sweat" },
-      { id: "fx_r18_sub", label: "従属演出セット", desc: "伏し目＋赤面＋震え", val: "submissive, downcast_eyes, blush, trembling" },
-      { id: "fx_r18_yearn", label: "渇望演出セット", desc: "潤んだ瞳＋熱のこもる視線", val: "longing, watery_eyes, parted_lips, heated_gaze" }
-      ]
+        title_ja: "😊 喜び・笑い",
+        title_en: "Joy & Laughter",
+        children: [
+          {
+            title_ja: "😄 喜び",
+            title_en: "Joy",
+            children: [
+              { id: "fx_joy_happy", label: "喜び演出セット", desc: "笑顔＋輝き瞳", val: "happy, smile, shining_eyes, sparkling_eyes" },
+              { id: "fx_joy_innocent", label: "無邪気演出セット", desc: "きゃっ＋目きら", val: "happy, open_mouth, wide-eyed, sparkling_eyes" },
+              { id: "fx_joy_relief", label: "ほっとした喜び演出セット", desc: "安堵＋やわらかな笑み", val: "relieved smile, softened eyes, gentle happiness, warm expression" },
+              { id: "fx_joy_proud", label: "誇らしい喜び演出セット", desc: "満足げ＋胸を張る気配", val: "proud smile, bright eyes, satisfied expression, confident joy" },
+              { id: "fx_joy_blessed", label: "幸せ満ちる演出セット", desc: "満たされた幸福感＋潤んだ瞳", val: "blissful smile, softened gaze, watery eyes, fulfilled happiness" }
+            ]
+          },
+          {
+            title_ja: "😂 笑い",
+            title_en: "Laughter",
+            children: [
+              { id: "fx_joy_laugh", label: "爆笑演出セット", desc: "大笑い＋涙目", val: "laughing, open_mouth, tears_in_eyes" },
+              { id: "fx_joy_tease", label: "いたずら笑い演出セット", desc: "にやり＋片目細め", val: "playful_smile, smirk, narrowed_eyes, teasing" },
+              { id: "fx_joy_shy", label: "照れ笑い演出セット", desc: "赤面＋笑顔＋目逸らし", val: "blush, nervous_smile, looking_away, shy" },
+              { id: "fx_joy_snicker", label: "くすくす笑い演出セット", desc: "堪えきれない小さな笑い", val: "soft laughter, hand_over_mouth, amused eyes, suppressed giggle" },
+              { id: "fx_joy_grin", label: "満面笑み演出セット", desc: "弾けるような笑顔", val: "big smile, sparkling eyes, cheerful expression, radiant joy" }
+            ]
+          }
+        ]
+      },
+      {
+        title_ja: "🔥 怒り・狂気",
+        title_en: "Anger & Madness",
+        children: [
+          {
+            title_ja: "💢 怒り",
+            title_en: "Anger",
+            children: [
+              { id: "fx_anger_basic", label: "怒り演出セット", desc: "眉圧＋歯噛み＋睨み", val: "angry, furrowed_brow, clenched_teeth, glaring" },
+              { id: "fx_anger_silent", label: "静かな怒気演出セット", desc: "無表情気味＋鋭い視線", val: "cold_anger, expressionless, sharp_eyes, glare" },
+              { id: "fx_anger_burst", label: "激昂演出セット", desc: "叫び＋目見開き＋血走り", val: "rage, shouting, wide-eyed, bloodshot_eyes" },
+              { id: "fx_anger_control", label: "抑え込んだ怒り演出セット", desc: "耐える怒気＋震える口元", val: "suppressed anger, clenched jaw, trembling lips, burning eyes, tense face" },
+              { id: "fx_anger_disdain", label: "吐き捨て怒り演出セット", desc: "苛立ち＋軽蔑混じりの視線", val: "irritated, contemptuous glare, curled lip, narrowed eyes, sharp tone" },
+              { id: "fx_anger_crack", label: "理性限界演出セット", desc: "静かに切れかける危うさ", val: "about to snap, tense stare, clenched teeth, dark pressure, restrained rage" }
+            ]
+          },
+          {
+            title_ja: "🌀 狂気",
+            title_en: "Madness",
+            children: [
+              { id: "fx_anger_mad", label: "狂気演出セット", desc: "瞳開き＋不穏な笑み", val: "crazy_eyes, wide-eyed, evil_smile, stare" },
+              { id: "fx_mad_ecstasy", label: "陶酔狂気演出セット", desc: "うっとり笑み＋焦点の危うさ", val: "ecstatic madness, unfocused eyes, eerie smile, intoxicated expression, unstable" },
+              { id: "fx_mad_break", label: "壊れ笑い演出セット", desc: "笑っているのに壊れている", val: "broken smile, manic laughter, trembling eyes, unstable expression, insanity" },
+              { id: "fx_mad_whisper", label: "囁き狂気演出セット", desc: "秘密めいた低さ＋異常な熱", val: "whispering madness, half-lidded eyes, eerie grin, obsessive gaze, unstable" },
+              { id: "fx_mad_obsess", label: "執着狂気演出セット", desc: "張り付く視線＋逃がさない熱", val: "obsessive stare, possessive madness, unblinking eyes, dangerous smile, fixation" },
+              { id: "fx_mad_empty", label: "空虚狂気演出セット", desc: "感情が抜けたまま壊れている", val: "hollow madness, blank stare, eerie calm, broken mind, uncanny" }
+            ]
+          }
+        ]
+      },
+      {
+        title_ja: "⚡ 焦り・パニック",
+        title_en: "Panic & Agitation",
+        children: [
+          {
+            title_ja: "😰 焦り",
+            title_en: "Agitation",
+            children: [
+              { id: "fx_panic_hurry", label: "焦る演出セット", desc: "焦る＋目を見開く＋汗", val: "panic, wide-eyed, sweat, sweatdrop" },
+              { id: "fx_panic_shaken", label: "動揺演出セット", desc: "動揺＋目が泳ぐ＋汗", val: "nervous, blank_stare, sweatdrop, sweating" },
+              { id: "fx_panic_fumble", label: "しどろもどろ焦り演出セット", desc: "言葉が詰まる＋視線迷い", val: "flustered, darting eyes, awkward speech, nervous sweat, unsettled" },
+              { id: "fx_panic_deadline", label: "切迫焦燥演出セット", desc: "時間に追われるような張りつめ", val: "urgent, tense expression, hurried breath, pressured eyes, stress" },
+              { id: "fx_panic_confused", label: "混乱焦り演出セット", desc: "考えが追いつかない揺れ", val: "confused panic, wavering eyes, tense face, restless, overwhelmed" }
+            ]
+          },
+          {
+            title_ja: "🚨 パニック",
+            title_en: "Panic",
+            children: [
+              { id: "fx_panic_surprise", label: "驚き演出セット", desc: "驚き＋目見開き＋口開け", val: "surprised, wide-eyed, open_mouth, gasp" },
+              { id: "fx_panic_cornered", label: "追い詰められ演出セット", desc: "息荒い＋瞳揺れ＋汗", val: "cornered, shaky_eyes, heavy_breathing, sweating" },
+              { id: "fx_panic_breathless", label: "呼吸乱れ演出セット", desc: "過呼吸気味＋汗＋恐慌", val: "panic attack, heavy breathing, trembling, sweat, wide eyes" },
+              { id: "fx_panic_freeze", label: "思考停止演出セット", desc: "真っ白になるような狼狽", val: "mind gone blank, frozen panic, vacant stare, trembling lips, shock" },
+              { id: "fx_panic_scramble", label: "取り乱し演出セット", desc: "余裕を失った崩れ方", val: "frantic, disoriented, sweating, panicked expression, loss of composure" }
+            ]
+          }
+        ]
+      },
+      {
+        title_ja: "🕯 恐怖・泣き",
+        title_en: "Fear & Crying",
+        children: [
+          {
+            title_ja: "😢 泣き",
+            title_en: "Crying",
+            children: [
+              { id: "fx_fear_cry", label: "泣き演出セット", desc: "泣き＋嗚咽＋涙", val: "crying, sobbing, streaming_tears, trembling_lips" },
+              { id: "fx_fear_break", label: "涙堪え崩れ演出セット", desc: "耐える＋潤み＋崩れかけ", val: "holding_back_tears, watery_eyes, trembling_lips, fearful" },
+              { id: "fx_cry_smile", label: "泣き笑い演出セット", desc: "笑おうとして涙がこぼれる", val: "tearful smile, crying, trembling lips, bittersweet expression, watery eyes" },
+              { id: "fx_cry_silent", label: "静かな涙演出セット", desc: "声を出さずに流れる涙", val: "silent tears, downcast eyes, trembling lashes, restrained emotion, sadness" },
+              { id: "fx_cry_plead", label: "引き止め涙演出セット", desc: "縋るような涙＋離れたくなさ", val: "tearful pleading, reaching out, watery eyes, trembling lips, desperate sadness" },
+              { id: "fx_cry_broken", label: "感情決壊演出セット", desc: "堪えていたものが一気に溢れる", val: "emotional breakdown, sobbing, streaming tears, shaking shoulders, overwhelmed" }
+            ]
+          },
+          {
+            title_ja: "😨 怯え",
+            title_en: "Fear",
+            children: [
+              { id: "fx_fear_scared", label: "怯え演出セット", desc: "怯える＋震える＋涙目", val: "scared, trembling, watery_eyes, tears_in_eyes" },
+              { id: "fx_fear_frozen", label: "硬直恐怖演出セット", desc: "青ざめ＋息止まり＋瞳固定", val: "frozen_in_fear, pale_face, held_breath, fixed_stare" },
+              { id: "fx_fear_corner", label: "追い詰め恐怖演出セット", desc: "逃げ場のない怯え＋息浅め", val: "cornered fear, shaky breath, wide eyes, trembling, panic" },
+              { id: "fx_fear_watch", label: "警戒怯え演出セット", desc: "周囲を気にする張りつめた視線", val: "wary, fearful glance, tense face, alert eyes, uneasy" },
+              { id: "fx_fear_pale", label: "青ざめ怯え演出セット", desc: "血の気が引いたような怖さ", val: "pale with fear, stiff expression, anxious stare, held breath, trembling" },
+              { id: "fx_fear_flinch", label: "身をすくめる演出セット", desc: "反射的に縮こまる怖さ", val: "flinching, shrinking back, fearful eyes, tense shoulders, startled" }
+            ]
+          }
+        ]
+      },
+      {
+        title_ja: "🧊 嫌悪・軽蔑",
+        title_en: "Disgust & Contempt",
+        children: [
+          {
+            title_ja: "🤢 嫌悪",
+            title_en: "Disgust",
+            children: [
+              { id: "fx_disgust_basic", label: "嫌悪演出セット", desc: "嫌悪＋軽蔑＋目細め", val: "disgust, contempt, squinting, glaring" },
+              { id: "fx_disgust_avert", label: "拒絶演出セット", desc: "顔背け＋眉寄せ＋不快", val: "rejection, looking_away, disgust, furrowed_brow" },
+              { id: "fx_disgust_nausea", label: "吐き気嫌悪演出セット", desc: "受けつけない不快感", val: "disgusted, nauseated expression, recoiling, tightened mouth, aversion" },
+              { id: "fx_disgust_stiff", label: "顔をしかめる嫌悪演出セット", desc: "露骨に嫌そうな歪み", val: "grimace, disgusted look, wrinkled nose, narrowed eyes, distaste" },
+              { id: "fx_disgust_distance", label: "距離を置く嫌悪演出セット", desc: "近づきたくない拒否感", val: "pulling back, aversion, tense face, disgust, wary distance" }
+            ]
+          },
+          {
+            title_ja: "😒 軽蔑",
+            title_en: "Contempt",
+            children: [
+              { id: "fx_disgust_cold", label: "冷笑軽蔑演出セット", desc: "薄笑い＋見下し", val: "contempt, cold_smile, looking_down_on, half-lidded_eyes" },
+              { id: "fx_disgust_sneer", label: "鼻で笑う軽蔑演出セット", desc: "相手を下に見る乾いた笑い", val: "sneer, contemptuous smile, looking down, dismissive eyes, superiority" },
+              { id: "fx_disgust_ice", label: "氷点軽蔑演出セット", desc: "感情を削いだ冷たい見下し", val: "icy contempt, cold stare, emotionless disdain, superior expression" },
+              { id: "fx_disgust_bored", label: "退屈軽蔑演出セット", desc: "価値がないと切り捨てる視線", val: "bored contempt, half-lidded eyes, dismissive expression, unimpressed" },
+              { id: "fx_disgust_judge", label: "断罪軽蔑演出セット", desc: "見下しと判断が混ざる圧", val: "judgmental stare, disdain, superior gaze, cold pressure, condemnation" }
+            ]
+          }
+        ]
+      },
+      {
+        title_ja: "🫧 我慢・抑制",
+        title_en: "Restraint & Endurance",
+        items: [
+          { id: "fx_restraint_endure", label: "我慢演出セット", desc: "唇噛み＋歯噛み＋緊張", val: "restrained, biting_lip, clenched_teeth, nervous_sweat" },
+          { id: "fx_restraint_brave", label: "強がり演出セット", desc: "強気＋涙目＋目逸らし", val: "forced_smile, watery_eyes, looking_away, trembling_lips" },
+          { id: "fx_restraint_fatigue", label: "疲労演出セット", desc: "虚ろ目＋ため息＋汗", val: "tired, glazed_eyes, sigh, sweating" },
+          { id: "fx_restraint_resolve", label: "耐え抜き演出セット", desc: "汗＋真顔＋視線固定", val: "enduring, serious, sweating, fixed_gaze" }
+        ]
+      },
+      {
+        title_ja: "🌸 恥・照れ・誘惑",
+        title_en: "Shyness & Seduction",
+        items: [
+          { id: "fx_shy_blush", label: "照れ演出セット", desc: "全顔赤面＋目逸らし", val: "bashful, full-face_blush, looking_away, shy" },
+          { id: "fx_shy_embarrassed", label: "恥演出セット", desc: "鼻赤＋汗＋視線逸らし", val: "embarrassed, nose_blush, sweatdrop, looking_away" },
+          { id: "fx_shy_flustered", label: "しどろもどろ演出セット", desc: "口ごもり＋赤面＋目泳ぎ", val: "flustered, blush, nervous, darting_eyes" },
+          { id: "fx_shy_seduce", label: "誘惑演出セット", desc: "誘う＋視線＋唇", val: "seductive_smile, half-closed_eyes, parted_lips, stare" },
+          { id: "fx_shy_tempt", label: "挑発演出セット", desc: "余裕笑い＋流し目", val: "smirk, bedroom_eyes, teasing, confident" }
+        ]
+      },
+      {
+        title_ja: "💤 眠気・脱力",
+        title_en: "Sleepy & Limp",
+        items: [
+          { id: "fx_sleepy_drowsy", label: "眠気演出セット", desc: "とろ目＋口半開き", val: "sleepy_eyes, half-closed_eyes, open_mouth, tired" },
+          { id: "fx_sleepy_blank", label: "脱力演出セット", desc: "虚脱＋焦点薄い目", val: "exhausted, unfocused_eyes, slack_expression, tired" },
+          { id: "fx_sleepy_yawn", label: "あくび演出セット", desc: "あくび＋涙目＋眠そう", val: "yawning, watery_eyes, sleepy, relaxed" }
+        ]
+      },
+      {
+        title_ja: "🪞 無感情・冷淡",
+        title_en: "Blank & Cold",
+        items: [
+          { id: "fx_blank_expressionless", label: "無表情演出セット", desc: "感情薄い＋視線固定", val: "expressionless, blank_stare, still_face, emotionless" },
+          { id: "fx_blank_cold", label: "冷淡演出セット", desc: "半目＋温度低めの視線", val: "cold_eyes, half-lidded_eyes, indifferent, calm" },
+          { id: "fx_blank_doll", label: "人形めいた演出セット", desc: "瞳静止＋表情欠落", val: "doll-like, fixed_stare, expressionless, glassy_eyes" }
+        ]
+      },
+      {
+        title_ja: "✨ 決意・覚醒",
+        title_en: "Resolve & Awakening",
+        items: [
+          { id: "fx_resolve_determined", label: "決意演出セット", desc: "真顔＋鋭い瞳＋口元締め", val: "determined, serious, sharp_eyes, firm_mouth" },
+          { id: "fx_resolve_awaken", label: "覚醒演出セット", desc: "光る瞳＋覚悟＋集中", val: "awakened, glowing_eyes, focused, intense" },
+          { id: "fx_resolve_heroic", label: "英雄覚悟演出セット", desc: "逆境前進＋強い視線", val: "heroic, resolute, fearless, intense_gaze" }
+        ]
+      },
+      {
+        title_ja: "🌧 泣き・情緒崩壊",
+        title_en: "Meltdown & Breakdown",
+        items: [
+          { id: "fx_breakdown_silent", label: "静かな落涙演出セット", desc: "無言＋涙一筋", val: "silent_tears, downcast_eyes, melancholy, fragile" },
+          { id: "fx_breakdown_burst", label: "感情崩壊演出セット", desc: "泣き叫び＋涙＋震え", val: "emotional_breakdown, crying, shouting, trembling" },
+          { id: "fx_breakdown_numb", label: "燃え尽き演出セット", desc: "涙跡＋無表情＋虚脱", val: "burned_out, tear_streaks, expressionless, exhausted" }
+        ]
+      },
+      {
+        title_ja: "🌙 艶めき・背徳心理",
+        title_en: "Suggestive Psychology",
+        items: [
+          { id: "fx_r18_suppressed", label: "抑圧演出セット", desc: "視線逸らし＋汗＋口元固め", val: "suppressed_heat, looking_away, sweatdrop, trembling_lips" },
+          { id: "fx_r18_forbidden", label: "背徳演出セット", desc: "ためらい＋赤面＋目逸らし", val: "forbidden, full-face_blush, looking_away, nervous" },
+          { id: "fx_r18_dom", label: "支配演出セット", desc: "強い視線＋眉圧＋緊張", val: "dominant, glare, furrowed_brow, nervous_sweat" },
+          { id: "fx_r18_sub", label: "従属演出セット", desc: "伏し目＋赤面＋震え", val: "submissive, downcast_eyes, blush, trembling" },
+          { id: "fx_r18_yearn", label: "渇望演出セット", desc: "潤んだ瞳＋熱のこもる視線", val: "longing, watery_eyes, parted_lips, heated_gaze" }
+        ]
       }
       ,
       {
-      title_ja: "😳 漫符連動",
-      title_en: "Face Effects Sync",
-      children: [
+        title_ja: "😌 日常・好感系",
+        title_en: "Warm & Likable",
+        children: [
+          {
+            title_ja: "🫶 安心",
+            title_en: "Comfort & Relief",
+            children: [
+              { id: "fx_warm_gentle", label: "やわらか微笑み演出セット", desc: "穏やか笑み＋優しい目", val: "gentle_smile, soft_eyes, calm, approachable, warm_expression" },
+              { id: "fx_warm_relief", label: "ほっとした演出セット", desc: "安堵＋肩の力が抜ける", val: "relieved, gentle_smile, softened_eyes, exhale, relaxed" },
+              { id: "fx_warm_safe", label: "安心しきり演出セット", desc: "気持ちがほどけた穏やかさ", val: "safe and relaxed, gentle smile, softened eyes, calm breathing, warm expression" },
+              { id: "fx_warm_unguarded", label: "無防備なくつろぎ演出セット", desc: "気を許した素直さ＋ゆるみ", val: "unguarded, relaxed smile, softened eyes, open posture, at ease" },
+              { id: "fx_warm_cozy", label: "ぬくもり安心演出セット", desc: "包まれるような安堵＋穏やかさ", val: "cozy, relieved smile, warm eyes, relaxed shoulders, comforted" }
+            ]
+          },
+          {
+            title_ja: "🤝 親愛",
+            title_en: "Affection & Familiarity",
+            children: [
+              { id: "fx_warm_friendly", label: "親しみ演出セット", desc: "気さく＋明るい目＋自然体", val: "friendly_smile, bright_eyes, relaxed, natural_pose, approachable" },
+              { id: "fx_warm_proudsoft", label: "褒められ嬉しい演出セット", desc: "照れ混じりの嬉しさ", val: "happy, bashful_smile, soft_blush, sparkling_eyes, pleased" },
+              { id: "fx_warm_listen", label: "聞き入り演出セット", desc: "真剣に聞く＋優しい視線", val: "attentive, soft_eyes, slight_smile, calm, focused_on_speaker" },
+              { id: "fx_warm_nod", label: "うなずき共感演出セット", desc: "優しく受け止める＋好感", val: "gentle nod, empathetic eyes, slight smile, friendly, receptive" },
+              { id: "fx_warm_close", label: "距離の近い親愛演出セット", desc: "心を開いた親しさ＋柔らかな笑み", val: "close affection, warm smile, soft eyes, familiar, relaxed" },
+              { id: "fx_warm_trust", label: "信頼まなざし演出セット", desc: "安心して見つめる＋素直な好意", val: "trusting gaze, gentle smile, calm eyes, affectionate, openhearted" }
+            ]
+          }
+        ]
+      },
       {
+        title_ja: "😖 照れ・気まずさ系",
+        title_en: "Awkward & Flustered",
+        children: [
+          {
+            title_ja: "🌸 照れ",
+            title_en: "Shy & Blushing",
+            children: [
+              { id: "fx_awkward_hidden", label: "顔隠し照れ演出セット", desc: "手で顔隠し＋赤面", val: "covering_face, blush, shy, embarrassed, peeking" },
+              { id: "fx_awkward_stammer", label: "しどろもどろ会話演出セット", desc: "口ごもり＋焦り＋汗", val: "stammering, flustered, sweatdrop, darting_eyes, embarrassed" },
+              { id: "fx_awkward_bashful", label: "もじもじ照れ演出セット", desc: "視線泳ぎ＋頬染め＋ためらい", val: "bashful, blush, fidgeting, looking away, shy smile" },
+              { id: "fx_awkward_flinchblush", label: "不意打ち照れ演出セット", desc: "急に意識して赤くなる", val: "sudden blush, startled, shy eyes, flustered, caught off guard" },
+              { id: "fx_awkward_smilehide", label: "笑ってごまかす照れ演出セット", desc: "照れ隠し＋はにかみ笑い", val: "embarrassed laugh, bashful smile, blush, looking away, fidgeting" }
+            ]
+          },
+          {
+            title_ja: "😬 気まずさ",
+            title_en: "Awkwardness",
+            children: [
+              { id: "fx_awkward_silence", label: "気まずい沈黙演出セット", desc: "言葉詰まり＋目逸らし", val: "awkward, looking_away, forced_smile, silence, nervous" },
+              { id: "fx_awkward_apology", label: "やってしまった演出セット", desc: "しまった顔＋青ざめ＋汗", val: "oops, pale_face, sweatdrop, awkward_smile, startled" },
+              { id: "fx_awkward_sideeye", label: "横目気まずさ演出セット", desc: "横目＋眉下げ＋戸惑い", val: "side_eye, uneasy, awkward, lowered_brows, hesitant" },
+              { id: "fx_awkward_freeze", label: "空気が固まる演出セット", desc: "場が止まる＋言葉が出ない", val: "frozen smile, awkward pause, uneasy eyes, tense silence, nervous" },
+              { id: "fx_awkward_backstep", label: "一歩引く気まずさ演出セット", desc: "引き気味＋困り笑い", val: "stepping back, awkward smile, uneasy eyes, hesitant, uncomfortable" },
+              { id: "fx_awkward_searchwords", label: "言葉探し演出セット", desc: "何か言おうとして詰まる", val: "searching for words, awkward pause, nervous eyes, forced smile, uneasy" }
+            ]
+          }
+        ]
+      },
+      {
+        title_ja: "👑 誇り・勝ち気系",
+        title_en: "Pride & Defiance",
+        children: [
+          {
+            title_ja: "🏆 誇り",
+            title_en: "Pride",
+            children: [
+              { id: "fx_pride_confident", label: "勝ち気演出セット", desc: "自信＋強い目＋口角上げ", val: "confident, strong_eyes, smirk, chin_up, assertive" },
+              { id: "fx_pride_victory", label: "勝利確信演出セット", desc: "余裕笑み＋見下ろし気味", val: "victorious, smug_smile, confident_eyes, looking_down_slightly, composed" },
+              { id: "fx_pride_noble", label: "気高い演出セット", desc: "凛とした顔＋静かな誇り", val: "noble, dignified, calm_pride, straight_posture, composed_expression" },
+              { id: "fx_pride_dignity", label: "堂々たる演出セット", desc: "胸を張る＋揺るがぬ自信", val: "dignified, poised, confident posture, steady eyes, composed smile" },
+              { id: "fx_pride_glory", label: "誇り高き余裕演出セット", desc: "静かな勝者の余裕", val: "proud composure, faint smile, steady gaze, elegant confidence, superior calm" },
+              { id: "fx_pride_resolve", label: "譲らぬ矜持演出セット", desc: "信念を曲げない誇り", val: "unyielding pride, firm gaze, lifted chin, composed, unwavering dignity" }
+            ]
+          },
+          {
+            title_ja: "⚔️ 反骨",
+            title_en: "Defiance",
+            children: [
+              { id: "fx_pride_challenge", label: "挑戦的演出セット", desc: "煽り笑み＋鋭い視線", val: "challenging, provocative_smile, sharp_eyes, fearless, teasing" },
+              { id: "fx_pride_resist", label: "反骨演出セット", desc: "睨み返し＋折れない目", val: "defiant, glaring_back, unwavering_eyes, stubborn, tense" },
+              { id: "fx_pride_rebel", label: "負けん気演出セット", desc: "噛みつくような闘志", val: "competitive, fierce eyes, clenched jaw, defiant, burning spirit" },
+              { id: "fx_pride_sneer", label: "鼻で笑う反骨演出セット", desc: "見下さずとも折れない挑発", val: "scoffing smile, defiant eyes, fearless, provocative, stubborn" },
+              { id: "fx_pride_standground", label: "一歩も引かない演出セット", desc: "退かない意思＋対抗心", val: "standing ground, defiant stare, tense jaw, unwavering, resistant" }
+            ]
+          }
+        ]
+      },
+      {
+        title_ja: "😈 あざとさ・小悪魔系",
+        title_en: "Coy & Devilish",
+        children: [
+          {
+            title_ja: "🎀 あざとさ",
+            title_en: "Coy",
+            children: [
+              { id: "fx_coy_wink", label: "あざとウィンク演出セット", desc: "ウィンク＋にっこり＋軽い挑発", val: "wink, playful_smile, teasing, charming, bright_eyes" },
+              { id: "fx_coy_upgaze", label: "上目遣い演出セット", desc: "上目＋頬染め＋甘い圧", val: "looking_up, puppy_eyes, soft_blush, sweet_smile, charming" },
+              { id: "fx_coy_fakeinnocent", label: "わざとらしい無垢演出セット", desc: "無垢ぶる＋含み笑い", val: "feigned_innocence, innocent_face, hidden_smile, teasing_eyes, coy" },
+              { id: "fx_coy_sugartrap", label: "甘え誘導演出セット", desc: "甘い笑み＋距離近め＋誘い", val: "sweet smile, inviting gaze, leaning in, charming, teasing" },
+              { id: "fx_coy_pout", label: "拗ね甘え演出セット", desc: "少し拗ねつつ甘えてくる", val: "pouting, needy eyes, soft blush, sweet expression, clingy" },
+              { id: "fx_coy_bait", label: "計算かわいい演出セット", desc: "可愛さを分かって使う", val: "calculated cute, playful smile, bright eyes, charming, coy" }
+            ]
+          },
+          {
+            title_ja: "😼 小悪魔",
+            title_en: "Devilish",
+            children: [
+              { id: "fx_coy_impish", label: "小悪魔演出セット", desc: "片眉上げ＋にやり", val: "impish_smile, smirk, raised_eyebrow, teasing, mischievous" },
+              { id: "fx_coy_bragcute", label: "どやかわ演出セット", desc: "得意げ＋可愛げ", val: "cute_smug, proud_smile, sparkling_eyes, cheeky, playful" },
+              { id: "fx_coy_hook", label: "翻弄笑み演出セット", desc: "余裕顔＋からかい＋主導感", val: "teasing smirk, confident eyes, playful dominance, charming, cheeky" },
+              { id: "fx_coy_temptail", label: "引き際ちらつかせ演出セット", desc: "追わせるような余裕", val: "teasing retreat, sly smile, beckoning eyes, playful control, elusive" },
+              { id: "fx_coy_catplay", label: "猫かぶり小悪魔演出セット", desc: "無垢そうで中身はいたずら", val: "fake innocence, devilish smile, bright eyes, playful trickster, charming" }
+            ]
+          }
+        ]
+      },
+      {
+        title_ja: "🌫 不穏・異常系",
+        title_en: "Unease & Uncanny",
+        children: [
+          {
+            title_ja: "🌒 静かな不穏",
+            title_en: "Quiet Unease",
+            children: [
+              { id: "fx_uncanny_blanksmile", label: "不穏な微笑み演出セット", desc: "笑っているのに怖い", val: "uncanny_smile, unsettling, fixed_smile, cold_eyes, eerie" },
+              { id: "fx_uncanny_whisper", label: "囁き不穏演出セット", desc: "口元だけ笑う＋秘密めき", val: "whispering, slight_smile, half-lidded_eyes, ominous, secretive" },
+              { id: "fx_uncanny_still", label: "静止圧演出セット", desc: "動かなさすぎる不気味さ", val: "motionless, eerie calm, fixed gaze, silent pressure, unsettling" },
+              { id: "fx_uncanny_lowtone", label: "静かな圧迫感演出セット", desc: "声を荒げずに怖い", val: "quiet menace, unreadable face, cold stare, restrained threat, unsettling" },
+              { id: "fx_uncanny_hollowcalm", label: "空虚な平静演出セット", desc: "感情の抜けた落ち着きが怖い", val: "hollow calm, blank eyes, still expression, eerie composure, uncanny" }
+            ]
+          },
+          {
+            title_ja: "🫥 壊れかけ",
+            title_en: "Fraying Mind",
+            children: [
+              { id: "fx_uncanny_stare", label: "異常凝視演出セット", desc: "見開き＋瞬き少ない", val: "unblinking_stare, wide_eyes, eerie, fixed_gaze, unsettling" },
+              { id: "fx_uncanny_crack", label: "壊れかけ演出セット", desc: "表情の綻び＋理性薄れ", val: "cracking_expression, trembling_smile, unstable, watery_eyes, eerie" },
+              { id: "fx_uncanny_trance", label: "陶酔異常演出セット", desc: "恍惚＋焦点の揺れ", val: "trance, unfocused_eyes, faint_smile, detached, abnormal" },
+              { id: "fx_uncanny_breaksnap", label: "理性の綻び演出セット", desc: "笑みの崩れ＋危うい目", val: "sanity slipping, broken smile, trembling eyes, unstable, eerie" },
+              { id: "fx_uncanny_glass", label: "焦点ずれ演出セット", desc: "視線が合っているのに合わない", val: "misfocused eyes, detached stare, faint smile, unstable, uncanny" },
+              { id: "fx_uncanny_murmur", label: "壊れ際の呟き演出セット", desc: "小声で危うく何かを漏らす", val: "murmuring, unstable smile, unfocused eyes, fraying mind, eerie" }
+            ]
+          }
+        ]
+      },
+{
+  title_ja: "😳 漫符連動",
+  title_en: "Face Effects Sync",
+  children: [
+    {
       title_ja: "😊 喜び＋漫符",
       title_en: "Joy + Face Effects",
       children: [
-      { id: "fx_face_joy_blush", label: "ときめき喜び演出セット", desc: "笑顔＋赤面＋輝き瞳", val: "happy, smile, blush, shining_eyes, sparkling_eyes" },
-      { id: "fx_face_laugh_tears", label: "泣き笑い爆笑演出セット", desc: "大笑い＋涙目＋頬染め", val: "laughing, open_mouth, tearing up, blush, sparkling_eyes" },
-      { id: "fx_face_joy_sweat", label: "無邪気どたばた演出セット", desc: "きゃっ＋汗＋目きら", val: "happy, open_mouth, wide-eyed, flying sweatdrops, sparkling_eyes" },
-      { id: "fx_face_joy_bulb", label: "ひらめき歓喜演出セット", desc: "電球＋ぱっと明るい笑顔", val: "light bulb symbol, bright smile, sparkling_eyes, delighted, inspired" },
-      { id: "fx_face_joy_music", label: "ごきげん音符演出セット", desc: "音符＋やわらか笑み＋上機嫌", val: "music note symbol, warm smile, cheerful, relaxed, likable" },
-      { id: "fx_face_joy_heartcheek", label: "頬ハートご満悦演出セット", desc: "頬ハート＋赤らみ＋満足げ", val: "heart cheek mark, light blush, pleased smile, soft eyes, delighted" }
+        { id: "fx_face_joy_blush", label: "ときめき喜び演出セット", desc: "笑顔＋赤面＋輝き瞳", val: "happy, smile, blush, shining_eyes, sparkling_eyes" },
+        { id: "fx_face_laugh_tears", label: "泣き笑い爆笑演出セット", desc: "大笑い＋涙目＋頬染め", val: "laughing, open_mouth, tearing up, blush, sparkling_eyes" },
+        { id: "fx_face_joy_sweat", label: "無邪気どたばた演出セット", desc: "きゃっ＋汗＋目きら", val: "happy, open_mouth, wide-eyed, flying sweatdrops, sparkling_eyes" },
+        { id: "fx_face_joy_bulb", label: "ひらめき歓喜演出セット", desc: "電球＋ぱっと明るい笑顔", val: "light bulb symbol, bright smile, sparkling_eyes, delighted, inspired" },
+        { id: "fx_face_joy_music", label: "ごきげん音符演出セット", desc: "音符＋やわらか笑み＋上機嫌", val: "music note symbol, warm smile, cheerful, relaxed, likable" },
+        { id: "fx_face_joy_heartcheek", label: "頬ハートご満悦演出セット", desc: "頬ハート＋赤らみ＋満足げ", val: "heart cheek mark, light blush, pleased smile, soft eyes, delighted" }
       ]
-      },
-      {
+    },
+    {
       title_ja: "🌸 照れ＋漫符",
       title_en: "Shyness + Face Effects",
       children: [
-      { id: "fx_face_shy_basic", label: "王道照れ演出セット", desc: "赤面＋目逸らし＋もじもじ", val: "bashful, blush, looking_away, shy, nervous_smile" },
-      { id: "fx_face_shy_heavy", label: "限界照れ演出セット", desc: "激しい赤面＋汗＋目逸らし", val: "embarrassed, heavy blush, flying sweatdrops, looking_away, trembling_lips" },
-      { id: "fx_face_shy_shadow", label: "気まずさ暗転演出セット", desc: "顔に影＋汗＋固まる", val: "awkward, shadow over face, flying sweatdrops, blank_stare, frozen" },
-      { id: "fx_face_shy_ear", label: "耳まで赤い照れ演出セット", desc: "耳赤＋頬染め＋うつむき", val: "ear blush, rosy cheeks, bashful, looking down, shy" },
-      { id: "fx_face_shy_lines", label: "照れ線うつむき演出セット", desc: "照れ線＋目逸らし＋口ごもり", val: "embarrassment lines, looking away, timid smile, nervous, flustered" },
-      { id: "fx_face_shy_puff", label: "むっと照れ演出セット", desc: "頬ふくらませ＋赤面＋拗ね気味", val: "puffed cheeks, blush, embarrassed, sulking cheeks, shy" }
+        { id: "fx_face_shy_basic", label: "王道照れ演出セット", desc: "赤面＋目逸らし＋もじもじ", val: "bashful, blush, looking_away, shy, nervous_smile" },
+        { id: "fx_face_shy_heavy", label: "限界照れ演出セット", desc: "激しい赤面＋汗＋目逸らし", val: "embarrassed, heavy blush, flying sweatdrops, looking_away, trembling_lips" },
+        { id: "fx_face_shy_shadow", label: "気まずさ暗転演出セット", desc: "顔に影＋汗＋固まる", val: "awkward, shadow over face, flying sweatdrops, blank_stare, frozen" },
+        { id: "fx_face_shy_ear", label: "耳まで赤い照れ演出セット", desc: "耳赤＋頬染め＋うつむき", val: "ear blush, rosy cheeks, bashful, looking down, shy" },
+        { id: "fx_face_shy_lines", label: "照れ線うつむき演出セット", desc: "照れ線＋目逸らし＋口ごもり", val: "embarrassment lines, looking away, timid smile, nervous, flustered" },
+        { id: "fx_face_shy_puff", label: "むっと照れ演出セット", desc: "頬ふくらませ＋赤面＋拗ね気味", val: "puffed cheeks, blush, embarrassed, sulking cheeks, shy" }
       ]
-      },
-      {
+    },
+    {
       title_ja: "💢 怒り＋漫符",
       title_en: "Anger + Face Effects",
       children: [
-      { id: "fx_face_anger_vein", label: "怒りマーク演出セット", desc: "怒り＋怒りマーク＋歯噛み", val: "angry, anger vein, furrowed_brow, clenched_teeth, glaring" },
-      { id: "fx_face_anger_shadow", label: "静かな激怒演出セット", desc: "顔に影＋睨み＋圧", val: "cold_anger, shadow over face, sharp_eyes, glare, dark pressure" },
-      { id: "fx_face_anger_sweat", label: "苛立ち沸騰演出セット", desc: "怒気＋汗＋こめかみ圧", val: "irritated, flying sweatdrops, narrowed_eyes, tense face, clenched jaw" },
-      { id: "fx_face_anger_steam", label: "湯気ぷんすか演出セット", desc: "湯気＋赤面怒り＋頬ぷく", val: "steam from face, flushed face, puffed cheeks, annoyed, fuming" },
-      { id: "fx_face_anger_mark", label: "びきびき激昂演出セット", desc: "感嘆符＋青筋＋睨み", val: "exclamation mark symbol, anger vein, glare, furious, tense" },
-      { id: "fx_face_anger_sulk", label: "むくれ怒り演出セット", desc: "むっと頬＋視線鋭い＋不満", val: "sulking cheeks, narrowed eyes, irritated, stubborn, displeased" }
+        { id: "fx_face_anger_vein", label: "怒りマーク演出セット", desc: "怒り＋怒りマーク＋歯噛み", val: "angry, anger vein, furrowed_brow, clenched_teeth, glaring" },
+        { id: "fx_face_anger_shadow", label: "静かな激怒演出セット", desc: "顔に影＋睨み＋圧", val: "cold_anger, shadow over face, sharp_eyes, glare, dark pressure" },
+        { id: "fx_face_anger_sweat", label: "苛立ち沸騰演出セット", desc: "怒気＋汗＋こめかみ圧", val: "irritated, flying sweatdrops, narrowed_eyes, tense face, clenched jaw" },
+        { id: "fx_face_anger_steam", label: "湯気ぷんすか演出セット", desc: "湯気＋赤面怒り＋頬ぷく", val: "steam from face, flushed face, puffed cheeks, annoyed, fuming" },
+        { id: "fx_face_anger_mark", label: "びきびき激昂演出セット", desc: "感嘆符＋青筋＋睨み", val: "exclamation mark symbol, anger vein, glare, furious, tense" },
+        { id: "fx_face_anger_sulk", label: "むくれ怒り演出セット", desc: "むっと頬＋視線鋭い＋不満", val: "sulking cheeks, narrowed eyes, irritated, stubborn, displeased" }
       ]
-      },
-      {
+    },
+    {
       title_ja: "😭 泣き＋漫符",
       title_en: "Crying + Face Effects",
       children: [
-      { id: "fx_face_cry_tears", label: "涙目泣き演出セット", desc: "涙目＋震え唇＋赤面", val: "tearing up, watery_eyes, trembling_lips, blush, sad" },
-      { id: "fx_face_cry_stream", label: "感情決壊演出セット", desc: "泣き＋汗＋呼吸乱れ", val: "crying, streaming_tears, flying sweatdrops, sobbing, trembling" },
-      { id: "fx_face_cry_sigh", label: "ため息泣き演出セット", desc: "ため息＋涙目＋力の抜け", val: "tearing up, sigh, downcast_eyes, exhausted, trembling_lips" },
-      { id: "fx_face_cry_single", label: "片涙こらえ演出セット", desc: "片涙＋必死に堪える", val: "single tear, watery eyes, trembling lips, holding back tears, pained" },
-      { id: "fx_face_cry_well", label: "涙ぐみ沈黙演出セット", desc: "にじむ涙＋言葉を飲む", val: "eyes welling with tears, downcast eyes, silent, fragile, emotional" },
-      { id: "fx_face_cry_tracks", label: "涙跡ぐすぐす演出セット", desc: "涙跡＋泣き腫れ＋鼻すすり", val: "tear tracks, puffy eyes, runny nose, sniffling, exhausted" }
+        { id: "fx_face_cry_tears", label: "涙目泣き演出セット", desc: "涙目＋震え唇＋赤面", val: "tearing up, watery_eyes, trembling_lips, blush, sad" },
+        { id: "fx_face_cry_stream", label: "感情決壊演出セット", desc: "泣き＋汗＋呼吸乱れ", val: "crying, streaming_tears, flying sweatdrops, sobbing, trembling" },
+        { id: "fx_face_cry_sigh", label: "ため息泣き演出セット", desc: "ため息＋涙目＋力の抜け", val: "tearing up, sigh, downcast_eyes, exhausted, trembling_lips" },
+        { id: "fx_face_cry_single", label: "片涙こらえ演出セット", desc: "片涙＋必死に堪える", val: "single tear, watery eyes, trembling lips, holding back tears, pained" },
+        { id: "fx_face_cry_well", label: "涙ぐみ沈黙演出セット", desc: "にじむ涙＋言葉を飲む", val: "eyes welling with tears, downcast eyes, silent, fragile, emotional" },
+        { id: "fx_face_cry_tracks", label: "涙跡ぐすぐす演出セット", desc: "涙跡＋泣き腫れ＋鼻すすり", val: "tear tracks, puffy eyes, runny nose, sniffling, exhausted" }
       ]
-      },
-      {
+    },
+    {
       title_ja: "🌫 不穏＋漫符",
       title_en: "Uncanny + Face Effects",
       children: [
-      { id: "fx_face_uncanny_shadow", label: "不穏影顔演出セット", desc: "顔に影＋無表情＋圧", val: "shadow over face, blank_stare, eerie composure, unsettling, stillness" },
-      { id: "fx_face_uncanny_blue", label: "青ざめ異常演出セット", desc: "青ざめ＋焦点ずれ＋不穏", val: "blue lines on face, misfocused eyes, uncanny, unstable, uneasy" },
-      { id: "fx_face_uncanny_drool", label: "虚脱異常演出セット", desc: "よだれ＋虚ろ目＋理性薄れ", val: "drooling, vacant eyes, unfocused gaze, trance, abnormal" },
-      { id: "fx_face_uncanny_crackshadow", label: "ひび影異常演出セット", desc: "顔のひび影＋無機質な圧", val: "cracked shadow effect, blank face, unsettling, eerie, uncanny" },
-      { id: "fx_face_uncanny_pale", label: "顔面蒼白演出セット", desc: "蒼白＋焦点薄れ＋不吉", val: "pale face, unfocused eyes, ominous, uneasy, silent" },
-      { id: "fx_face_uncanny_blank", label: "空白顔演出セット", desc: "無表情＋虚ろ目＋感情の欠落", val: "blank face, vacant stare, stillness, hollow calm, eerie" }
+        { id: "fx_face_uncanny_shadow", label: "不穏影顔演出セット", desc: "顔に影＋無表情＋圧", val: "shadow over face, blank_stare, eerie composure, unsettling, stillness" },
+        { id: "fx_face_uncanny_blue", label: "青ざめ異常演出セット", desc: "青ざめ＋焦点ずれ＋不穏", val: "blue lines on face, misfocused eyes, uncanny, unstable, uneasy" },
+        { id: "fx_face_uncanny_drool", label: "虚脱異常演出セット", desc: "よだれ＋虚ろ目＋理性薄れ", val: "drooling, vacant eyes, unfocused gaze, trance, abnormal" },
+        { id: "fx_face_uncanny_crackshadow", label: "ひび影異常演出セット", desc: "顔のひび影＋無機質な圧", val: "cracked shadow effect, blank face, unsettling, eerie, uncanny" },
+        { id: "fx_face_uncanny_pale", label: "顔面蒼白演出セット", desc: "蒼白＋焦点薄れ＋不吉", val: "pale face, unfocused eyes, ominous, uneasy, silent" },
+        { id: "fx_face_uncanny_blank", label: "空白顔演出セット", desc: "無表情＋虚ろ目＋感情の欠落", val: "blank face, vacant stare, stillness, hollow calm, eerie" }
       ]
-      },
-      {
+    },
+    {
       title_ja: "😵 混乱＋漫符",
       title_en: "Confusion + Face Effects",
       children: [
-      { id: "fx_face_confuse_shock", label: "ショック硬直演出セット", desc: "ショック線＋見開き＋絶句", val: "shock lines, wide eyes, open mouth, stunned, frozen" },
-      { id: "fx_face_confuse_spiral", label: "混乱ぐるぐる演出セット", desc: "ぐるぐる目＋困惑マーク＋焦点迷子", val: "spiral eyes effect, scribble symbol, confused, unfocused eyes, reeling" },
-      { id: "fx_face_confuse_gloom", label: "ガーン沈没演出セット", desc: "ガーン線＋顔面蒼白＋うなだれ", val: "gloom lines, pale face, downcast eyes, stunned, despair" },
-      { id: "fx_face_confuse_sweat", label: "焦り汗混乱演出セット", desc: "汗＋きょろ目＋言葉迷子", val: "flying sweatdrops, darting eyes, confused, open mouth, flustered" },
-      { id: "fx_face_confuse_blank", label: "理解停止演出セット", desc: "白目気味＋口あき＋停止", val: "blank stare, open mouth, unfocused eyes, frozen, mentally absent" },
-      { id: "fx_face_confuse_shiver", label: "混乱震え演出セット", desc: "震え＋困惑線＋視線迷子", val: "trembling, confusion marks, unfocused gaze, anxious, reeling" },
-      { id: "fx_face_confuse_qmark", label: "はてな混乱演出セット", desc: "はてな＋きょとん＋理解追いつかず", val: "question mark symbol, wide eyes, confused, tilting head, blank" },
-      { id: "fx_face_confuse_mix", label: "疑問符焦燥演出セット", desc: "疑問符＋汗＋戸惑い", val: "question mark symbol, nervous sweat, darting eyes, confused, flustered" }
+        { id: "fx_face_confuse_shock", label: "ショック硬直演出セット", desc: "ショック線＋見開き＋絶句", val: "shock lines, wide eyes, open mouth, stunned, frozen" },
+        { id: "fx_face_confuse_spiral", label: "混乱ぐるぐる演出セット", desc: "ぐるぐる目＋困惑マーク＋焦点迷子", val: "spiral eyes effect, scribble symbol, confused, unfocused eyes, reeling" },
+        { id: "fx_face_confuse_gloom", label: "ガーン沈没演出セット", desc: "ガーン線＋顔面蒼白＋うなだれ", val: "gloom lines, pale face, downcast eyes, stunned, despair" },
+        { id: "fx_face_confuse_sweat", label: "焦り汗混乱演出セット", desc: "汗＋きょろ目＋言葉迷子", val: "flying sweatdrops, darting eyes, confused, open mouth, flustered" },
+        { id: "fx_face_confuse_blank", label: "理解停止演出セット", desc: "白目気味＋口あき＋停止", val: "blank stare, open mouth, unfocused eyes, frozen, mentally absent" },
+        { id: "fx_face_confuse_shiver", label: "混乱震え演出セット", desc: "震え＋困惑線＋視線迷子", val: "trembling, confusion marks, unfocused gaze, anxious, reeling" },
+        { id: "fx_face_confuse_qmark", label: "はてな混乱演出セット", desc: "はてな＋きょとん＋理解追いつかず", val: "question mark symbol, wide eyes, confused, tilting head, blank" },
+        { id: "fx_face_confuse_mix", label: "疑問符焦燥演出セット", desc: "疑問符＋汗＋戸惑い", val: "question mark symbol, nervous sweat, darting eyes, confused, flustered" }
       ]
-      },
-      {
+    },
+    {
       title_ja: "😪 脱力＋漫符",
       title_en: "Exhaustion + Face Effects",
       children: [
-      { id: "fx_face_spent_dark", label: "寝不足ぐったり演出セット", desc: "クマ＋ため息＋脱力", val: "dark circles under eyes, sigh, exhausted, looking afar, drained" },
-      { id: "fx_face_spent_tear", label: "泣き疲れ演出セット", desc: "涙跡＋泣き腫れ＋放心", val: "tear tracks, puffy eyes, dazed, exhausted, trembling lips" },
-      { id: "fx_face_spent_fever", label: "熱っぽい脱力演出セット", desc: "火照り＋汗だらだら＋うるみ目", val: "flushed face, sweat running down face, watery eyes, weak, feverish" },
-      { id: "fx_face_spent_sigh", label: "ため息放心演出セット", desc: "ため息＋虚ろ目＋力抜け", val: "sigh, vacant eyes, limp, downcast face, drained" },
-      { id: "fx_face_spent_droop", label: "まぶた落ち演出セット", desc: "半目＋頬ゆるみ＋脱力", val: "drooping eyelids, slack cheeks, exhausted, weak, absent-minded" },
-      { id: "fx_face_spent_sweat", label: "やつれ汗演出セット", desc: "冷や汗＋青ざめ＋ぐったり", val: "cold sweat, pale face, exhausted, trembling lips, drained" },
-      { id: "fx_face_spent_zzz", label: "眠気限界演出セット", desc: "ZZZ＋半目＋ふらつき", val: "zzz, drooping eyelids, exhausted, drowsy, reeling" },
-      { id: "fx_face_spent_bubble", label: "寝落ち前演出セット", desc: "寝息バブル＋ぼんやり＋脱力", val: "sleeping bubble, spaced-out face, limp, drowsy, absent-minded" },
-      { id: "fx_face_spent_blank2", label: "無気力ぼんやり演出セット", desc: "ぼんやり顔＋焦点抜け＋沈黙", val: "spaced-out face, blank face, unfocused eyes, drained, quiet" }
+        { id: "fx_face_spent_dark", label: "寝不足ぐったり演出セット", desc: "クマ＋ため息＋脱力", val: "dark circles under eyes, sigh, exhausted, looking afar, drained" },
+        { id: "fx_face_spent_tear", label: "泣き疲れ演出セット", desc: "涙跡＋泣き腫れ＋放心", val: "tear tracks, puffy eyes, dazed, exhausted, trembling lips" },
+        { id: "fx_face_spent_fever", label: "熱っぽい脱力演出セット", desc: "火照り＋汗だらだら＋うるみ目", val: "flushed face, sweat running down face, watery eyes, weak, feverish" },
+        { id: "fx_face_spent_sigh", label: "ため息放心演出セット", desc: "ため息＋虚ろ目＋力抜け", val: "sigh, vacant eyes, limp, downcast face, drained" },
+        { id: "fx_face_spent_droop", label: "まぶた落ち演出セット", desc: "半目＋頬ゆるみ＋脱力", val: "drooping eyelids, slack cheeks, exhausted, weak, absent-minded" },
+        { id: "fx_face_spent_sweat", label: "やつれ汗演出セット", desc: "冷や汗＋青ざめ＋ぐったり", val: "cold sweat, pale face, exhausted, trembling lips, drained" },
+        { id: "fx_face_spent_zzz", label: "眠気限界演出セット", desc: "ZZZ＋半目＋ふらつき", val: "zzz, drooping eyelids, exhausted, drowsy, reeling" },
+        { id: "fx_face_spent_bubble", label: "寝落ち前演出セット", desc: "寝息バブル＋ぼんやり＋脱力", val: "sleeping bubble, spaced-out face, limp, drowsy, absent-minded" },
+        { id: "fx_face_spent_blank2", label: "無気力ぼんやり演出セット", desc: "ぼんやり顔＋焦点抜け＋沈黙", val: "spaced-out face, blank face, unfocused eyes, drained, quiet" }
       ]
-      }
-      ]
-      }
+    }
+  ]
+}
+
     ],
-  "🛰 ホログラフィック・オペレーター特化セット (Holographic Operator Collection)": [
-        {
-          title_ja: "1. 完成セット",
-          title_en: "Complete Sets",
-          children: [
-            {
-              id: "holoop_complete_standard",
-              label: "基本オペレーター同期 / Standard Operator Sync",
-              desc: "初心者向け。まずここから。指令卓＋感情発光の基準形",
-              val: "holographic operator standard route, clean command-deck presence, emotional sync baseline",
-              collection_id: "holographic_operator_collection",
-              collection_role: "complete_set",
-              linked_ids: ["holoop_base_operator_ui", "holoop_base_emotional_sync", "holoop_sync_connection"]
-            },
-            {
-              id: "holoop_complete_repair",
-              label: "低電力治療リンク / Low-Power Repair Link",
-              desc: "壊れかけの優しさ。治療・補修・静かな通信向け",
-              val: "low-power repair holographic operator route, fragile kindness, quiet recovery link",
-              collection_id: "holographic_operator_collection",
-              collection_role: "complete_set",
-              linked_ids: ["holoop_base_projection", "holoop_sync_repair_lowpower", "holoop_synergy_lowpower_sleepy"]
-            },
-            {
-              id: "holoop_complete_afterbattle",
-              label: "戦闘後ノイズ残響 / After-Battle Noise Echo",
-              desc: "息とノイズの余韻。戦闘後・損耗・通信揺らぎ向け",
-              val: "after-battle holographic operator route, noisy afterglow, damaged signal resonance",
-              collection_id: "holographic_operator_collection",
-              collection_role: "complete_set",
-              linked_ids: ["holoop_base_operator_ui", "holoop_sync_afterbattle_noise", "holoop_synergy_flicker_nervous"]
-            },
-            {
-              id: "holoop_complete_farewell",
-              label: "別れ際位相ズレ / Farewell Phase Shift",
-              desc: "輪郭が遠のく別れの通信。喪失感や手が届かない空気向け",
-              val: "farewell phase-shift holographic operator route, fading outline, unreachable connection",
-              collection_id: "holographic_operator_collection",
-              collection_role: "complete_set",
-              linked_ids: ["holoop_base_projection", "holoop_sync_farewell_phase", "holoop_synergy_dataloss_cry"]
-            },
-            {
-              id: "holoop_complete_blessing",
-              label: "聖域祝福リンク / Sacred Blessing Link",
-              desc: "白金ホロの祝福通信。祈り・導き・守護寄りの清潔な導線",
-              val: "sacred blessing holographic operator route, white-gold transmission, protective guidance",
-              collection_id: "holographic_operator_collection",
-              collection_role: "complete_set",
-              linked_ids: ["holoop_base_operator_ui", "holoop_base_emotional_sync", "holoop_sync_blessing_whitegold"]
-            }
-          ]
-        },
-        {
-          title_ja: "2. ベース",
-          title_en: "Base",
-          children: [
-            {
-              id: "holoop_base_operator_ui",
-              label: "オペレーター土台 / Operator UI Base",
-              desc: "操作卓・UI・指令席の存在感。オペレーター感の核",
-              val: "(holographic operator), (floating UI panels), (holographic ui), (AR interface), (glowing data streams), (digital glyphs), (holographic screen), (translucent interface), (neon glow)",
-              collection_id: "holographic_operator_collection",
-              collection_role: "base"
-            },
-            {
-              id: "holoop_base_projection",
-              label: "投影存在土台 / Projection Body Base",
-              desc: "光の身体・半透明存在・輪郭のホロ感を作る",
-              val: "(holographic projection), (semi-transparent body), (ethereal body made of light), (glowing edges), (volumetric light body), (digital particles), (floating hologram), (scanline shimmer)",
-              collection_id: "holographic_operator_collection",
-              collection_role: "base"
-            },
-            {
-              id: "holoop_base_material",
-              label: "素材ホロ土台 / Material Holo Base",
-              desc: "衣装や表面に虹色反射を足す。存在より素材寄り",
-              val: "(holographic material), (iridescent surface), (rainbow diffraction), (prismatic reflection), (thin film interference), (light-reactive fabric), (transparent polymer), (specular highlight bloom)",
-              collection_id: "holographic_operator_collection",
-              collection_role: "base"
-            },
-            {
-              id: "holoop_base_emotional_sync",
-              label: "感情発光土台 / Emotional Sync Base",
-              desc: "感情が光になる土台。心拍や記憶の反応を足す",
-              val: "(emotional resonance glow), (heartbeat-synced light pulse), (affection-linked brightness), (memory echo hologram), (emotional data feedback)",
-              collection_id: "holographic_operator_collection",
-              collection_role: "base"
-            }
-          ]
-        },
-        {
-          title_ja: "3. 感情同期",
-          title_en: "Emotion Sync",
-          children: [
-            {
-              id: "holoop_sync_connection",
-              label: "指令卓×接続の糸",
-              desc: "手が触れそうで触れない。切なめ同期",
-              val: "(holographic operator), (hands almost touching but not overlapping:1.2), (glowing data strands), (floating UI panels), (bittersweet connection), (emotional resonance glow)",
-              collection_id: "holographic_operator_collection",
-              collection_role: "custom"
-            },
-            {
-              id: "holoop_sync_repair_lowpower",
-              label: "治療/補修×低電力",
-              desc: "壊れかけの優しさ。静かな補修通信",
-              val: "(holographic operator), (low-power hologram mode), (soft ambient glow), (memory echo hologram), (warm gentle smile), (unstable holographic projection)",
-              collection_id: "holographic_operator_collection",
-              collection_role: "custom"
-            },
-            {
-              id: "holoop_sync_afterbattle_noise",
-              label: "戦闘後×ノイズ混じり",
-              desc: "息とノイズの余韻。損耗・残響寄り",
-              val: "(holographic operator), (signal interference), (hologram flickering), (volumetric lighting), (filmic contrast), (heartbeat-synced light pulse)",
-              collection_id: "holographic_operator_collection",
-              collection_role: "custom"
-            },
-            {
-              id: "holoop_sync_farewell_phase",
-              label: "別れ際×位相ズレ",
-              desc: "輪郭が遠のく。喪失・手が届かない感情向け",
-              val: "(holographic operator), (phase-shifting hologram), (partial data loss), (tears_in_eyes), (trembling_lips), (emotional data feedback)",
-              collection_id: "holographic_operator_collection",
-              collection_role: "custom"
-            },
-            {
-              id: "holoop_sync_blessing_whitegold",
-              label: "祝福×白金ホロ",
-              desc: "聖域のリンク。守護・祈り・導き寄り",
-              val: "(white-gold hologram), (digital halo), (sacred geometric glyphs), (affection-linked brightness), (soft warm backlight), (gentle smile)",
-              collection_id: "holographic_operator_collection",
-              collection_role: "custom"
-            }
-          ]
-        },
-        {
-          title_ja: "4. 状態×表情シナジー",
-          title_en: "State × Expression Synergy",
-          children: [
-            {
-              id: "holoop_synergy_flicker_nervous",
-              label: "Flicker × 動揺",
-              desc: "ノイズ＝心拍。緊張や不安を足す",
-              val: "(hologram flickering), (signal interference), nervous, blank_stare, sweatdrop, trembling_lips",
-              collection_id: "holographic_operator_collection",
-              collection_role: "setting"
-            },
-            {
-              id: "holoop_synergy_lowpower_sleepy",
-              label: "Low-Power × 眠気",
-              desc: "光が薄い＝体温。弱さや静かな疲労を足す",
-              val: "(low-power hologram mode), sleepy_eyes, half-closed_eyes, tired, soft ambient glow",
-              collection_id: "holographic_operator_collection",
-              collection_role: "setting"
-            },
-            {
-              id: "holoop_synergy_phase_hesitation",
-              label: "Phase Shift × ためらい",
-              desc: "触れない境界。距離感やためらいを強める",
-              val: "(phase-shifting hologram), (hands almost touching but not overlapping:1.2), full-face_blush, looking_away, nervous_smile, memory echo hologram",
-              collection_id: "holographic_operator_collection",
-              collection_role: "setting"
-            },
-            {
-              id: "holoop_synergy_dataloss_cry",
-              label: "Data Loss × 泣き",
-              desc: "欠けていく記憶。喪失・涙寄りの崩れ",
-              val: "(partial data loss), crying, streaming_tears, watery_eyes, emotional data feedback",
-              collection_id: "holographic_operator_collection",
-              collection_role: "setting"
-            },
-            {
-              id: "holoop_synergy_glitch_crazy",
-              label: "Glitch Overload × 狂気",
-              desc: "光が裂ける。暴走・異常・危うさ向け",
-              val: "(glitch overload), (unstable holographic projection), crazy_eyes, wide-eyed, evil_smile, stare",
-              collection_id: "holographic_operator_collection",
-              collection_role: "setting"
-            },
-            {
-              id: "holoop_synergy_stable_seduction",
-              label: "Stable Projection × 誘惑",
-              desc: "綺麗すぎる危うさ。冷たい誘惑を足す",
-              val: "(balanced holographic projection), seductive_smile, half-closed_eyes, parted_lips, stare, clean hologram edges",
-              collection_id: "holographic_operator_collection",
-              collection_role: "setting"
-            }
-          ]
-        }
+  "📸 写真系エフェクトパック (Photo Effect Packs)": [
+        { label: "映画調（Anamorphic Film）", desc: "王道フィルム", val: "(cinematic lighting), (anamorphic lens flare), (subtle film grain), (soft contrast curve), (teal-orange color grading)" },
+        { label: "柔光夢幻（Soft Bloom）", desc: "ポートレート柔光", val: "(soft lighting), (subtle bloom), (gentle highlight roll-off), (pastel color grading), (low contrast)" },
+        { label: "低キー陰影（Low-Key Noir）", desc: "影で語る", val: "(low-key lighting), (strong shadow contrast), (vignette), (desaturated color grading), (shadow emphasis)" },
+        { label: "透明感強調（High-Key Clean）", desc: "清潔・商品", val: "(high-key lighting), (even exposure), (minimal shadow), (clean color balance), (highlight preservation)" },
+        { label: "クラシック写真（Vintage Film）", desc: "古典フィルム", val: "(vintage film look), (warm color cast), (subtle grain), (lowered saturation), (soft vignette)" },
+        { label: "スナップ自然光（Natural Light Photo）", desc: "撮れた感", val: "(natural lighting), (realistic exposure), (soft shadow transition), (neutral color grading), (documentary style)" },
+        { label: "ドラマ照明（Dramatic Portrait）", desc: "人物立体感", val: "(rim lighting), (face-focused lighting), (controlled highlights), (contrast emphasis), (portrait color grading)" },
+        { label: "逆光演出（Backlight Glow）", desc: "エモ逆光", val: "(strong backlight), (light bloom), (rim glow), (atmospheric haze), (highlight diffusion)" },
+        { label: "高精細写真（Studio Sharp）", desc: "スタジオ硬質", val: "(studio lighting), (high clarity), (sharp detail), (controlled reflections), (neutral color tone)" },
+        { label: "夜景写真（Night City Photo）", desc: "夜ネオン", val: "(night lighting), (neon highlights), (high dynamic range), (urban color grading), (light reflections)" },
+        { label: "ホログラフィック（Holographic Foil）", desc: "虹色ホロ/反射", val: "(holographic), (iridescent), (rainbow diffraction), (prismatic highlights), (thin film interference), (specular highlight bloom)" }
+      ],
+  "🎮 ゲーム/3D系エフェクトパック (Game & 3D Effect Packs)": [
+        { label: "リアルタイムGI（Lumen GI）", desc: "ゲーム的光", val: "(unreal engine 5), (lumen global illumination), (realistic lighting), (ambient occlusion), (high dynamic range)" },
+        { label: "ホログラフィックUI（Holographic UI）", desc: "AR/HUD投影", val: "(holographic ui), (hologram overlay), (futuristic hud), (floating panels), (translucent interface), (neon cyan glow)" },
+        { label: "PBR強調（PBR Boost）", desc: "材質の説得力", val: "(physically based rendering), (realistic textures), (specular response), (roughness variation), (clearcoat reflections)" },
+        { label: "霧体積（Volumetric Fog）", desc: "空気が出る", val: "(volumetric lighting), (volumetric fog), (god rays), (atmospheric perspective), (light scattering)" },
+        { label: "高密度ジオメトリ（Nanite Detail）", desc: "造形密度", val: "(nanite geometry), (ultra detailed), (micro details), (edge fidelity), (high poly)" },
+        { label: "パストレ（Path Tracing）", desc: "物理寄り", val: "(path tracing), (ray tracing), (global illumination), (soft shadows), (accurate reflections)" },
+        { label: "シネゲーム（Cinematic Game Look）", desc: "映画×ゲーム", val: "(cinematic lighting), (unreal engine rendering), (lens effects), (depth of field), (color grading)" },
+        { label: "ハードシャドウ（Contact Shadow）", desc: "影を締める", val: "(contact shadow), (hard shadows), (ambient occlusion), (sharp edges), (high contrast)" },
+        { label: "金属映り込み（Metal Reflections）", desc: "反射強め", val: "(environment reflections), (specular highlights), (anisotropic highlights), (reflection clarity), (polished metal)" }
+      ],
+  "🪩 ホログラフィックEX (Holographic EX)": [
+        { label: "素材ホロセット（Material Holo）", desc: "衣装/表面/反射", val: "(holographic material), (iridescent surface), (rainbow diffraction), (prismatic reflection), (thin film interference), (light-reactive fabric), (transparent polymer), (specular highlight bloom)" },
+        { label: "投影ホロセット（Projection Holo）", desc: "存在/幽体/輪郭", val: "(holographic projection), (semi-transparent body), (ethereal body made of light), (glowing edges), (volumetric light body), (digital particles), (floating hologram), (scanline shimmer)" },
+        { label: "投影ホロ＋UI（Operator UI）", desc: "AR/HUD/操作卓", val: "(holographic operator), (floating UI panels), (holographic ui), (AR interface), (glowing data streams), (digital glyphs), (holographic screen), (translucent interface), (neon glow)" },
+
+        { label: "状態変化（Flicker/Glitch）", desc: "ホロの揺らぎ/不安定", val: "(hologram flickering), (unstable holographic projection), (signal interference), (glitch shimmer), (scanline interference)" },
+        { label: "状態変化（Phase Shift）", desc: "位相ズレ/断続", val: "(phase-shifting hologram), (partial data loss), (ghosting trails), (temporal jitter), (data dropout)" },
+        { label: "感情同期（Emotional Sync）", desc: "感情が光になる", val: "(emotional resonance glow), (heartbeat-synced light pulse), (affection-linked brightness), (memory echo hologram), (emotional data feedback)" },
+        { label: "強度：Subtle", desc: "控えめホロ", val: "(subtle holographic presence), (soft holographic glow), (thin scanlines), (low particle density)" },
+        { label: "強度：Balanced", desc: "標準ホロ", val: "(balanced holographic projection), (moderate glow), (clean hologram edges), (stable data particles)" },
+        { label: "強度：Intense", desc: "強めホロ", val: "(intense holographic glow), (bright edge bloom), (dense digital particles), (strong data streams)" },
+        { label: "強度：Overwhelming", desc: "圧倒ホロ", val: "(overwhelming holographic emission), (blinding neon glow), (heavy scanlines), (hologram storm), (glitch overload)" },
+        { label: "色プロファイル：Cyan-Blue", desc: "標準青緑", val: "(neon cyan glow), (cool blue hologram), (cyan highlights), (cool digital glow)" },
+        { label: "色プロファイル：Warm Amber", desc: "温かい琥珀", val: "(warm amber hologram), (golden data glow), (soft warm emission), (amber highlights)" },
+        { label: "色プロファイル：Magenta-Pink", desc: "妖艶ピンク", val: "(magenta hologram), (pink neon glow), (violet data light), (chromatic shimmer)" },
+        { label: "色プロファイル：White-Gold", desc: "聖光ホロ", val: "(white-gold hologram), (holy luminous glow), (clean halo light), (soft white bloom)" },
+        { label: "色プロファイル：Glitch Rainbow", desc: "虹グリッチ", val: "(glitch rainbow hologram), (prismatic noise), (chromatic aberration), (rainbow diffraction)" },
+      ],
+
+  "🧿 ホログラフィック・オペレーター×感情同期 (Holographic Operator Sync Combos)": [
+        { label: "指令卓×接続の糸", desc: "手が触れそうで触れない", val: "(holographic operator), (hands almost touching but not overlapping:1.2), (glowing data strands), (floating UI panels), (bittersweet connection), (emotional resonance glow)" },
+        { label: "治療/補修×低電力", desc: "壊れかけの優しさ", val: "(holographic operator), (low-power hologram mode), (soft ambient glow), (memory echo hologram), (warm gentle smile), (unstable holographic projection)" },
+        { label: "戦闘後×ノイズ混じり", desc: "息とノイズの余韻", val: "(holographic operator), (signal interference), (hologram flickering), (volumetric lighting), (filmic contrast), (heartbeat-synced light pulse)" },
+        { label: "別れ際×位相ズレ", desc: "輪郭が遠のく", val: "(holographic operator), (phase-shifting hologram), (partial data loss), (tears_in_eyes), (trembling_lips), (emotional data feedback)" },
+        { label: "祝福×白金ホロ", desc: "聖域のリンク", val: "(white-gold hologram), (digital halo), (sacred geometric glyphs), (affection-linked brightness), (soft warm backlight), (gentle smile)" }
+      ],
+
+  "🧬 ホロ状態×表情シナジー (Holo State × Expression Synergy)": [
+        { label: "Flicker × 動揺", desc: "ノイズ＝心拍", val: "(hologram flickering), (signal interference), nervous, blank_stare, sweatdrop, trembling_lips" },
+        { label: "Low-Power × 眠気", desc: "光が薄い＝体温", val: "(low-power hologram mode), sleepy_eyes, half-closed_eyes, tired, soft ambient glow" },
+        { label: "Phase Shift × ためらい", desc: "触れない境界", val: "(phase-shifting hologram), (hands almost touching but not overlapping:1.2), full-face_blush, looking_away, nervous_smile, memory echo hologram" },
+        { label: "Data Loss × 泣き", desc: "欠けていく記憶", val: "(partial data loss), crying, streaming_tears, watery_eyes, emotional data feedback" },
+        { label: "Glitch Overload × 狂気", desc: "光が裂ける", val: "(glitch overload), (unstable holographic projection), crazy_eyes, wide-eyed, evil_smile, stare" },
+        { label: "Stable Projection × 誘惑", desc: "綺麗すぎる危うさ", val: "(balanced holographic projection), seductive_smile, half-closed_eyes, parted_lips, stare, clean hologram edges" }
       ],
 
   "🤖 メカ脳パック (Mechanical Packs)": [
-        {
-          title_ja: "1. 完成セット",
-          title_en: "Complete Sets",
-          children: [
-            {
-              id: "mechbrain_complete_standard",
-              label: "標準オペレーター脳 / Standard Operator Brain",
-              desc: "初心者向け。冷静な指令処理と機械脳の基準形",
-              val: "mechanical brain operator route, precise command processing, readable hard-surface logic, stable cybernetic cognition",
-              collection_id: "mechanical_brain_collection",
-              collection_role: "complete_set",
-              linked_ids: ["mechbrain_base_core", "mechbrain_mode_sync", "mechbrain_shift_suppression"]
-            },
-            {
-              id: "mechbrain_complete_suppression",
-              label: "感情抑制型 / Emotion Suppression Model",
-              desc: "静かな従順さ。感情を薄くして命令受容を強める",
-              val: "emotion suppression mechanical brain route, obedient machine reasoning, cold and stable processing",
-              collection_id: "mechanical_brain_collection",
-              collection_role: "complete_set",
-              linked_ids: ["mechbrain_base_core", "mechbrain_base_interface", "mechbrain_mode_command", "mechbrain_shift_suppression", "mechbrain_synergy_blank_obedient"]
-            },
-            {
-              id: "mechbrain_complete_overload",
-              label: "暴走演算型 / Overload Calculation Model",
-              desc: "過負荷と誤作動。演算暴走や警告灯の危うさ向け",
-              val: "overload calculation mechanical brain route, unstable processing, warning-lit cybernetic stress",
-              collection_id: "mechanical_brain_collection",
-              collection_role: "complete_set",
-              linked_ids: ["mechbrain_base_dense", "mechbrain_mode_overload", "mechbrain_shift_conflict", "mechbrain_synergy_glitch_panic"]
-            },
-            {
-              id: "mechbrain_complete_reeducation",
-              label: "再教育・命令受容型 / Re-education Obedience Model",
-              desc: "思考を書き換えられた機械脳。受容と従順を強く寄せる",
-              val: "re-education mechanical brain route, rewritten loyalty, command acceptance, thought narrowing",
-              collection_id: "mechanical_brain_collection",
-              collection_role: "complete_set",
-              linked_ids: ["mechbrain_base_interface", "mechbrain_mode_reboot", "mechbrain_shift_acceptance", "mechbrain_synergy_teary_residual"]
-            },
-            {
-              id: "mechbrain_complete_residual",
-              label: "低電力残存人格型 / Low-Power Residual Self Model",
-              desc: "消えかけの自我が機械の奥に残る。静かな悲哀向け",
-              val: "low-power residual self mechanical brain route, fading ego, quiet machine sorrow, weak signal memory",
-              collection_id: "mechanical_brain_collection",
-              collection_role: "complete_set",
-              linked_ids: ["mechbrain_base_structure", "mechbrain_mode_lowpower", "mechbrain_shift_residual", "mechbrain_synergy_halfclosed_lowpower"]
-            }
-          ]
-        },
-        {
-          title_ja: "2. ベース",
-          title_en: "Base",
-          children: [
-            {
-              id: "mechbrain_base_core",
-              label: "機械脳コア / Mechanical Brain Core",
-              desc: "設計思想・機能美・完成度の土台",
-              val: "mechanical design, industrial design, precision engineering, production-ready design, functional design, orthographic design feel, clean silhouette, high fidelity details",
-              collection_id: "mechanical_brain_collection",
-              collection_role: "base"
-            },
-            {
-              id: "mechbrain_base_interface",
-              label: "頭部端子・接続土台 / Head Interface Base",
-              desc: "頭部端子・ニューロリンク・制御接続の土台",
-              val: "cranial interface ports, neural link sockets, head-mounted connectors, cybernetic temple hardware, embedded access panels, control terminals",
-              collection_id: "mechanical_brain_collection",
-              collection_role: "base"
-            },
-            {
-              id: "mechbrain_base_dense",
-              label: "精密外装・装甲密度 / Dense Hard-Surface Base",
-              desc: "硬質な外装と装甲密度を足す",
-              val: "sharp edges, chamfered edges, beveled edges, layered armor plates, interlocking panels, panel lines, controlled greebles, tight tolerances",
-              collection_id: "mechanical_brain_collection",
-              collection_role: "base"
-            },
-            {
-              id: "mechbrain_base_structure",
-              label: "露出構造・機械根拠 / Exposed Structure Base",
-              desc: "支える理由・動く理由を見せる骨格",
-              val: "exposed joints, actuators, hydraulic pistons, servo motors, gear assemblies, hinges, bearing housings, reinforced frame, load-bearing structure",
-              collection_id: "mechanical_brain_collection",
-              collection_role: "base"
-            }
-          ]
-        },
-        {
-          title_ja: "3. 状態・演算モード",
-          title_en: "State / Calculation Modes",
-          children: [
-            {
-              id: "mechbrain_mode_sync",
-              label: "同期演算中 / Synchronization Running",
-              desc: "安定した同期処理。標準の演算状態",
-              val: "synchronization in progress, stable data flow, active neural processing, measured machine cognition",
-              collection_id: "mechanical_brain_collection",
-              collection_role: "custom"
-            },
-            {
-              id: "mechbrain_mode_overload",
-              label: "過負荷・暴走演算 / Overload Processing",
-              desc: "熱とノイズを帯びた危険な演算状態",
-              val: "processing overload, error accumulation, unstable servo response, thermal warning, calculation runaway",
-              collection_id: "mechanical_brain_collection",
-              collection_role: "custom"
-            },
-            {
-              id: "mechbrain_mode_lowpower",
-              label: "低電力・残光稼働 / Low-Power Operation",
-              desc: "消えかけの信号で静かに動く",
-              val: "low-power mode, weak signal activity, reduced processing, dim indicator lights, intermittent cognition",
-              collection_id: "mechanical_brain_collection",
-              collection_role: "custom"
-            },
-            {
-              id: "mechbrain_mode_reboot",
-              label: "再起動・再教育中 / Reboot & Re-education",
-              desc: "書き換えと再構築の途中段階",
-              val: "system reboot, memory rewrite sequence, command imprinting, forced recalibration, neural reset process",
-              collection_id: "mechanical_brain_collection",
-              collection_role: "custom"
-            },
-            {
-              id: "mechbrain_mode_command",
-              label: "命令待機・受信中 / Command Reception",
-              desc: "命令待ちの静かな緊張感",
-              val: "command waiting state, external control reception, obedient standby, listening posture, incoming directive signal",
-              collection_id: "mechanical_brain_collection",
-              collection_role: "custom"
-            }
-          ]
-        },
-        {
-          title_ja: "4. 感情/人格変質",
-          title_en: "Emotion / Persona Shift",
-          children: [
-            {
-              id: "mechbrain_shift_suppression",
-              label: "感情抑制 / Emotional Suppression",
-              desc: "感情を薄くし、冷たい判断へ寄せる",
-              val: "emotional suppression, muted affect, cold machine-like calm, limited emotional range, reduced empathy",
-              collection_id: "mechanical_brain_collection",
-              collection_role: "setting"
-            },
-            {
-              id: "mechbrain_shift_acceptance",
-              label: "命令受容 / Command Acceptance",
-              desc: "命令への逆らいを減らす",
-              val: "command acceptance, obedient response, lowered resistance, compliant cognition, directive priority",
-              collection_id: "mechanical_brain_collection",
-              collection_role: "setting"
-            },
-            {
-              id: "mechbrain_shift_residual",
-              label: "残存自我 / Residual Self",
-              desc: "機械の奥にまだ人間味が残っている",
-              val: "residual self-awareness, fading humanity, fragile inner self, retained memory fragments, machine sorrow",
-              collection_id: "mechanical_brain_collection",
-              collection_role: "setting"
-            },
-            {
-              id: "mechbrain_shift_conflict",
-              label: "自我と命令の衝突 / Ego-Command Conflict",
-              desc: "理性と命令が噛み合わず軋む",
-              val: "ego-command conflict, processing hesitation, contradictory directives, mental instability, fractured decision flow",
-              collection_id: "mechanical_brain_collection",
-              collection_role: "setting"
-            },
-            {
-              id: "mechbrain_shift_machinegrief",
-              label: "機械悲哀 / Mechanical Grief",
-              desc: "無機質な悲しさ。失ったものを静かに抱える",
-              val: "mechanical grief, quiet sorrow, distant sadness, muted longing, machine-like loneliness",
-              collection_id: "mechanical_brain_collection",
-              collection_role: "setting"
-            }
-          ]
-        },
-        {
-          title_ja: "5. 表情・状態シナジー",
-          title_en: "Expression × State Synergy",
-          children: [
-            {
-              id: "mechbrain_synergy_blank_obedient",
-              label: "虚ろ目 × 命令受容",
-              desc: "従順さが空虚さとして表に出る",
-              val: "vacant eyes, blank expression, command acceptance, obedient stillness, lifeless gaze",
-              collection_id: "mechanical_brain_collection",
-              collection_role: "customize"
-            },
-            {
-              id: "mechbrain_synergy_halfclosed_lowpower",
-              label: "半目 × 低電力",
-              desc: "消えかけの意識と弱い信号を足す",
-              val: "half-closed eyes, low-power mode, slack mouth, weak signal awareness, fading presence",
-              collection_id: "mechanical_brain_collection",
-              collection_role: "customize"
-            },
-            {
-              id: "mechbrain_synergy_glitch_panic",
-              label: "焦点ずれ × ノイズ混線",
-              desc: "暴走と混線が顔に出る",
-              val: "unfocused eyes, signal interference, glitching expression, processing panic, unstable stare",
-              collection_id: "mechanical_brain_collection",
-              collection_role: "customize"
-            },
-            {
-              id: "mechbrain_synergy_teary_residual",
-              label: "涙目 × 残存自我",
-              desc: "残った人間味を切なく見せる",
-              val: "watery eyes, residual self-awareness, trembling lips, quiet sadness, retained humanity",
-              collection_id: "mechanical_brain_collection",
-              collection_role: "customize"
-            },
-            {
-              id: "mechbrain_synergy_smile_error",
-              label: "微笑み × 機械誤作動",
-              desc: "笑顔なのにどこか壊れている危うさ",
-              val: "faint smile, expression desync, subtle system error, uncanny warmth, unstable emotional display",
-              collection_id: "mechanical_brain_collection",
-              collection_role: "customize"
-            }
-          ]
-        }
+        { label: "🧠 Mechanical Brain ON（設計者の脳）", desc: "設計思想・完成度の底上げ", val: "mechanical design, industrial design, precision engineering, production-ready design, functional design, orthographic design feel, clean silhouette, high fidelity details" },
+        { label: "🔩 Hard Surface｜Clean（精密外装）", desc: "硬質で読みやすい外装言語", val: "sharp edges, chamfered edges, beveled edges, panel lines, tight tolerances, clean silhouette" },
+        { label: "🔩 Hard Surface｜Dense（装甲密度）", desc: "装甲・パネル・部品感を濃く", val: "layered armor plates, interlocking panels, panel lines, greeble details, kitbash look, tight tolerances" },
+        { label: "⚙️ Mechanical Structure｜Exposed（構造根拠）", desc: "動く理由・支える理由を足す", val: "exposed joints, actuators, hydraulic pistons, servo motors, gear assemblies, hinges, bearing housings, reinforced frame, load-bearing structure" },
+        { label: "🏭 Manufactured Reality（製造の痕跡）", desc: "工程のリアリティで“玩具感”を消す", val: "machined parts, CNC machining marks, weld seams, rivets and bolts, brushed metal, anodized aluminum, powder-coated metal, heat discoloration, oil stains" },
+        { label: "📐 Readable Mecha Detail（整理された密度）", desc: "注意ラベル/番号/整備印字で情報設計", val: "micro details, fine surface detail, decals, warning labels, serial numbers, maintenance markings, controlled greebles, edge wear, subtle scratches" },
+        { label: "🌐 Mecha Context（文化圏）", desc: "軍用/宇宙/産業/近未来などの文脈", val: "mecha engineering, military hardware, aerospace hardware, robotics, industrial machinery, dieselpunk machinery, near-future tech" }
       ],
+  "🏢 アニメスタジオ (Studios)": [
+    {
+      "label": "京都アニメーション",
+      "val": "kyoto animation"
+    },
+    {
+      "label": "ufotable",
+      "val": "ufotable"
+    },
+    {
+      "label": "SHAFT",
+      "val": "shaft"
+    },
+    {
+      "label": "TRIGGER",
+      "val": "studio trigger"
+    },
+    {
+      "label": "スタジオジブリ",
+      "val": "studio ghibli"
+    },
+    {
+      "label": "MAPPA",
+      "val": "mappa"
+    },
+    {
+      "label": "WIT STUDIO",
+      "val": "wit studio"
+    },
+    {
+      "label": "CloverWorks",
+      "val": "cloverworks"
+    },
+    {
+      "label": "A-1 Pictures",
+      "val": "a-1 pictures"
+    },
+    {
+      "label": "Production I.G",
+      "val": "production i.g"
+    },
+    {
+      "label": "サンライズ",
+      "val": "sunrise"
+    },
+    {
+      "label": "東映アニメーション",
+      "val": "toei animation"
+    },
+    {
+      "label": "P.A.WORKS",
+      "val": "p.a. works"
+    },
+    {
+      "label": "動画工房",
+      "val": "doga kobo"
+    }
+  ],
+  "🖌️ イラストレーター・画風 (Artists & Styles)": [
+    {
+      "label": "Mika Pikazo風",
+      "val": "mika pikazo style"
+    },
+    {
+      "label": "米山舞風",
+      "val": "yoneyama mai style"
+    },
+    {
+      "label": "ワダアルコ風",
+      "val": "wada arco style"
+    },
+    {
+      "label": "望月けい風",
+      "val": "kei mochizuki style"
+    },
+    {
+      "label": "副島成記風 (ペルソナ)",
+      "val": "shigenori soejima style"
+    },
+    {
+      "label": "新川洋司風 (MGS)",
+      "val": "yoji shinkawa style"
+    },
+    {
+      "label": "天野喜孝風 (FF)",
+      "val": "yoshitaka amano style"
+    },
+    {
+      "label": "村田蓮爾風",
+      "val": "range murata style"
+    },
+    {
+      "label": "カントク風",
+      "val": "kantoku style"
+    },
+    {
+      "label": "Tony風",
+      "val": "tony taka style"
+    },
+    {
+      "label": "redjuice風",
+      "val": "redjuice style"
+    },
+    {
+      "label": "huke風",
+      "val": "huke style"
+    },
+    {
+      "label": "深崎暮人風",
+      "val": "misaki kurehito style"
+    }
+  ],
+  "🎨 アート・絵画風 (Classic & Trad Art)": [
+    {
+      "label": "厚塗り・油絵",
+      "val": "(oil painting), (impasto:1.2), (visible brushstrokes), (rich texture)"
+    },
+    {
+      "label": "水彩画",
+      "val": "(watercolor medium), (wet on wet), (soft edges), (splatter effect)"
+    },
+    {
+      "label": "インク・水墨画",
+      "val": "(ink wash painting), (sumi-e), (monochrome), (bold lines), (brush stroke)"
+    },
+    {
+      "label": "スケッチ・鉛筆",
+      "val": "(sketch), (pencil drawing), (rough lines), (graphite medium), (hatching)"
+    },
+    {
+      "label": "線画",
+      "val": "(line art), (monochrome), (clean lines), (minimalist), (white background)"
+    },
+    {
+      "label": "浮世絵",
+      "val": "(ukiyo-e style), (woodblock print), (flat perspective), (bold outlines), (washi paper texture)"
+    },
+    {
+      "label": "ステンドグラス",
+      "val": "(stained glass style), (vibrant light), (mosaic pattern), (black outline)"
+    },
+    {
+      "label": "アール・ヌーヴォー",
+      "val": "art nouveau, mucha style, intricate floral decoration, elegant curves"
+    },
+    {
+      "label": "印象派",
+      "val": "impressionism, claude monet style, visible brushstrokes, light reflection"
+    },
+    {
+      "label": "切り絵",
+      "val": "(paper cutout art), (layered paper), (shadow box), (3d depth)"
+    }
+  ],
+  "🔮 現代アート・美学 (Modern Aesthetics)": [
+    {
+      "label": "ヴェイパーウェイヴ",
+      "val": "vaporwave, aesthetic, neon pink and blue, retro computer, greek statues, glitch"
+    },
+    {
+      "label": "シンセウェイヴ (80s)",
+      "val": "synthwave, retrowave, neon grid, sunset, futuristic 80s, outrun"
+    },
+    {
+      "label": "ローファイ (Lo-Fi)",
+      "val": "lo-fi aesthetic, grainy, nostalgic, muted colors, anime study girl style"
+    },
+    {
+      "label": "サイバーパンク",
+      "val": "cyberpunk, high tech low life, neon lights, cybernetics, night city"
+    },
+    {
+      "label": "スチームパンク",
+      "val": "steampunk, brass, gears, victorian tech, goggles, steam engines"
+    },
+    {
+      "label": "ピクセルアート",
+      "val": "pixel art, 16-bit, retro game sprite, dithering"
+    },
+    {
+      "label": "ボクセル",
+      "val": "voxel art, minecraft style, 3d blocks, isometric view"
+    },
+    {
+      "label": "フラットデザイン",
+      "val": "flat design, minimalist, simple shapes, bright colors"
+    },
+    {
+      "label": "グリッチアート",
+      "val": "glitch art, datamoshing, digital noise, corrupted image, rgb shift"
+    },
+    {
+      "label": "Y2K (2000年代)",
+      "val": "y2k aesthetic, chrome, futuristic, glossy, holographic, transparent tech"
+    }
+  ],
   "🎭 なりきりおすすめセット｜職業・なりきり（現代） (Modern Jobs)": [
       { type: "pair_header", leftLabel: "🎭 なりきり", rightLabel: "📍 場所・状況" },
       { label: "アイドル・シマエナガ風", val: "(idol-style outfit), (white and pastel blue frilly dress), (feather embroidery), (fluffy sleeves), (short layered skirt), (down feather texture), (translucent ribbons), (soft feather hairclip), (idol stage), (spotlight)", desc: "シマエナガモチーフのアイドル衣装" },
@@ -1455,7 +1646,8 @@
     { label: "弁護士 / Lawyer", val: "lawyer, courtroom, suit, documents, judge bench, centered composition", desc: "場所: 法廷 / 構図: centered, formal" },
     { label: "シェフ（高級店） / Fine Dining Chef", val: "fine dining chef, kitchen pass, plating, steam, spotlight, top-down detail", desc: "場所: レストラン厨房 / 構図: top-down detail, cinematic" },
     { label: "DJ / Club DJ", val: "dj, nightclub, turntable, strobe lights, crowd hands, wide angle", desc: "場所: クラブ / 構図: wide angle, motion" },
-    { label: "天気予報士 / Weathercaster", val: "weathercaster, studio, green screen map, pointer, bright light, medium shot", desc: "場所: TVスタジオ / 構図: medium shot, clean" }],
+    { label: "天気予報士 / Weathercaster", val: "weathercaster, studio, green screen map, pointer, bright light, medium shot", desc: "場所: TVスタジオ / 構図: medium shot, clean" },
+],
 
   "🎭 なりきりおすすめセット｜おすすめ組み合わせ（なりきり×場所） (Roleplay × Situation)": [
     { label: "アイドル × ステージ", val: "(idol performance), (concert stage), (spotlight), (cheering crowd), (glow sticks), (stage smoke)", desc: "王道ライブ空間" },
@@ -1469,7 +1661,8 @@
     { label: "スチーム技工士 × 工房", val: "(steampunk engineer), (workshop), (gears), (steam haze), (brass tools)", desc: "歯車と蒸気" },
     { label: "サイバーハッカー × ネオン街", val: "(cyber hacker), (neon city), (holograms), (rain), (wires)", desc: "電脳の深夜" },
     { label: "宇宙パイロット × 宇宙港", val: "(space pilot), (spaceport), (hangar lights), (spaceship)", desc: "発進前夜" },
-    { label: "魔法使い × 古塔の書庫", val: "(mage), (ancient library), (floating candles), (dust motes)", desc: "禁書の気配" }],
+    { label: "魔法使い × 古塔の書庫", val: "(mage), (ancient library), (floating candles), (dust motes)", desc: "禁書の気配" },
+  ],
 
 "🎭 なりきりおすすめセット｜職業・なりきり（未来/サイバーパンク） (Future & Cyber Jobs)": [
       { label: "サイバーパンク・ネトランナー", val: "(cyberpunk netrunner), (holographic UI), (neon city), (data cables), (visor), (street tech)", desc: "情報戦・都市夜景" },
@@ -1497,7 +1690,8 @@
     { label: "メカ医師 / Mecha Medic", val: "mecha medic, hangar, giant mech, repair arms, wide", desc: "場所: メカ格納庫 / 構図: wide, scale" },
     { label: "ARストリートアーティスト / AR Street Artist", val: "ar street artist, graffiti hologram, underpass, vibrant, wide angle", desc: "場所: 高架下 / 構図: wide angle, color" },
     { label: "未来考古学者 / Future Archaeologist", val: "future archaeologist, ruin with drones, scanning beam, sunset, three-quarter", desc: "場所: 遺跡 / 構図: three-quarter, scan beams" },
-    { label: "バイオハッカー / Biohacker", val: "biohacker, underground lab, bio pods, green glow, close-up face", desc: "場所: 地下ラボ / 構図: close-up, eerie" }],
+    { label: "バイオハッカー / Biohacker", val: "biohacker, underground lab, bio pods, green glow, close-up face", desc: "場所: 地下ラボ / 構図: close-up, eerie" },
+],
 
 "🎭 なりきりおすすめセット｜職業・なりきり（ファンタジー/スチーム） (Fantasy & Steam Jobs)": [
       { label: "アーチャー", val: "(archer), (bow), (quiver), (forest), (wind), (focused gaze)", desc: "弓兵・森" },
@@ -1524,7 +1718,8 @@
     { label: "鍛冶師 / Blacksmith", val: "blacksmith, forge, sparks, hammer, close-up, rim light", desc: "場所: 鍛冶場 / 構図: close-up, sparks" },
     { label: "獣医（幻想獣） / Beast Healer", val: "beast healer, stable, mythical creature, bandage, gentle, medium close-up", desc: "場所: 厩舎 / 構図: medium close-up, tender" },
     { label: "スチームパンク技工士 / Steampunk Artificer", val: "steampunk artificer, gear workshop, brass goggles, steam, three-quarter", desc: "場所: 歯車工房 / 構図: three-quarter, steam" },
-    { label: "空賊 / Sky Pirate", val: "sky pirate, airship deck, wind, flag, wide angle", desc: "場所: 飛空艇甲板 / 構図: wide, sky" }],
+    { label: "空賊 / Sky Pirate", val: "sky pirate, airship deck, wind, flag, wide angle", desc: "場所: 飛空艇甲板 / 構図: wide, sky" },
+],
     // --- ↓この部分を追加↓ ---
     "🎭 なりきりおすすめセット｜職業・なりきり（王道キャラ） (Famous Characters)": [
       { label: "初音ミク (Miku)", val: "hatsune miku, vocaloid, twintails, teal hair, futuristic outfit", desc: "ツインテールの歌姫" },
@@ -1626,6 +1821,8 @@
     { title_ja: "深淵：背光破滅", title_en: "Infernal: ruin backlight", val: "ruin backlight composition, black flame silhouette, apocalyptic framing", desc: "終焉感を強める" },
     { title_ja: "深淵：呪印展開", title_en: "Infernal: curse sigil spread", val: "curse sigil spread composition, diagonal force, infernal energy burst", desc: "呪印と魔力を見せる" }
   ],
+
+
 
 "🎭 なりきりおすすめセット｜管理者専用なりきり (Admin-only Roleplay)": [
   {
@@ -9820,332 +10017,199 @@
       label: "ベヒーモス（ペア補助） / Behemoth (Pair Helper)",
       val: "(male behemoth earth king armor), (female behemoth colossal queen dress), (paired behemoth duo), (colossal beast aura), (earth-cracking stage), (dust storm), (stone debris), (massive horn silhouette), (heavy ground impact), (mythic titan tension)",
       desc: "男女ペア向け補助語つき巨獣王演出"
-    }],
+    },
+  ],
     
 "🧰 テーマ別・持ち物セット (Item Sets)": [
     {
-      title_ja: "1. 完成セット",
-      title_en: "Complete Sets",
-      children: [
-        {
-          id: "itemset_complete_doctor",
-          label: "診察室スターター / Clinical Starter",
-          desc: "初心者向け。医療系の持ち物が一気に立つ基本セット",
-          val: "clinical item starter, medical inspection props, clean diagnostic workflow",
-          collection_id: "theme_item_collection",
-          collection_role: "complete_set",
-          linked_ids: ["itemset_base_doctor", "itemset_custom_doctor", "itemset_setting_doctor"]
-        },
-        {
-          id: "itemset_complete_gothic",
-          label: "退廃ゴスロリ装具 / Gothic Reliquary",
-          desc: "日傘・ドール・薔薇で世界観まで立つゴシック小物束",
-          val: "gothic lolita item route, parasol and relic-like accessories, melancholic doll motif",
-          collection_id: "theme_item_collection",
-          collection_role: "complete_set",
-          linked_ids: ["itemset_base_gothic", "itemset_custom_gothic", "itemset_setting_gothic"]
-        },
-        {
-          id: "itemset_complete_modern",
-          label: "現代ライフ持ち歩き / Modern Daily Carry",
-          desc: "スマホ・タピオカ・ヘッドホンで今っぽさを一気に作る",
-          val: "modern daily carry route, trendy handheld items, casual city youth styling",
-          collection_id: "theme_item_collection",
-          collection_role: "complete_set",
-          linked_ids: ["itemset_base_modern", "itemset_custom_modern", "itemset_setting_modern"]
-        },
-        {
-          id: "itemset_complete_adventurer",
-          label: "探索者遠征装備 / Explorer Field Kit",
-          desc: "地図・方位磁針・ランタンで旅支度がすぐ立つ",
-          val: "adventurer field kit route, exploration props, ready-for-journey gear bundle",
-          collection_id: "theme_item_collection",
-          collection_role: "complete_set",
-          linked_ids: ["itemset_base_adventurer", "itemset_custom_adventurer", "itemset_setting_adventurer"]
-        },
-        {
-          id: "itemset_complete_mage",
-          label: "魔導研究スターター / Arcane Research Starter",
-          desc: "杖・魔導書・薬瓶で魔法研究者の机上感まで作る",
-          val: "arcane research item route, magical study tools, caster workbench atmosphere",
-          collection_id: "theme_item_collection",
-          collection_role: "complete_set",
-          linked_ids: ["itemset_base_mage", "itemset_custom_mage", "itemset_setting_mage"]
-        },
-        {
-          id: "itemset_complete_artist",
-          label: "アトリエ制作導線 / Atelier Workbench",
-          desc: "筆・パレット・スケッチブックで制作中の空気まで乗る",
-          val: "atelier item route, active art-making tools, creative workbench setup",
-          collection_id: "theme_item_collection",
-          collection_role: "complete_set",
-          linked_ids: ["itemset_base_artist", "itemset_custom_artist", "itemset_setting_artist"]
-        }
+      "label": "医者セット",
+      "val": "(holding stethoscope), (clipboard under arm), (holding syringe), (medical tools), (pen in pocket)",
+      "desc": "診察に必要な道具一式"
+    },
+    {
+      "label": "ゴスロリセット",
+      "val": "(holding frilled parasol), (lace headdress), (cross necklace), (holding gothic doll), (rose decoration)",
+      "desc": "ゴシックな装飾品セット"
+    },
+    {
+      "label": "現代っ子セット",
+      "val": "(holding smartphone), (drinking bubble tea), (headphones around neck), (stylish backpack), (mask)",
+      "desc": "今風のアイテムセット"
+    },
+    {
+      "label": "冒険者セット",
+      "val": "(holding map), (compass), (lantern), (potion flask on belt), (leather backpack), (dagger)",
+      "desc": "旅の必需品セット"
+    },
+    {
+      "label": "魔法使いセット",
+      "val": "(holding magic staff), (grimoire), (potion bottles), (crystal ball), (magic components)",
+      "desc": "魔法研究の道具"
+    },
+    {
+      "label": "画材・美術セット",
+      "val": "(holding paintbrush), (palette), (easel), (apron with paint stains), (sketchbook), (pencils)",
+      "desc": "絵を描く道具"
+    }
+  ],
+  "😱 感情・スリル (Emotions)": [
+    {
+      "label": "追跡者からの逃走",
+      "val": "(running away:1.3), (looking back:1.3), (scared expression), (tears), (sweat), (abandoned hallway), (motion blur:1.2), (scary monster chasing from behind:1.3), (pursuer looming in background), (cinematic lighting), (dynamic angle), (dramatic shadows)",
+      "links": [
+        "ダイナミックポーズ",
+        "ホラー"
       ]
     },
     {
-      title_ja: "2. ベース",
-      title_en: "Base",
-      children: [
-        {
-          id: "itemset_base_doctor",
-          label: "医療器具土台 / Medical Core",
-          desc: "聴診器・注射器・カルテで医療職の核を作る",
-          val: "(holding stethoscope), (clipboard under arm), (holding syringe), (medical tools), (clean clinical props)",
-          collection_id: "theme_item_collection",
-          collection_role: "base"
-        },
-        {
-          id: "itemset_base_gothic",
-          label: "ゴシック装具土台 / Gothic Core",
-          desc: "日傘・ヘッドドレス・十字架でゴスロリ感の核を置く",
-          val: "(holding frilled parasol), (lace headdress), (cross necklace), (rose decoration), (gothic accessory core)",
-          collection_id: "theme_item_collection",
-          collection_role: "base"
-        },
-        {
-          id: "itemset_base_modern",
-          label: "現代携行土台 / Modern Carry Core",
-          desc: "スマホ・ヘッドホン・バッグで今っぽい日常物を置く",
-          val: "(holding smartphone), (headphones around neck), (stylish backpack), (modern casual carry items)",
-          collection_id: "theme_item_collection",
-          collection_role: "base"
-        },
-        {
-          id: "itemset_base_adventurer",
-          label: "探索装備土台 / Explorer Core",
-          desc: "地図・方位磁針・ランタンで遠征の核を作る",
-          val: "(holding map), (compass), (lantern), (leather backpack), (field-ready adventure props)",
-          collection_id: "theme_item_collection",
-          collection_role: "base"
-        },
-        {
-          id: "itemset_base_mage",
-          label: "魔導具土台 / Arcane Core",
-          desc: "杖・魔導書・薬瓶で魔法使いの基礎を置く",
-          val: "(holding magic staff), (grimoire), (potion bottles), (magic components), (arcane equipment core)",
-          collection_id: "theme_item_collection",
-          collection_role: "base"
-        },
-        {
-          id: "itemset_base_artist",
-          label: "画材土台 / Atelier Core",
-          desc: "筆・パレット・スケッチブックで制作の核を置く",
-          val: "(holding paintbrush), (palette), (sketchbook), (pencils), (art tool core)",
-          collection_id: "theme_item_collection",
-          collection_role: "base"
-        }
+      "label": "ロッカーに隠れる",
+      "val": "(hiding in locker), (pov from inside), (peeking through slit), (scared face), (covering mouth), (heavy breathing), (killer outside), (darkness), (ray tracing), (claustrophobic)",
+      "links": [
+        "ホラー"
       ]
     },
     {
-      title_ja: "3. 追加小物",
-      title_en: "Add-on Props",
-      children: [
-        {
-          id: "itemset_custom_doctor",
-          label: "診療まわり補助 / Clinical Extras",
-          desc: "ペン差しや補助器具で診察中の手元密度を上げる",
-          val: "(pen in pocket), (extra medical tools), (tidy utility pouch), (exam-room accessory density)",
-          collection_id: "theme_item_collection",
-          collection_role: "custom"
-        },
-        {
-          id: "itemset_custom_gothic",
-          label: "ドール・装飾強化 / Gothic Extras",
-          desc: "ドールや薔薇で退廃感を濃くする",
-          val: "(holding gothic doll), (rose decoration), (lace detail), (relic-like ornament accents)",
-          collection_id: "theme_item_collection",
-          collection_role: "custom"
-        },
-        {
-          id: "itemset_custom_modern",
-          label: "飲み物・雑貨追加 / Modern Extras",
-          desc: "タピオカやマスクで現代っ子の生活感を足す",
-          val: "(drinking bubble tea), (mask), (small daily accessories), (youth lifestyle details)",
-          collection_id: "theme_item_collection",
-          collection_role: "custom"
-        },
-        {
-          id: "itemset_custom_adventurer",
-          label: "小道具強化 / Explorer Extras",
-          desc: "薬瓶や短剣で旅の危険と備えを強くする",
-          val: "(potion flask on belt), (dagger), (travel survival extras), (rugged field accessories)",
-          collection_id: "theme_item_collection",
-          collection_role: "custom"
-        },
-        {
-          id: "itemset_custom_mage",
-          label: "儀式・研究追加 / Arcane Extras",
-          desc: "水晶球や触媒で研究机の密度を上げる",
-          val: "(crystal ball), (arcane catalyst items), (ritual desk details), (magical research extras)",
-          collection_id: "theme_item_collection",
-          collection_role: "custom"
-        },
-        {
-          id: "itemset_custom_artist",
-          label: "制作机強化 / Atelier Extras",
-          desc: "イーゼルや絵具汚れで制作中の現場感を足す",
-          val: "(easel), (apron with paint stains), (paint tubes), (creative desk clutter), (work-in-progress feeling)",
-          collection_id: "theme_item_collection",
-          collection_role: "custom"
-        }
-      ]
+      "label": "ヤンデレ・束縛",
+      "val": "(yandere), (empty eyes), (scary smile), (holding knife behind back), (shadow over face), (obsessed), (love hearts in eyes), (dark atmosphere)"
     },
     {
-      title_ja: "4. 用途・空気",
-      title_en: "Usage & Mood",
-      children: [
-        {
-          id: "itemset_setting_doctor",
-          label: "診察・記録の空気 / Clinical Workflow",
-          desc: "診察中・記録中の落ち着いた医療空気を足す",
-          val: "(medical checkup atmosphere), (calm clinic workflow), (professional handling of tools), (clean white practical mood)",
-          collection_id: "theme_item_collection",
-          collection_role: "setting"
-        },
-        {
-          id: "itemset_setting_gothic",
-          label: "退廃館の余韻 / Gothic Reverie",
-          desc: "装具だけでなく、薄暗い退廃感までまとめて足す",
-          val: "(gothic reverie mood), (melancholic elegance), (ornamental darkness), (old mansion accessory atmosphere)",
-          collection_id: "theme_item_collection",
-          collection_role: "setting"
-        },
-        {
-          id: "itemset_setting_modern",
-          label: "街歩きライフ感 / City Daily Mood",
-          desc: "通学・寄り道・都会の日常感を足す",
-          val: "(city daily life mood), (casual street carry atmosphere), (everyday youth vibe), (modern lifestyle presence)",
-          collection_id: "theme_item_collection",
-          collection_role: "setting"
-        },
-        {
-          id: "itemset_setting_adventurer",
-          label: "旅支度・遠征感 / Expedition Mood",
-          desc: "出発前や探索中の空気を足して冒険者らしさを締める",
-          val: "(expedition preparation mood), (journey-ready atmosphere), (field exploration vibe), (traveler presence)",
-          collection_id: "theme_item_collection",
-          collection_role: "setting"
-        },
-        {
-          id: "itemset_setting_mage",
-          label: "研究室・儀式感 / Arcane Study Mood",
-          desc: "研究机・調合室・儀式前の集中感を足す",
-          val: "(arcane study mood), (ritual preparation atmosphere), (magical research focus), (mystic workbench vibe)",
-          collection_id: "theme_item_collection",
-          collection_role: "setting"
-        },
-        {
-          id: "itemset_setting_artist",
-          label: "制作没頭感 / Creative Flow",
-          desc: "描きかけ・考え込み・制作中の空気をまとめて足す",
-          val: "(creative flow atmosphere), (work-in-progress mood), (immersed in making art), (atelier concentration)",
-          collection_id: "theme_item_collection",
-          collection_role: "setting"
-        }
+      "label": "ツンデレ・赤面",
+      "val": "(tsundere), (arms crossed), (looking away), (blush), (pout), (angry but shy), (school uniform), (cute angry face)"
+    },
+    {
+      "label": "クーデレ・無口",
+      "val": "(expressionless), (staring), (quiet atmosphere), (beautiful detailed eyes), (cool beauty), (emotionless), (mysterious)"
+    }
+  ],
+  "👻 ホラー・サスペンス (Horror)": [
+    {
+      "label": "廃墟",
+      "val": "(abandoned building), (ruins), (broken glass), (overgrown), (dust), (decay), (lonely atmosphere)"
+    },
+    {
+      "label": "廃病院",
+      "val": "(abandoned hospital), (wheelchair), (blood stains), (flickering light), (dark corridor), (scary), (medical equipment)"
+    },
+    {
+      "label": "心霊写真風",
+      "val": "(daily life photo), (peace sign), (group photo), (ghost face behind), (transparent spirit), (cursed image), (noise), (low quality style), (vhs artifact), (film grain)"
+    },
+    {
+      "label": "儀式の生贄",
+      "val": "(lying on altar), (bound hands), (unconscious), (magic circle), (red candles), (hooded figures), (ritual chamber), (high angle shot), (glowing magic), (atmospheric lighting)",
+      "links": [
+        "寝ポーズ"
       ]
     }
   ],
-
-  "📚 物語セット (Story Sets)": [
+  "⚔️ 剣戟・刀 (Sword Battle)": [
     {
-      title_ja: "😱 感情・スリル",
-      title_en: "Emotions & Thrill",
-      children: [
-        {
-          id: "story_thrill_chase",
-          label: "追跡者からの逃走",
-          val: "running away, looking back, scared expression, tears, sweat, abandoned hallway, motion blur, scary monster chasing from behind, pursuer looming in background, cinematic lighting, dynamic angle, dramatic shadows",
-          desc: "追跡・逃走・恐怖の導線"
-        },
-        {
-          id: "story_thrill_locker",
-          label: "ロッカーに隠れる",
-          val: "hiding in locker, pov from inside, peeking through slit, scared face, covering mouth, heavy breathing, killer outside, darkness, ray tracing, claustrophobic",
-          desc: "閉所・潜伏・息を殺す場面"
-        },
-        {
-          id: "story_thrill_yandere",
-          label: "ヤンデレ・束縛",
-          val: "yandere, empty eyes, scary smile, holding knife behind back, shadow over face, obsessed, love hearts in eyes, dark atmosphere",
-          desc: "執着・束縛・危うい愛"
-        },
-        {
-          id: "story_thrill_tsundere",
-          label: "ツンデレ・赤面",
-          val: "tsundere, arms crossed, looking away, blush, pout, angry but shy, school uniform, cute angry face",
-          desc: "反発と照れが混ざる定番劇"
-        },
-        {
-          id: "story_thrill_kuudere",
-          label: "クーデレ・無口",
-          val: "expressionless, staring, quiet atmosphere, beautiful detailed eyes, cool beauty, emotionless, mysterious",
-          desc: "静かな温度差・無口な空気"
-        }
+      "label": "居合・抜刀",
+      "val": "(drawing katana), (iai stance), (hand on hilt), (sparkles), (falling petals), (focused expression), (motion blur), (kimono or armor)",
+      "links": [
+        "和風",
+        "ダイナミックポーズ"
       ]
     },
     {
-      title_ja: "👻 ホラー・サスペンス",
-      title_en: "Horror & Suspense",
-      children: [
-        {
-          id: "story_horror_ruins",
-          label: "廃墟",
-          val: "abandoned building, ruins, broken glass, overgrown, dust, decay, lonely atmosphere",
-          desc: "崩壊・静寂・荒れた現場"
-        },
-        {
-          id: "story_horror_hospital",
-          label: "廃病院",
-          val: "abandoned hospital, wheelchair, blood stains, flickering light, dark corridor, scary, medical equipment",
-          desc: "不穏な医療施設の定番"
-        },
-        {
-          id: "story_horror_photo",
-          label: "心霊写真風",
-          val: "daily life photo, peace sign, group photo, ghost face behind, transparent spirit, cursed image, noise, low quality style, vhs artifact, film grain",
-          desc: "日常写真に混ざる怪異"
-        },
-        {
-          id: "story_horror_ritual",
-          label: "儀式の生贄",
-          val: "lying on altar, bound hands, unconscious, magic circle, red candles, hooded figures, ritual chamber, high angle shot, glowing magic, atmospheric lighting",
-          desc: "儀式・拘束・邪悪な祭壇"
-        }
+      "label": "二刀流・乱舞",
+      "val": "(dual wielding), (two swords), (spinning attack), (slashing effects), (dynamic action), (afterimage), (speed lines), (intense battle)",
+      "links": [
+        "ダイナミックポーズ",
+        "エフェクト"
       ]
     },
     {
-      title_ja: "🧙‍♀️ 魔法・ファンタジー",
-      title_en: "Magic & Fantasy",
-      children: [
-        {
-          id: "story_magic_fire",
-          label: "爆裂魔法・炎",
-          val: "fire magic, fireball in hand, flames surrounding, burning eyes, floating hair, intense heat, explosion background, casting spell",
-          desc: "炎属性・爆裂系の見せ場"
-        },
-        {
-          id: "story_magic_summon",
-          label: "召喚術・顕現",
-          val: "summoning ritual, summoning circle on ground, giant monster emerging, holding grimoire, chanting, glowing runes, mystical atmosphere",
-          desc: "召喚儀式・顕現シーン"
-        },
-        {
-          id: "story_magic_healer",
-          label: "ヒーラー・癒やし",
-          val: "casting healing magic, gentle light, feathers falling, praying hands, angelic atmosphere, soft focus, warm colors",
-          desc: "回復魔法・聖性・祈り"
-        },
-        {
-          id: "story_magic_reaper",
-          label: "大鎌・死神",
-          val: "holding scythe, grim reaper style, full moon, dark aura, floating, menacing, black feathers, silhouette",
-          desc: "死神・月夜・不吉な威圧"
-        }
+      "label": "聖騎士の誓い",
+      "val": "(kneeling with sword), (sword planted in ground), (praying), (holy light), (knight armor), (cathedral background), (solemn), (god rays)",
+      "links": [
+        "ファンタジー"
+      ]
+    },
+    {
+      "label": "大剣・一撃",
+      "val": "(holding giant sword), (heavy weapon), (swinging sword), (ground cracking), (debris flying), (power stance), (screaming), (impact frame)",
+      "links": [
+        "アクション"
       ]
     }
   ],
-
+  "🔫 銃撃・射撃 (Gun Action)": [
+    {
+      "label": "二丁拳銃・乱射",
+      "val": "(dual guns), (firing both hands), (jumping sideways), (bullet time), (muzzle flash), (debris), (action movie shot), (flying cartridges)",
+      "links": [
+        "アクション"
+      ]
+    },
+    {
+      "label": "スナイパー・狙撃",
+      "val": "(holding sniper rifle), (looking through scope), (lying prone), (rooftop), (cityscape in background), (one eye closed), (windy), (serious face)",
+      "links": [
+        "都市"
+      ]
+    },
+    {
+      "label": "リロード・遮蔽物",
+      "val": "(reloading gun), (magazine in air), (hiding behind cover), (sweat), (intense battle), (bullets flying), (wall damage), (tactical gear)",
+      "links": [
+        "アクション"
+      ]
+    }
+  ],
+  "🧙‍♀️ 魔法・ファンタジー (Magic & Fantasy)": [
+    {
+      "label": "爆裂魔法・炎",
+      "val": "(fire magic), (fireball in hand), (flames surrounding), (burning eyes), (floating hair), (intense heat), (explosion background), (casting spell)",
+      "links": [
+        "エフェクト"
+      ]
+    },
+    {
+      "label": "召喚術・顕現",
+      "val": "(summoning ritual), (summoning circle on ground), (giant monster emerging), (holding grimoire), (chanting), (glowing runes), (mystical atmosphere)",
+      "links": [
+        "ファンタジー"
+      ]
+    },
+    {
+      "label": "ヒーラー・癒やし",
+      "val": "(casting healing magic), (gentle light), (feathers falling), (praying hands), (angelic atmosphere), (soft focus), (warm colors)",
+      "links": [
+        "ファンタジー"
+      ]
+    },
+    {
+      "label": "大鎌・死神",
+      "val": "(holding scythe), (grim reaper style), (full moon), (dark aura), (floating), (menacing), (black feathers), (silhouette)",
+      "links": [
+        "ホラー"
+      ]
+    }
+  ],
+  "👊 格闘・近接 (Melee)": [
+    {
+      "label": "飛び蹴り",
+      "val": "(flying kick), (dynamic pose), (shoe sole focus), (impact effect), (shattered glass), (street fight), (high angle), (action lines)",
+      "links": [
+        "ダイナミックポーズ"
+      ]
+    },
+    {
+      "label": "クロスカウンター",
+      "val": "(punching), (fist clash), (sweat flying), (intense face), (motion blur), (close up), (fighting stance), (knuckles)",
+      "links": [
+        "アクション"
+      ]
+    },
+    {
+      "label": "気功・オーラ",
+      "val": "(martial arts stance), (glowing aura), (energy gathering), (power up), (floating rocks), (dragon effect), (intense eyes)",
+      "links": [
+        "エフェクト"
+      ]
+    }
+  ],
   "🚫 ネガティブセット (Negative Sets)": [
     {
       "label": "基本ネガティブ",
@@ -10215,6 +10279,7 @@
     }
     return out;
   }
+
 
   // =============================================================================
   // 🎭 なりきりおすすめセット (Roleplay Recommended Sets) - nested (minimal change)
@@ -10423,6 +10488,8 @@
     ];
   } catch (e) {}
 })();
+
+
 
   // 2. R-18 (シークレットモード) 判定
   // builder_ui.section.quality_preset.bundle.js (v1) でセットされるキーをチェック
@@ -10934,20 +11001,6 @@
   window.__PP_DB.packs = packs;
 })();
 
-/* === Stage2: prune adult expression preset pack after migration to expression shelves === */
-(function pruneAdultExpressionPresetPackStage2(){
-  try {
-    var db = (window.__PP_DB && window.__PP_DB.packs) ? window.__PP_DB.packs
-      : (window.PRESET_PACKS_DB || window.__PRESET_PACKS_DB || null);
-    if (!db) return;
-    var key = "🔞 R-18 表情演出プリセット (Adult Expression FX Packs)";
-    var pack = db[key];
-    if (!Array.isArray(pack)) return;
-    db[key] = pack.filter(function(node){
-      return node && node.title_ja === "😳 漫符連動";
-    });
-  } catch (e) { console.error('[Preset Packs] pruneAdultExpressionPresetPackStage2 failed', e); }
-})();
 
 /* === Roleplay-linked Expression Support Packs === */
 (function buildRoleplayExpressionSupportPacks(){
@@ -11108,6 +11161,7 @@
   } catch (e) {}
 })();
 
+
 /* === Reorder Roleplay-linked Expression Support Packs === */
 (function reorderRoleplayExpressionSupportPacks(){
   try {
@@ -11144,6 +11198,7 @@
     if (window.__PRESET_PACKS_DB) window.__PRESET_PACKS_DB = db;
   } catch (e) {}
 })();
+
 
 /* === Normalize Admin-only Roleplay Collection species roots === */
 (function normalizeAdminOnlyRoleplayCollectionSpeciesRoots(){
@@ -11242,6 +11297,7 @@
     if (window.__PRESET_PACKS_DB) window.__PRESET_PACKS_DB = db;
   } catch (e) {}
 })();
+
 
 (function(){
   "use strict";
@@ -11353,6 +11409,7 @@
     if (window.__PRESET_PACKS_DB) window.__PRESET_PACKS_DB = db;
   } catch (e) {}
 })();
+
 
 (function(){
   "use strict";
@@ -11478,6 +11535,7 @@
     if (window.__PRESET_PACKS_DB) window.__PRESET_PACKS_DB = db;
   } catch (e) {}
 })();
+
 
 (function(){
   "use strict";
@@ -12068,6 +12126,7 @@
       if (groups[gk].children && groups[gk].children.length) namedNode.children.push(groups[gk]);
     }
 
+
     function serpentBucketForId(id){
       id = String(id || "");
       if (id.indexOf("orochi") !== -1) return "orochi";
@@ -12310,6 +12369,7 @@
   } catch (e) {}
 })();
 
+
 (function(){
   try {
     var db = (window.__PP_DB && window.__PP_DB.packs) || window.PRESET_PACKS_DB || window.__PRESET_PACKS_DB;
@@ -12536,6 +12596,7 @@
   } catch(e) {}
 })();
 
+
 (function(){
   "use strict";
   try {
@@ -12737,6 +12798,7 @@
       { section: "実クオリティ項目", item: { id: "admin_dragon_named_quality_hydra_hundredthroat_miasma", label: "百喉花瘴 / Hydra Hundred Throat Miasma", val: "hundred-throat bloom miasma, poison neck garden gradients, imperial hydra haze", desc: "百喉毒苑蛇帝の百喉花瘴", collection_id: "admin_dragon_named_collection", collection_role: "quality_detail" } },
       { section: "実クオリティ項目", item: { id: "admin_dragon_named_quality_hydra_hundredthroat_crown", label: "帝苑毒冠 / Hydra Imperial Poison Crown", val: "imperial poison crown, venom bloom halo petals, hundred-throat hydra emperor ringlight", desc: "百喉毒苑蛇帝の帝苑毒冠", collection_id: "admin_dragon_named_collection", collection_role: "quality_detail" } }
     ]);
+
 
     // Further overdrive for Orochi dedicated collection: deepen each dedicated branch with extra complete sets.
     function addMythicVariant(rootNode, bucketTitle, spec){
@@ -12941,6 +13003,7 @@
   } catch(e) {}
 })();
 
+
 // Orochi dedicated collection grand wrappers
 (function(){
   try {
@@ -13072,6 +13135,7 @@
     if (window.__PRESET_PACKS_DB) window.__PRESET_PACKS_DB = db;
   } catch(e) {}
 })();
+
 
 // Orochi sacred altar collection subcollections: split into Divine Mirror / Blade Altar / Purge Chains
 (function(){
@@ -13475,6 +13539,7 @@
   } catch(e) {}
 })();
 
+
 // Orochi thunder war formation collection subcollections: split into Thunder Banners / War Drums / Storm Canopies
 (function(){
   try {
@@ -13676,6 +13741,8 @@
   } catch(e) {}
 })();
 
+
+
 // Hydra dedicated collection grand wrappers
 (function(){
   try {
@@ -13793,6 +13860,7 @@
   } catch(e) {}
 })();
 
+
 (function(){
   "use strict";
   try {
@@ -13887,6 +13955,7 @@
     window.__PRESET_PACKS_DB = db;
   } catch (e) {}
 })();
+
 
 (function(){
   "use strict";
@@ -14008,6 +14077,7 @@
   } catch (e) {}
 })();
 
+
 (function(){
   "use strict";
   try {
@@ -14127,6 +14197,7 @@
     window.__PRESET_PACKS_DB = db;
   } catch (e) {}
 })();
+
 
 (function(){
   "use strict";
@@ -14502,6 +14573,7 @@
   } catch (e) {}
 })();
 
+
 (function(){
   "use strict";
   try {
@@ -14689,6 +14761,7 @@
     window.__PRESET_PACKS_DB = db;
   } catch (e) {}
 })();
+
 
 (function(){
   "use strict";
@@ -14878,6 +14951,7 @@
     window.__PRESET_PACKS_DB = db;
   } catch (e) {}
 })();
+
 
 (function(){
   "use strict";
@@ -15121,6 +15195,7 @@
     window.__PRESET_PACKS_DB = db;
   } catch (e) {}
 })();
+
 
 (function(){
   "use strict";
@@ -15780,6 +15855,8 @@
   } catch (e) {}
 })();
 
+
+
 /* === Mythic fusion balance shelves (2026-04-12 rev2) === */
 (function(){
   try {
@@ -16318,6 +16395,7 @@
   } catch (e) {}
 })();
 
+
 (function(){
   "use strict";
   try {
@@ -16497,6 +16575,7 @@
     window.__PRESET_PACKS_DB = db;
   } catch (e) {}
 })();
+
 
 (function(){
   "use strict";
@@ -16725,6 +16804,7 @@
     window.__PRESET_PACKS_DB = db;
   } catch (e) {}
 })();
+
 
 (function(){
   "use strict";
@@ -16971,6 +17051,7 @@
   } catch (e) {}
 })();
 
+
 (function(){
   try {
     var ROLEPLAY_PARENT_KEY = '🎭 なりきりおすすめセット';
@@ -17159,6 +17240,7 @@
   } catch (e) {}
 })();
 
+
 (function(){
   try {
     var db = (window.__PP_DB && window.__PP_DB.packs) || window.PRESET_PACKS_DB || window.__PRESET_PACKS_DB;
@@ -17269,6 +17351,7 @@
     window.__PRESET_PACKS_DB = db;
   } catch (e) {}
 })();
+
 
 (function(){
   try {
@@ -17405,6 +17488,7 @@
   } catch(e) {}
 })();
 
+
 (function(){
   try {
     var db = window.__PRESET_PACKS_DB || window.PRESET_PACKS_DB || (window.__PP_DB && window.__PP_DB.packs);
@@ -17488,6 +17572,7 @@
     window.__PRESET_PACKS_DB = db;
   } catch (e) {}
 })();
+
 
 (function(){
   try {
@@ -17618,6 +17703,7 @@
     window.__PRESET_PACKS_DB = db;
   } catch (e) {}
 })();
+
 
 (function(){
   "use strict";
@@ -17828,6 +17914,7 @@
   } catch (e) {}
 })();
 
+
 (function(){
   "use strict";
   try {
@@ -18036,6 +18123,8 @@
     window.__PRESET_PACKS_DB = db;
   } catch (e) {}
 })();
+
+
 
 (function(){
   "use strict";
@@ -18246,6 +18335,7 @@
   } catch (e) {}
 })();
 
+
 (function(){
   "use strict";
   try {
@@ -18454,6 +18544,7 @@
     window.__PRESET_PACKS_DB = db;
   } catch (e) {}
 })();
+
 
 /* === Added: Basilisk Special Collection (2026-04-14) === */
 (function(){
@@ -18665,6 +18756,9 @@
   } catch (e) {}
 })();
 
+
+
+
 (function(){
   "use strict";
   try {
@@ -18841,6 +18935,7 @@
     window.__PRESET_PACKS_DB = db;
   } catch (e) {}
 })();
+
 
 (function(){
   "use strict";
@@ -19021,6 +19116,7 @@
 
 /* ===== High Mythic Beast grouping (Yinglong / Baize / Xiezhi / Chiryu / Griffon / Basilisk / Unicorn) ===== */
 
+
 (function(){
   "use strict";
   try {
@@ -19157,6 +19253,8 @@
     window.__PRESET_PACKS_DB = db;
   } catch (e) {}
 })();
+
+
 
 (function(){
   "use strict";
@@ -19441,6 +19539,7 @@
     window.__PRESET_PACKS_DB = db;
   } catch (e) {}
 })();
+
 
 /* ===== Journey to the West special collection ===== */
 (function(){
@@ -19727,6 +19826,7 @@
     window.__PRESET_PACKS_DB = db;
   } catch (e) {}
 })();
+
 
 /* ===== Celtic mythology special collection ===== */
 (function(){
@@ -20018,8 +20118,6 @@
     var qLughSetId = 'celtic_quality_set_lugh';
     var nevanSettingId = 'celtic_setting_nevan';
     var qNevanSetId = 'celtic_quality_set_nevan';
-    var badbSettingId = 'celtic_setting_badb';
-    var qBadbSetId = 'celtic_quality_set_badb';
     var machaSettingId = 'celtic_setting_macha';
     var qMachaSetId = 'celtic_quality_set_macha';
     var qWarAId = 'celtic_quality_war_a';
@@ -20052,8 +20150,6 @@
     var qLughBId = 'celtic_quality_lugh_b';
     var qNevanAId = 'celtic_quality_nevan_a';
     var qNevanBId = 'celtic_quality_nevan_b';
-    var qBadbAId = 'celtic_quality_badb_a';
-    var qBadbBId = 'celtic_quality_badb_b';
     var qMachaAId = 'celtic_quality_macha_a';
     var qMachaBId = 'celtic_quality_macha_b';
 
@@ -20072,7 +20168,6 @@
     var nuadaSettingVal = 'lost-king sovereignty, severed-arm fate, carved-stone throne wound, silver-arm restoration omen, battle-scarred royal return, hard-won kingship pressure';
     var lughSettingVal = 'many-skilled kingship, solar spear destiny, festival-crown brilliance, oath-bound hero command, craftsman-warrior radiance, youthful sovereign mastery';
     var nevanSettingVal = 'battlefield dread omen, torn-banner silence, pre-scream terror, panic-before-bloodshed, nerve-breaking war pressure, unseen battle-madness descending';
-    var badbSettingVal = 'war-raven omen, death-cry over the battlefield, blood-feast prophecy, black-feather descent, carrion-queen pressure, fate-of-the-slain made visible';
     var machaSettingVal = 'red-horse sovereignty, curse-of-ulster omen, battle-queen pressure, speed-before-bloodshed, crimson standard wind, fierce kingship and war-road destiny';
     var qStarAVal = 'silver wheel contour clarity, moon-thread garment separation, cool lunar edge light, star-court metallic discipline';
     var qStarBVal = 'star-mist haze, lunar court afterglow, distant constellation softness, restrained celestial omen air';
@@ -20107,8 +20202,6 @@
     var qLughBVal = 'solar spear haze, many-skilled afterglow, radiant hero particles, restrained high-king brilliance';
     var qNevanAVal = 'torn-banner contour clarity, ash-white dread separation, pre-battle edge chill, nerve-tight omen discipline';
     var qNevanBVal = 'panic haze, scream-torn afterglow, battlefield rupture particles, restrained war-frenzy omen air';
-    var qBadbAVal = 'war-raven contour clarity, black-feather omen separation, death-cry edge chill, carrion-queen discipline';
-    var qBadbBVal = 'blood-feast haze, slaughter-field afterglow, black-wing particles, restrained death-prophecy air';
     var qMachaAVal = 'red-horse contour clarity, crimson-black regalia separation, battle-queen edge light, road-of-war speed polish';
     var qMachaBVal = 'curse-wind haze, war-road afterglow, hoofbeat omen particles, restrained sovereignty-fury air';
 
@@ -20156,29 +20249,6 @@
         phaseBVal:'panic rupture aura, battlefield scream wind, broken formation terror, ash-white frenzy pressure, war-madness shockwave, shrieking omen manifestation'
       },
       {
-        stem:'celtic_badb',
-        ja:'バズヴ', en:'Badb',
-        styleId:'celtic_badb_style',
-        auraId:'celtic_badb_aura',
-        extraId:omenId,
-        settingId:badbSettingId,
-        qSetId:qBadbSetId,
-        dualSetAId:'celtic_badb_war_raven_omen',
-        dualSetBId:'celtic_badb_blood_feast_manifest',
-        phaseAJa:'戦鴉兆候', phaseAEn:'War-Raven Omen',
-        phaseBJa:'血宴顕現', phaseBEn:'Blood-Feast Manifest',
-        phaseARoleplay:'Badb inspired war-raven omen goddess, Celtic mythology roleplay, single human battle-spirit woman, black-feather and blood-dark regalia, death-cry before slaughter, raven-shadow circling over torn banners, calm prophecy of the slain, battlefield doom made visible, beautiful but merciless carrion-queen stillness',
-        phaseBRoleplay:'Badb inspired blood-feast manifest goddess, Celtic mythology roleplay, single human battle-spirit woman, black-feather blood-dark regalia, slaughter-field revel, war-raven frenzy, blood-haze and corpse-omen pressure, black wings over the fallen, feast of battle made visible, merciless queen of the slain',
-        phaseAShort2000:'single human battle-spirit woman, Badb inspired war-raven omen goddess, black-feather blood-dark regalia, death-cry before slaughter, raven-shadow omen, calm prophecy of the slain, battlefield doom',
-        phaseBShort2000:'single human battle-spirit woman, Badb inspired blood-feast manifest goddess, black-feather blood-dark regalia, slaughter-field revel, war-raven frenzy, blood-haze omen, queen of the slain',
-        roleplay:'Badb inspired war-raven battle goddess, death-cry omen and blood-feast manifestation, black-feather carrion-queen beauty, single human celtic battle-spirit focus',
-        styleVal:'Badb inspired war-raven goddess, black-feather blood-dark celtic battle regalia, torn-banner motifs, severe carrion-queen beauty, omen-crown silhouette, single human battle-spirit focus',
-        auraVal:'war-raven omen pressure, death-cry over the battlefield, black-feather descent, blood-feast prophecy, slaughter-field sovereignty, queen-of-the-slain atmosphere',
-        short2000:'single human battle-spirit woman, Badb inspired war-raven goddess, black-feather blood-dark regalia, death-cry omen, black-feather descent, blood-feast prophecy, queen of the slain',
-        phaseAVal:'war-raven omen hush, torn-banner prophecy, death-cry before slaughter, black-feather descent, doom-of-the-slain stillness, battlefield foretelling pressure',
-        phaseBVal:'blood-feast manifestation, black-wing frenzy, slaughter-field haze, corpse-omen pressure, feast-of-battle divinity, queen-of-the-slain afterglow'
-      },
-      {
         stem:'celtic_macha',
         ja:'マハ', en:'Macha',
         styleId:'celtic_macha_style',
@@ -20203,6 +20273,19 @@
         styleVal:'Cu Chulainn inspired heroic spear champion, blue-silver celtic war attire, battle sash, athletic poise, oath-bound ferocity, single human character focus',
         auraVal:'storming spear momentum, fate-bound battle trance, standing-stone wind, heroic rage held just short of monstrous frenzy, war-hero pressure',
         short2000:'single human character, Cu Chulainn inspired spear hero, blue-silver war attire, oath-bound intensity, spear momentum, standing-stone wind, heroic rage, celtic champion aura'
+      },
+      {
+        stem:'celtic_lugh',
+        ja:'ルー', en:'Lugh',
+        styleId:'celtic_lugh_style',
+        auraId:'celtic_lugh_aura',
+        extraId:omenId,
+        settingId:heroSettingId,
+        qSetId:qRoyalSetId,
+        roleplay:'Lugh inspired radiant king of skills, sun-bright spear authority, gold-blue-white heroic nobility, many-talented sovereign grace, single human light-king focus',
+        styleVal:'Lugh inspired radiant spear king, gold-blue-white celtic regalia, elegant warrior-prince silhouette, solar dignity, single human character focus',
+        auraVal:'sun-spear brilliance, festival-king charisma, luminous skill-master pressure, bright but severe sovereignty aura',
+        short2000:'single human character, Lugh inspired radiant spear king, gold-blue-white regalia, solar dignity, heroic nobility, bright sovereignty aura, celtic light-king presence'
       },
       {
         stem:'celtic_brigid',
@@ -20463,7 +20546,6 @@
         { title_ja:'設定', title_en:'Settings', children:[
           makeItem(battleSettingId, '戦女神・戦場予兆設定 / War Omen Setting', battleSettingVal, 'モリガンや戦場予兆側の圧を足す', 'setting'),
           makeItem(nevanSettingId, '戦慄恐慌設定 / Dread and Panic Setting', nevanSettingVal, 'ネヴァン寄りの戦慄前兆と恐慌顕現の狂いを足す', 'setting'),
-          makeItem(badbSettingId, '戦鴉血宴設定 / War-Raven Blood Feast Setting', badbSettingVal, 'バズヴ寄りの戦鴉兆候と血宴顕現の死告げを足す', 'setting'),
           makeItem(machaSettingId, '緋馬戦禍設定 / Crimson Horse War Setting', machaSettingVal, 'マハ寄りの緋馬戦禍と呪走王権の気配を足す', 'setting'),
           makeItem(royalSettingId, '主権女王設定 / Sovereignty Queen Setting', royalSettingVal, 'メイヴ寄りの王権と中毒性を足す', 'setting'),
           makeItem(sacredSettingId, '聖火・癒し設定 / Sacred Flame Setting', sacredSettingVal, 'ブリギッド寄りの聖火と癒しを足す', 'setting'),
@@ -20483,7 +20565,6 @@
         { title_ja:'クオリティセット', title_en:'Quality Sets', children:[
           { id:qWarSetId, label:'戦霧鴉兆クオリティ / War Omen Raven Quality', val:'', desc:'クオリティセット：戦場霧と鴉兆と冷たい予兆を安全に足す', collection_id:'celtic_special_collection', collection_role:'quality_set', linked_ids:[qWarAId, qWarBId] },
           { id:qNevanSetId, label:'戦慄恐慌クオリティ / Dread Panic Quality', val:'', desc:'クオリティセット：ネヴァン寄りの戦慄前兆と恐慌顕現の戦場錯乱を強める', collection_id:'celtic_special_collection', collection_role:'quality_set', linked_ids:[qNevanAId, qNevanBId] },
-          { id:qBadbSetId, label:'戦鴉血宴クオリティ / War-Raven Blood Feast Quality', val:'', desc:'クオリティセット：バズヴ寄りの戦鴉兆候と血宴顕現の死告げを強める', collection_id:'celtic_special_collection', collection_role:'quality_set', linked_ids:[qBadbAId, qBadbBId] },
           { id:qMachaSetId, label:'緋馬王権クオリティ / Crimson Horse Sovereignty Quality', val:'', desc:'クオリティセット：マハ寄りの緋馬戦禍と王権疾走の威光を強める', collection_id:'celtic_special_collection', collection_role:'quality_set', linked_ids:[qMachaAId, qMachaBId] },
           { id:qSacredSetId, label:'聖火泉光クオリティ / Sacred Flame Well Quality', val:'', desc:'クオリティセット：ブリギッド寄りの聖火と泉光を強める', collection_id:'celtic_special_collection', collection_role:'quality_set', linked_ids:[qSacredAId, qSacredBId] },
           { id:qRoyalSetId, label:'王権白霧クオリティ / Sovereignty White Mist Quality', val:'', desc:'クオリティセット：王権と白霧と冷たい威厳を強める', collection_id:'celtic_special_collection', collection_role:'quality_set', linked_ids:[qRoyalAId, qRoyalBId] },
@@ -20504,8 +20585,6 @@
           makeItem(qWarBId, '近接予兆粒子 / Near Omen Particles', qWarBVal, '巨大な鴉を呼ばず近接予兆だけを足す', 'quality_detail'),
           makeItem(qNevanAId, '裂旗戦慄輪郭 / Torn Banner Dread Contour', qNevanAVal, '裂けた旗と戦慄前兆の輪郭を整える', 'quality_detail'),
           makeItem(qNevanBId, '恐慌断裂残光 / Panic Rupture Haze', qNevanBVal, '恐慌顕現と戦場錯乱の余韻を足す', 'quality_detail'),
-          makeItem(qBadbAId, '戦鴉輪郭光 / War-Raven Contour Light', qBadbAVal, '戦鴉意匠と黒羽戦装の輪郭を整える', 'quality_detail'),
-          makeItem(qBadbBId, '血宴死告残光 / Blood-Feast Death-Omen Haze', qBadbBVal, '血宴顕現と死告げ鴉の余韻を足す', 'quality_detail'),
           makeItem(qMachaAId, '緋馬輪郭光 / Crimson Horse Contour Light', qMachaAVal, '緋馬意匠と深紅戦装の輪郭を整える', 'quality_detail'),
           makeItem(qMachaBId, '王権戦塵残光 / Sovereign War-Dust Haze', qMachaBVal, '王権疾走と呪走戦塵の余韻を足す', 'quality_detail'),
           makeItem(qSacredAId, '聖火縁光 / Sacred Flame Edge Light', qSacredAVal, '聖火衣装の清浄感を整える', 'quality_detail'),

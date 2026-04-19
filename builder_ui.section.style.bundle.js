@@ -179,13 +179,18 @@
   // --- ここから下の STYLE_DATA / DICT は一切削らず原文そのまま ---
   const STYLE_DATA = {
     "🖌️ アナログ画材・描画技法 (Traditional Media)": [
+      { ja: "油絵・厚塗り", en: "oil painting, impasto, visible brushstrokes, rich texture" },
+      { ja: "水彩画", en: "watercolor medium, wet on wet, soft edges, splatter effect" },
       { ja: "色鉛筆画", en: "colored pencil drawing, hatching, soft colors" },
+      { ja: "鉛筆スケッチ", en: "sketch, pencil drawing, rough lines, graphite medium, hatching" },
       { ja: "木炭画 (チャコール)", en: "charcoal drawing, smudge, rough sketch, grayscale" },
+      { ja: "線画", en: "line art, monochrome, clean lines, minimalist, white background" },
       { ja: "パステル画", en: "pastel painting, soft texture, chalky, gentle atmosphere" },
       { ja: "クレヨン・落書き", en: "crayon drawing, childish drawing, wax texture, doodles" },
       { ja: "アクリルガッシュ", en: "acrylic painting, matte finish, vibrant opaque colors" },
       { ja: "エアブラシ (80s)", en: "airbrush art, smooth gradients, retro 80s style" },
       { ja: "スプレーアート", en: "spray paint art, graffiti style, drips, stencil" },
+      { ja: "インク・水墨画", en: "ink wash painting, sumi-e, monochrome, bold lines, brush stroke" },
       { ja: "インク・万年筆", en: "ink drawing, fountain pen, cross-hatching, high contrast" },
       { ja: "筆ペン・書道", en: "brush pen, calligraphy, sumi-e, bold strokes, splashing ink" },
       { ja: "黒板アート", en: "chalkboard art, chalk drawing, blackboard background" },
@@ -196,6 +201,7 @@
       { ja: "銅版画 (エッチング)", en: "etching, copperplate print, fine lines, intaglio" }
     ],
     "🏛️ 古典・芸術運動 (Classic Movements)": [
+      { ja: "浮世絵", en: "ukiyo-e style, woodblock print, flat perspective, bold outlines, washi paper texture" },
       { ja: "アール・ヌーヴォー (装飾)", en: "art nouveau, mucha style, intricate floral decoration, elegant curves" },
       { ja: "アール・デコ (幾何学)", en: "art deco, geometric patterns, gold and black, luxury, 1920s style" },
       { ja: "印象派 (光と色)", en: "impressionism, claude monet style, visible brushstrokes, light reflection" },
@@ -227,7 +233,8 @@
   };
 
   const DICT = {
-    "colored pencil drawing": "色鉛筆画", "charcoal drawing": "木炭画", "crayon drawing": "クレヨン画",
+    "oil painting": "油絵", "impasto": "厚塗り", "watercolor medium": "水彩画", "sketch": "スケッチ", "line art": "線画",
+    "ink wash painting": "水墨画", "ukiyo-e style": "浮世絵", "colored pencil drawing": "色鉛筆画", "charcoal drawing": "木炭画", "crayon drawing": "クレヨン画",
     "pastel painting": "パステル画", "acrylic painting": "アクリル画", "airbrush art": "エアブラシ画",
     "spray paint art": "スプレーアート", "ink drawing": "インク画", "brush pen": "筆ペン",
     "chalkboard art": "黒板アート", "scratchboard": "スクラッチアート", "alcohol ink art": "アルコールインク",

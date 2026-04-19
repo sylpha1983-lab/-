@@ -594,6 +594,11 @@ body.log-fullscreen{
       <button id="translateBtn" type="button">訳ガイド</button> <button id="copyBtn" type="button" onclick="copyTagOutput()">コピー</button>
       <button id="resetBtn" type="button">リセット</button>
     </div>
+    <div id="prompt-stats" style="display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin:8px 0 6px; padding:8px 10px; border-radius:12px; background:rgba(255,255,255,.92); border:1px solid rgba(0,0,0,.08); font-size:0.9em; color:#334; box-shadow:0 2px 8px rgba(0,0,0,.05);">
+      <span id="prompt-word-count" style="font-weight:700;">ワード数: 0</span>
+      <span id="prompt-tag-count">タグ数: 0</span>
+      <span id="prompt-char-count">文字数: 0</span>
+    </div>
     <textarea id="out" placeholder="ここに生成されたタグが表示されます..."></textarea>
 <section id="aiSummaryThumb" class="ai-thumb" hidden></section>
 <section id="aiSummaryHistory" class="ai-history" hidden>
@@ -803,6 +808,49 @@ window.__simpleVisualizeEnabled=true;
     run();
   }
   window.__applyLoadingMode = applyLoadingMode;
+})();
+
+
+(function(){
+  "use strict";
+  function computePromptStats(text){
+    const normalized = String(text || "").replace(/\r\n?/g, "\n").trim();
+    if (!normalized) return { words: 0, tags: 0, chars: 0 };
+    const chars = normalized.length;
+    const tags = normalized.split(/[,，、\n]+/).map(s => s.trim()).filter(Boolean).length;
+    const words = normalized.split(/[\s,，、\n]+/).map(s => s.trim()).filter(Boolean).length;
+    return { words, tags, chars };
+  }
+  function updatePromptStats(nextText){
+    const out = document.getElementById('out');
+    const statsText = typeof nextText === 'string' ? nextText : ((out && typeof out.value === 'string') ? out.value : '');
+    const stats = computePromptStats(statsText);
+    const wordEl = document.getElementById('prompt-word-count');
+    const tagEl = document.getElementById('prompt-tag-count');
+    const charEl = document.getElementById('prompt-char-count');
+    if (wordEl) wordEl.textContent = 'ワード数: ' + stats.words;
+    if (tagEl) tagEl.textContent = 'タグ数: ' + stats.tags;
+    if (charEl) charEl.textContent = '文字数: ' + stats.chars;
+  }
+  window.updatePromptStats = updatePromptStats;
+  function bindPromptStats(){
+    const out = document.getElementById('out');
+    if (!out || out.__promptStatsBound) {
+      updatePromptStats();
+      return;
+    }
+    out.__promptStatsBound = true;
+    out.addEventListener('input', function(){ updatePromptStats(); });
+    out.addEventListener('change', function(){ updatePromptStats(); });
+    updatePromptStats();
+    setTimeout(updatePromptStats, 250);
+    setTimeout(updatePromptStats, 1200);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bindPromptStats);
+  } else {
+    bindPromptStats();
+  }
 })();
 
 </script>

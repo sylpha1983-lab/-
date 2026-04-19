@@ -2881,6 +2881,8 @@ const POSE_STAGE1_BODY = {
         { ja: "くぱぁ", en: "(spread pussy)" },
         { ja: "ディープキス", en: "french kiss, deep kiss, saliva trail" },
         { ja: "胸を激しく揉む", en: "groping breasts, grabbing breasts, breast squeeze" },
+        { ja: "後ろから胸を揉む", en: "{{grab breasts}}, grabbing from behind" },
+        { ja: "後ろから服越しに胸を揉む", en: "{{grab breasts}}, grabbing from behind, over clothes" },
         { ja: "お尻を揉む", en: "groping ass, grabbing ass" }, 
         { ja: "腰を振る・擦り合わせる", en: "thrusting hips, grinding" },
         { ja: "体を反らす（快感）", en: "arching back, flinching" },
@@ -4020,3 +4022,76 @@ const STAGE1_COMPLETED_POSES = [
 ];
 
 console.log("STAGE1 COMPLETED POSES v24 LOADED");
+
+
+(function(){
+// --- builder_ui.section.pose.v15.js ---
+(function(){
+  "use strict";
+  const VERSION = 15;
+  const KEY = "pose";
+
+  const POSE_STORY_ACTION_MOVE = {
+    "⚔️ 剣戟・刀 (Sword Battle)": {
+      "抜刀・斬撃": [
+        { ja: "居合・抜刀", en: "drawing katana, iai stance, hand on hilt, sparkles, falling petals, focused expression, motion blur, kimono or armor" },
+        { ja: "二刀流・乱舞", en: "dual wielding, two swords, spinning attack, slashing effects, dynamic action, afterimage, speed lines, intense battle" }
+      ],
+      "騎士・重剣": [
+        { ja: "聖騎士の誓い", en: "kneeling with sword, sword planted in ground, praying, holy light, knight armor, cathedral background, solemn, god rays" },
+        { ja: "大剣・一撃", en: "holding giant sword, heavy weapon, swinging sword, ground cracking, debris flying, power stance, screaming, impact frame" }
+      ]
+    },
+    "🔫 銃撃・射撃 (Gun Action)": {
+      "拳銃・乱射": [
+        { ja: "二丁拳銃・乱射", en: "dual guns, firing both hands, jumping sideways, bullet time, muzzle flash, debris, action movie shot, flying cartridges" }
+      ],
+      "狙撃・射線": [
+        { ja: "スナイパー・狙撃", en: "holding sniper rifle, looking through scope, lying prone, rooftop, cityscape in background, one eye closed, windy, serious face" }
+      ],
+      "遮蔽物・戦術": [
+        { ja: "リロード・遮蔽物", en: "reloading gun, magazine in air, hiding behind cover, sweat, intense battle, bullets flying, wall damage, tactical gear" }
+      ]
+    },
+    "👊 格闘・近接 (Melee)": {
+      "打撃・蹴り": [
+        { ja: "飛び蹴り", en: "flying kick, dynamic pose, shoe sole focus, impact effect, shattered glass, street fight, high angle, action lines" },
+        { ja: "クロスカウンター", en: "punching, fist clash, sweat flying, intense face, motion blur, close up, fighting stance, knuckles" }
+      ],
+      "気功・構え": [
+        { ja: "気功・オーラ", en: "martial arts stance, glowing aura, energy gathering, power up, floating rocks, dragon effect, intense eyes" }
+      ]
+    }
+  };
+
+  function mount(){
+    const root = document.getElementById("pose-master-root");
+    if (!root || typeof window.__POSE_RENDERER !== "function") { setTimeout(mount, 120); return; }
+    if (document.getElementById("pose-v15-storymove")) return;
+
+    const marker = document.createElement("div");
+    marker.id = "pose-v15-storymove";
+    marker.style.display = "contents";
+    root.appendChild(marker);
+
+    try {
+      if (typeof window.__POSE_RENDERER === "function") {
+        window.__POSE_RENDERER(root, POSE_STORY_ACTION_MOVE, "v15-storymove");
+      }
+    } catch(e){ console.warn("POSE v15 mount failed", e); }
+  }
+
+  const API = {
+    initUI(){
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", mount, { once: true });
+      } else {
+        mount();
+      }
+    },
+    getTags(){ return []; }
+  };
+
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
+})();

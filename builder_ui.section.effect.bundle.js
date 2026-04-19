@@ -320,6 +320,30 @@
       { ja: "ドット絵・レトロゲー", en: "pixel art, 8-bit, 16-bit, retro game style" },
       { ja: "ガチャ画面風", en: "gacha screen, summon result, ssr, rarity stars" }
     ],
+    "📸 写真系エフェクト (Photo Effects)": [
+      { ja: "映画調（Anamorphic Film）", en: "(cinematic lighting), (anamorphic lens flare), (subtle film grain), (soft contrast curve), (teal-orange color grading)" },
+      { ja: "柔光夢幻（Soft Bloom）", en: "(soft lighting), (subtle bloom), (gentle highlight roll-off), (pastel color grading), (low contrast)" },
+      { ja: "低キー陰影（Low-Key Noir）", en: "(low-key lighting), (strong shadow contrast), (vignette), (desaturated color grading), (shadow emphasis)" },
+      { ja: "透明感強調（High-Key Clean）", en: "(high-key lighting), (even exposure), (minimal shadow), (clean color balance), (highlight preservation)" },
+      { ja: "クラシック写真（Vintage Film）", en: "(vintage film look), (warm color cast), (subtle grain), (lowered saturation), (soft vignette)" },
+      { ja: "スナップ自然光（Natural Light Photo）", en: "(natural lighting), (realistic exposure), (soft shadow transition), (neutral color grading), (documentary style)" },
+      { ja: "ドラマ照明（Dramatic Portrait）", en: "(rim lighting), (face-focused lighting), (controlled highlights), (contrast emphasis), (portrait color grading)" },
+      { ja: "逆光演出（Backlight Glow）", en: "(strong backlight), (light bloom), (rim glow), (atmospheric haze), (highlight diffusion)" },
+      { ja: "高精細写真（Studio Sharp）", en: "(studio lighting), (high clarity), (sharp detail), (controlled reflections), (neutral color tone)" },
+      { ja: "夜景写真（Night City Photo）", en: "(night lighting), (neon highlights), (high dynamic range), (urban color grading), (light reflections)" },
+      { ja: "ホログラフィック（Holographic Foil）", en: "(holographic), (iridescent), (rainbow diffraction), (prismatic highlights), (thin film interference), (specular highlight bloom)" }
+    ],
+    "🎮 ゲーム/3D系エフェクト (Game & 3D Effects)": [
+      { ja: "リアルタイムGI（Lumen GI）", en: "(unreal engine 5), (lumen global illumination), (realistic lighting), (ambient occlusion), (high dynamic range)" },
+      { ja: "ホログラフィックUI（Holographic UI）", en: "(holographic ui), (hologram overlay), (futuristic hud), (floating panels), (translucent interface), (neon cyan glow)" },
+      { ja: "PBR強調（PBR Boost）", en: "(physically based rendering), (realistic textures), (specular response), (roughness variation), (clearcoat reflections)" },
+      { ja: "霧体積（Volumetric Fog）", en: "(volumetric lighting), (volumetric fog), (god rays), (atmospheric perspective), (light scattering)" },
+      { ja: "高密度ジオメトリ（Nanite Detail）", en: "(nanite geometry), (ultra detailed), (micro details), (edge fidelity), (high poly)" },
+      { ja: "パストレ（Path Tracing）", en: "(path tracing), (ray tracing), (global illumination), (soft shadows), (accurate reflections)" },
+      { ja: "シネゲーム（Cinematic Game Look）", en: "(cinematic lighting), (unreal engine rendering), (lens effects), (depth of field), (color grading)" },
+      { ja: "ハードシャドウ（Contact Shadow）", en: "(contact shadow), (hard shadows), (ambient occlusion), (sharp edges), (high contrast)" },
+      { ja: "金属映り込み（Metal Reflections）", en: "(environment reflections), (specular highlights), (anisotropic highlights), (reflection clarity), (polished metal)" }
+    ],
     "🪩 ホログラフィック (Holographic)": [
       { ja: "投影ホロ（存在）", en: "holographic projection, hologram, semi-transparent body, glowing edges, volumetric light body" },
       { ja: "投影ホロUI（HUD/AR）", en: "holographic ui, floating UI panels, AR interface, translucent interface, holographic screen" },
@@ -328,7 +352,32 @@
       { ja: "データストランド", en: "glowing data strands, luminous threads, data stream particles" },
       { ja: "デジタルグリッド", en: "digital grid, wireframe overlay, data lines" },
       { ja: "クロマティック・トレイル", en: "chromatic light trails, spectral highlights, color separation glow" },
-      { ja: "ネオングロー", en: "neon glow, emissive lighting, cyberpunk glow" }
+      { ja: "ネオングロー", en: "neon glow, emissive lighting, cyberpunk glow" },
+      { ja: "ホロ・フリッカー", en: "hologram flickering, unstable holographic projection, signal interference, glitch shimmer, scanline interference" },
+      { ja: "ホロ位相ズレ", en: "phase-shifting hologram, partial data loss, ghosting trails, temporal jitter, data dropout" },
+      { ja: "低電力ホロ", en: "low-power hologram mode, soft ambient glow, faint scanlines, reduced particle density" },
+      { ja: "感情発光", en: "emotional resonance glow, heartbeat-synced light pulse, affection-linked brightness, memory echo hologram, emotional data feedback" },
+      { ja: "ホロ発光：控えめ", en: "subtle holographic presence, soft holographic glow, thin scanlines, low particle density" },
+      { ja: "ホロ発光：標準", en: "balanced holographic projection, moderate glow, clean hologram edges, stable data particles" },
+      { ja: "ホロ発光：強め", en: "intense holographic glow, bright edge bloom, dense digital particles, strong data streams" },
+      { ja: "ホロ発光：暴走", en: "overwhelming holographic emission, blinding neon glow, heavy scanlines, hologram storm, glitch overload" },
+      { ja: "ホロ色：Cyan-Blue", en: "neon cyan glow, cool blue hologram, cyan highlights, cool digital glow" },
+      { ja: "ホロ色：Warm Amber", en: "warm amber hologram, golden data glow, soft warm emission, amber highlights" },
+      { ja: "ホロ色：Magenta-Pink", en: "magenta hologram, pink neon glow, violet data light, chromatic shimmer" },
+      { ja: "ホロ色：White-Gold", en: "white-gold hologram, holy luminous glow, clean halo light, soft white bloom" },
+      { ja: "ホロ色：Glitch Rainbow", en: "glitch rainbow hologram, prismatic noise, chromatic aberration, rainbow diffraction" }
+    ],
+    "⚙️ メカ/電子演出 (Mecha / Electronic FX)": [
+      { ja: "診断HUD", en: "diagnostic HUD, machine readout overlay, technical interface, telemetry display" },
+      { ja: "警告表示", en: "warning overlay, alert text, caution labels, hazard display, system warning" },
+      { ja: "赤警告灯", en: "red warning light, alarm beacon, emergency glow, danger indicator" },
+      { ja: "電流スパーク", en: "electric sparks, arcing electricity, short circuit sparks, power surge" },
+      { ja: "機械ノイズ線", en: "machine noise lines, signal jitter, diagnostic interference, scan distortion" },
+      { ja: "サーボ眼発光", en: "servo-eye glow, cybernetic eye light, sensor lens emission, target-lock glow" },
+      { ja: "回路発光", en: "circuit glow, luminous circuitry, glowing traces, powered pathways" },
+      { ja: "冷却蒸気", en: "coolant steam, pressure vent, mechanical exhaust haze, system release vapor" },
+      { ja: "接続ケーブル", en: "data cables, power conduits, tether lines, neural connector cords" },
+      { ja: "整備印字・注意ラベル", en: "maintenance markings, serial numbers, warning labels, service print, panel text" }
     ],
     "📹 モニター・画質演出 (Screen Artifacts)": [
       { ja: "VHS (ビデオテープ風)", en: "vhs artifacts, tracking error, magnetic tape noise, 90s footage" },
