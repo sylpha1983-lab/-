@@ -7,6 +7,8 @@
   var syncLock = false;
   var toastTimer = null;
   var lastToastKey = "";
+  var lastToastAt = 0;
+  var TOAST_MS = 1600;
   var annotateTimer = null;
   var noteObserver = null;
 
@@ -129,6 +131,7 @@
       'letter-spacing:0.01em',
       'opacity:0',
       'pointer-events:none',
+      'display:none',
       'transition:opacity .18s ease, transform .18s ease'
     ].join(';');
     document.body.appendChild(el);
@@ -136,18 +139,24 @@
   }
 
   function showToast(text, key){
-    if (key && lastToastKey === key) return;
+    var now = Date.now();
+    if (key && lastToastKey === key && (now - lastToastAt) < (TOAST_MS + 250)) return;
     lastToastKey = key || '';
+    lastToastAt = now;
     var el = ensureToast();
     el.textContent = text;
+    el.style.display = 'block';
     el.style.opacity = '1';
     el.style.transform = 'translateX(-50%) translateY(0)';
     if (toastTimer) clearTimeout(toastTimer);
     toastTimer = setTimeout(function(){
       el.style.opacity = '0';
       el.style.transform = 'translateX(-50%) translateY(8px)';
+      setTimeout(function(){
+        el.style.display = 'none';
+      }, 190);
       lastToastKey = '';
-    }, 3200);
+    }, TOAST_MS);
   }
 
   function dispatchChange(el){
@@ -410,16 +419,24 @@
     } catch (e) {}
     var el = document.getElementById('pair-helper-toast');
     if (!el) return;
-    if (key && el.dataset.lastKey === key) return;
+    var now = Date.now();
+    var lastAt = Number(el.dataset.lastAt || '0');
+    if (key && el.dataset.lastKey === key && (now - lastAt) < (TOAST_MS + 250)) return;
     el.dataset.lastKey = key || '';
+    el.dataset.lastAt = String(now);
     el.textContent = text;
+    el.style.display = 'block';
     el.style.opacity = '1';
     el.style.transform = 'translateX(-50%) translateY(0)';
     setTimeout(function(){
       el.style.opacity = '0';
       el.style.transform = 'translateX(-50%) translateY(8px)';
+      setTimeout(function(){
+        el.style.display = 'none';
+      }, 190);
       el.dataset.lastKey = '';
-    }, 3200);
+      el.dataset.lastAt = '0';
+    }, TOAST_MS);
   }
 
   function showPairPrompt(message, packId, ctx){

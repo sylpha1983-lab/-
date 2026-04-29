@@ -493,53 +493,106 @@
         ]
       }
     ],
-    "🛍 商業・ショッピング (Commercial/Shopping)": [
-      {
-        group: "🏪 小売店・日常店舗",
-        items: [
-          { ja: "コンビニ", en: "convenience store" },
-          { ja: "スーパーマーケット", en: "supermarket" },
-          { ja: "ドラッグストア", en: "drugstore" },
-          { ja: "商店街の店先", en: "shopping street storefront" }
-        ]
-      },
-      {
-        group: "🛒 大型商業・売り場",
-        items: [
-          { ja: "ショッピングモール", en: "shopping mall" },
-          { ja: "デパート売り場", en: "department store floor" },
-          { ja: "家電量販店", en: "electronics superstore" }
-        ]
-      },
-      {
-        group: "👗 専門店・ブランド店",
-        items: [
-          { ja: "ブティック/服屋", en: "clothing store" },
-          { ja: "本屋", en: "bookstore" },
-          { ja: "花屋", en: "flower shop" },
-          { ja: "雑貨店", en: "variety goods store" },
-          { ja: "靴屋", en: "shoe store" },
-          { ja: "宝石店", en: "jewelry store" }
-        ]
-      },
-      {
-        group: "💄 サービス・美容・接客空間",
-        items: [
-          { ja: "コスメ売り場", en: "cosmetics counter" },
-          { ja: "美容院", en: "hair salon" },
-          { ja: "ネイルサロン", en: "nail salon" },
-          { ja: "エステ受付", en: "esthetic salon reception" },
-          { ja: "店舗カウンター", en: "shop counter" }
-        ]
-      },
-      {
-        group: "🌙 商業演出空間",
-        items: [
-          { ja: "深夜のコンビニ前", en: "outside convenience store at midnight" },
-          { ja: "閉店間際の売り場", en: "shop floor near closing time" }
-        ]
-      }
-    ],
+
+"🛍 商業・ショッピング (Commercial/Shopping)": [
+  {
+    group: "🏪 コンビニ・ドラッグストア",
+    items: [
+      { ja: "コンビニ", en: "convenience store" },
+      { ja: "深夜のコンビニ前", en: "outside convenience store at midnight" },
+      { ja: "ドラッグストア", en: "drugstore" },
+      { ja: "ドラッグストア入口", en: "drugstore entrance" },
+      { ja: "24時間営業の店舗前", en: "outside a 24-hour shop" },
+      { ja: "雨夜のロードサイド店舗入口", en: "roadside shop entrance on a rainy night" }
+    ]
+  },
+  {
+    group: "🛒 スーパー・日用品売り場",
+    items: [
+      { ja: "スーパーマーケット", en: "supermarket" },
+      { ja: "青果売り場", en: "produce section" },
+      { ja: "冷凍食品売り場", en: "frozen food aisle" },
+      { ja: "レジ前通路", en: "checkout aisle" },
+      { ja: "スーパー入口前", en: "outside supermarket entrance" },
+      { ja: "夜の大型スーパー入口", en: "large supermarket entrance at night" }
+    ]
+  },
+  {
+    group: "🏬 モール・百貨店共用空間",
+    items: [
+      { ja: "ショッピングモール", en: "shopping mall" },
+      { ja: "モール吹き抜け広場", en: "mall atrium" },
+      { ja: "エスカレーター前ホール", en: "escalator hall" },
+      { ja: "百貨店エントランス", en: "department store entrance hall" },
+      { ja: "百貨店売り場フロア", en: "department store floor" },
+      { ja: "モール外観エントランス", en: "mall exterior entrance" }
+    ]
+  },
+  {
+    group: "👗 アパレル・ブランド店",
+    items: [
+      { ja: "ブティック/服屋", en: "clothing store" },
+      { ja: "セレクトショップ", en: "select shop" },
+      { ja: "ショーウィンドウ前", en: "in front of shop window display" },
+      { ja: "試着室前", en: "near fitting rooms" },
+      { ja: "ブランドショップ入口", en: "brand shop entrance" },
+      { ja: "夜のブティック外観", en: "boutique exterior at night" }
+    ]
+  },
+  {
+    group: "📚 本屋・文具・雑貨",
+    items: [
+      { ja: "本屋", en: "bookstore" },
+      { ja: "文具店", en: "stationery store" },
+      { ja: "雑貨店", en: "variety goods store" },
+      { ja: "花屋", en: "flower shop" },
+      { ja: "商店街の店先", en: "shopping street storefront" },
+      { ja: "雑貨店のガラス扉前", en: "outside a variety shop glass door" }
+    ]
+  },
+  {
+    group: "💻 家電・ホビー量販",
+    items: [
+      { ja: "家電量販店", en: "electronics superstore" },
+      { ja: "スマホ売り場", en: "smartphone section" },
+      { ja: "PC売り場", en: "computer section" },
+      { ja: "ホビーショップ", en: "hobby shop" },
+      { ja: "家電量販店入口", en: "electronics store entrance" },
+      { ja: "ネオン看板のある量販店外観", en: "superstore exterior with neon signage" }
+    ]
+  },
+  {
+    group: "💎 宝飾・高級ブティック",
+    items: [
+      { ja: "宝石店", en: "jewelry store" },
+      { ja: "高級時計店", en: "luxury watch boutique" },
+      { ja: "高級ブランド店", en: "luxury brand boutique" },
+      { ja: "ガラス張りの高級店前", en: "in front of glass luxury storefront" },
+      { ja: "夜の宝飾店入口", en: "jewelry boutique entrance at night" }
+    ]
+  },
+  {
+    group: "💄 コスメ・美容・接客空間",
+    items: [
+      { ja: "コスメ売り場", en: "cosmetics counter" },
+      { ja: "美容院", en: "hair salon" },
+      { ja: "ネイルサロン", en: "nail salon" },
+      { ja: "エステ受付", en: "esthetic salon reception" },
+      { ja: "店舗カウンター", en: "shop counter" },
+      { ja: "美容サロン入口", en: "beauty salon entrance" }
+    ]
+  },
+  {
+    group: "🌙 商業演出空間",
+    items: [
+      { ja: "閉店間際の売り場", en: "shop floor near closing time" },
+      { ja: "夜のショッピングモール通路", en: "mall corridor at night" },
+      { ja: "雨に濡れた店舗前照明", en: "rain-wet storefront lighting" },
+      { ja: "セール終盤の荒れた売り場", en: "late-sale retail floor" },
+      { ja: "開店直後の静かな売り場", en: "quiet shop floor just after opening" }
+    ]
+  }
+],
     "🎮 娯楽・アミューズメント (Entertainment/Amusement)": [
       {
         group: "🕹 ゲームセンター・アーケード",
@@ -674,12 +727,75 @@
         ]
       },
       {
-        group: "🎰 カジノ・遊技空間",
+        group: "🎰 カジノフロア・全景",
         items: [
-          { ja: "カジノ", en: "casino" },
+          { ja: "カジノフロア", en: "casino floor" },
+          { ja: "ネオンが揺れるカジノホール", en: "neon-lit casino hall" },
+          { ja: "高級ホテル併設カジノ", en: "hotel casino floor" },
+          { ja: "深夜のカジノフロア", en: "casino floor at midnight" },
+          { ja: "混雑したカジノホール", en: "crowded casino hall" },
+          { ja: "閉店間際の静かなカジノ", en: "quiet casino near closing" }
+        ]
+      },
+      {
+        group: "♠ テーブルゲーム・カード卓",
+        items: [
           { ja: "ポーカールーム", en: "poker room" },
+          { ja: "ブラックジャック卓", en: "blackjack table area" },
+          { ja: "バカラ卓", en: "baccarat table room" },
+          { ja: "緑フェルトのカードテーブル列", en: "row of green felt card tables" },
+          { ja: "ディーラー卓の並ぶ一角", en: "dealer table section" },
+          { ja: "静かなVIPカードルーム", en: "quiet vip card room" }
+        ]
+      },
+      {
+        group: "🎲 ルーレット・メイン遊技卓",
+        items: [
+          { ja: "ルーレット卓", en: "roulette table section" },
+          { ja: "ルーレットホイール前", en: "in front of roulette wheel" },
+          { ja: "チップが積まれたメイン卓", en: "main casino table with stacked chips" },
+          { ja: "歓声の上がる遊技卓エリア", en: "cheering gaming table area" },
+          { ja: "スポットライトの当たる卓上", en: "spotlit casino table" }
+        ]
+      },
+      {
+        group: "🎰 スロット・ジャックポット列",
+        items: [
           { ja: "スロットフロア", en: "slot machine floor" },
-          { ja: "VIPカジノラウンジ", en: "vip casino lounge" }
+          { ja: "スロットマシン通路", en: "slot machine aisle" },
+          { ja: "ジャックポット表示が光る列", en: "jackpot display row" },
+          { ja: "電子音が響く遊技通路", en: "electronic gaming aisle" },
+          { ja: "薄暗いメダルスロット列", en: "dim slot machine row" }
+        ]
+      },
+      {
+        group: "🥂 VIPラウンジ・高級遊技",
+        items: [
+          { ja: "VIPカジノラウンジ", en: "vip casino lounge" },
+          { ja: "シャンデリアのある高級ラウンジ", en: "chandelier casino lounge" },
+          { ja: "大理石床のVIP遊技室", en: "marble-floor vip gaming room" },
+          { ja: "個室バカラルーム", en: "private baccarat room" },
+          { ja: "ハイローラー向け遊技席", en: "high-roller gaming section" }
+        ]
+      },
+      {
+        group: "🚪 エントランス・周辺導線",
+        items: [
+          { ja: "カジノエントランスロビー", en: "casino entrance lobby" },
+          { ja: "雨に濡れたカジノ入口", en: "rainy casino entrance" },
+          { ja: "ネオン看板のあるカジノ外観", en: "casino exterior with neon sign" },
+          { ja: "高級ホテル側のカジノ入口", en: "hotel-side casino entrance" },
+          { ja: "警備員の立つ入場ゲート", en: "guarded casino entry gate" }
+        ]
+      },
+      {
+        group: "🌙 カジノ演出空間",
+        items: [
+          { ja: "ネオンのカジノフロア", en: "neon casino floor" },
+          { ja: "チップ音が響く夜の遊技空間", en: "night casino with chip clatter" },
+          { ja: "金色の光に満ちたカジノ", en: "gold-lit casino interior" },
+          { ja: "閉店後の静まり返った遊技ホール", en: "silent casino hall after closing" },
+          { ja: "雨夜のエントランス反射床", en: "rainy entrance floor reflections" }
         ]
       },
       {
@@ -740,46 +856,70 @@
       {
         group: "🎡 遊園地・テーマパーク",
         items: [
-          { ja: "遊園地", en: "amusement park" },
-          { ja: "観覧車前", en: "in front of ferris wheel" },
-          { ja: "メリーゴーランド周辺", en: "merry-go-round area" },
-          { ja: "テーマパーク通路", en: "theme park walkway" }
+          { ja: "遊園地の入口ゲート", en: "theme park entrance gate" },
+          { ja: "観覧車前広場", en: "ferris wheel plaza" },
+          { ja: "メリーゴーランド広場", en: "carousel plaza" },
+          { ja: "アトラクション通り", en: "theme park attraction street" },
+          { ja: "ジェットコースター前通路", en: "roller coaster approach walkway" },
+          { ja: "パレード通路", en: "theme park parade route" },
+          { ja: "夕暮れのテーマパーク入口", en: "theme park gate at dusk" }
         ]
       },
       {
-        group: "🌳 公園・広場・外遊び",
+        group: "🌳 公園・広場・都市オープンスペース",
         items: [
-          { ja: "公園", en: "park" },
-          { ja: "噴水広場", en: "plaza fountain" },
-          { ja: "河川敷", en: "riverbank" }
+          { ja: "近所の公園入口", en: "neighborhood park entrance" },
+          { ja: "芝生広場", en: "lawn plaza" },
+          { ja: "噴水広場", en: "fountain square" },
+          { ja: "並木のある公園道", en: "tree-lined park path" },
+          { ja: "遊具脇の公園", en: "playground-side park area" },
+          { ja: "河川敷の遊歩道", en: "riverside promenade" },
+          { ja: "夜のベンチ広場", en: "night bench plaza" }
         ]
       },
       {
-        group: "🏖 観光・休日スポット",
+        group: "🧭 観光・街歩きスポット",
         items: [
-          { ja: "プールサイド", en: "poolside" },
-          { ja: "インフィニティプール", en: "infinity pool" },
-          { ja: "アクアリウム", en: "aquarium hall" },
-          { ja: "植物園", en: "botanical garden greenhouse" },
-          { ja: "水族館ホール", en: "aquarium hall interior" },
-          { ja: "動物園通路", en: "zoo walkway" },
-          { ja: "展望台", en: "observation deck" },
-          { ja: "海辺の遊歩道", en: "seaside promenade" }
+          { ja: "観光通り", en: "sightseeing street" },
+          { ja: "石畳の街歩き路地", en: "stone-paved sightseeing alley" },
+          { ja: "水族館の入口ホール", en: "aquarium entrance hall" },
+          { ja: "植物園の温室入口", en: "botanical garden greenhouse entrance" },
+          { ja: "動物園の散策通路", en: "zoo promenade" },
+          { ja: "リゾート庭園の散歩道", en: "resort garden walkway" },
+          { ja: "観光客が行き交う休日通り", en: "holiday tourist lane" }
         ]
       },
       {
-        group: "🛶 アクティブレジャー",
+        group: "🌆 展望・夜景・高所スポット",
         items: [
-          { ja: "キャンプ場", en: "campground" },
-          { ja: "バーベキュー場", en: "barbecue area" },
-          { ja: "スキー場ロッジ前", en: "in front of ski lodge" }
+          { ja: "展望タワーのデッキ", en: "tower observation deck" },
+          { ja: "屋上展望テラス", en: "rooftop observatory terrace" },
+          { ja: "高台の夜景スポット", en: "hillside night viewpoint" },
+          { ja: "ガラス張りの展望通路", en: "glass observation corridor" },
+          { ja: "港を見下ろす見晴らし台", en: "harbor overlook terrace" },
+          { ja: "夕景が広がる展望広場", en: "sunset outlook plaza" },
+          { ja: "街明かりを見渡す高所デッキ", en: "citylight panorama deck" }
+        ]
+      },
+      {
+        group: "🌊 水辺レジャー・休日散策",
+        items: [
+          { ja: "プールサイドデッキ", en: "poolside deck" },
+          { ja: "インフィニティプールの縁", en: "infinity pool edge" },
+          { ja: "湖畔のボードウォーク", en: "lakeside boardwalk" },
+          { ja: "海辺の遊歩道", en: "seaside promenade" },
+          { ja: "マリーナの散策デッキ", en: "marina promenade deck" },
+          { ja: "水辺の休憩テラス", en: "waterfront rest terrace" },
+          { ja: "夕暮れのウォーターフロント", en: "waterfront at dusk" }
         ]
       },
       {
         group: "🌙 レジャー演出空間",
         items: [
           { ja: "夜の遊園地", en: "amusement park at night" },
-          { ja: "夕暮れの広場", en: "plaza at dusk" }
+          { ja: "休日夕方の広場", en: "holiday plaza at dusk" },
+          { ja: "夜景が濃くなる展望デッキ", en: "nightfall observation deck" },
+          { ja: "水面反射が揺れる水辺", en: "waterside with shimmering reflections" }
         ]
       }
     ],
@@ -929,19 +1069,583 @@
       { ja: "月の祭壇", en: "moon altar" },
       { ja: "浮遊城", en: "floating castle" },
       { ja: "星の回廊", en: "astral corridor" }
-    ],
+    
+      ,{ ja: "王城の外観", en: "royal castle exterior" }
+      ,{ ja: "王宮の大広間", en: "royal palace grand hall" }
+      ,{ ja: "城門前の石畳広場", en: "castle gate stone plaza" }
+      ,{ ja: "異世界王都の大通り", en: "otherworld royal capital avenue" }
+      ,{ ja: "異世界市場通り", en: "otherworld market street" }
+      ,{ ja: "冒険者ギルドの酒場", en: "adventurers guild tavern" }
+      ,{ ja: "魔法学院の中庭", en: "magic academy courtyard" }
+      ,{ ja: "魔法講義室", en: "magic lecture hall" }
+      ,{ ja: "魔導工房", en: "arcane workshop" }
+      ,{ ja: "錬金術研究室", en: "alchemy laboratory" }
+      ,{ ja: "神殿の回廊", en: "temple colonnade" }
+      ,{ ja: "封印遺跡の入口", en: "sealed ruin entrance" }
+      ,{ ja: "地下遺跡の石廊下", en: "underground ruin corridor" }
+      ,{ ja: "水晶祭壇", en: "crystal altar" }
+      ,{ ja: "召喚門の広場", en: "summoning gate plaza" }
+      ,{ ja: "精霊樹の庭", en: "spirit tree garden" }
+      ,{ ja: "妖精の花庭", en: "fae flower glade" }
+      ,{ ja: "精霊の古森", en: "ancient spirit forest" }
+      ,{ ja: "聖なる森の小径", en: "sacred forest path" }
+      ,{ ja: "月光の妖精森", en: "moonlit fairy forest" }
+      ,{ ja: "苔むす精霊樹の根庭", en: "mossy spirit-root glade" }
+      ,{ ja: "霧に沈む妖精の森", en: "misty fae woodland" }
+      ,{ ja: "蛍光茸の夜森", en: "bioluminescent mushroom forest" }
+,{ ja: "ダンジョン入口の石階段", en: "dungeon entrance stone stairs" }
+,{ ja: "地下迷宮の長廊下", en: "underground labyrinth corridor" }
+,{ ja: "封印施設の環状通路", en: "sealed facility ring corridor" }
+,{ ja: "封鎖扉のある地下区画", en: "barred subterranean sector" }
+,{ ja: "罠仕掛けの石回廊", en: "trap-lined stone corridor" }
+,{ ja: "古代封印室", en: "ancient sealing chamber" }
+,{ ja: "深部の祭壇間", en: "deep altar chamber" }
+,{ ja: "崩れかけた地下神殿路", en: "collapsed under-temple passage" }
+,{ ja: "地下の鎖橋ホール", en: "subterranean chain-bridge hall" }
+,{ ja: "深層ボス前広間", en: "deep boss antechamber" }
+      ,{ ja: "森の聖泉", en: "sacred woodland spring" }
+      ,{ ja: "精霊が集う森の水辺", en: "spirit-touched forest waterside" }
+      ,{ ja: "魔王城の外観", en: "demon lord castle exterior" }
+      ,{ ja: "邪城の玉座間", en: "dark throne hall" }
+      ,{ ja: "黒い城門前の広場", en: "cursed castle gate plaza" }
+      ,{ ja: "禍々しい謁見の間", en: "ominous audience chamber" }
+      ,{ ja: "邪教祭壇室", en: "profane ritual sanctuary" }
+      ,{ ja: "奈落門のある断崖", en: "abyss gate cliff" }
+      ,{ ja: "血月の異界平原", en: "blood-moon otherworld plain" }
+      ,{ ja: "黒霧の外廊", en: "black-mist outer corridor" }
+      ,{ ja: "禍穴のある異界回廊", en: "rift-scarred otherworld corridor" }
+      ,{ ja: "呪われた玉座の塔", en: "cursed throne tower" }
+
+      ,{ ja: "赤い三日月の夜空", en: "blood-red crescent moon sky" }
+      ,{ ja: "巨大な三日月の夜空", en: "giant crescent moon sky" }
+      ,{ ja: "空を圧する巨大な月", en: "looming giant moon sky" }
+      ,{ ja: "ドラキュラ城の外観", en: "dracula castle exterior" }
+      ,{ ja: "月下の吸血城尖塔", en: "moonlit vampire castle spires" }
+      ,{ ja: "赤い月に照らされた古城前庭", en: "blood-moon castle forecourt" }
+      ,{ ja: "月下の墓地", en: "moonlit graveyard" }
+      ,{ ja: "月光ステンドグラスの古城回廊", en: "moonlit stained-glass castle corridor" }
+      ,{ ja: "月光が落ちる古城の大階段", en: "moonlit gothic grand staircase" }
+      ,{ ja: "赤月を背負う断崖の古城", en: "cliffside castle beneath a crimson moon" }
+      ,{ ja: "巨大な満月の夜空", en: "gigantic full moon sky" }
+      ,{ ja: "赤い満月の夜空", en: "crimson full moon sky" }
+      ,{ ja: "血月のゴシック夜空", en: "blood-moon gothic night sky" }
+      ,{ ja: "巨大な月を背負う断崖の古城", en: "cliffside castle beneath a giant moon" }
+      ,{ ja: "吸血城の玉座間", en: "vampire castle throne hall" }
+      ,{ ja: "月光の謁見の間", en: "moonlit audience chamber" }
+      ,{ ja: "血月の玉座間", en: "blood-moon throne hall" }
+      ,{ ja: "月窓へ続く古城の踊り場", en: "castle moon-window landing" }
+      ,{ ja: "月下の吸血寝室", en: "moonlit vampire bedchamber" }
+      ,{ ja: "天蓋付きのゴシック寝室", en: "canopied gothic bedroom" }
+      ,{ ja: "棺のある吸血城私室", en: "coffin private chamber" }
+      ,{ ja: "月下の吸血私室", en: "moonlit vampire private room" }
+      ,{ ja: "吸血城の宴の間", en: "vampire banquet hall" }
+      ,{ ja: "月光ゴシック晩餐ホール", en: "moonlit gothic banquet hall" }
+      ,{ ja: "血月の晩餐ホール", en: "blood-moon supper hall" }
+      ,{ ja: "細い三日月が浮かぶゴシック夜空", en: "slender crescent gothic night sky" }
+      ,{ ja: "低く垂れた巨大月の夜空", en: "low-hanging giant moon sky" }
+      ,{ ja: "雲越しの赤月夜空", en: "cloud-veiled blood moon sky" }
+      ,{ ja: "月輪を帯びた満月夜", en: "haloed full moon night" }
+      ,{ ja: "月下の墓標列", en: "moonlit rows of gravestones" }
+      ,{ ja: "鉄柵に囲まれた古い墓地", en: "wrought-iron fenced graveyard" }
+      ,{ ja: "霧の流れる月下墓地", en: "mist-drifting moonlit cemetery" }
+      ,{ ja: "墓地礼拝堂の前庭", en: "graveyard chapel forecourt" }
+      ,{ ja: "月下の墓地参道", en: "moonlit cemetery approach" }
+      ,{ ja: "吸血城の城門前", en: "vampire castle gate front" }
+      ,{ ja: "断崖に架かる古城橋", en: "cliffside gothic castle bridge" }
+      ,{ ja: "月下の吸血城外壁", en: "moonlit vampire castle outer wall" }
+      ,{ ja: "尖塔群が並ぶ吸血城遠景", en: "vampire castle spire skyline" }
+      ,{ ja: "月影に沈む古城の中庭", en: "moon-shadowed castle courtyard" }
+      ,{ ja: "月光に染まる玉座間", en: "moon-washed throne chamber" }
+      ,{ ja: "赤絨毯の吸血謁見室", en: "crimson-carpet vampire audience hall" }
+      ,{ ja: "月窓のある長い古城回廊", en: "long moon-window castle corridor" }
+      ,{ ja: "尖窓ステンドグラスの回廊", en: "lancet stained-glass corridor" }
+      ,{ ja: "棺が安置された石室寝所", en: "coffin crypt bedchamber" }
+      ,{ ja: "天蓋と黒布の吸血寝室", en: "canopied dark-draped vampire bedroom" }
+      ,{ ja: "長卓が伸びる吸血晩餐室", en: "long-table vampire banquet chamber" }
+      ,{ ja: "燭台列のある宴のホール", en: "candelabra-lined feast hall" }
+],
+
+"特殊・異常 (Special/Abnormal)": [
+  { ja: "夢景", en: "dreamscape" },
+  { ja: "夢の回廊", en: "dream corridor" },
+  { ja: "浮遊する室内", en: "floating room" },
+  { ja: "白い虚空", en: "white void" },
+  { ja: "眠りの入口室", en: "dream-entry chamber" },
+  { ja: "無重力の庭", en: "gravityless sky courtyard" },
+  { ja: "記憶の街路", en: "repeating memory street" },
+  { ja: "星の眠り海", en: "starry sleep sea" },
+  { ja: "鏡の回廊", en: "mirror corridor" },
+  { ja: "上下反転の通路", en: "upside-down corridor" },
+  { ja: "歪んだ建築空間", en: "warped architecture" },
+  { ja: "終わらない部屋", en: "endless room" },
+  { ja: "反復回廊", en: "loop corridor" },
+  { ja: "迷路室群", en: "maze room cluster" },
+  { ja: "螺旋リングホール", en: "spiral ring hall" },
+  { ja: "ねじれ吹き抜け橋空間", en: "twisted bridge atrium" },
+  { ja: "崩壊した街区", en: "collapsed district" },
+  { ja: "停電した施設", en: "blackout facility" },
+  { ja: "灰に沈む広場", en: "ash-covered plaza" },
+  { ja: "破断した駅ホーム", en: "broken station platform" },
+  { ja: "崩落トンネル", en: "collapsed tunnel" },
+  { ja: "避難跡のホール", en: "evacuation aftermath hall" },
+  { ja: "観測される回廊", en: "watched corridor" },
+  { ja: "禁域の祭儀室", en: "forbidden ritual chamber" },
+  { ja: "概念的な空間", en: "conceptual space" },
+  { ja: "記録不能保管室", en: "unnamable archive room" },
+  { ja: "白い登録ホール", en: "white registry hall" },
+  { ja: "不在ラウンジ", en: "absence lounge" },
+  { ja: "応答しない部屋", en: "silent response chamber" },
+  { ja: "深層睡眠の夢殻", en: "abyssal sleep chamber" },
+  { ja: "夢底室", en: "dream-bottom sleep room" },
+  { ja: "夢底駅", en: "dream-bottom station" },
+  { ja: "深層待合室", en: "deep dream waiting hall" },
+  { ja: "赤い悪夢回廊", en: "red nightmare corridor" },
+  { ja: "圧迫寝室", en: "crushing nightmare bedroom" },
+  { ja: "悪夢病棟", en: "nightmare ward hall" },
+  { ja: "覚醒失敗室", en: "false-awakening room" },
+  { ja: "家庭内悪夢室", en: "nightmare home interior" },
+  { ja: "悪夢の家廊下", en: "nightmare home hallway" },
+  { ja: "悪夢教室", en: "nightmare classroom" },
+  { ja: "悪夢登校路", en: "nightmare school route" },
+  { ja: "測定不能核井", en: "unmeasurable core pit" },
+  { ja: "深層禁域ホール", en: "concept-threshold chamber" },
+  { ja: "無言の審査回廊", en: "silent judgment corridor" },
+  { ja: "応答断絶管理層", en: "response-cutoff control layer" }
+],
     "SF・研究施設 (Sci-Fi/Lab)": [
-      { ja: "水中/海中都市", en: "underwater city" },
-      { ja: "深海", en: "deep sea" },
-      { ja: "宇宙", en: "space" },
-      { ja: "惑星/月面", en: "planet surface" },
-      { ja: "サイバーパンク都市", en: "cyberpunk city" },
-      { ja: "スチームパンク都市", en: "steampunk city" },
-      { ja: "研究所/ラボ/実験室", en: "laboratory" },
-      { ja: "サーバールーム", en: "server room" },
-      { ja: "ポストアポカリプス", en: "post-apocalyptic" },
-      { ja: "機械都市の中枢", en: "mecha control room" }
-    ],
+      {
+            "ja": "水中/海中都市",
+            "en": "underwater city"
+      },
+      {
+            "ja": "深海",
+            "en": "deep sea"
+      },
+      {
+            "ja": "宇宙",
+            "en": "space"
+      },
+      {
+            "ja": "惑星/月面",
+            "en": "planet surface"
+      },
+      {
+            "ja": "サイバーパンク都市",
+            "en": "cyberpunk city"
+      },
+      {
+            "ja": "スチームパンク都市",
+            "en": "steampunk city"
+      },
+      {
+            "ja": "研究所/ラボ/実験室",
+            "en": "laboratory"
+      },
+      {
+            "ja": "サーバールーム",
+            "en": "server room"
+      },
+      {
+            "ja": "ポストアポカリプス",
+            "en": "post-apocalyptic"
+      },
+      {
+            "ja": "機械都市の中枢",
+            "en": "mecha control room"
+      },
+      {
+            "ja": "近未来高層街区",
+            "en": "near-future high-rise district"
+      },
+      {
+            "ja": "雨のネオン大通り",
+            "en": "rainy neon boulevard"
+      },
+      {
+            "ja": "ホログラム広告街路",
+            "en": "hologram-ad avenue"
+      },
+      {
+            "ja": "ネオン立体交差街",
+            "en": "neon multilevel crossroads"
+      },
+      {
+            "ja": "未来歓楽コア街区",
+            "en": "future entertainment core"
+      },
+      {
+            "ja": "未来裏路地",
+            "en": "future back alley"
+      },
+      {
+            "ja": "闇マーケット街角",
+            "en": "future black market corner"
+      },
+      {
+            "ja": "封鎖裏区画",
+            "en": "future quarantine backblock"
+      },
+      {
+            "ja": "企業タワーロビー",
+            "en": "future corporate lobby"
+      },
+      {
+            "ja": "上層歩廊デッキ",
+            "en": "upper deck skywalk zone"
+      },
+      {
+            "ja": "行政広場・未来官庁前",
+            "en": "future civic plaza"
+      },
+      {
+            "ja": "未来駅コンコース",
+            "en": "future transit concourse"
+      },
+      {
+            "ja": "人工居住コロニー",
+            "en": "artificial habitat colony"
+      },
+      {
+            "ja": "宇宙船ブリッジ",
+            "en": "starship bridge"
+      },
+      {
+            "ja": "宇宙船格納庫",
+            "en": "starship hangar bay"
+      },
+      {
+            "ja": "宇宙船居住デッキ",
+            "en": "starship habitation deck"
+      },
+      {
+            "ja": "旅客船ラウンジ",
+            "en": "passenger starliner lounge"
+      },
+      {
+            "ja": "民生船アトリウム",
+            "en": "civilian starliner atrium"
+      },
+      {
+            "ja": "軍用艦通路",
+            "en": "military frigate corridor"
+      },
+      {
+            "ja": "艦内武装待機室",
+            "en": "shipboard armory deck"
+      },
+      {
+            "ja": "救難船トリアージ区",
+            "en": "rescue ship triage bay"
+      },
+      {
+            "ja": "医療回復区画",
+            "en": "medical recovery ward"
+      },
+      {
+            "ja": "貨物船ホールド",
+            "en": "freighter cargo hold"
+      },
+      {
+            "ja": "貨物仕分けレーン",
+            "en": "freight sorting lane"
+      },
+      {
+            "ja": "VIP展望サロン",
+            "en": "VIP observation salon"
+      },
+      {
+            "ja": "外交応接デッキ",
+            "en": "diplomatic reception deck"
+      },
+      {
+            "ja": "宇宙艦隊戦宙域",
+            "en": "fleet-battle void"
+      },
+      {
+            "ja": "艦隊対峙宙域",
+            "en": "standoff fleet engagement zone"
+      },
+      {
+            "ja": "主砲斉射戦場",
+            "en": "broadside artillery battle zone"
+      },
+      {
+            "ja": "母艦発艦宙域",
+            "en": "carrier launch combat zone"
+      },
+      {
+            "ja": "残骸漂流戦場",
+            "en": "wreck-drift battle field"
+      },
+      {
+            "ja": "要塞防衛宙域",
+            "en": "fortress defense space"
+      },
+      {
+            "ja": "ワープ直後接敵空間",
+            "en": "post-warp contact zone"
+      },
+      {
+            "ja": "巨大惑星の空",
+            "en": "giant-planet sky"
+      },
+      {
+            "ja": "軌道上の惑星曲面",
+            "en": "orbital planet curvature"
+      },
+      {
+            "ja": "リング惑星の空",
+            "en": "ringed-planet sky"
+      },
+      {
+            "ja": "衛星群の宙景",
+            "en": "satellite-cluster orbital view"
+      },
+      {
+            "ja": "ガス惑星の嵐縁",
+            "en": "gas-giant storm rim"
+      },
+      {
+            "ja": "氷惑星の極光空",
+            "en": "aurora ice-planet sky"
+      },
+      {
+            "ja": "火山惑星の赤い空",
+            "en": "volcanic-planet red sky"
+      },
+      {
+            "ja": "砂塵惑星の黄昏空",
+            "en": "dust-planet dusk sky"
+      },
+      {
+            "ja": "破砕惑星の残骸天球",
+            "en": "shattered-planet debris sky"
+      },
+      {
+            "ja": "月面基地ハブ",
+            "en": "lunar base hub"
+      },
+      {
+            "ja": "月面基地エアロック",
+            "en": "lunar base airlock"
+      },
+      {
+            "ja": "月面採掘場",
+            "en": "lunar mining site"
+      },
+      {
+            "ja": "採掘惑星掘削現場",
+            "en": "mining-planet excavation field"
+      },
+      {
+            "ja": "鉱石搬送ヤード",
+            "en": "ore transport yard"
+      },
+      {
+            "ja": "採掘管制室",
+            "en": "mining control room"
+      },
+      {
+            "ja": "外縁通信塔",
+            "en": "frontier communication tower"
+      },
+      {
+            "ja": "氷鉱惑星の採掘地",
+            "en": "ice-mining planet extraction site"
+      },
+      {
+            "ja": "火山鉱脈惑星の採掘場",
+            "en": "volcanic ore-planet mining field"
+      },
+      {
+            "ja": "月面基地通路",
+            "en": "lunar base corridor"
+      },
+      {
+            "ja": "軌道施設の回廊",
+            "en": "orbital facility corridor"
+      },
+      {
+            "ja": "無菌実験室",
+            "en": "sterile laboratory"
+      },
+      {
+            "ja": "バイオ研究棟",
+            "en": "biotech research wing"
+      },
+      {
+            "ja": "AI監視中枢",
+            "en": "AI oversight core"
+      },
+      {
+            "ja": "量子サーバー室",
+            "en": "quantum server chamber"
+      },
+      {
+            "ja": "垂直農場",
+            "en": "vertical farm"
+      },
+      {
+            "ja": "未来住宅ユニット",
+            "en": "future residential unit"
+      },
+      {
+            "ja": "自動搬送物流ヤード",
+            "en": "automated logistics yard"
+      },
+      {
+            "ja": "ドローン物流拠点",
+            "en": "drone logistics hub"
+      },
+      {
+            "ja": "研究都市の外観",
+            "en": "research city exterior"
+      },
+      {
+            "ja": "未来商業アトリウム",
+            "en": "future commercial atrium"
+      },
+      {
+            "ja": "未来都市俯瞰夜景",
+            "en": "future city overlook"
+      },
+      {
+            "ja": "雨霧の都市展望",
+            "en": "rain-haze city overlook"
+      },
+      {
+            "ja": "深宇宙観測ラボ",
+            "en": "deep-space observation lab"
+      },
+      {
+            "ja": "テレメトリ観測室",
+            "en": "telemetry observatory room"
+      },
+      {
+            "ja": "標本スキャン室",
+            "en": "specimen scan room"
+      },
+      {
+            "ja": "生体培養ホール",
+            "en": "bioculture tank hall"
+      },
+      {
+            "ja": "遺伝子編集室",
+            "en": "genetic editing suite"
+      },
+      {
+            "ja": "孵化管理区",
+            "en": "specimen incubation bay"
+      },
+      {
+            "ja": "AI意思決定中枢",
+            "en": "AI decision core"
+      },
+      {
+            "ja": "量子演算ホール",
+            "en": "quantum compute hall"
+      },
+      {
+            "ja": "全周監視リング",
+            "en": "panopticon monitoring ring"
+      },
+      {
+            "ja": "収容セル回廊",
+            "en": "containment cell corridor"
+      },
+      {
+            "ja": "除染隔離エアロック",
+            "en": "decon quarantine airlock"
+      },
+      {
+            "ja": "拘束検証ホールド",
+            "en": "restraint verification bay"
+      },
+      {
+            "ja": "事故後ラボ",
+            "en": "breach aftermath lab"
+      },
+      {
+            "ja": "封鎖火災通路",
+            "en": "firebreak corridor"
+      },
+      {
+            "ja": "放棄試験区",
+            "en": "abandoned test ruin"
+      },
+      {
+            "ja": "スマート住区回廊",
+            "en": "smart habitation corridor"
+      },
+      {
+            "ja": "家族住居アトリウム",
+            "en": "family habitation atrium"
+      },
+      {
+            "ja": "睡眠ポッド区画",
+            "en": "sleeping pod cluster"
+      },
+      {
+            "ja": "複合商業アトリウム",
+            "en": "mixed-use retail deck"
+      },
+      {
+            "ja": "自動販売ハブ",
+            "en": "automated convenience hub"
+      },
+      {
+            "ja": "セルフサービス市場通路",
+            "en": "self-service market aisle"
+      },
+      {
+            "ja": "未来フードコート",
+            "en": "future food court"
+      },
+      {
+            "ja": "生活サービスプロムナード",
+            "en": "lifestyle service promenade"
+      },
+      {
+            "ja": "学習コモンズホール",
+            "en": "learning commons hall"
+      },
+      {
+            "ja": "保育コミュニティモジュール",
+            "en": "community daycare module"
+      },
+      {
+            "ja": "ウェルネスガーデンデッキ",
+            "en": "wellness garden deck"
+      },
+      {
+            "ja": "磁気浮上乗換ホール",
+            "en": "maglev interchange hall"
+      },
+      {
+            "ja": "通勤連絡ギャラリー",
+            "en": "commuter transfer gallery"
+      },
+      {
+            "ja": "資源循環回廊",
+            "en": "waste recycling corridor"
+      },
+      {
+            "ja": "水再生ステーション",
+            "en": "water reclamation station"
+      },
+      {
+            "ja": "エネルギー保守中枢",
+            "en": "energy service subcore"
+      },
+      {
+            "ja": "市民修繕ベイ",
+            "en": "civic repair bay"
+      },
+      {
+            "ja": "配送ドローン交換ノード",
+            "en": "delivery drone exchange node"
+      }
+],
     "時間帯・天候 (Time & Weather)": [
       { ja: "昼 (Day)", en: "day" },
       { ja: "朝 (Morning)", en: "morning" },
@@ -1167,15 +1871,19 @@ const BG_EFFECTS = {
     const linked = [];
     ["base", "customize", "settings"].forEach(sectionKey => {
       (item.links && item.links[sectionKey] || []).forEach(tag => {
-        const cb = tagMap[tag];
+        const tagEntry = tagMap[tag];
+        const cb = tagEntry && tagEntry.cb ? tagEntry.cb : tagEntry;
         if (!cb) return;
         cb.checked = true;
         cb.dataset.autoFromComplete = completeItemId;
         linked.push(cb);
+        if (tagEntry && tagEntry.group) tagEntry.group.open = true;
+        if (tagEntry && tagEntry.shelf) tagEntry.shelf.open = true;
       });
       const shelf = root.querySelector(`details[data-collection-shelf="${sectionKey}"]`);
       if (shelf) shelf.open = true;
     });
+    root.open = true;
 
     state.linked = linked;
     state.activeCompleteId = completeItemId;
@@ -1196,10 +1904,14 @@ const BG_EFFECTS = {
     return out;
   }
 
-  function createCollectionOptionNode(root, collection, shelfKey, item) {
+  function createCollectionOptionNode(root, collection, shelfKey, item, uiRefs = {}) {
     const { label, cb } = createCollectionCheckbox(item, shelfKey, collection.id, { isComplete: shelfKey === "complete" });
     if (shelfKey !== "complete" && item.en) {
-      root.__tagMap[item.en] = cb;
+      root.__tagMap[item.en] = {
+        cb,
+        shelf: uiRefs.shelfDetails || null,
+        group: uiRefs.groupDetails || null
+      };
     }
 
     cb.addEventListener("change", () => {
@@ -1318,7 +2030,10 @@ const BG_EFFECTS = {
           groupBody.style.marginTop = "6px";
 
           (group.items || []).forEach(item => {
-            groupBody.appendChild(createCollectionOptionNode(root, collection, shelf.key, item));
+            groupBody.appendChild(createCollectionOptionNode(root, collection, shelf.key, item, {
+              shelfDetails,
+              groupDetails
+            }));
           });
 
           groupDetails.appendChild(groupBody);
@@ -1330,7 +2045,9 @@ const BG_EFFECTS = {
         shelfBody.style.gap = "4px";
 
         shelf.items.forEach(item => {
-          shelfBody.appendChild(createCollectionOptionNode(root, collection, shelf.key, item));
+          shelfBody.appendChild(createCollectionOptionNode(root, collection, shelf.key, item, {
+            shelfDetails
+          }));
         });
       }
 
@@ -1348,13 +2065,7 @@ const BG_EFFECTS = {
     wrapper.className = "bg-special-collections-zone";
     wrapper.style.marginBottom = "12px";
 
-    const heading = document.createElement("div");
-    heading.textContent = "🧩 背景特化コレクション";
-    heading.style.fontSize = "0.92em";
-    heading.style.fontWeight = "bold";
-    heading.style.color = "#374151";
-    heading.style.margin = "4px 0 8px";
-    wrapper.appendChild(heading);
+    wrapper.appendChild(createSkyOverlayZone());
 
     const bucketDefs = [
       {
@@ -1386,19 +2097,19 @@ const BG_EFFECTS = {
       {
         id: "sf",
         title: "🛸 SF・未来",
-        subtitle: "近未来都市、宇宙船、研究施設、未来生活圏へ進む予定の棚",
+        subtitle: "近未来都市、宇宙船、艦隊戦、惑星景観、月面基地、採掘惑星、研究施設、未来生活圏を、機能と空気で割って深掘りする棚",
         placeholder: true
       },
       {
         id: "fantasy",
         title: "🏰 ファンタジー・異世界",
-        subtitle: "城、神殿、異世界都市、魔法空間などへ進む予定の棚",
+        subtitle: "城、神殿、魔法学院、異世界市場、遺跡、月夜の古城や吸血城まで、幻想世界の舞台をまとめた棚",
         placeholder: true
       },
       {
         id: "special",
         title: "🧪 特殊・異常",
-        subtitle: "夢景、崩壊、異常空間、特殊演出背景へ進む予定の棚",
+        subtitle: "夢景、歪み、崩壊、観測不能、概念異常まで、現実から外れた背景をまとめる棚",
         placeholder: true
       }
     ];
@@ -1424,9 +2135,34 @@ const BG_EFFECTS = {
       sea_coast_harbor_collection: "nature",
       desert_wasteland_canyon_collection: "nature",
       sky_cloud_atmosphere_collection: "sky",
+      twilight_dawn_sunset_collection: "sky",
+      cloud_layers_upperair_collection: "sky",
       star_celestial_cosmos_collection: "sky",
       horizon_cloudsea_overlook_collection: "sky",
-      airborne_flight_view_collection: "sky"
+      airborne_flight_view_collection: "sky",
+      sunlight_optical_sky_collection: "sky",
+      weather_transition_sky_collection: "sky",
+      lightning_storm_luminous_sky_collection: "sky",
+      moon_noctilucent_polar_sky_collection: "sky",
+      future_city_highrise_collection: "sf",
+      starship_hangar_bridge_collection: "sf",
+      fleet_battle_space_collection: "sf",
+      planet_orbit_scenery_collection: "sf",
+      moonbase_mining_planet_collection: "sf",
+      research_lab_control_collection: "sf",
+      future_living_infrastructure_collection: "sf",
+      fantasy_castle_royal_collection: "fantasy",
+      fantasy_temple_ruins_collection: "fantasy",
+      magic_academy_library_collection: "fantasy",
+      fantasy_forest_fae_spirit_collection: "fantasy",
+      fantasy_dungeon_seal_collection: "fantasy",
+      fantasy_demonlord_evil_otherworld_collection: "fantasy",
+      fantasy_moon_vampire_castle_collection: "fantasy",
+      otherworld_city_market_collection: "fantasy",
+      dream_unreal_sleep_collection: "special",
+      distortion_inversion_structure_collection: "special",
+      collapse_terminal_space_collection: "special",
+      forbidden_concept_observation_collection: "special"
     };
 
     const bucketMap = {};
@@ -14429,14 +15165,14 @@ const BG_EFFECTS = {
   {
     "id": "store_indoor_collection",
     "title": "🏪 店舗・屋内空間特化コレクション",
-    "subtitle": "コンビニ・小型店舗、服屋・アパレルショップなど、飲食以外の都市店舗内観を陳列、照明、売り場導線、生活感で多層に噛ませる、小売・ショップ系の特化コレクション",
+    "subtitle": "コンビニ・ドラッグストア、スーパー・量販売り場、アパレル、書店・雑貨、家電・ホビー、モール・百貨店の共用空間まで、飲食以外の商業空間を陳列、照明、ガラス、導線、買い物の密度で多層に噛ませる、小売・ショップ系の特化コレクション",
     "complete": [
       {
-        "group": "🏪 コンビニ・小型店舗",
+        "group": "🏪 コンビニ・ドラッグストア",
         "items": [
           {
             "id": "store_convenience_midnight",
-            "ja": "深夜のコンビニ店内",
+            "ja": "蛍光灯が白く残る深夜のコンビニ",
             "links": {
               "base": [
                 "convenience store interior"
@@ -14473,59 +15209,40 @@ const BG_EFFECTS = {
             }
           },
           {
-            "id": "store_convenience_bright_morning",
-            "ja": "朝の明るいコンビニ",
+            "id": "store_drugstore_after_work",
+            "ja": "仕事帰りのドラッグストア通路",
             "links": {
               "base": [
-                "convenience store interior"
-              ],
-              "customize": [
-                "morning store brightness",
-                "cool fluorescent lighting",
-                "fresh opening atmosphere"
-              ],
-              "settings": [
-                "refrigerated case glow",
-                "product shelf rows",
-                "window posters"
-              ]
-            }
-          },
-          {
-            "id": "store_convenience_evening_register",
-            "ja": "夕方の混んだレジ前",
-            "links": {
-              "base": [
-                "checkout counter area"
+                "drugstore aisle"
               ],
               "customize": [
                 "after-work customer flow",
-                "crowded counter zone",
+                "bright retail white lighting",
                 "busy store atmosphere"
               ],
               "settings": [
-                "POS register counter",
-                "queue guide posts",
-                "countertop small goods"
+                "cosmetic shelf rows",
+                "basket stack stand",
+                "price tag strips"
               ]
             }
           },
           {
-            "id": "store_convenience_silent_fluorescent",
-            "ja": "蛍光灯の静かな深夜コンビニ",
+            "id": "store_drugstore_night_entry",
+            "ja": "夜のドラッグストア入口",
             "links": {
               "base": [
-                "magazine shelf aisle"
+                "drugstore entrance area"
               ],
               "customize": [
-                "late-night store mood",
-                "cool fluorescent lighting",
-                "silent aisle atmosphere"
+                "night storefront glow",
+                "roadside retail stillness",
+                "evening shopping lull"
               ],
               "settings": [
-                "magazine rack",
-                "product shelf rows",
-                "security mirror"
+                "automatic sliding door",
+                "window posters",
+                "rain-wet floor reflection"
               ]
             }
           },
@@ -14547,106 +15264,111 @@ const BG_EFFECTS = {
                 "restocking cart"
               ]
             }
-          },
+          }
+        ]
+      },
+      {
+        "group": "🛒 スーパー・大型売り場",
+        "items": [
           {
-            "id": "store_convenience_lunch_rush",
-            "ja": "昼のコンビニラッシュ",
+            "id": "store_supermarket_evening_checkout",
+            "ja": "夕方のスーパー会計列",
             "links": {
               "base": [
-                "checkout counter area"
+                "supermarket checkout area"
               ],
               "customize": [
-                "lunchtime store rush",
-                "busy store atmosphere",
-                "daytime customer turnover"
+                "after-work customer flow",
+                "checkout queue pressure",
+                "busy store atmosphere"
               ],
               "settings": [
-                "queue guide posts",
-                "countertop small goods",
-                "hot snack warmer case"
+                "cash register lane signs",
+                "shopping basket stacks",
+                "queue guide rails"
               ]
             }
           },
           {
-            "id": "store_convenience_hot_snack_night",
-            "ja": "夜のホットスナック前",
+            "id": "store_supermarket_produce_morning",
+            "ja": "朝の青果売り場のスーパー",
             "links": {
               "base": [
-                "hot snack corner"
+                "supermarket produce section"
+              ],
+              "customize": [
+                "morning store freshness",
+                "bright retail white lighting",
+                "fresh opening atmosphere"
+              ],
+              "settings": [
+                "produce crate display",
+                "price tag strips",
+                "mist-cooled vegetable shelf"
+              ]
+            }
+          },
+          {
+            "id": "store_supermarket_night_entrance",
+            "ja": "夜の大型スーパー入口",
+            "links": {
+              "base": [
+                "supermarket entrance hall"
               ],
               "customize": [
                 "night storefront glow",
-                "warm snack-case glow",
-                "after-work customer flow"
+                "evening shopping lull",
+                "roadside retail stillness"
               ],
               "settings": [
-                "hot snack warmer case",
-                "counter coffee machine",
-                "condiment sachet stand"
+                "cart bay",
+                "automatic sliding door",
+                "shopping basket stacks"
               ]
             }
           },
           {
-            "id": "store_convenience_rain_shelter",
-            "ja": "雨宿り客のいる深夜コンビニ",
+            "id": "store_supermarket_frozen_aisle",
+            "ja": "冷凍ケースが続くスーパー通路",
             "links": {
               "base": [
-                "store entrance area"
+                "frozen aisle supermarket"
               ],
               "customize": [
-                "rain-shelter customer flow",
-                "late-night store mood",
+                "cold case hum",
+                "bright retail white lighting",
+                "calm retail air"
+              ],
+              "settings": [
+                "freezer door reflections",
+                "price tag strips",
+                "aisle category signs"
+              ]
+            }
+          },
+          {
+            "id": "store_supermarket_rain_parking_entry",
+            "ja": "雨上がりのスーパー出入口",
+            "links": {
+              "base": [
+                "supermarket entrance area"
+              ],
+              "customize": [
+                "after-rain store humidity",
+                "shopping cart wheel echoes",
                 "wet entrance air"
               ],
               "settings": [
-                "umbrella stand",
+                "cart bay",
                 "rain-wet floor reflection",
-                "half-open umbrella bin"
-              ]
-            }
-          },
-          {
-            "id": "store_convenience_copy_corner",
-            "ja": "コピー機脇の静かな深夜コンビニ",
-            "links": {
-              "base": [
-                "copy machine corner"
-              ],
-              "customize": [
-                "late-night machine hum",
-                "silent aisle atmosphere",
-                "quiet convenience store air"
-              ],
-              "settings": [
-                "copy machine terminal",
-                "prepaid card rack",
-                "security mirror"
-              ]
-            }
-          },
-          {
-            "id": "store_convenience_winter_entry",
-            "ja": "冬の温かいコンビニ入口",
-            "links": {
-              "base": [
-                "store entrance area"
-              ],
-              "customize": [
-                "winter entry warmth",
-                "night storefront glow",
-                "evening shopping lull"
-              ],
-              "settings": [
-                "automatic sliding door",
-                "heated drink shelf",
-                "floor heater mat"
+                "automatic sliding door"
               ]
             }
           }
         ]
       },
       {
-        "group": "👗 服屋・アパレルショップ",
+        "group": "👗 アパレル・ブランドショップ",
         "items": [
           {
             "id": "store_apparel_bright",
@@ -14675,171 +15397,314 @@ const BG_EFFECTS = {
                 "shop window display area"
               ],
               "customize": [
-                "night storefront glow",
-                "quiet after-hours street feel",
-                "window display stillness"
+                "rainy evening boutique glow",
+                "window display stillness",
+                "quiet after-hours street feel"
               ],
               "settings": [
                 "window spotlights",
-                "mannequin display",
-                "glass reflections"
-              ]
-            }
-          },
-          {
-            "id": "store_apparel_closing",
-            "ja": "閉店前のアパレル店",
-            "links": {
-              "base": [
-                "apparel shop interior"
-              ],
-              "customize": [
-                "closing-time quiet",
-                "orderly retail display mood",
-                "evening shopping lull"
-              ],
-              "settings": [
-                "hanger racks",
-                "sale POP signs",
-                "half-lowered shutter feel"
+                "glass reflections",
+                "mannequin display"
               ]
             }
           },
           {
             "id": "store_apparel_fitting",
-            "ja": "試着室まわりの店内",
+            "ja": "試着室まわりが静かなアパレル店",
             "links": {
               "base": [
-                "fitting room frontage"
+                "fitting room corridor"
               ],
               "customize": [
                 "fitting room hush",
                 "bright boutique lighting",
-                "calm retail air"
+                "fitting queue mood"
               ],
               "settings": [
-                "full-length mirrors",
                 "fitting room curtains",
-                "bench near fitting room"
+                "bench near fitting room",
+                "full-length mirrors"
               ]
             }
           },
           {
-            "id": "store_apparel_sale",
-            "ja": "セール中の服屋",
+            "id": "store_luxury_boutique_evening",
+            "ja": "ガラスが冷たく光る高級ブティック",
             "links": {
               "base": [
-                "apparel shop interior"
+                "luxury boutique interior"
               ],
               "customize": [
-                "sale-event bustle",
-                "weekend shopping crowd",
-                "bright boutique lighting"
+                "luxury retail hush",
+                "crisp spotlight reflections",
+                "high-end display calm"
               ],
               "settings": [
-                "sale POP signs",
-                "hanger racks",
-                "cash wrap counter"
+                "glass display cases",
+                "window spotlights",
+                "stacked shopping bags"
               ]
             }
           },
           {
-            "id": "store_apparel_late_sale",
-            "ja": "セール終盤の荒れた服屋",
+            "id": "store_apparel_sale_end",
+            "ja": "セール終盤で少し荒れた服売り場",
             "links": {
               "base": [
-                "apparel shop interior",
-                "sale display table zone"
+                "sale apparel floor"
               ],
               "customize": [
                 "late-sale disarray",
                 "weekend shopping crowd",
-                "bright boutique lighting"
+                "busy store atmosphere"
               ],
               "settings": [
                 "sale POP signs",
-                "central display table",
-                "hanging price tags"
+                "hanger racks",
+                "central display table"
               ]
             }
-          },
+          }
+        ]
+      },
+      {
+        "group": "📚 本屋・雑貨・文具店",
+        "items": [
           {
-            "id": "store_apparel_mirror_fitting",
-            "ja": "鏡灯りが並ぶ試着室前",
+            "id": "store_bookstore_evening_rows",
+            "ja": "夕方の本棚列が静かな書店",
             "links": {
               "base": [
-                "fitting room frontage",
-                "mirror-side display area"
+                "bookstore interior"
               ],
               "customize": [
-                "fitting queue mood",
-                "bright boutique lighting",
-                "calm retail air"
+                "bookstore hush",
+                "paper-dust stillness",
+                "evening shopping lull"
               ],
               "settings": [
-                "full-length mirrors",
-                "mirror-side stool",
-                "fitting room curtains"
+                "tall book stacks",
+                "category shelf signs",
+                "flat display table"
               ]
             }
           },
           {
-            "id": "store_apparel_rainy_evening",
-            "ja": "雨夜のブティック店内",
+            "id": "store_stationery_clean_white",
+            "ja": "白く整った文具店の売り場",
             "links": {
               "base": [
-                "apparel shop interior",
-                "window-side aisle"
+                "stationery store interior"
               ],
               "customize": [
-                "rainy evening boutique glow",
-                "night storefront glow",
+                "clean retail arrangement",
+                "bright retail white lighting",
                 "orderly retail display mood"
               ],
               "settings": [
-                "window spotlights",
-                "glass reflections",
-                "accessory display fixtures"
+                "pen display racks",
+                "notebook wall shelf",
+                "price tag strips"
               ]
             }
           },
           {
-            "id": "store_apparel_preopening",
-            "ja": "開店前の静かなアパレル店",
+            "id": "store_variety_goods_colorful",
+            "ja": "色が多い雑貨店の通路",
             "links": {
               "base": [
-                "apparel shop interior",
-                "stockroom doorway"
+                "variety goods store aisle"
               ],
               "customize": [
-                "pre-opening prep hush",
-                "calm retail air",
-                "bright boutique lighting"
+                "crowded small-goods density",
+                "bright retail white lighting",
+                "busy store atmosphere"
               ],
               "settings": [
-                "stockroom door",
-                "stacked shopping bags",
-                "hanger racks"
+                "hanging small-item racks",
+                "basket stack stand",
+                "countertop small goods"
               ]
             }
           },
           {
-            "id": "store_apparel_window_reset",
-            "ja": "閉店後のウィンドウ替え中の服屋",
+            "id": "store_flower_shop_rain_glass",
+            "ja": "雨粒の残る花屋のガラス前",
             "links": {
               "base": [
-                "shop window display area",
-                "stockroom doorway"
+                "flower shop entrance"
               ],
               "customize": [
-                "after-hours display reset mood",
-                "quiet after-hours street feel",
+                "rainy storefront humidity",
+                "cool floral freshness",
                 "window display stillness"
               ],
               "settings": [
-                "window spotlights",
-                "stockroom door",
-                "stacked shopping bags"
+                "bucket flower rows",
+                "glass door reflections",
+                "chalkboard sign stand"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "💻 家電・ホビーショップ",
+        "items": [
+          {
+            "id": "store_electronics_bright_floor",
+            "ja": "照明が強い家電量販フロア",
+            "links": {
+              "base": [
+                "electronics superstore interior"
+              ],
+              "customize": [
+                "bright retail white lighting",
+                "announcement-filled store air",
+                "busy store atmosphere"
+              ],
+              "settings": [
+                "demo device counters",
+                "hanging price tags",
+                "aisle category signs"
+              ]
+            }
+          },
+          {
+            "id": "store_phone_section_evening",
+            "ja": "夕方のスマホ売り場",
+            "links": {
+              "base": [
+                "smartphone display section"
+              ],
+              "customize": [
+                "after-work customer flow",
+                "bright retail white lighting",
+                "counter consultation mood"
+              ],
+              "settings": [
+                "demo phone stands",
+                "counter stools",
+                "carrier signboards"
+              ]
+            }
+          },
+          {
+            "id": "store_hobby_shop_box_wall",
+            "ja": "箱が積まれたホビーショップ",
+            "links": {
+              "base": [
+                "hobby shop interior"
+              ],
+              "customize": [
+                "collector-store density",
+                "packed shelf atmosphere",
+                "quiet after-hours street feel"
+              ],
+              "settings": [
+                "stacked model boxes",
+                "glass display cases",
+                "poster wall"
+              ]
+            }
+          },
+          {
+            "id": "store_electronics_night_entrance",
+            "ja": "ネオン看板が見える量販店入口",
+            "links": {
+              "base": [
+                "electronics store entrance"
+              ],
+              "customize": [
+                "night storefront glow",
+                "roadside retail stillness",
+                "glass-door reflection shimmer"
+              ],
+              "settings": [
+                "automatic sliding door",
+                "large hanging sign",
+                "poster lightboxes"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🏬 モール・百貨店共用空間",
+        "items": [
+          {
+            "id": "store_mall_atrium_daylight",
+            "ja": "昼光が落ちるモール吹き抜け",
+            "links": {
+              "base": [
+                "shopping mall atrium"
+              ],
+              "customize": [
+                "open commercial spaciousness",
+                "weekend shopping crowd",
+                "bright atrium daylight"
+              ],
+              "settings": [
+                "glass railings",
+                "escalator crossing",
+                "hanging mall banners"
+              ]
+            }
+          },
+          {
+            "id": "store_mall_corridor_evening",
+            "ja": "夕方のモール通路",
+            "links": {
+              "base": [
+                "mall corridor"
+              ],
+              "customize": [
+                "evening shopping lull",
+                "air-conditioned corridor hush",
+                "soft commercial reflections"
+              ],
+              "settings": [
+                "storefront glass lines",
+                "bench island",
+                "directional sign pylons"
+              ]
+            }
+          },
+          {
+            "id": "store_department_store_opening",
+            "ja": "開店直後の百貨店フロア",
+            "links": {
+              "base": [
+                "department store floor"
+              ],
+              "customize": [
+                "fresh opening atmosphere",
+                "orderly retail display mood",
+                "floor-wide ambient music"
+              ],
+              "settings": [
+                "cosmetic counter islands",
+                "polished floor reflections",
+                "elevator hall signage"
+              ]
+            }
+          },
+          {
+            "id": "store_department_store_entrance_rain",
+            "ja": "雨の日の百貨店エントランス",
+            "links": {
+              "base": [
+                "department store entrance hall"
+              ],
+              "customize": [
+                "rainy-day customer flow",
+                "wet entrance air",
+                "high-ceiling commercial hush"
+              ],
+              "settings": [
+                "revolving door",
+                "umbrella bag stand",
+                "polished floor reflections"
               ]
             }
           }
@@ -14848,68 +15713,140 @@ const BG_EFFECTS = {
     ],
     "base": [
       {
-        "group": "🏪 コンビニ・小型店舗",
+        "group": "🏪 コンビニ・ドラッグストア",
         "items": [
           {
             "ja": "コンビニ店内",
             "en": "convenience store interior"
           },
           {
-            "ja": "レジ前",
-            "en": "checkout counter area"
-          },
-          {
-            "ja": "入口まわり",
+            "ja": "店の入口まわり",
             "en": "store entrance area"
           },
           {
-            "ja": "雑誌棚通路",
-            "en": "magazine shelf aisle"
+            "ja": "ドラッグストア通路",
+            "en": "drugstore aisle"
           },
           {
-            "ja": "ホットスナック前",
-            "en": "hot snack corner"
+            "ja": "ドラッグストア入口",
+            "en": "drugstore entrance area"
           },
           {
-            "ja": "ドリンクケース通路",
+            "ja": "飲料ケース通路",
             "en": "drink case aisle"
-          },
-          {
-            "ja": "コピー機コーナー",
-            "en": "copy machine corner"
           }
         ]
       },
       {
-        "group": "👗 服屋・アパレルショップ",
+        "group": "🛒 スーパー・大型売り場",
         "items": [
           {
-            "ja": "アパレル店内",
-            "en": "apparel shop interior"
+            "ja": "スーパー会計前",
+            "en": "supermarket checkout area"
           },
           {
-            "ja": "試着室前",
-            "en": "fitting room frontage"
+            "ja": "スーパー青果売り場",
+            "en": "supermarket produce section"
+          },
+          {
+            "ja": "スーパー入口ホール",
+            "en": "supermarket entrance hall"
+          },
+          {
+            "ja": "冷凍ケース通路",
+            "en": "frozen aisle supermarket"
+          },
+          {
+            "ja": "スーパー出入口",
+            "en": "supermarket entrance area"
+          }
+        ]
+      },
+      {
+        "group": "👗 アパレル・ブランドショップ",
+        "items": [
+          {
+            "ja": "服屋の店内",
+            "en": "apparel shop interior"
           },
           {
             "ja": "ショーウィンドウ前",
             "en": "shop window display area"
           },
           {
-            "ja": "セール平台まわり",
-            "en": "sale display table zone"
+            "ja": "試着室通路",
+            "en": "fitting room corridor"
           },
           {
-            "ja": "ショーウィンドウ脇通路",
-            "en": "window-side aisle"
+            "ja": "高級ブティック店内",
+            "en": "luxury boutique interior"
           },
           {
-            "ja": "ストックルーム前",
-            "en": "stockroom doorway"
+            "ja": "セール服売り場",
+            "en": "sale apparel floor"
+          }
+        ]
+      },
+      {
+        "group": "📚 本屋・雑貨・文具店",
+        "items": [
+          {
+            "ja": "書店の店内",
+            "en": "bookstore interior"
           },
           {
-            "ja": "ミラー前の売り場",
-            "en": "mirror-side display area"
+            "ja": "文具店の店内",
+            "en": "stationery store interior"
+          },
+          {
+            "ja": "雑貨店通路",
+            "en": "variety goods store aisle"
+          },
+          {
+            "ja": "花屋の入口",
+            "en": "flower shop entrance"
+          }
+        ]
+      },
+      {
+        "group": "💻 家電・ホビーショップ",
+        "items": [
+          {
+            "ja": "家電量販店の店内",
+            "en": "electronics superstore interior"
+          },
+          {
+            "ja": "スマホ売り場",
+            "en": "smartphone display section"
+          },
+          {
+            "ja": "ホビーショップ店内",
+            "en": "hobby shop interior"
+          },
+          {
+            "ja": "家電店入口",
+            "en": "electronics store entrance"
+          }
+        ]
+      },
+      {
+        "group": "🏬 モール・百貨店共用空間",
+        "items": [
+          {
+            "ja": "モール吹き抜け",
+            "en": "shopping mall atrium"
+          },
+          {
+            "ja": "モール通路",
+            "en": "mall corridor"
+          },
+          {
+            "ja": "百貨店フロア",
+            "en": "department store floor"
+          },
+          {
+            "ja": "百貨店エントランスホール",
+            "en": "department store entrance hall"
           }
         ]
       }
@@ -14923,274 +15860,304 @@ const BG_EFFECTS = {
             "en": "late-night store mood"
           },
           {
-            "ja": "朝の明るさ",
-            "en": "morning store brightness"
-          },
-          {
             "ja": "仕事帰りの客流れ",
             "en": "after-work customer flow"
-          },
-          {
-            "ja": "閉店前の静けさ",
-            "en": "closing-time quiet"
-          },
-          {
-            "ja": "週末の買い物客",
-            "en": "weekend shopping crowd"
-          },
-          {
-            "ja": "セール時のざわめき",
-            "en": "sale-event bustle"
-          },
-          {
-            "ja": "昼のコンビニラッシュ",
-            "en": "lunchtime store rush"
           },
           {
             "ja": "早朝の品出し気配",
             "en": "early-morning restocking mood"
           },
           {
-            "ja": "雨宿り客の出入り",
-            "en": "rain-shelter customer flow"
-          },
-          {
-            "ja": "昼の回転の速い客流れ",
+            "ja": "昼の買い物客の回転",
             "en": "daytime customer turnover"
-          }
-        ]
-      },
-      {
-        "group": "💡 光・温度・煙",
-        "items": [
-          {
-            "ja": "白い蛍光灯",
-            "en": "cool fluorescent lighting"
           },
           {
-            "ja": "雨夜の湿った入口空気",
-            "en": "wet entrance air"
-          },
-          {
-            "ja": "静かな店内空気",
-            "en": "calm retail air"
-          },
-          {
-            "ja": "コンビニの静かな深夜感",
-            "en": "quiet convenience store air"
-          },
-          {
-            "ja": "忙しい店内の空気",
-            "en": "busy store atmosphere"
-          },
-          {
-            "ja": "ホットスナックの暖かな灯り",
-            "en": "warm snack-case glow"
-          },
-          {
-            "ja": "冬の入口のぬくもり",
-            "en": "winter entry warmth"
-          },
-          {
-            "ja": "明るいブティック照明",
-            "en": "bright boutique lighting"
-          },
-          {
-            "ja": "開店前の静かな準備空気",
-            "en": "pre-opening prep hush"
-          },
-          {
-            "ja": "雨夜のブティック灯り",
-            "en": "rainy evening boutique glow"
-          },
-          {
-            "ja": "試着待ちの気配",
-            "en": "fitting queue mood"
-          },
-          {
-            "ja": "セール終盤の荒れた売り場感",
-            "en": "late-sale disarray"
-          },
-          {
-            "ja": "閉店後のウィンドウ替え気配",
-            "en": "after-hours display reset mood"
-          }
-        ]
-      },
-      {
-        "group": "👥 気配・ムード",
-        "items": [
-          {
-            "ja": "混んだレジ前の圧",
-            "en": "crowded counter zone"
-          },
-          {
-            "ja": "整頓された売り場感",
-            "en": "orderly retail display mood"
-          },
-          {
-            "ja": "試着室まわりの静けさ",
-            "en": "fitting room hush"
-          },
-          {
-            "ja": "閉店後の街側の静けさ",
-            "en": "quiet after-hours street feel"
-          },
-          {
-            "ja": "ショーウィンドウの静止感",
-            "en": "window display stillness"
-          },
-          {
-            "ja": "雨の日の来店気配",
-            "en": "rainy-day customer flow"
+            "ja": "週末の買い物客",
+            "en": "weekend shopping crowd"
           },
           {
             "ja": "開店直後の新鮮さ",
             "en": "fresh opening atmosphere"
           },
           {
-            "ja": "夜の店先の光",
-            "en": "night storefront glow"
+            "ja": "閉店前の静けさ",
+            "en": "closing-time quiet"
           },
           {
-            "ja": "夕方の買い物の落ち着き",
-            "en": "evening shopping lull"
-          },
-          {
-            "ja": "無人の棚通路の静けさ",
-            "en": "silent aisle atmosphere"
-          },
-          {
-            "ja": "コピー機の低い作動音",
-            "en": "late-night machine hum"
+            "ja": "雨の日の来店気配",
+            "en": "rainy-day customer flow"
           },
           {
             "ja": "夜の買い物の落ち着き",
             "en": "evening shopping lull"
           }
         ]
+      },
+      {
+        "group": "💡 光・反射・空気",
+        "items": [
+          {
+            "ja": "白い蛍光灯",
+            "en": "cool fluorescent lighting"
+          },
+          {
+            "ja": "明るい量販店照明",
+            "en": "bright retail white lighting"
+          },
+          {
+            "ja": "濡れた入口空気",
+            "en": "wet entrance air"
+          },
+          {
+            "ja": "店内の落ち着いた空気",
+            "en": "calm retail air"
+          },
+          {
+            "ja": "店先の夜の光",
+            "en": "night storefront glow"
+          },
+          {
+            "ja": "ガラス反射の揺れ",
+            "en": "glass-door reflection shimmer"
+          },
+          {
+            "ja": "高級店の静かな張りつめ",
+            "en": "luxury retail hush"
+          },
+          {
+            "ja": "アトリウムの昼光",
+            "en": "bright atrium daylight"
+          },
+          {
+            "ja": "空調の効いた通路の静けさ",
+            "en": "air-conditioned corridor hush"
+          },
+          {
+            "ja": "やわらかな商業反射",
+            "en": "soft commercial reflections"
+          }
+        ]
+      },
+      {
+        "group": "👥 密度・ムード",
+        "items": [
+          {
+            "ja": "コンビニの静かな深夜感",
+            "en": "quiet convenience store air"
+          },
+          {
+            "ja": "混んだレジ前の圧",
+            "en": "checkout queue pressure"
+          },
+          {
+            "ja": "忙しい売り場の空気",
+            "en": "busy store atmosphere"
+          },
+          {
+            "ja": "整頓された売り場感",
+            "en": "orderly retail display mood"
+          },
+          {
+            "ja": "試着待ちの気配",
+            "en": "fitting queue mood"
+          },
+          {
+            "ja": "書店の静けさ",
+            "en": "bookstore hush"
+          },
+          {
+            "ja": "紙粉の静止感",
+            "en": "paper-dust stillness"
+          },
+          {
+            "ja": "コレクターショップの密度",
+            "en": "collector-store density"
+          },
+          {
+            "ja": "ぎっしりした棚空気",
+            "en": "packed shelf atmosphere"
+          },
+          {
+            "ja": "開放的な商業空間の広さ",
+            "en": "open commercial spaciousness"
+          },
+          {
+            "ja": "天井の高い商業の静けさ",
+            "en": "high-ceiling commercial hush"
+          },
+          {
+            "ja": "高級陳列の静けさ",
+            "en": "high-end display calm"
+          }
+        ]
+      },
+      {
+        "group": "🪧 演出・状態変化",
+        "items": [
+          {
+            "ja": "セール終盤の荒れた売り場感",
+            "en": "late-sale disarray"
+          },
+          {
+            "ja": "開店前の静かな準備気配",
+            "en": "pre-opening prep hush"
+          },
+          {
+            "ja": "雨上がりの湿り",
+            "en": "after-rain store humidity"
+          },
+          {
+            "ja": "カートの車輪反響",
+            "en": "shopping cart wheel echoes"
+          },
+          {
+            "ja": "アナウンスが満ちた店内空気",
+            "en": "announcement-filled store air"
+          },
+          {
+            "ja": "フロア全体の環境音楽",
+            "en": "floor-wide ambient music"
+          },
+          {
+            "ja": "窓際の静止感",
+            "en": "window display stillness"
+          },
+          {
+            "ja": "街側の閉店後の静けさ",
+            "en": "quiet after-hours street feel"
+          }
+        ]
       }
     ],
     "settings": [
       {
-        "group": "🧊 小売・入口まわり",
+        "group": "🚪 入口・会計まわり",
         "items": [
           {
-            "ja": "冷蔵ケースの灯り",
-            "en": "refrigerated case glow"
+            "ja": "自動ドア",
+            "en": "automatic sliding door"
           },
           {
             "ja": "レジカウンター",
             "en": "POS register counter"
           },
           {
-            "ja": "商品棚の列",
-            "en": "product shelf rows"
+            "ja": "整列レール",
+            "en": "queue guide rails"
           },
           {
-            "ja": "自動ドア",
-            "en": "automatic sliding door"
+            "ja": "買い物かご積み",
+            "en": "shopping basket stacks"
+          },
+          {
+            "ja": "カート置き場",
+            "en": "cart bay"
           },
           {
             "ja": "傘立て",
             "en": "umbrella stand"
           },
           {
-            "ja": "濡れた床反射",
-            "en": "rain-wet floor reflection"
+            "ja": "傘袋台",
+            "en": "umbrella bag stand"
           },
           {
-            "ja": "雑誌ラック",
-            "en": "magazine rack"
+            "ja": "回転ドア",
+            "en": "revolving door"
           },
           {
-            "ja": "防犯ミラー",
-            "en": "security mirror"
-          },
-          {
-            "ja": "窓ポスター",
-            "en": "window posters"
+            "ja": "レジレーン看板",
+            "en": "cash register lane signs"
           },
           {
             "ja": "レジ横小物棚",
             "en": "countertop small goods"
+          }
+        ]
+      },
+      {
+        "group": "🧱 棚・什器・陳列",
+        "items": [
+          {
+            "ja": "商品棚の列",
+            "en": "product shelf rows"
           },
           {
-            "ja": "整列ポール",
-            "en": "queue guide posts"
-          },
-          {
-            "ja": "ホットスナックケース",
-            "en": "hot snack warmer case"
-          },
-          {
-            "ja": "カウンターコーヒーマシン",
-            "en": "counter coffee machine"
-          },
-          {
-            "ja": "コピー機端末",
-            "en": "copy machine terminal"
-          },
-          {
-            "ja": "プリペイドカード棚",
-            "en": "prepaid card rack"
+            "ja": "冷蔵ケースの灯り",
+            "en": "refrigerated case glow"
           },
           {
             "ja": "飲料ケースの灯り",
             "en": "beverage case glow"
           },
           {
-            "ja": "品出し台車",
-            "en": "restocking cart"
+            "ja": "価格タグ帯",
+            "en": "price tag strips"
           },
           {
-            "ja": "積まれた搬入ケース",
-            "en": "stacked delivery crates"
-          },
-          {
-            "ja": "薬味・ソース小袋台",
-            "en": "condiment sachet stand"
-          },
-          {
-            "ja": "半開き傘立て箱",
-            "en": "half-open umbrella bin"
-          },
-          {
-            "ja": "温かい飲料棚",
-            "en": "heated drink shelf"
-          },
-          {
-            "ja": "入口ヒーターマット",
-            "en": "floor heater mat"
-          }
-        ]
-      },
-      {
-        "group": "👗 アパレル・売り場の細部",
-        "items": [
-          {
-            "ja": "ハンガーラック",
-            "en": "hanger racks"
+            "ja": "ミスト冷却の野菜棚",
+            "en": "mist-cooled vegetable shelf"
           },
           {
             "ja": "マネキン展示",
             "en": "mannequin display"
           },
           {
-            "ja": "畳まれた服の台",
-            "en": "folded clothing tables"
+            "ja": "ハンガーラック",
+            "en": "hanger racks"
           },
           {
-            "ja": "ウィンドウスポット",
-            "en": "window spotlights"
+            "ja": "平台ディスプレイ",
+            "en": "central display table"
           },
+          {
+            "ja": "高い本棚列",
+            "en": "tall book stacks"
+          },
+          {
+            "ja": "ペン什器",
+            "en": "pen display racks"
+          },
+          {
+            "ja": "吊り小物ラック",
+            "en": "hanging small-item racks"
+          },
+          {
+            "ja": "積まれた模型箱",
+            "en": "stacked model boxes"
+          },
+          {
+            "ja": "ガラスケース",
+            "en": "glass display cases"
+          },
+          {
+            "ja": "デモ機カウンター",
+            "en": "demo device counters"
+          },
+          {
+            "ja": "デモスマホ台",
+            "en": "demo phone stands"
+          }
+        ]
+      },
+      {
+        "group": "🪞 壁・反射・細部",
+        "items": [
           {
             "ja": "ガラス反射",
             "en": "glass reflections"
           },
           {
-            "ja": "セールPOP",
-            "en": "sale POP signs"
+            "ja": "濡れた床反射",
+            "en": "rain-wet floor reflection"
+          },
+          {
+            "ja": "窓ポスター",
+            "en": "window posters"
+          },
+          {
+            "ja": "案内カテゴリ看板",
+            "en": "aisle category signs"
           },
           {
             "ja": "姿見",
@@ -15201,45 +16168,77 @@ const BG_EFFECTS = {
             "en": "fitting room curtains"
           },
           {
-            "ja": "試着室前のベンチ",
+            "ja": "試着室前ベンチ",
             "en": "bench near fitting room"
           },
           {
-            "ja": "半閉じシャッター感",
-            "en": "half-lowered shutter feel"
+            "ja": "黒板サインスタンド",
+            "en": "chalkboard sign stand"
           },
           {
-            "ja": "アクセサリー什器",
-            "en": "accessory display fixtures"
+            "ja": "ポスター壁",
+            "en": "poster wall"
           },
           {
-            "ja": "平台ディスプレイ",
-            "en": "central display table"
+            "ja": "大型吊り看板",
+            "en": "large hanging sign"
           },
           {
-            "ja": "価格タグ列",
-            "en": "hanging price tags"
+            "ja": "ライトボックスポスター",
+            "en": "poster lightboxes"
           },
           {
-            "ja": "ストックルーム扉",
-            "en": "stockroom door"
+            "ja": "キャリア看板",
+            "en": "carrier signboards"
           },
           {
             "ja": "ショッパーバッグの束",
             "en": "stacked shopping bags"
-          },
-          {
-            "ja": "ミラー前スツール",
-            "en": "mirror-side stool"
           }
         ]
       },
       {
-        "group": "🧾 レジ・会計まわり",
+        "group": "🏬 モール・共用導線",
         "items": [
           {
-            "ja": "アパレルレジカウンター",
-            "en": "cash wrap counter"
+            "ja": "ガラス手すり",
+            "en": "glass railings"
+          },
+          {
+            "ja": "交差エスカレーター",
+            "en": "escalator crossing"
+          },
+          {
+            "ja": "モール吊りバナー",
+            "en": "hanging mall banners"
+          },
+          {
+            "ja": "店舗ガラスの並び",
+            "en": "storefront glass lines"
+          },
+          {
+            "ja": "ベンチ島",
+            "en": "bench island"
+          },
+          {
+            "ja": "案内ピロン",
+            "en": "directional sign pylons"
+          },
+          {
+            "ja": "磨かれた床反射",
+            "en": "polished floor reflections"
+          },
+          {
+            "ja": "化粧品カウンター島",
+            "en": "cosmetic counter islands"
+          },
+          {
+            "ja": "エレベーターホール看板",
+            "en": "elevator hall signage"
+          },
+          {
+            "ja": "カウンタースツール",
+            "en": "counter stools"
           }
         ]
       }
@@ -20094,6 +21093,125 @@ const BG_EFFECTS = {
         ]
       },
       {
+        "group": "🎰 カジノ・遊技空間",
+        "items": [
+          {
+            "id": "leisure_casino_neon_floor",
+            "ja": "ネオンに沈む夜のカジノフロア",
+            "links": {
+              "base": [
+                "casino floor"
+              ],
+              "customize": [
+                "casino neon glow",
+                "crowded casino buzz",
+                "chip-clatter tension"
+              ],
+              "settings": [
+                "roulette wheel table",
+                "slot machine row",
+                "marble lobby floor"
+              ]
+            }
+          },
+          {
+            "id": "leisure_casino_roulette_heat",
+            "ja": "熱気が渦巻くルーレット卓",
+            "links": {
+              "base": [
+                "roulette table section"
+              ],
+              "customize": [
+                "roulette-table tension",
+                "casino spotlight drama",
+                "chip-clatter tension"
+              ],
+              "settings": [
+                "roulette wheel table",
+                "chip tray stacks",
+                "dealer call placard"
+              ]
+            }
+          },
+          {
+            "id": "leisure_casino_poker_quiet",
+            "ja": "張り詰めた静けさのポーカールーム",
+            "links": {
+              "base": [
+                "poker room"
+              ],
+              "customize": [
+                "poker-room hush",
+                "velvet luxury ambience",
+                "late-night casino hush"
+              ],
+              "settings": [
+                "green felt card table",
+                "chip tray stacks",
+                "security camera dome"
+              ]
+            }
+          },
+          {
+            "id": "leisure_casino_slot_flash",
+            "ja": "ジャックポットが瞬くスロット通路",
+            "links": {
+              "base": [
+                "slot machine aisle"
+              ],
+              "customize": [
+                "slot-machine flashing",
+                "jackpot alarm glow",
+                "crowded casino buzz"
+              ],
+              "settings": [
+                "slot machine row",
+                "jackpot marquee lights",
+                "cashier cage counter"
+              ]
+            }
+          },
+          {
+            "id": "leisure_casino_vip_gold",
+            "ja": "金の気配が満ちるVIPカジノラウンジ",
+            "links": {
+              "base": [
+                "vip casino lounge"
+              ],
+              "customize": [
+                "vip-lounge calm",
+                "gold-lit luxury hush",
+                "velvet luxury ambience"
+              ],
+              "settings": [
+                "chandelier ceiling",
+                "gold trim wall panels",
+                "private dealer booth"
+              ]
+            }
+          },
+          {
+            "id": "leisure_casino_rain_entrance",
+            "ja": "雨夜に光るカジノエントランス",
+            "links": {
+              "base": [
+                "casino entrance lobby"
+              ],
+              "customize": [
+                "rainy casino entrance bustle",
+                "casino neon glow",
+                "late-night casino hush"
+              ],
+              "settings": [
+                "wet entrance mat",
+                "velvet queue ropes",
+                "security camera dome"
+              ]
+            }
+          }
+        ]
+      },
+      {
         "group": "🎤 カラオケ・個室娯楽",
         "items": [
           {
@@ -20453,6 +21571,35 @@ const BG_EFFECTS = {
         ]
       },
       {
+        "group": "🎰 カジノ・遊技の場所",
+        "items": [
+          {
+            "ja": "カジノフロア",
+            "en": "casino floor"
+          },
+          {
+            "ja": "ルーレット卓エリア",
+            "en": "roulette table section"
+          },
+          {
+            "ja": "ポーカールーム",
+            "en": "poker room"
+          },
+          {
+            "ja": "スロットマシン通路",
+            "en": "slot machine aisle"
+          },
+          {
+            "ja": "VIPカジノラウンジ",
+            "en": "vip casino lounge"
+          },
+          {
+            "ja": "カジノエントランスロビー",
+            "en": "casino entrance lobby"
+          }
+        ]
+      },
+      {
         "group": "🎤 個室・受付まわり",
         "items": [
           {
@@ -20688,6 +21835,63 @@ const BG_EFFECTS = {
           {
             "ja": "無人フロアの静止感",
             "en": "empty arcade stillness"
+          }
+        ]
+      },
+      {
+        "group": "🎰 勝負の熱気・光",
+        "items": [
+          {
+            "ja": "カジノのネオン光",
+            "en": "casino neon glow"
+          },
+          {
+            "ja": "混雑したカジノのざわめき",
+            "en": "crowded casino buzz"
+          },
+          {
+            "ja": "チップが鳴る緊張感",
+            "en": "chip-clatter tension"
+          },
+          {
+            "ja": "ルーレット卓の張り詰めた空気",
+            "en": "roulette-table tension"
+          },
+          {
+            "ja": "ポーカールームの静けさ",
+            "en": "poker-room hush"
+          },
+          {
+            "ja": "スロットの点滅光",
+            "en": "slot-machine flashing"
+          },
+          {
+            "ja": "ジャックポット警告の光",
+            "en": "jackpot alarm glow"
+          },
+          {
+            "ja": "VIPラウンジの静かな高級感",
+            "en": "vip-lounge calm"
+          },
+          {
+            "ja": "雨夜のエントランスのざわめき",
+            "en": "rainy casino entrance bustle"
+          },
+          {
+            "ja": "深夜カジノの静まり",
+            "en": "late-night casino hush"
+          },
+          {
+            "ja": "スポットライトの劇場感",
+            "en": "casino spotlight drama"
+          },
+          {
+            "ja": "ベルベットの高級感",
+            "en": "velvet luxury ambience"
+          },
+          {
+            "ja": "金色の静かな豪華さ",
+            "en": "gold-lit luxury hush"
           }
         ]
       },
@@ -20959,6 +22163,67 @@ const BG_EFFECTS = {
         ]
       },
       {
+        "group": "🎰 テーブル・設備・導線",
+        "items": [
+          {
+            "ja": "ルーレットホイール卓",
+            "en": "roulette wheel table"
+          },
+          {
+            "ja": "緑フェルトのカードテーブル",
+            "en": "green felt card table"
+          },
+          {
+            "ja": "スロットマシン列",
+            "en": "slot machine row"
+          },
+          {
+            "ja": "チップトレイの山",
+            "en": "chip tray stacks"
+          },
+          {
+            "ja": "キャッシャー窓口",
+            "en": "cashier cage counter"
+          },
+          {
+            "ja": "ベルベットの導線ロープ",
+            "en": "velvet queue ropes"
+          },
+          {
+            "ja": "シャンデリア天井",
+            "en": "chandelier ceiling"
+          },
+          {
+            "ja": "監視カメラドーム",
+            "en": "security camera dome"
+          },
+          {
+            "ja": "濡れたエントランスマット",
+            "en": "wet entrance mat"
+          },
+          {
+            "ja": "大理石のロビー床",
+            "en": "marble lobby floor"
+          },
+          {
+            "ja": "金装飾の壁面",
+            "en": "gold trim wall panels"
+          },
+          {
+            "ja": "個室ディーラーブース",
+            "en": "private dealer booth"
+          },
+          {
+            "ja": "ジャックポット電飾看板",
+            "en": "jackpot marquee lights"
+          },
+          {
+            "ja": "ディーラーコール札",
+            "en": "dealer call placard"
+          }
+        ]
+      },
+      {
         "group": "🎤 マイク・室内設備",
         "items": [
           {
@@ -21053,6 +22318,1074 @@ const BG_EFFECTS = {
           {
             "ja": "映写光の靄",
             "en": "projection haze beam"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "outing_leisure_spot_collection",
+    "title": "🎠 外出・観光・レジャースポット特化コレクション",
+    "subtitle": "遊園地、都市公園、観光通り、展望施設、水辺の休日散策まで、外へ出て歩く・眺める・遊ぶ導線を、光、風、賑わい、抜け、水面反射で多層に噛ませる、外出系レジャースポットの特化コレクション",
+    "complete": [
+      {
+        "group": "🎡 遊園地・テーマパーク",
+        "items": [
+          {
+            "id": "outing_themepark_gate_dusk",
+            "ja": "夕暮れのテーマパーク入口ゲート",
+            "links": {
+              "base": [
+                "theme park entrance gate"
+              ],
+              "customize": [
+                "dusk amusement sparkle",
+                "ticket-gate bustle",
+                "theme-park crowd energy"
+              ],
+              "settings": [
+                "themed entrance arch",
+                "ticket booth canopy",
+                "directional attraction sign"
+              ]
+            }
+          },
+          {
+            "id": "outing_ferriswheel_evening",
+            "ja": "観覧車前がきらめく夕方の広場",
+            "links": {
+              "base": [
+                "ferris wheel plaza"
+              ],
+              "customize": [
+                "colorful ride lights",
+                "festive outdoor music",
+                "dusk amusement sparkle"
+              ],
+              "settings": [
+                "ferris wheel gondolas",
+                "parade rope barrier",
+                "directional attraction sign"
+              ]
+            }
+          },
+          {
+            "id": "outing_carousel_night",
+            "ja": "夜灯りが回るメリーゴーランド広場",
+            "links": {
+              "base": [
+                "carousel zone"
+              ],
+              "customize": [
+                "colorful ride lights",
+                "theme-park crowd energy",
+                "closed-ride quiet"
+              ],
+              "settings": [
+                "carousel lights",
+                "ride safety fence",
+                "themed entrance arch"
+              ]
+            }
+          },
+          {
+            "id": "outing_parade_route_day",
+            "ja": "パレードの余韻が残る昼の通り",
+            "links": {
+              "base": [
+                "parade street"
+              ],
+              "customize": [
+                "parade-afterglow mood",
+                "theme-park crowd energy",
+                "festive outdoor music"
+              ],
+              "settings": [
+                "parade rope barrier",
+                "directional attraction sign",
+                "ticket booth canopy"
+              ]
+            }
+          },
+          {
+            "id": "outing_coaster_plaza_afterrain",
+            "ja": "雨上がりに明るいコースター前広場",
+            "links": {
+              "base": [
+                "coaster approach plaza"
+              ],
+              "customize": [
+                "rain-cleared park brightness",
+                "colorful ride lights",
+                "theme-park crowd energy"
+              ],
+              "settings": [
+                "ride safety fence",
+                "directional attraction sign",
+                "themed entrance arch"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🌳 公園・広場・都市オープンスペース",
+        "items": [
+          {
+            "id": "outing_park_morning_entrance",
+            "ja": "朝の空気が澄む公園入口",
+            "links": {
+              "base": [
+                "neighborhood park entrance"
+              ],
+              "customize": [
+                "early-park stillness",
+                "tree-shade breeze",
+                "holiday-park liveliness"
+              ],
+              "settings": [
+                "park map signboard",
+                "public park bench",
+                "trimmed flowerbed edge"
+              ]
+            }
+          },
+          {
+            "id": "outing_lawn_plaza_day",
+            "ja": "陽の広がる芝生広場",
+            "links": {
+              "base": [
+                "lawn plaza"
+              ],
+              "customize": [
+                "holiday-park liveliness",
+                "tree-shade breeze",
+                "after-school open air"
+              ],
+              "settings": [
+                "stone paving plaza",
+                "public park bench",
+                "trimmed flowerbed edge"
+              ]
+            }
+          },
+          {
+            "id": "outing_fountain_square_dusk",
+            "ja": "涼気が漂う夕方の噴水広場",
+            "links": {
+              "base": [
+                "fountain square"
+              ],
+              "customize": [
+                "fountain mist coolness",
+                "dusk plaza quiet",
+                "holiday-park liveliness"
+              ],
+              "settings": [
+                "plaza fountain jets",
+                "stone paving plaza",
+                "warm park lamppost"
+              ]
+            }
+          },
+          {
+            "id": "outing_riverside_walk_afterrain",
+            "ja": "雨上がりの河川敷遊歩道",
+            "links": {
+              "base": [
+                "riverside promenade"
+              ],
+              "customize": [
+                "rain-soaked park calm",
+                "tree-shade breeze",
+                "early-park stillness"
+              ],
+              "settings": [
+                "riverside handrail",
+                "park map signboard",
+                "public park bench"
+              ]
+            }
+          },
+          {
+            "id": "outing_night_bench_plaza",
+            "ja": "静けさが残る夜のベンチ広場",
+            "links": {
+              "base": [
+                "night park bench area"
+              ],
+              "customize": [
+                "night-park hush",
+                "dusk plaza quiet",
+                "rain-soaked park calm"
+              ],
+              "settings": [
+                "warm park lamppost",
+                "public park bench",
+                "stone paving plaza"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🧭 観光・街歩きスポット",
+        "items": [
+          {
+            "id": "outing_oldtown_daywalk",
+            "ja": "光が回る昼の観光通り",
+            "links": {
+              "base": [
+                "old-town sightseeing street"
+              ],
+              "customize": [
+                "travel-day brightness",
+                "sightseeing bustle",
+                "stone-street echo"
+              ],
+              "settings": [
+                "old-town lantern sign",
+                "sightseeing map board",
+                "tourist queue rail"
+              ]
+            }
+          },
+          {
+            "id": "outing_aquarium_rain_entry",
+            "ja": "雨の日の水族館入口ホール",
+            "links": {
+              "base": [
+                "aquarium entrance hall"
+              ],
+              "customize": [
+                "aquarium dim glow",
+                "off-season stillness",
+                "travel-day brightness"
+              ],
+              "settings": [
+                "glass aquarium panel",
+                "sightseeing map board",
+                "tourist queue rail"
+              ]
+            }
+          },
+          {
+            "id": "outing_greenhouse_humid_day",
+            "ja": "湿り気のある植物園温室入口",
+            "links": {
+              "base": [
+                "botanical garden glasshouse"
+              ],
+              "customize": [
+                "greenhouse humidity",
+                "travel-day brightness",
+                "off-season stillness"
+              ],
+              "settings": [
+                "greenhouse iron frame",
+                "stone alley planter",
+                "sightseeing map board"
+              ]
+            }
+          },
+          {
+            "id": "outing_zoo_bright_path",
+            "ja": "休日の光が差す動物園通路",
+            "links": {
+              "base": [
+                "zoo promenade"
+              ],
+              "customize": [
+                "zoo-path daylight",
+                "sightseeing bustle",
+                "travel-day brightness"
+              ],
+              "settings": [
+                "zoo guide fence",
+                "tourist queue rail",
+                "sightseeing map board"
+              ]
+            }
+          },
+          {
+            "id": "outing_resort_walk_evening",
+            "ja": "夕方のリゾート庭園散歩道",
+            "links": {
+              "base": [
+                "resort garden walkway"
+              ],
+              "customize": [
+                "off-season stillness",
+                "travel-day brightness",
+                "souvenir-street chatter"
+              ],
+              "settings": [
+                "stone alley planter",
+                "souvenir banner flags",
+                "old-town lantern sign"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🌆 展望・夜景・高所スポット",
+        "items": [
+          {
+            "id": "outing_tower_bluehour",
+            "ja": "青の時間に沈む展望タワーデッキ",
+            "links": {
+              "base": [
+                "tower observation deck"
+              ],
+              "customize": [
+                "blue-hour city haze",
+                "tower-light shimmer",
+                "wind-swept highplace air"
+              ],
+              "settings": [
+                "observation handrail",
+                "tower floor spotlight",
+                "city-view telescope"
+              ]
+            }
+          },
+          {
+            "id": "outing_rooftop_nightview",
+            "ja": "街明かりを見下ろす屋上展望テラス",
+            "links": {
+              "base": [
+                "rooftop observatory terrace"
+              ],
+              "customize": [
+                "skyline night glow",
+                "glass-deck reflections",
+                "distant-city twinkle"
+              ],
+              "settings": [
+                "glass viewing panel",
+                "lookout bench",
+                "skyline info plaque"
+              ]
+            }
+          },
+          {
+            "id": "outing_hillside_sunset",
+            "ja": "夕景が長く残る高台の見晴らし",
+            "links": {
+              "base": [
+                "hillside night viewpoint"
+              ],
+              "customize": [
+                "sunset outlook warmth",
+                "wind-swept highplace air",
+                "dawn-view clarity"
+              ],
+              "settings": [
+                "observation handrail",
+                "lookout bench",
+                "stair tread lights"
+              ]
+            }
+          },
+          {
+            "id": "outing_glass_corridor_evening",
+            "ja": "反射が重なるガラス展望通路",
+            "links": {
+              "base": [
+                "glass observation corridor"
+              ],
+              "customize": [
+                "glass-deck reflections",
+                "blue-hour city haze",
+                "skyline night glow"
+              ],
+              "settings": [
+                "glass viewing panel",
+                "windbreak glass wall",
+                "skyline info plaque"
+              ]
+            }
+          },
+          {
+            "id": "outing_harbor_overlook_night",
+            "ja": "港灯りが広がる夜の見晴らし台",
+            "links": {
+              "base": [
+                "harbor overlook terrace"
+              ],
+              "customize": [
+                "distant-city twinkle",
+                "skyline night glow",
+                "wind-swept highplace air"
+              ],
+              "settings": [
+                "city-view telescope",
+                "observation handrail",
+                "tower floor spotlight"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🌊 水辺レジャー・休日散策",
+        "items": [
+          {
+            "id": "outing_poolside_summer",
+            "ja": "夏光が強いプールサイドデッキ",
+            "links": {
+              "base": [
+                "poolside deck"
+              ],
+              "customize": [
+                "poolside summer brightness",
+                "water-reflection shimmer",
+                "humid waterside breeze"
+              ],
+              "settings": [
+                "poolside parasol",
+                "deck chairs",
+                "waterfront step lights"
+              ]
+            }
+          },
+          {
+            "id": "outing_infinity_sunset",
+            "ja": "夕照りが残るインフィニティの縁",
+            "links": {
+              "base": [
+                "infinity pool edge"
+              ],
+              "customize": [
+                "sunset waterfront glow",
+                "water-reflection shimmer",
+                "poolside summer brightness"
+              ],
+              "settings": [
+                "deck chairs",
+                "poolside parasol",
+                "waterfront step lights"
+              ]
+            }
+          },
+          {
+            "id": "outing_lakeside_calm",
+            "ja": "静かな風が通る湖畔ボードウォーク",
+            "links": {
+              "base": [
+                "lakeside boardwalk"
+              ],
+              "customize": [
+                "lakeside quiet",
+                "harbor-wind freshness",
+                "after-rain waterside clarity"
+              ],
+              "settings": [
+                "lakeside wooden railing",
+                "waterside boardwalk planks",
+                "rippling water reflections"
+              ]
+            }
+          },
+          {
+            "id": "outing_marina_evening",
+            "ja": "風が抜ける夕方のマリーナ散策デッキ",
+            "links": {
+              "base": [
+                "marina boardwalk"
+              ],
+              "customize": [
+                "harbor-wind freshness",
+                "sunset waterfront glow",
+                "water-reflection shimmer"
+              ],
+              "settings": [
+                "marina mooring posts",
+                "waterside boardwalk planks",
+                "lakeside wooden railing"
+              ]
+            }
+          },
+          {
+            "id": "outing_waterfront_night",
+            "ja": "夜の静けさが残る水辺テラス",
+            "links": {
+              "base": [
+                "waterfront rest terrace"
+              ],
+              "customize": [
+                "night waterfront calm",
+                "after-rain waterside clarity",
+                "humid waterside breeze"
+              ],
+              "settings": [
+                "waterfront step lights",
+                "beach path rope fence",
+                "rippling water reflections"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "base": [
+      {
+        "group": "🎡 遊園地・テーマパークの場所",
+        "items": [
+          {
+            "ja": "テーマパーク入口ゲート",
+            "en": "theme park entrance gate"
+          },
+          {
+            "ja": "観覧車前広場",
+            "en": "ferris wheel plaza"
+          },
+          {
+            "ja": "メリーゴーランド広場",
+            "en": "carousel zone"
+          },
+          {
+            "ja": "パレード通り",
+            "en": "parade street"
+          },
+          {
+            "ja": "コースター前広場",
+            "en": "coaster approach plaza"
+          },
+          {
+            "ja": "夕暮れの園内通り",
+            "en": "twilight theme park street"
+          },
+          {
+            "ja": "家族向けアトラクション通路",
+            "en": "family attraction walkway"
+          },
+          {
+            "ja": "装飾アーチのある入口",
+            "en": "themed archway entrance"
+          }
+        ]
+      },
+      {
+        "group": "🌳 公園・広場の場所",
+        "items": [
+          {
+            "ja": "近所の公園入口",
+            "en": "neighborhood park entrance"
+          },
+          {
+            "ja": "芝生広場",
+            "en": "lawn plaza"
+          },
+          {
+            "ja": "噴水広場",
+            "en": "fountain square"
+          },
+          {
+            "ja": "河川敷の遊歩道",
+            "en": "riverside promenade"
+          },
+          {
+            "ja": "遊具脇の公園",
+            "en": "play equipment zone"
+          },
+          {
+            "ja": "並木のある公園道",
+            "en": "tree-lined park path"
+          },
+          {
+            "ja": "夜のベンチ広場",
+            "en": "night park bench area"
+          },
+          {
+            "ja": "都市の開けた広場",
+            "en": "city open plaza"
+          }
+        ]
+      },
+      {
+        "group": "🧭 観光・街歩きの場所",
+        "items": [
+          {
+            "ja": "旧市街の観光通り",
+            "en": "old-town sightseeing street"
+          },
+          {
+            "ja": "水族館の入口ホール",
+            "en": "aquarium entrance hall"
+          },
+          {
+            "ja": "植物園のガラス温室入口",
+            "en": "botanical garden glasshouse"
+          },
+          {
+            "ja": "動物園の散策通路",
+            "en": "zoo promenade"
+          },
+          {
+            "ja": "観光客で賑わう休日通り",
+            "en": "tourist shopping lane"
+          },
+          {
+            "ja": "リゾート庭園の散歩道",
+            "en": "resort garden walkway"
+          },
+          {
+            "ja": "石畳の観光路地",
+            "en": "stone-paved sightseeing alley"
+          },
+          {
+            "ja": "港寄りの観光ボードウォーク",
+            "en": "sightseeing pier boardwalk"
+          }
+        ]
+      },
+      {
+        "group": "🌆 展望・夜景・高所スポットの場所",
+        "items": [
+          {
+            "ja": "展望タワーデッキ",
+            "en": "tower observation deck"
+          },
+          {
+            "ja": "屋上展望テラス",
+            "en": "rooftop observatory terrace"
+          },
+          {
+            "ja": "高台の夜景スポット",
+            "en": "hillside night viewpoint"
+          },
+          {
+            "ja": "ガラス張りの展望通路",
+            "en": "glass observation corridor"
+          },
+          {
+            "ja": "港を見下ろす見晴らし台",
+            "en": "harbor overlook terrace"
+          },
+          {
+            "ja": "街灯りが沈む見晴らし広場",
+            "en": "citylight panorama point"
+          },
+          {
+            "ja": "灯りのある展望階段",
+            "en": "illuminated lookout staircase"
+          },
+          {
+            "ja": "空が抜ける眺望デッキ端",
+            "en": "skyline deck edge"
+          }
+        ]
+      },
+      {
+        "group": "🌊 水辺レジャー・休日散策の場所",
+        "items": [
+          {
+            "ja": "プールサイドデッキ",
+            "en": "poolside deck"
+          },
+          {
+            "ja": "インフィニティプールの縁",
+            "en": "infinity pool edge"
+          },
+          {
+            "ja": "湖畔のボードウォーク",
+            "en": "lakeside boardwalk"
+          },
+          {
+            "ja": "海辺の遊歩道",
+            "en": "seaside promenade"
+          },
+          {
+            "ja": "マリーナの散策デッキ",
+            "en": "marina boardwalk"
+          },
+          {
+            "ja": "水辺の休憩テラス",
+            "en": "waterfront rest terrace"
+          },
+          {
+            "ja": "砂浜脇の見晴らし路",
+            "en": "beach observation path"
+          },
+          {
+            "ja": "夕暮れの水辺テラス",
+            "en": "waterfront at dusk"
+          }
+        ]
+      }
+    ],
+    "customize": [
+      {
+        "group": "🎡 遊園地の光・賑わい",
+        "items": [
+          {
+            "ja": "テーマパークの人混みの熱気",
+            "en": "theme-park crowd energy"
+          },
+          {
+            "ja": "色とりどりの乗り物ライト",
+            "en": "colorful ride lights"
+          },
+          {
+            "ja": "外まで流れる祝祭音楽",
+            "en": "festive outdoor music"
+          },
+          {
+            "ja": "パレード後の余韻",
+            "en": "parade-afterglow mood"
+          },
+          {
+            "ja": "薄暮にきらめく遊園光",
+            "en": "dusk amusement sparkle"
+          },
+          {
+            "ja": "チケットゲートの賑わい",
+            "en": "ticket-gate bustle"
+          },
+          {
+            "ja": "雨上がりに明るい園内光",
+            "en": "rain-cleared park brightness"
+          },
+          {
+            "ja": "閉園前の静かな空白",
+            "en": "closed-ride quiet"
+          }
+        ]
+      },
+      {
+        "group": "🌳 公園・広場の空気",
+        "items": [
+          {
+            "ja": "朝の公園の澄んだ静けさ",
+            "en": "early-park stillness"
+          },
+          {
+            "ja": "放課後の抜けた外気",
+            "en": "after-school open air"
+          },
+          {
+            "ja": "噴水脇の涼気",
+            "en": "fountain mist coolness"
+          },
+          {
+            "ja": "木陰を渡る風",
+            "en": "tree-shade breeze"
+          },
+          {
+            "ja": "夕方の広場に沈む静けさ",
+            "en": "dusk plaza quiet"
+          },
+          {
+            "ja": "雨を吸った公園の静けさ",
+            "en": "rain-soaked park calm"
+          },
+          {
+            "ja": "夜の公園に残る無音",
+            "en": "night-park hush"
+          },
+          {
+            "ja": "休日の公園の賑わい",
+            "en": "holiday-park liveliness"
+          }
+        ]
+      },
+      {
+        "group": "🧭 観光・街歩きの気配",
+        "items": [
+          {
+            "ja": "観光客の賑わい",
+            "en": "sightseeing bustle"
+          },
+          {
+            "ja": "オフシーズンの静けさ",
+            "en": "off-season stillness"
+          },
+          {
+            "ja": "旅日の明るさ",
+            "en": "travel-day brightness"
+          },
+          {
+            "ja": "石畳に返る足音",
+            "en": "stone-street echo"
+          },
+          {
+            "ja": "温室の湿り気",
+            "en": "greenhouse humidity"
+          },
+          {
+            "ja": "水族館寄りの薄青い暗さ",
+            "en": "aquarium dim glow"
+          },
+          {
+            "ja": "動物園通路の昼光",
+            "en": "zoo-path daylight"
+          },
+          {
+            "ja": "土産通りのざわめき",
+            "en": "souvenir-street chatter"
+          }
+        ]
+      },
+      {
+        "group": "🌆 展望・夜景の光",
+        "items": [
+          {
+            "ja": "街明かりの夜景光",
+            "en": "skyline night glow"
+          },
+          {
+            "ja": "夕景の展望の暖かさ",
+            "en": "sunset outlook warmth"
+          },
+          {
+            "ja": "高所を抜ける強い風",
+            "en": "wind-swept highplace air"
+          },
+          {
+            "ja": "青の時間の街霞",
+            "en": "blue-hour city haze"
+          },
+          {
+            "ja": "ガラス面に重なる反射",
+            "en": "glass-deck reflections"
+          },
+          {
+            "ja": "塔灯りのきらめき",
+            "en": "tower-light shimmer"
+          },
+          {
+            "ja": "夜明け前の見晴らしの明瞭さ",
+            "en": "dawn-view clarity"
+          },
+          {
+            "ja": "遠景の街灯の粒",
+            "en": "distant-city twinkle"
+          }
+        ]
+      },
+      {
+        "group": "🌊 水辺レジャーの光と風",
+        "items": [
+          {
+            "ja": "水面反射のきらめき",
+            "en": "water-reflection shimmer"
+          },
+          {
+            "ja": "湿り気を含む水辺の風",
+            "en": "humid waterside breeze"
+          },
+          {
+            "ja": "湖畔の静けさ",
+            "en": "lakeside quiet"
+          },
+          {
+            "ja": "港風のさっぱりした抜け",
+            "en": "harbor-wind freshness"
+          },
+          {
+            "ja": "夕照りが残る水辺光",
+            "en": "sunset waterfront glow"
+          },
+          {
+            "ja": "夜の水辺に残る静けさ",
+            "en": "night waterfront calm"
+          },
+          {
+            "ja": "夏のプールサイドの明るさ",
+            "en": "poolside summer brightness"
+          },
+          {
+            "ja": "雨上がりの水辺の透明感",
+            "en": "after-rain waterside clarity"
+          }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "group": "🎡 遊園地の設備・導線",
+        "items": [
+          {
+            "ja": "チケット売場の屋根",
+            "en": "ticket booth canopy"
+          },
+          {
+            "ja": "アトラクション案内サイン",
+            "en": "directional attraction sign"
+          },
+          {
+            "ja": "パレード用ロープ柵",
+            "en": "parade rope barrier"
+          },
+          {
+            "ja": "観覧車のゴンドラ列",
+            "en": "ferris wheel gondolas"
+          },
+          {
+            "ja": "メリーゴーランドの電飾",
+            "en": "carousel lights"
+          },
+          {
+            "ja": "乗り場の安全柵",
+            "en": "ride safety fence"
+          },
+          {
+            "ja": "園内フードカート屋根",
+            "en": "food cart awning"
+          },
+          {
+            "ja": "装飾入口アーチ",
+            "en": "themed entrance arch"
+          }
+        ]
+      },
+      {
+        "group": "🌳 公園・広場の細部",
+        "items": [
+          {
+            "ja": "公園ベンチ",
+            "en": "public park bench"
+          },
+          {
+            "ja": "広場の噴水噴流",
+            "en": "plaza fountain jets"
+          },
+          {
+            "ja": "公園案内板",
+            "en": "park map signboard"
+          },
+          {
+            "ja": "石張りの広場床",
+            "en": "stone paving plaza"
+          },
+          {
+            "ja": "遊具のシルエット",
+            "en": "play equipment silhouette"
+          },
+          {
+            "ja": "整えられた花壇の縁",
+            "en": "trimmed flowerbed edge"
+          },
+          {
+            "ja": "河川敷の手すり",
+            "en": "riverside handrail"
+          },
+          {
+            "ja": "暖色の公園灯",
+            "en": "warm park lamppost"
+          }
+        ]
+      },
+      {
+        "group": "🧭 観光・街歩きの細部",
+        "items": [
+          {
+            "ja": "観光案内マップ",
+            "en": "sightseeing map board"
+          },
+          {
+            "ja": "水族館のガラスパネル",
+            "en": "glass aquarium panel"
+          },
+          {
+            "ja": "温室の鉄フレーム",
+            "en": "greenhouse iron frame"
+          },
+          {
+            "ja": "動物園のガイド柵",
+            "en": "zoo guide fence"
+          },
+          {
+            "ja": "土産通りの旗飾り",
+            "en": "souvenir banner flags"
+          },
+          {
+            "ja": "旧市街のランタン看板",
+            "en": "old-town lantern sign"
+          },
+          {
+            "ja": "観光列の誘導レール",
+            "en": "tourist queue rail"
+          },
+          {
+            "ja": "石路地の植木鉢",
+            "en": "stone alley planter"
+          }
+        ]
+      },
+      {
+        "group": "🌆 展望・夜景スポットの細部",
+        "items": [
+          {
+            "ja": "展望手すり",
+            "en": "observation handrail"
+          },
+          {
+            "ja": "ガラスの展望パネル",
+            "en": "glass viewing panel"
+          },
+          {
+            "ja": "塔床のスポットライト",
+            "en": "tower floor spotlight"
+          },
+          {
+            "ja": "景色案内プレート",
+            "en": "skyline info plaque"
+          },
+          {
+            "ja": "見晴らしベンチ",
+            "en": "lookout bench"
+          },
+          {
+            "ja": "風除けガラス壁",
+            "en": "windbreak glass wall"
+          },
+          {
+            "ja": "階段縁の灯り",
+            "en": "stair tread lights"
+          },
+          {
+            "ja": "展望望遠鏡",
+            "en": "city-view telescope"
+          }
+        ]
+      },
+      {
+        "group": "🌊 水辺レジャーの細部",
+        "items": [
+          {
+            "ja": "プールサイドパラソル",
+            "en": "poolside parasol"
+          },
+          {
+            "ja": "デッキチェア",
+            "en": "deck chairs"
+          },
+          {
+            "ja": "マリーナの係留杭",
+            "en": "marina mooring posts"
+          },
+          {
+            "ja": "水辺ボードウォークの板張り",
+            "en": "waterside boardwalk planks"
+          },
+          {
+            "ja": "湖畔の木製手すり",
+            "en": "lakeside wooden railing"
+          },
+          {
+            "ja": "砂浜脇のロープ柵",
+            "en": "beach path rope fence"
+          },
+          {
+            "ja": "水辺の段差灯",
+            "en": "waterfront step lights"
+          },
+          {
+            "ja": "揺れる水面反射",
+            "en": "rippling water reflections"
           }
         ]
       }
@@ -34757,6 +37090,2160 @@ const BG_EFFECTS = {
     ]
   },
   {
+    "id": "sunlight_optical_sky_collection",
+    "title": "☀ 日輪・光芒・空の光学現象特化コレクション",
+    "subtitle": "晴れ空や夜空の途中をさらに割り、逆光、薄明光線、雲縁発光、ハロ、彩雲、虹など、空に走る光の筋・輪・にじみで劇性を成立させる光学現象特化コレクション",
+    "complete": [
+      {
+        "group": "☀ 逆光・太陽位置",
+        "items": [
+          {
+            "id": "low_winter_sun_backlight_sky",
+            "ja": "低い冬の日差しが刺さる逆光の空",
+            "links": {
+              "base": [
+                "low winter sun sky",
+                "backlit open sky"
+              ],
+              "customize": [
+                "piercing backlight",
+                "cold clear glare",
+                "thin winter air"
+              ],
+              "settings": [
+                "low sun disc",
+                "white sun veil",
+                "long-shadow feel",
+                "pale winter zenith"
+              ]
+            }
+          },
+          {
+            "id": "highnoon_solar_glare_sky",
+            "ja": "真上の太陽が強く照りつける昼空",
+            "links": {
+              "base": [
+                "high-noon open sky",
+                "sun-overhead sky"
+              ],
+              "customize": [
+                "hard solar glare",
+                "bleached daylight",
+                "summer solar intensity"
+              ],
+              "settings": [
+                "small sharp sun disc",
+                "washed cloud edges",
+                "short-shadow feel",
+                "heat-shimmer brightness"
+              ]
+            }
+          },
+          {
+            "id": "sun_behind_cloud_break_sky",
+            "ja": "雲の奥に太陽が潜む雲間の空",
+            "links": {
+              "base": [
+                "sun behind cloud layer",
+                "broken-cloud sky"
+              ],
+              "customize": [
+                "hidden-sun pressure",
+                "cloud-edge blaze",
+                "muted glare"
+              ],
+              "settings": [
+                "bright cloud breaks",
+                "silver cloud lining",
+                "sun diffused behind clouds",
+                "patches of blue opening"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🌤 光芒・雲間の光",
+        "items": [
+          {
+            "id": "stormbreak_crepuscular_rays",
+            "ja": "嵐の切れ目から光芒が差す空",
+            "links": {
+              "base": [
+                "storm-break sky",
+                "crepuscular rays"
+              ],
+              "customize": [
+                "storm clearing drama",
+                "layered light shafts",
+                "after-rain radiance"
+              ],
+              "settings": [
+                "dark cloud shelf",
+                "sunbeams through clouds",
+                "wet-air glow",
+                "opening blue patch"
+              ]
+            }
+          },
+          {
+            "id": "evening_cathedral_rays_sky",
+            "ja": "夕方の雲間から扇状の光が落ちる空",
+            "links": {
+              "base": [
+                "evening cloud-gap sky",
+                "radiant evening sky"
+              ],
+              "customize": [
+                "fan-shaped rays",
+                "solemn sky glow",
+                "broad cloud-shadow bands"
+              ],
+              "settings": [
+                "sunset light shafts",
+                "glowing cloud underside",
+                "layered evening clouds",
+                "warm horizon bloom"
+              ]
+            }
+          },
+          {
+            "id": "morning_valley_lightshafts",
+            "ja": "朝の谷筋へ光の柱が落ちる空",
+            "links": {
+              "base": [
+                "morning shaft-lit sky",
+                "clear upper-air morning"
+              ],
+              "customize": [
+                "vertical light columns",
+                "clean dawn air",
+                "mountain-morning stillness"
+              ],
+              "settings": [
+                "narrow light shafts",
+                "thin mist below",
+                "sun beyond ridge",
+                "cool pale sky"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🌈 虹・ハロ・彩雲",
+        "items": [
+          {
+            "id": "summer_sunshower_rainbow_sky",
+            "ja": "通り雨のあとに虹がかかる夏空",
+            "links": {
+              "base": [
+                "after-rain summer sky",
+                "rainbow sky"
+              ],
+              "customize": [
+                "humid bright air",
+                "sunshower freshness",
+                "wet clear openness"
+              ],
+              "settings": [
+                "broad rainbow arc",
+                "retreating rain curtain",
+                "bright blue opening",
+                "sunlit cloud edge"
+              ]
+            }
+          },
+          {
+            "id": "winter_sundog_halo_sky",
+            "ja": "冬の太陽にハロと幻日がにじむ空",
+            "links": {
+              "base": [
+                "winter halo sky",
+                "cold sunlit sky"
+              ],
+              "customize": [
+                "icy atmospheric optics",
+                "pale spectral ring",
+                "frost-clear air"
+              ],
+              "settings": [
+                "faint halo ring",
+                "sundog glints",
+                "thin ice-cloud veil",
+                "white winter sun"
+              ]
+            }
+          },
+          {
+            "id": "afternoon_iridescent_cloud_sky",
+            "ja": "午後の薄雲に彩雲が浮かぶ空",
+            "links": {
+              "base": [
+                "iridescent cloud sky",
+                "thin-cloud afternoon sky"
+              ],
+              "customize": [
+                "pastel spectral tint",
+                "delicate color fringe",
+                "soft upper-air shimmer"
+              ],
+              "settings": [
+                "iridescent cloud patch",
+                "thin translucent clouds",
+                "pale blue dome",
+                "gentle solar glow"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "base": [
+      {
+        "group": "☀ 太陽・逆光ベース",
+        "items": [
+          {
+            "ja": "低い逆光の空",
+            "en": "low backlit sky"
+          },
+          {
+            "ja": "真昼の強い日差しの空",
+            "en": "hard midday sun sky"
+          },
+          {
+            "ja": "雲越しの太陽の空",
+            "en": "sun behind clouds sky"
+          },
+          {
+            "ja": "冬の白い日差しの空",
+            "en": "white winter sun sky"
+          },
+          {
+            "ja": "夏の焼けるような昼空",
+            "en": "blazing summer noon sky"
+          },
+          {
+            "ja": "高い太陽の乾いた空",
+            "en": "high dry solar sky"
+          }
+        ]
+      },
+      {
+        "group": "🌤 光芒ベース",
+        "items": [
+          {
+            "ja": "雲間の光芒",
+            "en": "crepuscular rays"
+          },
+          {
+            "ja": "空から降りる光の筋",
+            "en": "descending light shafts"
+          },
+          {
+            "ja": "雲の切れ目の放射光",
+            "en": "radiant cloud gap"
+          },
+          {
+            "ja": "扇状に広がる光線",
+            "en": "fan-shaped sky rays"
+          },
+          {
+            "ja": "雲縁が輝く空",
+            "en": "silver-lined clouds"
+          },
+          {
+            "ja": "厚雲を割る光",
+            "en": "light breaking through cloud layer"
+          }
+        ]
+      },
+      {
+        "group": "🌈 光学現象ベース",
+        "items": [
+          {
+            "ja": "虹のある空",
+            "en": "rainbow sky"
+          },
+          {
+            "ja": "ハロが出た空",
+            "en": "halo sky"
+          },
+          {
+            "ja": "幻日が見える空",
+            "en": "sundog sky"
+          },
+          {
+            "ja": "彩雲のある空",
+            "en": "iridescent cloud sky"
+          },
+          {
+            "ja": "湿気ににじむ光の空",
+            "en": "mist-prism sky"
+          },
+          {
+            "ja": "雨上がりの光の空",
+            "en": "after-rain luminous sky"
+          }
+        ]
+      },
+      {
+        "group": "🌫 霞・にじみベース",
+        "items": [
+          {
+            "ja": "太陽光がにじむ薄霞",
+            "en": "solar haze veil"
+          },
+          {
+            "ja": "湿気を帯びた明るい空気",
+            "en": "humid bright air"
+          },
+          {
+            "ja": "乾いた高空の透明感",
+            "en": "thin upper-air clarity"
+          },
+          {
+            "ja": "夏の白い光霞",
+            "en": "summer white glare haze"
+          },
+          {
+            "ja": "冬の冷たい透明感",
+            "en": "cold winter transparency"
+          },
+          {
+            "ja": "地平にたまる光の靄",
+            "en": "luminous horizon haze"
+          }
+        ]
+      }
+    ],
+    "customize": [
+      {
+        "group": "☀ 太陽の強さ",
+        "items": [
+          {
+            "ja": "鋭い逆光",
+            "en": "piercing backlight"
+          },
+          {
+            "ja": "柔らかい拡散日差し",
+            "en": "soft diffused sunlight"
+          },
+          {
+            "ja": "低角度の強い輝き",
+            "en": "low-angle brilliance"
+          },
+          {
+            "ja": "白く焼ける日差し",
+            "en": "white-hot daylight glare"
+          },
+          {
+            "ja": "暖かい夕方の焼け光",
+            "en": "warm sunset burn"
+          },
+          {
+            "ja": "冷たく硬い日光",
+            "en": "cold hard sunlight"
+          }
+        ]
+      },
+      {
+        "group": "🌤 光の筋",
+        "items": [
+          {
+            "ja": "層になって差す光",
+            "en": "layered light shafts"
+          },
+          {
+            "ja": "細く走る光線",
+            "en": "narrow beam streaks"
+          },
+          {
+            "ja": "扇状の光の広がり",
+            "en": "fan-shaped rays"
+          },
+          {
+            "ja": "傾いて差すゴッドレイ",
+            "en": "slanted god rays"
+          },
+          {
+            "ja": "雲の切れ目の光幕",
+            "en": "cloud-gap light curtains"
+          },
+          {
+            "ja": "空一面に広がる光束",
+            "en": "spreading beam field"
+          }
+        ]
+      },
+      {
+        "group": "🌈 色の出方",
+        "items": [
+          {
+            "ja": "うっすらした虹色",
+            "en": "faint rainbow tint"
+          },
+          {
+            "ja": "パステル調の彩光",
+            "en": "pastel spectral glow"
+          },
+          {
+            "ja": "輪にじみの色彩",
+            "en": "halo-ring tint"
+          },
+          {
+            "ja": "霧に混じるプリズム色",
+            "en": "prismatic mist color"
+          },
+          {
+            "ja": "繊細な彩雲の縁色",
+            "en": "delicate iridescent fringe"
+          },
+          {
+            "ja": "濡れ空気の分光感",
+            "en": "wet-air spectral color"
+          }
+        ]
+      },
+      {
+        "group": "🌫 空気の抜け",
+        "items": [
+          {
+            "ja": "乾いた澄み空気",
+            "en": "crisp dry air"
+          },
+          {
+            "ja": "雨上がりの湿った透明感",
+            "en": "humid after-rain clarity"
+          },
+          {
+            "ja": "高空の薄い透明度",
+            "en": "thin upper-air transparency"
+          },
+          {
+            "ja": "夏の霞んだ空気",
+            "en": "hazy summer atmosphere"
+          },
+          {
+            "ja": "冬の張った空気",
+            "en": "tight winter air"
+          },
+          {
+            "ja": "距離をぼかす光霧",
+            "en": "light-softened distance haze"
+          }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "group": "☀ 太陽位置・光源",
+        "items": [
+          {
+            "ja": "地平近くの太陽",
+            "en": "sun disc near horizon"
+          },
+          {
+            "ja": "真上の小さな太陽",
+            "en": "small overhead sun"
+          },
+          {
+            "ja": "雲の奥に隠れた太陽",
+            "en": "sun hidden behind clouds"
+          },
+          {
+            "ja": "横から差す日光",
+            "en": "side-angle sunlight"
+          },
+          {
+            "ja": "沈みかけた太陽縁",
+            "en": "sinking sun edge"
+          },
+          {
+            "ja": "白く強い昼の太陽",
+            "en": "white-hot noon sun"
+          }
+        ]
+      },
+      {
+        "group": "☁ 雲縁と発光",
+        "items": [
+          {
+            "ja": "銀色の雲縁",
+            "en": "silver cloud edges"
+          },
+          {
+            "ja": "裏側から光る雲",
+            "en": "glowing cloud underside"
+          },
+          {
+            "ja": "明るい雲の裂け目",
+            "en": "bright cloud break"
+          },
+          {
+            "ja": "燃えるような雲縁",
+            "en": "cloud rim fire"
+          },
+          {
+            "ja": "透ける雲の縁",
+            "en": "translucent cloud fringe"
+          },
+          {
+            "ja": "割れた雲の光穴",
+            "en": "light hole in cloud layer"
+          }
+        ]
+      },
+      {
+        "group": "🌈 現象の印",
+        "items": [
+          {
+            "ja": "大きな虹の弧",
+            "en": "broad rainbow arc"
+          },
+          {
+            "ja": "二重虹の気配",
+            "en": "double-rainbow hint"
+          },
+          {
+            "ja": "幻日の光点",
+            "en": "sundog flares"
+          },
+          {
+            "ja": "薄いハロの輪",
+            "en": "faint halo ring"
+          },
+          {
+            "ja": "彩雲の色斑",
+            "en": "iridescent cloud patch"
+          },
+          {
+            "ja": "霧縁のプリズム",
+            "en": "prism mist fringe"
+          }
+        ]
+      },
+      {
+        "group": "🌄 補助景",
+        "items": [
+          {
+            "ja": "遠い山並みの影",
+            "en": "far mountain silhouettes"
+          },
+          {
+            "ja": "濡れた屋根の反射",
+            "en": "wet rooftop reflections"
+          },
+          {
+            "ja": "雨粒を残す空気",
+            "en": "lingering rain in the air"
+          },
+          {
+            "ja": "地平の光帯",
+            "en": "horizon light band"
+          },
+          {
+            "ja": "小さな鳥影",
+            "en": "tiny bird silhouettes"
+          },
+          {
+            "ja": "遠景を包む薄靄",
+            "en": "thin haze over distance"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "weather_transition_sky_collection",
+    "title": "⛈ 雨上がり・荒天遷移空景特化コレクション",
+    "subtitle": "晴れと嵐の間をさらに割り、降り出し前、通り雨の切れ目、嵐雲の通過、雪雲の低さ、前線の流れまで、湿度、気圧、雲脚、風向きの変化で空の移り変わりを成立させる遷移空景特化コレクション",
+    "complete": [
+      {
+        "group": "🌦 雨上がり・晴れ間",
+        "items": [
+          {
+            "id": "sunshower_clearing_open_sky",
+            "ja": "通り雨が抜けて晴れ間が開く空",
+            "links": {
+              "base": [
+                "after-rain clearing sky",
+                "sunshower sky"
+              ],
+              "customize": [
+                "humid clearing air",
+                "fresh wet openness",
+                "retreating rain feel"
+              ],
+              "settings": [
+                "broken blue opening",
+                "retreating rain curtain",
+                "bright wet atmosphere",
+                "soft rainbow hint"
+              ]
+            }
+          },
+          {
+            "id": "wet_twilight_after_rain_sky",
+            "ja": "雨上がりの湿った夕空",
+            "links": {
+              "base": [
+                "after-rain twilight sky",
+                "wet evening sky"
+              ],
+              "customize": [
+                "wet dusk softness",
+                "humid violet air",
+                "post-rain silence"
+              ],
+              "settings": [
+                "reflective low clouds",
+                "cool violet gradient",
+                "lingering drizzle haze",
+                "dim sunset edge"
+              ]
+            }
+          },
+          {
+            "id": "blue_gap_over_school_after_rain",
+            "ja": "学校の上に青い切れ目がのぞく雨上がり空",
+            "links": {
+              "base": [
+                "clearing schoolyard sky",
+                "after-rain open sky"
+              ],
+              "customize": [
+                "fresh post-rain brightness",
+                "everyday-air recovery",
+                "wet summer atmosphere"
+              ],
+              "settings": [
+                "patches of blue above",
+                "broken gray clouds",
+                "light puddle reflections below",
+                "humid brightness"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "⛈ 嵐前・嵐後",
+        "items": [
+          {
+            "id": "pressure_heavy_pre_storm_sky",
+            "ja": "嵐前の圧が低くのしかかる空",
+            "links": {
+              "base": [
+                "pre-storm pressure sky",
+                "heavy thundercloud sky"
+              ],
+              "customize": [
+                "barometric heaviness",
+                "charged stillness",
+                "dark cloud build-up"
+              ],
+              "settings": [
+                "low dark cloud ceiling",
+                "green-gray storm tint",
+                "distant thunder glow",
+                "windless tense air"
+              ]
+            }
+          },
+          {
+            "id": "retreating_storm_wall_sky",
+            "ja": "嵐雲の壁が遠ざかっていく空",
+            "links": {
+              "base": [
+                "retreating storm sky",
+                "storm-wall horizon sky"
+              ],
+              "customize": [
+                "storm receding drama",
+                "clearing-edge contrast",
+                "wind after impact"
+              ],
+              "settings": [
+                "dark cloud wall receding",
+                "opening clear section",
+                "sunlight returning",
+                "rain curtain in distance"
+              ]
+            }
+          },
+          {
+            "id": "typhoon_eye_break_light",
+            "ja": "台風の切れ目に光が差す不穏な空",
+            "links": {
+              "base": [
+                "typhoon break sky",
+                "violent cloud-belt sky"
+              ],
+              "customize": [
+                "uneasy calm",
+                "rotating cloud pressure",
+                "sudden sharp brightness"
+              ],
+              "settings": [
+                "spiral cloud flow",
+                "bright tear in storm clouds",
+                "violent wind direction",
+                "dark horizon shelf"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "❄ 冬空・雪雲",
+        "items": [
+          {
+            "id": "low_snow_cloud_morning",
+            "ja": "雪雲が低く垂れこめる朝の空",
+            "links": {
+              "base": [
+                "low snow-cloud sky",
+                "winter overcast sky"
+              ],
+              "customize": [
+                "cold low ceiling",
+                "snow-heavy silence",
+                "frozen morning air"
+              ],
+              "settings": [
+                "flat gray cloud blanket",
+                "dim winter daylight",
+                "powdery air",
+                "muted horizon line"
+              ]
+            }
+          },
+          {
+            "id": "snowstop_evening_cold_sky",
+            "ja": "雪が止みきった直後の冷たい夕空",
+            "links": {
+              "base": [
+                "post-snow evening sky",
+                "cold clearing winter sky"
+              ],
+              "customize": [
+                "after-snow stillness",
+                "blue-cold clarity",
+                "hushed evening air"
+              ],
+              "settings": [
+                "thin blue clearing",
+                "residual snow clouds",
+                "cold pale glow",
+                "frosty distance haze"
+              ]
+            }
+          },
+          {
+            "id": "blizzard_break_blue_gap",
+            "ja": "吹雪の切れ目に青がのぞく冬空",
+            "links": {
+              "base": [
+                "blizzard-break sky",
+                "winter clearing sky"
+              ],
+              "customize": [
+                "violent-to-clear transition",
+                "sharp winter wind",
+                "cold restored visibility"
+              ],
+              "settings": [
+                "blue slit in snow clouds",
+                "drifting snow remnants",
+                "fast cloud movement",
+                "white horizon blur"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🌬 風・前線の流れ",
+        "items": [
+          {
+            "id": "front_cloud_bands_plain_sky",
+            "ja": "前線雲が帯のように流れる平野の空",
+            "links": {
+              "base": [
+                "frontal band sky",
+                "plain-wide moving sky"
+              ],
+              "customize": [
+                "broad cloud-stream flow",
+                "weather-front tension",
+                "wind-driven movement"
+              ],
+              "settings": [
+                "parallel cloud bands",
+                "fast upper-air motion",
+                "wide flat horizon",
+                "uneven light patches"
+              ]
+            }
+          },
+          {
+            "id": "gusty_autumn_cloudrun_sky",
+            "ja": "秋風に雲が走る高い空",
+            "links": {
+              "base": [
+                "gusty autumn sky",
+                "high moving-cloud sky"
+              ],
+              "customize": [
+                "dry seasonal wind",
+                "fast cloud run",
+                "clear-cold openness"
+              ],
+              "settings": [
+                "stretched cloud streaks",
+                "high blue gap",
+                "wind-driven cloud edges",
+                "bright crisp daylight"
+              ]
+            }
+          },
+          {
+            "id": "sea_wind_changeover_sky",
+            "ja": "海風と雲が切り替わる沿岸の空",
+            "links": {
+              "base": [
+                "coastal weather-shift sky",
+                "sea-breeze sky"
+              ],
+              "customize": [
+                "marine air turnover",
+                "salt-moist wind",
+                "changing cloud pressure"
+              ],
+              "settings": [
+                "mixed cloud heights",
+                "bright sea-side opening",
+                "dark weather pocket",
+                "moving horizon haze"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "base": [
+      {
+        "group": "🌦 雨上がりベース",
+        "items": [
+          {
+            "ja": "雨上がりの空",
+            "en": "after-rain clearing sky"
+          },
+          {
+            "ja": "通り雨の空",
+            "en": "sunshower sky"
+          },
+          {
+            "ja": "濡れた夕空",
+            "en": "wet twilight sky"
+          },
+          {
+            "ja": "灰雲が割れた空",
+            "en": "broken gray-cloud sky"
+          },
+          {
+            "ja": "湿った明るい空",
+            "en": "humid bright sky"
+          },
+          {
+            "ja": "晴れ間がのぞく空",
+            "en": "blue-opening sky"
+          }
+        ]
+      },
+      {
+        "group": "⛈ 嵐雲・前線ベース",
+        "items": [
+          {
+            "ja": "嵐前の重い空",
+            "en": "pre-storm pressure sky"
+          },
+          {
+            "ja": "雷雲の空",
+            "en": "thundercloud sky"
+          },
+          {
+            "ja": "嵐が抜ける空",
+            "en": "retreating storm sky"
+          },
+          {
+            "ja": "台風の切れ目の空",
+            "en": "typhoon-break sky"
+          },
+          {
+            "ja": "前線の帯雲の空",
+            "en": "frontal-band sky"
+          },
+          {
+            "ja": "遠雷を孕む空",
+            "en": "distant-thunder sky"
+          }
+        ]
+      },
+      {
+        "group": "❄ 冬空・雪雲ベース",
+        "items": [
+          {
+            "ja": "低い雪雲の空",
+            "en": "low snow-cloud sky"
+          },
+          {
+            "ja": "冬の鉛色の空",
+            "en": "lead-gray winter sky"
+          },
+          {
+            "ja": "雪が上がる空",
+            "en": "post-snow clearing sky"
+          },
+          {
+            "ja": "吹雪の切れ目の空",
+            "en": "blizzard-break sky"
+          },
+          {
+            "ja": "凍てた曇天",
+            "en": "frozen overcast sky"
+          },
+          {
+            "ja": "寒波の空",
+            "en": "cold-wave sky"
+          }
+        ]
+      },
+      {
+        "group": "🌬 風・流れベース",
+        "items": [
+          {
+            "ja": "風で流れる空",
+            "en": "wind-driven sky"
+          },
+          {
+            "ja": "雲帯が走る空",
+            "en": "running cloud-band sky"
+          },
+          {
+            "ja": "季節風の空",
+            "en": "seasonal-wind sky"
+          },
+          {
+            "ja": "沿岸の変わりやすい空",
+            "en": "coastal changeable sky"
+          },
+          {
+            "ja": "上空だけ早く動く空",
+            "en": "fast upper-air sky"
+          },
+          {
+            "ja": "空気が入れ替わる空",
+            "en": "air-mass turnover sky"
+          }
+        ]
+      }
+    ],
+    "customize": [
+      {
+        "group": "💧 湿度・濡れ空気",
+        "items": [
+          {
+            "ja": "雨粒を残す湿気",
+            "en": "lingering rain humidity"
+          },
+          {
+            "ja": "濡れた空気の反射感",
+            "en": "wet-air reflectivity"
+          },
+          {
+            "ja": "重い蒸気感",
+            "en": "heavy vapor feel"
+          },
+          {
+            "ja": "水気のある透明感",
+            "en": "moist clarity"
+          },
+          {
+            "ja": "夏雨あとの蒸し空気",
+            "en": "post-summer-rain humidity"
+          },
+          {
+            "ja": "冷たい湿り気",
+            "en": "cold dampness"
+          }
+        ]
+      },
+      {
+        "group": "⚡ 圧迫感・気圧",
+        "items": [
+          {
+            "ja": "低気圧の圧",
+            "en": "barometric heaviness"
+          },
+          {
+            "ja": "雷前の緊張感",
+            "en": "pre-thunder tension"
+          },
+          {
+            "ja": "嵐の前触れ",
+            "en": "storm omen atmosphere"
+          },
+          {
+            "ja": "息苦しい曇圧",
+            "en": "oppressive cloud pressure"
+          },
+          {
+            "ja": "不穏な静けさ",
+            "en": "uneasy calm"
+          },
+          {
+            "ja": "暗雲の膨張感",
+            "en": "swelling storm mass"
+          }
+        ]
+      },
+      {
+        "group": "☁ 雲の動き",
+        "items": [
+          {
+            "ja": "早く流れる雲",
+            "en": "fast-moving clouds"
+          },
+          {
+            "ja": "帯状に伸びる雲",
+            "en": "banded cloud stretch"
+          },
+          {
+            "ja": "裂ける雲脚",
+            "en": "tearing cloud base"
+          },
+          {
+            "ja": "巻き込むような雲流れ",
+            "en": "spiraling cloud flow"
+          },
+          {
+            "ja": "雪雲の低い移動",
+            "en": "low drifting snow clouds"
+          },
+          {
+            "ja": "上空だけ走る薄雲",
+            "en": "upper-air fast thin clouds"
+          }
+        ]
+      },
+      {
+        "group": "🌤 切れ目・回復感",
+        "items": [
+          {
+            "ja": "晴れ間の回復感",
+            "en": "returning clear-sky feel"
+          },
+          {
+            "ja": "雲の裂け目の明るさ",
+            "en": "brightness through cloud tears"
+          },
+          {
+            "ja": "嵐後の光戻り",
+            "en": "light returning after storm"
+          },
+          {
+            "ja": "雪後の青み",
+            "en": "blue tint after snow"
+          },
+          {
+            "ja": "地平から戻る明るさ",
+            "en": "brightness returning from horizon"
+          },
+          {
+            "ja": "視界回復の抜け感",
+            "en": "restored visibility openness"
+          }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "group": "🌦 雨上がりの印",
+        "items": [
+          {
+            "ja": "遠ざかる雨の幕",
+            "en": "retreating rain curtain"
+          },
+          {
+            "ja": "小さな虹の気配",
+            "en": "small rainbow hint"
+          },
+          {
+            "ja": "水たまりに映る空",
+            "en": "sky reflected in puddles"
+          },
+          {
+            "ja": "しずくを残す空気",
+            "en": "droplet-laden air"
+          },
+          {
+            "ja": "濡れた地表の照り返し",
+            "en": "wet-ground glow"
+          },
+          {
+            "ja": "切れ目から射す光",
+            "en": "light through clearing gap"
+          }
+        ]
+      },
+      {
+        "group": "⛈ 嵐の印",
+        "items": [
+          {
+            "ja": "低く垂れた暗雲",
+            "en": "low dark cloud ceiling"
+          },
+          {
+            "ja": "遠雷の閃き",
+            "en": "distant thunder flashes"
+          },
+          {
+            "ja": "水平に流れる雨帯",
+            "en": "horizontal rain band"
+          },
+          {
+            "ja": "雲の壁の地平線",
+            "en": "storm-wall horizon"
+          },
+          {
+            "ja": "緑がかった嵐色",
+            "en": "green-gray storm tint"
+          },
+          {
+            "ja": "急な光の裂け目",
+            "en": "sudden bright break in storm"
+          }
+        ]
+      },
+      {
+        "group": "❄ 冬空の印",
+        "items": [
+          {
+            "ja": "平らな鉛雲",
+            "en": "flat lead-gray clouds"
+          },
+          {
+            "ja": "雪粉を含む空気",
+            "en": "powdery snow air"
+          },
+          {
+            "ja": "白くにじむ地平",
+            "en": "white-blurred horizon"
+          },
+          {
+            "ja": "薄青い回復帯",
+            "en": "thin blue clearing band"
+          },
+          {
+            "ja": "凍える薄光",
+            "en": "frost-pale light"
+          },
+          {
+            "ja": "残雪雲の塊",
+            "en": "residual snow-cloud masses"
+          }
+        ]
+      },
+      {
+        "group": "🌬 風向き・流線",
+        "items": [
+          {
+            "ja": "風向きに傾く雲",
+            "en": "wind-leaning clouds"
+          },
+          {
+            "ja": "斜めに引かれる雲筋",
+            "en": "diagonal cloud streaks"
+          },
+          {
+            "ja": "海から押す風の流れ",
+            "en": "sea-breeze push"
+          },
+          {
+            "ja": "高空の速い雲帯",
+            "en": "fast upper cloud bands"
+          },
+          {
+            "ja": "地平へ流れる雲影",
+            "en": "cloud shadows streaming to horizon"
+          },
+          {
+            "ja": "空気の入れ替わり線",
+            "en": "air-mass turnover line"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "twilight_dawn_sunset_collection",
+    "title": "🌅 朝焼け・夕焼け・薄明空特化コレクション",
+    "subtitle": "日の出前、朝焼け、夕焼け、残照、群青への移行まで、地平線の色帯、空気の薄さ、雲裏の発光、街明かりとの混ざり方で時間の縁を成立させる薄明空特化コレクション",
+    "complete": [
+      {
+        "group": "🌅 朝焼け・日の出前",
+        "items": [
+          {
+            "id": "cold_blue_dawn_edge_sky",
+            "ja": "夜の青がほどける直前の冷たい明け方の空",
+            "links": {
+              "base": [
+                "pre-dawn blue sky",
+                "cold horizon dawn sky"
+              ],
+              "customize": [
+                "blue-hour chill",
+                "thin pre-sunrise air",
+                "still sleeping world"
+              ],
+              "settings": [
+                "pale east horizon band",
+                "deep cobalt zenith",
+                "faint first-light rim",
+                "quiet silhouette line"
+              ]
+            }
+          },
+          {
+            "id": "pink_cloud_spring_dawn_sky",
+            "ja": "春の雲が薄桃に染まり始める朝焼け空",
+            "links": {
+              "base": [
+                "spring dawn sky",
+                "soft cloud dawn sky"
+              ],
+              "customize": [
+                "pink dawn cloud tint",
+                "gentle morning humidity",
+                "soft awakening light"
+              ],
+              "settings": [
+                "pink cloud undersides",
+                "pale peach horizon",
+                "cool upper blue",
+                "faint mist over distance"
+              ]
+            }
+          },
+          {
+            "id": "golden_sunrise_break_sky",
+            "ja": "地平の裂け目から金の光が立ち上がる日の出空",
+            "links": {
+              "base": [
+                "sunrise break sky",
+                "golden dawn sky"
+              ],
+              "customize": [
+                "golden horizon blaze",
+                "awakening sunlight pressure",
+                "fresh morning clarity"
+              ],
+              "settings": [
+                "bright sunrise slit",
+                "gold cloud edges",
+                "warm lower glow",
+                "long low-angle light"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🌇 夕焼け・残照",
+        "items": [
+          {
+            "id": "schoolyard_orange_afterglow_sky",
+            "ja": "放課後の校舎に橙が残る夕焼け空",
+            "links": {
+              "base": [
+                "after-school sunset sky",
+                "orange afterglow sky"
+              ],
+              "customize": [
+                "nostalgic dusk warmth",
+                "lingering sunset softness",
+                "quiet end-of-day air"
+              ],
+              "settings": [
+                "orange horizon wash",
+                "warm cloud underside",
+                "violet upper gradient",
+                "long evening silhouette"
+              ]
+            }
+          },
+          {
+            "id": "crimson_streak_windy_evening_sky",
+            "ja": "風に引き延ばされた紅い雲筋の夕空",
+            "links": {
+              "base": [
+                "windy sunset sky",
+                "crimson streak sky"
+              ],
+              "customize": [
+                "wind-stretched cloud bands",
+                "high-atmosphere dryness",
+                "dramatic evening tension"
+              ],
+              "settings": [
+                "crimson cloud streaks",
+                "amber lower band",
+                "cool indigo upper sky",
+                "fast-moving cloud texture"
+              ]
+            }
+          },
+          {
+            "id": "city_afterglow_bluehour_transition",
+            "ja": "街明かりが混ざり始める残照から群青への空",
+            "links": {
+              "base": [
+                "afterglow blue-hour sky",
+                "city dusk sky"
+              ],
+              "customize": [
+                "city-light dusk mix",
+                "violet afterglow fade",
+                "urban evening softness"
+              ],
+              "settings": [
+                "fading orange horizon",
+                "deepening blue upper sky",
+                "first city-light glow",
+                "thin evening cloud film"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🌃 薄明・群青移行",
+        "items": [
+          {
+            "id": "deep_blue_hour_waterside_sky",
+            "ja": "水辺が群青に沈むブルーアワーの空",
+            "links": {
+              "base": [
+                "blue-hour sky",
+                "waterside twilight sky"
+              ],
+              "customize": [
+                "blue-hour depth",
+                "cold reflective calm",
+                "evening hush"
+              ],
+              "settings": [
+                "deep cobalt gradient",
+                "faint horizon ember",
+                "thin reflective haze",
+                "first star hint"
+              ]
+            }
+          },
+          {
+            "id": "winter_twilight_single_star_sky",
+            "ja": "冬の薄明に一番星だけが残る空",
+            "links": {
+              "base": [
+                "winter twilight sky",
+                "single-star dusk sky"
+              ],
+              "customize": [
+                "winter dusk sharpness",
+                "clear cold horizon",
+                "quiet first-star focus"
+              ],
+              "settings": [
+                "single bright evening star",
+                "clear blue-black gradient",
+                "cold pale horizon",
+                "dry upper air"
+              ]
+            }
+          },
+          {
+            "id": "last_light_cloud_fade_sky",
+            "ja": "雲だけが最後まで光を持つ終端の薄明空",
+            "links": {
+              "base": [
+                "last-light twilight sky",
+                "cloud-lit dusk sky"
+              ],
+              "customize": [
+                "lingering cloud light",
+                "end-of-day stillness",
+                "delayed sunset fade"
+              ],
+              "settings": [
+                "bright cloud remnants",
+                "nearly dark zenith",
+                "ashen violet horizon",
+                "fading lower warmth"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "base": [
+      {
+        "group": "🌅 薄明ベース",
+        "items": [
+          {
+            "ja": "夜明け前の青い空",
+            "en": "pre-dawn blue sky"
+          },
+          {
+            "ja": "春の朝焼け空",
+            "en": "spring dawn sky"
+          },
+          {
+            "ja": "黄金の朝の空",
+            "en": "golden sunrise sky"
+          },
+          {
+            "ja": "夕焼けの空",
+            "en": "sunset afterglow sky"
+          },
+          {
+            "ja": "群青のブルーアワー空",
+            "en": "deep blue-hour sky"
+          },
+          {
+            "ja": "残照の都市夕空",
+            "en": "city afterglow dusk sky"
+          }
+        ]
+      },
+      {
+        "group": "🌇 地平線の色帯",
+        "items": [
+          {
+            "ja": "桃色の地平帯",
+            "en": "pink horizon band"
+          },
+          {
+            "ja": "橙の残照帯",
+            "en": "orange afterglow band"
+          },
+          {
+            "ja": "金色の日の出裂け目",
+            "en": "gold sunrise slit"
+          },
+          {
+            "ja": "紫に沈む空気層",
+            "en": "violet evening air layer"
+          },
+          {
+            "ja": "冷たい青の上空",
+            "en": "cold upper blue"
+          },
+          {
+            "ja": "群青へ沈む上空",
+            "en": "deepening blue upper sky"
+          }
+        ]
+      },
+      {
+        "group": "☁ 雲と残光",
+        "items": [
+          {
+            "ja": "朝焼け雲の裏光",
+            "en": "dawn cloud backglow"
+          },
+          {
+            "ja": "夕雲の赤い縁",
+            "en": "red evening cloud edges"
+          },
+          {
+            "ja": "最後まで光る雲",
+            "en": "last-lit clouds"
+          },
+          {
+            "ja": "薄い夕雲の膜",
+            "en": "thin evening cloud film"
+          },
+          {
+            "ja": "風に流れる雲筋",
+            "en": "wind-stretched cloud streaks"
+          },
+          {
+            "ja": "淡い朝靄の雲縁",
+            "en": "mist-softened dawn cloud edge"
+          }
+        ]
+      }
+    ],
+    "customize": [
+      {
+        "group": "🎨 色味調整",
+        "items": [
+          {
+            "ja": "薄桃の朝焼け",
+            "en": "soft pink dawn tint"
+          },
+          {
+            "ja": "濃い朱の夕焼け",
+            "en": "deep vermilion sunset tint"
+          },
+          {
+            "ja": "紫がかった残照",
+            "en": "violet afterglow tint"
+          },
+          {
+            "ja": "群青の深まり",
+            "en": "deepening cobalt tone"
+          },
+          {
+            "ja": "冷たい冬の青",
+            "en": "cold winter blue cast"
+          },
+          {
+            "ja": "金色の朝光にじみ",
+            "en": "golden dawn bloom"
+          }
+        ]
+      },
+      {
+        "group": "🌬 空気感・時間感",
+        "items": [
+          {
+            "ja": "朝の張った冷気",
+            "en": "tense morning chill"
+          },
+          {
+            "ja": "湿った夕方のやわらかさ",
+            "en": "humid evening softness"
+          },
+          {
+            "ja": "放課後の懐かしさ",
+            "en": "after-school nostalgia"
+          },
+          {
+            "ja": "一日の終わりの静けさ",
+            "en": "end-of-day hush"
+          },
+          {
+            "ja": "目覚める前の静止感",
+            "en": "pre-awakening stillness"
+          },
+          {
+            "ja": "街が灯り始める気配",
+            "en": "first city-light presence"
+          }
+        ]
+      },
+      {
+        "group": "✨ 光の滲み",
+        "items": [
+          {
+            "ja": "地平のやわらかい発光",
+            "en": "soft horizon glow"
+          },
+          {
+            "ja": "雲裏の金縁",
+            "en": "gold cloud underside glow"
+          },
+          {
+            "ja": "薄い光柱",
+            "en": "subtle light columns"
+          },
+          {
+            "ja": "残照の拡散にじみ",
+            "en": "afterglow diffusion"
+          },
+          {
+            "ja": "空気越しの白いにじみ",
+            "en": "white atmospheric bloom"
+          },
+          {
+            "ja": "最初の星が目立つ暗さ",
+            "en": "first-star-emerging darkness"
+          }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "group": "🌄 時間帯設定",
+        "items": [
+          {
+            "ja": "夜明け直前",
+            "en": "just before sunrise"
+          },
+          {
+            "ja": "日の出直後",
+            "en": "just after sunrise"
+          },
+          {
+            "ja": "日没直後",
+            "en": "just after sunset"
+          },
+          {
+            "ja": "ブルーアワー",
+            "en": "blue hour"
+          },
+          {
+            "ja": "宵の口",
+            "en": "early nightfall"
+          },
+          {
+            "ja": "最後の残光",
+            "en": "last afterglow"
+          }
+        ]
+      },
+      {
+        "group": "🏙 補助景",
+        "items": [
+          {
+            "ja": "校舎の黒い輪郭",
+            "en": "school-building silhouette"
+          },
+          {
+            "ja": "遠い山並み",
+            "en": "far mountain line"
+          },
+          {
+            "ja": "水面の反射帯",
+            "en": "water reflection band"
+          },
+          {
+            "ja": "街明かりの淡い粒",
+            "en": "faint city-light dots"
+          },
+          {
+            "ja": "電線の細い影",
+            "en": "thin powerline silhouettes"
+          },
+          {
+            "ja": "屋上の手すり影",
+            "en": "rooftop railing silhouette"
+          }
+        ]
+      },
+      {
+        "group": "🌫 余韻・空気層",
+        "items": [
+          {
+            "ja": "薄い地平の靄",
+            "en": "thin horizon haze"
+          },
+          {
+            "ja": "夕方の熱の残り",
+            "en": "lingering evening warmth"
+          },
+          {
+            "ja": "冬の乾いた透明感",
+            "en": "dry winter clarity"
+          },
+          {
+            "ja": "朝の白い息感",
+            "en": "morning breath-white air"
+          },
+          {
+            "ja": "夜へ沈む静かな色",
+            "en": "quiet fade into night"
+          },
+          {
+            "ja": "遅れて消える雲の光",
+            "en": "delayed cloud-light fade"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cloud_layers_upperair_collection",
+    "title": "☁ 雲相・高層雲・空の層構造特化コレクション",
+    "subtitle": "積雲、巻雲、うろこ雲、波状雲、棚雲、かなとこ雲まで、雲の種類、層の高さ、流れ、ちぎれ方、重なり方で空そのものの骨格を見せる雲相特化コレクション",
+    "complete": [
+      {
+        "group": "☁ 積雲・夏雲",
+        "items": [
+          {
+            "id": "towering_summer_cumulus_sky",
+            "ja": "真夏に雲塔が立ち上がる積雲の空",
+            "links": {
+              "base": [
+                "towering summer cumulus sky",
+                "bright summer cloud sky"
+              ],
+              "customize": [
+                "sunlit cumulus volume",
+                "humid summer lift",
+                "strong vertical cloud build"
+              ],
+              "settings": [
+                "towering cumulus heads",
+                "bright white cloud rims",
+                "deep blue gaps",
+                "heat-heavy lower air"
+              ]
+            }
+          },
+          {
+            "id": "broken_fairweather_cumulus_sky",
+            "ja": "千切れた積雲が散る乾いた昼空",
+            "links": {
+              "base": [
+                "fairweather cumulus sky",
+                "dry bright daytime sky"
+              ],
+              "customize": [
+                "scattered cloud spacing",
+                "dry clear daylight",
+                "light summer breeze"
+              ],
+              "settings": [
+                "small cumulus clusters",
+                "wide blue openings",
+                "crisp white cloud tops",
+                "clean noon visibility"
+              ]
+            }
+          },
+          {
+            "id": "anvil_cloud_thunderhead_sky",
+            "ja": "かなとこ雲が遠くに張り出す雷雲の空",
+            "links": {
+              "base": [
+                "anvil thunderhead sky",
+                "distant storm cloud sky"
+              ],
+              "customize": [
+                "thunderhead scale",
+                "upper-air shear spread",
+                "storm-distance grandeur"
+              ],
+              "settings": [
+                "anvil cloud top",
+                "dark lower thunder base",
+                "bright sunlit crown",
+                "distant rain shaft"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🪶 巻雲・高層雲",
+        "items": [
+          {
+            "id": "feather_cirrus_cold_sky",
+            "ja": "羽のような巻雲が走る冷たい高空",
+            "links": {
+              "base": [
+                "cirrus feather sky",
+                "cold clear upper sky"
+              ],
+              "customize": [
+                "fine upper-air brushstrokes",
+                "high-altitude dryness",
+                "thin crystalline light"
+              ],
+              "settings": [
+                "feather cirrus streaks",
+                "pale blue dome",
+                "clean solar glare",
+                "subtle upper-wind flow"
+              ]
+            }
+          },
+          {
+            "id": "mackerel_altocumulus_evening_sky",
+            "ja": "うろこ雲が広がる秋の夕空",
+            "links": {
+              "base": [
+                "mackerel-cloud evening sky",
+                "autumn upper-cloud sky"
+              ],
+              "customize": [
+                "patterned cloud tessellation",
+                "autumn dryness",
+                "evening quiet"
+              ],
+              "settings": [
+                "altocumulus field",
+                "warm lower afterglow",
+                "cool upper pattern",
+                "fine cloud texture"
+              ]
+            }
+          },
+          {
+            "id": "wave_cloud_windy_highland_sky",
+            "ja": "波状雲が連なる風の強い高原の空",
+            "links": {
+              "base": [
+                "wave-cloud sky",
+                "windy highland sky"
+              ],
+              "customize": [
+                "striped cloud rhythm",
+                "strong upper-wind flow",
+                "highland air movement"
+              ],
+              "settings": [
+                "parallel cloud bands",
+                "clean blue intervals",
+                "wind-shaped spacing",
+                "cool highland clarity"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🌫 層雲・低い天井",
+        "items": [
+          {
+            "id": "marine_layer_overcast_sky",
+            "ja": "海霧の層が空を低く塞ぐ曇天",
+            "links": {
+              "base": [
+                "marine layer overcast sky",
+                "low cloud-ceiling sky"
+              ],
+              "customize": [
+                "flat gray pressure",
+                "humid coastal air",
+                "low-ceiling silence"
+              ],
+              "settings": [
+                "flat cloud blanket",
+                "dim coastal brightness",
+                "blurred horizon line",
+                "mist-softened distance"
+              ]
+            }
+          },
+          {
+            "id": "winter_stratus_city_sky",
+            "ja": "冬の街を低く覆う層雲の空",
+            "links": {
+              "base": [
+                "winter stratus city sky",
+                "overcast urban sky"
+              ],
+              "customize": [
+                "winter ceiling weight",
+                "muted daylight",
+                "urban gray hush"
+              ],
+              "settings": [
+                "low gray ceiling",
+                "flat winter light",
+                "faint cold haze",
+                "muted skyline silhouette"
+              ]
+            }
+          },
+          {
+            "id": "shelfcloud_front_edge_sky",
+            "ja": "前線の先端がのしかかる棚雲の空",
+            "links": {
+              "base": [
+                "shelf-cloud front sky",
+                "storm-front edge sky"
+              ],
+              "customize": [
+                "front-edge menace",
+                "rolling cloud shelf",
+                "gust-front pressure"
+              ],
+              "settings": [
+                "arched shelf cloud",
+                "dark underside roll",
+                "sharp boundary light",
+                "wind-pushed cloud lip"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "base": [
+      {
+        "group": "☁ 雲の骨格ベース",
+        "items": [
+          {
+            "ja": "大きな積雲の空",
+            "en": "large cumulus sky"
+          },
+          {
+            "ja": "巻雲が走る空",
+            "en": "cirrus-streaked sky"
+          },
+          {
+            "ja": "うろこ雲の空",
+            "en": "mackerel-cloud sky"
+          },
+          {
+            "ja": "波状雲の空",
+            "en": "wave-cloud sky"
+          },
+          {
+            "ja": "低い層雲の空",
+            "en": "low stratus sky"
+          },
+          {
+            "ja": "棚雲の空",
+            "en": "shelf-cloud sky"
+          }
+        ]
+      },
+      {
+        "group": "📏 層の高さ",
+        "items": [
+          {
+            "ja": "高い上層雲",
+            "en": "high upper clouds"
+          },
+          {
+            "ja": "中層に広がる雲帯",
+            "en": "mid-level cloud band"
+          },
+          {
+            "ja": "低い雲天井",
+            "en": "low cloud ceiling"
+          },
+          {
+            "ja": "雲塔の立ち上がり",
+            "en": "towering cloud columns"
+          },
+          {
+            "ja": "遠くで張るかなとこ雲",
+            "en": "distant anvil spread"
+          },
+          {
+            "ja": "水平に流れる雲列",
+            "en": "horizontal cloud rows"
+          }
+        ]
+      },
+      {
+        "group": "🌬 風と流れ",
+        "items": [
+          {
+            "ja": "上空の速い風筋",
+            "en": "fast upper-wind lines"
+          },
+          {
+            "ja": "風に千切れる雲",
+            "en": "wind-torn clouds"
+          },
+          {
+            "ja": "層ごとに違う流れ",
+            "en": "cross-layer cloud drift"
+          },
+          {
+            "ja": "前線に押される雲端",
+            "en": "front-pushed cloud edge"
+          },
+          {
+            "ja": "滑るような高層雲",
+            "en": "gliding upper clouds"
+          },
+          {
+            "ja": "回転感のある雲流れ",
+            "en": "rotational cloud flow"
+          }
+        ]
+      }
+    ],
+    "customize": [
+      {
+        "group": "🧱 体積・厚み",
+        "items": [
+          {
+            "ja": "もくもくした厚み",
+            "en": "billowing cloud volume"
+          },
+          {
+            "ja": "薄く透ける高層雲",
+            "en": "thin translucent high clouds"
+          },
+          {
+            "ja": "平たくのしかかる曇り",
+            "en": "flattened oppressive overcast"
+          },
+          {
+            "ja": "遠近差のある雲塊",
+            "en": "depth-layered cloud masses"
+          },
+          {
+            "ja": "削れた雲頂",
+            "en": "eroded cloud tops"
+          },
+          {
+            "ja": "重く暗い雲腹",
+            "en": "heavy dark cloud bellies"
+          }
+        ]
+      },
+      {
+        "group": "✨ 光の当たり方",
+        "items": [
+          {
+            "ja": "白く光る雲頂",
+            "en": "bright sunlit cloud tops"
+          },
+          {
+            "ja": "影で青みを持つ雲腹",
+            "en": "blue-shadow cloud undersides"
+          },
+          {
+            "ja": "縁だけ光る雲",
+            "en": "rim-lit cloud edges"
+          },
+          {
+            "ja": "薄く拡散した昼光",
+            "en": "diffused daylight spread"
+          },
+          {
+            "ja": "雷雲の上だけ明るい",
+            "en": "bright thunderhead crown"
+          },
+          {
+            "ja": "光が途切れる層境界",
+            "en": "light-breaking cloud layer boundary"
+          }
+        ]
+      },
+      {
+        "group": "🪶 細部の表情",
+        "items": [
+          {
+            "ja": "筆で掃いたような雲筋",
+            "en": "brushstroke cloud streaks"
+          },
+          {
+            "ja": "細かな粒雲の模様",
+            "en": "fine mottled cloud pattern"
+          },
+          {
+            "ja": "波打つ雲の列",
+            "en": "undulating cloud rows"
+          },
+          {
+            "ja": "ちぎれた雲片",
+            "en": "torn cloud fragments"
+          },
+          {
+            "ja": "雲脚の垂れ",
+            "en": "hanging cloud bases"
+          },
+          {
+            "ja": "雨脚を孕む暗部",
+            "en": "rain-laden dark sections"
+          }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "group": "🌀 気圧・空気感",
+        "items": [
+          {
+            "ja": "夏の湿った上昇気流",
+            "en": "humid summer uplift"
+          },
+          {
+            "ja": "秋の乾いた透明感",
+            "en": "dry autumn transparency"
+          },
+          {
+            "ja": "海沿いの湿った重さ",
+            "en": "coastal humid heaviness"
+          },
+          {
+            "ja": "冬の鈍い曇天圧",
+            "en": "winter overcast pressure"
+          },
+          {
+            "ja": "嵐前の不穏さ",
+            "en": "pre-storm unease"
+          },
+          {
+            "ja": "高原の風の抜け",
+            "en": "highland wind passage"
+          }
+        ]
+      },
+      {
+        "group": "🌍 補助景",
+        "items": [
+          {
+            "ja": "遠い稜線の影",
+            "en": "distant ridgeline silhouettes"
+          },
+          {
+            "ja": "海際の白い靄",
+            "en": "coastal white haze"
+          },
+          {
+            "ja": "街並みの低い黒線",
+            "en": "low city skyline line"
+          },
+          {
+            "ja": "鉄塔の細い影",
+            "en": "thin transmission-tower silhouettes"
+          },
+          {
+            "ja": "草原の水平線",
+            "en": "grassland horizon line"
+          },
+          {
+            "ja": "雨柱の遠景",
+            "en": "distant rain shafts"
+          }
+        ]
+      },
+      {
+        "group": "📐 層構造の強調",
+        "items": [
+          {
+            "ja": "上層と下層の流れ差",
+            "en": "upper-lower layer drift contrast"
+          },
+          {
+            "ja": "雲の高さ差",
+            "en": "cloud-height separation"
+          },
+          {
+            "ja": "水平に重なる雲帯",
+            "en": "stacked horizontal cloud bands"
+          },
+          {
+            "ja": "上空だけ澄んだ抜け",
+            "en": "clear upper-air opening"
+          },
+          {
+            "ja": "前線境界の切れ目",
+            "en": "frontal boundary break"
+          },
+          {
+            "ja": "空全体の骨格感",
+            "en": "overall sky-structure presence"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "star_celestial_cosmos_collection",
     "title": "🌌 星空・天体・宇宙寄り夜空特化コレクション",
     "subtitle": "空模様の先で夜空をさらに深く掘り、天の川、月相、流星、食、オーロラ、観測ドーム、衛星軌跡まで、静けさ、密度、寒気、光の薄さ、宇宙の奥行で多層に噛ませる夜空特化コレクション",
@@ -35621,691 +40108,691 @@ const BG_EFFECTS = {
       }
     ]
   },
-{
-  "id": "horizon_cloudsea_overlook_collection",
-  "title": "🌅 地平・雲海・上空眺望特化コレクション",
-  "subtitle": "地上から見上げる空の次段として、山頂、尾根、断崖、屋上、塔上、雲海の上など、高い場所から地平と雲層を見渡す眺望側の空景を、抜け、距離、眼下の広がり、風、光帯で多層に噛ませる高所眺望特化コレクション",
-  "complete": [
-    {
-      "group": "🌅 地平・朝夕の眺望",
-      "items": [
-        {
-          "id": "dawn_horizon_lookout",
-          "ja": "夜明けの縁が差す高所の地平眺望",
-          "links": {
-            "base": [
-              "horizon overlook point",
-              "dawn-facing lookout"
-            ],
-            "customize": [
-              "dawn edge glow",
-              "high-elevation openness",
-              "overlook silence"
-            ],
-            "settings": [
-              "far horizon line",
-              "pale sun edge",
-              "layered mountain silhouettes",
-              "observation deck railing"
-            ]
+  {
+    "id": "horizon_cloudsea_overlook_collection",
+    "title": "🌅 地平・雲海・上空眺望特化コレクション",
+    "subtitle": "地上から見上げる空の次段として、山頂、尾根、断崖、屋上、塔上、雲海の上など、高い場所から地平と雲層を見渡す眺望側の空景を、抜け、距離、眼下の広がり、風、光帯で多層に噛ませる高所眺望特化コレクション",
+    "complete": [
+      {
+        "group": "🌅 地平・朝夕の眺望",
+        "items": [
+          {
+            "id": "dawn_horizon_lookout",
+            "ja": "夜明けの縁が差す高所の地平眺望",
+            "links": {
+              "base": [
+                "horizon overlook point",
+                "dawn-facing lookout"
+              ],
+              "customize": [
+                "dawn edge glow",
+                "high-elevation openness",
+                "overlook silence"
+              ],
+              "settings": [
+                "far horizon line",
+                "pale sun edge",
+                "layered mountain silhouettes",
+                "observation deck railing"
+              ]
+            }
+          },
+          {
+            "id": "sunset_horizon_overlook",
+            "ja": "夕焼けが低く燃える展望地の地平",
+            "links": {
+              "base": [
+                "far plain horizon viewpoint",
+                "horizon overlook point"
+              ],
+              "customize": [
+                "sunset horizon blaze",
+                "far-distance depth",
+                "vast-earth spread"
+              ],
+              "settings": [
+                "far horizon line",
+                "sunset light band",
+                "tiny town grid below",
+                "guardrail silhouette"
+              ]
+            }
+          },
+          {
+            "id": "bluehour_highplace_view",
+            "ja": "青の時間が沈む高所の遠景眺望",
+            "links": {
+              "base": [
+                "tower observatory deck",
+                "horizon overlook point"
+              ],
+              "customize": [
+                "blue-hour depth",
+                "overlook silence",
+                "thin upper-air clarity"
+              ],
+              "settings": [
+                "blue twilight band",
+                "far horizon line",
+                "distant river curve",
+                "observation deck railing"
+              ]
+            }
+          },
+          {
+            "id": "moonrise_horizon_view",
+            "ja": "月が昇る地平を待つ静かな高所",
+            "links": {
+              "base": [
+                "sea horizon viewpoint",
+                "tower observatory deck"
+              ],
+              "customize": [
+                "moonrise silver haze",
+                "overlook silence",
+                "far-distance depth"
+              ],
+              "settings": [
+                "moonrise glow band",
+                "far horizon line",
+                "guardrail silhouette",
+                "silver horizon haze"
+              ]
+            }
           }
-        },
-        {
-          "id": "sunset_horizon_overlook",
-          "ja": "夕焼けが低く燃える展望地の地平",
-          "links": {
-            "base": [
-              "far plain horizon viewpoint",
-              "horizon overlook point"
-            ],
-            "customize": [
-              "sunset horizon blaze",
-              "far-distance depth",
-              "vast-earth spread"
-            ],
-            "settings": [
-              "far horizon line",
-              "sunset light band",
-              "tiny town grid below",
-              "guardrail silhouette"
-            ]
+        ]
+      },
+      {
+        "group": "☁ 雲海・雲層の眺望",
+        "items": [
+          {
+            "id": "sunrise_cloudsea_ridge",
+            "ja": "朝焼けが差す雲海上の尾根眺望",
+            "links": {
+              "base": [
+                "cloud sea overlook",
+                "ridge above cloud layer"
+              ],
+              "customize": [
+                "cloud-sea stillness",
+                "dawn edge glow",
+                "beneath-cloud separation"
+              ],
+              "settings": [
+                "cloud sea blanket",
+                "floating peak islands",
+                "sunlit cloud sea rim",
+                "ridge line silhouette"
+              ]
+            }
+          },
+          {
+            "id": "twilight_cloudsea_overlook",
+            "ja": "薄暮が沈む雲海の展望地",
+            "links": {
+              "base": [
+                "cloud sea overlook",
+                "broken cloud deck overlook"
+              ],
+              "customize": [
+                "blue-hour depth",
+                "cloud-sea stillness",
+                "slow cloudbank drift"
+              ],
+              "settings": [
+                "cloud sea blanket",
+                "silver horizon haze",
+                "floating peak islands",
+                "observation deck railing"
+              ]
+            }
+          },
+          {
+            "id": "moonlit_cloudsea_height",
+            "ja": "月光が落ちる雲海上の高所眺望",
+            "links": {
+              "base": [
+                "ridge above cloud layer",
+                "cloud sea overlook"
+              ],
+              "customize": [
+                "moonrise silver haze",
+                "cloud-sea stillness",
+                "high-elevation openness"
+              ],
+              "settings": [
+                "moonlit cloud blanket",
+                "floating peak islands",
+                "ridge line silhouette",
+                "far horizon line"
+              ]
+            }
+          },
+          {
+            "id": "stormbreak_above_clouds",
+            "ja": "雲の切れ目から光が落ちる高所眺望",
+            "links": {
+              "base": [
+                "broken cloud deck overlook",
+                "mist-filled valley overlook"
+              ],
+              "customize": [
+                "stormbreak clearing",
+                "beneath-cloud separation",
+                "slow cloudbank drift"
+              ],
+              "settings": [
+                "broken cloud deck",
+                "cloud shadows below",
+                "sunlit cloud sea rim",
+                "silver horizon haze"
+              ]
+            }
           }
-        },
-        {
-          "id": "bluehour_highplace_view",
-          "ja": "青の時間が沈む高所の遠景眺望",
-          "links": {
-            "base": [
-              "tower observatory deck",
-              "horizon overlook point"
-            ],
-            "customize": [
-              "blue-hour depth",
-              "overlook silence",
-              "thin upper-air clarity"
-            ],
-            "settings": [
-              "blue twilight band",
-              "far horizon line",
-              "distant river curve",
-              "observation deck railing"
-            ]
+        ]
+      },
+      {
+        "group": "🏙 高所・建築眺望",
+        "items": [
+          {
+            "id": "city_rooftop_dusk_view",
+            "ja": "夕暮れの街を見下ろす屋上眺望",
+            "links": {
+              "base": [
+                "city rooftop lookout",
+                "high-rise sky terrace"
+              ],
+              "customize": [
+                "sunset horizon blaze",
+                "lookdown hush",
+                "vast-earth spread"
+              ],
+              "settings": [
+                "tiny town grid below",
+                "roof equipment silhouette",
+                "observation deck railing",
+                "sunset light band"
+              ]
+            }
+          },
+          {
+            "id": "school_rooftop_morning_view",
+            "ja": "朝の静けさが張る学校屋上の眺望",
+            "links": {
+              "base": [
+                "school rooftop outlook",
+                "far plain horizon viewpoint"
+              ],
+              "customize": [
+                "dawn edge glow",
+                "overlook silence",
+                "high-elevation openness"
+              ],
+              "settings": [
+                "school rooftop fence",
+                "tiny town grid below",
+                "pale sun edge",
+                "distant river curve"
+              ]
+            }
+          },
+          {
+            "id": "tower_observatory_night_overlook",
+            "ja": "夜景の端まで見渡す塔上展望地",
+            "links": {
+              "base": [
+                "tower observatory deck",
+                "city rooftop lookout"
+              ],
+              "customize": [
+                "blue-hour depth",
+                "far-distance depth",
+                "overlook silence"
+              ],
+              "settings": [
+                "observation deck railing",
+                "city light beadline",
+                "far horizon line",
+                "concrete parapet edge"
+              ]
+            }
+          },
+          {
+            "id": "windy_highrise_skyterrace",
+            "ja": "風が抜ける高層テラスの上空眺望",
+            "links": {
+              "base": [
+                "high-rise sky terrace",
+                "tower observatory deck"
+              ],
+              "customize": [
+                "wind-brushed lookout",
+                "far-distance depth",
+                "lookdown hush"
+              ],
+              "settings": [
+                "guardrail silhouette",
+                "roof equipment silhouette",
+                "city light beadline",
+                "silver horizon haze"
+              ]
+            }
           }
-        },
-        {
-          "id": "moonrise_horizon_view",
-          "ja": "月が昇る地平を待つ静かな高所",
-          "links": {
-            "base": [
-              "sea horizon viewpoint",
-              "tower observatory deck"
-            ],
-            "customize": [
-              "moonrise silver haze",
-              "overlook silence",
-              "far-distance depth"
-            ],
-            "settings": [
-              "moonrise glow band",
-              "far horizon line",
-              "guardrail silhouette",
-              "silver horizon haze"
-            ]
+        ]
+      },
+      {
+        "group": "⛰ 山頂・断崖・展望地",
+        "items": [
+          {
+            "id": "summit_panorama_sunrise",
+            "ja": "朝の眺望がひらく山頂展望地",
+            "links": {
+              "base": [
+                "mountain summit panorama point",
+                "ridge panorama point"
+              ],
+              "customize": [
+                "dawn edge glow",
+                "high-elevation openness",
+                "vast-earth spread"
+              ],
+              "settings": [
+                "summit marker",
+                "layered mountain silhouettes",
+                "pale sun edge",
+                "coin viewfinder"
+              ]
+            }
+          },
+          {
+            "id": "ridge_shadow_open_noon",
+            "ja": "雲影が流れる尾根の昼眺望",
+            "links": {
+              "base": [
+                "ridge panorama point",
+                "mountain summit panorama point"
+              ],
+              "customize": [
+                "wind-brushed lookout",
+                "far-distance depth",
+                "high-elevation openness"
+              ],
+              "settings": [
+                "cloud shadows below",
+                "ridge line silhouette",
+                "layered mountain silhouettes",
+                "summit marker"
+              ]
+            }
+          },
+          {
+            "id": "cliff_edge_sea_horizon",
+            "ja": "海の地平を遠く抱く断崖の眺望",
+            "links": {
+              "base": [
+                "cliff-edge lookout",
+                "sea horizon viewpoint"
+              ],
+              "customize": [
+                "far-distance depth",
+                "wind-brushed lookout",
+                "high-elevation openness"
+              ],
+              "settings": [
+                "cliff-edge railing",
+                "far horizon line",
+                "sea-glint strip",
+                "stone lookout platform"
+              ]
+            }
+          },
+          {
+            "id": "valley_overlook_evening",
+            "ja": "谷あいの遠さが沈む夕方の展望地",
+            "links": {
+              "base": [
+                "valley overlook platform",
+                "mist-filled valley overlook"
+              ],
+              "customize": [
+                "sunset horizon blaze",
+                "valley mist layering",
+                "lookdown hush"
+              ],
+              "settings": [
+                "valley depth bands",
+                "stone lookout platform",
+                "long ground shadows",
+                "guardrail silhouette"
+              ]
+            }
           }
-        }
-      ]
-    },
-    {
-      "group": "☁ 雲海・雲層の眺望",
-      "items": [
-        {
-          "id": "sunrise_cloudsea_ridge",
-          "ja": "朝焼けが差す雲海上の尾根眺望",
-          "links": {
-            "base": [
-              "cloud sea overlook",
-              "ridge above cloud layer"
-            ],
-            "customize": [
-              "cloud-sea stillness",
-              "dawn edge glow",
-              "beneath-cloud separation"
-            ],
-            "settings": [
-              "cloud sea blanket",
-              "floating peak islands",
-              "sunlit cloud sea rim",
-              "ridge line silhouette"
-            ]
+        ]
+      }
+    ],
+    "base": [
+      {
+        "group": "🌅 地平・水平線の眺望",
+        "items": [
+          {
+            "ja": "地平を見渡す展望地",
+            "en": "horizon overlook point"
+          },
+          {
+            "ja": "海の水平線が抜ける眺望地",
+            "en": "sea horizon viewpoint"
+          },
+          {
+            "ja": "平野の先まで見える高所眺望",
+            "en": "far plain horizon viewpoint"
+          },
+          {
+            "ja": "朝日を受ける向きの見晴らし",
+            "en": "dawn-facing lookout"
           }
-        },
-        {
-          "id": "twilight_cloudsea_overlook",
-          "ja": "薄暮が沈む雲海の展望地",
-          "links": {
-            "base": [
-              "cloud sea overlook",
-              "broken cloud deck overlook"
-            ],
-            "customize": [
-              "blue-hour depth",
-              "cloud-sea stillness",
-              "slow cloudbank drift"
-            ],
-            "settings": [
-              "cloud sea blanket",
-              "silver horizon haze",
-              "floating peak islands",
-              "observation deck railing"
-            ]
+        ]
+      },
+      {
+        "group": "☁ 雲海・雲層の眺望",
+        "items": [
+          {
+            "ja": "雲海を見下ろす高所",
+            "en": "cloud sea overlook"
+          },
+          {
+            "ja": "雲層の上に出る尾根眺望",
+            "en": "ridge above cloud layer"
+          },
+          {
+            "ja": "雲の切れ目がひらく展望地",
+            "en": "broken cloud deck overlook"
+          },
+          {
+            "ja": "谷霧がたまる高所眺望",
+            "en": "mist-filled valley overlook"
           }
-        },
-        {
-          "id": "moonlit_cloudsea_height",
-          "ja": "月光が落ちる雲海上の高所眺望",
-          "links": {
-            "base": [
-              "ridge above cloud layer",
-              "cloud sea overlook"
-            ],
-            "customize": [
-              "moonrise silver haze",
-              "cloud-sea stillness",
-              "high-elevation openness"
-            ],
-            "settings": [
-              "moonlit cloud blanket",
-              "floating peak islands",
-              "ridge line silhouette",
-              "far horizon line"
-            ]
+        ]
+      },
+      {
+        "group": "🏙 高所・建築眺望",
+        "items": [
+          {
+            "ja": "街を見下ろす屋上眺望",
+            "en": "city rooftop lookout"
+          },
+          {
+            "ja": "学校屋上の見晴らし",
+            "en": "school rooftop outlook"
+          },
+          {
+            "ja": "塔上の展望デッキ",
+            "en": "tower observatory deck"
+          },
+          {
+            "ja": "高層の空中テラス眺望",
+            "en": "high-rise sky terrace"
           }
-        },
-        {
-          "id": "stormbreak_above_clouds",
-          "ja": "雲の切れ目から光が落ちる高所眺望",
-          "links": {
-            "base": [
-              "broken cloud deck overlook",
-              "mist-filled valley overlook"
-            ],
-            "customize": [
-              "stormbreak clearing",
-              "beneath-cloud separation",
-              "slow cloudbank drift"
-            ],
-            "settings": [
-              "broken cloud deck",
-              "cloud shadows below",
-              "sunlit cloud sea rim",
-              "silver horizon haze"
-            ]
+        ]
+      },
+      {
+        "group": "⛰ 山頂・断崖・谷の眺望",
+        "items": [
+          {
+            "ja": "山頂のパノラマ眺望地",
+            "en": "mountain summit panorama point"
+          },
+          {
+            "ja": "断崖の縁の眺望地",
+            "en": "cliff-edge lookout"
+          },
+          {
+            "ja": "尾根上の見晴らし点",
+            "en": "ridge panorama point"
+          },
+          {
+            "ja": "谷を見下ろす展望台",
+            "en": "valley overlook platform"
           }
-        }
-      ]
-    },
-    {
-      "group": "🏙 高所・建築眺望",
-      "items": [
-        {
-          "id": "city_rooftop_dusk_view",
-          "ja": "夕暮れの街を見下ろす屋上眺望",
-          "links": {
-            "base": [
-              "city rooftop lookout",
-              "high-rise sky terrace"
-            ],
-            "customize": [
-              "sunset horizon blaze",
-              "lookdown hush",
-              "vast-earth spread"
-            ],
-            "settings": [
-              "tiny town grid below",
-              "roof equipment silhouette",
-              "observation deck railing",
-              "sunset light band"
-            ]
+        ]
+      }
+    ],
+    "customize": [
+      {
+        "group": "🌤 光と色の移ろい",
+        "items": [
+          {
+            "ja": "夜明けの縁光",
+            "en": "dawn edge glow"
+          },
+          {
+            "ja": "夕焼けの地平の燃え",
+            "en": "sunset horizon blaze"
+          },
+          {
+            "ja": "青の時間の深まり",
+            "en": "blue-hour depth"
+          },
+          {
+            "ja": "月が昇る銀の霞",
+            "en": "moonrise silver haze"
+          },
+          {
+            "ja": "雲切れから戻る晴れ間",
+            "en": "stormbreak clearing"
           }
-        },
-        {
-          "id": "school_rooftop_morning_view",
-          "ja": "朝の静けさが張る学校屋上の眺望",
-          "links": {
-            "base": [
-              "school rooftop outlook",
-              "far plain horizon viewpoint"
-            ],
-            "customize": [
-              "dawn edge glow",
-              "overlook silence",
-              "high-elevation openness"
-            ],
-            "settings": [
-              "school rooftop fence",
-              "tiny town grid below",
-              "pale sun edge",
-              "distant river curve"
-            ]
+        ]
+      },
+      {
+        "group": "☁ 高さ・抜け・距離感",
+        "items": [
+          {
+            "ja": "高所の抜けた空気",
+            "en": "high-elevation openness"
+          },
+          {
+            "ja": "遠距離まで見渡せる深さ",
+            "en": "far-distance depth"
+          },
+          {
+            "ja": "高空の薄い明瞭さ",
+            "en": "thin upper-air clarity"
+          },
+          {
+            "ja": "雲の下と分かれる高さ",
+            "en": "beneath-cloud separation"
+          },
+          {
+            "ja": "広い地表が開く感覚",
+            "en": "vast-earth spread"
           }
-        },
-        {
-          "id": "tower_observatory_night_overlook",
-          "ja": "夜景の端まで見渡す塔上展望地",
-          "links": {
-            "base": [
-              "tower observatory deck",
-              "city rooftop lookout"
-            ],
-            "customize": [
-              "blue-hour depth",
-              "far-distance depth",
-              "overlook silence"
-            ],
-            "settings": [
-              "observation deck railing",
-              "city light beadline",
-              "far horizon line",
-              "concrete parapet edge"
-            ]
+        ]
+      },
+      {
+        "group": "🌫 雲海・霞・層の動き",
+        "items": [
+          {
+            "ja": "雲海の静けさ",
+            "en": "cloud-sea stillness"
+          },
+          {
+            "ja": "雲の帯がゆっくり流れる動き",
+            "en": "slow cloudbank drift"
+          },
+          {
+            "ja": "谷霧が層になる深さ",
+            "en": "valley mist layering"
+          },
+          {
+            "ja": "地平にたまる霞帯",
+            "en": "horizon haze band"
           }
-        },
-        {
-          "id": "windy_highrise_skyterrace",
-          "ja": "風が抜ける高層テラスの上空眺望",
-          "links": {
-            "base": [
-              "high-rise sky terrace",
-              "tower observatory deck"
-            ],
-            "customize": [
-              "wind-brushed lookout",
-              "far-distance depth",
-              "lookdown hush"
-            ],
-            "settings": [
-              "guardrail silhouette",
-              "roof equipment silhouette",
-              "city light beadline",
-              "silver horizon haze"
-            ]
+        ]
+      },
+      {
+        "group": "👁 見下ろし・風・静けさ",
+        "items": [
+          {
+            "ja": "見晴らしに沈む静けさ",
+            "en": "overlook silence"
+          },
+          {
+            "ja": "見下ろしの薄い緊張",
+            "en": "lookdown hush"
+          },
+          {
+            "ja": "風が抜ける展望地",
+            "en": "wind-brushed lookout"
+          },
+          {
+            "ja": "足元が遠のく静けさ",
+            "en": "height-fall hush"
           }
-        }
-      ]
-    },
-    {
-      "group": "⛰ 山頂・断崖・展望地",
-      "items": [
-        {
-          "id": "summit_panorama_sunrise",
-          "ja": "朝の眺望がひらく山頂展望地",
-          "links": {
-            "base": [
-              "mountain summit panorama point",
-              "ridge panorama point"
-            ],
-            "customize": [
-              "dawn edge glow",
-              "high-elevation openness",
-              "vast-earth spread"
-            ],
-            "settings": [
-              "summit marker",
-              "layered mountain silhouettes",
-              "pale sun edge",
-              "coin viewfinder"
-            ]
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "group": "🌅 地平・遠景の細部",
+        "items": [
+          {
+            "ja": "遠い地平線",
+            "en": "far horizon line"
+          },
+          {
+            "ja": "重なる山並みの影",
+            "en": "layered mountain silhouettes"
+          },
+          {
+            "ja": "遠く蛇行する川筋",
+            "en": "distant river curve"
+          },
+          {
+            "ja": "眼下の小さな町区画",
+            "en": "tiny town grid below"
+          },
+          {
+            "ja": "谷の奥へ重なる深さ",
+            "en": "valley depth bands"
+          },
+          {
+            "ja": "長く伸びる地上の影",
+            "en": "long ground shadows"
           }
-        },
-        {
-          "id": "ridge_shadow_open_noon",
-          "ja": "雲影が流れる尾根の昼眺望",
-          "links": {
-            "base": [
-              "ridge panorama point",
-              "mountain summit panorama point"
-            ],
-            "customize": [
-              "wind-brushed lookout",
-              "far-distance depth",
-              "high-elevation openness"
-            ],
-            "settings": [
-              "cloud shadows below",
-              "ridge line silhouette",
-              "layered mountain silhouettes",
-              "summit marker"
-            ]
+        ]
+      },
+      {
+        "group": "☁ 雲海・雲層の細部",
+        "items": [
+          {
+            "ja": "雲海の白い敷き詰め",
+            "en": "cloud sea blanket"
+          },
+          {
+            "ja": "雲から頭を出す峰",
+            "en": "floating peak islands"
+          },
+          {
+            "ja": "ちぎれた雲の甲板",
+            "en": "broken cloud deck"
+          },
+          {
+            "ja": "眼下へ落ちる雲影",
+            "en": "cloud shadows below"
+          },
+          {
+            "ja": "雲海の縁に当たる陽光",
+            "en": "sunlit cloud sea rim"
+          },
+          {
+            "ja": "月光を受ける雲海",
+            "en": "moonlit cloud blanket"
           }
-        },
-        {
-          "id": "cliff_edge_sea_horizon",
-          "ja": "海の地平を遠く抱く断崖の眺望",
-          "links": {
-            "base": [
-              "cliff-edge lookout",
-              "sea horizon viewpoint"
-            ],
-            "customize": [
-              "far-distance depth",
-              "wind-brushed lookout",
-              "high-elevation openness"
-            ],
-            "settings": [
-              "cliff-edge railing",
-              "far horizon line",
-              "sea-glint strip",
-              "stone lookout platform"
-            ]
+        ]
+      },
+      {
+        "group": "🏙 展望施設・高所の細部",
+        "items": [
+          {
+            "ja": "展望デッキの手すり",
+            "en": "observation deck railing"
+          },
+          {
+            "ja": "ガードレールの黒い輪郭",
+            "en": "guardrail silhouette"
+          },
+          {
+            "ja": "屋上設備の影",
+            "en": "roof equipment silhouette"
+          },
+          {
+            "ja": "学校屋上フェンス",
+            "en": "school rooftop fence"
+          },
+          {
+            "ja": "コンクリのパラペット縁",
+            "en": "concrete parapet edge"
+          },
+          {
+            "ja": "遠い夜景の光列",
+            "en": "city light beadline"
           }
-        },
-        {
-          "id": "valley_overlook_evening",
-          "ja": "谷あいの遠さが沈む夕方の展望地",
-          "links": {
-            "base": [
-              "valley overlook platform",
-              "mist-filled valley overlook"
-            ],
-            "customize": [
-              "sunset horizon blaze",
-              "valley mist layering",
-              "lookdown hush"
-            ],
-            "settings": [
-              "valley depth bands",
-              "stone lookout platform",
-              "long ground shadows",
-              "guardrail silhouette"
-            ]
+        ]
+      },
+      {
+        "group": "⛰ 山頂・断崖・光帯の細部",
+        "items": [
+          {
+            "ja": "山頂標識",
+            "en": "summit marker"
+          },
+          {
+            "ja": "コイン望遠鏡",
+            "en": "coin viewfinder"
+          },
+          {
+            "ja": "断崖の縁の手すり",
+            "en": "cliff-edge railing"
+          },
+          {
+            "ja": "石の展望台床",
+            "en": "stone lookout platform"
+          },
+          {
+            "ja": "尾根の黒い輪郭",
+            "en": "ridge line silhouette"
+          },
+          {
+            "ja": "海面の銀の反射帯",
+            "en": "sea-glint strip"
+          },
+          {
+            "ja": "朝日の淡い縁",
+            "en": "pale sun edge"
+          },
+          {
+            "ja": "夕焼けの光帯",
+            "en": "sunset light band"
+          },
+          {
+            "ja": "青薄暮の帯",
+            "en": "blue twilight band"
+          },
+          {
+            "ja": "月の出の光帯",
+            "en": "moonrise glow band"
+          },
+          {
+            "ja": "地平にたまる銀の霞",
+            "en": "silver horizon haze"
           }
-        }
-      ]
-    }
-  ],
-  "base": [
-    {
-      "group": "🌅 地平・水平線の眺望",
-      "items": [
-        {
-          "ja": "地平を見渡す展望地",
-          "en": "horizon overlook point"
-        },
-        {
-          "ja": "海の水平線が抜ける眺望地",
-          "en": "sea horizon viewpoint"
-        },
-        {
-          "ja": "平野の先まで見える高所眺望",
-          "en": "far plain horizon viewpoint"
-        },
-        {
-          "ja": "朝日を受ける向きの見晴らし",
-          "en": "dawn-facing lookout"
-        }
-      ]
-    },
-    {
-      "group": "☁ 雲海・雲層の眺望",
-      "items": [
-        {
-          "ja": "雲海を見下ろす高所",
-          "en": "cloud sea overlook"
-        },
-        {
-          "ja": "雲層の上に出る尾根眺望",
-          "en": "ridge above cloud layer"
-        },
-        {
-          "ja": "雲の切れ目がひらく展望地",
-          "en": "broken cloud deck overlook"
-        },
-        {
-          "ja": "谷霧がたまる高所眺望",
-          "en": "mist-filled valley overlook"
-        }
-      ]
-    },
-    {
-      "group": "🏙 高所・建築眺望",
-      "items": [
-        {
-          "ja": "街を見下ろす屋上眺望",
-          "en": "city rooftop lookout"
-        },
-        {
-          "ja": "学校屋上の見晴らし",
-          "en": "school rooftop outlook"
-        },
-        {
-          "ja": "塔上の展望デッキ",
-          "en": "tower observatory deck"
-        },
-        {
-          "ja": "高層の空中テラス眺望",
-          "en": "high-rise sky terrace"
-        }
-      ]
-    },
-    {
-      "group": "⛰ 山頂・断崖・谷の眺望",
-      "items": [
-        {
-          "ja": "山頂のパノラマ眺望地",
-          "en": "mountain summit panorama point"
-        },
-        {
-          "ja": "断崖の縁の眺望地",
-          "en": "cliff-edge lookout"
-        },
-        {
-          "ja": "尾根上の見晴らし点",
-          "en": "ridge panorama point"
-        },
-        {
-          "ja": "谷を見下ろす展望台",
-          "en": "valley overlook platform"
-        }
-      ]
-    }
-  ],
-  "customize": [
-    {
-      "group": "🌤 光と色の移ろい",
-      "items": [
-        {
-          "ja": "夜明けの縁光",
-          "en": "dawn edge glow"
-        },
-        {
-          "ja": "夕焼けの地平の燃え",
-          "en": "sunset horizon blaze"
-        },
-        {
-          "ja": "青の時間の深まり",
-          "en": "blue-hour depth"
-        },
-        {
-          "ja": "月が昇る銀の霞",
-          "en": "moonrise silver haze"
-        },
-        {
-          "ja": "雲切れから戻る晴れ間",
-          "en": "stormbreak clearing"
-        }
-      ]
-    },
-    {
-      "group": "☁ 高さ・抜け・距離感",
-      "items": [
-        {
-          "ja": "高所の抜けた空気",
-          "en": "high-elevation openness"
-        },
-        {
-          "ja": "遠距離まで見渡せる深さ",
-          "en": "far-distance depth"
-        },
-        {
-          "ja": "高空の薄い明瞭さ",
-          "en": "thin upper-air clarity"
-        },
-        {
-          "ja": "雲の下と分かれる高さ",
-          "en": "beneath-cloud separation"
-        },
-        {
-          "ja": "広い地表が開く感覚",
-          "en": "vast-earth spread"
-        }
-      ]
-    },
-    {
-      "group": "🌫 雲海・霞・層の動き",
-      "items": [
-        {
-          "ja": "雲海の静けさ",
-          "en": "cloud-sea stillness"
-        },
-        {
-          "ja": "雲の帯がゆっくり流れる動き",
-          "en": "slow cloudbank drift"
-        },
-        {
-          "ja": "谷霧が層になる深さ",
-          "en": "valley mist layering"
-        },
-        {
-          "ja": "地平にたまる霞帯",
-          "en": "horizon haze band"
-        }
-      ]
-    },
-    {
-      "group": "👁 見下ろし・風・静けさ",
-      "items": [
-        {
-          "ja": "見晴らしに沈む静けさ",
-          "en": "overlook silence"
-        },
-        {
-          "ja": "見下ろしの薄い緊張",
-          "en": "lookdown hush"
-        },
-        {
-          "ja": "風が抜ける展望地",
-          "en": "wind-brushed lookout"
-        },
-        {
-          "ja": "足元が遠のく静けさ",
-          "en": "height-fall hush"
-        }
-      ]
-    }
-  ],
-  "settings": [
-    {
-      "group": "🌅 地平・遠景の細部",
-      "items": [
-        {
-          "ja": "遠い地平線",
-          "en": "far horizon line"
-        },
-        {
-          "ja": "重なる山並みの影",
-          "en": "layered mountain silhouettes"
-        },
-        {
-          "ja": "遠く蛇行する川筋",
-          "en": "distant river curve"
-        },
-        {
-          "ja": "眼下の小さな町区画",
-          "en": "tiny town grid below"
-        },
-        {
-          "ja": "谷の奥へ重なる深さ",
-          "en": "valley depth bands"
-        },
-        {
-          "ja": "長く伸びる地上の影",
-          "en": "long ground shadows"
-        }
-      ]
-    },
-    {
-      "group": "☁ 雲海・雲層の細部",
-      "items": [
-        {
-          "ja": "雲海の白い敷き詰め",
-          "en": "cloud sea blanket"
-        },
-        {
-          "ja": "雲から頭を出す峰",
-          "en": "floating peak islands"
-        },
-        {
-          "ja": "ちぎれた雲の甲板",
-          "en": "broken cloud deck"
-        },
-        {
-          "ja": "眼下へ落ちる雲影",
-          "en": "cloud shadows below"
-        },
-        {
-          "ja": "雲海の縁に当たる陽光",
-          "en": "sunlit cloud sea rim"
-        },
-        {
-          "ja": "月光を受ける雲海",
-          "en": "moonlit cloud blanket"
-        }
-      ]
-    },
-    {
-      "group": "🏙 展望施設・高所の細部",
-      "items": [
-        {
-          "ja": "展望デッキの手すり",
-          "en": "observation deck railing"
-        },
-        {
-          "ja": "ガードレールの黒い輪郭",
-          "en": "guardrail silhouette"
-        },
-        {
-          "ja": "屋上設備の影",
-          "en": "roof equipment silhouette"
-        },
-        {
-          "ja": "学校屋上フェンス",
-          "en": "school rooftop fence"
-        },
-        {
-          "ja": "コンクリのパラペット縁",
-          "en": "concrete parapet edge"
-        },
-        {
-          "ja": "遠い夜景の光列",
-          "en": "city light beadline"
-        }
-      ]
-    },
-    {
-      "group": "⛰ 山頂・断崖・光帯の細部",
-      "items": [
-        {
-          "ja": "山頂標識",
-          "en": "summit marker"
-        },
-        {
-          "ja": "コイン望遠鏡",
-          "en": "coin viewfinder"
-        },
-        {
-          "ja": "断崖の縁の手すり",
-          "en": "cliff-edge railing"
-        },
-        {
-          "ja": "石の展望台床",
-          "en": "stone lookout platform"
-        },
-        {
-          "ja": "尾根の黒い輪郭",
-          "en": "ridge line silhouette"
-        },
-        {
-          "ja": "海面の銀の反射帯",
-          "en": "sea-glint strip"
-        },
-        {
-          "ja": "朝日の淡い縁",
-          "en": "pale sun edge"
-        },
-        {
-          "ja": "夕焼けの光帯",
-          "en": "sunset light band"
-        },
-        {
-          "ja": "青薄暮の帯",
-          "en": "blue twilight band"
-        },
-        {
-          "ja": "月の出の光帯",
-          "en": "moonrise glow band"
-        },
-        {
-          "ja": "地平にたまる銀の霞",
-          "en": "silver horizon haze"
-        }
-      ]
-    }
-  ]
-},
+        ]
+      }
+    ]
+  },
   {
     "id": "airborne_flight_view_collection",
     "title": "🪽 空中・飛行視点特化コレクション",
-    "subtitle": "街、学校、森、草原、川、山、海、雲上まで、何の上をどの高さでどう飛ぶか、眼下情報、傾き、風圧、雲の位置で『空にいる視点』を成立させる空中・飛行視点特化コレクション",
+    "subtitle": "街、学校、森、草原、川、山、海、雲上まで、何の上をどの高さでどう飛ぶかに加えて、機窓・キャノピー越しの乗り物寄り視点から、生身で風と雨を直に受ける飛翔視点まで、眼下情報、傾き、風圧、雲の位置で『空にいる視点』を成立させる空中・飛行視点特化コレクション",
     "complete": [
       {
         "group": "🏙 都市上空",
@@ -36704,6 +41191,362 @@ const BG_EFFECTS = {
             }
           }
         ]
+      },
+      {
+        "group": "🌦 天候変化を切る飛行景",
+        "items": [
+          {
+            "id": "rainshaft_lowpass_flight",
+            "ja": "雨脚を抜ける低空飛行景",
+            "links": {
+              "base": [
+                "rain-shaft overflight",
+                "bridge-crossing overflight"
+              ],
+              "customize": [
+                "rain-curtain pass",
+                "reduced-visibility flight",
+                "near-ground low altitude"
+              ],
+              "settings": [
+                "slanted rain bands below",
+                "wet reflective corridors",
+                "mist-smeared horizon",
+                "forward motion streak in rain"
+              ]
+            }
+          },
+          {
+            "id": "headwind_climb_mountain_route",
+            "ja": "向かい風に押し返される上昇飛行",
+            "links": {
+              "base": [
+                "storm-gap overflight",
+                "mountain range overflight"
+              ],
+              "customize": [
+                "headwind climb",
+                "climbing ascent",
+                "storm-front tension"
+              ],
+              "settings": [
+                "wind-torn cloud strips",
+                "tilted horizon line",
+                "deep valley folds",
+                "gust shear lines"
+              ]
+            }
+          },
+          {
+            "id": "crosswind_sea_bank_flight",
+            "ja": "横風で傾く海上飛行景",
+            "links": {
+              "base": [
+                "crosswind sea lane",
+                "sea overflight"
+              ],
+              "customize": [
+                "crosswind drift",
+                "banking tilt",
+                "sea-spray haze from above"
+              ],
+              "settings": [
+                "whitecap lines below",
+                "sea reflection band",
+                "drifted cloud shadows",
+                "off-center horizon"
+              ]
+            }
+          },
+          {
+            "id": "snowsquall_winter_flight",
+            "ja": "雪雲の下を抜ける冬の飛行景",
+            "links": {
+              "base": [
+                "snow-squall overflight",
+                "ridge overflight"
+              ],
+              "customize": [
+                "snow-flurry pass",
+                "night-cooled atmosphere",
+                "reduced-visibility flight"
+              ],
+              "settings": [
+                "broken snow bands below",
+                "cold blue horizon",
+                "wind-torn cloud strips",
+                "snowless rock ribs below"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🎥 飛行視点・航路演出",
+        "items": [
+          {
+            "id": "sunbreak_descent_flight",
+            "ja": "雲の切れ間へ降りる俯角飛行",
+            "links": {
+              "base": [
+                "between cloud layers",
+                "sunbreak overflight"
+              ],
+              "customize": [
+                "gentle descent",
+                "forward-pulled viewpoint",
+                "sunbreak shaft crossing"
+              ],
+              "settings": [
+                "broken cloud gap",
+                "light-columns through gaps",
+                "eye-line dragged downward",
+                "shifting-light columns below"
+              ]
+            }
+          },
+          {
+            "id": "horizon_slice_banking_turn",
+            "ja": "地平線を斜めに切る旋回飛行",
+            "links": {
+              "base": [
+                "high-altitude sky lane",
+                "tower-cluster overflight"
+              ],
+              "customize": [
+                "banking tilt",
+                "horizon-slicing turn",
+                "ground-shrinking distance"
+              ],
+              "settings": [
+                "tilted horizon line",
+                "far-horizon glow",
+                "city light clusters below",
+                "earth-haze curve"
+              ]
+            }
+          },
+          {
+            "id": "jetstream_straight_cruise",
+            "ja": "雲上を一直線に抜ける巡航視点",
+            "links": {
+              "base": [
+                "jetstream cruise lane",
+                "above cloud tops"
+              ],
+              "customize": [
+                "straight-flight feel",
+                "high-speed pass",
+                "dry upper air"
+              ],
+              "settings": [
+                "layered cloud horizon",
+                "jetstream streaks above",
+                "far-thin cloud belt",
+                "earth-haze curve"
+              ]
+            }
+          },
+          {
+            "id": "moonrim_quiet_night_flight",
+            "ja": "月光の雲縁をなぞる静かな夜間飛行",
+            "links": {
+              "base": [
+                "moonlit haze overflight",
+                "moonlit cloud-top flight"
+              ],
+              "customize": [
+                "gliding hush",
+                "moonlit silver wash",
+                "cloud-edge tracing path"
+              ],
+              "settings": [
+                "moonlit cloud tops",
+                "thin crescent from above",
+                "starlight scatter",
+                "cloud-edge silver rim"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "✈ 乗り物寄り飛行視点",
+        "items": [
+          {
+            "id": "airliner_window_cloudsea_cruise",
+            "ja": "旅客機の窓から雲海を抜ける巡航視点",
+            "links": {
+              "base": [
+                "airliner window overflight",
+                "cabin-side cloud-top overflight"
+              ],
+              "customize": [
+                "oval window framing",
+                "enclosed-cabin stillness",
+                "forward-pulled viewpoint"
+              ],
+              "settings": [
+                "window rim silhouette",
+                "double-layer cloud sea",
+                "far thin contrail",
+                "far-horizon glow"
+              ]
+            }
+          },
+          {
+            "id": "helicopter_cityedge_bank_view",
+            "ja": "ヘリ越しに都市縁を覗く旋回飛行視点",
+            "links": {
+              "base": [
+                "helicopter banked overflight",
+                "rotorcraft city-edge overflight"
+              ],
+              "customize": [
+                "rotor vibration trace",
+                "banking tilt",
+                "mid-altitude lookdown"
+              ],
+              "settings": [
+                "rotor shadow sweep",
+                "city light clusters below",
+                "river silver thread",
+                "tilted horizon line"
+              ]
+            }
+          },
+          {
+            "id": "smallcraft_coastline_lowpass_view",
+            "ja": "小型機で海岸線をなぞる低空飛行視点",
+            "links": {
+              "base": [
+                "small-aircraft coastal overflight",
+                "sea overflight"
+              ],
+              "customize": [
+                "canopy frame edges",
+                "crosswind drift",
+                "rooftop-skimming altitude"
+              ],
+              "settings": [
+                "coastline foam edge below",
+                "white wave lines",
+                "frame-cut horizon",
+                "sea-glint strips below"
+              ]
+            }
+          },
+          {
+            "id": "canopy_stormedge_highspeed_view",
+            "ja": "キャノピー越しに雷雲縁を切る高速飛行視点",
+            "links": {
+              "base": [
+                "canopy-framed high-speed overflight",
+                "storm-edge overflight"
+              ],
+              "customize": [
+                "canopy reflections",
+                "high-speed pass",
+                "storm-front tension"
+              ],
+              "settings": [
+                "storm shelf cloud",
+                "window rain dots",
+                "blue-white flash bloom",
+                "off-center horizon"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🪽 生身寄り飛翔・滑空視点",
+        "items": [
+          {
+            "id": "openair_cloudgap_bodyflight_view",
+            "ja": "風を胸で受けて雲間へ飛び込む生身視点",
+            "links": {
+              "base": [
+                "open-air body flight over cloud gap",
+                "between cloud layers"
+              ],
+              "customize": [
+                "open-air exposure",
+                "chest-first wind impact",
+                "climbing ascent"
+              ],
+              "settings": [
+                "no-frame open sky field",
+                "cloud-gap brightness ahead",
+                "wind-sheared peripheral blur",
+                "altitude-shifting lookdown"
+              ]
+            }
+          },
+          {
+            "id": "bodyglide_citydive_view",
+            "ja": "斜め下へ身を倒して街へ滑空する生身視点",
+            "links": {
+              "base": [
+                "body-glide city overflight",
+                "city overflight"
+              ],
+              "customize": [
+                "body-banked glide",
+                "eye-line dragged downward",
+                "wind-pressure rush"
+              ],
+              "settings": [
+                "raw horizon cant",
+                "rooftop grid below",
+                "diagonal-ground drift below",
+                "open-air rush lines"
+              ]
+            }
+          },
+          {
+            "id": "raincut_sea_bodyflight_view",
+            "ja": "雨粒を受けながら海上を抜ける生身飛行視点",
+            "links": {
+              "base": [
+                "open-air sea body flight",
+                "rain-shaft overflight"
+              ],
+              "customize": [
+                "rain striking the viewpoint",
+                "crosswind drift",
+                "open-air exposure"
+              ],
+              "settings": [
+                "direct rain hits on viewpoint",
+                "white wave lines",
+                "forward motion streak in rain",
+                "sea-glint strips below"
+              ]
+            }
+          },
+          {
+            "id": "moonrim_openair_glide_view",
+            "ja": "月光の雲縁をかすめる静かな生身滑空視点",
+            "links": {
+              "base": [
+                "moonlit body-flight over cloud tops",
+                "moonlit cloud-top flight"
+              ],
+              "customize": [
+                "body-banked glide",
+                "night-cooled atmosphere",
+                "gliding hush"
+              ],
+              "settings": [
+                "cloud-edge silver rim",
+                "faint upper stars",
+                "no-frame open sky field",
+                "starlit high-altitude clarity"
+              ]
+            }
+          }
+        ]
       }
     ],
     "base": [
@@ -36868,6 +41711,97 @@ const BG_EFFECTS = {
           {
             "ja": "朝靄を抜けた上空",
             "en": "dawn-haze upper air"
+          }
+        ]
+      },
+      {
+        "group": "🌦 天候・空路の上空",
+        "items": [
+          {
+            "ja": "雨脚の中の上空",
+            "en": "rain-shaft overflight"
+          },
+          {
+            "ja": "嵐の切れ目を縫う上空",
+            "en": "storm-gap overflight"
+          },
+          {
+            "ja": "横風の強い海上空路",
+            "en": "crosswind sea lane"
+          },
+          {
+            "ja": "雪雲の下の上空",
+            "en": "snow-squall overflight"
+          },
+          {
+            "ja": "雲の切れ間へ降りる上空",
+            "en": "sunbreak overflight"
+          },
+          {
+            "ja": "ジェット気流寄りの巡航空路",
+            "en": "jetstream cruise lane"
+          },
+          {
+            "ja": "月霞を帯びた夜の上空",
+            "en": "moonlit haze overflight"
+          }
+        ]
+      },
+      {
+        "group": "✈ 乗り物・機体寄り上空",
+        "items": [
+          {
+            "ja": "旅客機の窓越し上空",
+            "en": "airliner window overflight"
+          },
+          {
+            "ja": "客室脇の雲上飛行景",
+            "en": "cabin-side cloud-top overflight"
+          },
+          {
+            "ja": "ヘリの旋回上空",
+            "en": "helicopter banked overflight"
+          },
+          {
+            "ja": "都市縁をなぞるローター機上空",
+            "en": "rotorcraft city-edge overflight"
+          },
+          {
+            "ja": "小型機の海岸線飛行上空",
+            "en": "small-aircraft coastal overflight"
+          },
+          {
+            "ja": "キャノピー越しの高速上空",
+            "en": "canopy-framed high-speed overflight"
+          }
+        ]
+      },
+      {
+        "group": "🪽 生身・開放飛翔寄り上空",
+        "items": [
+          {
+            "ja": "雲間へ飛び込む生身上空",
+            "en": "open-air body flight over cloud gap"
+          },
+          {
+            "ja": "街へ滑空する生身上空",
+            "en": "body-glide city overflight"
+          },
+          {
+            "ja": "海上を抜ける生身飛行",
+            "en": "open-air sea body flight"
+          },
+          {
+            "ja": "月光の雲上を滑る生身飛行",
+            "en": "moonlit body-flight over cloud tops"
+          },
+          {
+            "ja": "開放空域の自由飛翔",
+            "en": "open-air free-flight over sky"
+          },
+          {
+            "ja": "風を直受けする高空飛翔",
+            "en": "direct-wind high-altitude body flight"
           }
         ]
       }
@@ -37075,6 +42009,126 @@ const BG_EFFECTS = {
           {
             "ja": "遠い稲光の明滅",
             "en": "far lightning flicker"
+          }
+        ]
+      },
+      {
+        "group": "🌦 天候・視界",
+        "items": [
+          {
+            "ja": "雨幕を突っ切る飛行感",
+            "en": "rain-curtain pass"
+          },
+          {
+            "ja": "視界の削られた飛行",
+            "en": "reduced-visibility flight"
+          },
+          {
+            "ja": "向かい風に押し返される上昇",
+            "en": "headwind climb"
+          },
+          {
+            "ja": "雪片を切る飛行感",
+            "en": "snow-flurry pass"
+          },
+          {
+            "ja": "雲間の陽光を横切る",
+            "en": "sunbreak shaft crossing"
+          },
+          {
+            "ja": "上空から海霧をかすめる感覚",
+            "en": "sea-spray haze from above"
+          },
+          {
+            "ja": "前線通過後の澄んだ抜け",
+            "en": "post-front clarity"
+          }
+        ]
+      },
+      {
+        "group": "🎥 航路・カメラ感",
+        "items": [
+          {
+            "ja": "地平線を切る旋回感",
+            "en": "horizon-slicing turn"
+          },
+          {
+            "ja": "俯角の強い見下ろし",
+            "en": "steep-lookdown angle"
+          },
+          {
+            "ja": "雲縁をなぞる航路",
+            "en": "cloud-edge tracing path"
+          },
+          {
+            "ja": "乱気流の微振動",
+            "en": "turbulence tremor"
+          },
+          {
+            "ja": "高度変化を伴う見下ろし",
+            "en": "altitude-shifting lookdown"
+          },
+          {
+            "ja": "斜め前へ逃げる地上の流れ",
+            "en": "diagonal-ground-flow"
+          }
+        ]
+      },
+      {
+        "group": "🪟 機窓・キャノピー・機械感",
+        "items": [
+          {
+            "ja": "楕円窓で切られた視界",
+            "en": "oval window framing"
+          },
+          {
+            "ja": "キャノピー縁のフレーム",
+            "en": "canopy frame edges"
+          },
+          {
+            "ja": "ローター由来の微振動",
+            "en": "rotor vibration trace"
+          },
+          {
+            "ja": "閉じた客室の静けさ",
+            "en": "enclosed-cabin stillness"
+          },
+          {
+            "ja": "エンジンに引かれる前方感",
+            "en": "engine-thrust forward pull"
+          },
+          {
+            "ja": "ガラスに走る反射のすべり",
+            "en": "canopy reflections"
+          }
+        ]
+      },
+      {
+        "group": "💨 生身・直受け飛翔感",
+        "items": [
+          {
+            "ja": "剥き出しの開放空気感",
+            "en": "open-air exposure"
+          },
+          {
+            "ja": "胸から受ける風圧",
+            "en": "chest-first wind impact"
+          },
+          {
+            "ja": "体ごと傾く滑空感",
+            "en": "body-banked glide"
+          },
+          {
+            "ja": "雨粒が視界へ直接当たる感覚",
+            "en": "rain striking the viewpoint"
+          },
+          {
+            "ja": "胃が落ちるような下降感",
+            "en": "stomach-drop descent feel"
+          },
+          {
+            "ja": "羽ばたき抜きの滑走静けさ",
+            "en": "silent unpowered glide"
           }
         ]
       }
@@ -37340,6 +42394,13035 @@ const BG_EFFECTS = {
             "en": "earth-haze curve"
           }
         ]
+      },
+      {
+        "group": "🌧 空中の天候痕跡",
+        "items": [
+          {
+            "ja": "斜めに流れる雨帯",
+            "en": "slanted rain bands below"
+          },
+          {
+            "ja": "濡れて光る地上の筋",
+            "en": "wet reflective corridors"
+          },
+          {
+            "ja": "風に裂かれた雲片",
+            "en": "wind-torn cloud strips"
+          },
+          {
+            "ja": "砕けた雪帯",
+            "en": "broken snow bands below"
+          },
+          {
+            "ja": "白波の線群",
+            "en": "whitecap lines below"
+          },
+          {
+            "ja": "流される雲影",
+            "en": "drifted cloud shadows"
+          },
+          {
+            "ja": "雨ににじむ地平",
+            "en": "mist-smeared horizon"
+          },
+          {
+            "ja": "冷たい青の地平",
+            "en": "cold blue horizon"
+          },
+          {
+            "ja": "頭上のジェット気流筋",
+            "en": "jetstream streaks above"
+          },
+          {
+            "ja": "雲縁の銀光",
+            "en": "cloud-edge silver rim"
+          },
+          {
+            "ja": "突風のせん断線",
+            "en": "gust shear lines"
+          }
+        ]
+      },
+      {
+        "group": "🧭 飛行経路・視点の証拠",
+        "items": [
+          {
+            "ja": "前方へ流れる雨線",
+            "en": "forward motion streak in rain"
+          },
+          {
+            "ja": "わずかに外れた地平中心",
+            "en": "off-center horizon"
+          },
+          {
+            "ja": "風でややぶれる視界",
+            "en": "turbulence-softened focus"
+          },
+          {
+            "ja": "高度変化のかかる見下ろし",
+            "en": "altitude-shifting lookdown"
+          },
+          {
+            "ja": "斜めに逃げる地上模様",
+            "en": "diagonal-ground drift below"
+          }
+        ]
+      },
+      {
+        "group": "✈ 乗り物視点の証拠",
+        "items": [
+          {
+            "ja": "窓縁の黒いシルエット",
+            "en": "window rim silhouette"
+          },
+          {
+            "ja": "キャノピー面の反射線",
+            "en": "canopy surface reflections"
+          },
+          {
+            "ja": "ローター影の流れ",
+            "en": "rotor shadow sweep"
+          },
+          {
+            "ja": "窓ガラスの雨点",
+            "en": "window rain dots"
+          },
+          {
+            "ja": "フレームで切られた地平",
+            "en": "frame-cut horizon"
+          },
+          {
+            "ja": "薄く震える機体視界",
+            "en": "machine-borne view vibration"
+          }
+        ]
+      },
+      {
+        "group": "🪽 生身視点の証拠",
+        "items": [
+          {
+            "ja": "枠のないむき出しの空",
+            "en": "no-frame open sky field"
+          },
+          {
+            "ja": "視界端を裂く風ブレ",
+            "en": "wind-sheared peripheral blur"
+          },
+          {
+            "ja": "生身で傾いた地平",
+            "en": "raw horizon cant"
+          },
+          {
+            "ja": "視界へ直接当たる雨粒",
+            "en": "direct rain hits on viewpoint"
+          },
+          {
+            "ja": "前方へ伸びる開放風線",
+            "en": "open-air rush lines"
+          },
+          {
+            "ja": "体勢で揺れる見下ろし",
+            "en": "body-tilted lookdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lightning_storm_luminous_sky_collection",
+    "title": "⚡ 雷・稲妻・発光嵐空特化コレクション",
+    "subtitle": "遠雷の予感、積乱雲の圧、稲妻の枝分かれ、発光する雨幕、嵐雲の内側で走る青白い反射まで、空そのものが発電しているような緊張と明滅で成立させる雷雲特化コレクション",
+    "complete": [
+      {
+        "group": "⛈ 遠雷・嵐の接近",
+        "items": [
+          {
+            "id": "distant_thunderhead_evening_sky",
+            "ja": "遠い地平で雷雲が育っていく夕方の空",
+            "links": {
+              "base": [
+                "distant thunderhead sky",
+                "storm-front evening sky"
+              ],
+              "customize": [
+                "humid pressure build-up",
+                "far-thunder tension",
+                "storm-brewing stillness"
+              ],
+              "settings": [
+                "towering thunderhead wall",
+                "dim amber horizon",
+                "wind-dark cloud shelf",
+                "heat-haze foreground"
+              ]
+            }
+          },
+          {
+            "id": "summer_gust_front_lightning_sky",
+            "ja": "夏の突風前線が空を裂く雷前の空",
+            "links": {
+              "base": [
+                "gust-front storm sky",
+                "summer lightning-front sky"
+              ],
+              "customize": [
+                "charged summer air",
+                "gust-front momentum",
+                "pressure-drop unease"
+              ],
+              "settings": [
+                "rolling shelf cloud",
+                "dust-lifted lower air",
+                "green-gray storm tint",
+                "fast cloud underside"
+              ]
+            }
+          },
+          {
+            "id": "mountain_storm_arrival_sky",
+            "ja": "山際から雷雨がせり上がる荒天接近の空",
+            "links": {
+              "base": [
+                "mountain storm-arrival sky",
+                "rain-bearing thunder sky"
+              ],
+              "customize": [
+                "mountain-weather acceleration",
+                "cold downdraft hint",
+                "wet-ozone anticipation"
+              ],
+              "settings": [
+                "dark mountain storm mass",
+                "advancing rain curtain",
+                "split cloud light",
+                "low booming horizon"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "⚡ 稲妻・雷光直撃",
+        "items": [
+          {
+            "id": "forked_lightning_night_storm_sky",
+            "ja": "枝分かれした稲妻が夜の雲を照り返す嵐空",
+            "links": {
+              "base": [
+                "forked-lightning storm sky",
+                "night thunderstorm sky"
+              ],
+              "customize": [
+                "branching lightning flare",
+                "instant cloud-backflash",
+                "violent night contrast"
+              ],
+              "settings": [
+                "forked lightning veins",
+                "backlit storm cloud core",
+                "blue-white flash bloom",
+                "black rain wall"
+              ]
+            }
+          },
+          {
+            "id": "single_bolt_rainfield_sky",
+            "ja": "雨野の向こうへ一本の落雷が走る雷空",
+            "links": {
+              "base": [
+                "single-bolt rainfield sky",
+                "open lightning storm sky"
+              ],
+              "customize": [
+                "single-strike tension",
+                "rainfield brightness pulse",
+                "electric atmosphere"
+              ],
+              "settings": [
+                "one vertical lightning strike",
+                "wide rain curtain",
+                "flash-lit low clouds",
+                "wet reflective distance"
+              ]
+            }
+          },
+          {
+            "id": "sheet_lightning_cloudbank_sky",
+            "ja": "雲の内部で面発光する雷光が広がる空",
+            "links": {
+              "base": [
+                "sheet-lightning cloudbank sky",
+                "internal-flash storm sky"
+              ],
+              "customize": [
+                "cloud-internal lightning pulse",
+                "diffuse storm illumination",
+                "silent-flash eeriness"
+              ],
+              "settings": [
+                "sheet lightning glow",
+                "glowing cloud belly",
+                "purple-blue storm core",
+                "layered rain shadow"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🌩 発光雨幕・異様な嵐色",
+        "items": [
+          {
+            "id": "neon_rainstorm_cityedge_sky",
+            "ja": "街明かりを吸って雨幕が光る都市縁の嵐空",
+            "links": {
+              "base": [
+                "city-edge luminous storm sky",
+                "rain-glow thunder sky"
+              ],
+              "customize": [
+                "rain-screen city glow",
+                "charged violet humidity",
+                "storm-lit urban edge"
+              ],
+              "settings": [
+                "glowing rain curtain",
+                "violet storm underlight",
+                "distant city backglow",
+                "electric mist fringe"
+              ]
+            }
+          },
+          {
+            "id": "green_tinted_severe_storm_sky",
+            "ja": "不吉な緑を帯びた荒天直前の発光空",
+            "links": {
+              "base": [
+                "green-tinted severe-storm sky",
+                "supercell warning sky"
+              ],
+              "customize": [
+                "ominous green cast",
+                "severe-weather dread",
+                "rotating storm pressure"
+              ],
+              "settings": [
+                "green storm light",
+                "rotating cloud base",
+                "dark inflow band",
+                "hail-core brightness"
+              ]
+            }
+          },
+          {
+            "id": "after_strike_ozone_glow_sky",
+            "ja": "雷鳴のあとに空気が青白く残る放電後の空",
+            "links": {
+              "base": [
+                "post-strike ozone sky",
+                "after-lightning storm sky"
+              ],
+              "customize": [
+                "post-flash ozone clarity",
+                "blue-white afterimage air",
+                "ringing silence aftermath"
+              ],
+              "settings": [
+                "fading electric glow",
+                "rain-washed dark vault",
+                "ozone-bright air edge",
+                "retreating thunder mass"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "base": [
+      {
+        "group": "⛈ 雷雲ベース",
+        "items": [
+          {
+            "ja": "遠雷の積乱雲空",
+            "en": "distant thunderhead sky"
+          },
+          {
+            "ja": "夕方のストームフロント空",
+            "en": "storm-front evening sky"
+          },
+          {
+            "ja": "突風前線の雷空",
+            "en": "gust-front storm sky"
+          },
+          {
+            "ja": "夜の雷雨空",
+            "en": "night thunderstorm sky"
+          },
+          {
+            "ja": "面発光する雷雲空",
+            "en": "sheet-lightning cloudbank sky"
+          },
+          {
+            "ja": "放電後の嵐空",
+            "en": "after-lightning storm sky"
+          }
+        ]
+      },
+      {
+        "group": "⚡ 雷光・発光軸",
+        "items": [
+          {
+            "ja": "枝分かれ稲妻",
+            "en": "forked lightning veins"
+          },
+          {
+            "ja": "一本の落雷線",
+            "en": "one vertical lightning strike"
+          },
+          {
+            "ja": "雲内の面発光",
+            "en": "sheet lightning glow"
+          },
+          {
+            "ja": "青白い閃光滲み",
+            "en": "blue-white flash bloom"
+          },
+          {
+            "ja": "紫がかった雷雲核",
+            "en": "purple-blue storm core"
+          },
+          {
+            "ja": "発光する雨幕",
+            "en": "glowing rain curtain"
+          }
+        ]
+      },
+      {
+        "group": "🌧 雨壁・雲壁",
+        "items": [
+          {
+            "ja": "黒い雨壁",
+            "en": "black rain wall"
+          },
+          {
+            "ja": "広い雨の幕",
+            "en": "wide rain curtain"
+          },
+          {
+            "ja": "回転する雲底",
+            "en": "rotating cloud base"
+          },
+          {
+            "ja": "せり出す棚雲",
+            "en": "rolling shelf cloud"
+          },
+          {
+            "ja": "風で暗くなった雲棚",
+            "en": "wind-dark cloud shelf"
+          },
+          {
+            "ja": "後退する雷塊",
+            "en": "retreating thunder mass"
+          }
+        ]
+      }
+    ],
+    "customize": [
+      {
+        "group": "🌬 気圧・空気感",
+        "items": [
+          {
+            "ja": "湿度の張り",
+            "en": "humid pressure build-up"
+          },
+          {
+            "ja": "雷前の息苦しさ",
+            "en": "pressure-drop unease"
+          },
+          {
+            "ja": "帯電した夏気",
+            "en": "charged summer air"
+          },
+          {
+            "ja": "湿ったオゾン感",
+            "en": "wet-ozone anticipation"
+          },
+          {
+            "ja": "雷後の澄み",
+            "en": "post-flash ozone clarity"
+          },
+          {
+            "ja": "電気を帯びた空気",
+            "en": "electric atmosphere"
+          }
+        ]
+      },
+      {
+        "group": "✨ 閃光・明滅",
+        "items": [
+          {
+            "ja": "枝分かれ閃光",
+            "en": "branching lightning flare"
+          },
+          {
+            "ja": "雲裏の瞬間照り返し",
+            "en": "instant cloud-backflash"
+          },
+          {
+            "ja": "面で広がる明滅",
+            "en": "diffuse storm illumination"
+          },
+          {
+            "ja": "静かなフラッシュ不穏",
+            "en": "silent-flash eeriness"
+          },
+          {
+            "ja": "青白い残像感",
+            "en": "blue-white afterimage air"
+          },
+          {
+            "ja": "雨幕の明るさの脈動",
+            "en": "rainfield brightness pulse"
+          }
+        ]
+      },
+      {
+        "group": "🎨 嵐色・色相補正",
+        "items": [
+          {
+            "ja": "緑がかった荒天色",
+            "en": "ominous green cast"
+          },
+          {
+            "ja": "紫がかった湿気",
+            "en": "charged violet humidity"
+          },
+          {
+            "ja": "夜の激しいコントラスト",
+            "en": "violent night contrast"
+          },
+          {
+            "ja": "嵐に照らされた都市縁",
+            "en": "storm-lit urban edge"
+          },
+          {
+            "ja": "深刻な天候の恐れ",
+            "en": "severe-weather dread"
+          },
+          {
+            "ja": "嵐醸成の静止感",
+            "en": "storm-brewing stillness"
+          }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "group": "⚙ 雷雲構図",
+        "items": [
+          {
+            "ja": "積乱雲の壁",
+            "en": "towering thunderhead wall"
+          },
+          {
+            "ja": "暗い流入帯",
+            "en": "dark inflow band"
+          },
+          {
+            "ja": "早い雲裏の流れ",
+            "en": "fast cloud underside"
+          },
+          {
+            "ja": "雲腹の発光",
+            "en": "glowing cloud belly"
+          },
+          {
+            "ja": "雲の切れ目の弱光",
+            "en": "split cloud light"
+          },
+          {
+            "ja": "雹核の明るさ",
+            "en": "hail-core brightness"
+          }
+        ]
+      },
+      {
+        "group": "🌆 地上との接続",
+        "items": [
+          {
+            "ja": "琥珀の地平",
+            "en": "dim amber horizon"
+          },
+          {
+            "ja": "雨に濡れた遠景反射",
+            "en": "wet reflective distance"
+          },
+          {
+            "ja": "街の背後光",
+            "en": "distant city backglow"
+          },
+          {
+            "ja": "持ち上がる砂塵",
+            "en": "dust-lifted lower air"
+          },
+          {
+            "ja": "地熱の揺らぎ",
+            "en": "heat-haze foreground"
+          },
+          {
+            "ja": "低く鳴る地平",
+            "en": "low booming horizon"
+          }
+        ]
+      },
+      {
+        "group": "🌫 余韻・霧化",
+        "items": [
+          {
+            "ja": "電気を帯びた霧縁",
+            "en": "electric mist fringe"
+          },
+          {
+            "ja": "雨影の層",
+            "en": "layered rain shadow"
+          },
+          {
+            "ja": "雨で洗われた暗天蓋",
+            "en": "rain-washed dark vault"
+          },
+          {
+            "ja": "残る電光",
+            "en": "fading electric glow"
+          },
+          {
+            "ja": "オゾンで明るい空気の縁",
+            "en": "ozone-bright air edge"
+          },
+          {
+            "ja": "黒い雲核の余熱",
+            "en": "storm-core afterheat"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "moon_noctilucent_polar_sky_collection",
+    "title": "🌙 月・夜光雲・極夜冷空特化コレクション",
+    "subtitle": "月齢の違い、月輪、雲越しの月光、夜光雲の冷たい発光、極夜の青、雪雲の反射、星が凍るような静寂まで、夜の空を冷たい光と高層の気配で成立させる寒色夜空特化コレクション",
+    "complete": [
+      {
+        "group": "🌙 月光・月齢",
+        "items": [
+          {
+            "id": "crescent_moon_frost_night_sky",
+            "ja": "細い月が凍える空気を切る冬夜の空",
+            "links": {
+              "base": [
+                "crescent-moon frost sky",
+                "cold winter moon sky"
+              ],
+              "customize": [
+                "knife-thin moonlight",
+                "dry freezing clarity",
+                "winter-night hush"
+              ],
+              "settings": [
+                "thin crescent moon",
+                "silver frost haze",
+                "dark blue upper vault",
+                "snowline silhouette"
+              ]
+            }
+          },
+          {
+            "id": "fullmoon_halo_icecrystal_sky",
+            "ja": "氷晶の輪が満月を囲む冷たい観測夜空",
+            "links": {
+              "base": [
+                "full-moon halo sky",
+                "ice-crystal moon sky"
+              ],
+              "customize": [
+                "halo-ring sharpness",
+                "ice-crystal chill",
+                "silent lunar prominence"
+              ],
+              "settings": [
+                "moon halo ring",
+                "bright full moon disk",
+                "frozen upper haze",
+                "pale silver cloud rim"
+              ]
+            }
+          },
+          {
+            "id": "cloudveil_moon_midnight_sky",
+            "ja": "薄い雲幕の向こうで月だけがにじむ深夜空",
+            "links": {
+              "base": [
+                "cloud-veiled moon sky",
+                "midnight moon-diffused sky"
+              ],
+              "customize": [
+                "moon-through-veil softness",
+                "night-haze diffusion",
+                "midnight still air"
+              ],
+              "settings": [
+                "veiled moon disk",
+                "soft lunar diffusion",
+                "thin cloud membrane",
+                "quiet midnight band"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🌌 夜光雲・高層発光",
+        "items": [
+          {
+            "id": "noctilucent_summer_midnight_sky",
+            "ja": "白銀の夜光雲が高層に漂う夏の深夜空",
+            "links": {
+              "base": [
+                "noctilucent-cloud sky",
+                "midnight summer upperair sky"
+              ],
+              "customize": [
+                "upper-atmosphere silver glow",
+                "high-altitude luminous filaments",
+                "midnight summer clarity"
+              ],
+              "settings": [
+                "noctilucent cloud bands",
+                "electric-blue upper rim",
+                "dim northern horizon",
+                "fine stratospheric texture"
+              ]
+            }
+          },
+          {
+            "id": "twilight_nightglow_horizon_sky",
+            "ja": "薄明の名残に夜光の帯が浮く高緯度の空",
+            "links": {
+              "base": [
+                "nightglow horizon sky",
+                "high-latitude twilight sky"
+              ],
+              "customize": [
+                "cold twilight afterlight",
+                "pale nocturnal luminescence",
+                "high-latitude calm"
+              ],
+              "settings": [
+                "nightglow horizon band",
+                "low silver-blue glow",
+                "subtle twilight residue",
+                "quiet upper-air shimmer"
+              ]
+            }
+          },
+          {
+            "id": "polar_stratosphere_shimmer_sky",
+            "ja": "成層圏の冷たい光がわずかに揺れる極地夜空",
+            "links": {
+              "base": [
+                "polar stratosphere sky",
+                "cold luminous upper-night sky"
+              ],
+              "customize": [
+                "stratospheric shimmer",
+                "subzero upper-air stillness",
+                "faint scientific awe"
+              ],
+              "settings": [
+                "thin luminous high cloud",
+                "blue-silver upper glow",
+                "dark polar dome",
+                "needle-star field"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "❄ 極夜・冷空",
+        "items": [
+          {
+            "id": "polar_night_blue_snow_sky",
+            "ja": "極夜の青が雪地から返る静かな北の空",
+            "links": {
+              "base": [
+                "polar-night blue sky",
+                "snow-reflected night sky"
+              ],
+              "customize": [
+                "polar-night blue depth",
+                "snow-reflected dimness",
+                "frozen-silence vastness"
+              ],
+              "settings": [
+                "low cobalt horizon",
+                "snowlight glow",
+                "faint moonless brightness",
+                "arctic flat cloud line"
+              ]
+            }
+          },
+          {
+            "id": "subzero_starfield_mountain_sky",
+            "ja": "凍てつく山稜の上で星が鋭く立つ寒冷夜空",
+            "links": {
+              "base": [
+                "subzero starfield sky",
+                "frozen mountain night sky"
+              ],
+              "customize": [
+                "crystal-cold transparency",
+                "needle-sharp stars",
+                "highland freezing air"
+              ],
+              "settings": [
+                "dense cold star field",
+                "hard black mountain ridge",
+                "frost-clear zenith",
+                "pale breath haze"
+              ]
+            }
+          },
+          {
+            "id": "moonless_icefog_port_sky",
+            "ja": "月のない氷霧だけが港を包む極寒夜空",
+            "links": {
+              "base": [
+                "moonless ice-fog sky",
+                "arctic harbor night sky"
+              ],
+              "customize": [
+                "ice-fog diffusion",
+                "wind-cut numbness",
+                "dark winter port stillness"
+              ],
+              "settings": [
+                "ice-fog veil",
+                "faint harbor sodium dots",
+                "cold black waterline",
+                "low frozen overcast"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "base": [
+      {
+        "group": "🌙 月光ベース",
+        "items": [
+          {
+            "ja": "細月の冬空",
+            "en": "crescent-moon frost sky"
+          },
+          {
+            "ja": "氷晶輪の満月空",
+            "en": "full-moon halo sky"
+          },
+          {
+            "ja": "雲越しの月空",
+            "en": "cloud-veiled moon sky"
+          },
+          {
+            "ja": "夜光雲の空",
+            "en": "noctilucent-cloud sky"
+          },
+          {
+            "ja": "極夜の青空",
+            "en": "polar-night blue sky"
+          },
+          {
+            "ja": "氷霧のない月夜空",
+            "en": "moonless ice-fog sky"
+          }
+        ]
+      },
+      {
+        "group": "🌌 高層・冷光軸",
+        "items": [
+          {
+            "ja": "月輪",
+            "en": "moon halo ring"
+          },
+          {
+            "ja": "夜光の地平帯",
+            "en": "nightglow horizon band"
+          },
+          {
+            "ja": "夜光雲の帯",
+            "en": "noctilucent cloud bands"
+          },
+          {
+            "ja": "電気青の上縁",
+            "en": "electric-blue upper rim"
+          },
+          {
+            "ja": "青銀の上空発光",
+            "en": "blue-silver upper glow"
+          },
+          {
+            "ja": "極地の暗い天蓋",
+            "en": "dark polar dome"
+          }
+        ]
+      },
+      {
+        "group": "❄ 寒冷夜景",
+        "items": [
+          {
+            "ja": "銀の霜靄",
+            "en": "silver frost haze"
+          },
+          {
+            "ja": "雪明かり",
+            "en": "snowlight glow"
+          },
+          {
+            "ja": "針のような星空",
+            "en": "needle-star field"
+          },
+          {
+            "ja": "濃い寒冷星空",
+            "en": "dense cold star field"
+          },
+          {
+            "ja": "氷霧の幕",
+            "en": "ice-fog veil"
+          },
+          {
+            "ja": "凍った曇天線",
+            "en": "low frozen overcast"
+          }
+        ]
+      }
+    ],
+    "customize": [
+      {
+        "group": "🌬 冷気・透明感",
+        "items": [
+          {
+            "ja": "刃のような月光",
+            "en": "knife-thin moonlight"
+          },
+          {
+            "ja": "乾いた凍結透明感",
+            "en": "dry freezing clarity"
+          },
+          {
+            "ja": "冬夜の静けさ",
+            "en": "winter-night hush"
+          },
+          {
+            "ja": "氷晶の冷たさ",
+            "en": "ice-crystal chill"
+          },
+          {
+            "ja": "零下の上空静止",
+            "en": "subzero upper-air stillness"
+          },
+          {
+            "ja": "結晶のような冷たさ",
+            "en": "crystal-cold transparency"
+          }
+        ]
+      },
+      {
+        "group": "✨ 発光・にじみ",
+        "items": [
+          {
+            "ja": "月越しのやわらかさ",
+            "en": "moon-through-veil softness"
+          },
+          {
+            "ja": "夜の靄拡散",
+            "en": "night-haze diffusion"
+          },
+          {
+            "ja": "上空の銀色発光",
+            "en": "upper-atmosphere silver glow"
+          },
+          {
+            "ja": "高層の光の糸",
+            "en": "high-altitude luminous filaments"
+          },
+          {
+            "ja": "淡い夜間発光",
+            "en": "pale nocturnal luminescence"
+          },
+          {
+            "ja": "成層圏の揺らぎ",
+            "en": "stratospheric shimmer"
+          }
+        ]
+      },
+      {
+        "group": "🎨 寒色寄せ",
+        "items": [
+          {
+            "ja": "極夜の青の深まり",
+            "en": "polar-night blue depth"
+          },
+          {
+            "ja": "雪の反射減光",
+            "en": "snow-reflected dimness"
+          },
+          {
+            "ja": "凍るような静寂の広がり",
+            "en": "frozen-silence vastness"
+          },
+          {
+            "ja": "針のように鋭い星",
+            "en": "needle-sharp stars"
+          },
+          {
+            "ja": "風で削がれる寒さ",
+            "en": "wind-cut numbness"
+          },
+          {
+            "ja": "冬の港の停止感",
+            "en": "dark winter port stillness"
+          }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "group": "⚙ 月・高層配置",
+        "items": [
+          {
+            "ja": "細い三日月",
+            "en": "thin crescent moon"
+          },
+          {
+            "ja": "明るい満月盤",
+            "en": "bright full moon disk"
+          },
+          {
+            "ja": "雲越しの月盤",
+            "en": "veiled moon disk"
+          },
+          {
+            "ja": "静かな上空の揺らぎ",
+            "en": "quiet upper-air shimmer"
+          },
+          {
+            "ja": "成層圏の細密筋",
+            "en": "fine stratospheric texture"
+          },
+          {
+            "ja": "薄い発光高層雲",
+            "en": "thin luminous high cloud"
+          }
+        ]
+      },
+      {
+        "group": "🌌 地平・極地補助",
+        "items": [
+          {
+            "ja": "雪線の輪郭",
+            "en": "snowline silhouette"
+          },
+          {
+            "ja": "暗い青の上天蓋",
+            "en": "dark blue upper vault"
+          },
+          {
+            "ja": "静かな真夜中帯",
+            "en": "quiet midnight band"
+          },
+          {
+            "ja": "低いコバルト地平",
+            "en": "low cobalt horizon"
+          },
+          {
+            "ja": "北の地平のかすかな光",
+            "en": "dim northern horizon"
+          },
+          {
+            "ja": "北極の薄い雲線",
+            "en": "arctic flat cloud line"
+          }
+        ]
+      },
+      {
+        "group": "🌫 霧・残光・生活点",
+        "items": [
+          {
+            "ja": "凍った上空の靄",
+            "en": "frozen upper haze"
+          },
+          {
+            "ja": "淡い銀の雲縁",
+            "en": "pale silver cloud rim"
+          },
+          {
+            "ja": "薄い雲膜",
+            "en": "thin cloud membrane"
+          },
+          {
+            "ja": "かすかな無月の明るさ",
+            "en": "faint moonless brightness"
+          },
+          {
+            "ja": "呼気のような薄靄",
+            "en": "pale breath haze"
+          },
+          {
+            "ja": "港のナトリウム灯粒",
+            "en": "faint harbor sodium dots"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "future_city_highrise_collection",
+    "title": "🌃 近未来都市・高層街区特化コレクション",
+    "subtitle": "ネオン繁華街、裏路地、企業街区、上層歩廊、物流縁、雨霧の遠景まで、近未来都市を生活密度と階層差で成立させるSF都市特化コレクション",
+    "complete": [
+      {
+        "group": "🌆 ネオン繁華街・商業コア",
+        "items": [
+          {
+            "id": "future_downtown_rain_neon",
+            "ja": "雨に濡れたネオン街路が高層へ伸びる近未来中心街",
+            "links": {
+              "base": [
+                "near-future downtown",
+                "rainy neon boulevard"
+              ],
+              "customize": [
+                "wet neon reflections",
+                "layered traffic glow",
+                "dense urban pressure"
+              ],
+              "settings": [
+                "towering hologram signage",
+                "multilevel overpass",
+                "misty street steam",
+                "high-rise canyon"
+              ]
+            }
+          },
+          {
+            "id": "future_multilevel_crossroads_night",
+            "ja": "立体交差が何層にも重なる夜の近未来街区",
+            "links": {
+              "base": [
+                "multilevel future crossroads",
+                "night high-rise district"
+              ],
+              "customize": [
+                "stacked-lane motion",
+                "cyan-magenta city light",
+                "elevated traffic flow"
+              ],
+              "settings": [
+                "tiered expressways",
+                "lighted rail line",
+                "deep city perspective",
+                "dense signal glow"
+              ]
+            }
+          },
+          {
+            "id": "future_hologram_promenade_evening",
+            "ja": "ホログラム広告が歩道を染める夕刻の未来都市遊歩道",
+            "links": {
+              "base": [
+                "hologram promenade",
+                "future commercial avenue"
+              ],
+              "customize": [
+                "animated ad glow",
+                "soft evening city haze",
+                "pedestrian flow"
+              ],
+              "settings": [
+                "floating hologram panels",
+                "glass-front towers",
+                "light mist fringe",
+                "wide polished pavement"
+              ]
+            }
+          },
+          {
+            "id": "future_arcade_market_core_night",
+            "ja": "巨大広告と高密度店舗が連なる未来歓楽コア街区",
+            "links": {
+              "base": [
+                "future entertainment core",
+                "night commercial canyon"
+              ],
+              "customize": [
+                "sign-clutter density",
+                "crowded night energy",
+                "humid neon air"
+              ],
+              "settings": [
+                "vertical ad walls",
+                "dense storefront strips",
+                "projected menu signs",
+                "glowing side passages"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🕳 裏路地・治安グレー地帯",
+        "items": [
+          {
+            "id": "future_back_alley_pipe_shadow",
+            "ja": "配管と配線が頭上を走る未来都市の狭い裏路地",
+            "links": {
+              "base": [
+                "future back alley",
+                "pipe-shadow service lane"
+              ],
+              "customize": [
+                "tight vertical clutter",
+                "grimy neon spill",
+                "low-visibility pressure"
+              ],
+              "settings": [
+                "overhead utility pipes",
+                "wet wall sheen",
+                "maintenance ladders",
+                "security camera dots"
+              ]
+            }
+          },
+          {
+            "id": "future_black_market_corner_rain",
+            "ja": "雨粒ににじむ看板が集まる未来闇マーケット街角",
+            "links": {
+              "base": [
+                "future black market corner",
+                "rainy side-street bazaar"
+              ],
+              "customize": [
+                "illegal-sign glow",
+                "rain-blurred silhouettes",
+                "crowded side-corridor feel"
+              ],
+              "settings": [
+                "patchwork awnings",
+                "coded neon signs",
+                "narrow vendor lane",
+                "shadowy checkpoint edge"
+              ]
+            }
+          },
+          {
+            "id": "future_quarantine_block_alley",
+            "ja": "封鎖帯の黄色灯が滲む管理外れの未来裏区画",
+            "links": {
+              "base": [
+                "future quarantine backblock",
+                "sealed side district"
+              ],
+              "customize": [
+                "uneasy warning glow",
+                "empty late-night stillness",
+                "restricted-zone tension"
+              ],
+              "settings": [
+                "strip barricade lights",
+                "sealed shutter doors",
+                "warning projection text",
+                "detour fence lines"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🏢 行政・企業・上層街区",
+        "items": [
+          {
+            "id": "future_corporate_lobby_axis",
+            "ja": "巨大ガラス壁と受付光が伸びる未来企業ロビー",
+            "links": {
+              "base": [
+                "future corporate lobby",
+                "glass-tower interior axis"
+              ],
+              "customize": [
+                "sterile luxury sheen",
+                "high-ceiling corporate calm",
+                "clean blue-white glow"
+              ],
+              "settings": [
+                "tower atrium void",
+                "security gate line",
+                "reception light desk",
+                "elevator-core depth"
+              ]
+            }
+          },
+          {
+            "id": "future_upper_deck_walkway",
+            "ja": "街を見下ろす透明歩廊が連結する上層デッキ街区",
+            "links": {
+              "base": [
+                "upper deck skywalk zone",
+                "elevated future district"
+              ],
+              "customize": [
+                "high-altitude urban wind",
+                "glass-floor tension",
+                "orderly elite quiet"
+              ],
+              "settings": [
+                "transparent skybridges",
+                "air-rail lane",
+                "tower-linked decks",
+                "distant city floor below"
+              ]
+            }
+          },
+          {
+            "id": "future_civic_plaza_guarded",
+            "ja": "監視ドローンが巡回する未来行政広場",
+            "links": {
+              "base": [
+                "future civic plaza",
+                "administrative tower forecourt"
+              ],
+              "customize": [
+                "formal open-space scale",
+                "controlled civic stillness",
+                "polished plaza reflections"
+              ],
+              "settings": [
+                "hover-drone patrol",
+                "flagless civic pylons",
+                "tower entry axis",
+                "broad surveillance plaza"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🏭 工業縁・物流区",
+        "items": [
+          {
+            "id": "future_industrial_edge_yard",
+            "ja": "搬送路と発光倉庫が連なる未来都市縁の物流帯",
+            "links": {
+              "base": [
+                "future logistics yard",
+                "industrial city edge"
+              ],
+              "customize": [
+                "automated cargo motion",
+                "cold sodium-cyan mix",
+                "mechanized rhythm"
+              ],
+              "settings": [
+                "container transfer rails",
+                "drone traffic lanes",
+                "warehouse light lines",
+                "distant tower skyline"
+              ]
+            }
+          },
+          {
+            "id": "future_powerplant_district_dusk",
+            "ja": "発電棟の光が地平を占める黄昏の未来工業区",
+            "links": {
+              "base": [
+                "future power district",
+                "industrial dusk skyline"
+              ],
+              "customize": [
+                "heat-exhaust shimmer",
+                "heavy infrastructure scale",
+                "orange-blue dusk contrast"
+              ],
+              "settings": [
+                "reactor-like tower silhouettes",
+                "vent-steam columns",
+                "perimeter security lights",
+                "broad service road"
+              ]
+            }
+          },
+          {
+            "id": "future_port_megacity_edge",
+            "ja": "巨大港湾と都市群が接続する未来メガシティ外縁",
+            "links": {
+              "base": [
+                "future megacity port edge",
+                "harbor-connected city fringe"
+              ],
+              "customize": [
+                "maritime industrial glow",
+                "wide-scale urban edge",
+                "freight movement density"
+              ],
+              "settings": [
+                "automated dock cranes",
+                "stacked cargo decks",
+                "sea-haze backlight",
+                "far skyline beam"
+              ]
+            }
+          },
+          {
+            "id": "future_drone_logistics_hub_evening",
+            "ja": "離着陸灯と搬送レーンが交差するドローン物流拠点",
+            "links": {
+              "base": [
+                "drone logistics hub",
+                "automated freight apron"
+              ],
+              "customize": [
+                "beacon-blink rhythm",
+                "precision traffic pattern",
+                "cold evening cargo glow"
+              ],
+              "settings": [
+                "landing-pad grid",
+                "cargo lift towers",
+                "guide-beacon rows",
+                "sorting-bay canopies"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🌌 都市遠景・俯瞰",
+        "items": [
+          {
+            "id": "future_city_overlook_night",
+            "ja": "高所から光の層を見下ろす未来都市俯瞰夜景",
+            "links": {
+              "base": [
+                "future city overlook",
+                "night megacity panorama"
+              ],
+              "customize": [
+                "layered light grid",
+                "wide aerial depth",
+                "cold urban wind"
+              ],
+              "settings": [
+                "vast tower sea",
+                "multilevel road tracers",
+                "distant haze vault",
+                "observation-edge framing"
+              ]
+            }
+          },
+          {
+            "id": "future_rainy_city_rooftop_view",
+            "ja": "雨上がりの屋上から街光を見下ろす未来都市視点",
+            "links": {
+              "base": [
+                "future rooftop city view",
+                "post-rain urban panorama"
+              ],
+              "customize": [
+                "post-rain clarity",
+                "roof-edge solitude",
+                "violet-blue afterglow"
+              ],
+              "settings": [
+                "wet rooftop surface",
+                "sign glow reflections",
+                "low cloud ceiling",
+                "city-depth lights"
+              ]
+            }
+          },
+          {
+            "id": "future_dawn_city_silhouette",
+            "ja": "夜明けの薄明に塔群が浮かぶ近未来都市遠景",
+            "links": {
+              "base": [
+                "future dawn skyline",
+                "thin-light city silhouette"
+              ],
+              "customize": [
+                "quiet dawn transition",
+                "cool pastel haze",
+                "low-traffic stillness"
+              ],
+              "settings": [
+                "slender tower silhouettes",
+                "pale horizon band",
+                "residual night lights",
+                "broad city basin"
+              ]
+            }
+          },
+          {
+            "id": "future_mist_city_observation_deck",
+            "ja": "雨霧の層越しに巨大街区が滲む展望デッキ視点",
+            "links": {
+              "base": [
+                "misty observation deck view",
+                "rain-haze city overlook"
+              ],
+              "customize": [
+                "mist-layer depth",
+                "edge-of-height tension",
+                "soft signal diffusion"
+              ],
+              "settings": [
+                "guardrail silhouette",
+                "fog-softened towers",
+                "fading traffic veins",
+                "high-altitude moisture veil"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "base": [
+      {
+        "group": "🌃 繁華街・商業コア",
+        "items": [
+          {
+            "ja": "近未来中心街",
+            "en": "near-future downtown"
+          },
+          {
+            "ja": "雨のネオン大通り",
+            "en": "rainy neon boulevard"
+          },
+          {
+            "ja": "夜の高層街区",
+            "en": "night high-rise district"
+          },
+          {
+            "ja": "多層未来交差点",
+            "en": "multilevel future crossroads"
+          },
+          {
+            "ja": "ホログラム遊歩道",
+            "en": "hologram promenade"
+          },
+          {
+            "ja": "未来商業大通り",
+            "en": "future commercial avenue"
+          },
+          {
+            "ja": "未来歓楽コア",
+            "en": "future entertainment core"
+          },
+          {
+            "ja": "夜の商業キャニオン",
+            "en": "night commercial canyon"
+          }
+        ]
+      },
+      {
+        "group": "🕳 裏路地・治安グレー",
+        "items": [
+          {
+            "ja": "未来裏路地",
+            "en": "future back alley"
+          },
+          {
+            "ja": "配管影のサービス路地",
+            "en": "pipe-shadow service lane"
+          },
+          {
+            "ja": "未来闇マーケット街角",
+            "en": "future black market corner"
+          },
+          {
+            "ja": "雨の脇道バザール",
+            "en": "rainy side-street bazaar"
+          },
+          {
+            "ja": "未来封鎖裏区画",
+            "en": "future quarantine backblock"
+          },
+          {
+            "ja": "封鎖された脇区画",
+            "en": "sealed side district"
+          }
+        ]
+      },
+      {
+        "group": "🏢 行政・企業・上層",
+        "items": [
+          {
+            "ja": "未来企業ロビー",
+            "en": "future corporate lobby"
+          },
+          {
+            "ja": "ガラスタワー軸空間",
+            "en": "glass-tower interior axis"
+          },
+          {
+            "ja": "上層デッキ歩廊区",
+            "en": "upper deck skywalk zone"
+          },
+          {
+            "ja": "高架未来街区",
+            "en": "elevated future district"
+          },
+          {
+            "ja": "未来行政広場",
+            "en": "future civic plaza"
+          },
+          {
+            "ja": "行政塔前広場",
+            "en": "administrative tower forecourt"
+          }
+        ]
+      },
+      {
+        "group": "🏭 工業縁・物流",
+        "items": [
+          {
+            "ja": "未来物流ヤード",
+            "en": "future logistics yard"
+          },
+          {
+            "ja": "工業都市外縁",
+            "en": "industrial city edge"
+          },
+          {
+            "ja": "未来発電区",
+            "en": "future power district"
+          },
+          {
+            "ja": "工業黄昏地平",
+            "en": "industrial dusk skyline"
+          },
+          {
+            "ja": "未来港湾外縁",
+            "en": "future megacity port edge"
+          },
+          {
+            "ja": "港湾接続都市縁",
+            "en": "harbor-connected city fringe"
+          },
+          {
+            "ja": "ドローン物流拠点",
+            "en": "drone logistics hub"
+          },
+          {
+            "ja": "自動貨物エプロン",
+            "en": "automated freight apron"
+          }
+        ]
+      },
+      {
+        "group": "🌌 遠景・俯瞰",
+        "items": [
+          {
+            "ja": "未来都市俯瞰",
+            "en": "future city overlook"
+          },
+          {
+            "ja": "夜のメガシティ全景",
+            "en": "night megacity panorama"
+          },
+          {
+            "ja": "未来屋上都市視点",
+            "en": "future rooftop city view"
+          },
+          {
+            "ja": "雨上がりの都市全景",
+            "en": "post-rain urban panorama"
+          },
+          {
+            "ja": "未来夜明け地平",
+            "en": "future dawn skyline"
+          },
+          {
+            "ja": "薄光の都市シルエット",
+            "en": "thin-light city silhouette"
+          },
+          {
+            "ja": "霧の展望デッキ視点",
+            "en": "misty observation deck view"
+          },
+          {
+            "ja": "雨霧の都市俯瞰",
+            "en": "rain-haze city overlook"
+          }
+        ]
+      }
+    ],
+    "customize": [
+      {
+        "group": "💡 光・ネオン・雨面",
+        "items": [
+          {
+            "ja": "濡れたネオン反射",
+            "en": "wet neon reflections"
+          },
+          {
+            "ja": "層状交通光",
+            "en": "layered traffic glow"
+          },
+          {
+            "ja": "密な都市圧",
+            "en": "dense urban pressure"
+          },
+          {
+            "ja": "積層レーンの運動感",
+            "en": "stacked-lane motion"
+          },
+          {
+            "ja": "青紫の都市光",
+            "en": "cyan-magenta city light"
+          },
+          {
+            "ja": "高架交通の流れ",
+            "en": "elevated traffic flow"
+          },
+          {
+            "ja": "広告アニメ光",
+            "en": "animated ad glow"
+          },
+          {
+            "ja": "夕刻都市の薄靄",
+            "en": "soft evening city haze"
+          },
+          {
+            "ja": "歩行者の流れ",
+            "en": "pedestrian flow"
+          },
+          {
+            "ja": "看板密度",
+            "en": "sign-clutter density"
+          },
+          {
+            "ja": "夜の群衆熱",
+            "en": "crowded night energy"
+          },
+          {
+            "ja": "湿ったネオン空気",
+            "en": "humid neon air"
+          }
+        ]
+      },
+      {
+        "group": "🔻 治安・密度・圧迫感",
+        "items": [
+          {
+            "ja": "狭い縦密度",
+            "en": "tight vertical clutter"
+          },
+          {
+            "ja": "汚れたネオン漏れ",
+            "en": "grimy neon spill"
+          },
+          {
+            "ja": "視界の悪い圧",
+            "en": "low-visibility pressure"
+          },
+          {
+            "ja": "違法看板の光",
+            "en": "illegal-sign glow"
+          },
+          {
+            "ja": "雨で滲む人影",
+            "en": "rain-blurred silhouettes"
+          },
+          {
+            "ja": "脇通路の混み感",
+            "en": "crowded side-corridor feel"
+          },
+          {
+            "ja": "不穏な警告灯",
+            "en": "uneasy warning glow"
+          },
+          {
+            "ja": "深夜の静まり",
+            "en": "empty late-night stillness"
+          },
+          {
+            "ja": "制限区画の緊張",
+            "en": "restricted-zone tension"
+          }
+        ]
+      },
+      {
+        "group": "🧭 上層導線・監視・企業感",
+        "items": [
+          {
+            "ja": "無菌高級光沢",
+            "en": "sterile luxury sheen"
+          },
+          {
+            "ja": "高天井企業静謐",
+            "en": "high-ceiling corporate calm"
+          },
+          {
+            "ja": "青白い清潔光",
+            "en": "clean blue-white glow"
+          },
+          {
+            "ja": "高所の都市風",
+            "en": "high-altitude urban wind"
+          },
+          {
+            "ja": "ガラス床の緊張",
+            "en": "glass-floor tension"
+          },
+          {
+            "ja": "秩序ある上層静けさ",
+            "en": "orderly elite quiet"
+          },
+          {
+            "ja": "形式的な空間規模",
+            "en": "formal open-space scale"
+          },
+          {
+            "ja": "統制された静けさ",
+            "en": "controlled civic stillness"
+          },
+          {
+            "ja": "磨かれた広場反射",
+            "en": "polished plaza reflections"
+          }
+        ]
+      },
+      {
+        "group": "🚚 工業・物流・搬送",
+        "items": [
+          {
+            "ja": "自動貨物の運動",
+            "en": "automated cargo motion"
+          },
+          {
+            "ja": "冷たいナトリウム青光",
+            "en": "cold sodium-cyan mix"
+          },
+          {
+            "ja": "機械的リズム",
+            "en": "mechanized rhythm"
+          },
+          {
+            "ja": "排熱の揺らぎ",
+            "en": "heat-exhaust shimmer"
+          },
+          {
+            "ja": "重インフラ規模",
+            "en": "heavy infrastructure scale"
+          },
+          {
+            "ja": "橙青の黄昏対比",
+            "en": "orange-blue dusk contrast"
+          },
+          {
+            "ja": "海運工業の光",
+            "en": "maritime industrial glow"
+          },
+          {
+            "ja": "広域外縁スケール",
+            "en": "wide-scale urban edge"
+          },
+          {
+            "ja": "貨物流動密度",
+            "en": "freight movement density"
+          },
+          {
+            "ja": "ビーコン明滅リズム",
+            "en": "beacon-blink rhythm"
+          },
+          {
+            "ja": "精密な交通パターン",
+            "en": "precision traffic pattern"
+          },
+          {
+            "ja": "冷たい夕刻カーゴ光",
+            "en": "cold evening cargo glow"
+          }
+        ]
+      },
+      {
+        "group": "🌫 俯瞰・遠景・気象",
+        "items": [
+          {
+            "ja": "層状光格子",
+            "en": "layered light grid"
+          },
+          {
+            "ja": "広い空撮奥行き",
+            "en": "wide aerial depth"
+          },
+          {
+            "ja": "冷たい都市風",
+            "en": "cold urban wind"
+          },
+          {
+            "ja": "雨上がりの明瞭感",
+            "en": "post-rain clarity"
+          },
+          {
+            "ja": "屋上縁の孤独",
+            "en": "roof-edge solitude"
+          },
+          {
+            "ja": "青紫の残光",
+            "en": "violet-blue afterglow"
+          },
+          {
+            "ja": "静かな夜明け遷移",
+            "en": "quiet dawn transition"
+          },
+          {
+            "ja": "冷たいパステル靄",
+            "en": "cool pastel haze"
+          },
+          {
+            "ja": "低交通の静止",
+            "en": "low-traffic stillness"
+          },
+          {
+            "ja": "霧層の奥行き",
+            "en": "mist-layer depth"
+          },
+          {
+            "ja": "高所縁の緊張",
+            "en": "edge-of-height tension"
+          },
+          {
+            "ja": "信号の柔拡散",
+            "en": "soft signal diffusion"
+          }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "group": "🪧 都市構造物",
+        "items": [
+          {
+            "ja": "巨大ホログラム看板",
+            "en": "towering hologram signage"
+          },
+          {
+            "ja": "多層高架路",
+            "en": "multilevel overpass"
+          },
+          {
+            "ja": "霧の街路蒸気",
+            "en": "misty street steam"
+          },
+          {
+            "ja": "高層キャニオン",
+            "en": "high-rise canyon"
+          },
+          {
+            "ja": "段状高速道路",
+            "en": "tiered expressways"
+          },
+          {
+            "ja": "発光レール線",
+            "en": "lighted rail line"
+          },
+          {
+            "ja": "深い都市透視",
+            "en": "deep city perspective"
+          },
+          {
+            "ja": "密な信号光",
+            "en": "dense signal glow"
+          },
+          {
+            "ja": "浮遊ホログラムパネル",
+            "en": "floating hologram panels"
+          },
+          {
+            "ja": "ガラス前面塔群",
+            "en": "glass-front towers"
+          },
+          {
+            "ja": "靄の縁",
+            "en": "light mist fringe"
+          },
+          {
+            "ja": "広い磨き舗装",
+            "en": "wide polished pavement"
+          },
+          {
+            "ja": "垂直広告壁",
+            "en": "vertical ad walls"
+          },
+          {
+            "ja": "密な店舗列",
+            "en": "dense storefront strips"
+          },
+          {
+            "ja": "投影メニュー看板",
+            "en": "projected menu signs"
+          },
+          {
+            "ja": "発光する脇通路",
+            "en": "glowing side passages"
+          }
+        ]
+      },
+      {
+        "group": "🛰 監視・上層インフラ",
+        "items": [
+          {
+            "ja": "監視ゲート列",
+            "en": "security gate line"
+          },
+          {
+            "ja": "受付光デスク",
+            "en": "reception light desk"
+          },
+          {
+            "ja": "エレベーター中枢奥行き",
+            "en": "elevator-core depth"
+          },
+          {
+            "ja": "透明空中歩廊",
+            "en": "transparent skybridges"
+          },
+          {
+            "ja": "空中レール路",
+            "en": "air-rail lane"
+          },
+          {
+            "ja": "塔接続デッキ",
+            "en": "tower-linked decks"
+          },
+          {
+            "ja": "眼下の都市床",
+            "en": "distant city floor below"
+          },
+          {
+            "ja": "ホバードローン巡回",
+            "en": "hover-drone patrol"
+          },
+          {
+            "ja": "無旗の行政支柱",
+            "en": "flagless civic pylons"
+          },
+          {
+            "ja": "塔入口軸",
+            "en": "tower entry axis"
+          },
+          {
+            "ja": "広い監視広場",
+            "en": "broad surveillance plaza"
+          },
+          {
+            "ja": "塔アトリウム空洞",
+            "en": "tower atrium void"
+          }
+        ]
+      },
+      {
+        "group": "🧱 路地・治安ディテール",
+        "items": [
+          {
+            "ja": "頭上配管群",
+            "en": "overhead utility pipes"
+          },
+          {
+            "ja": "濡れた壁面の艶",
+            "en": "wet wall sheen"
+          },
+          {
+            "ja": "整備用梯子",
+            "en": "maintenance ladders"
+          },
+          {
+            "ja": "小さな監視点",
+            "en": "security camera dots"
+          },
+          {
+            "ja": "継ぎ接ぎの庇",
+            "en": "patchwork awnings"
+          },
+          {
+            "ja": "暗号ネオンサイン",
+            "en": "coded neon signs"
+          },
+          {
+            "ja": "狭い露店路",
+            "en": "narrow vendor lane"
+          },
+          {
+            "ja": "影の検問縁",
+            "en": "shadowy checkpoint edge"
+          },
+          {
+            "ja": "帯状バリケード灯",
+            "en": "strip barricade lights"
+          },
+          {
+            "ja": "封鎖シャッター列",
+            "en": "sealed shutter doors"
+          },
+          {
+            "ja": "警告投影文字",
+            "en": "warning projection text"
+          },
+          {
+            "ja": "迂回フェンス線",
+            "en": "detour fence lines"
+          }
+        ]
+      },
+      {
+        "group": "🏭 工業外縁ディテール",
+        "items": [
+          {
+            "ja": "コンテナ搬送レール",
+            "en": "container transfer rails"
+          },
+          {
+            "ja": "ドローン交通レーン",
+            "en": "drone traffic lanes"
+          },
+          {
+            "ja": "倉庫の光線",
+            "en": "warehouse light lines"
+          },
+          {
+            "ja": "遠い塔群線",
+            "en": "distant tower skyline"
+          },
+          {
+            "ja": "反応炉じみた塔影",
+            "en": "reactor-like tower silhouettes"
+          },
+          {
+            "ja": "排気蒸気柱",
+            "en": "vent-steam columns"
+          },
+          {
+            "ja": "周縁警備灯",
+            "en": "perimeter security lights"
+          },
+          {
+            "ja": "広いサービス道路",
+            "en": "broad service road"
+          },
+          {
+            "ja": "自動ドッククレーン",
+            "en": "automated dock cranes"
+          },
+          {
+            "ja": "積層貨物デッキ",
+            "en": "stacked cargo decks"
+          },
+          {
+            "ja": "海霧逆光",
+            "en": "sea-haze backlight"
+          },
+          {
+            "ja": "遠い地平ビーム",
+            "en": "far skyline beam"
+          },
+          {
+            "ja": "着陸パッド格子",
+            "en": "landing-pad grid"
+          },
+          {
+            "ja": "貨物リフト塔",
+            "en": "cargo lift towers"
+          },
+          {
+            "ja": "誘導ビーコン列",
+            "en": "guide-beacon rows"
+          },
+          {
+            "ja": "仕分けベイ庇",
+            "en": "sorting-bay canopies"
+          }
+        ]
+      },
+      {
+        "group": "🌌 遠景演出",
+        "items": [
+          {
+            "ja": "広大な塔の海",
+            "en": "vast tower sea"
+          },
+          {
+            "ja": "多層道路の光跡",
+            "en": "multilevel road tracers"
+          },
+          {
+            "ja": "遠景靄の天蓋",
+            "en": "distant haze vault"
+          },
+          {
+            "ja": "展望縁フレーミング",
+            "en": "observation-edge framing"
+          },
+          {
+            "ja": "濡れた屋上面",
+            "en": "wet rooftop surface"
+          },
+          {
+            "ja": "看板光の反射",
+            "en": "sign glow reflections"
+          },
+          {
+            "ja": "低い雲天井",
+            "en": "low cloud ceiling"
+          },
+          {
+            "ja": "都市奥の灯り",
+            "en": "city-depth lights"
+          },
+          {
+            "ja": "細い塔の輪郭",
+            "en": "slender tower silhouettes"
+          },
+          {
+            "ja": "淡い地平の帯",
+            "en": "pale horizon band"
+          },
+          {
+            "ja": "夜の残留灯",
+            "en": "residual night lights"
+          },
+          {
+            "ja": "広い都市盆地",
+            "en": "broad city basin"
+          },
+          {
+            "ja": "手すりの影",
+            "en": "guardrail silhouette"
+          },
+          {
+            "ja": "霧で柔らいだ塔群",
+            "en": "fog-softened towers"
+          },
+          {
+            "ja": "消えかけた交通脈",
+            "en": "fading traffic veins"
+          },
+          {
+            "ja": "高所の湿潤ベール",
+            "en": "high-altitude moisture veil"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "starship_hangar_bridge_collection",
+    "title": "🚀 宇宙船・艦内・格納庫特化コレクション",
+    "subtitle": "艦橋、通路、格納庫、整備デッキに加え、民生船、軍用艦、医療救難、輸送貨物、VIP区画まで、宇宙船内部を機能と役割差で成立させる艦内特化コレクション",
+    "complete": [
+      {
+        "group": "🛸 艦橋・操舵・観測",
+        "items": [
+          {
+            "id": "starship_bridge_command_view",
+            "ja": "星図と前面窓が広がる宇宙船艦橋の指揮視点",
+            "links": {
+              "base": [
+                "starship bridge",
+                "forward command deck"
+              ],
+              "customize": [
+                "instrument glow",
+                "silent spaceborne tension",
+                "panoramic viewport"
+              ],
+              "settings": [
+                "forward starfield window",
+                "tiered control consoles",
+                "captain-seat axis",
+                "cool command lighting"
+              ]
+            }
+          },
+          {
+            "id": "orbital_observation_corridor",
+            "ja": "観測窓越しに星域が流れる軌道施設の展望回廊",
+            "links": {
+              "base": [
+                "orbital observation corridor",
+                "space-view gallery"
+              ],
+              "customize": [
+                "slow orbital drift",
+                "glass-reflection hush",
+                "vacuum-side stillness"
+              ],
+              "settings": [
+                "long window band",
+                "planet limb glow",
+                "clean corridor line",
+                "soft floor guidance lights"
+              ]
+            }
+          },
+          {
+            "id": "combat_bridge_alert_mode",
+            "ja": "警戒灯が切り替わる戦術アラート中の艦橋",
+            "links": {
+              "base": [
+                "alert-mode bridge",
+                "tactical command deck"
+              ],
+              "customize": [
+                "red-blue warning pulse",
+                "urgent system chatter feel",
+                "tight command focus"
+              ],
+              "settings": [
+                "warning strip lights",
+                "combat display panels",
+                "darkened viewport edge",
+                "dense console silhouette"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🛠 格納庫・整備デッキ",
+        "items": [
+          {
+            "id": "starship_hangar_service_bay",
+            "ja": "整備灯と搬送アームが並ぶ宇宙船格納庫",
+            "links": {
+              "base": [
+                "starship hangar bay",
+                "maintenance deck"
+              ],
+              "customize": [
+                "service-light glare",
+                "heavy mechanical volume",
+                "dockside echo"
+              ],
+              "settings": [
+                "suspended service arms",
+                "open docking floor",
+                "strip-lit bay walls",
+                "parked craft silhouettes"
+              ]
+            }
+          },
+          {
+            "id": "launch_catapult_bay",
+            "ja": "発進カタパルトへ機体が並ぶ発艦準備ベイ",
+            "links": {
+              "base": [
+                "launch catapult bay",
+                "pre-launch hangar"
+              ],
+              "customize": [
+                "pre-launch tension",
+                "rail-line depth",
+                "compressed industrial brightness"
+              ],
+              "settings": [
+                "launch rail groove",
+                "catapult guide lights",
+                "locked craft nose-lines",
+                "support gantry layers"
+              ]
+            }
+          },
+          {
+            "id": "dockside_airlock_loading_zone",
+            "ja": "エアロック横で貨物搬入が続く接舷作業区",
+            "links": {
+              "base": [
+                "dockside airlock zone",
+                "cargo loading deck"
+              ],
+              "customize": [
+                "pressurized-bay bustle",
+                "cargo-transfer rhythm",
+                "industrial dock atmosphere"
+              ],
+              "settings": [
+                "airlock ring door",
+                "cargo pallet stacks",
+                "loading beacon lights",
+                "service-vehicle lane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🛏 居住区・通路・日常",
+        "items": [
+          {
+            "id": "starship_living_deck_corridor",
+            "ja": "居住区へ続く清潔な宇宙船生活回廊",
+            "links": {
+              "base": [
+                "starship habitation deck",
+                "clean ship corridor"
+              ],
+              "customize": [
+                "quiet recycled-air feel",
+                "sterile domestic calm",
+                "soft utility lighting"
+              ],
+              "settings": [
+                "rounded corridor walls",
+                "cabin door sequence",
+                "underfloor light guide",
+                "compact ceiling panels"
+              ]
+            }
+          },
+          {
+            "id": "mess_hall_window_stars",
+            "ja": "窓外に星が浮かぶ宇宙船食堂デッキ",
+            "links": {
+              "base": [
+                "ship mess hall",
+                "window-side star deck"
+              ],
+              "customize": [
+                "off-duty warmth",
+                "contained social calm",
+                "soft reflective metal"
+              ],
+              "settings": [
+                "broad star-view window",
+                "modular table rows",
+                "galley service line",
+                "gentle ambient ceiling"
+              ]
+            }
+          },
+          {
+            "id": "sleep_pod_quarters_blue",
+            "ja": "青い待機灯に包まれたスリープポッド居住区",
+            "links": {
+              "base": [
+                "sleep pod quarters",
+                "crew rest compartment"
+              ],
+              "customize": [
+                "deep-ship quiet",
+                "contained privacy",
+                "low-blue standby light"
+              ],
+              "settings": [
+                "stacked sleep pods",
+                "status-light dots",
+                "narrow access aisle",
+                "sealed compartment tone"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🧳 民生船・旅客デッキ",
+        "items": [
+          {
+            "id": "civilian_liner_atrium_view",
+            "ja": "案内表示と乗客動線が整った民生船アトリウムデッキ",
+            "links": {
+              "base": [
+                "civilian starliner atrium",
+                "passenger transit deck"
+              ],
+              "customize": [
+                "civilian traffic flow",
+                "soft hospitality lighting",
+                "quiet terminal cleanliness"
+              ],
+              "settings": [
+                "wayfinding holo signage",
+                "lounge-facing balcony",
+                "multi-level deck void",
+                "passenger handrail lines"
+              ]
+            }
+          },
+          {
+            "id": "passenger_liner_window_lounge",
+            "ja": "星景を眺める窓際席が並ぶ旅客船ラウンジ",
+            "links": {
+              "base": [
+                "passenger starliner lounge",
+                "window-side cruise lounge"
+              ],
+              "customize": [
+                "relaxed interstellar travel mood",
+                "soft upholstery reflections",
+                "civilian comfort tone"
+              ],
+              "settings": [
+                "panoramic observation windows",
+                "curved lounge seating",
+                "drink service counter",
+                "muted floor guide lights"
+              ]
+            }
+          },
+          {
+            "id": "ferry_terminal_embark_corridor",
+            "ja": "搭乗案内が流れる民間宇宙フェリーの乗船回廊",
+            "links": {
+              "base": [
+                "space ferry embark corridor",
+                "civilian boarding passage"
+              ],
+              "customize": [
+                "embarkation bustle",
+                "scheduled travel order",
+                "contained terminal brightness"
+              ],
+              "settings": [
+                "boarding gate band",
+                "queue-control barriers",
+                "arrival departure displays",
+                "clean access tunnel line"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🛡 軍用艦・警備区画",
+        "items": [
+          {
+            "id": "military_frigate_corridor_alert",
+            "ja": "警備灯と識別標識が走る軍用艦の戦術通路",
+            "links": {
+              "base": [
+                "military frigate corridor",
+                "tactical security passage"
+              ],
+              "customize": [
+                "disciplined combat readiness",
+                "hard metallic austerity",
+                "tight security pressure"
+              ],
+              "settings": [
+                "unit-marked bulkhead walls",
+                "armored door sections",
+                "alert strip lighting",
+                "restricted access panels"
+              ]
+            }
+          },
+          {
+            "id": "armory_ready_room_deck",
+            "ja": "装備ラックと待機席が並ぶ出撃前の武装待機室",
+            "links": {
+              "base": [
+                "starship ready room",
+                "shipboard armory deck"
+              ],
+              "customize": [
+                "pre-sortie tension",
+                "orderly military storage",
+                "contained operational silence"
+              ],
+              "settings": [
+                "weapon locker banks",
+                "helmet rack rows",
+                "launch briefing display",
+                "reinforced deck plating"
+              ]
+            }
+          },
+          {
+            "id": "carrier_ops_command_ring",
+            "ja": "作戦投影図が浮かぶ母艦オペレーションリング",
+            "links": {
+              "base": [
+                "carrier operations ring",
+                "military command hub"
+              ],
+              "customize": [
+                "mission-control focus",
+                "strategic urgency",
+                "dark tactical glow"
+              ],
+              "settings": [
+                "holographic battle map",
+                "tiered command stations",
+                "secured central dais",
+                "status beacon accents"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🏥 医療救難・隔離ユニット",
+        "items": [
+          {
+            "id": "rescue_ship_triage_bay",
+            "ja": "応急処置ベッドが並ぶ救難船のトリアージ区",
+            "links": {
+              "base": [
+                "rescue ship triage bay",
+                "emergency medical deck"
+              ],
+              "customize": [
+                "urgent clinical motion",
+                "clean rescue lighting",
+                "managed emergency calm"
+              ],
+              "settings": [
+                "folding treatment beds",
+                "rapid-response med cart",
+                "status monitor strips",
+                "clear access aisles"
+              ]
+            }
+          },
+          {
+            "id": "medical_ship_recovery_room",
+            "ja": "生命維持装置が静かに灯る医療船の回復区画",
+            "links": {
+              "base": [
+                "medical recovery ward",
+                "starship care unit"
+              ],
+              "customize": [
+                "gentle medical quiet",
+                "sterile reassurance",
+                "soft life-support ambience"
+              ],
+              "settings": [
+                "med-bed capsules",
+                "ceiling support arms",
+                "privacy partition glass",
+                "cool-white care panels"
+              ]
+            }
+          },
+          {
+            "id": "quarantine_airlock_medical",
+            "ja": "消毒灯と隔離扉が連なる検疫エアロック通路",
+            "links": {
+              "base": [
+                "quarantine airlock corridor",
+                "medical isolation airlock"
+              ],
+              "customize": [
+                "biosecurity tension",
+                "decontamination brightness",
+                "controlled isolation hush"
+              ],
+              "settings": [
+                "decon spray arch",
+                "sealed quarantine doors",
+                "hazard icon bands",
+                "scrub-light ceiling strips"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "📦 輸送船・貨物搬送",
+        "items": [
+          {
+            "id": "freighter_container_hold",
+            "ja": "大型コンテナが層状に積まれた貨物船ホールド",
+            "links": {
+              "base": [
+                "freighter cargo hold",
+                "container stack bay"
+              ],
+              "customize": [
+                "heavy freight scale",
+                "industrial shipping gravity",
+                "echoing cargo vastness"
+              ],
+              "settings": [
+                "stacked cargo containers",
+                "mag-lock floor tracks",
+                "loading crane gantries",
+                "coded freight markings"
+              ]
+            }
+          },
+          {
+            "id": "salvage_tug_loading_frame",
+            "ja": "回収フレームと固定具が並ぶサルベージ輸送デッキ",
+            "links": {
+              "base": [
+                "salvage transport deck",
+                "heavy recovery loading frame"
+              ],
+              "customize": [
+                "rough utility atmosphere",
+                "dockside salvage strain",
+                "practical machine grime feel"
+              ],
+              "settings": [
+                "recovery clamp rigs",
+                "tow-cable anchors",
+                "reinforced floor braces",
+                "industrial service lamps"
+              ]
+            }
+          },
+          {
+            "id": "freight_airlock_sorting_lane",
+            "ja": "仕分け標示と搬送ラインが走る貨物エアロック搬入区",
+            "links": {
+              "base": [
+                "freight sorting lane",
+                "cargo airlock terminal"
+              ],
+              "customize": [
+                "logistics throughput rhythm",
+                "functional workflow order",
+                "busy industrial cadence"
+              ],
+              "settings": [
+                "sorting hologram labels",
+                "belt-loader channels",
+                "airlock dock ring",
+                "pallet staging zones"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "✨ VIPデッキ・高級区画",
+        "items": [
+          {
+            "id": "vip_observation_salon_gold",
+            "ja": "星雲を見下ろす曲面窓のVIP展望サロン",
+            "links": {
+              "base": [
+                "VIP observation salon",
+                "luxury starship lounge"
+              ],
+              "customize": [
+                "luxury stillness",
+                "soft premium glow",
+                "high-end quiet opulence"
+              ],
+              "settings": [
+                "curved nebula-view window",
+                "private sofa islands",
+                "gold-accent trim",
+                "subtle floor sheen"
+              ]
+            }
+          },
+          {
+            "id": "executive_suite_corridor",
+            "ja": "私室入口と静かな装飾照明が続くエグゼクティブ居住回廊",
+            "links": {
+              "base": [
+                "executive suite corridor",
+                "premium residence deck"
+              ],
+              "customize": [
+                "private-deck exclusivity",
+                "refined shipboard comfort",
+                "muted elite calm"
+              ],
+              "settings": [
+                "suite door sequence",
+                "soft wall inlays",
+                "deep-pile corridor runner",
+                "warm indirect lighting"
+              ]
+            }
+          },
+          {
+            "id": "diplomatic_reception_deck",
+            "ja": "歓迎ホログラムと応接席が整う外交応接デッキ",
+            "links": {
+              "base": [
+                "diplomatic reception deck",
+                "formal starship salon"
+              ],
+              "customize": [
+                "ceremonial hospitality mood",
+                "composed prestige",
+                "formal social polish"
+              ],
+              "settings": [
+                "reception holo crest",
+                "conversation seating clusters",
+                "service alcove niche",
+                "clean panoramic backdrop"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "base": [
+      {
+        "group": "🛸 指揮・観測",
+        "items": [
+          {
+            "ja": "宇宙船艦橋",
+            "en": "starship bridge"
+          },
+          {
+            "ja": "前方指揮デッキ",
+            "en": "forward command deck"
+          },
+          {
+            "ja": "軌道観測回廊",
+            "en": "orbital observation corridor"
+          },
+          {
+            "ja": "宇宙眺望ギャラリー",
+            "en": "space-view gallery"
+          },
+          {
+            "ja": "アラート艦橋",
+            "en": "alert-mode bridge"
+          },
+          {
+            "ja": "戦術指揮デッキ",
+            "en": "tactical command deck"
+          }
+        ]
+      },
+      {
+        "group": "🛠 格納庫・接舷",
+        "items": [
+          {
+            "ja": "宇宙船格納庫",
+            "en": "starship hangar bay"
+          },
+          {
+            "ja": "整備デッキ",
+            "en": "maintenance deck"
+          },
+          {
+            "ja": "発進カタパルトベイ",
+            "en": "launch catapult bay"
+          },
+          {
+            "ja": "発艦準備格納庫",
+            "en": "pre-launch hangar"
+          },
+          {
+            "ja": "接舷エアロック区",
+            "en": "dockside airlock zone"
+          },
+          {
+            "ja": "貨物搬入デッキ",
+            "en": "cargo loading deck"
+          }
+        ]
+      },
+      {
+        "group": "🏠 艦内日常",
+        "items": [
+          {
+            "ja": "宇宙船居住デッキ",
+            "en": "starship habitation deck"
+          },
+          {
+            "ja": "清潔な船内回廊",
+            "en": "clean ship corridor"
+          },
+          {
+            "ja": "宇宙船食堂",
+            "en": "ship mess hall"
+          },
+          {
+            "ja": "窓際の星見デッキ",
+            "en": "window-side star deck"
+          },
+          {
+            "ja": "スリープポッド居住区",
+            "en": "sleep pod quarters"
+          },
+          {
+            "ja": "乗員休息区画",
+            "en": "crew rest compartment"
+          }
+        ]
+      },
+      {
+        "group": "🧳 民生船・旅客基盤",
+        "items": [
+          {
+            "ja": "民生船アトリウム",
+            "en": "civilian starliner atrium"
+          },
+          {
+            "ja": "旅客デッキ",
+            "en": "passenger transit deck"
+          },
+          {
+            "ja": "旅客船ラウンジ",
+            "en": "passenger starliner lounge"
+          },
+          {
+            "ja": "窓際クルーズラウンジ",
+            "en": "window-side cruise lounge"
+          },
+          {
+            "ja": "宇宙フェリー乗船回廊",
+            "en": "space ferry embark corridor"
+          },
+          {
+            "ja": "民間乗船通路",
+            "en": "civilian boarding passage"
+          }
+        ]
+      },
+      {
+        "group": "🛡 軍用艦・警備基盤",
+        "items": [
+          {
+            "ja": "軍用艦通路",
+            "en": "military frigate corridor"
+          },
+          {
+            "ja": "戦術警備通路",
+            "en": "tactical security passage"
+          },
+          {
+            "ja": "艦内武装待機室",
+            "en": "shipboard armory deck"
+          },
+          {
+            "ja": "出撃前待機室",
+            "en": "starship ready room"
+          },
+          {
+            "ja": "母艦オペレーションリング",
+            "en": "carrier operations ring"
+          },
+          {
+            "ja": "軍用司令ハブ",
+            "en": "military command hub"
+          }
+        ]
+      },
+      {
+        "group": "🏥 医療救難基盤",
+        "items": [
+          {
+            "ja": "救難船トリアージ区",
+            "en": "rescue ship triage bay"
+          },
+          {
+            "ja": "緊急医療デッキ",
+            "en": "emergency medical deck"
+          },
+          {
+            "ja": "医療回復区画",
+            "en": "medical recovery ward"
+          },
+          {
+            "ja": "艦内ケアユニット",
+            "en": "starship care unit"
+          },
+          {
+            "ja": "検疫エアロック通路",
+            "en": "quarantine airlock corridor"
+          },
+          {
+            "ja": "医療隔離エアロック",
+            "en": "medical isolation airlock"
+          }
+        ]
+      },
+      {
+        "group": "📦 輸送貨物基盤",
+        "items": [
+          {
+            "ja": "貨物船ホールド",
+            "en": "freighter cargo hold"
+          },
+          {
+            "ja": "コンテナ積載ベイ",
+            "en": "container stack bay"
+          },
+          {
+            "ja": "サルベージ輸送デッキ",
+            "en": "salvage transport deck"
+          },
+          {
+            "ja": "回収搬送フレーム",
+            "en": "heavy recovery loading frame"
+          },
+          {
+            "ja": "貨物仕分けレーン",
+            "en": "freight sorting lane"
+          },
+          {
+            "ja": "貨物エアロック端末",
+            "en": "cargo airlock terminal"
+          }
+        ]
+      },
+      {
+        "group": "✨ VIP・高級基盤",
+        "items": [
+          {
+            "ja": "VIP展望サロン",
+            "en": "VIP observation salon"
+          },
+          {
+            "ja": "高級宇宙船ラウンジ",
+            "en": "luxury starship lounge"
+          },
+          {
+            "ja": "エグゼクティブ居住回廊",
+            "en": "executive suite corridor"
+          },
+          {
+            "ja": "高級居住デッキ",
+            "en": "premium residence deck"
+          },
+          {
+            "ja": "外交応接デッキ",
+            "en": "diplomatic reception deck"
+          },
+          {
+            "ja": "正式応接サロン",
+            "en": "formal starship salon"
+          }
+        ]
+      }
+    ],
+    "customize": [
+      {
+        "group": "💡 光・計器",
+        "items": [
+          {
+            "ja": "計器の発光",
+            "en": "instrument glow"
+          },
+          {
+            "ja": "広い前面窓",
+            "en": "panoramic viewport"
+          },
+          {
+            "ja": "赤青の警戒脈動",
+            "en": "red-blue warning pulse"
+          },
+          {
+            "ja": "ガラス反射の静けさ",
+            "en": "glass-reflection hush"
+          },
+          {
+            "ja": "整備灯の眩しさ",
+            "en": "service-light glare"
+          },
+          {
+            "ja": "柔らかな実用照明",
+            "en": "soft utility lighting"
+          }
+        ]
+      },
+      {
+        "group": "🎛 機能・稼働",
+        "items": [
+          {
+            "ja": "宇宙航行の緊張",
+            "en": "silent spaceborne tension"
+          },
+          {
+            "ja": "緩やかな軌道流れ",
+            "en": "slow orbital drift"
+          },
+          {
+            "ja": "発艦前の緊張",
+            "en": "pre-launch tension"
+          },
+          {
+            "ja": "貨物移送のリズム",
+            "en": "cargo-transfer rhythm"
+          },
+          {
+            "ja": "再循環空気の気配",
+            "en": "quiet recycled-air feel"
+          },
+          {
+            "ja": "深船の静けさ",
+            "en": "deep-ship quiet"
+          }
+        ]
+      },
+      {
+        "group": "🧱 材質・空気",
+        "items": [
+          {
+            "ja": "冷たい司令室照明",
+            "en": "cool command lighting"
+          },
+          {
+            "ja": "工業的ドック空気",
+            "en": "industrial dock atmosphere"
+          },
+          {
+            "ja": "圧縮された工業光",
+            "en": "compressed industrial brightness"
+          },
+          {
+            "ja": "無菌的な落ち着き",
+            "en": "sterile domestic calm"
+          },
+          {
+            "ja": "金属の柔らかな反射",
+            "en": "soft reflective metal"
+          },
+          {
+            "ja": "青い待機灯",
+            "en": "low-blue standby light"
+          }
+        ]
+      },
+      {
+        "group": "🧳 旅客・民生の空気",
+        "items": [
+          {
+            "ja": "民生動線の流れ",
+            "en": "civilian traffic flow"
+          },
+          {
+            "ja": "接客寄りの柔らかい照明",
+            "en": "soft hospitality lighting"
+          },
+          {
+            "ja": "穏やかな旅情",
+            "en": "relaxed interstellar travel mood"
+          },
+          {
+            "ja": "定期便の秩序感",
+            "en": "scheduled travel order"
+          }
+        ]
+      },
+      {
+        "group": "🛡 軍用・緊張感",
+        "items": [
+          {
+            "ja": "規律ある戦闘待機",
+            "en": "disciplined combat readiness"
+          },
+          {
+            "ja": "出撃前の緊張",
+            "en": "pre-sortie tension"
+          },
+          {
+            "ja": "作戦中枢の集中",
+            "en": "mission-control focus"
+          },
+          {
+            "ja": "暗い戦術発光",
+            "en": "dark tactical glow"
+          }
+        ]
+      },
+      {
+        "group": "🏥 医療・救難の空気",
+        "items": [
+          {
+            "ja": "救難現場の緊急感",
+            "en": "urgent clinical motion"
+          },
+          {
+            "ja": "静かな回復区の空気",
+            "en": "gentle medical quiet"
+          },
+          {
+            "ja": "無菌の安心感",
+            "en": "sterile reassurance"
+          },
+          {
+            "ja": "隔離手順の緊張",
+            "en": "biosecurity tension"
+          }
+        ]
+      },
+      {
+        "group": "📦 貨物・搬送の空気",
+        "items": [
+          {
+            "ja": "重量物流の圧",
+            "en": "heavy freight scale"
+          },
+          {
+            "ja": "実務的な搬送リズム",
+            "en": "logistics throughput rhythm"
+          },
+          {
+            "ja": "荒い作業感",
+            "en": "rough utility atmosphere"
+          },
+          {
+            "ja": "工業的な反響",
+            "en": "echoing cargo vastness"
+          }
+        ]
+      },
+      {
+        "group": "✨ 高級・儀礼の空気",
+        "items": [
+          {
+            "ja": "高級区画の静けさ",
+            "en": "luxury stillness"
+          },
+          {
+            "ja": "上質な柔光",
+            "en": "soft premium glow"
+          },
+          {
+            "ja": "私的空間の特別感",
+            "en": "private-deck exclusivity"
+          },
+          {
+            "ja": "儀礼的な歓迎空気",
+            "en": "ceremonial hospitality mood"
+          }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "group": "🪟 窓・視界",
+        "items": [
+          {
+            "ja": "前面の星野窓",
+            "en": "forward starfield window"
+          },
+          {
+            "ja": "惑星縁の発光",
+            "en": "planet limb glow"
+          },
+          {
+            "ja": "暗い舷窓縁",
+            "en": "darkened viewport edge"
+          },
+          {
+            "ja": "広い星見窓",
+            "en": "broad star-view window"
+          },
+          {
+            "ja": "長い窓帯",
+            "en": "long window band"
+          },
+          {
+            "ja": "軌道流れの視界",
+            "en": "orbital-drift view"
+          }
+        ]
+      },
+      {
+        "group": "⚙ 内部構造",
+        "items": [
+          {
+            "ja": "段状の制御卓",
+            "en": "tiered control consoles"
+          },
+          {
+            "ja": "船長席の軸",
+            "en": "captain-seat axis"
+          },
+          {
+            "ja": "吊り下げ整備アーム",
+            "en": "suspended service arms"
+          },
+          {
+            "ja": "ガントリーの層",
+            "en": "support gantry layers"
+          },
+          {
+            "ja": "丸みのある回廊壁",
+            "en": "rounded corridor walls"
+          },
+          {
+            "ja": "区画ドアの連なり",
+            "en": "cabin door sequence"
+          }
+        ]
+      },
+      {
+        "group": "📦 細部・小物",
+        "items": [
+          {
+            "ja": "戦術表示パネル",
+            "en": "combat display panels"
+          },
+          {
+            "ja": "ベイ壁の光帯",
+            "en": "strip-lit bay walls"
+          },
+          {
+            "ja": "貨物パレットの山",
+            "en": "cargo pallet stacks"
+          },
+          {
+            "ja": "サービス車両レーン",
+            "en": "service-vehicle lane"
+          },
+          {
+            "ja": "テーブル列",
+            "en": "modular table rows"
+          },
+          {
+            "ja": "状態灯の粒",
+            "en": "status-light dots"
+          }
+        ]
+      },
+      {
+        "group": "🧳 旅客船の証拠",
+        "items": [
+          {
+            "ja": "案内ホロサイン",
+            "en": "wayfinding holo signage"
+          },
+          {
+            "ja": "乗客用手すり列",
+            "en": "passenger handrail lines"
+          },
+          {
+            "ja": "搭乗ゲート帯",
+            "en": "boarding gate band"
+          },
+          {
+            "ja": "出発到着表示",
+            "en": "arrival departure displays"
+          }
+        ]
+      },
+      {
+        "group": "🛡 軍用艦の証拠",
+        "items": [
+          {
+            "ja": "部隊識別標識",
+            "en": "unit-marked bulkhead walls"
+          },
+          {
+            "ja": "装甲区画扉",
+            "en": "armored door sections"
+          },
+          {
+            "ja": "装備ラック列",
+            "en": "weapon locker banks"
+          },
+          {
+            "ja": "ホログラム戦況図",
+            "en": "holographic battle map"
+          }
+        ]
+      },
+      {
+        "group": "🏥 医療船の証拠",
+        "items": [
+          {
+            "ja": "応急ベッド列",
+            "en": "folding treatment beds"
+          },
+          {
+            "ja": "生命維持装置光",
+            "en": "soft life-support ambience"
+          },
+          {
+            "ja": "消毒アーチ",
+            "en": "decon spray arch"
+          },
+          {
+            "ja": "隔離扉連結",
+            "en": "sealed quarantine doors"
+          }
+        ]
+      },
+      {
+        "group": "📦 貨物船の証拠",
+        "items": [
+          {
+            "ja": "積層コンテナ群",
+            "en": "stacked cargo containers"
+          },
+          {
+            "ja": "磁気固定床レール",
+            "en": "mag-lock floor tracks"
+          },
+          {
+            "ja": "牽引用アンカー",
+            "en": "tow-cable anchors"
+          },
+          {
+            "ja": "仕分けホログラム標示",
+            "en": "sorting hologram labels"
+          }
+        ]
+      },
+      {
+        "group": "✨ VIP区画の証拠",
+        "items": [
+          {
+            "ja": "曲面星雲窓",
+            "en": "curved nebula-view window"
+          },
+          {
+            "ja": "金装飾トリム",
+            "en": "gold-accent trim"
+          },
+          {
+            "ja": "私室扉の連なり",
+            "en": "suite door sequence"
+          },
+          {
+            "ja": "歓迎ホロ紋章",
+            "en": "reception holo crest"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fleet_battle_space_collection",
+    "title": "🚢 宇宙艦隊戦・宙域戦場特化コレクション",
+    "subtitle": "艦隊対峙、主砲斉射、母艦発艦、残骸漂流、要塞防衛、ワープ奇襲まで、宇宙戦場の密度と火力で成立させる宙域戦闘特化コレクション",
+    "complete": [
+      {
+        "group": "⚔ 艦隊対峙・開戦前",
+        "items": [
+          {
+            "id": "fleet_standoff_red_alert",
+            "ja": "赤警報の光だけが艦影を撫でる開戦直前の艦隊対峙宙域",
+            "links": {
+              "base": [
+                "standoff fleet engagement zone",
+                "battle line deployment"
+              ],
+              "customize": [
+                "red alert glow",
+                "silent pre-battle tension",
+                "formation depth"
+              ],
+              "settings": [
+                "opposing capital ships",
+                "far gun battery silhouettes",
+                "cold tactical void",
+                "distant escort screens"
+              ]
+            }
+          },
+          {
+            "id": "fleet_horizon_encirclement",
+            "ja": "遠方艦列が弧を描いて包囲圧を作る開戦前の宙域",
+            "links": {
+              "base": [
+                "fleet-battle void",
+                "encirclement line"
+              ],
+              "customize": [
+                "encirclement pressure",
+                "blue-white vacuum light",
+                "formation scale"
+              ],
+              "settings": [
+                "curving battlefront",
+                "escort light points",
+                "distant command ship",
+                "silent weapon charge"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🔥 主砲斉射・砲撃戦",
+        "items": [
+          {
+            "id": "fleet_broadside_crossfire",
+            "ja": "主砲斉射と爆散光が交差する本格砲撃戦の宇宙艦隊戦場",
+            "links": {
+              "base": [
+                "broadside artillery battle zone",
+                "crossfire fleet combat"
+              ],
+              "customize": [
+                "laser broadside volleys",
+                "explosion bloom chains",
+                "missile trail density"
+              ],
+              "settings": [
+                "crossing artillery arcs",
+                "shield flash pulses",
+                "burning hull fragments",
+                "weapon discharge haze"
+              ]
+            }
+          },
+          {
+            "id": "fleet_close_range_breakthrough",
+            "ja": "近距離で火線が重なり突破口が裂ける艦隊砲撃戦",
+            "links": {
+              "base": [
+                "close-range fleet combat",
+                "breakthrough battle corridor"
+              ],
+              "customize": [
+                "compressed combat spacing",
+                "intense weapons glare",
+                "armor-scorch sparks"
+              ],
+              "settings": [
+                "broken formation gap",
+                "flanking destroyer rush",
+                "venting hull fires",
+                "white-hot shot lanes"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🛫 空母・母艦・発艦宙域",
+        "items": [
+          {
+            "id": "fleet_carrier_launch_burst",
+            "ja": "母艦側面から戦闘機群が吐き出される発艦宙域",
+            "links": {
+              "base": [
+                "carrier launch combat zone",
+                "mother-ship sortie space"
+              ],
+              "customize": [
+                "fighter launch streaks",
+                "hangar-beacon glow",
+                "escort swarm motion"
+              ],
+              "settings": [
+                "open launch bays",
+                "carrier flank silhouette",
+                "catapult flare trails",
+                "formation rendezvous dots"
+              ]
+            }
+          },
+          {
+            "id": "fleet_mothership_cover_screen",
+            "ja": "巨大母艦の周囲を護衛艦が多層に囲む発艦前線",
+            "links": {
+              "base": [
+                "carrier task-force front",
+                "escort-screen deployment"
+              ],
+              "customize": [
+                "layered escort motion",
+                "hangar-door activity",
+                "launch-window urgency"
+              ],
+              "settings": [
+                "heavy carrier center silhouette",
+                "escort frigate rings",
+                "service drone sparkles",
+                "outbound strike lanes"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "☄ 残骸帯・撃沈艦・漂流戦場",
+        "items": [
+          {
+            "id": "fleet_wreckfield_aftermath",
+            "ja": "撃沈艦の残骸と火を引く破片が漂う戦後の宙域",
+            "links": {
+              "base": [
+                "wreck-drift battle field",
+                "post-battle debris belt"
+              ],
+              "customize": [
+                "smoldering wreckage",
+                "slow debris drift",
+                "ashen battle silence"
+              ],
+              "settings": [
+                "broken capital-ship hulks",
+                "venting plasma scars",
+                "fragment cloud depth",
+                "dark rescue-beacon flashes"
+              ]
+            }
+          },
+          {
+            "id": "fleet_disabled_hulk_pass",
+            "ja": "沈黙した巨艦の残骸脇を砲火がまだ流れる漂流戦場",
+            "links": {
+              "base": [
+                "disabled battleship graveyard",
+                "drifting combat aftermath"
+              ],
+              "customize": [
+                "dim ember glows",
+                "shattered armor plates",
+                "lingering battle smoke"
+              ],
+              "settings": [
+                "dead flagship silhouette",
+                "floating hull sections",
+                "damaged escort remnants",
+                "sporadic tracer fire"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🛰 要塞宙域・防衛線・包囲戦",
+        "items": [
+          {
+            "id": "fleet_fortress_defense_ring",
+            "ja": "軌道要塞の防衛火線が輪を描く包囲戦宙域",
+            "links": {
+              "base": [
+                "fortress defense space",
+                "orbital siege ring"
+              ],
+              "customize": [
+                "defense-grid glow",
+                "siege-line pressure",
+                "turret-fire rhythm"
+              ],
+              "settings": [
+                "orbital fortress silhouette",
+                "defense satellite chain",
+                "intercept fire arcs",
+                "blockade fleet depth"
+              ]
+            }
+          },
+          {
+            "id": "fleet_station_last_line",
+            "ja": "巨大ステーション前で最後の防衛線が崩れかける宙域戦場",
+            "links": {
+              "base": [
+                "station defense battle zone",
+                "last-line fleet stand"
+              ],
+              "customize": [
+                "desperate defense intensity",
+                "station-light reflections",
+                "siege-breach panic"
+              ],
+              "settings": [
+                "ring station backdrop",
+                "breached defense perimeter",
+                "emergency beacon flashes",
+                "falling screen ships"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🌀 ワープアウト・奇襲接敵",
+        "items": [
+          {
+            "id": "fleet_postwarp_ambush",
+            "ja": "ワープアウトの光渦の直後に敵艦影が迫る奇襲接敵宙域",
+            "links": {
+              "base": [
+                "post-warp contact zone",
+                "ambush engagement space"
+              ],
+              "customize": [
+                "warp wake glare",
+                "sudden-contact tension",
+                "sensor-blind confusion"
+              ],
+              "settings": [
+                "warp ripple halo",
+                "emerging fleet silhouettes",
+                "abrupt lock-on flares",
+                "compressed encounter distance"
+              ]
+            }
+          },
+          {
+            "id": "fleet_jump_exit_crossroad",
+            "ja": "跳躍航路出口で交錯した艦隊が一瞬で戦場化する接敵空間",
+            "links": {
+              "base": [
+                "jump-exit conflict zone",
+                "sudden fleet interception"
+              ],
+              "customize": [
+                "navigation-wake turbulence",
+                "rapid tactical reorientation",
+                "chaotic arrival spacing"
+              ],
+              "settings": [
+                "luminous jump scars",
+                "crossing fleet vectors",
+                "alarm-flash bursts",
+                "immediate weapons wake"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "base": [
+      {
+        "group": "🌌 宙域の土台",
+        "items": [
+          { "ja": "宇宙艦隊戦宙域", "en": "fleet-battle void" },
+          { "ja": "艦隊対峙宙域", "en": "standoff fleet engagement zone" },
+          { "ja": "主砲斉射戦場", "en": "broadside artillery battle zone" },
+          { "ja": "母艦発艦宙域", "en": "carrier launch combat zone" },
+          { "ja": "残骸漂流戦場", "en": "wreck-drift battle field" },
+          { "ja": "要塞防衛宙域", "en": "fortress defense space" },
+          { "ja": "ワープ直後接敵空間", "en": "post-warp contact zone" },
+          { "ja": "包囲陣宙域", "en": "orbital siege ring" }
+        ]
+      },
+      {
+        "group": "🚢 艦隊規模・陣形",
+        "items": [
+          { "ja": "戦列艦隊配置", "en": "battle line deployment" },
+          { "ja": "護衛艦スクリーン", "en": "escort-screen deployment" },
+          { "ja": "交差砲撃艦列", "en": "crossfire fleet combat" },
+          { "ja": "空母機動部隊前線", "en": "carrier task-force front" },
+          { "ja": "包囲陣の弧", "en": "encirclement line" },
+          { "ja": "最後の防衛線", "en": "last-line fleet stand" }
+        ]
+      },
+      {
+        "group": "☄ 損傷・戦後の土台",
+        "items": [
+          { "ja": "戦後残骸帯", "en": "post-battle debris belt" },
+          { "ja": "沈黙した旗艦残骸", "en": "dead flagship silhouette" },
+          { "ja": "無力化巨艦墓場", "en": "disabled battleship graveyard" },
+          { "ja": "破断船体漂流", "en": "floating hull sections" },
+          { "ja": "損傷艦残列", "en": "damaged escort remnants" },
+          { "ja": "薄暗い救難信号宙域", "en": "dark rescue-beacon flashes" }
+        ]
+      }
+    ],
+    "customize": [
+      {
+        "group": "🔥 火力・発光",
+        "items": [
+          { "ja": "レーザー斉射", "en": "laser broadside volleys" },
+          { "ja": "ミサイル軌跡密度", "en": "missile trail density" },
+          { "ja": "爆散光の連鎖", "en": "explosion bloom chains" },
+          { "ja": "シールド明滅", "en": "shield flash pulses" },
+          { "ja": "兵器放電の白熱", "en": "weapons-discharge glare" },
+          { "ja": "警報赤光", "en": "red alert glow" }
+        ]
+      },
+      {
+        "group": "💨 動き・緊張",
+        "items": [
+          { "ja": "開戦前の静かな緊張", "en": "silent pre-battle tension" },
+          { "ja": "奇襲接敵の圧", "en": "sudden-contact tension" },
+          { "ja": "発艦の切迫感", "en": "launch-window urgency" },
+          { "ja": "包囲圧", "en": "encirclement pressure" },
+          { "ja": "センサー混乱", "en": "sensor-blind confusion" },
+          { "ja": "艦隊規模感", "en": "formation scale" }
+        ]
+      },
+      {
+        "group": "☄ 破片・残骸演出",
+        "items": [
+          { "ja": "燃え残る残骸", "en": "smoldering wreckage" },
+          { "ja": "破片雲の奥行き", "en": "fragment cloud depth" },
+          { "ja": "装甲板の散乱", "en": "shattered armor plates" },
+          { "ja": "船体火災の尾", "en": "venting hull fires" },
+          { "ja": "遅い漂流感", "en": "slow debris drift" },
+          { "ja": "灰色の戦後静寂", "en": "ashen battle silence" }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "group": "🧱 艦影・構造",
+        "items": [
+          { "ja": "対峙する主力艦群", "en": "opposing capital ships" },
+          { "ja": "遠方砲塔艦影", "en": "far gun battery silhouettes" },
+          { "ja": "巨大母艦の中心艦影", "en": "heavy carrier center silhouette" },
+          { "ja": "軌道要塞の輪郭", "en": "orbital fortress silhouette" },
+          { "ja": "リングステーション背景", "en": "ring station backdrop" },
+          { "ja": "死んだ旗艦の輪郭", "en": "dead flagship silhouette" }
+        ]
+      },
+      {
+        "group": "⚙ 戦場の証拠",
+        "items": [
+          { "ja": "迎撃火線アーク", "en": "intercept fire arcs" },
+          { "ja": "ホログラム戦術帯", "en": "holographic tactical overlays" },
+          { "ja": "ロックオン警告光", "en": "abrupt lock-on flares" },
+          { "ja": "ワープ残光環", "en": "warp ripple halo" },
+          { "ja": "艦載機発艦ライン", "en": "outbound strike lanes" },
+          { "ja": "防衛衛星列", "en": "defense satellite chain" }
+        ]
+      },
+      {
+        "group": "✨ 宇宙戦場の空気",
+        "items": [
+          { "ja": "青白い真空光", "en": "blue-white vacuum light" },
+          { "ja": "冷たい戦術宙域", "en": "cold tactical void" },
+          { "ja": "真空の焦げた静けさ", "en": "burnt-vacuum hush" },
+          { "ja": "包囲戦の圧迫感", "en": "siege-line pressure" },
+          { "ja": "突破口の裂け目", "en": "breakthrough battle corridor" },
+          { "ja": "奇襲後の圧縮距離", "en": "compressed encounter distance" }
+        ]
+      }
+    ]
+  },
+{
+  "id": "planet_orbit_scenery_collection",
+  "title": "🪐 惑星・衛星・軌道景観特化コレクション",
+  "subtitle": "巨大惑星を見上げる空、軌道上から見下ろす曲面、リング惑星、衛星群、ガス惑星、氷惑星、火山・砂塵・破砕惑星まで、宇宙背景の顔になる天体景観を深掘りするコレクション",
+  "complete": [
+    {
+      "group": "🌍 地表から見上げる巨大惑星",
+      "items": [
+        {
+          "id": "planet_sky_colossal_horizon",
+          "ja": "空の半分を巨大惑星が覆う地表視点の異星空",
+          "links": {
+            "base": [
+              "giant-planet sky",
+              "surface-upward planetary vista"
+            ],
+            "customize": [
+              "planet-dominant sky",
+              "overwhelming celestial scale",
+              "quiet alien horizon"
+            ],
+            "settings": [
+              "massive planet disc",
+              "atmospheric scatter haze",
+              "distant star pricks",
+              "low alien skyline"
+            ]
+          }
+        },
+        {
+          "id": "planet_sky_twin_moons_giant",
+          "ja": "巨大惑星の脇に衛星が連なる多天体の地平空",
+          "links": {
+            "base": [
+              "multi-body planet horizon",
+              "giant-planet sky"
+            ],
+            "customize": [
+              "satellite chain",
+              "layered celestial depth",
+              "alien dusk coloration"
+            ],
+            "settings": [
+              "secondary moon dots",
+              "planet limb glow",
+              "cold upper atmosphere",
+              "thin horizon dust"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "group": "🛰 軌道上から見下ろす惑星曲面",
+      "items": [
+        {
+          "id": "orbit_curvature_blue_world",
+          "ja": "青い惑星曲面と雲帯が足下へ落ちる軌道上の眺望",
+          "links": {
+            "base": [
+              "orbital planet curvature",
+              "high-orbit world view"
+            ],
+            "customize": [
+              "cloud-band sweep",
+              "orbital scale clarity",
+              "vacuum-edge glow"
+            ],
+            "settings": [
+              "curved planetary limb",
+              "sunlit cloud systems",
+              "night-side terminator",
+              "thin orbital haze"
+            ]
+          }
+        },
+        {
+          "id": "orbit_nightside_cityline",
+          "ja": "夜側へ沈む惑星表面の都市光が見える高軌道景観",
+          "links": {
+            "base": [
+              "orbital nightside planet view",
+              "planet curvature"
+            ],
+            "customize": [
+              "city-light threads",
+              "night-side descent",
+              "silent orbital drift"
+            ],
+            "settings": [
+              "terminator boundary",
+              "continent light veins",
+              "dark ocean mass",
+              "remote station glints"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "group": "💍 リング惑星・衛星群",
+      "items": [
+        {
+          "id": "ring_planet_moon_cluster",
+          "ja": "リング惑星の帯と複数衛星が重なる軌道景観",
+          "links": {
+            "base": [
+              "ringed-planet sky",
+              "satellite-cluster orbital view"
+            ],
+            "customize": [
+              "ring-shadow sweep",
+              "moon-cluster depth",
+              "celestial layering"
+            ],
+            "settings": [
+              "broad planetary rings",
+              "ring shadow bands",
+              "clustered moons",
+              "soft reflected starlight"
+            ]
+          }
+        },
+        {
+          "id": "ringed_world_surface_dusk",
+          "ja": "地表から環の影が斜めに走るリング惑星の黄昏空",
+          "links": {
+            "base": [
+              "ringed-planet surface dusk",
+              "ringed-planet sky"
+            ],
+            "customize": [
+              "ring-cast shadow",
+              "slow dusk tint",
+              "ceremonial alien beauty"
+            ],
+            "settings": [
+              "angled ring arc",
+              "surface shadow bands",
+              "thin golden atmosphere",
+              "far moon accents"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "group": "🌀 ガス惑星・嵐渦・極大気象",
+      "items": [
+        {
+          "id": "gas_giant_storm_rim",
+          "ja": "巨大な嵐渦の縁が惑星表面にうねるガス惑星景観",
+          "links": {
+            "base": [
+              "gas-giant storm rim",
+              "gas giant vista"
+            ],
+            "customize": [
+              "storm-vortex scale",
+              "banded atmosphere motion",
+              "colossal turbulence"
+            ],
+            "settings": [
+              "striped cloud belts",
+              "storm eye boundary",
+              "amber lightning haze",
+              "immense atmospheric depth"
+            ]
+          }
+        },
+        {
+          "id": "gas_giant_orbit_tempest",
+          "ja": "軌道上から極大嵐帯を見下ろす荒々しいガス惑星宙景",
+          "links": {
+            "base": [
+              "orbital gas giant view",
+              "gas-giant storm rim"
+            ],
+            "customize": [
+              "high-orbit storm sweep",
+              "violent atmospheric swirl",
+              "charged cloud glow"
+            ],
+            "settings": [
+              "planetary band curvature",
+              "electrical storm veins",
+              "deep amber cloud mass",
+              "orbiting debris motes"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "group": "❄ 氷惑星・極光・冷光空",
+      "items": [
+        {
+          "id": "ice_planet_aurora_pole",
+          "ja": "極光が冷たく流れる氷惑星の蒼い空",
+          "links": {
+            "base": [
+              "aurora ice-planet sky",
+              "ice planet vista"
+            ],
+            "customize": [
+              "polar aurora curtains",
+              "crystalline cold light",
+              "silent frost vastness"
+            ],
+            "settings": [
+              "green-blue aurora drapes",
+              "icy atmospheric glow",
+              "snow glare horizon",
+              "frozen satellite pinpoints"
+            ]
+          }
+        },
+        {
+          "id": "ice_planet_orbit_pale_curve",
+          "ja": "白く凍った惑星曲面が淡い光を返す氷惑星の軌道景観",
+          "links": {
+            "base": [
+              "orbital ice planet curve",
+              "aurora ice-planet sky"
+            ],
+            "customize": [
+              "pale frozen curvature",
+              "subzero halo",
+              "quiet polar orbit"
+            ],
+            "settings": [
+              "white-blue planet limb",
+              "frosted cloud veil",
+              "auroral edge shimmer",
+              "dark cold starfield"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "group": "🌋 火山・砂塵・破砕惑星",
+      "items": [
+        {
+          "id": "volcanic_planet_red_sky",
+          "ja": "火山噴煙と赤熱した地平が続く火山惑星の空",
+          "links": {
+            "base": [
+              "volcanic-planet red sky",
+              "volcanic planet horizon"
+            ],
+            "customize": [
+              "ash-plume density",
+              "molten horizon glow",
+              "sulfuric atmosphere"
+            ],
+            "settings": [
+              "volcanic smoke towers",
+              "lava-lit haze",
+              "dark basalt silhouettes",
+              "ember drift specks"
+            ]
+          }
+        },
+        {
+          "id": "dust_shattered_planet_sky",
+          "ja": "砂塵と砕けた天体片が空に浮く崩壊惑星の黄昏景",
+          "links": {
+            "base": [
+              "dust-planet dusk sky",
+              "shattered-planet debris sky"
+            ],
+            "customize": [
+              "dust-loaded atmosphere",
+              "debris-sky tension",
+              "ruined-world omen"
+            ],
+            "settings": [
+              "floating broken fragments",
+              "ochre dusk scattering",
+              "dust storm veil",
+              "fractured moon remnants"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "base": [
+    {
+      "group": "🪐 惑星景観の土台",
+      "items": [
+        {
+          "ja": "巨大惑星の空",
+          "en": "giant-planet sky"
+        },
+        {
+          "ja": "軌道上の惑星曲面",
+          "en": "orbital planet curvature"
+        },
+        {
+          "ja": "リング惑星の空",
+          "en": "ringed-planet sky"
+        },
+        {
+          "ja": "衛星群の宙景",
+          "en": "satellite-cluster orbital view"
+        },
+        {
+          "ja": "ガス惑星の嵐縁",
+          "en": "gas-giant storm rim"
+        },
+        {
+          "ja": "氷惑星の極光空",
+          "en": "aurora ice-planet sky"
+        },
+        {
+          "ja": "火山惑星の赤い空",
+          "en": "volcanic-planet red sky"
+        },
+        {
+          "ja": "砂塵惑星の黄昏空",
+          "en": "dust-planet dusk sky"
+        },
+        {
+          "ja": "破砕惑星の残骸天球",
+          "en": "shattered-planet debris sky"
+        }
+      ]
+    },
+    {
+      "group": "🌍 視点・位置関係",
+      "items": [
+        {
+          "ja": "地表見上げ視点",
+          "en": "surface-upward planetary vista"
+        },
+        {
+          "ja": "高軌道宙景",
+          "en": "high-orbit world view"
+        },
+        {
+          "ja": "夜側軌道景観",
+          "en": "orbital nightside planet view"
+        },
+        {
+          "ja": "リング惑星地表黄昏",
+          "en": "ringed-planet surface dusk"
+        },
+        {
+          "ja": "ガス惑星宙景",
+          "en": "orbital gas giant view"
+        },
+        {
+          "ja": "氷惑星曲面",
+          "en": "orbital ice planet curve"
+        },
+        {
+          "ja": "火山惑星地平",
+          "en": "volcanic planet horizon"
+        }
+      ]
+    }
+  ],
+  "customize": [
+    {
+      "group": "✨ 天体の映え方",
+      "items": [
+        {
+          "ja": "空を支配する惑星感",
+          "en": "planet-dominant sky"
+        },
+        {
+          "ja": "圧倒的天体スケール",
+          "en": "overwhelming celestial scale"
+        },
+        {
+          "ja": "環の影の走り",
+          "en": "ring-shadow sweep"
+        },
+        {
+          "ja": "衛星群の奥行き",
+          "en": "moon-cluster depth"
+        },
+        {
+          "ja": "極光の幕",
+          "en": "polar aurora curtains"
+        },
+        {
+          "ja": "嵐渦の巨大感",
+          "en": "storm-vortex scale"
+        },
+        {
+          "ja": "赤熱地平の光",
+          "en": "molten horizon glow"
+        },
+        {
+          "ja": "砂塵大気の濃さ",
+          "en": "dust-loaded atmosphere"
+        }
+      ]
+    },
+    {
+      "group": "🌌 宇宙的な空気",
+      "items": [
+        {
+          "ja": "静かな異星地平",
+          "en": "quiet alien horizon"
+        },
+        {
+          "ja": "真空縁の淡い発光",
+          "en": "vacuum-edge glow"
+        },
+        {
+          "ja": "夜側へ沈む感じ",
+          "en": "night-side descent"
+        },
+        {
+          "ja": "儀式めいた異星美",
+          "en": "ceremonial alien beauty"
+        },
+        {
+          "ja": "結晶めいた冷光",
+          "en": "crystalline cold light"
+        },
+        {
+          "ja": "巨大乱流の荒さ",
+          "en": "colossal turbulence"
+        },
+        {
+          "ja": "滅びた星の不穏",
+          "en": "ruined-world omen"
+        },
+        {
+          "ja": "層になった天体奥行き",
+          "en": "celestial layering"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "group": "🧱 惑星の証拠",
+      "items": [
+        {
+          "ja": "巨大惑星円盤",
+          "en": "massive planet disc"
+        },
+        {
+          "ja": "惑星の縁光",
+          "en": "planet limb glow"
+        },
+        {
+          "ja": "薄い大気散乱",
+          "en": "atmospheric scatter haze"
+        },
+        {
+          "ja": "惑星曲面の輪郭",
+          "en": "curved planetary limb"
+        },
+        {
+          "ja": "環状の帯",
+          "en": "broad planetary rings"
+        },
+        {
+          "ja": "環の影帯",
+          "en": "ring shadow bands"
+        },
+        {
+          "ja": "条帯雲層",
+          "en": "striped cloud belts"
+        },
+        {
+          "ja": "嵐眼の境界",
+          "en": "storm eye boundary"
+        },
+        {
+          "ja": "氷の薄光",
+          "en": "icy atmospheric glow"
+        },
+        {
+          "ja": "浮遊する破砕片",
+          "en": "floating broken fragments"
+        }
+      ]
+    },
+    {
+      "group": "🌠 周辺天体・空の要素",
+      "items": [
+        {
+          "ja": "副衛星の点列",
+          "en": "secondary moon dots"
+        },
+        {
+          "ja": "凍った衛星の光点",
+          "en": "frozen satellite pinpoints"
+        },
+        {
+          "ja": "星明かりの反射",
+          "en": "soft reflected starlight"
+        },
+        {
+          "ja": "赤道雲帯",
+          "en": "sunlit cloud systems"
+        },
+        {
+          "ja": "夜側境界線",
+          "en": "terminator boundary"
+        },
+        {
+          "ja": "電気嵐の筋",
+          "en": "electrical storm veins"
+        },
+        {
+          "ja": "火山煙柱",
+          "en": "volcanic smoke towers"
+        },
+        {
+          "ja": "砕けた月の残骸",
+          "en": "fractured moon remnants"
+        }
+      ]
+    },
+    {
+      "group": "❄ 温度・雰囲気",
+      "items": [
+        {
+          "ja": "冷たい無音",
+          "en": "cold cosmic silence"
+        },
+        {
+          "ja": "聖域めいた静寂",
+          "en": "sacred orbital stillness"
+        },
+        {
+          "ja": "不吉な赤い空",
+          "en": "ominous red sky"
+        },
+        {
+          "ja": "終末惑星の気配",
+          "en": "terminal-planet atmosphere"
+        },
+        {
+          "ja": "天体観測の孤独",
+          "en": "solitary celestial vantage"
+        },
+        {
+          "ja": "見上げた時の圧迫感",
+          "en": "skyborne mass pressure"
+        }
+      ]
+    }
+  ]
+},
+  {
+    "id": "moonbase_mining_planet_collection",
+    "title": "🌕 月面基地・採掘惑星特化コレクション",
+    "subtitle": "月面基地の与圧通路、採掘現場、鉱石搬送ヤード、外縁観測施設、氷鉱惑星や火山鉱脈惑星まで、宇宙開発と採掘の現場感を深掘りするコレクション",
+    "complete": [
+      {
+        "group": "🌕 月面基地・与圧通路",
+        "items": [
+          {
+            "id": "moonbase_corridor_glass_dome",
+            "ja": "ガラスドーム越しに灰色の地平が見える月面基地回廊",
+            "links": {
+              "base": [
+                "lunar base corridor",
+                "lunar base hub"
+              ],
+              "customize": [
+                "pressurized corridor glow",
+                "lunar dust quiet",
+                "sealed habitat calm"
+              ],
+              "settings": [
+                "dome window frames",
+                "regolith horizon",
+                "airlock guide lights",
+                "habitat module junctions"
+              ]
+            }
+          },
+          {
+            "id": "moonbase_airlock_shift_change",
+            "ja": "交代灯が点くエアロック前の月面基地接続区画",
+            "links": {
+              "base": [
+                "lunar base airlock",
+                "lunar base hub"
+              ],
+              "customize": [
+                "shift-change tension",
+                "sealed threshold light",
+                "hard vacuum contrast"
+              ],
+              "settings": [
+                "airlock seal rings",
+                "pressure bulkhead doors",
+                "suit rack silhouettes",
+                "warning floor strips"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "⛏ 採掘施設・掘削現場",
+        "items": [
+          {
+            "id": "moon_mining_excavation_crater",
+            "ja": "クレーター縁に掘削塔が並ぶ月面採掘場",
+            "links": {
+              "base": [
+                "lunar mining site",
+                "mining-planet excavation field"
+              ],
+              "customize": [
+                "excavation rig density",
+                "regolith dust haze",
+                "industrial lunar scale"
+              ],
+              "settings": [
+                "crater-rim drills",
+                "ore trench cuts",
+                "crawler track scars",
+                "mining beacon poles"
+              ]
+            }
+          },
+          {
+            "id": "ore_planet_drill_field",
+            "ja": "巨大ドリルが鉱脈を割る採掘惑星の掘削現場",
+            "links": {
+              "base": [
+                "mining-planet excavation field",
+                "volcanic ore-planet mining field"
+              ],
+              "customize": [
+                "deep-drill vibration",
+                "ore-glow fissures",
+                "heavy industrial pressure"
+              ],
+              "settings": [
+                "core-drill towers",
+                "ore fracture glow",
+                "excavation terraces",
+                "dust plume bursts"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🚜 鉱石搬送・物流ヤード",
+        "items": [
+          {
+            "id": "ore_transport_convoy_yard",
+            "ja": "コンテナ列車と搬送車が交差する鉱石搬送ヤード",
+            "links": {
+              "base": [
+                "ore transport yard",
+                "mining logistics yard"
+              ],
+              "customize": [
+                "cargo convoy motion",
+                "ore-container repetition",
+                "industrial route depth"
+              ],
+              "settings": [
+                "ore freight containers",
+                "haul-road guide lights",
+                "loader crane arms",
+                "track-marked regolith"
+              ]
+            }
+          },
+          {
+            "id": "mining_sorting_bay_flow",
+            "ja": "精錬前の鉱石が仕分けラインを流れる採掘搬送ベイ",
+            "links": {
+              "base": [
+                "ore transport yard",
+                "mining control room"
+              ],
+              "customize": [
+                "sorting-line rhythm",
+                "dusty work-light glow",
+                "ore-weighted atmosphere"
+              ],
+              "settings": [
+                "sorting belt lanes",
+                "ore bin stacks",
+                "inspection gantries",
+                "load-signal lamps"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🛰 外縁観測・通信・管制",
+        "items": [
+          {
+            "id": "frontier_comms_tower_ridge",
+            "ja": "尾根上の通信塔が基地と採掘地を結ぶ外縁観測施設",
+            "links": {
+              "base": [
+                "frontier communication tower",
+                "mining control room"
+              ],
+              "customize": [
+                "remote frontier isolation",
+                "signal-beacon blink",
+                "thin-world silence"
+              ],
+              "settings": [
+                "comms mast silhouettes",
+                "relay dish cluster",
+                "survey platform rails",
+                "distant base lights"
+              ]
+            }
+          },
+          {
+            "id": "mining_control_overlook",
+            "ja": "採掘区全体を見下ろす高所の採掘管制室",
+            "links": {
+              "base": [
+                "mining control room",
+                "frontier communication tower"
+              ],
+              "customize": [
+                "overlook command tension",
+                "survey-display glow",
+                "operational oversight mood"
+              ],
+              "settings": [
+                "panoramic control glass",
+                "site-map holos",
+                "dispatch console rows",
+                "blinking route markers"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "❄🌋 極限採掘惑星・資源環境",
+        "items": [
+          {
+            "id": "ice_mining_planet_harvest",
+            "ja": "極光の下で採掘機が凍土を割る氷鉱惑星の採掘地",
+            "links": {
+              "base": [
+                "ice-mining planet extraction site",
+                "mining-planet excavation field"
+              ],
+              "customize": [
+                "subzero harvest light",
+                "ice-dust sparkle",
+                "aurora mining atmosphere"
+              ],
+              "settings": [
+                "frozen extraction pits",
+                "ice fog plumes",
+                "cold work beacons",
+                "aurora-veiled sky"
+              ]
+            }
+          },
+          {
+            "id": "volcanic_ore_harvest_field",
+            "ja": "赤熱した鉱脈を囲って掘り進む火山鉱脈惑星の採掘場",
+            "links": {
+              "base": [
+                "volcanic ore-planet mining field",
+                "mining-planet excavation field"
+              ],
+              "customize": [
+                "molten ore glow",
+                "sulfuric dust haze",
+                "hazardous harvest tension"
+              ],
+              "settings": [
+                "lava-lit excavation pits",
+                "heat-shield barriers",
+                "smoke vent cracks",
+                "warning flare pylons"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "base": [
+      {
+        "group": "🌕 月面基地の土台",
+        "items": [
+          {
+            "ja": "月面基地通路",
+            "en": "lunar base corridor"
+          },
+          {
+            "ja": "月面基地ハブ",
+            "en": "lunar base hub"
+          },
+          {
+            "ja": "月面基地エアロック",
+            "en": "lunar base airlock"
+          }
+        ]
+      },
+      {
+        "group": "⛏ 採掘現場の土台",
+        "items": [
+          {
+            "ja": "月面採掘場",
+            "en": "lunar mining site"
+          },
+          {
+            "ja": "採掘惑星掘削現場",
+            "en": "mining-planet excavation field"
+          },
+          {
+            "ja": "氷鉱惑星の採掘地",
+            "en": "ice-mining planet extraction site"
+          },
+          {
+            "ja": "火山鉱脈惑星の採掘場",
+            "en": "volcanic ore-planet mining field"
+          }
+        ]
+      },
+      {
+        "group": "🚜 搬送・物流の土台",
+        "items": [
+          {
+            "ja": "鉱石搬送ヤード",
+            "en": "ore transport yard"
+          },
+          {
+            "ja": "採掘物流ヤード",
+            "en": "mining logistics yard"
+          }
+        ]
+      },
+      {
+        "group": "🛰 外縁観測・管制の土台",
+        "items": [
+          {
+            "ja": "採掘管制室",
+            "en": "mining control room"
+          },
+          {
+            "ja": "外縁通信塔",
+            "en": "frontier communication tower"
+          }
+        ]
+      }
+    ],
+    "customize": [
+      {
+        "group": "🌫 月塵・採掘粉塵の空気",
+        "items": [
+          {
+            "ja": "月塵の薄い霞",
+            "en": "lunar dust haze"
+          },
+          {
+            "ja": "掘削粉塵の舞い",
+            "en": "excavation dust plumes"
+          },
+          {
+            "ja": "低重力の静かな粉浮き",
+            "en": "low-gravity dust drift"
+          },
+          {
+            "ja": "硫黄混じりの赤い霞",
+            "en": "sulfuric red haze"
+          }
+        ]
+      },
+      {
+        "group": "🏗 基地・掘削設備の密度",
+        "items": [
+          {
+            "ja": "与圧通路の連結密度",
+            "en": "pressurized corridor density"
+          },
+          {
+            "ja": "掘削塔の密集感",
+            "en": "drill-tower density"
+          },
+          {
+            "ja": "コンテナと搬送車の反復",
+            "en": "cargo-vehicle repetition"
+          },
+          {
+            "ja": "外縁施設の孤立感",
+            "en": "remote outpost isolation"
+          }
+        ]
+      },
+      {
+        "group": "💡 作業光・警告光・鉱石光",
+        "items": [
+          {
+            "ja": "白い作業灯",
+            "en": "white work lights"
+          },
+          {
+            "ja": "橙色の警告灯",
+            "en": "amber warning beacons"
+          },
+          {
+            "ja": "青い管制表示光",
+            "en": "blue control glow"
+          },
+          {
+            "ja": "鉱脈の発光割れ目",
+            "en": "ore-glow fissures"
+          }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "group": "🌕 月面基地の証拠",
+        "items": [
+          {
+            "ja": "レゴリス地平",
+            "en": "regolith horizon"
+          },
+          {
+            "ja": "ドーム窓の骨組み",
+            "en": "dome window frames"
+          },
+          {
+            "ja": "エアロック誘導灯",
+            "en": "airlock guide lights"
+          },
+          {
+            "ja": "基地モジュール接続節",
+            "en": "habitat module junctions"
+          }
+        ]
+      },
+      {
+        "group": "⛏ 採掘現場の証拠",
+        "items": [
+          {
+            "ja": "クレーター縁の掘削塔",
+            "en": "crater-rim drills"
+          },
+          {
+            "ja": "鉱石トレンチ",
+            "en": "ore trench cuts"
+          },
+          {
+            "ja": "掘削テラス段差",
+            "en": "excavation terraces"
+          },
+          {
+            "ja": "採掘ビーコン支柱",
+            "en": "mining beacon poles"
+          }
+        ]
+      },
+      {
+        "group": "🚜 搬送・物流の証拠",
+        "items": [
+          {
+            "ja": "鉱石コンテナ列",
+            "en": "ore freight containers"
+          },
+          {
+            "ja": "搬送路のガイド灯",
+            "en": "haul-road guide lights"
+          },
+          {
+            "ja": "ローダークレーン腕",
+            "en": "loader crane arms"
+          },
+          {
+            "ja": "レゴリスに刻まれた走行痕",
+            "en": "track-marked regolith"
+          }
+        ]
+      },
+      {
+        "group": "🛰 外縁観測・管制の証拠",
+        "items": [
+          {
+            "ja": "通信マストの影",
+            "en": "comms mast silhouettes"
+          },
+          {
+            "ja": "中継皿アンテナ群",
+            "en": "relay dish cluster"
+          },
+          {
+            "ja": "サイトマップホロ",
+            "en": "site-map holos"
+          },
+          {
+            "ja": "点滅する搬送ルート標示",
+            "en": "blinking route markers"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "research_lab_control_collection",
+    "title": "🧪 研究施設・ラボ・管理中枢特化コレクション",
+    "subtitle": "無菌実験室、バイオ研究棟、監視中枢、量子サーバー、試験区画、封鎖通路まで、研究と管理の冷たさで成立させるSF研究施設特化コレクション",
+    "complete": [
+      {
+        "group": "🧫 無菌実験・解析区",
+        "items": [
+          {
+            "id": "sterile_lab_analysis_room",
+            "ja": "白い反射と隔離ガラスに包まれた無菌解析室",
+            "links": {
+              "base": [
+                "sterile laboratory",
+                "analysis room"
+              ],
+              "customize": [
+                "clinical brightness",
+                "glass-partition sterility",
+                "quiet instrument hum"
+              ],
+              "settings": [
+                "clean white surfaces",
+                "sealed observation glass",
+                "analysis terminal rows",
+                "floor reflection sheen"
+              ]
+            }
+          },
+          {
+            "id": "biotech_growth_chamber",
+            "ja": "培養槽の光が並ぶバイオ研究棟の成育室",
+            "links": {
+              "base": [
+                "biotech research wing",
+                "growth chamber"
+              ],
+              "customize": [
+                "bio-fluid glow",
+                "humid sealed atmosphere",
+                "contained specimen tension"
+              ],
+              "settings": [
+                "cylindrical growth tanks",
+                "green-blue liquid light",
+                "sealed service catwalk",
+                "sterile wall modules"
+              ]
+            }
+          },
+          {
+            "id": "forensic_future_lab",
+            "ja": "検査台と投影UIが整然と並ぶ未来鑑識ラボ",
+            "links": {
+              "base": [
+                "forensic future lab",
+                "sterile laboratory"
+              ],
+              "customize": [
+                "forensic precision mood",
+                "blue-white task lighting",
+                "ordered evidence flow"
+              ],
+              "settings": [
+                "projection interface layers",
+                "exam-table centerline",
+                "tool arm mount",
+                "clean shadow boundaries"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🖥 監視・制御・サーバー",
+        "items": [
+          {
+            "id": "ai_oversight_control_room",
+            "ja": "監視画面が壁を埋めるAI管理中枢",
+            "links": {
+              "base": [
+                "AI oversight core",
+                "control room"
+              ],
+              "customize": [
+                "omnipresent system gaze",
+                "dense monitor glow",
+                "quiet operational pressure"
+              ],
+              "settings": [
+                "wall-filling monitor grid",
+                "central operator pit",
+                "dark console island",
+                "status-light matrix"
+              ]
+            }
+          },
+          {
+            "id": "quantum_server_chamber_blue",
+            "ja": "青く冷えた量子サーバー室の高密度回廊",
+            "links": {
+              "base": [
+                "quantum server chamber",
+                "data corridor"
+              ],
+              "customize": [
+                "cold compute ambience",
+                "high-density machine hum",
+                "cool misted air"
+              ],
+              "settings": [
+                "server-column rows",
+                "blue coolant light",
+                "cable-floor channels",
+                "narrow service aisle"
+              ]
+            }
+          },
+          {
+            "id": "sealed_research_command_hub",
+            "ja": "封鎖区域情報が流れる研究司令ハブ",
+            "links": {
+              "base": [
+                "research command hub",
+                "alert control room"
+              ],
+              "customize": [
+                "restricted-area tension",
+                "priority-alert pulse",
+                "managed crisis calm"
+              ],
+              "settings": [
+                "priority display bands",
+                "security gate map",
+                "command table center",
+                "amber alert accents"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🚪 試験区画・封鎖通路",
+        "items": [
+          {
+            "id": "containment_corridor_redlock",
+            "ja": "赤い封鎖灯が点る収容区画前通路",
+            "links": {
+              "base": [
+                "containment corridor",
+                "sealed test wing"
+              ],
+              "customize": [
+                "containment warning tension",
+                "red lock-light pulse",
+                "sterile hazard calm"
+              ],
+              "settings": [
+                "sealed bulkhead door",
+                "warning stripe floor",
+                "narrow pressure corridor",
+                "airlock checkpoint"
+              ]
+            }
+          },
+          {
+            "id": "test_chamber_observation_walk",
+            "ja": "実験室を見下ろす観測歩廊付き試験区",
+            "links": {
+              "base": [
+                "test chamber",
+                "observation catwalk"
+              ],
+              "customize": [
+                "high-risk experiment hush",
+                "elevated oversight feel",
+                "contained echo"
+              ],
+              "settings": [
+                "sunken experiment pit",
+                "upper glass walkway",
+                "industrial clamp fixtures",
+                "focused task beams"
+              ]
+            }
+          },
+          {
+            "id": "medical_isolation_unit_future",
+            "ja": "静かな警告音だけが響く未来隔離医療ユニット",
+            "links": {
+              "base": [
+                "future isolation unit",
+                "medical containment room"
+              ],
+              "customize": [
+                "clinical isolation mood",
+                "soft alert pulse",
+                "controlled sterile quiet"
+              ],
+              "settings": [
+                "sealed medical bed bay",
+                "isolation divider glass",
+                "status-display corner",
+                "gentle ceiling panels"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "📡 解析・観測ラボ",
+        "items": [
+          {
+            "id": "deep_scan_observation_lab",
+            "ja": "深宇宙スキャン波形が壁を流れる観測解析ラボ",
+            "links": {
+              "base": [
+                "observation laboratory",
+                "deep-scan analysis room"
+              ],
+              "customize": [
+                "spectral scan glow",
+                "layered waveform displays",
+                "quiet observatory tension"
+              ],
+              "settings": [
+                "sensor mast silhouettes",
+                "floating scan panels",
+                "dark glass observation wall",
+                "measurement console rows"
+              ]
+            }
+          },
+          {
+            "id": "orbital_telemetry_room",
+            "ja": "軌道データと遠隔計測が束ねられたテレメトリ室",
+            "links": {
+              "base": [
+                "telemetry control room",
+                "observation laboratory"
+              ],
+              "customize": [
+                "cold telemetry light",
+                "precision monitoring mood",
+                "data-stream reflections"
+              ],
+              "settings": [
+                "telemetry arc displays",
+                "status plotting tables",
+                "instrument armatures",
+                "sealed window slit"
+              ]
+            }
+          },
+          {
+            "id": "specimen_scan_gallery",
+            "ja": "試料スキャン台が列を成す未来標本解析ギャラリー",
+            "links": {
+              "base": [
+                "specimen scan lab",
+                "analysis gallery"
+              ],
+              "customize": [
+                "clinical scan beams",
+                "ordered sample handling",
+                "sterile document flow"
+              ],
+              "settings": [
+                "scan cradle rows",
+                "beam-emitter frames",
+                "sample vault drawers",
+                "cool task spotlights"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🧬 生体・培養ラボ",
+        "items": [
+          {
+            "id": "bioculture_tank_hall",
+            "ja": "培養槽の液光が天井まで満ちる生体培養ホール",
+            "links": {
+              "base": [
+                "bioculture chamber",
+                "growth tank hall"
+              ],
+              "customize": [
+                "bio-liquid luminescence",
+                "humid sterile haze",
+                "slow bubble motion"
+              ],
+              "settings": [
+                "towering culture tanks",
+                "catwalk maintenance rails",
+                "sealed nutrient pipes",
+                "wet floor reflections"
+              ]
+            }
+          },
+          {
+            "id": "genetic_editing_suite",
+            "ja": "遺伝子編集ポッドが並ぶバイオ加工スイート",
+            "links": {
+              "base": [
+                "genetic editing suite",
+                "biotech clean room"
+              ],
+              "customize": [
+                "surgical-white precision",
+                "gene-sequence overlays",
+                "contained clinical tension"
+              ],
+              "settings": [
+                "editing pod ring",
+                "transparent seal curtains",
+                "sterile tool arms",
+                "sequence display strip"
+              ]
+            }
+          },
+          {
+            "id": "specimen_incubation_bay",
+            "ja": "封入試料の熱と湿度が管理された孵化管理区",
+            "links": {
+              "base": [
+                "specimen incubation bay",
+                "bioculture chamber"
+              ],
+              "customize": [
+                "warm incubation glow",
+                "condensed chamber humidity",
+                "contained growth suspense"
+              ],
+              "settings": [
+                "incubation capsule rows",
+                "misty inspection windows",
+                "nutrient feed lines",
+                "sealed hatch frames"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🧠 AI演算・監視中枢",
+        "items": [
+          {
+            "id": "ai_decision_core",
+            "ja": "多層投影と判断ログが脈打つAI意思決定中枢",
+            "links": {
+              "base": [
+                "AI decision core",
+                "computation control nexus"
+              ],
+              "customize": [
+                "algorithm pulse glow",
+                "watchful machine presence",
+                "layered projection drift"
+              ],
+              "settings": [
+                "circular command dais",
+                "hanging data veils",
+                "core-temperature indicators",
+                "observer catwalk ring"
+              ]
+            }
+          },
+          {
+            "id": "quantum_compute_hall",
+            "ja": "冷却光と演算塔が並ぶ量子演算ホール",
+            "links": {
+              "base": [
+                "quantum compute hall",
+                "server cathedral"
+              ],
+              "customize": [
+                "frost-blue machine light",
+                "low resonant hum",
+                "dense processing rhythm"
+              ],
+              "settings": [
+                "compute tower aisles",
+                "coolant conduit glow",
+                "maintenance gantry lines",
+                "server status rain"
+              ]
+            }
+          },
+          {
+            "id": "panopticon_monitoring_ring",
+            "ja": "全周監視スクリーンが囲むパノプティコン監視リング",
+            "links": {
+              "base": [
+                "panopticon monitoring ring",
+                "security oversight hub"
+              ],
+              "customize": [
+                "all-angle surveillance pressure",
+                "alert pulse reflections",
+                "disciplined control mood"
+              ],
+              "settings": [
+                "ring-shaped monitor wall",
+                "central oversight seat",
+                "surveillance lens clusters",
+                "warning edge lights"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🔒 収容・隔離区画",
+        "items": [
+          {
+            "id": "containment_cell_corridor",
+            "ja": "観察窓付き収容セルが連なる隔離回廊",
+            "links": {
+              "base": [
+                "containment corridor",
+                "isolation cell block"
+              ],
+              "customize": [
+                "sealed-pressure silence",
+                "contained threat tension",
+                "warning-lamp cadence"
+              ],
+              "settings": [
+                "observation slit doors",
+                "restraint anchor points",
+                "decontamination threshold",
+                "hazard floor markings"
+              ]
+            }
+          },
+          {
+            "id": "decon_airlock_quarantine",
+            "ja": "除染噴霧が漂う隔離エアロック前室",
+            "links": {
+              "base": [
+                "quarantine airlock",
+                "decontamination chamber"
+              ],
+              "customize": [
+                "sterile decon mist",
+                "checkpoint anxiety",
+                "containment protocol mood"
+              ],
+              "settings": [
+                "airlock seal rings",
+                "spray nozzle rows",
+                "biohazard sign panels",
+                "pressure door locks"
+              ]
+            }
+          },
+          {
+            "id": "restraint_testing_hold",
+            "ja": "固定具と観測端末が並ぶ拘束検証ホールド",
+            "links": {
+              "base": [
+                "restraint verification bay",
+                "containment test hold"
+              ],
+              "customize": [
+                "clinical restraint severity",
+                "observation-focused tension",
+                "cold procedural lighting"
+              ],
+              "settings": [
+                "floor restraint rails",
+                "overhead sensor booms",
+                "sealed side booths",
+                "status alarm columns"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "💥 事故跡・封鎖崩れ区画",
+        "items": [
+          {
+            "id": "breach_lab_aftermath",
+            "ja": "警報残響と割れた隔離ガラスが残る事故後ラボ",
+            "links": {
+              "base": [
+                "breach aftermath lab",
+                "damaged sterile laboratory"
+              ],
+              "customize": [
+                "alarm-red residue",
+                "broken-glass danger",
+                "failed containment tension"
+              ],
+              "settings": [
+                "cracked observation wall",
+                "sparking console ends",
+                "emergency shutter scars",
+                "scattered specimen traces"
+              ]
+            }
+          },
+          {
+            "id": "sealed_firebreak_corridor",
+            "ja": "消火剤の白残りが伸びる封鎖火災通路",
+            "links": {
+              "base": [
+                "firebreak corridor",
+                "sealed emergency passage"
+              ],
+              "customize": [
+                "smoke-scrubbed harshness",
+                "recent emergency shutdown",
+                "charred cleanroom contrast"
+              ],
+              "settings": [
+                "foam residue streaks",
+                "burn-marked bulkhead edges",
+                "emergency beacon pulses",
+                "collapsed utility panels"
+              ]
+            }
+          },
+          {
+            "id": "abandoned_test_ruin",
+            "ja": "放棄された試験区の破損設備と停止端末群",
+            "links": {
+              "base": [
+                "abandoned test ruin",
+                "damaged research chamber"
+              ],
+              "customize": [
+                "stale shutdown air",
+                "abandonment chill",
+                "half-dead monitor glow"
+              ],
+              "settings": [
+                "fallen frame pieces",
+                "offline terminal stacks",
+                "hanging cable shadows",
+                "dust over clean surfaces"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "base": [
+      {
+        "group": "🧪 ラボ基盤",
+        "items": [
+          {
+            "ja": "無菌実験室",
+            "en": "sterile laboratory"
+          },
+          {
+            "ja": "解析室",
+            "en": "analysis room"
+          },
+          {
+            "ja": "バイオ研究棟",
+            "en": "biotech research wing"
+          },
+          {
+            "ja": "培養室",
+            "en": "growth chamber"
+          },
+          {
+            "ja": "未来鑑識ラボ",
+            "en": "forensic future lab"
+          },
+          {
+            "ja": "試験区画",
+            "en": "test chamber"
+          }
+        ]
+      },
+      {
+        "group": "🖥 管理・演算",
+        "items": [
+          {
+            "ja": "AI管理中枢",
+            "en": "AI oversight core"
+          },
+          {
+            "ja": "制御室",
+            "en": "control room"
+          },
+          {
+            "ja": "量子サーバー室",
+            "en": "quantum server chamber"
+          },
+          {
+            "ja": "データ回廊",
+            "en": "data corridor"
+          },
+          {
+            "ja": "研究司令ハブ",
+            "en": "research command hub"
+          },
+          {
+            "ja": "警戒制御室",
+            "en": "alert control room"
+          }
+        ]
+      },
+      {
+        "group": "🚪 封鎖・収容",
+        "items": [
+          {
+            "ja": "収容通路",
+            "en": "containment corridor"
+          },
+          {
+            "ja": "封鎖試験棟",
+            "en": "sealed test wing"
+          },
+          {
+            "ja": "観測歩廊",
+            "en": "observation catwalk"
+          },
+          {
+            "ja": "未来隔離ユニット",
+            "en": "future isolation unit"
+          },
+          {
+            "ja": "医療収容室",
+            "en": "medical containment room"
+          },
+          {
+            "ja": "エアロック検問",
+            "en": "airlock checkpoint"
+          }
+        ]
+      },
+      {
+        "group": "📡 解析・観測基盤",
+        "items": [
+          {
+            "ja": "観測ラボ",
+            "en": "observation laboratory"
+          },
+          {
+            "ja": "深層スキャン解析室",
+            "en": "deep-scan analysis room"
+          },
+          {
+            "ja": "テレメトリ制御室",
+            "en": "telemetry control room"
+          },
+          {
+            "ja": "標本スキャンラボ",
+            "en": "specimen scan lab"
+          },
+          {
+            "ja": "解析ギャラリー",
+            "en": "analysis gallery"
+          }
+        ]
+      },
+      {
+        "group": "🧬 生体・培養基盤",
+        "items": [
+          {
+            "ja": "生体培養室",
+            "en": "bioculture chamber"
+          },
+          {
+            "ja": "培養槽ホール",
+            "en": "growth tank hall"
+          },
+          {
+            "ja": "遺伝子編集スイート",
+            "en": "genetic editing suite"
+          },
+          {
+            "ja": "バイオクリーンルーム",
+            "en": "biotech clean room"
+          },
+          {
+            "ja": "孵化管理区",
+            "en": "specimen incubation bay"
+          }
+        ]
+      },
+      {
+        "group": "🧠 AI演算基盤",
+        "items": [
+          {
+            "ja": "AI意思決定中枢",
+            "en": "AI decision core"
+          },
+          {
+            "ja": "演算制御中枢",
+            "en": "computation control nexus"
+          },
+          {
+            "ja": "量子演算ホール",
+            "en": "quantum compute hall"
+          },
+          {
+            "ja": "サーバー大聖堂",
+            "en": "server cathedral"
+          },
+          {
+            "ja": "監視リング",
+            "en": "panopticon monitoring ring"
+          },
+          {
+            "ja": "監視ハブ",
+            "en": "security oversight hub"
+          }
+        ]
+      },
+      {
+        "group": "🔒 収容・隔離基盤",
+        "items": [
+          {
+            "ja": "収容回廊",
+            "en": "containment corridor"
+          },
+          {
+            "ja": "隔離セル棟",
+            "en": "isolation cell block"
+          },
+          {
+            "ja": "隔離エアロック",
+            "en": "quarantine airlock"
+          },
+          {
+            "ja": "除染室",
+            "en": "decontamination chamber"
+          },
+          {
+            "ja": "拘束検証ベイ",
+            "en": "restraint verification bay"
+          },
+          {
+            "ja": "収容試験ホールド",
+            "en": "containment test hold"
+          }
+        ]
+      },
+      {
+        "group": "💥 事故跡・崩壊基盤",
+        "items": [
+          {
+            "ja": "事故後ラボ",
+            "en": "breach aftermath lab"
+          },
+          {
+            "ja": "損傷無菌ラボ",
+            "en": "damaged sterile laboratory"
+          },
+          {
+            "ja": "封鎖火災通路",
+            "en": "firebreak corridor"
+          },
+          {
+            "ja": "封鎖非常通路",
+            "en": "sealed emergency passage"
+          },
+          {
+            "ja": "放棄試験区",
+            "en": "abandoned test ruin"
+          },
+          {
+            "ja": "損傷研究室",
+            "en": "damaged research chamber"
+          }
+        ]
+      }
+    ],
+    "customize": [
+      {
+        "group": "💡 光・清潔感",
+        "items": [
+          {
+            "ja": "臨床的な明るさ",
+            "en": "clinical brightness"
+          },
+          {
+            "ja": "隔離ガラスの無菌感",
+            "en": "glass-partition sterility"
+          },
+          {
+            "ja": "青白い作業灯",
+            "en": "blue-white task lighting"
+          },
+          {
+            "ja": "冷えた演算空気",
+            "en": "cold compute ambience"
+          },
+          {
+            "ja": "柔らかな警告脈動",
+            "en": "soft alert pulse"
+          },
+          {
+            "ja": "制御された静寂",
+            "en": "controlled sterile quiet"
+          }
+        ]
+      },
+      {
+        "group": "⚠ 緊張・管理圧",
+        "items": [
+          {
+            "ja": "検体の緊張感",
+            "en": "contained specimen tension"
+          },
+          {
+            "ja": "全域監視の視線",
+            "en": "omnipresent system gaze"
+          },
+          {
+            "ja": "静かな運用圧",
+            "en": "quiet operational pressure"
+          },
+          {
+            "ja": "制限区域の緊張",
+            "en": "restricted-area tension"
+          },
+          {
+            "ja": "高危険実験の静けさ",
+            "en": "high-risk experiment hush"
+          },
+          {
+            "ja": "封鎖警告の緊張",
+            "en": "containment warning tension"
+          }
+        ]
+      },
+      {
+        "group": "🔊 機械音・空調",
+        "items": [
+          {
+            "ja": "静かな機器駆動音",
+            "en": "quiet instrument hum"
+          },
+          {
+            "ja": "液体槽の発光",
+            "en": "bio-fluid glow"
+          },
+          {
+            "ja": "高密度機械のうなり",
+            "en": "high-density machine hum"
+          },
+          {
+            "ja": "冷却霧の空気",
+            "en": "cool misted air"
+          },
+          {
+            "ja": "高所監視の感覚",
+            "en": "elevated oversight feel"
+          },
+          {
+            "ja": "管理された危機の静けさ",
+            "en": "managed crisis calm"
+          }
+        ]
+      },
+      {
+        "group": "📈 解析表示・観測光",
+        "items": [
+          {
+            "ja": "スペクトル走査光",
+            "en": "spectral scan glow"
+          },
+          {
+            "ja": "多層波形表示",
+            "en": "layered waveform displays"
+          },
+          {
+            "ja": "静かな観測緊張",
+            "en": "quiet observatory tension"
+          },
+          {
+            "ja": "冷たいテレメトリ光",
+            "en": "cold telemetry light"
+          },
+          {
+            "ja": "精密監視ムード",
+            "en": "precision monitoring mood"
+          },
+          {
+            "ja": "データ流反射",
+            "en": "data-stream reflections"
+          },
+          {
+            "ja": "臨床的スキャンビーム",
+            "en": "clinical scan beams"
+          },
+          {
+            "ja": "整然とした試料処理",
+            "en": "ordered sample handling"
+          },
+          {
+            "ja": "無菌書類フロー",
+            "en": "sterile document flow"
+          }
+        ]
+      },
+      {
+        "group": "🫧 生体液・培養光",
+        "items": [
+          {
+            "ja": "生体液の発光",
+            "en": "bio-liquid luminescence"
+          },
+          {
+            "ja": "湿った無菌霞",
+            "en": "humid sterile haze"
+          },
+          {
+            "ja": "遅い泡の動き",
+            "en": "slow bubble motion"
+          },
+          {
+            "ja": "外科的な白さ",
+            "en": "surgical-white precision"
+          },
+          {
+            "ja": "遺伝子配列オーバーレイ",
+            "en": "gene-sequence overlays"
+          },
+          {
+            "ja": "封じられた臨床緊張",
+            "en": "contained clinical tension"
+          },
+          {
+            "ja": "孵化の暖光",
+            "en": "warm incubation glow"
+          },
+          {
+            "ja": "結露する管理湿度",
+            "en": "condensed chamber humidity"
+          },
+          {
+            "ja": "成育の気配",
+            "en": "contained growth suspense"
+          }
+        ]
+      },
+      {
+        "group": "🧠 監視圧・演算脈動",
+        "items": [
+          {
+            "ja": "アルゴリズム脈動光",
+            "en": "algorithm pulse glow"
+          },
+          {
+            "ja": "機械の視線圧",
+            "en": "watchful machine presence"
+          },
+          {
+            "ja": "多層投影の漂い",
+            "en": "layered projection drift"
+          },
+          {
+            "ja": "霜色の機械光",
+            "en": "frost-blue machine light"
+          },
+          {
+            "ja": "低い共振音",
+            "en": "low resonant hum"
+          },
+          {
+            "ja": "高密度演算の律動",
+            "en": "dense processing rhythm"
+          },
+          {
+            "ja": "全方位監視圧",
+            "en": "all-angle surveillance pressure"
+          },
+          {
+            "ja": "警戒パルス反射",
+            "en": "alert pulse reflections"
+          },
+          {
+            "ja": "規律的制御ムード",
+            "en": "disciplined control mood"
+          }
+        ]
+      },
+      {
+        "group": "🚨 封鎖警戒・隔離感",
+        "items": [
+          {
+            "ja": "加圧静寂",
+            "en": "sealed-pressure silence"
+          },
+          {
+            "ja": "封じられた脅威感",
+            "en": "contained threat tension"
+          },
+          {
+            "ja": "警告灯の拍動",
+            "en": "warning-lamp cadence"
+          },
+          {
+            "ja": "除染霧の無菌感",
+            "en": "sterile decon mist"
+          },
+          {
+            "ja": "検問前の不安",
+            "en": "checkpoint anxiety"
+          },
+          {
+            "ja": "収容プロトコル感",
+            "en": "containment protocol mood"
+          },
+          {
+            "ja": "拘束の臨床的厳しさ",
+            "en": "clinical restraint severity"
+          },
+          {
+            "ja": "観測される緊張",
+            "en": "observation-focused tension"
+          },
+          {
+            "ja": "冷たい手順照明",
+            "en": "cold procedural lighting"
+          }
+        ]
+      },
+      {
+        "group": "🔥 事故熱・損傷痕",
+        "items": [
+          {
+            "ja": "警報赤の残り火",
+            "en": "alarm-red residue"
+          },
+          {
+            "ja": "破砕ガラスの危険感",
+            "en": "broken-glass danger"
+          },
+          {
+            "ja": "封鎖失敗の緊張",
+            "en": "failed containment tension"
+          },
+          {
+            "ja": "煙を洗った荒さ",
+            "en": "smoke-scrubbed harshness"
+          },
+          {
+            "ja": "直後の非常停止感",
+            "en": "recent emergency shutdown"
+          },
+          {
+            "ja": "焦げた無菌室コントラスト",
+            "en": "charred cleanroom contrast"
+          },
+          {
+            "ja": "停止空気の淀み",
+            "en": "stale shutdown air"
+          },
+          {
+            "ja": "放棄の冷たさ",
+            "en": "abandonment chill"
+          },
+          {
+            "ja": "半死のモニター光",
+            "en": "half-dead monitor glow"
+          }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "group": "🧱 施設構造",
+        "items": [
+          {
+            "ja": "清潔な白面",
+            "en": "clean white surfaces"
+          },
+          {
+            "ja": "封鎖観測ガラス",
+            "en": "sealed observation glass"
+          },
+          {
+            "ja": "円筒培養槽",
+            "en": "cylindrical growth tanks"
+          },
+          {
+            "ja": "滅菌壁モジュール",
+            "en": "sterile wall modules"
+          },
+          {
+            "ja": "壁一面モニター",
+            "en": "wall-filling monitor grid"
+          },
+          {
+            "ja": "中央操作ピット",
+            "en": "central operator pit"
+          }
+        ]
+      },
+      {
+        "group": "🖥 計器・表示",
+        "items": [
+          {
+            "ja": "解析端末列",
+            "en": "analysis terminal rows"
+          },
+          {
+            "ja": "投影UI層",
+            "en": "projection interface layers"
+          },
+          {
+            "ja": "状態灯マトリクス",
+            "en": "status-light matrix"
+          },
+          {
+            "ja": "優先表示帯",
+            "en": "priority display bands"
+          },
+          {
+            "ja": "封鎖区域マップ",
+            "en": "security gate map"
+          },
+          {
+            "ja": "状態表示コーナー",
+            "en": "status-display corner"
+          }
+        ]
+      },
+      {
+        "group": "🚧 封鎖・警告",
+        "items": [
+          {
+            "ja": "封鎖隔壁ドア",
+            "en": "sealed bulkhead door"
+          },
+          {
+            "ja": "警告床ライン",
+            "en": "warning stripe floor"
+          },
+          {
+            "ja": "圧力通路",
+            "en": "narrow pressure corridor"
+          },
+          {
+            "ja": "実験ピット",
+            "en": "sunken experiment pit"
+          },
+          {
+            "ja": "クランプ固定具",
+            "en": "industrial clamp fixtures"
+          },
+          {
+            "ja": "隔離ベッド区画",
+            "en": "sealed medical bed bay"
+          }
+        ]
+      },
+      {
+        "group": "📡 観測装置・計測列",
+        "items": [
+          {
+            "ja": "センサーマスト影",
+            "en": "sensor mast silhouettes"
+          },
+          {
+            "ja": "浮遊スキャンパネル",
+            "en": "floating scan panels"
+          },
+          {
+            "ja": "暗い観測ガラス壁",
+            "en": "dark glass observation wall"
+          },
+          {
+            "ja": "計測コンソール列",
+            "en": "measurement console rows"
+          },
+          {
+            "ja": "テレメトリアーク表示",
+            "en": "telemetry arc displays"
+          },
+          {
+            "ja": "状態プロット卓",
+            "en": "status plotting tables"
+          },
+          {
+            "ja": "計器アーム群",
+            "en": "instrument armatures"
+          },
+          {
+            "ja": "細い観測窓",
+            "en": "sealed window slit"
+          },
+          {
+            "ja": "スキャン台列",
+            "en": "scan cradle rows"
+          }
+        ]
+      },
+      {
+        "group": "🧬 培養槽・封入設備",
+        "items": [
+          {
+            "ja": "高い培養槽列",
+            "en": "towering culture tanks"
+          },
+          {
+            "ja": "整備用キャットウォーク",
+            "en": "catwalk maintenance rails"
+          },
+          {
+            "ja": "栄養パイプ束",
+            "en": "sealed nutrient pipes"
+          },
+          {
+            "ja": "濡れた床反射",
+            "en": "wet floor reflections"
+          },
+          {
+            "ja": "編集ポッド環",
+            "en": "editing pod ring"
+          },
+          {
+            "ja": "透明シールカーテン",
+            "en": "transparent seal curtains"
+          },
+          {
+            "ja": "無菌ツールアーム",
+            "en": "sterile tool arms"
+          },
+          {
+            "ja": "配列表示帯",
+            "en": "sequence display strip"
+          },
+          {
+            "ja": "孵化カプセル列",
+            "en": "incubation capsule rows"
+          }
+        ]
+      },
+      {
+        "group": "🧠 サーバー・投影UI",
+        "items": [
+          {
+            "ja": "円形指令壇",
+            "en": "circular command dais"
+          },
+          {
+            "ja": "吊り下がるデータ幕",
+            "en": "hanging data veils"
+          },
+          {
+            "ja": "中枢温度表示",
+            "en": "core-temperature indicators"
+          },
+          {
+            "ja": "監視歩廊リング",
+            "en": "observer catwalk ring"
+          },
+          {
+            "ja": "演算塔通路",
+            "en": "compute tower aisles"
+          },
+          {
+            "ja": "冷却導管の光",
+            "en": "coolant conduit glow"
+          },
+          {
+            "ja": "保守ガントリー線",
+            "en": "maintenance gantry lines"
+          },
+          {
+            "ja": "降るサーバー状態灯",
+            "en": "server status rain"
+          },
+          {
+            "ja": "環状監視壁",
+            "en": "ring-shaped monitor wall"
+          }
+        ]
+      },
+      {
+        "group": "🔒 隔壁・拘束設備",
+        "items": [
+          {
+            "ja": "観察窓付きドア",
+            "en": "observation slit doors"
+          },
+          {
+            "ja": "拘束アンカーポイント",
+            "en": "restraint anchor points"
+          },
+          {
+            "ja": "除染しきい枠",
+            "en": "decontamination threshold"
+          },
+          {
+            "ja": "危険床マーキング",
+            "en": "hazard floor markings"
+          },
+          {
+            "ja": "エアロック封印環",
+            "en": "airlock seal rings"
+          },
+          {
+            "ja": "噴霧ノズル列",
+            "en": "spray nozzle rows"
+          },
+          {
+            "ja": "バイオ危険標識盤",
+            "en": "biohazard sign panels"
+          },
+          {
+            "ja": "加圧ドアロック",
+            "en": "pressure door locks"
+          },
+          {
+            "ja": "床固定レール",
+            "en": "floor restraint rails"
+          }
+        ]
+      },
+      {
+        "group": "💥 破損・警報残骸",
+        "items": [
+          {
+            "ja": "割れた観測壁",
+            "en": "cracked observation wall"
+          },
+          {
+            "ja": "火花を散らす端末端",
+            "en": "sparking console ends"
+          },
+          {
+            "ja": "非常閉鎖痕",
+            "en": "emergency shutter scars"
+          },
+          {
+            "ja": "散乱した試料痕",
+            "en": "scattered specimen traces"
+          },
+          {
+            "ja": "消火剤の白残り",
+            "en": "foam residue streaks"
+          },
+          {
+            "ja": "焦げた隔壁縁",
+            "en": "burn-marked bulkhead edges"
+          },
+          {
+            "ja": "非常灯パルス",
+            "en": "emergency beacon pulses"
+          },
+          {
+            "ja": "崩れた設備パネル",
+            "en": "collapsed utility panels"
+          },
+          {
+            "ja": "落下フレーム片",
+            "en": "fallen frame pieces"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "future_living_infrastructure_collection",
+    "title": "🏙 未来生活圏・居住インフラ特化コレクション",
+    "subtitle": "未来住宅、交通結節、商業アトリウム、学習・保育、人工公園、資源循環インフラまで、未来の暮らし側に寄せた生活圏特化コレクション",
+    "complete": [
+      {
+        "group": "🏠 居住・生活ユニット",
+        "items": [
+          {
+            "id": "future_residential_unit_softmorning",
+            "ja": "柔らかな朝光が回る未来住宅ユニット",
+            "links": {
+              "base": [
+                "future residential unit",
+                "habitation module"
+              ],
+              "customize": [
+                "clean domestic futurism",
+                "soft integrated lighting",
+                "quiet lived-in calm"
+              ],
+              "settings": [
+                "curved wall furniture",
+                "embedded utility panels",
+                "wide smart window",
+                "minimal floor seams"
+              ]
+            }
+          },
+          {
+            "id": "colony_apartment_corridor_evening",
+            "ja": "人工居住コロニーの夕方回廊と住区入口",
+            "links": {
+              "base": [
+                "artificial habitat colony",
+                "residential access corridor"
+              ],
+              "customize": [
+                "contained-colony daily life",
+                "evening utility warmth",
+                "modular civic calm"
+              ],
+              "settings": [
+                "repeating habitation doors",
+                "shared light well",
+                "clean handrail lines",
+                "colony signage strip"
+              ]
+            }
+          },
+          {
+            "id": "future_public_lounge_module",
+            "ja": "共有ラウンジに生活光が満ちる未来居住棟",
+            "links": {
+              "base": [
+                "public lounge module",
+                "future habitation zone"
+              ],
+              "customize": [
+                "community atmosphere",
+                "soft transit of people",
+                "comfortable polished surfaces"
+              ],
+              "settings": [
+                "modular seating islands",
+                "ambient wall display",
+                "ceiling greenhouse strip",
+                "open circulation path"
+              ]
+            }
+          },
+          {
+            "id": "family_habitation_atrium_day",
+            "ja": "家族生活の気配が残る未来住居アトリウム",
+            "links": {
+              "base": [
+                "family habitation atrium",
+                "smart habitation corridor"
+              ],
+              "customize": [
+                "warm family-scale futurism",
+                "gentle domestic traffic",
+                "settled residential calm"
+              ],
+              "settings": [
+                "soft play corner",
+                "shared meal niche",
+                "window garden strip",
+                "home access lift"
+              ]
+            }
+          },
+          {
+            "id": "sleeping_pod_cluster_midnight",
+            "ja": "睡眠ポッドが静かに並ぶ深夜の居住区画",
+            "links": {
+              "base": [
+                "sleeping pod cluster",
+                "habitation module"
+              ],
+              "customize": [
+                "low-light sleep-cycle hush",
+                "compact lived-in efficiency",
+                "soft blue standby glow"
+              ],
+              "settings": [
+                "pod status lights",
+                "privacy partitions",
+                "night corridor floor guides",
+                "foldaway storage wall"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🚉 交通・公共結節",
+        "items": [
+          {
+            "id": "future_station_concourse_flow",
+            "ja": "人流と案内光が交差する未来駅コンコース",
+            "links": {
+              "base": [
+                "future transit concourse",
+                "mobility hub interior"
+              ],
+              "customize": [
+                "guided pedestrian flow",
+                "clean transit brightness",
+                "public-system order"
+              ],
+              "settings": [
+                "route-light ceiling",
+                "large guidance display",
+                "broad escalator well",
+                "ticketless gate line"
+              ]
+            }
+          },
+          {
+            "id": "orbital_elevator_terminal_hall",
+            "ja": "高天井と待機列が伸びる軌道昇降端末ホール",
+            "links": {
+              "base": [
+                "orbital elevator terminal",
+                "future terminal hall"
+              ],
+              "customize": [
+                "high-altitude departure tension",
+                "civic monumental scale",
+                "contained terminal hush"
+              ],
+              "settings": [
+                "vertical shaft aperture",
+                "departure queue lanes",
+                "security arch frames",
+                "upward light beams"
+              ]
+            }
+          },
+          {
+            "id": "autonomous_bus_platform_future",
+            "ja": "無人運行車が静かに着く未来公共プラットフォーム",
+            "links": {
+              "base": [
+                "autonomous transit platform",
+                "future public stop"
+              ],
+              "customize": [
+                "quiet scheduled precision",
+                "urban civic neatness",
+                "soft vehicle arrival glow"
+              ],
+              "settings": [
+                "platform edge lights",
+                "vehicle docking marks",
+                "transparent shelter panels",
+                "arrival-info pillar"
+              ]
+            }
+          },
+          {
+            "id": "maglev_interchange_peakhour",
+            "ja": "磁気浮上列車の光が流れる未来乗換ホール",
+            "links": {
+              "base": [
+                "maglev interchange hall",
+                "commuter transfer gallery"
+              ],
+              "customize": [
+                "fast commuter momentum",
+                "layered transfer rhythm",
+                "bright infrastructural clarity"
+              ],
+              "settings": [
+                "sweeping rail-light arcs",
+                "transfer color bands",
+                "suspended route signs",
+                "wide crossing bridges"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🛍 商業・日常サービス",
+        "items": [
+          {
+            "id": "future_commercial_atrium_midday",
+            "ja": "生活動線が集まる未来商業アトリウム",
+            "links": {
+              "base": [
+                "future commercial atrium",
+                "mixed-use retail deck"
+              ],
+              "customize": [
+                "clean daily-service futurism",
+                "soft commercial circulation",
+                "low-noise civic bustle"
+              ],
+              "settings": [
+                "tiered storefront bands",
+                "hanging route displays",
+                "open atrium void",
+                "autonomous kiosk clusters"
+              ]
+            }
+          },
+          {
+            "id": "automated_convenience_hub_evening",
+            "ja": "自動販売と受取導線が滑らかに巡る生活ハブ",
+            "links": {
+              "base": [
+                "automated convenience hub",
+                "self-service market aisle"
+              ],
+              "customize": [
+                "self-service efficiency",
+                "ordered purchase flow",
+                "compact urban convenience"
+              ],
+              "settings": [
+                "pickup locker walls",
+                "checkout-free gate line",
+                "shelf-light strips",
+                "order status panels"
+              ]
+            }
+          },
+          {
+            "id": "future_foodcourt_service_deck",
+            "ja": "食と休憩が交わる未来フードコート回廊",
+            "links": {
+              "base": [
+                "future food court",
+                "lifestyle service promenade"
+              ],
+              "customize": [
+                "lunch-hour public softness",
+                "mixed service liveliness",
+                "bright social everyday feel"
+              ],
+              "settings": [
+                "shared seating terraces",
+                "food stall display bands",
+                "waste-return ports",
+                "ceiling menu holo-lines"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🌿 教育・公共緑地・休養",
+        "items": [
+          {
+            "id": "vertical_farm_service_atrium",
+            "ja": "栽培層と搬送路が見える垂直農場アトリウム",
+            "links": {
+              "base": [
+                "vertical farm",
+                "service atrium"
+              ],
+              "customize": [
+                "humid green technology feel",
+                "productive civic calm",
+                "soft grow-light bloom"
+              ],
+              "settings": [
+                "stacked crop terraces",
+                "water rail lines",
+                "maintenance catwalk",
+                "sun-filtered canopy"
+              ]
+            }
+          },
+          {
+            "id": "future_indoor_park_civic_space",
+            "ja": "人工樹木と休憩席が並ぶ未来公共パーク空間",
+            "links": {
+              "base": [
+                "future civic park",
+                "indoor eco plaza"
+              ],
+              "customize": [
+                "eco-civic softness",
+                "clean breathable openness",
+                "gentle public warmth"
+              ],
+              "settings": [
+                "engineered trees",
+                "resting bench clusters",
+                "mist-cooling vents",
+                "broad open hall"
+              ]
+            }
+          },
+          {
+            "id": "future_service_counter_plaza",
+            "ja": "行政案内と公共端末が並ぶ未来サービス広場",
+            "links": {
+              "base": [
+                "future service plaza",
+                "public terminal area"
+              ],
+              "customize": [
+                "well-managed public order",
+                "low-noise civic atmosphere",
+                "soft institutional light"
+              ],
+              "settings": [
+                "service counter islands",
+                "self-service terminals",
+                "queue guidance floor lines",
+                "ceiling service beacons"
+              ]
+            }
+          },
+          {
+            "id": "learning_commons_future_day",
+            "ja": "学習と交流が溶け合う未来コモンズホール",
+            "links": {
+              "base": [
+                "learning commons hall",
+                "community daycare module"
+              ],
+              "customize": [
+                "open educational warmth",
+                "shared neighborhood activity",
+                "bright cooperative atmosphere"
+              ],
+              "settings": [
+                "study pod clusters",
+                "children zone divider",
+                "community notice displays",
+                "quiet reading terrace"
+              ]
+            }
+          },
+          {
+            "id": "wellness_garden_deck_morning",
+            "ja": "朝霧の残る未来ウェルネスガーデンデッキ",
+            "links": {
+              "base": [
+                "wellness garden deck",
+                "future civic park"
+              ],
+              "customize": [
+                "restorative stillness",
+                "soft wellness ambiance",
+                "cool filtered morning air"
+              ],
+              "settings": [
+                "walking loop path",
+                "light exercise bays",
+                "water-mist rail",
+                "open sky window"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🛠 生活インフラ・循環保守",
+        "items": [
+          {
+            "id": "recycling_corridor_public_services",
+            "ja": "資源循環が静かに回る未来保守回廊",
+            "links": {
+              "base": [
+                "waste recycling corridor",
+                "maintenance utility spine"
+              ],
+              "customize": [
+                "behind-the-scenes civic rhythm",
+                "clean service efficiency",
+                "muted industrial neatness"
+              ],
+              "settings": [
+                "segregated recycling chutes",
+                "service drone tracks",
+                "utility pipe bands",
+                "maintenance hatch lines"
+              ]
+            }
+          },
+          {
+            "id": "water_reclamation_station_clean",
+            "ja": "水再生設備が透明に光る生活基盤ステーション",
+            "links": {
+              "base": [
+                "water reclamation station",
+                "energy service subcore"
+              ],
+              "customize": [
+                "sterile infrastructure calm",
+                "stable municipal pulse",
+                "soft aqua utility glow"
+              ],
+              "settings": [
+                "glass filtration columns",
+                "status-monitor pylons",
+                "service catwalk mesh",
+                "pump-room indicator lines"
+              ]
+            }
+          },
+          {
+            "id": "civic_repair_bay_delivery_node",
+            "ja": "修繕ベイと配送ノードが繋がる未来物流裏導線",
+            "links": {
+              "base": [
+                "civic repair bay",
+                "delivery drone exchange node"
+              ],
+              "customize": [
+                "backstage urban logistics",
+                "precise maintenance readiness",
+                "quiet nonstop circulation"
+              ],
+              "settings": [
+                "tool-arm docks",
+                "drone nest slots",
+                "repair gantry rails",
+                "dispatch signal strips"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "base": [
+      {
+        "group": "🏠 居住ユニット",
+        "items": [
+          {
+            "ja": "未来住宅ユニット",
+            "en": "future residential unit"
+          },
+          {
+            "ja": "居住モジュール",
+            "en": "habitation module"
+          },
+          {
+            "ja": "住区アクセス回廊",
+            "en": "residential access corridor"
+          },
+          {
+            "ja": "人工居住コロニー",
+            "en": "artificial habitat colony"
+          },
+          {
+            "ja": "共有ラウンジモジュール",
+            "en": "public lounge module"
+          },
+          {
+            "ja": "未来居住ゾーン",
+            "en": "future habitation zone"
+          },
+          {
+            "ja": "スマート住区回廊",
+            "en": "smart habitation corridor"
+          },
+          {
+            "ja": "家族住居アトリウム",
+            "en": "family habitation atrium"
+          },
+          {
+            "ja": "睡眠ポッド区画",
+            "en": "sleeping pod cluster"
+          }
+        ]
+      },
+      {
+        "group": "🚉 交通・端末",
+        "items": [
+          {
+            "ja": "未来駅コンコース",
+            "en": "future transit concourse"
+          },
+          {
+            "ja": "モビリティハブ内部",
+            "en": "mobility hub interior"
+          },
+          {
+            "ja": "軌道昇降端末",
+            "en": "orbital elevator terminal"
+          },
+          {
+            "ja": "未来端末ホール",
+            "en": "future terminal hall"
+          },
+          {
+            "ja": "無人運行プラットフォーム",
+            "en": "autonomous transit platform"
+          },
+          {
+            "ja": "未来公共停留空間",
+            "en": "future public stop"
+          },
+          {
+            "ja": "磁気浮上乗換ホール",
+            "en": "maglev interchange hall"
+          },
+          {
+            "ja": "通勤連絡ギャラリー",
+            "en": "commuter transfer gallery"
+          }
+        ]
+      },
+      {
+        "group": "🛍 商業・生活サービス",
+        "items": [
+          {
+            "ja": "未来商業アトリウム",
+            "en": "future commercial atrium"
+          },
+          {
+            "ja": "複合商業デッキ",
+            "en": "mixed-use retail deck"
+          },
+          {
+            "ja": "自動販売ハブ",
+            "en": "automated convenience hub"
+          },
+          {
+            "ja": "セルフサービス市場通路",
+            "en": "self-service market aisle"
+          },
+          {
+            "ja": "未来フードコート",
+            "en": "future food court"
+          },
+          {
+            "ja": "生活サービスプロムナード",
+            "en": "lifestyle service promenade"
+          }
+        ]
+      },
+      {
+        "group": "🌿 公共生活圏",
+        "items": [
+          {
+            "ja": "垂直農場",
+            "en": "vertical farm"
+          },
+          {
+            "ja": "サービスアトリウム",
+            "en": "service atrium"
+          },
+          {
+            "ja": "未来公共パーク",
+            "en": "future civic park"
+          },
+          {
+            "ja": "屋内エコ広場",
+            "en": "indoor eco plaza"
+          },
+          {
+            "ja": "未来サービス広場",
+            "en": "future service plaza"
+          },
+          {
+            "ja": "公共端末エリア",
+            "en": "public terminal area"
+          },
+          {
+            "ja": "学習コモンズホール",
+            "en": "learning commons hall"
+          },
+          {
+            "ja": "保育コミュニティモジュール",
+            "en": "community daycare module"
+          },
+          {
+            "ja": "ウェルネスガーデンデッキ",
+            "en": "wellness garden deck"
+          }
+        ]
+      },
+      {
+        "group": "🛠 保守・循環インフラ",
+        "items": [
+          {
+            "ja": "資源循環回廊",
+            "en": "waste recycling corridor"
+          },
+          {
+            "ja": "保守設備スパイン",
+            "en": "maintenance utility spine"
+          },
+          {
+            "ja": "水再生ステーション",
+            "en": "water reclamation station"
+          },
+          {
+            "ja": "エネルギー保守中枢",
+            "en": "energy service subcore"
+          },
+          {
+            "ja": "市民修繕ベイ",
+            "en": "civic repair bay"
+          },
+          {
+            "ja": "配送ドローン交換ノード",
+            "en": "delivery drone exchange node"
+          }
+        ]
+      }
+    ],
+    "customize": [
+      {
+        "group": "💡 光・生活感",
+        "items": [
+          {
+            "ja": "清潔な生活未来感",
+            "en": "clean domestic futurism"
+          },
+          {
+            "ja": "柔らかな統合照明",
+            "en": "soft integrated lighting"
+          },
+          {
+            "ja": "生活の静けさ",
+            "en": "quiet lived-in calm"
+          },
+          {
+            "ja": "夕方の設備温度",
+            "en": "evening utility warmth"
+          },
+          {
+            "ja": "コミュニティの空気",
+            "en": "community atmosphere"
+          },
+          {
+            "ja": "快適な磨かれ面",
+            "en": "comfortable polished surfaces"
+          },
+          {
+            "ja": "家族規模の温かい未来感",
+            "en": "warm family-scale futurism"
+          },
+          {
+            "ja": "深夜待機の青い柔光",
+            "en": "soft blue standby glow"
+          },
+          {
+            "ja": "落ち着いた住居の静穏",
+            "en": "settled residential calm"
+          }
+        ]
+      },
+      {
+        "group": "🚶 公共導線",
+        "items": [
+          {
+            "ja": "案内された人流",
+            "en": "guided pedestrian flow"
+          },
+          {
+            "ja": "公共システムの秩序",
+            "en": "public-system order"
+          },
+          {
+            "ja": "高所出発の緊張",
+            "en": "high-altitude departure tension"
+          },
+          {
+            "ja": "予定精度の静けさ",
+            "en": "quiet scheduled precision"
+          },
+          {
+            "ja": "よく管理された公共感",
+            "en": "well-managed public order"
+          },
+          {
+            "ja": "低騒音の公共空気",
+            "en": "low-noise civic atmosphere"
+          },
+          {
+            "ja": "高速通勤の勢い",
+            "en": "fast commuter momentum"
+          },
+          {
+            "ja": "乗換の層状リズム",
+            "en": "layered transfer rhythm"
+          },
+          {
+            "ja": "やわらかな人の行き交い",
+            "en": "soft transit of people"
+          }
+        ]
+      },
+      {
+        "group": "🛍 日常サービス",
+        "items": [
+          {
+            "ja": "生活サービスの未来感",
+            "en": "clean daily-service futurism"
+          },
+          {
+            "ja": "やわらかな商業導線",
+            "en": "soft commercial circulation"
+          },
+          {
+            "ja": "低騒音のにぎわい",
+            "en": "low-noise civic bustle"
+          },
+          {
+            "ja": "セルフサービス効率",
+            "en": "self-service efficiency"
+          },
+          {
+            "ja": "整った購買フロー",
+            "en": "ordered purchase flow"
+          },
+          {
+            "ja": "コンパクトな日常利便",
+            "en": "compact urban convenience"
+          },
+          {
+            "ja": "昼休みの公共やわらかさ",
+            "en": "lunch-hour public softness"
+          },
+          {
+            "ja": "混合サービスの活気",
+            "en": "mixed service liveliness"
+          },
+          {
+            "ja": "明るい日常交流感",
+            "en": "bright social everyday feel"
+          }
+        ]
+      },
+      {
+        "group": "🌿 生態・公共柔らかさ",
+        "items": [
+          {
+            "ja": "湿った栽培技術感",
+            "en": "humid green technology feel"
+          },
+          {
+            "ja": "生産的な公共の穏やかさ",
+            "en": "productive civic calm"
+          },
+          {
+            "ja": "育成灯の柔光",
+            "en": "soft grow-light bloom"
+          },
+          {
+            "ja": "エコ公共のやわらかさ",
+            "en": "eco-civic softness"
+          },
+          {
+            "ja": "呼吸しやすい開放感",
+            "en": "clean breathable openness"
+          },
+          {
+            "ja": "やさしい公共の温度",
+            "en": "gentle public warmth"
+          },
+          {
+            "ja": "開かれた学習のぬくもり",
+            "en": "open educational warmth"
+          },
+          {
+            "ja": "地域活動の気配",
+            "en": "shared neighborhood activity"
+          },
+          {
+            "ja": "回復的な静けさ",
+            "en": "restorative stillness"
+          },
+          {
+            "ja": "ウェルネスの穏やかさ",
+            "en": "soft wellness ambiance"
+          },
+          {
+            "ja": "冷たい朝の濾過空気",
+            "en": "cool filtered morning air"
+          }
+        ]
+      },
+      {
+        "group": "🛠 生活基盤・運用",
+        "items": [
+          {
+            "ja": "舞台裏の公共リズム",
+            "en": "behind-the-scenes civic rhythm"
+          },
+          {
+            "ja": "清潔な運用効率",
+            "en": "clean service efficiency"
+          },
+          {
+            "ja": "控えめな工業整然さ",
+            "en": "muted industrial neatness"
+          },
+          {
+            "ja": "無菌的な設備の落ち着き",
+            "en": "sterile infrastructure calm"
+          },
+          {
+            "ja": "安定した都市脈動",
+            "en": "stable municipal pulse"
+          },
+          {
+            "ja": "静かな循環稼働",
+            "en": "quiet nonstop circulation"
+          },
+          {
+            "ja": "精密な保守待機感",
+            "en": "precise maintenance readiness"
+          },
+          {
+            "ja": "水色の設備微光",
+            "en": "soft aqua utility glow"
+          }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "group": "🧱 建築・居住",
+        "items": [
+          {
+            "ja": "曲面家具壁",
+            "en": "curved wall furniture"
+          },
+          {
+            "ja": "埋込設備パネル",
+            "en": "embedded utility panels"
+          },
+          {
+            "ja": "広いスマート窓",
+            "en": "wide smart window"
+          },
+          {
+            "ja": "最小床目地",
+            "en": "minimal floor seams"
+          },
+          {
+            "ja": "繰り返す居住扉",
+            "en": "repeating habitation doors"
+          },
+          {
+            "ja": "共用ライトウェル",
+            "en": "shared light well"
+          },
+          {
+            "ja": "モジュール座席島",
+            "en": "modular seating islands"
+          },
+          {
+            "ja": "開放動線",
+            "en": "open circulation path"
+          },
+          {
+            "ja": "遊びコーナー",
+            "en": "soft play corner"
+          },
+          {
+            "ja": "共用食事ニッチ",
+            "en": "shared meal niche"
+          },
+          {
+            "ja": "窓際菜園帯",
+            "en": "window garden strip"
+          },
+          {
+            "ja": "ホームアクセスリフト",
+            "en": "home access lift"
+          },
+          {
+            "ja": "ポッド状態灯",
+            "en": "pod status lights"
+          },
+          {
+            "ja": "可動プライバシー壁",
+            "en": "privacy partitions"
+          },
+          {
+            "ja": "夜間床ガイド",
+            "en": "night corridor floor guides"
+          },
+          {
+            "ja": "折畳収納壁",
+            "en": "foldaway storage wall"
+          }
+        ]
+      },
+      {
+        "group": "🚉 導線・表示",
+        "items": [
+          {
+            "ja": "路線光天井",
+            "en": "route-light ceiling"
+          },
+          {
+            "ja": "大型案内表示",
+            "en": "large guidance display"
+          },
+          {
+            "ja": "広いエスカレータ井",
+            "en": "broad escalator well"
+          },
+          {
+            "ja": "改札ライン",
+            "en": "ticketless gate line"
+          },
+          {
+            "ja": "上向き光束",
+            "en": "upward light beams"
+          },
+          {
+            "ja": "到着情報柱",
+            "en": "arrival-info pillar"
+          },
+          {
+            "ja": "縦穴開口",
+            "en": "vertical shaft aperture"
+          },
+          {
+            "ja": "出発待機レーン",
+            "en": "departure queue lanes"
+          },
+          {
+            "ja": "保安アーチ列",
+            "en": "security arch frames"
+          },
+          {
+            "ja": "軌道光アーク",
+            "en": "sweeping rail-light arcs"
+          },
+          {
+            "ja": "乗換色帯",
+            "en": "transfer color bands"
+          },
+          {
+            "ja": "吊下げ路線標識",
+            "en": "suspended route signs"
+          },
+          {
+            "ja": "横断ブリッジ群",
+            "en": "wide crossing bridges"
+          }
+        ]
+      },
+      {
+        "group": "🛍 商業・生活細部",
+        "items": [
+          {
+            "ja": "段状店舗帯",
+            "en": "tiered storefront bands"
+          },
+          {
+            "ja": "吊下げ案内ディスプレイ",
+            "en": "hanging route displays"
+          },
+          {
+            "ja": "吹抜けアトリウム空洞",
+            "en": "open atrium void"
+          },
+          {
+            "ja": "自律キオスク群",
+            "en": "autonomous kiosk clusters"
+          },
+          {
+            "ja": "受取ロッカー壁",
+            "en": "pickup locker walls"
+          },
+          {
+            "ja": "棚照明ライン",
+            "en": "shelf-light strips"
+          },
+          {
+            "ja": "注文状況パネル",
+            "en": "order status panels"
+          },
+          {
+            "ja": "共用着席テラス",
+            "en": "shared seating terraces"
+          },
+          {
+            "ja": "屋台表示帯",
+            "en": "food stall display bands"
+          },
+          {
+            "ja": "返却ポート列",
+            "en": "waste-return ports"
+          },
+          {
+            "ja": "天井メニューホロ線",
+            "en": "ceiling menu holo-lines"
+          },
+          {
+            "ja": "会計不要ゲート線",
+            "en": "checkout-free gate line"
+          }
+        ]
+      },
+      {
+        "group": "🌿 休養・公共細部",
+        "items": [
+          {
+            "ja": "積層栽培棚",
+            "en": "stacked crop terraces"
+          },
+          {
+            "ja": "水路レール",
+            "en": "water rail lines"
+          },
+          {
+            "ja": "保守キャットウォーク",
+            "en": "maintenance catwalk"
+          },
+          {
+            "ja": "日差しろ過キャノピー",
+            "en": "sun-filtered canopy"
+          },
+          {
+            "ja": "人工樹木",
+            "en": "engineered trees"
+          },
+          {
+            "ja": "休憩席クラスター",
+            "en": "resting bench clusters"
+          },
+          {
+            "ja": "案内カウンター島",
+            "en": "service counter islands"
+          },
+          {
+            "ja": "セルフ端末列",
+            "en": "self-service terminals"
+          },
+          {
+            "ja": "待機列ガイド床線",
+            "en": "queue guidance floor lines"
+          },
+          {
+            "ja": "天井サービス灯",
+            "en": "ceiling service beacons"
+          },
+          {
+            "ja": "学習ポッド群",
+            "en": "study pod clusters"
+          },
+          {
+            "ja": "子ども区画仕切り",
+            "en": "children zone divider"
+          },
+          {
+            "ja": "地域掲示ディスプレイ",
+            "en": "community notice displays"
+          },
+          {
+            "ja": "静かな読書テラス",
+            "en": "quiet reading terrace"
+          },
+          {
+            "ja": "回遊歩道",
+            "en": "walking loop path"
+          },
+          {
+            "ja": "軽運動ベイ",
+            "en": "light exercise bays"
+          },
+          {
+            "ja": "水霧レール",
+            "en": "water-mist rail"
+          },
+          {
+            "ja": "開放天窓",
+            "en": "open sky window"
+          }
+        ]
+      },
+      {
+        "group": "🛠 設備・循環細部",
+        "items": [
+          {
+            "ja": "分別シュート列",
+            "en": "segregated recycling chutes"
+          },
+          {
+            "ja": "サービスドローン軌道",
+            "en": "service drone tracks"
+          },
+          {
+            "ja": "設備管バンド",
+            "en": "utility pipe bands"
+          },
+          {
+            "ja": "保守ハッチ列",
+            "en": "maintenance hatch lines"
+          },
+          {
+            "ja": "ガラスろ過柱",
+            "en": "glass filtration columns"
+          },
+          {
+            "ja": "監視パイロン",
+            "en": "status-monitor pylons"
+          },
+          {
+            "ja": "メッシュ作業通路",
+            "en": "service catwalk mesh"
+          },
+          {
+            "ja": "ポンプ室表示線",
+            "en": "pump-room indicator lines"
+          },
+          {
+            "ja": "工具アームドック",
+            "en": "tool-arm docks"
+          },
+          {
+            "ja": "ドローン巣スロット",
+            "en": "drone nest slots"
+          },
+          {
+            "ja": "修繕ガントリレール",
+            "en": "repair gantry rails"
+          },
+          {
+            "ja": "発送信号帯",
+            "en": "dispatch signal strips"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fantasy_castle_royal_collection",
+    "title": "🏰 城・王都・宮殿特化コレクション",
+    "subtitle": "王城外観、城門前、王都大通り、宮殿広間、謁見空間まで、王道ファンタジーの都市権力側をまとめて使いやすくした特化コレクション",
+    "complete": [
+      {
+        "group": "👑 王城・宮殿中枢",
+        "items": [
+          {
+            "id": "fantasy_throne_hall_goldlight",
+            "ja": "金の反射が天井へ伸びる王宮大広間",
+            "links": {
+              "base": [
+                "royal palace grand hall",
+                "fantasy throne hall"
+              ],
+              "customize": [
+                "regal ceremonial scale",
+                "warm gold torch glow",
+                "high fantasy authority"
+              ],
+              "settings": [
+                "vaulted palace ceiling",
+                "banner-lined columns",
+                "polished marble floor",
+                "far throne dais"
+              ]
+            }
+          },
+          {
+            "id": "fantasy_palace_corridor_twilight",
+            "ja": "夕光が長く流れる王宮回廊",
+            "links": {
+              "base": [
+                "palace corridor",
+                "royal interior passage"
+              ],
+              "customize": [
+                "twilight palace hush",
+                "soft stained-glass spill",
+                "quiet noble elegance"
+              ],
+              "settings": [
+                "long colonnade rhythm",
+                "arched window light",
+                "runner carpet axis",
+                "torch bracket shadows"
+              ]
+            }
+          },
+          {
+            "id": "fantasy_ballroom_crystal_night",
+            "ja": "水晶灯が星のように瞬く夜の宮廷広間",
+            "links": {
+              "base": [
+                "fantasy ballroom",
+                "royal reception chamber"
+              ],
+              "customize": [
+                "ceremonial night luxury",
+                "crystal-light shimmer",
+                "noble gathering atmosphere"
+              ],
+              "settings": [
+                "giant crystal chandelier",
+                "mirrorlike polished floor",
+                "curtain-framed balconies",
+                "moonlit tall windows"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🏯 城門前・王都街区",
+        "items": [
+          {
+            "id": "fantasy_castle_gate_plaza_day",
+            "ja": "衛兵と旗影が伸びる王城門前の石畳広場",
+            "links": {
+              "base": [
+                "castle gate stone plaza",
+                "royal castle exterior"
+              ],
+              "customize": [
+                "clear heroic daylight",
+                "broad medieval-fantasy scale",
+                "formal civic order"
+              ],
+              "settings": [
+                "drawbridge approach",
+                "banner-topped battlements",
+                "guard post silhouettes",
+                "radiating stone pavement"
+              ]
+            }
+          },
+          {
+            "id": "fantasy_royal_capital_avenue_noon",
+            "ja": "噴水と商旗が並ぶ異世界王都の大通り",
+            "links": {
+              "base": [
+                "otherworld royal capital avenue",
+                "fantasy capital boulevard"
+              ],
+              "customize": [
+                "bright kingdom bustle",
+                "storybook capital openness",
+                "orderly market traffic"
+              ],
+              "settings": [
+                "central fountain axis",
+                "guild banners overhead",
+                "white-stone facades",
+                "distant castle silhouette"
+              ]
+            }
+          },
+          {
+            "id": "fantasy_rampart_overlook_sunset",
+            "ja": "夕焼けに城壁線が沈む王都外縁の見晴らし回廊",
+            "links": {
+              "base": [
+                "castle rampart overlook",
+                "royal wall terrace"
+              ],
+              "customize": [
+                "heroic sunset atmosphere",
+                "windy high-wall openness",
+                "quiet kingdom grandeur"
+              ],
+              "settings": [
+                "stone parapet rhythm",
+                "long wall shadows",
+                "flag streamers in wind",
+                "capital roofs below"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🌃 王都夜景・貴族街",
+        "items": [
+          {
+            "id": "fantasy_noble_district_lantern_night",
+            "ja": "灯籠と石壁が青夜に浮く王都貴族街",
+            "links": {
+              "base": [
+                "noble district at night",
+                "fantasy capital side street"
+              ],
+              "customize": [
+                "quiet aristocratic night",
+                "lantern-lit stone texture",
+                "refined fantasy stillness"
+              ],
+              "settings": [
+                "wrought-iron lantern rows",
+                "arched townhouse facades",
+                "wet cobblestone glow",
+                "balcony flower shadows"
+              ]
+            }
+          },
+          {
+            "id": "fantasy_palace_balcony_moon",
+            "ja": "月光が王宮バルコニーを白く切る高所外廊",
+            "links": {
+              "base": [
+                "palace balcony",
+                "moonlit royal terrace"
+              ],
+              "customize": [
+                "cool moonlit nobility",
+                "high-elevation quiet",
+                "nightcourt elegance"
+              ],
+              "settings": [
+                "arched balcony openings",
+                "moon-washed stone rail",
+                "capital skyline below",
+                "curtain movement at doorway"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "base": [
+      {
+        "group": "🏰 建築核",
+        "items": [
+          {
+            "ja": "王城外観",
+            "en": "royal castle exterior"
+          },
+          {
+            "ja": "王宮大広間",
+            "en": "royal palace grand hall"
+          },
+          {
+            "ja": "王宮回廊",
+            "en": "palace corridor"
+          },
+          {
+            "ja": "城門前石畳広場",
+            "en": "castle gate stone plaza"
+          },
+          {
+            "ja": "王都大通り",
+            "en": "otherworld royal capital avenue"
+          },
+          {
+            "ja": "城壁見晴らし",
+            "en": "castle rampart overlook"
+          }
+        ]
+      },
+      {
+        "group": "🏙 王都・街区",
+        "items": [
+          {
+            "ja": "貴族街の路地",
+            "en": "noble district at night"
+          },
+          {
+            "ja": "王都屋根群",
+            "en": "capital rooftops"
+          },
+          {
+            "ja": "宮廷広間",
+            "en": "fantasy ballroom"
+          },
+          {
+            "ja": "宮殿バルコニー",
+            "en": "palace balcony"
+          }
+        ]
+      }
+    ],
+    "customize": [
+      {
+        "group": "✨ 権威・豪華さ",
+        "items": [
+          {
+            "ja": "王権の荘厳さ",
+            "en": "regal ceremonial scale"
+          },
+          {
+            "ja": "英雄的な昼光",
+            "en": "clear heroic daylight"
+          },
+          {
+            "ja": "貴族的な静けさ",
+            "en": "quiet noble elegance"
+          },
+          {
+            "ja": "宮廷の夜の豪奢",
+            "en": "ceremonial night luxury"
+          },
+          {
+            "ja": "高貴な月夜感",
+            "en": "cool moonlit nobility"
+          }
+        ]
+      },
+      {
+        "group": "🌇 時間・空気",
+        "items": [
+          {
+            "ja": "夕刻の宮廷の静寂",
+            "en": "twilight palace hush"
+          },
+          {
+            "ja": "王都の明るい賑わい",
+            "en": "bright kingdom bustle"
+          },
+          {
+            "ja": "城壁上の風感",
+            "en": "windy high-wall openness"
+          },
+          {
+            "ja": "灯籠夜のしっとり感",
+            "en": "lantern-lit stone texture"
+          }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "group": "🧱 建築ディテール",
+        "items": [
+          {
+            "ja": "旗付き胸壁",
+            "en": "banner-topped battlements"
+          },
+          {
+            "ja": "大理石床",
+            "en": "polished marble floor"
+          },
+          {
+            "ja": "長い列柱回廊",
+            "en": "long colonnade rhythm"
+          },
+          {
+            "ja": "水晶灯",
+            "en": "giant crystal chandelier"
+          },
+          {
+            "ja": "放射石畳",
+            "en": "radiating stone pavement"
+          },
+          {
+            "ja": "風に流れる旗帯",
+            "en": "flag streamers in wind"
+          },
+          {
+            "ja": "濡れた石畳の反射",
+            "en": "wet cobblestone glow"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fantasy_temple_ruins_collection",
+    "title": "⛩ 神殿・祭壇・遺跡特化コレクション",
+    "subtitle": "神殿回廊、月祭壇、封印遺跡、地下石廊下、水晶祭壇まで、祈りと封印と崩壊をまとめて扱える神秘遺構特化コレクション",
+    "complete": [
+      {
+        "group": "🕯 神殿・祭壇中心部",
+        "items": [
+          {
+            "id": "fantasy_temple_colonnade_morning",
+            "ja": "朝霧が差す神殿列柱回廊",
+            "links": {
+              "base": [
+                "temple colonnade",
+                "ancient sacred hall"
+              ],
+              "customize": [
+                "holy morning hush",
+                "soft sacred mist",
+                "reverent stone stillness"
+              ],
+              "settings": [
+                "tall worn columns",
+                "open roof light shaft",
+                "mossy step edges",
+                "prayer-banner remnants"
+              ]
+            }
+          },
+          {
+            "id": "fantasy_moon_altar_night_silver",
+            "ja": "銀光が水晶へ落ちる月の祭壇",
+            "links": {
+              "base": [
+                "moon altar",
+                "crystal altar"
+              ],
+              "customize": [
+                "silver ritual light",
+                "cool nocturnal sanctity",
+                "mystic quiet"
+              ],
+              "settings": [
+                "circular altar platform",
+                "moonbeam shaft",
+                "floating crystal dust",
+                "engraved floor rings"
+              ]
+            }
+          },
+          {
+            "id": "fantasy_summoning_gate_plaza_glow",
+            "ja": "魔力の輪が足元に広がる召喚門の広場",
+            "links": {
+              "base": [
+                "summoning gate plaza",
+                "portal chamber"
+              ],
+              "customize": [
+                "charged magical pressure",
+                "ritual-circle luminosity",
+                "otherworld threshold tension"
+              ],
+              "settings": [
+                "standing stone gate frame",
+                "runic floor circle",
+                "mist at ground level",
+                "light leak from portal seam"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🪨 封印遺跡・地下構造",
+        "items": [
+          {
+            "id": "fantasy_sealed_ruin_entrance_vines",
+            "ja": "蔦と石碑が塞ぐ封印遺跡の入口",
+            "links": {
+              "base": [
+                "sealed ruin entrance",
+                "ancient ruin exterior"
+              ],
+              "customize": [
+                "forgotten ruin silence",
+                "ageworn sacred dread",
+                "moss-covered stone weight"
+              ],
+              "settings": [
+                "broken seal markers",
+                "vine-wrapped archway",
+                "half-buried steps",
+                "weathered guardian statues"
+              ]
+            }
+          },
+          {
+            "id": "fantasy_underground_ruin_corridor_blue",
+            "ja": "青い燐光が奥へ滲む地下遺跡の石廊下",
+            "links": {
+              "base": [
+                "underground ruin corridor",
+                "ancient dungeon passage"
+              ],
+              "customize": [
+                "cold subterranean echo",
+                "sealed-depth atmosphere",
+                "faint blue ruin glow"
+              ],
+              "settings": [
+                "repeating stone arches",
+                "cracked floor slabs",
+                "wall relief carvings",
+                "dripping ceiling moisture"
+              ]
+            }
+          },
+          {
+            "id": "fantasy_collapsed_sanctum_rubble",
+            "ja": "崩れた祭祀室に光が差す封鎖崩れ区画",
+            "links": {
+              "base": [
+                "collapsed sanctum",
+                "ruined temple interior"
+              ],
+              "customize": [
+                "post-collapse silence",
+                "sacred ruin desolation",
+                "dust-filled light shafts"
+              ],
+              "settings": [
+                "fallen stone blocks",
+                "broken idol fragments",
+                "open ceiling breach",
+                "tilted altar remnants"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "💎 水晶・精霊祭場",
+        "items": [
+          {
+            "id": "fantasy_crystal_sanctum_glow",
+            "ja": "水晶柱が薄く脈動する精霊祭場",
+            "links": {
+              "base": [
+                "crystal sanctum",
+                "spirit shrine interior"
+              ],
+              "customize": [
+                "ethereal crystal resonance",
+                "soft sacred radiance",
+                "clean mystical air"
+              ],
+              "settings": [
+                "clustered crystal pillars",
+                "reflective mineral floor",
+                "floating pollen lights",
+                "shrine ring pathway"
+              ]
+            }
+          },
+          {
+            "id": "fantasy_spirit_tree_garden_dawn",
+            "ja": "精霊樹の根元へ光が集まる夜明けの祭庭",
+            "links": {
+              "base": [
+                "spirit tree garden",
+                "sacred grove"
+              ],
+              "customize": [
+                "dawn ritual calm",
+                "living-nature sanctity",
+                "soft green luminescence"
+              ],
+              "settings": [
+                "massive sacred tree trunk",
+                "stone offering circle",
+                "floating firefly lights",
+                "dew-bright root paths"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "base": [
+      {
+        "group": "⛩ 聖域核",
+        "items": [
+          {
+            "ja": "神殿回廊",
+            "en": "temple colonnade"
+          },
+          {
+            "ja": "月の祭壇",
+            "en": "moon altar"
+          },
+          {
+            "ja": "水晶祭壇",
+            "en": "crystal altar"
+          },
+          {
+            "ja": "召喚門の広場",
+            "en": "summoning gate plaza"
+          },
+          {
+            "ja": "精霊樹の庭",
+            "en": "spirit tree garden"
+          }
+        ]
+      },
+      {
+        "group": "🪨 遺跡・地下",
+        "items": [
+          {
+            "ja": "封印遺跡の入口",
+            "en": "sealed ruin entrance"
+          },
+          {
+            "ja": "地下遺跡の石廊下",
+            "en": "underground ruin corridor"
+          },
+          {
+            "ja": "崩れた祭祀室",
+            "en": "collapsed sanctum"
+          },
+          {
+            "ja": "古代ダンジョン通路",
+            "en": "ancient dungeon passage"
+          }
+        ]
+      }
+    ],
+    "customize": [
+      {
+        "group": "✨ 神秘・祈り",
+        "items": [
+          {
+            "ja": "神聖な朝霧",
+            "en": "holy morning hush"
+          },
+          {
+            "ja": "銀の儀式光",
+            "en": "silver ritual light"
+          },
+          {
+            "ja": "神秘の静寂",
+            "en": "mystic quiet"
+          },
+          {
+            "ja": "召喚圧の高まり",
+            "en": "charged magical pressure"
+          },
+          {
+            "ja": "精霊共鳴感",
+            "en": "ethereal crystal resonance"
+          }
+        ]
+      },
+      {
+        "group": "🌫 封印・崩壊",
+        "items": [
+          {
+            "ja": "忘れられた遺跡の静けさ",
+            "en": "forgotten ruin silence"
+          },
+          {
+            "ja": "古い封印の重さ",
+            "en": "ageworn sacred dread"
+          },
+          {
+            "ja": "地下の冷たい反響",
+            "en": "cold subterranean echo"
+          },
+          {
+            "ja": "崩壊後の沈黙",
+            "en": "post-collapse silence"
+          }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "group": "🧱 聖域ディテール",
+        "items": [
+          {
+            "ja": "摩耗した高柱",
+            "en": "tall worn columns"
+          },
+          {
+            "ja": "月光の光条",
+            "en": "moonbeam shaft"
+          },
+          {
+            "ja": "刻印床円",
+            "en": "engraved floor rings"
+          },
+          {
+            "ja": "蔦に巻かれたアーチ",
+            "en": "vine-wrapped archway"
+          },
+          {
+            "ja": "半埋没階段",
+            "en": "half-buried steps"
+          },
+          {
+            "ja": "壁面浮彫",
+            "en": "wall relief carvings"
+          },
+          {
+            "ja": "砕けた偶像片",
+            "en": "broken idol fragments"
+          },
+          {
+            "ja": "浮遊花粉光",
+            "en": "floating pollen lights"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fantasy_forest_fae_spirit_collection",
+    "title": "🌲 森・妖精・精霊特化コレクション",
+    "subtitle": "妖精の森、精霊樹の聖域、月下の蛍光森、霧の境界林、水辺の精霊域まで、自然寄りファンタジーをまとめて扱える森系特化コレクション",
+    "complete": [
+      {
+        "group": "🧚 妖精の森・木漏れ日",
+        "items": [
+          {
+            "id": "fae_glade_sunlit_blossoms",
+            "ja": "花弁と木漏れ日が揺れる妖精の花庭",
+            "links": {
+              "base": [
+                "fae flower glade",
+                "fairy grove"
+              ],
+              "customize": [
+                "gentle fairy presence",
+                "sun-dappled forest glow",
+                "soft enchanted warmth"
+              ],
+              "settings": [
+                "flower-petal drift",
+                "small stone circle",
+                "luminous pollen trails",
+                "arched root canopy"
+              ]
+            }
+          },
+          {
+            "id": "forest_path_fairy_lanterns",
+            "ja": "淡い灯花が連なる聖なる森の小径",
+            "links": {
+              "base": [
+                "sacred forest path",
+                "enchanted forest trail"
+              ],
+              "customize": [
+                "quiet woodland invitation",
+                "fresh green stillness",
+                "fairy-lit path rhythm"
+              ],
+              "settings": [
+                "fairy lantern blossoms",
+                "mossy stepping stones",
+                "mist between trunks",
+                "vine-hung branches"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🌳 精霊樹・聖域・水辺",
+        "items": [
+          {
+            "id": "spirit_tree_sanctuary_dawn",
+            "ja": "根光が静かに広がる精霊樹の聖域",
+            "links": {
+              "base": [
+                "spirit tree garden",
+                "sacred grove sanctuary"
+              ],
+              "customize": [
+                "ancient spirit resonance",
+                "sacred woodland stillness",
+                "cool dawn woodland breath"
+              ],
+              "settings": [
+                "giant exposed roots",
+                "soft root-light veins",
+                "shallow spring reflections",
+                "standing stone markers"
+              ]
+            }
+          },
+          {
+            "id": "woodland_spring_spirit_evening",
+            "ja": "精霊光が水面へ集まる森の聖泉",
+            "links": {
+              "base": [
+                "sacred woodland spring",
+                "spirit-touched forest waterside"
+              ],
+              "customize": [
+                "silver water reverence",
+                "calm spirit gathering",
+                "holy spring hush"
+              ],
+              "settings": [
+                "clear spring basin",
+                "rippled moon reflection",
+                "reed-shadow edges",
+                "floating spirit motes"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🌙 月下・蛍光・夜森",
+        "items": [
+          {
+            "id": "moonlit_fairy_forest_silver",
+            "ja": "銀の月光が梢を切る月下の妖精森",
+            "links": {
+              "base": [
+                "moonlit fairy forest",
+                "misty fae woodland"
+              ],
+              "customize": [
+                "moonlit fae hush",
+                "silver moon canopy",
+                "glowing night-forest silence"
+              ],
+              "settings": [
+                "silver leaf shimmer",
+                "night mist layers",
+                "firefly arcs",
+                "hidden brook gleam"
+              ]
+            }
+          },
+          {
+            "id": "bioluminescent_forest_night",
+            "ja": "蛍光茸と粒光が漂う深夜の発光森",
+            "links": {
+              "base": [
+                "bioluminescent mushroom forest",
+                "ancient spirit forest"
+              ],
+              "customize": [
+                "luminous pollen drift",
+                "deep-night magical saturation",
+                "otherworld woodland depth"
+              ],
+              "settings": [
+                "bioluminescent mushrooms",
+                "floating pollen lights",
+                "dark moss floor",
+                "twisted old trunks"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🌫 霧森・境界・古森",
+        "items": [
+          {
+            "id": "ancient_spirit_forest_mist",
+            "ja": "白霧の向こうへ古木が消える精霊の古森",
+            "links": {
+              "base": [
+                "ancient spirit forest",
+                "misty fae woodland"
+              ],
+              "customize": [
+                "twilight mist boundary",
+                "old-growth sacred depth",
+                "quiet unknown threshold"
+              ],
+              "settings": [
+                "mist between trunks",
+                "fallen branch silhouettes",
+                "lichen stones",
+                "far-off glow pockets"
+              ]
+            }
+          },
+          {
+            "id": "mossy_spirit_root_glade",
+            "ja": "苔と根脈が広がる精霊樹根の隠れ庭",
+            "links": {
+              "base": [
+                "mossy spirit-root glade",
+                "enchanted forest trail"
+              ],
+              "customize": [
+                "earthy hidden sanctum",
+                "soft green dampness",
+                "root-bound mystery"
+              ],
+              "settings": [
+                "arched root canopy",
+                "mossy stepping stones",
+                "vine-hung branches",
+                "dripping leaf edges"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "base": [
+      {
+        "group": "🌲 森・林床",
+        "items": [
+          {
+            "ja": "妖精の森",
+            "en": "fairy grove"
+          },
+          {
+            "ja": "妖精の花庭",
+            "en": "fae flower glade"
+          },
+          {
+            "ja": "聖なる森の小径",
+            "en": "sacred forest path"
+          },
+          {
+            "ja": "魔法の森道",
+            "en": "enchanted forest trail"
+          },
+          {
+            "ja": "精霊の古森",
+            "en": "ancient spirit forest"
+          },
+          {
+            "ja": "霧に沈む妖精の森",
+            "en": "misty fae woodland"
+          },
+          {
+            "ja": "苔むす精霊樹の根庭",
+            "en": "mossy spirit-root glade"
+          }
+        ]
+      },
+      {
+        "group": "🌳 聖域・水辺・樹域",
+        "items": [
+          {
+            "ja": "精霊樹の庭",
+            "en": "spirit tree garden"
+          },
+          {
+            "ja": "森の聖域",
+            "en": "sacred grove sanctuary"
+          },
+          {
+            "ja": "森の聖泉",
+            "en": "sacred woodland spring"
+          },
+          {
+            "ja": "精霊が集う森の水辺",
+            "en": "spirit-touched forest waterside"
+          },
+          {
+            "ja": "月光の妖精森",
+            "en": "moonlit fairy forest"
+          },
+          {
+            "ja": "蛍光茸の夜森",
+            "en": "bioluminescent mushroom forest"
+          }
+        ]
+      }
+    ],
+    "customize": [
+      {
+        "group": "✨ 妖精・精霊の気配",
+        "items": [
+          {
+            "ja": "やわらかな妖精感",
+            "en": "gentle fairy presence"
+          },
+          {
+            "ja": "光粉の漂い",
+            "en": "luminous pollen drift"
+          },
+          {
+            "ja": "古い精霊共鳴",
+            "en": "ancient spirit resonance"
+          },
+          {
+            "ja": "聖なる森の静けさ",
+            "en": "sacred woodland stillness"
+          },
+          {
+            "ja": "月下の妖精静寂",
+            "en": "moonlit fae hush"
+          },
+          {
+            "ja": "精霊が集う落ち着き",
+            "en": "calm spirit gathering"
+          }
+        ]
+      },
+      {
+        "group": "🌫 時間・霧・光",
+        "items": [
+          {
+            "ja": "木漏れ日の森光",
+            "en": "sun-dappled forest glow"
+          },
+          {
+            "ja": "朝の森気",
+            "en": "cool dawn woodland breath"
+          },
+          {
+            "ja": "薄暮の霧境界",
+            "en": "twilight mist boundary"
+          },
+          {
+            "ja": "銀の月冠",
+            "en": "silver moon canopy"
+          },
+          {
+            "ja": "夜森の発光静寂",
+            "en": "glowing night-forest silence"
+          },
+          {
+            "ja": "深夜の魔力濃度",
+            "en": "deep-night magical saturation"
+          },
+          {
+            "ja": "森道へ誘う灯り",
+            "en": "fairy-lit path rhythm"
+          },
+          {
+            "ja": "隠れ聖域の湿り",
+            "en": "soft green dampness"
+          }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "group": "🧱 森・聖域ディテール",
+        "items": [
+          {
+            "ja": "巨根の露出",
+            "en": "giant exposed roots"
+          },
+          {
+            "ja": "根脈の淡光",
+            "en": "soft root-light veins"
+          },
+          {
+            "ja": "花弁の漂い",
+            "en": "flower-petal drift"
+          },
+          {
+            "ja": "小さな石環",
+            "en": "small stone circle"
+          },
+          {
+            "ja": "発光花灯",
+            "en": "fairy lantern blossoms"
+          },
+          {
+            "ja": "苔むす飛び石",
+            "en": "mossy stepping stones"
+          },
+          {
+            "ja": "幹間の霧層",
+            "en": "mist between trunks"
+          },
+          {
+            "ja": "蔓垂れの枝",
+            "en": "vine-hung branches"
+          },
+          {
+            "ja": "浅い泉の反射",
+            "en": "shallow spring reflections"
+          },
+          {
+            "ja": "立石の標",
+            "en": "standing stone markers"
+          },
+          {
+            "ja": "霊光粒子",
+            "en": "floating spirit motes"
+          },
+          {
+            "ja": "銀葉のきらめき",
+            "en": "silver leaf shimmer"
+          },
+          {
+            "ja": "蛍の弧",
+            "en": "firefly arcs"
+          },
+          {
+            "ja": "隠れ沢の光",
+            "en": "hidden brook gleam"
+          },
+          {
+            "ja": "蛍光茸",
+            "en": "bioluminescent mushrooms"
+          },
+          {
+            "ja": "浮遊花粉光",
+            "en": "floating pollen lights"
+          },
+          {
+            "ja": "ねじれた古木",
+            "en": "twisted old trunks"
+          },
+          {
+            "ja": "朽枝の影",
+            "en": "fallen branch silhouettes"
+          },
+          {
+            "ja": "地衣石",
+            "en": "lichen stones"
+          },
+          {
+            "ja": "遠い灯り溜まり",
+            "en": "far-off glow pockets"
+          },
+          {
+            "ja": "葉先の滴り",
+            "en": "dripping leaf edges"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fantasy_dungeon_seal_collection",
+    "title": "🗝 ダンジョン・地下迷宮・封印施設特化コレクション",
+    "subtitle": "地下迷宮の石廊下、封鎖扉の回廊、古代封印室、崩壊した地下神殿路、深部祭壇やボス前広間まで、探索と封印と深層感をまとめて扱える地下系ファンタジー特化コレクション",
+    "complete": [
+      {
+        "group": "🚪 入口・探索導線",
+        "items": [
+          {
+            "id": "dungeon_entry_stairs_torch",
+            "ja": "松明の先へ石階段が沈むダンジョン入口",
+            "links": {
+              "base": [
+                "dungeon entrance stone stairs",
+                "dungeon threshold hall"
+              ],
+              "customize": [
+                "adventure-entry tension",
+                "descending underground pull",
+                "torchlit ruin anticipation"
+              ],
+              "settings": [
+                "worn descent steps",
+                "torch brackets",
+                "cold stone arch",
+                "dusty threshold air"
+              ]
+            }
+          },
+          {
+            "id": "sealed_gate_entry_corridor",
+            "ja": "封鎖扉の影が奥へ伸びる封印施設の導入回廊",
+            "links": {
+              "base": [
+                "sealed gate corridor",
+                "sealed facility ring corridor"
+              ],
+              "customize": [
+                "forbidden-entry pressure",
+                "sealed-depth unease",
+                "ritual lockdown stillness"
+              ],
+              "settings": [
+                "ringed seal door",
+                "warning sigils",
+                "chain anchor grooves",
+                "echoing side alcoves"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🧱 地下迷宮・石廊",
+        "items": [
+          {
+            "id": "labyrinth_corridor_long_perspective",
+            "ja": "柱影と罠筋が連なる地下迷宮の長廊下",
+            "links": {
+              "base": [
+                "underground labyrinth corridor",
+                "trap-lined stone corridor"
+              ],
+              "customize": [
+                "maze-depth repetition",
+                "old stone oppression",
+                "exploration rhythm"
+              ],
+              "settings": [
+                "pillar shadow rows",
+                "pressure-plate seams",
+                "cracked floor joints",
+                "distant torch dots"
+              ]
+            }
+          },
+          {
+            "id": "collapsed_under_temple_passage",
+            "ja": "崩れた天井と石片が積もる地下神殿路",
+            "links": {
+              "base": [
+                "collapsed under-temple passage",
+                "barred subterranean sector"
+              ],
+              "customize": [
+                "collapse aftermath tension",
+                "dusty ruin hush",
+                "obstructed-route suspense"
+              ],
+              "settings": [
+                "fallen ceiling slabs",
+                "broken statue fragments",
+                "narrow bypass path",
+                "hanging chain shadows"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🔒 封印施設・拘束区画",
+        "items": [
+          {
+            "id": "ancient_sealing_chamber_blue_core",
+            "ja": "青い封光が脈打つ古代封印室",
+            "links": {
+              "base": [
+                "ancient sealing chamber",
+                "seal-core chamber"
+              ],
+              "customize": [
+                "ritual containment pressure",
+                "cold sacred machinery",
+                "sealed-power resonance"
+              ],
+              "settings": [
+                "glowing seal rings",
+                "binding chains",
+                "inscribed floor circle",
+                "sealed crystal core"
+              ]
+            }
+          },
+          {
+            "id": "subterranean_chain_bridge_hall",
+            "ja": "深い奈落を鎖橋が渡る地下拘束ホール",
+            "links": {
+              "base": [
+                "subterranean chain-bridge hall",
+                "seal-guard abyss hall"
+              ],
+              "customize": [
+                "abyss-crossing dread",
+                "guarded-depth severity",
+                "metal-on-stone tension"
+              ],
+              "settings": [
+                "suspended chain bridge",
+                "abyssal pit below",
+                "watch alcoves",
+                "massive lock pylons"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "👁 深部・祭壇・ボス前",
+        "items": [
+          {
+            "id": "deep_altar_chamber_ritual",
+            "ja": "紋環と供物影が残る深部の祭壇間",
+            "links": {
+              "base": [
+                "deep altar chamber",
+                "underworld ritual hall"
+              ],
+              "customize": [
+                "deep-core ritual stillness",
+                "sacred dread",
+                "boss-room anticipation"
+              ],
+              "settings": [
+                "ritual dais",
+                "offering shadows",
+                "floor rune rings",
+                "high vaulted darkness"
+              ]
+            }
+          },
+          {
+            "id": "boss_antechamber_massive_gate",
+            "ja": "巨大扉の前で空気が止まる深層ボス前広間",
+            "links": {
+              "base": [
+                "deep boss antechamber",
+                "boss-gate hall"
+              ],
+              "customize": [
+                "pre-battle silence",
+                "massive-door pressure",
+                "final-depth atmosphere"
+              ],
+              "settings": [
+                "gigantic sealed gate",
+                "cracked heraldic relief",
+                "waiting brazier light",
+                "broad stone forecourt"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "base": [
+      {
+        "group": "🚪 入口・導入区画",
+        "items": [
+          {
+            "ja": "ダンジョン入口の石階段",
+            "en": "dungeon entrance stone stairs"
+          },
+          {
+            "ja": "ダンジョン前室",
+            "en": "dungeon threshold hall"
+          },
+          {
+            "ja": "封鎖門の回廊",
+            "en": "sealed gate corridor"
+          },
+          {
+            "ja": "封印施設の環状通路",
+            "en": "sealed facility ring corridor"
+          }
+        ]
+      },
+      {
+        "group": "🧱 迷宮・地下通路",
+        "items": [
+          {
+            "ja": "地下迷宮の長廊下",
+            "en": "underground labyrinth corridor"
+          },
+          {
+            "ja": "罠仕掛けの石回廊",
+            "en": "trap-lined stone corridor"
+          },
+          {
+            "ja": "崩れかけた地下神殿路",
+            "en": "collapsed under-temple passage"
+          },
+          {
+            "ja": "封鎖扉のある地下区画",
+            "en": "barred subterranean sector"
+          }
+        ]
+      },
+      {
+        "group": "🔒 封印・深部施設",
+        "items": [
+          {
+            "ja": "古代封印室",
+            "en": "ancient sealing chamber"
+          },
+          {
+            "ja": "封印核の間",
+            "en": "seal-core chamber"
+          },
+          {
+            "ja": "地下の鎖橋ホール",
+            "en": "subterranean chain-bridge hall"
+          },
+          {
+            "ja": "封印守護の奈落ホール",
+            "en": "seal-guard abyss hall"
+          },
+          {
+            "ja": "深部の祭壇間",
+            "en": "deep altar chamber"
+          },
+          {
+            "ja": "地下儀式ホール",
+            "en": "underworld ritual hall"
+          },
+          {
+            "ja": "深層ボス前広間",
+            "en": "deep boss antechamber"
+          },
+          {
+            "ja": "ボス扉前ホール",
+            "en": "boss-gate hall"
+          }
+        ]
+      }
+    ],
+    "customize": [
+      {
+        "group": "🧭 探索・迷宮感",
+        "items": [
+          {
+            "ja": "冒険導入の緊張",
+            "en": "adventure-entry tension"
+          },
+          {
+            "ja": "地下へ引き込む感覚",
+            "en": "descending underground pull"
+          },
+          {
+            "ja": "松明遺跡の予感",
+            "en": "torchlit ruin anticipation"
+          },
+          {
+            "ja": "迷宮の反復圧",
+            "en": "maze-depth repetition"
+          },
+          {
+            "ja": "古石の圧迫感",
+            "en": "old stone oppression"
+          },
+          {
+            "ja": "探索導線の律動",
+            "en": "exploration rhythm"
+          },
+          {
+            "ja": "崩落後の緊張",
+            "en": "collapse aftermath tension"
+          },
+          {
+            "ja": "進路閉塞の不穏",
+            "en": "obstructed-route suspense"
+          }
+        ]
+      },
+      {
+        "group": "🔒 封印・深層圧",
+        "items": [
+          {
+            "ja": "禁足侵入の圧",
+            "en": "forbidden-entry pressure"
+          },
+          {
+            "ja": "封印深部の不安",
+            "en": "sealed-depth unease"
+          },
+          {
+            "ja": "儀式封鎖の静止",
+            "en": "ritual lockdown stillness"
+          },
+          {
+            "ja": "封印圧の共鳴",
+            "en": "sealed-power resonance"
+          },
+          {
+            "ja": "奈落横断の恐れ",
+            "en": "abyss-crossing dread"
+          },
+          {
+            "ja": "守護深層の峻厳",
+            "en": "guarded-depth severity"
+          },
+          {
+            "ja": "深核儀式の静寂",
+            "en": "deep-core ritual stillness"
+          },
+          {
+            "ja": "聖なる不吉",
+            "en": "sacred dread"
+          },
+          {
+            "ja": "ボス前の予兆",
+            "en": "boss-room anticipation"
+          },
+          {
+            "ja": "最深部の気配",
+            "en": "final-depth atmosphere"
+          },
+          {
+            "ja": "巨大扉の威圧",
+            "en": "massive-door pressure"
+          },
+          {
+            "ja": "開戦前の静けさ",
+            "en": "pre-battle silence"
+          }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "group": "🧱 地下・封印ディテール",
+        "items": [
+          {
+            "ja": "摩耗した下り階段",
+            "en": "worn descent steps"
+          },
+          {
+            "ja": "松明金具",
+            "en": "torch brackets"
+          },
+          {
+            "ja": "冷えた石アーチ",
+            "en": "cold stone arch"
+          },
+          {
+            "ja": "埃の閾気",
+            "en": "dusty threshold air"
+          },
+          {
+            "ja": "環状封印扉",
+            "en": "ringed seal door"
+          },
+          {
+            "ja": "警告刻印",
+            "en": "warning sigils"
+          },
+          {
+            "ja": "鎖固定溝",
+            "en": "chain anchor grooves"
+          },
+          {
+            "ja": "反響する側室",
+            "en": "echoing side alcoves"
+          },
+          {
+            "ja": "柱影の列",
+            "en": "pillar shadow rows"
+          },
+          {
+            "ja": "感圧板の継ぎ目",
+            "en": "pressure-plate seams"
+          },
+          {
+            "ja": "床石の亀裂",
+            "en": "cracked floor joints"
+          },
+          {
+            "ja": "遠い松明点",
+            "en": "distant torch dots"
+          },
+          {
+            "ja": "落ちた天井石",
+            "en": "fallen ceiling slabs"
+          },
+          {
+            "ja": "砕けた像片",
+            "en": "broken statue fragments"
+          },
+          {
+            "ja": "脇を抜ける細道",
+            "en": "narrow bypass path"
+          },
+          {
+            "ja": "垂れ鎖の影",
+            "en": "hanging chain shadows"
+          },
+          {
+            "ja": "発光封印環",
+            "en": "glowing seal rings"
+          },
+          {
+            "ja": "拘束鎖",
+            "en": "binding chains"
+          },
+          {
+            "ja": "刻印床円",
+            "en": "inscribed floor circle"
+          },
+          {
+            "ja": "封印水晶核",
+            "en": "sealed crystal core"
+          },
+          {
+            "ja": "吊り鎖橋",
+            "en": "suspended chain bridge"
+          },
+          {
+            "ja": "奈落穴",
+            "en": "abyssal pit below"
+          },
+          {
+            "ja": "監視小間",
+            "en": "watch alcoves"
+          },
+          {
+            "ja": "巨大錠柱",
+            "en": "massive lock pylons"
+          },
+          {
+            "ja": "儀式台",
+            "en": "ritual dais"
+          },
+          {
+            "ja": "供物の影",
+            "en": "offering shadows"
+          },
+          {
+            "ja": "床ルーン環",
+            "en": "floor rune rings"
+          },
+          {
+            "ja": "高天井の闇",
+            "en": "high vaulted darkness"
+          },
+          {
+            "ja": "巨大封鎖扉",
+            "en": "gigantic sealed gate"
+          },
+          {
+            "ja": "紋章浮彫の亀裂",
+            "en": "cracked heraldic relief"
+          },
+          {
+            "ja": "待機篝火",
+            "en": "waiting brazier light"
+          },
+          {
+            "ja": "広い石前庭",
+            "en": "broad stone forecourt"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fantasy_demonlord_evil_otherworld_collection",
+    "title": "👹 魔王城・邪悪拠点・禍々しい異界特化コレクション",
+    "subtitle": "魔王城外観、邪城玉座、邪教祭壇、黒霧回廊、血月の異界平原、奈落門の断崖まで、禍々しさと支配気配と異界圧をまとめて扱える暗黒ファンタジー特化コレクション",
+    "complete": [
+      {
+        "group": "👑 魔王城・玉座中枢",
+        "items": [
+          {
+            "id": "fantasy_demoncastle_throne_bloodmoon",
+            "ja": "血月の赤が玉座に滲む魔王城の謁見間",
+            "links": {
+              "base": [
+                "dark throne hall",
+                "ominous audience chamber"
+              ],
+              "customize": [
+                "blood-moon tyranny",
+                "oppressive evil grandeur",
+                "ominous court stillness"
+              ],
+              "settings": [
+                "jagged throne silhouette",
+                "black stone steps",
+                "crimson backlight haze",
+                "banner-like shadow drapes"
+              ]
+            }
+          },
+          {
+            "id": "fantasy_demoncastle_gate_storm",
+            "ja": "雷雲を背に黒い門影が立つ魔王城正門前",
+            "links": {
+              "base": [
+                "demon lord castle exterior",
+                "cursed castle gate plaza"
+              ],
+              "customize": [
+                "storm-front menace",
+                "fortress-scale dread",
+                "dark-fantasy authority"
+              ],
+              "settings": [
+                "spiked battlement silhouette",
+                "wind-torn black banners",
+                "volcanic stone forecourt",
+                "far thundercloud wall"
+              ]
+            }
+          },
+          {
+            "id": "fantasy_cursed_throne_tower_night",
+            "ja": "黒霧の高みに孤立する呪われた玉座塔",
+            "links": {
+              "base": [
+                "cursed throne tower",
+                "demon lord castle exterior"
+              ],
+              "customize": [
+                "isolated evil sovereignty",
+                "high-altitude curse atmosphere",
+                "cold tyrant silence"
+              ],
+              "settings": [
+                "needle-like tower crown",
+                "ringing void wind",
+                "sheer abyss below",
+                "faint crimson window slits"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🕯 邪教祭儀・禁忌拠点",
+        "items": [
+          {
+            "id": "fantasy_profane_ritual_sanctuary_glow",
+            "ja": "紫黒の燐光が床紋を這う邪教祭壇室",
+            "links": {
+              "base": [
+                "profane ritual sanctuary",
+                "dark ritual chamber"
+              ],
+              "customize": [
+                "forbidden rite pressure",
+                "violet-black occult glow",
+                "heretical sanctity"
+              ],
+              "settings": [
+                "runic altar rings",
+                "hanging chains in shadow",
+                "smoke-fed braziers",
+                "stained sacrificial stone"
+              ]
+            }
+          },
+          {
+            "id": "fantasy_blackmist_outer_corridor_vigil",
+            "ja": "見張り火だけが揺れる黒霧の外廊",
+            "links": {
+              "base": [
+                "black-mist outer corridor",
+                "fortress outer walkway"
+              ],
+              "customize": [
+                "watchful cult silence",
+                "wind-blown outer darkness",
+                "suspicious fortress tension"
+              ],
+              "settings": [
+                "open parapet gaps",
+                "torch ember trails",
+                "wet black flag cloth",
+                "fog-filled drop beyond rail"
+              ]
+            }
+          },
+          {
+            "id": "fantasy_abyss_gate_cliff_rite",
+            "ja": "奈落門の脈動が断崖を照らす禁忌の召喚場",
+            "links": {
+              "base": [
+                "abyss gate cliff",
+                "rift-scarred otherworld corridor"
+              ],
+              "customize": [
+                "abyssal threshold tension",
+                "summoning-danger atmosphere",
+                "wind-lashed occult severity"
+              ],
+              "settings": [
+                "split cliff altar",
+                "gate-seam light leak",
+                "falling ash trails",
+                "broken chain pylons"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🌋 禍々しい異界・境界地帯",
+        "items": [
+          {
+            "id": "fantasy_bloodmoon_plain_wastes",
+            "ja": "血月の下で地脈が赤く脈打つ異界平原",
+            "links": {
+              "base": [
+                "blood-moon otherworld plain",
+                "blighted otherworld field"
+              ],
+              "customize": [
+                "apocalyptic red-night atmosphere",
+                "otherworld desolation",
+                "malignant horizon pressure"
+              ],
+              "settings": [
+                "cracked glowing fissures",
+                "dead-grass wave bands",
+                "tilted monolith silhouettes",
+                "low red cloud ceiling"
+              ]
+            }
+          },
+          {
+            "id": "fantasy_rift_corridor_voidwind",
+            "ja": "裂け目風が回廊を舐める禍穴のある異界通路",
+            "links": {
+              "base": [
+                "rift-scarred otherworld corridor",
+                "otherworld stone causeway"
+              ],
+              "customize": [
+                "voidwind unease",
+                "fractured reality atmosphere",
+                "warped passage pressure"
+              ],
+              "settings": [
+                "torn-space seam",
+                "broken arch repetition",
+                "dark gravel drift",
+                "distant echoing moan"
+              ]
+            }
+          },
+          {
+            "id": "fantasy_corrupt_audience_voidhall",
+            "ja": "赤黒い靄が奥へ沈む禍々しい謁見の間",
+            "links": {
+              "base": [
+                "ominous audience chamber",
+                "dark throne hall"
+              ],
+              "customize": [
+                "corrupted court atmosphere",
+                "smoldering evil hush",
+                "heavy dark-fantasy pressure"
+              ],
+              "settings": [
+                "sunken dais edge",
+                "charred pillar rows",
+                "floating black embers",
+                "curtain-like shadow spill"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "base": [
+      {
+        "group": "🏰 魔王城・邪城核",
+        "items": [
+          {
+            "ja": "魔王城外観",
+            "en": "demon lord castle exterior"
+          },
+          {
+            "ja": "邪城の玉座間",
+            "en": "dark throne hall"
+          },
+          {
+            "ja": "黒い城門前の広場",
+            "en": "cursed castle gate plaza"
+          },
+          {
+            "ja": "禍々しい謁見の間",
+            "en": "ominous audience chamber"
+          },
+          {
+            "ja": "呪われた玉座の塔",
+            "en": "cursed throne tower"
+          }
+        ]
+      },
+      {
+        "group": "🕯 邪教・禁忌施設",
+        "items": [
+          {
+            "ja": "邪教祭壇室",
+            "en": "profane ritual sanctuary"
+          },
+          {
+            "ja": "黒霧の外廊",
+            "en": "black-mist outer corridor"
+          },
+          {
+            "ja": "奈落門のある断崖",
+            "en": "abyss gate cliff"
+          }
+        ]
+      },
+      {
+        "group": "🌋 異界・外縁地帯",
+        "items": [
+          {
+            "ja": "血月の異界平原",
+            "en": "blood-moon otherworld plain"
+          },
+          {
+            "ja": "禍穴のある異界回廊",
+            "en": "rift-scarred otherworld corridor"
+          },
+          {
+            "ja": "荒れた異界野",
+            "en": "blighted otherworld field"
+          },
+          {
+            "ja": "異界の石道",
+            "en": "otherworld stone causeway"
+          }
+        ]
+      }
+    ],
+    "customize": [
+      {
+        "group": "👿 支配・禍々しさ",
+        "items": [
+          {
+            "ja": "血月の支配感",
+            "en": "blood-moon tyranny"
+          },
+          {
+            "ja": "圧迫的な邪悪荘厳",
+            "en": "oppressive evil grandeur"
+          },
+          {
+            "ja": "嵐前の威圧感",
+            "en": "storm-front menace"
+          },
+          {
+            "ja": "孤絶した邪王感",
+            "en": "isolated evil sovereignty"
+          },
+          {
+            "ja": "重い暗黒ファンタジー圧",
+            "en": "heavy dark-fantasy pressure"
+          }
+        ]
+      },
+      {
+        "group": "🕯 儀式・異界空気",
+        "items": [
+          {
+            "ja": "禁忌儀式の圧",
+            "en": "forbidden rite pressure"
+          },
+          {
+            "ja": "紫黒の呪光",
+            "en": "violet-black occult glow"
+          },
+          {
+            "ja": "奈落門の閾圧",
+            "en": "abyssal threshold tension"
+          },
+          {
+            "ja": "終末的な赤夜感",
+            "en": "apocalyptic red-night atmosphere"
+          },
+          {
+            "ja": "虚無風の不穏",
+            "en": "voidwind unease"
+          },
+          {
+            "ja": "穢れた宮廷の静けさ",
+            "en": "smoldering evil hush"
+          }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "group": "🧱 邪城・異界ディテール",
+        "items": [
+          {
+            "ja": "棘付き胸壁影",
+            "en": "spiked battlement silhouette"
+          },
+          {
+            "ja": "風裂け黒旗",
+            "en": "wind-torn black banners"
+          },
+          {
+            "ja": "黒石の段床",
+            "en": "black stone steps"
+          },
+          {
+            "ja": "真紅の逆光靄",
+            "en": "crimson backlight haze"
+          },
+          {
+            "ja": "影幕の垂れ布",
+            "en": "banner-like shadow drapes"
+          },
+          {
+            "ja": "床の祭儀輪",
+            "en": "runic altar rings"
+          },
+          {
+            "ja": "影の吊り鎖",
+            "en": "hanging chains in shadow"
+          },
+          {
+            "ja": "煙を食う火鉢",
+            "en": "smoke-fed braziers"
+          },
+          {
+            "ja": "割れた断崖祭壇",
+            "en": "split cliff altar"
+          },
+          {
+            "ja": "奈落門の継ぎ目光",
+            "en": "gate-seam light leak"
+          },
+          {
+            "ja": "灰の落下線",
+            "en": "falling ash trails"
+          },
+          {
+            "ja": "赤く光る地割れ",
+            "en": "cracked glowing fissures"
+          },
+          {
+            "ja": "傾いた巨石碑影",
+            "en": "tilted monolith silhouettes"
+          },
+          {
+            "ja": "裂けた空間縫い目",
+            "en": "torn-space seam"
+          },
+          {
+            "ja": "黒火の残り火",
+            "en": "floating black embers"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dream_unreal_sleep_collection",
+    "title": "💤 夢景・睡眠・非現実特化コレクション",
+    "subtitle": "眠りへ沈む寝室、浮遊回廊、白い虚空、記憶がほどける街路や水面まで、柔らかい非現実から深層睡眠、水底夢層、帰れない夢底駅、赤い悪夢回廊、覚醒失敗室、家庭内へ染み込む悪夢、学校や登校路へ侵食する生活圏悪夢まで扱える夢景特化コレクション",
+    "complete": [
+      {
+        "group": "🛏 眠り・夢の入口",
+        "items": [
+          {
+            "id": "bedroom_to_dream_threshold",
+            "ja": "寝具の輪郭が夢へほどける眠りの入口室",
+            "links": {
+              "base": [
+                "sleep-threshold bedroom",
+                "dream-entry chamber"
+              ],
+              "customize": [
+                "soft unreal stillness",
+                "drowsy light haze",
+                "half-asleep silence"
+              ],
+              "settings": [
+                "floating curtains",
+                "blurred bedside edges",
+                "slow drifting dust",
+                "slightly open dreamlike doorway"
+              ]
+            }
+          },
+          {
+            "id": "floating_dream_corridor_night",
+            "ja": "足元の境界が消える浮遊する夢の回廊",
+            "links": {
+              "base": [
+                "floating dream corridor",
+                "levitating hallway"
+              ],
+              "customize": [
+                "gravity-softened atmosphere",
+                "slow-motion quiet",
+                "weightless unreal calm"
+              ],
+              "settings": [
+                "vanishing corridor edges",
+                "floating floor fragments",
+                "suspended lantern glow",
+                "silent door rhythm"
+              ]
+            }
+          },
+          {
+            "id": "white_void_sleep_sea",
+            "ja": "白い虚空と浅い水面が混ざる眠りの空間",
+            "links": {
+              "base": [
+                "white void dreamscape",
+                "sleep sea plain"
+              ],
+              "customize": [
+                "blank peaceful unreality",
+                "thin reflective quiet",
+                "gentle dream isolation"
+              ],
+              "settings": [
+                "mirror-like shallow water",
+                "no-horizon whiteness",
+                "slow concentric ripples",
+                "distant soft glow"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🌙 記憶・反復・静かな非現実",
+        "items": [
+          {
+            "id": "repeating_memory_street_bluehour",
+            "ja": "同じ街角が静かに反復する青い記憶路",
+            "links": {
+              "base": [
+                "repeating memory street",
+                "dreamlike blue-hour lane"
+              ],
+              "customize": [
+                "echoing recollection mood",
+                "looping spatial calm",
+                "nostalgic unreality"
+              ],
+              "settings": [
+                "repeated sign shapes",
+                "recurring window lights",
+                "slightly shifted street corners",
+                "thin blue mist"
+              ]
+            }
+          },
+          {
+            "id": "underwater_memory_room",
+            "ja": "水の気配だけが満ちる記憶の室内",
+            "links": {
+              "base": [
+                "memory room under shallow water",
+                "submerged dream room"
+              ],
+              "customize": [
+                "muffled dream hush",
+                "watery suspended stillness",
+                "soft melancholic unreality"
+              ],
+              "settings": [
+                "wavering caustic reflections",
+                "slow drifting paper fragments",
+                "soft submerged curtains",
+                "muted glassy light"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "☁ 浮遊・無重力夢景",
+        "items": [
+          {
+            "id": "stair_garden_in_sky",
+            "ja": "階段と庭が空へほどける無重力夢景",
+            "links": {
+              "base": [
+                "floating stair garden",
+                "gravityless sky courtyard"
+              ],
+              "customize": [
+                "airy impossible openness",
+                "light drifting fantasy",
+                "gentle surreal lift"
+              ],
+              "settings": [
+                "detached stair fragments",
+                "hanging garden planters",
+                "open sky void",
+                "petals suspended in air"
+              ]
+            }
+          },
+          {
+            "id": "upside_room_cloud_window",
+            "ja": "天井側へ窓が開く反転気味の雲室",
+            "links": {
+              "base": [
+                "inverted dream room",
+                "cloud-window chamber"
+              ],
+              "customize": [
+                "soft upside-down unease",
+                "ceilingward openness",
+                "strange but calm unreality"
+              ],
+              "settings": [
+                "ceiling-facing window light",
+                "tilted furniture silhouettes",
+                "floating bedding folds",
+                "cloud-shadow interior"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🍬 甘い夢・童話・やさしい非現実",
+        "items": [
+          {
+            "id": "storybook_room_sugar_light",
+            "ja": "絵本の余白みたいな光が満ちる童話の夢室",
+            "links": {
+              "base": [
+                "storybook dream room",
+                "soft fairytale chamber"
+              ],
+              "customize": [
+                "sweet dream softness",
+                "gentle pastel unreality",
+                "kind fantasy hush"
+              ],
+              "settings": [
+                "melting storybook pages",
+                "soft toy silhouettes",
+                "round window glow",
+                "floating ribbon shadows"
+              ]
+            }
+          },
+          {
+            "id": "candy_bedroom_morningdream",
+            "ja": "朝の砂糖光に包まれる甘い夢の寝室",
+            "links": {
+              "base": [
+                "sweet dream bedroom",
+                "pastel sleep chamber"
+              ],
+              "customize": [
+                "cotton-soft dream mood",
+                "sugary morning haze",
+                "safe unreal warmth"
+              ],
+              "settings": [
+                "pillowy bedding folds",
+                "pearl-like dust motes",
+                "soft pink curtain light",
+                "quiet toy-like shadows"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🌌 星海・深眠・夜の夢底",
+        "items": [
+          {
+            "id": "starry_sleep_sea_night",
+            "ja": "星の粒が浅い波に沈む深眠の夜海夢景",
+            "links": {
+              "base": [
+                "starry sleep sea",
+                "deep-sleep night waterscape"
+              ],
+              "customize": [
+                "deep-sleep sinking calm",
+                "cosmic lull quiet",
+                "slow nocturnal unreality"
+              ],
+              "settings": [
+                "stardust bedside glow",
+                "dark mirror ripples",
+                "low moon-silver edge",
+                "floating constellated reflections"
+              ]
+            }
+          },
+          {
+            "id": "moonlit_pillow_void_room",
+            "ja": "月明かりだけが枕元に落ちる深い眠りの虚空室",
+            "links": {
+              "base": [
+                "moonlit void bedroom",
+                "deep-sleep chamber"
+              ],
+              "customize": [
+                "deep-sleep sinking calm",
+                "still midnight dream hush",
+                "soft cosmic loneliness"
+              ],
+              "settings": [
+                "single moonbeam on pillow",
+                "no-horizon darkness",
+                "slow drifting sheet edges",
+                "quiet blue-silver dust"
+              ]
+            }
+          }
+        ]
+      }
+      ,
+      {
+        "group": "🫧 深層睡眠・沈降・水底夢層",
+        "items": [
+          {
+            "id": "abyssal_sleep_shell_blue_pressure",
+            "ja": "水圧みたいな静けさが沈む深層睡眠の青い夢殻",
+            "links": {
+              "base": [
+                "abyssal sleep chamber",
+                "deep-sleep pressure shell"
+              ],
+              "customize": [
+                "pressure-softened silence",
+                "submerged drowsy stillness",
+                "deep-layer dream descent"
+              ],
+              "settings": [
+                "heavy blue dimness",
+                "slow sinking bed silhouette",
+                "soft distant bubble lights",
+                "floorless sleep depth"
+              ]
+            }
+          },
+          {
+            "id": "sunken_bedroom_dream_bottom_room",
+            "ja": "寝台だけがゆっくり沈んでいく水底めいた夢底室",
+            "links": {
+              "base": [
+                "sunken dream bedroom",
+                "dream-bottom sleep room"
+              ],
+              "customize": [
+                "bed-sinking unreality",
+                "quiet submerged melancholy",
+                "deep-layer sleep hush"
+              ],
+              "settings": [
+                "sinking bed frame",
+                "dark waterline shadows",
+                "wavering ceiling reflections",
+                "slow drifting blanket edges"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🚉 夢底駅・帰れない待合・深夜の乗換",
+        "items": [
+          {
+            "id": "after_last_train_dream_station",
+            "ja": "終電後みたいな青さだけ残る夢底の無人駅",
+            "links": {
+              "base": [
+                "dream-bottom station",
+                "after-last-train blue platform"
+              ],
+              "customize": [
+                "late-night unreal loneliness",
+                "deep dream transit hush",
+                "returnless waiting mood"
+              ],
+              "settings": [
+                "empty platform lines",
+                "mute departure board",
+                "distant tunnel glow",
+                "cold bench reflections"
+              ]
+            }
+          },
+          {
+            "id": "nameless_transfer_waiting_room",
+            "ja": "帰る場所の名前だけ消えている深層待合室",
+            "links": {
+              "base": [
+                "nameless transfer waiting room",
+                "deep dream waiting hall"
+              ],
+              "customize": [
+                "home-lost dream melancholy",
+                "nameless transit unease",
+                "silent suspended waiting"
+              ],
+              "settings": [
+                "blank route signage",
+                "wordless station announcements",
+                "forgotten luggage shadow",
+                "doors that never align"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🩸 悪夢・追跡・圧迫非現実",
+        "items": [
+          {
+            "id": "red_nightmare_corridor_hunting_presence",
+            "ja": "獲物を探す気配だけが赤く近づく悪夢回廊",
+            "links": {
+              "base": [
+                "red nightmare corridor",
+                "hunting-presence hallway"
+              ],
+              "customize": [
+                "pursued nightmare tension",
+                "red-alert dream dread",
+                "inescapable sleep terror"
+              ],
+              "settings": [
+                "approaching footstep echoes",
+                "wet red emergency glow",
+                "too-many door seams",
+                "heartbeat-like wall throb"
+              ]
+            }
+          },
+          {
+            "id": "lowering_ceiling_crushing_bedroom",
+            "ja": "天井がじわじわ下がってくる圧迫寝室の悪夢",
+            "links": {
+              "base": [
+                "crushing nightmare bedroom",
+                "lowering-ceiling sleep room"
+              ],
+              "customize": [
+                "crushing enclosed pressure",
+                "breath-shortening nightmare hush",
+                "corner-closing fear"
+              ],
+              "settings": [
+                "lowering ceiling shadow",
+                "warped bedframe silhouette",
+                "closing wall distance",
+                "sheet corners pulled inward"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🚪 覚醒失敗・病棟・戻れない悪夢",
+        "items": [
+          {
+            "id": "nightmare_ward_calllight_loop",
+            "ja": "誰もいないのに呼び出し灯だけ続く悪夢病棟",
+            "links": {
+              "base": [
+                "nightmare ward hall",
+                "call-light loop corridor"
+              ],
+              "customize": [
+                "false-awakening dread",
+                "clinical nightmare chill",
+                "blood-drained silence"
+              ],
+              "settings": [
+                "blinking call lights",
+                "distorted monitor beeps",
+                "empty bed wheels",
+                "pale curtain partitions"
+              ]
+            }
+          },
+          {
+            "id": "false_awakening_same_room_return",
+            "ja": "起きたはずなのに同じ部屋へ戻される覚醒失敗室",
+            "links": {
+              "base": [
+                "false-awakening room",
+                "same-room return chamber"
+              ],
+              "customize": [
+                "waking-failure anxiety",
+                "looped awakening unease",
+                "bedside repetition horror"
+              ],
+              "settings": [
+                "returning doorway loop",
+                "same clock after waking",
+                "half-open curtain reset",
+                "unchanged bedside glass"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🏠 家庭内・寝室・廊下へ染み込む悪夢",
+        "items": [
+          {
+            "id": "nightmare_home_bedroom_familiar_wrongness",
+            "ja": "自室の配置は同じなのに息苦しさだけが増していく家庭内悪夢室",
+            "links": {
+              "base": [
+                "nightmare home interior",
+                "false-safe bedroom"
+              ],
+              "customize": [
+                "domestic nightmare unease",
+                "familiar-space dread",
+                "inescapable home tension"
+              ],
+              "settings": [
+                "slightly open closet darkness",
+                "hallway light under the door",
+                "unchanged family photos",
+                "breathing wall silence"
+              ]
+            }
+          },
+          {
+            "id": "nightmare_home_hallway_red_far_end",
+            "ja": "深夜の廊下の先だけ赤くにじむ帰れない家庭内悪夢",
+            "links": {
+              "base": [
+                "nightmare home hallway",
+                "returnless domestic corridor"
+              ],
+              "customize": [
+                "after-midnight house dread",
+                "familiar-layout wrongness",
+                "predatory household silence"
+              ],
+              "settings": [
+                "red bleed at far hallway",
+                "half-open room doors",
+                "silent staircase shadow",
+                "family home floor creaks"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🏫 学校・教室・登校路へ侵食する悪夢",
+        "items": [
+          {
+            "id": "nightmare_classroom_attendance_loop",
+            "ja": "誰もいないのに出席だけ取られ続ける悪夢教室",
+            "links": {
+              "base": [
+                "nightmare classroom",
+                "attendance-loop classroom"
+              ],
+              "customize": [
+                "school-space dread",
+                "being-called nightmare pressure",
+                "institutional unease"
+              ],
+              "settings": [
+                "chalk dust in empty seats",
+                "attendance call echo",
+                "window glow after dusk",
+                "desks facing nobody"
+              ]
+            }
+          },
+          {
+            "id": "nightmare_school_route_returning_gate",
+            "ja": "通学路の先が同じ校門へ戻され続ける悪夢登校路",
+            "links": {
+              "base": [
+                "nightmare school route",
+                "returning school gate path"
+              ],
+              "customize": [
+                "route-loop anxiety",
+                "familiar-morning wrongness",
+                "cannot-arrive dread"
+              ],
+              "settings": [
+                "same crossing signal again",
+                "repeating school gate silhouette",
+                "wet asphalt dawn sheen",
+                "windless utility pole wires"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "base": [
+      {
+        "group": "💤 夢景ベース",
+        "items": [
+          {
+            "ja": "夢景",
+            "en": "dreamscape"
+          },
+          {
+            "ja": "眠りの入口室",
+            "en": "dream-entry chamber"
+          },
+          {
+            "ja": "浮遊する夢の回廊",
+            "en": "floating dream corridor"
+          },
+          {
+            "ja": "白い虚空",
+            "en": "white void dreamscape"
+          },
+          {
+            "ja": "記憶の街路",
+            "en": "repeating memory street"
+          }
+        ]
+      },
+      {
+        "group": "🌊 夢の派生空間",
+        "items": [
+          {
+            "ja": "水に沈む記憶の室内",
+            "en": "submerged dream room"
+          },
+          {
+            "ja": "無重力の庭",
+            "en": "gravityless sky courtyard"
+          },
+          {
+            "ja": "反転した夢室",
+            "en": "inverted dream room"
+          },
+          {
+            "ja": "星の眠り海",
+            "en": "starry sleep sea"
+          },
+          {
+            "ja": "童話の夢室",
+            "en": "storybook dream room"
+          },
+          {
+            "ja": "深層睡眠の夢殻",
+            "en": "abyssal sleep chamber"
+          },
+          {
+            "ja": "夢底室",
+            "en": "dream-bottom sleep room"
+          },
+          {
+            "ja": "夢底駅",
+            "en": "dream-bottom station"
+          },
+          {
+            "ja": "深層待合室",
+            "en": "deep dream waiting hall"
+          },
+          {
+            "ja": "赤い悪夢回廊",
+            "en": "red nightmare corridor"
+          },
+          {
+            "ja": "圧迫寝室",
+            "en": "crushing nightmare bedroom"
+          },
+          {
+            "ja": "悪夢病棟",
+            "en": "nightmare ward hall"
+          },
+          {
+            "ja": "覚醒失敗室",
+            "en": "false-awakening room"
+          },
+          {
+            "ja": "家庭内悪夢室",
+            "en": "nightmare home interior"
+          },
+          {
+            "ja": "悪夢の家廊下",
+            "en": "nightmare home hallway"
+          },
+          {
+            "ja": "悪夢教室",
+            "en": "nightmare classroom"
+          },
+          {
+            "ja": "悪夢登校路",
+            "en": "nightmare school route"
+          }
+        ]
+      }
+    ],
+    "customize": [
+      {
+        "group": "🌫 夢の空気",
+        "items": [
+          {
+            "ja": "柔らかな非現実感",
+            "en": "soft unreal stillness"
+          },
+          {
+            "ja": "眠気を帯びた光霧",
+            "en": "drowsy light haze"
+          },
+          {
+            "ja": "重力のほどけた静けさ",
+            "en": "gravity-softened atmosphere"
+          },
+          {
+            "ja": "記憶の反復感",
+            "en": "echoing recollection mood"
+          },
+          {
+            "ja": "水に包まれた静けさ",
+            "en": "watery suspended stillness"
+          }
+        ]
+      },
+      {
+        "group": "☁ 浮遊・転位",
+        "items": [
+          {
+            "ja": "無重力の浮遊感",
+            "en": "weightless unreal calm"
+          },
+          {
+            "ja": "空へほどける開放感",
+            "en": "airy impossible openness"
+          },
+          {
+            "ja": "穏やかな上下反転感",
+            "en": "soft upside-down unease"
+          },
+          {
+            "ja": "甘い夢のやわらかさ",
+            "en": "sweet dream softness"
+          },
+          {
+            "ja": "深眠の静かな沈み",
+            "en": "deep-sleep sinking calm"
+          },
+          {
+            "ja": "深層へ沈む静けさ",
+            "en": "deep-layer dream descent"
+          },
+          {
+            "ja": "水圧めいた眠気",
+            "en": "pressure-softened silence"
+          },
+          {
+            "ja": "帰れない待機感",
+            "en": "returnless waiting mood"
+          },
+          {
+            "ja": "家の名を失った寂しさ",
+            "en": "home-lost dream melancholy"
+          },
+          {
+            "ja": "追われる悪夢感",
+            "en": "pursued nightmare tension"
+          },
+          {
+            "ja": "圧迫される閉塞感",
+            "en": "crushing enclosed pressure"
+          },
+          {
+            "ja": "覚醒失敗の不安",
+            "en": "false-awakening dread"
+          },
+          {
+            "ja": "眠りから逃げられない恐怖",
+            "en": "inescapable sleep terror"
+          },
+          {
+            "ja": "血の気の引く静けさ",
+            "en": "blood-drained silence"
+          },
+          {
+            "ja": "家庭内の既視感恐怖",
+            "en": "domestic déjà-vu dread"
+          },
+          {
+            "ja": "生活圏への悪夢侵食",
+            "en": "nightmare seep into daily space"
+          },
+          {
+            "ja": "学校空間の圧迫感",
+            "en": "school-space pressure"
+          },
+          {
+            "ja": "登校ループの不安",
+            "en": "school-route loop anxiety"
+          },
+          {
+            "ja": "呼ばれ続ける焦燥",
+            "en": "unceasingly called dread"
+          }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "group": "🧱 夢景ディテール",
+        "items": [
+          {
+            "ja": "浮遊するカーテン",
+            "en": "floating curtains"
+          },
+          {
+            "ja": "曖昧な寝具の輪郭",
+            "en": "blurred bedside edges"
+          },
+          {
+            "ja": "水面の同心波",
+            "en": "slow concentric ripples"
+          },
+          {
+            "ja": "反復する窓灯り",
+            "en": "recurring window lights"
+          },
+          {
+            "ja": "宙に浮く花弁",
+            "en": "petals suspended in air"
+          },
+          {
+            "ja": "天井側の窓光",
+            "en": "ceiling-facing window light"
+          },
+          {
+            "ja": "枕元の星屑光",
+            "en": "stardust bedside glow"
+          },
+          {
+            "ja": "溶ける絵本の紙片",
+            "en": "melting storybook pages"
+          },
+          {
+            "ja": "床のない睡眠深度",
+            "en": "floorless sleep depth"
+          },
+          {
+            "ja": "沈む寝台の輪郭",
+            "en": "sinking bed frame"
+          },
+          {
+            "ja": "無言の発車表示板",
+            "en": "mute departure board"
+          },
+          {
+            "ja": "言葉にならない駅アナウンス",
+            "en": "wordless station announcements"
+          },
+          {
+            "ja": "近づく足音の反響",
+            "en": "approaching footstep echoes"
+          },
+          {
+            "ja": "濡れた赤色灯",
+            "en": "wet red emergency glow"
+          },
+          {
+            "ja": "下がる天井影",
+            "en": "lowering ceiling shadow"
+          },
+          {
+            "ja": "点滅する呼び出し灯",
+            "en": "blinking call lights"
+          },
+          {
+            "ja": "何度も戻る扉",
+            "en": "returning doorway loop"
+          },
+          {
+            "ja": "歪んだモニター音",
+            "en": "distorted monitor beeps"
+          },
+          {
+            "ja": "半開きの押し入れの闇",
+            "en": "slightly open closet darkness"
+          },
+          {
+            "ja": "ドア下から漏れる廊下灯",
+            "en": "hallway light under the door"
+          },
+          {
+            "ja": "変わらない家族写真",
+            "en": "unchanged family photos"
+          },
+          {
+            "ja": "家鳴りみたいな床きしみ",
+            "en": "family home floor creaks"
+          },
+          {
+            "ja": "誰も座っていない机列",
+            "en": "desks facing nobody"
+          },
+          {
+            "ja": "夕方以降の教室窓光",
+            "en": "window glow after dusk"
+          },
+          {
+            "ja": "反復する校門影",
+            "en": "repeating school gate silhouette"
+          },
+          {
+            "ja": "何度も同じ横断信号",
+            "en": "same crossing signal again"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "distortion_inversion_structure_collection",
+    "title": "🌀 歪み・反転・異常構造特化コレクション",
+    "subtitle": "鏡の回廊、上下反転通路、曲がる建築、折れた遠近、終わらない階段まで、構造そのものが正常から外れた空間異常をまとめて扱える異常構造特化コレクション",
+    "complete": [
+      {
+        "group": "🪞 反転・鏡像空間",
+        "items": [
+          {
+            "id": "mirror_hall_double_axis",
+            "ja": "左右も奥行きも鏡写しに増殖する回廊",
+            "links": {
+              "base": [
+                "mirror corridor",
+                "infinite reflected hall"
+              ],
+              "customize": [
+                "geometric unease",
+                "duplicated spatial rhythm",
+                "cold reflective abnormality"
+              ],
+              "settings": [
+                "parallel mirrored doors",
+                "repeating light strips",
+                "duplicate shadow lines",
+                "hard glass reflections"
+              ]
+            }
+          },
+          {
+            "id": "mirror_room_false_exit",
+            "ja": "出口の位置だけが信用できない鏡室",
+            "links": {
+              "base": [
+                "mirror room",
+                "false-exit chamber"
+              ],
+              "customize": [
+                "uncertain orientation",
+                "quiet psychological distortion",
+                "glassy wrongness"
+              ],
+              "settings": [
+                "fake doorway reflections",
+                "offset handle positions",
+                "cold polished floor",
+                "split vanishing point"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "↕ 重力崩れ・上下反転",
+        "items": [
+          {
+            "id": "upside_down_corridor_redline",
+            "ja": "床と天井が入れ替わった警戒色の反転通路",
+            "links": {
+              "base": [
+                "upside-down corridor",
+                "gravity inversion hallway"
+              ],
+              "customize": [
+                "gravity-broken tension",
+                "tilted balance anxiety",
+                "sterile abnormal pressure"
+              ],
+              "settings": [
+                "ceiling floor panels",
+                "dangling floor furniture",
+                "wrong-direction hazard lights",
+                "inverted railing lines"
+              ]
+            }
+          },
+          {
+            "id": "endless_inversion_stairwell",
+            "ja": "上も下も曖昧な反転階段井",
+            "links": {
+              "base": [
+                "inversion stairwell",
+                "endless upside-down stairs"
+              ],
+              "customize": [
+                "vertigo-heavy abnormality",
+                "uncertain vertical depth",
+                "architecture-lost orientation"
+              ],
+              "settings": [
+                "folding stair flights",
+                "crossing handrails",
+                "double gravity shadows",
+                "topless bottomless shaft"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "📐 伸縮・歪曲・折れ曲がり",
+        "items": [
+          {
+            "id": "warped_concrete_passage",
+            "ja": "壁面がわずかに波打つ歪曲通路",
+            "links": {
+              "base": [
+                "warped passage",
+                "bent concrete hall"
+              ],
+              "customize": [
+                "architecture-bending discomfort",
+                "subtle impossible perspective",
+                "concrete abnormal calm"
+              ],
+              "settings": [
+                "bowed wall seams",
+                "curved fluorescent strips",
+                "floor grid distortion",
+                "tilted corner joints"
+              ]
+            }
+          },
+          {
+            "id": "folded_room_misaligned_horizon",
+            "ja": "地平線だけが折れた室内空間",
+            "links": {
+              "base": [
+                "folded room",
+                "misaligned horizon chamber"
+              ],
+              "customize": [
+                "bent spatial logic",
+                "slight fisheye unease",
+                "low-volume surreal pressure"
+              ],
+              "settings": [
+                "broken horizon line",
+                "angled window frames",
+                "skewed ceiling beams",
+                "folding wall planes"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "♾ 反復・迷路・終わらない構造",
+        "items": [
+          {
+            "id": "looping_school_hall_repeat_doors",
+            "ja": "同じ扉だけが規則正しく続く反復回廊",
+            "links": {
+              "base": [
+                "loop corridor",
+                "repeating school hall"
+              ],
+              "customize": [
+                "repetition-induced dread",
+                "ordered spatial wrongness",
+                "memory-loop unease"
+              ],
+              "settings": [
+                "identical door intervals",
+                "repeating wall clocks",
+                "copied notice boards",
+                "distance that refuses to close"
+              ]
+            }
+          },
+          {
+            "id": "maze_room_returning_corners",
+            "ja": "曲がっても同じ角へ戻される迷路室群",
+            "links": {
+              "base": [
+                "maze room cluster",
+                "returning-corner labyrinth"
+              ],
+              "customize": [
+                "route-collapse anxiety",
+                "disorientation spiral",
+                "architecture trapping logic"
+              ],
+              "settings": [
+                "same-corner repetition",
+                "duplicated corner signage",
+                "misleading intersection shadows",
+                "corridors folding back"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🧭 回転・捻れ・円環構造",
+        "items": [
+          {
+            "id": "spiral_ring_hall_tilted_lights",
+            "ja": "輪のように巡る照明が傾き続ける螺旋ホール",
+            "links": {
+              "base": [
+                "spiral ring hall",
+                "twisted circular corridor"
+              ],
+              "customize": [
+                "rotational vertigo",
+                "spiraling architectural pressure",
+                "centrifugal unease"
+              ],
+              "settings": [
+                "tilted ring lights",
+                "curving handrails",
+                "continuous circular seams",
+                "centerless spiral floor"
+              ]
+            }
+          },
+          {
+            "id": "twisted_bridge_atrium_offset_axis",
+            "ja": "軸がねじれたまま渡る吹き抜け橋空間",
+            "links": {
+              "base": [
+                "twisted bridge atrium",
+                "offset-axis hall"
+              ],
+              "customize": [
+                "axis-twist discomfort",
+                "balance-breaking openness",
+                "rotated spatial logic"
+              ],
+              "settings": [
+                "twisted bridge span",
+                "offset support frames",
+                "rotated ceiling panels",
+                "misaligned atrium void"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "base": [
+      {
+        "group": "🌀 異常構造ベース",
+        "items": [
+          {
+            "ja": "鏡の回廊",
+            "en": "mirror corridor"
+          },
+          {
+            "ja": "無限反射ホール",
+            "en": "infinite reflected hall"
+          },
+          {
+            "ja": "上下反転通路",
+            "en": "upside-down corridor"
+          },
+          {
+            "ja": "反転階段井",
+            "en": "inversion stairwell"
+          },
+          {
+            "ja": "歪曲通路",
+            "en": "warped passage"
+          },
+          {
+            "ja": "折れた室内空間",
+            "en": "folded room"
+          },
+          {
+            "ja": "反復回廊",
+            "en": "loop corridor"
+          },
+          {
+            "ja": "迷路室群",
+            "en": "maze room cluster"
+          },
+          {
+            "ja": "螺旋リングホール",
+            "en": "spiral ring hall"
+          },
+          {
+            "ja": "ねじれ吹き抜け橋空間",
+            "en": "twisted bridge atrium"
+          }
+        ]
+      }
+    ],
+    "customize": [
+      {
+        "group": "📐 構造の違和感",
+        "items": [
+          {
+            "ja": "幾何学的不安感",
+            "en": "geometric unease"
+          },
+          {
+            "ja": "方向感覚の喪失",
+            "en": "uncertain orientation"
+          },
+          {
+            "ja": "重力崩れの緊張",
+            "en": "gravity-broken tension"
+          },
+          {
+            "ja": "建築が曲がる不快感",
+            "en": "architecture-bending discomfort"
+          },
+          {
+            "ja": "低圧のシュール圧",
+            "en": "low-volume surreal pressure"
+          },
+          {
+            "ja": "反復による恐怖感",
+            "en": "repetition-induced dread"
+          },
+          {
+            "ja": "記憶ループめいた違和感",
+            "en": "memory-loop unease"
+          },
+          {
+            "ja": "旋回性のめまい",
+            "en": "rotational vertigo"
+          },
+          {
+            "ja": "軸ねじれの不快感",
+            "en": "axis-twist discomfort"
+          },
+          {
+            "ja": "経路崩れの不安",
+            "en": "route-collapse anxiety"
+          }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "group": "🧱 異常構造ディテール",
+        "items": [
+          {
+            "ja": "偽の出入口反射",
+            "en": "fake doorway reflections"
+          },
+          {
+            "ja": "二重の消失点",
+            "en": "split vanishing point"
+          },
+          {
+            "ja": "逆向き警戒灯",
+            "en": "wrong-direction hazard lights"
+          },
+          {
+            "ja": "交差する手すり",
+            "en": "crossing handrails"
+          },
+          {
+            "ja": "歪んだ床グリッド",
+            "en": "floor grid distortion"
+          },
+          {
+            "ja": "折れた地平線",
+            "en": "broken horizon line"
+          },
+          {
+            "ja": "同じ間隔の扉列",
+            "en": "identical door intervals"
+          },
+          {
+            "ja": "近づかない距離感",
+            "en": "distance that refuses to close"
+          },
+          {
+            "ja": "傾いたリング照明",
+            "en": "tilted ring lights"
+          },
+          {
+            "ja": "中心のない螺旋床",
+            "en": "centerless spiral floor"
+          },
+          {
+            "ja": "ねじれた橋スパン",
+            "en": "twisted bridge span"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "collapse_terminal_space_collection",
+    "title": "💥 崩壊・終末・破断空間特化コレクション",
+    "subtitle": "崩れた街区、停電施設、焼損通路、灰の広場、破断橋や断線したインフラまで、壊れた後の静けさと危うさをまとめて扱える崩壊空間特化コレクション",
+    "complete": [
+      {
+        "group": "🏙 崩れゆく都市・破断街区",
+        "items": [
+          {
+            "id": "collapsed_city_block_dust",
+            "ja": "粉塵がたなびく破断街区の交差点",
+            "links": {
+              "base": [
+                "collapsed district",
+                "fractured city block"
+              ],
+              "customize": [
+                "post-collapse tension",
+                "dust-laden silence",
+                "broken civic scale"
+              ],
+              "settings": [
+                "split asphalt seams",
+                "leaning traffic lights",
+                "broken glass scatter",
+                "distant dust plumes"
+              ]
+            }
+          },
+          {
+            "id": "broken_overpass_terminal_evening",
+            "ja": "高架が途中で終わる夕暮れの終端地帯",
+            "links": {
+              "base": [
+                "broken overpass zone",
+                "terminal urban edge"
+              ],
+              "customize": [
+                "sudden infrastructural rupture",
+                "long-shadow desolation",
+                "end-of-route melancholy"
+              ],
+              "settings": [
+                "cut bridge span",
+                "hanging sign frames",
+                "windblown road debris",
+                "empty traffic lanes"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🔥 焼損・停電・事故跡",
+        "items": [
+          {
+            "id": "blackout_facility_corridor_alarm",
+            "ja": "非常灯だけが残る停電施設の回廊",
+            "links": {
+              "base": [
+                "blackout facility corridor",
+                "emergency-lit hallway"
+              ],
+              "customize": [
+                "power-loss unease",
+                "alarm-memory stillness",
+                "sterile disaster aftermath"
+              ],
+              "settings": [
+                "red emergency lamps",
+                "darkened ceiling panels",
+                "open maintenance hatches",
+                "cable shadow tangles"
+              ]
+            }
+          },
+          {
+            "id": "burned_passage_char_residue",
+            "ja": "煤と焼け跡が残る事故後の通路",
+            "links": {
+              "base": [
+                "burned passage aftermath",
+                "charred disaster corridor"
+              ],
+              "customize": [
+                "scorched air dryness",
+                "just-past disaster quiet",
+                "heat-ghost aftermath"
+              ],
+              "settings": [
+                "charred wall streaks",
+                "fallen ceiling fragments",
+                "dead sprinkler heads",
+                "ash-smudged floor trails"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🌫 灰・粉塵・静かな終末",
+        "items": [
+          {
+            "id": "ash_plaza_long_silence",
+            "ja": "灰が積もった広場に風だけが通る終末景",
+            "links": {
+              "base": [
+                "ash-covered plaza",
+                "silent terminal square"
+              ],
+              "customize": [
+                "quiet end-state stillness",
+                "powdery ruin atmosphere",
+                "emptied public scale"
+              ],
+              "settings": [
+                "drifting ash ribbons",
+                "abandoned benches",
+                "buried signage bases",
+                "muted sky glow"
+              ]
+            }
+          },
+          {
+            "id": "evacuation_hall_aftermath",
+            "ja": "避難の痕跡だけが残る広い終端ホール",
+            "links": {
+              "base": [
+                "evacuation hall aftermath",
+                "terminal shelter hall"
+              ],
+              "customize": [
+                "post-human absence",
+                "institutional emptiness",
+                "flat terminal quiet"
+              ],
+              "settings": [
+                "discarded guide tape",
+                "empty partition frames",
+                "scattered emergency blankets",
+                "faint PA speaker glow"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🚇 交通・駅・終端インフラ",
+        "items": [
+          {
+            "id": "broken_station_platform_coldwind",
+            "ja": "案内が止まったまま風だけが抜ける破断駅ホーム",
+            "links": {
+              "base": [
+                "broken station platform",
+                "abandoned terminal platform"
+              ],
+              "customize": [
+                "transport rupture chill",
+                "evacuated transit silence",
+                "terminal infrastructure fatigue"
+              ],
+              "settings": [
+                "cracked platform edge",
+                "dead arrival boards",
+                "hanging overhead cable shadows",
+                "cold track dust"
+              ]
+            }
+          },
+          {
+            "id": "collapsed_tunnel_emergency_lights",
+            "ja": "崩落の先が見えない非常灯だけのトンネル",
+            "links": {
+              "base": [
+                "collapsed tunnel",
+                "emergency-lit tunnel ruin"
+              ],
+              "customize": [
+                "transport rupture chill",
+                "dust-choked danger hush",
+                "claustrophobic terminal tension"
+              ],
+              "settings": [
+                "fallen concrete rings",
+                "red guide lamps",
+                "broken maintenance rails",
+                "blocked far end darkness"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🏢 放棄施設・避難跡の公共空間",
+        "items": [
+          {
+            "id": "abandoned_civic_lobby_after_evacuation",
+            "ja": "避難誘導の跡だけが残る放棄公共ロビー",
+            "links": {
+              "base": [
+                "abandoned civic lobby",
+                "evacuation aftermath hall"
+              ],
+              "customize": [
+                "flat evacuation emptiness",
+                "institutional end-state quiet",
+                "public-space desolation"
+              ],
+              "settings": [
+                "discarded guide tape",
+                "vacant reception counters",
+                "rolled emergency shutters",
+                "dusty floor arrows"
+              ]
+            }
+          },
+          {
+            "id": "shelter_gym_after_departure",
+            "ja": "人が去った後の仮設寝具だけ残る避難所空間",
+            "links": {
+              "base": [
+                "shelter gym aftermath",
+                "post-evacuation public hall"
+              ],
+              "customize": [
+                "flat evacuation emptiness",
+                "post-human absence",
+                "institutional fatigue"
+              ],
+              "settings": [
+                "folded partition frames",
+                "abandoned bedding rows",
+                "half-lit public notice boards",
+                "quiet ventilation hum"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "base": [
+      {
+        "group": "💥 崩壊空間ベース",
+        "items": [
+          {
+            "ja": "崩壊した街区",
+            "en": "collapsed district"
+          },
+          {
+            "ja": "破断高架地帯",
+            "en": "broken overpass zone"
+          },
+          {
+            "ja": "停電施設の回廊",
+            "en": "blackout facility corridor"
+          },
+          {
+            "ja": "焼損通路",
+            "en": "burned passage aftermath"
+          },
+          {
+            "ja": "灰に沈む広場",
+            "en": "ash-covered plaza"
+          },
+          {
+            "ja": "終端ホール",
+            "en": "terminal shelter hall"
+          },
+          {
+            "ja": "破断した駅ホーム",
+            "en": "broken station platform"
+          },
+          {
+            "ja": "崩落トンネル",
+            "en": "collapsed tunnel"
+          }
+        ]
+      }
+    ],
+    "customize": [
+      {
+        "group": "🌫 崩壊後の空気",
+        "items": [
+          {
+            "ja": "崩壊後の緊張",
+            "en": "post-collapse tension"
+          },
+          {
+            "ja": "粉塵混じりの静けさ",
+            "en": "dust-laden silence"
+          },
+          {
+            "ja": "停電の不穏さ",
+            "en": "power-loss unease"
+          },
+          {
+            "ja": "焼けた空気の乾き",
+            "en": "scorched air dryness"
+          },
+          {
+            "ja": "終末の静まり",
+            "en": "quiet end-state stillness"
+          },
+          {
+            "ja": "人が消えた空虚さ",
+            "en": "post-human absence"
+          },
+          {
+            "ja": "交通断絶の冷え",
+            "en": "transport rupture chill"
+          },
+          {
+            "ja": "避難後の平たい空虚",
+            "en": "flat evacuation emptiness"
+          }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "group": "🧱 崩壊ディテール",
+        "items": [
+          {
+            "ja": "割れたアスファルト継ぎ目",
+            "en": "split asphalt seams"
+          },
+          {
+            "ja": "傾いた信号機",
+            "en": "leaning traffic lights"
+          },
+          {
+            "ja": "非常灯の赤い残光",
+            "en": "red emergency lamps"
+          },
+          {
+            "ja": "焼けた壁筋",
+            "en": "charred wall streaks"
+          },
+          {
+            "ja": "流れる灰線",
+            "en": "drifting ash ribbons"
+          },
+          {
+            "ja": "放棄された誘導テープ",
+            "en": "discarded guide tape"
+          },
+          {
+            "ja": "割れたホーム縁",
+            "en": "cracked platform edge"
+          },
+          {
+            "ja": "垂れた架線影",
+            "en": "hanging overhead cable shadows"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "forbidden_concept_observation_collection",
+    "title": "👁 観測不能・概念・不穏領域特化コレクション",
+    "subtitle": "視線を感じる回廊、終わらない部屋、禁域祭儀室、測れない黒水面、概念的な白黒空間まで、説明しきれない不穏と観測不能性、深層禁域や判定の深部管理層まで扱える概念異常特化コレクション",
+    "complete": [
+      {
+        "group": "👁 視線・監視・観測される空間",
+        "items": [
+          {
+            "id": "watched_corridor_sensor_unease",
+            "ja": "見られている気配だけが濃い監視回廊",
+            "links": {
+              "base": [
+                "watched corridor",
+                "observation hallway"
+              ],
+              "customize": [
+                "being-watched pressure",
+                "sterile unease",
+                "measured silence"
+              ],
+              "settings": [
+                "unblinking sensor points",
+                "camera-like shadow domes",
+                "thin tracking lights",
+                "repeating inspection doors"
+              ]
+            }
+          },
+          {
+            "id": "silent_observation_room_no_operator",
+            "ja": "操作者のいない観測室がこちらだけを見ている空間",
+            "links": {
+              "base": [
+                "operatorless observation room",
+                "silent monitoring chamber"
+              ],
+              "customize": [
+                "empty supervision mood",
+                "cold analytic pressure",
+                "inhuman attention"
+              ],
+              "settings": [
+                "inactive console rows",
+                "one-way dark glass",
+                "single status LED",
+                "chair silhouettes without owners"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🚪 概念回廊・終わらない部屋",
+        "items": [
+          {
+            "id": "endless_room_white_black",
+            "ja": "白と黒だけで構成された終わらない部屋",
+            "links": {
+              "base": [
+                "endless room",
+                "black-and-white conceptual chamber"
+              ],
+              "customize": [
+                "measurement-impossible calm",
+                "conceptual emptiness",
+                "formalized unease"
+              ],
+              "settings": [
+                "repeating doorframes",
+                "white-black floor divide",
+                "no-source ambient light",
+                "distance-without-scale"
+              ]
+            }
+          },
+          {
+            "id": "concept_stair_hall_null_horizon",
+            "ja": "地平の概念が消えた階段ホール",
+            "links": {
+              "base": [
+                "concept stair hall",
+                "null-horizon chamber"
+              ],
+              "customize": [
+                "scale-loss abstraction",
+                "ordered but wrong architecture",
+                "quiet conceptual distortion"
+              ],
+              "settings": [
+                "stairs to blank planes",
+                "frameless openings",
+                "flat ambient glow",
+                "absent far wall"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "⛧ 禁域・儀式・触れてはいけない場",
+        "items": [
+          {
+            "id": "forbidden_ritual_chamber_ring",
+            "ja": "踏み越えてはいけない輪が刻まれた禁域祭儀室",
+            "links": {
+              "base": [
+                "forbidden ritual chamber",
+                "sealed concept sanctuary"
+              ],
+              "customize": [
+                "forbidden sacred pressure",
+                "untouchable stillness",
+                "ominous ceremonial calm"
+              ],
+              "settings": [
+                "inscribed boundary rings",
+                "hanging dark cloth",
+                "sealed threshold chains",
+                "central unmoving glow"
+              ]
+            }
+          },
+          {
+            "id": "black_water_concept_shore",
+            "ja": "測れない黒水面が広がる概念岸辺",
+            "links": {
+              "base": [
+                "black conceptual waterside",
+                "unknowable shore"
+              ],
+              "customize": [
+                "bottomless quiet",
+                "threshold-of-the-unknown",
+                "cold metaphysical mood"
+              ],
+              "settings": [
+                "lightless water surface",
+                "shoreline without depth cue",
+                "distant monolith shadows",
+                "thin horizon glow"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "📼 記録不能・名称喪失・空白の領域",
+        "items": [
+          {
+            "id": "unnamed_archive_room_blank_labels",
+            "ja": "ラベルだけが空白のまま積まれた記録不能保管室",
+            "links": {
+              "base": [
+                "unnamable archive room",
+                "blank-label storage"
+              ],
+              "customize": [
+                "record-impossible stillness",
+                "administrative dread",
+                "nameless abstraction"
+              ],
+              "settings": [
+                "blank document tabs",
+                "numberless shelves",
+                "erased room plates",
+                "index lights without text"
+              ]
+            }
+          },
+          {
+            "id": "white_registry_hall_missing_names",
+            "ja": "名前という概念だけが抜け落ちた白い登録ホール",
+            "links": {
+              "base": [
+                "white registry hall",
+                "name-missing chamber"
+              ],
+              "customize": [
+                "identity-loss abstraction",
+                "clean bureaucratic unease",
+                "conceptual vacancy"
+              ],
+              "settings": [
+                "blank registration desks",
+                "empty display panels",
+                "tagless lockers",
+                "soft humming white light"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🫥 不在痕・存在欠落・応答しない空間",
+        "items": [
+          {
+            "id": "absence_lounge_warm_seat",
+            "ja": "誰かがいた温度だけ残る不在ラウンジ",
+            "links": {
+              "base": [
+                "absence lounge",
+                "recently-left waiting room"
+              ],
+              "customize": [
+                "presence-loss melancholy",
+                "near-human emptiness",
+                "quiet residual unease"
+              ],
+              "settings": [
+                "warm chair impression",
+                "half-drunk cup shadow",
+                "soft ventilation noise",
+                "door that never opens"
+              ]
+            }
+          },
+          {
+            "id": "silent_response_chamber_dead_intercom",
+            "ja": "呼びかけても返らない応答室が沈黙する空間",
+            "links": {
+              "base": [
+                "silent response chamber",
+                "dead intercom room"
+              ],
+              "customize": [
+                "one-sided communication dread",
+                "institutional wrong silence",
+                "waiting-for-answer pressure"
+              ],
+              "settings": [
+                "dead intercom panels",
+                "inactive speaker grills",
+                "steady standby lamp",
+                "chairs facing empty glass"
+              ]
+            }
+          }
+        ]
+      }
+      ,
+      {
+        "group": "🕳 深層禁域・測定不能核",
+        "items": [
+          {
+            "id": "unmeasurable_core_pit",
+            "ja": "計測だけが破綻する測定不能核の深部井",
+            "links": {
+              "base": [
+                "unmeasurable core pit",
+                "forbidden deep core shaft"
+              ],
+              "customize": [
+                "instrument-failure dread",
+                "core-depth metaphysical pressure",
+                "measurement-collapse silence"
+              ],
+              "settings": [
+                "broken depth gauges",
+                "lights stopping before the center",
+                "sealed concentric rails",
+                "core without readable bottom"
+              ]
+            }
+          },
+          {
+            "id": "pre_meaning_forbidden_hall",
+            "ja": "意味が届く手前で止まる深層禁域ホール",
+            "links": {
+              "base": [
+                "pre-meaning forbidden hall",
+                "concept-threshold chamber"
+              ],
+              "customize": [
+                "semantic failure unease",
+                "forbidden-depth stillness",
+                "unreadable central pressure"
+              ],
+              "settings": [
+                "unfinished warning text",
+                "censored signage panels",
+                "dark central aperture",
+                "halted guide lights"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "📡 審査・判定・応答断絶の深部管理層",
+        "items": [
+          {
+            "id": "silent_judgment_corridor",
+            "ja": "何かに判定され続ける無言の審査回廊",
+            "links": {
+              "base": [
+                "silent judgment corridor",
+                "deep assessment hall"
+              ],
+              "customize": [
+                "constant evaluation pressure",
+                "bureaucratic metaphysical dread",
+                "inhuman administrative calm"
+              ],
+              "settings": [
+                "status lamps cycling silently",
+                "inspection gates without operators",
+                "queue lines without people",
+                "approval screens with no words"
+              ]
+            }
+          },
+          {
+            "id": "response_cutoff_management_floor",
+            "ja": "呼び出しだけが繰り返される応答断絶の深部管理層",
+            "links": {
+              "base": [
+                "response-cutoff control layer",
+                "recursive call management floor"
+              ],
+              "customize": [
+                "one-sided summons anxiety",
+                "remote surveillance emptiness",
+                "administrative deep isolation"
+              ],
+              "settings": [
+                "repeating call chimes",
+                "speaker cones with no reply",
+                "slow blinking room numbers",
+                "locked service shutters"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "base": [
+      {
+        "group": "👁 不穏・概念ベース",
+        "items": [
+          {
+            "ja": "観測される回廊",
+            "en": "watched corridor"
+          },
+          {
+            "ja": "無人の観測室",
+            "en": "operatorless observation room"
+          },
+          {
+            "ja": "終わらない部屋",
+            "en": "endless room"
+          },
+          {
+            "ja": "概念階段ホール",
+            "en": "concept stair hall"
+          },
+          {
+            "ja": "禁域祭儀室",
+            "en": "forbidden ritual chamber"
+          },
+          {
+            "ja": "測れない黒水面",
+            "en": "black conceptual waterside"
+          },
+          {
+            "ja": "記録不能保管室",
+            "en": "unnamable archive room"
+          },
+          {
+            "ja": "白い登録ホール",
+            "en": "white registry hall"
+          },
+          {
+            "ja": "不在ラウンジ",
+            "en": "absence lounge"
+          },
+          {
+            "ja": "応答しない部屋",
+            "en": "silent response chamber"
+          },
+          {
+            "ja": "測定不能核井",
+            "en": "unmeasurable core pit"
+          },
+          {
+            "ja": "深層禁域ホール",
+            "en": "concept-threshold chamber"
+          },
+          {
+            "ja": "無言の審査回廊",
+            "en": "silent judgment corridor"
+          },
+          {
+            "ja": "応答断絶管理層",
+            "en": "response-cutoff control layer"
+          }
+        ]
+      }
+    ],
+    "customize": [
+      {
+        "group": "🌫 不穏の圧",
+        "items": [
+          {
+            "ja": "見られている圧",
+            "en": "being-watched pressure"
+          },
+          {
+            "ja": "無機質な解析圧",
+            "en": "cold analytic pressure"
+          },
+          {
+            "ja": "概念的な空虚さ",
+            "en": "conceptual emptiness"
+          },
+          {
+            "ja": "尺度喪失の抽象感",
+            "en": "scale-loss abstraction"
+          },
+          {
+            "ja": "触れてはいけない静けさ",
+            "en": "untouchable stillness"
+          },
+          {
+            "ja": "底なしの静寂",
+            "en": "bottomless quiet"
+          },
+          {
+            "ja": "記録不能の静けさ",
+            "en": "record-impossible stillness"
+          },
+          {
+            "ja": "名づけ不能の抽象感",
+            "en": "nameless abstraction"
+          },
+          {
+            "ja": "存在喪失のもの悲しさ",
+            "en": "presence-loss melancholy"
+          },
+          {
+            "ja": "返答待ちの圧",
+            "en": "waiting-for-answer pressure"
+          },
+          {
+            "ja": "近くに人がいない空虚さ",
+            "en": "near-human emptiness"
+          },
+          {
+            "ja": "計測破綻の圧",
+            "en": "instrument-failure dread"
+          },
+          {
+            "ja": "意味崩れの不安",
+            "en": "semantic failure unease"
+          },
+          {
+            "ja": "常時判定される圧",
+            "en": "constant evaluation pressure"
+          },
+          {
+            "ja": "一方通行の召喚不安",
+            "en": "one-sided summons anxiety"
+          }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "group": "🧱 不穏ディテール",
+        "items": [
+          {
+            "ja": "瞬かない感知点",
+            "en": "unblinking sensor points"
+          },
+          {
+            "ja": "片面の暗い観測ガラス",
+            "en": "one-way dark glass"
+          },
+          {
+            "ja": "反復する扉枠",
+            "en": "repeating doorframes"
+          },
+          {
+            "ja": "光源不明の白黒床",
+            "en": "white-black floor divide"
+          },
+          {
+            "ja": "封じ鎖の閾",
+            "en": "sealed threshold chains"
+          },
+          {
+            "ja": "深度感のない岸辺",
+            "en": "shoreline without depth cue"
+          },
+          {
+            "ja": "文字のないインデックス灯",
+            "en": "index lights without text"
+          },
+          {
+            "ja": "名札のないロッカー列",
+            "en": "tagless lockers"
+          },
+          {
+            "ja": "誰も開けない扉",
+            "en": "door that never opens"
+          },
+          {
+            "ja": "死んだインターホン盤",
+            "en": "dead intercom panels"
+          },
+          {
+            "ja": "空のガラスへ向く椅子列",
+            "en": "chairs facing empty glass"
+          },
+          {
+            "ja": "壊れた深度計列",
+            "en": "broken depth gauges"
+          },
+          {
+            "ja": "途中で切れる警告文",
+            "en": "unfinished warning text"
+          },
+          {
+            "ja": "無人の審査ゲート",
+            "en": "inspection gates without operators"
+          },
+          {
+            "ja": "繰り返す呼び出し音",
+            "en": "repeating call chimes"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "magic_academy_library_collection",
+    "title": "📚 魔法学院・図書館・工房特化コレクション",
+    "subtitle": "魔法学院の中庭、講義室、魔導図書館、錬金工房、研究室まで、学びと製作と魔導知の気配をまとめた学院特化コレクション",
+    "complete": [
+      {
+        "group": "🏫 魔法学院・学習区",
+        "items": [
+          {
+            "id": "magic_academy_courtyard_day",
+            "ja": "魔法灯と白石が映える魔法学院の中庭",
+            "links": {
+              "base": [
+                "magic academy courtyard",
+                "fantasy school quadrangle"
+              ],
+              "customize": [
+                "bright scholastic fantasy",
+                "orderly academy atmosphere",
+                "fresh enchanted air"
+              ],
+              "settings": [
+                "arcaded school walls",
+                "floating lamp orbs",
+                "flag-lined balconies",
+                "central fountain basin"
+              ]
+            }
+          },
+          {
+            "id": "magic_lecture_hall_spelllight",
+            "ja": "魔法光が黒板代わりに浮かぶ講義室",
+            "links": {
+              "base": [
+                "magic lecture hall",
+                "arcane classroom"
+              ],
+              "customize": [
+                "focused learning stillness",
+                "soft spell-glow illumination",
+                "old academy dignity"
+              ],
+              "settings": [
+                "tiered wooden desks",
+                "floating chalk glyphs",
+                "arched classroom windows",
+                "teacher dais"
+              ]
+            }
+          },
+          {
+            "id": "student_dorm_corridor_evening_magic",
+            "ja": "寮の灯りが連なる夕方の学院回廊",
+            "links": {
+              "base": [
+                "academy dorm corridor",
+                "student residence wing"
+              ],
+              "customize": [
+                "after-class quiet",
+                "warm dormitory glow",
+                "lived-in academy calm"
+              ],
+              "settings": [
+                "repeating dorm doors",
+                "soft wand-light sconces",
+                "noticeboard niche",
+                "long runner carpet"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "📖 魔導図書館・知の空間",
+        "items": [
+          {
+            "id": "arcane_library_tower_night",
+            "ja": "魔導書の光が塔まで積み上がる夜の魔導図書館",
+            "links": {
+              "base": [
+                "arcane library",
+                "wizard archive hall"
+              ],
+              "customize": [
+                "quiet forbidden knowledge",
+                "dusty magical glow",
+                "towering book density"
+              ],
+              "settings": [
+                "spiral shelf towers",
+                "floating reading lanterns",
+                "rolling ladder bridges",
+                "sealed tome display"
+              ]
+            }
+          },
+          {
+            "id": "observatory_reading_room_bluehour",
+            "ja": "青い薄暮が観測窓に滲む学院閲覧室",
+            "links": {
+              "base": [
+                "observatory reading room",
+                "academy study chamber"
+              ],
+              "customize": [
+                "blue-hour study quiet",
+                "careful page-turn calm",
+                "astral scholarship feel"
+              ],
+              "settings": [
+                "arched observatory windows",
+                "constellation chart tables",
+                "ink bottle clusters",
+                "star globe stand"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "⚗ 錬金工房・製作区",
+        "items": [
+          {
+            "id": "alchemy_workshop_fireglass",
+            "ja": "火鉢とガラス器具が密集する錬金工房",
+            "links": {
+              "base": [
+                "alchemy laboratory",
+                "arcane workshop"
+              ],
+              "customize": [
+                "hands-on magical craft",
+                "warm furnace reflections",
+                "dense workbench clutter"
+              ],
+              "settings": [
+                "glass retort array",
+                "ingredient drawers",
+                "glyph-etched worktable",
+                "hanging herb bundles"
+              ]
+            }
+          },
+          {
+            "id": "enchantment_smith_room_sparks",
+            "ja": "刻印台に火花が走る付与工房",
+            "links": {
+              "base": [
+                "enchantment workshop",
+                "magic craft room"
+              ],
+              "customize": [
+                "focused artisan intensity",
+                "charged spark atmosphere",
+                "metal-and-magic fusion"
+              ],
+              "settings": [
+                "rune engraving bench",
+                "small forge glow",
+                "tool rack shadows",
+                "half-finished artifact stands"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "base": [
+      {
+        "group": "📚 学院・知識",
+        "items": [
+          {
+            "ja": "魔法学院の中庭",
+            "en": "magic academy courtyard"
+          },
+          {
+            "ja": "魔法講義室",
+            "en": "magic lecture hall"
+          },
+          {
+            "ja": "学院寮回廊",
+            "en": "academy dorm corridor"
+          },
+          {
+            "ja": "魔導図書館",
+            "en": "arcane library"
+          },
+          {
+            "ja": "観測閲覧室",
+            "en": "observatory reading room"
+          }
+        ]
+      },
+      {
+        "group": "⚗ 工房・研究",
+        "items": [
+          {
+            "ja": "魔導工房",
+            "en": "arcane workshop"
+          },
+          {
+            "ja": "錬金術研究室",
+            "en": "alchemy laboratory"
+          },
+          {
+            "ja": "付与工房",
+            "en": "enchantment workshop"
+          },
+          {
+            "ja": "魔法工作室",
+            "en": "magic craft room"
+          }
+        ]
+      }
+    ],
+    "customize": [
+      {
+        "group": "✨ 学院空気",
+        "items": [
+          {
+            "ja": "明るい学院感",
+            "en": "bright scholastic fantasy"
+          },
+          {
+            "ja": "学習の静けさ",
+            "en": "focused learning stillness"
+          },
+          {
+            "ja": "放課後の静けさ",
+            "en": "after-class quiet"
+          },
+          {
+            "ja": "禁書めいた知の気配",
+            "en": "quiet forbidden knowledge"
+          },
+          {
+            "ja": "星学の落ち着き",
+            "en": "astral scholarship feel"
+          }
+        ]
+      },
+      {
+        "group": "⚗ 製作熱量",
+        "items": [
+          {
+            "ja": "実作業の魔法工房感",
+            "en": "hands-on magical craft"
+          },
+          {
+            "ja": "炉火反射",
+            "en": "warm furnace reflections"
+          },
+          {
+            "ja": "密な作業台の雑然",
+            "en": "dense workbench clutter"
+          },
+          {
+            "ja": "職人的集中",
+            "en": "focused artisan intensity"
+          },
+          {
+            "ja": "火花を孕んだ空気",
+            "en": "charged spark atmosphere"
+          }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "group": "🧱 学院・工房ディテール",
+        "items": [
+          {
+            "ja": "浮遊灯球",
+            "en": "floating lamp orbs"
+          },
+          {
+            "ja": "学院の回廊壁",
+            "en": "arcaded school walls"
+          },
+          {
+            "ja": "浮遊チョーク文字",
+            "en": "floating chalk glyphs"
+          },
+          {
+            "ja": "らせん書架塔",
+            "en": "spiral shelf towers"
+          },
+          {
+            "ja": "読書灯籠",
+            "en": "floating reading lanterns"
+          },
+          {
+            "ja": "ガラス蒸留器列",
+            "en": "glass retort array"
+          },
+          {
+            "ja": "薬材引き出し",
+            "en": "ingredient drawers"
+          },
+          {
+            "ja": "刻印作業台",
+            "en": "rune engraving bench"
+          },
+          {
+            "ja": "未完成アーティファクト台",
+            "en": "half-finished artifact stands"
+          }
+        ]
+      }
+    ]
+
+  },
+  {
+    "id": "fantasy_moon_vampire_castle_collection",
+    "title": "🌙 血月・三日月・吸血城特化コレクション",
+    "subtitle": "満月・三日月・血月の月相から、ドラキュラ城外観、玉座間、回廊、寝室、宴の間まで、月光と吸血ゴシックの空気をまとめて扱える月夜特化コレクション",
+    "complete": [
+      {
+        "group": "🌕 満月・大きい月・月下夜空",
+        "items": [
+          {
+            "id": "fantasy_fullmoon_vampire_sky",
+            "ja": "巨大な満月が古城の輪郭を白く浮かべる吸血夜空",
+            "links": {
+              "base": [
+                "gigantic full moon sky",
+                "moonlit gothic night sky"
+              ],
+              "customize": [
+                "overwhelming lunar scale",
+                "cold gothic moonlight",
+                "silent nocturnal majesty"
+              ],
+              "settings": [
+                "oversized full moon disk",
+                "silver-rimmed night haze",
+                "tower-edge silhouettes",
+                "deep cobalt night gradient"
+              ]
+            }
+          },
+          {
+            "id": "fantasy_large_moon_castle_overlook",
+            "ja": "大きい月が断崖古城を見下ろす静かな吸血月夜",
+            "links": {
+              "base": [
+                "looming giant moon sky",
+                "cliffside castle beneath a giant moon"
+              ],
+              "customize": [
+                "ominous moon-dominance",
+                "moon-drenched aristocratic dread",
+                "moonlit castle stillness"
+              ],
+              "settings": [
+                "haloed moon edge",
+                "cliffside silhouette",
+                "needle-like tower crowns",
+                "slow drifting cloud bands"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🌙 三日月・細月・刃の月",
+        "items": [
+          {
+            "id": "fantasy_blood_crescent_moon_sky",
+            "ja": "赤い三日月が黒雲を裂いて覗く吸血夜空",
+            "links": {
+              "base": [
+                "blood-red crescent moon sky",
+                "moonlit gothic night sky"
+              ],
+              "customize": [
+                "vampiric night tension",
+                "scarlet moonlit dread",
+                "cold gothic moonlight"
+              ],
+              "settings": [
+                "crimson crescent edge",
+                "ragged black cloud bands",
+                "silver-rimmed night haze",
+                "wind-cut spire silhouettes"
+              ]
+            }
+          },
+          {
+            "id": "fantasy_giant_crescent_moon_sky_overlook",
+            "ja": "大きい三日月が尖塔群を刃のように切り抜く月夜",
+            "links": {
+              "base": [
+                "giant crescent moon sky",
+                "moonlit vampire castle spires"
+              ],
+              "customize": [
+                "crescent-blade moon drama",
+                "spire-silhouette elegance",
+                "icy moonlit gothic atmosphere"
+              ],
+              "settings": [
+                "thin giant crescent arc",
+                "layered spire silhouettes",
+                "moon-facing parapets",
+                "high arched windows"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🩸 血月・赤月・不穏月",
+        "items": [
+          {
+            "id": "fantasy_crimson_fullmoon_vampire_sky",
+            "ja": "赤い満月が霧の古城を不穏に染める血月夜",
+            "links": {
+              "base": [
+                "crimson full moon sky",
+                "dracula castle exterior"
+              ],
+              "customize": [
+                "scarlet moonlit dread",
+                "vampire-castle menace",
+                "ominous red-night grandeur"
+              ],
+              "settings": [
+                "crimson full moon disk",
+                "bat-shadow sky scatter",
+                "mist over dead grass",
+                "black rose garden outlines"
+              ]
+            }
+          },
+          {
+            "id": "fantasy_bloodmoon_castle_forecourt_scene",
+            "ja": "血月を背負った古城前庭に鉄柵と墓標が沈む夜景",
+            "links": {
+              "base": [
+                "blood-moon castle forecourt",
+                "moonlit graveyard"
+              ],
+              "customize": [
+                "graveyard hush",
+                "moonlit mourning atmosphere",
+                "gothic forecourt eeriness"
+              ],
+              "settings": [
+                "wrought-iron fence rows",
+                "tilted gravestones",
+                "crimson back moon",
+                "distant castle mass"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🏰 ドラキュラ城・吸血城外観",
+        "items": [
+          {
+            "id": "fantasy_dracula_castle_crimson_moon",
+            "ja": "赤月を背負って断崖に立つドラキュラ城外観",
+            "links": {
+              "base": [
+                "dracula castle exterior",
+                "cliffside castle beneath a crimson moon"
+              ],
+              "customize": [
+                "gothic fortress grandeur",
+                "vampire-castle menace",
+                "moon-drenched aristocratic dread"
+              ],
+              "settings": [
+                "needle-like tower crowns",
+                "cliff-edge battlements",
+                "crimson back moon",
+                "bat-shadow sky scatter"
+              ]
+            }
+          },
+          {
+            "id": "fantasy_vampire_castle_spires_moonlight",
+            "ja": "大きい三日月に尖塔が刺さる月下の吸血城",
+            "links": {
+              "base": [
+                "moonlit vampire castle spires",
+                "dracula castle exterior"
+              ],
+              "customize": [
+                "spire-silhouette elegance",
+                "noble nocturnal menace",
+                "icy moonlit gothic atmosphere"
+              ],
+              "settings": [
+                "layered spire silhouettes",
+                "high arched windows",
+                "moon-facing parapets",
+                "black rose garden outlines"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "👑 玉座間・謁見の間",
+        "items": [
+          {
+            "id": "fantasy_vampire_throne_hall_moonlit",
+            "ja": "月光が玉座へ落ちる吸血城の謁見の間",
+            "links": {
+              "base": [
+                "vampire castle throne hall",
+                "moonlit audience chamber"
+              ],
+              "customize": [
+                "aristocratic nocturnal authority",
+                "cathedral-like moon shadows",
+                "velvet-draped grandeur"
+              ],
+              "settings": [
+                "raised throne dais",
+                "long velvet curtain shadows",
+                "cold candelabra reflections",
+                "moonlit stained floor"
+              ]
+            }
+          },
+          {
+            "id": "fantasy_crimson_throne_hall_bloodmoon",
+            "ja": "血月の赤が玉座の間をうっすら染める古城中枢",
+            "links": {
+              "base": [
+                "blood-moon throne hall",
+                "vampire castle throne hall"
+              ],
+              "customize": [
+                "scarlet royal dread",
+                "gothic interior power",
+                "moon-drenched aristocratic dread"
+              ],
+              "settings": [
+                "crimson window spill",
+                "black marble floor",
+                "empty throne silhouette",
+                "echoing vaulted ceiling"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🕯 回廊・大階段・窓辺",
+        "items": [
+          {
+            "id": "fantasy_moonlit_stainedglass_corridor",
+            "ja": "月光ステンドグラスが床を染める古城の回廊",
+            "links": {
+              "base": [
+                "moonlit stained-glass castle corridor",
+                "moonlit gothic grand staircase"
+              ],
+              "customize": [
+                "interior gothic stillness",
+                "cathedral-like moon shadows",
+                "aristocratic nocturnal elegance"
+              ],
+              "settings": [
+                "colored moonlight spill",
+                "long velvet curtain shadows",
+                "marble stair edge",
+                "cold candelabra reflections"
+              ]
+            }
+          },
+          {
+            "id": "fantasy_moon_window_grand_stair",
+            "ja": "巨大な月を背負う窓辺へ続く古城の大階段",
+            "links": {
+              "base": [
+                "moonlit gothic grand staircase",
+                "castle moon-window landing"
+              ],
+              "customize": [
+                "staircase procession grandeur",
+                "moon-facing melancholy",
+                "interior gothic stillness"
+              ],
+              "settings": [
+                "arched moon window",
+                "marble stair edge",
+                "long runner shadow",
+                "silver dust in the air"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🛏 寝室・棺室・私室",
+        "items": [
+          {
+            "id": "fantasy_vampire_bedchamber_moonlight",
+            "ja": "大きい月の光が天蓋をかすめる吸血城の寝室",
+            "links": {
+              "base": [
+                "moonlit vampire bedchamber",
+                "canopied gothic bedroom"
+              ],
+              "customize": [
+                "moonlit intimacy of the castle",
+                "velvet-dark bedroom hush",
+                "cold aristocratic privacy"
+              ],
+              "settings": [
+                "canopy curtain folds",
+                "moonlit bed edge",
+                "mirror-frame glint",
+                "half-open balcony drape"
+              ]
+            }
+          },
+          {
+            "id": "fantasy_coffin_private_chamber",
+            "ja": "棺と黒薔薇が静かに置かれた吸血城の私室",
+            "links": {
+              "base": [
+                "coffin private chamber",
+                "moonlit vampire private room"
+              ],
+              "customize": [
+                "funereal elegance",
+                "sealed nocturnal privacy",
+                "vampiric chamber stillness"
+              ],
+              "settings": [
+                "coffin lid highlights",
+                "black rose vase",
+                "candle-smoke veil",
+                "dark lacquer furniture"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🍷 宴の間・晩餐ホール",
+        "items": [
+          {
+            "id": "fantasy_vampire_banquet_hall",
+            "ja": "月光と燭台が長卓を照らす吸血城の宴の間",
+            "links": {
+              "base": [
+                "vampire banquet hall",
+                "moonlit gothic banquet hall"
+              ],
+              "customize": [
+                "forbidden banquet opulence",
+                "aristocratic midnight feast",
+                "gilded gothic decadence"
+              ],
+              "settings": [
+                "long banquet table",
+                "silver goblet rows",
+                "candelabra reflections",
+                "moonlit high windows"
+              ]
+            }
+          },
+          {
+            "id": "fantasy_empty_supper_hall_redmoon",
+            "ja": "血月の窓光だけが残る誰もいない晩餐ホール",
+            "links": {
+              "base": [
+                "blood-moon supper hall",
+                "vampire banquet hall"
+              ],
+              "customize": [
+                "after-feast emptiness",
+                "scarlet silence",
+                "abandoned gothic luxury"
+              ],
+              "settings": [
+                "red window spill",
+                "half-drawn chairs",
+                "cold silverware gleam",
+                "echoing vaulted ceiling"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🪦 月下の墓地・前庭",
+        "items": [
+          {
+            "id": "fantasy_moonlit_graveyard_castleyard",
+            "ja": "墓標と鉄柵の向こうに古城が沈む月下の墓地前庭",
+            "links": {
+              "base": [
+                "moonlit graveyard",
+                "blood-moon castle forecourt"
+              ],
+              "customize": [
+                "graveyard hush",
+                "moonlit mourning atmosphere",
+                "gothic forecourt eeriness"
+              ],
+              "settings": [
+                "wrought-iron fence rows",
+                "tilted gravestones",
+                "mist over dead grass",
+                "distant castle mass"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "base": [
+      {
+        "group": "🌕 月相・夜空",
+        "items": [
+          {
+            "ja": "巨大な満月の夜空",
+            "en": "gigantic full moon sky"
+          },
+          {
+            "ja": "巨大な三日月の夜空",
+            "en": "giant crescent moon sky"
+          },
+          {
+            "ja": "赤い満月の夜空",
+            "en": "crimson full moon sky"
+          },
+          {
+            "ja": "赤い三日月の夜空",
+            "en": "blood-red crescent moon sky"
+          },
+          {
+            "ja": "空を圧する巨大な月",
+            "en": "looming giant moon sky"
+          },
+          {
+            "ja": "月光ゴシック夜空",
+            "en": "moonlit gothic night sky"
+          }
+        ]
+      },
+      {
+        "group": "🏰 吸血城・古城外観",
+        "items": [
+          {
+            "ja": "ドラキュラ城の外観",
+            "en": "dracula castle exterior"
+          },
+          {
+            "ja": "月下の吸血城尖塔",
+            "en": "moonlit vampire castle spires"
+          },
+          {
+            "ja": "赤い月に照らされた古城前庭",
+            "en": "blood-moon castle forecourt"
+          },
+          {
+            "ja": "赤月を背負う断崖の古城",
+            "en": "cliffside castle beneath a crimson moon"
+          },
+          {
+            "ja": "巨大な月を背負う断崖の古城",
+            "en": "cliffside castle beneath a giant moon"
+          }
+        ]
+      },
+      {
+        "group": "👑 吸血城の中枢・内部",
+        "items": [
+          {
+            "ja": "吸血城の玉座間",
+            "en": "vampire castle throne hall"
+          },
+          {
+            "ja": "月光の謁見の間",
+            "en": "moonlit audience chamber"
+          },
+          {
+            "ja": "血月の玉座間",
+            "en": "blood-moon throne hall"
+          },
+          {
+            "ja": "月光ステンドグラスの古城回廊",
+            "en": "moonlit stained-glass castle corridor"
+          },
+          {
+            "ja": "月光が落ちる古城の大階段",
+            "en": "moonlit gothic grand staircase"
+          },
+          {
+            "ja": "月窓へ続く古城の踊り場",
+            "en": "castle moon-window landing"
+          },
+          {
+            "ja": "月下の吸血寝室",
+            "en": "moonlit vampire bedchamber"
+          },
+          {
+            "ja": "天蓋付きのゴシック寝室",
+            "en": "canopied gothic bedroom"
+          },
+          {
+            "ja": "棺のある吸血城私室",
+            "en": "coffin private chamber"
+          },
+          {
+            "ja": "月下の吸血私室",
+            "en": "moonlit vampire private room"
+          },
+          {
+            "ja": "吸血城の宴の間",
+            "en": "vampire banquet hall"
+          },
+          {
+            "ja": "月光ゴシック晩餐ホール",
+            "en": "moonlit gothic banquet hall"
+          },
+          {
+            "ja": "血月の晩餐ホール",
+            "en": "blood-moon supper hall"
+          }
+        ]
+      },
+      {
+        "group": "🪦 墓地・前庭",
+        "items": [
+          {
+            "ja": "月下の墓地",
+            "en": "moonlit graveyard"
+          }
+        ]
+      }
+    ],
+    "customize": [
+      {
+        "group": "🌙 月光演出",
+        "items": [
+          {
+            "ja": "圧倒的な月の大きさ",
+            "en": "overwhelming lunar scale"
+          },
+          {
+            "ja": "冷たいゴシック月光",
+            "en": "cold gothic moonlight"
+          },
+          {
+            "ja": "静かな夜の威厳",
+            "en": "silent nocturnal majesty"
+          },
+          {
+            "ja": "月に支配される不穏さ",
+            "en": "ominous moon-dominance"
+          },
+          {
+            "ja": "吸血夜の緊張感",
+            "en": "vampiric night tension"
+          },
+          {
+            "ja": "赤い月明かりの不吉さ",
+            "en": "scarlet moonlit dread"
+          },
+          {
+            "ja": "刃のような三日月劇場感",
+            "en": "crescent-blade moon drama"
+          }
+        ]
+      },
+      {
+        "group": "🏰 吸血城外観の空気",
+        "items": [
+          {
+            "ja": "ゴシック要塞の威容",
+            "en": "gothic fortress grandeur"
+          },
+          {
+            "ja": "吸血城の威圧感",
+            "en": "vampire-castle menace"
+          },
+          {
+            "ja": "月に濡れた貴族的不穏",
+            "en": "moon-drenched aristocratic dread"
+          },
+          {
+            "ja": "尖塔シルエットの優美",
+            "en": "spire-silhouette elegance"
+          },
+          {
+            "ja": "月下の城の静けさ",
+            "en": "moonlit castle stillness"
+          },
+          {
+            "ja": "高貴な夜の脅威",
+            "en": "noble nocturnal menace"
+          },
+          {
+            "ja": "氷のような月夜ゴシック",
+            "en": "icy moonlit gothic atmosphere"
+          }
+        ]
+      },
+      {
+        "group": "👑 内部空間の空気",
+        "items": [
+          {
+            "ja": "大理石に響く権威",
+            "en": "aristocratic nocturnal authority"
+          },
+          {
+            "ja": "大聖堂めいた月影",
+            "en": "cathedral-like moon shadows"
+          },
+          {
+            "ja": "ベルベットの重い壮麗さ",
+            "en": "velvet-draped grandeur"
+          },
+          {
+            "ja": "赤い玉座の威圧感",
+            "en": "scarlet royal dread"
+          },
+          {
+            "ja": "ゴシック内装の権力感",
+            "en": "gothic interior power"
+          },
+          {
+            "ja": "回廊の静謐",
+            "en": "interior gothic stillness"
+          },
+          {
+            "ja": "月へ向く物悲しさ",
+            "en": "moon-facing melancholy"
+          },
+          {
+            "ja": "城の親密な夜気",
+            "en": "moonlit intimacy of the castle"
+          },
+          {
+            "ja": "ベルベットに沈む寝室の静けさ",
+            "en": "velvet-dark bedroom hush"
+          },
+          {
+            "ja": "冷たい貴族の私性",
+            "en": "cold aristocratic privacy"
+          },
+          {
+            "ja": "葬送めいた優美",
+            "en": "funereal elegance"
+          },
+          {
+            "ja": "封じた夜の私室感",
+            "en": "sealed nocturnal privacy"
+          },
+          {
+            "ja": "吸血私室の静けさ",
+            "en": "vampiric chamber stillness"
+          },
+          {
+            "ja": "禁じられた晩餐の豪奢",
+            "en": "forbidden banquet opulence"
+          },
+          {
+            "ja": "貴族の真夜中の饗宴",
+            "en": "aristocratic midnight feast"
+          },
+          {
+            "ja": "金装ゴシックの退廃",
+            "en": "gilded gothic decadence"
+          },
+          {
+            "ja": "宴の後の空虚",
+            "en": "after-feast emptiness"
+          },
+          {
+            "ja": "赤い静寂",
+            "en": "scarlet silence"
+          },
+          {
+            "ja": "放棄された豪奢",
+            "en": "abandoned gothic luxury"
+          }
+        ]
+      },
+      {
+        "group": "🪦 墓地の空気",
+        "items": [
+          {
+            "ja": "墓地の静けさ",
+            "en": "graveyard hush"
+          },
+          {
+            "ja": "月下の追悼感",
+            "en": "moonlit mourning atmosphere"
+          },
+          {
+            "ja": "前庭のゴシック不穏",
+            "en": "gothic forecourt eeriness"
+          }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "group": "🌙 月と空の細部",
+        "items": [
+          {
+            "ja": "巨大な満月円盤",
+            "en": "oversized full moon disk"
+          },
+          {
+            "ja": "薄い月輪の霞",
+            "en": "haloed moon edge"
+          },
+          {
+            "ja": "赤い三日月の縁",
+            "en": "crimson crescent edge"
+          },
+          {
+            "ja": "黒雲の裂け目",
+            "en": "ragged black cloud bands"
+          },
+          {
+            "ja": "銀の縁を持つ夜霧",
+            "en": "silver-rimmed night haze"
+          },
+          {
+            "ja": "深い藍の夜勾配",
+            "en": "deep cobalt night gradient"
+          },
+          {
+            "ja": "ゆっくり流れる雲帯",
+            "en": "slow drifting cloud bands"
+          },
+          {
+            "ja": "血の満月円盤",
+            "en": "crimson full moon disk"
+          }
+        ]
+      },
+      {
+        "group": "🏰 吸血城外観の細部",
+        "items": [
+          {
+            "ja": "針のような塔冠",
+            "en": "needle-like tower crowns"
+          },
+          {
+            "ja": "断崖の城壁線",
+            "en": "cliff-edge battlements"
+          },
+          {
+            "ja": "赤月の逆光",
+            "en": "crimson back moon"
+          },
+          {
+            "ja": "蝙蝠影の散り",
+            "en": "bat-shadow sky scatter"
+          },
+          {
+            "ja": "塔の縁シルエット",
+            "en": "tower-edge silhouettes"
+          },
+          {
+            "ja": "断崖の輪郭",
+            "en": "cliffside silhouette"
+          },
+          {
+            "ja": "月へ向く胸壁",
+            "en": "moon-facing parapets"
+          },
+          {
+            "ja": "黒薔薇庭園の輪郭",
+            "en": "black rose garden outlines"
+          },
+          {
+            "ja": "層状の尖塔影",
+            "en": "layered spire silhouettes"
+          },
+          {
+            "ja": "高いアーチ窓",
+            "en": "high arched windows"
+          }
+        ]
+      },
+      {
+        "group": "👑 内部空間の細部",
+        "items": [
+          {
+            "ja": "玉座壇の高まり",
+            "en": "raised throne dais"
+          },
+          {
+            "ja": "長いベルベットの影",
+            "en": "long velvet curtain shadows"
+          },
+          {
+            "ja": "冷たい燭台の反射",
+            "en": "cold candelabra reflections"
+          },
+          {
+            "ja": "月に染まる床",
+            "en": "moonlit stained floor"
+          },
+          {
+            "ja": "赤い窓光",
+            "en": "crimson window spill"
+          },
+          {
+            "ja": "黒大理石の床",
+            "en": "black marble floor"
+          },
+          {
+            "ja": "空の玉座影",
+            "en": "empty throne silhouette"
+          },
+          {
+            "ja": "反響する高い天井",
+            "en": "echoing vaulted ceiling"
+          },
+          {
+            "ja": "大理石の階段縁",
+            "en": "marble stair edge"
+          },
+          {
+            "ja": "巨大な月窓",
+            "en": "arched moon window"
+          },
+          {
+            "ja": "長いランナーの影",
+            "en": "long runner shadow"
+          },
+          {
+            "ja": "空気に漂う銀塵",
+            "en": "silver dust in the air"
+          },
+          {
+            "ja": "天蓋カーテンの襞",
+            "en": "canopy curtain folds"
+          },
+          {
+            "ja": "月に触れる寝台縁",
+            "en": "moonlit bed edge"
+          },
+          {
+            "ja": "鏡枠のきらめき",
+            "en": "mirror-frame glint"
+          },
+          {
+            "ja": "半開きのバルコニードレープ",
+            "en": "half-open balcony drape"
+          },
+          {
+            "ja": "棺蓋の反射",
+            "en": "coffin lid highlights"
+          },
+          {
+            "ja": "黒薔薇の花瓶",
+            "en": "black rose vase"
+          },
+          {
+            "ja": "燭煙の膜",
+            "en": "candle-smoke veil"
+          },
+          {
+            "ja": "黒漆の家具",
+            "en": "dark lacquer furniture"
+          },
+          {
+            "ja": "長い晩餐卓",
+            "en": "long banquet table"
+          },
+          {
+            "ja": "銀杯の列",
+            "en": "silver goblet rows"
+          },
+          {
+            "ja": "月光の高窓",
+            "en": "moonlit high windows"
+          },
+          {
+            "ja": "半分引かれた椅子",
+            "en": "half-drawn chairs"
+          },
+          {
+            "ja": "冷たい食器の光",
+            "en": "cold silverware gleam"
+          }
+        ]
+      },
+      {
+        "group": "🪦 墓地・前庭の細部",
+        "items": [
+          {
+            "ja": "鉄柵の列",
+            "en": "wrought-iron fence rows"
+          },
+          {
+            "ja": "傾いた墓標",
+            "en": "tilted gravestones"
+          },
+          {
+            "ja": "枯れ草の上の霧",
+            "en": "mist over dead grass"
+          },
+          {
+            "ja": "遠くの古城の塊",
+            "en": "distant castle mass"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "otherworld_city_market_collection",
+
+    "title": "🧭 異世界都市・市場・路地特化コレクション",
+    "subtitle": "異世界市場通り、冒険者ギルド酒場、港町風の路地、旅人宿、召喚門近辺まで、生活と冒険の入口側をまとめた異世界街区特化コレクション",
+    "complete": [
+      {
+        "group": "🛒 市場・通り・広場",
+        "items": [
+          {
+            "id": "otherworld_market_street_day",
+            "ja": "布屋根と露店が連なる異世界市場通り",
+            "links": {
+              "base": [
+                "otherworld market street",
+                "fantasy bazaar lane"
+              ],
+              "customize": [
+                "lively adventuring-town bustle",
+                "sunlit fabric-shadow rhythm",
+                "warm fantasy commerce"
+              ],
+              "settings": [
+                "canvas awning rows",
+                "fruit and potion stalls",
+                "stone lane perspective",
+                "signboard clusters"
+              ]
+            }
+          },
+          {
+            "id": "guild_square_notice_board",
+            "ja": "依頼板と往来が重なるギルド前広場",
+            "links": {
+              "base": [
+                "guild square",
+                "adventurers guild exterior"
+              ],
+              "customize": [
+                "busy quest-town circulation",
+                "daily heroic atmosphere",
+                "lived-in fantasy square"
+              ],
+              "settings": [
+                "quest notice board",
+                "weapon shop frontage",
+                "stone fountain edge",
+                "flagged guild doorway"
+              ]
+            }
+          },
+          {
+            "id": "otherworld_portal_plaza_evening",
+            "ja": "青い門光が通りへこぼれる召喚門前の夕暮れ広場",
+            "links": {
+              "base": [
+                "summoning gate plaza",
+                "otherworld town square"
+              ],
+              "customize": [
+                "arrival-town anticipation",
+                "evening magical glow",
+                "threshold-city romance"
+              ],
+              "settings": [
+                "portal-arch silhouette",
+                "warm shopfront lamps",
+                "gathering-stone plaza",
+                "distant inn signage"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🍻 酒場・宿・生活路地",
+        "items": [
+          {
+            "id": "guild_tavern_evening_firelight",
+            "ja": "木梁と火灯りが揺れる冒険者ギルド酒場",
+            "links": {
+              "base": [
+                "adventurers guild tavern",
+                "fantasy tavern interior"
+              ],
+              "customize": [
+                "warm quest-hub atmosphere",
+                "wood-and-fire comfort",
+                "busy adventurer chatter feel"
+              ],
+              "settings": [
+                "heavy timber beams",
+                "fireplace glow",
+                "quest board corner",
+                "long communal tables"
+              ]
+            }
+          },
+          {
+            "id": "traveler_inn_corridor_rain",
+            "ja": "雨宿りの気配が残る旅人宿の二階回廊",
+            "links": {
+              "base": [
+                "traveler inn corridor",
+                "fantasy lodging interior"
+              ],
+              "customize": [
+                "rainy-road fatigue hush",
+                "warm lodging quiet",
+                "post-journey stillness"
+              ],
+              "settings": [
+                "wooden room doors",
+                "lantern wall brackets",
+                "wet cloak stand",
+                "creaking floorboards"
+              ]
+            }
+          },
+          {
+            "id": "stone_backlane_magiclamps_night",
+            "ja": "魔法灯が細く連なる異世界石路地の夜",
+            "links": {
+              "base": [
+                "fantasy back lane",
+                "otherworld side alley"
+              ],
+              "customize": [
+                "quiet side-street mystery",
+                "soft lamp-lit dampness",
+                "lived-in afterhours fantasy"
+              ],
+              "settings": [
+                "narrow stone stairs",
+                "window-box shadows",
+                "hanging magic lamps",
+                "wet mortar texture"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "group": "🚪 入口・都市縁・旅立ち感",
+        "items": [
+          {
+            "id": "otherworld_gate_road_morning",
+            "ja": "朝靄の中へ道が延びる異世界都市門前",
+            "links": {
+              "base": [
+                "otherworld city gate",
+                "fantasy road entrance"
+              ],
+              "customize": [
+                "journey-beginning atmosphere",
+                "cool dawn openness",
+                "quiet adventure expectancy"
+              ],
+              "settings": [
+                "arched gate silhouette",
+                "wagon-track stone road",
+                "field horizon outside walls",
+                "watchtower outline"
+              ]
+            }
+          },
+          {
+            "id": "harbor_town_fantasy_pier_wind",
+            "ja": "帆影と潮風が抜ける異世界港町の桟橋縁",
+            "links": {
+              "base": [
+                "fantasy harbor town",
+                "pier edge promenade"
+              ],
+              "customize": [
+                "salt-wind travel mood",
+                "open harbor fantasy",
+                "soft maritime bustle"
+              ],
+              "settings": [
+                "rope mooring posts",
+                "sail-mast silhouettes",
+                "weathered plank edge",
+                "sea-bird arcs"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "base": [
+      {
+        "group": "🏙 生活街区",
+        "items": [
+          {
+            "ja": "異世界市場通り",
+            "en": "otherworld market street"
+          },
+          {
+            "ja": "ギルド前広場",
+            "en": "guild square"
+          },
+          {
+            "ja": "冒険者ギルド外観",
+            "en": "adventurers guild exterior"
+          },
+          {
+            "ja": "召喚門前広場",
+            "en": "summoning gate plaza"
+          },
+          {
+            "ja": "異世界街角",
+            "en": "otherworld town square"
+          }
+        ]
+      },
+      {
+        "group": "🍻 酒場・宿・路地",
+        "items": [
+          {
+            "ja": "冒険者ギルド酒場",
+            "en": "adventurers guild tavern"
+          },
+          {
+            "ja": "幻想酒場内装",
+            "en": "fantasy tavern interior"
+          },
+          {
+            "ja": "旅人宿回廊",
+            "en": "traveler inn corridor"
+          },
+          {
+            "ja": "異世界裏路地",
+            "en": "otherworld side alley"
+          },
+          {
+            "ja": "幻想裏路地",
+            "en": "fantasy back lane"
+          }
+        ]
+      },
+      {
+        "group": "🚪 都市縁・旅路",
+        "items": [
+          {
+            "ja": "異世界都市門",
+            "en": "otherworld city gate"
+          },
+          {
+            "ja": "幻想の道入口",
+            "en": "fantasy road entrance"
+          },
+          {
+            "ja": "幻想港町",
+            "en": "fantasy harbor town"
+          },
+          {
+            "ja": "桟橋遊歩道",
+            "en": "pier edge promenade"
+          }
+        ]
+      }
+    ],
+    "customize": [
+      {
+        "group": "✨ 冒険町の空気",
+        "items": [
+          {
+            "ja": "冒険町の賑わい",
+            "en": "lively adventuring-town bustle"
+          },
+          {
+            "ja": "日常英雄感",
+            "en": "daily heroic atmosphere"
+          },
+          {
+            "ja": "到着町の高揚",
+            "en": "arrival-town anticipation"
+          },
+          {
+            "ja": "依頼拠点のぬくもり",
+            "en": "warm quest-hub atmosphere"
+          },
+          {
+            "ja": "旅後の静けさ",
+            "en": "post-journey stillness"
+          }
+        ]
+      },
+      {
+        "group": "🌫 夜路地・旅立ち",
+        "items": [
+          {
+            "ja": "夜の路地の神秘",
+            "en": "quiet side-street mystery"
+          },
+          {
+            "ja": "湿った灯り感",
+            "en": "soft lamp-lit dampness"
+          },
+          {
+            "ja": "旅立ちの空気",
+            "en": "journey-beginning atmosphere"
+          },
+          {
+            "ja": "潮風旅情",
+            "en": "salt-wind travel mood"
+          },
+          {
+            "ja": "冒険前の静かな期待",
+            "en": "quiet adventure expectancy"
+          }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "group": "🧱 生活街ディテール",
+        "items": [
+          {
+            "ja": "布屋根の列",
+            "en": "canvas awning rows"
+          },
+          {
+            "ja": "果物と薬瓶の屋台",
+            "en": "fruit and potion stalls"
+          },
+          {
+            "ja": "依頼掲示板",
+            "en": "quest notice board"
+          },
+          {
+            "ja": "旗付きギルド扉",
+            "en": "flagged guild doorway"
+          },
+          {
+            "ja": "木梁天井",
+            "en": "heavy timber beams"
+          },
+          {
+            "ja": "暖炉の火",
+            "en": "fireplace glow"
+          },
+          {
+            "ja": "濡れ外套掛け",
+            "en": "wet cloak stand"
+          },
+          {
+            "ja": "吊り魔法灯",
+            "en": "hanging magic lamps"
+          },
+          {
+            "ja": "門アーチ影",
+            "en": "arched gate silhouette"
+          },
+          {
+            "ja": "帆柱影",
+            "en": "sail-mast silhouettes"
+          },
+          {
+            "ja": "海鳥の弧",
+            "en": "sea-bird arcs"
+          }
+        ]
       }
     ]
   }
@@ -37402,15 +55485,19 @@ function createCollectionCheckbox(item, sectionKey, collectionId, options = {}) 
     const linked = [];
     ["base", "customize", "settings"].forEach(sectionKey => {
       (item.links && item.links[sectionKey] || []).forEach(tag => {
-        const cb = tagMap[tag];
+        const tagEntry = tagMap[tag];
+        const cb = tagEntry && tagEntry.cb ? tagEntry.cb : tagEntry;
         if (!cb) return;
         cb.checked = true;
         cb.dataset.autoFromComplete = completeItemId;
         linked.push(cb);
+        if (tagEntry && tagEntry.group) tagEntry.group.open = true;
+        if (tagEntry && tagEntry.shelf) tagEntry.shelf.open = true;
       });
       const shelf = root.querySelector(`details[data-collection-shelf="${sectionKey}"]`);
       if (shelf) shelf.open = true;
     });
+    root.open = true;
 
     state.linked = linked;
     state.activeCompleteId = completeItemId;
@@ -37431,10 +55518,14 @@ function createCollectionCheckbox(item, sectionKey, collectionId, options = {}) 
     return out;
   }
 
-  function createCollectionOptionNode(root, collection, shelfKey, item) {
+  function createCollectionOptionNode(root, collection, shelfKey, item, uiRefs = {}) {
     const { label, cb } = createCollectionCheckbox(item, shelfKey, collection.id, { isComplete: shelfKey === "complete" });
     if (shelfKey !== "complete" && item.en) {
-      root.__tagMap[item.en] = cb;
+      root.__tagMap[item.en] = {
+        cb,
+        shelf: uiRefs.shelfDetails || null,
+        group: uiRefs.groupDetails || null
+      };
     }
 
     cb.addEventListener("change", () => {
@@ -37553,7 +55644,10 @@ function createCollectionCheckbox(item, sectionKey, collectionId, options = {}) 
           groupBody.style.marginTop = "6px";
 
           (group.items || []).forEach(item => {
-            groupBody.appendChild(createCollectionOptionNode(root, collection, shelf.key, item));
+            groupBody.appendChild(createCollectionOptionNode(root, collection, shelf.key, item, {
+              shelfDetails,
+              groupDetails
+            }));
           });
 
           groupDetails.appendChild(groupBody);
@@ -37565,7 +55659,9 @@ function createCollectionCheckbox(item, sectionKey, collectionId, options = {}) 
         shelfBody.style.gap = "4px";
 
         shelf.items.forEach(item => {
-          shelfBody.appendChild(createCollectionOptionNode(root, collection, shelf.key, item));
+          shelfBody.appendChild(createCollectionOptionNode(root, collection, shelf.key, item, {
+            shelfDetails
+          }));
         });
       }
 
@@ -37583,13 +55679,7 @@ function createCollectionCheckbox(item, sectionKey, collectionId, options = {}) 
     wrapper.className = "bg-special-collections-zone";
     wrapper.style.marginBottom = "12px";
 
-    const heading = document.createElement("div");
-    heading.textContent = "🧩 背景特化コレクション";
-    heading.style.fontSize = "0.92em";
-    heading.style.fontWeight = "bold";
-    heading.style.color = "#374151";
-    heading.style.margin = "4px 0 8px";
-    wrapper.appendChild(heading);
+    wrapper.appendChild(createSkyOverlayZone());
 
     const bucketDefs = [
       {
@@ -37621,19 +55711,19 @@ function createCollectionCheckbox(item, sectionKey, collectionId, options = {}) 
       {
         id: "sf",
         title: "🛸 SF・未来",
-        subtitle: "近未来都市、宇宙船、研究施設、未来生活圏へ進む予定の棚",
+        subtitle: "近未来都市、宇宙船、艦隊戦、惑星景観、研究施設、未来生活圏を、機能と空気で割って深掘りする棚",
         placeholder: true
       },
       {
         id: "fantasy",
         title: "🏰 ファンタジー・異世界",
-        subtitle: "城、神殿、異世界都市、魔法空間などへ進む予定の棚",
+        subtitle: "城、神殿、魔法学院、異世界市場、遺跡などをまとめた棚",
         placeholder: true
       },
       {
         id: "special",
         title: "🧪 特殊・異常",
-        subtitle: "夢景、崩壊、異常空間、特殊演出背景へ進む予定の棚",
+        subtitle: "夢景、歪み、崩壊、観測不能、概念異常まで、現実から外れた背景をまとめる棚",
         placeholder: true
       }
     ];
@@ -37659,9 +55749,32 @@ function createCollectionCheckbox(item, sectionKey, collectionId, options = {}) 
       sea_coast_harbor_collection: "nature",
       desert_wasteland_canyon_collection: "nature",
       sky_cloud_atmosphere_collection: "sky",
+      twilight_dawn_sunset_collection: "sky",
+      cloud_layers_upperair_collection: "sky",
       star_celestial_cosmos_collection: "sky",
       horizon_cloudsea_overlook_collection: "sky",
-      airborne_flight_view_collection: "sky"
+      airborne_flight_view_collection: "sky",
+      sunlight_optical_sky_collection: "sky",
+      weather_transition_sky_collection: "sky",
+      lightning_storm_luminous_sky_collection: "sky",
+      moon_noctilucent_polar_sky_collection: "sky",
+      future_city_highrise_collection: "sf",
+      starship_hangar_bridge_collection: "sf",
+      fleet_battle_space_collection: "sf",
+      planet_orbit_scenery_collection: "sf",
+      research_lab_control_collection: "sf",
+      future_living_infrastructure_collection: "sf",
+      fantasy_castle_royal_collection: "fantasy",
+      fantasy_temple_ruins_collection: "fantasy",
+      magic_academy_library_collection: "fantasy",
+      fantasy_forest_fae_spirit_collection: "fantasy",
+      fantasy_dungeon_seal_collection: "fantasy",
+      fantasy_demonlord_evil_otherworld_collection: "fantasy",
+      otherworld_city_market_collection: "fantasy",
+      dream_unreal_sleep_collection: "special",
+      distortion_inversion_structure_collection: "special",
+      collapse_terminal_space_collection: "special",
+      forbidden_concept_observation_collection: "special"
     };
 
     const bucketMap = {};
@@ -37819,6 +55932,982 @@ function createCollectionCheckbox(item, sectionKey, collectionId, options = {}) 
     return wrapper;
   }
 
+
+const SKY_OVERLAY_COLLECTION = {
+  "id": "sky_state_celestial_overlay_collection",
+  "title": "🌙 空の状態・天体オーバーレイセット",
+  "subtitle": "場所系の完成セットを消さずに、月相、色月、異常月、星空密度、雲流れ、極光、稲妻雲、終末空に加えて、昼空、朝夕焼け、水面反射、窓光、逆光、霧越しの空気感まで上から重ねるための加算用セット",
+  "complete": [
+    {
+      "group": "🌕 月相・天体オーバーレイ",
+      "items": [
+        {
+          "id": "overlay_full_moon_night",
+          "ja": "フルムーン・月光夜",
+          "links": {
+            "base": [
+              "full moon disk",
+              "deep blue-black night sky",
+              "silver moon haze"
+            ],
+            "customize": [
+              "moonlit backlight",
+              "moonlit cloud rim",
+              "silver edge light"
+            ],
+            "settings": [
+              "serene moonlit night",
+              "dominant moon scale",
+              "moon-above-scenery emphasis"
+            ]
+          }
+        },
+        {
+          "id": "overlay_thin_crescent_night",
+          "ja": "三日月・細月夜",
+          "links": {
+            "base": [
+              "thin crescent moon",
+              "clear indigo night sky",
+              "low horizon moon sky"
+            ],
+            "customize": [
+              "silhouette moon backlight",
+              "cold night clarity",
+              "moon-window beam"
+            ],
+            "settings": [
+              "lonely moonlit hush",
+              "sky-focused composition",
+              "silhouette foreground emphasis"
+            ]
+          }
+        },
+        {
+          "id": "overlay_blood_moon_night",
+          "ja": "血月・赤月夜",
+          "links": {
+            "base": [
+              "blood-red moon",
+              "red-tinted night sky",
+              "low horizon moon sky"
+            ],
+            "customize": [
+              "red atmospheric bleed",
+              "moonlit backlight",
+              "drifting cloud layers"
+            ],
+            "settings": [
+              "ominous blood-moon mood",
+              "gothic vampire night",
+              "apocalyptic red night"
+            ]
+          }
+        },
+        {
+          "id": "overlay_looming_giant_moon",
+          "ja": "巨大月・圧する夜空",
+          "links": {
+            "base": [
+              "giant looming moon",
+              "low horizon moon sky",
+              "deep blue-black night sky"
+            ],
+            "customize": [
+              "dominant moon scale",
+              "silver edge light",
+              "moonlit backlight"
+            ],
+            "settings": [
+              "moon-above-scenery emphasis",
+              "low-hanging moon pressure",
+              "sky-focused composition"
+            ]
+          }
+        },
+        {
+          "id": "overlay_cloud_veiled_moon",
+          "ja": "雲越しの月・朧月夜",
+          "links": {
+            "base": [
+              "broken-cloud moon opening",
+              "veiled moon haze",
+              "soft moon haze"
+            ],
+            "customize": [
+              "drifting cloud layers",
+              "moonlit cloud rim",
+              "halo glow diffusion"
+            ],
+            "settings": [
+              "ritual moon night",
+              "serene moonlit night",
+              "reflected moon accent"
+            ]
+          }
+        },
+        {
+          "id": "overlay_moon_halo_night",
+          "ja": "月輪・光環の夜",
+          "links": {
+            "base": [
+              "moon halo ring",
+              "half-veiled moon",
+              "clear indigo night sky"
+            ],
+            "customize": [
+              "halo glow diffusion",
+              "moon-rim cloud glow",
+              "silver edge light"
+            ],
+            "settings": [
+              "ritual moon night",
+              "serene moonlit night",
+              "moon-above-scenery emphasis"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "group": "🎨 色月・彩月オーバーレイ",
+      "items": [
+        {
+          "id": "overlay_blue_moon_night",
+          "ja": "🔵 ブルームーン・青月夜",
+          "links": {
+            "base": [
+              "blue moon disk",
+              "deep blue-black night sky",
+              "silver moon haze"
+            ],
+            "customize": [
+              "cool blue lunar glow",
+              "moonlit backlight",
+              "cold night clarity"
+            ],
+            "settings": [
+              "mystic blue moon night",
+              "cold ceremonial moon mood",
+              "moon-above-scenery emphasis"
+            ]
+          }
+        },
+        {
+          "id": "overlay_violet_moon_night",
+          "ja": "🟣 紫月・妖月夜",
+          "links": {
+            "base": [
+              "violet moon disk",
+              "clear indigo night sky",
+              "veiled moon haze"
+            ],
+            "customize": [
+              "violet lunar haze",
+              "halo glow diffusion",
+              "moonlit cloud rim"
+            ],
+            "settings": [
+              "occult violet moon mood",
+              "ritual moon night",
+              "sky-focused composition"
+            ]
+          }
+        },
+        {
+          "id": "overlay_amber_moon_night",
+          "ja": "🟡 金月・琥珀月夜",
+          "links": {
+            "base": [
+              "amber moon disk",
+              "low horizon moon sky",
+              "soft moon haze"
+            ],
+            "customize": [
+              "amber lunar glow",
+              "warm rim light",
+              "moonlit backlight"
+            ],
+            "settings": [
+              "decadent amber moon night",
+              "antique gothic moon mood",
+              "dominant moon scale"
+            ]
+          }
+        },
+        {
+          "id": "overlay_emerald_moon_night",
+          "ja": "🟢 翡翠月・異界月夜",
+          "links": {
+            "base": [
+              "emerald moon disk",
+              "deep blue-black night sky",
+              "half-veiled moon"
+            ],
+            "customize": [
+              "eerie green lunar glow",
+              "moon-rim cloud glow",
+              "halo glow diffusion"
+            ],
+            "settings": [
+              "otherworldly green moon omen",
+              "forbidden moonlit night",
+              "sky-dominant upper-air mood"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "group": "🌘 異常月・形状変異オーバーレイ",
+      "items": [
+        {
+          "id": "overlay_eclipse_moon_night",
+          "ja": "🌘 月食・蝕の月夜",
+          "links": {
+            "base": [
+              "eclipsed moon disk",
+              "darkened lunar shadow",
+              "deep blue-black night sky"
+            ],
+            "customize": [
+              "eclipse rim glow",
+              "dim halo diffusion",
+              "drifting cloud layers"
+            ],
+            "settings": [
+              "ominous eclipse night",
+              "ritual interruption sky",
+              "sky-focused composition"
+            ]
+          }
+        },
+        {
+          "id": "overlay_bitten_moon_night",
+          "ja": "🌓 欠け途中・食われ月夜",
+          "links": {
+            "base": [
+              "partially shadowed moon",
+              "bitten moon silhouette",
+              "low horizon moon sky"
+            ],
+            "customize": [
+              "jagged shadow edge",
+              "moonlit backlight",
+              "cold night clarity"
+            ],
+            "settings": [
+              "unstable half-eaten moon mood",
+              "uneasy moonlit hush",
+              "silhouette foreground emphasis"
+            ]
+          }
+        },
+        {
+          "id": "overlay_twin_moon_night",
+          "ja": "🌙🌙 二重月・双月夜",
+          "links": {
+            "base": [
+              "twin moons",
+              "offset dual moon sky",
+              "clear indigo night sky"
+            ],
+            "customize": [
+              "overlapping lunar glow",
+              "double moon backlight",
+              "halo glow diffusion"
+            ],
+            "settings": [
+              "otherworldly twin-moon mood",
+              "sky-dominant upper-air mood",
+              "moon-above-scenery emphasis"
+            ]
+          }
+        },
+        {
+          "id": "overlay_cracked_moon_night",
+          "ja": "💔 割れ月・砕け月夜",
+          "links": {
+            "base": [
+              "cracked moon disk",
+              "fractured lunar surface glow",
+              "red-tinted night sky"
+            ],
+            "customize": [
+              "split moon glow",
+              "drifting lunar fragments",
+              "red atmospheric bleed"
+            ],
+            "settings": [
+              "broken-world moon omen",
+              "apocalyptic red night",
+              "dominant moon scale"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "group": "🌌 星空・星群オーバーレイ",
+      "items": [
+        {
+          "id": "overlay_dense_starfield_night",
+          "ja": "星空濃度・深い星夜",
+          "links": {
+            "base": [
+              "dense starfield sky",
+              "deep blue-black night sky",
+              "high star density"
+            ],
+            "customize": [
+              "star-rich sky emphasis",
+              "cold night clarity",
+              "silvery starlight dust"
+            ],
+            "settings": [
+              "cosmic awe night",
+              "sky-dominant upper-air mood",
+              "quiet endless night"
+            ]
+          }
+        },
+        {
+          "id": "overlay_milkyway_night",
+          "ja": "天の川・群星夜",
+          "links": {
+            "base": [
+              "milky way band",
+              "dense starfield sky",
+              "clear indigo night sky"
+            ],
+            "customize": [
+              "milky way haze",
+              "star cluster sparkle",
+              "silvery starlight dust"
+            ],
+            "settings": [
+              "cosmic awe night",
+              "sky-focused composition",
+              "quiet endless night"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "group": "☁ 雲流れ・気流オーバーレイ",
+      "items": [
+        {
+          "id": "overlay_windy_cloudflow_night",
+          "ja": "雲流れ・風のある夜空",
+          "links": {
+            "base": [
+              "wind-swept cloud flow",
+              "deep blue-black night sky",
+              "drifting cloud masses"
+            ],
+            "customize": [
+              "drifting cloud layers",
+              "wind-torn cloud edges",
+              "cloud-gap moon opening"
+            ],
+            "settings": [
+              "moving weather tension",
+              "sky-dominant upper-air mood",
+              "silhouette foreground emphasis"
+            ]
+          }
+        },
+        {
+          "id": "overlay_rough_cloud_break_night",
+          "ja": "荒れた雲・切れ間の夜",
+          "links": {
+            "base": [
+              "broken storm-cloud sky",
+              "cloud-gap moon opening",
+              "dark moving cloud ceiling"
+            ],
+            "customize": [
+              "drifting cloud layers",
+              "wind-torn cloud edges",
+              "moonlit cloud rim"
+            ],
+            "settings": [
+              "moving weather tension",
+              "ritual moon night",
+              "sky-focused composition"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "group": "🌈 極光・寒色光オーバーレイ",
+      "items": [
+        {
+          "id": "overlay_aurora_cold_night",
+          "ja": "極光・冷光夜",
+          "links": {
+            "base": [
+              "aurora curtains",
+              "polar cold sky",
+              "clear indigo night sky"
+            ],
+            "customize": [
+              "green-blue aurora veil",
+              "cold night clarity",
+              "silvery starlight dust"
+            ],
+            "settings": [
+              "sacred cold night",
+              "cosmic awe night",
+              "sky-dominant upper-air mood"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "group": "⚡ 雷雲・異常気象オーバーレイ",
+      "items": [
+        {
+          "id": "overlay_lightning_storm_night",
+          "ja": "稲妻雲・嵐の夜",
+          "links": {
+            "base": [
+              "lightning storm cloud bank",
+              "dark moving cloud ceiling",
+              "deep blue-black night sky"
+            ],
+            "customize": [
+              "forked lightning veins",
+              "storm-cloud contrast",
+              "drifting cloud layers"
+            ],
+            "settings": [
+              "violent storm omen",
+              "moving weather tension",
+              "sky-dominant upper-air mood"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "group": "🔥 赤空・終末空オーバーレイ",
+      "items": [
+        {
+          "id": "overlay_apocalyptic_red_sky",
+          "ja": "終末赤空・不穏空",
+          "links": {
+            "base": [
+              "apocalyptic red sky",
+              "red-black clouded sky",
+              "red-tinted night sky"
+            ],
+            "customize": [
+              "ashen haze drift",
+              "red atmospheric bleed",
+              "storm-cloud contrast"
+            ],
+            "settings": [
+              "apocalyptic red night",
+              "world-ending sky pressure",
+              "ominous red-sky omen"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "group": "☀ 昼空・太陽光オーバーレイ",
+      "items": [
+        {
+          "id": "overlay_clear_blue_day",
+          "ja": "晴天・青空昼",
+          "links": {
+            "base": [
+              "clear blue daytime sky",
+              "crisp daylight sky",
+              "bright open sky"
+            ],
+            "customize": [
+              "daylight backlight",
+              "sunlit cloud rim",
+              "atmospheric depth haze"
+            ],
+            "settings": [
+              "clean open daytime mood",
+              "airy daylight openness",
+              "daylight-over-scenery emphasis"
+            ]
+          }
+        },
+        {
+          "id": "overlay_sunbeam_backlight_day",
+          "ja": "逆光太陽・光芒昼",
+          "links": {
+            "base": [
+              "bright sun disk",
+              "bright open sky",
+              "sun-through-cloud opening"
+            ],
+            "customize": [
+              "sunbeam god rays",
+              "strong backlight silhouette",
+              "warm rim light"
+            ],
+            "settings": [
+              "dramatic daylight backlight",
+              "daylight-over-scenery emphasis",
+              "silhouette foreground emphasis"
+            ]
+          }
+        },
+        {
+          "id": "overlay_morning_dawn_sky",
+          "ja": "朝焼け・薄明空",
+          "links": {
+            "base": [
+              "soft dawn sky",
+              "pale dawn gradient",
+              "morning glow horizon"
+            ],
+            "customize": [
+              "warm dawn haze",
+              "pastel cloud edges",
+              "low-angle morning light"
+            ],
+            "settings": [
+              "fresh dawn stillness",
+              "beginning-of-day mood",
+              "sky-focused composition"
+            ]
+          }
+        },
+        {
+          "id": "overlay_evening_afterglow_sky",
+          "ja": "夕焼け・残照空",
+          "links": {
+            "base": [
+              "sunset afterglow sky",
+              "warm dusk gradient",
+              "ember horizon glow"
+            ],
+            "customize": [
+              "afterglow cloud edges",
+              "warm sunset backlight",
+              "lingering dusk haze"
+            ],
+            "settings": [
+              "melancholic evening glow",
+              "end-of-day hush",
+              "sky-focused composition"
+            ]
+          }
+        },
+        {
+          "id": "overlay_soft_overcast_day",
+          "ja": "曇天・白空昼",
+          "links": {
+            "base": [
+              "soft overcast daylight",
+              "pale white cloud ceiling",
+              "diffused daylight sky"
+            ],
+            "customize": [
+              "diffused ambient light",
+              "low-contrast cloud blanket",
+              "moisture haze"
+            ],
+            "settings": [
+              "quiet overcast calm",
+              "grounded daylight realism",
+              "soft light dominance"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "group": "🪞 背景への乗り方オーバーレイ",
+      "items": [
+        {
+          "id": "overlay_water_reflection_carry",
+          "ja": "水面反射・波面光",
+          "links": {
+            "base": [
+              "reflective water surface",
+              "reflected sky highlight",
+              "rippled water mirror"
+            ],
+            "customize": [
+              "water moon reflection",
+              "shimmering surface highlights",
+              "broken reflection lines"
+            ],
+            "settings": [
+              "reflected moon accent",
+              "reflection-led composition",
+              "sky-below echo"
+            ]
+          }
+        },
+        {
+          "id": "overlay_window_beam_carry",
+          "ja": "窓光・室内差し込み",
+          "links": {
+            "base": [
+              "window-lit interior spill",
+              "moon-window beam",
+              "side-window light shaft"
+            ],
+            "customize": [
+              "window-frame light pattern",
+              "dust-lit beam",
+              "interior edge glow"
+            ],
+            "settings": [
+              "interior-meets-sky contrast",
+              "light-through-window emphasis",
+              "silent window-lit atmosphere"
+            ]
+          }
+        },
+        {
+          "id": "overlay_backlight_silhouette_carry",
+          "ja": "逆光シルエット・縁光",
+          "links": {
+            "base": [
+              "backlit silhouette zone",
+              "bright horizon backlight",
+              "foreground silhouette mass"
+            ],
+            "customize": [
+              "silhouette moon backlight",
+              "silver edge light",
+              "strong backlight silhouette"
+            ],
+            "settings": [
+              "silhouette foreground emphasis",
+              "figure-against-sky mood",
+              "contrast-heavy framing"
+            ]
+          }
+        },
+        {
+          "id": "overlay_fog_depth_carry",
+          "ja": "霧越し・空気遠近",
+          "links": {
+            "base": [
+              "misty distance layering",
+              "haze-filled foreground air",
+              "veiled scenic depth"
+            ],
+            "customize": [
+              "soft atmospheric diffusion",
+              "fog-softened horizon",
+              "halo glow diffusion"
+            ],
+            "settings": [
+              "depth-through-air mood",
+              "softened distant scenery",
+              "dreamlike scenic veil"
+            ]
+          }
+        }
+      ]
+
+    }
+  ],
+  "base": [
+    {
+      "group": "🌔 月相・月の姿",
+      "items": [
+        { "ja": "満月", "en": "full moon disk" },
+        { "ja": "細い三日月", "en": "thin crescent moon" },
+        { "ja": "血月", "en": "blood-red moon" },
+        { "ja": "巨大月", "en": "giant looming moon" },
+        { "ja": "青い月", "en": "blue moon disk" },
+        { "ja": "紫の月", "en": "violet moon disk" },
+        { "ja": "琥珀色の月", "en": "amber moon disk" },
+        { "ja": "翡翠色の月", "en": "emerald moon disk" },
+        { "ja": "雲に半ば隠れた月", "en": "half-veiled moon" },
+        { "ja": "月輪", "en": "moon halo ring" },
+        { "ja": "月食の月", "en": "eclipsed moon disk" },
+        { "ja": "影に食われた月", "en": "partially shadowed moon" },
+        { "ja": "噛まれたような月輪郭", "en": "bitten moon silhouette" },
+        { "ja": "二重月", "en": "twin moons" },
+        { "ja": "ずれた双月空", "en": "offset dual moon sky" },
+        { "ja": "割れた月", "en": "cracked moon disk" },
+        { "ja": "砕けた月面光", "en": "fractured lunar surface glow" }
+      ]
+    },
+    {
+      "group": "🌌 星空・星群",
+      "items": [
+        { "ja": "濃い星空", "en": "dense starfield sky" },
+        { "ja": "星密度の高い夜空", "en": "high star density" },
+        { "ja": "天の川", "en": "milky way band" },
+        { "ja": "銀の星塵が見える空", "en": "starlit dust sky" }
+      ]
+    },
+    {
+      "group": "☁ 雲・空気の流れ",
+      "items": [
+        { "ja": "深い青黒の夜空", "en": "deep blue-black night sky" },
+        { "ja": "澄んだ藍色の夜空", "en": "clear indigo night sky" },
+        { "ja": "低い位置の月空", "en": "low horizon moon sky" },
+        { "ja": "雲の切れ間の月", "en": "broken-cloud moon opening" },
+        { "ja": "月の切れ間が見える雲空", "en": "cloud-gap moon opening" },
+        { "ja": "風に流れる雲塊", "en": "drifting cloud masses" },
+        { "ja": "暗く動く雲天井", "en": "dark moving cloud ceiling" },
+        { "ja": "風に掃かれた雲流れ", "en": "wind-swept cloud flow" },
+        { "ja": "嵐の切れ間空", "en": "broken storm-cloud sky" },
+        { "ja": "赤みを帯びた夜空", "en": "red-tinted night sky" },
+        { "ja": "銀色の月霞", "en": "silver moon haze" },
+        { "ja": "柔らかな朧月の霞", "en": "soft moon haze" },
+        { "ja": "朧げな月の靄", "en": "veiled moon haze" }
+      ]
+    },
+    {
+      "group": "🌈 極光・特殊夜空",
+      "items": [
+        { "ja": "極光のカーテン", "en": "aurora curtains" },
+        { "ja": "極地の冷たい空", "en": "polar cold sky" },
+        { "ja": "稲妻を孕む雷雲帯", "en": "lightning storm cloud bank" },
+        { "ja": "終末の赤空", "en": "apocalyptic red sky" },
+        { "ja": "赤黒い雲空", "en": "red-black clouded sky" }
+      ]
+    },
+    {
+      "group": "☀ 昼空・太陽・薄明",
+      "items": [
+        { "ja": "澄んだ青空昼", "en": "clear blue daytime sky" },
+        { "ja": "冴えた昼空", "en": "crisp daylight sky" },
+        { "ja": "明るく開いた空", "en": "bright open sky" },
+        { "ja": "太陽円盤", "en": "bright sun disk" },
+        { "ja": "雲間から差す太陽", "en": "sun-through-cloud opening" },
+        { "ja": "柔らかな朝焼け空", "en": "soft dawn sky" },
+        { "ja": "淡い薄明グラデーション", "en": "pale dawn gradient" },
+        { "ja": "朝の地平光", "en": "morning glow horizon" },
+        { "ja": "夕焼けの残照空", "en": "sunset afterglow sky" },
+        { "ja": "暖かな夕暮れグラデーション", "en": "warm dusk gradient" },
+        { "ja": "残り火のような地平光", "en": "ember horizon glow" },
+        { "ja": "柔らかな曇天昼光", "en": "soft overcast daylight" },
+        { "ja": "白い雲天井", "en": "pale white cloud ceiling" },
+        { "ja": "拡散した昼空", "en": "diffused daylight sky" }
+      ]
+    },
+    {
+      "group": "🪞 反射・窓光・逆光の受け皿",
+      "items": [
+        { "ja": "反射する水面", "en": "reflective water surface" },
+        { "ja": "空を返す反射光", "en": "reflected sky highlight" },
+        { "ja": "波打つ水鏡", "en": "rippled water mirror" },
+        { "ja": "窓光が流れ込む室内", "en": "window-lit interior spill" },
+        { "ja": "横窓の光筋", "en": "side-window light shaft" },
+        { "ja": "逆光シルエット帯", "en": "backlit silhouette zone" },
+        { "ja": "明るい地平逆光", "en": "bright horizon backlight" },
+        { "ja": "前景シルエット塊", "en": "foreground silhouette mass" },
+        { "ja": "霧の距離層", "en": "misty distance layering" },
+        { "ja": "霞の満ちた前景空気", "en": "haze-filled foreground air" },
+        { "ja": "景色を包む薄い靄", "en": "veiled scenic depth" }
+      ]
+    }
+  ],
+  "customize": [
+    {
+      "group": "💡 光・反射・逆光",
+      "items": [
+        { "ja": "月光の逆光", "en": "moonlit backlight" },
+        { "ja": "青い月光のにじみ", "en": "cool blue lunar glow" },
+        { "ja": "紫月の靄", "en": "violet lunar haze" },
+        { "ja": "琥珀月の光彩", "en": "amber lunar glow" },
+        { "ja": "翡翠月の怪しい光", "en": "eerie green lunar glow" },
+        { "ja": "水面への月反射", "en": "water moon reflection" },
+        { "ja": "月縁の雲光", "en": "moon-rim cloud glow" },
+        { "ja": "銀色の縁光", "en": "silver edge light" },
+        { "ja": "月窓の光筋", "en": "moon-window beam" },
+        { "ja": "月を背負うシルエット逆光", "en": "silhouette moon backlight" },
+        { "ja": "蝕の縁光", "en": "eclipse rim glow" },
+        { "ja": "淡い蝕の光環にじみ", "en": "dim halo diffusion" },
+        { "ja": "欠け影のぎざつき", "en": "jagged shadow edge" },
+        { "ja": "双月の重なり光", "en": "overlapping lunar glow" },
+        { "ja": "双月の逆光", "en": "double moon backlight" },
+        { "ja": "割れ月の光片", "en": "split moon glow" },
+        { "ja": "月片が漂う感じ", "en": "drifting lunar fragments" }
+      ]
+    },
+    {
+      "group": "🌫 雲・星・大気表情",
+      "items": [
+        { "ja": "流れる雲層", "en": "drifting cloud layers" },
+        { "ja": "月光の雲縁", "en": "moonlit cloud rim" },
+        { "ja": "赤い大気のにじみ", "en": "red atmospheric bleed" },
+        { "ja": "光環のにじみ", "en": "halo glow diffusion" },
+        { "ja": "冷たい夜の透明感", "en": "cold night clarity" },
+        { "ja": "星空を強める", "en": "star-rich sky emphasis" },
+        { "ja": "天の川の靄", "en": "milky way haze" },
+        { "ja": "群星の瞬き", "en": "star cluster sparkle" },
+        { "ja": "銀の星塵光", "en": "silvery starlight dust" }
+      ]
+    },
+    {
+      "group": "🌬 気流・極光・嵐の表情",
+      "items": [
+        { "ja": "風に裂けた雲縁", "en": "wind-torn cloud edges" },
+        { "ja": "緑青の極光の膜", "en": "green-blue aurora veil" },
+        { "ja": "稲妻の枝線", "en": "forked lightning veins" },
+        { "ja": "雷雲の強い明暗", "en": "storm-cloud contrast" },
+        { "ja": "灰の靄の流れ", "en": "ashen haze drift" }
+      ]
+    },
+    {
+      "group": "☀ 昼側の光・雲・色温度",
+      "items": [
+        { "ja": "昼の逆光", "en": "daylight backlight" },
+        { "ja": "日光の雲縁", "en": "sunlit cloud rim" },
+        { "ja": "大気の奥行き霞", "en": "atmospheric depth haze" },
+        { "ja": "太陽光の光芒", "en": "sunbeam god rays" },
+        { "ja": "暖かな縁光", "en": "warm rim light" },
+        { "ja": "朝の暖色霞", "en": "warm dawn haze" },
+        { "ja": "淡い雲縁", "en": "pastel cloud edges" },
+        { "ja": "低い朝の斜光", "en": "low-angle morning light" },
+        { "ja": "夕焼けの雲縁", "en": "afterglow cloud edges" },
+        { "ja": "夕景の逆光", "en": "warm sunset backlight" },
+        { "ja": "残照の靄", "en": "lingering dusk haze" },
+        { "ja": "拡散した環境光", "en": "diffused ambient light" },
+        { "ja": "低コントラストな雲布", "en": "low-contrast cloud blanket" },
+        { "ja": "湿った空気の霞", "en": "moisture haze" }
+      ]
+    },
+    {
+      "group": "🪟 背景への乗り方・反射演出",
+      "items": [
+        { "ja": "水面のきらめき", "en": "shimmering surface highlights" },
+        { "ja": "砕ける反射線", "en": "broken reflection lines" },
+        { "ja": "窓枠の光模様", "en": "window-frame light pattern" },
+        { "ja": "埃に見える光筋", "en": "dust-lit beam" },
+        { "ja": "室内の縁光", "en": "interior edge glow" },
+        { "ja": "強い逆光シルエット", "en": "strong backlight silhouette" },
+        { "ja": "霧でやわらぐ地平", "en": "fog-softened horizon" },
+        { "ja": "やわらかな大気拡散", "en": "soft atmospheric diffusion" }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "group": "🎭 夜の意味づけ",
+      "items": [
+        { "ja": "静かな月夜", "en": "serene moonlit night" },
+        { "ja": "不穏な血月の気配", "en": "ominous blood-moon mood" },
+        { "ja": "吸血鬼的な夜", "en": "gothic vampire night" },
+        { "ja": "儀式めいた月夜", "en": "ritual moon night" },
+        { "ja": "神秘的な青月夜", "en": "mystic blue moon night" },
+        { "ja": "冷たい儀式の月気配", "en": "cold ceremonial moon mood" },
+        { "ja": "妖しい紫月の気配", "en": "occult violet moon mood" },
+        { "ja": "退廃的な琥珀月夜", "en": "decadent amber moon night" },
+        { "ja": "古城めいた金月の空気", "en": "antique gothic moon mood" },
+        { "ja": "異界の翡翠月の凶兆", "en": "otherworldly green moon omen" },
+        { "ja": "禁じられた月夜", "en": "forbidden moonlit night" },
+        { "ja": "不吉な蝕の夜", "en": "ominous eclipse night" },
+        { "ja": "儀式が途切れるような空", "en": "ritual interruption sky" },
+        { "ja": "食われた月の不安定さ", "en": "unstable half-eaten moon mood" },
+        { "ja": "落ち着かない月夜", "en": "uneasy moonlit hush" },
+        { "ja": "異界の双月夜", "en": "otherworldly twin-moon mood" },
+        { "ja": "割れた世界の月兆", "en": "broken-world moon omen" },
+        { "ja": "孤独な月光の静けさ", "en": "lonely moonlit hush" },
+        { "ja": "終末めいた赤い夜", "en": "apocalyptic red night" },
+        { "ja": "宇宙に呑まれる夜", "en": "cosmic awe night" },
+        { "ja": "静かで終わりのない夜", "en": "quiet endless night" },
+        { "ja": "聖域めいた冷たい夜", "en": "sacred cold night" },
+        { "ja": "激しい嵐の前兆", "en": "violent storm omen" },
+        { "ja": "動く天気の緊張感", "en": "moving weather tension" },
+        { "ja": "世界が終わる空の圧", "en": "world-ending sky pressure" },
+        { "ja": "赤空の凶兆", "en": "ominous red-sky omen" }
+      ]
+    },
+    {
+      "group": "🌤 昼側・薄明の意味づけ",
+      "items": [
+        { "ja": "明るく開いた昼の空気", "en": "clean open daytime mood" },
+        { "ja": "風通しの良い昼の広がり", "en": "airy daylight openness" },
+        { "ja": "昼の上空を強める", "en": "daylight-over-scenery emphasis" },
+        { "ja": "劇的な昼逆光", "en": "dramatic daylight backlight" },
+        { "ja": "朝の始まりの静けさ", "en": "fresh dawn stillness" },
+        { "ja": "一日の始まりの気配", "en": "beginning-of-day mood" },
+        { "ja": "夕暮れの余韻", "en": "melancholic evening glow" },
+        { "ja": "一日の終わりの静けさ", "en": "end-of-day hush" },
+        { "ja": "静かな曇天の落ち着き", "en": "quiet overcast calm" },
+        { "ja": "地に足のついた昼の現実感", "en": "grounded daylight realism" },
+        { "ja": "柔らかな光支配", "en": "soft light dominance" }
+      ]
+    },
+    {
+      "group": "🎬 背景への乗り方・画面圧",
+      "items": [
+        { "ja": "空を下にも響かせる", "en": "sky-below echo" },
+        { "ja": "反射主導の構図", "en": "reflection-led composition" },
+        { "ja": "室内と空の対比", "en": "interior-meets-sky contrast" },
+        { "ja": "窓から入る光を主役にする", "en": "light-through-window emphasis" },
+        { "ja": "静かな窓明かりの空気", "en": "silent window-lit atmosphere" },
+        { "ja": "空に対する人物シルエット感", "en": "figure-against-sky mood" },
+        { "ja": "コントラスト強めの画面圧", "en": "contrast-heavy framing" },
+        { "ja": "空気越しの奥行き感", "en": "depth-through-air mood" },
+        { "ja": "遠景をやわらげる", "en": "softened distant scenery" },
+        { "ja": "夢のような景色の膜", "en": "dreamlike scenic veil" }
+      ]
+    },
+    {
+      "group": "📐 見え方・構図補助",
+      "items": [
+        { "ja": "月を大きく見せる", "en": "dominant moon scale" },
+        { "ja": "低く垂れた月の圧", "en": "low-hanging moon pressure" },
+        { "ja": "空重心の構図", "en": "sky-focused composition" },
+        { "ja": "背景より上空を強める", "en": "moon-above-scenery emphasis" },
+        { "ja": "月の反射を強調", "en": "reflected moon accent" },
+        { "ja": "前景シルエットを効かせる", "en": "silhouette foreground emphasis" },
+        { "ja": "上空支配を強める", "en": "sky-dominant upper-air mood" }
+      ]
+    }
+  ]
+};
+
+function createSkyOverlayZone() {
+  const wrapper = document.createElement("div");
+  wrapper.className = "bg-sky-overlay-zone";
+  wrapper.style.marginBottom = "12px";
+
+  const heading = document.createElement("div");
+  heading.textContent = "🌌 空の状態・天体オーバーレイ";
+  heading.style.fontSize = "0.92em";
+  heading.style.fontWeight = "bold";
+  heading.style.color = "#374151";
+  heading.style.margin = "4px 0 8px";
+  wrapper.appendChild(heading);
+
+  const guide = document.createElement("div");
+  guide.textContent = "川辺・古城・墓地などの場所系完成セットを消さずに、月相、色月、異常月、星空密度、雲流れ、極光、稲妻雲、終末空に加えて、昼空、朝夕焼け、水面反射、窓光、逆光、霧越しの空気感まで上から重ねるための加算棚";
+  guide.style.fontSize = "0.84em";
+  guide.style.color = "#4b5563";
+  guide.style.margin = "2px 0 8px";
+  wrapper.appendChild(guide);
+
+  wrapper.appendChild(createBackgroundCollection(SKY_OVERLAY_COLLECTION));
+
+  const divider = document.createElement("div");
+  divider.style.margin = "10px 0 6px";
+  divider.style.paddingTop = "8px";
+  divider.style.borderTop = "1px solid #d1d5db";
+  divider.textContent = "🧩 背景特化コレクション";
+  divider.style.fontWeight = "bold";
+  divider.style.color = "#4b5563";
+  wrapper.appendChild(divider);
+
+  return wrapper;
+}
+
   const API = {
     initUI(container) {
       const parent = document.querySelector("#list-background") || container;
@@ -37889,6 +56978,7 @@ function createCollectionCheckbox(item, sectionKey, collectionId, options = {}) 
         BACKGROUND_COLLECTIONS.forEach(collection => {
           [collection.base, collection.customize, collection.settings].forEach(collectTranslation);
         });
+        [SKY_OVERLAY_COLLECTION.base, SKY_OVERLAY_COLLECTION.customize, SKY_OVERLAY_COLLECTION.settings].forEach(collectTranslation);
         window.__outputTranslation.register(dict);
       }
     },

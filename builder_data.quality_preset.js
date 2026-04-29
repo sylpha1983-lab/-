@@ -149,9 +149,34 @@
     ]
   };
   window.__QP_DB.secret = {
-    label: "✨SECRET・管理者専用（セット）", 
-    val: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4), (anime-realism blend:1.4), (semi-realistic rendering:1.2), (cinematic lighting:1.4), (ray tracing:1.3), (subsurface scattering:1.3), (global illumination:1.3), (physically based rendering:1.3), (unreal engine 5:1.2), (octane render:1.2), (lumen reflections:1.2), (nanite geometry:1.1), (realistic lighting:1.2), (shiny hair:1.4), (glossy hair:1.4), (specular sharp highlights:1.3), (high contrast specular edges:1.3), (strong rim lighting:1.4), (backlight glow:1.3), (light wrapping around body:1.3), (separate material response), (different reflectivity for skin and clothing), (glossy coated fabric:1.4), (mirror-like costume highlights:1.3), (volumetric lighting:1.3), (light particles in air), (spark-like bokeh lights), (stage-like luminous background), (cinematic portrait crop), (close-up upper body focus), (Kodak Portra 400), (low contrast)",
-    links: ["基本・最高画質", "光沢/ツヤ肌", "Specular", "Rim Light", "Material", "シネマティック", "Cinematic", "UE5", "PBR", "Perfect Face"]
+    label: "✨SECRET・管理者専用（セット）",
+    desc: "標準の強化版。画質・光・質感を広く底上げ。（文字数:589）",
+    val: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4), (anime-realism blend:1.35), (semi-realistic rendering:1.2), (refined details:1.35), (clean edge definition:1.3), (fine texture detail:1.25), (cinematic lighting:1.3), (global illumination:1.25), (soft ambient occlusion:1.2), (controlled bloom:1.2), (natural skin translucency:1.2), (subtle skin glow:1.15), (silky hair highlights:1.2), (clear specular highlights:1.2), (material separation:1.2), (rich color depth:1.2), (smooth tonal gradation:1.2), (soft rim light:1.15), (volumetric glow:1.15), (light particles in air)",
+    links: ["Masterpiece", "Best Quality", "Anime-Realism", "Refined Details", "Lighting", "Material"]
+  };
+  window.__QP_DB.secret_plain_lite = {
+    label: "✨SECRET・管理者専用（セット・強調なし軽量）",
+    desc: "ワード数軽め。普段使い・干渉少なめ。（文字数:486）",
+    val: "masterpiece, best quality, ultra high resolution, refined details, clean edge definition, fine texture detail, anime-realism blend, semi-realistic rendering, cinematic lighting, soft ambient occlusion, global illumination, controlled bloom, natural skin translucency, subtle skin glow, silky hair highlights, clear specular highlights, material separation, fabric texture detail, soft rim light, backlight glow, volumetric glow, light particles, rich color depth, smooth tonal gradation",
+    links: ["Masterpiece", "Best Quality", "Lightweight", "Details", "Lighting"]
+  };
+  window.__QP_DB.secret_limitbreak = {
+    label: "✨SECRET・管理者専用（リミットブレイク）",
+    desc: "強調あり。艶・反射・光を限界まで盛る。（文字数:702）",
+    val: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4), (anime-realism blend:1.4), (extreme refined details:1.35), (crisp detail definition:1.35), (clean edge definition:1.3), (fine texture detail:1.3), (cinematic lighting:1.45), (global illumination:1.35), (soft ambient occlusion:1.3), (controlled bloom:1.3), (crystal clear speculars:1.35), (layered light diffusion:1.3), (translucent skin glow:1.25), (silky hair highlights:1.35), (hard glossy reflections:1.3), (high energy highlights:1.3), (strong rim lighting:1.35), (backlight glow:1.35), (volumetric glow:1.3), (spark-like bokeh lights:1.25), (material separation:1.3), (glossy coated fabric:1.25), (dynamic light interaction:1.25)",
+    links: ["Limit Break", "Specular", "Gloss", "Rim Light", "Material"]
+  };
+  window.__QP_DB.secret_transparency = {
+    label: "✨SECRET・管理者専用（透明感）",
+    desc: "肌、髪、空気、光の柔らかさ重視。（文字数:355）",
+    val: "masterpiece, best quality, ultra high resolution, refined details, smooth tonal gradation, soft ambient occlusion, light diffusion, controlled bloom, translucent skin glow, subtle skin glow, silky hair highlights, clear specular highlights, soft rim light, backlight glow, volumetric glow, floating light particles, clean edge definition, rich color depth",
+    links: ["Transparency", "Skin Glow", "Hair Highlights", "Soft Light"]
+  };
+  window.__QP_DB.secret_precision_material = {
+    label: "✨SECRET・管理者専用（精密マテリアル）",
+    desc: "布、金属、髪、肌、衣装の質感分離重視。（文字数:354）",
+    val: "masterpiece, best quality, ultra high resolution, fine texture detail, material separation, different reflectivity for skin hair and clothing, fabric texture detail, polished surface reflection, glossy coated fabric, clear specular highlights, crisp detail definition, clean edge definition, soft ambient occlusion, global illumination, balanced contrast",
+    links: ["Material", "Fabric", "Specular", "Texture"]
   };
   window.__QP_DB.cg_anime_glow = {
     label: "✨CGアニメ艶彩",
@@ -183,9 +208,65 @@
     val: "(masterpiece:1.35), (best quality:1.35), (ultra high resolution:1.3), (CG animation:1.5), (anime style:1.15), (anime-realism blend:1.35), (semi-realistic rendering:1.25), (intricate details:1.3), (realistic textures:1.2), (extremely detailed skin, face, hair, background:1.2), (refined shading:1.3), (clean lineart), (cinematic lighting:1.3), (cool rim lighting:1.2), (blue-white glow:1.2), (cold atmospheric haze:1.15), (global illumination:1.15), (ambient occlusion:1.15), (ray tracing-inspired effects:1.15), (depth haze:1.05), (specular control:1.1), (clean material separation:1.1), (UHD, ultra-sharp details:1.25), (vivid anime-like colors:1.15), (shiny hair:1.15), (subtle skin glow:1.05), (drifting particle lights:1.1), (soft bokeh sparkles:1.05), (cool light bloom:1.1), (crisp luminous air:1.1), (cinematic framing:1.15), (depth of field:1.1), (high-quality image:1.3)",
     links: ["CG Animation", "Cool Rim Light", "Blue-White Glow", "Cold Haze", "AO", "Material Separation", "Sharper Details", "Cinematic" ]
   };
-  window.__QP_DB.secret_limitbreak = {
-    label: "✨SECRET・管理者専用（リミットブレイク）",
-    val: "(masterpiece:1.5), (best quality:1.5), (ultra high resolution:1.4), (anime-realism blend:1.4), (cinematic lighting:1.5), (ray tracing:1.4), (subsurface scattering:1.4), (global illumination:1.4), (physically based rendering:1.3), (unreal engine 5:1.2), (octane render:1.2), (shiny hair:1.4), (glossy hair:1.4), (specular sharp highlights:1.4), (high contrast specular edges:1.4), (hard glossy reflections:1.3), (strong rim lighting:1.4), (backlight glow:1.4), (light wrapping around body:1.3), (separate material response), (different reflectivity for skin and clothing), (glossy coated fabric:1.5), (mirror-like costume highlights:1.4), (volumetric lighting:1.3), (light particles in air), (spark-like bokeh lights), (stage-like luminous background), (cinematic portrait crop), (close-up upper body focus), (liquid surface tension effect:1.3), (light bleeding through wet skin:1.3), (dynamic light interaction), (Kodak Portra 400), (low contrast)",
-    links: ["基本・最高画質", "光沢/ツヤ肌", "Limit Break", "Specular", "Wet Light", "Material", "シネマティック", "Cinematic", "UE5", "PBR"]
+  window.__QP_DB.secret_boost_camera_portrait = {
+    label: "✨SECRET・ポートレートブースト",
+    desc: "顔・上半身・視線誘導を強める加算用ブースト（文字数:255）",
+    val: "(cinematic portrait crop), (portrait composition), (close-up upper body focus), (subject-centered framing), (focus on eyes), (85mm portrait lens look), (delicate facial lighting), (soft depth of field), (background compression), (camera-aware composition)",
+    links: ["Portrait", "Close-up", "Focus on Eyes", "Camera"]
   };
+  window.__QP_DB.secret_boost_camera_cinematic = {
+    label: "✨SECRET・シネマティックカメラブースト",
+    desc: "画角・構図・映画的ショット感を足す加算用ブースト（文字数:203）",
+    val: "(dynamic camera angle), (cinematic framing), (camera tilt), (depth of field:1.1), (foreground framing), (shot composition emphasis), (lens compression), (visual storytelling shot), (dramatic perspective)",
+    links: ["Cinematic", "Camera Angle", "Framing"]
+  };
+  window.__QP_DB.secret_boost_mood_candle_rose = {
+    label: "✨SECRET・燭光ローズムード",
+    desc: "蝋燭・薔薇・赤い空気感を足す加算用ムードブースト（文字数:201）",
+    val: "(candlelight glow), (rose petal ambience), (warm crimson ambience), (romantic mood), (seductive atmosphere), (soft flickering light), (velvet-like shadows), (luxurious red accent light), (intimate air)",
+    links: ["Candlelight", "Rose", "Mood"]
+  };
+  window.__QP_DB.secret_boost_mood_midnight = {
+    label: "✨SECRET・ミッドナイトムード",
+    desc: "夜・静けさ・妖しい余韻を足す加算用ムードブースト（文字数:162）",
+    val: "(midnight atmosphere), (cool nocturnal air), (blue-violet ambience), (quiet dramatic mood), (night glow), (soft darkness), (afterglow haze), (mysterious elegance)",
+    links: ["Midnight", "Night", "Mood"]
+  };
+  window.__QP_DB.secret_boost_material_luxury = {
+    label: "✨SECRET・ラグジュアリーマテリアルブースト",
+    desc: "布・金属・宝飾の材質差を強める加算用ブースト（文字数:233）",
+    val: "(separate material response), (different reflectivity for skin and clothing), (luxury fabric sheen), (glossy coated fabric), (mirror-like costume highlights), (fine jewelry reflections), (material realism), (premium polished surface)",
+    links: ["Material", "Luxury", "Gloss"]
+  };
+  window.__QP_DB.secret_boost_material_render = {
+    label: "✨SECRET・レンダー技術ブースト",
+    desc: "エンジン名なしでPBR・反射・シェーダ質感を足す加算用ブースト（文字数:374）",
+    val: "(physically based lighting), (ray-traced reflections), (shader-like material response), (subsurface scattering), (anisotropic highlights), (micro-surface detail), (realistic material response), (polished surface reflections), (clear specular highlights), (ambient occlusion), (volumetric lighting), (high dynamic range lighting), (global illumination), (material separation)",
+    links: ["PBR", "Shader", "Reflection", "Material"]
+  };
+  window.__QP_DB.secret_boost_liquid_wet_sheen = {
+    label: "✨SECRET・濡れ艶ブースト",
+    desc: "水分による艶・反射・湿度感を足す加算用ブースト（文字数:192）",
+    val: "(wet surface sheen), (subtle water sheen), (tiny water droplets), (glossy highlights on skin), (controlled wet speculars), (light reflecting on moisture), (soft humid air), (fresh wet texture)",
+    links: ["Wet Surface", "Droplets", "Specular"]
+  };
+  window.__QP_DB.secret_boost_liquid_reflection = {
+    label: "✨SECRET・液体反射ブースト",
+    desc: "水滴・液膜・反射光を強める液体表現ブースト（文字数:186）",
+    val: "(clear liquid surface), (rippling reflections), (liquid surface tension), (transparent water highlights), (caustic light accents), (fluid gloss), (thin liquid film), (sparkling droplets)",
+    links: ["Liquid", "Reflection", "Caustics"]
+  };
+  window.__QP_DB.secret_boost_skinlighting_translucency = {
+    label: "✨SECRET・肌透過光ブースト",
+    desc: "肌の透明感・血色・柔らかい光を足す加算用ブースト（文字数:200）",
+    val: "(natural skin translucency), (subsurface skin glow), (soft cheek light), (gentle skin highlights), (warm skin undertone), (smooth tonal gradation), (soft ambient bounce light), (delicate skin shading)",
+    links: ["Skin Light", "Translucency", "Soft Glow"]
+  };
+  window.__QP_DB.secret_boost_skinlighting_soft_highlight = {
+    label: "✨SECRET・柔肌ハイライトブースト",
+    desc: "肌ハイライト・影のつながり・顔周りの発光感を整えるブースト（文字数:202）",
+    val: "(silky skin highlights), (controlled skin bloom), (soft rim light on skin), (natural face glow), (clean shadow transitions), (fine skin texture detail), (healthy skin luminosity), (soft reflected light)",
+    links: ["Skin Highlight", "Face Glow", "Soft Light"]
+  };
+
 })();
