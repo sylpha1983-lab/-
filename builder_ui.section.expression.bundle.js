@@ -1148,6 +1148,7 @@
       { ja: "勝ち気満足顔", en: "confident smirk, steady gaze, relaxed face, certain victory expression" }
      ],
    "🔞 🤤絶頂・イキ顔セット  (orgasm)": [
+      { ja: "絶頂後顔セット", en: "close up eyes, ((exhausted, saliva, crying, empty eyes, lots of drool)), embarrassed, blush, (((Wet, sweat))), (Twitching), (speech bubble, {moaning)" },
       { ja: "絶頂後ベッド仰向け", en: "(lying on back), close up eyes, ((exhausted, saliva, crying, empty eyes, lots of drool)), embarrassed, blush, (((Wet, sweat))), on bed, head on pillow, (Twitching), (speech bubble, {moaning)" },
       { ja: "イキ顔セット", en: "(ahegao:1.3), (rolling eyes), (tongue out), (drooling), (v-shaped eyebrows), (pleasure face), (blush), (slobber), (euphoric tears), (ecstatic expression), heart-shaped pupils, heavy blush, heavy breathing, pleasure surrender, quivering lips, panting mouth, dilated pupils, pleasure priority, sound effect text, stylized sound effect text, speech bubble, motion lines, dynamic motion blur, moaning, heated breath, sensual sound effects, twitching, twitching motion lines" }
     ]
