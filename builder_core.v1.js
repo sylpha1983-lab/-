@@ -1221,8 +1221,8 @@ function applyCommercialDefaults(){
     if (!confirm("全てリセットしますか？")) return;
 
     // Many extension panels update their visibility/state via checkbox
-    // 'change' events (e.g. "生成内容の簡易可視化"). If we only flip
-    // `checked=false`, those panels can remain visible/stale after reset.
+    // 'change' events. If we only flip `checked=false`, those panels can
+    // remain visible/stale after reset.
     const allCheckboxes = Array.from(document.querySelectorAll("input[type='checkbox']"));
     allCheckboxes.forEach((el) => (el.checked = false));
     // Notify listeners after the state change.
