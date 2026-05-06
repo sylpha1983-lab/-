@@ -49548,6 +49548,21 @@
         "infernal_asmodeus_restraint",
         "infernal_asmodeus_quality_safe"
        ]
+      },
+      {
+       "id": "infernal_asmodeus_seduction_no_expression",
+       "label": "アスモデウス（色欲）王道セット 表情無しver / Asmodeus (Lust) Seductive No Expression Lock Set",
+       "val": "single humanoid demon noble, asmodeus of lust, clearly human face, elegant horns, silky hair, luxurious crimson-black attire, rose petals, warm candlelight, sensual but elegant presence, lust embodied through costume, posture, and atmosphere",
+       "desc": "表情固定なし：王道妖艶型を、視線・笑みを固定せず衣装と空気で成立させる",
+       "collection_id": "infernal_asmodeus_lust_collection",
+       "collection_role": "complete_set",
+       "linked_ids": [
+        "infernal_asmodeus_base_no_expression",
+        "infernal_asmodeus_preserve",
+        "infernal_asmodeus_no_expression_lock",
+        "infernal_asmodeus_restraint",
+        "infernal_asmodeus_quality_safe"
+       ]
       }
      ]
     },
@@ -49616,6 +49631,23 @@
         "infernal_asmodeus_redheat",
         "infernal_asmodeus_quality_nocturne"
        ]
+      },
+      {
+       "id": "infernal_asmodeus_honey_succubus_no_expression",
+       "label": "アスモデウス（色欲）蜜の味・夢魔の誘惑 表情無しver / Asmodeus (Lust) Honey Succubus No Expression Lock Set",
+       "val": "single adult humanoid succubus demon, asmodeus of lust, clearly human face, small curved horns, bat-like succubus wings, tail with heart tip, sheer black-crimson attire, steamy reddish atmosphere, pheromone aura, soft focus, honey-sweet demonic temptation carried by body silhouette and red haze",
+       "desc": "表情固定なし：蜜酔い表情を使わず、夢魔器官・赤霞・フェロモンで成立させる",
+       "collection_id": "infernal_asmodeus_lust_collection",
+       "collection_role": "complete_set",
+       "linked_ids": [
+        "infernal_asmodeus_base_no_expression",
+        "infernal_asmodeus_preserve",
+        "infernal_asmodeus_succubus_traits",
+        "infernal_asmodeus_redheat",
+        "infernal_asmodeus_no_expression_lock",
+        "infernal_asmodeus_restraint",
+        "infernal_asmodeus_quality_nocturne"
+       ]
       }
      ]
     },
@@ -49681,6 +49713,23 @@
         "infernal_asmodeus_gaze",
         "infernal_asmodeus_rose_chamber",
         "infernal_asmodeus_perfume",
+        "infernal_asmodeus_restraint",
+        "infernal_asmodeus_quality_safe"
+       ]
+      },
+      {
+       "id": "infernal_asmodeus_rose_no_expression",
+       "label": "アスモデウス（色欲）薔薇寝室 表情無しver / Asmodeus (Lust) Rose Chamber No Expression Lock Set",
+       "val": "single humanoid demon noble, asmodeus of lust, clearly human face, elegant horns, luxurious bedroom chamber, rose petals on silk sheets, candlelight, velvet shadows, sweet temptation through silk, roses, and warm private atmosphere",
+       "desc": "表情固定なし：薔薇寝室型を、寝室・薔薇・灯りで成立させる",
+       "collection_id": "infernal_asmodeus_lust_collection",
+       "collection_role": "complete_set",
+       "linked_ids": [
+        "infernal_asmodeus_base_no_expression",
+        "infernal_asmodeus_preserve",
+        "infernal_asmodeus_rose_chamber",
+        "infernal_asmodeus_perfume",
+        "infernal_asmodeus_no_expression_lock",
         "infernal_asmodeus_restraint",
         "infernal_asmodeus_quality_safe"
        ]
@@ -49754,6 +49803,23 @@
         "infernal_asmodeus_quality_safe",
         "infernal_asmodeus_quality_mythic"
        ]
+      },
+      {
+       "id": "infernal_asmodeus_throne_no_expression",
+       "label": "アスモデウス（色欲）色欲王座 表情無しver / Asmodeus (Lust) Sovereign Throne No Expression Lock Set",
+       "val": "single humanoid demon sovereign, asmodeus of lust, clearly human face, elegant horns, crimson throne room, velvet drapery, perfume haze, regal seated posture, desire as demonic authority, elegant lust demon-lord presence",
+       "desc": "表情固定なし：王座型を、姿勢・玉座・王権圧で成立させる",
+       "collection_id": "infernal_asmodeus_lust_collection",
+       "collection_role": "complete_set",
+       "linked_ids": [
+        "infernal_asmodeus_base_no_expression",
+        "infernal_asmodeus_preserve",
+        "infernal_asmodeus_sovereignty",
+        "infernal_asmodeus_setting",
+        "infernal_asmodeus_no_expression_lock",
+        "infernal_asmodeus_restraint",
+        "infernal_asmodeus_quality_mythic"
+       ]
       }
      ]
     },
@@ -49815,6 +49881,22 @@
         "infernal_asmodeus_gaze",
         "infernal_asmodeus_rose_palace",
         "infernal_asmodeus_perfume",
+        "infernal_asmodeus_quality_safe"
+       ]
+      },
+      {
+       "id": "infernal_asmodeus_rose_palace_no_expression",
+       "label": "アスモデウス（色欲）薔薇宮殿 表情無しver / Asmodeus (Lust) Rose Palace No Expression Lock Set",
+       "val": "single humanoid demon noble, asmodeus of lust, clearly human face, small curved horns, elegant black and crimson palace gown, rose palace hall, velvet drapery, rose petals floating, luxurious temptation aura, high-class demonic beauty carried by palace staging",
+       "desc": "表情固定なし：薔薇宮殿型を、宮殿・衣装・薔薇演出で成立させる",
+       "collection_id": "infernal_asmodeus_lust_collection",
+       "collection_role": "complete_set",
+       "linked_ids": [
+        "infernal_asmodeus_base_no_expression",
+        "infernal_asmodeus_preserve",
+        "infernal_asmodeus_rose_palace",
+        "infernal_asmodeus_perfume",
+        "infernal_asmodeus_no_expression_lock",
         "infernal_asmodeus_quality_safe"
        ]
       }
@@ -49880,6 +49962,22 @@
         "infernal_asmodeus_succubus_traits",
         "infernal_asmodeus_gaze",
         "infernal_asmodeus_redheat",
+        "infernal_asmodeus_quality_nocturne"
+       ]
+      },
+      {
+       "id": "infernal_asmodeus_redheat_no_expression",
+       "label": "アスモデウス（色欲）紅熱オーラ 表情無しver / Asmodeus (Lust) Red Heat Aura No Expression Lock Set",
+       "val": "single humanoid succubus demon, asmodeus of lust, clearly human face, small curved horns, bat-like succubus wings, tail with heart tip, sheer black-crimson attire, warm red haze, pheromone aura, red heat temptation, desire felt like atmospheric pressure",
+       "desc": "表情固定なし：紅熱オーラ型を、熱気・翼・尾・フェロモン圧で成立させる",
+       "collection_id": "infernal_asmodeus_lust_collection",
+       "collection_role": "complete_set",
+       "linked_ids": [
+        "infernal_asmodeus_base_no_expression",
+        "infernal_asmodeus_preserve",
+        "infernal_asmodeus_succubus_traits",
+        "infernal_asmodeus_redheat",
+        "infernal_asmodeus_no_expression_lock",
         "infernal_asmodeus_quality_nocturne"
        ]
       }
@@ -49948,6 +50046,22 @@
         "infernal_asmodeus_sovereignty",
         "infernal_asmodeus_quality_mythic"
        ]
+      },
+      {
+       "id": "infernal_asmodeus_audience_no_expression",
+       "label": "アスモデウス（色欲）色欲女王の謁見 表情無しver / Asmodeus (Lust) Audience No Expression Lock Set",
+       "val": "single humanoid demon queen, asmodeus of lust, clearly human face, small curved horns, elegant wings folded behind, formal audience hall, ceremonial carpet, crimson drapery, regal seated or standing posture, queen of lust receiving supplicants, temptation framed as royal decree",
+       "desc": "表情固定なし：謁見型を、姿勢・謁見空間・王命感で成立させる",
+       "collection_id": "infernal_asmodeus_lust_collection",
+       "collection_role": "complete_set",
+       "linked_ids": [
+        "infernal_asmodeus_base_no_expression",
+        "infernal_asmodeus_preserve",
+        "infernal_asmodeus_audience_hall",
+        "infernal_asmodeus_audience_pressure",
+        "infernal_asmodeus_no_expression_lock",
+        "infernal_asmodeus_quality_mythic"
+       ]
       }
      ]
     },
@@ -50011,6 +50125,22 @@
         "infernal_asmodeus_gaze",
         "infernal_asmodeus_lounge",
         "infernal_asmodeus_perfume",
+        "infernal_asmodeus_quality_nocturne"
+       ]
+      },
+      {
+       "id": "infernal_asmodeus_lounge_no_expression",
+       "label": "アスモデウス（色欲）夜宴ラウンジ 表情無しver / Asmodeus (Lust) Nocturne Lounge No Expression Lock Set",
+       "val": "single humanoid demon hostess, asmodeus of lust, clearly human face, small curved horns, relaxed lounge posture, decadent night lounge, velvet sofa, crimson ambient lighting, perfume haze, soft smoke, intoxicating nightlife temptation",
+       "desc": "表情固定なし：夜宴ラウンジ型を、姿勢・ソファ・煙・香気で成立させる",
+       "collection_id": "infernal_asmodeus_lust_collection",
+       "collection_role": "complete_set",
+       "linked_ids": [
+        "infernal_asmodeus_base_no_expression",
+        "infernal_asmodeus_preserve",
+        "infernal_asmodeus_lounge",
+        "infernal_asmodeus_perfume",
+        "infernal_asmodeus_no_expression_lock",
         "infernal_asmodeus_quality_nocturne"
        ]
       }
@@ -50078,6 +50208,22 @@
         "infernal_asmodeus_corrupt_grace",
         "infernal_asmodeus_quality_fallen"
        ]
+      },
+      {
+       "id": "infernal_asmodeus_fallen_no_expression",
+       "label": "アスモデウス（色欲）白翼反転 表情無しver / Asmodeus (Lust) Fallen White-Wing No Expression Lock Set",
+       "val": "single humanoid fallen succubus, asmodeus of lust, clearly human face, small curved horns, luminous white wings with crimson-violet glow, soft halo-like backlight, elegant black revealing attire, sacred beauty turning sinful, alluring corrupted grace carried by wings and light",
+       "desc": "表情固定なし：白翼反転型を、翼・後光・背徳神性で成立させる",
+       "collection_id": "infernal_asmodeus_lust_collection",
+       "collection_role": "complete_set",
+       "linked_ids": [
+        "infernal_asmodeus_base_no_expression",
+        "infernal_asmodeus_preserve",
+        "infernal_asmodeus_fallen_wings",
+        "infernal_asmodeus_corrupt_grace",
+        "infernal_asmodeus_no_expression_lock",
+        "infernal_asmodeus_quality_fallen"
+       ]
       }
      ]
     }
@@ -50106,6 +50252,20 @@
      "label": "アスモデウス・人型維持 / Asmodeus Humanoid Preservation",
      "val": "single humanoid character focus, clearly human face, human torso and limbs remain primary, humanoid proportions, horns attached to the head, demon traits integrated into the body",
      "desc": "人型主役を固定して別個体化を防ぐ",
+     "collection_id": "infernal_asmodeus_lust_collection",
+     "collection_role": "setting"
+    }
+   ]
+  },
+  {
+   "title_ja": "😶 表情固定なし",
+   "title_en": "No Expression Lock",
+   "children": [
+    {
+     "id": "infernal_asmodeus_no_expression_lock",
+     "label": "表情固定なし / No Expression Lock",
+     "val": "mood carried by posture, costume, lighting, and atmosphere",
+     "desc": "表情ワードを固定せず、所作・衣装・光・空気で色欲感を出す",
      "collection_id": "infernal_asmodeus_lust_collection",
      "collection_role": "setting"
     }
@@ -50316,6 +50476,14 @@
      "label": "アスモデウス本体 / Asmodeus Base",
      "val": "humanoid demon noble, asmodeus motif, clearly human face, elegant horns, seductive gaze, silky hair, refined seductive aura, crimson-black luxury attire",
      "desc": "色欲アスモデウスの基本素体",
+     "collection_id": "infernal_asmodeus_lust_collection",
+     "collection_role": "base"
+    },
+    {
+     "id": "infernal_asmodeus_base_no_expression",
+     "label": "アスモデウス本体・表情固定なし / Asmodeus Base No Expression Lock",
+     "val": "humanoid demon noble, asmodeus motif, clearly human face, elegant horns, silky hair, crimson-black luxury attire, refined lust aura",
+     "desc": "表情を固定しないアスモデウス基礎素体",
      "collection_id": "infernal_asmodeus_lust_collection",
      "collection_role": "base"
     }
@@ -51124,4 +51292,68 @@
  window.PRESET_PACKS_DB = db;
  window.__PRESET_PACKS_DB = db;
  } catch(e) {}
+})();
+
+
+/* === Secret adult sound/motion preset packs: attach to existing R-18 Expression FX shelf === */
+(function addSecretAdultSoundMotionFxPacks(){
+  "use strict";
+  try {
+    var db = (window.__PP_DB && window.__PP_DB.packs) || window.PRESET_PACKS_DB || window.__PRESET_PACKS_DB;
+    if (!db || typeof db !== "object") return;
+    if (localStorage.getItem("MY_SECRET_UNLOCK") !== "true") return;
+
+    var key = "🔞 R-18 表情演出プリセット (Adult Expression FX Packs)";
+    if (!Array.isArray(db[key])) db[key] = [];
+
+    function titleOf(node) {
+      return String((node && (node.title_ja || node.label || node.title || node.ja)) || "");
+    }
+    function hasTitle(arr, title) {
+      if (!Array.isArray(arr)) return false;
+      for (var i = 0; i < arr.length; i++) {
+        if (titleOf(arr[i]) === title) return true;
+      }
+      return false;
+    }
+    function addNode(node) {
+      if (!hasTitle(db[key], node.title_ja)) db[key].push(node);
+    }
+
+    addNode({
+      title_ja: "🔊 声・吐息",
+      title_en: "Voice & Breath",
+      children: [
+        { id: "r18_fx_voice_moaning", label: "あえぎ声セット", desc: "あえぎ＋吐息＋熱っぽさ", val: "(moaning), (heated breath), (parted lips), (flushed face), (breathy voice)" },
+        { id: "r18_fx_voice_muffled", label: "押し殺した声セット", desc: "小声＋抑えた吐息＋赤面", val: "(muffled moan), (restrained breath), (quiet voice), (deep blush), (wavering composure)" },
+        { id: "r18_fx_voice_breathy", label: "かすれ吐息セット", desc: "かすれ声＋荒い息＋半目", val: "(breathy moan), (heavy breathing), (half-closed eyes), (parted lips), (heated expression)" },
+        { id: "r18_fx_voice_soft", label: "小さな声漏れセット", desc: "小さな声＋震え息＋潤み", val: "(soft moan), (shaky breath), (watery eyes), (soft blush), (unsteady expression)" }
+      ]
+    });
+
+    addNode({
+      title_ja: "💓 震え・ぴくつき",
+      title_en: "Twitch & Tremble",
+      children: [
+        { id: "r18_fx_motion_twitch", label: "ぴくつき反応セット", desc: "ぴくつき＋小刻みな震え", val: "(twitching), (subtle twitching), (small body tremor), (flushed face), (strained composure)" },
+        { id: "r18_fx_motion_tremble", label: "震えモーションセット", desc: "震え＋荒い息＋余裕崩れ", val: "(trembling motion), (shivering reaction), (heavy breathing), (wavering composure), (heated blush)" },
+        { id: "r18_fx_motion_quiver", label: "唇と吐息の震えセット", desc: "震える唇＋震え息", val: "(quivering lips), (quivering breath), (parted lips), (watery eyes), (deep blush)" },
+        { id: "r18_fx_motion_lines", label: "ぴくつき線セット", desc: "ぴくつき線＋反応の強調", val: "(twitching motion lines), (subtle motion lines), (small body tremor), (reaction emphasis)" }
+      ]
+    });
+
+    addNode({
+      title_ja: "💬 成人寄せ擬音",
+      title_en: "Adult Sound Text",
+      children: [
+        { id: "r18_fx_text_sound", label: "成人寄せ効果音セット", desc: "効果音文字＋艶っぽい擬音", val: "(adult sound effect text), (sensual sound effects), (stylized sound effect text), (speech bubble)" },
+        { id: "r18_fx_text_moanmark", label: "声記号セット", desc: "声の記号＋吐息の可視化", val: "(moan marks), (breath symbols), (small sound effect text), (manga sound effects)" },
+        { id: "r18_fx_text_reaction", label: "反応擬音セット", desc: "反応音＋動き線＋ブラー", val: "(reaction sound effects), (twitching motion lines), (dynamic motion blur), (motion lines)" }
+      ]
+    });
+
+    if (window.__PP_DB) window.__PP_DB.packs = db;
+    window.PRESET_PACKS_DB = db;
+    window.__PRESET_PACKS_DB = db;
+  } catch (e) {}
 })();

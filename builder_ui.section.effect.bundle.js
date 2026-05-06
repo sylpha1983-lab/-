@@ -379,6 +379,16 @@
       { ja: "接続ケーブル", en: "data cables, power conduits, tether lines, neural connector cords" },
       { ja: "整備印字・注意ラベル", en: "maintenance markings, serial numbers, warning labels, service print, panel text" }
     ],
+    "🔊 効果音・動き表現 (Sound & Motion FX)": [
+      { ja: "効果音テキスト", en: "sound effect text" },
+      { ja: "漫画風効果音", en: "manga sound effects" },
+      { ja: "装飾効果音テキスト", en: "stylized sound effect text" },
+      { ja: "吹き出し", en: "speech bubble" },
+      { ja: "モーションライン", en: "motion lines" },
+      { ja: "ダイナミックモーションブラー", en: "dynamic motion blur" },
+      { ja: "控えめモーションブラー", en: "subtle motion blur" },
+      { ja: "アクションブラー", en: "action blur" }
+    ],
     "📹 モニター・画質演出 (Screen Artifacts)": [
       { ja: "VHS (ビデオテープ風)", en: "vhs artifacts, tracking error, magnetic tape noise, 90s footage" },
       { ja: "グリッチ (バグ・ノイズ)", en: "glitch art, datamoshing, digital distortion, corrupted image" },
@@ -414,6 +424,18 @@
       { ja: "あえぎ声 (文字浮かび)", en: "erotic moan text floating" },
       { ja: "愛のオーラ", en: "love aura" },
       { ja: "魅惑的な輝き", en: "seductive glow" }
+    ],
+    "💓 声・反応・擬音 (Reaction & Vocal FX)": [
+      { ja: "あえぎ", en: "moaning" },
+      { ja: "熱を含む吐息", en: "heated breath" },
+      { ja: "かすれ声", en: "breathy moan" },
+      { ja: "押し殺した声", en: "muffled moan" },
+      { ja: "成人寄せ効果音テキスト", en: "adult sound effect text" },
+      { ja: "艶っぽい擬音", en: "sensual sound effects" },
+      { ja: "ぴくつき", en: "twitching" },
+      { ja: "小刻みなぴくつき", en: "subtle twitching" },
+      { ja: "震えモーション", en: "trembling motion" },
+      { ja: "ぴくつき線", en: "twitching motion lines" }
     ]
   };
 
@@ -448,12 +470,17 @@
     "letterbox": "レターボックス", "(black bars:1.4)": "黒帯(強)", "movie screencap": "映画スクショ風", "cinematic aspect ratio": "シネマ比率", "widescreen": "ワイドスクリーン", "anamorphic lens": "アナモルフィックレンズ", "2.35:1": "シネスコ",
     "black bars": "黒帯", "polaroid frame": "ポラロイド枠", "instant photo border": "インスタント写真枠",
     "view through smartphone": "スマホ画面越し", "phone camera interface": "カメラインターフェース", "rec button": "録画ボタン",
+    "sound effect text": "効果音テキスト", "manga sound effects": "漫画風効果音", "stylized sound effect text": "装飾効果音テキスト", "speech bubble": "吹き出し",
+    "motion lines": "モーションライン", "dynamic motion blur": "ダイナミックモーションブラー", "subtle motion blur": "控えめモーションブラー", "action blur": "アクションブラー",
     
     // ★ R-18用の翻訳辞書を追加
     "pink breath": "ピンクの吐息", "foggy breath trails": "白く霞んだ吐息", "steamy": "湯気", "hot atmosphere": "熱気", 
     "pink atmosphere": "ピンク色の空気感", "sensual lighting": "官能的な照明", "erotic atmosphere": "エロティックな空間",
     "heart particles": "♡のパーティクル", "floating hearts": "浮かぶ♡マーク", "smeared heart-shaped breath patches": "♡型の吐息の跡", 
-    "erotic moan text floating": "あえぎ声(文字)", "love aura": "愛のオーラ", "seductive glow": "魅惑的な輝き"
+    "erotic moan text floating": "あえぎ声(文字)", "love aura": "愛のオーラ", "seductive glow": "魅惑的な輝き",
+    "moaning": "あえぎ", "heated breath": "熱を含む吐息", "breathy moan": "かすれ声", "muffled moan": "押し殺した声",
+    "adult sound effect text": "成人寄せ効果音テキスト", "sensual sound effects": "艶っぽい擬音",
+    "twitching": "ぴくつき", "subtle twitching": "小刻みなぴくつき", "trembling motion": "震えモーション", "twitching motion lines": "ぴくつき線"
   };
 
   const API = {

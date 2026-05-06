@@ -153,6 +153,9 @@
       { ja: "優位確信顔", en: "confident lewd smile, superior look, heavy breathing, mocking eyes" },
       { ja: "してやったり顔", en: "smug grin, satisfied eyes, playful confidence, triumphant expression" },
       { ja: "勝ち気満足顔", en: "confident smirk, steady gaze, relaxed face, certain victory expression" }
+     ],
+   "🔞 🤤絶頂・イキ顔セット  (orgasm)": [
+      { ja: "絶頂後ベッド仰向け", en: "(lying on back), close up eyes, ((exhausted, saliva, crying, empty eyes, lots of drool)), embarrassed, blush, (((Wet, sweat))), on bed, head on pillow, (Twitching), (speech bubble, {moaning)" },
     ]
   };
 
@@ -1143,6 +1146,10 @@
       { ja: "優位確信顔", en: "confident lewd smile, superior look, heavy breathing, mocking eyes" },
       { ja: "してやったり顔", en: "smug grin, satisfied eyes, playful confidence, triumphant expression" },
       { ja: "勝ち気満足顔", en: "confident smirk, steady gaze, relaxed face, certain victory expression" }
+     ],
+   "🔞 🤤絶頂・イキ顔セット  (orgasm)": [
+      { ja: "絶頂後ベッド仰向け", en: "(lying on back), close up eyes, ((exhausted, saliva, crying, empty eyes, lots of drool)), embarrassed, blush, (((Wet, sweat))), on bed, head on pillow, (Twitching), (speech bubble, {moaning)" },
+      { ja: "イキ顔セット", en: "(ahegao:1.3), (rolling eyes), (tongue out), (drooling), (v-shaped eyebrows), (pleasure face), (blush), (slobber), (euphoric tears), (ecstatic expression), heart-shaped pupils, heavy blush, heavy breathing, pleasure surrender, quivering lips, panting mouth, dilated pupils, pleasure priority, sound effect text, stylized sound effect text, speech bubble, motion lines, dynamic motion blur, moaning, heated breath, sensual sound effects, twitching, twitching motion lines" }
     ]
   };
 
@@ -2031,10 +2038,11 @@
       // 2. ★ シークレットモードONの時だけ、R-18カテゴリーを追加
       if (IS_UNLOCKED) {
         const migratedSecretExpressionCats = new Set([
-          "🥴 酩酊・洗脳・催眠 (Mind Alteration)",
-          "🤪 恍惚・快楽 (Ecstasy)",
-          "👀 狂気・虚無の瞳 (Broken Eyes)"
+          // "🥴 酩酊・洗脳・催眠 (Mind Alteration)"
+          // "🤪 恍惚・快楽 (Ecstasy)",
+          // "👀 狂気・虚無の瞳 (Broken Eyes)"
         ]);
+
         Object.entries(SECRET_EXPRESSION_DATA).forEach(([cat, items]) => {
           if (migratedSecretExpressionCats.has(cat)) return;
           root.appendChild(createCat(cat, items, true));
