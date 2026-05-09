@@ -125,11 +125,11 @@
   }
 
   function clearAllCheckboxes() {
+    // 履歴復元は「静音トランザクション」として扱う。
+    // checkbox の change を大量発火すると、linked_ids / autosave / Prompt Compiler v2 / 再描画が
+    // 復元中に何度も走り、出力順セレクトが通常へ戻る等の副作用が出やすい。
     const boxes = Array.from(document.querySelectorAll('input[type="checkbox"]'));
     boxes.forEach(cb => { cb.checked = false; });
-    boxes.forEach(cb => {
-      cb.dispatchEvent(new Event('change', { bubbles: true }));
-    });
   }
 
   function openAncestors(el) {
@@ -215,7 +215,6 @@
       used.add(cb);
       cb.checked = true;
       openAncestors(cb);
-      cb.dispatchEvent(new Event('change', { bubbles: true }));
       restored++;
     });
 
@@ -403,12 +402,27 @@
             return;
           }
 
+          let restoredCount = 0;
           window.__historyRestoring = true;
-          const restoredCount = restoreCheckedItems(item.checkedItems || []);
-          out.value = item.text || '';
-          out.dispatchEvent(new Event('input', { bubbles: true }));
-          out.dispatchEvent(new Event('change', { bubbles: true }));
-          window.__historyRestoring = false;
+          window.__historySilentRestoring = true;
+          try {
+            restoredCount = restoreCheckedItems(item.checkedItems || []);
+            // 履歴の text はフォールバック表示としてだけ入れる。
+            // input/change は発火させず、最後に1回だけ generateOutput で現在モードの出力へ再構築する。
+            out.value = item.text || '';
+          } finally {
+            window.__historyRestoring = false;
+            window.__historySilentRestoring = false;
+          }
+
+          // 復元したチェック状態を基準に、現在の出力順モードで一度だけ再生成する。
+          // change 大量発火ではなく、ここに処理を集約することで履歴復元を静音化する。
+          setTimeout(function(){
+            try {
+              if (typeof window.__builderGenerateOutput === 'function') window.__builderGenerateOutput();
+              window.dispatchEvent(new CustomEvent('builderHistoryRestored', { detail: { restoredCount: restoredCount } }));
+            } catch (e) {}
+          }, 0);
 
           showHistoryRestoreToast(restoredCount);
 

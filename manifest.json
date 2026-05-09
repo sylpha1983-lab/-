@@ -1,12 +1,9 @@
 {
   "version": "Completed v1.1",
-  "display_settings": [
-    "生成内容の簡易可視化 (default OFF)"
-  ],
+  "display_settings": [],
   "features": [
     "HC Emotional System",
     "World Preset Prompt Packs",
-    "Beginner-safe visualization (optional)",
     "Silent Professional UI"
   ],
   "core_modules": [

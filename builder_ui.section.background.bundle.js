@@ -40789,1745 +40789,2496 @@ const BG_EFFECTS = {
       }
     ]
   },
-  {
-    "id": "airborne_flight_view_collection",
-    "title": "🪽 空中・飛行視点特化コレクション",
-    "subtitle": "街、学校、森、草原、川、山、海、雲上まで、何の上をどの高さでどう飛ぶかに加えて、機窓・キャノピー越しの乗り物寄り視点から、生身で風と雨を直に受ける飛翔視点まで、眼下情報、傾き、風圧、雲の位置で『空にいる視点』を成立させる空中・飛行視点特化コレクション",
-    "complete": [
-      {
-        "group": "🏙 都市上空",
-        "items": [
+    {
+      "id": "airborne_flight_view_collection",
+      "title": "🪽 空中・飛行視点特化コレクション",
+      "subtitle": "街、学校、森、草原、川、山、海、雲上まで、何の上をどの高さでどう飛ぶかに加えて、機窓・キャノピー越しの乗り物寄り視点から、生身で風と雨を直に受ける飛翔視点まで、宇宙空間、無重力浮遊、軌道上視点、艦隊戦・人型ロボット戦・戦闘機戦闘中の宇宙戦闘視点まで、眼下情報、傾き、風圧、雲の位置で『空にいる視点』を成立させる空中・飛行視点特化コレクション",
+      "complete": [
           {
-            "id": "twilight_city_overflight",
-            "ja": "黄昏の街の上空",
-            "links": {
-              "base": [
-                "city overflight",
-                "elevated-highway overflight"
-              ],
-              "customize": [
-                "sunset grazing light",
-                "ground-shrinking distance",
-                "straight-flight feel"
-              ],
-              "settings": [
-                "rooftop grid below",
-                "elevated highway line",
-                "tilted horizon line",
-                "city-block shadow bands"
+              "group": "🏙 都市上空",
+              "items": [
+                  {
+                      "id": "twilight_city_overflight",
+                      "ja": "黄昏の街の上空",
+                      "links": {
+                          "base": [
+                              "city overflight",
+                              "elevated-highway overflight"
+                          ],
+                          "customize": [
+                              "sunset grazing light",
+                              "ground-shrinking distance",
+                              "straight-flight feel"
+                          ],
+                          "settings": [
+                              "rooftop grid below",
+                              "elevated highway line",
+                              "tilted horizon line",
+                              "city-block shadow bands"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "lowpass_highrise_canyon",
+                      "ja": "ビル群を越える低空飛行",
+                      "links": {
+                          "base": [
+                              "highrise overflight",
+                              "dense skyline overflight"
+                          ],
+                          "customize": [
+                              "rooftop-skimming altitude",
+                              "wind-pressure rush",
+                              "banking tilt"
+                          ],
+                          "settings": [
+                              "highrise glass reflections below",
+                              "roof equipment clusters",
+                              "rooftop water tanks",
+                              "shrinking-ground edges"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "night_citylights_overflight",
+                      "ja": "夜景を見下ろす都市上空",
+                      "links": {
+                          "base": [
+                              "night city overflight",
+                              "city overflight"
+                          ],
+                          "customize": [
+                              "night cityglow scatter",
+                              "high-altitude remoteness",
+                              "gliding hush"
+                          ],
+                          "settings": [
+                              "night traffic beadlines",
+                              "city light clusters below",
+                              "bridge-line lights below",
+                              "far-horizon glow"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "raincleared_urban_overflight",
+                      "ja": "雨上がりの街を滑る上空視点",
+                      "links": {
+                          "base": [
+                              "city overflight",
+                              "bridge-crossing overflight"
+                          ],
+                          "customize": [
+                              "sunlit upper-air clarity",
+                              "cloud-shadow sweep below",
+                              "gentle descent"
+                          ],
+                          "settings": [
+                              "wet rooftops below",
+                              "river silver thread",
+                              "broken cloud gap",
+                              "city-block shadow bands"
+                          ]
+                      }
+                  }
               ]
-            }
           },
           {
-            "id": "lowpass_highrise_canyon",
-            "ja": "ビル群を越える低空飛行",
-            "links": {
-              "base": [
-                "highrise overflight",
-                "dense skyline overflight"
-              ],
-              "customize": [
-                "rooftop-skimming altitude",
-                "wind-pressure rush",
-                "banking tilt"
-              ],
-              "settings": [
-                "highrise glass reflections below",
-                "roof equipment clusters",
-                "rooftop water tanks",
-                "shrinking-ground edges"
+              "group": "🏫 学校・生活圏上空",
+              "items": [
+                  {
+                      "id": "sunset_school_overflight",
+                      "ja": "夕方の学校上空",
+                      "links": {
+                          "base": [
+                              "school campus overflight",
+                              "suburban district overflight"
+                          ],
+                          "customize": [
+                              "sunset grazing light",
+                              "roads-turn-to-lines",
+                              "straight-flight feel"
+                          ],
+                          "settings": [
+                              "schoolyard rectangle",
+                              "pool blue patch",
+                              "residential block pattern",
+                              "school-roof geometry"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "low_schoolyard_pass",
+                      "ja": "校庭を見下ろす低空飛行",
+                      "links": {
+                          "base": [
+                              "school campus overflight",
+                              "schoolyard overflight"
+                          ],
+                          "customize": [
+                              "near-ground low altitude",
+                              "wind-pressure rush",
+                              "eye-line dragged downward"
+                          ],
+                          "settings": [
+                              "schoolyard rectangle",
+                              "track oval markings below",
+                              "pool blue patch",
+                              "low rooftop shadows"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "dawn_residential_overflight",
+                      "ja": "住宅街の屋根を越える朝の上空",
+                      "links": {
+                          "base": [
+                              "residential district overflight",
+                              "suburban district overflight"
+                          ],
+                          "customize": [
+                              "dawn side light",
+                              "ground-shrinking distance",
+                              "gliding hush"
+                          ],
+                          "settings": [
+                              "residential block pattern",
+                              "roof tile patterns below",
+                              "narrow street grid",
+                              "far-horizon glow"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "midday_suburban_flow",
+                      "ja": "郊外の生活圏を流れる昼の上空",
+                      "links": {
+                          "base": [
+                              "suburban district overflight",
+                              "bridge-crossing overflight"
+                          ],
+                          "customize": [
+                              "noon top light",
+                              "mid-altitude lookdown",
+                              "crosswind drift"
+                          ],
+                          "settings": [
+                              "residential block pattern",
+                              "rail-line streak below",
+                              "river silver thread",
+                              "district road grid"
+                          ]
+                      }
+                  }
               ]
-            }
           },
           {
-            "id": "night_citylights_overflight",
-            "ja": "夜景を見下ろす都市上空",
-            "links": {
-              "base": [
-                "night city overflight",
-                "city overflight"
-              ],
-              "customize": [
-                "night cityglow scatter",
-                "high-altitude remoteness",
-                "gliding hush"
-              ],
-              "settings": [
-                "night traffic beadlines",
-                "city light clusters below",
-                "bridge-line lights below",
-                "far-horizon glow"
+              "group": "🌲 自然地形上空",
+              "items": [
+                  {
+                      "id": "dawn_forest_mist_overflight",
+                      "ja": "森の上空を抜ける朝霧",
+                      "links": {
+                          "base": [
+                              "forest canopy overflight",
+                              "mist valley overflight"
+                          ],
+                          "customize": [
+                              "dawn upper-air chill",
+                              "treetop-skimming altitude",
+                              "cloud-cut dampness"
+                          ],
+                          "settings": [
+                              "forest canopy mosaic",
+                              "mist pockets below",
+                              "tree-crown highlight patches",
+                              "shrinking-ground edges"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "noon_grassland_aerial",
+                      "ja": "草原の上空を流れる昼の風",
+                      "links": {
+                          "base": [
+                              "grassland overflight",
+                              "plateau grassland overflight"
+                          ],
+                          "customize": [
+                              "noon top light",
+                              "crosswind drift",
+                              "mid-altitude lookdown"
+                          ],
+                          "settings": [
+                              "grassland color field",
+                              "wind-bent grass streaks below",
+                              "field-boundary lines",
+                              "long river meander below"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "sunset_riverbend_aerial",
+                      "ja": "河川の蛇行を見下ろす上空",
+                      "links": {
+                          "base": [
+                              "river bend overflight",
+                              "wetland overflight"
+                          ],
+                          "customize": [
+                              "sunset grazing light",
+                              "river-thread below",
+                              "gentle descent"
+                          ],
+                          "settings": [
+                              "river silver thread",
+                              "sandbar patterns below",
+                              "reflective water strips",
+                              "floodplain patchwork"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "ridge_crossing_mountain_flight",
+                      "ja": "山脈の稜線を越える上空",
+                      "links": {
+                          "base": [
+                              "mountain range overflight",
+                              "ridge overflight"
+                          ],
+                          "customize": [
+                              "climbing ascent",
+                              "high-altitude remoteness",
+                              "dry upper air"
+                          ],
+                          "settings": [
+                              "mountain ridge bands",
+                              "snowless rock ribs below",
+                              "deep valley folds",
+                              "far-horizon glow"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "coastline_evening_overflight",
+                      "ja": "海岸線をなぞる夕方の上空",
+                      "links": {
+                          "base": [
+                              "coastline overflight",
+                              "sea overflight"
+                          ],
+                          "customize": [
+                              "sunset grazing light",
+                              "crosswind drift",
+                              "ground-shrinking distance"
+                          ],
+                          "settings": [
+                              "coastline white fringe",
+                              "sea reflection band",
+                              "harbor outlines below",
+                              "cliff-shadow bands"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "desert_pattern_highaltitude",
+                      "ja": "砂漠の模様が沈む高高度",
+                      "links": {
+                          "base": [
+                              "desert dune overflight",
+                              "canyon overflight"
+                          ],
+                          "customize": [
+                              "high-altitude remoteness",
+                              "dry upper air",
+                              "ground-shrinking distance"
+                          ],
+                          "settings": [
+                              "desert dune patterns",
+                              "canyon cuts below",
+                              "salt-flat gleam patches",
+                              "long terrain shadow bands"
+                          ]
+                      }
+                  }
               ]
-            }
           },
           {
-            "id": "raincleared_urban_overflight",
-            "ja": "雨上がりの街を滑る上空視点",
-            "links": {
-              "base": [
-                "city overflight",
-                "bridge-crossing overflight"
-              ],
-              "customize": [
-                "sunlit upper-air clarity",
-                "cloud-shadow sweep below",
-                "gentle descent"
-              ],
-              "settings": [
-                "wet rooftops below",
-                "river silver thread",
-                "broken cloud gap",
-                "city-block shadow bands"
+              "group": "☁ 雲上・高高度",
+              "items": [
+                  {
+                      "id": "cloudsea_morning_flight",
+                      "ja": "雲海の上を進む朝の飛行景",
+                      "links": {
+                          "base": [
+                              "above cloud sea",
+                              "above cloud tops"
+                          ],
+                          "customize": [
+                              "above-cloud altitude",
+                              "dawn side light",
+                              "gliding hush"
+                          ],
+                          "settings": [
+                              "cloud sea surface",
+                              "sunlit cloud rim",
+                              "layered cloud horizon",
+                              "far-horizon glow"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "cloudgap_breakthrough",
+                      "ja": "雲層の切れ目を抜ける飛行景",
+                      "links": {
+                          "base": [
+                              "between cloud layers",
+                              "storm-edge overflight"
+                          ],
+                          "customize": [
+                              "between-cloud-layer flight",
+                              "cloud-cut dampness",
+                              "cloud-shadow sweep below"
+                          ],
+                          "settings": [
+                              "broken cloud gap",
+                              "cloud-wall edge",
+                              "sunlit cloud rim",
+                              "shifting-light columns below"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "moonlit_abovecloud_flight",
+                      "ja": "月光の雲上飛行景",
+                      "links": {
+                          "base": [
+                              "moonlit cloud-top flight",
+                              "above cloud tops"
+                          ],
+                          "customize": [
+                              "moonlit silver wash",
+                              "above-cloud altitude",
+                              "night-cooled atmosphere"
+                          ],
+                          "settings": [
+                              "moonlit cloud tops",
+                              "thin crescent from above",
+                              "starlight scatter",
+                              "tilted horizon line"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "starnear_highalt_night",
+                      "ja": "星の近い高高度の夜空飛行",
+                      "links": {
+                          "base": [
+                              "high-altitude sky lane",
+                              "stratosphere-leaning flight path"
+                          ],
+                          "customize": [
+                              "starlit high-altitude clarity",
+                              "high-altitude remoteness",
+                              "straight-flight feel"
+                          ],
+                          "settings": [
+                              "dense starlight field",
+                              "upper-atmosphere gradient",
+                              "far-thin cloud belt",
+                              "earth-haze curve"
+                          ]
+                      }
+                  }
               ]
-            }
+          },
+          {
+              "group": "🌦 天候変化を切る飛行景",
+              "items": [
+                  {
+                      "id": "rainshaft_lowpass_flight",
+                      "ja": "雨脚を抜ける低空飛行景",
+                      "links": {
+                          "base": [
+                              "rain-shaft overflight",
+                              "bridge-crossing overflight"
+                          ],
+                          "customize": [
+                              "rain-curtain pass",
+                              "reduced-visibility flight",
+                              "near-ground low altitude"
+                          ],
+                          "settings": [
+                              "slanted rain bands below",
+                              "wet reflective corridors",
+                              "mist-smeared horizon",
+                              "forward motion streak in rain"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "headwind_climb_mountain_route",
+                      "ja": "向かい風に押し返される上昇飛行",
+                      "links": {
+                          "base": [
+                              "storm-gap overflight",
+                              "mountain range overflight"
+                          ],
+                          "customize": [
+                              "headwind climb",
+                              "climbing ascent",
+                              "storm-front tension"
+                          ],
+                          "settings": [
+                              "wind-torn cloud strips",
+                              "tilted horizon line",
+                              "deep valley folds",
+                              "gust shear lines"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "crosswind_sea_bank_flight",
+                      "ja": "横風で傾く海上飛行景",
+                      "links": {
+                          "base": [
+                              "crosswind sea lane",
+                              "sea overflight"
+                          ],
+                          "customize": [
+                              "crosswind drift",
+                              "banking tilt",
+                              "sea-spray haze from above"
+                          ],
+                          "settings": [
+                              "whitecap lines below",
+                              "sea reflection band",
+                              "drifted cloud shadows",
+                              "off-center horizon"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "snowsquall_winter_flight",
+                      "ja": "雪雲の下を抜ける冬の飛行景",
+                      "links": {
+                          "base": [
+                              "snow-squall overflight",
+                              "ridge overflight"
+                          ],
+                          "customize": [
+                              "snow-flurry pass",
+                              "night-cooled atmosphere",
+                              "reduced-visibility flight"
+                          ],
+                          "settings": [
+                              "broken snow bands below",
+                              "cold blue horizon",
+                              "wind-torn cloud strips",
+                              "snowless rock ribs below"
+                          ]
+                      }
+                  }
+              ]
+          },
+          {
+              "group": "🎥 飛行視点・航路演出",
+              "items": [
+                  {
+                      "id": "sunbreak_descent_flight",
+                      "ja": "雲の切れ間へ降りる俯角飛行",
+                      "links": {
+                          "base": [
+                              "between cloud layers",
+                              "sunbreak overflight"
+                          ],
+                          "customize": [
+                              "gentle descent",
+                              "forward-pulled viewpoint",
+                              "sunbreak shaft crossing"
+                          ],
+                          "settings": [
+                              "broken cloud gap",
+                              "light-columns through gaps",
+                              "eye-line dragged downward",
+                              "shifting-light columns below"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "horizon_slice_banking_turn",
+                      "ja": "地平線を斜めに切る旋回飛行",
+                      "links": {
+                          "base": [
+                              "high-altitude sky lane",
+                              "tower-cluster overflight"
+                          ],
+                          "customize": [
+                              "banking tilt",
+                              "horizon-slicing turn",
+                              "ground-shrinking distance"
+                          ],
+                          "settings": [
+                              "tilted horizon line",
+                              "far-horizon glow",
+                              "city light clusters below",
+                              "earth-haze curve"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "jetstream_straight_cruise",
+                      "ja": "雲上を一直線に抜ける巡航視点",
+                      "links": {
+                          "base": [
+                              "jetstream cruise lane",
+                              "above cloud tops"
+                          ],
+                          "customize": [
+                              "straight-flight feel",
+                              "high-speed pass",
+                              "dry upper air"
+                          ],
+                          "settings": [
+                              "layered cloud horizon",
+                              "jetstream streaks above",
+                              "far-thin cloud belt",
+                              "earth-haze curve"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "moonrim_quiet_night_flight",
+                      "ja": "月光の雲縁をなぞる静かな夜間飛行",
+                      "links": {
+                          "base": [
+                              "moonlit haze overflight",
+                              "moonlit cloud-top flight"
+                          ],
+                          "customize": [
+                              "gliding hush",
+                              "moonlit silver wash",
+                              "cloud-edge tracing path"
+                          ],
+                          "settings": [
+                              "moonlit cloud tops",
+                              "thin crescent from above",
+                              "starlight scatter",
+                              "cloud-edge silver rim"
+                          ]
+                      }
+                  }
+              ]
+          },
+          {
+              "group": "✈ 乗り物寄り飛行視点",
+              "items": [
+                  {
+                      "id": "airliner_window_cloudsea_cruise",
+                      "ja": "旅客機の窓から雲海を抜ける巡航視点",
+                      "links": {
+                          "base": [
+                              "airliner window overflight",
+                              "cabin-side cloud-top overflight"
+                          ],
+                          "customize": [
+                              "oval window framing",
+                              "enclosed-cabin stillness",
+                              "forward-pulled viewpoint"
+                          ],
+                          "settings": [
+                              "window rim silhouette",
+                              "double-layer cloud sea",
+                              "far thin contrail",
+                              "far-horizon glow"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "helicopter_cityedge_bank_view",
+                      "ja": "ヘリ越しに都市縁を覗く旋回飛行視点",
+                      "links": {
+                          "base": [
+                              "helicopter banked overflight",
+                              "rotorcraft city-edge overflight"
+                          ],
+                          "customize": [
+                              "rotor vibration trace",
+                              "banking tilt",
+                              "mid-altitude lookdown"
+                          ],
+                          "settings": [
+                              "rotor shadow sweep",
+                              "city light clusters below",
+                              "river silver thread",
+                              "tilted horizon line"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "smallcraft_coastline_lowpass_view",
+                      "ja": "小型機で海岸線をなぞる低空飛行視点",
+                      "links": {
+                          "base": [
+                              "small-aircraft coastal overflight",
+                              "sea overflight"
+                          ],
+                          "customize": [
+                              "canopy frame edges",
+                              "crosswind drift",
+                              "rooftop-skimming altitude"
+                          ],
+                          "settings": [
+                              "coastline foam edge below",
+                              "white wave lines",
+                              "frame-cut horizon",
+                              "sea-glint strips below"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "canopy_stormedge_highspeed_view",
+                      "ja": "キャノピー越しに雷雲縁を切る高速飛行視点",
+                      "links": {
+                          "base": [
+                              "canopy-framed high-speed overflight",
+                              "storm-edge overflight"
+                          ],
+                          "customize": [
+                              "canopy reflections",
+                              "high-speed pass",
+                              "storm-front tension"
+                          ],
+                          "settings": [
+                              "storm shelf cloud",
+                              "window rain dots",
+                              "blue-white flash bloom",
+                              "off-center horizon"
+                          ]
+                      }
+                  }
+              ]
+          },
+          {
+              "group": "🪽 生身寄り飛翔・滑空視点",
+              "items": [
+                  {
+                      "id": "openair_cloudgap_bodyflight_view",
+                      "ja": "風を胸で受けて雲間へ飛び込む生身視点",
+                      "links": {
+                          "base": [
+                              "open-air body flight over cloud gap",
+                              "between cloud layers"
+                          ],
+                          "customize": [
+                              "open-air exposure",
+                              "chest-first wind impact",
+                              "climbing ascent"
+                          ],
+                          "settings": [
+                              "no-frame open sky field",
+                              "cloud-gap brightness ahead",
+                              "wind-sheared peripheral blur",
+                              "altitude-shifting lookdown"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "bodyglide_citydive_view",
+                      "ja": "斜め下へ身を倒して街へ滑空する生身視点",
+                      "links": {
+                          "base": [
+                              "body-glide city overflight",
+                              "city overflight"
+                          ],
+                          "customize": [
+                              "body-banked glide",
+                              "eye-line dragged downward",
+                              "wind-pressure rush"
+                          ],
+                          "settings": [
+                              "raw horizon cant",
+                              "rooftop grid below",
+                              "diagonal-ground drift below",
+                              "open-air rush lines"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "raincut_sea_bodyflight_view",
+                      "ja": "雨粒を受けながら海上を抜ける生身飛行視点",
+                      "links": {
+                          "base": [
+                              "open-air sea body flight",
+                              "rain-shaft overflight"
+                          ],
+                          "customize": [
+                              "rain striking the viewpoint",
+                              "crosswind drift",
+                              "open-air exposure"
+                          ],
+                          "settings": [
+                              "direct rain hits on viewpoint",
+                              "white wave lines",
+                              "forward motion streak in rain",
+                              "sea-glint strips below"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "moonrim_openair_glide_view",
+                      "ja": "月光の雲縁をかすめる静かな生身滑空視点",
+                      "links": {
+                          "base": [
+                              "moonlit body-flight over cloud tops",
+                              "moonlit cloud-top flight"
+                          ],
+                          "customize": [
+                              "body-banked glide",
+                              "night-cooled atmosphere",
+                              "gliding hush"
+                          ],
+                          "settings": [
+                              "cloud-edge silver rim",
+                              "faint upper stars",
+                              "no-frame open sky field",
+                              "starlit high-altitude clarity"
+                          ]
+                      }
+                  }
+              ]
+          },
+          {
+              "group": "🌌 宇宙空間・無重力飛行視点",
+              "items": [
+                  {
+                      "id": "zero_g_space_drift_view",
+                      "ja": "宇宙漂流・無重力浮遊",
+                      "links": {
+                          "base": [
+                              "deep space zero-g flight",
+                              "EVA exterior viewpoint"
+                          ],
+                          "customize": [
+                              "zero-g body drift",
+                              "silent vacuum float",
+                              "star-parallax depth"
+                          ],
+                          "settings": [
+                              "black-space negative area",
+                              "starfield depth layers",
+                              "drifting tool silhouettes",
+                              "thin suit light reflection"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "planet_backdrop_orbital_flight",
+                      "ja": "惑星を背にした軌道飛行",
+                      "links": {
+                          "base": [
+                              "orbital space overflight",
+                              "planet-backdrop flight"
+                          ],
+                          "customize": [
+                              "orbit-arc motion",
+                              "slow altitude glide",
+                              "horizonless depth"
+                          ],
+                          "settings": [
+                              "planet limb below",
+                              "thin atmospheric rim",
+                              "sunlit cloud swirl far below",
+                              "distant moon disk"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "eva_exterior_work_view",
+                      "ja": "宇宙船外・EVA作業視点",
+                      "links": {
+                          "base": [
+                              "EVA exterior viewpoint",
+                              "station exterior flight path"
+                          ],
+                          "customize": [
+                              "exterior hull proximity",
+                              "slow suit rotation",
+                              "weightless object drift"
+                          ],
+                          "settings": [
+                              "orbital station curve",
+                              "hull panel close pass",
+                              "tether line arc",
+                              "solar glare on hull"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "debris_field_zero_g_flight",
+                      "ja": "デブリ帯を抜ける無重力飛行",
+                      "links": {
+                          "base": [
+                              "debris-field flight path",
+                              "orbital space overflight"
+                          ],
+                          "customize": [
+                              "near-miss debris drift",
+                              "evasive micro-thruster drift",
+                              "star-parallax depth"
+                          ],
+                          "settings": [
+                              "drifting debris silhouettes",
+                              "broken panel fragments",
+                              "black-space negative area",
+                              "distant hazard lights"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "atmospheric_limb_edge_flight",
+                      "ja": "大気圏境界・地球縁光",
+                      "links": {
+                          "base": [
+                              "atmospheric limb flight",
+                              "planet-backdrop flight"
+                          ],
+                          "customize": [
+                              "blue rimline glow",
+                              "slow altitude glide",
+                              "orbit-arc motion"
+                          ],
+                          "settings": [
+                              "thin atmospheric rim",
+                              "planet limb below",
+                              "sunrise edge flare",
+                              "night-side citylight beads"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "station_outer_ring_flight_view",
+                      "ja": "軌道ステーション外周飛行",
+                      "links": {
+                          "base": [
+                              "station exterior flight path",
+                              "orbital space overflight"
+                          ],
+                          "customize": [
+                              "ring-structure passby",
+                              "exterior hull proximity",
+                              "controlled approach glide"
+                          ],
+                          "settings": [
+                              "orbital station curve",
+                              "docking lights in a row",
+                              "solar panel arrays",
+                              "maintenance arm silhouettes"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "deep_space_interstellar_view",
+                      "ja": "恒星間航行・深宇宙視点",
+                      "links": {
+                          "base": [
+                              "deep space zero-g flight",
+                              "interstellar cruise viewpoint"
+                          ],
+                          "customize": [
+                              "horizonless depth",
+                              "distant-star compression",
+                              "silent vacuum float"
+                          ],
+                          "settings": [
+                              "starfield depth layers",
+                              "nebula haze far ahead",
+                              "black-space negative area",
+                              "faint navigation light trail"
+                          ]
+                      }
+                  }
+              ]
+          },
+          {
+              "group": "⚔ 宇宙戦闘・交戦視点",
+              "items": [
+                  {
+                      "id": "space_fleet_battle_standoff_view",
+                      "ja": "艦隊戦・布陣宙域",
+                      "links": {
+                          "base": [
+                              "fleet-battle overflight perspective",
+                              "battle-line formation orbit"
+                          ],
+                          "customize": [
+                              "pre-battle tension drift",
+                              "formation-depth emphasis",
+                              "target-lock tension"
+                          ],
+                          "settings": [
+                              "capital ships in formation",
+                              "red alert beacon glints",
+                              "planet limb below",
+                              "distant escort silhouettes"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "space_fleet_battle_under_fire_view",
+                      "ja": "艦隊戦・砲撃戦闘中",
+                      "links": {
+                          "base": [
+                              "active fleet crossfire zone",
+                              "fleet-battle overflight perspective"
+                          ],
+                          "customize": [
+                              "broadside fire crossing",
+                              "beam-lance exchange",
+                              "missile salvo trails"
+                          ],
+                          "settings": [
+                              "beam lines across void",
+                              "explosion blossoms in vacuum",
+                              "shield bubble flashes",
+                              "wreckage drifting field"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "humanoid_mecha_standoff_space_view",
+                      "ja": "人型ロボット戦・対峙宙域",
+                      "links": {
+                          "base": [
+                              "humanoid mecha standoff zone",
+                              "orbital duel space"
+                          ],
+                          "customize": [
+                              "weapon-ready silhouette tension",
+                              "thruster-vector hover",
+                              "close-range distance hold"
+                          ],
+                          "settings": [
+                              "mecha silhouettes at distance",
+                              "weapon glow points",
+                              "distant carrier backdrop",
+                              "floating armor fragments"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "humanoid_mecha_close_combat_space_view",
+                      "ja": "人型ロボット戦・交戦中",
+                      "links": {
+                          "base": [
+                              "humanoid mecha combat zone",
+                              "orbital duel space"
+                          ],
+                          "customize": [
+                              "close-range clash sparks",
+                              "evasive roll motion",
+                              "thruster-vector blur"
+                          ],
+                          "settings": [
+                              "mecha silhouettes crossing",
+                              "saber-like beam arcs",
+                              "armor spark fragments",
+                              "debris-spark cloud"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "space_fighter_squadron_patrol_view",
+                      "ja": "戦闘機編隊・宇宙戦域",
+                      "links": {
+                          "base": [
+                              "space-fighter formation flight",
+                              "carrier launch corridor"
+                          ],
+                          "customize": [
+                              "synchronized squadron banking",
+                              "ion-trail formation lines",
+                              "controlled approach glide"
+                          ],
+                          "settings": [
+                              "fighter silhouettes in formation",
+                              "carrier launch lights",
+                              "planet limb below",
+                              "engine glow dots"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "space_fighter_dogfight_combat_view",
+                      "ja": "戦闘機ドッグファイト・戦闘中",
+                      "links": {
+                          "base": [
+                              "space-fighter dogfight zone",
+                              "active pursuit orbit"
+                          ],
+                          "customize": [
+                              "evasive roll motion",
+                              "missile salvo trails",
+                              "thruster-vector blur"
+                          ],
+                          "settings": [
+                              "ion trail crossing arcs",
+                              "target reticle glow",
+                              "explosion blossoms in vacuum",
+                              "wreckage drifting field"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "carrier_launch_battle_corridor_view",
+                      "ja": "母艦発艦・戦闘機出撃視点",
+                      "links": {
+                          "base": [
+                              "carrier launch corridor",
+                              "space-fighter formation flight"
+                          ],
+                          "customize": [
+                              "launch-rail acceleration",
+                              "engine flare burst",
+                              "formation-depth emphasis"
+                          ],
+                          "settings": [
+                              "carrier launch lights",
+                              "hangar mouth silhouette",
+                              "fighter silhouettes in formation",
+                              "red alert beacon glints"
+                          ]
+                      }
+                  },
+                  {
+                      "id": "fortress_defense_orbital_battle_view",
+                      "ja": "宇宙要塞防衛・迎撃戦闘中",
+                      "links": {
+                          "base": [
+                              "fortress defense combat orbit",
+                              "active fleet crossfire zone"
+                          ],
+                          "customize": [
+                              "intercept fire web",
+                              "shield flare burst",
+                              "missile salvo trails"
+                          ],
+                          "settings": [
+                              "orbital fortress silhouette",
+                              "defense satellite chain",
+                              "beam lines across void",
+                              "shield bubble flashes"
+                          ]
+                      }
+                  }
+              ]
           }
-        ]
-      },
-      {
-        "group": "🏫 学校・生活圏上空",
-        "items": [
+      ],
+      "base": [
           {
-            "id": "sunset_school_overflight",
-            "ja": "夕方の学校上空",
-            "links": {
-              "base": [
-                "school campus overflight",
-                "suburban district overflight"
-              ],
-              "customize": [
-                "sunset grazing light",
-                "roads-turn-to-lines",
-                "straight-flight feel"
-              ],
-              "settings": [
-                "schoolyard rectangle",
-                "pool blue patch",
-                "residential block pattern",
-                "school-roof geometry"
+              "group": "🏙 街・建築の上空",
+              "items": [
+                  {
+                      "ja": "街の上空",
+                      "en": "city overflight"
+                  },
+                  {
+                      "ja": "高層ビル街の上空",
+                      "en": "highrise overflight"
+                  },
+                  {
+                      "ja": "密集した都市中心部の上空",
+                      "en": "dense skyline overflight"
+                  },
+                  {
+                      "ja": "夜景都市の上空",
+                      "en": "night city overflight"
+                  },
+                  {
+                      "ja": "橋を抱く都市の上空",
+                      "en": "bridge-crossing overflight"
+                  },
+                  {
+                      "ja": "港湾都市の上空",
+                      "en": "harbor-city overflight"
+                  },
+                  {
+                      "ja": "高架道路が走る都市の上空",
+                      "en": "elevated-highway overflight"
+                  },
+                  {
+                      "ja": "塔群を抱く都市の上空",
+                      "en": "tower-cluster overflight"
+                  }
               ]
-            }
           },
           {
-            "id": "low_schoolyard_pass",
-            "ja": "校庭を見下ろす低空飛行",
-            "links": {
-              "base": [
-                "school campus overflight",
-                "schoolyard overflight"
-              ],
-              "customize": [
-                "near-ground low altitude",
-                "wind-pressure rush",
-                "eye-line dragged downward"
-              ],
-              "settings": [
-                "schoolyard rectangle",
-                "track oval markings below",
-                "pool blue patch",
-                "low rooftop shadows"
+              "group": "🏫 施設・生活圏の上空",
+              "items": [
+                  {
+                      "ja": "学校の上空",
+                      "en": "school campus overflight"
+                  },
+                  {
+                      "ja": "校庭の上空",
+                      "en": "schoolyard overflight"
+                  },
+                  {
+                      "ja": "住宅街の上空",
+                      "en": "residential district overflight"
+                  },
+                  {
+                      "ja": "郊外生活圏の上空",
+                      "en": "suburban district overflight"
+                  },
+                  {
+                      "ja": "工場地帯の上空",
+                      "en": "industrial zone overflight"
+                  },
+                  {
+                      "ja": "倉庫街の上空",
+                      "en": "warehouse block overflight"
+                  },
+                  {
+                      "ja": "スタジアムの上空",
+                      "en": "stadium overflight"
+                  },
+                  {
+                      "ja": "鉄道路線沿いの上空",
+                      "en": "rail-corridor overflight"
+                  }
               ]
-            }
           },
           {
-            "id": "dawn_residential_overflight",
-            "ja": "住宅街の屋根を越える朝の上空",
-            "links": {
-              "base": [
-                "residential district overflight",
-                "suburban district overflight"
-              ],
-              "customize": [
-                "dawn side light",
-                "ground-shrinking distance",
-                "gliding hush"
-              ],
-              "settings": [
-                "residential block pattern",
-                "roof tile patterns below",
-                "narrow street grid",
-                "far-horizon glow"
+              "group": "🌲 自然地形の上空",
+              "items": [
+                  {
+                      "ja": "森の上空",
+                      "en": "forest canopy overflight"
+                  },
+                  {
+                      "ja": "霧の谷を抱く上空",
+                      "en": "mist valley overflight"
+                  },
+                  {
+                      "ja": "草原の上空",
+                      "en": "grassland overflight"
+                  },
+                  {
+                      "ja": "高原草地の上空",
+                      "en": "plateau grassland overflight"
+                  },
+                  {
+                      "ja": "川の蛇行上空",
+                      "en": "river bend overflight"
+                  },
+                  {
+                      "ja": "湿地の上空",
+                      "en": "wetland overflight"
+                  },
+                  {
+                      "ja": "山脈の上空",
+                      "en": "mountain range overflight"
+                  },
+                  {
+                      "ja": "尾根筋の上空",
+                      "en": "ridge overflight"
+                  },
+                  {
+                      "ja": "海の上空",
+                      "en": "sea overflight"
+                  },
+                  {
+                      "ja": "海岸線の上空",
+                      "en": "coastline overflight"
+                  },
+                  {
+                      "ja": "砂丘の上空",
+                      "en": "desert dune overflight"
+                  },
+                  {
+                      "ja": "渓谷の上空",
+                      "en": "canyon overflight"
+                  }
               ]
-            }
           },
           {
-            "id": "midday_suburban_flow",
-            "ja": "郊外の生活圏を流れる昼の上空",
-            "links": {
-              "base": [
-                "suburban district overflight",
-                "bridge-crossing overflight"
-              ],
-              "customize": [
-                "noon top light",
-                "mid-altitude lookdown",
-                "crosswind drift"
-              ],
-              "settings": [
-                "residential block pattern",
-                "rail-line streak below",
-                "river silver thread",
-                "district road grid"
+              "group": "☁ 雲・高高度の上空",
+              "items": [
+                  {
+                      "ja": "雲の上",
+                      "en": "above cloud tops"
+                  },
+                  {
+                      "ja": "雲海の上",
+                      "en": "above cloud sea"
+                  },
+                  {
+                      "ja": "雲層のあいだ",
+                      "en": "between cloud layers"
+                  },
+                  {
+                      "ja": "雷雲縁の上空",
+                      "en": "storm-edge overflight"
+                  },
+                  {
+                      "ja": "月光の雲上飛行景",
+                      "en": "moonlit cloud-top flight"
+                  },
+                  {
+                      "ja": "高高度の空路",
+                      "en": "high-altitude sky lane"
+                  },
+                  {
+                      "ja": "成層圏寄りの航路",
+                      "en": "stratosphere-leaning flight path"
+                  },
+                  {
+                      "ja": "朝靄を抜けた上空",
+                      "en": "dawn-haze upper air"
+                  }
               ]
-            }
-          }
-        ]
-      },
-      {
-        "group": "🌲 自然地形上空",
-        "items": [
+          },
           {
-            "id": "dawn_forest_mist_overflight",
-            "ja": "森の上空を抜ける朝霧",
-            "links": {
-              "base": [
-                "forest canopy overflight",
-                "mist valley overflight"
-              ],
-              "customize": [
-                "dawn upper-air chill",
-                "treetop-skimming altitude",
-                "cloud-cut dampness"
-              ],
-              "settings": [
-                "forest canopy mosaic",
-                "mist pockets below",
-                "tree-crown highlight patches",
-                "shrinking-ground edges"
+              "group": "🌦 天候・空路の上空",
+              "items": [
+                  {
+                      "ja": "雨脚の中の上空",
+                      "en": "rain-shaft overflight"
+                  },
+                  {
+                      "ja": "嵐の切れ目を縫う上空",
+                      "en": "storm-gap overflight"
+                  },
+                  {
+                      "ja": "横風の強い海上空路",
+                      "en": "crosswind sea lane"
+                  },
+                  {
+                      "ja": "雪雲の下の上空",
+                      "en": "snow-squall overflight"
+                  },
+                  {
+                      "ja": "雲の切れ間へ降りる上空",
+                      "en": "sunbreak overflight"
+                  },
+                  {
+                      "ja": "ジェット気流寄りの巡航空路",
+                      "en": "jetstream cruise lane"
+                  },
+                  {
+                      "ja": "月霞を帯びた夜の上空",
+                      "en": "moonlit haze overflight"
+                  }
               ]
-            }
           },
           {
-            "id": "noon_grassland_aerial",
-            "ja": "草原の上空を流れる昼の風",
-            "links": {
-              "base": [
-                "grassland overflight",
-                "plateau grassland overflight"
-              ],
-              "customize": [
-                "noon top light",
-                "crosswind drift",
-                "mid-altitude lookdown"
-              ],
-              "settings": [
-                "grassland color field",
-                "wind-bent grass streaks below",
-                "field-boundary lines",
-                "long river meander below"
+              "group": "✈ 乗り物・機体寄り上空",
+              "items": [
+                  {
+                      "ja": "旅客機の窓越し上空",
+                      "en": "airliner window overflight"
+                  },
+                  {
+                      "ja": "客室脇の雲上飛行景",
+                      "en": "cabin-side cloud-top overflight"
+                  },
+                  {
+                      "ja": "ヘリの旋回上空",
+                      "en": "helicopter banked overflight"
+                  },
+                  {
+                      "ja": "都市縁をなぞるローター機上空",
+                      "en": "rotorcraft city-edge overflight"
+                  },
+                  {
+                      "ja": "小型機の海岸線飛行上空",
+                      "en": "small-aircraft coastal overflight"
+                  },
+                  {
+                      "ja": "キャノピー越しの高速上空",
+                      "en": "canopy-framed high-speed overflight"
+                  }
               ]
-            }
           },
           {
-            "id": "sunset_riverbend_aerial",
-            "ja": "河川の蛇行を見下ろす上空",
-            "links": {
-              "base": [
-                "river bend overflight",
-                "wetland overflight"
-              ],
-              "customize": [
-                "sunset grazing light",
-                "river-thread below",
-                "gentle descent"
-              ],
-              "settings": [
-                "river silver thread",
-                "sandbar patterns below",
-                "reflective water strips",
-                "floodplain patchwork"
+              "group": "🪽 生身・開放飛翔寄り上空",
+              "items": [
+                  {
+                      "ja": "雲間へ飛び込む生身上空",
+                      "en": "open-air body flight over cloud gap"
+                  },
+                  {
+                      "ja": "街へ滑空する生身上空",
+                      "en": "body-glide city overflight"
+                  },
+                  {
+                      "ja": "海上を抜ける生身飛行",
+                      "en": "open-air sea body flight"
+                  },
+                  {
+                      "ja": "月光の雲上を滑る生身飛行",
+                      "en": "moonlit body-flight over cloud tops"
+                  },
+                  {
+                      "ja": "開放空域の自由飛翔",
+                      "en": "open-air free-flight over sky"
+                  },
+                  {
+                      "ja": "風を直受けする高空飛翔",
+                      "en": "direct-wind high-altitude body flight"
+                  }
               ]
-            }
           },
           {
-            "id": "ridge_crossing_mountain_flight",
-            "ja": "山脈の稜線を越える上空",
-            "links": {
-              "base": [
-                "mountain range overflight",
-                "ridge overflight"
-              ],
-              "customize": [
-                "climbing ascent",
-                "high-altitude remoteness",
-                "dry upper air"
-              ],
-              "settings": [
-                "mountain ridge bands",
-                "snowless rock ribs below",
-                "deep valley folds",
-                "far-horizon glow"
+              "group": "🌌 宇宙空間・軌道上空",
+              "items": [
+                  {
+                      "ja": "深宇宙の無重力飛行",
+                      "en": "deep space zero-g flight"
+                  },
+                  {
+                      "ja": "軌道上の宇宙飛行視点",
+                      "en": "orbital space overflight"
+                  },
+                  {
+                      "ja": "惑星を背にした飛行",
+                      "en": "planet-backdrop flight"
+                  },
+                  {
+                      "ja": "大気圏縁の飛行視点",
+                      "en": "atmospheric limb flight"
+                  },
+                  {
+                      "ja": "デブリ帯の飛行経路",
+                      "en": "debris-field flight path"
+                  },
+                  {
+                      "ja": "軌道ステーション外周航路",
+                      "en": "station exterior flight path"
+                  },
+                  {
+                      "ja": "宇宙船外EVA視点",
+                      "en": "EVA exterior viewpoint"
+                  },
+                  {
+                      "ja": "恒星間航行視点",
+                      "en": "interstellar cruise viewpoint"
+                  },
+                  {
+                      "ja": "小惑星帯の上空航路",
+                      "en": "asteroid-belt overflight"
+                  },
+                  {
+                      "ja": "深宇宙の航路外視点",
+                      "en": "off-route deep space viewpoint"
+                  }
               ]
-            }
           },
           {
-            "id": "coastline_evening_overflight",
-            "ja": "海岸線をなぞる夕方の上空",
-            "links": {
-              "base": [
-                "coastline overflight",
-                "sea overflight"
-              ],
-              "customize": [
-                "sunset grazing light",
-                "crosswind drift",
-                "ground-shrinking distance"
-              ],
-              "settings": [
-                "coastline white fringe",
-                "sea reflection band",
-                "harbor outlines below",
-                "cliff-shadow bands"
+              "group": "⚔ 宇宙戦闘・機動戦域",
+              "items": [
+                  {
+                      "ja": "艦隊戦を見下ろす戦域視点",
+                      "en": "fleet-battle overflight perspective"
+                  },
+                  {
+                      "ja": "艦隊の戦列布陣軌道",
+                      "en": "battle-line formation orbit"
+                  },
+                  {
+                      "ja": "艦隊砲火が交差する戦闘宙域",
+                      "en": "active fleet crossfire zone"
+                  },
+                  {
+                      "ja": "人型ロボットの対峙宙域",
+                      "en": "humanoid mecha standoff zone"
+                  },
+                  {
+                      "ja": "人型ロボットの交戦宙域",
+                      "en": "humanoid mecha combat zone"
+                  },
+                  {
+                      "ja": "軌道上の一騎打ち空間",
+                      "en": "orbital duel space"
+                  },
+                  {
+                      "ja": "戦闘機編隊の宇宙飛行",
+                      "en": "space-fighter formation flight"
+                  },
+                  {
+                      "ja": "戦闘機ドッグファイト宙域",
+                      "en": "space-fighter dogfight zone"
+                  },
+                  {
+                      "ja": "追撃戦の軌道",
+                      "en": "active pursuit orbit"
+                  },
+                  {
+                      "ja": "母艦発艦コリドー",
+                      "en": "carrier launch corridor"
+                  },
+                  {
+                      "ja": "宇宙要塞防衛軌道",
+                      "en": "fortress defense combat orbit"
+                  }
               ]
-            }
-          },
+          }
+      ],
+      "customize": [
           {
-            "id": "desert_pattern_highaltitude",
-            "ja": "砂漠の模様が沈む高高度",
-            "links": {
-              "base": [
-                "desert dune overflight",
-                "canyon overflight"
-              ],
-              "customize": [
-                "high-altitude remoteness",
-                "dry upper air",
-                "ground-shrinking distance"
-              ],
-              "settings": [
-                "desert dune patterns",
-                "canyon cuts below",
-                "salt-flat gleam patches",
-                "long terrain shadow bands"
+              "group": "📏 高度・位置",
+              "items": [
+                  {
+                      "ja": "建物すれすれの低空",
+                      "en": "rooftop-skimming altitude"
+                  },
+                  {
+                      "ja": "地表に近い低空",
+                      "en": "near-ground low altitude"
+                  },
+                  {
+                      "ja": "樹冠すれすれの低空",
+                      "en": "treetop-skimming altitude"
+                  },
+                  {
+                      "ja": "中高度の見下ろし",
+                      "en": "mid-altitude lookdown"
+                  },
+                  {
+                      "ja": "高高度の遠景化",
+                      "en": "high-altitude remoteness"
+                  },
+                  {
+                      "ja": "雲の上の高度",
+                      "en": "above-cloud altitude"
+                  },
+                  {
+                      "ja": "雲海上の高さ",
+                      "en": "cloud-sea altitude"
+                  },
+                  {
+                      "ja": "雲層内の位置",
+                      "en": "between-cloud-layer flight"
+                  },
+                  {
+                      "ja": "成層圏寄りの薄い高さ",
+                      "en": "stratospheric thin air height"
+                  }
               ]
-            }
-          }
-        ]
-      },
-      {
-        "group": "☁ 雲上・高高度",
-        "items": [
+          },
           {
-            "id": "cloudsea_morning_flight",
-            "ja": "雲海の上を進む朝の飛行景",
-            "links": {
-              "base": [
-                "above cloud sea",
-                "above cloud tops"
-              ],
-              "customize": [
-                "above-cloud altitude",
-                "dawn side light",
-                "gliding hush"
-              ],
-              "settings": [
-                "cloud sea surface",
-                "sunlit cloud rim",
-                "layered cloud horizon",
-                "far-horizon glow"
+              "group": "🪽 飛行感・姿勢",
+              "items": [
+                  {
+                      "ja": "直進する飛行感",
+                      "en": "straight-flight feel"
+                  },
+                  {
+                      "ja": "滑空する静けさ",
+                      "en": "gliding hush"
+                  },
+                  {
+                      "ja": "旋回中の傾き",
+                      "en": "banking tilt"
+                  },
+                  {
+                      "ja": "緩やかな降下",
+                      "en": "gentle descent"
+                  },
+                  {
+                      "ja": "上昇する抜け感",
+                      "en": "climbing ascent"
+                  },
+                  {
+                      "ja": "横風に流れる感覚",
+                      "en": "crosswind drift"
+                  },
+                  {
+                      "ja": "加速する抜け感",
+                      "en": "high-speed pass"
+                  },
+                  {
+                      "ja": "浮遊するような静止感",
+                      "en": "hovering suspension"
+                  },
+                  {
+                      "ja": "前方へ引かれる視点",
+                      "en": "forward-pulled viewpoint"
+                  }
               ]
-            }
           },
           {
-            "id": "cloudgap_breakthrough",
-            "ja": "雲層の切れ目を抜ける飛行景",
-            "links": {
-              "base": [
-                "between cloud layers",
-                "storm-edge overflight"
-              ],
-              "customize": [
-                "between-cloud-layer flight",
-                "cloud-cut dampness",
-                "cloud-shadow sweep below"
-              ],
-              "settings": [
-                "broken cloud gap",
-                "cloud-wall edge",
-                "sunlit cloud rim",
-                "shifting-light columns below"
+              "group": "🌬 風・大気",
+              "items": [
+                  {
+                      "ja": "風圧のある飛行感",
+                      "en": "wind-pressure rush"
+                  },
+                  {
+                      "ja": "乾いた高高度の空気",
+                      "en": "dry upper air"
+                  },
+                  {
+                      "ja": "雲を切る湿り気",
+                      "en": "cloud-cut dampness"
+                  },
+                  {
+                      "ja": "朝の上空の冷気",
+                      "en": "dawn upper-air chill"
+                  },
+                  {
+                      "ja": "夕方の上昇気流の暖かさ",
+                      "en": "evening updraft warmth"
+                  },
+                  {
+                      "ja": "夜に冷えた大気",
+                      "en": "night-cooled atmosphere"
+                  },
+                  {
+                      "ja": "前線近くの張りつめ",
+                      "en": "storm-front tension"
+                  },
+                  {
+                      "ja": "晴れた上空の澄み",
+                      "en": "sunlit upper-air clarity"
+                  },
+                  {
+                      "ja": "星の近い冷たい透明感",
+                      "en": "starlit high-altitude clarity"
+                  }
               ]
-            }
           },
           {
-            "id": "moonlit_abovecloud_flight",
-            "ja": "月光の雲上飛行景",
-            "links": {
-              "base": [
-                "moonlit cloud-top flight",
-                "above cloud tops"
-              ],
-              "customize": [
-                "moonlit silver wash",
-                "above-cloud altitude",
-                "night-cooled atmosphere"
-              ],
-              "settings": [
-                "moonlit cloud tops",
-                "thin crescent from above",
-                "starlight scatter",
-                "tilted horizon line"
+              "group": "👁 見下ろし・距離感",
+              "items": [
+                  {
+                      "ja": "眼下が遠のく感覚",
+                      "en": "ground-shrinking distance"
+                  },
+                  {
+                      "ja": "屋根が図形に変わる見下ろし",
+                      "en": "roofs-become-patterns"
+                  },
+                  {
+                      "ja": "道路が線に変わる高さ",
+                      "en": "roads-turn-to-lines"
+                  },
+                  {
+                      "ja": "川が一本の銀線に見える距離",
+                      "en": "river-thread below"
+                  },
+                  {
+                      "ja": "森が樹冠模様になる見下ろし",
+                      "en": "forest-mosaic lookdown"
+                  },
+                  {
+                      "ja": "街灯が点群に沈む夜景高度",
+                      "en": "city-lights-as-beads"
+                  },
+                  {
+                      "ja": "地平がわずかに丸みを帯びる感覚",
+                      "en": "earth-curve hint"
+                  },
+                  {
+                      "ja": "視線が下へ引かれる感覚",
+                      "en": "eye-line dragged downward"
+                  },
+                  {
+                      "ja": "空気遠近で霞む地表",
+                      "en": "atmospheric-ground-haze"
+                  }
               ]
-            }
           },
           {
-            "id": "starnear_highalt_night",
-            "ja": "星の近い高高度の夜空飛行",
-            "links": {
-              "base": [
-                "high-altitude sky lane",
-                "stratosphere-leaning flight path"
-              ],
-              "customize": [
-                "starlit high-altitude clarity",
-                "high-altitude remoteness",
-                "straight-flight feel"
-              ],
-              "settings": [
-                "dense starlight field",
-                "upper-atmosphere gradient",
-                "far-thin cloud belt",
-                "earth-haze curve"
+              "group": "🌅 光・時間",
+              "items": [
+                  {
+                      "ja": "朝の斜光",
+                      "en": "dawn side light"
+                  },
+                  {
+                      "ja": "昼の真上光",
+                      "en": "noon top light"
+                  },
+                  {
+                      "ja": "夕方のかすめる光",
+                      "en": "sunset grazing light"
+                  },
+                  {
+                      "ja": "青の時間の静けさ",
+                      "en": "blue-hour aerial hush"
+                  },
+                  {
+                      "ja": "月光の銀の洗い",
+                      "en": "moonlit silver wash"
+                  },
+                  {
+                      "ja": "夜景光の散り",
+                      "en": "night cityglow scatter"
+                  },
+                  {
+                      "ja": "雲影が地表を流れる光",
+                      "en": "cloud-shadow sweep below"
+                  },
+                  {
+                      "ja": "雲間から落ちる光柱",
+                      "en": "light-columns through gaps"
+                  },
+                  {
+                      "ja": "遠い稲光の明滅",
+                      "en": "far lightning flicker"
+                  }
               ]
-            }
-          }
-        ]
-      },
-      {
-        "group": "🌦 天候変化を切る飛行景",
-        "items": [
+          },
           {
-            "id": "rainshaft_lowpass_flight",
-            "ja": "雨脚を抜ける低空飛行景",
-            "links": {
-              "base": [
-                "rain-shaft overflight",
-                "bridge-crossing overflight"
-              ],
-              "customize": [
-                "rain-curtain pass",
-                "reduced-visibility flight",
-                "near-ground low altitude"
-              ],
-              "settings": [
-                "slanted rain bands below",
-                "wet reflective corridors",
-                "mist-smeared horizon",
-                "forward motion streak in rain"
+              "group": "🌦 天候・視界",
+              "items": [
+                  {
+                      "ja": "雨幕を突っ切る飛行感",
+                      "en": "rain-curtain pass"
+                  },
+                  {
+                      "ja": "視界の削られた飛行",
+                      "en": "reduced-visibility flight"
+                  },
+                  {
+                      "ja": "向かい風に押し返される上昇",
+                      "en": "headwind climb"
+                  },
+                  {
+                      "ja": "雪片を切る飛行感",
+                      "en": "snow-flurry pass"
+                  },
+                  {
+                      "ja": "雲間の陽光を横切る",
+                      "en": "sunbreak shaft crossing"
+                  },
+                  {
+                      "ja": "上空から海霧をかすめる感覚",
+                      "en": "sea-spray haze from above"
+                  },
+                  {
+                      "ja": "前線通過後の澄んだ抜け",
+                      "en": "post-front clarity"
+                  }
               ]
-            }
           },
           {
-            "id": "headwind_climb_mountain_route",
-            "ja": "向かい風に押し返される上昇飛行",
-            "links": {
-              "base": [
-                "storm-gap overflight",
-                "mountain range overflight"
-              ],
-              "customize": [
-                "headwind climb",
-                "climbing ascent",
-                "storm-front tension"
-              ],
-              "settings": [
-                "wind-torn cloud strips",
-                "tilted horizon line",
-                "deep valley folds",
-                "gust shear lines"
+              "group": "🎥 航路・カメラ感",
+              "items": [
+                  {
+                      "ja": "地平線を切る旋回感",
+                      "en": "horizon-slicing turn"
+                  },
+                  {
+                      "ja": "俯角の強い見下ろし",
+                      "en": "steep-lookdown angle"
+                  },
+                  {
+                      "ja": "雲縁をなぞる航路",
+                      "en": "cloud-edge tracing path"
+                  },
+                  {
+                      "ja": "乱気流の微振動",
+                      "en": "turbulence tremor"
+                  },
+                  {
+                      "ja": "高度変化を伴う見下ろし",
+                      "en": "altitude-shifting lookdown"
+                  },
+                  {
+                      "ja": "斜め前へ逃げる地上の流れ",
+                      "en": "diagonal-ground-flow"
+                  }
               ]
-            }
           },
           {
-            "id": "crosswind_sea_bank_flight",
-            "ja": "横風で傾く海上飛行景",
-            "links": {
-              "base": [
-                "crosswind sea lane",
-                "sea overflight"
-              ],
-              "customize": [
-                "crosswind drift",
-                "banking tilt",
-                "sea-spray haze from above"
-              ],
-              "settings": [
-                "whitecap lines below",
-                "sea reflection band",
-                "drifted cloud shadows",
-                "off-center horizon"
+              "group": "🪟 機窓・キャノピー・機械感",
+              "items": [
+                  {
+                      "ja": "楕円窓で切られた視界",
+                      "en": "oval window framing"
+                  },
+                  {
+                      "ja": "キャノピー縁のフレーム",
+                      "en": "canopy frame edges"
+                  },
+                  {
+                      "ja": "ローター由来の微振動",
+                      "en": "rotor vibration trace"
+                  },
+                  {
+                      "ja": "閉じた客室の静けさ",
+                      "en": "enclosed-cabin stillness"
+                  },
+                  {
+                      "ja": "エンジンに引かれる前方感",
+                      "en": "engine-thrust forward pull"
+                  },
+                  {
+                      "ja": "ガラスに走る反射のすべり",
+                      "en": "canopy reflections"
+                  }
               ]
-            }
           },
           {
-            "id": "snowsquall_winter_flight",
-            "ja": "雪雲の下を抜ける冬の飛行景",
-            "links": {
-              "base": [
-                "snow-squall overflight",
-                "ridge overflight"
-              ],
-              "customize": [
-                "snow-flurry pass",
-                "night-cooled atmosphere",
-                "reduced-visibility flight"
-              ],
-              "settings": [
-                "broken snow bands below",
-                "cold blue horizon",
-                "wind-torn cloud strips",
-                "snowless rock ribs below"
+              "group": "💨 生身・直受け飛翔感",
+              "items": [
+                  {
+                      "ja": "剥き出しの開放空気感",
+                      "en": "open-air exposure"
+                  },
+                  {
+                      "ja": "胸から受ける風圧",
+                      "en": "chest-first wind impact"
+                  },
+                  {
+                      "ja": "体ごと傾く滑空感",
+                      "en": "body-banked glide"
+                  },
+                  {
+                      "ja": "雨粒が視界へ直接当たる感覚",
+                      "en": "rain striking the viewpoint"
+                  },
+                  {
+                      "ja": "胃が落ちるような下降感",
+                      "en": "stomach-drop descent feel"
+                  },
+                  {
+                      "ja": "羽ばたき抜きの滑走静けさ",
+                      "en": "silent unpowered glide"
+                  }
               ]
-            }
-          }
-        ]
-      },
-      {
-        "group": "🎥 飛行視点・航路演出",
-        "items": [
+          },
           {
-            "id": "sunbreak_descent_flight",
-            "ja": "雲の切れ間へ降りる俯角飛行",
-            "links": {
-              "base": [
-                "between cloud layers",
-                "sunbreak overflight"
-              ],
-              "customize": [
-                "gentle descent",
-                "forward-pulled viewpoint",
-                "sunbreak shaft crossing"
-              ],
-              "settings": [
-                "broken cloud gap",
-                "light-columns through gaps",
-                "eye-line dragged downward",
-                "shifting-light columns below"
+              "group": "🌌 無重力・宇宙飛行感",
+              "items": [
+                  {
+                      "ja": "無重力で身体が流れる",
+                      "en": "zero-g body drift"
+                  },
+                  {
+                      "ja": "真空の静かな浮遊感",
+                      "en": "silent vacuum float"
+                  },
+                  {
+                      "ja": "宇宙服のゆっくりした回転",
+                      "en": "slow suit rotation"
+                  },
+                  {
+                      "ja": "軌道に沿った弧の移動",
+                      "en": "orbit-arc motion"
+                  },
+                  {
+                      "ja": "高度を保つゆるい滑空",
+                      "en": "slow altitude glide"
+                  },
+                  {
+                      "ja": "地平線のない奥行き",
+                      "en": "horizonless depth"
+                  },
+                  {
+                      "ja": "星の視差で出る奥行き",
+                      "en": "star-parallax depth"
+                  },
+                  {
+                      "ja": "無重力の小物漂流",
+                      "en": "weightless object drift"
+                  },
+                  {
+                      "ja": "船体に沿った近接通過",
+                      "en": "exterior hull proximity"
+                  },
+                  {
+                      "ja": "デブリすれすれの通過",
+                      "en": "near-miss debris drift"
+                  },
+                  {
+                      "ja": "微細スラスターの回避移動",
+                      "en": "evasive micro-thruster drift"
+                  },
+                  {
+                      "ja": "青い大気縁の発光",
+                      "en": "blue rimline glow"
+                  },
+                  {
+                      "ja": "リング構造の横通過",
+                      "en": "ring-structure passby"
+                  },
+                  {
+                      "ja": "制御された接近滑空",
+                      "en": "controlled approach glide"
+                  },
+                  {
+                      "ja": "遠い星の圧縮感",
+                      "en": "distant-star compression"
+                  }
               ]
-            }
           },
           {
-            "id": "horizon_slice_banking_turn",
-            "ja": "地平線を斜めに切る旋回飛行",
-            "links": {
-              "base": [
-                "high-altitude sky lane",
-                "tower-cluster overflight"
-              ],
-              "customize": [
-                "banking tilt",
-                "horizon-slicing turn",
-                "ground-shrinking distance"
-              ],
-              "settings": [
-                "tilted horizon line",
-                "far-horizon glow",
-                "city light clusters below",
-                "earth-haze curve"
+              "group": "⚔ 宇宙戦闘の動き・火線",
+              "items": [
+                  {
+                      "ja": "開戦前の緊張した漂流",
+                      "en": "pre-battle tension drift"
+                  },
+                  {
+                      "ja": "編隊の奥行き強調",
+                      "en": "formation-depth emphasis"
+                  },
+                  {
+                      "ja": "ロックオンの緊張感",
+                      "en": "target-lock tension"
+                  },
+                  {
+                      "ja": "主砲斉射の火線交差",
+                      "en": "broadside fire crossing"
+                  },
+                  {
+                      "ja": "ビーム槍の撃ち合い",
+                      "en": "beam-lance exchange"
+                  },
+                  {
+                      "ja": "ミサイル一斉射の航跡",
+                      "en": "missile salvo trails"
+                  },
+                  {
+                      "ja": "シールド閃光の破裂",
+                      "en": "shield flare burst"
+                  },
+                  {
+                      "ja": "回避ロールの機動感",
+                      "en": "evasive roll motion"
+                  },
+                  {
+                      "ja": "推進ベクトルのブラー",
+                      "en": "thruster-vector blur"
+                  },
+                  {
+                      "ja": "スラスターで静止する人型機",
+                      "en": "thruster-vector hover"
+                  },
+                  {
+                      "ja": "近距離の間合い維持",
+                      "en": "close-range distance hold"
+                  },
+                  {
+                      "ja": "構えた武装のシルエット緊張",
+                      "en": "weapon-ready silhouette tension"
+                  },
+                  {
+                      "ja": "近接戦の火花",
+                      "en": "close-range clash sparks"
+                  },
+                  {
+                      "ja": "戦闘機編隊の同調バンク",
+                      "en": "synchronized squadron banking"
+                  },
+                  {
+                      "ja": "イオン航跡の編隊線",
+                      "en": "ion-trail formation lines"
+                  },
+                  {
+                      "ja": "発艦レールの加速",
+                      "en": "launch-rail acceleration"
+                  },
+                  {
+                      "ja": "エンジン炎の瞬間的な膨らみ",
+                      "en": "engine flare burst"
+                  },
+                  {
+                      "ja": "迎撃火線の網",
+                      "en": "intercept fire web"
+                  }
               ]
-            }
-          },
+          }
+      ],
+      "settings": [
           {
-            "id": "jetstream_straight_cruise",
-            "ja": "雲上を一直線に抜ける巡航視点",
-            "links": {
-              "base": [
-                "jetstream cruise lane",
-                "above cloud tops"
-              ],
-              "customize": [
-                "straight-flight feel",
-                "high-speed pass",
-                "dry upper air"
-              ],
-              "settings": [
-                "layered cloud horizon",
-                "jetstream streaks above",
-                "far-thin cloud belt",
-                "earth-haze curve"
+              "group": "🏙 眼下の都市細部",
+              "items": [
+                  {
+                      "ja": "屋上の格子配置",
+                      "en": "rooftop grid below"
+                  },
+                  {
+                      "ja": "屋上の給水タンク群",
+                      "en": "rooftop water tanks"
+                  },
+                  {
+                      "ja": "高架道路の線",
+                      "en": "elevated highway line"
+                  },
+                  {
+                      "ja": "夜の車列の点線",
+                      "en": "night traffic beadlines"
+                  },
+                  {
+                      "ja": "都市の光点群",
+                      "en": "city light clusters below"
+                  },
+                  {
+                      "ja": "橋の光の線",
+                      "en": "bridge-line lights below"
+                  },
+                  {
+                      "ja": "ビル群のガラス反射",
+                      "en": "highrise glass reflections below"
+                  },
+                  {
+                      "ja": "屋上設備の集まり",
+                      "en": "roof equipment clusters"
+                  },
+                  {
+                      "ja": "都市区画の影帯",
+                      "en": "city-block shadow bands"
+                  },
+                  {
+                      "ja": "低い屋上影",
+                      "en": "low rooftop shadows"
+                  },
+                  {
+                      "ja": "濡れた屋上の反射",
+                      "en": "wet rooftops below"
+                  }
               ]
-            }
           },
           {
-            "id": "moonrim_quiet_night_flight",
-            "ja": "月光の雲縁をなぞる静かな夜間飛行",
-            "links": {
-              "base": [
-                "moonlit haze overflight",
-                "moonlit cloud-top flight"
-              ],
-              "customize": [
-                "gliding hush",
-                "moonlit silver wash",
-                "cloud-edge tracing path"
-              ],
-              "settings": [
-                "moonlit cloud tops",
-                "thin crescent from above",
-                "starlight scatter",
-                "cloud-edge silver rim"
+              "group": "🏫 眼下の施設・生活圏細部",
+              "items": [
+                  {
+                      "ja": "校庭の矩形",
+                      "en": "schoolyard rectangle"
+                  },
+                  {
+                      "ja": "プールの青い面",
+                      "en": "pool blue patch"
+                  },
+                  {
+                      "ja": "住宅街の区画模様",
+                      "en": "residential block pattern"
+                  },
+                  {
+                      "ja": "屋根瓦の並び",
+                      "en": "roof tile patterns below"
+                  },
+                  {
+                      "ja": "細い道路の格子",
+                      "en": "narrow street grid"
+                  },
+                  {
+                      "ja": "学校屋上の幾何形",
+                      "en": "school-roof geometry"
+                  },
+                  {
+                      "ja": "トラックの楕円線",
+                      "en": "track oval markings below"
+                  },
+                  {
+                      "ja": "鉄道路線の線",
+                      "en": "rail-line streak below"
+                  },
+                  {
+                      "ja": "生活圏の道路網",
+                      "en": "district road grid"
+                  },
+                  {
+                      "ja": "境界線の区切り",
+                      "en": "field-boundary lines"
+                  }
               ]
-            }
-          }
-        ]
-      },
-      {
-        "group": "✈ 乗り物寄り飛行視点",
-        "items": [
+          },
           {
-            "id": "airliner_window_cloudsea_cruise",
-            "ja": "旅客機の窓から雲海を抜ける巡航視点",
-            "links": {
-              "base": [
-                "airliner window overflight",
-                "cabin-side cloud-top overflight"
-              ],
-              "customize": [
-                "oval window framing",
-                "enclosed-cabin stillness",
-                "forward-pulled viewpoint"
-              ],
-              "settings": [
-                "window rim silhouette",
-                "double-layer cloud sea",
-                "far thin contrail",
-                "far-horizon glow"
+              "group": "🌲 眼下の自然細部",
+              "items": [
+                  {
+                      "ja": "森の樹冠模様",
+                      "en": "forest canopy mosaic"
+                  },
+                  {
+                      "ja": "霧だまり",
+                      "en": "mist pockets below"
+                  },
+                  {
+                      "ja": "草原の色の面",
+                      "en": "grassland color field"
+                  },
+                  {
+                      "ja": "風に流れた草筋",
+                      "en": "wind-bent grass streaks below"
+                  },
+                  {
+                      "ja": "河川の銀線",
+                      "en": "river silver thread"
+                  },
+                  {
+                      "ja": "長く蛇行する川筋",
+                      "en": "long river meander below"
+                  },
+                  {
+                      "ja": "砂州の模様",
+                      "en": "sandbar patterns below"
+                  },
+                  {
+                      "ja": "山脈の稜線帯",
+                      "en": "mountain ridge bands"
+                  },
+                  {
+                      "ja": "雪のない岩肋",
+                      "en": "snowless rock ribs below"
+                  },
+                  {
+                      "ja": "深い谷の折れ",
+                      "en": "deep valley folds"
+                  },
+                  {
+                      "ja": "海岸線の白い縁",
+                      "en": "coastline white fringe"
+                  },
+                  {
+                      "ja": "海面の反射帯",
+                      "en": "sea reflection band"
+                  },
+                  {
+                      "ja": "砂丘の風紋模様",
+                      "en": "desert dune patterns"
+                  },
+                  {
+                      "ja": "渓谷の裂け目",
+                      "en": "canyon cuts below"
+                  }
               ]
-            }
           },
           {
-            "id": "helicopter_cityedge_bank_view",
-            "ja": "ヘリ越しに都市縁を覗く旋回飛行視点",
-            "links": {
-              "base": [
-                "helicopter banked overflight",
-                "rotorcraft city-edge overflight"
-              ],
-              "customize": [
-                "rotor vibration trace",
-                "banking tilt",
-                "mid-altitude lookdown"
-              ],
-              "settings": [
-                "rotor shadow sweep",
-                "city light clusters below",
-                "river silver thread",
-                "tilted horizon line"
+              "group": "☁ 雲・空中の細部",
+              "items": [
+                  {
+                      "ja": "雲海の表面",
+                      "en": "cloud sea surface"
+                  },
+                  {
+                      "ja": "層になった雲の地平",
+                      "en": "layered cloud horizon"
+                  },
+                  {
+                      "ja": "雲の切れ目",
+                      "en": "broken cloud gap"
+                  },
+                  {
+                      "ja": "雲壁の縁",
+                      "en": "cloud-wall edge"
+                  },
+                  {
+                      "ja": "陽を受けた雲の縁",
+                      "en": "sunlit cloud rim"
+                  },
+                  {
+                      "ja": "月光を受けた雲頂",
+                      "en": "moonlit cloud tops"
+                  },
+                  {
+                      "ja": "星明かりの散り",
+                      "en": "starlight scatter"
+                  },
+                  {
+                      "ja": "上層大気のグラデーション",
+                      "en": "upper-atmosphere gradient"
+                  },
+                  {
+                      "ja": "遠い薄雲の帯",
+                      "en": "far-thin cloud belt"
+                  },
+                  {
+                      "ja": "上から見る細い三日月",
+                      "en": "thin crescent from above"
+                  },
+                  {
+                      "ja": "密な星の帯",
+                      "en": "dense starlight field"
+                  }
               ]
-            }
           },
           {
-            "id": "smallcraft_coastline_lowpass_view",
-            "ja": "小型機で海岸線をなぞる低空飛行視点",
-            "links": {
-              "base": [
-                "small-aircraft coastal overflight",
-                "sea overflight"
-              ],
-              "customize": [
-                "canopy frame edges",
-                "crosswind drift",
-                "rooftop-skimming altitude"
-              ],
-              "settings": [
-                "coastline foam edge below",
-                "white wave lines",
-                "frame-cut horizon",
-                "sea-glint strips below"
+              "group": "🧭 上空視点の証拠",
+              "items": [
+                  {
+                      "ja": "傾いた地平線",
+                      "en": "tilted horizon line"
+                  },
+                  {
+                      "ja": "遠く薄い地平の輝き",
+                      "en": "far-horizon glow"
+                  },
+                  {
+                      "ja": "下へ流れる景色の縁",
+                      "en": "shrinking-ground edges"
+                  },
+                  {
+                      "ja": "樹冠の光斑",
+                      "en": "tree-crown highlight patches"
+                  },
+                  {
+                      "ja": "見下ろしの水面反射帯",
+                      "en": "reflective water strips"
+                  },
+                  {
+                      "ja": "氾濫原のパッチワーク",
+                      "en": "floodplain patchwork"
+                  },
+                  {
+                      "ja": "港の輪郭線",
+                      "en": "harbor outlines below"
+                  },
+                  {
+                      "ja": "崖影の帯",
+                      "en": "cliff-shadow bands"
+                  },
+                  {
+                      "ja": "塩地の光る斑",
+                      "en": "salt-flat gleam patches"
+                  },
+                  {
+                      "ja": "長く伸びる地形影",
+                      "en": "long terrain shadow bands"
+                  },
+                  {
+                      "ja": "雲影の斑",
+                      "en": "cloud shadows below"
+                  },
+                  {
+                      "ja": "地上へ落ちる光柱",
+                      "en": "shifting-light columns below"
+                  },
+                  {
+                      "ja": "地球側の霞の曲線",
+                      "en": "earth-haze curve"
+                  }
               ]
-            }
           },
           {
-            "id": "canopy_stormedge_highspeed_view",
-            "ja": "キャノピー越しに雷雲縁を切る高速飛行視点",
-            "links": {
-              "base": [
-                "canopy-framed high-speed overflight",
-                "storm-edge overflight"
-              ],
-              "customize": [
-                "canopy reflections",
-                "high-speed pass",
-                "storm-front tension"
-              ],
-              "settings": [
-                "storm shelf cloud",
-                "window rain dots",
-                "blue-white flash bloom",
-                "off-center horizon"
+              "group": "🌧 空中の天候痕跡",
+              "items": [
+                  {
+                      "ja": "斜めに流れる雨帯",
+                      "en": "slanted rain bands below"
+                  },
+                  {
+                      "ja": "濡れて光る地上の筋",
+                      "en": "wet reflective corridors"
+                  },
+                  {
+                      "ja": "風に裂かれた雲片",
+                      "en": "wind-torn cloud strips"
+                  },
+                  {
+                      "ja": "砕けた雪帯",
+                      "en": "broken snow bands below"
+                  },
+                  {
+                      "ja": "白波の線群",
+                      "en": "whitecap lines below"
+                  },
+                  {
+                      "ja": "流される雲影",
+                      "en": "drifted cloud shadows"
+                  },
+                  {
+                      "ja": "雨ににじむ地平",
+                      "en": "mist-smeared horizon"
+                  },
+                  {
+                      "ja": "冷たい青の地平",
+                      "en": "cold blue horizon"
+                  },
+                  {
+                      "ja": "頭上のジェット気流筋",
+                      "en": "jetstream streaks above"
+                  },
+                  {
+                      "ja": "雲縁の銀光",
+                      "en": "cloud-edge silver rim"
+                  },
+                  {
+                      "ja": "突風のせん断線",
+                      "en": "gust shear lines"
+                  }
               ]
-            }
-          }
-        ]
-      },
-      {
-        "group": "🪽 生身寄り飛翔・滑空視点",
-        "items": [
+          },
           {
-            "id": "openair_cloudgap_bodyflight_view",
-            "ja": "風を胸で受けて雲間へ飛び込む生身視点",
-            "links": {
-              "base": [
-                "open-air body flight over cloud gap",
-                "between cloud layers"
-              ],
-              "customize": [
-                "open-air exposure",
-                "chest-first wind impact",
-                "climbing ascent"
-              ],
-              "settings": [
-                "no-frame open sky field",
-                "cloud-gap brightness ahead",
-                "wind-sheared peripheral blur",
-                "altitude-shifting lookdown"
+              "group": "🧭 飛行経路・視点の証拠",
+              "items": [
+                  {
+                      "ja": "前方へ流れる雨線",
+                      "en": "forward motion streak in rain"
+                  },
+                  {
+                      "ja": "わずかに外れた地平中心",
+                      "en": "off-center horizon"
+                  },
+                  {
+                      "ja": "風でややぶれる視界",
+                      "en": "turbulence-softened focus"
+                  },
+                  {
+                      "ja": "高度変化のかかる見下ろし",
+                      "en": "altitude-shifting lookdown"
+                  },
+                  {
+                      "ja": "斜めに逃げる地上模様",
+                      "en": "diagonal-ground drift below"
+                  }
               ]
-            }
           },
           {
-            "id": "bodyglide_citydive_view",
-            "ja": "斜め下へ身を倒して街へ滑空する生身視点",
-            "links": {
-              "base": [
-                "body-glide city overflight",
-                "city overflight"
-              ],
-              "customize": [
-                "body-banked glide",
-                "eye-line dragged downward",
-                "wind-pressure rush"
-              ],
-              "settings": [
-                "raw horizon cant",
-                "rooftop grid below",
-                "diagonal-ground drift below",
-                "open-air rush lines"
+              "group": "✈ 乗り物視点の証拠",
+              "items": [
+                  {
+                      "ja": "窓縁の黒いシルエット",
+                      "en": "window rim silhouette"
+                  },
+                  {
+                      "ja": "キャノピー面の反射線",
+                      "en": "canopy surface reflections"
+                  },
+                  {
+                      "ja": "ローター影の流れ",
+                      "en": "rotor shadow sweep"
+                  },
+                  {
+                      "ja": "窓ガラスの雨点",
+                      "en": "window rain dots"
+                  },
+                  {
+                      "ja": "フレームで切られた地平",
+                      "en": "frame-cut horizon"
+                  },
+                  {
+                      "ja": "薄く震える機体視界",
+                      "en": "machine-borne view vibration"
+                  }
               ]
-            }
           },
           {
-            "id": "raincut_sea_bodyflight_view",
-            "ja": "雨粒を受けながら海上を抜ける生身飛行視点",
-            "links": {
-              "base": [
-                "open-air sea body flight",
-                "rain-shaft overflight"
-              ],
-              "customize": [
-                "rain striking the viewpoint",
-                "crosswind drift",
-                "open-air exposure"
-              ],
-              "settings": [
-                "direct rain hits on viewpoint",
-                "white wave lines",
-                "forward motion streak in rain",
-                "sea-glint strips below"
+              "group": "🪽 生身視点の証拠",
+              "items": [
+                  {
+                      "ja": "枠のないむき出しの空",
+                      "en": "no-frame open sky field"
+                  },
+                  {
+                      "ja": "視界端を裂く風ブレ",
+                      "en": "wind-sheared peripheral blur"
+                  },
+                  {
+                      "ja": "生身で傾いた地平",
+                      "en": "raw horizon cant"
+                  },
+                  {
+                      "ja": "視界へ直接当たる雨粒",
+                      "en": "direct rain hits on viewpoint"
+                  },
+                  {
+                      "ja": "前方へ伸びる開放風線",
+                      "en": "open-air rush lines"
+                  },
+                  {
+                      "ja": "体勢で揺れる見下ろし",
+                      "en": "body-tilted lookdown"
+                  }
               ]
-            }
           },
           {
-            "id": "moonrim_openair_glide_view",
-            "ja": "月光の雲縁をかすめる静かな生身滑空視点",
-            "links": {
-              "base": [
-                "moonlit body-flight over cloud tops",
-                "moonlit cloud-top flight"
-              ],
-              "customize": [
-                "body-banked glide",
-                "night-cooled atmosphere",
-                "gliding hush"
-              ],
-              "settings": [
-                "cloud-edge silver rim",
-                "faint upper stars",
-                "no-frame open sky field",
-                "starlit high-altitude clarity"
+              "group": "🌌 宇宙視点の証拠",
+              "items": [
+                  {
+                      "ja": "黒い宇宙の余白",
+                      "en": "black-space negative area"
+                  },
+                  {
+                      "ja": "奥行きのある星野層",
+                      "en": "starfield depth layers"
+                  },
+                  {
+                      "ja": "眼下の惑星の縁",
+                      "en": "planet limb below"
+                  },
+                  {
+                      "ja": "薄い大気の縁光",
+                      "en": "thin atmospheric rim"
+                  },
+                  {
+                      "ja": "遠い月の円盤",
+                      "en": "distant moon disk"
+                  },
+                  {
+                      "ja": "眼下の雲渦",
+                      "en": "sunlit cloud swirl far below"
+                  },
+                  {
+                      "ja": "船体に反射する太陽光",
+                      "en": "solar glare on hull"
+                  },
+                  {
+                      "ja": "軌道ステーションの曲線",
+                      "en": "orbital station curve"
+                  },
+                  {
+                      "ja": "船体パネルの近接通過",
+                      "en": "hull panel close pass"
+                  },
+                  {
+                      "ja": "テザー線の弧",
+                      "en": "tether line arc"
+                  },
+                  {
+                      "ja": "漂う工具の影",
+                      "en": "drifting tool silhouettes"
+                  },
+                  {
+                      "ja": "宇宙服ライトの薄い反射",
+                      "en": "thin suit light reflection"
+                  },
+                  {
+                      "ja": "漂うデブリのシルエット",
+                      "en": "drifting debris silhouettes"
+                  },
+                  {
+                      "ja": "割れた外装板の破片",
+                      "en": "broken panel fragments"
+                  },
+                  {
+                      "ja": "遠い危険灯",
+                      "en": "distant hazard lights"
+                  },
+                  {
+                      "ja": "日の出の縁光フレア",
+                      "en": "sunrise edge flare"
+                  },
+                  {
+                      "ja": "夜側の都市光ビーズ",
+                      "en": "night-side citylight beads"
+                  },
+                  {
+                      "ja": "並んだドッキング灯",
+                      "en": "docking lights in a row"
+                  },
+                  {
+                      "ja": "太陽電池パネル列",
+                      "en": "solar panel arrays"
+                  },
+                  {
+                      "ja": "メンテナンスアーム影",
+                      "en": "maintenance arm silhouettes"
+                  },
+                  {
+                      "ja": "遠くの星雲霞",
+                      "en": "nebula haze far ahead"
+                  },
+                  {
+                      "ja": "かすかな航法灯の軌跡",
+                      "en": "faint navigation light trail"
+                  }
               ]
-            }
+          },
+          {
+              "group": "⚔ 宇宙戦闘の証拠",
+              "items": [
+                  {
+                      "ja": "編隊を組む大型艦影",
+                      "en": "capital ships in formation"
+                  },
+                  {
+                      "ja": "遠い護衛艦の影",
+                      "en": "distant escort silhouettes"
+                  },
+                  {
+                      "ja": "赤警報ビーコンの反射",
+                      "en": "red alert beacon glints"
+                  },
+                  {
+                      "ja": "宇宙を横切るビーム線",
+                      "en": "beam lines across void"
+                  },
+                  {
+                      "ja": "真空に咲く爆発光",
+                      "en": "explosion blossoms in vacuum"
+                  },
+                  {
+                      "ja": "シールド球の閃光",
+                      "en": "shield bubble flashes"
+                  },
+                  {
+                      "ja": "漂う残骸群",
+                      "en": "wreckage drifting field"
+                  },
+                  {
+                      "ja": "遠距離の人型機シルエット",
+                      "en": "mecha silhouettes at distance"
+                  },
+                  {
+                      "ja": "交差する人型機シルエット",
+                      "en": "mecha silhouettes crossing"
+                  },
+                  {
+                      "ja": "武器の発光点",
+                      "en": "weapon glow points"
+                  },
+                  {
+                      "ja": "遠い母艦の背景",
+                      "en": "distant carrier backdrop"
+                  },
+                  {
+                      "ja": "漂う装甲片",
+                      "en": "floating armor fragments"
+                  },
+                  {
+                      "ja": "サーベル状ビームの弧",
+                      "en": "saber-like beam arcs"
+                  },
+                  {
+                      "ja": "装甲火花の破片",
+                      "en": "armor spark fragments"
+                  },
+                  {
+                      "ja": "デブリ火花の雲",
+                      "en": "debris-spark cloud"
+                  },
+                  {
+                      "ja": "編隊を組む戦闘機影",
+                      "en": "fighter silhouettes in formation"
+                  },
+                  {
+                      "ja": "母艦の発艦灯",
+                      "en": "carrier launch lights"
+                  },
+                  {
+                      "ja": "エンジン光点",
+                      "en": "engine glow dots"
+                  },
+                  {
+                      "ja": "イオン航跡の交差弧",
+                      "en": "ion trail crossing arcs"
+                  },
+                  {
+                      "ja": "照準レティクルの光",
+                      "en": "target reticle glow"
+                  },
+                  {
+                      "ja": "格納庫口のシルエット",
+                      "en": "hangar mouth silhouette"
+                  },
+                  {
+                      "ja": "軌道要塞のシルエット",
+                      "en": "orbital fortress silhouette"
+                  },
+                  {
+                      "ja": "防衛衛星の連なり",
+                      "en": "defense satellite chain"
+                  }
+              ]
           }
-        ]
-      }
-    ],
-    "base": [
-      {
-        "group": "🏙 街・建築の上空",
-        "items": [
-          {
-            "ja": "街の上空",
-            "en": "city overflight"
-          },
-          {
-            "ja": "高層ビル街の上空",
-            "en": "highrise overflight"
-          },
-          {
-            "ja": "密集した都市中心部の上空",
-            "en": "dense skyline overflight"
-          },
-          {
-            "ja": "夜景都市の上空",
-            "en": "night city overflight"
-          },
-          {
-            "ja": "橋を抱く都市の上空",
-            "en": "bridge-crossing overflight"
-          },
-          {
-            "ja": "港湾都市の上空",
-            "en": "harbor-city overflight"
-          },
-          {
-            "ja": "高架道路が走る都市の上空",
-            "en": "elevated-highway overflight"
-          },
-          {
-            "ja": "塔群を抱く都市の上空",
-            "en": "tower-cluster overflight"
-          }
-        ]
-      },
-      {
-        "group": "🏫 施設・生活圏の上空",
-        "items": [
-          {
-            "ja": "学校の上空",
-            "en": "school campus overflight"
-          },
-          {
-            "ja": "校庭の上空",
-            "en": "schoolyard overflight"
-          },
-          {
-            "ja": "住宅街の上空",
-            "en": "residential district overflight"
-          },
-          {
-            "ja": "郊外生活圏の上空",
-            "en": "suburban district overflight"
-          },
-          {
-            "ja": "工場地帯の上空",
-            "en": "industrial zone overflight"
-          },
-          {
-            "ja": "倉庫街の上空",
-            "en": "warehouse block overflight"
-          },
-          {
-            "ja": "スタジアムの上空",
-            "en": "stadium overflight"
-          },
-          {
-            "ja": "鉄道路線沿いの上空",
-            "en": "rail-corridor overflight"
-          }
-        ]
-      },
-      {
-        "group": "🌲 自然地形の上空",
-        "items": [
-          {
-            "ja": "森の上空",
-            "en": "forest canopy overflight"
-          },
-          {
-            "ja": "霧の谷を抱く上空",
-            "en": "mist valley overflight"
-          },
-          {
-            "ja": "草原の上空",
-            "en": "grassland overflight"
-          },
-          {
-            "ja": "高原草地の上空",
-            "en": "plateau grassland overflight"
-          },
-          {
-            "ja": "川の蛇行上空",
-            "en": "river bend overflight"
-          },
-          {
-            "ja": "湿地の上空",
-            "en": "wetland overflight"
-          },
-          {
-            "ja": "山脈の上空",
-            "en": "mountain range overflight"
-          },
-          {
-            "ja": "尾根筋の上空",
-            "en": "ridge overflight"
-          },
-          {
-            "ja": "海の上空",
-            "en": "sea overflight"
-          },
-          {
-            "ja": "海岸線の上空",
-            "en": "coastline overflight"
-          },
-          {
-            "ja": "砂丘の上空",
-            "en": "desert dune overflight"
-          },
-          {
-            "ja": "渓谷の上空",
-            "en": "canyon overflight"
-          }
-        ]
-      },
-      {
-        "group": "☁ 雲・高高度の上空",
-        "items": [
-          {
-            "ja": "雲の上",
-            "en": "above cloud tops"
-          },
-          {
-            "ja": "雲海の上",
-            "en": "above cloud sea"
-          },
-          {
-            "ja": "雲層のあいだ",
-            "en": "between cloud layers"
-          },
-          {
-            "ja": "雷雲縁の上空",
-            "en": "storm-edge overflight"
-          },
-          {
-            "ja": "月光の雲上飛行景",
-            "en": "moonlit cloud-top flight"
-          },
-          {
-            "ja": "高高度の空路",
-            "en": "high-altitude sky lane"
-          },
-          {
-            "ja": "成層圏寄りの航路",
-            "en": "stratosphere-leaning flight path"
-          },
-          {
-            "ja": "朝靄を抜けた上空",
-            "en": "dawn-haze upper air"
-          }
-        ]
-      },
-      {
-        "group": "🌦 天候・空路の上空",
-        "items": [
-          {
-            "ja": "雨脚の中の上空",
-            "en": "rain-shaft overflight"
-          },
-          {
-            "ja": "嵐の切れ目を縫う上空",
-            "en": "storm-gap overflight"
-          },
-          {
-            "ja": "横風の強い海上空路",
-            "en": "crosswind sea lane"
-          },
-          {
-            "ja": "雪雲の下の上空",
-            "en": "snow-squall overflight"
-          },
-          {
-            "ja": "雲の切れ間へ降りる上空",
-            "en": "sunbreak overflight"
-          },
-          {
-            "ja": "ジェット気流寄りの巡航空路",
-            "en": "jetstream cruise lane"
-          },
-          {
-            "ja": "月霞を帯びた夜の上空",
-            "en": "moonlit haze overflight"
-          }
-        ]
-      },
-      {
-        "group": "✈ 乗り物・機体寄り上空",
-        "items": [
-          {
-            "ja": "旅客機の窓越し上空",
-            "en": "airliner window overflight"
-          },
-          {
-            "ja": "客室脇の雲上飛行景",
-            "en": "cabin-side cloud-top overflight"
-          },
-          {
-            "ja": "ヘリの旋回上空",
-            "en": "helicopter banked overflight"
-          },
-          {
-            "ja": "都市縁をなぞるローター機上空",
-            "en": "rotorcraft city-edge overflight"
-          },
-          {
-            "ja": "小型機の海岸線飛行上空",
-            "en": "small-aircraft coastal overflight"
-          },
-          {
-            "ja": "キャノピー越しの高速上空",
-            "en": "canopy-framed high-speed overflight"
-          }
-        ]
-      },
-      {
-        "group": "🪽 生身・開放飛翔寄り上空",
-        "items": [
-          {
-            "ja": "雲間へ飛び込む生身上空",
-            "en": "open-air body flight over cloud gap"
-          },
-          {
-            "ja": "街へ滑空する生身上空",
-            "en": "body-glide city overflight"
-          },
-          {
-            "ja": "海上を抜ける生身飛行",
-            "en": "open-air sea body flight"
-          },
-          {
-            "ja": "月光の雲上を滑る生身飛行",
-            "en": "moonlit body-flight over cloud tops"
-          },
-          {
-            "ja": "開放空域の自由飛翔",
-            "en": "open-air free-flight over sky"
-          },
-          {
-            "ja": "風を直受けする高空飛翔",
-            "en": "direct-wind high-altitude body flight"
-          }
-        ]
-      }
-    ],
-    "customize": [
-      {
-        "group": "📏 高度・位置",
-        "items": [
-          {
-            "ja": "建物すれすれの低空",
-            "en": "rooftop-skimming altitude"
-          },
-          {
-            "ja": "地表に近い低空",
-            "en": "near-ground low altitude"
-          },
-          {
-            "ja": "樹冠すれすれの低空",
-            "en": "treetop-skimming altitude"
-          },
-          {
-            "ja": "中高度の見下ろし",
-            "en": "mid-altitude lookdown"
-          },
-          {
-            "ja": "高高度の遠景化",
-            "en": "high-altitude remoteness"
-          },
-          {
-            "ja": "雲の上の高度",
-            "en": "above-cloud altitude"
-          },
-          {
-            "ja": "雲海上の高さ",
-            "en": "cloud-sea altitude"
-          },
-          {
-            "ja": "雲層内の位置",
-            "en": "between-cloud-layer flight"
-          },
-          {
-            "ja": "成層圏寄りの薄い高さ",
-            "en": "stratospheric thin air height"
-          }
-        ]
-      },
-      {
-        "group": "🪽 飛行感・姿勢",
-        "items": [
-          {
-            "ja": "直進する飛行感",
-            "en": "straight-flight feel"
-          },
-          {
-            "ja": "滑空する静けさ",
-            "en": "gliding hush"
-          },
-          {
-            "ja": "旋回中の傾き",
-            "en": "banking tilt"
-          },
-          {
-            "ja": "緩やかな降下",
-            "en": "gentle descent"
-          },
-          {
-            "ja": "上昇する抜け感",
-            "en": "climbing ascent"
-          },
-          {
-            "ja": "横風に流れる感覚",
-            "en": "crosswind drift"
-          },
-          {
-            "ja": "加速する抜け感",
-            "en": "high-speed pass"
-          },
-          {
-            "ja": "浮遊するような静止感",
-            "en": "hovering suspension"
-          },
-          {
-            "ja": "前方へ引かれる視点",
-            "en": "forward-pulled viewpoint"
-          }
-        ]
-      },
-      {
-        "group": "🌬 風・大気",
-        "items": [
-          {
-            "ja": "風圧のある飛行感",
-            "en": "wind-pressure rush"
-          },
-          {
-            "ja": "乾いた高高度の空気",
-            "en": "dry upper air"
-          },
-          {
-            "ja": "雲を切る湿り気",
-            "en": "cloud-cut dampness"
-          },
-          {
-            "ja": "朝の上空の冷気",
-            "en": "dawn upper-air chill"
-          },
-          {
-            "ja": "夕方の上昇気流の暖かさ",
-            "en": "evening updraft warmth"
-          },
-          {
-            "ja": "夜に冷えた大気",
-            "en": "night-cooled atmosphere"
-          },
-          {
-            "ja": "前線近くの張りつめ",
-            "en": "storm-front tension"
-          },
-          {
-            "ja": "晴れた上空の澄み",
-            "en": "sunlit upper-air clarity"
-          },
-          {
-            "ja": "星の近い冷たい透明感",
-            "en": "starlit high-altitude clarity"
-          }
-        ]
-      },
-      {
-        "group": "👁 見下ろし・距離感",
-        "items": [
-          {
-            "ja": "眼下が遠のく感覚",
-            "en": "ground-shrinking distance"
-          },
-          {
-            "ja": "屋根が図形に変わる見下ろし",
-            "en": "roofs-become-patterns"
-          },
-          {
-            "ja": "道路が線に変わる高さ",
-            "en": "roads-turn-to-lines"
-          },
-          {
-            "ja": "川が一本の銀線に見える距離",
-            "en": "river-thread below"
-          },
-          {
-            "ja": "森が樹冠模様になる見下ろし",
-            "en": "forest-mosaic lookdown"
-          },
-          {
-            "ja": "街灯が点群に沈む夜景高度",
-            "en": "city-lights-as-beads"
-          },
-          {
-            "ja": "地平がわずかに丸みを帯びる感覚",
-            "en": "earth-curve hint"
-          },
-          {
-            "ja": "視線が下へ引かれる感覚",
-            "en": "eye-line dragged downward"
-          },
-          {
-            "ja": "空気遠近で霞む地表",
-            "en": "atmospheric-ground-haze"
-          }
-        ]
-      },
-      {
-        "group": "🌅 光・時間",
-        "items": [
-          {
-            "ja": "朝の斜光",
-            "en": "dawn side light"
-          },
-          {
-            "ja": "昼の真上光",
-            "en": "noon top light"
-          },
-          {
-            "ja": "夕方のかすめる光",
-            "en": "sunset grazing light"
-          },
-          {
-            "ja": "青の時間の静けさ",
-            "en": "blue-hour aerial hush"
-          },
-          {
-            "ja": "月光の銀の洗い",
-            "en": "moonlit silver wash"
-          },
-          {
-            "ja": "夜景光の散り",
-            "en": "night cityglow scatter"
-          },
-          {
-            "ja": "雲影が地表を流れる光",
-            "en": "cloud-shadow sweep below"
-          },
-          {
-            "ja": "雲間から落ちる光柱",
-            "en": "light-columns through gaps"
-          },
-          {
-            "ja": "遠い稲光の明滅",
-            "en": "far lightning flicker"
-          }
-        ]
-      },
-      {
-        "group": "🌦 天候・視界",
-        "items": [
-          {
-            "ja": "雨幕を突っ切る飛行感",
-            "en": "rain-curtain pass"
-          },
-          {
-            "ja": "視界の削られた飛行",
-            "en": "reduced-visibility flight"
-          },
-          {
-            "ja": "向かい風に押し返される上昇",
-            "en": "headwind climb"
-          },
-          {
-            "ja": "雪片を切る飛行感",
-            "en": "snow-flurry pass"
-          },
-          {
-            "ja": "雲間の陽光を横切る",
-            "en": "sunbreak shaft crossing"
-          },
-          {
-            "ja": "上空から海霧をかすめる感覚",
-            "en": "sea-spray haze from above"
-          },
-          {
-            "ja": "前線通過後の澄んだ抜け",
-            "en": "post-front clarity"
-          }
-        ]
-      },
-      {
-        "group": "🎥 航路・カメラ感",
-        "items": [
-          {
-            "ja": "地平線を切る旋回感",
-            "en": "horizon-slicing turn"
-          },
-          {
-            "ja": "俯角の強い見下ろし",
-            "en": "steep-lookdown angle"
-          },
-          {
-            "ja": "雲縁をなぞる航路",
-            "en": "cloud-edge tracing path"
-          },
-          {
-            "ja": "乱気流の微振動",
-            "en": "turbulence tremor"
-          },
-          {
-            "ja": "高度変化を伴う見下ろし",
-            "en": "altitude-shifting lookdown"
-          },
-          {
-            "ja": "斜め前へ逃げる地上の流れ",
-            "en": "diagonal-ground-flow"
-          }
-        ]
-      },
-      {
-        "group": "🪟 機窓・キャノピー・機械感",
-        "items": [
-          {
-            "ja": "楕円窓で切られた視界",
-            "en": "oval window framing"
-          },
-          {
-            "ja": "キャノピー縁のフレーム",
-            "en": "canopy frame edges"
-          },
-          {
-            "ja": "ローター由来の微振動",
-            "en": "rotor vibration trace"
-          },
-          {
-            "ja": "閉じた客室の静けさ",
-            "en": "enclosed-cabin stillness"
-          },
-          {
-            "ja": "エンジンに引かれる前方感",
-            "en": "engine-thrust forward pull"
-          },
-          {
-            "ja": "ガラスに走る反射のすべり",
-            "en": "canopy reflections"
-          }
-        ]
-      },
-      {
-        "group": "💨 生身・直受け飛翔感",
-        "items": [
-          {
-            "ja": "剥き出しの開放空気感",
-            "en": "open-air exposure"
-          },
-          {
-            "ja": "胸から受ける風圧",
-            "en": "chest-first wind impact"
-          },
-          {
-            "ja": "体ごと傾く滑空感",
-            "en": "body-banked glide"
-          },
-          {
-            "ja": "雨粒が視界へ直接当たる感覚",
-            "en": "rain striking the viewpoint"
-          },
-          {
-            "ja": "胃が落ちるような下降感",
-            "en": "stomach-drop descent feel"
-          },
-          {
-            "ja": "羽ばたき抜きの滑走静けさ",
-            "en": "silent unpowered glide"
-          }
-        ]
-      }
-    ],
-    "settings": [
-      {
-        "group": "🏙 眼下の都市細部",
-        "items": [
-          {
-            "ja": "屋上の格子配置",
-            "en": "rooftop grid below"
-          },
-          {
-            "ja": "屋上の給水タンク群",
-            "en": "rooftop water tanks"
-          },
-          {
-            "ja": "高架道路の線",
-            "en": "elevated highway line"
-          },
-          {
-            "ja": "夜の車列の点線",
-            "en": "night traffic beadlines"
-          },
-          {
-            "ja": "都市の光点群",
-            "en": "city light clusters below"
-          },
-          {
-            "ja": "橋の光の線",
-            "en": "bridge-line lights below"
-          },
-          {
-            "ja": "ビル群のガラス反射",
-            "en": "highrise glass reflections below"
-          },
-          {
-            "ja": "屋上設備の集まり",
-            "en": "roof equipment clusters"
-          },
-          {
-            "ja": "都市区画の影帯",
-            "en": "city-block shadow bands"
-          },
-          {
-            "ja": "低い屋上影",
-            "en": "low rooftop shadows"
-          },
-          {
-            "ja": "濡れた屋上の反射",
-            "en": "wet rooftops below"
-          }
-        ]
-      },
-      {
-        "group": "🏫 眼下の施設・生活圏細部",
-        "items": [
-          {
-            "ja": "校庭の矩形",
-            "en": "schoolyard rectangle"
-          },
-          {
-            "ja": "プールの青い面",
-            "en": "pool blue patch"
-          },
-          {
-            "ja": "住宅街の区画模様",
-            "en": "residential block pattern"
-          },
-          {
-            "ja": "屋根瓦の並び",
-            "en": "roof tile patterns below"
-          },
-          {
-            "ja": "細い道路の格子",
-            "en": "narrow street grid"
-          },
-          {
-            "ja": "学校屋上の幾何形",
-            "en": "school-roof geometry"
-          },
-          {
-            "ja": "トラックの楕円線",
-            "en": "track oval markings below"
-          },
-          {
-            "ja": "鉄道路線の線",
-            "en": "rail-line streak below"
-          },
-          {
-            "ja": "生活圏の道路網",
-            "en": "district road grid"
-          },
-          {
-            "ja": "境界線の区切り",
-            "en": "field-boundary lines"
-          }
-        ]
-      },
-      {
-        "group": "🌲 眼下の自然細部",
-        "items": [
-          {
-            "ja": "森の樹冠模様",
-            "en": "forest canopy mosaic"
-          },
-          {
-            "ja": "霧だまり",
-            "en": "mist pockets below"
-          },
-          {
-            "ja": "草原の色の面",
-            "en": "grassland color field"
-          },
-          {
-            "ja": "風に流れた草筋",
-            "en": "wind-bent grass streaks below"
-          },
-          {
-            "ja": "河川の銀線",
-            "en": "river silver thread"
-          },
-          {
-            "ja": "長く蛇行する川筋",
-            "en": "long river meander below"
-          },
-          {
-            "ja": "砂州の模様",
-            "en": "sandbar patterns below"
-          },
-          {
-            "ja": "山脈の稜線帯",
-            "en": "mountain ridge bands"
-          },
-          {
-            "ja": "雪のない岩肋",
-            "en": "snowless rock ribs below"
-          },
-          {
-            "ja": "深い谷の折れ",
-            "en": "deep valley folds"
-          },
-          {
-            "ja": "海岸線の白い縁",
-            "en": "coastline white fringe"
-          },
-          {
-            "ja": "海面の反射帯",
-            "en": "sea reflection band"
-          },
-          {
-            "ja": "砂丘の風紋模様",
-            "en": "desert dune patterns"
-          },
-          {
-            "ja": "渓谷の裂け目",
-            "en": "canyon cuts below"
-          }
-        ]
-      },
-      {
-        "group": "☁ 雲・空中の細部",
-        "items": [
-          {
-            "ja": "雲海の表面",
-            "en": "cloud sea surface"
-          },
-          {
-            "ja": "層になった雲の地平",
-            "en": "layered cloud horizon"
-          },
-          {
-            "ja": "雲の切れ目",
-            "en": "broken cloud gap"
-          },
-          {
-            "ja": "雲壁の縁",
-            "en": "cloud-wall edge"
-          },
-          {
-            "ja": "陽を受けた雲の縁",
-            "en": "sunlit cloud rim"
-          },
-          {
-            "ja": "月光を受けた雲頂",
-            "en": "moonlit cloud tops"
-          },
-          {
-            "ja": "星明かりの散り",
-            "en": "starlight scatter"
-          },
-          {
-            "ja": "上層大気のグラデーション",
-            "en": "upper-atmosphere gradient"
-          },
-          {
-            "ja": "遠い薄雲の帯",
-            "en": "far-thin cloud belt"
-          },
-          {
-            "ja": "上から見る細い三日月",
-            "en": "thin crescent from above"
-          },
-          {
-            "ja": "密な星の帯",
-            "en": "dense starlight field"
-          }
-        ]
-      },
-      {
-        "group": "🧭 上空視点の証拠",
-        "items": [
-          {
-            "ja": "傾いた地平線",
-            "en": "tilted horizon line"
-          },
-          {
-            "ja": "遠く薄い地平の輝き",
-            "en": "far-horizon glow"
-          },
-          {
-            "ja": "下へ流れる景色の縁",
-            "en": "shrinking-ground edges"
-          },
-          {
-            "ja": "樹冠の光斑",
-            "en": "tree-crown highlight patches"
-          },
-          {
-            "ja": "見下ろしの水面反射帯",
-            "en": "reflective water strips"
-          },
-          {
-            "ja": "氾濫原のパッチワーク",
-            "en": "floodplain patchwork"
-          },
-          {
-            "ja": "港の輪郭線",
-            "en": "harbor outlines below"
-          },
-          {
-            "ja": "崖影の帯",
-            "en": "cliff-shadow bands"
-          },
-          {
-            "ja": "塩地の光る斑",
-            "en": "salt-flat gleam patches"
-          },
-          {
-            "ja": "長く伸びる地形影",
-            "en": "long terrain shadow bands"
-          },
-          {
-            "ja": "雲影の斑",
-            "en": "cloud shadows below"
-          },
-          {
-            "ja": "地上へ落ちる光柱",
-            "en": "shifting-light columns below"
-          },
-          {
-            "ja": "地球側の霞の曲線",
-            "en": "earth-haze curve"
-          }
-        ]
-      },
-      {
-        "group": "🌧 空中の天候痕跡",
-        "items": [
-          {
-            "ja": "斜めに流れる雨帯",
-            "en": "slanted rain bands below"
-          },
-          {
-            "ja": "濡れて光る地上の筋",
-            "en": "wet reflective corridors"
-          },
-          {
-            "ja": "風に裂かれた雲片",
-            "en": "wind-torn cloud strips"
-          },
-          {
-            "ja": "砕けた雪帯",
-            "en": "broken snow bands below"
-          },
-          {
-            "ja": "白波の線群",
-            "en": "whitecap lines below"
-          },
-          {
-            "ja": "流される雲影",
-            "en": "drifted cloud shadows"
-          },
-          {
-            "ja": "雨ににじむ地平",
-            "en": "mist-smeared horizon"
-          },
-          {
-            "ja": "冷たい青の地平",
-            "en": "cold blue horizon"
-          },
-          {
-            "ja": "頭上のジェット気流筋",
-            "en": "jetstream streaks above"
-          },
-          {
-            "ja": "雲縁の銀光",
-            "en": "cloud-edge silver rim"
-          },
-          {
-            "ja": "突風のせん断線",
-            "en": "gust shear lines"
-          }
-        ]
-      },
-      {
-        "group": "🧭 飛行経路・視点の証拠",
-        "items": [
-          {
-            "ja": "前方へ流れる雨線",
-            "en": "forward motion streak in rain"
-          },
-          {
-            "ja": "わずかに外れた地平中心",
-            "en": "off-center horizon"
-          },
-          {
-            "ja": "風でややぶれる視界",
-            "en": "turbulence-softened focus"
-          },
-          {
-            "ja": "高度変化のかかる見下ろし",
-            "en": "altitude-shifting lookdown"
-          },
-          {
-            "ja": "斜めに逃げる地上模様",
-            "en": "diagonal-ground drift below"
-          }
-        ]
-      },
-      {
-        "group": "✈ 乗り物視点の証拠",
-        "items": [
-          {
-            "ja": "窓縁の黒いシルエット",
-            "en": "window rim silhouette"
-          },
-          {
-            "ja": "キャノピー面の反射線",
-            "en": "canopy surface reflections"
-          },
-          {
-            "ja": "ローター影の流れ",
-            "en": "rotor shadow sweep"
-          },
-          {
-            "ja": "窓ガラスの雨点",
-            "en": "window rain dots"
-          },
-          {
-            "ja": "フレームで切られた地平",
-            "en": "frame-cut horizon"
-          },
-          {
-            "ja": "薄く震える機体視界",
-            "en": "machine-borne view vibration"
-          }
-        ]
-      },
-      {
-        "group": "🪽 生身視点の証拠",
-        "items": [
-          {
-            "ja": "枠のないむき出しの空",
-            "en": "no-frame open sky field"
-          },
-          {
-            "ja": "視界端を裂く風ブレ",
-            "en": "wind-sheared peripheral blur"
-          },
-          {
-            "ja": "生身で傾いた地平",
-            "en": "raw horizon cant"
-          },
-          {
-            "ja": "視界へ直接当たる雨粒",
-            "en": "direct rain hits on viewpoint"
-          },
-          {
-            "ja": "前方へ伸びる開放風線",
-            "en": "open-air rush lines"
-          },
-          {
-            "ja": "体勢で揺れる見下ろし",
-            "en": "body-tilted lookdown"
-          }
-        ]
-      }
-    ]
+      ]
   },
   {
     "id": "lightning_storm_luminous_sky_collection",
@@ -55936,7 +56687,7 @@ function createCollectionCheckbox(item, sectionKey, collectionId, options = {}) 
 const SKY_OVERLAY_COLLECTION = {
   "id": "sky_state_celestial_overlay_collection",
   "title": "🌙 空の状態・天体オーバーレイセット",
-  "subtitle": "場所系の完成セットを消さずに、月相、色月、異常月、星空密度、雲流れ、極光、稲妻雲、終末空に加えて、昼空、朝夕焼け、水面反射、窓光、逆光、霧越しの空気感まで上から重ねるための加算用セット",
+  "subtitle": "場所系の完成セットを消さずに、月相、色月、異常月、月の見え方、星空密度、雲流れ、極光、稲妻雲、終末空、昼空、朝夕焼け、昼夜境界、反射・窓光・霧越しの空気感まで上から重ねるための加算用セット",
   "complete": [
     {
       "group": "🌕 月相・天体オーバーレイ",
@@ -56248,6 +56999,137 @@ const SKY_OVERLAY_COLLECTION = {
       ]
     },
     {
+      "group": "🪟 月の見え方・遮蔽物オーバーレイ",
+      "items": [
+        {
+          "id": "overlay_reflected_moon_water",
+          "ja": "水面の月・川面ゆらぎ",
+          "links": {
+            "base": [
+              "rippled reflected moon",
+              "reflective water surface",
+              "rippled water mirror"
+            ],
+            "customize": [
+              "shimmering lunar reflection",
+              "broken moon reflection lines",
+              "silver ripple highlights"
+            ],
+            "settings": [
+              "reflected moon accent",
+              "waterline moon framing",
+              "reflection-led composition"
+            ]
+          }
+        },
+        {
+          "id": "overlay_window_framed_moon",
+          "ja": "窓越しの月・室内差し込み",
+          "links": {
+            "base": [
+              "moon framed by window",
+              "window-lit interior spill",
+              "side-window light shaft"
+            ],
+            "customize": [
+              "window-framed moonlight",
+              "moon-window beam",
+              "window-frame light pattern"
+            ],
+            "settings": [
+              "interior-meets-sky contrast",
+              "light-through-window emphasis",
+              "silent window-lit atmosphere"
+            ]
+          }
+        },
+        {
+          "id": "overlay_fog_veiled_moon",
+          "ja": "霧越しの月・朧の距離",
+          "links": {
+            "base": [
+              "fog-veiled moon disk",
+              "misty distance layering",
+              "veiled scenic depth"
+            ],
+            "customize": [
+              "mist-diffused moon glow",
+              "soft atmospheric diffusion",
+              "halo glow diffusion"
+            ],
+            "settings": [
+              "depth-through-air mood",
+              "softened distant scenery",
+              "dreamlike scenic veil"
+            ]
+          }
+        },
+        {
+          "id": "overlay_branch_framed_moon",
+          "ja": "枝越しの月・森影シルエット",
+          "links": {
+            "base": [
+              "moon seen through bare branches",
+              "branch-framed moon sky",
+              "deep blue-black night sky"
+            ],
+            "customize": [
+              "branch silhouette across moon",
+              "thin twig foreground lines",
+              "silver moon rim on branches"
+            ],
+            "settings": [
+              "silhouette foreground emphasis",
+              "gothic branch framing",
+              "moon-above-scenery emphasis"
+            ]
+          }
+        },
+        {
+          "id": "overlay_rooftop_low_moon",
+          "ja": "屋根越しの低い月・街影",
+          "links": {
+            "base": [
+              "low moon over rooftops",
+              "low horizon moon sky",
+              "foreground rooftop silhouettes"
+            ],
+            "customize": [
+              "roofline moon silhouette",
+              "silver edge light",
+              "low moon haze"
+            ],
+            "settings": [
+              "low-hanging moon pressure",
+              "town-silhouette moon mood",
+              "figure-against-sky mood"
+            ]
+          }
+        },
+        {
+          "id": "overlay_cloudbreak_moon_reveal",
+          "ja": "雲裂けの月・一瞬の覗き",
+          "links": {
+            "base": [
+              "moon breaking through clouds",
+              "cloud-gap moon opening",
+              "dark moving cloud ceiling"
+            ],
+            "customize": [
+              "moonlit cloud rim",
+              "cloud-slit lunar beam",
+              "drifting cloud layers"
+            ],
+            "settings": [
+              "brief moon reveal mood",
+              "sky-focused composition",
+              "moving weather tension"
+            ]
+          }
+        }
+      ]
+    },
+    {
       "group": "🌌 星空・星群オーバーレイ",
       "items": [
         {
@@ -56530,6 +57412,95 @@ const SKY_OVERLAY_COLLECTION = {
       ]
     },
     {
+      "group": "🌗 昼夜境界・薄明オーバーレイ",
+      "items": [
+        {
+          "id": "overlay_blue_hour_twilight",
+          "ja": "ブルーアワー・夜へ変わる空",
+          "links": {
+            "base": [
+              "blue hour twilight sky",
+              "cool cobalt horizon",
+              "first evening stars"
+            ],
+            "customize": [
+              "blue-hour ambient glow",
+              "city-lights beginning sparkle",
+              "cool dusk haze"
+            ],
+            "settings": [
+              "between-day-and-night mood",
+              "quiet transition sky",
+              "sky-focused composition"
+            ]
+          }
+        },
+        {
+          "id": "overlay_golden_hour_low_sun",
+          "ja": "ゴールデンアワー・低い太陽",
+          "links": {
+            "base": [
+              "golden hour sky",
+              "low warm sun horizon",
+              "warm amber haze"
+            ],
+            "customize": [
+              "golden rim light",
+              "long evening shadows",
+              "warm lens-like glow"
+            ],
+            "settings": [
+              "warm cinematic transition",
+              "end-of-day hush",
+              "daylight-over-scenery emphasis"
+            ]
+          }
+        },
+        {
+          "id": "overlay_night_to_dawn_edge",
+          "ja": "夜明け直前・群青から朝へ",
+          "links": {
+            "base": [
+              "pre-dawn indigo sky",
+              "pale dawn horizon line",
+              "fading night stars"
+            ],
+            "customize": [
+              "thin dawn edge glow",
+              "cold-to-warm gradient",
+              "quiet morning haze"
+            ],
+            "settings": [
+              "night-turning-to-dawn mood",
+              "fresh dawn stillness",
+              "beginning-of-day mood"
+            ]
+          }
+        },
+        {
+          "id": "overlay_after_rain_clearing_light",
+          "ja": "雨上がりの境界光・雲切れ",
+          "links": {
+            "base": [
+              "post-rain clearing sky",
+              "wet-cloud break light",
+              "soft overcast daylight"
+            ],
+            "customize": [
+              "wet air sparkle",
+              "diffused ambient light",
+              "sunlit cloud rim"
+            ],
+            "settings": [
+              "after-rain calm transition",
+              "soft light dominance",
+              "grounded daylight realism"
+            ]
+          }
+        }
+      ]
+    },
+    {
       "group": "🪞 背景への乗り方オーバーレイ",
       "items": [
         {
@@ -56644,6 +57615,19 @@ const SKY_OVERLAY_COLLECTION = {
       ]
     },
     {
+      "group": "🪟 月の見え方・遮蔽物",
+      "items": [
+        { "ja": "波に揺れる月反射", "en": "rippled reflected moon" },
+        { "ja": "窓に切り取られた月", "en": "moon framed by window" },
+        { "ja": "霧に隠れた月円盤", "en": "fog-veiled moon disk" },
+        { "ja": "枝越しに見える月", "en": "moon seen through bare branches" },
+        { "ja": "枝で縁取られた月空", "en": "branch-framed moon sky" },
+        { "ja": "屋根越しの低い月", "en": "low moon over rooftops" },
+        { "ja": "前景の屋根シルエット", "en": "foreground rooftop silhouettes" },
+        { "ja": "雲を割って出る月", "en": "moon breaking through clouds" }
+      ]
+    },
+    {
       "group": "🌌 星空・星群",
       "items": [
         { "ja": "濃い星空", "en": "dense starfield sky" },
@@ -56700,6 +57684,22 @@ const SKY_OVERLAY_COLLECTION = {
       ]
     },
     {
+      "group": "🌗 昼夜境界・移り変わる空",
+      "items": [
+        { "ja": "ブルーアワーの薄明空", "en": "blue hour twilight sky" },
+        { "ja": "冷たい群青の地平", "en": "cool cobalt horizon" },
+        { "ja": "夕方最初の星", "en": "first evening stars" },
+        { "ja": "ゴールデンアワーの空", "en": "golden hour sky" },
+        { "ja": "低い暖色の太陽地平", "en": "low warm sun horizon" },
+        { "ja": "暖かな琥珀の霞", "en": "warm amber haze" },
+        { "ja": "夜明け前の藍色空", "en": "pre-dawn indigo sky" },
+        { "ja": "淡い夜明けの地平線", "en": "pale dawn horizon line" },
+        { "ja": "消えかけの夜星", "en": "fading night stars" },
+        { "ja": "雨上がりの雲切れ空", "en": "post-rain clearing sky" },
+        { "ja": "濡れ雲を割る光", "en": "wet-cloud break light" }
+      ]
+    },
+    {
       "group": "🪞 反射・窓光・逆光の受け皿",
       "items": [
         { "ja": "反射する水面", "en": "reflective water surface" },
@@ -56737,6 +57737,22 @@ const SKY_OVERLAY_COLLECTION = {
         { "ja": "双月の逆光", "en": "double moon backlight" },
         { "ja": "割れ月の光片", "en": "split moon glow" },
         { "ja": "月片が漂う感じ", "en": "drifting lunar fragments" }
+      ]
+    },
+    {
+      "group": "🪟 月の見え方・前景フレーム",
+      "items": [
+        { "ja": "月反射のきらめき", "en": "shimmering lunar reflection" },
+        { "ja": "割れた月反射線", "en": "broken moon reflection lines" },
+        { "ja": "銀色の波紋ハイライト", "en": "silver ripple highlights" },
+        { "ja": "窓枠越しの月明かり", "en": "window-framed moonlight" },
+        { "ja": "霧で拡散した月光", "en": "mist-diffused moon glow" },
+        { "ja": "月を横切る枝影", "en": "branch silhouette across moon" },
+        { "ja": "細い小枝の前景線", "en": "thin twig foreground lines" },
+        { "ja": "枝をなぞる銀の月縁", "en": "silver moon rim on branches" },
+        { "ja": "屋根稜線の月シルエット", "en": "roofline moon silhouette" },
+        { "ja": "低い月の霞", "en": "low moon haze" },
+        { "ja": "雲裂けの月光筋", "en": "cloud-slit lunar beam" }
       ]
     },
     {
@@ -56780,6 +57796,21 @@ const SKY_OVERLAY_COLLECTION = {
         { "ja": "拡散した環境光", "en": "diffused ambient light" },
         { "ja": "低コントラストな雲布", "en": "low-contrast cloud blanket" },
         { "ja": "湿った空気の霞", "en": "moisture haze" }
+      ]
+    },
+    {
+      "group": "🌗 昼夜境界の光・色温度",
+      "items": [
+        { "ja": "ブルーアワーの環境光", "en": "blue-hour ambient glow" },
+        { "ja": "街灯りがつき始める瞬き", "en": "city-lights beginning sparkle" },
+        { "ja": "冷たい夕靄", "en": "cool dusk haze" },
+        { "ja": "黄金の縁光", "en": "golden rim light" },
+        { "ja": "長い夕方の影", "en": "long evening shadows" },
+        { "ja": "暖かなレンズ風の光", "en": "warm lens-like glow" },
+        { "ja": "細い夜明けの光縁", "en": "thin dawn edge glow" },
+        { "ja": "寒色から暖色へのグラデーション", "en": "cold-to-warm gradient" },
+        { "ja": "静かな朝靄", "en": "quiet morning haze" },
+        { "ja": "濡れた空気のきらめき", "en": "wet air sparkle" }
       ]
     },
     {
@@ -56845,6 +57876,15 @@ const SKY_OVERLAY_COLLECTION = {
       ]
     },
     {
+      "group": "🪟 月の見え方・画面への置き方",
+      "items": [
+        { "ja": "水際で月を見せる", "en": "waterline moon framing" },
+        { "ja": "ゴシックな枝影で月を縁取る", "en": "gothic branch framing" },
+        { "ja": "街影に低い月を置く", "en": "town-silhouette moon mood" },
+        { "ja": "一瞬だけ月が覗く空気", "en": "brief moon reveal mood" }
+      ]
+    },
+    {
       "group": "🎬 背景への乗り方・画面圧",
       "items": [
         { "ja": "空を下にも響かせる", "en": "sky-below echo" },
@@ -56857,6 +57897,16 @@ const SKY_OVERLAY_COLLECTION = {
         { "ja": "空気越しの奥行き感", "en": "depth-through-air mood" },
         { "ja": "遠景をやわらげる", "en": "softened distant scenery" },
         { "ja": "夢のような景色の膜", "en": "dreamlike scenic veil" }
+      ]
+    },
+    {
+      "group": "🌗 昼夜境界・時間帯の意味づけ",
+      "items": [
+        { "ja": "昼と夜のあいだの空気", "en": "between-day-and-night mood" },
+        { "ja": "静かな移り変わりの空", "en": "quiet transition sky" },
+        { "ja": "暖かい映画的な移行光", "en": "warm cinematic transition" },
+        { "ja": "夜が朝へ変わる気配", "en": "night-turning-to-dawn mood" },
+        { "ja": "雨上がりの静かな境界", "en": "after-rain calm transition" }
       ]
     },
     {
@@ -56888,7 +57938,7 @@ function createSkyOverlayZone() {
   wrapper.appendChild(heading);
 
   const guide = document.createElement("div");
-  guide.textContent = "川辺・古城・墓地などの場所系完成セットを消さずに、月相、色月、異常月、星空密度、雲流れ、極光、稲妻雲、終末空に加えて、昼空、朝夕焼け、水面反射、窓光、逆光、霧越しの空気感まで上から重ねるための加算棚";
+  guide.textContent = "川辺・古城・墓地などの場所系完成セットを消さずに、月相、色月、異常月、月の見え方、星空密度、雲流れ、極光、稲妻雲、終末空、昼空、朝夕焼け、昼夜境界、反射・窓光・霧越しの空気感まで上から重ねるための加算棚";
   guide.style.fontSize = "0.84em";
   guide.style.color = "#4b5563";
   guide.style.margin = "2px 0 8px";

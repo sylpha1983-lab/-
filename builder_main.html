@@ -797,7 +797,38 @@ body.log-fullscreen{
     const charEl = document.getElementById('prompt-char-count');
     if (wordEl) wordEl.textContent = 'ワード数: ' + stats.words;
     if (tagEl) tagEl.textContent = 'タグ数: ' + stats.tags;
-    if (charEl) charEl.textContent = '文字数: ' + stats.chars;
+    if (charEl) {
+      let suffix = '';
+      if (stats.chars >= 2000) suffix = '（2000超過）';
+      else if (stats.chars >= 1500) suffix = '（注意）';
+      charEl.textContent = '文字数: ' + stats.chars + suffix;
+    }
+
+    const statsBox = document.getElementById('prompt-stats');
+    if (statsBox && charEl) {
+      if (stats.chars >= 2000) {
+        statsBox.style.background = 'rgba(255, 238, 238, .96)';
+        statsBox.style.borderColor = 'rgba(220, 53, 69, .55)';
+        statsBox.style.boxShadow = '0 2px 10px rgba(220, 53, 69, .13)';
+        charEl.style.color = '#c92a2a';
+        charEl.style.fontWeight = '900';
+        statsBox.title = '2000文字を超えています。短縮推奨です。';
+      } else if (stats.chars >= 1500) {
+        statsBox.style.background = 'rgba(255, 248, 219, .96)';
+        statsBox.style.borderColor = 'rgba(245, 197, 66, .75)';
+        statsBox.style.boxShadow = '0 2px 10px rgba(245, 197, 66, .12)';
+        charEl.style.color = '#8a5a00';
+        charEl.style.fontWeight = '850';
+        statsBox.title = '1500文字以上です。2000文字以内運用に注意してください。';
+      } else {
+        statsBox.style.background = 'rgba(255,255,255,.92)';
+        statsBox.style.borderColor = 'rgba(0,0,0,.08)';
+        statsBox.style.boxShadow = '0 2px 8px rgba(0,0,0,.05)';
+        charEl.style.color = '';
+        charEl.style.fontWeight = '';
+        statsBox.title = '';
+      }
+    }
   }
   window.updatePromptStats = updatePromptStats;
   function bindPromptStats(){

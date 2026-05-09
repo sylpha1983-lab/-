@@ -51357,3 +51357,1464 @@
     window.__PRESET_PACKS_DB = db;
   } catch (e) {}
 })();
+
+/* ===== Mythic / beast roleplay character-only patch (no fixed expression / no fixed pose) ===== */
+(function(){
+  "use strict";
+  try {
+    var db = (window.__PP_DB && window.__PP_DB.packs) || window.PRESET_PACKS_DB || window.__PRESET_PACKS_DB;
+    if (!db || typeof db !== 'object') return;
+
+    var roleplayRoot = db['🎭 なりきりおすすめセット (Roleplay Recommended Sets)'] || db['🎭 なりきりおすすめセット'];
+    if (!roleplayRoot) return;
+
+    function isArray(v){ return Object.prototype.toString.call(v) === '[object Array]'; }
+    function titleOf(node){ return (node && (node.title_ja || node.titleJa || node.title || node.label || '')) || ''; }
+    function firstItem(group){ return group && isArray(group.children) && group.children.length ? group.children[0] : null; }
+    function directChildByTitle(node, title){
+      if (!node || !isArray(node.children)) return null;
+      for (var i = 0; i < node.children.length; i++) if (titleOf(node.children[i]) === title) return node.children[i];
+      return null;
+    }
+    function findByTitle(node, title){
+      var arr = isArray(node) ? node : (node && node.children);
+      if (!isArray(arr)) return null;
+      for (var i = 0; i < arr.length; i++) {
+        var child = arr[i];
+        if (titleOf(child) === title) return child;
+        var got = findByTitle(child, title);
+        if (got) return got;
+      }
+      return null;
+    }
+    function containsAny(s, list){
+      if (!s) return false;
+      for (var i = 0; i < list.length; i++) if (s.indexOf(list[i]) >= 0) return true;
+      return false;
+    }
+    function uniquePush(arr, v){ if (v != null && String(v).trim() && arr.indexOf(v) < 0) arr.push(v); }
+
+    var TARGET_TITLES = [
+      '☯ 四神特化コレクション',
+      '📖 封神演義特化コレクション',
+      '🐒 西遊記特化コレクション',
+      '🗡️ ケルト神話特化コレクション',
+      '🏮 東方高位神獣',
+      '🏰 西方高位神獣',
+      '🌊 海蛇・深海特化コレクション',
+      '☠ 冥獣・終末獣特化コレクション',
+      '🪽 天空・神鳥特化コレクション'
+    ];
+
+    var SEGMENT_DROP = [
+      'expression', 'smile', 'smirk', 'grin', 'blush', 'lips', 'mouth', 'wink', 'gaze', 'stare', 'glance', 'eyes closed', 'eyes open', 'eyes opened', 'closed eyes', 'open eyes',
+      'half-lidded', 'heavy-lidded', 'intoxicated', 'drowsy', 'sleepy', 'beckon', 'beckoning', 'looking at viewer', 'looking away', 'looking up', 'looking down',
+      'seated', 'sitting', 'kneeling', 'standing', 'standing pose', 'lying', 'reclining', 'leaning', 'crouching', 'running', 'walking', 'jumping', 'one hand raised', 'raised hand',
+      'arms spread', 'crossed arms', 'pointing', 'pose', 'posture'
+    ];
+    var DIRECT_SKIP = ['完成セット', 'クオリティセット', '実クオリティ項目', '🤝 ペア補助'];
+    var LINK_PRIORITY = ['ベース', 'カスタマイズ', '設定', '人型維持', '外部', '短抑制', '軽融合', '軽身体変化', '中融合', '中身体変化', '深融合', '深身体変化', '神格', '聖域', '王庭'];
+
+    function cleanSegment(seg){
+      var t = String(seg || '').replace(/\s+/g, ' ').trim();
+      if (!t) return '';
+      var lower = t.toLowerCase();
+      if (containsAny(lower, SEGMENT_DROP)) return '';
+      if (/^(1girl|1boy|solo|upper body|cowboy shot)$/i.test(lower)) return t;
+      return t;
+    }
+
+    function gatherLinkedIds(node){
+      var out = [];
+      if (!node || !isArray(node.children)) return out;
+      for (var p = 0; p < LINK_PRIORITY.length; p++) {
+        for (var i = 0; i < node.children.length; i++) {
+          var child = node.children[i];
+          var t = titleOf(child);
+          if (!t || containsAny(t, DIRECT_SKIP)) continue;
+          if (t.indexOf(LINK_PRIORITY[p]) >= 0) {
+            var item = firstItem(child);
+            if (item && item.id) uniquePush(out, item.id);
+          }
+        }
+      }
+      return out.slice(0, 6);
+    }
+
+    function buildFallbackVal(node){
+      var parts = [];
+      if (!node || !isArray(node.children)) return '';
+      for (var i = 0; i < node.children.length; i++) {
+        var child = node.children[i];
+        var t = titleOf(child);
+        if (!t || containsAny(t, DIRECT_SKIP)) continue;
+        var item = firstItem(child);
+        if (item && item.val) {
+          String(item.val).split(',').forEach(function(seg){
+            var c = cleanSegment(seg);
+            if (c) uniquePush(parts, c);
+          });
+        }
+      }
+      return parts.slice(0, 22).join(', ');
+    }
+
+    function buildCharacterOnlyVal(node, srcItem){
+      var parts = [];
+      if (srcItem && srcItem.val) {
+        String(srcItem.val).split(',').forEach(function(seg){
+          var c = cleanSegment(seg);
+          if (c) uniquePush(parts, c);
+        });
+      }
+      if (parts.length < 8) {
+        var fallback = buildFallbackVal(node);
+        if (fallback) {
+          fallback.split(',').forEach(function(seg){
+            var c = cleanSegment(seg);
+            if (c) uniquePush(parts, c);
+          });
+        }
+      }
+      return parts.slice(0, 28).join(', ');
+    }
+
+    function stripJaSetWords(s){
+      return String(s || '')
+        .replace(/\s*完成セット群$/,'')
+        .replace(/(妥協神演出フルセット|神演出フルセット|妥協高画質セット.*|高画質セット.*|2000字.*|フルセット|妥協セット|セット)$/,'')
+        .replace(/^(閉眼|開眼|神気開眼)/,'')
+        .trim();
+    }
+    function stripEnSetWords(s){
+      return String(s || '')
+        .replace(/\s*Complete Set Group$/i,'')
+        .replace(/\s*(Mythic Full Set|Compact Mythic Full Set|Safe Quality Set 2000 Limit Compatible|2000 Limit Compatible Set|Compact Safe Quality Set 2000 Limit Compatible|Compact Safe Quality Set|Safe Quality Set|Compact Set|Full Set|Set)$/i,'')
+        .trim();
+    }
+    function makeLabel(group, srcItem){
+      var gt = titleOf(group);
+      var ja = '', en = '';
+      if (gt.indexOf(' / ') >= 0) {
+        var parts = gt.split(' / ');
+        ja = stripJaSetWords(parts[0]);
+        en = stripEnSetWords(parts[1] || '');
+      } else if (gt.indexOf('完成セット群') >= 0) {
+        ja = stripJaSetWords(gt);
+      }
+      if ((!ja || !en) && srcItem && srcItem.label && srcItem.label.indexOf(' / ') >= 0) {
+        var lp = srcItem.label.split(' / ');
+        if (!ja) ja = stripJaSetWords(lp[0]);
+        if (!en) en = stripEnSetWords(lp[1] || '');
+      }
+      if (!ja) ja = 'キャラのみ';
+      if (!en) en = 'Character Only';
+      return ja + 'キャラのみセット / ' + en + ' Character Only Set';
+    }
+
+    function makeDesc(group){
+      var ja = titleOf(group);
+      return '完成セット：' + ja + 'の核を残し、表情固定とポーズ固定を外してキャラ要素を優先する版';
+    }
+
+    function addCharacterOnlyToFlatComplete(node, complete){
+      if (!complete || !isArray(complete.children) || !complete.children.length) return 0;
+      var original = complete.children.slice();
+      var rebuilt = [];
+      var added = 0;
+      for (var i = 0; i < original.length; i += 4) {
+        var chunk = original.slice(i, i + 4);
+        for (var c = 0; c < chunk.length; c++) rebuilt.push(chunk[c]);
+        if (!chunk.length) continue;
+        var srcItem = chunk[0];
+        if (!srcItem || !srcItem.id) continue;
+        var newId = srcItem.id + '_character_only';
+        var exists = false;
+        for (var j = 0; j < original.length; j++) if (original[j] && original[j].id === newId) { exists = true; break; }
+        if (exists) continue;
+        var val = buildCharacterOnlyVal(node, srcItem);
+        if (!val) continue;
+        var newItem = {
+          id: newId,
+          label: makeLabel(srcItem, srcItem),
+          val: val,
+          desc: makeDesc(srcItem),
+          collection_id: srcItem.collection_id || node.collection_id,
+          collection_role: 'complete_set',
+          linked_ids: gatherLinkedIds(node)
+        };
+        rebuilt.push(newItem);
+        added++;
+      }
+      complete.children = rebuilt;
+      return added;
+    }
+
+    function addCharacterOnlyToGroupedComplete(node, complete){
+      if (!complete || !isArray(complete.children)) return 0;
+      var added = 0;
+      for (var i = 0; i < complete.children.length; i++) {
+        var group = complete.children[i];
+        if (!group || !isArray(group.children) || !group.children.length) continue;
+        var srcItem = group.children[0];
+        if (!srcItem || !srcItem.id) continue;
+        var newId = srcItem.id + '_character_only';
+        var exists = false;
+        for (var j = 0; j < group.children.length; j++) if (group.children[j] && group.children[j].id === newId) { exists = true; break; }
+        if (exists) continue;
+        var val = buildCharacterOnlyVal(node, srcItem);
+        if (!val) continue;
+        group.children.push({
+          id: newId,
+          label: makeLabel(group, srcItem),
+          val: val,
+          desc: makeDesc(group),
+          collection_id: srcItem.collection_id || node.collection_id,
+          collection_role: 'complete_set',
+          linked_ids: gatherLinkedIds(node)
+        });
+        added++;
+      }
+      return added;
+    }
+
+    function processNode(node){
+      if (!node || !isArray(node.children)) return 0;
+      var total = 0;
+      var complete = directChildByTitle(node, '完成セット');
+      if (complete && isArray(complete.children) && complete.children.length) {
+        if (complete.children[0] && isArray(complete.children[0].children)) total += addCharacterOnlyToGroupedComplete(node, complete);
+        else total += addCharacterOnlyToFlatComplete(node, complete);
+      }
+      for (var i = 0; i < node.children.length; i++) total += processNode(node.children[i]);
+      return total;
+    }
+
+    var totalAdded = 0;
+    for (var t = 0; t < TARGET_TITLES.length; t++) {
+      var target = findByTitle(roleplayRoot, TARGET_TITLES[t]);
+      if (target) totalAdded += processNode(target);
+    }
+
+    if (window.__PP_DB) window.__PP_DB.packs = db;
+    window.PRESET_PACKS_DB = db;
+    window.__PRESET_PACKS_DB = db;
+    window.__MYTHIC_CHARACTER_ONLY_PATCH_COUNT = totalAdded;
+  } catch (e) {
+    try { console.warn('[mythic_character_only_patch] failed', e); } catch(_){}
+  }
+})();
+
+/* ===== Infernal Deadly Sins character-only patch (no fixed expression / no fixed pose) ===== */
+(function(){
+  "use strict";
+  try {
+    var db = (window.__PP_DB && window.__PP_DB.packs) || window.PRESET_PACKS_DB || window.__PRESET_PACKS_DB;
+    if (!db || typeof db !== 'object') return;
+
+    var ROLEPLAY_PARENT_KEY = '🎭 なりきりおすすめセット (Roleplay Recommended Sets)';
+    var SINS_KEY = '🎭 なりきりおすすめセット｜七つの大罪特化コレクション (Deadly Sins Special Collections)';
+    var roleplayRoot = db[ROLEPLAY_PARENT_KEY] || db['🎭 なりきりおすすめセット'];
+
+    function isArray(v){ return Object.prototype.toString.call(v) === '[object Array]'; }
+    function titleOf(node){ return (node && (node.title_ja || node.titleJa || node.title || node.label || '')) || ''; }
+    function findByTitle(node, title){
+      var arr = isArray(node) ? node : (node && node.children);
+      if (!isArray(arr)) return null;
+      for (var i = 0; i < arr.length; i++) {
+        var child = arr[i];
+        if (titleOf(child) === title) return child;
+        var got = findByTitle(child, title);
+        if (got) return got;
+      }
+      return null;
+    }
+    function directChildByTitle(node, title){
+      if (!node || !isArray(node.children)) return null;
+      for (var i = 0; i < node.children.length; i++) if (titleOf(node.children[i]) === title) return node.children[i];
+      return null;
+    }
+    function containsAny(s, list){
+      if (!s) return false;
+      for (var i = 0; i < list.length; i++) if (s.indexOf(list[i]) >= 0) return true;
+      return false;
+    }
+    function uniquePush(arr, v){
+      if (v != null && String(v).trim() && arr.indexOf(v) < 0) arr.push(v);
+    }
+    function getCollectionId(node){
+      if (node && node.collection_id) return node.collection_id;
+      var complete = directChildByTitle(node, '完成セット');
+      if (complete && isArray(complete.children)) {
+        for (var i = 0; i < complete.children.length; i++) {
+          var g = complete.children[i];
+          if (g && isArray(g.children)) {
+            for (var j = 0; j < g.children.length; j++) if (g.children[j] && g.children[j].collection_id) return g.children[j].collection_id;
+          } else if (g && g.collection_id) return g.collection_id;
+        }
+      }
+      return 'infernal_deadly_sins_collection';
+    }
+
+    var SEGMENT_DROP = [
+      'expression', 'smile', 'smirk', 'grin', 'blush', 'lips', 'mouth', 'wink', 'gaze', 'stare', 'glare', 'glance',
+      'eyes closed', 'closed eyes', 'eyes open', 'opened eyes', 'open eyes', 'half-lidded', 'heavy-lidded', 'intoxicated',
+      'drowsy', 'sleepy', 'vacant', 'dreamy eyes', 'burning eyes', 'pink eyes', 'eyes', 'eye contact',
+      'seated', 'sitting', 'kneeling', 'standing pose', 'standing', 'lying', 'reclining', 'sprawled', 'leaning', 'crouching',
+      'running', 'walking', 'jumping', 'beckon', 'beckoning', 'one hand raised', 'raised hand', 'hand raised',
+      'curling finger', 'commanding gesture', 'clenched fists', 'fists', 'arms spread', 'crossed arms', 'pointing',
+      'pose', 'posture', 'gesture',
+      'bedroom', 'bed ', ' bed', 'sheets', 'pillows', 'throne room', 'throne', 'palace', 'hall', 'chamber', 'battlefield',
+      'court', 'lounge', 'sofa', 'carpet', 'pillars', 'drapery', 'candlelight', 'lamplight', 'room', 'background'
+    ];
+    var LINK_DROP = [
+      'gaze', 'expr', 'expression', 'smile', 'sleepy', 'bedroom', 'bed', 'throne', 'palace', 'setting', 'quality',
+      'chamber', 'lounge', 'perfume', 'redheat', 'audience', 'rose', 'blackflame', 'battlefield', 'sovereignty',
+      'nocturne', 'fallen', 'halo'
+    ];
+    var LINK_ALLOW = ['base', 'roleplay', 'preserve', 'restraint', 'succubus_traits', 'fallen_wings', 'corrupt_grace'];
+    var SIN_TITLES = [
+      '🍽 ベルゼブブ（暴食）特化コレクション',
+      '🌊 レヴィアタン（嫉妬）特化コレクション',
+      '🛏 ベルフェゴール（怠惰）特化コレクション',
+      '🔥 サタン（憤怒）特化コレクション',
+      '💋 アスモデウス（色欲）特化コレクション',
+      '🪽 ルシフェル（傲慢）特化コレクション'
+    ];
+
+    function cleanSegment(seg){
+      var t = String(seg || '').replace(/\s+/g, ' ').trim();
+      if (!t) return '';
+      var lower = t.toLowerCase();
+      if (containsAny(lower, SEGMENT_DROP)) return '';
+      return t;
+    }
+    function cleanVal(srcVal){
+      var parts = [];
+      String(srcVal || '').split(',').forEach(function(seg){
+        var c = cleanSegment(seg);
+        if (c) uniquePush(parts, c);
+      });
+      return parts.slice(0, 30).join(', ');
+    }
+    function helperIdFor(node){
+      return getCollectionId(node) + '_character_only_helper';
+    }
+    function ensureHelper(node){
+      if (!node || !isArray(node.children)) return null;
+      var collectionId = getCollectionId(node);
+      var helperId = helperIdFor(node);
+      var helper = directChildByTitle(node, '😶 キャラのみ補助');
+      if (!helper) {
+        helper = {
+          title_ja: '😶 キャラのみ補助',
+          title_en: 'Character Only Helper',
+          children: []
+        };
+        var insertAt = node.children.length;
+        for (var i = 0; i < node.children.length; i++) {
+          if (titleOf(node.children[i]) === '🚫 短抑制') { insertAt = i; break; }
+        }
+        node.children.splice(insertAt, 0, helper);
+      }
+      if (!isArray(helper.children)) helper.children = [];
+      for (var j = 0; j < helper.children.length; j++) if (helper.children[j] && helper.children[j].id === helperId) return helperId;
+      helper.children.push({
+        id: helperId,
+        label: 'キャラのみ補助 / Character Only Helper',
+        val: 'character design focus, body traits and costume priority, reference-style presentation, facial details left open, action left open, identity-focused roleplay',
+        desc: '表情固定とポーズ固定を外し、キャラ要素だけを優先する補助',
+        collection_id: collectionId,
+        collection_role: 'setting'
+      });
+      return helperId;
+    }
+    function filteredLinks(srcItem, helperId){
+      var out = [];
+      if (srcItem && isArray(srcItem.linked_ids)) {
+        for (var i = 0; i < srcItem.linked_ids.length; i++) {
+          var id = String(srcItem.linked_ids[i] || '');
+          var lower = id.toLowerCase();
+          var allowed = false;
+          for (var a = 0; a < LINK_ALLOW.length; a++) if (lower.indexOf(LINK_ALLOW[a]) >= 0) allowed = true;
+          if (!allowed) continue;
+          if (containsAny(lower, LINK_DROP)) continue;
+          uniquePush(out, id);
+        }
+      }
+      uniquePush(out, helperId);
+      return out;
+    }
+    function stripEmoji(s){ return String(s || '').replace(/^[\uD800-\uDBFF][\uDC00-\uDFFF]\s*/,'').replace(/^[^\wぁ-んァ-ン一-龥A-Za-z0-9]+/,'').trim(); }
+    function labelFor(node, group, srcItem){
+      var nodeJa = stripEmoji(titleOf(node)).replace('特化コレクション','').trim();
+      var groupJa = stripEmoji(titleOf(group)).trim();
+      var en = titleOf(group).indexOf(' / ') >= 0 ? titleOf(group).split(' / ')[1] : (group.title_en || 'Character Only');
+      if (group.title_en) en = group.title_en;
+      if (!nodeJa) nodeJa = '七つの大罪';
+      if (!groupJa) groupJa = 'キャラのみ';
+      return nodeJa + groupJa + 'キャラのみセット / ' + en + ' Character Only Set';
+    }
+    function addToNode(node){
+      if (!node || !isArray(node.children)) return 0;
+      var complete = directChildByTitle(node, '完成セット');
+      if (!complete || !isArray(complete.children)) return 0;
+      var helperId = ensureHelper(node);
+      var added = 0;
+      for (var i = 0; i < complete.children.length; i++) {
+        var group = complete.children[i];
+        if (!group || !isArray(group.children) || !group.children.length) continue;
+        var srcItem = group.children[0];
+        if (!srcItem || !srcItem.id) continue;
+        var newId = srcItem.id + '_character_only';
+        var exists = false;
+        for (var j = 0; j < group.children.length; j++) if (group.children[j] && group.children[j].id === newId) { exists = true; break; }
+        if (exists) continue;
+        var val = cleanVal(srcItem.val);
+        if (!val) val = 'single humanoid demon character, ' + stripEmoji(titleOf(node)).replace('特化コレクション','') + ' motif, character design focus, body traits and costume priority, reference-style presentation';
+        group.children.push({
+          id: newId,
+          label: labelFor(node, group, srcItem),
+          val: val,
+          desc: '完成セット：' + titleOf(group) + 'のキャラ核だけを残し、表情固定とポーズ固定を外す版',
+          collection_id: srcItem.collection_id || getCollectionId(node),
+          collection_role: 'complete_set',
+          linked_ids: filteredLinks(srcItem, helperId)
+        });
+        added++;
+      }
+      return added;
+    }
+
+    var targets = [];
+    if (isArray(db[SINS_KEY])) {
+      for (var a = 0; a < db[SINS_KEY].length; a++) targets.push(db[SINS_KEY][a]);
+    }
+    if (roleplayRoot) {
+      for (var s = 0; s < SIN_TITLES.length; s++) {
+        var found = findByTitle(roleplayRoot, SIN_TITLES[s]);
+        if (found) targets.push(found);
+      }
+    }
+
+    var seen = [];
+    var total = 0;
+    for (var t = 0; t < targets.length; t++) {
+      var node = targets[t];
+      if (!node) continue;
+      var key = titleOf(node) + '|' + getCollectionId(node);
+      if (seen.indexOf(key) >= 0) continue;
+      seen.push(key);
+      total += addToNode(node);
+    }
+
+    if (window.__PP_DB) window.__PP_DB.packs = db;
+    window.PRESET_PACKS_DB = db;
+    window.__PRESET_PACKS_DB = db;
+    window.__INFERNAL_SINS_CHARACTER_ONLY_PATCH_COUNT = total;
+  } catch (e) {
+    try { console.warn('[infernal_sins_character_only_patch] failed', e); } catch(_){}
+  }
+})();
+
+
+/* ===== Roleplay character-only repair (Fengshen / Journey / Celtic) ===== */
+(function(){
+  "use strict";
+  try {
+    var db = (window.__PP_DB && window.__PP_DB.packs) || window.PRESET_PACKS_DB || window.__PRESET_PACKS_DB;
+    if (!db || typeof db !== "object") return;
+
+    var roleplayRoot = db["🎭 なりきりおすすめセット (Roleplay Recommended Sets)"] || db["🎭 なりきりおすすめセット"];
+    if (!roleplayRoot) return;
+
+    function isArray(v){ return Object.prototype.toString.call(v) === "[object Array]"; }
+    function titleOf(node){ return (node && (node.title_ja || node.titleJa || node.title || node.label || "")) || ""; }
+    function findByTitle(node, title){
+      var arr = isArray(node) ? node : (node && node.children);
+      if (!isArray(arr)) return null;
+      for (var i = 0; i < arr.length; i++) {
+        var child = arr[i];
+        if (titleOf(child) === title) return child;
+        var got = findByTitle(child, title);
+        if (got) return got;
+      }
+      return null;
+    }
+    function directChildByTitle(node, title){
+      if (!node || !isArray(node.children)) return null;
+      for (var i = 0; i < node.children.length; i++) if (titleOf(node.children[i]) === title) return node.children[i];
+      return null;
+    }
+    function uniquePush(arr, v){
+      if (v != null && String(v).trim() && arr.indexOf(v) < 0) arr.push(v);
+    }
+    function containsAny(s, list){
+      if (!s) return false;
+      for (var i = 0; i < list.length; i++) if (s.indexOf(list[i]) >= 0) return true;
+      return false;
+    }
+
+    var DROP_SEGMENTS = [
+      "expression", "smile", "smirk", "grin", "blush", "lips", "mouth", "wink", "gaze", "stare", "glare", "look", "eyes",
+      "closed eyes", "eyes closed", "opened eyes", "open eyes", "half-lidded", "heavy-lidded", "predatory eyes", "mocking",
+      "composed planner expression", "alluring smile", "rebellious grin", "relaxed smile", "playful cruelty", "eyelid", "eyelash", "lowered head", "calm face",
+      "pose", "posture", "gesture", "standing", "sitting", "seated", "kneeling", "crouching", "lying", "reclining", "jump",
+      "leaping", "running", "walking", "action", "momentum", "motion", "speed"
+    ];
+    var LINK_KEEP = ["_base", "_style", "_setting_"];
+    var LINK_DROP = ["_aura", "quality", "_relic", "_hobei", "_helper"];
+
+    function cleanSegment(seg){
+      var t = String(seg || "").replace(/\s+/g, " ").trim();
+      if (!t) return "";
+      var normalized = t.toLowerCase().replace(/[_-]+/g, " ");
+      if (containsAny(normalized, DROP_SEGMENTS)) return "";
+      return t;
+    }
+    function cleanVal(srcVal){
+      var parts = [];
+      String(srcVal || "").split(",").forEach(function(seg){
+        var c = cleanSegment(seg);
+        if (c) uniquePush(parts, c);
+      });
+      return parts.join(", ");
+    }
+    function filterLinks(srcItem){
+      var out = [];
+      if (!srcItem || !isArray(srcItem.linked_ids)) return out;
+      for (var i = 0; i < srcItem.linked_ids.length; i++) {
+        var id = String(srcItem.linked_ids[i] || "");
+        var lower = id.toLowerCase();
+        if (containsAny(lower, LINK_DROP)) continue;
+        var keep = false;
+        for (var k = 0; k < LINK_KEEP.length; k++) if (lower.indexOf(LINK_KEEP[k]) >= 0) keep = true;
+        if (keep) uniquePush(out, id);
+      }
+      return out;
+    }
+    function repairCollection(title){
+      var node = findByTitle(roleplayRoot, title);
+      if (!node) return 0;
+      var complete = directChildByTitle(node, "完成セット");
+      if (!complete || !isArray(complete.children)) return 0;
+      var fixed = 0;
+      for (var i = 0; i < complete.children.length; i++) {
+        var group = complete.children[i];
+        if (!group || !isArray(group.children) || !group.children.length) continue;
+        var srcItem = null;
+        for (var s = 0; s < group.children.length; s++) {
+          if (group.children[s] && group.children[s].id && String(group.children[s].id).indexOf("_character_only") < 0) {
+            srcItem = group.children[s];
+            break;
+          }
+        }
+        if (!srcItem || !srcItem.id) continue;
+        var newId = srcItem.id + "_character_only";
+        var characterItem = null;
+        for (var j = 0; j < group.children.length; j++) {
+          if (group.children[j] && group.children[j].id === newId) {
+            characterItem = group.children[j];
+            break;
+          }
+        }
+        if (!characterItem) {
+          characterItem = {
+            id: newId,
+            label: (srcItem.label || titleOf(group) || srcItem.id) + " キャラのみ / Character Only",
+            val: "",
+            desc: "",
+            collection_id: srcItem.collection_id,
+            collection_role: "complete_set",
+            linked_ids: []
+          };
+          group.children.push(characterItem);
+        }
+        var val = cleanVal(srcItem.val);
+        if (!val) val = String(srcItem.val || "").replace(/\s+/g, " ").trim();
+        characterItem.val = val;
+        characterItem.linked_ids = filterLinks(srcItem);
+        characterItem.collection_id = srcItem.collection_id || characterItem.collection_id;
+        characterItem.collection_role = "complete_set";
+        characterItem.desc = "完成セット：キャラ本体確認用。表情・ポーズ固定を外し、同一キャラのベース・演出・設定だけに連動する";
+        fixed++;
+      }
+      return fixed;
+    }
+
+    var fixedTotal = 0;
+    fixedTotal += repairCollection("📖 封神演義特化コレクション");
+    fixedTotal += repairCollection("🐒 西遊記特化コレクション");
+    fixedTotal += repairCollection("🗡️ ケルト神話特化コレクション");
+
+    if (window.__PP_DB) window.__PP_DB.packs = db;
+    window.PRESET_PACKS_DB = db;
+    window.__PRESET_PACKS_DB = db;
+    window.__ROLEPLAY_CHARACTER_ONLY_REPAIR_COUNT = fixedTotal;
+  } catch (e) {
+    try { console.warn("[roleplay_character_only_repair] failed", e); } catch(_){}
+  }
+})();
+
+
+
+/* ===== Roleplay character-only hardening pass (2026-05-08)
+   Purpose:
+   - Character Only sets are external-attachment anchors.
+   - Do not inherit parent collection first customize.
+   - Rebuild from each character's own core complete set and its own linked_ids only.
+   - Remove fixed expression / gaze / pose / strong scene / strong effect words.
+===== */
+(function(){
+  "use strict";
+  try {
+    var db = (window.__PP_DB && window.__PP_DB.packs) || window.PRESET_PACKS_DB || window.__PRESET_PACKS_DB;
+    if (!db || typeof db !== "object") return;
+
+    function isArray(v){ return Object.prototype.toString.call(v) === "[object Array]"; }
+    function titleOf(node){ return String((node && (node.title_ja || node.titleJa || node.title || node.label || node.ja || "")) || ""); }
+    function uniquePush(arr, v){
+      v = String(v == null ? "" : v).replace(/\s+/g, " ").trim();
+      if (v && arr.indexOf(v) < 0) arr.push(v);
+    }
+    function containsAny(s, list){
+      s = String(s || "").toLowerCase();
+      for (var i = 0; i < list.length; i++) if (s.indexOf(list[i]) >= 0) return true;
+      return false;
+    }
+    function directChildByTitle(node, title){
+      if (!node || !isArray(node.children)) return null;
+      for (var i = 0; i < node.children.length; i++) if (titleOf(node.children[i]) === title) return node.children[i];
+      return null;
+    }
+    function walk(node, fn, path){
+      path = path || [];
+      if (isArray(node)) {
+        for (var a = 0; a < node.length; a++) walk(node[a], fn, path);
+        return;
+      }
+      if (!node || typeof node !== "object") return;
+      var t = titleOf(node);
+      var nextPath = (t && !node.val) ? path.concat(t) : path;
+      fn(node, nextPath);
+      if (isArray(node.children)) {
+        for (var i = 0; i < node.children.length; i++) walk(node.children[i], fn, nextPath);
+      } else {
+        for (var k in node) if (node.hasOwnProperty(k) && node[k] && typeof node[k] === "object") walk(node[k], fn, nextPath.concat(k));
+      }
+    }
+
+    var idIndex = {};
+    walk(db, function(node){
+      if (node && node.id) idIndex[String(node.id)] = node;
+    });
+
+    var TARGET_PATH_MARKERS = [
+      "🩸 七つの大罪特化コレクション",
+      "☯ 四神特化コレクション",
+      "📖 封神演義特化コレクション",
+      "🐒 西遊記特化コレクション",
+      "🗡️ ケルト神話特化コレクション",
+      "🏮 東方高位神獣",
+      "🏰 西方高位神獣",
+      "🦌 麒麟特化コレクション",
+      "🌊 海蛇・深海特化コレクション",
+      "☠ 冥獣・終末獣特化コレクション",
+      "🪽 天空・神鳥特化コレクション"
+    ];
+
+    var DROP_SEGMENTS = [
+      "smile", "smirk", "grin", "blush", "wink", "gaze", "stare", "glare", "looking", "look at", "eye contact",
+      "eyes closed", "closed eyes", "open eyes", "opened eyes", "half-lidded", "heavy-lidded", "bedroom eyes",
+      "seductive gaze", "alluring gaze", "predatory eyes", "mocking expression", "playful cruelty",
+      "tears", "tearful", "sweat", "drool", "drooling", "panting", "trembling", "panic", "embarrassed", "pleading",
+      "pose", "posture", "gesture", "standing", "sitting", "seated", "kneeling", "crouching", "lying", "reclining",
+      "leaning", "running", "walking", "jumping", "raised hand", "hand raised", "one hand raised", "arms spread",
+      "crossed arms", "pointing", "beckoning", "curling finger", "clenched fists",
+      "speech bubble", "sound effect", "sound effects", "motion lines", "speed lines", "manga symbol",
+      "bedroom", "bed scene", "on bed", "bedsheet", "sheets", "pillow", "throne room", "audience chamber",
+      "palace hall", "battlefield", "lounge", "sofa", "room background", "background scene",
+      "foxfire wisps", "wisps", "strong aura", "black flame aura", "flame aura", "pheromone aura", "perfume haze",
+      "red heat temptation", "soporific mist", "soft smoke", "smoke", "haze", "mist", "ambient lighting",
+      "backlight", "candlelight", "luminous dust", "rose petals", "petals floating", "motion blur",
+      "afterglow", "ecstasy", "post-act", "after sex", "sensual sound", "adult sound", "moaning"
+    ];
+
+    var DROP_LINK = [
+      "quality", "setting", "aura", "scene", "background", "expr", "expression", "gaze", "smile", "pose",
+      "throne", "palace", "bed", "chamber", "lounge", "battlefield", "perfume", "haze", "mist", "smoke",
+      "foxfire", "flame", "rose", "audience", "redheat", "nocturne", "fallen_halo", "sovereignty"
+    ];
+    var KEEP_LINK = [
+      "base", "style", "custom", "customize", "roleplay", "preserve", "suppress", "restraint", "fusion",
+      "body", "trait", "traits", "wings", "horns", "tail", "tails", "ears", "succubus_traits", "corrupt_grace"
+    ];
+
+    var OTHER_STEMS = [
+      "taikobo", "dakki", "nezha", "yangjian", "shen-gongbao", "shengongbao", "wenzhong",
+      "sunwukong", "sanzang", "zhubajie", "shagojyo", "niumaowang", "honghaier",
+      "morrigan", "nevan", "badb", "macha", "cu_chulainn", "brigid", "medb", "arianrhod",
+      "etain", "ceridwen", "blodeuwedd", "niamh", "manannan", "nuada", "lugh", "epona",
+      "seiryu", "byakko", "suzaku", "genbu", "qilin", "yinglong", "baize", "xiezhi", "chiryu",
+      "griffon", "griffin", "basilisk", "unicorn", "leviathan", "jormungandr", "kraken",
+      "fenrir", "cerberus", "behemoth", "phoenix", "sphinx",
+      "gluttony", "beelzebub", "leviathan", "belphegor", "satan", "asmodeus", "lucifer"
+    ];
+
+    function normalizeStemFromId(id){
+      var s = String(id || "").toLowerCase();
+      s = s.replace(/^mythic_four_complete_/, "");
+      s = s.replace(/^mythic_sea_complete_/, "");
+      s = s.replace(/^mythic_doom_complete_/, "");
+      s = s.replace(/^mythic_sky_complete_/, "");
+      s = s.replace(/^mythic_/, "");
+      s = s.replace(/^fengshen_/, "");
+      s = s.replace(/^xiyou_/, "");
+      s = s.replace(/^celtic_/, "");
+      s = s.replace(/^infernal_/, "");
+      s = s.replace(/_character_only$/g, "");
+      s = s.replace(/_(complete|core|safe|safe_quality|quality|2000|limit|compatible|mythic|myth|full|compact|set|classic|throne|phase_a|phase_b|radiance|rebellion|seduction|rose|redheat|audience|lounge|fallen|drowsy|berserker|envy|temptation|honey_succubus|wrath|gluttony|sloth|lust|pride)$/g, "");
+      return s;
+    }
+    function hasOtherStem(id, ownStem){
+      var lower = String(id || "").toLowerCase();
+      ownStem = String(ownStem || "").toLowerCase();
+      if (!ownStem) return false;
+      for (var i = 0; i < OTHER_STEMS.length; i++) {
+        var st = OTHER_STEMS[i];
+        if (st && st !== ownStem && lower.indexOf(st) >= 0 && ownStem.indexOf(st) < 0) return true;
+      }
+      return false;
+    }
+    function keepLinkId(id, srcItem){
+      var lower = String(id || "").toLowerCase();
+      if (!lower) return false;
+      if (containsAny(lower, DROP_LINK)) return false;
+      var keep = false;
+      for (var i = 0; i < KEEP_LINK.length; i++) if (lower.indexOf(KEEP_LINK[i]) >= 0) keep = true;
+      if (!keep) return false;
+      var ownStem = normalizeStemFromId(srcItem && srcItem.id);
+      if (hasOtherStem(lower, ownStem)) return false;
+      return true;
+    }
+    function filteredLinks(srcItem){
+      var out = [];
+      if (srcItem && isArray(srcItem.linked_ids)) {
+        for (var i = 0; i < srcItem.linked_ids.length; i++) {
+          var id = String(srcItem.linked_ids[i] || "");
+          if (keepLinkId(id, srcItem)) uniquePush(out, id);
+        }
+      }
+      return out;
+    }
+
+    function isSourceCompleteItem(item){
+      if (!item || !item.id || !item.val) return false;
+      var id = String(item.id).toLowerCase();
+      var label = String(item.label || "").toLowerCase();
+      if (id.indexOf("character_only") >= 0 || label.indexOf("character only") >= 0 || String(item.label || "").indexOf("キャラのみ") >= 0) return false;
+      if (id.indexOf("quality") >= 0 || id.indexOf("2000") >= 0 || id.indexOf("full") >= 0 || id.indexOf("_myth") >= 0 || id.indexOf("_safe") >= 0) return false;
+      if (label.indexOf("quality") >= 0 || label.indexOf("2000") >= 0 || label.indexOf("full") >= 0 || String(item.label || "").indexOf("高画質") >= 0 || String(item.label || "").indexOf("フル") >= 0) return false;
+      return true;
+    }
+
+    function stripJaLabel(s){
+      return String(s || "")
+        .replace(/\s*完成セット群\s*$/g, "")
+        .replace(/高画質セット.*$/g, "")
+        .replace(/2000字.*$/g, "")
+        .replace(/神演出フルセット.*$/g, "")
+        .replace(/妥協神演出フルセット.*$/g, "")
+        .replace(/妥協高画質セット.*$/g, "")
+        .replace(/妥協セット.*$/g, "")
+        .replace(/フルセット.*$/g, "")
+        .replace(/セット\s*$/g, "")
+        .trim();
+    }
+    function stripEnLabel(s){
+      return String(s || "")
+        .replace(/\s*Complete Set Group\s*$/ig, "")
+        .replace(/\s*Safe Quality Set.*$/ig, "")
+        .replace(/\s*2000.*$/ig, "")
+        .replace(/\s*Mythic Full Set.*$/ig, "")
+        .replace(/\s*Compact Mythic Full Set.*$/ig, "")
+        .replace(/\s*Compact Safe Quality Set.*$/ig, "")
+        .replace(/\s*Full Set.*$/ig, "")
+        .replace(/\s*Core Set\s*$/ig, "")
+        .replace(/\s*Compact Set\s*$/ig, "")
+        .replace(/\s*Set\s*$/ig, "")
+        .trim();
+    }
+    function makeLabel(group, srcItem){
+      var ja = "", en = "";
+      var gt = titleOf(group);
+      if (gt.indexOf(" / ") >= 0) {
+        var gp = gt.split(" / ");
+        ja = stripJaLabel(gp[0]);
+        en = stripEnLabel(gp[1] || "");
+      } else if (gt) {
+        ja = stripJaLabel(gt);
+      }
+      if (srcItem && srcItem.label && (!ja || !en)) {
+        var lp = String(srcItem.label).split(" / ");
+        if (!ja) ja = stripJaLabel(lp[0]);
+        if (!en) en = stripEnLabel(lp[1] || "");
+      }
+      if (!ja) ja = "キャラ";
+      if (!en) en = "Character";
+      return ja + "キャラのみセット / " + en + " Character Only Set";
+    }
+
+    function cleanSegment(seg){
+      var t = String(seg || "").replace(/\s+/g, " ").trim();
+      if (!t) return "";
+      var lower = t.toLowerCase();
+      if (containsAny(lower, DROP_SEGMENTS)) return "";
+      /* preserve role identity terms while dropping reactions/effects around them */
+      if (lower.indexOf("pheromone") >= 0 || lower.indexOf("intoxicating") >= 0 || lower.indexOf("steamy") >= 0) return "";
+      if (lower.indexOf("temptation") >= 0 && lower.indexOf("asmodeus of lust") < 0) return "";
+      if (lower.indexOf("desire") >= 0 && lower.indexOf("asmodeus of lust") < 0) return "";
+      if (lower.indexOf("sensual") >= 0) return "";
+      return t;
+    }
+    function addSegmentsFromVal(parts, val){
+      String(val || "").split(",").forEach(function(seg){
+        var c = cleanSegment(seg);
+        if (c) uniquePush(parts, c);
+      });
+    }
+    function buildCharacterOnlyVal(srcItem, links){
+      var parts = [];
+      uniquePush(parts, "single character focus");
+      addSegmentsFromVal(parts, srcItem && srcItem.val);
+      if (parts.length < 10 && isArray(links)) {
+        for (var i = 0; i < links.length; i++) {
+          var linked = idIndex[links[i]];
+          if (linked && linked.val) addSegmentsFromVal(parts, linked.val);
+        }
+      }
+      var joined = parts.join(", ").toLowerCase();
+      if (joined.indexOf("human") >= 0 || joined.indexOf("humanoid") >= 0 || joined.indexOf("girl") >= 0 || joined.indexOf("boy") >= 0) {
+        if (parts.indexOf("single humanoid character focus") < 0) parts.splice(1, 0, "single humanoid character focus");
+      }
+      return parts.slice(0, 32).join(", ");
+    }
+
+    function findExistingCharacterOnly(children, newId){
+      if (!isArray(children)) return null;
+      for (var i = 0; i < children.length; i++) {
+        var item = children[i];
+        if (!item) continue;
+        if (item.id === newId) return item;
+        if (item.id && String(item.id).indexOf("_character_only") >= 0 && String(item.id).indexOf(String(newId).replace(/_character_only$/, "")) >= 0) return item;
+      }
+      return null;
+    }
+    function upsertCharacterOnly(containerChildren, group, srcItem, insertAfterIndex){
+      if (!srcItem || !srcItem.id || !isArray(containerChildren)) return 0;
+      var newId = String(srcItem.id) + "_character_only";
+      var item = findExistingCharacterOnly(containerChildren, newId);
+      var created = 0;
+      if (!item) {
+        item = {
+          id: newId,
+          label: makeLabel(group, srcItem),
+          val: "",
+          desc: "",
+          collection_id: srcItem.collection_id,
+          collection_role: "complete_set",
+          linked_ids: []
+        };
+        var pos = (typeof insertAfterIndex === "number" && insertAfterIndex >= 0) ? insertAfterIndex + 1 : containerChildren.length;
+        if (pos > containerChildren.length) pos = containerChildren.length;
+        containerChildren.splice(pos, 0, item);
+        created = 1;
+      }
+      var links = filteredLinks(srcItem);
+      item.id = newId;
+      item.label = makeLabel(group, srcItem);
+      item.val = buildCharacterOnlyVal(srcItem, links);
+      item.desc = "完成セット：キャラ本体だけを外付け用起点として使う版。固定表情・固定ポーズ・強い背景演出を除外";
+      item.collection_id = srcItem.collection_id || item.collection_id;
+      item.collection_role = "complete_set";
+      item.linked_ids = links;
+      return created ? 1 : 2;
+    }
+
+    function processGroupedComplete(complete){
+      var added = 0, updated = 0;
+      for (var i = 0; i < complete.children.length; i++) {
+        var group = complete.children[i];
+        if (!group || !isArray(group.children)) continue;
+        var srcItem = null, srcIndex = -1;
+        for (var j = 0; j < group.children.length; j++) {
+          if (isSourceCompleteItem(group.children[j])) {
+            srcItem = group.children[j];
+            srcIndex = j;
+            break;
+          }
+        }
+        if (!srcItem) continue;
+        var result = upsertCharacterOnly(group.children, group, srcItem, group.children.length - 1);
+        if (result === 1) added++;
+        if (result === 2) updated++;
+      }
+      return { added: added, updated: updated };
+    }
+
+    function findNextSourceIndex(children, fromIndex){
+      for (var i = fromIndex + 1; i < children.length; i++) {
+        if (isSourceCompleteItem(children[i])) return i;
+      }
+      return -1;
+    }
+    function processFlatComplete(complete){
+      var added = 0, updated = 0;
+      for (var i = 0; i < complete.children.length; i++) {
+        var srcItem = complete.children[i];
+        if (!isSourceCompleteItem(srcItem)) continue;
+        var newId = String(srcItem.id) + "_character_only";
+        if (findExistingCharacterOnly(complete.children, newId)) {
+          var r0 = upsertCharacterOnly(complete.children, srcItem, srcItem, i);
+          if (r0 === 1) added++;
+          if (r0 === 2) updated++;
+          continue;
+        }
+        var nextSource = findNextSourceIndex(complete.children, i);
+        var insertAfter = (nextSource >= 0 ? nextSource - 1 : complete.children.length - 1);
+        var r = upsertCharacterOnly(complete.children, srcItem, srcItem, insertAfter);
+        if (r === 1) { added++; i++; }
+        if (r === 2) updated++;
+      }
+      return { added: added, updated: updated };
+    }
+
+    function isTargetCollection(path){
+      var p = path.join(" > ");
+      for (var i = 0; i < TARGET_PATH_MARKERS.length; i++) {
+        if (p.indexOf(TARGET_PATH_MARKERS[i]) >= 0) return true;
+      }
+      return false;
+    }
+
+    var seen = {};
+    var report = { added: 0, updated: 0, collections: 0 };
+    walk(db, function(node, path){
+      if (!node || !isArray(node.children) || !isTargetCollection(path)) return;
+      var complete = directChildByTitle(node, "完成セット");
+      if (!complete || !isArray(complete.children) || !complete.children.length) return;
+      var key = path.join(" > ");
+      if (seen[key]) return;
+      seen[key] = true;
+      var first = complete.children[0];
+      var res = null;
+      if (first && first.val) res = processFlatComplete(complete);
+      else res = processGroupedComplete(complete);
+      if (res && (res.added || res.updated)) {
+        report.added += res.added;
+        report.updated += res.updated;
+        report.collections++;
+      }
+    });
+
+    if (window.__PP_DB) window.__PP_DB.packs = db;
+    window.PRESET_PACKS_DB = db;
+    window.__PRESET_PACKS_DB = db;
+    window.__ROLEPLAY_CHARACTER_ONLY_HARDENING_REPORT = report;
+  } catch (e) {
+    try { console.warn("[roleplay_character_only_hardening] failed", e); } catch(_){}
+  }
+})();
+
+
+/* ===== Roleplay character-only final sanitizer (2026-05-08)
+   Runs after older character-only generators.
+   - Deduplicates same-id Character Only rows.
+   - Rebuilds each Character Only value from source complete set + same-character linked_ids.
+   - Uses stricter external-attachment cleanup for expression / pose / scene / effect.
+===== */
+(function(){
+  "use strict";
+  try {
+    var db = (window.__PP_DB && window.__PP_DB.packs) || window.PRESET_PACKS_DB || window.__PRESET_PACKS_DB;
+    if (!db || typeof db !== "object") return;
+
+    function isArray(v){ return Object.prototype.toString.call(v) === "[object Array]"; }
+    function titleOf(node){ return String((node && (node.title_ja || node.titleJa || node.title || node.label || node.ja || "")) || ""); }
+    function uniquePush(arr, v){
+      v = String(v == null ? "" : v).replace(/\s+/g, " ").trim();
+      if (v && arr.indexOf(v) < 0) arr.push(v);
+    }
+    function containsAny(s, list){
+      s = String(s || "").toLowerCase();
+      for (var i = 0; i < list.length; i++) if (s.indexOf(list[i]) >= 0) return true;
+      return false;
+    }
+    function walk(node, fn, path){
+      path = path || [];
+      if (isArray(node)) { for (var a = 0; a < node.length; a++) walk(node[a], fn, path); return; }
+      if (!node || typeof node !== "object") return;
+      var t = titleOf(node);
+      var nextPath = (t && !node.val) ? path.concat(t) : path;
+      fn(node, nextPath);
+      if (isArray(node.children)) {
+        for (var i = 0; i < node.children.length; i++) walk(node.children[i], fn, nextPath);
+      } else {
+        for (var k in node) if (node.hasOwnProperty(k) && node[k] && typeof node[k] === "object") walk(node[k], fn, nextPath.concat(k));
+      }
+    }
+
+    var idIndex = {};
+    walk(db, function(node){ if (node && node.id) idIndex[String(node.id)] = node; });
+
+    var TARGET_MARKERS = [
+      "🩸 七つの大罪特化コレクション",
+      "☯ 四神特化コレクション",
+      "📖 封神演義特化コレクション",
+      "🐒 西遊記特化コレクション",
+      "🗡️ ケルト神話特化コレクション",
+      "🏮 東方高位神獣",
+      "🏰 西方高位神獣",
+      "🦌 麒麟特化コレクション",
+      "🌊 海蛇・深海特化コレクション",
+      "☠ 冥獣・終末獣特化コレクション",
+      "🪽 天空・神鳥特化コレクション"
+    ];
+    function isTargetPath(path){
+      var p = path.join(" > ");
+      for (var i = 0; i < TARGET_MARKERS.length; i++) if (p.indexOf(TARGET_MARKERS[i]) >= 0) return true;
+      return false;
+    }
+
+    var DROP_SEGMENTS = [
+      "smile", "smirk", "grin", "blush", "wink", "gaze", "stare", "glare", "looking", "look at", "eye contact",
+      "eyes closed", "closed eyes", "open eyes", "opened eyes", "half-lidded", "heavy-lidded", "sleepy eyes", "dreamy eyes",
+      "bedroom eyes", "seductive gaze", "alluring gaze", "predatory eyes", "mocking expression", "expressionless sleepy face",
+      "half-open exhausted eyes", "glossy parted lips", "parted lips", "lips", "mouth", "tears", "tearful", "sweat",
+      "drool", "drooling", "panting", "trembling", "panic", "embarrassed", "pleading",
+      "pose", "posture", "gesture", "standing", "sitting", "seated", "kneeling", "crouching", "lying", "reclining",
+      "leaning", "running", "walking", "jumping", "raised hand", "hand raised", "one hand raised", "arms spread",
+      "crossed arms", "pointing", "beckoning", "curling finger", "clenched", "collapsed sideways",
+      "speech bubble", "sound effect", "sound effects", "motion lines", "speed lines", "manga symbol", "motion blur",
+      "bedroom", "bed scene", "on bed", " bed ", "bedsheet", "sheets", "pillow", "throne", "audience chamber",
+      "palace hall", "battlefield", "lounge", "sofa", "room background", "background", "indoor chamber", "chamber atmosphere",
+      "cracked ground", "road dust", "luminous dust", "dust", "foxfire", "wisps", "smoke", "mist", "haze", "glow",
+      "lighting", "backlight", "candlelight", "sparks", "spark", "rose petals", "petals floating", "petals",
+      "strong aura", "flame aura", "pheromone aura", "seductive aura", "refined seductive aura", "perfume",
+      "red heat", "soporific", "drowsiness", "drowsy", "sleepy", "command", "rage", "anger", "resentment",
+      "jealousy pressure", "alluring", "seductive", "sensual", "temptation", "desire", "pheromone", "intoxicating",
+      "steamy", "afterglow", "ecstasy", "post-act", "after sex", "moaning", "receiving supplicants", "supplicants",
+      "glamour", "atmosphere"
+    ];
+    var DROP_LINK = [
+      "quality", "setting", "aura", "scene", "background", "expr", "expression", "gaze", "smile", "pose",
+      "throne", "palace", "bed", "chamber", "lounge", "battlefield", "perfume", "haze", "mist", "smoke",
+      "foxfire", "flame", "rose", "audience", "redheat", "nocturne", "sovereignty", "weather", "divine"
+    ];
+    var KEEP_LINK = [
+      "base", "style", "custom", "customize", "roleplay", "preserve", "suppress", "restraint", "fusion",
+      "body", "trait", "traits", "wings", "horns", "tail", "tails", "ears", "succubus_traits", "fallen_wings", "corrupt_grace"
+    ];
+    var OTHER_STEMS = [
+      "taikobo", "dakki", "nezha", "yangjian", "shengongbao", "shen-gongbao", "wenzhong",
+      "sunwukong", "sanzo", "sanzang", "hakkai", "zhubajie", "gojo", "shagojyo", "gyumao", "niumaowang", "kogaiji", "honghaier",
+      "morrigan", "nevan", "badb", "macha", "cu_chulainn", "brigid", "medb", "arianrhod", "etain", "ceridwen",
+      "blodeuwedd", "niamh", "manannan", "nuada", "lugh", "epona",
+      "seiryu", "byakko", "suzaku", "genbu", "qilin", "yinglong", "baize", "xiezhi", "chiryu",
+      "griffon", "griffin", "basilisk", "unicorn", "leviathan", "jormungandr", "kraken", "fenrir", "cerberus", "behemoth", "phoenix", "sphinx",
+      "gluttony", "beelzebub", "belphegor", "satan", "asmodeus", "lucifer"
+    ];
+
+    function normalizeStemFromId(id){
+      var s = String(id || "").toLowerCase();
+      s = s.replace(/^mythic_four_complete_/, "").replace(/^mythic_sea_complete_/, "").replace(/^mythic_doom_complete_/, "").replace(/^mythic_sky_complete_/, "");
+      s = s.replace(/^mythic_/, "").replace(/^fengshen_/, "").replace(/^xiyou_/, "").replace(/^celtic_/, "").replace(/^infernal_/, "");
+      s = s.replace(/_character_only$/g, "");
+      s = s.replace(/_(complete|core|safe|safe_quality|quality|2000|limit|compatible|mythic|myth|full|compact|set|classic|throne|phase_a|phase_b|radiance|rebellion|seduction|rose|redheat|audience|lounge|fallen|drowsy|berserker|envy|temptation|honey_succubus|wrath|gluttony|sloth|lust|pride)$/g, "");
+      return s;
+    }
+    function hasOtherStem(id, ownStem){
+      var lower = String(id || "").toLowerCase();
+      ownStem = String(ownStem || "").toLowerCase();
+      if (!ownStem) return false;
+      for (var i = 0; i < OTHER_STEMS.length; i++) {
+        var st = OTHER_STEMS[i];
+        if (st && st !== ownStem && lower.indexOf(st) >= 0 && ownStem.indexOf(st) < 0) return true;
+      }
+      return false;
+    }
+    function keepLink(id, source){
+      var lower = String(id || "").toLowerCase();
+      if (!lower || containsAny(lower, DROP_LINK)) return false;
+      var keep = false;
+      for (var i = 0; i < KEEP_LINK.length; i++) if (lower.indexOf(KEEP_LINK[i]) >= 0) keep = true;
+      if (!keep) return false;
+      if (hasOtherStem(lower, normalizeStemFromId(source && source.id))) return false;
+      return true;
+    }
+    function filteredLinks(source){
+      var out = [];
+      if (source && isArray(source.linked_ids)) {
+        for (var i = 0; i < source.linked_ids.length; i++) {
+          var id = String(source.linked_ids[i] || "");
+          if (keepLink(id, source)) uniquePush(out, id);
+        }
+      }
+      return out;
+    }
+
+    function cleanSegment(seg){
+      var t = String(seg || "").replace(/\s+/g, " ").trim();
+      if (!t) return "";
+      var lower = t.toLowerCase();
+      if (containsAny(lower, DROP_SEGMENTS)) return "";
+      /* Preserve role identity, but not reaction/scene wording around it. */
+      if (lower === "asmodeus of lust" || lower === "satan of wrath" || lower === "lucifer of pride" || lower === "belphegor motif") return t;
+      return t;
+    }
+    function addVal(parts, val){
+      String(val || "").split(",").forEach(function(seg){
+        var c = cleanSegment(seg);
+        if (c) uniquePush(parts, c);
+      });
+    }
+    function rebuildVal(item, source, links){
+      var parts = [];
+      uniquePush(parts, "single character focus");
+      if (source && source.val) addVal(parts, source.val);
+      if (isArray(links)) {
+        for (var i = 0; i < links.length; i++) {
+          var linked = idIndex[links[i]];
+          if (linked && linked.val) addVal(parts, linked.val);
+        }
+      }
+      if (parts.join(", ").toLowerCase().indexOf("human") >= 0 || parts.join(", ").toLowerCase().indexOf("humanoid") >= 0) {
+        if (parts.indexOf("single humanoid character focus") < 0) parts.splice(1, 0, "single humanoid character focus");
+      }
+      return parts.slice(0, 42).join(", ");
+    }
+
+    function dedupeChildren(children){
+      if (!isArray(children)) return 0;
+      var seen = {}, removed = 0;
+      for (var i = children.length - 1; i >= 0; i--) {
+        var id = children[i] && children[i].id;
+        if (!id) continue;
+        if (seen[id]) {
+          children.splice(i, 1);
+          removed++;
+        } else {
+          seen[id] = true;
+        }
+      }
+      return removed;
+    }
+
+    var report = { sanitized: 0, deduped: 0, missingSource: 0 };
+    walk(db, function(node, path){
+      if (!isTargetPath(path)) return;
+      if (node && isArray(node.children)) report.deduped += dedupeChildren(node.children);
+      if (!node || !node.id || String(node.id).indexOf("_character_only") < 0) return;
+      var sourceId = String(node.id).replace(/_character_only$/, "");
+      var source = idIndex[sourceId];
+      if (!source) {
+        node.val = rebuildVal(node, node, []);
+        report.missingSource++;
+        return;
+      }
+      var links = filteredLinks(source);
+      node.linked_ids = links;
+      node.val = rebuildVal(node, source, links);
+      node.collection_role = "complete_set";
+      node.collection_id = source.collection_id || node.collection_id;
+      node.desc = "完成セット：キャラ本体だけを外付け用起点として使う版。固定表情・固定ポーズ・強い背景演出を除外";
+      report.sanitized++;
+    });
+
+    if (window.__PP_DB) window.__PP_DB.packs = db;
+    window.PRESET_PACKS_DB = db;
+    window.__PRESET_PACKS_DB = db;
+    window.__ROLEPLAY_CHARACTER_ONLY_FINAL_SANITIZE_REPORT = report;
+  } catch (e) {
+    try { console.warn("[roleplay_character_only_final_sanitizer] failed", e); } catch(_){}
+  }
+})();
+
+
+/* ===== Roleplay character-only helper role restore (2026-05-08) ===== */
+(function(){
+  "use strict";
+  try {
+    var db = (window.__PP_DB && window.__PP_DB.packs) || window.PRESET_PACKS_DB || window.__PRESET_PACKS_DB;
+    if (!db || typeof db !== "object") return;
+    function isArray(v){ return Object.prototype.toString.call(v) === "[object Array]"; }
+    function walk(node){
+      if (isArray(node)) { for (var a = 0; a < node.length; a++) walk(node[a]); return; }
+      if (!node || typeof node !== "object") return;
+      if (node.id && String(node.id).indexOf("_character_only_helper") >= 0) {
+        node.collection_role = "setting";
+        node.label = "キャラのみ補助 / Character Only Helper";
+        node.val = "character design focus, body traits and costume priority, reference-style presentation, facial details left open, action left open, identity-focused roleplay";
+        node.desc = "表情固定とポーズ固定を外し、キャラ要素だけを優先する補助";
+        count++;
+      }
+      if (isArray(node.children)) {
+        for (var i = 0; i < node.children.length; i++) walk(node.children[i]);
+      } else {
+        for (var k in node) if (node.hasOwnProperty(k) && node[k] && typeof node[k] === "object") walk(node[k]);
+      }
+    }
+    var count = 0;
+    walk(db);
+    if (window.__PP_DB) window.__PP_DB.packs = db;
+    window.PRESET_PACKS_DB = db;
+    window.__PRESET_PACKS_DB = db;
+    window.__ROLEPLAY_CHARACTER_ONLY_HELPER_RESTORE_COUNT = count;
+  } catch(e) {
+    try { console.warn("[roleplay_character_only_helper_restore] failed", e); } catch(_){}
+  }
+})();
+
+
+/* ===== Roleplay character-only body-trait enrichment from same-character dropped links (2026-05-08)
+   Keeps linked_ids clean, but allows body/costume traits hidden inside same-character aura/customize items
+   to be copied into the Character Only val after filtering.
+===== */
+(function(){
+  "use strict";
+  try {
+    var db = (window.__PP_DB && window.__PP_DB.packs) || window.PRESET_PACKS_DB || window.__PRESET_PACKS_DB;
+    if (!db || typeof db !== "object") return;
+    function isArray(v){ return Object.prototype.toString.call(v) === "[object Array]"; }
+    function titleOf(node){ return String((node && (node.title_ja || node.titleJa || node.title || node.label || node.ja || "")) || ""); }
+    function walk(node, fn, path){
+      path = path || [];
+      if (isArray(node)) { for (var a = 0; a < node.length; a++) walk(node[a], fn, path); return; }
+      if (!node || typeof node !== "object") return;
+      var t = titleOf(node);
+      var nextPath = (t && !node.val) ? path.concat(t) : path;
+      fn(node, nextPath);
+      if (isArray(node.children)) for (var i = 0; i < node.children.length; i++) walk(node.children[i], fn, nextPath);
+      else for (var k in node) if (node.hasOwnProperty(k) && node[k] && typeof node[k] === "object") walk(node[k], fn, nextPath.concat(k));
+    }
+    function uniquePush(arr, v){
+      v = String(v == null ? "" : v).replace(/\s+/g, " ").trim();
+      if (v && arr.indexOf(v) < 0) arr.push(v);
+    }
+    function containsAny(s, list){
+      s = String(s || "").toLowerCase();
+      for (var i = 0; i < list.length; i++) if (s.indexOf(list[i]) >= 0) return true;
+      return false;
+    }
+
+    var idIndex = {};
+    walk(db, function(node){ if (node && node.id) idIndex[String(node.id)] = node; });
+
+    var TARGET_MARKERS = [
+      "🩸 七つの大罪特化コレクション", "☯ 四神特化コレクション", "📖 封神演義特化コレクション",
+      "🐒 西遊記特化コレクション", "🗡️ ケルト神話特化コレクション", "🏮 東方高位神獣",
+      "🏰 西方高位神獣", "🦌 麒麟特化コレクション", "🌊 海蛇・深海特化コレクション",
+      "☠ 冥獣・終末獣特化コレクション", "🪽 天空・神鳥特化コレクション"
+    ];
+    function isTargetPath(path){
+      var p = path.join(" > ");
+      for (var i = 0; i < TARGET_MARKERS.length; i++) if (p.indexOf(TARGET_MARKERS[i]) >= 0) return true;
+      return false;
+    }
+
+    var DROP_SEGMENTS = [
+      "smile", "smiling", "smirk", "grin", "blush", "wink", "gaze", "stare", "glare", "looking", "eye contact",
+      "closed eyes", "open eyes", "opened eyes", "half-lidded", "heavy-lidded", "sleepy eyes", "dreamy eyes", "predatory eyes",
+      "lips", "mouth", "tears", "sweat", "drool", "panting", "trembling", "panic", "embarrassed", "pleading",
+      "pose", "posture", "gesture", "standing", "sitting", "kneeling", "lying", "reclining", "running", "walking", "jumping",
+      "raised hand", "arms spread", "crossed arms", "pointing", "beckoning", "clenched", "speech bubble", "sound effect", "motion lines",
+      "bedroom", " bed ", "bedsheet", "sheets", "pillow", "throne", "audience chamber", "palace hall", "battlefield", "lounge", "sofa",
+      "background", "chamber atmosphere", "cracked ground", "dust", "foxfire", "wisps", "smoke", "mist", "haze", "glow", "lighting",
+      "backlight", "sparks", "petals", "aura", "perfume", "red heat", "soporific", "drowsy", "sleepy", "rage", "anger",
+      "resentment", "jealousy pressure", "alluring", "seductive", "sensual", "temptation", "desire", "pheromone", "intoxicating",
+      "steamy", "afterglow", "ecstasy", "moaning", "glamour", "atmosphere"
+    ];
+    var BODY_KEEP = [
+      "horn", "horns", "ear", "ears", "tail", "tails", "wing", "wings", "feather", "feathers", "scale", "scales",
+      "fin", "fins", "fang", "fangs", "claw", "claws", "antennae", "antenna", "appendage", "appendages",
+      "hair", "dress", "robe", "attire", "regalia", "armor", "ornament", "ornaments", "jewel", "tassel", "tassels",
+      "spirit", "fox", "dragon", "serpent", "wolf", "hound", "bird", "qilin", "sphinx", "beastkin", "succubus"
+    ];
+    var OTHER_STEMS = [
+      "taikobo", "dakki", "nezha", "yangjian", "shengongbao", "wenzhong", "sunwukong", "sanzo", "hakkai", "gojo", "gyumao", "kogaiji",
+      "morrigan", "nevan", "badb", "macha", "brigid", "medb", "arianrhod", "etain", "ceridwen", "niamh", "manannan", "nuada", "lugh",
+      "seiryu", "byakko", "suzaku", "genbu", "qilin", "yinglong", "baize", "xiezhi", "chiryu", "griffon", "griffin", "basilisk",
+      "unicorn", "leviathan", "jormungandr", "kraken", "fenrir", "cerberus", "behemoth", "phoenix", "sphinx",
+      "beelzebub", "belphegor", "satan", "asmodeus", "lucifer"
+    ];
+
+    function normalizeStemFromId(id){
+      var s = String(id || "").toLowerCase();
+      s = s.replace(/^mythic_four_complete_/, "").replace(/^mythic_sea_complete_/, "").replace(/^mythic_doom_complete_/, "").replace(/^mythic_sky_complete_/, "");
+      s = s.replace(/^mythic_/, "").replace(/^fengshen_/, "").replace(/^xiyou_/, "").replace(/^celtic_/, "").replace(/^infernal_/, "");
+      s = s.replace(/_character_only$/g, "");
+      s = s.replace(/_(complete|core|safe|safe_quality|quality|2000|limit|compatible|mythic|myth|full|compact|set|classic|throne|phase_a|phase_b|radiance|rebellion|seduction|rose|redheat|audience|lounge|fallen|drowsy|berserker|envy|temptation|honey_succubus|wrath|gluttony|sloth|lust|pride)$/g, "");
+      return s;
+    }
+    function hasOtherStem(id, ownStem){
+      var lower = String(id || "").toLowerCase();
+      ownStem = String(ownStem || "").toLowerCase();
+      if (!ownStem) return false;
+      for (var i = 0; i < OTHER_STEMS.length; i++) {
+        var st = OTHER_STEMS[i];
+        if (st && st !== ownStem && lower.indexOf(st) >= 0 && ownStem.indexOf(st) < 0) return true;
+      }
+      return false;
+    }
+    function canReadLink(id, source){
+      var lower = String(id || "").toLowerCase();
+      if (!lower || hasOtherStem(lower, normalizeStemFromId(source && source.id))) return false;
+      if (lower.indexOf("setting") >= 0 || lower.indexOf("quality") >= 0) return false;
+      return lower.indexOf("style") >= 0 || lower.indexOf("custom") >= 0 || lower.indexOf("aura") >= 0 || lower.indexOf("trait") >= 0 || lower.indexOf("body") >= 0 || lower.indexOf("wings") >= 0;
+    }
+    function cleanSegment(seg){
+      var t = String(seg || "").replace(/\s+/g, " ").trim();
+      if (!t) return "";
+      var lower = t.toLowerCase();
+      if (containsAny(lower, DROP_SEGMENTS)) return "";
+      if (!containsAny(lower, BODY_KEEP)) return "";
+      return t;
+    }
+
+    var report = { enriched: 0 };
+    walk(db, function(node, path){
+      if (!isTargetPath(path)) return;
+      if (!node || !node.id || String(node.id).indexOf("_character_only") < 0 || String(node.id).indexOf("_character_only_helper") >= 0) return;
+      var source = idIndex[String(node.id).replace(/_character_only$/, "")];
+      if (!source || !isArray(source.linked_ids)) return;
+      var parts = String(node.val || "").split(",").map(function(v){ return String(v || "").replace(/\s+/g, " ").trim(); }).filter(function(v){ return !!v; });
+      var before = parts.length;
+      for (var i = 0; i < source.linked_ids.length; i++) {
+        var linkId = String(source.linked_ids[i] || "");
+        if (!canReadLink(linkId, source)) continue;
+        var linked = idIndex[linkId];
+        if (!linked || !linked.val) continue;
+        String(linked.val || "").split(",").forEach(function(seg){
+          var c = cleanSegment(seg);
+          if (c) uniquePush(parts, c);
+        });
+      }
+      if (parts.length > before) {
+        node.val = parts.slice(0, 52).join(", ");
+        report.enriched++;
+      }
+    });
+
+    if (window.__PP_DB) window.__PP_DB.packs = db;
+    window.PRESET_PACKS_DB = db;
+    window.__PRESET_PACKS_DB = db;
+    window.__ROLEPLAY_CHARACTER_ONLY_BODY_TRAIT_ENRICH_REPORT = report;
+  } catch(e) {
+    try { console.warn("[roleplay_character_only_body_trait_enrich] failed", e); } catch(_){}
+  }
+})();
+
+
+/* ===== Roleplay character-only final value micro-cleanup (2026-05-08) ===== */
+(function(){
+  "use strict";
+  try {
+    var db = (window.__PP_DB && window.__PP_DB.packs) || window.PRESET_PACKS_DB || window.__PRESET_PACKS_DB;
+    if (!db || typeof db !== "object") return;
+    function isArray(v){ return Object.prototype.toString.call(v) === "[object Array]"; }
+    function titleOf(node){ return String((node && (node.title_ja || node.titleJa || node.title || node.label || node.ja || "")) || ""); }
+    var TARGET = ["🩸 七つの大罪特化コレクション","☯ 四神特化コレクション","📖 封神演義特化コレクション","🐒 西遊記特化コレクション","🗡️ ケルト神話特化コレクション","🏮 東方高位神獣","🏰 西方高位神獣","🦌 麒麟特化コレクション","🌊 海蛇・深海特化コレクション","☠ 冥獣・終末獣特化コレクション","🪽 天空・神鳥特化コレクション"];
+    var DROP = ["smile","smiling","smirk","grin","blush","gaze","stare","glare","looking","wink","speech bubble","sound effect","motion lines","pose","posture","gesture","standing","sitting","seated","kneeling","lying","reclining","running","walking","jumping","raised hand","clenched","bedroom"," bed ","sheets","pillow","throne","battlefield","lounge","background","foxfire","wisps","smoke","mist","haze","glow","lighting","backlight","dust","petals","pheromone","afterglow","moaning","seductive"];
+    function inTarget(path){ var p = path.join(" > "); for (var i=0;i<TARGET.length;i++) if (p.indexOf(TARGET[i])>=0) return true; return false; }
+    function bad(s){ s=String(s||"").toLowerCase(); for (var i=0;i<DROP.length;i++) if (s.indexOf(DROP[i])>=0) return true; return false; }
+    function cleanVal(v){
+      var out = [];
+      String(v || "").split(",").forEach(function(seg){
+        var t = String(seg || "").replace(/\s+/g, " ").trim();
+        if (t && !bad(t) && out.indexOf(t) < 0) out.push(t);
+      });
+      return out.join(", ");
+    }
+    function walk(node,path){
+      path=path||[];
+      if (isArray(node)) { for (var a=0;a<node.length;a++) walk(node[a], path); return; }
+      if (!node || typeof node !== "object") return;
+      var t=titleOf(node), next=(t && !node.val) ? path.concat(t) : path;
+      if (inTarget(next) && node.id && String(node.id).indexOf("_character_only")>=0 && String(node.id).indexOf("_character_only_helper")<0) {
+        var nv = cleanVal(node.val);
+        if (nv !== node.val) { node.val = nv; count++; }
+      }
+      if (isArray(node.children)) for (var i=0;i<node.children.length;i++) walk(node.children[i], next);
+      else for (var k in node) if (node.hasOwnProperty(k) && node[k] && typeof node[k] === "object") walk(node[k], next.concat(k));
+    }
+    var count = 0;
+    walk(db, []);
+    if (window.__PP_DB) window.__PP_DB.packs = db;
+    window.PRESET_PACKS_DB = db;
+    window.__PRESET_PACKS_DB = db;
+    window.__ROLEPLAY_CHARACTER_ONLY_MICRO_CLEANUP_COUNT = count;
+  } catch(e) {
+    try { console.warn("[roleplay_character_only_micro_cleanup] failed", e); } catch(_){}
+  }
+})();
+
+
+/* ===== Roleplay character-only extra scene cleanup (2026-05-08) ===== */
+(function(){
+  "use strict";
+  try {
+    var db = (window.__PP_DB && window.__PP_DB.packs) || window.PRESET_PACKS_DB || window.__PRESET_PACKS_DB;
+    if (!db || typeof db !== "object") return;
+    function isArray(v){ return Object.prototype.toString.call(v) === "[object Array]"; }
+    var DROP = [
+      "dark palace bedchamber",
+      "velvet cushions",
+      "candlelit gloom",
+      "bedchamber",
+      "bedroom",
+      "lying on bed",
+      "head on pillow",
+      "speech bubble",
+      "sound effect text",
+      "motion lines",
+      "shock lines"
+    ];
+    function shouldDrop(seg){
+      var lower = String(seg || "").toLowerCase();
+      return DROP.some(function(term){ return lower.indexOf(term) >= 0; });
+    }
+    function walk(node){
+      if (isArray(node)) {
+        for (var i = 0; i < node.length; i++) {
+          var it = node[i];
+          if (it && typeof it === "object" && String(it.id || "").indexOf("_character_only") >= 0 && String(it.id || "").indexOf("_character_only_helper") < 0 && typeof it.val === "string") {
+            var parts = it.val.split(",").map(function(s){ return s.replace(/\s+/g, " ").trim(); }).filter(Boolean);
+            var kept = [];
+            var seen = Object.create(null);
+            for (var p = 0; p < parts.length; p++) {
+              var seg = parts[p];
+              var key = seg.toLowerCase();
+              if (shouldDrop(seg)) continue;
+              if (seen[key]) continue;
+              seen[key] = true;
+              kept.push(seg);
+            }
+            it.val = kept.join(", ");
+          }
+          if (it && typeof it === "object") walk(it);
+        }
+        return;
+      }
+      if (node && typeof node === "object") {
+        Object.keys(node).forEach(function(k){ walk(node[k]); });
+      }
+    }
+    walk(db);
+    if (window.__PP_DB) window.__PP_DB.packs = db;
+    window.PRESET_PACKS_DB = db;
+    window.__PRESET_PACKS_DB = db;
+    window.__ROLEPLAY_CHARACTER_ONLY_EXTRA_SCENE_CLEANUP = true;
+  } catch(e) {
+    try { console.warn("[roleplay_character_only_extra_scene_cleanup]", e); } catch(_e) {}
+  }
+})();

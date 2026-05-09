@@ -136,6 +136,82 @@
   }
   #commercial-suggest-toast.show{ opacity: 1; top: 12%; pointer-events:auto; }
   #commercial-suggest-toast .btnrow{ margin-top:8px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+
+  .prompt-compiler-control {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    flex:1 1 180px;
+    min-width:180px;
+    min-height:44px;
+    padding:4px 8px;
+    border-radius:6px;
+    background:rgba(255,255,255,0.92);
+    border:1px solid rgba(40,60,90,0.18);
+    box-shadow:0 2px 4px rgba(0,0,0,0.08);
+    font-size:0.82rem;
+    color:#223;
+  }
+  .prompt-compiler-control select {
+    min-width:104px;
+    max-width:140px;
+    padding:4px 6px;
+    border-radius:5px;
+    border:1px solid #b8c2d6;
+    background:#fff;
+    font-weight:700;
+    color:#17335f;
+  }
+  .prompt-compiler-control .prompt-compiler-status {
+    font-size:0.76rem;
+    color:#516070;
+    white-space:nowrap;
+  }
+
+  .prompt-compiler-warning {
+    flex: 1 1 100%;
+    min-height: 0;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: #fff3cd;
+    color: #7a4d00;
+    border: 1px solid #f1d08a;
+    font-size: 0.78rem;
+    line-height: 1.35;
+    display: none;
+    white-space: normal;
+  }
+  .prompt-compiler-warning.show {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .prompt-compiler-warning.danger {
+    background: #fff1f2;
+    color: #991b1b;
+    border-color: #fecdd3;
+    font-weight: 700;
+  }
+  .prompt-compiler-warning.info {
+    background: #eff6ff;
+    color: #1d4ed8;
+    border-color: #bfdbfe;
+    font-weight: 700;
+  }
+  .prompt-compiler-warning .prompt-compiler-reset-mode {
+    flex: 0 0 auto;
+    border: 1px solid #fecdd3;
+    background: #fff;
+    color: #991b1b;
+    border-radius: 999px;
+    padding: 3px 8px;
+    font-size: 0.74rem;
+    font-weight: 800;
+    cursor: pointer;
+  }
+
   #commercial-suggest-toast button{
     cursor:pointer;
     border:1px solid rgba(255,255,255,0.25);
@@ -729,7 +805,7 @@
       { id: "postprocessing", label: "22. 仕上げ・後処理 (Post-Processing)" },
       { id: "filter", label: "23. フィルター・効果 (Filter)" },
       { id: "presets", label: "24. 保存済みプリセット (My Presets)" },
-      { id: "visualsync", label: "🛠️ Visual Sync (Preview & Adjust)" },
+      { id: "visualsync", label: "🎨 トーン・色調補正 (Color Adjust)" },
       { id: "shadow", label: "Shadow (Internal)" },
     ];
 
@@ -837,6 +913,309 @@
     if (current.trim()) result.push(current.trim());
     return result;
   }
+
+
+  // --- Prompt Compiler v2 (role-order output layer) ---
+  const PROMPT_COMPILER_V2_MODE_KEY = "shima_prompt_compiler_v2_mode";
+  const PROMPT_COMPILER_V2_DEFAULT_MODE = "normal";
+  // モードは現在ページ内のセッション変数だけで保持する。
+  // localStorage 復元や履歴復元に引っ張られると、select が通常へ戻ることがあるため永続化しない。
+  let promptCompilerV2SessionMode = PROMPT_COMPILER_V2_DEFAULT_MODE;
+
+  function promptCompilerV2ModeLabel(mode) {
+    if (mode === "pose_first") return "ポーズ優先";
+    if (mode === "character_design") return "キャラ設計";
+    if (mode === "character_pure") return "キャラ確認";
+    if (mode === "off") return "旧順";
+    return "通常";
+  }
+
+  function promptCompilerV2IsKnownMode(mode) {
+    return mode === "normal" || mode === "pose_first" || mode === "character_design" || mode === "character_pure" || mode === "off";
+  }
+
+  function getPromptCompilerV2Mode() {
+    try {
+      if (promptCompilerV2IsKnownMode(promptCompilerV2SessionMode)) return promptCompilerV2SessionMode;
+      promptCompilerV2SessionMode = PROMPT_COMPILER_V2_DEFAULT_MODE;
+      return PROMPT_COMPILER_V2_DEFAULT_MODE;
+    } catch (e) {
+      return "normal";
+    }
+  }
+
+  function promptCompilerV2ModeNotice(mode) {
+    if (mode === "pose_first") return "ポーズ優先：ポーズ語を主題近くへ前寄せします";
+    if (mode === "character_design") return "キャラ設計：キャラ本体要素を前寄せします";
+    return "";
+  }
+
+  function renderPromptCompilerV2Warning(warnings, mode) {
+    try {
+      const warn = document.getElementById("prompt-compiler-v2-warning");
+      if (!warn) return;
+
+      const list = Array.isArray(warnings) ? warnings.filter(Boolean) : [];
+      const isCharacterCheck = mode === "character_pure";
+      const modeNotice = promptCompilerV2ModeNotice(mode);
+      const shown = [];
+      if (isCharacterCheck) shown.push("キャラ確認：表情・ポーズ・背景・演出を一時除外中");
+      else if (modeNotice) shown.push(modeNotice);
+      list.slice(0, isCharacterCheck ? 2 : 3).forEach((x) => {
+        if (shown.indexOf(x) < 0) shown.push(x);
+      });
+
+      warn.textContent = "";
+      warn.title = "";
+      warn.classList.remove("show", "danger", "info");
+
+      if (!shown.length) return;
+
+      const msg = document.createElement("span");
+      msg.textContent = (isCharacterCheck || list.length ? "⚠ " : "ℹ ") + shown.join(" / ");
+      warn.appendChild(msg);
+
+      if (isCharacterCheck) {
+        const back = document.createElement("button");
+        back.type = "button";
+        back.className = "prompt-compiler-reset-mode";
+        back.textContent = "通常へ戻す";
+        back.title = "出力順を通常モードへ戻します";
+        back.addEventListener("click", function(ev) {
+          ev.preventDefault();
+          setPromptCompilerV2Mode("normal", { regenerate: true });
+        });
+        warn.appendChild(back);
+      }
+
+      const titleLines = [];
+      if (isCharacterCheck) titleLines.push("キャラ確認は確認用モードです。表情・ポーズ・背景・演出を出力欄から一時除外します。");
+      list.forEach((x) => titleLines.push(x));
+      warn.title = titleLines.join("\n");
+      warn.classList.add("show");
+      if (isCharacterCheck) warn.classList.add("danger");
+      else if (modeNotice && !list.length) warn.classList.add("info");
+    } catch (e) {}
+  }
+
+  function setPromptCompilerV2Mode(mode, opts) {
+    try {
+      const next = promptCompilerV2IsKnownMode(mode) ? mode : "normal";
+      const options = opts || {};
+      promptCompilerV2SessionMode = next;
+      window.__PROMPT_COMPILER_V2_MODE = next;
+      // 出力順モードは現在ページ内だけで保持する。localStorage には保存しない。
+      try { localStorage.removeItem(PROMPT_COMPILER_V2_MODE_KEY); } catch (_) {}
+      const sel = document.getElementById("prompt-compiler-v2-mode");
+      if (!options.skipSelectSync && sel && sel.value !== next) sel.value = next;
+      const status = document.getElementById("prompt-compiler-v2-status");
+      if (status) status.textContent = "出力順: " + promptCompilerV2ModeLabel(next);
+      renderPromptCompilerV2Warning([], next);
+
+      // 履歴復元後など、出力欄が「過去に生成された固定テキスト」になっている場合がある。
+      // モード切替時は選択済みチェックから即再生成して、通常/ポーズ優先/キャラ設計/旧順が確実に反映されるようにする。
+      if (options.regenerate) {
+        setTimeout(function(){
+          try {
+            if (window.__historyRestoring) return;
+            const out = document.getElementById("out");
+            const hasChecked = !!document.querySelector('input[type="checkbox"]:checked');
+            if (out && hasChecked && typeof generateOutput === "function") generateOutput();
+          } catch (_) {}
+        }, 0);
+      }
+    } catch (e) {}
+  }
+
+  function promptCompilerV2Core(tag) {
+    try {
+      if (typeof getCoreTag === "function") return getCoreTag(tag);
+    } catch (e) {}
+    return String(tag || "")
+      .replace(/[\(\{\[\]\}\)]/g, "")
+      .replace(/:[\d\.]+(%?)/g, "")
+      .replace(/\s+/g, " ")
+      .trim()
+      .toLowerCase();
+  }
+
+  function promptCompilerV2Clean(tag) {
+    return String(tag || "").replace(/\s+/g, " ").trim();
+  }
+
+  function promptCompilerV2Role(tag) {
+    const raw = promptCompilerV2Clean(tag);
+    const s = raw.toLowerCase();
+    const core = promptCompilerV2Core(raw);
+    // snake_case / hyphen tags such as impish_smile, raised_eyebrow, motion-blur are common in older shelves.
+    // Use a normalized shadow string for role detection so complete character-design mode can drop them safely.
+    const normalized = (s + " " + core).replace(/[_-]+/g, " ");
+    const has = (re) => re.test(s) || re.test(core) || re.test(normalized);
+
+    // 抑制は最後尾で効かせる
+    if (has(/\b(no|without|avoid|prevent|exclude)\b|no separate|no companion|not a separate|not a companion|not cosplay|external suppression|suppress/i)) return "suppression";
+
+    // キャラ設計のみ確認用では一時除外したい、文字・漫画記号・動き演出系。quality より前で捕まえる。
+    if (has(/\b(sound effect text|comic sound effect|effect text|sfx|onomatopoeia|motion blur|dynamic motion blur|action blur|speed lines|motion lines|impact lines|manga sound|comic text|吹き出し|効果音|モーションブラー|アクションブラー)\b/i)) return "atmosphere_effect";
+
+    // 画質・光・質感。body/attire より先に判定し、skin glow / hair highlights / coated fabric を前半へ出しすぎない
+    if (has(/\b(masterpiece|best quality|highest quality|highres|high resolution|ultra[- ]detailed|ultra high resolution|8k|16k|4k|uhd|hdr|octane render|unreal engine|ray tracing|physically based rendering|global illumination|subsurface scattering|ambient occlusion|volumetric lighting|volumetric glow|cinematic lighting|dramatic lighting|realistic lighting|lumen reflections|nanite geometry|sharp focus|fine texture|texture detail|crisp detail|clean edge|edge definition|refined details|specular|speculars|bokeh|depth of field|bloom|controlled bloom|film grain|post[- ]processing|lens flare|rim lighting|rim light|backlight glow|material separation|diffusion|light diffusion|official art|illustration|anime[- ]realism|kodak|octane|unreal|glossy reflections|hard glossy|high energy highlights|translucent skin glow|silky hair highlights|shiny hair|glossy hair|coated fabric|glossy coated fabric|dynamic light interaction|spark[- ]like bokeh|clear specular highlights|natural skin translucency|subtle skin glow|soft rim light|rich color depth|smooth tonal gradation|semi[- ]realistic rendering)\b/i)) return "quality";
+
+    if (has(/\b(upper body|full body|cowboy shot|close[- ]?up|portrait|wide shot|medium shot|three[- ]quarter|low angle|high angle|dutch angle|pov|over the shoulder|camera|composition|framing|view)\b/i)) return "composition_camera";
+    if (has(/\b(pose|posture|standing(?![- ]stones?\b)|idle pose|seated|sitting|kneeling|crouching|lying|reclining|leaning|walking|running|jumping|on hands and knees|hands and knees|arched back|arms spread|crossed arms|one hand|raised hand|hand raised|beckon|beckoning|finger|holding|commanding gesture|drawn bow)\b/i)) return "pose";
+    if (has(/\b(expression|smile|smirk|grin|blush|lips|mouth|eyes|gaze|stare|glance|look|wink|eyebrow|raised eyebrow|half[- ]lidded|heavy[- ]lidded|sparkling eyes|intoxicated|drowsy|sleepy|curious|serious|sad|angry|crying|closed eyes|open eyes|heart[- ]throbbing|planner expression|enchanted expression|impish|teasing|mischievous|flirtatious|playful look|seductive look|alluring look|predatory eyes|ominous smile)\b/i)) return "expression";
+    if (has(/\b(1girl|1boy|solo|single human|single humanoid|single character|human character focus|humanoid girl|humanoid boy|faceless male|faceless female|male focus|female focus|muscular male|muscularmale)\b/i)) return "person_anchor";
+    if (has(/\b(inspired|motif|roleplay base|roleplay|empress|emperor|queen|king|lord|monarch|sovereign|demon|succubus|fox|beast|mythic|god|goddess|strategist|sage|femme fatale|beauty|dak?ki|taikobo|nezha|sun wukong|goku|fengshen|journey to the west|celtic|seiryu|byakko|suzaku|genbu|fenrir|leviathan|phoenix|griffon|unicorn|cerberus|kraken)\b/i)) return "subject_anchor";
+    if (has(/\b(horns?|wings?|tail|scales?|fangs?|claws?|ears?|fur|feathers?|plumage|mane|halo|body|skin|hair|appendages?|tentacles?|fins?|membranes?|pupils?|animal[- ]inspired|beast traits|dragon traits|fox traits|wolf traits|avian traits)\b/i)) return "body_traits";
+    if (has(/\b(attire|outfit|robes?|robe|dress|gown|uniform|armor|armour|regalia|ornaments?|jewelry|jewellery|cloak|veil|ribbons?|fabric|kimono|court attire|layered robes|lacquered gold fittings|black-gold-red|palace dress|ceremonial dress|jewel tassels?)\b/i)) return "attire";
+    if (has(/\b(palace|court|throne room|bedroom|chamber|room|interior|background|riverbank|forest|mountain|temple|shrine|sanctuary|battlefield|city|street|lounge|stage|garden|hall|banners?|ritual banners|standing[- ]stones?|standing stone destiny|shang and zhou|late yin court|court aesthetics)\b/i)) return "scene_background";
+    // glow / aura / mood は主題・人物・衣装判定の後で雰囲気へ送る
+    if (has(/\b(aura|mist|haze|smoke|flames?|fire|foxfire|wisps?|petals?|spark|sparks|particles?|pressure|tension|mood|perfume|perfumed|pheromone|divine|sacred|infernal|heavenly|mandate|xianxia|taoist|immortal|war chronicle|seductive glow|warm glow|soft glow|ambient glow|atmosphere|atmospheric|menace|sinister|luxury contrast|decadent|glamour|glamorous|calamity|court light control|palace ember)\b/i)) return "atmosphere_effect";
+    if (has(/\b(base|preservation|anchor|human face|human torso|humanoid proportions|remain primary)\b/i)) return "base";
+    return "misc";
+  }
+
+  function promptCompilerV2Order(mode) {
+    if (mode === "pose_first") {
+      return ["person_anchor", "subject_anchor", "pose", "base", "body_traits", "attire", "expression", "composition_camera", "scene_background", "atmosphere_effect", "quality", "suppression", "misc"];
+    }
+    if (mode === "character_design") {
+      return ["person_anchor", "subject_anchor", "base", "body_traits", "attire", "scene_background", "atmosphere_effect", "quality", "suppression", "pose", "expression", "composition_camera", "misc"];
+    }
+    if (mode === "character_pure") {
+      return ["person_anchor", "subject_anchor", "base", "body_traits", "attire", "suppression", "quality", "misc"];
+    }
+    return ["person_anchor", "subject_anchor", "base", "body_traits", "attire", "pose", "expression", "composition_camera", "scene_background", "atmosphere_effect", "quality", "suppression", "misc"];
+  }
+
+
+  function promptCompilerV2PureDropRole(tag, fallbackRole) {
+    const raw = promptCompilerV2Clean(tag);
+    const s = raw.toLowerCase();
+    const core = promptCompilerV2Core(raw);
+    const normalized = (s + " " + core).replace(/[_-]+/g, " ");
+    const has = (re) => re.test(s) || re.test(core) || re.test(normalized);
+
+    // まず既存ロールで明確に落とせるものはそのまま使う
+    if (fallbackRole === "pose" || fallbackRole === "expression" || fallbackRole === "scene_background" || fallbackRole === "atmosphere_effect" || fallbackRole === "composition_camera") {
+      return fallbackRole === "composition_camera" ? "pose" : fallbackRole;
+    }
+
+    // 漫画記号・吹き出し・効果音・顔まわり演出
+    if (has(/\b(speech bubble|dialogue bubble|text bubble|comic bubble|caption box|balloon|sound effect text|stylized sound effect text|comic sound effect|effect text|sensual sound effects?|sfx|onomatopoeia|moaning|motion lines|twitching motion lines|dynamic motion blur|motion blur|action blur|speed lines|impact lines|shock lines|steam from face|sparkles? on face|sparkle effect around face|floating hearts?|heart\b(?![- ]?(pupils?|eyes?))|zzz|sleeping bubble|flying sweatdrops?|sweatdrop|gloom lines|confusion lines|embarrassment lines|stress lines|impatience lines|anger vein|scribble symbol|exclamation mark symbol|question mark symbol|music note symbol|light bulb symbol|villainous aura|silent pressure|quiet menace|cold pressure|dark pressure)\b/i)) return "atmosphere_effect";
+
+    // ベッド・体勢・仕草・動作・身体状態
+    if (has(/\b(covering body|covering face|covering_face|lying on back|on bed|head on pillow|legs giving out|stepping back|pulling back|recoiling|shrinking back|fidgeting|gentle nod|silent nod|hand on chin|head resting on hand|shushing|eating|drinking|sleeping|kissing|blowing kiss|licking|chewing|looking (?:at viewer|away|back|up|down|afar|around|into someone'?s eyes)|eye contact|peeking|listening|stammering|whispering|murmuring|shouting|laughing|soft laughter|gasp|yawning|running|jump(?:ing)?|jump apex|weightless moment|weightless motion|midair|mid-air|leaping|suspended motion|holding back tears|trying to cover up|trying to endure|looking around nervously|aware of being watched|resting together|close embrace|clinging hug|close affection|open posture|natural pose|natural_pose|straight posture|straight_posture|confident posture|raised chin|chin up|chin_up|lifted chin|tense shoulders|relaxed shoulders|relaxed body|tense body|limp body|stiffened body|frozen body|motionless|poised|at ease|cozy|approachable|focused on speaker|focused_on_speaker|open mouthed pause|open-mouthed pause)\b/i)) return "pose";
+
+    // 表情・視線・汗涙・精神状態・感情反応
+    if (has(/\b(ahegao|tongue out|v shaped eyebrows|v-shaped eyebrows|pleasure face|pleasure surrender|pleasure priority|ecstatic expression|blissful expression|shocked expression|embarrassed expression|frozen expression|stiff face|focused eyes|eager expression|lively expression|hesitant expression|nervous face|alarmed expression|tense face|panic expression|crisis face|panicked expression|villainous expression|disdainful expression|nauseated expression|dismissive expression|sleepy expression|fear expression|intoxicated expression|unstable expression|cute expression|relieved expression|pleading expression|friendly smile|friendly_smile|cheerful expression|battle ready expression|battle-ready expression|determination filled face|determination-filled face|melting face|overloaded expression|soft pleading expression|seductive composure|superior composure|composed expression|victorious expression|satisfied expression|affectionate face|troubled face|awkward smile|forced smile|shy smile|nervous smile|tearful smile|bittersweet expression|dreamy face|big smile|full smile|radiant smile|glowing face|bright smile|reward awaiting grin|reward-awaiting grin|survived and won face|survived-and-won face|it'?s finally over face|mission accomplished vibe|game face|serious mode face|serious-mode face|brain lag face|brain-lag face|too much information face|too-much-information face|can'?t keep up face|can't-keep-up face|thought stopped face|thought-stopped face|cross wired blank face|cross-wired blank face|gift received emotional face|gift-received emotional face|lingering distant gaze face|teary lingering emotion face|reward awaiting grin|soul leaving body|blank stare|empty smile|unreadable face|soft caring expression|calm supportive expression|soft emotional warmth|close comforting face|watching-over smile|accepting gentle smile|soft stunned eyes|shining eyes|sparkling eyes|bright eyes|bright_eyes|strong eyes|strong_eyes|focused|intense gaze|intense_gaze|fixed gaze|fixed_gaze|fixed stare|fixed_stare|unblinking stare|unblinking_stare|detached stare|obsessive gaze|obsessive stare|seductive gaze|soft gaze|heartwarming gaze|trusting gaze|tender gaze|watching over smile|begging face|asking expression|apologetic eyes|expectant eyes|gentle eyes|kind eyes|caring eyes|empathetic eyes|alert eyes|fearful glance|shaky eyes|shaky_eyes|glassy eyes|glassy_eyes|sleepy eyes|sleepy_eyes|cold eyes|cold_eyes|puppy eyes|puppy_eyes|beckoning eyes|widened eyes|widened shining eyes|delighted eyes|fearful eyes|horrified eyes|trembling eyes|vacant eyes|empty eyes|lifeless eyes|misfocused eyes|upturned eyes|narrowed eyes|shadowed eyes|droopy eyes|focused eyes|pressured eyes|tense eyes|burning eyes|bloodshot eyes|bloodshot_eyes|shining anticipation|energetic anticipation|teasing confidence|softened gaze|softened eyes|steady eyes|calm eyes|peaceful eyes|restful expression|safe expression|warm understanding expression|understanding eyes|teasing look|confident look|alluring look|smug face|playful wink|playful eyes|knowing smile|slight smirk|wicked smirk|teasing smirk|sly smile|devilish smile|soft smirk|thin smile|evil smile|evil_smile|cold smile|cold_smile|fixed smile|fixed_smile|faint smile|slight smile|slight_smile|trembling smile|broken smile|awkward calm|soft warmth|warm comfort|rosy calm|soft glow|heat(?:ed)? resolve|burning spirit|euphoric dominance|playful confidence|playful provocation|playful control|controlling presence|leading presence|calm superiority|cold confidence|superior calm|confident relief|relieved confidence|pleased expression|emotional satisfaction|filled with comfort|quiet comfort|quiet tenderness|quiet support|quiet affirming face|quiet reflection|quiet ache|quiet memory|quiet depth|emotional afterglow|soft emotional tremble|soft vulnerable look|soft hopeful look|light blush|slight blush|joyful blush|cheerful blush|flushed cheeks|rosy cheeks|tired blush|feverish blush|nose blush|nose_blush|sudden blush|blush|bashful|shy|flustered|uneasy|awkward|embarrassed laugh|caught off guard|surprised|restless|overwhelmed|urgent|unsettled|frantic|disoriented|panic attack|cornered fear|speechless terror|silent scream|dread|uncanny|eerie|unsettling|unstable|abnormal|sanity slipping|broken mind|insanity|madness|ecstatic madness|hollow madness|possessive madness|mindless heat|desperate heat|deep desire|desperate attachment|loss of composure|lost composure|confidence falling apart|broken bravado|wavering composure|fraying mind|dangerous smile|mastermind vibe|superior attitude|cold anger|cold_anger|anger|angry|rage|irritated|contempt|superiority|judgmental stare|dismissive eyes|bored contempt|icy contempt|emotionless disdain|contemptuous glare|contemptuous smile|distaste|disgusted|disgusted look|disgust|rejection|aversion|sadistic smile|cruel amusement|provocative smile|provocative_smile|fearless|defiant|challenging|resistant|competitive|stubborn|unwavering|assertive|noble|dignified|calm pride|calm_pride|proud face|prideful face|proud joy|proud composure|triumphant face|victory expression|success face|comeback energy|heroic|resolute|awakened|determined|serious|enduring|restrained|indifferent|emotionless|still face|still_face|doll like|doll-like|hazy eyes|airy mood|floating mood|sweet daze|drifting bliss|soft surrender|tender fascination|dazed confusion|stunned confusion|delayed understanding|unable to process|halted mind|crowded thoughts|mental overload|sensory overload|dizzy thoughts|spinning focus|tangled thoughts|gasping in amazement|breath catching expression|breath-catching expression|emotional shock|emotional silence|grateful smile|overwhelmed happiness|accomplished face|loosened tension|released relief face|deep exhale|slackened tension|liberated expression|accepting gentle smile|forgiving accepting face|bittersweet face|wistful face|fragile eyes|melancholy|fragile|heated resolve|gathered spirit|intense readiness|fully fired up face|fully fired-up face|pumped up mood|pumped-up mood|eager intensity|sharpened stare|serious focus|ready to win expression|ready-to-win expression|gritted teeth determination face|gritted-teeth determination face|stubborn will|pushing forward|locked in eyes|locked-in eyes|total commitment|full intensity expression|full-intensity expression|dissolved tension|glowing contentment|fluffy absent minded face|fluffy absent-minded face|gentle blankness|delayed reaction|lost processing|halted mind|overwhelmed feeling|satisfied expectation|desperate sadness|sadness|sobbing|silent tears|tearful pleading|touched expression|heart throbbing look|heart-throbbing look|lovestruck expression|content face|happy reaction to praise|happy|smile|radiant joy|hopeful smile|inspired expression|needy gaze|soft vulnerable look|wanting affection|relying expression|gentle comfort|opened heart expression|opened-heart expression|comforted|healing smile|heartwarming mood|moved teary eyes|fulfilled look|protective smile|kind expression|hidden affection|shimmering eyes|burning fighting spirit face|sweet dreamy entranced face|brain lag face|reward awaiting grin|seductive gaze|alluring look|charming|coy|mischievous|cheeky|playful|elusive|fake innocence|softened focus|unfocused|messy expression|messy mouth|intense eating face|covered|covering|curled lip|wrinkled nose|wrinkled face|squeezed eyes|grimace|twisted face|pursed lips|lips pressed together|mouth wide open|quivering lips|panting mouth|heated breath|hurried breath|sharp inhale|slack mouth|tense mouth|tearing up|tear tracks|streaming tears|single tear|tear droplets|euphoric tears|happy tears|holding back tears|moved teary eyes|sweat beads|panic sweat|heavy sweat|cold sweat|nervous sweat|sweat|sweating|drooling|slobber|saliva trail|stringy saliva|runny nose|gagging|choking|soft panting|panting|heavy breathing|heavy breath|uneven breathing|shaky breath|hot breath|warm breath|soft exhale|drunk|flushed from alcohol|tipsy|toes curling|after kiss|after sex|afterglow|lingering afterglow|guilty pleasure|guilty acceptance|in heat|orgasm|climax|spent|spasms|shaking shoulders|trembling shoulders|twitching face|twitching|shaking|staring eyes|wide eyed|wide-eyed|darting eyes|darting_eyes|lowered brows|lowered_brows|raised eyebrow|raised_eyebrow|furrowed brow|furrowed_brow|clenched teeth|clenched_teeth|clenched jaw|gritted teeth|fixed gaze|fixed_gaze|stare|glare|glaring|side eye|side_eye|squinting|looking down|pale face|dark circles under eyes|blank face|empty expression|emotionless face|stiff expression|frozen fear|frozen mouth|still expression|hollow calm|eerie calm|awkward speech|searching for words|tense silence|silence|oops|fearful obedience|submissive|obedient|helpless|resigned|acceptance|cannot resist|unable to resist|passive surrender|pleasure surrender|resting together|at ease|completely at ease|relaxed|content|affectionate|clinging|clingy|yearning|relief|surrendering|cornered|fearful|desperate heat|restrained desire|restrained heat|superior calm|dominant|pressuring|arrogant|confidence|composed|calm superiority|playful provocation|controlling presence|leading presence|focused eyes|focused_on_speaker)\b/i)) return "expression";
+
+    return "";
+  }
+
+  function promptCompilerV2Warnings(tokens, mode, bucketCounts, droppedCounts) {
+    const warnings = [];
+    try {
+      const joined = tokens.join(", ").toLowerCase();
+      const hasMale = /\b(1boy|male|man|faceless male|muscular male|muscularmale)\b/.test(joined);
+      const hasFemale = /\b(1girl|female|woman|girl|femme fatale|empress|queen|princess|seductress|beauty)\b/.test(joined);
+      if (hasMale && hasFemale) warnings.push("人物指定に男性系と女性系が混在しています");
+
+      const subjects = [];
+      tokens.forEach((t) => {
+        const s = String(t || "");
+        const m = s.match(/\b([A-Z][A-Za-z0-9'_-]{2,})\s+inspired\b/i);
+        if (m && subjects.indexOf(m[1].toLowerCase()) < 0) subjects.push(m[1].toLowerCase());
+      });
+      if (subjects.length >= 2) warnings.push("主役級の inspired 指定が複数あります: " + subjects.join(" / "));
+
+      if (mode === "character_pure" && droppedCounts) {
+        const dropped = [];
+        if (droppedCounts.pose) dropped.push("ポーズ " + droppedCounts.pose);
+        if (droppedCounts.expression) dropped.push("表情 " + droppedCounts.expression);
+        if (droppedCounts.scene_background) dropped.push("背景 " + droppedCounts.scene_background);
+        if (droppedCounts.atmosphere_effect) dropped.push("演出 " + droppedCounts.atmosphere_effect);
+        if (dropped.length) warnings.push("キャラ確認で一時除外: " + dropped.join(" / "));
+      }
+    } catch (e) {}
+    return warnings;
+  }
+
+  function applyPromptCompilerV2(text) {
+    try {
+      const mode = getPromptCompilerV2Mode();
+      if (mode === "off") return text || "";
+
+      const tokens = smartSplit(text || "").map(promptCompilerV2Clean).filter(Boolean);
+      if (!tokens.length) return text || "";
+
+      const buckets = {};
+      const dropped = {};
+      const seen = new Set();
+      const orderedRoles = promptCompilerV2Order(mode);
+      const keepRole = {};
+      orderedRoles.forEach((r) => { buckets[r] = []; keepRole[r] = true; });
+
+      tokens.forEach((tag, idx) => {
+        const core = promptCompilerV2Core(tag);
+        if (!core || seen.has(core)) return;
+        seen.add(core);
+        const role = promptCompilerV2Role(tag);
+        if (mode === "character_pure") {
+          const pureDropRole = promptCompilerV2PureDropRole(tag, role);
+          if (pureDropRole) {
+            dropped[pureDropRole] = (dropped[pureDropRole] || 0) + 1;
+            return;
+          }
+        }
+        if (!keepRole[role] && mode === "character_pure") {
+          dropped[role] = (dropped[role] || 0) + 1;
+          return;
+        }
+        if (!buckets[role]) buckets[role] = [];
+        buckets[role].push({ tag, idx });
+      });
+
+      const out = [];
+      orderedRoles.forEach((role) => {
+        (buckets[role] || []).forEach((item) => out.push(item.tag));
+      });
+
+      const bucketCounts = Object.keys(buckets).reduce((acc, role) => {
+        acc[role] = (buckets[role] || []).length;
+        return acc;
+      }, {});
+      const warnings = promptCompilerV2Warnings(tokens, mode, bucketCounts, dropped);
+      window.__PROMPT_COMPILER_V2_LAST_REPORT = {
+        mode,
+        total: out.length,
+        warnings,
+        dropped,
+        bucketCounts,
+        buckets: Object.keys(buckets).reduce((acc, role) => {
+          acc[role] = (buckets[role] || []).map((x) => x.tag);
+          return acc;
+        }, {})
+      };
+
+      const label = promptCompilerV2ModeLabel(mode);
+      const status = document.getElementById("prompt-compiler-v2-status");
+      if (status) {
+        status.textContent = warnings.length ? ("出力順: " + label + " / 注意 " + warnings.length) : ("出力順: " + label);
+        status.title = warnings.join("\n");
+      }
+      renderPromptCompilerV2Warning(warnings, mode);
+
+      return out.join(", ");
+    } catch (e) {
+      return text || "";
+    }
+  }
+
+
+
+  window.__applyPromptCompilerV2 = applyPromptCompilerV2;
+  window.__setPromptCompilerV2Mode = setPromptCompilerV2Mode;
 
   // --- Subject Anchor (auto-front) ---
 function applySubjectAnchorOrdering(text) {
@@ -958,6 +1337,7 @@ function generateOutput() {
 
     
     outText = applySubjectAnchorOrdering(outText);
+    outText = applyPromptCompilerV2(outText);
 
     if (OT && keepMode === "ja" && OT.enToJa) {
       const words = outText.split(/[,，、\n]+/).map((s) => s.trim()).filter(Boolean);
@@ -1028,6 +1408,8 @@ function generateOutput() {
       window.__isGenerating = false;
     }, 100);
   }
+
+  window.__builderGenerateOutput = generateOutput;
 
   function showLinkageToast(items, mode) {
     let toast = document.getElementById("linkage-toast");
@@ -1852,6 +2234,69 @@ function applyCommercialDefaults(){
   }
 
 
+
+  function ensurePromptCompilerV2UI() {
+    try {
+      if (document.getElementById("prompt-compiler-v2-control")) return;
+      const genBtn = document.getElementById("genBtn");
+      if (!genBtn || !genBtn.parentElement) return;
+      const wrap = document.createElement("label");
+      wrap.id = "prompt-compiler-v2-control";
+      wrap.className = "prompt-compiler-control";
+      wrap.title = "最終プロンプトを生成向けの役割順に並べ替えます。キャラ確認はチェック状態を変えず、出力欄だけ一時的にキャラ本体確認用へ絞ります";
+      const caption = document.createElement("span");
+      caption.textContent = "出力順";
+      const sel = document.createElement("select");
+      sel.id = "prompt-compiler-v2-mode";
+      [
+        ["normal", "通常"],
+        ["pose_first", "ポーズ優先"],
+        ["character_design", "キャラ設計"],
+        ["character_pure", "キャラ確認"],
+        ["off", "旧順"]
+      ].forEach(([value, label]) => {
+        const opt = document.createElement("option");
+        opt.value = value;
+        opt.textContent = label;
+        sel.appendChild(opt);
+      });
+      try { localStorage.removeItem(PROMPT_COMPILER_V2_MODE_KEY); } catch (_) {}
+      sel.value = getPromptCompilerV2Mode();
+      const status = document.createElement("span");
+      status.id = "prompt-compiler-v2-status";
+      status.className = "prompt-compiler-status";
+      status.textContent = "出力順: " + promptCompilerV2ModeLabel(sel.value);
+      const warning = document.createElement("div");
+      warning.id = "prompt-compiler-v2-warning";
+      warning.className = "prompt-compiler-warning";
+      warning.setAttribute("aria-live", "polite");
+      const handleModeSelect = (ev) => {
+        const target = ev && ev.currentTarget ? ev.currentTarget : sel;
+        // Android Chrome の select は、履歴復元直後に input が旧値で発火することがある。
+        // 旧値で setPromptCompilerV2Mode() を即実行すると select.value を「通常」へ書き戻してしまい、
+        // 以後ほかのモードを選べないように見えるため、change 後の確定値だけを読む。
+        const selected = (target.options && target.selectedIndex >= 0 && target.options[target.selectedIndex])
+          ? target.options[target.selectedIndex].value
+          : target.value;
+        setPromptCompilerV2Mode(selected, { regenerate: true, skipSelectSync: true });
+        // セッション変数とUI表示を確定値で同期する。select値の上書きはここでのみ行う。
+        setTimeout(function(){
+          try {
+            const current = getPromptCompilerV2Mode();
+            if (sel.value !== current) sel.value = current;
+          } catch (_) {}
+        }, 0);
+      };
+      sel.addEventListener("change", handleModeSelect);
+      wrap.appendChild(caption);
+      wrap.appendChild(sel);
+      wrap.appendChild(status);
+      genBtn.parentElement.insertBefore(wrap, genBtn.nextSibling);
+      genBtn.parentElement.insertBefore(warning, wrap.nextSibling);
+      setPromptCompilerV2Mode(sel.value);
+    } catch (e) {}
+  }
+
   function init() {
     if (!document.getElementById("builder-core-style")) {
       const style = document.createElement("style");
@@ -1864,6 +2309,7 @@ function applyCommercialDefaults(){
     if (genBtn) {
       const container = genBtn.parentElement;
       container.classList.add("builder-footer-grid");
+      ensurePromptCompilerV2UI();
       genBtn.addEventListener("click", generateOutput);
 
       const copyBtn = document.getElementById("copyBtn");
