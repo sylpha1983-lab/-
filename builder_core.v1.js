@@ -914,6 +914,57 @@
     return result;
   }
 
+  function __normalizeAttireTokenForV25Suppression(token) {
+    return String(token || "")
+      .toLowerCase()
+      .replace(/[\(\)\[\]\{\}]/g, "")
+      .replace(/:[\d\.]+%?/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function applyAttireMotifFusionDuplicateSuppression(text) {
+    try {
+      const parts = smartSplit(text);
+      if (!parts.length) return text;
+
+      const protectedOutfits = new Set();
+      parts.forEach((part) => {
+        const norm = __normalizeAttireTokenForV25Suppression(part);
+        if (!/^selected\s+.+?\s+outfit\b/.test(norm)) return;
+        if (!/(inspired styling|fusion costume design|thematic accents|integrated outfit details)/.test(norm)) return;
+
+        const m = norm.match(/^selected\s+(.+?)\s+outfit\b/);
+        if (!m || !m[1]) return;
+        const outfit = m[1].trim();
+        if (!outfit) return;
+
+        protectedOutfits.add(outfit);
+        protectedOutfits.add(outfit + " outfit");
+
+        // Swimsuit helpers often produce "selected monokini swimsuit outfit" while
+        // the original checked item remains "monokini" or "school swimsuit".
+        if (/\bswimsuit\b/.test(outfit)) {
+          protectedOutfits.add("swimsuit");
+          const swimsuitBase = outfit.replace(/\s+swimsuit\b/, "").trim();
+          if (swimsuitBase && swimsuitBase !== "school" && swimsuitBase !== outfit) protectedOutfits.add(swimsuitBase);
+        }
+      });
+
+      if (!protectedOutfits.size) return text;
+
+      const out = [];
+      parts.forEach((part) => {
+        const norm = __normalizeAttireTokenForV25Suppression(part);
+        if (protectedOutfits.has(norm)) return;
+        out.push(part);
+      });
+      return out.join(", ");
+    } catch (e) {
+      return text;
+    }
+  }
+
 
   // --- Prompt Compiler v2 (role-order output layer) ---
   const PROMPT_COMPILER_V2_MODE_KEY = "shima_prompt_compiler_v2_mode";
@@ -1338,6 +1389,7 @@ function generateOutput() {
     
     outText = applySubjectAnchorOrdering(outText);
     outText = applyPromptCompilerV2(outText);
+    outText = applyAttireMotifFusionDuplicateSuppression(outText);
 
     if (OT && keepMode === "ja" && OT.enToJa) {
       const words = outText.split(/[,，、\n]+/).map((s) => s.trim()).filter(Boolean);

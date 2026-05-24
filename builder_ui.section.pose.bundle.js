@@ -5021,6 +5021,28 @@ const POSE_STAGE1_BODY = {
         { ja: "ガード", en: "guarding" },
         { ja: "突撃", en: "charging" },
       ],
+      "足元・足裏見せ": [
+        { ja: "足裏見せつけ（正面）", en: "one foot raised toward viewer, sole visible, barefoot, toes visible, foreshortened leg" },
+        { ja: "足を画面手前へ突き出す", en: "foot extended toward camera, sole close to viewer, strong perspective, low angle" },
+        { ja: "座り足裏見せ", en: "sitting pose, one foot lifted toward camera, soles visible, toes visible" },
+        { ja: "仰向け足裏見せ", en: "lying on back, feet toward camera, soles visible, foreshortening" },
+        { ja: "靴底見せ", en: "shoe sole toward viewer, foot in foreground, foreshortened leg, low angle" },
+        { ja: "つま先アピール", en: "bare toes pointed toward viewer, toe focus, foot in foreground" },
+      ],
+      "踏みつけ・見下ろし": [
+        { ja: "踏みつけポーズ（床）", en: "stomping pose, foot pressing down onto floor, dominant stance, low angle" },
+        { ja: "画面手前を踏む", en: "stepping toward camera, foot close to viewer, sole focus, dramatic perspective" },
+        { ja: "見下ろし足元強調", en: "looking down at viewer, foot in foreground, low angle, dominant pose" },
+        { ja: "片足を高く上げる", en: "one leg raised high, sole visible, balance pose, dynamic perspective" },
+        { ja: "足を台に乗せて見下ろす", en: "one foot on raised object, looking down, dominant stance, low angle" },
+        { ja: "踏み込みアップ", en: "deep step forward, foot in foreground, grounded stance, dynamic foreshortening" },
+        { ja: "画面を踏むPOV", en: "foot pressing against camera, sole fills the foreground, viewer POV, low angle, strong perspective" },
+        { ja: "視聴者を踏むPOV", en: "foot pressing down toward viewer, dominant pose, viewer perspective, sole close-up, foreshortened leg" },
+        { ja: "踏まれる直前POV", en: "foot descending toward viewer, imminent stomp pose, dramatic foreshortening, low angle POV" },
+        { ja: "顔前で足裏見せPOV", en: "sole hovering above viewer, close-up sole, toes visible, low angle viewer POV" },
+        { ja: "靴底を画面に押し当てる", en: "shoe sole pressed against screen, camera lens contact, sole fills frame, viewer POV" },
+        { ja: "上から足元を差し出す", en: "standing over viewer, one foot extended toward camera, looking down, dominant stance" },
+      ],
       "交流（ライト）": [
         { ja: "ハグ（ライト）", en: "hugging" },
         { ja: "手をつなぐ", en: "holding hands" },
@@ -6583,4 +6605,421 @@ console.log("STAGE1 COMPLETED POSES v24 LOADED");
 
   window.__registerPromptPart(KEY, VERSION, API);
 })();
+})();
+
+
+// =====================================================
+// Body Focus Support Poses v16
+// - Adds pose shelves that pair with builder_ui.section.body_focus.bundle.js.
+// - Public shelves are always shown.
+// - R-18 support shelves follow the existing MY_SECRET_UNLOCK gate.
+// =====================================================
+(function(){
+  "use strict";
+  const VERSION = 16;
+  const KEY = "pose";
+
+  const IS_R18_UNLOCKED = (function(){
+    try { return localStorage.getItem("MY_SECRET_UNLOCK") === "true"; } catch(e){ return false; }
+  })();
+
+  const POSE_BODY_FOCUS_SUPPORT = {
+    "🔍 Body Focus対応ポーズ (Fetish Support)": {
+      "💋 顔周り・口元": [
+        { ja: "唇見せ・指添え", en: "finger near lips, parted lips, glossy lips focus, face close-up, looking at viewer" },
+        { ja: "舌出し・口元アップ", en: "tongue out, licking lips, mouth close-up, head tilted, playful expression" },
+        { ja: "ピアス見せポーズ", en: "piercing reveal pose, hand framing piercing, close-up detail, tongue piercing or navel piercing visible" }
+      ],
+      "🔍 上半身・首・胸": [
+        { ja: "うなじ見せ・髪上げ", en: "turning away, looking back over shoulder, hair lifted, nape visible, back of neck focus" },
+        { ja: "鎖骨見せ・肩落とし", en: "chin up, shoulders lowered, collarbone focus, upper body close-up, elegant neck line" },
+        { ja: "胸元見せ・前かがみ", en: "leaning forward, chest angled toward camera, cleavage focus, upper body close-up" },
+        { ja: "横乳見せ・横向きひねり", en: "side pose, upper body twist, arm raised, sideboob emphasis, side profile composition" },
+        { ja: "下乳見せ・腕上げ", en: "arms raised, chest lifted, underboob angle, low angle upper body, torso stretch" },
+        { ja: "へそ見せ・腰手", en: "hand on waist, midriff exposed, navel focus, slight hip pop, front view" },
+        { ja: "腋見せ・伸びポーズ", en: "both arms raised, stretching pose, armpits visible, torso elongated, upper body focus" }
+      ],
+      "🦴 背中・手・ボディライン": [
+        { ja: "背中見せ・肩越し振り返り", en: "back view, looking over shoulder, bare back focus, shoulder blades visible, elegant S-curve" },
+        { ja: "手指見せ・顔横フレーム", en: "hands near face, fingers spread, beautiful hands focus, nail polish visible, delicate gesture" },
+        { ja: "くびれ腰見せ・S字立ち", en: "hip pop, hand on waist, S-curve pose, narrow waist focus, wide hips emphasis" }
+      ],
+      "🍑 下半身・脚": [
+        { ja: "お尻見せ・振り返り", en: "from behind, looking back over shoulder, hip pop, ass focus, lower body emphasis" },
+        { ja: "太もも見せ・片脚前出し", en: "sitting pose with one leg forward, thigh focus, hand resting on thigh, low angle" },
+        { ja: "絶対領域見せ・片脚前", en: "standing pose, one leg slightly forward, skirt hem and thigh highs visible, zettai ryouiki focus" },
+        { ja: "足裏足先見せ・座り前出し", en: "sitting pose, feet toward camera, soles visible, toes visible, foot in foreground, foreshortened legs" }
+      ]
+    }
+  };
+
+  const POSE_BODY_FOCUS_R18_SUPPORT = {
+    "🔞 Body Focus対応ポーズ R-18": {
+      "🔞 局部・秘部": [
+        { ja: "局部見せ・開脚座り", en: "adult character, open-leg seated pose, pelvis toward camera, crotch focus, front view" },
+        { ja: "胸先端見せ・胸元正面", en: "adult character, chest presented toward camera, arms lifted, nipple focus, upper body close-up" },
+        { ja: "下着チラ見せ・裾持ち", en: "adult character, skirt lift pose, panty peek, visible underwear, shy stance, lower body focus" },
+        { ja: "衣服ずり落ち・肩出し", en: "adult character, off-shoulder pose, clothes slipping down, half-dressed pose, exposed shoulder" },
+        { ja: "M字開脚・正面", en: "adult character, m-leg pose, legs spread toward camera, sitting on floor, front view, low angle" }
+      ],
+      "🔞 痕跡・ディープフェチ": [
+        { ja: "食い込み見せ・腰前出し", en: "adult character, tight clothes reveal pose, hip pushed forward, fabric tension, crotch and hip focus" },
+        { ja: "首筋痕見せ・横傾け", en: "adult character, neck exposed, head tilted aside, hickey and bite marks visible, nape and neck focus" },
+        { ja: "胸圧迫・寄せ胸見せ", en: "adult character, breast press pose, arms squeezing breasts together, cleavage close-up, chest focus" },
+        { ja: "柔らかいお腹見せ・座り", en: "adult character, soft belly focus, relaxed sitting pose, hand on stomach, midriff close-up" }
+      ]
+    }
+  };
+
+  function mount(){
+    const root = document.getElementById("pose-master-root");
+    if (!root || typeof window.__POSE_RENDERER !== "function") { setTimeout(mount, 120); return; }
+    if (document.getElementById("pose-v16-body-focus-support")) return;
+
+    const marker = document.createElement("div");
+    marker.id = "pose-v16-body-focus-support";
+    marker.style.display = "contents";
+    root.appendChild(marker);
+
+    try {
+      window.__POSE_RENDERER(root, POSE_BODY_FOCUS_SUPPORT, "v16-body-focus-support");
+      if (IS_R18_UNLOCKED) {
+        window.__POSE_RENDERER(root, POSE_BODY_FOCUS_R18_SUPPORT, "v16-body-focus-r18-support");
+      }
+      try { if (typeof window.__POSE_NORMALIZE === "function") window.__POSE_NORMALIZE(); } catch(_){}
+    } catch(e){ console.warn("POSE v16 body focus support mount failed", e); }
+  }
+
+  const API = {
+    initUI(){
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", mount, { once: true });
+      } else {
+        mount();
+      }
+    },
+    getTags(){ return []; }
+  };
+
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
+
+// ================================================
+// v17 R-18 性交・体位・絶頂 極限特化コレクション（全連動最終強化版）
+// ================================================
+(function(){
+  "use strict";
+  const VERSION = 17;
+  const KEY = "pose";
+
+  const IS_R18_UNLOCKED = localStorage.getItem("MY_SECRET_UNLOCK") === "true";
+
+  const POSE_R18_SEX = {
+    "🔥 完成セット (Complete Sex Sets)": [
+      { ja: "正常位深挿入連続イキ", en: "missionary position, deep penetration, mating press, legs spread wide, visible penetration" },
+      { ja: "バック激ピス崩壊", en: "doggy style, ass up face down, violent thrusting, visible penetration" },
+      { ja: "騎乗位腰振り絶頂", en: "cowgirl position, intense hip grinding, breasts bouncing, visible penetration" },
+      { ja: "対面座位密着情事", en: "face to face sitting sex, deep kissing, full embrace, slow deep thrusting" },
+      { ja: "立ちバック壁ドン", en: "standing doggy against wall, hands pinned, one leg lifted" },
+      { ja: "脚肩掛け正常位", en: "missionary legs on shoulders, deep cervix penetration" },
+      { ja: "バック連続イキ失禁", en: "doggy style, multiple orgasm, incontinence" },
+      { ja: "騎乗位中出し溢れ", en: "cowgirl creampie, cum overflowing" },
+      { ja: "M字開脚指マン", en: "m-shaped legs spread, intense fingering, visible insertion" },
+      { ja: "首絞めバック", en: "doggy style choking from behind" },
+      { ja: "正常位キスしながら", en: "missionary with deep kissing, passionate eye contact" },
+      { ja: "失禁潮吹き完全崩壊", en: "heavy squirting and incontinence, total mind break" },
+
+      // 拡張体位
+      { ja: "ロータス位密着", en: "lotus position, face to face, deep penetration, full embrace" },
+      { ja: "車輪位", en: "wheelbarrow position, standing doggy legs lifted" },
+      { ja: "バック騎乗位", en: "reverse cowgirl, ass focus, intense grinding" },
+      { ja: "対面正常位密着", en: "missionary position, face to face, full body contact" },
+      { ja: "プリズナーバック", en: "doggy style, hands pinned behind back" }
+    ],
+
+    "🔥 前座完成セット (Foreplay Complete Sets)": [
+      { ja: "ディープキス激しく", en: "deep french kiss, tongue entanglement" },
+      { ja: "胸を優しく揉む前戯", en: "gentle breast groping, nipple licking" },
+      { ja: "乳首責め集中", en: "intense nipple play, sucking, pinching" },
+      { ja: "クンニリングス", en: "cunnilingus, pussy eating, legs spread" },
+      { ja: "フェラチオ丁寧", en: "blowjob, deep throat, eye contact" },
+      { ja: "パイズリ", en: "paizuri, titjob, cleavage sex" },
+      { ja: "指マン激しく", en: "intense fingering, two fingers" },
+      { ja: "クリトリス責め", en: "clitoris teasing, rubbing, intense pleasure" },
+      { ja: "耳元で囁きながら愛撫", en: "whispering in ear while groping" },
+      { ja: "全身キス攻め", en: "kissing all over body, neck to thighs" }
+    ],
+
+    "🔧 性具完成セット (Sex Toy Complete Sets)": [
+      { ja: "バイブ正常位", en: "missionary position, vibrator inside, deep penetration, squirting" },
+      { ja: "バックディルド", en: "doggy style, large dildo, rough insertion, ahegao" },
+      { ja: "騎乗位ローター", en: "cowgirl position, clitoral vibrator, intense grinding" },
+      { ja: "M字開脚電マ", en: "m-shaped legs spread, hitachi magic wand, heavy squirting" },
+      { ja: "アナルプラグバック", en: "doggy style, anal plug, double penetration feel" },
+      { ja: "乳首クリップ拘束", en: "nipple clamps, bondage, submissive pose" },
+      { ja: "複数玩具同時責め", en: "multiple sex toys, vibrator and dildo, overwhelming pleasure" },
+      { ja: "目隠しローター", en: "blindfold, clitoral vibrator, anticipation play" }
+    ],
+
+    "🧬 ベース (Base)": [
+      { ja: "正常位基本", en: "missionary position" },
+      { ja: "バック基本", en: "doggy style" },
+      { ja: "騎乗位基本", en: "cowgirl position" },
+      { ja: "対面座位", en: "face to face sitting sex" },
+      { ja: "立ちバック", en: "standing doggy style" },
+      { ja: "M字開脚", en: "m-shaped legs spread" },
+      { ja: "脚肩掛け", en: "legs on shoulders" },
+      { ja: "ロータス位", en: "lotus position" },
+      { ja: "車輪位", en: "wheelbarrow position" }
+    ],
+
+    "🎨 カスタマイズ (Customize)": [
+      { ja: "激しいピストン", en: "violent fast thrusting" },
+      { ja: "腰振り強調", en: "strong hip grinding" },
+      { ja: "胸を激しく揉む", en: "rough breast groping, nipple pinching" },
+      { ja: "首を軽く絞める", en: "light choking play" },
+      { ja: "髪を強く掴む", en: "hair pulling" },
+      { ja: "体を反らす", en: "arching back in pleasure" },
+      { ja: "震え・痙攣", en: "twitching, body spasms" }
+    ],
+
+    "⚙️ 設定 (Settings)": [
+      { ja: "激しい", en: "rough violent sex" },
+      { ja: "優しい", en: "gentle passionate sex" },
+      { ja: "完全服従", en: "total submission" },
+      { ja: "精神崩壊", en: "mind break" },
+      { ja: "中出し重視", en: "creampie focused" },
+      { ja: "連続イキ", en: "multiple orgasm focus" }
+    ],
+
+    "😵 表情カスタマイズ (Expression Customize)": [
+      { ja: "アヘ顔", en: "ahegao" },
+      { ja: "白目", en: "rolling eyes" },
+      { ja: "舌出し", en: "tongue out" },
+      { ja: "大量よだれ", en: "excessive drooling" },
+      { ja: "口角泡立ち", en: "foamy mouth" },
+      { ja: "連続絶頂顔", en: "multiple orgasm face" },
+      { ja: "精神崩壊顔", en: "mind break face" },
+      { ja: "泣きイキ顔", en: "crying orgasm face" },
+      { ja: "恍惚顔", en: "ecstasy face" },
+      { ja: "虚ろな目", en: "vacant eyes" }
+    ],
+
+    "✨ 品質ブースト (Quality Boost)": [
+      { ja: "最高品質", en: "masterpiece, best quality, ultra detailed, absurdres" },
+      { ja: "高解像度", en: "8k, sharp focus, intricate details" },
+      { ja: "美しい照明", en: "volumetric lighting, beautiful lighting, cinematic lighting" },
+      { ja: "エロティックライト", en: "erotic lighting, seductive lighting, rim lighting, backlighting" },
+      { ja: "エロティックムード", en: "erotic atmosphere, seductive mood, sensual atmosphere" },
+      { ja: "リアルな肌", en: "detailed skin texture, subsurface scattering, realistic skin" },
+      { ja: "サブサーフェス肌", en: "subsurface scattering, translucent skin, soft skin" },
+      { ja: "光沢肌", en: "glossy skin, oily skin, shiny skin" },
+      { ja: "汗ばんだ肌", en: "sweaty skin, glistening skin, wet skin" },
+      { ja: "完璧なボディ", en: "perfect body, perfect proportions, beautiful detailed body" },
+      { ja: "ディープフォーカス", en: "depth of field, bokeh, sharp focus" },
+      { ja: "高精細エロ", en: "highly detailed pussy, visible penetration, wet pussy, detailed fluids" },
+      { ja: "リアルティック", en: "photorealistic, realistic, ultra realistic" },
+      { ja: "映画的", en: "cinematic, film grain, dramatic lighting" }
+    ],
+
+    "💦 エフェクト・体液 (Effects & Fluids)": [
+      { ja: "大量潮吹き", en: "heavy squirting, female ejaculation, squirting orgasm" },
+      { ja: "大量よだれ", en: "excessive drooling, saliva trail, messy mouth" },
+      { ja: "中出し溢れ", en: "creampie overflowing, cum dripping from pussy" },
+      { ja: "連続絶頂", en: "multiple orgasm, body spasms, twitching" },
+      { ja: "アヘ顔強め", en: "ahegao, rolling eyes, tongue out" },
+      { ja: "精神崩壊", en: "mind break, vacant eyes" }
+    ],
+
+    "🔞 NSFWフラグ (NSFW Flags)": [
+      { ja: "NSFW", en: "nsfw" },
+      { ja: "R-18", en: "r-18, explicit content" },
+      { ja: "成人向け", en: "adult content, mature content" },
+      { ja: "ヌード許可", en: "nude, completely nude, naked" },
+      { ja: "露骨な表現", en: "explicit, explicit sexual content, explicit nudity" },
+      { ja: "性的描写", en: "sexual activity, detailed sex" },
+      { ja: "過激", en: "extreme content, hardcore" },
+      { ja: "生々しい", en: "raw, uncensored, unfiltered" },
+      { ja: "エロティック", en: "erotic, sensual" },
+      { ja: "ポルノグラフィック", en: "pornographic, hentai" }
+    ]
+  };
+
+  const completeSetLinks = {
+    // ==================== 完成セット ====================
+    "missionary position, deep penetration, mating press, legs spread wide, visible penetration": ["masterpiece, best quality, ultra detailed", "heavy squirting", "multiple orgasm", "ahegao", "rolling eyes", "nsfw", "r-18", "missionary position"],
+    "doggy style, ass up face down, violent thrusting, visible penetration": ["masterpiece, best quality, ultra detailed", "heavy squirting", "excessive drooling", "mind break", "nsfw", "doggy style"],
+    "cowgirl position, intense hip grinding, breasts bouncing, visible penetration": ["masterpiece, best quality, ultra detailed", "creampie overflowing", "multiple orgasm", "ahegao", "nsfw", "cowgirl position"],
+    "face to face sitting sex, deep kissing, full embrace, slow deep thrusting": ["masterpiece, best quality, ultra detailed", "erotic atmosphere", "gentle passionate sex", "nsfw", "face to face sitting sex"],
+    "standing doggy against wall, hands pinned, one leg lifted": ["masterpiece, best quality, ultra detailed", "heavy squirting", "rough violent sex", "nsfw", "standing doggy style", "doggy style"],
+    "missionary legs on shoulders, deep cervix penetration": ["masterpiece, best quality, ultra detailed", "heavy squirting", "ahegao", "nsfw", "missionary position"],
+    "doggy style, multiple orgasm, incontinence": ["masterpiece, best quality, ultra detailed", "heavy squirting", "mind break", "excessive drooling", "nsfw", "doggy style"],
+    "cowgirl creampie, cum overflowing": ["masterpiece, best quality, ultra detailed", "creampie overflowing", "ahegao", "nsfw", "cowgirl position"],
+    "m-shaped legs spread, intense fingering, visible insertion": ["masterpiece, best quality, ultra detailed", "heavy squirting", "multiple orgasm", "nsfw", "m-shaped legs spread"],
+    "doggy style choking from behind": ["masterpiece, best quality, ultra detailed", "mind break", "rough violent sex", "nsfw", "doggy style"],
+    "missionary with deep kissing, passionate eye contact": ["masterpiece, best quality, ultra detailed", "deep kissing focus", "gentle passionate sex", "nsfw", "missionary position"],
+    "heavy squirting and incontinence, total mind break": ["masterpiece, best quality, ultra detailed", "heavy squirting", "mind break", "ahegao", "nsfw"],
+
+    "lotus position, face to face, deep penetration, full embrace": ["masterpiece, best quality, ultra detailed", "gentle passionate sex", "nsfw", "lotus position"],
+    "wheelbarrow position, standing doggy legs lifted": ["masterpiece, best quality, ultra detailed", "rough violent sex", "heavy squirting", "nsfw", "doggy style"],
+    "reverse cowgirl, ass focus, intense grinding": ["masterpiece, best quality, ultra detailed", "creampie overflowing", "ahegao", "nsfw", "cowgirl position"],
+    "missionary position, face to face, full body contact": ["masterpiece, best quality, ultra detailed", "gentle passionate sex", "nsfw", "missionary position"],
+    "doggy style, hands pinned behind back": ["masterpiece, best quality, ultra detailed", "rough violent sex", "mind break", "nsfw", "doggy style"],
+
+    // ==================== 前座完成セット ====================
+    "deep french kiss, tongue entanglement": ["masterpiece, best quality, ultra detailed", "deep kissing focus", "erotic atmosphere", "nsfw"],
+    "gentle breast groping, nipple licking": ["masterpiece, best quality, ultra detailed", "breast play focus", "glossy skin", "nsfw"],
+    "intense nipple play, sucking, pinching": ["masterpiece, best quality, ultra detailed", "breast play focus", "nsfw"],
+    "cunnilingus, pussy eating, legs spread": ["masterpiece, best quality, ultra detailed", "heavy squirting", "nsfw"],
+    "blowjob, deep throat, eye contact": ["masterpiece, best quality, ultra detailed", "excessive drooling", "nsfw"],
+    "paizuri, titjob, cleavage sex": ["masterpiece, best quality, ultra detailed", "breast play focus", "glossy skin", "nsfw"],
+    "intense fingering, two fingers": ["masterpiece, best quality, ultra detailed", "heavy squirting", "nsfw"],
+    "clitoris teasing, rubbing, intense pleasure": ["masterpiece, best quality, ultra detailed", "heavy squirting", "nsfw"],
+    "whispering in ear while groping": ["masterpiece, best quality, ultra detailed", "gentle passionate sex", "nsfw"],
+    "kissing all over body, neck to thighs": ["masterpiece, best quality, ultra detailed", "gentle passionate sex", "nsfw"],
+
+    // ==================== 性具完成セット ====================
+    "missionary position, vibrator inside, deep penetration, squirting": ["masterpiece, best quality, ultra detailed", "heavy squirting", "vibrator, vibrating toy", "nsfw", "explicit"],
+    "doggy style, large dildo, rough insertion, ahegao": ["masterpiece, best quality, ultra detailed", "dildo, large dildo", "ahegao", "heavy squirting", "nsfw", "doggy style"],
+    "cowgirl position, clitoral vibrator, intense grinding": ["masterpiece, best quality, ultra detailed", "clitoral vibrator, rotor", "multiple orgasm", "nsfw"],
+    "m-shaped legs spread, hitachi magic wand, heavy squirting": ["masterpiece, best quality, ultra detailed", "hitachi magic wand, powerful vibrator", "heavy squirting", "ahegao", "nsfw"],
+    "doggy style, anal plug, double penetration feel": ["masterpiece, best quality, ultra detailed", "anal plug", "nsfw", "doggy style"],
+    "nipple clamps, bondage, submissive pose": ["masterpiece, best quality, ultra detailed", "nipple clamps", "bondage", "nsfw"],
+    "multiple sex toys, vibrator and dildo, overwhelming pleasure": ["masterpiece, best quality, ultra detailed", "multiple sex toys", "heavy squirting", "nsfw"],
+    "blindfold, clitoral vibrator, anticipation play": ["masterpiece, best quality, ultra detailed", "blindfold", "nsfw"]
+  };
+
+  const API = {
+    initUI() {
+      if (!IS_R18_UNLOCKED) return;
+
+      const tryMount = () => {
+        const root = document.getElementById("pose-master-root");
+        if (!root) { setTimeout(tryMount, 150); return; }
+        if (document.getElementById("pose-v17-r18-sex")) return;
+
+        const separator = document.createElement("div");
+        separator.id = "pose-v17-r18-sex";
+        separator.style.cssText = "margin:25px 0 12px 0; border-top:2px dashed #c00; text-align:center;";
+        separator.innerHTML = `<span style="background:#fff0f0;padding:4px 14px;color:#c00;font-weight:bold;border-radius:6px;">🔴 R-18 性交・絶頂特化 v17（全連動最終強化）</span>`;
+        root.appendChild(separator);
+
+        const details = document.createElement("details");
+        details.className = "r18-sex-collection";
+        details.style.cssText = `margin:10px 0; border:2px solid #c00; border-radius:10px; background:#fff5f5; padding:2px;`;
+        details.open = false;
+
+        const summary = document.createElement("summary");
+        summary.innerHTML = `🔥 性交・体位・絶頂極限特化 <span style="color:#c00;">(v17)</span>`;
+        summary.style.cssText = `font-weight:bold; padding:12px; background:#ffe6e6; color:#c00; cursor:pointer; border-radius:8px;`;
+        details.appendChild(summary);
+
+        const content = document.createElement("div");
+        content.style.padding = "12px";
+        content.style.display = "flex";
+        content.style.flexDirection = "column";
+        content.style.gap = "12px";
+
+        const createSubCat = (title, items, role = "") => {
+          const sub = document.createElement("details");
+          sub.open = false;
+          sub.style.marginBottom = "10px";
+          sub.style.border = "1px solid #ff9999";
+          sub.style.borderRadius = "6px";
+
+          const subSummary = document.createElement("summary");
+          subSummary.textContent = title;
+          subSummary.style.fontWeight = "bold";
+          subSummary.style.padding = "8px 12px";
+          subSummary.style.background = "#fff0f0";
+          sub.appendChild(subSummary);
+
+          const grid = document.createElement("div");
+          grid.style.padding = "10px";
+          grid.style.display = "grid";
+          grid.style.gridTemplateColumns = "repeat(auto-fill, minmax(140px, 1fr))";
+          grid.style.gap = "8px";
+
+          items.forEach(item => {
+            const label = document.createElement("label");
+            label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer; padding:4px 0;";
+            const cb = document.createElement("input");
+            cb.type = "checkbox";
+            cb.style.marginRight = "8px";
+            cb.dataset.en = item.en;
+            if (role) cb.dataset.role = role;
+            label.appendChild(cb);
+            label.appendChild(document.createTextNode(item.ja));
+            grid.appendChild(label);
+          });
+          sub.appendChild(grid);
+          return sub;
+        };
+
+        const completeSetNode = createSubCat("🔥 完成セット", POSE_R18_SEX["🔥 完成セット (Complete Sex Sets)"], "complete");
+        const foreplaySetNode = createSubCat("🔥 前座完成セット", POSE_R18_SEX["🔥 前座完成セット (Foreplay Complete Sets)"], "foreplay");
+        const sexToySetNode = createSubCat("🔧 性具完成セット", POSE_R18_SEX["🔧 性具完成セット (Sex Toy Complete Sets)"], "sextoy");
+        const baseNode = createSubCat("🧬 ベース", POSE_R18_SEX["🧬 ベース (Base)"], "base");
+        const customNode = createSubCat("🎨 カスタマイズ", POSE_R18_SEX["🎨 カスタマイズ (Customize)"], "custom");
+        const settingNode = createSubCat("⚙️ 設定", POSE_R18_SEX["⚙️ 設定 (Settings)"], "setting");
+        const expressionNode = createSubCat("😵 表情カスタマイズ", POSE_R18_SEX["😵 表情カスタマイズ (Expression Customize)"], "expression");
+        const qualityNode = createSubCat("✨ 品質ブースト", POSE_R18_SEX["✨ 品質ブースト (Quality Boost)"], "quality");
+        const effectsNode = createSubCat("💦 エフェクト・体液", POSE_R18_SEX["💦 エフェクト・体液 (Effects & Fluids)"], "effects");
+        const nsfwFlagNode = createSubCat("🔞 NSFWフラグ", POSE_R18_SEX["🔞 NSFWフラグ (NSFW Flags)"], "nsfw");
+
+        content.append(completeSetNode, foreplaySetNode, sexToySetNode, baseNode, customNode, settingNode, expressionNode, qualityNode, effectsNode, nsfwFlagNode);
+
+        const allCompleteCheckboxes = [
+          ...completeSetNode.querySelectorAll('input[type="checkbox"]'),
+          ...foreplaySetNode.querySelectorAll('input[type="checkbox"]'),
+          ...sexToySetNode.querySelectorAll('input[type="checkbox"]')
+        ];
+
+        const clearAllLinked = () => {
+          [baseNode, customNode, settingNode, expressionNode, qualityNode, effectsNode, nsfwFlagNode].forEach(node => {
+            node.querySelectorAll('input[type="checkbox"]').forEach(c => c.checked = false);
+          });
+        };
+
+        allCompleteCheckboxes.forEach(cb => {
+          cb.addEventListener("change", () => {
+            const activeEn = cb.dataset.en || "";
+
+            if (cb.checked) {
+              allCompleteCheckboxes.forEach(other => { if (other !== cb) other.checked = false; });
+
+              const links = completeSetLinks[activeEn] || [];
+              clearAllLinked();
+
+              [baseNode, customNode, settingNode, expressionNode, qualityNode, effectsNode, nsfwFlagNode].forEach(node => {
+                node.querySelectorAll('input[type="checkbox"]').forEach(c => {
+                  const val = (c.dataset.en || "").toLowerCase();
+                  if (links.some(link => val.includes(link.toLowerCase()) || link.toLowerCase().includes(val))) {
+                    c.checked = true;
+                  }
+                });
+              });
+            } else {
+              clearAllLinked();
+            }
+          });
+        });
+
+        details.appendChild(content);
+        root.appendChild(details);
+      };
+
+      tryMount();
+    },
+
+    getTags() {
+      const tags = [];
+      document.querySelectorAll(".r18-sex-collection input[type='checkbox']:checked").forEach(cb => {
+        if (cb.dataset?.en) tags.push(cb.dataset.en);
+      });
+      return tags;
+    }
+  };
+
+  window.__registerPromptPart(KEY, VERSION, API);
 })();

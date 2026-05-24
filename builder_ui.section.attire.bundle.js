@@ -4240,6 +4240,13 @@ window.__attireEnsureZones = window.__attireEnsureZones || function(parent){
       { ja: "オーバーニー", en: "thighhighs" },
       { ja: "サイハイソックス", en: "thighhighs" },
       { ja: "パンスト", en: "pantyhose" },
+      { ja: "ストッキング", en: "stockings" },
+      { ja: "シアーストッキング", en: "sheer stockings" },
+      { ja: "黒ストッキング", en: "black stockings" },
+      { ja: "白ストッキング", en: "white stockings" },
+      { ja: "厚手ストッキング", en: "thick stockings" },
+      { ja: "不透明ストッキング", en: "opaque stockings" },
+      { ja: "80デニールストッキング", en: "80 denier stockings" },
       { ja: "黒タイツ", en: "black tights" },
       { ja: "網タイツ", en: "fishnets" },
       { ja: "ガーターベルト", en: "garter belt" },
@@ -4247,6 +4254,61 @@ window.__attireEnsureZones = window.__attireEnsureZones || function(parent){
       { ja: "ルーズソックス", en: "loose socks" }, // ★追加
       { ja: "レッグウォーマー", en: "leg warmers" }, // ★追加
       { ja: "足袋 (タビ)", en: "tabi" } // ★追加
+    ],
+    "🧪 特殊レッグウェア (Special Legwear)": [
+      { ja: "レースストッキング", en: "lace stockings" },
+      { ja: "刺繍ストッキング", en: "embroidered stockings" },
+      { ja: "蜘蛛の巣柄ストッキング", en: "spiderweb-patterned stockings" },
+      { ja: "タトゥー柄ストッキング", en: "tattoo-print stockings" },
+      { ja: "星柄ストッキング", en: "star-pattern stockings" },
+      { ja: "グラデーションストッキング", en: "gradient stockings" },
+      { ja: "ホログラムストッキング", en: "holographic stockings" },
+      { ja: "発光ラインストッキング", en: "glowing line stockings" },
+      { ja: "サイバー回路ストッキング", en: "cyber circuit-pattern stockings" },
+      { ja: "ルーン模様ストッキング", en: "rune-pattern stockings" },
+      { ja: "ラテックスストッキング", en: "latex stockings" },
+      { ja: "メタリックストッキング", en: "metallic sheen stockings" },
+      { ja: "透明PVCレッグカバー", en: "transparent PVC legwear" },
+      { ja: "バイオメカストッキング", en: "biomechanical stockings" },
+      { ja: "スライムストッキング", en: "translucent slime stockings" },
+      { ja: "生体ストッキング", en: "living organic stockings" },
+      { ja: "チョコレートメルトストッキング", en: "melting chocolate stockings" },
+      { ja: "ミラージュストッキング", en: "mirage stockings" },
+      { ja: "リフレクションストッキング", en: "reflective stockings" },
+      { ja: "クリスタルストッキング", en: "crystal stockings" },
+      { ja: "ステンドグラスストッキング", en: "stained glass stockings" },
+      { ja: "液体金属ストッキング", en: "liquid metal stockings" },
+      { ja: "影のヴェールストッキング", en: "shadow veil stockings" },
+      { ja: "星屑ストッキング", en: "stardust stockings" },
+      { ja: "蔦巻きストッキング", en: "vine-wrapped stockings" },
+      { ja: "魔法陣ストッキング", en: "magic circle stockings" },
+      { ja: "ガラス膜ストッキング", en: "glass-like membrane stockings" }
+    ],
+    "🧵 レッグウェア状態 (Legwear Condition)": [
+      { ja: "破れたストッキング", en: "torn stockings" },
+      { ja: "穴あきストッキング", en: "stockings with holes" },
+      { ja: "伝線したストッキング", en: "laddered stockings, runs in stockings" },
+      { ja: "ほつれたストッキング", en: "frayed stockings" },
+      { ja: "縦線入りストッキング", en: "vertical line stockings" },
+      { ja: "バックシームストッキング", en: "back-seam stockings" },
+      { ja: "ずり落ちたストッキング", en: "stockings slipping down" },
+      { ja: "片脚だけずり落ちたストッキング", en: "one stocking slipping down" },
+      { ja: "脱げかけストッキング", en: "partially slipped-off stockings" },
+      { ja: "丸まった足首ストッキング", en: "stockings bunched around the ankles" },
+      { ja: "片方だけ破れたストッキング", en: "one torn stocking" },
+      { ja: "膝まわりが破れたストッキング", en: "stockings torn around the knees" },
+      { ja: "とろける表面", en: "melting glossy surface" },
+      { ja: "滴る表面", en: "dripping glossy surface" },
+      { ja: "脈動する表面", en: "subtly pulsing organic surface" },
+      { ja: "揺らぐ幻影表面", en: "shimmering mirage distortion" },
+      { ja: "鏡面反射", en: "mirror-like reflective sheen" },
+      { ja: "半透明膜", en: "translucent membrane surface" },
+      { ja: "ひび割れた表面", en: "cracked surface" },
+      { ja: "光る縫い目", en: "glowing seams" },
+      { ja: "浮かぶ粒子", en: "floating particles around the stockings" },
+      { ja: "液体金属の流動", en: "flowing liquid metal surface" },
+      { ja: "星屑のきらめき", en: "stardust shimmer" },
+      { ja: "魔力が走る線", en: "glowing magical lines" }
     ],
     "👠 靴 (Footwear)": [
       { ja: "スニーカー", en: "sneakers" },
@@ -4268,6 +4330,134 @@ window.__attireEnsureZones = window.__attireEnsureZones || function(parent){
       { ja: "食い込み", en: "clothing cutout" }
     ]
   };
+
+  const LEGWEAR_TARGET_RE = /(?:stockings|fishnets|pantyhose|tights|kneehighs|thighhighs)/i;
+
+  function uniqTags(tags) {
+    const seen = new Set();
+    const out = [];
+    tags.forEach(tag => {
+      const v = String(tag || "").trim();
+      if (!v || seen.has(v)) return;
+      seen.add(v);
+      out.push(v);
+    });
+    return out;
+  }
+
+  function isComposableLegwearTarget(target) {
+    return LEGWEAR_TARGET_RE.test(String(target || ""));
+  }
+
+  function normalizeLegwearTarget(target) {
+    const t = String(target || "").trim();
+    const map = {
+      "fishnets": "fishnet stockings",
+      "pantyhose": "pantyhose",
+      "kneehighs": "knee-high socks",
+      "thighhighs": "thigh-high stockings"
+    };
+    return map[t] || t;
+  }
+
+  function singularLegwear(base) {
+    const b = String(base || "").trim();
+    if (/stockings$/i.test(b)) return b.replace(/stockings$/i, "stocking");
+    if (/socks$/i.test(b)) return b.replace(/socks$/i, "sock");
+    return b;
+  }
+
+  function composeLegwearCondition(target, condition) {
+    const rawTarget = String(target || "").trim();
+    const rawCondition = String(condition || "").trim();
+    const base = normalizeLegwearTarget(rawTarget);
+    const one = singularLegwear(base);
+    const isFishnet = /fishnet|fishnets/i.test(rawTarget + " " + base);
+    const isSlime = /slime/i.test(rawTarget + " " + base);
+    const isOrganic = /organic|bio|biomechanical|living/i.test(rawTarget + " " + base);
+    const isChocolate = /chocolate/i.test(rawTarget + " " + base);
+    const isMirage = /mirage/i.test(rawTarget + " " + base);
+    const isReflective = /reflective|metallic|holographic/i.test(rawTarget + " " + base);
+    const isCrystal = /crystal|stained glass|glass-like/i.test(rawTarget + " " + base);
+    const isLiquidMetal = /liquid metal/i.test(rawTarget + " " + base);
+    const isShadow = /shadow veil/i.test(rawTarget + " " + base);
+    const isStardust = /stardust/i.test(rawTarget + " " + base);
+    const isVine = /vine-wrapped/i.test(rawTarget + " " + base);
+    const isMagic = /magic circle|rune/i.test(rawTarget + " " + base);
+
+    switch (rawCondition) {
+      case "torn stockings":
+        return isFishnet ? "torn fishnet stockings, broken mesh" : `torn ${base}`;
+      case "stockings with holes":
+        return isFishnet ? "torn fishnet stockings, visible holes in the mesh" : `${base} with holes`;
+      case "laddered stockings, runs in stockings":
+        return isFishnet ? "torn fishnet stockings, broken mesh" : `laddered ${base}, visible runs in the stockings`;
+      case "frayed stockings":
+        return `frayed ${base}`;
+      case "vertical line stockings":
+        return `${base} with vertical seam lines`;
+      case "back-seam stockings":
+        return `back-seam ${base}`;
+      case "stockings slipping down":
+        return `${base} slipping down`;
+      case "one stocking slipping down":
+        return `one ${one} slipping down`;
+      case "partially slipped-off stockings":
+        return `partially slipped-off ${base}, ${base} partly sliding down`;
+      case "stockings bunched around the ankles":
+        return `${base} bunched around the ankles`;
+      case "one torn stocking":
+        return `one torn ${one}`;
+      case "stockings torn around the knees":
+        return `${base} torn around the knees`;
+      case "melting glossy surface":
+        if (isChocolate) return `melting chocolate stockings, glossy chocolate melt surface`;
+        if (isSlime) return `melting slime stockings, glossy fluid surface`;
+        return `melting ${base}, glossy surface`;
+      case "dripping glossy surface":
+        if (isChocolate) return `melting chocolate stockings, dripping chocolate effect`;
+        if (isSlime) return `${base}, translucent dripping slime texture`;
+        return `${base} with dripping glossy surface`;
+      case "subtly pulsing organic surface":
+        if (isOrganic) return `${base}, subtly pulsing bio-texture`;
+        return `${base} with subtle pulsing organic texture`;
+      case "shimmering mirage distortion":
+        if (isMirage) return `mirage stockings, shimmering distortion, translucent illusion effect`;
+        return `${base} with shimmering mirage distortion`;
+      case "mirror-like reflective sheen":
+        if (isReflective) return `${base}, mirror-like reflective sheen, glossy highlights`;
+        return `${base} with mirror-like reflective sheen`;
+      case "translucent membrane surface":
+        if (isSlime || isOrganic) return `${base}, translucent membrane surface`;
+        if (isCrystal) return `${base}, glass-like translucent membrane`;
+        return `${base} with translucent membrane texture`;
+      case "cracked surface":
+        if (isCrystal) return `${base}, cracked glass-like surface`;
+        if (isLiquidMetal) return `${base}, cracked reflective surface`;
+        return `${base} with cracked surface texture`;
+      case "glowing seams":
+        if (isMagic) return `${base}, glowing magical seams`;
+        if (isLiquidMetal) return `${base}, luminous seams on liquid metal surface`;
+        return `${base} with glowing seams`;
+      case "floating particles around the stockings":
+        if (isStardust) return `${base}, floating stardust particles around the legs`;
+        if (isMagic) return `${base}, floating magical particles around the legs`;
+        return `${base}, floating particles around the stockings`;
+      case "flowing liquid metal surface":
+        if (isLiquidMetal) return `liquid metal stockings, flowing metallic surface, mirror-like highlights`;
+        if (isReflective) return `${base}, flowing reflective surface`;
+        return `${base} with flowing liquid-metal sheen`;
+      case "stardust shimmer":
+        if (isStardust) return `stardust stockings, stardust shimmer, tiny sparkling particles`;
+        return `${base} with stardust shimmer`;
+      case "glowing magical lines":
+        if (isMagic) return `${base}, glowing magical lines, arcane circle pattern`;
+        if (isVine) return `${base}, faint glowing magical lines between vine patterns`;
+        return `${base} with glowing magical lines`;
+      default:
+        return `${rawCondition}, ${base}`;
+    }
+  }
 
   const API = {
     initUI(container) {
@@ -4299,6 +4489,11 @@ window.__attireEnsureZones = window.__attireEnsureZones || function(parent){
           const cb = document.createElement("input");
           cb.type = "checkbox";
           cb.dataset.en = item.en;
+          if (cat.indexOf("Legwear Condition") !== -1) {
+            cb.dataset.legwearRole = "condition";
+          } else if (cat.indexOf("Legwear") !== -1 || cat.indexOf("Special Legwear") !== -1) {
+            cb.dataset.legwearRole = "target";
+          }
           label.appendChild(cb);
           label.appendChild(document.createTextNode(`${item.ja} / ${item.en}`));
           content.appendChild(label);
@@ -4316,9 +4511,33 @@ window.__attireEnsureZones = window.__attireEnsureZones || function(parent){
       }
     },
     getTags() {
-      const tags = [];
-      document.querySelectorAll(".attire-v4-container input[type='checkbox']:checked").forEach(cb => tags.push(cb.dataset.en));
-      return tags;
+      const normalTags = [];
+      const legwearTargets = [];
+      const legwearConditions = [];
+
+      document.querySelectorAll(".attire-v4-container input[type='checkbox']:checked").forEach(cb => {
+        const val = cb.dataset.en;
+        const role = cb.dataset.legwearRole;
+        if (role === "condition") {
+          legwearConditions.push(val);
+        } else if (role === "target" && isComposableLegwearTarget(val)) {
+          legwearTargets.push(val);
+        } else {
+          normalTags.push(val);
+        }
+      });
+
+      if (legwearTargets.length > 0 && legwearConditions.length > 0) {
+        const composed = [];
+        legwearTargets.forEach(target => {
+          legwearConditions.forEach(condition => {
+            composed.push(composeLegwearCondition(target, condition));
+          });
+        });
+        return uniqTags([...normalTags, ...composed]);
+      }
+
+      return uniqTags([...normalTags, ...legwearTargets, ...legwearConditions]);
     }
   };
   window.__registerPromptPart(KEY, VERSION, API);
@@ -4815,9 +5034,24 @@ const contentArea = parent.querySelector(".section-content") || parent;
       { ja: "サイハイソックス", en: "thighhighs" }, { ja: "ルーズソックス", en: "loose socks" },
       { ja: "ラインソックス", en: "striped socks" }, { ja: "スクールソックス", en: "white socks" },
       { ja: "黒タイツ", en: "black tights" }, { ja: "パンスト", en: "pantyhose" },
+      { ja: "ストッキング", en: "stockings" }, { ja: "シアーストッキング", en: "sheer stockings" },
+      { ja: "黒ストッキング", en: "black stockings" }, { ja: "白ストッキング", en: "white stockings" },
+      { ja: "厚手ストッキング", en: "thick stockings" }, { ja: "不透明ストッキング", en: "opaque stockings" },
+      { ja: "40デニールストッキング", en: "40 denier stockings" }, { ja: "80デニールストッキング", en: "80 denier stockings" },
+      { ja: "120デニールストッキング", en: "120 denier stockings" }, { ja: "マットストッキング", en: "matte stockings" },
+      { ja: "リブストッキング", en: "ribbed stockings" }, { ja: "保温ストッキング", en: "warm thick stockings" },
       { ja: "網タイツ", en: "fishnets" }, { ja: "ガーターベルト", en: "garter belt" },
       { ja: "レッグウォーマー", en: "leg warmers" }, { ja: "トレンカ", en: "stirrup legwear" },
       { ja: "足袋 (タビ)", en: "tabi" }, { ja: "裸足 (脚)", en: "bare legs" }
+    ],
+    "🧪 特殊レッグウェア (Special Legwear)": [
+      { ja: "レースストッキング", en: "lace stockings" }, { ja: "刺繍ストッキング", en: "embroidered stockings" },
+      { ja: "蜘蛛の巣柄ストッキング", en: "spiderweb-patterned stockings" }, { ja: "タトゥー柄ストッキング", en: "tattoo-print stockings" },
+      { ja: "星柄ストッキング", en: "star-pattern stockings" }, { ja: "グラデーションストッキング", en: "gradient stockings" },
+      { ja: "ホログラムストッキング", en: "holographic stockings" }, { ja: "発光ラインストッキング", en: "glowing line stockings" },
+      { ja: "サイバー回路ストッキング", en: "cyber circuit-pattern stockings" }, { ja: "ルーン模様ストッキング", en: "rune-pattern stockings" },
+      { ja: "ラテックスストッキング", en: "latex stockings" }, { ja: "メタリックストッキング", en: "metallic sheen stockings" },
+      { ja: "透明PVCレッグカバー", en: "transparent PVC legwear" }, { ja: "バイオメカストッキング", en: "biomechanical stockings" }
     ]
   };
 
@@ -8825,7 +9059,7 @@ wrap.appendChild(title);
             const cb = document.createElement("input");
             cb.type = "checkbox"; cb.dataset.en = item.en; cb.dataset.r18src = "v22"; cb.style.marginRight = "6px";
             label.appendChild(cb); label.appendChild(document.createTextNode(`${item.ja}`));
-            label.title = item.en; // 英語はツールチップで表示
+            label.title = item.ja || ""; // 英語はツールチップで表示
             content.appendChild(label);
           });
           details.appendChild(content);
@@ -12119,5 +12353,782 @@ function createItemLabel(item){
       return tags;
     }
   };
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
+
+// --- builder_ui.section.attire.v25.js ---
+// User motif / outfit fusion helper (touch-only additive patch)
+// v25o: expand legendary/myth motif and fusion into detailed nested shelves using builder_data mythic collection names as reference.
+  // - keeps custom input generation manual until Generate.
+  // - keeps outfit category at the front of motif/fusion helper text.
+  // - smooths connector wording so Prompt Compiler does not scatter phrase fragments.
+  // - infers idol/stage outfit from grouped existing attire tags.
+  // - normalizes doggy/doggie/doggo to dog for safer general prompts.
+  // - keeps preset labels Japanese while emitting English prompt themes at generation time.
+  // - adds animal and legendary/myth preset shelves for motif and fusion.
+(function(){
+  "use strict";
+  const VERSION = 25;
+  const KEY = "attire";
+  const ROOT_CLASS = "attire-v25-motif-fusion";
+  const STYLE_ID = "__attire_v25_motif_fusion_style__";
+
+  const MOTIF_PRESETS = [];
+
+  const FLORAL_MOTIF_PRESETS = [
+    { ja: "桜", mode: "motif", theme: "cherry blossom" },
+    { ja: "薔薇", mode: "motif", theme: "rose" },
+    { ja: "百合", mode: "motif", theme: "white lily" },
+    { ja: "紫陽花", mode: "motif", theme: "hydrangea" },
+    { ja: "朝顔", mode: "motif", theme: "morning glory" },
+    { ja: "牡丹", mode: "motif", theme: "peony" },
+    { ja: "椿", mode: "motif", theme: "camellia" },
+    { ja: "藤", mode: "motif", theme: "wisteria" },
+    { ja: "蓮", mode: "motif", theme: "lotus" },
+    { ja: "向日葵", mode: "motif", theme: "sunflower" }
+  ];
+
+  const CELESTIAL_MOTIF_PRESETS = [
+    { ja: "星", mode: "motif", theme: "star" },
+    { ja: "月", mode: "motif", theme: "moon" },
+    { ja: "星月", mode: "motif", theme: "star and crescent" },
+    { ja: "星座", mode: "motif", theme: "constellation" },
+    { ja: "銀河", mode: "motif", theme: "galaxy" },
+    { ja: "流星", mode: "motif", theme: "shooting star" },
+    { ja: "惑星", mode: "motif", theme: "planet" },
+    { ja: "オーロラ", mode: "motif", theme: "aurora" }
+  ];
+
+  const CRYSTAL_MOTIF_PRESETS = [
+    { ja: "雪結晶", mode: "motif", theme: "snowflake" },
+    { ja: "氷結晶", mode: "motif", theme: "ice crystal" },
+    { ja: "霜", mode: "motif", theme: "frost" },
+    { ja: "氷柱", mode: "motif", theme: "icicle" },
+    { ja: "透明結晶", mode: "motif", theme: "clear crystal" },
+    { ja: "宝石結晶", mode: "motif", theme: "gem crystal" }
+  ];
+
+  const CLOCKWORK_MOTIF_PRESETS = [
+    { ja: "時計歯車", mode: "motif", theme: "clockwork" },
+    { ja: "歯車", mode: "motif", theme: "gear" },
+    { ja: "懐中時計", mode: "motif", theme: "pocket watch" },
+    { ja: "真鍮機械", mode: "motif", theme: "brass machinery" },
+    { ja: "スチームパンク", mode: "motif", theme: "steampunk" },
+    { ja: "機械仕掛け", mode: "motif", theme: "mechanical" }
+  ];
+
+  const GLASS_GEM_MOTIF_PRESETS = [
+    { ja: "ステンドグラス", mode: "motif", theme: "stained glass" },
+    { ja: "宝石", mode: "motif", theme: "jewel" },
+    { ja: "プリズム", mode: "motif", theme: "prism" },
+    { ja: "モザイクガラス", mode: "motif", theme: "mosaic glass" },
+    { ja: "クリスタル", mode: "motif", theme: "crystal" },
+    { ja: "色ガラス", mode: "motif", theme: "colored glass" }
+  ];
+
+  const FEATHER_MOTIF_PRESETS = [
+    { ja: "淡い羽根", mode: "motif", theme: "subtle feather" },
+    { ja: "白い羽根", mode: "motif", theme: "white feather" },
+    { ja: "黒い羽根", mode: "motif", theme: "black feather" },
+    { ja: "天使の羽根", mode: "motif", theme: "angel feather" },
+    { ja: "鳥羽根", mode: "motif", theme: "bird feather" },
+    { ja: "翼飾り", mode: "motif", theme: "wing ornament" }
+  ];
+
+  const ANIMAL_MOTIF_PRESETS = [
+    { ja: "猫", mode: "motif", theme: "cat" },
+    { ja: "犬", mode: "motif", theme: "dog" },
+    { ja: "子犬", mode: "motif", theme: "puppy" },
+    { ja: "狐", mode: "motif", theme: "fox" },
+    { ja: "狼", mode: "motif", theme: "wolf" },
+    { ja: "兎", mode: "motif", theme: "rabbit" },
+    { ja: "蝶", mode: "motif", theme: "butterfly" },
+    { ja: "鳥", mode: "motif", theme: "bird" },
+    { ja: "蛇", mode: "motif", theme: "snake" }
+  ];
+
+  const LEGENDARY_MOTIF_PRESETS = [];
+
+  const DRAGON_LEGENDARY_MOTIF_PRESETS = [
+    { ja: "竜", mode: "motif", theme: "dragon" },
+    { ja: "バハムート", mode: "motif", theme: "bahamut" },
+    { ja: "ティアマト", mode: "motif", theme: "tiamat" },
+    { ja: "ファフニール", mode: "motif", theme: "fafnir" },
+    { ja: "ニーズヘッグ", mode: "motif", theme: "nidhogg" },
+    { ja: "ヨルムンガンド", mode: "motif", theme: "jormungandr" },
+    { ja: "リヴァイアサン", mode: "motif", theme: "leviathan" },
+    { ja: "オロチ", mode: "motif", theme: "orochi" },
+    { ja: "ヒュドラ", mode: "motif", theme: "hydra" },
+    { ja: "ケツァルコアトル", mode: "motif", theme: "quetzalcoatl" },
+    { ja: "ウロボロス", mode: "motif", theme: "ouroboros" }
+  ];
+
+  const CELESTIAL_ANGEL_MOTIF_PRESETS = [
+    { ja: "天使", mode: "motif", theme: "angel" },
+    { ja: "ガブリエル", mode: "motif", theme: "gabriel" },
+    { ja: "ラファエル", mode: "motif", theme: "raphael" },
+    { ja: "ミカエル", mode: "motif", theme: "michael" },
+    { ja: "ウリエル", mode: "motif", theme: "uriel" },
+    { ja: "熾天使", mode: "motif", theme: "seraphim" },
+    { ja: "座天使", mode: "motif", theme: "throne-angel" },
+    { ja: "守護天使", mode: "motif", theme: "guardian-angel" }
+  ];
+
+  const INFERNAL_DEMON_MOTIF_PRESETS = [
+    { ja: "悪魔", mode: "motif", theme: "demon" },
+    { ja: "ルシフェル", mode: "motif", theme: "lucifer" },
+    { ja: "サタン", mode: "motif", theme: "satan" },
+    { ja: "ベルゼブブ", mode: "motif", theme: "beelzebub" },
+    { ja: "アスモデウス", mode: "motif", theme: "asmodeus" },
+    { ja: "ベルフェゴール", mode: "motif", theme: "belphegor" },
+    { ja: "サキュバス", mode: "motif", theme: "succubus" },
+    { ja: "ディアボロス", mode: "motif", theme: "diabolos" }
+  ];
+
+  const FAIRY_MOTIF_PRESETS = [
+    { ja: "妖精", mode: "motif", theme: "fairy" },
+    { ja: "ピクシー", mode: "motif", theme: "pixie" },
+    { ja: "シルフ", mode: "motif", theme: "sylph" },
+    { ja: "ウンディーネ", mode: "motif", theme: "undine" },
+    { ja: "ノーム", mode: "motif", theme: "gnome" },
+    { ja: "サラマンダー", mode: "motif", theme: "salamander" },
+    { ja: "ティターニア", mode: "motif", theme: "titania" },
+    { ja: "オベロン", mode: "motif", theme: "oberon" }
+  ];
+
+  const MERMAID_SEA_MOTIF_PRESETS = [
+    { ja: "人魚", mode: "motif", theme: "mermaid" },
+    { ja: "セイレーン", mode: "motif", theme: "siren" },
+    { ja: "ネレイド", mode: "motif", theme: "nereid" },
+    { ja: "メリュジーヌ", mode: "motif", theme: "melusine" },
+    { ja: "海の女神", mode: "motif", theme: "sea-goddess" },
+    { ja: "リヴァイアサン", mode: "motif", theme: "leviathan" },
+    { ja: "クラーケン", mode: "motif", theme: "kraken" }
+  ];
+
+  const SKY_BIRD_MOTIF_PRESETS = [
+    { ja: "不死鳥", mode: "motif", theme: "phoenix" },
+    { ja: "フェニックス", mode: "motif", theme: "phoenix" },
+    { ja: "朱雀", mode: "motif", theme: "suzaku" },
+    { ja: "グリフォン", mode: "motif", theme: "griffin" },
+    { ja: "ロック鳥", mode: "motif", theme: "roc" }
+  ];
+
+  const MYTHIC_BEAST_MOTIF_PRESETS = [
+    { ja: "ユニコーン", mode: "motif", theme: "unicorn" },
+    { ja: "麒麟", mode: "motif", theme: "qilin" },
+    { ja: "白澤", mode: "motif", theme: "bai-ze" },
+    { ja: "獬豸", mode: "motif", theme: "xiezhi" },
+    { ja: "フェンリル", mode: "motif", theme: "fenrir" },
+    { ja: "ケルベロス", mode: "motif", theme: "cerberus" },
+    { ja: "ベヒーモス", mode: "motif", theme: "behemoth" },
+    { ja: "バジリスク", mode: "motif", theme: "basilisk" },
+    { ja: "スフィンクス", mode: "motif", theme: "sphinx" }
+  ];
+
+  const FOUR_SYMBOLS_MOTIF_PRESETS = [
+    { ja: "青龍", mode: "motif", theme: "seiryu" },
+    { ja: "白虎", mode: "motif", theme: "byakko" },
+    { ja: "朱雀", mode: "motif", theme: "suzaku" },
+    { ja: "玄武", mode: "motif", theme: "genbu" },
+    { ja: "応龍", mode: "motif", theme: "yinglong" }
+  ];
+
+  const FUSION_PRESETS = [];
+
+  const CYBER_FUSION_PRESETS = [
+    { ja: "サイバーパンク衣装融合", mode: "fusion", theme: "cyberpunk", detail: "neon tech silhouette and integrated circuit-like trim" },
+    { ja: "アンドロイド衣装融合", mode: "fusion", theme: "android-tech", detail: "sleek synthetic silhouette and integrated mechanical seams" },
+    { ja: "メカアーマー衣装融合", mode: "fusion", theme: "mecha-armor", detail: "armored mechanical silhouette and integrated panel trim" },
+    { ja: "ホログラム衣装融合", mode: "fusion", theme: "holographic", detail: "transparent light-layer silhouette and integrated luminous trim" },
+    { ja: "ネオン回路衣装融合", mode: "fusion", theme: "neon-circuit", detail: "glowing circuit silhouette and integrated neon line details" }
+  ];
+
+  const CULTURAL_FUSION_PRESETS = [
+    { ja: "中華×洋装衣装融合", mode: "fusion", theme: "chinese-western", detail: "layered formal silhouette and integrated ornamental trim" },
+    { ja: "和装×ドレス衣装融合", mode: "fusion", theme: "kimono-dress", detail: "layered fabric structure and integrated sash details" },
+    { ja: "アラビアン×ドレス衣装融合", mode: "fusion", theme: "arabian-dress", detail: "flowing layered silhouette and integrated veil-like trim" },
+    { ja: "ゴシック×アイドル衣装融合", mode: "fusion", theme: "gothic-idol", detail: "dark stage silhouette and integrated lace trim" },
+    { ja: "騎士×ドレス衣装融合", mode: "fusion", theme: "knight-dress", detail: "elegant armored silhouette and integrated metal trim" }
+  ];
+
+  const NATURAL_FUSION_PRESETS = [
+    { ja: "海神風衣装融合", mode: "fusion", theme: "sea-deity", detail: "flowing aquatic silhouette and shell-like trim" },
+    { ja: "氷結晶衣装融合", mode: "fusion", theme: "ice-crystal", detail: "faceted frozen silhouette and integrated crystal trim" },
+    { ja: "炎衣装融合", mode: "fusion", theme: "flame", detail: "flame-shaped silhouette and integrated ember-like trim" },
+    { ja: "森精霊衣装融合", mode: "fusion", theme: "forest-spirit", detail: "leaf-layered silhouette and integrated vine trim" },
+    { ja: "雷衣装融合", mode: "fusion", theme: "lightning", detail: "sharp electric silhouette and integrated lightning trim" }
+  ];
+
+  const ORNAMENTAL_FUSION_PRESETS = [
+    { ja: "竜鱗風衣装融合", mode: "fusion", theme: "draconic-scale", detail: "scale-like plated fabric and ceremonial silhouette" },
+    { ja: "聖堂装飾衣装融合", mode: "fusion", theme: "cathedral-ornament", detail: "stained-glass trim and sacred metal accents" },
+    { ja: "ステンドグラス衣装融合", mode: "fusion", theme: "stained-glass", detail: "colored glass panel silhouette and luminous trim" },
+    { ja: "宝石衣装融合", mode: "fusion", theme: "jewel", detail: "faceted gemstone silhouette and integrated jewel trim" },
+    { ja: "時計歯車衣装融合", mode: "fusion", theme: "clockwork", detail: "gear-layered silhouette and integrated brass mechanism trim" }
+  ];
+
+  const ANIMAL_FUSION_PRESETS = [
+    { ja: "猫", mode: "fusion", theme: "cat", detail: "cat-inspired silhouette plus matching materials and trim" },
+    { ja: "犬", mode: "fusion", theme: "dog", detail: "dog-inspired silhouette plus matching materials and trim" },
+    { ja: "子犬", mode: "fusion", theme: "puppy", detail: "puppy-inspired silhouette plus matching materials and trim" },
+    { ja: "狐", mode: "fusion", theme: "fox", detail: "fox-inspired silhouette plus matching materials and trim" },
+    { ja: "狼", mode: "fusion", theme: "wolf", detail: "wolf-inspired silhouette plus matching materials and trim" },
+    { ja: "兎", mode: "fusion", theme: "rabbit", detail: "rabbit-inspired silhouette plus matching materials and trim" },
+    { ja: "蝶", mode: "fusion", theme: "butterfly", detail: "butterfly-inspired silhouette plus matching materials and trim" },
+    { ja: "鳥", mode: "fusion", theme: "bird", detail: "bird-inspired silhouette plus matching materials and trim" },
+    { ja: "蛇", mode: "fusion", theme: "snake", detail: "snake-inspired silhouette plus matching materials and trim" }
+  ];
+
+  const LEGENDARY_FUSION_PRESETS = [];
+
+  function toLegendaryFusionPreset(item){
+    return {
+      ja: item.ja,
+      mode: "fusion",
+      theme: item.theme,
+      detail: item.theme + "-inspired silhouette plus mythic materials and trim"
+    };
+  }
+
+  const DRAGON_LEGENDARY_FUSION_PRESETS = DRAGON_LEGENDARY_MOTIF_PRESETS.map(toLegendaryFusionPreset);
+  const CELESTIAL_ANGEL_FUSION_PRESETS = CELESTIAL_ANGEL_MOTIF_PRESETS.map(toLegendaryFusionPreset);
+  const INFERNAL_DEMON_FUSION_PRESETS = INFERNAL_DEMON_MOTIF_PRESETS.map(toLegendaryFusionPreset);
+  const FAIRY_FUSION_PRESETS = FAIRY_MOTIF_PRESETS.map(toLegendaryFusionPreset);
+  const MERMAID_SEA_FUSION_PRESETS = MERMAID_SEA_MOTIF_PRESETS.map(toLegendaryFusionPreset);
+  const SKY_BIRD_FUSION_PRESETS = SKY_BIRD_MOTIF_PRESETS.map(toLegendaryFusionPreset);
+  const MYTHIC_BEAST_FUSION_PRESETS = MYTHIC_BEAST_MOTIF_PRESETS.map(toLegendaryFusionPreset);
+  const FOUR_SYMBOLS_FUSION_PRESETS = FOUR_SYMBOLS_MOTIF_PRESETS.map(toLegendaryFusionPreset);
+
+  const SAFETY_PRESETS = [
+    { ja: "融合を衣装側に固定", en: "single humanoid character focus with fusion elements integrated into the outfit design and no separate creature" }
+  ];
+
+  const DICT = {};
+  MOTIF_PRESETS
+    .concat(FLORAL_MOTIF_PRESETS)
+    .concat(CELESTIAL_MOTIF_PRESETS)
+    .concat(CRYSTAL_MOTIF_PRESETS)
+    .concat(CLOCKWORK_MOTIF_PRESETS)
+    .concat(GLASS_GEM_MOTIF_PRESETS)
+    .concat(FEATHER_MOTIF_PRESETS)
+    .concat(ANIMAL_MOTIF_PRESETS)
+    .concat(LEGENDARY_MOTIF_PRESETS)
+    .concat(DRAGON_LEGENDARY_MOTIF_PRESETS)
+    .concat(CELESTIAL_ANGEL_MOTIF_PRESETS)
+    .concat(INFERNAL_DEMON_MOTIF_PRESETS)
+    .concat(FAIRY_MOTIF_PRESETS)
+    .concat(MERMAID_SEA_MOTIF_PRESETS)
+    .concat(SKY_BIRD_MOTIF_PRESETS)
+    .concat(MYTHIC_BEAST_MOTIF_PRESETS)
+    .concat(FOUR_SYMBOLS_MOTIF_PRESETS)
+    .concat(FUSION_PRESETS)
+    .concat(CYBER_FUSION_PRESETS)
+    .concat(CULTURAL_FUSION_PRESETS)
+    .concat(NATURAL_FUSION_PRESETS)
+    .concat(ORNAMENTAL_FUSION_PRESETS)
+    .concat(ANIMAL_FUSION_PRESETS)
+    .concat(LEGENDARY_FUSION_PRESETS)
+    .concat(DRAGON_LEGENDARY_FUSION_PRESETS)
+    .concat(CELESTIAL_ANGEL_FUSION_PRESETS)
+    .concat(INFERNAL_DEMON_FUSION_PRESETS)
+    .concat(FAIRY_FUSION_PRESETS)
+    .concat(MERMAID_SEA_FUSION_PRESETS)
+    .concat(SKY_BIRD_FUSION_PRESETS)
+    .concat(MYTHIC_BEAST_FUSION_PRESETS)
+    .concat(FOUR_SYMBOLS_FUSION_PRESETS)
+    .concat(SAFETY_PRESETS)
+    .forEach(function(item){
+      if (item && item.en) DICT[item.en] = item.ja;
+    });
+
+  function injectStyle(rootForShadow){
+    try{
+      const css = `
+.${ROOT_CLASS}{
+  display:block!important;width:100%;max-width:100%;box-sizing:border-box;
+  grid-column:1 / -1!important;
+  margin:10px 0 12px;border:1px solid #d8c7ee;border-radius:14px;
+  background:linear-gradient(180deg,#fffaff 0%,#fbf7ff 100%);
+  overflow:hidden;
+}
+.${ROOT_CLASS} summary{cursor:pointer;list-style:none;}
+.${ROOT_CLASS} .v25-head{
+  padding:11px 12px;font-weight:800;color:#5b3f82;background:#f2eaff;
+}
+.${ROOT_CLASS} .v25-body{display:block!important;grid-template-columns:1fr!important;padding:10px 12px 12px;box-sizing:border-box;}
+.${ROOT_CLASS} .v25-note{
+  font-size:12px;line-height:1.5;color:#6c5c7c;margin:0 0 10px;
+}
+.${ROOT_CLASS} .v25-sub{
+  display:block!important;width:100%!important;max-width:100%!important;grid-column:1 / -1!important;
+  border:1px solid #e3d9f1;border-radius:12px;background:#fff;
+  margin:8px 0;overflow:hidden;
+}
+.${ROOT_CLASS} .v25-sub > summary{
+  padding:9px 10px;font-weight:700;color:#5d4a71;background:#faf7ff;
+}
+.${ROOT_CLASS} .v25-sub-body{display:block!important;padding:9px 10px 10px;}
+.${ROOT_CLASS} .v25-sub-body .v25-sub{
+  margin:8px 0 0;background:#fffdfd;border-color:#eadff5;
+}
+.${ROOT_CLASS} .v25-sub-body .v25-sub > summary{
+  background:#fbf8ff;
+}
+.${ROOT_CLASS} .v25-grid{
+  display:grid;grid-template-columns:1fr;gap:7px;width:100%;
+}
+.${ROOT_CLASS} label{
+  display:flex;align-items:flex-start;gap:7px;line-height:1.35;
+  font-size:13px;color:#372f40;box-sizing:border-box;
+}
+.${ROOT_CLASS} input[type="checkbox"]{margin-top:2px;flex:0 0 auto;}
+.${ROOT_CLASS} .v25-custom-row{
+  display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:center;
+  margin:0 0 8px;
+}
+.${ROOT_CLASS} .v25-custom-row label{font-weight:700;white-space:nowrap;}
+.${ROOT_CLASS} input[type="text"]{
+  width:100%;min-width:0;box-sizing:border-box;border:1px solid #d8cbea;
+  border-radius:10px;padding:8px 9px;font-size:13px;background:#fff;
+}
+.${ROOT_CLASS} .v25-mini{
+  font-size:11px;line-height:1.45;color:#7b6c89;margin:4px 0 8px;
+}
+@media (max-width: 520px){
+  .${ROOT_CLASS} .v25-custom-row{grid-template-columns:1fr;}
+  .${ROOT_CLASS} .v25-custom-row label{white-space:normal;}
+}`;
+      if (!document.getElementById(STYLE_ID)){
+        const st = document.createElement("style");
+        st.id = STYLE_ID;
+        st.textContent = css;
+        document.head.appendChild(st);
+      }
+      if (rootForShadow && rootForShadow.querySelector && !rootForShadow.querySelector("#" + STYLE_ID)){
+        const st2 = document.createElement("style");
+        st2.id = STYLE_ID;
+        st2.textContent = css;
+        rootForShadow.appendChild(st2);
+      }
+    }catch(_){}
+  }
+
+  function cleanUserText(value){
+    return String(value || "")
+      .replace(/[\r\n\t]+/g, " ")
+      .replace(/[，、,]+/g, " ")
+      .replace(/\s+/g, " ")
+      .replace(/^[\s]+|[\s]+$/g, "")
+      .slice(0, 160)
+      .trim();
+  }
+
+  function normalizeThemeTypos(value){
+    const v = cleanUserText(value);
+    if (!v) return "";
+    const lower = v.toLowerCase();
+    const exact = {
+      "succbus": "succubus",
+      "sucubus": "succubus",
+      "succubuss": "succubus",
+      "succubas": "succubus",
+      "doggy": "dog",
+      "doggie": "dog",
+      "doggo": "dog"
+    };
+    if (exact[lower]) return exact[lower];
+    return v.replace(/\bsuccbus\b/ig, "succubus")
+      .replace(/\bsucubus\b/ig, "succubus")
+      .replace(/\bsuccubuss\b/ig, "succubus")
+      .replace(/\bsuccubas\b/ig, "succubus")
+      .replace(/\bdoggy\b/ig, "dog")
+      .replace(/\bdoggie\b/ig, "dog")
+      .replace(/\bdoggo\b/ig, "dog");
+  }
+
+  function promptTheme(raw){
+    const v = normalizeThemeTypos(raw);
+    if (!v) return "";
+    // 英字入力はプロンプト内で自然に見えるよう小文字化する。日本語などはそのまま残す。
+    if (/^[A-Za-z0-9][A-Za-z0-9\s'_-]*$/.test(v)) return v.toLowerCase();
+    return v;
+  }
+
+  function checkedPromptValue(cb){
+    if (!cb || !cb.checked || !cb.dataset) return "";
+    return cleanUserText(cb.dataset.en || cb.value || cb.getAttribute("value") || "");
+  }
+
+  function inferSelectedOutfit(root){
+    const scope = document.querySelector("#list-attire") || document;
+    const values = [];
+    try{
+      scope.querySelectorAll("input[type='checkbox']:checked").forEach(function(cb){
+        if (!cb || (root && root.contains(cb))) return;
+        const v = checkedPromptValue(cb);
+        if (v) values.push(v.toLowerCase());
+      });
+    }catch(_){}
+    const joined = values.join(" | ");
+
+    const rules = [
+      { label: "selected bikini armor", re: /\bbikini armor\b/ },
+
+      // 水着系は generic swimsuit より前で細分化する。
+      // 例：monokini を選んだ時に "selected swimsuit outfit ... , monokini" だけになるのを避ける。
+      { label: "selected micro bikini outfit", re: /\bmicro bikini\b/ },
+      { label: "selected string bikini outfit", re: /\bstring bikini\b/ },
+      { label: "selected front-tie bikini outfit", re: /\bfront-tie bikini\b/ },
+      { label: "selected bikini outfit", re: /\bbikini\b/ },
+      { label: "selected monokini swimsuit outfit", re: /\bmonokini\b/ },
+      { label: "selected tankini swimsuit outfit", re: /\btankini\b/ },
+      { label: "selected one-piece swimsuit outfit", re: /\bone-piece swimsuit\b/ },
+      { label: "selected school swimsuit outfit", re: /\bschool swimsuit\b/ },
+      { label: "selected rash guard swimsuit outfit", re: /\brash guard\b/ },
+      { label: "selected wetsuit outfit", re: /\bwetsuit\b/ },
+      { label: "selected swimsuit outfit", re: /\bswimsuit\b/ },
+
+      // 特化・完成セット由来の複数タグから衣装カテゴリを推定する。
+      // 例：idol outfit designed for center position / spotlight-enhancing stage costume など。
+      { label: "selected idol outfit", re: /\b(idol outfit|idol costume|idol stage outfit|stage costume|stage outfit|performance outfit|performance costume|concert costume|center position|handheld microphone|spotlight-enhancing|classic flared idol|sparkling classic idol|sequined sparkling costume)\b/ },
+
+      { label: "selected kimono outfit", re: /\b(kimono|furisode|tomesode|shiromuku|uchikake|yukata|hakama|jinbei|samue)\b/ },
+      { label: "selected dress outfit", re: /\b(dress|gown|sundress|cocktail dress|evening dress|ball gown|wedding dress|one-piece dress)\b/ },
+      { label: "selected armor outfit", re: /\b(armor|armour|chainmail|plate armor|leather armor|paladin armor|armored fabric)\b/ },
+      { label: "selected uniform outfit", re: /\b(uniform|sailor uniform|school uniform|military uniform|maid uniform|nurse uniform)\b/ },
+      { label: "selected robe outfit", re: /\b(robe|cloak|cape|vestments|wizard robe|cleric vestments)\b/ },
+      { label: "selected bodysuit outfit", re: /\b(bodysuit|body suit|catsuit|leotard|skin-tight suit|restraint suit)\b/ },
+      { label: "selected lingerie outfit", re: /\b(lingerie|bra|panties|corset|garter|stockings|babydoll)\b/ }
+    ];
+
+    for (let i = 0; i < rules.length; i++){
+      if (rules[i].re.test(joined)) return rules[i].label;
+    }
+    return "selected outfit";
+  }
+
+  function motifTag(raw, root){
+    const v = promptTheme(raw);
+    if (!v) return "";
+    const outfit = inferSelectedOutfit(root);
+    return outfit + " with " + v + "-inspired styling plus thematic accents matching trim and accessory details";
+  }
+
+  function fusionTag(raw, root, detail){
+    const v = promptTheme(raw);
+    if (!v) return "";
+    const outfit = inferSelectedOutfit(root);
+    const extra = cleanUserText(detail) || (v + "-inspired silhouette plus matching materials and trim");
+    return outfit + " transformed into a " + v + "-fusion costume design with " + extra + " plus integrated outfit details";
+  }
+
+  function requestOutputRefresh(){
+    // 旧v25ではチェック変更時に即生成していたが、現在は生成ボタン実行時のみ getTags() で反映する。
+    // 互換用に関数名だけ残すが、ここでは何もしない。
+  }
+
+  function makeCheckbox(item, className){
+    const label = document.createElement("label");
+    const cb = document.createElement("input");
+    cb.type = "checkbox";
+    cb.className = className || "attire-v25-preset";
+    cb.dataset.en = item.en || "";
+    cb.dataset.ja = item.ja || "";
+    cb.dataset.v25Mode = item.mode || "";
+    cb.dataset.theme = item.theme || "";
+    cb.dataset.detail = item.detail || "";
+    cb.dataset.role = "shared";
+    // v25プリセットはチェック時点では出力生成しない。生成ボタン時の getTags() で反映する。
+    label.appendChild(cb);
+    label.appendChild(document.createTextNode(item.ja));
+    label.title = item.ja || "";
+    return label;
+  }
+
+  function makePresetGrid(items){
+    const grid = document.createElement("div");
+    grid.className = "v25-grid";
+    items.forEach(function(item){
+      grid.appendChild(makeCheckbox(item, "attire-v25-preset"));
+    });
+    return grid;
+  }
+
+  function makeCustomInput(kind, labelText, placeholder){
+    const wrap = document.createElement("div");
+    const row = document.createElement("div");
+    row.className = "v25-custom-row";
+
+    const lab = document.createElement("label");
+    const cb = document.createElement("input");
+    cb.type = "checkbox";
+    cb.className = "attire-v25-custom-toggle";
+    cb.dataset.kind = kind;
+    cb.dataset.role = "shared";
+    // 自由入力はチェック時点で出力生成せず、生成ボタン実行時の getTags() で反映する。
+    lab.appendChild(cb);
+    lab.appendChild(document.createTextNode(labelText));
+
+    const input = document.createElement("input");
+    input.type = "text";
+    input.className = "attire-v25-custom-input";
+    input.dataset.kind = kind;
+    input.placeholder = placeholder;
+    input.maxLength = 160;
+    input.autocomplete = "off";
+    // 入力中も自動生成しない。生成ボタンを押した時点の入力値を読む。
+
+    row.appendChild(lab);
+    row.appendChild(input);
+    wrap.appendChild(row);
+    return wrap;
+  }
+
+  function makeSub(title, desc, customNode, presets, childSubs){
+    const details = document.createElement("details");
+    details.className = "v25-sub";
+    details.open = false;
+
+    const summary = document.createElement("summary");
+    summary.textContent = title;
+    details.appendChild(summary);
+
+    const body = document.createElement("div");
+    body.className = "v25-sub-body";
+
+    const p = document.createElement("div");
+    p.className = "v25-mini";
+    p.textContent = desc;
+    body.appendChild(p);
+
+    if (customNode) body.appendChild(customNode);
+    if (presets && presets.length) body.appendChild(makePresetGrid(presets));
+    if (childSubs && childSubs.length) {
+      childSubs.forEach(function(child){
+        if (child) body.appendChild(child);
+      });
+    }
+
+    details.appendChild(body);
+    return details;
+  }
+
+  function buildUI(){
+    const root = document.createElement("details");
+    root.className = ROOT_CLASS + " attire-v25-container";
+    root.open = false;
+
+    const summary = document.createElement("summary");
+    summary.className = "v25-head";
+    summary.textContent = "🧩 衣装モチーフ・フュージョン特化コレクション";
+    root.appendChild(summary);
+
+    const body = document.createElement("div");
+    body.className = "v25-body";
+
+    const note = document.createElement("div");
+    note.className = "v25-note";
+    note.textContent = "選んだ衣装へ、自由入力や日本語プリセットでテーマ・装飾・融合デザインを後がけする補助棚。花・星月・結晶・歯車・羽根などの基本モチーフも棚化し、表示は日本語、生成時は英語プロンプトへ変換します。スマホ幅でも詰まりにくいよう、この棚は一列表示を優先します。";
+    body.appendChild(note);
+
+    body.appendChild(makeSub(
+      "🧩 自由モチーフ / User Motif",
+      "刺繍だけに限定せず、花・星月・結晶・歯車・羽根などを衣装テーマや装飾方向として重ねます。各プリセット棚はこの中へ収納しています。",
+      makeCustomInput("motif", "生成時に入力を使う", "例：succubus / blue butterfly / white lily / 桜"),
+      MOTIF_PRESETS,
+      [
+        makeSub(
+          "🌸 花モチーフ",
+          "桜・薔薇・紫陽花・朝顔などを、生成時は cherry blossom / rose / hydrangea / morning glory などへ変換します。",
+          null,
+          FLORAL_MOTIF_PRESETS
+        ),
+        makeSub(
+          "🌙 星月・宇宙モチーフ",
+          "星・月・星座・銀河などを、衣装の天体装飾として軽めに重ねます。",
+          null,
+          CELESTIAL_MOTIF_PRESETS
+        ),
+        makeSub(
+          "❄ 雪・結晶モチーフ",
+          "雪結晶・氷結晶・霜などを、衣装の透明感や結晶装飾として重ねます。",
+          null,
+          CRYSTAL_MOTIF_PRESETS
+        ),
+        makeSub(
+          "⚙ 時計歯車モチーフ",
+          "時計歯車・懐中時計・真鍮機械などを、衣装装飾として重ねます。",
+          null,
+          CLOCKWORK_MOTIF_PRESETS
+        ),
+        makeSub(
+          "💎 ガラス・宝石モチーフ",
+          "ステンドグラス・宝石・プリズムなどを、衣装の発光装飾や面構造として重ねます。",
+          null,
+          GLASS_GEM_MOTIF_PRESETS
+        ),
+        makeSub(
+          "🪽 羽根モチーフ",
+          "淡い羽根・白い羽根・黒い羽根などを、衣装の軽い装飾として重ねます。",
+          null,
+          FEATHER_MOTIF_PRESETS
+        ),
+        makeSub(
+          "🐾 動物モチーフ",
+          "表示は日本語、生成時は cat / dog / fox などの英語テーマとして衣装へ反映します。",
+          null,
+          ANIMAL_MOTIF_PRESETS
+        ),
+        makeSub(
+          "🐉 伝説・神話モチーフ",
+          "竜・天使・悪魔・妖精・人魚・神獣などを、詳細棚から選んで衣装テーマや装飾方向として重ねます。",
+          null,
+          LEGENDARY_MOTIF_PRESETS,
+          [
+            makeSub("🐉 竜モチーフ", "バハムート・ティアマト・ヨルムンガンドなど、神話竜名を衣装モチーフとして重ねます。", null, DRAGON_LEGENDARY_MOTIF_PRESETS),
+            makeSub("☯ 四神・東洋神獣モチーフ", "青龍・白虎・朱雀・玄武など、東洋神獣系を衣装装飾として重ねます。", null, FOUR_SYMBOLS_MOTIF_PRESETS),
+            makeSub("🪽 天使モチーフ", "ガブリエル・ミカエル・ウリエルなど、天使系の意匠を衣装へ軽く重ねます。", null, CELESTIAL_ANGEL_MOTIF_PRESETS),
+            makeSub("😈 悪魔モチーフ", "ルシフェル・サタン・ベルゼブブなど、悪魔系の意匠を衣装へ軽く重ねます。", null, INFERNAL_DEMON_MOTIF_PRESETS),
+            makeSub("🧚 妖精モチーフ", "妖精・ピクシー・シルフなど、軽やかな妖精系意匠を衣装へ重ねます。", null, FAIRY_MOTIF_PRESETS),
+            makeSub("🧜 人魚・海神話モチーフ", "人魚・セイレーン・ネレイド・海の女神など、海神話系意匠を衣装へ重ねます。", null, MERMAID_SEA_MOTIF_PRESETS),
+            makeSub("🔥 不死鳥・神鳥モチーフ", "フェニックス・朱雀・グリフォンなど、神鳥系意匠を衣装へ重ねます。", null, SKY_BIRD_MOTIF_PRESETS),
+            makeSub("🦄 神獣モチーフ", "ユニコーン・麒麟・フェンリルなど、神獣系意匠を衣装へ重ねます。", null, MYTHIC_BEAST_MOTIF_PRESETS)
+          ]
+        )
+      ]
+    ));
+
+    body.appendChild(makeSub(
+      "🧬 衣装フュージョン / Outfit Fusion",
+      "キャラ融合ではなく、選択済み衣装を○○融合衣装デザインへ変形させる棚です。各プリセット棚はこの中へ収納しています。",
+      makeCustomInput("fusion", "生成時に入力を使う", "例：dragon / cyberpunk / sea goddess / crystal"),
+      FUSION_PRESETS,
+      [
+        makeSub(
+          "🤖 サイバー・機械フュージョン",
+          "サイバー・機械・ホログラム系の素材やシルエットを衣装側へ統合します。",
+          null,
+          CYBER_FUSION_PRESETS
+        ),
+        makeSub(
+          "👘 文化衣装フュージョン",
+          "中華×洋装、和装×ドレスなど、衣装文化同士を統合します。",
+          null,
+          CULTURAL_FUSION_PRESETS
+        ),
+        makeSub(
+          "🌊 自然・元素フュージョン",
+          "海・氷・炎・森・雷などの自然要素を、衣装の形状や素材へ統合します。",
+          null,
+          NATURAL_FUSION_PRESETS
+        ),
+        makeSub(
+          "💎 装飾・宝石フュージョン",
+          "竜鱗・聖堂装飾・ステンドグラス・宝石・時計歯車などを、衣装構造へ統合します。",
+          null,
+          ORNAMENTAL_FUSION_PRESETS
+        ),
+        makeSub(
+          "🐾 動物フュージョン",
+          "cat / dog / fox などの動物要素を、別個体ではなく衣装シルエットや素材へ統合します。",
+          null,
+          ANIMAL_FUSION_PRESETS
+        ),
+        makeSub(
+          "🐉 伝説・神話フュージョン",
+          "竜・天使・悪魔・妖精・人魚・神獣などを、別個体ではなく衣装シルエットや素材へ統合します。",
+          null,
+          LEGENDARY_FUSION_PRESETS,
+          [
+            makeSub("🐉 竜フュージョン", "バハムート・ティアマト・ヨルムンガンドなどを衣装構造へ統合します。", null, DRAGON_LEGENDARY_FUSION_PRESETS),
+            makeSub("☯ 四神・東洋神獣フュージョン", "青龍・白虎・朱雀・玄武などを衣装シルエットや装飾へ統合します。", null, FOUR_SYMBOLS_FUSION_PRESETS),
+            makeSub("🪽 天使フュージョン", "ガブリエル・ミカエル・ウリエルなどを、天使系衣装シルエットへ統合します。", null, CELESTIAL_ANGEL_FUSION_PRESETS),
+            makeSub("😈 悪魔フュージョン", "ルシフェル・サタン・ベルゼブブなどを、悪魔系衣装シルエットへ統合します。", null, INFERNAL_DEMON_FUSION_PRESETS),
+            makeSub("🧚 妖精フュージョン", "妖精・ピクシー・シルフなどを、軽やかな衣装素材やラインへ統合します。", null, FAIRY_FUSION_PRESETS),
+            makeSub("🧜 人魚・海神話フュージョン", "人魚・セイレーン・海の女神などを、海神話系衣装構造へ統合します。", null, MERMAID_SEA_FUSION_PRESETS),
+            makeSub("🔥 不死鳥・神鳥フュージョン", "フェニックス・朱雀・グリフォンなどを、翼や炎を思わせる衣装構造へ統合します。", null, SKY_BIRD_FUSION_PRESETS),
+            makeSub("🦄 神獣フュージョン", "ユニコーン・麒麟・フェンリルなどを、神獣系衣装デザインへ統合します。", null, MYTHIC_BEAST_FUSION_PRESETS)
+          ]
+        )
+      ]
+    ));
+
+    body.appendChild(makeSub(
+      "🛡 融合安全補助 / Safety",
+      "獣・神獣・悪魔・生物系モチーフが別個体として出そうな時だけ使います。",
+      null,
+      SAFETY_PRESETS
+    ));
+
+    root.appendChild(body);
+    return root;
+  }
+
+  const API = {
+    initUI(container){
+      try{
+        if (window.__outputTranslation) window.__outputTranslation.register(DICT);
+      }catch(_){}
+
+      const mount = function(retry){
+        const parent = document.querySelector("#list-attire") || container;
+        if (!parent) {
+          if ((retry || 0) < 50) setTimeout(function(){ mount((retry || 0) + 1); }, 80);
+          return;
+        }
+
+        if (parent.querySelector("." + ROOT_CLASS)) return;
+        injectStyle();
+
+        const host = parent.closest && parent.closest(".attire-v21-shima");
+        if (host && host.shadowRoot) injectStyle(host.shadowRoot);
+
+        const contentArea = parent.querySelector(".section-content") || parent;
+        const node = buildUI();
+        contentArea.appendChild(node);
+        try{ if (window.__normalizeAttireLayout) window.__normalizeAttireLayout(contentArea || parent); }catch(_){}
+      };
+      mount(0);
+    },
+
+    getTags(){
+      const tags = [];
+      const root = document.querySelector("." + ROOT_CLASS);
+      if (!root) return tags;
+
+      root.querySelectorAll("input.attire-v25-preset:checked").forEach(function(cb){
+        if (!cb || !cb.dataset) return;
+        if (cb.dataset.v25Mode === "motif" && cb.dataset.theme) {
+          const tag = motifTag(cb.dataset.theme, root);
+          if (tag) tags.push(tag);
+          return;
+        }
+        if (cb.dataset.v25Mode === "fusion" && cb.dataset.theme) {
+          const tag = fusionTag(cb.dataset.theme, root, cb.dataset.detail);
+          if (tag) tags.push(tag);
+          return;
+        }
+        if (cb.dataset.en) tags.push(cb.dataset.en);
+      });
+
+      const motifToggle = root.querySelector(".attire-v25-custom-toggle[data-kind='motif']");
+      const motifInput = root.querySelector(".attire-v25-custom-input[data-kind='motif']");
+      if (motifToggle && motifToggle.checked && motifInput) {
+        const tag = motifTag(motifInput.value, root);
+        if (tag) tags.push(tag);
+      }
+
+      const fusionToggle = root.querySelector(".attire-v25-custom-toggle[data-kind='fusion']");
+      const fusionInput = root.querySelector(".attire-v25-custom-input[data-kind='fusion']");
+      if (fusionToggle && fusionToggle.checked && fusionInput) {
+        const tag = fusionTag(fusionInput.value, root);
+        if (tag) tags.push(tag);
+      }
+
+      return tags;
+    }
+  };
+
   window.__registerPromptPart(KEY, VERSION, API);
 })();

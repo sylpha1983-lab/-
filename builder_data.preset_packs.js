@@ -52818,3 +52818,2831 @@
     try { console.warn("[roleplay_character_only_extra_scene_cleanup]", e); } catch(_e) {}
   }
 })();
+
+/* ===== Bahamut special collection restore + structured variants (2026-05-16) ===== */
+(function(){
+  "use strict";
+  try {
+    var db = (window.__PP_DB && window.__PP_DB.packs) || window.PRESET_PACKS_DB || window.__PRESET_PACKS_DB;
+    if (!db || typeof db !== "object") return;
+
+    var WEST_TITLE_JA = "🏰 西方高位神獣";
+    var WEST_TITLE_EN = "Western High Mythic Beasts";
+
+    function isArray(v){ return Object.prototype.toString.call(v) === "[object Array]"; }
+    function findByTitle(node, titleJa, titleEn){
+      if (!node) return null;
+      if (isArray(node)) {
+        for (var i = 0; i < node.length; i++) {
+          var got = findByTitle(node[i], titleJa, titleEn);
+          if (got) return got;
+        }
+        return null;
+      }
+      if (typeof node === "object") {
+        var tJa = node.title_ja || node.titleJa || node.title || "";
+        var tEn = node.title_en || node.titleEn || "";
+        if ((titleJa && tJa === titleJa) || (titleEn && tEn === titleEn)) return node;
+        var keys = Object.keys(node);
+        for (var j = 0; j < keys.length; j++) {
+          var got2 = findByTitle(node[keys[j]], titleJa, titleEn);
+          if (got2) return got2;
+        }
+      }
+      return null;
+    }
+    function upsertFirst(arr, node){
+      if (!isArray(arr) || !node) return;
+      var tJa = node.title_ja || "";
+      var tEn = node.title_en || "";
+      for (var i = arr.length - 1; i >= 0; i--) {
+        var it = arr[i] || {};
+        if ((tJa && (it.title_ja === tJa || it.title === tJa)) || (tEn && it.title_en === tEn)) {
+          arr.splice(i, 1);
+        }
+      }
+      arr.unshift(node);
+    }
+
+    var westNode = findByTitle(db, WEST_TITLE_JA, WEST_TITLE_EN);
+    if (!westNode || !isArray(westNode.children)) return;
+
+    var bahamutNode = {
+      "title_ja": "🐉 バハムート特化コレクション",
+      "title_en": "Bahamut Special Collection",
+      "collection_id": "mythic_bahamut_collection",
+      "children": [
+            {
+                  "title_ja": "👑 神竜姫型 / Dragon Princess Type",
+                  "title_en": "Dragon Princess Type",
+                  "children": [
+                        {
+                              "title_ja": "完成セット",
+                              "title_en": "Complete Sets",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_princess_complete_core",
+                                          "label": "バハムート神竜姫 Core Set / Bahamut Dragon Princess Core Set",
+                                          "val": "single humanoid girl, single character focus, single human character focus, Bahamut-inspired dragon princess, cosmic sovereign dragon girl, clearly human face, majestic dragon horns, compact celestial dragon wings attached to her back, powerful dragon tail attached from her lower back, blue white gold star-dragon regalia, star-scale mantle, divine dragon authority, celestial dragon aura, no separate dragon creature",
+                                          "desc": "完成セット：服を着た神竜姫型の基本形",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_princess_base",
+                                                "mythic_bahamut_princess_custom_star_regalia",
+                                                "mythic_bahamut_princess_setting_cosmic_throne",
+                                                "mythic_bahamut_princess_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_princess_complete_quality",
+                                          "label": "バハムート神竜姫 Safe Quality Set / Bahamut Dragon Princess Safe Quality Set",
+                                          "val": "single humanoid girl, Bahamut-inspired dragon princess, clearly human face, celestial dragon horns, attached compact dragon wings, attached dragon tail, blue white gold star-dragon regalia, polished star-scale ornaments, divine dragon authority, clean anime-realism rendering, refined details, crisp gold trim, luminous blue highlights, controlled celestial glow, no separate dragon creature",
+                                          "desc": "高画質セット：神竜姫型の主題を崩さず光と質感を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_princess_base",
+                                                "mythic_bahamut_princess_custom_star_regalia",
+                                                "mythic_bahamut_princess_setting_cosmic_throne",
+                                                "mythic_bahamut_princess_quality_set",
+                                                "mythic_bahamut_princess_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_princess_complete_2000",
+                                          "label": "バハムート神竜姫 2000 Limit Compatible Set / Bahamut Dragon Princess 2000 Limit Compatible Set",
+                                          "val": "single humanoid girl, single character focus, Bahamut-inspired dragon princess, clearly human face, majestic dragon horns, attached celestial dragon wings, attached dragon tail, blue white gold star-dragon regalia, star-scale ornaments, divine dragon authority, celestial aura, no separate dragon creature, refined details, clean lighting",
+                                          "desc": "2000字制限対応：神竜姫型の核だけを短く固定",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_princess_base",
+                                                "mythic_bahamut_princess_custom_star_regalia",
+                                                "mythic_bahamut_princess_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_princess_complete_full",
+                                          "label": "バハムート神竜姫 Full Set / Bahamut Dragon Princess Full Set",
+                                          "val": "single humanoid girl, single character focus, Bahamut-inspired dragon princess, cosmic sovereign dragon girl, clearly human face, majestic dragon horns like a star-forged crown, compact celestial dragon wings attached to her back, powerful dragon tail attached from her lower back, blue white gold star-dragon regalia, ornate gold horn crown, star-scale mantle, celestial scale ornaments, divine dragon authority, apex dragon majesty, cosmic throne atmosphere, constellation halo, blue starlight glow, polished gold trim, luminous scale reflections, no separate dragon creature",
+                                          "desc": "フルセット：神竜姫型の衣装・星界・覇竜演出を厚めに統合",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_princess_base",
+                                                "mythic_bahamut_princess_custom_star_regalia",
+                                                "mythic_bahamut_princess_custom_horns_wings_tail",
+                                                "mythic_bahamut_princess_setting_cosmic_throne",
+                                                "mythic_bahamut_princess_quality_set",
+                                                "mythic_bahamut_princess_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_princess_complete_character_only",
+                                          "label": "バハムート神竜姫キャラのみセット / Bahamut Dragon Princess Character Only Set",
+                                          "val": "single humanoid girl, single character focus, single human character focus, Bahamut-inspired dragon princess, clearly human face, majestic dragon horns, compact celestial dragon wings attached to her back, powerful dragon tail attached from her lower back, blue white gold star-dragon regalia, star-scale ornaments, divine dragon authority, no separate dragon creature",
+                                          "desc": "完成セット：神竜姫型のキャラ本体だけを外付け用起点として使う版。固定表情・固定ポーズ・強い背景演出を除外",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_princess_base",
+                                                "mythic_bahamut_princess_custom_horns_wings_tail",
+                                                "mythic_bahamut_princess_suppress_external_dragon"
+                                          ]
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "ベース",
+                              "title_en": "Base",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_princess_base",
+                                          "label": "神竜姫ベース / Dragon Princess Base",
+                                          "val": "Bahamut-inspired dragon princess, cosmic sovereign dragon girl, clearly human face, blue white gold star-dragon regalia, divine dragon authority",
+                                          "desc": "服あり神竜姫型の土台",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "base"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_princess_base_human_priority",
+                                          "label": "人型美少女維持 / Human Girl Priority",
+                                          "val": "clearly human face, human torso and limbs, humanoid girl silhouette priority, elegant princess character body priority, not a separate beast",
+                                          "desc": "人型美少女として安定させる補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "base"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "カスタマイズ",
+                              "title_en": "Customize",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_princess_custom_horns_wings_tail",
+                                          "label": "角・翼・尾 / Horns Wings Tail",
+                                          "val": "majestic dragon horns attached to the head, compact celestial dragon wings attached to her back, powerful dragon tail attached from her lower back, dragon traits integrated into the outfit and character silhouette",
+                                          "desc": "竜角・翼・尾を衣装とキャラシルエットへ安定接続",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "custom"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_princess_custom_star_regalia",
+                                          "label": "星竜礼装 / Star Dragon Regalia",
+                                          "val": "blue white gold star-dragon regalia, ornate gold horn crown, celestial scale ornaments, star-scale mantle, luminous dragon core jewel",
+                                          "desc": "神竜姫型の衣装・装飾",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "custom"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "設定",
+                              "title_en": "Settings",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_princess_setting_cosmic_throne",
+                                          "label": "星界覇竜設定 / Cosmic Apex Dragon Setting",
+                                          "val": "celestial dragon aura, divine apex dragon authority, cosmic throne atmosphere, constellation halo, starfield depth, sovereign dragon presence",
+                                          "desc": "星界と覇竜の格を足す",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "setting"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_princess_suppress_external_dragon",
+                                          "label": "外部竜抑制 / No Separate Dragon",
+                                          "val": "single merged character, no separate dragon creature, no companion dragon, dragon traits integrated into the character design, not a dragon standing behind her",
+                                          "desc": "別個体ドラゴン化を抑制",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "suppression"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "クオリティ補助",
+                              "title_en": "Quality Support",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_princess_quality_set",
+                                          "label": "神竜姫クオリティ / Dragon Princess Quality",
+                                          "val": "",
+                                          "desc": "神竜姫型の星界光と金装飾を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_princess_quality_star_glow",
+                                                "mythic_bahamut_princess_quality_gold_trim",
+                                                "mythic_bahamut_princess_quality_scale_reflection"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_princess_quality_star_glow",
+                                          "label": "星界光 / Celestial Star Glow",
+                                          "val": "controlled celestial glow, constellation rim light, starfield bloom, luminous cosmic backlight",
+                                          "desc": "星界の光を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_princess_quality_gold_trim",
+                                          "label": "金装飾精細 / Refined Gold Trim",
+                                          "val": "crisp gold trim, refined ornament edges, polished royal metal highlights, clean material separation",
+                                          "desc": "金装飾を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_princess_quality_scale_reflection",
+                                          "label": "王鱗反射 / Apex Scale Reflection",
+                                          "val": "regal star-polished draconic plating, luminous scale reflections, glossy scale highlights",
+                                          "desc": "王鱗の反射を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    }
+                              ]
+                        }
+                  ]
+            },
+            {
+                  "title_ja": "🐉 融合版 / Fusion Version",
+                  "title_en": "Fusion Version",
+                  "children": [
+                        {
+                              "title_ja": "完成セット",
+                              "title_en": "Complete Sets",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_fusion_complete_core",
+                                          "label": "バハムート融合版 Core Set / Bahamut Fusion Version Core Set",
+                                          "val": "single humanoid dragon character, single character focus, Bahamut motif, clearly human face, human torso and limbs remain primary, draconic body fusion, scale-textured skin, partial blue white gold dragon scales across shoulders arms torso sides and legs, shimmering dragon scales integrated into her own body, majestic dragon horns, integrated celestial dragon wings, powerful attached dragon tail, subtle dragon claws, light celestial drapery and regal draconic ornaments, celestial dragon aura, divine dragon authority, single merged character design, no separate dragon creature, no companion dragon",
+                                          "desc": "完成セット：鎧ではなく鱗肌と身体融合でバハムート感を出す基本形",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_fusion_base",
+                                                "mythic_bahamut_fusion_custom_scale_armor",
+                                                "mythic_bahamut_fusion_custom_living_armor",
+                                                "mythic_bahamut_fusion_setting_celestial_aura",
+                                                "mythic_bahamut_fusion_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_fusion_complete_quality",
+                                          "label": "バハムート融合版 Safe Quality Set / Bahamut Fusion Version Safe Quality Set",
+                                          "val": "single humanoid dragon character, Bahamut motif, clearly human face, human torso and limbs remain clear, draconic body fusion, scale-textured skin, shimmering blue white gold dragon scales on shoulders arms torso sides and legs, integrated celestial dragon wings, attached dragon tail, subtle dragon claws, light ceremonial drapery, refined scale sheen, crisp silhouette, luminous blue highlights, controlled celestial glow, no separate dragon creature",
+                                          "desc": "高画質セット：融合版の鱗肌・青光・輪郭を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_fusion_base",
+                                                "mythic_bahamut_fusion_custom_scale_armor",
+                                                "mythic_bahamut_fusion_custom_living_armor",
+                                                "mythic_bahamut_fusion_setting_celestial_aura",
+                                                "mythic_bahamut_fusion_quality_set",
+                                                "mythic_bahamut_fusion_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_fusion_complete_2000",
+                                          "label": "バハムート融合版 2000 Limit Compatible Set / Bahamut Fusion Version 2000 Limit Compatible Set",
+                                          "val": "single humanoid dragon character, Bahamut motif, clearly human face, draconic body fusion, scale-textured skin, partial blue white gold dragon scales on body, majestic dragon horns, integrated dragon wings, attached dragon tail, subtle dragon claws, single merged character design, celestial dragon aura, no separate dragon creature",
+                                          "desc": "2000字制限対応：融合版の核を短く固定",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_fusion_base",
+                                                "mythic_bahamut_fusion_custom_scale_armor",
+                                                "mythic_bahamut_fusion_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_fusion_complete_full",
+                                          "label": "バハムート融合版 Full Set / Bahamut Fusion Version Full Set",
+                                          "val": "single humanoid dragon character, single character focus, Bahamut motif, clearly human face, human torso and limbs remain primary, draconic body fusion, scale-textured skin, shimmering blue white gold dragon scales across shoulders arms torso sides and legs, dragon traits integrated into her own body, majestic dragon horns like a star-forged crown, integrated celestial dragon wings, powerful attached dragon tail, subtle dragon claws, light celestial drapery, regal draconic ornaments, luminous dragon core markings, celestial dragon aura, divine apex dragon authority, cosmic throne atmosphere, constellation halo, refined scale sheen, crisp silhouette, luminous blue highlights, clean gold ornament accents, single merged character design, no separate dragon creature, no companion dragon",
+                                          "desc": "フルセット：融合版の鱗肌・翼・尾・星界覇竜演出を厚めに統合",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_fusion_base",
+                                                "mythic_bahamut_fusion_custom_scale_armor",
+                                                "mythic_bahamut_fusion_custom_living_armor",
+                                                "mythic_bahamut_fusion_custom_horns_wings_tail",
+                                                "mythic_bahamut_fusion_setting_celestial_aura",
+                                                "mythic_bahamut_fusion_quality_set",
+                                                "mythic_bahamut_fusion_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_fusion_complete_character_only",
+                                          "label": "バハムート融合版キャラのみセット / Bahamut Fusion Version Character Only Set",
+                                          "val": "single humanoid dragon character, single character focus, Bahamut motif, clearly human face, human torso and limbs remain primary, draconic body fusion, scale-textured skin, shimmering dragon scales integrated into the body, majestic dragon horns, integrated dragon wings, attached dragon tail, subtle dragon claws, single merged character design, no separate dragon creature, no companion dragon",
+                                          "desc": "完成セット：融合版のキャラ本体だけを外付け用起点として使う版。固定表情・固定ポーズ・強い背景演出を除外",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_fusion_base",
+                                                "mythic_bahamut_fusion_custom_horns_wings_tail",
+                                                "mythic_bahamut_fusion_suppress_external_dragon"
+                                          ]
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "ベース",
+                              "title_en": "Base",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_fusion_base",
+                                          "label": "融合版ベース / Fusion Version Base",
+                                          "val": "single humanoid Bahamut avatar, clearly human face, human torso and limbs remain primary, draconic body fusion, scale-textured skin, partial blue white gold dragon scales, single merged character design, single character focus",
+                                          "desc": "鱗肌と身体融合で人型バハムート感を作る土台",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "base"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_fusion_base_human_priority",
+                                          "label": "人型維持 / Human Face Priority",
+                                          "val": "clearly human face, humanoid silhouette priority, human torso and limbs remain readable, dragon traits integrated into the character body, character design priority, single humanoid character, not a separate beast",
+                                          "desc": "人型維持と別個体化防止",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "base"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "カスタマイズ",
+                              "title_en": "Customize",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_fusion_custom_horns_wings_tail",
+                                          "label": "角・翼・尾 / Horns Wings Tail",
+                                          "val": "majestic dragon horns, integrated celestial dragon wings, powerful attached dragon tail, dragon elements unified with the character silhouette",
+                                          "desc": "角・翼・尾を本人側のシルエットへ統合",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "custom"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_fusion_custom_scale_armor",
+                                          "label": "鱗肌・体表竜化 / Scaled Skin Body Fusion",
+                                          "val": "scale-textured skin, shimmering dragon scales, partial blue white gold scales across shoulders arms torso sides and legs, dragon-scale accents integrated into the body, soft cyan-blue scale sheen close to the silhouette",
+                                          "desc": "装甲ではなく、肌・体表側の鱗化で融合感を出す",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "custom"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_fusion_custom_living_armor",
+                                          "label": "生体竜融合 / Biological Dragon Integration",
+                                          "val": "draconic body fusion, biological dragon integration, dragon traits layered onto the humanoid body, light celestial drapery and regal draconic ornaments, no heavy armor silhouette",
+                                          "desc": "鎧化しすぎず身体に竜要素を統合する",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "custom"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "設定",
+                              "title_en": "Settings",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_fusion_setting_celestial_aura",
+                                          "label": "星界融合オーラ / Celestial Fusion Aura",
+                                          "val": "celestial dragon aura, star-forged dragon presence, divine dragon authority, cosmic throne atmosphere, constellation halo",
+                                          "desc": "星界と覇竜の格を足す",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "setting"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_fusion_suppress_external_dragon",
+                                          "label": "外部竜抑制 / No Separate Dragon",
+                                          "val": "single humanoid character, no separate dragon creature, no companion dragon, dragon elements belong to the character design, not a dragon standing behind the character",
+                                          "desc": "別個体ドラゴン化を抑制",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "suppression"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "クオリティ補助",
+                              "title_en": "Quality Support",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_fusion_quality_set",
+                                          "label": "融合版クオリティ / Fusion Version Quality",
+                                          "val": "",
+                                          "desc": "融合版の鱗肌・青光・輪郭を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_fusion_quality_armor_texture",
+                                                "mythic_bahamut_fusion_quality_blue_glow",
+                                                "mythic_bahamut_fusion_quality_material_separation"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_fusion_quality_armor_texture",
+                                          "label": "鱗肌質感 / Scaled Skin Texture",
+                                          "val": "refined scale-textured skin, clean scale pattern definition, shimmering dragon scale highlights, smooth transition between human skin and dragon scales",
+                                          "desc": "鱗肌の質感を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_fusion_quality_blue_glow",
+                                          "label": "青竜光 / Blue Dragon Glow",
+                                          "val": "luminous blue highlights, turquoise draconic energy glow, controlled blue rim light, clean specular highlights",
+                                          "desc": "青い竜光を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_fusion_quality_material_separation",
+                                          "label": "体表・布・装飾分離 / Clean Body Cloth Ornament Separation",
+                                          "val": "clean material separation, clear readability between scaled skin, light ceremonial cloth, and draconic ornaments, crisp gold accents, balanced glow intensity",
+                                          "desc": "装甲・光・金装飾を見分けやすくする",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    }
+                              ]
+                        }
+                  ]
+            },
+            {
+                  "title_ja": "⚠️ 融合版（ワード注意版） / Fusion Version Word Caution",
+                  "title_en": "Fusion Version Word Caution",
+                  "children": [
+                        {
+                              "title_ja": "完成セット",
+                              "title_en": "Complete Sets",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_fusion_caution_complete_core",
+                                          "label": "バハムート融合版（ワード注意版）Core Set / Bahamut Fusion Version Word Caution Core Set",
+                                          "val": "single humanoid dragon girl, single character focus, Bahamut motif, clearly human face, biological dragon traits fused into her own body, shimmering blue white dragon scale skin accents, majestic dragon horns, attached living dragon wings, powerful dragon tail attached from her lower back, draconic skin fusion, star-forged living dragon armor, celestial dragon aura, no separate dragon creature",
+                                          "desc": "完成セット：鱗肌と生体竜装甲を持つ強め融合版。ワード注意",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_fusion_caution_base",
+                                                "mythic_bahamut_fusion_caution_custom_scaled_skin",
+                                                "mythic_bahamut_fusion_caution_custom_living_armor",
+                                                "mythic_bahamut_fusion_caution_setting_cosmic_throne",
+                                                "mythic_bahamut_fusion_caution_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_fusion_caution_complete_quality",
+                                          "label": "バハムート融合版（ワード注意版）Safe Quality Set / Bahamut Fusion Version Word Caution Safe Quality Set",
+                                          "val": "single humanoid dragon girl, Bahamut motif, clearly human face, biological dragon traits fused into her own body, shimmering dragon scale skin accents, attached living dragon wings, attached dragon tail, star-forged living dragon armor, celestial dragon aura, refined scale texture, crisp armor edges, luminous blue scale highlights, clean material separation, controlled celestial glow, no separate dragon creature",
+                                          "desc": "高画質セット：強め融合版の鱗・生体装甲・光沢を補助。ワード注意",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_fusion_caution_base",
+                                                "mythic_bahamut_fusion_caution_custom_scaled_skin",
+                                                "mythic_bahamut_fusion_caution_custom_living_armor",
+                                                "mythic_bahamut_fusion_caution_setting_cosmic_throne",
+                                                "mythic_bahamut_fusion_caution_quality_set",
+                                                "mythic_bahamut_fusion_caution_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_fusion_caution_complete_2000",
+                                          "label": "バハムート融合版（ワード注意版）2000 Limit Compatible Set / Bahamut Fusion Version Word Caution 2000 Limit Compatible Set",
+                                          "val": "single humanoid dragon girl, single character focus, Bahamut motif, clearly human face, dragon traits fused into her own body, shimmering scale skin accents, majestic dragon horns, attached dragon wings, attached dragon tail, star-forged living dragon armor, celestial dragon aura, no separate dragon creature, refined scale texture",
+                                          "desc": "2000字制限対応：強め融合版の核を短く固定。ワード注意",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_fusion_caution_base",
+                                                "mythic_bahamut_fusion_caution_custom_scaled_skin",
+                                                "mythic_bahamut_fusion_caution_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_fusion_caution_complete_full",
+                                          "label": "バハムート融合版（ワード注意版）Full Set / Bahamut Fusion Version Word Caution Full Set",
+                                          "val": "single humanoid dragon girl, single character focus, Bahamut motif, clearly human face, biological dragon traits fused into her own body, shimmering blue white iridescent dragon scales across shoulders collarbone abdomen hips and thighs, majestic dragon horns like a star-forged crown, attached living dragon wings with celestial blue membranes, powerful dragon tail attached from her lower back, draconic skin fusion, star-forged living dragon armor grown from her body, scale-textured skin, luminous dragon core ornaments, celestial dragon aura, divine apex dragon authority, cosmic throne atmosphere, constellation halo, refined scale texture, crisp armor edges, luminous blue scale highlights, polished gold biological armor seams, no separate dragon creature",
+                                          "desc": "フルセット：鱗肌・翼・尾・生体装甲・星界覇竜演出の全部乗せ。ワード注意",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_fusion_caution_base",
+                                                "mythic_bahamut_fusion_caution_custom_scaled_skin",
+                                                "mythic_bahamut_fusion_caution_custom_living_armor",
+                                                "mythic_bahamut_fusion_caution_custom_horns_wings_tail",
+                                                "mythic_bahamut_fusion_caution_setting_cosmic_throne",
+                                                "mythic_bahamut_fusion_caution_quality_set",
+                                                "mythic_bahamut_fusion_caution_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_fusion_caution_complete_character_only",
+                                          "label": "バハムート融合版（ワード注意版）キャラのみセット / Bahamut Fusion Version Word Caution Character Only Set",
+                                          "val": "single humanoid dragon girl, single character focus, Bahamut motif, clearly human face, biological dragon traits fused into her own body, shimmering dragon scale skin accents, majestic dragon horns, attached living dragon wings, powerful dragon tail attached from her lower back, star-forged living dragon armor, no separate dragon creature",
+                                          "desc": "完成セット：強め融合版のキャラ本体だけを外付け用起点として使う版。固定表情・固定ポーズ・強い背景演出を除外。ワード注意",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_fusion_caution_base",
+                                                "mythic_bahamut_fusion_caution_custom_scaled_skin",
+                                                "mythic_bahamut_fusion_caution_custom_horns_wings_tail",
+                                                "mythic_bahamut_fusion_caution_suppress_external_dragon"
+                                          ]
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "ベース",
+                              "title_en": "Base",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_fusion_caution_base",
+                                          "label": "融合版（ワード注意版）ベース / Fusion Word Caution Base",
+                                          "val": "single humanoid dragon girl, Bahamut motif, clearly human face, biological dragon traits fused into her own body, draconic skin fusion, single merged character design",
+                                          "desc": "鱗肌と竜化を本人の身体へ統合する土台。ワード注意",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "base"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_fusion_caution_base_human_priority",
+                                          "label": "人型維持 / Human Face Priority",
+                                          "val": "clearly human face, human torso and limbs, humanoid silhouette priority, character body priority, not a separate beast",
+                                          "desc": "人型維持と別個体化防止",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "base"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "カスタマイズ",
+                              "title_en": "Customize",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_fusion_caution_custom_horns_wings_tail",
+                                          "label": "角・翼・尾 / Horns Wings Tail",
+                                          "val": "majestic dragon horns attached to the head, attached living dragon wings, powerful dragon tail attached from her lower back, dragon anatomy integrated into the character body",
+                                          "desc": "バハムートの竜器官を本人の身体へ接続",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "custom"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_fusion_caution_custom_scaled_skin",
+                                          "label": "鱗肌融合 / Scaled Skin Fusion",
+                                          "val": "shimmering blue white dragon scale skin accents, iridescent scales across shoulders collarbone abdomen hips and thighs, scale-textured skin, draconic skin fusion",
+                                          "desc": "強め融合版の鱗肌と部分竜化。ワード注意",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "custom"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_fusion_caution_custom_living_armor",
+                                          "label": "生体竜装甲 / Living Dragon Armor",
+                                          "val": "star-forged living dragon armor grown from her body, biological dragon plating, polished gold biological armor seams, integrated scale armor around shoulders chest waist and thighs",
+                                          "desc": "衣装ではなく身体と融合した生体装甲。ワード注意",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "custom"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "設定",
+                              "title_en": "Settings",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_fusion_caution_setting_cosmic_throne",
+                                          "label": "星界覇竜設定 / Cosmic Apex Dragon Setting",
+                                          "val": "celestial dragon aura, divine apex dragon authority, cosmic throne atmosphere, constellation halo, starfield depth, sovereign dragon presence",
+                                          "desc": "星界と覇竜の格を足す",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "setting"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_fusion_caution_suppress_external_dragon",
+                                          "label": "外部竜抑制 / No Separate Dragon",
+                                          "val": "single merged character, no separate dragon creature, no companion dragon, dragon traits integrated into her own body, not a dragon standing behind her",
+                                          "desc": "別個体ドラゴン化を抑制",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "suppression"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "クオリティ補助",
+                              "title_en": "Quality Support",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_fusion_caution_quality_set",
+                                          "label": "融合版（ワード注意版）クオリティ / Fusion Word Caution Quality",
+                                          "val": "",
+                                          "desc": "強め融合版の鱗肌・生体装甲・青光を補助。ワード注意",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_fusion_caution_quality_scale_texture",
+                                                "mythic_bahamut_fusion_caution_quality_living_armor",
+                                                "mythic_bahamut_fusion_caution_quality_blue_glow"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_fusion_caution_quality_scale_texture",
+                                          "label": "鱗肌質感 / Scale Skin Texture",
+                                          "val": "refined scale texture, iridescent scale detail, clean scale pattern definition, subtle skin-to-scale transition",
+                                          "desc": "鱗肌の質感を補助。ワード注意",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_fusion_caution_quality_living_armor",
+                                          "label": "生体装甲質感 / Living Armor Texture",
+                                          "val": "crisp living armor edges, biological armor gloss, layered dragon plating detail, polished gold biological seams",
+                                          "desc": "生体竜装甲の質感を補助。ワード注意",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_fusion_caution_quality_blue_glow",
+                                          "label": "青竜光 / Blue Dragon Glow",
+                                          "val": "luminous blue scale highlights, turquoise draconic energy glow, controlled blue rim light, clean specular highlights",
+                                          "desc": "青い竜光を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    }
+                              ]
+                        }
+                  ]
+            },
+            {
+                  "title_ja": "🌌 星核型 / Starcore Type",
+                  "title_en": "Starcore Type",
+                  "children": [
+                        {
+                              "title_ja": "完成セット",
+                              "title_en": "Complete Sets",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_starcore_complete_core",
+                                          "label": "星核バハムート Core Set / Starcore Bahamut Core Set",
+                                          "val": "single humanoid girl, single character focus, Bahamut-inspired starcore dragon princess, clearly human face, majestic dragon horns, integrated celestial dragon wings, attached dragon tail, blue white gold starcore dragon armor, luminous central armor core, divine dragon authority, celestial dragon aura, no separate dragon creature",
+                                          "desc": "完成セット：星核バハムートの基本形",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_starcore_base",
+                                                "mythic_bahamut_starcore_custom_horns_wings_tail",
+                                                "mythic_bahamut_starcore_custom_central_armor_core",
+                                                "mythic_bahamut_starcore_setting_main",
+                                                "mythic_bahamut_starcore_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_starcore_complete_quality",
+                                          "label": "星核バハムート Safe Quality Set / Starcore Bahamut Safe Quality Set",
+                                          "val": "single humanoid girl, Bahamut-inspired starcore dragon princess, clearly human face, star-forged dragon horns, integrated celestial wings, attached dragon tail, polished blue white gold starcore armor, luminous armor core, clean anime-realism rendering, refined armor details, controlled cosmic glow, no separate dragon creature",
+                                          "desc": "高画質セット：星核バハムートの主題を崩さず質感と光を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_starcore_base",
+                                                "mythic_bahamut_starcore_custom_horns_wings_tail",
+                                                "mythic_bahamut_starcore_custom_central_armor_core",
+                                                "mythic_bahamut_starcore_setting_main",
+                                                "mythic_bahamut_starcore_quality_set",
+                                                "mythic_bahamut_starcore_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_starcore_complete_2000",
+                                          "label": "星核バハムート 2000 Limit Compatible Set / Starcore Bahamut 2000 Limit Compatible Set",
+                                          "val": "single humanoid girl, Bahamut starcore dragon princess, clearly human face, dragon horns, integrated celestial wings, attached dragon tail, blue white gold starcore armor, luminous armor core, divine dragon aura, no separate dragon creature, clean lighting",
+                                          "desc": "2000字制限対応：星核バハムートの核だけを短く固定",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_starcore_base",
+                                                "mythic_bahamut_starcore_custom_horns_wings_tail",
+                                                "mythic_bahamut_starcore_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_starcore_complete_full",
+                                          "label": "星核バハムート Full Set / Starcore Bahamut Full Set",
+                                          "val": "single humanoid girl, single character focus, Bahamut-inspired starcore dragon princess, clearly human face, majestic star-forged dragon horns, integrated celestial dragon wings, attached dragon tail, blue white gold starcore dragon armor, luminous central armor core, living dragon armor motif, astral reactor sanctuary, divine dragon authority, celestial dragon aura, refined armor details, controlled cosmic lighting, no separate dragon creature, no companion dragon",
+                                          "desc": "フルセット：星核バハムートの外見・設定・品質補助をまとめる",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_starcore_base",
+                                                "mythic_bahamut_starcore_base_human_priority",
+                                                "mythic_bahamut_starcore_custom_horns_wings_tail",
+                                                "mythic_bahamut_starcore_custom_central_armor_core",
+                                                "mythic_bahamut_starcore_custom_living_armor",
+                                                "mythic_bahamut_starcore_setting_main",
+                                                "mythic_bahamut_starcore_quality_set",
+                                                "mythic_bahamut_starcore_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_starcore_complete_character_only",
+                                          "label": "星核バハムートキャラのみセット / Starcore Bahamut Character Only Set",
+                                          "val": "single humanoid girl, single character focus, Bahamut starcore dragon princess, clearly human face, dragon horns, integrated celestial wings, attached dragon tail, blue white gold starcore armor, luminous armor core, simple character design view, no separate dragon creature",
+                                          "desc": "キャラのみ：表情・ポーズ・強背景・強エフェクトを抜いた外付け起点",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_starcore_base",
+                                                "mythic_bahamut_starcore_base_human_priority",
+                                                "mythic_bahamut_starcore_custom_horns_wings_tail",
+                                                "mythic_bahamut_starcore_suppress_external_dragon"
+                                          ]
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "ベース",
+                              "title_en": "Base",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_starcore_base",
+                                          "label": "星核バハムートベース / Starcore Bahamut Base",
+                                          "val": "single humanoid girl, single character focus, Bahamut starcore dragon princess, clearly human face, starcore dragon armor, humanoid silhouette priority",
+                                          "desc": "星核バハムートのベース",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "base"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_starcore_base_human_priority",
+                                          "label": "人型維持 / Human Face Priority",
+                                          "val": "clearly human face, single humanoid character focus, elegant human-like proportions, dragon traits integrated as armor and attached features",
+                                          "desc": "人型美少女・明確な人の顔を維持",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "base"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "カスタマイズ",
+                              "title_en": "Customize",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_starcore_custom_horns_wings_tail",
+                                          "label": "星核角・翼・尾 / Starcore Horns Wings Tail",
+                                          "val": "star-forged dragon horns, integrated celestial dragon wings, attached dragon tail, all dragon traits belonging to the same humanoid character",
+                                          "desc": "角・翼・尾を本人の意匠として固定",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "custom"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_starcore_custom_central_armor_core",
+                                          "label": "中央星核装甲 / Central Starcore Armor",
+                                          "val": "luminous central armor core set into blue white gold dragon armor, star reactor motif, clean armor plate framing",
+                                          "desc": "肌ではなく装甲コアとして星核を見せる",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "custom"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_starcore_custom_living_armor",
+                                          "label": "星界生体竜装 / Celestial Living Dragon Armor",
+                                          "val": "living dragon armor motif, star-forged armor plates, scale-patterned armor ornament, elegant draconic silhouette",
+                                          "desc": "融合感を装甲表現で補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "custom"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "設定",
+                              "title_en": "Setting",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_starcore_setting_main",
+                                          "label": "星核バハムート設定 / Starcore Bahamut Setting",
+                                          "val": "astral reactor sanctuary, floating star rings, quiet cosmic throne room, blue white gold celestial light, divine dragon authority",
+                                          "desc": "星核バハムート用の空間・雰囲気設定",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "setting"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_starcore_suppress_external_dragon",
+                                          "label": "外部竜抑制 / No Separate Dragon",
+                                          "val": "single humanoid character only, no separate dragon creature, no companion dragon, dragon traits integrated into the character design",
+                                          "desc": "別個体ドラゴンを出さず、本人の意匠として固定",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "suppression"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "クオリティ補助",
+                              "title_en": "Quality Support",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_starcore_quality_set",
+                                          "label": "星核バハムートクオリティ / Starcore Bahamut Quality",
+                                          "val": "Starcore Bahamut quality support, refined armor silhouette, crisp detail separation, controlled glow, clean anime-realism rendering",
+                                          "desc": "星核バハムート用の軽量品質補助セット",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_starcore_quality_core_glow",
+                                                "mythic_bahamut_starcore_quality_armor_polish",
+                                                "mythic_bahamut_starcore_quality_cosmic_rim"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_starcore_quality_core_glow",
+                                          "label": "星核発光 / Starcore Glow",
+                                          "val": "controlled luminous armor core, soft blue white gold glow, crisp light edge separation",
+                                          "desc": "星核の発光を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_starcore_quality_armor_polish",
+                                          "label": "星竜装甲質感 / Star Dragon Armor Polish",
+                                          "val": "polished star-forged dragon armor, clean metallic highlights, refined gold trim",
+                                          "desc": "装甲の質感を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_starcore_quality_cosmic_rim",
+                                          "label": "宇宙リムライト / Cosmic Rim Light",
+                                          "val": "subtle cosmic rim light, clear silhouette against astral background, controlled sparkle density",
+                                          "desc": "輪郭を整理して見栄えを補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    }
+                              ]
+                        }
+                  ]
+            },
+            {
+                  "title_ja": "🌑 黒翼型 / Eclipse Type",
+                  "title_en": "Eclipse Type",
+                  "children": [
+                        {
+                              "title_ja": "完成セット",
+                              "title_en": "Complete Sets",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_eclipse_complete_core",
+                                          "label": "黒翼バハムート Core Set / Eclipse Bahamut Core Set",
+                                          "val": "single humanoid girl, single character focus, Bahamut-inspired eclipse dragon princess, clearly human face, majestic black-gold dragon horns, dark celestial dragon wings attached to her back, attached dragon tail, black gold deep blue dragon armor dress, radiant eclipse halo, calm divine authority, no separate dragon creature",
+                                          "desc": "完成セット：黒翼バハムートの基本形",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_eclipse_base",
+                                                "mythic_bahamut_eclipse_custom_horns_wings_tail",
+                                                "mythic_bahamut_eclipse_custom_eclipse_halo",
+                                                "mythic_bahamut_eclipse_setting_main",
+                                                "mythic_bahamut_eclipse_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_eclipse_complete_quality",
+                                          "label": "黒翼バハムート Safe Quality Set / Eclipse Bahamut Safe Quality Set",
+                                          "val": "single humanoid girl, Bahamut-inspired eclipse dragon princess, clearly human face, black-gold dragon horns, dark celestial wings, attached dragon tail, black gold deep blue armor dress, radiant eclipse halo, refined dark metallic highlights, clean anime-realism rendering, controlled moonlit glow, no separate dragon creature",
+                                          "desc": "高画質セット：黒翼バハムートの主題を崩さず質感と光を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_eclipse_base",
+                                                "mythic_bahamut_eclipse_custom_horns_wings_tail",
+                                                "mythic_bahamut_eclipse_custom_eclipse_halo",
+                                                "mythic_bahamut_eclipse_setting_main",
+                                                "mythic_bahamut_eclipse_quality_set",
+                                                "mythic_bahamut_eclipse_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_eclipse_complete_2000",
+                                          "label": "黒翼バハムート 2000 Limit Compatible Set / Eclipse Bahamut 2000 Limit Compatible Set",
+                                          "val": "single humanoid girl, Bahamut eclipse dragon princess, clearly human face, black-gold dragon horns, dark celestial wings, attached dragon tail, black gold deep blue armor dress, eclipse halo, divine authority, no separate dragon creature",
+                                          "desc": "2000字制限対応：黒翼バハムートの核だけを短く固定",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_eclipse_base",
+                                                "mythic_bahamut_eclipse_custom_horns_wings_tail",
+                                                "mythic_bahamut_eclipse_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_eclipse_complete_full",
+                                          "label": "黒翼バハムート Full Set / Eclipse Bahamut Full Set",
+                                          "val": "single humanoid girl, single character focus, Bahamut-inspired eclipse dragon princess, clearly human face, majestic black-gold dragon horns, dark celestial dragon wings attached to her back, attached dragon tail, black gold deep blue dragon armor dress, radiant eclipse halo, starless sky sanctuary, calm divine intimidation, refined dark metallic highlights, controlled moonlit glow, no separate dragon creature, no companion dragon",
+                                          "desc": "フルセット：黒翼バハムートの外見・設定・品質補助をまとめる",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_eclipse_base",
+                                                "mythic_bahamut_eclipse_base_human_priority",
+                                                "mythic_bahamut_eclipse_custom_horns_wings_tail",
+                                                "mythic_bahamut_eclipse_custom_eclipse_halo",
+                                                "mythic_bahamut_eclipse_custom_dark_regalia",
+                                                "mythic_bahamut_eclipse_setting_main",
+                                                "mythic_bahamut_eclipse_quality_set",
+                                                "mythic_bahamut_eclipse_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_eclipse_complete_character_only",
+                                          "label": "黒翼バハムートキャラのみセット / Eclipse Bahamut Character Only Set",
+                                          "val": "single humanoid girl, single character focus, Bahamut eclipse dragon princess, clearly human face, black-gold dragon horns, dark celestial wings, attached dragon tail, black gold deep blue armor dress, eclipse halo, simple character design view, no separate dragon creature",
+                                          "desc": "キャラのみ：表情・ポーズ・強背景・強エフェクトを抜いた外付け起点",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_eclipse_base",
+                                                "mythic_bahamut_eclipse_base_human_priority",
+                                                "mythic_bahamut_eclipse_custom_horns_wings_tail",
+                                                "mythic_bahamut_eclipse_suppress_external_dragon"
+                                          ]
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "ベース",
+                              "title_en": "Base",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_eclipse_base",
+                                          "label": "黒翼バハムートベース / Eclipse Bahamut Base",
+                                          "val": "single humanoid girl, single character focus, Bahamut eclipse dragon princess, clearly human face, black gold deep blue dragon armor dress, noble humanoid silhouette",
+                                          "desc": "黒翼バハムートのベース",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "base"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_eclipse_base_human_priority",
+                                          "label": "人型維持 / Human Face Priority",
+                                          "val": "clearly human face, single humanoid character focus, elegant human-like proportions, dragon horns wings and tail attached to the same character",
+                                          "desc": "人型美少女・明確な人の顔を維持",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "base"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "カスタマイズ",
+                              "title_en": "Customize",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_eclipse_custom_horns_wings_tail",
+                                          "label": "黒翼角・翼・尾 / Eclipse Horns Wings Tail",
+                                          "val": "black-gold dragon horns, dark celestial dragon wings attached to her back, attached dragon tail, all features belonging to one humanoid character",
+                                          "desc": "黒翼バハムートの必須外見",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "custom"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_eclipse_custom_eclipse_halo",
+                                          "label": "蝕の光輪 / Eclipse Halo",
+                                          "val": "radiant eclipse halo behind the head, crescent shadow ring, dark blue gold celestial contrast",
+                                          "desc": "日蝕・月蝕の神格感",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "custom"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_eclipse_custom_dark_regalia",
+                                          "label": "黒金竜礼装 / Black Gold Dragon Regalia",
+                                          "val": "black gold deep blue dragon armor dress, noble starless regalia, sharp gold trim, calm sovereign silhouette",
+                                          "desc": "黒金の礼装を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "custom"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "設定",
+                              "title_en": "Setting",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_eclipse_setting_main",
+                                          "label": "黒翼バハムート設定 / Eclipse Bahamut Setting",
+                                          "val": "starless sky sanctuary, eclipse-lit celestial throne, dark blue gold atmosphere, calm divine authority, solemn final guardian presence",
+                                          "desc": "黒翼バハムート用の空間・雰囲気設定",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "setting"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_eclipse_suppress_external_dragon",
+                                          "label": "外部竜抑制 / No Separate Dragon",
+                                          "val": "single humanoid character only, no separate dragon creature, no companion dragon, dragon traits integrated into the character design",
+                                          "desc": "別個体ドラゴンを出さず、本人の意匠として固定",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "suppression"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "クオリティ補助",
+                              "title_en": "Quality Support",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_eclipse_quality_set",
+                                          "label": "黒翼バハムートクオリティ / Eclipse Bahamut Quality",
+                                          "val": "Eclipse Bahamut quality support, refined armor silhouette, crisp detail separation, controlled glow, clean anime-realism rendering",
+                                          "desc": "黒翼バハムート用の軽量品質補助セット",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_eclipse_quality_dark_metal",
+                                                "mythic_bahamut_eclipse_quality_eclipse_light",
+                                                "mythic_bahamut_eclipse_quality_silhouette"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_eclipse_quality_dark_metal",
+                                          "label": "黒金金属光 / Black Gold Metal Highlights",
+                                          "val": "refined black gold metallic highlights, clean edge lighting, deep blue shadow separation",
+                                          "desc": "黒翼型の質感補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_eclipse_quality_eclipse_light",
+                                          "label": "蝕光 / Eclipse Light",
+                                          "val": "controlled eclipse glow, subtle moonlit rim light, radiant halo clarity",
+                                          "desc": "光輪と影を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_eclipse_quality_silhouette",
+                                          "label": "黒翼シルエット / Dark Wing Silhouette",
+                                          "val": "clear dark wing silhouette, readable horn shape, balanced tail line, no visual clutter",
+                                          "desc": "黒翼の見やすさを補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    }
+                              ]
+                        }
+                  ]
+            },
+            {
+                  "title_ja": "💎 竜晶型 / Crystal Type",
+                  "title_en": "Crystal Type",
+                  "children": [
+                        {
+                              "title_ja": "完成セット",
+                              "title_en": "Complete Sets",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_crystal_complete_core",
+                                          "label": "竜晶バハムート Core Set / Crystal Bahamut Core Set",
+                                          "val": "single humanoid girl, single character focus, Bahamut-inspired crystal dragon princess, clearly human face, crystal dragon horn crown, translucent blue white dragon armor, jewel-like wing membranes attached to her back, attached dragon tail, prism scale ornaments, elegant celestial crystal aura, no separate dragon creature",
+                                          "desc": "完成セット：竜晶バハムートの基本形",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_crystal_base",
+                                                "mythic_bahamut_crystal_custom_horns_wings_tail",
+                                                "mythic_bahamut_crystal_custom_crystal_armor",
+                                                "mythic_bahamut_crystal_setting_main",
+                                                "mythic_bahamut_crystal_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_crystal_complete_quality",
+                                          "label": "竜晶バハムート Safe Quality Set / Crystal Bahamut Safe Quality Set",
+                                          "val": "single humanoid girl, Bahamut-inspired crystal dragon princess, clearly human face, crystal horn crown, translucent blue white dragon armor, jewel-like attached wings, attached dragon tail, prism scale ornaments, clean anime-realism rendering, refined crystal highlights, soft celestial sparkle, no separate dragon creature",
+                                          "desc": "高画質セット：竜晶バハムートの主題を崩さず質感と光を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_crystal_base",
+                                                "mythic_bahamut_crystal_custom_horns_wings_tail",
+                                                "mythic_bahamut_crystal_custom_crystal_armor",
+                                                "mythic_bahamut_crystal_setting_main",
+                                                "mythic_bahamut_crystal_quality_set",
+                                                "mythic_bahamut_crystal_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_crystal_complete_2000",
+                                          "label": "竜晶バハムート 2000 Limit Compatible Set / Crystal Bahamut 2000 Limit Compatible Set",
+                                          "val": "single humanoid girl, Bahamut crystal dragon princess, clearly human face, crystal horn crown, translucent blue white dragon armor, jewel-like wings, attached dragon tail, prism scale ornaments, celestial crystal aura, no separate dragon creature",
+                                          "desc": "2000字制限対応：竜晶バハムートの核だけを短く固定",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_crystal_base",
+                                                "mythic_bahamut_crystal_custom_horns_wings_tail",
+                                                "mythic_bahamut_crystal_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_crystal_complete_full",
+                                          "label": "竜晶バハムート Full Set / Crystal Bahamut Full Set",
+                                          "val": "single humanoid girl, single character focus, Bahamut-inspired crystal dragon princess, clearly human face, crystal dragon horn crown, translucent blue white dragon armor, jewel-like wing membranes attached to her back, attached dragon tail, prism scale ornaments, crystal sanctuary background, elegant celestial crystal aura, refined transparent highlights, soft sparkle control, no separate dragon creature, no companion dragon",
+                                          "desc": "フルセット：竜晶バハムートの外見・設定・品質補助をまとめる",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_crystal_base",
+                                                "mythic_bahamut_crystal_base_human_priority",
+                                                "mythic_bahamut_crystal_custom_horns_wings_tail",
+                                                "mythic_bahamut_crystal_custom_crystal_armor",
+                                                "mythic_bahamut_crystal_custom_prism_ornament",
+                                                "mythic_bahamut_crystal_setting_main",
+                                                "mythic_bahamut_crystal_quality_set",
+                                                "mythic_bahamut_crystal_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_crystal_complete_character_only",
+                                          "label": "竜晶バハムートキャラのみセット / Crystal Bahamut Character Only Set",
+                                          "val": "single humanoid girl, single character focus, Bahamut crystal dragon princess, clearly human face, crystal horn crown, translucent blue white dragon armor, jewel-like attached wings, attached dragon tail, prism scale ornaments, simple character design view, no separate dragon creature",
+                                          "desc": "キャラのみ：表情・ポーズ・強背景・強エフェクトを抜いた外付け起点",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_crystal_base",
+                                                "mythic_bahamut_crystal_base_human_priority",
+                                                "mythic_bahamut_crystal_custom_horns_wings_tail",
+                                                "mythic_bahamut_crystal_suppress_external_dragon"
+                                          ]
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "ベース",
+                              "title_en": "Base",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_crystal_base",
+                                          "label": "竜晶バハムートベース / Crystal Bahamut Base",
+                                          "val": "single humanoid girl, single character focus, Bahamut crystal dragon princess, clearly human face, translucent blue white dragon armor, elegant humanoid silhouette",
+                                          "desc": "竜晶バハムートのベース",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "base"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_crystal_base_human_priority",
+                                          "label": "人型維持 / Human Face Priority",
+                                          "val": "clearly human face, single humanoid character focus, elegant human-like proportions, crystal dragon traits attached to the same character",
+                                          "desc": "人型美少女・明確な人の顔を維持",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "base"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "カスタマイズ",
+                              "title_en": "Customize",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_crystal_custom_horns_wings_tail",
+                                          "label": "竜晶角・翼・尾 / Crystal Horns Wings Tail",
+                                          "val": "crystal dragon horn crown, jewel-like wing membranes attached to her back, attached dragon tail, all crystal dragon traits belonging to one humanoid character",
+                                          "desc": "竜晶型の必須外見",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "custom"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_crystal_custom_crystal_armor",
+                                          "label": "透晶竜装甲 / Translucent Crystal Armor",
+                                          "val": "translucent blue white dragon armor, crystal armor plates, prism scale ornaments, clean gold accents",
+                                          "desc": "結晶装甲を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "custom"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_crystal_custom_prism_ornament",
+                                          "label": "プリズム装飾 / Prism Ornament",
+                                          "val": "jewel-like dragon ornaments, subtle prism refraction, clear crystal edges, elegant celestial sparkle",
+                                          "desc": "宝石感を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "custom"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "設定",
+                              "title_en": "Setting",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_crystal_setting_main",
+                                          "label": "竜晶バハムート設定 / Crystal Bahamut Setting",
+                                          "val": "celestial crystal sanctuary, floating crystal shards, blue white prism light, elegant divine dragon atmosphere, quiet sacred space",
+                                          "desc": "竜晶バハムート用の空間・雰囲気設定",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "setting"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_crystal_suppress_external_dragon",
+                                          "label": "外部竜抑制 / No Separate Dragon",
+                                          "val": "single humanoid character only, no separate dragon creature, no companion dragon, dragon traits integrated into the character design",
+                                          "desc": "別個体ドラゴンを出さず、本人の意匠として固定",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "suppression"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "クオリティ補助",
+                              "title_en": "Quality Support",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_crystal_quality_set",
+                                          "label": "竜晶バハムートクオリティ / Crystal Bahamut Quality",
+                                          "val": "Crystal Bahamut quality support, refined armor silhouette, crisp detail separation, controlled glow, clean anime-realism rendering",
+                                          "desc": "竜晶バハムート用の軽量品質補助セット",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_crystal_quality_transparency",
+                                                "mythic_bahamut_crystal_quality_sparkle",
+                                                "mythic_bahamut_crystal_quality_gold_trim"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_crystal_quality_transparency",
+                                          "label": "透晶ハイライト / Crystal Transparency Highlights",
+                                          "val": "refined transparent crystal highlights, clean refraction edges, readable armor silhouette",
+                                          "desc": "結晶の透明感を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_crystal_quality_sparkle",
+                                          "label": "プリズム光 / Prism Sparkle",
+                                          "val": "controlled prism sparkle, soft blue white light, not overly crowded glitter",
+                                          "desc": "光の粒を整理",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_crystal_quality_gold_trim",
+                                          "label": "白金縁取り / White Gold Trim",
+                                          "val": "delicate white gold armor trim, crisp decorative lines, polished jewel setting",
+                                          "desc": "装飾線を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    }
+                              ]
+                        }
+                  ]
+            },
+            {
+                  "title_ja": "✨ 光竜型 / Light Dragon Type",
+                  "title_en": "Light Dragon Type",
+                  "children": [
+                        {
+                              "title_ja": "完成セット",
+                              "title_en": "Complete Sets",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_lightdragon_complete_core",
+                                          "label": "光竜バハムート Core Set / Light Dragon Bahamut Core Set",
+                                          "val": "single humanoid girl, single character focus, Bahamut-inspired radiant light dragon princess, clearly human face, luminous dragon horns, integrated radiant dragon wings, attached dragon tail, white gold blue ceremonial dragon dress armor, holy dragon light aura, radiant celestial glow, divine dragon authority, no separate dragon creature",
+                                          "desc": "完成セット：光竜バハムートの基本形",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_lightdragon_base",
+                                                "mythic_bahamut_lightdragon_custom_horns_wings_tail",
+                                                "mythic_bahamut_lightdragon_custom_radiant_halo",
+                                                "mythic_bahamut_lightdragon_setting_main",
+                                                "mythic_bahamut_lightdragon_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_lightdragon_complete_quality",
+                                          "label": "光竜バハムート Safe Quality Set / Light Dragon Bahamut Safe Quality Set",
+                                          "val": "single humanoid girl, Bahamut-inspired radiant light dragon princess, clearly human face, luminous dragon horns, radiant integrated wings, attached dragon tail, polished white gold blue ceremonial dragon armor, clean anime-realism rendering, controlled radiant glow, crisp white gold highlights, no separate dragon creature",
+                                          "desc": "高画質セット：光竜バハムートの主題を崩さず質感と光を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_lightdragon_base",
+                                                "mythic_bahamut_lightdragon_custom_horns_wings_tail",
+                                                "mythic_bahamut_lightdragon_custom_radiant_halo",
+                                                "mythic_bahamut_lightdragon_setting_main",
+                                                "mythic_bahamut_lightdragon_quality_set",
+                                                "mythic_bahamut_lightdragon_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_lightdragon_complete_2000",
+                                          "label": "光竜バハムート 2000 Limit Compatible Set / Light Dragon Bahamut 2000 Limit Compatible Set",
+                                          "val": "single humanoid girl, Bahamut light dragon princess, clearly human face, luminous dragon horns, radiant dragon wings, attached dragon tail, white gold blue light-dragon outfit, holy dragon light aura, no separate dragon creature, clean lighting",
+                                          "desc": "2000字制限対応：光竜バハムートの核だけを短く固定",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_lightdragon_base",
+                                                "mythic_bahamut_lightdragon_custom_horns_wings_tail",
+                                                "mythic_bahamut_lightdragon_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_lightdragon_complete_full",
+                                          "label": "光竜バハムート Full Set / Light Dragon Bahamut Full Set",
+                                          "val": "single humanoid girl, single character focus, Bahamut-inspired radiant light dragon princess, clearly human face, luminous dragon horns, integrated radiant dragon wings, attached dragon tail, white gold blue light-dragon ornaments, white gold blue ceremonial dragon dress armor, sacred light scale ornaments, radiant crown halo, soft radiant wing membranes, gentle prism light, sacred dragon halo, heavenly light sanctuary, floating white gold sigils, divine dragon authority, controlled radiant glow, crisp white gold highlights, no separate dragon creature, no companion dragon",
+                                          "desc": "フルセット：光竜バハムートの外見・設定・品質補助をまとめる",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_lightdragon_base",
+                                                "mythic_bahamut_lightdragon_base_human_priority",
+                                                "mythic_bahamut_lightdragon_custom_horns_wings_tail",
+                                                "mythic_bahamut_lightdragon_custom_radiant_halo",
+                                                "mythic_bahamut_lightdragon_custom_prism_scales",
+                                                "mythic_bahamut_lightdragon_setting_main",
+                                                "mythic_bahamut_lightdragon_quality_set",
+                                                "mythic_bahamut_lightdragon_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_lightdragon_complete_character_only",
+                                          "label": "光竜バハムートキャラのみセット / Light Dragon Bahamut Character Only Set",
+                                          "val": "single humanoid girl, single character focus, Bahamut light dragon princess, clearly human face, luminous dragon horns, radiant dragon wings, attached dragon tail, white gold blue light-dragon outfit, sacred light ornaments, simple character design view, no separate dragon creature",
+                                          "desc": "キャラのみ：表情・ポーズ・強背景・強エフェクトを抜いた外付け起点",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_lightdragon_base",
+                                                "mythic_bahamut_lightdragon_base_human_priority",
+                                                "mythic_bahamut_lightdragon_custom_horns_wings_tail",
+                                                "mythic_bahamut_lightdragon_suppress_external_dragon"
+                                          ]
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "ベース",
+                              "title_en": "Base",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_lightdragon_base",
+                                          "label": "光竜バハムートベース / Light Dragon Bahamut Base",
+                                          "val": "single humanoid girl, single character focus, Bahamut-inspired radiant light dragon princess, clearly human face, human body silhouette priority, radiant dragon horns, integrated dragon wings, attached dragon tail, white gold blue light-dragon motif, no separate dragon creature",
+                                          "desc": "光竜バハムートの基本形",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "base"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_lightdragon_base_human_priority",
+                                          "label": "人型維持 / Human Face Priority",
+                                          "val": "clearly human face, elegant humanoid girl body, dragon traits integrated into the character design, not a separate dragon, not a monster-only creature",
+                                          "desc": "人型維持補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "base"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "カスタマイズ",
+                              "title_en": "Customize",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_lightdragon_custom_horns_wings_tail",
+                                          "label": "光竜角・翼・尾 / Radiant Horns Wings Tail",
+                                          "val": "luminous dragon horns attached to the head, integrated radiant dragon wings, attached dragon tail, elegant humanoid dragon princess silhouette",
+                                          "desc": "角・翼・尾を本人の特徴として固定",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "customize"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_lightdragon_custom_radiant_halo",
+                                          "label": "光冠と竜光輪 / Radiant Crown Halo",
+                                          "val": "radiant crown halo, white gold dragon light ring, sacred light sigils around the head and shoulders",
+                                          "desc": "光竜らしい神性を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "customize"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_lightdragon_custom_prism_scales",
+                                          "label": "白金プリズム鱗装飾 / White Gold Prism Scale Ornaments",
+                                          "val": "white gold prism scale ornaments, delicate luminous dragon scale patterns on outfit and accessories",
+                                          "desc": "光の鱗装飾を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "customize"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "設定",
+                              "title_en": "Setting",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_lightdragon_setting_main",
+                                          "label": "光竜バハムート設定 / Light Dragon Bahamut Setting",
+                                          "val": "heavenly light sanctuary, white gold celestial temple, floating sacred dragon sigils, soft radiant sky, Bahamut divine authority",
+                                          "desc": "光竜バハムートの空間設定",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "setting"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_lightdragon_suppress_external_dragon",
+                                          "label": "外部竜抑制 / No Separate Dragon",
+                                          "val": "single humanoid character focus, no separate dragon creature, no companion dragon, dragon traits belong to the character body and costume design",
+                                          "desc": "別個体ドラゴン抑制",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "setting"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "クオリティ補助",
+                              "title_en": "Quality Support",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_lightdragon_quality_set",
+                                          "label": "光竜バハムートクオリティ / Light Dragon Bahamut Quality",
+                                          "val": "clean anime-realism rendering, radiant white gold lighting, crisp silhouette, delicate sparkle control, not overexposed",
+                                          "desc": "全体品質補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_lightdragon_quality_pure_light",
+                                          "label": "純白光 / Pure White Light",
+                                          "val": "pure white dragon light, soft luminous bloom, clean highlights, not overexposed",
+                                          "desc": "白光を整理",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_lightdragon_quality_gold_rim",
+                                          "label": "金色リムライト / Gold Rim Light",
+                                          "val": "thin golden rim light, polished white gold reflections, crisp edge lighting",
+                                          "desc": "輪郭光を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_lightdragon_quality_sacred_sparkles",
+                                          "label": "聖光粒子 / Sacred Light Particles",
+                                          "val": "small sacred light particles, organized celestial sparkles, soft floating motes",
+                                          "desc": "光粒子を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    }
+                              ]
+                        }
+                  ]
+            },
+            {
+                  "title_ja": "🌀 混沌竜型 / Chaos Dragon Type",
+                  "title_en": "Chaos Dragon Type",
+                  "children": [
+                        {
+                              "title_ja": "完成セット",
+                              "title_en": "Complete Sets",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_chaosdragon_complete_core",
+                                          "label": "混沌竜バハムート Core Set / Chaos Dragon Bahamut Core Set",
+                                          "val": "single humanoid girl, single character focus, Bahamut-inspired controlled chaos dragon princess, clearly human face, asymmetrical dragon horns, integrated chaos dragon wings, attached dragon tail, white black gold violet dragon ceremonial outfit, controlled celestial chaos aura, divine dragon authority, divine dragon authority, no separate dragon creature",
+                                          "desc": "完成セット：混沌竜バハムートの基本形",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_chaosdragon_base",
+                                                "mythic_bahamut_chaosdragon_custom_horns_wings_tail",
+                                                "mythic_bahamut_chaosdragon_custom_spiral_halo",
+                                                "mythic_bahamut_chaosdragon_setting_main",
+                                                "mythic_bahamut_chaosdragon_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_chaosdragon_complete_quality",
+                                          "label": "混沌竜バハムート Safe Quality Set / Chaos Dragon Bahamut Safe Quality Set",
+                                          "val": "single humanoid girl, Bahamut-inspired controlled chaos dragon princess, clearly human face, asymmetrical dragon horns, integrated chaos wings, attached dragon tail, polished white black gold violet dragon ornaments, clean anime-realism rendering, balanced contrast, controlled particle density, clean readable silhouette, no separate dragon creature",
+                                          "desc": "高画質セット：混沌竜バハムートの主題を崩さず質感と光を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_chaosdragon_base",
+                                                "mythic_bahamut_chaosdragon_custom_horns_wings_tail",
+                                                "mythic_bahamut_chaosdragon_custom_spiral_halo",
+                                                "mythic_bahamut_chaosdragon_setting_main",
+                                                "mythic_bahamut_chaosdragon_quality_set",
+                                                "mythic_bahamut_chaosdragon_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_chaosdragon_complete_2000",
+                                          "label": "混沌竜バハムート 2000 Limit Compatible Set / Chaos Dragon Bahamut 2000 Limit Compatible Set",
+                                          "val": "single humanoid girl, Bahamut chaos dragon princess, clearly human face, asymmetrical dragon horns, chaos dragon wings, attached dragon tail, white black gold violet chaos-dragon outfit, controlled chaos dragon aura, no separate dragon creature, clean lighting",
+                                          "desc": "2000字制限対応：混沌竜バハムートの核だけを短く固定",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_chaosdragon_base",
+                                                "mythic_bahamut_chaosdragon_custom_horns_wings_tail",
+                                                "mythic_bahamut_chaosdragon_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_chaosdragon_complete_full",
+                                          "label": "混沌竜バハムート Full Set / Chaos Dragon Bahamut Full Set",
+                                          "val": "single humanoid girl, single character focus, Bahamut-inspired controlled chaos dragon princess, clearly human face, asymmetrical dragon horns, integrated chaos dragon wings, attached dragon tail, white black gold violet dragon motifs, white black gold violet dragon ceremonial outfit, spiral chaos halo, split-tone dragon ornaments, spiral halo, alternating light and shadow ribbons, unstable but elegant dragon sigils, chaotic celestial rift sanctuary, balanced order and disorder, divine dragon authority, balanced contrast, controlled particle density, clean readable silhouette, no separate dragon creature, no companion dragon",
+                                          "desc": "フルセット：混沌竜バハムートの外見・設定・品質補助をまとめる",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_chaosdragon_base",
+                                                "mythic_bahamut_chaosdragon_base_human_priority",
+                                                "mythic_bahamut_chaosdragon_custom_horns_wings_tail",
+                                                "mythic_bahamut_chaosdragon_custom_spiral_halo",
+                                                "mythic_bahamut_chaosdragon_custom_split_tone_ornaments",
+                                                "mythic_bahamut_chaosdragon_setting_main",
+                                                "mythic_bahamut_chaosdragon_quality_set",
+                                                "mythic_bahamut_chaosdragon_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_chaosdragon_complete_character_only",
+                                          "label": "混沌竜バハムートキャラのみセット / Chaos Dragon Bahamut Character Only Set",
+                                          "val": "single humanoid girl, single character focus, Bahamut chaos dragon princess, clearly human face, asymmetrical dragon horns, chaos dragon wings, attached dragon tail, white black gold violet chaos-dragon outfit, spiral dragon ornaments, simple character design view, no separate dragon creature",
+                                          "desc": "キャラのみ：表情・ポーズ・強背景・強エフェクトを抜いた外付け起点",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_chaosdragon_base",
+                                                "mythic_bahamut_chaosdragon_base_human_priority",
+                                                "mythic_bahamut_chaosdragon_custom_horns_wings_tail",
+                                                "mythic_bahamut_chaosdragon_suppress_external_dragon"
+                                          ]
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "ベース",
+                              "title_en": "Base",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_chaosdragon_base",
+                                          "label": "混沌竜バハムートベース / Chaos Dragon Bahamut Base",
+                                          "val": "single humanoid girl, single character focus, Bahamut-inspired controlled chaos dragon princess, clearly human face, human body silhouette priority, asymmetrical dragon horns, integrated dragon wings, attached dragon tail, white black gold violet chaos-dragon motif, no separate dragon creature",
+                                          "desc": "混沌竜バハムートの基本形",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "base"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_chaosdragon_base_human_priority",
+                                          "label": "人型維持 / Human Face Priority",
+                                          "val": "clearly human face, elegant humanoid girl body, dragon traits integrated into the character design, not a separate dragon, not a monster-only creature",
+                                          "desc": "人型維持補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "base"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "カスタマイズ",
+                              "title_en": "Customize",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_chaosdragon_custom_horns_wings_tail",
+                                          "label": "混沌竜角・翼・尾 / Chaos Horns Wings Tail",
+                                          "val": "asymmetrical dragon horns attached to the head, integrated chaos dragon wings, attached dragon tail, elegant humanoid dragon princess silhouette",
+                                          "desc": "角・翼・尾を本人の特徴として固定",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "customize"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_chaosdragon_custom_spiral_halo",
+                                          "label": "混沌渦光輪 / Spiral Chaos Halo",
+                                          "val": "spiral chaos halo, rotating white black gold violet dragon sigils, controlled celestial turbulence",
+                                          "desc": "混沌竜らしい光輪を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "customize"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_chaosdragon_custom_split_tone_ornaments",
+                                          "label": "白黒金紫の竜装飾 / Split Tone Dragon Ornaments",
+                                          "val": "white black gold violet dragon ornaments, asymmetrical ceremonial lines, split-tone scale patterns on costume and accessories",
+                                          "desc": "混沌配色を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "customize"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "設定",
+                              "title_en": "Setting",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_chaosdragon_setting_main",
+                                          "label": "混沌竜バハムート設定 / Chaos Dragon Bahamut Setting",
+                                          "val": "chaotic celestial rift sanctuary, floating broken dragon sigils, balanced light and shadow, Bahamut divine authority, readable background",
+                                          "desc": "混沌竜バハムートの空間設定",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "setting"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_chaosdragon_suppress_external_dragon",
+                                          "label": "外部竜抑制 / No Separate Dragon",
+                                          "val": "single humanoid character focus, no separate dragon creature, no companion dragon, dragon traits belong to the character body and costume design",
+                                          "desc": "別個体ドラゴン抑制",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "setting"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "クオリティ補助",
+                              "title_en": "Quality Support",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_chaosdragon_quality_set",
+                                          "label": "混沌竜バハムートクオリティ / Chaos Dragon Bahamut Quality",
+                                          "val": "clean anime-realism rendering, controlled chaos particles, balanced dark and bright values, crisp character silhouette",
+                                          "desc": "全体品質補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_chaosdragon_quality_balanced_contrast",
+                                          "label": "明暗バランス / Balanced Contrast",
+                                          "val": "balanced light and shadow, readable face, controlled dark accents, clean highlights",
+                                          "desc": "明暗を整える",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_chaosdragon_quality_chaos_particles",
+                                          "label": "混沌粒子整理 / Controlled Chaos Particles",
+                                          "val": "controlled chaos particles, organized spiral motes, not noisy, not overly crowded",
+                                          "desc": "粒子密度を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_chaosdragon_quality_sigil_edges",
+                                          "label": "竜紋エッジ / Dragon Sigil Edges",
+                                          "val": "crisp dragon sigil edges, sharp decorative linework, clear ornamental rhythm",
+                                          "desc": "竜紋を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    }
+                              ]
+                        }
+                  ]
+            },
+            {
+                  "title_ja": "🌪️ 暴風竜型 / Storm Dragon Type",
+                  "title_en": "Storm Dragon Type",
+                  "children": [
+                        {
+                              "title_ja": "完成セット",
+                              "title_en": "Complete Sets",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_stormdragon_complete_core",
+                                          "label": "暴風竜バハムート Core Set / Storm Dragon Bahamut Core Set",
+                                          "val": "single humanoid girl, single character focus, Bahamut-inspired tempest storm dragon princess, clearly human face, storm-forged dragon horns, integrated storm dragon wings, attached dragon tail, blue white silver storm-dragon ceremonial outfit, tempest dragon aura, divine storm authority, divine dragon authority, no separate dragon creature",
+                                          "desc": "完成セット：暴風竜バハムートの基本形",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_stormdragon_base",
+                                                "mythic_bahamut_stormdragon_custom_horns_wings_tail",
+                                                "mythic_bahamut_stormdragon_custom_wind_ribbons",
+                                                "mythic_bahamut_stormdragon_setting_main",
+                                                "mythic_bahamut_stormdragon_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_stormdragon_complete_quality",
+                                          "label": "暴風竜バハムート Safe Quality Set / Storm Dragon Bahamut Safe Quality Set",
+                                          "val": "single humanoid girl, Bahamut-inspired tempest storm dragon princess, clearly human face, storm-forged dragon horns, integrated storm wings, attached dragon tail, polished blue white silver storm-dragon ornaments, clean anime-realism rendering, crisp wind motion, controlled lightning glow, clear dynamic silhouette, no separate dragon creature",
+                                          "desc": "高画質セット：暴風竜バハムートの主題を崩さず質感と光を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_stormdragon_base",
+                                                "mythic_bahamut_stormdragon_custom_horns_wings_tail",
+                                                "mythic_bahamut_stormdragon_custom_wind_ribbons",
+                                                "mythic_bahamut_stormdragon_setting_main",
+                                                "mythic_bahamut_stormdragon_quality_set",
+                                                "mythic_bahamut_stormdragon_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_stormdragon_complete_2000",
+                                          "label": "暴風竜バハムート 2000 Limit Compatible Set / Storm Dragon Bahamut 2000 Limit Compatible Set",
+                                          "val": "single humanoid girl, Bahamut storm dragon princess, clearly human face, storm dragon horns, storm dragon wings, attached dragon tail, blue white silver storm-dragon outfit, tempest dragon aura, no separate dragon creature, clean lighting",
+                                          "desc": "2000字制限対応：暴風竜バハムートの核だけを短く固定",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_stormdragon_base",
+                                                "mythic_bahamut_stormdragon_custom_horns_wings_tail",
+                                                "mythic_bahamut_stormdragon_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_stormdragon_complete_full",
+                                          "label": "暴風竜バハムート Full Set / Storm Dragon Bahamut Full Set",
+                                          "val": "single humanoid girl, single character focus, Bahamut-inspired tempest storm dragon princess, clearly human face, storm-forged dragon horns, integrated storm dragon wings, attached dragon tail, blue white silver wind-dragon ornaments, blue white silver storm-dragon ceremonial outfit, wind ribbons, lightning dragon sigils, flowing wind ribbons, lightning arcs, storm cloud halo, dynamic wing membranes, skyborne storm sanctuary, thundercloud horizon, swirling wind field, divine dragon authority, crisp wind motion, controlled lightning glow, clear dynamic silhouette, no separate dragon creature, no companion dragon",
+                                          "desc": "フルセット：暴風竜バハムートの外見・設定・品質補助をまとめる",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_stormdragon_base",
+                                                "mythic_bahamut_stormdragon_base_human_priority",
+                                                "mythic_bahamut_stormdragon_custom_horns_wings_tail",
+                                                "mythic_bahamut_stormdragon_custom_wind_ribbons",
+                                                "mythic_bahamut_stormdragon_custom_lightning_sigils",
+                                                "mythic_bahamut_stormdragon_setting_main",
+                                                "mythic_bahamut_stormdragon_quality_set",
+                                                "mythic_bahamut_stormdragon_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_stormdragon_complete_character_only",
+                                          "label": "暴風竜バハムートキャラのみセット / Storm Dragon Bahamut Character Only Set",
+                                          "val": "single humanoid girl, single character focus, Bahamut storm dragon princess, clearly human face, storm dragon horns, storm dragon wings, attached dragon tail, blue white silver storm-dragon outfit, wind ribbon ornaments, simple character design view, no separate dragon creature",
+                                          "desc": "キャラのみ：表情・ポーズ・強背景・強エフェクトを抜いた外付け起点",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_stormdragon_base",
+                                                "mythic_bahamut_stormdragon_base_human_priority",
+                                                "mythic_bahamut_stormdragon_custom_horns_wings_tail",
+                                                "mythic_bahamut_stormdragon_suppress_external_dragon"
+                                          ]
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "ベース",
+                              "title_en": "Base",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_stormdragon_base",
+                                          "label": "暴風竜バハムートベース / Storm Dragon Bahamut Base",
+                                          "val": "single humanoid girl, single character focus, Bahamut-inspired tempest storm dragon princess, clearly human face, human body silhouette priority, storm dragon horns, integrated dragon wings, attached dragon tail, blue white silver storm-dragon motif, no separate dragon creature",
+                                          "desc": "暴風竜バハムートの基本形",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "base"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_stormdragon_base_human_priority",
+                                          "label": "人型維持 / Human Face Priority",
+                                          "val": "clearly human face, elegant humanoid girl body, dragon traits integrated into the character design, not a separate dragon, not a monster-only creature",
+                                          "desc": "人型維持補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "base"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "カスタマイズ",
+                              "title_en": "Customize",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_stormdragon_custom_horns_wings_tail",
+                                          "label": "暴風竜角・翼・尾 / Storm Horns Wings Tail",
+                                          "val": "storm-forged dragon horns attached to the head, integrated storm dragon wings, attached dragon tail, elegant humanoid dragon princess silhouette",
+                                          "desc": "角・翼・尾を本人の特徴として固定",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "customize"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_stormdragon_custom_wind_ribbons",
+                                          "label": "風帯と竜気流 / Wind Ribbons and Dragon Airflow",
+                                          "val": "flowing wind ribbons, spiral dragon airflow, cloth and hair moving in a controlled tempest",
+                                          "desc": "暴風感を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "customize"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_stormdragon_custom_lightning_sigils",
+                                          "label": "雷竜紋 / Lightning Dragon Sigils",
+                                          "val": "blue white lightning dragon sigils, small arcs around wings and tail, controlled electric glow",
+                                          "desc": "雷と竜紋を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "customize"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "設定",
+                              "title_en": "Setting",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_stormdragon_setting_main",
+                                          "label": "暴風竜バハムート設定 / Storm Dragon Bahamut Setting",
+                                          "val": "skyborne storm sanctuary, thundercloud horizon, swirling wind field, floating dragon sigils, Bahamut divine authority",
+                                          "desc": "暴風竜バハムートの空間設定",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "setting"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_stormdragon_suppress_external_dragon",
+                                          "label": "外部竜抑制 / No Separate Dragon",
+                                          "val": "single humanoid character focus, no separate dragon creature, no companion dragon, dragon traits belong to the character body and costume design",
+                                          "desc": "別個体ドラゴン抑制",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "setting"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "クオリティ補助",
+                              "title_en": "Quality Support",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_stormdragon_quality_set",
+                                          "label": "暴風竜バハムートクオリティ / Storm Dragon Bahamut Quality",
+                                          "val": "clean anime-realism rendering, crisp wind motion, controlled lightning glow, sharp silhouette, readable face",
+                                          "desc": "全体品質補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_stormdragon_quality_wind_motion",
+                                          "label": "風の動線 / Wind Motion Lines",
+                                          "val": "clear wind motion lines, flowing ribbons, controlled storm movement, readable silhouette",
+                                          "desc": "風の流れを補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_stormdragon_quality_lightning_glow",
+                                          "label": "雷光制御 / Controlled Lightning Glow",
+                                          "val": "controlled lightning glow, thin electric arcs, blue white highlights, not overexposed",
+                                          "desc": "雷光を整理",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_stormdragon_quality_storm_depth",
+                                          "label": "嵐の奥行き / Storm Depth",
+                                          "val": "layered storm clouds, atmospheric depth, clear subject separation, dynamic sky lighting",
+                                          "desc": "背景の奥行きを補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    }
+                              ]
+                        }
+                  ]
+            },
+            {
+                  "title_ja": "🌹 妖艶竜姫型 / Enchanting Dragon Princess Type",
+                  "title_en": "Enchanting Dragon Princess Type",
+                  "children": [
+                        {
+                              "title_ja": "完成セット",
+                              "title_en": "Complete Sets",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_enchantdragon_complete_core",
+                                          "label": "妖艶竜姫バハムート Core Set / Enchanting Dragon Princess Bahamut Core Set",
+                                          "val": "Bahamut-inspired alluring dark dragon princess, seductive dragon throne portrait, body-hugging glossy black silk dragon gown",
+                                          "desc": "完成セット：妖艶竜姫バハムートの基本形",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_enchantdragon_base",
+                                                "mythic_bahamut_enchantdragon_base_humanoid_anchor",
+                                                "mythic_bahamut_enchantdragon_custom_horns_wings_tail",
+                                                "mythic_bahamut_enchantdragon_custom_signature",
+                                                "mythic_bahamut_enchantdragon_custom_outfit",
+                                                "mythic_bahamut_enchantdragon_setting_main",
+                                                "mythic_bahamut_enchantdragon_setting_scene",
+                                                "mythic_bahamut_enchantdragon_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_enchantdragon_complete_quality",
+                                          "label": "妖艶竜姫バハムート Safe Quality Set / Enchanting Dragon Princess Bahamut Safe Quality Set",
+                                          "val": "Bahamut-inspired alluring dark dragon princess, safe quality throne portrait, clearly human face, heavy-lidded eyes, glossy black silk gown, cinematic deep shadows, highest fidelity details",
+                                          "desc": "高画質セット：妖艶竜姫バハムートを安全に見栄え強化",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_enchantdragon_base",
+                                                "mythic_bahamut_enchantdragon_base_humanoid_anchor",
+                                                "mythic_bahamut_enchantdragon_custom_horns_wings_tail",
+                                                "mythic_bahamut_enchantdragon_custom_signature",
+                                                "mythic_bahamut_enchantdragon_custom_outfit",
+                                                "mythic_bahamut_enchantdragon_setting_main",
+                                                "mythic_bahamut_enchantdragon_setting_scene",
+                                                "mythic_bahamut_enchantdragon_setting_aura",
+                                                "mythic_bahamut_enchantdragon_quality_main",
+                                                "mythic_bahamut_enchantdragon_quality_light",
+                                                "mythic_bahamut_enchantdragon_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_enchantdragon_complete_2000",
+                                          "label": "妖艶竜姫バハムート 2000 Limit Compatible Set / Enchanting Dragon Princess Bahamut 2000 Limit Compatible Set",
+                                          "val": "Bahamut-inspired alluring dark dragon princess, clearly human face, dragon horns, compact dragon wings, dragon tail, black silk dragon gown, off-shoulder lace neckline, sitting on dragon throne, heavy-lidded eyes, seductively parted lips, faint teasing smile",
+                                          "desc": "2000字制限対応：妖艶竜姫バハムートの核だけを残した短縮版",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_enchantdragon_base",
+                                                "mythic_bahamut_enchantdragon_base_humanoid_anchor",
+                                                "mythic_bahamut_enchantdragon_custom_horns_wings_tail",
+                                                "mythic_bahamut_enchantdragon_custom_signature",
+                                                "mythic_bahamut_enchantdragon_custom_outfit",
+                                                "mythic_bahamut_enchantdragon_setting_main",
+                                                "mythic_bahamut_enchantdragon_setting_scene",
+                                                "mythic_bahamut_enchantdragon_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_enchantdragon_complete_full",
+                                          "label": "妖艶竜姫バハムート Full Set / Enchanting Dragon Princess Bahamut Full Set",
+                                          "val": "Bahamut-inspired alluring dark dragon princess, seductive dragon throne portrait",
+                                          "desc": "フルセット：妖艶竜姫バハムートの演出・設定・質感を厚めに含む",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_enchantdragon_base",
+                                                "mythic_bahamut_enchantdragon_base_humanoid_anchor",
+                                                "mythic_bahamut_enchantdragon_custom_horns_wings_tail",
+                                                "mythic_bahamut_enchantdragon_custom_signature",
+                                                "mythic_bahamut_enchantdragon_custom_outfit",
+                                                "mythic_bahamut_enchantdragon_setting_main",
+                                                "mythic_bahamut_enchantdragon_setting_scene",
+                                                "mythic_bahamut_enchantdragon_setting_aura",
+                                                "mythic_bahamut_enchantdragon_quality_main",
+                                                "mythic_bahamut_enchantdragon_quality_light",
+                                                "mythic_bahamut_enchantdragon_fullset_boost",
+                                                "mythic_bahamut_enchantdragon_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_enchantdragon_character_only",
+                                          "label": "妖艶竜姫バハムート キャラのみセット / Enchanting Dragon Princess Bahamut Character Only Set",
+                                          "val": "Bahamut-inspired alluring dark dragon princess, single humanoid character focus, clearly human face, dragon horns, compact dragon wings, dragon tail, dragon traits integrated into her body, body-hugging glossy black silk dragon gown, off-shoulder lace neckline, sheer lace paneling, heavy-lidded eyes, faint teasing smile",
+                                          "desc": "キャラのみ：背景・強エフェクトを抜いて妖艶竜姫バハムートの外見核を確認",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_enchantdragon_base",
+                                                "mythic_bahamut_enchantdragon_base_humanoid_anchor",
+                                                "mythic_bahamut_enchantdragon_custom_horns_wings_tail",
+                                                "mythic_bahamut_enchantdragon_custom_signature",
+                                                "mythic_bahamut_enchantdragon_custom_outfit",
+                                                "mythic_bahamut_enchantdragon_suppress_external_dragon"
+                                          ]
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "ベース",
+                              "title_en": "Base",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_enchantdragon_base",
+                                          "label": "妖艶竜姫バハムートベース / Enchanting Dragon Princess Bahamut Base",
+                                          "val": "adult mature dark royal dragon-girl aura, confident temptress aura",
+                                          "desc": "妖艶竜姫バハムートの基本ベース",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "base"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_enchantdragon_base_humanoid_anchor",
+                                          "label": "人型維持アンカー / Humanoid Anchor",
+                                          "val": "single humanoid character focus, clearly human face",
+                                          "desc": "人型美少女として安定させる",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "base"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "カスタマイズ",
+                              "title_en": "Customize",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_enchantdragon_custom_horns_wings_tail",
+                                          "label": "角・翼・尾 / Horns Wings Tail",
+                                          "val": "dragon horns, compact dragon wings, dragon tail",
+                                          "desc": "バハムートの竜要素を身体に統合",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "customize"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_enchantdragon_custom_signature",
+                                          "label": "妖艶な視線と気配 / Enchanting Gaze",
+                                          "val": "direct seductive eye contact, inviting gaze toward viewer, chin slightly lowered while looking up, heavy-lidded eyes, seductively parted lips, faint teasing smile",
+                                          "desc": "露出ではなく視線と所作で妖艶さを出す",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "customize"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_enchantdragon_custom_outfit",
+                                          "label": "夜会竜礼装 / Nocturne Dragon Dress",
+                                          "val": "body-hugging glossy black silk dragon gown, tight silk fabric tension, off-shoulder lace neckline, sheer lace paneling, translucent draped fabric, high side slit, long opera gloves, jewel chains across the waist and thigh",
+                                          "desc": "夜会向けの竜姫礼装",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "customize"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_enchantdragon_fullset_boost",
+                                          "label": "フルセット補強 / Full Set Boost",
+                                          "val": "(masterpiece:1.3), (best quality:1.3), (ultra high resolution:1.3), (intricate details:1.2), (cinematic lighting:1.2), single humanoid dragon princess, majestic crown-like dragon horns, compact celestial dragon wings, face and gaze clearly visible, heavy-lidded glowing eyes, a smile as if testing the viewer, slow predatory elegance, one knee raised slightly, hip angled to one side, fitted waist silhouette, asymmetrical draped gown, slightly loosened shoulder drape, delicate thigh jewelry",
+                                          "desc": "フルセット専用：格・視線・衣装シルエットを軽量に盛る",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "customize"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_enchantdragon_custom_extra",
+                                          "label": "薔薇星飾り / Rose Star Ornaments",
+                                          "val": "black lace-like dragon embroidery, star jewelry, polished horn decorations, elegant dragon motif accessories",
+                                          "desc": "薔薇と星の装飾を追加",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "customize"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "設定",
+                              "title_en": "Setting",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_enchantdragon_setting_main",
+                                          "label": "月夜の竜宮 / Moonlit Dragon Palace",
+                                          "val": "private moonlit palace chamber, ornate dragon throne, red velvet curtains, candlelit intimate lighting, deep blue night sky",
+                                          "desc": "月夜の宮殿背景",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "setting"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_enchantdragon_setting_scene",
+                                          "label": "夜会の間 / Nocturne Ballroom",
+                                          "val": "sitting on dragon throne, leaning forward, one leg crossed, curved S-line posture, poised seductive sitting pose, one hand resting on her thigh, one hand lightly pulling the neckline",
+                                          "desc": "夜会感を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "setting"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_enchantdragon_setting_aura",
+                                          "label": "妖光オーラ / Enchanting Aura",
+                                          "val": "perfume-like haze, dragon-core sparks, floating starlight cinders, luxurious temptation aura, decadent nocturne atmosphere, luxurious shadow play, refined evening glamour",
+                                          "desc": "上品な妖艶オーラ",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "setting"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_enchantdragon_suppress_external_dragon",
+                                          "label": "人型竜姫固定 / Humanoid Dragon Princess Anchor",
+                                          "val": "single merged character design, dragon traits integrated into her body",
+                                          "desc": "否定語ではなく、人型・身体接続型の肯定語で固定",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "setting"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "クオリティ補助",
+                              "title_en": "Quality Support",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_enchantdragon_quality_main",
+                                          "label": "月光質感 / Moonlit Texture",
+                                          "val": "highest fidelity details, glossy black silk sheen, clear lace texture, polished jewelry highlights, crisp fitted silhouette, clear material separation, ornate dragon motifs",
+                                          "desc": "月光と礼装の質感を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_enchantdragon_quality_light",
+                                          "label": "柔らかい縁光 / Soft Rim Light",
+                                          "val": "cinematic deep shadows, dramatic side light, soft rim light, moonlit rim highlights, velvet shadow depth, clear face lighting",
+                                          "desc": "顔と輪郭を見やすくする",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_enchantdragon_quality_detail",
+                                          "label": "宝飾ディテール / Jewelry Detail",
+                                          "val": "fine jewelry detail, crystal dragon horn crown detail, sheer lace paneling detail, ornate dragon motifs, clean decorative lines",
+                                          "desc": "宝飾と装飾の密度を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    }
+                              ]
+                        }
+                  ]
+            },
+            {
+                  "title_ja": "💚 翡翠妖艶竜姫型 / Jade Enchanting Dragon Princess Type",
+                  "title_en": "Jade Enchanting Dragon Princess Type",
+                  "children": [
+                        {
+                              "title_ja": "完成セット",
+                              "title_en": "Complete Sets",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_jadeenchantdragon_complete_core",
+                                          "label": "翡翠妖艶竜姫バハムート Core Set / Jade Enchanting Dragon Princess Bahamut Core Set",
+                                          "val": "Jade Bahamut-inspired alluring dark dragon princess, seductive jade dragon throne portrait, body-hugging glossy black silk dragon gown with jade accents",
+                                          "desc": "完成セット：翡翠妖艶竜姫バハムートの基本形",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_jadeenchantdragon_base",
+                                                "mythic_bahamut_jadeenchantdragon_base_humanoid_anchor",
+                                                "mythic_bahamut_jadeenchantdragon_custom_horns_wings_tail",
+                                                "mythic_bahamut_jadeenchantdragon_custom_signature",
+                                                "mythic_bahamut_jadeenchantdragon_custom_outfit",
+                                                "mythic_bahamut_jadeenchantdragon_setting_main",
+                                                "mythic_bahamut_jadeenchantdragon_setting_scene",
+                                                "mythic_bahamut_jadeenchantdragon_positive_anchor"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_jadeenchantdragon_complete_quality",
+                                          "label": "翡翠妖艶竜姫バハムート Safe Quality Set / Jade Enchanting Dragon Princess Bahamut Safe Quality Set",
+                                          "val": "Jade Bahamut-inspired alluring dark dragon princess, safe quality jade throne portrait, clearly human face, heavy-lidded emerald eyes, glossy black silk and jade gown, cinematic deep shadows, highest fidelity details",
+                                          "desc": "高画質セット：翡翠妖艶竜姫バハムートを安全に見栄え強化",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_jadeenchantdragon_base",
+                                                "mythic_bahamut_jadeenchantdragon_base_humanoid_anchor",
+                                                "mythic_bahamut_jadeenchantdragon_custom_horns_wings_tail",
+                                                "mythic_bahamut_jadeenchantdragon_custom_signature",
+                                                "mythic_bahamut_jadeenchantdragon_custom_outfit",
+                                                "mythic_bahamut_jadeenchantdragon_custom_jade_regalia",
+                                                "mythic_bahamut_jadeenchantdragon_setting_main",
+                                                "mythic_bahamut_jadeenchantdragon_setting_scene",
+                                                "mythic_bahamut_jadeenchantdragon_setting_aura",
+                                                "mythic_bahamut_jadeenchantdragon_quality_main",
+                                                "mythic_bahamut_jadeenchantdragon_quality_light",
+                                                "mythic_bahamut_jadeenchantdragon_positive_anchor"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_jadeenchantdragon_complete_2000",
+                                          "label": "翡翠妖艶竜姫バハムート 2000 Limit Compatible Set / Jade Enchanting Dragon Princess Bahamut 2000 Limit Compatible Set",
+                                          "val": "Jade Bahamut-inspired alluring dark dragon princess, clearly human face, jade dragon horns, compact jade dragon wings, dragon tail, black silk dragon gown with jade accents, off-shoulder lace neckline, high side slit, sitting on jade dragon throne, heavy-lidded emerald eyes, softly parted lips, faint teasing smile",
+                                          "desc": "2000字制限対応：翡翠妖艶竜姫バハムートの核だけを残した短縮版",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_jadeenchantdragon_base",
+                                                "mythic_bahamut_jadeenchantdragon_base_humanoid_anchor",
+                                                "mythic_bahamut_jadeenchantdragon_custom_horns_wings_tail",
+                                                "mythic_bahamut_jadeenchantdragon_custom_signature",
+                                                "mythic_bahamut_jadeenchantdragon_custom_outfit",
+                                                "mythic_bahamut_jadeenchantdragon_custom_jade_regalia",
+                                                "mythic_bahamut_jadeenchantdragon_setting_main",
+                                                "mythic_bahamut_jadeenchantdragon_setting_scene",
+                                                "mythic_bahamut_jadeenchantdragon_positive_anchor"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_jadeenchantdragon_complete_full",
+                                          "label": "翡翠妖艶竜姫バハムート Full Set / Jade Enchanting Dragon Princess Bahamut Full Set",
+                                          "val": "Jade Bahamut-inspired alluring dark dragon princess, seductive jade dragon throne portrait",
+                                          "desc": "フルセット：翡翠妖艶竜姫バハムートの演出・設定・質感を厚めに含む",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_jadeenchantdragon_base",
+                                                "mythic_bahamut_jadeenchantdragon_base_humanoid_anchor",
+                                                "mythic_bahamut_jadeenchantdragon_custom_horns_wings_tail",
+                                                "mythic_bahamut_jadeenchantdragon_custom_signature",
+                                                "mythic_bahamut_jadeenchantdragon_custom_outfit",
+                                                "mythic_bahamut_jadeenchantdragon_custom_jade_regalia",
+                                                "mythic_bahamut_jadeenchantdragon_setting_main",
+                                                "mythic_bahamut_jadeenchantdragon_setting_scene",
+                                                "mythic_bahamut_jadeenchantdragon_setting_aura",
+                                                "mythic_bahamut_jadeenchantdragon_quality_main",
+                                                "mythic_bahamut_jadeenchantdragon_fullset_boost",
+                                                "mythic_bahamut_jadeenchantdragon_positive_anchor"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_jadeenchantdragon_character_only",
+                                          "label": "翡翠妖艶竜姫バハムート キャラのみセット / Jade Enchanting Dragon Princess Bahamut Character Only Set",
+                                          "val": "Jade Bahamut-inspired alluring dark dragon princess, single humanoid character focus, clearly human face, jade dragon horns, compact jade dragon wings, dragon tail, dragon traits integrated into her body, body-hugging black silk dragon gown with jade accents, off-shoulder lace neckline, sheer lace paneling, heavy-lidded emerald eyes, faint teasing smile",
+                                          "desc": "キャラのみ：背景・強エフェクトを抜いて翡翠妖艶竜姫バハムートの外見核を確認",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_jadeenchantdragon_base",
+                                                "mythic_bahamut_jadeenchantdragon_base_humanoid_anchor",
+                                                "mythic_bahamut_jadeenchantdragon_custom_horns_wings_tail",
+                                                "mythic_bahamut_jadeenchantdragon_custom_signature",
+                                                "mythic_bahamut_jadeenchantdragon_custom_outfit",
+                                                "mythic_bahamut_jadeenchantdragon_custom_jade_regalia",
+                                                "mythic_bahamut_jadeenchantdragon_positive_anchor"
+                                          ]
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "ベース",
+                              "title_en": "Base",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_jadeenchantdragon_base",
+                                          "label": "翡翠妖艶竜姫バハムートベース / Jade Enchanting Bahamut Base",
+                                          "val": "adult mature dark royal jade dragon-girl aura, confident temptress aura, refined emerald elegance",
+                                          "desc": "翡翠妖艶竜姫バハムートの基本ベース",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "base"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_jadeenchantdragon_base_humanoid_anchor",
+                                          "label": "人型維持アンカー / Humanoid Anchor",
+                                          "val": "single humanoid character focus, clearly human face",
+                                          "desc": "人型美少女として安定させる",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "base"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "カスタマイズ",
+                              "title_en": "Customize",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_jadeenchantdragon_custom_horns_wings_tail",
+                                          "label": "翡翠角・翼・尾 / Jade Horns Wings Tail",
+                                          "val": "dragon horns with jade crystal accents, compact jade dragon wings, dragon tail, dragon traits integrated into her body",
+                                          "desc": "バハムートの竜要素を翡翠調で身体に統合",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "customize"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_jadeenchantdragon_custom_signature",
+                                          "label": "翡翠の妖艶な視線 / Jade Enchanting Gaze",
+                                          "val": "direct seductive eye contact, inviting gaze toward viewer, chin slightly lowered while looking up, heavy-lidded glowing emerald eyes, seductively parted lips, faint teasing smile, a smile as if testing the viewer",
+                                          "desc": "翡翠色の視線と所作で妖艶さを出す",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "customize"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_jadeenchantdragon_custom_outfit",
+                                          "label": "翡翠夜会竜礼装 / Jade Nocturne Dragon Dress",
+                                          "val": "body-hugging glossy black silk dragon gown, jade-green gemstone accents, emerald and pale mint highlights, translucent jade draped fabric, off-shoulder lace neckline, sheer lace paneling, high side slit, long opera gloves, jewel chains across the waist and thigh",
+                                          "desc": "翡翠アクセントの夜会向け竜姫礼装",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "customize"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_jadeenchantdragon_custom_jade_regalia",
+                                          "label": "翡翠宝飾 / Jade Regalia",
+                                          "val": "jade crown ornaments, emerald jewelry, gold filigree, polished jewelry highlights, delicate thigh jewelry, ornate dragon motifs",
+                                          "desc": "葱ではなく翡翠宝飾として見せる装飾群",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "customize"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_jadeenchantdragon_fullset_boost",
+                                          "label": "フルセット補強 / Full Set Boost",
+                                          "val": "majestic crown-like dragon horns with jade inlays, face and gaze clearly visible, slow predatory elegance, one knee raised slightly, hip angled to one side, fitted waist silhouette, asymmetrical draped gown, black emerald pale mint and gold palette, (masterpiece:1.3), (best quality:1.3)",
+                                          "desc": "フルセット専用：格・視線・衣装シルエット・翡翠感を軽量に盛る",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "customize"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "設定",
+                              "title_en": "Setting",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_jadeenchantdragon_setting_main",
+                                          "label": "月夜の翡翠竜宮 / Moonlit Jade Dragon Palace",
+                                          "val": "private moonlit palace chamber, ornate jade dragon throne, red velvet curtains, candlelit intimate lighting, deep blue night sky",
+                                          "desc": "月夜の翡翠宮殿背景",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "setting"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_jadeenchantdragon_setting_scene",
+                                          "label": "翡翠夜会の間 / Jade Nocturne Chamber",
+                                          "val": "sitting on ornate dragon throne, leaning forward, one leg crossed, curved S-line posture, poised seductive sitting pose, one hand resting on her thigh, one hand lightly pulling the neckline",
+                                          "desc": "玉座での妖艶な座り姿を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "setting"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_jadeenchantdragon_setting_aura",
+                                          "label": "翡翠妖光オーラ / Jade Enchanting Aura",
+                                          "val": "perfume-like haze, dragon-core sparks, floating starlight cinders, luxurious temptation aura, decadent nocturne atmosphere, refined evening glamour, moonlit rim highlights",
+                                          "desc": "翡翠の上品な妖艶オーラ",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "setting"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_jadeenchantdragon_positive_anchor",
+                                          "label": "人型竜姫固定 / Humanoid Dragon Princess Anchor",
+                                          "val": "single merged character design, dragon traits integrated into her body",
+                                          "desc": "否定語ではなく、人型・身体接続型の肯定語で固定",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "setting"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "クオリティ補助",
+                              "title_en": "Quality Support",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_jadeenchantdragon_quality_main",
+                                          "label": "翡翠月光質感 / Jade Moonlit Texture",
+                                          "val": "highest fidelity details, glossy black silk sheen, clear lace texture, clear material separation, crisp fitted silhouette, jade gemstone sparkle, polished jewelry highlights",
+                                          "desc": "月光と翡翠礼装の質感を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_jadeenchantdragon_quality_light",
+                                          "label": "翡翠縁光 / Jade Rim Light",
+                                          "val": "cinematic deep shadows, dramatic side light, soft rim light, velvet shadow depth, clear face lighting, luxurious shadow play",
+                                          "desc": "顔と輪郭を見やすくする",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_jadeenchantdragon_quality_detail",
+                                          "label": "宝飾ディテール / Jewelry Detail",
+                                          "val": "fine jewelry detail, jade crystal horn detail, sheer lace paneling detail, ornate dragon motifs, clean decorative lines",
+                                          "desc": "翡翠宝飾と装飾の密度を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    }
+                              ]
+                        }
+                  ]
+            },
+            {
+                  "title_ja": "🌙 月影竜型 / Moonshadow Dragon Type",
+                  "title_en": "Moonshadow Dragon Type",
+                  "children": [
+                        {
+                              "title_ja": "完成セット",
+                              "title_en": "Complete Sets",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_moonshadow_complete_core",
+                                          "label": "月影竜バハムート Core Set / Moonshadow Dragon Bahamut Core Set",
+                                          "val": "single humanoid girl, single character focus, Bahamut-inspired moonshadow dragon princess, clearly human face, silver blue black dragon horns, integrated moonlit dragon wings, attached dragon tail, lunar shadow veil, calm nocturne aura, divine dragon authority, no separate dragon creature",
+                                          "desc": "完成セット：月影竜バハムートの基本形",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_moonshadow_base",
+                                                "mythic_bahamut_moonshadow_base_humanoid_anchor",
+                                                "mythic_bahamut_moonshadow_custom_horns_wings_tail",
+                                                "mythic_bahamut_moonshadow_custom_signature",
+                                                "mythic_bahamut_moonshadow_setting_main",
+                                                "mythic_bahamut_moonshadow_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_moonshadow_complete_quality",
+                                          "label": "月影竜バハムート Safe Quality Set / Moonshadow Dragon Bahamut Safe Quality Set",
+                                          "val": "single humanoid Bahamut moonshadow dragon princess, clearly human face, silver blue black ornaments, moonlit dragon wings, quiet shadow veil, soft lunar lighting, clean silhouette, high detail, no separate dragon creature",
+                                          "desc": "高画質セット：月影竜バハムートを安全に見栄え強化",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_moonshadow_base",
+                                                "mythic_bahamut_moonshadow_base_humanoid_anchor",
+                                                "mythic_bahamut_moonshadow_custom_horns_wings_tail",
+                                                "mythic_bahamut_moonshadow_custom_signature",
+                                                "mythic_bahamut_moonshadow_setting_main",
+                                                "mythic_bahamut_moonshadow_quality_main",
+                                                "mythic_bahamut_moonshadow_quality_light",
+                                                "mythic_bahamut_moonshadow_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_moonshadow_complete_2000",
+                                          "label": "月影竜バハムート 2000 Limit Compatible Set / Moonshadow Dragon Bahamut 2000 Limit Compatible Set",
+                                          "val": "single humanoid Bahamut moonshadow dragon princess, clearly human face, silver blue black horns, integrated moonlit wings, attached tail, lunar shadow veil, calm nocturne aura, no companion dragon",
+                                          "desc": "2000字制限対応：月影竜バハムートの核だけを残した短縮版",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_moonshadow_base",
+                                                "mythic_bahamut_moonshadow_base_humanoid_anchor",
+                                                "mythic_bahamut_moonshadow_custom_horns_wings_tail",
+                                                "mythic_bahamut_moonshadow_custom_signature",
+                                                "mythic_bahamut_moonshadow_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_moonshadow_complete_full",
+                                          "label": "月影竜バハムート Full Set / Moonshadow Dragon Bahamut Full Set",
+                                          "val": "single humanoid girl, single character focus, Bahamut-inspired moonshadow dragon princess, clearly human face, silver blue black dragon horns, integrated moonlit dragon wings, attached dragon tail, lunar shadow veil, crescent halo, starless night palace, quiet divine dragon authority, silver moon rim light, high detail, no separate dragon creature, no companion dragon",
+                                          "desc": "フルセット：月影竜バハムートの演出・設定・質感を厚めに含む",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_moonshadow_base",
+                                                "mythic_bahamut_moonshadow_base_humanoid_anchor",
+                                                "mythic_bahamut_moonshadow_custom_horns_wings_tail",
+                                                "mythic_bahamut_moonshadow_custom_signature",
+                                                "mythic_bahamut_moonshadow_custom_outfit",
+                                                "mythic_bahamut_moonshadow_custom_extra",
+                                                "mythic_bahamut_moonshadow_setting_main",
+                                                "mythic_bahamut_moonshadow_setting_scene",
+                                                "mythic_bahamut_moonshadow_setting_aura",
+                                                "mythic_bahamut_moonshadow_quality_main",
+                                                "mythic_bahamut_moonshadow_quality_light",
+                                                "mythic_bahamut_moonshadow_quality_detail",
+                                                "mythic_bahamut_moonshadow_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_moonshadow_character_only",
+                                          "label": "月影竜バハムート キャラのみセット / Moonshadow Dragon Bahamut Character Only Set",
+                                          "val": "single humanoid Bahamut moonshadow dragon princess, clearly human face, silver blue black dragon horns, integrated moonlit dragon wings, attached dragon tail, lunar shadow veil, crescent ornaments, single character focus, no separate dragon creature",
+                                          "desc": "キャラのみ：背景・強エフェクトを抜いて月影竜バハムートの外見核を確認",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_moonshadow_base",
+                                                "mythic_bahamut_moonshadow_base_humanoid_anchor",
+                                                "mythic_bahamut_moonshadow_custom_horns_wings_tail",
+                                                "mythic_bahamut_moonshadow_custom_signature",
+                                                "mythic_bahamut_moonshadow_custom_outfit",
+                                                "mythic_bahamut_moonshadow_suppress_external_dragon"
+                                          ]
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "ベース",
+                              "title_en": "Base",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_moonshadow_base",
+                                          "label": "月影竜バハムートベース / Moonshadow Dragon Bahamut Base",
+                                          "val": "single humanoid Bahamut moonshadow dragon princess, nocturne divine dragon girl, clearly human face, single character focus",
+                                          "desc": "月影竜バハムートの基本ベース",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "base"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_moonshadow_base_humanoid_anchor",
+                                          "label": "人型維持アンカー / Humanoid Anchor",
+                                          "val": "clearly human face, human facial proportions, beautiful humanoid character, no beast head, no monstrous transformation",
+                                          "desc": "人型美少女として安定させる",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "base"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "カスタマイズ",
+                              "title_en": "Customize",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_moonshadow_custom_horns_wings_tail",
+                                          "label": "角・翼・尾 / Horns Wings Tail",
+                                          "val": "silver blue black dragon horns attached to the head, integrated moonlit dragon wings attached to her back, slender dragon tail attached to the body",
+                                          "desc": "バハムートの竜要素を身体に統合",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "customize"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_moonshadow_custom_signature",
+                                          "label": "月影のヴェール / Lunar Shadow Veil",
+                                          "val": "lunar shadow veil, crescent halo, soft silver-blue glow, quiet nocturne presence",
+                                          "desc": "月影と静かな神格を出す",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "customize"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_moonshadow_custom_outfit",
+                                          "label": "月影竜礼装 / Moonshadow Dragon Dress",
+                                          "val": "silver blue black ceremonial dragon dress, crescent ornaments, dark translucent mantle, elegant lunar accessories",
+                                          "desc": "月影モチーフの竜礼装",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "customize"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_moonshadow_custom_extra",
+                                          "label": "三日月飾り / Crescent Ornaments",
+                                          "val": "crescent horn ornaments, moonstone jewelry, small star charms, silver dragon motif accessories",
+                                          "desc": "月の装飾を追加",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "customize"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "設定",
+                              "title_en": "Setting",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_moonshadow_setting_main",
+                                          "label": "月影神殿 / Moonshadow Temple",
+                                          "val": "moonshadow celestial temple, silver moonlight, quiet night sky, blue black sacred pillars",
+                                          "desc": "月影神殿の背景",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "setting"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_moonshadow_setting_scene",
+                                          "label": "夜空の回廊 / Night Sky Corridor",
+                                          "val": "open-air palace corridor under the moon, distant stars, calm night breeze, reflective stone floor",
+                                          "desc": "夜の回廊背景",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "setting"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_moonshadow_setting_aura",
+                                          "label": "静謐な月竜気配 / Quiet Lunar Dragon Aura",
+                                          "val": "quiet lunar dragon aura, soft silver mist, calm shadow glow, divine nocturne presence",
+                                          "desc": "静かな月竜の気配",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "setting"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_moonshadow_suppress_external_dragon",
+                                          "label": "外部ドラゴン抑制 / No Separate Dragon",
+                                          "val": "single humanoid character focus, no separate dragon creature, no companion dragon, no extra beast body",
+                                          "desc": "別個体ドラゴンの発生を抑制",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "setting"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "クオリティ補助",
+                              "title_en": "Quality Support",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_moonshadow_quality_main",
+                                          "label": "銀月ハイライト / Silver Moon Highlights",
+                                          "val": "silver moon highlights, clear face lighting, deep blue shadow balance, crisp dark silhouette",
+                                          "desc": "月光の見栄えを補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_moonshadow_quality_light",
+                                          "label": "夜光グラデーション / Nocturne Gradation",
+                                          "val": "soft nocturne gradation, controlled dark tones, readable details, gentle rim lighting",
+                                          "desc": "黒潰れを避ける",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_moonshadow_quality_detail",
+                                          "label": "月石ディテール / Moonstone Detail",
+                                          "val": "moonstone jewelry detail, crescent accessory detail, refined silver ornaments, clean decorative linework",
+                                          "desc": "月石装飾を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    }
+                              ]
+                        }
+                  ]
+            },
+            {
+                  "title_ja": "🔥 星炎竜型 / Starfire Dragon Type",
+                  "title_en": "Starfire Dragon Type",
+                  "children": [
+                        {
+                              "title_ja": "完成セット",
+                              "title_en": "Complete Sets",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_starfire_complete_core",
+                                          "label": "星炎竜バハムート Core Set / Starfire Dragon Bahamut Core Set",
+                                          "val": "single humanoid girl, single character focus, Bahamut-inspired starfire dragon princess, clearly human face, blazing gold blue white dragon horns, integrated starfire dragon wings, attached dragon tail, celestial flame aura, star-forged fire light, divine dragon authority, no separate dragon creature",
+                                          "desc": "完成セット：星炎竜バハムートの基本形",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_starfire_base",
+                                                "mythic_bahamut_starfire_base_humanoid_anchor",
+                                                "mythic_bahamut_starfire_custom_horns_wings_tail",
+                                                "mythic_bahamut_starfire_custom_signature",
+                                                "mythic_bahamut_starfire_setting_main",
+                                                "mythic_bahamut_starfire_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_starfire_complete_quality",
+                                          "label": "星炎竜バハムート Safe Quality Set / Starfire Dragon Bahamut Safe Quality Set",
+                                          "val": "single humanoid Bahamut starfire dragon princess, clearly human face, blazing dragon horns, integrated starfire wings, attached tail, gold blue white flame accents, controlled celestial fire glow, high detail, no separate dragon creature",
+                                          "desc": "高画質セット：星炎竜バハムートを安全に見栄え強化",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_starfire_base",
+                                                "mythic_bahamut_starfire_base_humanoid_anchor",
+                                                "mythic_bahamut_starfire_custom_horns_wings_tail",
+                                                "mythic_bahamut_starfire_custom_signature",
+                                                "mythic_bahamut_starfire_setting_main",
+                                                "mythic_bahamut_starfire_quality_main",
+                                                "mythic_bahamut_starfire_quality_light",
+                                                "mythic_bahamut_starfire_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_starfire_complete_2000",
+                                          "label": "星炎竜バハムート 2000 Limit Compatible Set / Starfire Dragon Bahamut 2000 Limit Compatible Set",
+                                          "val": "single humanoid Bahamut starfire dragon princess, clearly human face, blazing dragon horns, integrated starfire wings, attached tail, celestial flame aura, star-forged light, no companion dragon",
+                                          "desc": "2000字制限対応：星炎竜バハムートの核だけを残した短縮版",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_starfire_base",
+                                                "mythic_bahamut_starfire_base_humanoid_anchor",
+                                                "mythic_bahamut_starfire_custom_horns_wings_tail",
+                                                "mythic_bahamut_starfire_custom_signature",
+                                                "mythic_bahamut_starfire_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_starfire_complete_full",
+                                          "label": "星炎竜バハムート Full Set / Starfire Dragon Bahamut Full Set",
+                                          "val": "single humanoid girl, single character focus, Bahamut-inspired starfire dragon princess, clearly human face, blazing gold blue white dragon horns, integrated starfire dragon wings, attached dragon tail, star-forged flame halo, celestial fire ribbons, radiant dragon sigils, divine dragon authority, dramatic but controlled flame lighting, high detail, no separate dragon creature, no companion dragon",
+                                          "desc": "フルセット：星炎竜バハムートの演出・設定・質感を厚めに含む",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_starfire_base",
+                                                "mythic_bahamut_starfire_base_humanoid_anchor",
+                                                "mythic_bahamut_starfire_custom_horns_wings_tail",
+                                                "mythic_bahamut_starfire_custom_signature",
+                                                "mythic_bahamut_starfire_custom_outfit",
+                                                "mythic_bahamut_starfire_custom_extra",
+                                                "mythic_bahamut_starfire_setting_main",
+                                                "mythic_bahamut_starfire_setting_scene",
+                                                "mythic_bahamut_starfire_setting_aura",
+                                                "mythic_bahamut_starfire_quality_main",
+                                                "mythic_bahamut_starfire_quality_light",
+                                                "mythic_bahamut_starfire_quality_detail",
+                                                "mythic_bahamut_starfire_suppress_external_dragon"
+                                          ]
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_starfire_character_only",
+                                          "label": "星炎竜バハムート キャラのみセット / Starfire Dragon Bahamut Character Only Set",
+                                          "val": "single humanoid Bahamut starfire dragon princess, clearly human face, blazing dragon horns, integrated starfire dragon wings, attached dragon tail, gold blue white flame accents, star-forged dragon ornaments, single character focus, no separate dragon creature",
+                                          "desc": "キャラのみ：背景・強エフェクトを抜いて星炎竜バハムートの外見核を確認",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "complete_set",
+                                          "linked_ids": [
+                                                "mythic_bahamut_starfire_base",
+                                                "mythic_bahamut_starfire_base_humanoid_anchor",
+                                                "mythic_bahamut_starfire_custom_horns_wings_tail",
+                                                "mythic_bahamut_starfire_custom_signature",
+                                                "mythic_bahamut_starfire_custom_outfit",
+                                                "mythic_bahamut_starfire_suppress_external_dragon"
+                                          ]
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "ベース",
+                              "title_en": "Base",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_starfire_base",
+                                          "label": "星炎竜バハムートベース / Starfire Dragon Bahamut Base",
+                                          "val": "single humanoid Bahamut starfire dragon princess, radiant celestial fire dragon girl, clearly human face, single character focus",
+                                          "desc": "星炎竜バハムートの基本ベース",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "base"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_starfire_base_humanoid_anchor",
+                                          "label": "人型維持アンカー / Humanoid Anchor",
+                                          "val": "clearly human face, human facial proportions, beautiful humanoid character, no beast head, no separate dragon body",
+                                          "desc": "人型美少女として安定させる",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "base"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "カスタマイズ",
+                              "title_en": "Customize",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_starfire_custom_horns_wings_tail",
+                                          "label": "角・翼・尾 / Horns Wings Tail",
+                                          "val": "blazing dragon horns attached to the head, integrated starfire dragon wings attached to her back, powerful dragon tail attached to the body",
+                                          "desc": "バハムートの竜要素を身体に統合",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "customize"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_starfire_custom_signature",
+                                          "label": "星炎オーラ / Starfire Aura",
+                                          "val": "celestial flame aura, star-forged fire light, gold blue white fire accents, controlled radiant heat shimmer",
+                                          "desc": "星炎の主題を固定",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "customize"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_starfire_custom_outfit",
+                                          "label": "星炎竜礼装 / Starfire Dragon Dress",
+                                          "val": "gold blue white ceremonial dragon dress, flame-shaped dragon ornaments, star-forged accessories, luminous trim",
+                                          "desc": "星炎モチーフの竜礼装",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "customize"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_starfire_custom_extra",
+                                          "label": "炎環と竜紋 / Flame Halo and Dragon Sigils",
+                                          "val": "starfire halo, radiant dragon sigils, small flame ribbons, controlled celestial sparks",
+                                          "desc": "星炎の装飾と紋様を追加",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "customize"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "設定",
+                              "title_en": "Setting",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_starfire_setting_main",
+                                          "label": "星炎祭壇 / Starfire Altar",
+                                          "val": "celestial starfire altar, floating dragon sigils, radiant sky, controlled sacred flames",
+                                          "desc": "星炎の祭壇背景",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "setting"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_starfire_setting_scene",
+                                          "label": "燃える星空 / Burning Star Sky",
+                                          "val": "burning star sky, gold blue white light, distant nebula glow, sacred fire atmosphere",
+                                          "desc": "星空と炎の背景",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "setting"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_starfire_setting_aura",
+                                          "label": "制御された神炎 / Controlled Divine Flame",
+                                          "val": "controlled divine flame aura, organized flame ribbons, no chaotic explosion, clear character silhouette",
+                                          "desc": "炎で主役が埋もれないようにする",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "setting"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_starfire_suppress_external_dragon",
+                                          "label": "外部ドラゴン抑制 / No Separate Dragon",
+                                          "val": "single humanoid character focus, no separate dragon creature, no companion dragon, no extra beast body",
+                                          "desc": "別個体ドラゴンの発生を抑制",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "setting"
+                                    }
+                              ]
+                        },
+                        {
+                              "title_ja": "クオリティ補助",
+                              "title_en": "Quality Support",
+                              "children": [
+                                    {
+                                          "id": "mythic_bahamut_starfire_quality_main",
+                                          "label": "炎光質感 / Flame Light Texture",
+                                          "val": "controlled flame lighting, crisp highlights, readable face lighting, clean glow edges",
+                                          "desc": "炎光と顔の見やすさを補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_starfire_quality_light",
+                                          "label": "発光制御 / Glow Control",
+                                          "val": "controlled glow intensity, no overexposure, balanced highlights, clear silhouette",
+                                          "desc": "光りすぎを抑える",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    },
+                                    {
+                                          "id": "mythic_bahamut_starfire_quality_detail",
+                                          "label": "火花粒子 / Spark Detail",
+                                          "val": "small celestial sparks, organized fire particles, refined flame ribbons, detailed dragon sigils",
+                                          "desc": "火花と竜紋の密度を補助",
+                                          "collection_id": "mythic_bahamut_collection",
+                                          "collection_role": "quality_detail"
+                                    }
+                              ]
+                        }
+                  ]
+            }
+      ]
+};
+
+    upsertFirst(westNode.children, bahamutNode);
+
+    if (window.__PP_DB) window.__PP_DB.packs = db;
+    window.PRESET_PACKS_DB = db;
+    window.__PRESET_PACKS_DB = db;
+    window.__BAHAMUT_SPECIAL_COLLECTION_RESTORED = true;
+    window.__BAHAMUT_SPECIAL_COLLECTION_VARIANTS_20260516 = true;
+    window.__BAHAMUT_SPECIAL_COLLECTION_EXPANDED_LIGHT_CHAOS_STORM_20260516 = true;
+  } catch(e) {
+    try { console.warn("[bahamut_special_collection_variants]", e); } catch(_e) {}
+  }
+})();

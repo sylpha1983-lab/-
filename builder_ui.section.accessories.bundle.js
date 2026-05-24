@@ -308,6 +308,231 @@
         { ja: "虹色にきらめく飲料", en: "iridescent drink" }
       ]
     },
+    "🍱 食べ物・飲み物 / 🥩 食材 / 🥬 野菜 / 🧅 葱・ねぎ": {
+      icon: "🧅",
+      items: [
+        { ja: "青ねぎ", en: "green onion" },
+        { ja: "長ねぎ", en: "Japanese long green onion" },
+        { ja: "小ねぎ", en: "thin green onion" },
+        { ja: "万能ねぎ", en: "scallion" },
+        { ja: "刻みねぎ", en: "chopped green onion" },
+        { ja: "小口切りねぎ", en: "finely sliced green onion rings" },
+        { ja: "白髪ねぎ", en: "thin white green onion strips" },
+        { ja: "ねぎ束", en: "bundle of green onions" },
+        { ja: "焼きねぎ", en: "grilled green onion" },
+        { ja: "ねぎ串", en: "green onion skewer" },
+        { ja: "ラーメンのねぎトッピング", en: "green onion topping on ramen" },
+        { ja: "散らしねぎ", en: "scattered green onion garnish" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🥩 食材 / 🥬 野菜 / 🧅 玉ねぎ・球根野菜": {
+      icon: "🧅",
+      items: [
+        { ja: "玉ねぎ", en: "onion" },
+        { ja: "赤玉ねぎ", en: "red onion" },
+        { ja: "白玉ねぎ", en: "white onion" },
+        { ja: "新玉ねぎ", en: "fresh onion" },
+        { ja: "小玉ねぎ", en: "pearl onions" },
+        { ja: "スライス玉ねぎ", en: "sliced onion" },
+        { ja: "みじん切り玉ねぎ", en: "diced onion" },
+        { ja: "飴色玉ねぎ", en: "caramelized onion" },
+        { ja: "フライドオニオン", en: "fried onion flakes" },
+        { ja: "オニオンリング", en: "onion rings" },
+        { ja: "エシャロット", en: "shallot" },
+        { ja: "にんにく片", en: "garlic cloves" },
+        { ja: "ローストガーリック", en: "roasted garlic" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🥩 食材 / 🥬 野菜 / 🥦 ブロッコリー・花野菜": {
+      icon: "🥦",
+      items: [
+        { ja: "ブロッコリー", en: "broccoli" },
+        { ja: "ブロッコリーの小房", en: "broccoli florets" },
+        { ja: "ブロッコリーの茎", en: "broccoli stem" },
+        { ja: "蒸しブロッコリー", en: "steamed broccoli" },
+        { ja: "焼きブロッコリー", en: "roasted broccoli" },
+        { ja: "ブロッコリースプラウト", en: "broccoli sprouts" },
+        { ja: "スティックセニョール", en: "broccolini" },
+        { ja: "カリフラワー", en: "cauliflower" },
+        { ja: "カリフラワーの小房", en: "cauliflower florets" },
+        { ja: "ロマネスコ", en: "romanesco broccoli" },
+        { ja: "花野菜の盛り合わせ", en: "assorted flower vegetables" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🥩 食材 / 🥬 野菜 / 🥕 にんじん・根菜": {
+      icon: "🥕",
+      items: [
+        { ja: "にんじん", en: "carrot" },
+        { ja: "ベビーキャロット", en: "baby carrots" },
+        { ja: "輪切りにんじん", en: "sliced carrot" },
+        { ja: "千切りにんじん", en: "julienned carrot" },
+        { ja: "にんじんスティック", en: "carrot sticks" },
+        { ja: "大根", en: "daikon radish" },
+        { ja: "ラディッシュ", en: "red radish" },
+        { ja: "かぶ", en: "turnip" },
+        { ja: "ビーツ", en: "beetroot" },
+        { ja: "ごぼう", en: "burdock root" },
+        { ja: "れんこん", en: "lotus root slices" },
+        { ja: "パースニップ", en: "parsnip" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🥩 食材 / 🥬 野菜 / 🥔 じゃがいも・芋類": {
+      icon: "🥔",
+      items: [
+        { ja: "じゃがいも", en: "potato" },
+        { ja: "新じゃが", en: "new potatoes" },
+        { ja: "角切りじゃがいも", en: "diced potato" },
+        { ja: "くし切りポテト", en: "potato wedges" },
+        { ja: "ゆでじゃがいも", en: "boiled potato" },
+        { ja: "ベイクドポテト", en: "baked potato" },
+        { ja: "マッシュポテト", en: "mashed potato" },
+        { ja: "さつまいも", en: "sweet potato" },
+        { ja: "焼き芋", en: "roasted sweet potato" },
+        { ja: "里芋", en: "taro" },
+        { ja: "山芋", en: "Japanese yam" },
+        { ja: "芋の盛り合わせ", en: "assorted root tubers" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🥩 食材 / 🥬 野菜 / 🥬 葉物野菜": {
+      icon: "🥬",
+      items: [
+        { ja: "キャベツ", en: "cabbage" },
+        { ja: "千切りキャベツ", en: "shredded cabbage" },
+        { ja: "白菜", en: "napa cabbage" },
+        { ja: "レタス", en: "lettuce" },
+        { ja: "ロメインレタス", en: "romaine lettuce" },
+        { ja: "ほうれん草", en: "spinach" },
+        { ja: "小松菜", en: "Japanese mustard spinach" },
+        { ja: "チンゲン菜", en: "bok choy" },
+        { ja: "ケール", en: "kale" },
+        { ja: "水菜", en: "mizuna" },
+        { ja: "ルッコラ", en: "arugula" },
+        { ja: "クレソン", en: "watercress" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🥩 食材 / 🥬 野菜 / 🍅 トマト・実野菜": {
+      icon: "🍅",
+      items: [
+        { ja: "トマト", en: "tomato" },
+        { ja: "ミニトマト", en: "cherry tomatoes" },
+        { ja: "スライストマト", en: "sliced tomato" },
+        { ja: "くし切りトマト", en: "tomato wedges" },
+        { ja: "房付きトマト", en: "tomatoes on the vine" },
+        { ja: "オクラ", en: "okra" },
+        { ja: "アボカド", en: "avocado" },
+        { ja: "アボカドスライス", en: "avocado slices" },
+        { ja: "グリーントマト", en: "green tomato" },
+        { ja: "ドライトマト", en: "sun-dried tomatoes" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🥩 食材 / 🥬 野菜 / 🥒 きゅうり・瓜類": {
+      icon: "🥒",
+      items: [
+        { ja: "きゅうり", en: "cucumber" },
+        { ja: "輪切りきゅうり", en: "sliced cucumber" },
+        { ja: "きゅうりスティック", en: "cucumber sticks" },
+        { ja: "ズッキーニ", en: "zucchini" },
+        { ja: "輪切りズッキーニ", en: "sliced zucchini" },
+        { ja: "ゴーヤ", en: "bitter melon" },
+        { ja: "冬瓜", en: "winter melon" },
+        { ja: "瓜", en: "melon gourd" },
+        { ja: "ピクルスきゅうり", en: "pickling cucumber" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🥩 食材 / 🥬 野菜 / 🍆 なす・ピーマン": {
+      icon: "🍆",
+      items: [
+        { ja: "なす", en: "eggplant" },
+        { ja: "輪切りなす", en: "sliced eggplant" },
+        { ja: "焼きなす", en: "grilled eggplant" },
+        { ja: "ピーマン", en: "green bell pepper" },
+        { ja: "赤ピーマン", en: "red bell pepper" },
+        { ja: "黄ピーマン", en: "yellow bell pepper" },
+        { ja: "パプリカ", en: "paprika pepper" },
+        { ja: "パプリカスライス", en: "sliced bell peppers" },
+        { ja: "ししとう", en: "shishito peppers" },
+        { ja: "唐辛子", en: "chili pepper" },
+        { ja: "ハラペーニョ", en: "jalapeno pepper" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🥩 食材 / 🥬 野菜 / 🎃 かぼちゃ・とうもろこし": {
+      icon: "🎃",
+      items: [
+        { ja: "かぼちゃ", en: "pumpkin" },
+        { ja: "かぼちゃのくし切り", en: "pumpkin wedges" },
+        { ja: "焼きかぼちゃ", en: "roasted pumpkin" },
+        { ja: "バターナッツかぼちゃ", en: "butternut squash" },
+        { ja: "とうもろこし", en: "corn" },
+        { ja: "とうもろこしの芯付き", en: "corn on the cob" },
+        { ja: "コーン粒", en: "corn kernels" },
+        { ja: "ベビーコーン", en: "baby corn" },
+        { ja: "焼きとうもろこし", en: "grilled corn" },
+        { ja: "とうもろこしの皮", en: "corn husk" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🥩 食材 / 🥬 野菜 / 🫘 豆・莢野菜": {
+      icon: "🫘",
+      items: [
+        { ja: "枝豆", en: "edamame" },
+        { ja: "グリーンピース", en: "green peas" },
+        { ja: "さやえんどう", en: "snow peas" },
+        { ja: "スナップえんどう", en: "sugar snap peas" },
+        { ja: "いんげん", en: "string beans" },
+        { ja: "そら豆", en: "broad beans" },
+        { ja: "大豆", en: "soybeans" },
+        { ja: "もやし", en: "bean sprouts" },
+        { ja: "豆苗", en: "pea shoots" },
+        { ja: "豆野菜の盛り合わせ", en: "assorted green legumes" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🥩 食材 / 🥬 野菜 / 🍄 きのこ": {
+      icon: "🍄",
+      items: [
+        { ja: "しいたけ", en: "shiitake mushrooms" },
+        { ja: "えのき", en: "enoki mushrooms" },
+        { ja: "しめじ", en: "shimeji mushrooms" },
+        { ja: "まいたけ", en: "maitake mushrooms" },
+        { ja: "エリンギ", en: "king oyster mushroom" },
+        { ja: "マッシュルーム", en: "button mushrooms" },
+        { ja: "ポートベロ", en: "portobello mushroom" },
+        { ja: "松茸", en: "matsutake mushroom" },
+        { ja: "スライスきのこ", en: "sliced mushrooms" },
+        { ja: "きのこ盛り合わせ", en: "assorted mushrooms" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🥩 食材 / 🥬 野菜 / 🌿 香味野菜・ハーブ": {
+      icon: "🌿",
+      items: [
+        { ja: "しょうが", en: "ginger" },
+        { ja: "薄切りしょうが", en: "sliced ginger" },
+        { ja: "すりおろししょうが", en: "grated ginger" },
+        { ja: "みょうが", en: "myoga ginger" },
+        { ja: "大葉", en: "perilla leaves" },
+        { ja: "パクチー", en: "cilantro" },
+        { ja: "パセリ", en: "parsley" },
+        { ja: "バジル", en: "basil" },
+        { ja: "ミント", en: "mint leaves" },
+        { ja: "ローズマリー", en: "rosemary" },
+        { ja: "タイム", en: "thyme" },
+        { ja: "ディル", en: "dill" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🥩 食材 / 🥬 野菜 / 🧺 その他の定番野菜": {
+      icon: "🧺",
+      items: [
+        { ja: "アスパラガス", en: "asparagus" },
+        { ja: "セロリ", en: "celery" },
+        { ja: "セロリスティック", en: "celery sticks" },
+        { ja: "たけのこ", en: "bamboo shoots" },
+        { ja: "アーティチョーク", en: "artichoke" },
+        { ja: "フェンネル", en: "fennel bulb" },
+        { ja: "芽キャベツ", en: "Brussels sprouts" },
+        { ja: "アルファルファ", en: "alfalfa sprouts" },
+        { ja: "野菜スティック盛り", en: "assorted vegetable sticks" },
+        { ja: "カット野菜", en: "mixed cut vegetables" },
+        { ja: "野菜の盛り合わせ", en: "assorted vegetables" }
+      ]
+    },
     "🍱 食べ物・飲み物 / 🥩 食材 / 🥩 肉": { icon: "🥩", items: [{ ja: "ソーセージ串", en: "sausage skewer" }, { ja: "骨付き肉", en: "bone-in meat" }, { ja: "漫画肉", en: "manga meat" }] }
   };
 

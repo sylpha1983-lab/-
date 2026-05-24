@@ -339,3 +339,128 @@
 
 })();
 
+// --- builder_ui.section.texture.v3.js ---
+// R-18液体・粘液・体液特化強化（マウント改善版）
+(function(){
+  "use strict";
+  const VERSION = 3;
+  const KEY = "texture";
+
+  const IS_UNLOCKED = localStorage.getItem("MY_SECRET_UNLOCK") === "true";
+
+  const SECRET_FLUID_CATEGORIES = {
+    "🔞 愛液・牝汁 (Pussy Juice & Female Fluids)": [
+      { ja: "大量愛液", en: "copious vaginal fluids, overflowing pussy juice" },
+      { ja: "糸引き愛液", en: "stringy pussy juice, viscous vaginal fluids, dripping threads" },
+      { ja: "透明愛液", en: "clear sticky fluids, glistening pussy juice" },
+      { ja: "白濁愛液", en: "creamy pussy juice, mixed fluids" },
+      { ja: "大洪水", en: "flooding wetness, excessive squirting fluids" }
+    ],
+    "🔞 精液・白濁 (Cum & Semen)": [
+      { ja: "大量中出し", en: "creampie, excessive cum inside, cum overflow" },
+      { ja: "精液垂れ", en: "cum dripping from pussy, creampie leakage" },
+      { ja: "顔射・精液まみれ", en: "bukkake, cum on face, semen covered" },
+      { ja: "体液混合", en: "mixed cum and pussy juice, messy fluids" },
+      { ja: "精液プール", en: "pool of cum, semen puddle" }
+    ],
+    "🔞 混合体液・ベトベト (Mixed Bodily Fluids)": [
+      { ja: "愛液と精液の混合", en: "cum mixed with pussy juice, creamy mess" },
+      { ja: "汗＋よだれ＋愛液", en: "sweat, saliva and vaginal fluids mix" },
+      { ja: "全身体液まみれ", en: "body covered in fluids, glossy wet body" },
+      { ja: "ベトベト糸引き", en: "sticky stringy fluids all over" }
+    ],
+    "💦 汗・光沢・ぬめり (Sweat & Sheen)": [
+      { ja: "汗だく光沢", en: "drenched in sweat, glistening sweat" },
+      { ja: "オイルまみれ", en: "oiled body, shiny oil" },
+      { ja: "ローション塗れ", en: "covered in lotion, slippery wet" }
+    ]
+  };
+
+  const API = {
+    initUI(container) {
+      if (!IS_UNLOCKED) return;
+
+      // より確実にsectionを探す（v1/v2両対応）
+      let section = document.querySelector(".texture-section");
+      if (!section) {
+        // まだ作られていない場合は親コンテナから作る
+        const parent = container || document.querySelector("#list-texture");
+        if (!parent) return;
+
+        section = document.createElement("div");
+        section.className = "texture-section";
+        
+        const h = document.createElement("div");
+        h.textContent = "🧶 素材・質感 (Material/Texture)";
+        h.style.fontWeight = "bold";
+        h.style.color = "#556b2f"; 
+        h.style.marginBottom = "8px";
+        section.appendChild(h);
+        
+        parent.appendChild(section);
+      }
+
+      // 新しいカテゴリーを追加
+      Object.entries(SECRET_FLUID_CATEGORIES).forEach(([cat, items]) => {
+        // 既に同じカテゴリーが存在していたらスキップ（重複防止）
+        if (section.querySelector(`summary[textContent="${cat}"]`)) return;
+
+        const details = document.createElement("details");
+        details.style.marginBottom = "8px";
+        details.style.border = "1px solid #ff6699";
+        details.style.borderRadius = "6px";
+        details.style.backgroundColor = "#fff0f5";
+
+        const summary = document.createElement("summary");
+        summary.textContent = cat;
+        summary.style.backgroundColor = "#ffe6f0";
+        summary.style.color = "#c00";
+        summary.style.fontWeight = "bold";
+        summary.style.padding = "8px";
+        details.appendChild(summary);
+
+        const content = document.createElement("div");
+        content.style.padding = "8px";
+        content.style.display = "flex";
+        content.style.flexWrap = "wrap";
+        content.style.gap = "6px";
+
+        items.forEach(item => {
+          const label = document.createElement("label");
+          label.style.cssText = `
+            display:flex; 
+            align-items:center; 
+            padding:4px 8px; 
+            background:#fff; 
+            border:1px solid #ff99bb; 
+            border-radius:4px; 
+            cursor:pointer; 
+            font-size:0.85em;
+          `;
+          
+          const cb = document.createElement("input");
+          cb.type = "checkbox";
+          cb.dataset.en = item.en;
+          cb.style.marginRight = "5px";
+          
+          label.appendChild(cb);
+          label.appendChild(document.createTextNode(item.ja));
+          content.appendChild(label);
+        });
+
+        details.appendChild(content);
+        section.appendChild(details);
+      });
+    },
+
+    getTags() {
+      const tags = [];
+      document.querySelectorAll(".texture-section input:checked").forEach(cb => {
+        if (cb.dataset && cb.dataset.en) tags.push(cb.dataset.en);
+      });
+      return tags;
+    }
+  };
+
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
