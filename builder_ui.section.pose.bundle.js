@@ -1,5 +1,5 @@
 // Auto-generated bundle for section 'pose'
-// Contains 15 versions stacked in ascending order.
+// Contains 18 versions stacked in ascending order.
 
 (function(){
 // --- builder_ui.section.pose.v1.js ---
@@ -5341,12 +5341,26 @@ const POSE_STAGE1_BODY = {
     if(!root) return;
 
     // R-18 は後追い棚が追加された後でも最後尾に戻す。
+    // v17 は「見出し線 + 本体 details」を必ずセットで並べる。
+    const v17Sep = document.getElementById("pose-v17-r18-sex-final");
+    const v17Details = root.querySelector(".r18-sex-collection");
     const r18Nodes = [];
+
     Array.from(root.children).forEach(node => {
+      if (node === v17Sep || node === v17Details) return;
       const text = (node.textContent || "").trim();
       if (text.indexOf("🔴 R-18") !== -1) r18Nodes.push(node);
     });
+
     r18Nodes.forEach(node => root.appendChild(node));
+
+    if (v17Sep && v17Details) {
+      root.appendChild(v17Sep);
+      root.appendChild(v17Details);
+    } else {
+      if (v17Sep) root.appendChild(v17Sep);
+      if (v17Details) root.appendChild(v17Details);
+    }
   }
 
 
@@ -6574,6 +6588,93 @@ console.log("STAGE1 COMPLETED POSES v24 LOADED");
     }
   };
 
+
+  function getOwnSummaryText(details) {
+    if (!details) return "";
+    const summary = Array.from(details.children || []).find(ch => ch && ch.tagName === "SUMMARY");
+    return summary ? String(summary.textContent || "") : "";
+  }
+
+  function openDetailsBySummaryText(scope, needle) {
+    if (!scope || !needle) return null;
+    const target = String(needle || "");
+    let found = null;
+    Array.from(scope.querySelectorAll("details")).forEach(details => {
+      if (found) return;
+      const text = getOwnSummaryText(details);
+      if (text && text.includes(target)) found = details;
+    });
+    if (found) {
+      found.open = true;
+      openAncestors(found);
+    }
+    return found;
+  }
+
+  function clearCreaturePoseShortcutHighlights(scope) {
+    if (!scope) return;
+    scope.querySelectorAll("[data-creature-pose-shortcut-highlight='1']").forEach(node => {
+      node.style.outline = "";
+      node.style.background = "";
+      node.style.borderRadius = "";
+      node.style.padding = "";
+      delete node.dataset.creaturePoseShortcutHighlight;
+    });
+  }
+
+  function findPoseLabelByJa(scope, labelText) {
+    if (!scope || !labelText) return null;
+    const needle = String(labelText || "");
+    const labels = Array.from(scope.querySelectorAll("label"));
+    return labels.find(label => String(label.textContent || "").includes(needle)) || null;
+  }
+
+  function highlightCreaturePoseShortcutLabel(scope, labelText) {
+    // 候補が複数ある分類棚では、個別ポーズを緑で強調しない。
+    // 既存の強調だけ解除して、棚移動のみ行う。
+    clearCreaturePoseShortcutHighlights(scope);
+    return null;
+  }
+
+  function handleCreaturePoseShortcut(detail) {
+    detail = detail || window.__SHIMA_PENDING_CREATURE_POSE_SHORTCUT__ || null;
+    if (!detail) return false;
+
+    const marker = document.getElementById("pose-v18-animalpose");
+    const poseRoot = document.getElementById("pose-master-root");
+    const poseList = document.getElementById("list-pose") || poseRoot;
+    if (!marker || !poseRoot) {
+      window.__SHIMA_PENDING_CREATURE_POSE_SHORTCUT__ = detail;
+      return false;
+    }
+
+    const mainDetails = Array.from(marker.querySelectorAll("details")).find(d => getOwnSummaryText(d).includes("動物ポーズ特化コレクション"));
+    if (mainDetails) mainDetails.open = true;
+
+    // 動物ポーズ候補が複数ある場合、個別候補を緑で目立たせると
+    // 「これだけを選ぶべき」に見えてしまうため、棚だけを開いて移動する。
+    // creatures 側から focusLabel が来ても、ここでは候補ラベルの強調には使わない。
+    clearCreaturePoseShortcutHighlights(marker);
+    const shelf = detail.targetShelf ? openDetailsBySummaryText(marker, detail.targetShelf) : null;
+
+    try {
+      const target = shelf || mainDetails || marker || poseList;
+      (target || poseList).scrollIntoView({ behavior: "smooth", block: "start" });
+    } catch(_) {}
+
+    window.__SHIMA_PENDING_CREATURE_POSE_SHORTCUT__ = null;
+    return true;
+  }
+
+  function installCreaturePoseShortcutListener() {
+    if (window.__SHIMA_CREATURE_POSE_SHORTCUT_READY__) return;
+    window.__SHIMA_CREATURE_POSE_SHORTCUT_READY__ = true;
+    window.addEventListener("shima:creature-pose-shortcut", ev => {
+      handleCreaturePoseShortcut(ev && ev.detail);
+    });
+  }
+
+
   function mount(){
     const root = document.getElementById("pose-master-root");
     if (!root || typeof window.__POSE_RENDERER !== "function") { setTimeout(mount, 120); return; }
@@ -6705,7 +6806,7 @@ console.log("STAGE1 COMPLETED POSES v24 LOADED");
 })();
 
 // ================================================
-// v17 R-18 性交・体位・絶頂 極限特化コレクション（全連動最終強化版）
+// v17 R-18 性交・体位・絶頂 極限特化コレクション（連動完全強化・最終版）
 // ================================================
 (function(){
   "use strict";
@@ -6728,8 +6829,6 @@ console.log("STAGE1 COMPLETED POSES v24 LOADED");
       { ja: "首絞めバック", en: "doggy style choking from behind" },
       { ja: "正常位キスしながら", en: "missionary with deep kissing, passionate eye contact" },
       { ja: "失禁潮吹き完全崩壊", en: "heavy squirting and incontinence, total mind break" },
-
-      // 拡張体位
       { ja: "ロータス位密着", en: "lotus position, face to face, deep penetration, full embrace" },
       { ja: "車輪位", en: "wheelbarrow position, standing doggy legs lifted" },
       { ja: "バック騎乗位", en: "reverse cowgirl, ass focus, intense grinding" },
@@ -6759,6 +6858,34 @@ console.log("STAGE1 COMPLETED POSES v24 LOADED");
       { ja: "乳首クリップ拘束", en: "nipple clamps, bondage, submissive pose" },
       { ja: "複数玩具同時責め", en: "multiple sex toys, vibrator and dildo, overwhelming pleasure" },
       { ja: "目隠しローター", en: "blindfold, clitoral vibrator, anticipation play" }
+    ],
+
+    "🏠 場所完成セット (Location Sets)": [
+      { ja: "ベッドで正常位", en: "missionary on bed, soft sheets, bedroom" },
+      { ja: "シャワーでバック", en: "doggy style in shower, wet bodies, water running" },
+      { ja: "ソファで騎乗位", en: "cowgirl on sofa, living room" },
+      { ja: "机の上に座らせて", en: "sex on desk, office, papers scattered" },
+      { ja: "車内で密着", en: "sex in car, cramped space, steamed windows" },
+      { ja: "鏡の前で立ちバック", en: "standing doggy in front of mirror, watching reflection" },
+      { ja: "屋外夜のベンチ", en: "outdoor night sex on bench, risky public" },
+      { ja: "浴室壁ドン", en: "standing sex against bathroom wall" }
+    ],
+
+    "👗 服装プレイセット (Clothing Play)": [
+      { ja: "制服を乱して", en: "sex while wearing disheveled school uniform" },
+      { ja: "ランジェリー半脱ぎ", en: "lingerie pulled aside, partially undressed" },
+      { ja: "シャツだけ着て", en: "wearing only oversized shirt, no panties" },
+      { ja: "ストッキング破れ", en: "torn stockings, sex with ripped pantyhose" },
+      { ja: "メイド服で奉仕", en: "sex in maid outfit, apron lifted" },
+      { ja: "水着ずらし", en: "swimsuit pulled aside" }
+    ],
+
+    "💤 アフター・余韻セット (Aftercare)": [
+      { ja: "抱き合って余韻", en: "after sex, cuddling, embracing, breathing heavily" },
+      { ja: "放心状態で横たわる", en: "after orgasm, vacant eyes, limp body" },
+      { ja: "汗だくでキス", en: "sweaty afterglow kiss" },
+      { ja: "中出し溢れながら抱かれる", en: "creampie dripping, being held gently" },
+      { ja: "頭を撫でられながら", en: "aftercare, head pat, gentle smile" }
     ],
 
     "🧬 ベース (Base)": [
@@ -6792,102 +6919,47 @@ console.log("STAGE1 COMPLETED POSES v24 LOADED");
       { ja: "連続イキ", en: "multiple orgasm focus" }
     ],
 
-    "😵 表情カスタマイズ (Expression Customize)": [
-      { ja: "アヘ顔", en: "ahegao" },
-      { ja: "白目", en: "rolling eyes" },
-      { ja: "舌出し", en: "tongue out" },
-      { ja: "大量よだれ", en: "excessive drooling" },
-      { ja: "口角泡立ち", en: "foamy mouth" },
-      { ja: "連続絶頂顔", en: "multiple orgasm face" },
-      { ja: "精神崩壊顔", en: "mind break face" },
-      { ja: "泣きイキ顔", en: "crying orgasm face" },
-      { ja: "恍惚顔", en: "ecstasy face" },
-      { ja: "虚ろな目", en: "vacant eyes" }
-    ],
-
-    "✨ 品質ブースト (Quality Boost)": [
-      { ja: "最高品質", en: "masterpiece, best quality, ultra detailed, absurdres" },
-      { ja: "高解像度", en: "8k, sharp focus, intricate details" },
-      { ja: "美しい照明", en: "volumetric lighting, beautiful lighting, cinematic lighting" },
-      { ja: "エロティックライト", en: "erotic lighting, seductive lighting, rim lighting, backlighting" },
-      { ja: "エロティックムード", en: "erotic atmosphere, seductive mood, sensual atmosphere" },
-      { ja: "リアルな肌", en: "detailed skin texture, subsurface scattering, realistic skin" },
-      { ja: "サブサーフェス肌", en: "subsurface scattering, translucent skin, soft skin" },
-      { ja: "光沢肌", en: "glossy skin, oily skin, shiny skin" },
-      { ja: "汗ばんだ肌", en: "sweaty skin, glistening skin, wet skin" },
-      { ja: "完璧なボディ", en: "perfect body, perfect proportions, beautiful detailed body" },
-      { ja: "ディープフォーカス", en: "depth of field, bokeh, sharp focus" },
-      { ja: "高精細エロ", en: "highly detailed pussy, visible penetration, wet pussy, detailed fluids" },
-      { ja: "リアルティック", en: "photorealistic, realistic, ultra realistic" },
-      { ja: "映画的", en: "cinematic, film grain, dramatic lighting" }
-    ],
-
     "💦 エフェクト・体液 (Effects & Fluids)": [
-      { ja: "大量潮吹き", en: "heavy squirting, female ejaculation, squirting orgasm" },
-      { ja: "大量よだれ", en: "excessive drooling, saliva trail, messy mouth" },
-      { ja: "中出し溢れ", en: "creampie overflowing, cum dripping from pussy" },
-      { ja: "連続絶頂", en: "multiple orgasm, body spasms, twitching" },
-      { ja: "アヘ顔強め", en: "ahegao, rolling eyes, tongue out" },
-      { ja: "精神崩壊", en: "mind break, vacant eyes" }
-    ],
-
-    "🔞 NSFWフラグ (NSFW Flags)": [
-      { ja: "NSFW", en: "nsfw" },
-      { ja: "R-18", en: "r-18, explicit content" },
-      { ja: "成人向け", en: "adult content, mature content" },
-      { ja: "ヌード許可", en: "nude, completely nude, naked" },
-      { ja: "露骨な表現", en: "explicit, explicit sexual content, explicit nudity" },
-      { ja: "性的描写", en: "sexual activity, detailed sex" },
-      { ja: "過激", en: "extreme content, hardcore" },
-      { ja: "生々しい", en: "raw, uncensored, unfiltered" },
-      { ja: "エロティック", en: "erotic, sensual" },
-      { ja: "ポルノグラフィック", en: "pornographic, hentai" }
+      { ja: "大量潮吹き", en: "heavy squirting, female ejaculation" },
+      { ja: "大量よだれ", en: "excessive drooling" },
+      { ja: "中出し溢れ", en: "creampie overflowing, cum dripping" },
+      { ja: "連続絶頂", en: "multiple orgasm, body spasms" },
+      { ja: "アヘ顔強め", en: "ahegao, rolling eyes, tongue out" }
     ]
   };
 
+  // ==================== Pose v17内の下位棚連動マッピング（全セット対応） ====================
   const completeSetLinks = {
-    // ==================== 完成セット ====================
-    "missionary position, deep penetration, mating press, legs spread wide, visible penetration": ["masterpiece, best quality, ultra detailed", "heavy squirting", "multiple orgasm", "ahegao", "rolling eyes", "nsfw", "r-18", "missionary position"],
-    "doggy style, ass up face down, violent thrusting, visible penetration": ["masterpiece, best quality, ultra detailed", "heavy squirting", "excessive drooling", "mind break", "nsfw", "doggy style"],
-    "cowgirl position, intense hip grinding, breasts bouncing, visible penetration": ["masterpiece, best quality, ultra detailed", "creampie overflowing", "multiple orgasm", "ahegao", "nsfw", "cowgirl position"],
-    "face to face sitting sex, deep kissing, full embrace, slow deep thrusting": ["masterpiece, best quality, ultra detailed", "erotic atmosphere", "gentle passionate sex", "nsfw", "face to face sitting sex"],
-    "standing doggy against wall, hands pinned, one leg lifted": ["masterpiece, best quality, ultra detailed", "heavy squirting", "rough violent sex", "nsfw", "standing doggy style", "doggy style"],
-    "missionary legs on shoulders, deep cervix penetration": ["masterpiece, best quality, ultra detailed", "heavy squirting", "ahegao", "nsfw", "missionary position"],
-    "doggy style, multiple orgasm, incontinence": ["masterpiece, best quality, ultra detailed", "heavy squirting", "mind break", "excessive drooling", "nsfw", "doggy style"],
-    "cowgirl creampie, cum overflowing": ["masterpiece, best quality, ultra detailed", "creampie overflowing", "ahegao", "nsfw", "cowgirl position"],
-    "m-shaped legs spread, intense fingering, visible insertion": ["masterpiece, best quality, ultra detailed", "heavy squirting", "multiple orgasm", "nsfw", "m-shaped legs spread"],
-    "doggy style choking from behind": ["masterpiece, best quality, ultra detailed", "mind break", "rough violent sex", "nsfw", "doggy style"],
-    "missionary with deep kissing, passionate eye contact": ["masterpiece, best quality, ultra detailed", "deep kissing focus", "gentle passionate sex", "nsfw", "missionary position"],
-    "heavy squirting and incontinence, total mind break": ["masterpiece, best quality, ultra detailed", "heavy squirting", "mind break", "ahegao", "nsfw"],
+    "missionary position, deep penetration, mating press, legs spread wide, visible penetration": ["masterpiece, best quality", "missionary position", "heavy squirting", "ahegao", "rolling eyes", "wavy mouth", "nsfw", "r-18"],
+    "doggy style, ass up face down, violent thrusting, visible penetration": ["masterpiece, best quality", "doggy style", "heavy squirting", "mind break", "wavy mouth", "nsfw"],
+    "cowgirl position, intense hip grinding, breasts bouncing, visible penetration": ["masterpiece, best quality", "cowgirl position", "creampie overflowing", "ahegao", "wavy mouth", "nsfw"],
+    "face to face sitting sex, deep kissing, full embrace, slow deep thrusting": ["masterpiece, best quality", "face to face sitting sex", "gentle passionate sex", "nsfw"],
+    "standing doggy against wall, hands pinned, one leg lifted": ["masterpiece, best quality", "standing doggy style", "doggy style", "rough violent sex", "wavy mouth", "nsfw"],
+    "missionary legs on shoulders, deep cervix penetration": ["masterpiece, best quality", "missionary position", "heavy squirting", "ahegao", "wavy mouth"],
+    "doggy style, multiple orgasm, incontinence": ["masterpiece, best quality", "doggy style", "heavy squirting", "mind break", "wavy mouth"],
+    "cowgirl creampie, cum overflowing": ["masterpiece, best quality", "cowgirl position", "creampie overflowing", "ahegao"],
+    "m-shaped legs spread, intense fingering, visible insertion": ["masterpiece, best quality", "m-shaped legs spread", "heavy squirting", "wavy mouth"],
+    "doggy style choking from behind": ["masterpiece, best quality", "doggy style", "mind break", "rough violent sex"],
+    "missionary with deep kissing, passionate eye contact": ["masterpiece, best quality", "missionary position", "gentle passionate sex"],
+    "heavy squirting and incontinence, total mind break": ["masterpiece, best quality", "heavy squirting", "mind break", "ahegao", "wavy mouth"],
+    "lotus position, face to face, deep penetration, full embrace": ["masterpiece, best quality", "lotus position", "gentle passionate sex"],
+    "wheelbarrow position, standing doggy legs lifted": ["masterpiece, best quality", "wheelbarrow position", "doggy style"],
+    "reverse cowgirl, ass focus, intense grinding": ["masterpiece, best quality", "reverse cowgirl", "cowgirl position"],
+    "missionary position, face to face, full body contact": ["masterpiece, best quality", "missionary position"],
+    "doggy style, hands pinned behind back": ["masterpiece, best quality", "doggy style", "mind break"],
 
-    "lotus position, face to face, deep penetration, full embrace": ["masterpiece, best quality, ultra detailed", "gentle passionate sex", "nsfw", "lotus position"],
-    "wheelbarrow position, standing doggy legs lifted": ["masterpiece, best quality, ultra detailed", "rough violent sex", "heavy squirting", "nsfw", "doggy style"],
-    "reverse cowgirl, ass focus, intense grinding": ["masterpiece, best quality, ultra detailed", "creampie overflowing", "ahegao", "nsfw", "cowgirl position"],
-    "missionary position, face to face, full body contact": ["masterpiece, best quality, ultra detailed", "gentle passionate sex", "nsfw", "missionary position"],
-    "doggy style, hands pinned behind back": ["masterpiece, best quality, ultra detailed", "rough violent sex", "mind break", "nsfw", "doggy style"],
-
-    // ==================== 前座完成セット ====================
-    "deep french kiss, tongue entanglement": ["masterpiece, best quality, ultra detailed", "deep kissing focus", "erotic atmosphere", "nsfw"],
-    "gentle breast groping, nipple licking": ["masterpiece, best quality, ultra detailed", "breast play focus", "glossy skin", "nsfw"],
-    "intense nipple play, sucking, pinching": ["masterpiece, best quality, ultra detailed", "breast play focus", "nsfw"],
-    "cunnilingus, pussy eating, legs spread": ["masterpiece, best quality, ultra detailed", "heavy squirting", "nsfw"],
-    "blowjob, deep throat, eye contact": ["masterpiece, best quality, ultra detailed", "excessive drooling", "nsfw"],
-    "paizuri, titjob, cleavage sex": ["masterpiece, best quality, ultra detailed", "breast play focus", "glossy skin", "nsfw"],
-    "intense fingering, two fingers": ["masterpiece, best quality, ultra detailed", "heavy squirting", "nsfw"],
-    "clitoris teasing, rubbing, intense pleasure": ["masterpiece, best quality, ultra detailed", "heavy squirting", "nsfw"],
-    "whispering in ear while groping": ["masterpiece, best quality, ultra detailed", "gentle passionate sex", "nsfw"],
-    "kissing all over body, neck to thighs": ["masterpiece, best quality, ultra detailed", "gentle passionate sex", "nsfw"],
-
-    // ==================== 性具完成セット ====================
-    "missionary position, vibrator inside, deep penetration, squirting": ["masterpiece, best quality, ultra detailed", "heavy squirting", "vibrator, vibrating toy", "nsfw", "explicit"],
-    "doggy style, large dildo, rough insertion, ahegao": ["masterpiece, best quality, ultra detailed", "dildo, large dildo", "ahegao", "heavy squirting", "nsfw", "doggy style"],
-    "cowgirl position, clitoral vibrator, intense grinding": ["masterpiece, best quality, ultra detailed", "clitoral vibrator, rotor", "multiple orgasm", "nsfw"],
-    "m-shaped legs spread, hitachi magic wand, heavy squirting": ["masterpiece, best quality, ultra detailed", "hitachi magic wand, powerful vibrator", "heavy squirting", "ahegao", "nsfw"],
-    "doggy style, anal plug, double penetration feel": ["masterpiece, best quality, ultra detailed", "anal plug", "nsfw", "doggy style"],
-    "nipple clamps, bondage, submissive pose": ["masterpiece, best quality, ultra detailed", "nipple clamps", "bondage", "nsfw"],
-    "multiple sex toys, vibrator and dildo, overwhelming pleasure": ["masterpiece, best quality, ultra detailed", "multiple sex toys", "heavy squirting", "nsfw"],
-    "blindfold, clitoral vibrator, anticipation play": ["masterpiece, best quality, ultra detailed", "blindfold", "nsfw"]
+    // 前座・性具など主要なものも追加
+    "deep french kiss, tongue entanglement": ["deep kissing focus", "erotic atmosphere"],
+    "cunnilingus, pussy eating, legs spread": ["heavy squirting"],
+    "blowjob, deep throat, eye contact": ["excessive drooling"],
+    "intense fingering, two fingers": ["heavy squirting"],
+    "missionary position, vibrator inside, deep penetration, squirting": ["heavy squirting", "vibrator"],
+    "doggy style, large dildo, rough insertion, ahegao": ["doggy style", "ahegao", "heavy squirting"]
   };
+
+
+  // Pose v17 と Expression v5 の自動チェック連動は廃止。
+  // Expression v5 は表情側で手動選択、Pose v17 はPose内の下位棚だけを連動対象にする。
 
   const API = {
     initUI() {
@@ -6896,22 +6968,23 @@ console.log("STAGE1 COMPLETED POSES v24 LOADED");
       const tryMount = () => {
         const root = document.getElementById("pose-master-root");
         if (!root) { setTimeout(tryMount, 150); return; }
-        if (document.getElementById("pose-v17-r18-sex")) return;
+        if (document.getElementById("pose-v17-r18-sex-final")) return;
 
-        const separator = document.createElement("div");
-        separator.id = "pose-v17-r18-sex";
-        separator.style.cssText = "margin:25px 0 12px 0; border-top:2px dashed #c00; text-align:center;";
-        separator.innerHTML = `<span style="background:#fff0f0;padding:4px 14px;color:#c00;font-weight:bold;border-radius:6px;">🔴 R-18 性交・絶頂特化 v17（全連動最終強化）</span>`;
-        root.appendChild(separator);
+        // セパレーター
+        const sep = document.createElement("div");
+        sep.id = "pose-v17-r18-sex-final";
+        sep.style.cssText = "margin:25px 0 12px; border-top:2px dashed #c00; text-align:center;";
+        sep.innerHTML = `<span style="background:#fff0f0; padding:4px 16px; color:#c00; font-weight:bold; border-radius:6px;">🔴 R-18 性交・絶頂特化 v17（単独版）</span>`;
+        root.appendChild(sep);
 
         const details = document.createElement("details");
         details.className = "r18-sex-collection";
-        details.style.cssText = `margin:10px 0; border:2px solid #c00; border-radius:10px; background:#fff5f5; padding:2px;`;
+        details.style.cssText = "margin:10px 0; border:2px solid #c00; border-radius:10px; background:#fff5f5;";
         details.open = false;
 
         const summary = document.createElement("summary");
         summary.innerHTML = `🔥 性交・体位・絶頂極限特化 <span style="color:#c00;">(v17)</span>`;
-        summary.style.cssText = `font-weight:bold; padding:12px; background:#ffe6e6; color:#c00; cursor:pointer; border-radius:8px;`;
+        summary.style.cssText = "font-weight:bold; padding:12px; background:#ffe6e6; color:#c00; cursor:pointer;";
         details.appendChild(summary);
 
         const content = document.createElement("div");
@@ -6920,34 +6993,33 @@ console.log("STAGE1 COMPLETED POSES v24 LOADED");
         content.style.flexDirection = "column";
         content.style.gap = "12px";
 
-        const createSubCat = (title, items, role = "") => {
+        const createSubCat = (title, items) => {
           const sub = document.createElement("details");
           sub.open = false;
-          sub.style.marginBottom = "10px";
           sub.style.border = "1px solid #ff9999";
           sub.style.borderRadius = "6px";
+          sub.style.background = "#fff9f9";
 
-          const subSummary = document.createElement("summary");
-          subSummary.textContent = title;
-          subSummary.style.fontWeight = "bold";
-          subSummary.style.padding = "8px 12px";
-          subSummary.style.background = "#fff0f0";
-          sub.appendChild(subSummary);
+          const subSum = document.createElement("summary");
+          subSum.textContent = title;
+          subSum.style.fontWeight = "bold";
+          subSum.style.padding = "8px 12px";
+          subSum.style.background = "#ffe6e6";
+          sub.appendChild(subSum);
 
           const grid = document.createElement("div");
           grid.style.padding = "10px";
           grid.style.display = "grid";
-          grid.style.gridTemplateColumns = "repeat(auto-fill, minmax(140px, 1fr))";
-          grid.style.gap = "8px";
+          grid.style.gridTemplateColumns = "repeat(auto-fill, minmax(145px, 1fr))";
+          grid.style.gap = "6px";
 
           items.forEach(item => {
             const label = document.createElement("label");
-            label.style.cssText = "display:flex; align-items:center; font-size:0.9em; cursor:pointer; padding:4px 0;";
+            label.style.cssText = "display:flex; align-items:center; cursor:pointer; font-size:0.9em;";
             const cb = document.createElement("input");
             cb.type = "checkbox";
-            cb.style.marginRight = "8px";
+            cb.style.marginRight = "6px";
             cb.dataset.en = item.en;
-            if (role) cb.dataset.role = role;
             label.appendChild(cb);
             label.appendChild(document.createTextNode(item.ja));
             grid.appendChild(label);
@@ -6956,57 +7028,67 @@ console.log("STAGE1 COMPLETED POSES v24 LOADED");
           return sub;
         };
 
-        const completeSetNode = createSubCat("🔥 完成セット", POSE_R18_SEX["🔥 完成セット (Complete Sex Sets)"], "complete");
-        const foreplaySetNode = createSubCat("🔥 前座完成セット", POSE_R18_SEX["🔥 前座完成セット (Foreplay Complete Sets)"], "foreplay");
-        const sexToySetNode = createSubCat("🔧 性具完成セット", POSE_R18_SEX["🔧 性具完成セット (Sex Toy Complete Sets)"], "sextoy");
-        const baseNode = createSubCat("🧬 ベース", POSE_R18_SEX["🧬 ベース (Base)"], "base");
-        const customNode = createSubCat("🎨 カスタマイズ", POSE_R18_SEX["🎨 カスタマイズ (Customize)"], "custom");
-        const settingNode = createSubCat("⚙️ 設定", POSE_R18_SEX["⚙️ 設定 (Settings)"], "setting");
-        const expressionNode = createSubCat("😵 表情カスタマイズ", POSE_R18_SEX["😵 表情カスタマイズ (Expression Customize)"], "expression");
-        const qualityNode = createSubCat("✨ 品質ブースト", POSE_R18_SEX["✨ 品質ブースト (Quality Boost)"], "quality");
-        const effectsNode = createSubCat("💦 エフェクト・体液", POSE_R18_SEX["💦 エフェクト・体液 (Effects & Fluids)"], "effects");
-        const nsfwFlagNode = createSubCat("🔞 NSFWフラグ", POSE_R18_SEX["🔞 NSFWフラグ (NSFW Flags)"], "nsfw");
+        // 全棚追加
+        content.appendChild(createSubCat("🔥 完成セット", POSE_R18_SEX["🔥 完成セット (Complete Sex Sets)"]));
+        content.appendChild(createSubCat("🔥 前座完成セット", POSE_R18_SEX["🔥 前座完成セット (Foreplay Complete Sets)"]));
+        content.appendChild(createSubCat("🔧 性具完成セット", POSE_R18_SEX["🔧 性具完成セット (Sex Toy Complete Sets)"]));
+        content.appendChild(createSubCat("🏠 場所完成セット", POSE_R18_SEX["🏠 場所完成セット (Location Sets)"]));
+        content.appendChild(createSubCat("👗 服装プレイセット", POSE_R18_SEX["👗 服装プレイセット (Clothing Play)"]));
+        content.appendChild(createSubCat("💤 アフター・余韻セット", POSE_R18_SEX["💤 アフター・余韻セット (Aftercare)"]));
+        content.appendChild(createSubCat("🧬 ベース", POSE_R18_SEX["🧬 ベース (Base)"]));
+        content.appendChild(createSubCat("🎨 カスタマイズ", POSE_R18_SEX["🎨 カスタマイズ (Customize)"]));
+        content.appendChild(createSubCat("⚙️ 設定", POSE_R18_SEX["⚙️ 設定 (Settings)"]));
+        content.appendChild(createSubCat("💦 エフェクト・体液", POSE_R18_SEX["💦 エフェクト・体液 (Effects & Fluids)"]));
 
-        content.append(completeSetNode, foreplaySetNode, sexToySetNode, baseNode, customNode, settingNode, expressionNode, qualityNode, effectsNode, nsfwFlagNode);
+        details.appendChild(content);
+        root.appendChild(details);
 
-        const allCompleteCheckboxes = [
-          ...completeSetNode.querySelectorAll('input[type="checkbox"]'),
-          ...foreplaySetNode.querySelectorAll('input[type="checkbox"]'),
-          ...sexToySetNode.querySelectorAll('input[type="checkbox"]')
-        ];
+        // ==================== 連動ロジック ====================
+        const allCompleteCb = Array.from(details.querySelectorAll('details summary')).filter(s => 
+          s.textContent.includes("完成セット")
+        ).flatMap(s => Array.from(s.parentElement.querySelectorAll('input[type="checkbox"]')));
+
+        const getLinkedShelves = () => Array.from(details.querySelectorAll('details')).filter(d => {
+          const sum = d.querySelector('summary');
+          return sum && (sum.textContent.includes("ベース") || 
+                         sum.textContent.includes("カスタマイズ") || 
+                         sum.textContent.includes("設定") || 
+                         sum.textContent.includes("エフェクト"));
+        });
 
         const clearAllLinked = () => {
-          [baseNode, customNode, settingNode, expressionNode, qualityNode, effectsNode, nsfwFlagNode].forEach(node => {
-            node.querySelectorAll('input[type="checkbox"]').forEach(c => c.checked = false);
+          getLinkedShelves().forEach(shelf => {
+            shelf.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
           });
         };
 
-        allCompleteCheckboxes.forEach(cb => {
+        allCompleteCb.forEach(cb => {
           cb.addEventListener("change", () => {
-            const activeEn = cb.dataset.en || "";
+            const activeEn = (cb.dataset.en || "").trim();
 
             if (cb.checked) {
-              allCompleteCheckboxes.forEach(other => { if (other !== cb) other.checked = false; });
+              // 他の完成セットをオフ
+              allCompleteCb.forEach(other => { if (other !== cb) other.checked = false; });
 
               const links = completeSetLinks[activeEn] || [];
               clearAllLinked();
 
-              [baseNode, customNode, settingNode, expressionNode, qualityNode, effectsNode, nsfwFlagNode].forEach(node => {
-                node.querySelectorAll('input[type="checkbox"]').forEach(c => {
-                  const val = (c.dataset.en || "").toLowerCase();
+              getLinkedShelves().forEach(shelf => {
+                shelf.querySelectorAll('input[type="checkbox"]').forEach(targetCb => {
+                  const val = (targetCb.dataset.en || "").toLowerCase();
                   if (links.some(link => val.includes(link.toLowerCase()) || link.toLowerCase().includes(val))) {
-                    c.checked = true;
+                    targetCb.checked = true;
                   }
                 });
               });
+
+              // Expression v5への自動チェック連動は廃止。
             } else {
               clearAllLinked();
+              // Expression v5への自動解除連動は廃止。
             }
           });
         });
-
-        details.appendChild(content);
-        root.appendChild(details);
       };
 
       tryMount();
@@ -7023,3 +7105,1066 @@ console.log("STAGE1 COMPLETED POSES v24 LOADED");
 
   window.__registerPromptPart(KEY, VERSION, API);
 })();
+
+// =====================================================
+// Animal Pose Specialized Collection v18
+// - Adds animal-specific pose shelves to pose-master-root.
+// - Public collection only; does not change existing pose shelves.
+// =====================================================
+(function(){
+  "use strict";
+  const VERSION = 18;
+  const KEY = "pose";
+
+
+  function installCreaturePoseShortcutBridge() {
+    if (window.__SHIMA_CREATURE_POSE_SHORTCUT_BRIDGE_READY__) return;
+    window.__SHIMA_CREATURE_POSE_SHORTCUT_BRIDGE_READY__ = true;
+
+    function getOwnSummaryText(details) {
+      if (!details) return "";
+      const summary = Array.from(details.children || []).find(ch => ch && ch.tagName === "SUMMARY");
+      return summary ? String(summary.textContent || "") : "";
+    }
+
+    function openAncestors(node) {
+      let cur = node;
+      while (cur && cur !== document.body) {
+        if (cur.tagName === "DETAILS") cur.open = true;
+        cur = cur.parentElement;
+      }
+    }
+
+    function openPoseSection() {
+      const poseSection = document.getElementById("list-pose");
+      if (poseSection) {
+        const sectionDetails = Array.from(poseSection.children || []).find(ch => ch && ch.tagName === "DETAILS");
+        if (sectionDetails) sectionDetails.open = true;
+        openAncestors(poseSection);
+      }
+      return poseSection;
+    }
+
+    function openDetailsBySummaryText(scope, needle) {
+      if (!scope || !needle) return null;
+      const target = String(needle || "");
+      let found = null;
+      Array.from(scope.querySelectorAll("details")).forEach(details => {
+        if (found) return;
+        const text = getOwnSummaryText(details);
+        if (text && text.includes(target)) found = details;
+      });
+      if (found) {
+        found.open = true;
+        openAncestors(found);
+      }
+      return found;
+    }
+
+    function clearShortcutHighlights(scope) {
+      if (!scope) return;
+      scope.querySelectorAll("[data-creature-pose-shortcut-highlight='1']").forEach(node => {
+        node.style.outline = "";
+        node.style.background = "";
+        node.style.borderRadius = "";
+        node.style.padding = "";
+        delete node.dataset.creaturePoseShortcutHighlight;
+      });
+    }
+
+    function highlightLabel(scope, labelText) {
+      // 動物ポーズ誘導では個別候補を強調しない。
+      // 緑枠が「これを選ぶべき」に見えるため、既存強調を解除するだけにする。
+      clearShortcutHighlights(scope);
+      return null;
+    }
+
+    function handleCreaturePoseShortcut(detail) {
+      detail = detail || window.__SHIMA_PENDING_CREATURE_POSE_SHORTCUT__ || null;
+      if (!detail) return false;
+
+      const poseSection = openPoseSection();
+      const poseRoot = document.getElementById("pose-master-root");
+      const marker = document.getElementById("pose-v18-animalpose");
+
+      if (!poseRoot || !marker) {
+        window.__SHIMA_PENDING_CREATURE_POSE_SHORTCUT__ = detail;
+        try {
+          (poseRoot || poseSection || document.getElementById("list-pose")).scrollIntoView({ behavior: "smooth", block: "center" });
+        } catch(_) {}
+        return false;
+      }
+
+      const mainDetails = Array.from(marker.querySelectorAll("details")).find(d => {
+        const text = getOwnSummaryText(d);
+        return text.includes("動物ポーズ特化コレクション") || text.includes("動物ポーズ特化 v18");
+      });
+      if (mainDetails) {
+        mainDetails.open = true;
+        openAncestors(mainDetails);
+      }
+
+      // 複数候補棚では個別ラベルを強調せず、対応棚だけを開いて移動する。
+      clearShortcutHighlights(marker);
+      const shelf = detail.targetShelf ? openDetailsBySummaryText(marker, detail.targetShelf) : null;
+
+      try {
+        const target = shelf || mainDetails || marker || poseRoot;
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      } catch(_) {}
+
+      window.__SHIMA_PENDING_CREATURE_POSE_SHORTCUT__ = null;
+      return true;
+    }
+
+    window.__SHIMA_HANDLE_CREATURE_POSE_SHORTCUT__ = handleCreaturePoseShortcut;
+    window.__SHIMA_INSTALL_CREATURE_POSE_SHORTCUT_LISTENER__ = function(){
+      if (window.__SHIMA_CREATURE_POSE_SHORTCUT_READY__) return;
+      window.__SHIMA_CREATURE_POSE_SHORTCUT_READY__ = true;
+      window.addEventListener("shima:creature-pose-shortcut", ev => {
+        handleCreaturePoseShortcut(ev && ev.detail);
+      });
+    };
+
+    window.__SHIMA_INSTALL_CREATURE_POSE_SHORTCUT_LISTENER__();
+  }
+
+  installCreaturePoseShortcutBridge();
+
+  const POSE_ANIMAL_SPECIAL_COLLECTION = {
+    "🐾 動物ポーズ特化コレクション (Animal Pose Collection)": {
+      "✅ 完成セット：動物単体ポーズ": [
+        {
+          ja: "猫単体：香箱座り＋片前足上げ＋毛づくろい",
+          en: "single animal subject, real cat, cat pose starter set, cat loaf pose, one paw raised pose, grooming pose",
+          linked_ids: [
+            "cat loaf pose, paws tucked under body, compact relaxed silhouette",
+            "one paw raised pose, curious feline gesture, balanced sitting posture",
+            "grooming pose, licking paw, relaxed sitting, delicate movement"
+          ]
+        },
+        {
+          ja: "猫単体：低く忍び寄る＋飛びかかる＋前足一撃",
+          en: "single animal subject, real feline animal, feline hunting pose set, low stalking pose, pouncing pose, paw swipe pose",
+          linked_ids: [
+            "pouncing cat pose, low crouch, hind legs ready to spring, focused eyes",
+            "big cat stalking pose, low body, silent steps, tense shoulders",
+            "big cat paw swipe pose, powerful foreleg motion, dynamic attack arc"
+          ]
+        },
+        {
+          ja: "犬単体：遊びの伏せ＋おすわり＋お手",
+          en: "single animal subject, real dog, friendly dog pose set, play bow pose, sitting dog pose, offering paw pose",
+          linked_ids: [
+            "play bow pose, front legs lowered, hips raised, excited friendly posture",
+            "sitting dog pose, looking up, attentive friendly expression",
+            "offering paw pose, one front paw raised, obedient cute gesture"
+          ]
+        },
+        {
+          ja: "犬単体：全力疾走＋匂い嗅ぎ＋お腹見せ",
+          en: "single animal subject, real dog, active dog pose set, running dog pose, sniffing the ground pose, belly-up dog pose",
+          linked_ids: [
+            "running dog pose, stretched stride, ears back, energetic motion",
+            "sniffing the ground pose, head lowered, nose close to floor, searching motion",
+            "belly-up dog pose, rolling on back, relaxed trusting posture"
+          ]
+        },
+        {
+          ja: "狐・狼単体：忍び足＋遠吠え＋群れリーダー立ち",
+          en: "single animal subject, real fox or wolf, alert animal pose set, sneaking fox pose, howling wolf pose, pack leader stance",
+          linked_ids: [
+            "sneaking fox pose, light steps, lowered body, alert tail balance",
+            "howling wolf pose, head raised to sky, strong neck line, dramatic silhouette",
+            "wolf pack leader stance, proud standing posture, chest forward, alert gaze"
+          ]
+        },
+        {
+          ja: "うさぎ単体：おすわり＋ジャンプ＋鼻ひくひく",
+          en: "single animal subject, real rabbit, rabbit and small animal pose set, rabbit sitting pose, rabbit hopping pose, small animal sniffing pose",
+          linked_ids: [
+            "rabbit sitting pose, hind legs tucked, front paws close, ears upright",
+            "rabbit hopping pose, mid-air hop, tucked legs, light springy motion",
+            "small animal sniffing pose, tiny nose forward, curious cautious posture"
+          ]
+        },
+        {
+          ja: "小型齧歯類単体：丸まる＋種持ち＋木登り",
+          en: "single animal subject, real small rodent, animal-only small rodent pose set, hamster curled pose, real hamster holding seed, squirrel climbing pose",
+          linked_ids: [
+            "hamster curled pose, tiny round body, paws near mouth, cozy compact shape",
+            "small rodent holding seed pose, tiny paws holding food, upright nibbling posture",
+            "squirrel climbing pose, body pressed to tree, gripping claws, curled tail"
+          ]
+        },
+        {
+          ja: "有袋類単体：カンガルー跳躍＋コアラ木抱き＋ウォンバット穴掘り",
+          en: "single animal subject, real marsupial animal, marsupial pose set, kangaroo hopping pose, koala hugging tree pose, wombat digging pose",
+          linked_ids: [
+            "kangaroo hopping pose, powerful hind legs, tail balancing, forward leap",
+            "koala hugging tree pose, arms wrapped around trunk, sleepy relaxed body",
+            "wombat digging pose, front paws scraping ground, compact strong posture"
+          ]
+        },
+        {
+          ja: "鳥単体：止まり木＋首かしげ＋羽づくろい",
+          en: "single animal subject, real bird, bird basic pose set, perched pose, head tilt pose, preening pose",
+          linked_ids: [
+            "bird perched pose, balanced on branch, claws gripping, upright body",
+            "bird head tilt pose, curious small movement, bright attentive posture",
+            "bird preening pose, beak touching wing feathers, calm grooming motion"
+          ]
+        },
+        {
+          ja: "鳥単体：羽ばたき開始＋着地直前＋翼広げ",
+          en: "single animal subject, real bird, bird flight pose set, taking off pose, landing pose, wings fully spread pose",
+          linked_ids: [
+            "bird taking off pose, wings opening, feet leaving perch, dynamic lift",
+            "bird landing pose, wings spread for braking, feet reaching forward",
+            "wings fully spread pose, symmetrical feather display, proud silhouette"
+          ]
+        },
+        {
+          ja: "馬・鹿単体：ギャロップ＋前脚上げ＋鹿の跳躍",
+          en: "single animal subject, real horse or deer, animal motion pose set, galloping pose, rearing horse pose, deer leaping pose",
+          linked_ids: [
+            "horse galloping pose, extended legs, mane flowing, dynamic speed",
+            "rearing horse pose, front legs raised, powerful chest, dramatic silhouette",
+            "deer leaping pose, long legs stretched, graceful airborne motion"
+          ]
+        },
+        {
+          ja: "大型哺乳類単体：二本立ち＋のし歩き＋鮭を捕る",
+          en: "single animal subject, real large mammal, large mammal power pose set, bear standing pose, bear lumbering walk pose, bear catching fish pose",
+          linked_ids: [
+            "bear standing on hind legs, massive body, raised forepaws, imposing silhouette",
+            "bear lumbering walk pose, heavy steps, low head, powerful shoulders",
+            "bear catching fish pose, paw striking water, splash, focused motion"
+          ]
+        },
+        {
+          ja: "爬虫類・両生類単体：低い這い＋とぐろ＋しゃがみ",
+          en: "single animal subject, real reptile or amphibian, reptile and amphibian pose set, low crawl pose, coiled snake pose, frog crouching pose",
+          linked_ids: [
+            "crocodile low crawl pose, belly close to ground, heavy tail, stealthy movement",
+            "coiled snake pose, spiral body, head raised, focused strike readiness",
+            "frog crouching pose, legs folded, low squat, ready to jump"
+          ]
+        },
+        {
+          ja: "水生動物単体：イルカジャンプ＋ラッコ浮遊＋サメ旋回",
+          en: "single animal subject, real aquatic animal, aquatic animal motion pose set, dolphin leaping pose, sea otter floating pose, shark circling pose",
+          linked_ids: [
+            "dolphin leaping pose, arcing out of water, splash trail, joyful motion",
+            "sea otter floating on back pose, paws on belly, relaxed water surface",
+            "shark circling pose, sleek body curve, dorsal fin visible, predatory motion"
+          ]
+        },
+        {
+          ja: "昆虫・節足動物単体：蝶羽休め＋カマキリ構え＋サソリ尾上げ",
+          en: "single creature subject, real insect or arthropod, display pose set, butterfly resting pose, praying mantis stance, scorpion tail raised pose",
+          linked_ids: [
+            "butterfly resting pose, wings open on flower, delicate symmetrical silhouette",
+            "praying mantis stance, forelegs raised, triangular head tilt, predatory posture",
+            "scorpion tail raised pose, pincers open, defensive arched tail"
+          ]
+        },
+        {
+          ja: "ドラゴン単体：翼広げ＋飛び立ち＋咆哮",
+          en: "single fantasy creature subject, dragon pose set, wings spread pose, taking off pose, roaring pose",
+          linked_ids: [
+            "dragon wings spread pose, massive wings open, proud chest, long tail curve",
+            "dragon taking off pose, wings beating, claws leaving ground, dust and wind",
+            "roaring dragon pose, head thrown back, open jaws, spread wings, dramatic power"
+          ]
+        }
+      ],
+
+      "✅ 完成セット：人物＋動物 分離ポーズ": {
+        "🐹 小型齧歯類・小動物": [
+          {
+            ja: "人物＋ハムスター：手の上＋種を持つ＋別個体",
+            en: "human character focus, human character and a real pet hamster, separate characters, separate subjects, distinct bodies, different species, non-hybrid, clear size difference, human hands holding a real pet hamster",
+            linked_ids: [
+              "human character focus, human character and pet animal, separate characters, separate subjects, distinct bodies",
+              "different species, real pet animal, non-hybrid, separate anatomy",
+              "clear size difference, small pet animal in human hands, pet animal as a separate subject",
+              "human character gently holding a real pet hamster in human hands",
+              "real pet hamster holding seed in human hands, the hamster has tiny paws holding a seed",
+              "the real pet hamster is in an upright nibbling posture, clearly inside human hands"
+            ]
+          },
+          {
+            ja: "人物＋選択中の小型齧歯類：手の上＋餌持ち＋別個体",
+            en: "human character focus, human character and the selected real small rodent, separate characters, distinct bodies, different species, non-hybrid, selected small rodent in human hands, the selected small rodent holding food",
+            linked_ids: [
+              "human character focus, human character and pet animal, separate characters, separate subjects, distinct bodies",
+              "different species, real pet animal, non-hybrid, separate anatomy",
+              "selected creature species remains unchanged, preserve the selected animal species, no species replacement",
+              "clear size difference, small pet animal in human hands, pet animal as a separate subject",
+              "selected small rodent as a separate real animal in human hands, the selected small rodent holds food with tiny paws",
+              "human hand supports the selected small rodent without merging, clear size difference"
+            ]
+          },
+          {
+            ja: "人物＋選択中の小型齧歯類：両手で包む＋別個体",
+            en: "human character focus, human character cupping the selected real small rodent with both hands, separate characters, distinct bodies, different species, non-hybrid, clear size difference",
+            linked_ids: [
+              "human character focus, human character and pet animal, separate characters, separate subjects, distinct bodies",
+              "different species, real pet animal, non-hybrid, separate anatomy",
+              "selected creature species remains unchanged, preserve the selected animal species, no species replacement",
+              "clear size difference, small pet animal in human hands, pet animal as a separate subject",
+              "selected small rodent as a separate real animal in human hands, the selected small rodent holds food with tiny paws",
+              "human hand supports the selected small rodent without merging, clear size difference",
+              "human character watching the small animal from behind or beside, no body contact"
+            ]
+          },
+          {
+            ja: "人物＋選択中の小型齧歯類：袖・肩に乗る＋別個体",
+            en: "human character focus, human character and the selected real small rodent, separate characters, distinct bodies, different species, non-hybrid, selected small rodent perched on sleeve or shoulder",
+            linked_ids: [
+              "human character focus, human character and pet animal, separate characters, separate subjects, distinct bodies",
+              "different species, real pet animal, non-hybrid, separate anatomy",
+              "selected creature species remains unchanged, preserve the selected animal species, no species replacement",
+              "clear size difference, small pet animal in human hands, pet animal as a separate subject",
+              "selected small rodent perched on human sleeve or shoulder, separate tiny animal body",
+              "human hand supports the selected small rodent without merging, clear size difference"
+            ]
+          },
+          {
+            ja: "人物＋選択中の小型齧歯類：机上で餌探し＋人物は見守る",
+            en: "human character focus, human character and the selected real small rodent on a table, separate characters, distinct bodies, different species, non-hybrid, human watching the animal forage",
+            linked_ids: [
+              "human character focus, human character and pet animal, separate characters, separate subjects, distinct bodies",
+              "different species, real pet animal, non-hybrid, separate anatomy",
+              "selected creature species remains unchanged, preserve the selected animal species, no species replacement",
+              "selected small rodent foraging on tabletop, tiny paws searching food, separate animal body",
+              "human character watching the small animal from behind or beside, no body contact"
+            ]
+          },
+          {
+            ja: "人物＋シマリス：枝の上＋木の実＋人物は見上げる",
+            en: "human character focus, human character and a real chipmunk on a branch, separate characters, distinct bodies, different species, non-hybrid, chipmunk holding nut, human looking up",
+            linked_ids: [
+              "human character focus, human character and pet animal, separate characters, separate subjects, distinct bodies",
+              "different species, real pet animal, non-hybrid, separate anatomy",
+              "selected creature species remains unchanged, preserve the selected animal species, no species replacement",
+              "single animal subject, real chipmunk sitting on branch, striped back, tiny paws holding nut",
+              "human character watching the small animal from behind or beside, no body contact"
+            ]
+          }
+        ],
+        "🐦 鳥・翼の動き": [
+          {
+            ja: "人物＋選択中の鳥：肩に止まる＋別個体",
+            en: "human character focus, human character and the selected real bird, separate characters, distinct bodies, different species, non-hybrid, selected bird perched on the human shoulder",
+            linked_ids: [
+              "human character focus, human character and pet animal, separate characters, separate subjects, distinct bodies",
+              "different species, real pet animal, non-hybrid, separate anatomy",
+              "selected creature species remains unchanged, preserve the selected animal species, no species replacement",
+              "selected real bird perched on the human shoulder, tiny separate bird body",
+              "the bird claws perch on fabric or finger, the human body remains fully human"
+            ]
+          },
+          {
+            ja: "人物＋選択中の鳥：手・指に止まる＋別個体",
+            en: "human character focus, human character and the selected real bird, separate characters, distinct bodies, different species, non-hybrid, selected bird perched on human finger or hand",
+            linked_ids: [
+              "human character focus, human character and pet animal, separate characters, separate subjects, distinct bodies",
+              "different species, real pet animal, non-hybrid, separate anatomy",
+              "selected creature species remains unchanged, preserve the selected animal species, no species replacement",
+              "selected real bird perched on human finger or hand, tiny separate bird body",
+              "bird claws visibly grip the finger or glove, human hand remains human"
+            ]
+          },
+          {
+            ja: "人物＋選択中の鳥：近くを飛ぶ＋手を伸ばす",
+            en: "human character focus, human character and the selected real bird flying nearby, separate characters, distinct bodies, different species, non-hybrid, human reaching toward the bird",
+            linked_ids: [
+              "human character focus, human character and pet animal, separate characters, separate subjects, distinct bodies",
+              "different species, real pet animal, non-hybrid, separate anatomy",
+              "selected creature species remains unchanged, preserve the selected animal species, no species replacement",
+              "selected real bird flying beside the human character, separate wings and body visible",
+              "human hand reaching toward the flying bird, clear air gap between subjects"
+            ]
+          },
+          {
+            ja: "人物＋小鳥：肩に止まる鳥＋別個体",
+            en: "human character focus, human character and a real pet bird, separate characters, distinct bodies, different species, non-hybrid, real bird perched on the human shoulder",
+            linked_ids: [
+              "human character focus, human character and pet animal, separate characters, separate subjects, distinct bodies",
+              "different species, real pet animal, non-hybrid, separate anatomy",
+              "real pet bird perched on the human shoulder, tiny separate bird body",
+              "the bird claws perch on fabric or finger, the human body remains fully human"
+            ]
+          }
+        ],
+        "🐒 霊長類・樹上動物": [
+          {
+            ja: "人物＋選択中の霊長類：少し離れて並ぶ＋別個体",
+            en: "human character focus, human character and the selected real primate, separate characters, distinct bodies, different species, non-hybrid, selected primate beside the human with visible distance",
+            linked_ids: [
+              "human character focus, human character and pet animal, separate characters, separate subjects, distinct bodies",
+              "different species, real pet animal, non-hybrid, separate anatomy",
+              "selected creature species remains unchanged, preserve the selected animal species, no species replacement",
+              "selected real primate beside the human character, visible space between bodies",
+              "primate clinging or sitting pose, separate natural animal anatomy, hands and feet on branch or ground"
+            ]
+          },
+          {
+            ja: "人物＋選択中の霊長類：枝の上＋人物は見上げる＋別個体",
+            en: "human character focus, human character and the selected real primate on a branch, separate characters, distinct bodies, different species, non-hybrid, human looking up at the primate",
+            linked_ids: [
+              "human character focus, human character and pet animal, separate characters, separate subjects, distinct bodies",
+              "different species, real pet animal, non-hybrid, separate anatomy",
+              "selected creature species remains unchanged, preserve the selected animal species, no species replacement",
+              "selected real primate on a branch above or beside the human character, clear height difference",
+              "human character looking up at the primate, visible space between bodies"
+            ]
+          }
+        ],
+        "🐰 うさぎ・小型哺乳類": [
+          {
+            ja: "人物＋うさぎ：膝前のうさぎ＋別個体",
+            en: "human character focus, human character and a real pet rabbit, separate characters, distinct bodies, different species, non-hybrid, real rabbit sitting in front of the human",
+            linked_ids: [
+              "human character focus, human character and pet animal, separate characters, separate subjects, distinct bodies",
+              "different species, real pet animal, non-hybrid, separate anatomy",
+              "real pet rabbit sitting in front of the human character, clear size difference",
+              "the rabbit has its own small animal body, the human hands stay human"
+            ]
+          },
+          {
+            ja: "人物＋選択中のうさぎ類：膝前＋餌を差し出す＋別個体",
+            en: "human character focus, human character and the selected real rabbit or pika, separate characters, distinct bodies, different species, non-hybrid, human hand offering food",
+            linked_ids: [
+              "human character focus, human character and pet animal, separate characters, separate subjects, distinct bodies",
+              "different species, real pet animal, non-hybrid, separate anatomy",
+              "selected creature species remains unchanged, preserve the selected animal species, no species replacement",
+              "selected rabbit or pika sitting in front of the human character, nose twitching, separate animal body",
+              "human hand offering food near the rabbit, clear size difference and no merging"
+            ]
+          },
+          {
+            ja: "人物＋選択中の小型哺乳類：膝前＋別個体",
+            en: "human character focus, human character and the selected real small mammal, separate characters, distinct bodies, different species, non-hybrid, selected small mammal in front of the human",
+            linked_ids: [
+              "human character focus, human character and pet animal, separate characters, separate subjects, distinct bodies",
+              "different species, real pet animal, non-hybrid, separate anatomy",
+              "selected creature species remains unchanged, preserve the selected animal species, no species replacement",
+              "selected small mammal sitting in front of the human character, clear size difference",
+              "small mustelid or hedgehog low stance, separate real animal body, natural animal anatomy"
+            ]
+          },
+          {
+            ja: "人物＋選択中の小型哺乳類：腕に沿って歩く＋別個体",
+            en: "human character focus, human character and the selected real small mammal walking along the human arm, separate characters, distinct bodies, different species, non-hybrid",
+            linked_ids: [
+              "human character focus, human character and pet animal, separate characters, separate subjects, distinct bodies",
+              "different species, real pet animal, non-hybrid, separate anatomy",
+              "selected creature species remains unchanged, preserve the selected animal species, no species replacement",
+              "selected small mammal walking along the human forearm or beside the hand, separate animal body",
+              "long low small mammal body visible, paws separate from human fingers"
+            ]
+          }
+        ],
+        "🦘 有袋類・珍獣": [
+          {
+            ja: "人物＋選択中の滑空小動物：肩・腕に乗る＋別個体",
+            en: "human character focus, human character and the selected real gliding small animal, separate characters, distinct bodies, different species, non-hybrid, selected gliding animal perched on arm or shoulder",
+            linked_ids: [
+              "human character focus, human character and pet animal, separate characters, separate subjects, distinct bodies",
+              "different species, real pet animal, non-hybrid, separate anatomy",
+              "selected creature species remains unchanged, preserve the selected animal species, no species replacement",
+              "selected gliding small animal perched on human arm or shoulder, separate tiny animal body",
+              "gliding membrane spread pose, small animal limbs extended, natural animal anatomy"
+            ]
+          },
+          {
+            ja: "人物＋選択中の有袋類：少し離れて並ぶ＋別個体",
+            en: "human character focus, human character and the selected real marsupial animal, separate characters, distinct bodies, different species, non-hybrid, selected marsupial beside the human with visible distance",
+            linked_ids: [
+              "human character focus, human character and pet animal, separate characters, separate subjects, distinct bodies",
+              "different species, real pet animal, non-hybrid, separate anatomy",
+              "selected creature species remains unchanged, preserve the selected animal species, no species replacement",
+              "real animal companion beside the human character, visible space between bodies",
+              "clear two-subject composition, human body and animal body do not merge"
+            ]
+          }
+        ],
+        "🐱 猫・ネコ科": [
+          {
+            ja: "人物＋猫：膝の上の猫＋撫でる手＋別個体",
+            en: "human character focus, human character and a real pet cat, separate characters, distinct bodies, different species, non-hybrid, cat on the human lap, human hand petting the cat",
+            linked_ids: [
+              "human character focus, human character and pet animal, separate characters, separate subjects, distinct bodies",
+              "different species, real pet animal, non-hybrid, separate anatomy",
+              "real pet cat on the human lap, human hand gently petting the cat",
+              "the real pet cat remains a separate animal body, relaxed cat posture"
+            ]
+          }
+        ],
+        "🐶 犬・狼・狐": [
+          {
+            ja: "人物＋犬：隣でおすわり＋撫でる手＋別個体",
+            en: "human character focus, human character and a real pet dog, separate characters, distinct bodies, different species, non-hybrid, real dog sitting beside the human, human hand petting the dog",
+            linked_ids: [
+              "human character focus, human character and pet animal, separate characters, separate subjects, distinct bodies",
+              "different species, real pet animal, non-hybrid, separate anatomy",
+              "real pet dog sitting beside the human character, clear separate dog body",
+              "human hand gently petting the real dog, calm friendly distance"
+            ]
+          },
+          {
+            ja: "人物＋狐・狼：少し離れて並ぶ＋別個体",
+            en: "human character focus, human character and a real fox or wolf animal companion, separate characters, distinct bodies, different species, non-hybrid, animal beside the human with visible distance",
+            linked_ids: [
+              "human character focus, human character and pet animal, separate characters, separate subjects, distinct bodies",
+              "different species, real pet animal, non-hybrid, separate anatomy",
+              "real animal companion beside the human character, visible space between bodies",
+              "clear two-subject composition, human body and animal body do not merge"
+            ]
+          }
+        ],
+        "🐴 馬・鹿・大型草食": [
+          {
+            ja: "人物＋選択中の大型動物：距離を取った横並び＋別個体",
+            en: "human character focus, human character and the selected real large animal, separate characters, distinct bodies, different species, non-hybrid, large animal standing beside human with safe visible distance",
+            linked_ids: [
+              "human character focus, human character and pet animal, separate characters, separate subjects, distinct bodies",
+              "different species, real pet animal, non-hybrid, separate anatomy",
+              "selected creature species remains unchanged, preserve the selected animal species, no species replacement",
+              "selected large animal standing beside the human character, safe visible distance, full animal body visible",
+              "clear scale comparison between human and animal, no overlap or body fusion"
+            ]
+          }
+        ],
+        "🌊 水生・海洋無脊椎": [
+          {
+            ja: "人物＋選択中の水生動物：水槽越し＋別個体",
+            en: "human character focus, human character and the selected real aquatic animal behind glass or in water, separate subjects, distinct bodies, different species, non-hybrid, aquarium observation composition",
+            linked_ids: [
+              "human character focus, human character and pet animal, separate characters, separate subjects, distinct bodies",
+              "different species, real pet animal, non-hybrid, separate anatomy",
+              "selected creature species remains unchanged, preserve the selected animal species, no species replacement",
+              "selected aquatic animal swimming behind glass or in water, separate animal body",
+              "human character observing from outside the water or aquarium glass, clear barrier between subjects"
+            ]
+          },
+          {
+            ja: "人物＋選択中の海洋無脊椎：水中展示＋人物は観察",
+            en: "human character focus, human character observing the selected marine invertebrate, separate subjects, distinct bodies, different species, non-hybrid, underwater display composition",
+            linked_ids: [
+              "human character focus, human character and pet animal, separate characters, separate subjects, distinct bodies",
+              "different species, real pet animal, non-hybrid, separate anatomy",
+              "selected creature species remains unchanged, preserve the selected animal species, no species replacement",
+              "selected marine invertebrate displayed underwater, visible shell tentacles or colony structure",
+              "human character observing the marine invertebrate from outside the tank, no physical contact"
+            ]
+          }
+        ]
+      },
+
+      "🧷 主体分離アンカー": [
+        { ja: "人物＋ペット別個体 基本", en: "human character focus, human character and pet animal, separate characters, separate subjects, distinct bodies" },
+        { ja: "別種・非融合", en: "different species, real pet animal, non-hybrid, separate anatomy" },
+        { ja: "サイズ差と手の上", en: "clear size difference, small pet animal in human hands, pet animal as a separate subject" },
+        { ja: "人物の人型維持", en: "human character focus, human face and human hands, pet animal remains a separate real animal" },
+        { ja: "動物は本物の小動物", en: "real pet animal, natural animal anatomy, small separate animal body" },
+        { ja: "選択した動物種を維持", en: "selected creature species remains unchanged, preserve the selected animal species, no species replacement" },
+        { ja: "合体させない抑制", en: "no chimera, no merged creature, no furry humanoid, no kemonomimi" }
+      ],
+
+      "🧍 人物＋動物：別個体ポーズ": [
+        { ja: "選択小型齧歯類を手に乗せる", en: "selected small rodent as a separate real animal in human hands, the selected small rodent holds food with tiny paws" },
+        { ja: "選択鳥が肩に止まる", en: "selected real bird perched on the human shoulder, tiny separate bird body" },
+        { ja: "選択霊長類が少し離れて並ぶ", en: "selected real primate beside the human character, visible space between bodies" },
+        { ja: "霊長類の自然な樹上姿勢", en: "primate clinging or sitting pose, separate natural animal anatomy, hands and feet on branch or ground" },
+        { ja: "選択小型哺乳類が膝前にいる", en: "selected small mammal sitting in front of the human character, clear size difference" },
+        { ja: "イタチ科・ハリネズミの低い姿勢", en: "small mustelid or hedgehog low stance, separate real animal body, natural animal anatomy" },
+        { ja: "選択滑空小動物が腕や肩に乗る", en: "selected gliding small animal perched on human arm or shoulder, separate tiny animal body" },
+        { ja: "滑空膜を広げる小動物", en: "gliding membrane spread pose, small animal limbs extended, natural animal anatomy" },
+        { ja: "人物がハムスターを手に乗せる", en: "human character gently holding a real pet hamster in human hands" },
+        { ja: "本物ハムスターが手の上で種を持つ", en: "real pet hamster holding seed in human hands, the hamster has tiny paws holding a seed" },
+        { ja: "本物ハムスターが手の上で立って齧る", en: "the real pet hamster is in an upright nibbling posture, clearly inside human hands" },
+        { ja: "人物のそばのハムスター", en: "real pet hamster beside the human character, distinct small animal body" },
+        { ja: "膝の上の猫を撫でる", en: "real pet cat on the human lap, human hand gently petting the cat" },
+        { ja: "猫は別個体のまま", en: "the real pet cat remains a separate animal body, relaxed cat posture" },
+        { ja: "隣で座る犬", en: "real pet dog sitting beside the human character, clear separate dog body" },
+        { ja: "犬を撫でる手", en: "human hand gently petting the real dog, calm friendly distance" },
+        { ja: "肩に止まる小鳥", en: "real pet bird perched on the human shoulder, tiny separate bird body" },
+        { ja: "鳥の足場を明確化", en: "the bird claws perch on fabric or finger, the human body remains fully human" },
+        { ja: "膝前のうさぎ", en: "real pet rabbit sitting in front of the human character, clear size difference" },
+        { ja: "うさぎは別の小動物", en: "the rabbit has its own small animal body, the human hands stay human" },
+        { ja: "動物が横に並ぶ", en: "real animal companion beside the human character, visible space between bodies" },
+        { ja: "二主体構図", en: "clear two-subject composition, human body and animal body do not merge" }
+      ],
+
+
+      "🧍 人物＋小動物：手・膝・肩": [
+        { ja: "選択小型齧歯類：手の上で餌を持つ", en: "selected small rodent as a separate real animal in human hands, the selected small rodent holds food with tiny paws" },
+        { ja: "選択小型齧歯類：袖・肩に乗る", en: "selected small rodent perched on human sleeve or shoulder, separate tiny animal body" },
+        { ja: "小型齧歯類を手で支える", en: "human hand supports the selected small rodent without merging, clear size difference" },
+        { ja: "選択小型齧歯類：机上で餌探し", en: "selected small rodent foraging on tabletop, tiny paws searching food, separate animal body" },
+        { ja: "人物は小動物を見守る", en: "human character watching the small animal from behind or beside, no body contact" },
+        { ja: "選択うさぎ・ナキウサギ：膝前で鼻ひくひく", en: "selected rabbit or pika sitting in front of the human character, nose twitching, separate animal body" },
+        { ja: "うさぎへ餌を差し出す手", en: "human hand offering food near the rabbit, clear size difference and no merging" },
+        { ja: "選択小型哺乳類：腕に沿って歩く", en: "selected small mammal walking along the human forearm or beside the hand, separate animal body" },
+        { ja: "小型哺乳類の低い長い体を明確化", en: "long low small mammal body visible, paws separate from human fingers" },
+        { ja: "滑空小動物：腕や肩に止まる", en: "selected gliding small animal perched on human arm or shoulder, separate tiny animal body" },
+        { ja: "滑空小動物：膜を広げる", en: "gliding membrane spread pose, small animal limbs extended, natural animal anatomy" }
+      ],
+
+      "🧍 人物＋鳥：肩・手・飛翔": [
+        { ja: "選択鳥：肩に止まる", en: "selected real bird perched on the human shoulder, tiny separate bird body" },
+        { ja: "選択鳥：指や手に止まる", en: "selected real bird perched on human finger or hand, tiny separate bird body" },
+        { ja: "鳥の爪が手袋・指に乗る", en: "bird claws visibly grip the finger or glove, human hand remains human" },
+        { ja: "選択鳥：人物の近くを飛ぶ", en: "selected real bird flying beside the human character, separate wings and body visible" },
+        { ja: "人物が飛ぶ鳥へ手を伸ばす", en: "human hand reaching toward the flying bird, clear air gap between subjects" },
+        { ja: "鳥の足場を明確化", en: "the bird claws perch on fabric or finger, the human body remains fully human" },
+        { ja: "小鳥：両手の近くで休む", en: "small real bird resting near cupped human hands, separate tiny bird body, no merging" },
+        { ja: "猛禽：腕のグローブに止まる", en: "selected raptor perched on falconry glove, talons on glove, human arm separate from bird body" }
+      ],
+
+      "🧍 人物＋中大型動物：距離・横並び": [
+        { ja: "選択猫科：横で丸まる", en: "selected real feline curled beside the human character, relaxed separate animal body" },
+        { ja: "選択猫科を撫でる手", en: "human hand petting the selected feline animal, clear contact point, no merging" },
+        { ja: "選択犬科：横並びで歩く", en: "selected real canine walking beside the human character, clear separate animal body" },
+        { ja: "リードまたは手の距離を明確化", en: "human hand holding leash or reaching down, visible distance between bodies" },
+        { ja: "選択霊長類：枝の上にいる", en: "selected real primate on a branch above or beside the human character, clear height difference" },
+        { ja: "人物が霊長類を見上げる", en: "human character looking up at the primate, visible space between bodies" },
+        { ja: "選択大型動物：安全な距離で横に立つ", en: "selected large animal standing beside the human character, safe visible distance, full animal body visible" },
+        { ja: "人と動物のスケール比較", en: "clear scale comparison between human and animal, no overlap or body fusion" },
+        { ja: "選択動物：人物の前を横切る", en: "selected real animal crossing in front of the human character, full animal silhouette separate from human legs" },
+        { ja: "選択動物：少し後ろで待つ", en: "selected real animal waiting behind the human character, visible gap, separate subject composition" }
+      ],
+
+      "🌊 人物＋水生・無脊椎：観察構図": [
+        { ja: "選択水生動物：水槽越し", en: "selected aquatic animal swimming behind glass or in water, separate animal body" },
+        { ja: "人物は水槽の外から観察", en: "human character observing from outside the water or aquarium glass, clear barrier between subjects" },
+        { ja: "選択海洋無脊椎：水中展示", en: "selected marine invertebrate displayed underwater, visible shell tentacles or colony structure" },
+        { ja: "人物は海洋無脊椎を観察", en: "human character observing the marine invertebrate from outside the tank, no physical contact" },
+        { ja: "貝類：水槽内の岩に付着", en: "selected bivalve or oyster attached to rock inside aquarium, shell body separate from human observer" },
+        { ja: "イソギンチャク：水流で触手が揺れる", en: "selected sea anemone tentacles swaying underwater, radial body clearly separated from viewer" },
+        { ja: "サンゴ群体：水中の群体構図", en: "selected coral colony underwater display, branching structure, human observer outside the tank" },
+        { ja: "クラゲ・管クラゲ：水中を漂う", en: "selected jellyfish or siphonophore drifting underwater, trailing tentacles, clear water gap from human" }
+      ],
+
+      "🐒 霊長類・樹上動物": [
+        { ja: "原猿類：枝にしがみつく", en: "single animal subject, real prosimian primate clinging to branch, large eyes, small body, natural animal anatomy" },
+        { ja: "小型サル：肩や枝で座る", en: "single animal subject, real small monkey sitting pose, hands gripping branch, curled tail balance" },
+        { ja: "サル：木登り", en: "single animal subject, real monkey climbing pose, hands and feet gripping tree, agile body" },
+        { ja: "テナガザル：腕でぶら下がる", en: "single animal subject, real gibbon hanging pose, long arms extended, swinging from branch" },
+        { ja: "類人猿：四足歩行・ナックルウォーク", en: "single animal subject, real great ape knuckle-walking pose, powerful arms, grounded posture" },
+        { ja: "類人猿：座って見上げる", en: "single animal subject, real ape sitting pose, broad shoulders, calm attentive gaze" },
+        { ja: "霊長類＋人物：距離を空ける", en: "selected real primate beside the human character, visible space between bodies" },
+        { ja: "霊長類：自然な樹上姿勢", en: "primate clinging or sitting pose, separate natural animal anatomy, hands and feet on branch or ground" },
+        { ja: "メガネザル：大きな目で枝に座る", en: "single animal subject, real tarsier sitting on branch, huge eyes, tiny hands gripping bark" },
+        { ja: "アイアイ：細い指で探る", en: "single animal subject, real aye-aye tapping pose, long thin finger extended, nocturnal primate posture" },
+        { ja: "マーモセット・タマリン：枝で身を寄せる", en: "single animal subject, real marmoset or tamarin clinging to branch, small body, long tail balance" },
+        { ja: "ニホンザル：座って毛づくろい", en: "single animal subject, real japanese macaque sitting grooming pose, hands combing fur" },
+        { ja: "ヒヒ・マンドリル：四足の威圧立ち", en: "single animal subject, real baboon or mandrill quadruped stance, strong shoulders, alert face" },
+        { ja: "オランウータン：片腕で枝を掴む", en: "single animal subject, real orangutan one-arm branch hold, long arm extended, heavy body hanging" }
+      ],
+
+      "🐱 猫・ネコ科": [
+        { ja: "香箱座り", en: "cat loaf pose, paws tucked under body, compact relaxed silhouette" },
+        { ja: "伸びをする猫", en: "cat stretching pose, front legs extended, arched back, relaxed tail" },
+        { ja: "飛びかかる猫", en: "pouncing cat pose, low crouch, hind legs ready to spring, focused eyes" },
+        { ja: "背中を丸める威嚇", en: "arched back cat pose, raised shoulders, defensive feline stance" },
+        { ja: "片前足を上げる", en: "one paw raised pose, curious feline gesture, balanced sitting posture" },
+        { ja: "丸まって眠る", en: "curled sleeping pose, round compact body, tail wrapped around" },
+        { ja: "毛づくろい", en: "grooming pose, licking paw, relaxed sitting, delicate movement" },
+        { ja: "木の上で伏せる大型ネコ", en: "big cat resting on tree branch, long relaxed body, hanging paws" },
+        { ja: "低く忍び寄る大型ネコ", en: "big cat stalking pose, low body, silent steps, tense shoulders" },
+        { ja: "前足で一撃", en: "big cat paw swipe pose, powerful foreleg motion, dynamic attack arc" }
+      ],
+
+      "🐶 犬・狼・狐": [
+        { ja: "遊びの伏せ", en: "play bow pose, front legs lowered, hips raised, excited friendly posture" },
+        { ja: "おすわりで見上げる", en: "sitting dog pose, looking up, attentive friendly expression" },
+        { ja: "お手ポーズ", en: "offering paw pose, one front paw raised, obedient cute gesture" },
+        { ja: "全力疾走", en: "running dog pose, stretched stride, ears back, energetic motion" },
+        { ja: "地面の匂いを嗅ぐ", en: "sniffing the ground pose, head lowered, nose close to floor, searching motion" },
+        { ja: "お腹を見せる", en: "belly-up dog pose, rolling on back, relaxed trusting posture" },
+        { ja: "狼の遠吠え", en: "howling wolf pose, head raised to sky, strong neck line, dramatic silhouette" },
+        { ja: "狐の忍び足", en: "sneaking fox pose, light steps, lowered body, alert tail balance" },
+        { ja: "尻尾を大きく巻く狐", en: "fox curled tail pose, sitting neatly, large tail wrapped around body" },
+        { ja: "群れのリーダー立ち", en: "wolf pack leader stance, proud standing posture, chest forward, alert gaze" }
+      ],
+
+      "🐹 小型齧歯類・小動物": [
+        { ja: "ハムスター単体：丸まる", en: "single animal subject, real hamster, hamster curled pose, tiny round animal body, paws near mouth, cozy compact shape" },
+        { ja: "ハムスター単体：種を持つ", en: "single animal subject, real hamster, the hamster has tiny paws holding a seed, upright nibbling posture" },
+        { ja: "ハムスター単体：手の上で種を持つ", en: "single animal subject, real pet hamster in human hands, the hamster has tiny paws holding a seed" },
+        { ja: "テディベアハムスター単体", en: "single animal subject, real teddy bear hamster, round fluffy hamster body, tiny paws, natural animal anatomy" },
+        { ja: "ドワーフハムスター単体", en: "single animal subject, real dwarf hamster, small round hamster body, natural animal anatomy" },
+        { ja: "リス単体：木登り", en: "single animal subject, real squirrel climbing pose, body pressed to tree, gripping claws, curled tail" },
+        { ja: "リス単体：ジャンプ", en: "single animal subject, real squirrel leaping pose, stretched body, fluffy tail trailing, agile motion" },
+        { ja: "プレーリードッグ単体：見張り", en: "single animal subject, real prairie dog lookout pose, standing upright, tiny paws held close, alert head" },
+        { ja: "小動物単体：鼻ひくひく", en: "single animal subject, small animal sniffing pose, tiny nose forward, curious cautious posture" },
+        { ja: "シマリス単体：頬袋に木の実", en: "single animal subject, real chipmunk, cheek pouch full, tiny paws holding acorn, striped back visible" },
+        { ja: "シマリス単体：枝の上で木の実持ち", en: "single animal subject, real chipmunk sitting on branch, striped back, tiny paws holding nut" },
+        { ja: "リス単体：尾でバランス", en: "single animal subject, real squirrel balancing with fluffy tail, hind feet gripping branch" },
+        { ja: "デグー・チンチラ単体：後脚座り", en: "single animal subject, real degu or chinchilla sitting upright, tiny paws close to chest, round ears" },
+        { ja: "モルモット単体：低く歩く", en: "single animal subject, real guinea pig low walking pose, compact body, tiny feet under fur" },
+        { ja: "ネズミ単体：ひげを前に出す", en: "single animal subject, real mouse sniffing pose, whiskers forward, small paws on ground" },
+        { ja: "小型齧歯類単体：穴から顔を出す", en: "single animal subject, real small rodent peeking from burrow, paws on edge, curious face" }
+      ],
+
+      "🐰 うさぎ・小型哺乳類": [
+        { ja: "うさぎのおすわり", en: "rabbit sitting pose, hind legs tucked, front paws close, ears upright" },
+        { ja: "うさぎジャンプ", en: "rabbit hopping pose, mid-air hop, tucked legs, light springy motion" },
+        { ja: "鼻をひくひくさせる", en: "small animal sniffing pose, tiny nose forward, curious cautious posture" },
+        { ja: "耳を伏せて警戒", en: "rabbit alert crouch, ears flattened, body low, ready to flee" },
+        { ja: "丸まるハムスター", en: "hamster curled pose, tiny round body, paws near mouth, cozy compact shape" },
+        { ja: "ひまわり種を持つ", en: "small rodent holding seed pose, tiny paws holding food, upright nibbling posture" },
+        { ja: "リスの木登り", en: "squirrel climbing pose, body pressed to tree, gripping claws, curled tail" },
+        { ja: "リスのジャンプ", en: "squirrel leaping pose, stretched body, fluffy tail trailing, agile motion" },
+        { ja: "プレーリードッグの見張り", en: "prairie dog lookout pose, standing upright, tiny paws held close, alert head" },
+        { ja: "カピバラの座り休憩", en: "capybara resting pose, seated relaxed body, calm rounded silhouette" },
+        { ja: "選択小型哺乳類：膝前で待つ", en: "selected small mammal sitting in front of the human character, clear size difference" },
+        { ja: "イタチ科・ハリネズミ：低い姿勢", en: "small mustelid or hedgehog low stance, separate real animal body, natural animal anatomy" },
+        { ja: "フェレット・ミンク：体を伸ばして歩く", en: "single animal subject, real ferret or mink elongated walking pose, low body, flexible spine" },
+        { ja: "フェレット・ミンク：後脚で立って覗く", en: "single animal subject, real ferret or mink standing on hind legs, curious upright posture" },
+        { ja: "ハリネズミ：丸まりかける", en: "single animal subject, real hedgehog half-curled pose, spines visible, tiny face peeking" },
+        { ja: "モグラ・トガリネズミ：地面を掘る", en: "single animal subject, real mole or shrew digging pose, nose low, small claws scraping ground" }
+      ],
+
+      "🦘 有袋類・珍獣": [
+        { ja: "カンガルーの跳躍", en: "kangaroo hopping pose, powerful hind legs, tail balancing, forward leap" },
+        { ja: "カンガルーの立ち姿", en: "kangaroo upright stance, large hind legs, tail support, alert posture" },
+        { ja: "コアラの木抱き", en: "koala hugging tree pose, arms wrapped around trunk, sleepy relaxed body" },
+        { ja: "ウォンバットの低い歩き", en: "wombat low walking pose, sturdy compact body, short legs, grounded movement" },
+        { ja: "ウォンバットの穴掘り", en: "wombat digging pose, front paws scraping ground, compact strong posture" },
+        { ja: "クオッカの見上げ座り", en: "quokka sitting pose, small paws close to chest, looking upward, cheerful body language" },
+        { ja: "ワラビーの小さな跳躍", en: "wallaby small hop pose, compact kangaroo-like jump, tail balance" },
+        { ja: "タスマニアデビルの低い威嚇", en: "tasmanian devil defensive stance, low body, open mouth, tense shoulders" },
+        { ja: "滑空小動物：腕や肩に乗る", en: "selected gliding small animal perched on human arm or shoulder, separate tiny animal body" },
+        { ja: "滑空膜を広げる", en: "gliding membrane spread pose, small animal limbs extended, natural animal anatomy" },
+        { ja: "フクロモモンガ単体：滑空膜を広げる", en: "single animal subject, real sugar glider spreading gliding membrane, limbs extended, small body" },
+        { ja: "フクロモモンガ単体：枝から飛び出す", en: "single animal subject, real sugar glider launching from branch, gliding membrane beginning to open" },
+        { ja: "ポッサム単体：尾で枝を支える", en: "single animal subject, real possum balancing on branch, tail support, small paws gripping" }
+      ],
+
+      "🐦 鳥・翼の動き": [
+        { ja: "止まり木ポーズ", en: "bird perched pose, balanced on branch, claws gripping, upright body" },
+        { ja: "首かしげ", en: "bird head tilt pose, curious small movement, bright attentive posture" },
+        { ja: "羽ばたき開始", en: "bird taking off pose, wings opening, feet leaving perch, dynamic lift" },
+        { ja: "着地直前", en: "bird landing pose, wings spread for braking, feet reaching forward" },
+        { ja: "羽づくろい", en: "bird preening pose, beak touching wing feathers, calm grooming motion" },
+        { ja: "翼を大きく広げる", en: "wings fully spread pose, symmetrical feather display, proud silhouette" },
+        { ja: "片足立ちの鳥", en: "one-legged bird standing pose, balanced calm posture, tucked leg" },
+        { ja: "水面を走る鳥", en: "water bird running on surface pose, wings flapping, splashing steps" },
+        { ja: "ペンギン歩き", en: "penguin waddling pose, small steps, flippers slightly out, cute motion" },
+        { ja: "フクロウの正面立ち", en: "owl front-facing perched pose, round body, still gaze, compact silhouette" },
+        { ja: "シマエナガ単体：白い丸ふわ止まり", en: "single animal subject, real shima-enaga bird perched pose, white round fluffy body, tiny black beak" },
+        { ja: "シマエナガ単体：枝で小さく首かしげ", en: "single animal subject, real shima-enaga bird head tilt pose, tiny black beak, small round body" },
+        { ja: "小鳥単体：地面をホップ", en: "single animal subject, real small bird hopping on ground, tiny feet, quick light motion" },
+        { ja: "小鳥単体：両翼を少し広げる", en: "single animal subject, real small bird half-spread wings, balanced perch, feathers visible" },
+        { ja: "猛禽単体：急降下", en: "single animal subject, real raptor diving pose, wings tucked, talons forward, fast downward motion" },
+        { ja: "猛禽単体：翼を広げて威嚇", en: "single animal subject, real raptor mantling pose, wings spread over prey, strong talons" },
+        { ja: "水鳥単体：羽ばたき水しぶき", en: "single animal subject, real water bird flapping on water, splashing surface, wings raised" }
+      ],
+
+      "🐴 馬・鹿・大型草食": [
+        { ja: "馬の立ち姿", en: "horse standing pose, elegant side view, lifted neck, clear leg silhouette" },
+        { ja: "馬のギャロップ", en: "horse galloping pose, extended legs, mane flowing, dynamic speed" },
+        { ja: "馬の前脚上げ", en: "rearing horse pose, front legs raised, powerful chest, dramatic silhouette" },
+        { ja: "馬の首を下げる", en: "horse lowering head pose, gentle neck curve, calm standing body" },
+        { ja: "鹿の警戒立ち", en: "deer alert standing pose, ears forward, neck raised, delicate legs" },
+        { ja: "鹿の跳躍", en: "deer leaping pose, long legs stretched, graceful airborne motion" },
+        { ja: "角を見せる鹿", en: "stag display pose, antlers prominent, proud head turn, forest silhouette" },
+        { ja: "草を食む", en: "grazing pose, head lowered to ground, relaxed animal posture" },
+        { ja: "キリンの見下ろし", en: "giraffe looking down pose, long neck curved, calm tall silhouette" },
+        { ja: "ゾウの鼻上げ", en: "elephant trunk raised pose, powerful standing body, ceremonial gesture" }
+      ],
+
+      "🐻 熊・大型哺乳類": [
+        { ja: "熊の二本立ち", en: "bear standing on hind legs, massive body, raised forepaws, imposing silhouette" },
+        { ja: "熊ののし歩き", en: "bear lumbering walk pose, heavy steps, low head, powerful shoulders" },
+        { ja: "鮭を捕る熊", en: "bear catching fish pose, paw striking water, splash, focused motion" },
+        { ja: "丸まって眠る熊", en: "bear curled sleeping pose, heavy round body, calm resting posture" },
+        { ja: "パンダ座り", en: "panda sitting pose, round seated body, paws near belly, relaxed cute posture" },
+        { ja: "レッサーパンダ威嚇", en: "red panda defensive standing pose, arms raised, fluffy tail balance, startled posture" },
+        { ja: "アライグマの手洗い", en: "raccoon washing paws pose, small hands near water, curious hunched posture" },
+        { ja: "アライグマの忍び歩き", en: "raccoon sneaking pose, low body, careful steps, ringed tail trailing" }
+      ],
+
+      "🦎 爬虫類・両生類": [
+        { ja: "トカゲの日向ぼっこ", en: "lizard basking pose, body flat on warm rock, relaxed limbs spread" },
+        { ja: "トカゲの素早い走り", en: "lizard sprint pose, low body, fast tiny legs, tail whipping behind" },
+        { ja: "蛇のとぐろ", en: "coiled snake pose, spiral body, head raised, focused strike readiness" },
+        { ja: "蛇の鎌首", en: "snake strike pose, raised neck, s-shaped body curve, poised to lunge" },
+        { ja: "カメの甲羅こもり", en: "turtle withdrawn pose, head and limbs tucked close, protective shell silhouette" },
+        { ja: "カメのゆっくり歩き", en: "turtle walking pose, low steady steps, shell-heavy body" },
+        { ja: "カエルのしゃがみ", en: "frog crouching pose, legs folded, low squat, ready to jump" },
+        { ja: "カエルの大ジャンプ", en: "frog jumping pose, long hind legs extended, airborne arc, splash or leaves" },
+        { ja: "ワニの低い這い", en: "crocodile low crawl pose, belly close to ground, heavy tail, stealthy movement" },
+        { ja: "ワニの水際待機", en: "crocodile waterline pose, eyes above water, still hidden body, ambush posture" }
+      ],
+
+      "🪸 海洋無脊椎・浮遊生物": [
+        { ja: "海洋無脊椎：殻・触手・群体を見せる", en: "single marine invertebrate subject, selected marine invertebrate, visible shell tentacles or colony structure, underwater composition" },
+        { ja: "貝類：殻を開く・閉じる", en: "bivalve open shell pose, hinged shell visible, soft body protected inside, seabed composition" },
+        { ja: "牡蠣・二枚貝：岩に付着", en: "oyster or bivalve attached to rock, rough shell texture, clustered seabed silhouette" },
+        { ja: "イソギンチャク：触手を広げる", en: "sea anemone tentacles spread pose, radial body, attached to reef, underwater sway" },
+        { ja: "サンゴ群体：枝状・群体構図", en: "coral colony composition, branching reef structure, many small polyps, stable underwater scene" },
+        { ja: "カツオノエボシ・管クラゲ：漂う", en: "Portuguese man o' war or siphonophore drifting pose, floating gas bladder, long trailing tentacles" },
+        { ja: "クラゲ：傘を開いて漂う", en: "single marine invertebrate subject, jellyfish bell open, trailing tentacles, slow drifting underwater" },
+        { ja: "クラゲ：半透明の傘と触手", en: "single marine invertebrate subject, translucent jellyfish bell, long tentacles, soft underwater glow" },
+        { ja: "管クラゲ：長い触手を引く", en: "single marine invertebrate subject, siphonophore drifting, long trailing tentacles, floating colony body" },
+        { ja: "サンゴ：小さなポリプを見せる", en: "single marine invertebrate subject, coral polyps visible, reef colony texture, stable underwater composition" }
+      ],
+
+      "🐬 水生動物": [
+        { ja: "イルカのジャンプ", en: "dolphin leaping pose, arcing out of water, splash trail, joyful motion" },
+        { ja: "クジラのブリーチング", en: "whale breaching pose, massive body rising from ocean, huge splash" },
+        { ja: "アザラシの寝そべり", en: "seal lounging pose, lying on belly, flippers relaxed, round body" },
+        { ja: "アシカの首上げ", en: "sea lion raised chest pose, head lifted, flippers supporting body" },
+        { ja: "ラッコの浮遊", en: "sea otter floating on back pose, paws on belly, relaxed water surface" },
+        { ja: "魚の群れの流れ", en: "school of fish swimming pattern, synchronized curved motion, flowing composition" },
+        { ja: "サメの旋回", en: "shark circling pose, sleek body curve, dorsal fin visible, predatory motion" },
+        { ja: "クラゲの漂い", en: "jellyfish drifting pose, translucent bell, trailing tentacles, slow floating motion" }
+      ],
+
+      "🦋 昆虫・節足動物": [
+        { ja: "蝶の羽休め", en: "butterfly resting pose, wings open on flower, delicate symmetrical silhouette" },
+        { ja: "蝶の飛び立ち", en: "butterfly taking off pose, wings lifting, light fluttering motion" },
+        { ja: "カマキリの構え", en: "praying mantis stance, forelegs raised, triangular head tilt, predatory posture" },
+        { ja: "クモの這い姿", en: "spider crawling pose, many legs spread, low body, creeping motion" },
+        { ja: "蜂のホバリング", en: "bee hovering pose, wings blurred, legs tucked, steady mid-air position" },
+        { ja: "甲虫の角見せ", en: "horned beetle display pose, horn raised, sturdy legs, armored silhouette" },
+        { ja: "サソリの尾上げ", en: "scorpion tail raised pose, pincers open, defensive arched tail" },
+        { ja: "蟹の横歩き", en: "crab sideways walking pose, claws raised, low shell body, beach motion" }
+      ],
+
+      "🐉 幻獣・ドラゴン": [
+        { ja: "ドラゴンの翼広げ", en: "dragon wings spread pose, massive wings open, proud chest, long tail curve" },
+        { ja: "ドラゴンの飛び立ち", en: "dragon taking off pose, wings beating, claws leaving ground, dust and wind" },
+        { ja: "ドラゴンのとぐろ", en: "coiled dragon pose, serpentine body loop, head raised, majestic silhouette" },
+        { ja: "ドラゴンの咆哮", en: "roaring dragon pose, head thrown back, open jaws, spread wings, dramatic power" },
+        { ja: "グリフォンの止まり姿", en: "griffin perched pose, talons gripping rock, wings folded, proud bird-lion stance" },
+        { ja: "フェニックスの再生飛翔", en: "phoenix rising pose, wings wide, flaming feathers, upward spiral motion" },
+        { ja: "ユニコーンの跳躍", en: "unicorn leaping pose, mane flowing, horn forward, graceful magical motion" },
+        { ja: "ケルベロスの低い威嚇", en: "cerberus low guarding stance, multiple heads alert, heavy paws planted" }
+      ],
+
+      "🐾 動物モチーフ・なりきり寄り": [
+        { ja: "ハムスター風の人物ポーズ", en: "hamster-inspired human character pose, animal-themed pose, cute nibbling gesture, kemonomimi style" },
+        { ja: "猫風の人物ポーズ", en: "cat-inspired human character pose, feline-themed pose, paw-like hand gesture, kemonomimi style" },
+        { ja: "犬風の人物ポーズ", en: "dog-inspired human character pose, playful animal-themed pose, offering hand gesture, kemonomimi style" },
+        { ja: "狐風の人物ポーズ", en: "fox-inspired human character pose, sly animal-themed pose, curled-tail motif styling, kemonomimi style" },
+        { ja: "小鳥風の人物ポーズ", en: "bird-inspired human character pose, wing-like arm gesture, light perched posture, avian-themed styling" },
+        { ja: "なりきり用：融合寄りを許可", en: "animal-themed human pose, animal motif integrated into the character, roleplay styling, kemonomimi style" }
+      ],
+
+      "⚙️ 配置・構図補助": [
+        { ja: "横向きシルエット", en: "clear side-view animal silhouette, full body visible, readable pose" },
+        { ja: "正面の迫力", en: "front-facing animal pose, symmetrical stance, direct eye contact, strong presence" },
+        { ja: "低い視点から見上げる", en: "low angle animal pose, imposing scale, paws or claws in foreground" },
+        { ja: "足跡つき移動", en: "animal walking pose with visible footprints, directional movement, ground contact" },
+        { ja: "尻尾で動きを見せる", en: "tail motion emphasized, curved tail line, dynamic animal body language" },
+        { ja: "耳で感情を見せる", en: "ear position emphasized, animal emotion through ears, readable body language" },
+        { ja: "群れの並び", en: "animal group formation, varied poses, leader in front, followers behind" },
+        { ja: "親子の距離感", en: "parent and baby animal pose, protective adult posture, small animal close beside" }
+      ]
+    }
+  };
+
+  function createSeparator(){
+    const separator = document.createElement("div");
+    separator.id = "pose-v18-animalpose-separator";
+    separator.style.cssText = "margin:22px 0 12px 0; border-top:2px dashed #16a34a; text-align:center;";
+    separator.innerHTML = "<span style='background:#f0fdf4; padding:4px 14px; color:#166534; font-weight:bold; border-radius:999px;'>🐾 動物ポーズ特化 v18</span>";
+    return separator;
+  }
+
+  function getAnimalPoseLinkMap(){
+    const map = new Map();
+
+    Object.values(POSE_ANIMAL_SPECIAL_COLLECTION).forEach(group => {
+      Object.values(group || {}).forEach(items => {
+        if (Array.isArray(items)) {
+          items.forEach(item => {
+            const links = item && (item.linked_ids || item.links);
+            if (item && item.en && Array.isArray(links) && links.length) {
+              map.set(item.en, links.slice());
+            }
+          });
+        } else if (items && typeof items === "object") {
+          Object.values(items).forEach(nestedItems => {
+            (nestedItems || []).forEach(item => {
+              const links = item && (item.linked_ids || item.links);
+              if (item && item.en && Array.isArray(links) && links.length) {
+                map.set(item.en, links.slice());
+              }
+            });
+          });
+        }
+      });
+    });
+
+    return map;
+  }
+
+  function getAnimalPoseCompletePromptSet(){
+    const set = new Set();
+
+    function collectCompleteItems(items){
+      if (Array.isArray(items)) {
+        items.forEach(item => {
+          if (item && item.en) set.add(item.en);
+        });
+        return;
+      }
+      if (items && typeof items === "object") {
+        Object.values(items).forEach(collectCompleteItems);
+      }
+    }
+
+    Object.values(POSE_ANIMAL_SPECIAL_COLLECTION).forEach(group => {
+      Object.entries(group || {}).forEach(([shelfName, items]) => {
+        if (!String(shelfName || "").includes("完成セット")) return;
+        collectCompleteItems(items);
+      });
+    });
+
+    return set;
+  }
+
+  function openAncestors(el){
+    let cur = el && el.parentElement;
+    while (cur) {
+      if (cur.tagName === "DETAILS") cur.open = true;
+      cur = cur.parentElement;
+    }
+  }
+
+  function dispatchLinkedChange(cb){
+    try {
+      cb.dispatchEvent(new Event("change", { bubbles: true }));
+      cb.dispatchEvent(new Event("input", { bubbles: true }));
+    } catch(_){}
+  }
+
+  function getLinkedSourceSet(cb){
+    return new Set((cb.dataset.animalPoseLinkedBy || "").split("||").filter(Boolean));
+  }
+
+  function addLinkedSource(cb, source){
+    const set = getLinkedSourceSet(cb);
+    set.add(source);
+    cb.dataset.animalPoseLinkedBy = Array.from(set).join("||");
+  }
+
+  function removeLinkedSource(cb, source){
+    const set = getLinkedSourceSet(cb);
+    set.delete(source);
+    if (set.size) cb.dataset.animalPoseLinkedBy = Array.from(set).join("||");
+    else delete cb.dataset.animalPoseLinkedBy;
+  }
+
+  function applyAnimalPoseLinks(scope){
+    const linkMap = getAnimalPoseLinkMap();
+    const completePromptSet = getAnimalPoseCompletePromptSet();
+    if (!scope || !linkMap.size) return;
+
+    const byPrompt = new Map();
+    scope.querySelectorAll("input[type='checkbox'][data-en]").forEach(cb => {
+      if (!byPrompt.has(cb.dataset.en)) byPrompt.set(cb.dataset.en, []);
+      byPrompt.get(cb.dataset.en).push(cb);
+    });
+
+    linkMap.forEach((linkedPrompts, parentPrompt) => {
+      (byPrompt.get(parentPrompt) || []).forEach(parentCb => {
+        if (parentCb.dataset.animalPoseLinkReady === "1") return;
+        parentCb.dataset.animalPoseLinkReady = "1";
+
+        parentCb.addEventListener("change", () => {
+          if (parentCb.checked && completePromptSet.has(parentPrompt)) {
+            completePromptSet.forEach(otherPrompt => {
+              if (otherPrompt === parentPrompt) return;
+              (byPrompt.get(otherPrompt) || []).forEach(otherCb => {
+                if (!otherCb.checked) return;
+                otherCb.checked = false;
+                dispatchLinkedChange(otherCb);
+              });
+            });
+          }
+
+          linkedPrompts.forEach(childPrompt => {
+            (byPrompt.get(childPrompt) || []).forEach(childCb => {
+              if (parentCb.checked) {
+                if (childCb.checked && !childCb.dataset.animalPoseLinkedBy) {
+                  childCb.dataset.animalPoseManualKeep = "1";
+                }
+                if (!childCb.checked) childCb.checked = true;
+                addLinkedSource(childCb, parentPrompt);
+                openAncestors(childCb);
+                dispatchLinkedChange(childCb);
+              } else {
+                removeLinkedSource(childCb, parentPrompt);
+                if (!childCb.dataset.animalPoseLinkedBy && childCb.dataset.animalPoseManualKeep !== "1") {
+                  if (childCb.checked) childCb.checked = false;
+                  dispatchLinkedChange(childCb);
+                }
+                if (!childCb.dataset.animalPoseLinkedBy) {
+                  delete childCb.dataset.animalPoseManualKeep;
+                }
+              }
+            });
+          });
+        });
+      });
+    });
+
+    scope.querySelectorAll("input[type='checkbox'][data-en]").forEach(cb => {
+      if (linkMap.has(cb.dataset.en)) return;
+      if (cb.dataset.animalPoseChildReady === "1") return;
+      cb.dataset.animalPoseChildReady = "1";
+      cb.addEventListener("change", () => {
+        if (!cb.checked) {
+          delete cb.dataset.animalPoseManualKeep;
+          delete cb.dataset.animalPoseLinkedBy;
+        }
+      });
+    });
+  }
+
+  function mount(){
+    const root = document.getElementById("pose-master-root");
+    if (!root || typeof window.__POSE_RENDERER !== "function") { setTimeout(mount, 120); return; }
+    if (document.getElementById("pose-v18-animalpose")) return;
+
+    const marker = document.createElement("div");
+    marker.id = "pose-v18-animalpose";
+    marker.style.display = "contents";
+
+    try {
+      if (!document.getElementById("pose-v18-animalpose-separator")) {
+        root.appendChild(createSeparator());
+      }
+      root.appendChild(marker);
+      window.__POSE_RENDERER(marker, POSE_ANIMAL_SPECIAL_COLLECTION, "v18-animalpose");
+      applyAnimalPoseLinks(marker);
+      if (typeof window.__SHIMA_INSTALL_CREATURE_POSE_SHORTCUT_LISTENER__ === "function") window.__SHIMA_INSTALL_CREATURE_POSE_SHORTCUT_LISTENER__();
+      try { if (typeof window.__POSE_NORMALIZE === "function") window.__POSE_NORMALIZE(); } catch(_){}
+      try { if (window.__SHIMA_PENDING_CREATURE_POSE_SHORTCUT__ && typeof window.__SHIMA_HANDLE_CREATURE_POSE_SHORTCUT__ === "function") setTimeout(() => window.__SHIMA_HANDLE_CREATURE_POSE_SHORTCUT__(window.__SHIMA_PENDING_CREATURE_POSE_SHORTCUT__), 80); } catch(_){}
+    } catch(e){ console.warn("POSE v18 animal pose mount failed", e); }
+  }
+
+  const API = {
+    initUI(){
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", mount, { once: true });
+      } else {
+        mount();
+      }
+    },
+    getTags(){ return []; }
+  };
+
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
+

@@ -258,6 +258,15 @@
       { ja: "ムササビ", en: "giant flying squirrel" }
     ];
 
+    const DATA_SMALL_MARSUPIALS = [
+      { ja: "ウォンバット", en: "wombat, sturdy burrowing marsupial, rounded ears" },
+      { ja: "コアラ", en: "koala, tree-dwelling marsupial" },
+      { ja: "クオッカ", en: "quokka, small smiling marsupial" },
+      { ja: "ワラビー", en: "wallaby, small kangaroo-like marsupial" },
+      { ja: "カンガルー", en: "kangaroo, large hopping marsupial, powerful hind legs" },
+      { ja: "タスマニアデビル", en: "Tasmanian devil, stocky carnivorous marsupial" }
+    ];
+
     const DATA_SMALL_CUTE = [
       { ja: "ふわふわの毛", en: "fluffy fur, soft texture" },
       { ja: "つぶらな瞳", en: "round beady eyes" },
@@ -285,6 +294,345 @@
       return n;
     }
 
+    function textHasAny(text, words) {
+      const t = String(text || "").toLowerCase();
+      return (words || []).some(w => t.includes(String(w || "").toLowerCase()));
+    }
+
+    function isCreaturePoseRelationLike(item) {
+      const t = `${item && item.ja || ""} ${item && item.en || ""}`.toLowerCase();
+      return textHasAny(t, [
+        "beside human", "with human", "human holding", "human carries", "riding",
+        "eye contact", "trust bond", "guarding", "protecting", "following",
+        "relationship", "companion distance", "pack formation", "territory",
+        "creature looks at", "動物の視線", "関係", "接触", "守護", "群れ"
+      ]);
+    }
+
+    function classifyCreaturePoseShortcut(item) {
+      if (!item || !item.en || isCreaturePoseRelationLike(item)) return null;
+      const t = `${item.ja || ""} ${item.en || ""}`.toLowerCase();
+
+      if (textHasAny(t, [
+        "shima-enaga", "bushtit", "long-tailed bushtit", "white head shima",
+        "sparrow", "swallow", "owl", "eagle", "hawk", "pelican", "swan",
+        "penguin", "crow", "pigeon", "bird", "phoenix", "thunder bird", "crane"
+      ])) {
+        return {
+          family: "bird",
+          targetShelf: "🐦 鳥・翼の動き",
+          focusLabel: "人物＋選択中の鳥：肩に止まる＋別個体",
+          title: "鳥類に合うポーズ候補"
+        };
+      }
+
+      if (textHasAny(t, [
+        "galago", "bushbaby", "prosimian", "primate", "aye-aye", "tarsier",
+        "marmoset", "new world monkey", "tamarin", "capuchin", "night monkey",
+        "macaque", "monkey", "japanese macaque", "baboon", "mandrill",
+        "langur", "colobus", "vervet", "gibbon", "siamang", "hoolock",
+        "chimpanzee", "bonobo", "gorilla", "orangutan"
+      ])) {
+        return {
+          family: "primate",
+          targetShelf: "🐒 霊長類・樹上動物",
+          focusLabel: "人物＋選択中の霊長類：少し離れて並ぶ＋別個体",
+          title: "霊長類に合うポーズ候補"
+        };
+      }
+
+      if (textHasAny(t, [
+        "hamster", "guinea pig", "marmot", "chinchilla", "degu", "mouse", "rat",
+        "gerbil", "dormouse", "lemming", "jerboa", "kangaroo rat", "squirrel",
+        "chipmunk", "prairie dog", "rodent"
+      ])) {
+        return {
+          family: "small_rodent",
+          targetShelf: "🐹 小型齧歯類・小動物",
+          focusLabel: "人物＋選択中の小型齧歯類：手の上＋餌持ち＋別個体",
+          title: "小型齧歯類に合うポーズ候補"
+        };
+      }
+
+      if (textHasAny(t, ["flying squirrel", "sugar glider", "gliding membrane", "gliding"])) {
+        return {
+          family: "glider",
+          targetShelf: "🦘 有袋類・珍獣",
+          focusLabel: "人物＋選択中の滑空小動物：肩・腕に乗る＋別個体",
+          title: "滑空小動物に合うポーズ候補"
+        };
+      }
+
+      if (textHasAny(t, ["rabbit", "hare", "bunny", "pika"])) {
+        return {
+          family: "rabbit",
+          targetShelf: "🐰 うさぎ・小型哺乳類",
+          focusLabel: "人物＋うさぎ：膝前のうさぎ＋別個体",
+          title: "うさぎ類に合うポーズ候補"
+        };
+      }
+
+      if (textHasAny(t, ["mink", "ferret", "weasel", "otter", "stoat", "ermine", "badger", "mustelid", "hedgehog", "mole", "shrew"])) {
+        return {
+          family: "small_mammal",
+          targetShelf: "🐰 うさぎ・小型哺乳類",
+          focusLabel: "人物＋選択中の小型哺乳類：膝前＋別個体",
+          title: "小型哺乳類に合うポーズ候補"
+        };
+      }
+
+      if (textHasAny(t, ["kangaroo", "wallaby", "koala", "wombat", "quokka", "tasmanian devil", "marsupial"])) {
+        return {
+          family: "marsupial",
+          targetShelf: "🦘 有袋類・珍獣",
+          focusLabel: "人物＋選択中の有袋類：少し離れて並ぶ＋別個体",
+          title: "有袋類に合うポーズ候補"
+        };
+      }
+
+      if (textHasAny(t, ["cat", "feline", "lion", "tiger", "leopard", "panther", "lynx"])) {
+        return {
+          family: "cat",
+          targetShelf: "🐱 猫・ネコ科",
+          focusLabel: "人物＋猫：膝の上の猫＋撫でる手＋別個体",
+          title: "猫・ネコ科に合うポーズ候補"
+        };
+      }
+
+      if (textHasAny(t, ["dog", "puppy", "wolf", "fox", "canine", "hound", "retriever", "terrier", "poodle", "shiba", "akita", "husky"])) {
+        return {
+          family: "dog",
+          targetShelf: "🐶 犬・狼・狐",
+          focusLabel: "人物＋犬：隣でおすわり＋撫でる手＋別個体",
+          title: "犬・狼・狐に合うポーズ候補"
+        };
+      }
+
+      if (textHasAny(t, ["horse", "deer", "stag", "giraffe", "elephant", "zebra", "cow", "goat", "sheep", "antelope"])) {
+        return {
+          family: "large_herbivore",
+          targetShelf: "🐴 馬・鹿・大型草食",
+          focusLabel: "馬・鹿単体：ギャロップ＋前脚上げ＋鹿の跳躍",
+          title: "大型草食動物に合うポーズ候補"
+        };
+      }
+
+      if (textHasAny(t, ["bear", "panda", "red panda", "raccoon"])) {
+        return {
+          family: "large_mammal",
+          targetShelf: "🐻 熊・大型哺乳類",
+          focusLabel: "大型哺乳類単体：二本立ち＋のし歩き＋鮭を捕る",
+          title: "大型哺乳類に合うポーズ候補"
+        };
+      }
+
+      if (textHasAny(t, ["snake", "python", "cobra", "viper", "boa", "lizard", "iguana", "gecko", "turtle", "tortoise", "crocodile", "alligator", "frog", "toad", "reptile", "amphibian"])) {
+        return {
+          family: "reptile",
+          targetShelf: "🦎 爬虫類・両生類",
+          focusLabel: "爬虫類・両生類単体：低い這い＋とぐろ＋しゃがみ",
+          title: "爬虫類・両生類に合うポーズ候補"
+        };
+      }
+
+      if (textHasAny(t, ["oyster", "bivalve", "clam", "scallop", "mussel", "sea anemone", "coral", "portuguese man o' war", "siphonophore", "jellyfish"])) {
+        return {
+          family: "marine_invertebrate",
+          targetShelf: "🪸 海洋無脊椎・浮遊生物",
+          focusLabel: "海洋無脊椎：殻・触手・群体を見せる",
+          title: "海洋無脊椎・浮遊生物の構図候補"
+        };
+      }
+
+      if (textHasAny(t, ["fish", "shark", "dolphin", "whale", "seal", "sea lion", "otter", "aquatic", "marine"])) {
+        return {
+          family: "aquatic",
+          targetShelf: "🐬 水生動物",
+          focusLabel: "水生動物単体：イルカジャンプ＋ラッコ浮遊＋サメ旋回",
+          title: "水生動物に合うポーズ候補"
+        };
+      }
+
+      if (textHasAny(t, ["butterfly", "mantis", "spider", "bee", "beetle", "scorpion", "crab", "insect", "arthropod", "crustacean"])) {
+        return {
+          family: "insect",
+          targetShelf: "🦋 昆虫・節足動物",
+          focusLabel: "昆虫・節足動物単体：蝶羽休め＋カマキリ構え＋サソリ尾上げ",
+          title: "昆虫・節足動物に合うポーズ候補"
+        };
+      }
+
+      if (textHasAny(t, ["dragon", "griffin", "unicorn", "cerberus", "mythical", "fantasy creature"])) {
+        return {
+          family: "fantasy",
+          targetShelf: "🐉 幻獣・ドラゴン",
+          focusLabel: "ドラゴン単体：翼広げ＋飛び立ち＋咆哮",
+          title: "幻獣・ドラゴンに合うポーズ候補"
+        };
+      }
+
+      return null;
+    }
+
+    function getCreaturePoseShortcutBox(anchorRow) {
+      // v18連動案内は、棚の奥ではなく画面下部の固定カードへ出す。
+      // 選択した動物の直下へ差し込む方式だと、固定出力バーや深い棚で見失いやすいため。
+      let box = document.getElementById("creature-pose-shortcut-box");
+
+      if (!box) {
+        box = el("div", {
+          id: "creature-pose-shortcut-box",
+          style: [
+            "display:none",
+            "position:fixed",
+            "left:10px",
+            "right:10px",
+            "bottom:12px",
+            "z-index:2147483640",
+            "box-sizing:border-box",
+            "padding:10px",
+            "border:2px solid #16a34a",
+            "border-radius:14px",
+            "background:#f0fdf4",
+            "box-shadow:0 8px 24px rgba(0,0,0,0.20)",
+            "font-size:13px",
+            "line-height:1.35",
+            "color:#14532d"
+          ].join(";")
+        });
+        document.body.appendChild(box);
+      }
+
+      return box;
+    }
+
+    function openCreatureShortcutPoseSectionOnly() {
+      const poseSection = document.getElementById("list-pose");
+      const poseRoot = document.getElementById("pose-master-root");
+      const target = poseRoot || poseSection;
+      if (!target) return false;
+
+      try {
+        if (poseSection) {
+          const directDetails = Array.from(poseSection.children || []).find(ch => ch && ch.tagName === "DETAILS");
+          if (directDetails) directDetails.open = true;
+        }
+        let node = target;
+        while (node && node !== document.body) {
+          if (node.tagName === "DETAILS") node.open = true;
+          node = node.parentElement;
+        }
+      } catch(_) {}
+
+      try {
+        (poseRoot || poseSection).scrollIntoView({ behavior: "smooth", block: "center" });
+      } catch(_) {
+        try { (poseRoot || poseSection).scrollIntoView(false); } catch(__) {}
+      }
+      return true;
+    }
+
+    function requestCreaturePoseShortcut(detail) {
+      if (!detail) return false;
+
+      window.__SHIMA_PENDING_CREATURE_POSE_SHORTCUT__ = detail;
+
+      let handled = false;
+      try {
+        if (typeof window.__SHIMA_HANDLE_CREATURE_POSE_SHORTCUT__ === "function") {
+          handled = !!window.__SHIMA_HANDLE_CREATURE_POSE_SHORTCUT__(detail);
+        }
+      } catch(_) {}
+
+      try {
+        window.dispatchEvent(new CustomEvent("shima:creature-pose-shortcut", { detail }));
+      } catch(_) {
+        try {
+          const ev = document.createEvent("CustomEvent");
+          ev.initCustomEvent("shima:creature-pose-shortcut", true, true, detail);
+          window.dispatchEvent(ev);
+        } catch(__) {}
+      }
+
+      if (!handled) {
+        try {
+          if (typeof window.__SHIMA_HANDLE_CREATURE_POSE_SHORTCUT__ === "function") {
+            handled = !!window.__SHIMA_HANDLE_CREATURE_POSE_SHORTCUT__(detail);
+          }
+        } catch(_) {}
+      }
+
+      // Pose側のリスナーがまだ未準備でも、少なくともPose欄本体へは移動する。
+      if (!handled) handled = openCreatureShortcutPoseSectionOnly();
+
+      // Pose v18 が後から描画された場合に備えて、保留データをもう一度処理する。
+      setTimeout(() => {
+        try {
+          if (typeof window.__SHIMA_HANDLE_CREATURE_POSE_SHORTCUT__ === "function") {
+            window.__SHIMA_HANDLE_CREATURE_POSE_SHORTCUT__(window.__SHIMA_PENDING_CREATURE_POSE_SHORTCUT__ || detail);
+          }
+        } catch(_) {}
+      }, 160);
+
+      setTimeout(() => {
+        try {
+          if (typeof window.__SHIMA_HANDLE_CREATURE_POSE_SHORTCUT__ === "function") {
+            window.__SHIMA_HANDLE_CREATURE_POSE_SHORTCUT__(window.__SHIMA_PENDING_CREATURE_POSE_SHORTCUT__ || detail);
+          }
+        } catch(_) {}
+      }, 520);
+
+      return handled;
+    }
+
+    function showCreaturePoseShortcut(item, target, anchorRow) {
+      const box = getCreaturePoseShortcutBox(anchorRow);
+      if (!box || !target) return;
+
+      const animalName = item && item.ja ? item.ja : "選択した動物";
+      box.innerHTML = "";
+      box.style.display = "block";
+
+      const msg = el("div", { style: "font-weight:800; margin-bottom:6px;" }, `🐾 ${animalName}：${target.title || "対応ポーズ候補"}があります。`);
+      const sub = el("div", { style: "margin-bottom:8px;" }, `Pose欄の「${target.targetShelf}」へショートカットしますか？`);
+      const actions = el("div", { style: "display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end;" });
+
+      const noBtn = el("button", { type: "button", style: "border:1px solid #94a3b8; background:#fff; border-radius:999px; padding:6px 10px; font-weight:700; flex:1 1 120px;" }, "いいえ");
+      const yesBtn = el("button", { type: "button", style: "border:1px solid #16a34a; background:#dcfce7; color:#14532d; border-radius:999px; padding:6px 10px; font-weight:800; flex:1 1 150px;" }, "はい：ポーズへ移動");
+
+      noBtn.addEventListener("click", () => { box.style.display = "none"; });
+      yesBtn.addEventListener("click", () => {
+        const detail = {
+          source: "creatures",
+          animalName,
+          creatureValue: item && item.en || "",
+          family: target.family,
+          targetShelf: target.targetShelf,
+          focusLabel: target.focusLabel
+        };
+
+        yesBtn.disabled = true;
+        yesBtn.textContent = "移動中…";
+        const moved = requestCreaturePoseShortcut(detail);
+
+        if (moved) {
+          setTimeout(() => { box.style.display = "none"; }, 180);
+        } else {
+          sub.textContent = "Pose欄の準備待ちです。Pose欄を開いてから、もう一度「はい」を押してください。";
+          yesBtn.disabled = false;
+          yesBtn.textContent = "はい：ポーズへ移動";
+        }
+      });
+
+      actions.appendChild(noBtn);
+      actions.appendChild(yesBtn);
+      box.appendChild(msg);
+      box.appendChild(sub);
+      box.appendChild(actions);
+
+      // 固定カードなので、棚内スクロール位置は動かさない。
+    }
+
     function makeCheckboxRow(item) {
       const id = `cr_${Math.random().toString(36).slice(2)}`;
       const cb = el("input", { type: "checkbox", id, "data-val": item.en });
@@ -301,6 +649,13 @@
         class: "row",
         style: "display:grid; grid-template-columns:26px 1fr; column-gap:8px; align-items:start; margin:6px 0; min-width:0; max-width:100%; box-sizing:border-box;"
       }, [cb, lb]);
+
+      cb.addEventListener("change", () => {
+        if (!cb.checked) return;
+        const target = classifyCreaturePoseShortcut(item);
+        if (target) showCreaturePoseShortcut(item, target, row);
+      });
+
       return row;
     }
 
@@ -634,13 +989,25 @@
         { ja:"デグー", en:"degu" },
         { ja:"ハツカネズミ", en:"house mouse" },
         { ja:"ラット", en:"rat" },
-        { ja:"リス", en:"squirrel" }
+        { ja:"スナネズミ", en:"gerbil" },
+        { ja:"ヤマネ", en:"dormouse" },
+        { ja:"レミング", en:"lemming" },
+        { ja:"トビネズミ", en:"jerboa, long hind legs" },
+        { ja:"カンガルーネズミ", en:"kangaroo rat, long hind legs" },
+        { ja:"リス", en:"squirrel" },
+        { ja:"シマリス", en:"chipmunk, striped squirrel" },
+        { ja:"モモンガ", en:"flying squirrel, gliding membrane" }
       ];
 
       const others = [
         { ja:"ビーバー", en:"beaver" },
         { ja:"カピバラ", en:"capybara" },
-        { ja:"ヤマアラシ", en:"porcupine" }
+        { ja:"ヤマアラシ", en:"porcupine" },
+        { ja:"プレーリードッグ", en:"prairie dog" },
+        { ja:"ヌートリア", en:"coypu, nutria, semi-aquatic rodent" },
+        { ja:"マスクラット", en:"muskrat, semi-aquatic rodent" },
+        { ja:"ハダカデバネズミ", en:"naked mole-rat" },
+        { ja:"パカラナ", en:"pacarana, large rodent" }
       ];
 
       // Fix: Append to outer.box (the content div), not outer (the object)
@@ -670,6 +1037,7 @@
       outer.box.appendChild(makeSub("🦦 イタチ科・フェレット / Mustelids", DATA_SMALL_MUSTELIDS, "#fb8c00"));
       outer.box.appendChild(makeSub("🦔 ハリネズミ・地下系 / Hedgehogs", DATA_SMALL_HEDGE, "#fb8c00"));
       outer.box.appendChild(makeSub("🪽 滑空・珍獣 / Gliders", DATA_SMALL_GLIDERS, "#fb8c00"));
+      outer.box.appendChild(makeSub("🦘 有袋類 / Marsupials", DATA_SMALL_MARSUPIALS, "#fb8c00"));
       outer.box.appendChild(makeSub("✨ かわいさ補助 / Cute Extras", DATA_SMALL_CUTE, "#fb8c00"));
 
       return outer.det;

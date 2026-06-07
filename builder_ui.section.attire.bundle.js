@@ -9059,7 +9059,7 @@ wrap.appendChild(title);
             const cb = document.createElement("input");
             cb.type = "checkbox"; cb.dataset.en = item.en; cb.dataset.r18src = "v22"; cb.style.marginRight = "6px";
             label.appendChild(cb); label.appendChild(document.createTextNode(`${item.ja}`));
-            label.title = item.ja || ""; // 英語はツールチップで表示
+            label.title = item.en; // 英語はツールチップで表示
             content.appendChild(label);
           });
           details.appendChild(content);
@@ -12356,379 +12356,271 @@ function createItemLabel(item){
   window.__registerPromptPart(KEY, VERSION, API);
 })();
 
-// --- builder_ui.section.attire.v25.js ---
-// User motif / outfit fusion helper (touch-only additive patch)
-// v25o: expand legendary/myth motif and fusion into detailed nested shelves using builder_data mythic collection names as reference.
-  // - keeps custom input generation manual until Generate.
-  // - keeps outfit category at the front of motif/fusion helper text.
-  // - smooths connector wording so Prompt Compiler does not scatter phrase fragments.
-  // - infers idol/stage outfit from grouped existing attire tags.
-  // - normalizes doggy/doggie/doggo to dog for safer general prompts.
-  // - keeps preset labels Japanese while emitting English prompt themes at generation time.
-  // - adds animal and legendary/myth preset shelves for motif and fusion.
+/* Attire Motif / Fusion Presets v25q
+ * - visible Japanese preset shelves
+ * - generate-time only getTags()
+ * - no automatic output generation on checkbox changes
+ */
 (function(){
   "use strict";
   const VERSION = 25;
   const KEY = "attire";
-  const ROOT_CLASS = "attire-v25-motif-fusion";
-  const STYLE_ID = "__attire_v25_motif_fusion_style__";
+  const ROOT_CLASS = "attire-v25-container";
+  const STYLE_ID = "attire-v25-mobile-style";
 
-  const MOTIF_PRESETS = [];
+  const JA_TO_EN = {
+    "猫":"cat", "犬":"dog", "狐":"fox", "狼":"wolf", "兎":"rabbit", "うさぎ":"rabbit", "蝶":"butterfly", "鳥":"bird", "蛇":"snake",
+    "竜":"dragon", "龍":"dragon", "ドラゴン":"dragon", "天使":"angel", "悪魔":"demon", "妖精":"fairy", "人魚":"mermaid", "不死鳥":"phoenix", "ユニコーン":"unicorn", "吸血鬼":"vampire",
+    "桜":"cherry blossom", "薔薇":"rose", "バラ":"rose", "百合":"lily", "紫陽花":"hydrangea", "アジサイ":"hydrangea", "朝顔":"morning glory", "牡丹":"peony", "椿":"camellia", "藤":"wisteria", "蓮":"lotus", "向日葵":"sunflower",
+    "星":"star", "月":"moon", "星座":"constellation", "銀河":"galaxy", "宇宙":"universe", "流星":"meteor", "惑星":"planet", "夜空":"night sky",
+    "雪結晶":"snowflake", "氷結晶":"ice crystal", "霜":"frost", "水晶":"crystal", "結晶":"crystal",
+    "歯車":"gear", "時計歯車":"clockwork gears", "懐中時計":"pocket watch", "真鍮機械":"brass machinery",
+    "ステンドグラス":"stained glass", "宝石":"gemstone", "プリズム":"prism", "ガラス":"glass",
+    "白い羽根":"white feathers", "黒い羽根":"black feathers", "羽根":"feathers",
+    "わらび餅":"warabi mochi", "団子":"dango", "みたらし団子":"mitarashi dango", "たい焼き":"taiyaki", "桜餅":"sakura mochi", "大福":"daifuku", "あんみつ":"anmitsu", "どら焼き":"dorayaki",
+    "パフェ":"parfait", "プリン":"pudding", "ゼリー":"jelly", "マカロン":"macaron", "ショートケーキ":"strawberry shortcake", "チョコレート":"chocolate", "アイスクリーム":"ice cream", "クレープ":"crepe", "キャンディ":"candy", "ドーナツ":"donut",
+    "紅茶":"black tea", "コーヒー":"coffee", "クリームソーダ":"cream soda", "メロンソーダ":"melon soda", "レモネード":"lemonade", "ミルクティー":"milk tea", "抹茶ラテ":"matcha latte", "カフェラテ":"cafe latte", "ココア":"hot cocoa", "ソーダフロート":"soda float",
+    "波":"ocean wave", "泡":"sea foam", "珊瑚":"coral", "サンゴ":"coral", "真珠":"pearl", "貝殻":"seashell", "クラゲ":"jellyfish", "深海":"deep sea", "水面":"water surface",
+    "ルビー":"ruby", "サファイア":"sapphire", "エメラルド":"emerald", "オパール":"opal", "アメジスト":"amethyst", "黒曜石":"obsidian", "琥珀":"amber", "ラピスラズリ":"lapis lazuli",
+    "雨":"rain", "雪":"snow", "霧":"mist", "雷":"lightning", "虹":"rainbow", "紅葉":"autumn leaves", "木漏れ日":"sun-dappled light"
+  };
+
+  function item(ja, theme, motifDetail, fusionDetail){
+    return { ja: ja, theme: theme, motifDetail: motifDetail || "", fusionDetail: fusionDetail || "" };
+  }
+  function motifItem(ja, theme, detail){ return { ja: ja, theme: theme, motifDetail: detail || "" }; }
+  function fusionItem(ja, theme, detail){ return { ja: ja, theme: theme, fusionDetail: detail || "" }; }
 
   const FLORAL_MOTIF_PRESETS = [
-    { ja: "桜", mode: "motif", theme: "cherry blossom" },
-    { ja: "薔薇", mode: "motif", theme: "rose" },
-    { ja: "百合", mode: "motif", theme: "white lily" },
-    { ja: "紫陽花", mode: "motif", theme: "hydrangea" },
-    { ja: "朝顔", mode: "motif", theme: "morning glory" },
-    { ja: "牡丹", mode: "motif", theme: "peony" },
-    { ja: "椿", mode: "motif", theme: "camellia" },
-    { ja: "藤", mode: "motif", theme: "wisteria" },
-    { ja: "蓮", mode: "motif", theme: "lotus" },
-    { ja: "向日葵", mode: "motif", theme: "sunflower" }
+    item("桜", "cherry blossom", "cherry blossom-inspired styling plus pale pink petal accents floral trim and delicate spring accessory details"),
+    item("薔薇", "rose", "rose-inspired styling plus layered rose petal accents thorn-like trim and elegant floral accessory details"),
+    item("百合", "lily", "lily-inspired styling plus clean white floral accents elegant petal trim and refined accessory details"),
+    item("紫陽花", "hydrangea", "hydrangea-inspired styling plus clustered blue-purple floral accents soft petal trim and rainy-season accessory details"),
+    item("朝顔", "morning glory", "morning glory-inspired styling plus trumpet-flower accents vine-like trim and fresh summer accessory details"),
+    item("牡丹", "peony", "peony-inspired styling plus large layered floral accents rich petal trim and ornate accessory details"),
+    item("椿", "camellia", "camellia-inspired styling plus glossy red floral accents dark leaf trim and elegant accessory details"),
+    item("藤", "wisteria", "wisteria-inspired styling plus hanging purple flower accents cascading trim and graceful accessory details"),
+    item("蓮", "lotus", "lotus-inspired styling plus soft lotus petal accents water-garden trim and serene accessory details"),
+    item("向日葵", "sunflower", "sunflower-inspired styling plus bright yellow petal accents warm seed-like trim and cheerful accessory details")
   ];
 
   const CELESTIAL_MOTIF_PRESETS = [
-    { ja: "星", mode: "motif", theme: "star" },
-    { ja: "月", mode: "motif", theme: "moon" },
-    { ja: "星月", mode: "motif", theme: "star and crescent" },
-    { ja: "星座", mode: "motif", theme: "constellation" },
-    { ja: "銀河", mode: "motif", theme: "galaxy" },
-    { ja: "流星", mode: "motif", theme: "shooting star" },
-    { ja: "惑星", mode: "motif", theme: "planet" },
-    { ja: "オーロラ", mode: "motif", theme: "aurora" }
+    item("星", "star", "star-inspired styling plus tiny star accents sparkling trim and celestial accessory details"),
+    item("月", "moon", "moon-inspired styling plus crescent accents pale lunar trim and elegant night accessory details"),
+    item("星座", "constellation", "constellation-inspired styling plus connected star-line accents celestial trim and night-sky accessory details"),
+    item("銀河", "galaxy", "galaxy-inspired styling plus cosmic gradient accents starfield trim and deep-space accessory details"),
+    item("宇宙", "universe", "universe-inspired styling plus cosmic thematic accents matching trim and accessory details"),
+    item("流星", "meteor", "meteor-inspired styling plus shooting-star accents glowing trail trim and dynamic accessory details"),
+    item("惑星", "planet", "planet-inspired styling plus orbit-ring accents round gem details and cosmic accessory details"),
+    item("夜空", "night sky", "night sky-inspired styling plus midnight blue accents tiny star trim and dreamy accessory details")
   ];
 
   const CRYSTAL_MOTIF_PRESETS = [
-    { ja: "雪結晶", mode: "motif", theme: "snowflake" },
-    { ja: "氷結晶", mode: "motif", theme: "ice crystal" },
-    { ja: "霜", mode: "motif", theme: "frost" },
-    { ja: "氷柱", mode: "motif", theme: "icicle" },
-    { ja: "透明結晶", mode: "motif", theme: "clear crystal" },
-    { ja: "宝石結晶", mode: "motif", theme: "gem crystal" }
+    item("雪結晶", "snowflake", "snowflake-inspired styling plus delicate ice-flake accents pale blue trim and winter accessory details"),
+    item("氷結晶", "ice crystal", "ice crystal-inspired styling plus faceted icy accents translucent trim and cold shimmer accessory details"),
+    item("霜", "frost", "frost-inspired styling plus frosty edge accents pale silver trim and crisp winter accessory details"),
+    item("水晶", "crystal", "crystal-inspired styling plus faceted clear accents reflective trim and gemstone accessory details")
   ];
 
   const CLOCKWORK_MOTIF_PRESETS = [
-    { ja: "時計歯車", mode: "motif", theme: "clockwork" },
-    { ja: "歯車", mode: "motif", theme: "gear" },
-    { ja: "懐中時計", mode: "motif", theme: "pocket watch" },
-    { ja: "真鍮機械", mode: "motif", theme: "brass machinery" },
-    { ja: "スチームパンク", mode: "motif", theme: "steampunk" },
-    { ja: "機械仕掛け", mode: "motif", theme: "mechanical" }
+    item("時計歯車", "clockwork gears", "clockwork gear-inspired styling plus small gear accents brass trim and timepiece accessory details"),
+    item("懐中時計", "pocket watch", "pocket watch-inspired styling plus watch-face accents chain trim and antique accessory details"),
+    item("真鍮機械", "brass machinery", "brass machinery-inspired styling plus mechanical accents golden brass trim and steampunk accessory details")
   ];
 
   const GLASS_GEM_MOTIF_PRESETS = [
-    { ja: "ステンドグラス", mode: "motif", theme: "stained glass" },
-    { ja: "宝石", mode: "motif", theme: "jewel" },
-    { ja: "プリズム", mode: "motif", theme: "prism" },
-    { ja: "モザイクガラス", mode: "motif", theme: "mosaic glass" },
-    { ja: "クリスタル", mode: "motif", theme: "crystal" },
-    { ja: "色ガラス", mode: "motif", theme: "colored glass" }
+    item("ステンドグラス", "stained glass", "stained glass-inspired styling plus colorful glass-panel accents lead-line trim and cathedral accessory details"),
+    item("宝石", "gemstone", "gemstone-inspired styling plus jeweled accents reflective trim and luxury accessory details"),
+    item("プリズム", "prism", "prism-inspired styling plus rainbow-refraction accents transparent trim and light-catching accessory details"),
+    item("ガラス", "glass", "glass-inspired styling plus translucent clear accents glossy trim and delicate accessory details")
   ];
 
   const FEATHER_MOTIF_PRESETS = [
-    { ja: "淡い羽根", mode: "motif", theme: "subtle feather" },
-    { ja: "白い羽根", mode: "motif", theme: "white feather" },
-    { ja: "黒い羽根", mode: "motif", theme: "black feather" },
-    { ja: "天使の羽根", mode: "motif", theme: "angel feather" },
-    { ja: "鳥羽根", mode: "motif", theme: "bird feather" },
-    { ja: "翼飾り", mode: "motif", theme: "wing ornament" }
+    item("白い羽根", "white feathers", "white feather-inspired styling plus soft feather accents pale trim and airy accessory details"),
+    item("黒い羽根", "black feathers", "black feather-inspired styling plus dark feather accents elegant trim and dramatic accessory details"),
+    item("淡い羽根", "soft feathers", "soft feather-inspired styling plus light feather accents fluffy trim and gentle accessory details")
   ];
 
-  const ANIMAL_MOTIF_PRESETS = [
-    { ja: "猫", mode: "motif", theme: "cat" },
-    { ja: "犬", mode: "motif", theme: "dog" },
-    { ja: "子犬", mode: "motif", theme: "puppy" },
-    { ja: "狐", mode: "motif", theme: "fox" },
-    { ja: "狼", mode: "motif", theme: "wolf" },
-    { ja: "兎", mode: "motif", theme: "rabbit" },
-    { ja: "蝶", mode: "motif", theme: "butterfly" },
-    { ja: "鳥", mode: "motif", theme: "bird" },
-    { ja: "蛇", mode: "motif", theme: "snake" }
+  const WAGASHI_PRESETS = [
+    item("わらび餅", "warabi mochi", "warabi mochi-inspired styling plus soft translucent jelly-like materials kinako-toned accents kuromitsu ribbon details and delicate wagashi accessory details", "soft translucent jelly-like materials kinako-toned trim kuromitsu-inspired ribbon accents and integrated wagashi outfit details"),
+    item("団子", "dango", "dango-inspired styling plus round dumpling ornament accents skewer-like trim and playful wagashi accessory details", "round dango-like silhouette plus soft mochi materials skewer-like trim and integrated wagashi outfit details"),
+    item("みたらし団子", "mitarashi dango", "mitarashi dango-inspired styling plus glossy caramel-brown accents round mochi ornaments and sweet glaze accessory details", "glossy mitarashi dango-like silhouette plus caramel glaze materials round mochi trim and integrated wagashi outfit details"),
+    item("たい焼き", "taiyaki", "taiyaki-inspired styling plus fish-shaped pastry accents golden baked trim and cute wagashi accessory details", "taiyaki-fish silhouette plus golden pastry materials baked trim and integrated wagashi outfit details"),
+    item("桜餅", "sakura mochi", "sakura mochi-inspired styling plus pale pink mochi accents cherry leaf trim and spring wagashi accessory details", "soft sakura mochi silhouette plus pale pink mochi materials cherry leaf trim and integrated wagashi outfit details"),
+    item("大福", "daifuku", "daifuku-inspired styling plus soft round mochi accents powdery white trim and gentle wagashi accessory details", "soft rounded daifuku silhouette plus powdery mochi materials white trim and integrated wagashi outfit details"),
+    item("あんみつ", "anmitsu", "anmitsu-inspired styling plus colorful kanten jelly accents fruit and syrup details and classic wagashi accessory details", "layered anmitsu dessert silhouette plus kanten jelly materials fruit trim and integrated wagashi outfit details"),
+    item("どら焼き", "dorayaki", "dorayaki-inspired styling plus round pancake accents warm brown trim and sweet bean accessory details", "rounded dorayaki silhouette plus soft pancake materials warm brown trim and integrated wagashi outfit details")
   ];
 
-  const LEGENDARY_MOTIF_PRESETS = [];
-
-  const DRAGON_LEGENDARY_MOTIF_PRESETS = [
-    { ja: "竜", mode: "motif", theme: "dragon" },
-    { ja: "バハムート", mode: "motif", theme: "bahamut" },
-    { ja: "ティアマト", mode: "motif", theme: "tiamat" },
-    { ja: "ファフニール", mode: "motif", theme: "fafnir" },
-    { ja: "ニーズヘッグ", mode: "motif", theme: "nidhogg" },
-    { ja: "ヨルムンガンド", mode: "motif", theme: "jormungandr" },
-    { ja: "リヴァイアサン", mode: "motif", theme: "leviathan" },
-    { ja: "オロチ", mode: "motif", theme: "orochi" },
-    { ja: "ヒュドラ", mode: "motif", theme: "hydra" },
-    { ja: "ケツァルコアトル", mode: "motif", theme: "quetzalcoatl" },
-    { ja: "ウロボロス", mode: "motif", theme: "ouroboros" }
+  const SWEETS_PRESETS = [
+    item("パフェ", "parfait", "parfait-inspired styling plus layered dessert-like frills cream-like ruffles fruit topping accents syrup-like trim and colorful accessory details", "layered dessert-like silhouette plus cream-like frills fruit topping accents syrup-like trim and integrated sweet-themed outfit details"),
+    item("プリン", "pudding", "pudding-inspired styling plus smooth glossy custard materials caramel-toned accents rounded dessert trim and sweet accessory details", "smooth rounded pudding silhouette plus glossy custard materials caramel trim and integrated sweet outfit details"),
+    item("ゼリー", "jelly", "jelly-inspired styling plus translucent jelly-like materials glossy soft colors wobbly trim and sweet accessory details", "translucent jelly-like silhouette plus glossy soft materials wobbly trim and integrated sweet outfit details"),
+    item("マカロン", "macaron", "macaron-inspired styling plus pastel round accents cream filling trim and delicate sweet accessory details", "round macaron silhouette plus pastel shell materials cream filling trim and integrated sweet outfit details"),
+    item("ショートケーキ", "strawberry shortcake", "strawberry shortcake-inspired styling plus cream frills strawberry accents sponge-cake trim and sweet accessory details", "layered shortcake silhouette plus cream ruffle materials strawberry trim and integrated cake outfit details"),
+    item("チョコレート", "chocolate", "chocolate-inspired styling plus glossy chocolate accents cocoa-brown trim and sweet ribbon accessory details", "chocolate-bar silhouette plus glossy cocoa materials molded trim and integrated sweet outfit details"),
+    item("アイスクリーム", "ice cream", "ice cream-inspired styling plus soft scoop accents pastel cream trim and sweet cone accessory details", "soft ice-cream scoop silhouette plus creamy materials cone-like trim and integrated sweet outfit details"),
+    item("クレープ", "crepe", "crepe-inspired styling plus folded fabric layers cream ruffles fruit accents and sweet street-dessert details", "folded crepe silhouette plus layered pastry materials cream trim and integrated fruit dessert details"),
+    item("キャンディ", "candy", "candy-inspired styling plus colorful wrapper bows glossy sugar accents and playful accessory details", "candy-wrapper silhouette plus glossy sugar materials colorful trim and integrated sweet outfit details"),
+    item("ドーナツ", "donut", "donut-inspired styling plus ring-shaped ornament accents glazed frosting trim sprinkles and playful sweet details", "donut-ring silhouette plus glazed frosting materials sprinkle trim and integrated sweet outfit details")
   ];
 
-  const CELESTIAL_ANGEL_MOTIF_PRESETS = [
-    { ja: "天使", mode: "motif", theme: "angel" },
-    { ja: "ガブリエル", mode: "motif", theme: "gabriel" },
-    { ja: "ラファエル", mode: "motif", theme: "raphael" },
-    { ja: "ミカエル", mode: "motif", theme: "michael" },
-    { ja: "ウリエル", mode: "motif", theme: "uriel" },
-    { ja: "熾天使", mode: "motif", theme: "seraphim" },
-    { ja: "座天使", mode: "motif", theme: "throne-angel" },
-    { ja: "守護天使", mode: "motif", theme: "guardian-angel" }
+  const DRINK_CAFE_PRESETS = [
+    item("紅茶", "black tea", "black tea-inspired styling plus warm amber accents teacup charm details delicate steam-like trim and cafe accessory details", "black tea-fusion silhouette plus warm amber materials teacup-like trim delicate steam accents and integrated cafe outfit details"),
+    item("コーヒー", "coffee", "coffee-inspired styling plus deep brown accents espresso swirl trim coffee-bean details and cafe accessory details", "coffee-fusion silhouette plus deep brown glossy materials espresso swirl trim and integrated cafe outfit details"),
+    item("クリームソーダ", "cream soda", "cream soda-inspired styling plus fizzy green accents whipped cream ruffles cherry details and soda-glass accessory details", "cream soda-fusion silhouette plus translucent fizzy green materials whipped cream trim cherry accents and integrated cafe outfit details"),
+    item("メロンソーダ", "melon soda", "melon soda-inspired styling plus bright green bubble accents glassy trim and retro cafe accessory details", "melon soda-fusion silhouette plus translucent green soda materials bubble trim and integrated retro cafe outfit details"),
+    item("レモネード", "lemonade", "lemonade-inspired styling plus lemon-yellow accents citrus slice details sparkling trim and fresh accessory details", "lemonade-fusion silhouette plus clear yellow citrus materials sparkling trim and integrated fresh outfit details"),
+    item("ミルクティー", "milk tea", "milk tea-inspired styling plus creamy beige accents tea-colored ribbon trim and soft cafe accessory details", "milk tea-fusion silhouette plus creamy beige materials tea-colored trim and integrated soft cafe outfit details"),
+    item("抹茶ラテ", "matcha latte", "matcha latte-inspired styling plus matcha green accents creamy foam trim and Japanese cafe accessory details", "matcha latte-fusion silhouette plus matcha green creamy materials foam trim and integrated cafe outfit details"),
+    item("カフェラテ", "cafe latte", "cafe latte-inspired styling plus latte-beige accents foam art trim and cozy cafe accessory details", "cafe latte-fusion silhouette plus beige coffee-foam materials latte-art trim and integrated cafe outfit details"),
+    item("ココア", "hot cocoa", "hot cocoa-inspired styling plus cocoa-brown accents marshmallow-like details warm trim and cozy accessory details", "hot cocoa-fusion silhouette plus warm cocoa materials marshmallow trim and integrated cozy outfit details"),
+    item("ソーダフロート", "soda float", "soda float-inspired styling plus clear fizzy accents ice-cream ruffles glassy trim and playful cafe details", "soda float-fusion silhouette plus fizzy translucent materials ice-cream trim and integrated cafe outfit details")
   ];
 
-  const INFERNAL_DEMON_MOTIF_PRESETS = [
-    { ja: "悪魔", mode: "motif", theme: "demon" },
-    { ja: "ルシフェル", mode: "motif", theme: "lucifer" },
-    { ja: "サタン", mode: "motif", theme: "satan" },
-    { ja: "ベルゼブブ", mode: "motif", theme: "beelzebub" },
-    { ja: "アスモデウス", mode: "motif", theme: "asmodeus" },
-    { ja: "ベルフェゴール", mode: "motif", theme: "belphegor" },
-    { ja: "サキュバス", mode: "motif", theme: "succubus" },
-    { ja: "ディアボロス", mode: "motif", theme: "diabolos" }
+  const SEA_UNDERWATER_PRESETS = [
+    item("波", "ocean wave", "ocean wave-inspired styling plus flowing wave accents blue gradient trim and marine accessory details", "ocean wave-fusion silhouette plus flowing blue materials wave trim and integrated marine outfit details"),
+    item("泡", "sea foam", "sea foam-inspired styling plus bubble accents pearly foam trim and light marine accessory details", "sea foam-fusion silhouette plus pearly translucent materials bubble trim and integrated aquatic outfit details"),
+    item("珊瑚", "coral", "coral-inspired styling plus branching coral accents warm reef trim and ocean accessory details", "coral-fusion silhouette plus branching reef materials coral trim and integrated ocean outfit details"),
+    item("真珠", "pearl", "pearl-inspired styling plus pearlescent bead accents soft shell trim and elegant marine accessory details", "pearl-fusion silhouette plus iridescent pearl materials soft shell trim and integrated marine outfit details"),
+    item("貝殻", "seashell", "seashell-inspired styling plus shell-shaped accents scallop trim and beach accessory details", "seashell-fusion silhouette plus shell-like materials scallop trim and integrated beach outfit details"),
+    item("クラゲ", "jellyfish", "jellyfish-inspired styling plus translucent frill accents trailing ribbon tendrils and glowing marine details", "jellyfish-fusion silhouette plus translucent floating materials trailing ribbon trim and integrated marine outfit details"),
+    item("深海", "deep sea", "deep sea-inspired styling plus dark blue gradient accents bioluminescent trim and mysterious ocean details", "deep sea-fusion silhouette plus dark blue materials bioluminescent trim and integrated abyssal outfit details"),
+    item("水面", "water surface", "water surface-inspired styling plus reflective ripple accents clear blue trim and shimmering marine details", "water surface-fusion silhouette plus reflective ripple materials clear trim and integrated aquatic outfit details")
   ];
 
-  const FAIRY_MOTIF_PRESETS = [
-    { ja: "妖精", mode: "motif", theme: "fairy" },
-    { ja: "ピクシー", mode: "motif", theme: "pixie" },
-    { ja: "シルフ", mode: "motif", theme: "sylph" },
-    { ja: "ウンディーネ", mode: "motif", theme: "undine" },
-    { ja: "ノーム", mode: "motif", theme: "gnome" },
-    { ja: "サラマンダー", mode: "motif", theme: "salamander" },
-    { ja: "ティターニア", mode: "motif", theme: "titania" },
-    { ja: "オベロン", mode: "motif", theme: "oberon" }
+  const GEM_MINERAL_PRESETS = [
+    item("水晶", "crystal", "crystal-inspired styling plus faceted clear accents reflective trim and gemstone accessory details", "crystal-fusion silhouette plus faceted clear materials reflective trim and integrated gemstone outfit details"),
+    item("ルビー", "ruby", "ruby-inspired styling plus deep red gem accents gold trim and luxurious jewel accessory details", "ruby-fusion silhouette plus deep red faceted materials gold trim and integrated jewel outfit details"),
+    item("サファイア", "sapphire", "sapphire-inspired styling plus royal blue gem accents silver trim and elegant jewel details", "sapphire-fusion silhouette plus royal blue faceted materials silver trim and integrated jewel outfit details"),
+    item("エメラルド", "emerald", "emerald-inspired styling plus vivid green gem accents ornate trim and refined jewel details", "emerald-fusion silhouette plus vivid green faceted materials ornate trim and integrated jewel outfit details"),
+    item("オパール", "opal", "opal-inspired styling plus milky iridescent accents rainbow shimmer trim and delicate jewel details", "opal-fusion silhouette plus milky iridescent materials rainbow trim and integrated jewel outfit details"),
+    item("アメジスト", "amethyst", "amethyst-inspired styling plus violet crystal accents silver trim and mystical jewel details", "amethyst-fusion silhouette plus violet crystalline materials silver trim and integrated jewel outfit details"),
+    item("黒曜石", "obsidian", "obsidian-inspired styling plus glossy black stone accents sharp trim and dark mineral details", "obsidian-fusion silhouette plus glossy black mineral materials sharp trim and integrated stone outfit details"),
+    item("琥珀", "amber", "amber-inspired styling plus honey-gold translucent accents warm fossil-like trim and antique jewel details", "amber-fusion silhouette plus honey-gold translucent materials warm trim and integrated jewel outfit details"),
+    item("ラピスラズリ", "lapis lazuli", "lapis lazuli-inspired styling plus deep ultramarine accents tiny gold flecks and royal mineral details", "lapis lazuli-fusion silhouette plus deep blue mineral materials gold-fleck trim and integrated jewel outfit details")
   ];
 
-  const MERMAID_SEA_MOTIF_PRESETS = [
-    { ja: "人魚", mode: "motif", theme: "mermaid" },
-    { ja: "セイレーン", mode: "motif", theme: "siren" },
-    { ja: "ネレイド", mode: "motif", theme: "nereid" },
-    { ja: "メリュジーヌ", mode: "motif", theme: "melusine" },
-    { ja: "海の女神", mode: "motif", theme: "sea-goddess" },
-    { ja: "リヴァイアサン", mode: "motif", theme: "leviathan" },
-    { ja: "クラーケン", mode: "motif", theme: "kraken" }
+  const SEASON_WEATHER_PRESETS = [
+    item("雨", "rain", "rain-inspired styling plus raindrop accents glossy wet-look trim and rainy-day accessory details", "rain-fusion silhouette plus glossy raindrop materials wet trim and integrated weather outfit details"),
+    item("雪", "snow", "snow-inspired styling plus soft white flake accents frosty trim and winter accessory details", "snow-fusion silhouette plus soft white frosty materials snowflake trim and integrated winter outfit details"),
+    item("霧", "mist", "mist-inspired styling plus soft hazy accents translucent veil trim and dreamy weather details", "mist-fusion silhouette plus hazy translucent materials veil-like trim and integrated misty outfit details"),
+    item("雷", "lightning", "lightning-inspired styling plus sharp electric accents bolt-like trim and storm accessory details", "lightning-fusion silhouette plus sharp electric materials bolt trim and integrated storm outfit details"),
+    item("虹", "rainbow", "rainbow-inspired styling plus multicolor gradient accents prismatic trim and cheerful weather details", "rainbow-fusion silhouette plus prismatic gradient materials multicolor trim and integrated weather outfit details"),
+    item("紅葉", "autumn leaves", "autumn leaves-inspired styling plus red-orange leaf accents warm seasonal trim and autumn accessory details", "autumn leaves-fusion silhouette plus layered leaf materials warm red-orange trim and integrated autumn outfit details"),
+    item("木漏れ日", "sun-dappled light", "sun-dappled light-inspired styling plus warm golden spot accents soft leaf-shadow trim and gentle sunlight details", "sun-dappled light-fusion silhouette plus warm golden materials leaf-shadow trim and integrated sunlight outfit details"),
+    item("霜", "frost", "frost-inspired styling plus crisp icy edge accents pale silver trim and cold morning accessory details", "frost-fusion silhouette plus pale icy materials crisp frost trim and integrated winter outfit details")
   ];
 
-  const SKY_BIRD_MOTIF_PRESETS = [
-    { ja: "不死鳥", mode: "motif", theme: "phoenix" },
-    { ja: "フェニックス", mode: "motif", theme: "phoenix" },
-    { ja: "朱雀", mode: "motif", theme: "suzaku" },
-    { ja: "グリフォン", mode: "motif", theme: "griffin" },
-    { ja: "ロック鳥", mode: "motif", theme: "roc" }
+  const ANIMAL_PRESETS = [
+    item("猫", "cat", "cat-inspired styling plus feline-themed accents ear-like trim and accessory details", "cat-inspired silhouette plus feline materials ear-like trim and integrated outfit details"),
+    item("犬", "dog", "dog-inspired styling plus canine-themed accents collar-like trim and accessory details", "dog-inspired silhouette plus canine materials collar-like trim and integrated outfit details"),
+    item("狐", "fox", "fox-inspired styling plus fox-tail accents pointed-ear trim and accessory details", "fox-inspired silhouette plus fox-like materials tail-like trim and integrated outfit details"),
+    item("狼", "wolf", "wolf-inspired styling plus wild fur accents sharp trim and accessory details", "wolf-inspired silhouette plus wolf-like materials fur trim and integrated outfit details"),
+    item("兎", "rabbit", "rabbit-inspired styling plus soft bunny accents long-ear trim and accessory details", "rabbit-inspired silhouette plus soft bunny materials long-ear trim and integrated outfit details"),
+    item("蝶", "butterfly", "butterfly-inspired styling plus wing-pattern accents delicate trim and accessory details", "butterfly-inspired silhouette plus wing-like materials delicate trim and integrated outfit details"),
+    item("鳥", "bird", "bird-inspired styling plus feather accents wing-like trim and accessory details", "bird-inspired silhouette plus feather materials wing-like trim and integrated outfit details"),
+    item("蛇", "snake", "snake-inspired styling plus scale-pattern accents sleek trim and accessory details", "snake-inspired silhouette plus scale-like materials serpentine trim and integrated outfit details")
   ];
 
-  const MYTHIC_BEAST_MOTIF_PRESETS = [
-    { ja: "ユニコーン", mode: "motif", theme: "unicorn" },
-    { ja: "麒麟", mode: "motif", theme: "qilin" },
-    { ja: "白澤", mode: "motif", theme: "bai-ze" },
-    { ja: "獬豸", mode: "motif", theme: "xiezhi" },
-    { ja: "フェンリル", mode: "motif", theme: "fenrir" },
-    { ja: "ケルベロス", mode: "motif", theme: "cerberus" },
-    { ja: "ベヒーモス", mode: "motif", theme: "behemoth" },
-    { ja: "バジリスク", mode: "motif", theme: "basilisk" },
-    { ja: "スフィンクス", mode: "motif", theme: "sphinx" }
+  const DRAGONS = [
+    item("バハムート", "bahamut", "bahamut-inspired styling plus mythic dragon accents majestic trim and legendary accessory details", "bahamut-inspired silhouette plus mythic dragon materials majestic trim and integrated legendary outfit details"),
+    item("ティアマト", "tiamat", "tiamat-inspired styling plus ancient dragon accents sea-serpent trim and mythic accessory details", "tiamat-inspired silhouette plus ancient dragon materials sea-serpent trim and integrated mythic outfit details"),
+    item("ファフニール", "fafnir", "fafnir-inspired styling plus treasure-dragon accents golden scale trim and mythic accessory details", "fafnir-inspired silhouette plus golden dragon-scale materials treasure trim and integrated mythic outfit details"),
+    item("ニーズヘッグ", "nidhogg", "nidhogg-inspired styling plus dark dragon accents root-like trim and mythic accessory details", "nidhogg-inspired silhouette plus dark dragon materials root-like trim and integrated mythic outfit details"),
+    item("ヨルムンガンド", "jormungandr", "jormungandr-inspired styling plus world-serpent accents coiling trim and mythic accessory details", "jormungandr-inspired silhouette plus world-serpent materials coiling trim and integrated mythic outfit details"),
+    item("リヴァイアサン", "leviathan", "leviathan-inspired styling plus sea-dragon accents aquatic scale trim and mythic accessory details", "leviathan-inspired silhouette plus sea-dragon materials aquatic trim and integrated mythic outfit details"),
+    item("オロチ", "yamata no orochi", "yamata no orochi-inspired styling plus many-headed serpent accents Japanese myth trim and accessory details", "yamata no orochi-inspired silhouette plus serpent-dragon materials Japanese myth trim and integrated outfit details"),
+    item("ヒュドラ", "hydra", "hydra-inspired styling plus multi-headed serpent accents toxic green trim and mythic accessory details", "hydra-inspired silhouette plus multi-serpent materials toxic green trim and integrated mythic outfit details"),
+    item("ケツァルコアトル", "quetzalcoatl", "quetzalcoatl-inspired styling plus feathered serpent accents colorful plume trim and mythic accessory details", "quetzalcoatl-inspired silhouette plus feathered serpent materials plume trim and integrated mythic outfit details"),
+    item("ウロボロス", "ouroboros", "ouroboros-inspired styling plus circular serpent accents eternal ring trim and mythic accessory details", "ouroboros-inspired silhouette plus circular serpent materials ring-like trim and integrated mythic outfit details")
   ];
 
-  const FOUR_SYMBOLS_MOTIF_PRESETS = [
-    { ja: "青龍", mode: "motif", theme: "seiryu" },
-    { ja: "白虎", mode: "motif", theme: "byakko" },
-    { ja: "朱雀", mode: "motif", theme: "suzaku" },
-    { ja: "玄武", mode: "motif", theme: "genbu" },
-    { ja: "応龍", mode: "motif", theme: "yinglong" }
+  const FOUR_SYMBOLS = [
+    item("青龍", "azure dragon", "azure dragon-inspired styling plus blue scale accents eastern cloud trim and sacred beast details", "azure dragon-inspired silhouette plus blue scale materials cloud trim and integrated sacred beast outfit details"),
+    item("白虎", "white tiger", "white tiger-inspired styling plus white tiger stripe accents sacred beast trim and accessory details", "white tiger-inspired silhouette plus striped white materials sacred beast trim and integrated outfit details"),
+    item("朱雀", "vermilion bird", "vermilion bird-inspired styling plus red feather accents flame-like trim and sacred bird details", "vermilion bird-inspired silhouette plus red feather materials flame trim and integrated sacred bird outfit details"),
+    item("玄武", "black tortoise", "black tortoise-inspired styling plus dark shell accents serpent-like trim and sacred beast details", "black tortoise-inspired silhouette plus dark shell materials serpent trim and integrated sacred beast outfit details"),
+    item("麒麟", "qilin", "qilin-inspired styling plus auspicious horn accents cloud trim and sacred beast details", "qilin-inspired silhouette plus auspicious beast materials cloud trim and integrated sacred beast outfit details")
   ];
 
-  const FUSION_PRESETS = [];
+  const ANGELS = [
+    item("天使", "angel", "angel-inspired styling plus halo accents white wing trim and sacred accessory details", "angel-inspired silhouette plus white wing materials halo trim and integrated celestial outfit details"),
+    item("ガブリエル", "gabriel", "gabriel-inspired styling plus messenger angel accents trumpet-like trim and sacred accessory details", "gabriel-inspired silhouette plus messenger angel materials trumpet trim and integrated celestial outfit details"),
+    item("ミカエル", "michael", "michael-inspired styling plus archangel armor accents radiant trim and sacred accessory details", "michael-inspired silhouette plus archangel armor materials radiant trim and integrated celestial outfit details"),
+    item("ウリエル", "uriel", "uriel-inspired styling plus golden angel accents flame-light trim and sacred accessory details", "uriel-inspired silhouette plus golden angel materials flame-light trim and integrated celestial outfit details"),
+    item("セラフィム", "seraphim", "seraphim-inspired styling plus many-winged angel accents fiery trim and sacred accessory details", "seraphim-inspired silhouette plus many-winged celestial materials fiery trim and integrated outfit details")
+  ];
+
+  const DEMONS = [
+    item("悪魔", "demon", "demon-inspired styling plus horn-like accents dark wing trim and infernal accessory details", "demon-inspired silhouette plus dark infernal materials horn-like trim and integrated demon outfit details"),
+    item("ルシフェル", "lucifer", "lucifer-inspired styling plus fallen angel accents dark halo trim and infernal accessory details", "lucifer-inspired silhouette plus fallen angel materials dark halo trim and integrated infernal outfit details"),
+    item("サタン", "satan", "satan-inspired styling plus infernal lord accents red-black trim and demonic accessory details", "satan-inspired silhouette plus infernal lord materials red-black trim and integrated demon outfit details"),
+    item("ベルゼブブ", "beelzebub", "beelzebub-inspired styling plus dark insect-lord accents glossy black trim and demonic accessory details", "beelzebub-inspired silhouette plus dark insect-lord materials glossy trim and integrated demon outfit details"),
+    item("リリス", "lilith", "lilith-inspired styling plus night demon accents elegant dark trim and demonic accessory details", "lilith-inspired silhouette plus night demon materials elegant dark trim and integrated demon outfit details"),
+    item("サキュバス", "succubus", "succubus-inspired styling plus seductive demon accents heart-like trim and fantasy accessory details", "succubus-inspired silhouette plus demon fantasy materials heart-like trim and integrated outfit details")
+  ];
+
+  const FAIRIES = [
+    item("妖精", "fairy", "fairy-inspired styling plus delicate wing accents tiny floral trim and magical accessory details", "fairy-inspired silhouette plus delicate wing materials floral trim and integrated fairy outfit details"),
+    item("ピクシー", "pixie", "pixie-inspired styling plus playful fairy accents small wing trim and sparkling accessory details", "pixie-inspired silhouette plus playful fairy materials small wing trim and integrated outfit details"),
+    item("シルフ", "sylph", "sylph-inspired styling plus airy wind-spirit accents flowing trim and magical accessory details", "sylph-inspired silhouette plus airy wind materials flowing trim and integrated fairy outfit details"),
+    item("ドライアド", "dryad", "dryad-inspired styling plus forest spirit accents bark-leaf trim and nature accessory details", "dryad-inspired silhouette plus forest spirit materials bark-leaf trim and integrated outfit details")
+  ];
+
+  const MERMAIDS = [
+    item("人魚", "mermaid", "mermaid-inspired styling plus scale accents shell trim and marine accessory details", "mermaid-inspired silhouette plus scale materials shell trim and integrated sea-myth outfit details"),
+    item("セイレーン", "siren", "siren-inspired styling plus dangerous sea-song accents dark aquatic trim and myth accessory details", "siren-inspired silhouette plus dark aquatic materials sea-song trim and integrated myth outfit details"),
+    item("ネレイド", "nereid", "nereid-inspired styling plus sea nymph accents wave trim and mythic marine details", "nereid-inspired silhouette plus sea nymph materials wave trim and integrated marine outfit details"),
+    item("海の女神", "sea goddess", "sea goddess-inspired styling plus divine ocean accents pearl trim and sacred marine details", "sea goddess-inspired silhouette plus divine ocean materials pearl trim and integrated sea-goddess outfit details")
+  ];
+
+  const SKY_BIRDS = [
+    item("フェニックス", "phoenix", "phoenix-inspired styling plus fiery feather accents rebirth flame trim and mythic bird details", "phoenix-inspired silhouette plus fiery feather materials flame trim and integrated mythic bird outfit details"),
+    item("不死鳥", "phoenix", "phoenix-inspired styling plus fiery feather accents rebirth flame trim and mythic bird details", "phoenix-inspired silhouette plus fiery feather materials flame trim and integrated mythic bird outfit details"),
+    item("グリフォン", "griffin", "griffin-inspired styling plus eagle-lion accents golden feather trim and mythic beast details", "griffin-inspired silhouette plus eagle-lion materials golden feather trim and integrated mythic outfit details"),
+    item("ガルーダ", "garuda", "garuda-inspired styling plus divine bird accents golden wing trim and mythic accessory details", "garuda-inspired silhouette plus divine bird materials golden wing trim and integrated mythic outfit details")
+  ];
+
+  const BEASTS = [
+    item("ユニコーン", "unicorn", "unicorn-inspired styling plus spiral horn accents pearly trim and pure mythic accessory details", "unicorn-inspired silhouette plus pearly mythic materials spiral horn trim and integrated outfit details"),
+    item("フェンリル", "fenrir", "fenrir-inspired styling plus giant wolf accents wild fur trim and Norse myth details", "fenrir-inspired silhouette plus giant wolf materials wild fur trim and integrated mythic outfit details"),
+    item("ケルベロス", "cerberus", "cerberus-inspired styling plus hellhound accents dark collar trim and mythic beast details", "cerberus-inspired silhouette plus hellhound materials dark collar trim and integrated mythic outfit details"),
+    item("スレイプニル", "sleipnir", "sleipnir-inspired styling plus eight-legged horse accents Norse runic trim and mythic details", "sleipnir-inspired silhouette plus mythic horse materials runic trim and integrated outfit details")
+  ];
 
   const CYBER_FUSION_PRESETS = [
-    { ja: "サイバーパンク衣装融合", mode: "fusion", theme: "cyberpunk", detail: "neon tech silhouette and integrated circuit-like trim" },
-    { ja: "アンドロイド衣装融合", mode: "fusion", theme: "android-tech", detail: "sleek synthetic silhouette and integrated mechanical seams" },
-    { ja: "メカアーマー衣装融合", mode: "fusion", theme: "mecha-armor", detail: "armored mechanical silhouette and integrated panel trim" },
-    { ja: "ホログラム衣装融合", mode: "fusion", theme: "holographic", detail: "transparent light-layer silhouette and integrated luminous trim" },
-    { ja: "ネオン回路衣装融合", mode: "fusion", theme: "neon-circuit", detail: "glowing circuit silhouette and integrated neon line details" }
+    fusionItem("サイバーパンク", "cyberpunk", "cyberpunk silhouette plus neon circuit materials mechanical trim and integrated tech outfit details"),
+    fusionItem("機械天使", "mechanical angel", "mechanical angel silhouette plus metallic wing materials halo-like trim and integrated tech outfit details"),
+    fusionItem("時計仕掛け", "clockwork", "clockwork silhouette plus brass gear materials mechanical trim and integrated timepiece outfit details"),
+    fusionItem("ホログラム", "hologram", "hologram silhouette plus translucent projection materials neon trim and integrated digital outfit details")
   ];
 
   const CULTURAL_FUSION_PRESETS = [
-    { ja: "中華×洋装衣装融合", mode: "fusion", theme: "chinese-western", detail: "layered formal silhouette and integrated ornamental trim" },
-    { ja: "和装×ドレス衣装融合", mode: "fusion", theme: "kimono-dress", detail: "layered fabric structure and integrated sash details" },
-    { ja: "アラビアン×ドレス衣装融合", mode: "fusion", theme: "arabian-dress", detail: "flowing layered silhouette and integrated veil-like trim" },
-    { ja: "ゴシック×アイドル衣装融合", mode: "fusion", theme: "gothic-idol", detail: "dark stage silhouette and integrated lace trim" },
-    { ja: "騎士×ドレス衣装融合", mode: "fusion", theme: "knight-dress", detail: "elegant armored silhouette and integrated metal trim" }
+    fusionItem("和風", "japanese traditional", "Japanese traditional silhouette plus kimono-inspired materials obi-like trim and integrated cultural outfit details"),
+    fusionItem("中華風", "chinese traditional", "Chinese traditional silhouette plus qipao-inspired materials knot-button trim and integrated cultural outfit details"),
+    fusionItem("アラビアン", "arabian", "Arabian silhouette plus flowing veil materials golden trim and integrated desert outfit details")
   ];
 
   const NATURAL_FUSION_PRESETS = [
-    { ja: "海神風衣装融合", mode: "fusion", theme: "sea-deity", detail: "flowing aquatic silhouette and shell-like trim" },
-    { ja: "氷結晶衣装融合", mode: "fusion", theme: "ice-crystal", detail: "faceted frozen silhouette and integrated crystal trim" },
-    { ja: "炎衣装融合", mode: "fusion", theme: "flame", detail: "flame-shaped silhouette and integrated ember-like trim" },
-    { ja: "森精霊衣装融合", mode: "fusion", theme: "forest-spirit", detail: "leaf-layered silhouette and integrated vine trim" },
-    { ja: "雷衣装融合", mode: "fusion", theme: "lightning", detail: "sharp electric silhouette and integrated lightning trim" }
+    fusionItem("炎", "fire", "flame-like silhouette plus glowing red materials ember trim and integrated fire outfit details"),
+    fusionItem("水", "water", "flowing water silhouette plus translucent blue materials ripple trim and integrated aquatic outfit details"),
+    fusionItem("森", "forest", "forest-like silhouette plus leaf materials vine trim and integrated nature outfit details"),
+    fusionItem("雷", "lightning", "sharp lightning silhouette plus electric materials bolt trim and integrated storm outfit details")
   ];
-
-  const ORNAMENTAL_FUSION_PRESETS = [
-    { ja: "竜鱗風衣装融合", mode: "fusion", theme: "draconic-scale", detail: "scale-like plated fabric and ceremonial silhouette" },
-    { ja: "聖堂装飾衣装融合", mode: "fusion", theme: "cathedral-ornament", detail: "stained-glass trim and sacred metal accents" },
-    { ja: "ステンドグラス衣装融合", mode: "fusion", theme: "stained-glass", detail: "colored glass panel silhouette and luminous trim" },
-    { ja: "宝石衣装融合", mode: "fusion", theme: "jewel", detail: "faceted gemstone silhouette and integrated jewel trim" },
-    { ja: "時計歯車衣装融合", mode: "fusion", theme: "clockwork", detail: "gear-layered silhouette and integrated brass mechanism trim" }
-  ];
-
-  const ANIMAL_FUSION_PRESETS = [
-    { ja: "猫", mode: "fusion", theme: "cat", detail: "cat-inspired silhouette plus matching materials and trim" },
-    { ja: "犬", mode: "fusion", theme: "dog", detail: "dog-inspired silhouette plus matching materials and trim" },
-    { ja: "子犬", mode: "fusion", theme: "puppy", detail: "puppy-inspired silhouette plus matching materials and trim" },
-    { ja: "狐", mode: "fusion", theme: "fox", detail: "fox-inspired silhouette plus matching materials and trim" },
-    { ja: "狼", mode: "fusion", theme: "wolf", detail: "wolf-inspired silhouette plus matching materials and trim" },
-    { ja: "兎", mode: "fusion", theme: "rabbit", detail: "rabbit-inspired silhouette plus matching materials and trim" },
-    { ja: "蝶", mode: "fusion", theme: "butterfly", detail: "butterfly-inspired silhouette plus matching materials and trim" },
-    { ja: "鳥", mode: "fusion", theme: "bird", detail: "bird-inspired silhouette plus matching materials and trim" },
-    { ja: "蛇", mode: "fusion", theme: "snake", detail: "snake-inspired silhouette plus matching materials and trim" }
-  ];
-
-  const LEGENDARY_FUSION_PRESETS = [];
-
-  function toLegendaryFusionPreset(item){
-    return {
-      ja: item.ja,
-      mode: "fusion",
-      theme: item.theme,
-      detail: item.theme + "-inspired silhouette plus mythic materials and trim"
-    };
-  }
-
-  const DRAGON_LEGENDARY_FUSION_PRESETS = DRAGON_LEGENDARY_MOTIF_PRESETS.map(toLegendaryFusionPreset);
-  const CELESTIAL_ANGEL_FUSION_PRESETS = CELESTIAL_ANGEL_MOTIF_PRESETS.map(toLegendaryFusionPreset);
-  const INFERNAL_DEMON_FUSION_PRESETS = INFERNAL_DEMON_MOTIF_PRESETS.map(toLegendaryFusionPreset);
-  const FAIRY_FUSION_PRESETS = FAIRY_MOTIF_PRESETS.map(toLegendaryFusionPreset);
-  const MERMAID_SEA_FUSION_PRESETS = MERMAID_SEA_MOTIF_PRESETS.map(toLegendaryFusionPreset);
-  const SKY_BIRD_FUSION_PRESETS = SKY_BIRD_MOTIF_PRESETS.map(toLegendaryFusionPreset);
-  const MYTHIC_BEAST_FUSION_PRESETS = MYTHIC_BEAST_MOTIF_PRESETS.map(toLegendaryFusionPreset);
-  const FOUR_SYMBOLS_FUSION_PRESETS = FOUR_SYMBOLS_MOTIF_PRESETS.map(toLegendaryFusionPreset);
 
   const SAFETY_PRESETS = [
-    { ja: "融合を衣装側に固定", en: "single humanoid character focus with fusion elements integrated into the outfit design and no separate creature" }
+    { ja: "融合を衣装内に統合", en: "single humanoid character focus plus motif traits integrated into the outfit design and no separate creature" },
+    { ja: "別個体化を抑える", en: "wearable integrated costume design focus and no companion creature" }
   ];
 
-  const DICT = {};
-  MOTIF_PRESETS
-    .concat(FLORAL_MOTIF_PRESETS)
-    .concat(CELESTIAL_MOTIF_PRESETS)
-    .concat(CRYSTAL_MOTIF_PRESETS)
-    .concat(CLOCKWORK_MOTIF_PRESETS)
-    .concat(GLASS_GEM_MOTIF_PRESETS)
-    .concat(FEATHER_MOTIF_PRESETS)
-    .concat(ANIMAL_MOTIF_PRESETS)
-    .concat(LEGENDARY_MOTIF_PRESETS)
-    .concat(DRAGON_LEGENDARY_MOTIF_PRESETS)
-    .concat(CELESTIAL_ANGEL_MOTIF_PRESETS)
-    .concat(INFERNAL_DEMON_MOTIF_PRESETS)
-    .concat(FAIRY_MOTIF_PRESETS)
-    .concat(MERMAID_SEA_MOTIF_PRESETS)
-    .concat(SKY_BIRD_MOTIF_PRESETS)
-    .concat(MYTHIC_BEAST_MOTIF_PRESETS)
-    .concat(FOUR_SYMBOLS_MOTIF_PRESETS)
-    .concat(FUSION_PRESETS)
-    .concat(CYBER_FUSION_PRESETS)
-    .concat(CULTURAL_FUSION_PRESETS)
-    .concat(NATURAL_FUSION_PRESETS)
-    .concat(ORNAMENTAL_FUSION_PRESETS)
-    .concat(ANIMAL_FUSION_PRESETS)
-    .concat(LEGENDARY_FUSION_PRESETS)
-    .concat(DRAGON_LEGENDARY_FUSION_PRESETS)
-    .concat(CELESTIAL_ANGEL_FUSION_PRESETS)
-    .concat(INFERNAL_DEMON_FUSION_PRESETS)
-    .concat(FAIRY_FUSION_PRESETS)
-    .concat(MERMAID_SEA_FUSION_PRESETS)
-    .concat(SKY_BIRD_FUSION_PRESETS)
-    .concat(MYTHIC_BEAST_FUSION_PRESETS)
-    .concat(FOUR_SYMBOLS_FUSION_PRESETS)
-    .concat(SAFETY_PRESETS)
-    .forEach(function(item){
-      if (item && item.en) DICT[item.en] = item.ja;
-    });
-
-  function injectStyle(rootForShadow){
-    try{
-      const css = `
-.${ROOT_CLASS}{
-  display:block!important;width:100%;max-width:100%;box-sizing:border-box;
-  grid-column:1 / -1!important;
-  margin:10px 0 12px;border:1px solid #d8c7ee;border-radius:14px;
-  background:linear-gradient(180deg,#fffaff 0%,#fbf7ff 100%);
-  overflow:hidden;
-}
-.${ROOT_CLASS} summary{cursor:pointer;list-style:none;}
-.${ROOT_CLASS} .v25-head{
-  padding:11px 12px;font-weight:800;color:#5b3f82;background:#f2eaff;
-}
-.${ROOT_CLASS} .v25-body{display:block!important;grid-template-columns:1fr!important;padding:10px 12px 12px;box-sizing:border-box;}
-.${ROOT_CLASS} .v25-note{
-  font-size:12px;line-height:1.5;color:#6c5c7c;margin:0 0 10px;
-}
-.${ROOT_CLASS} .v25-sub{
-  display:block!important;width:100%!important;max-width:100%!important;grid-column:1 / -1!important;
-  border:1px solid #e3d9f1;border-radius:12px;background:#fff;
-  margin:8px 0;overflow:hidden;
-}
-.${ROOT_CLASS} .v25-sub > summary{
-  padding:9px 10px;font-weight:700;color:#5d4a71;background:#faf7ff;
-}
-.${ROOT_CLASS} .v25-sub-body{display:block!important;padding:9px 10px 10px;}
-.${ROOT_CLASS} .v25-sub-body .v25-sub{
-  margin:8px 0 0;background:#fffdfd;border-color:#eadff5;
-}
-.${ROOT_CLASS} .v25-sub-body .v25-sub > summary{
-  background:#fbf8ff;
-}
-.${ROOT_CLASS} .v25-grid{
-  display:grid;grid-template-columns:1fr;gap:7px;width:100%;
-}
-.${ROOT_CLASS} label{
-  display:flex;align-items:flex-start;gap:7px;line-height:1.35;
-  font-size:13px;color:#372f40;box-sizing:border-box;
-}
-.${ROOT_CLASS} input[type="checkbox"]{margin-top:2px;flex:0 0 auto;}
-.${ROOT_CLASS} .v25-custom-row{
-  display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:center;
-  margin:0 0 8px;
-}
-.${ROOT_CLASS} .v25-custom-row label{font-weight:700;white-space:nowrap;}
-.${ROOT_CLASS} input[type="text"]{
-  width:100%;min-width:0;box-sizing:border-box;border:1px solid #d8cbea;
-  border-radius:10px;padding:8px 9px;font-size:13px;background:#fff;
-}
-.${ROOT_CLASS} .v25-mini{
-  font-size:11px;line-height:1.45;color:#7b6c89;margin:4px 0 8px;
-}
-@media (max-width: 520px){
-  .${ROOT_CLASS} .v25-custom-row{grid-template-columns:1fr;}
-  .${ROOT_CLASS} .v25-custom-row label{white-space:normal;}
-}`;
-      if (!document.getElementById(STYLE_ID)){
-        const st = document.createElement("style");
-        st.id = STYLE_ID;
-        st.textContent = css;
-        document.head.appendChild(st);
-      }
-      if (rootForShadow && rootForShadow.querySelector && !rootForShadow.querySelector("#" + STYLE_ID)){
-        const st2 = document.createElement("style");
-        st2.id = STYLE_ID;
-        st2.textContent = css;
-        rootForShadow.appendChild(st2);
-      }
-    }catch(_){}
-  }
-
-  function cleanUserText(value){
-    return String(value || "")
-      .replace(/[\r\n\t]+/g, " ")
-      .replace(/[，、,]+/g, " ")
-      .replace(/\s+/g, " ")
-      .replace(/^[\s]+|[\s]+$/g, "")
-      .slice(0, 160)
-      .trim();
-  }
-
-  function normalizeThemeTypos(value){
-    const v = cleanUserText(value);
-    if (!v) return "";
-    const lower = v.toLowerCase();
-    const exact = {
+  function normalizeTheme(raw){
+    let s = String(raw || "").trim();
+    if (!s) return "";
+    const direct = JA_TO_EN[s] || JA_TO_EN[s.replace(/\s+/g, "")];
+    if (direct) return direct;
+    s = s.toLowerCase().replace(/\s+/g, " ").trim();
+    const fixed = {
       "succbus": "succubus",
       "sucubus": "succubus",
       "succubuss": "succubus",
@@ -12737,121 +12629,134 @@ function createItemLabel(item){
       "doggie": "dog",
       "doggo": "dog"
     };
-    if (exact[lower]) return exact[lower];
-    return v.replace(/\bsuccbus\b/ig, "succubus")
-      .replace(/\bsucubus\b/ig, "succubus")
-      .replace(/\bsuccubuss\b/ig, "succubus")
-      .replace(/\bsuccubas\b/ig, "succubus")
-      .replace(/\bdoggy\b/ig, "dog")
-      .replace(/\bdoggie\b/ig, "dog")
-      .replace(/\bdoggo\b/ig, "dog");
-  }
-
-  function promptTheme(raw){
-    const v = normalizeThemeTypos(raw);
-    if (!v) return "";
-    // 英字入力はプロンプト内で自然に見えるよう小文字化する。日本語などはそのまま残す。
-    if (/^[A-Za-z0-9][A-Za-z0-9\s'_-]*$/.test(v)) return v.toLowerCase();
-    return v;
-  }
-
-  function checkedPromptValue(cb){
-    if (!cb || !cb.checked || !cb.dataset) return "";
-    return cleanUserText(cb.dataset.en || cb.value || cb.getAttribute("value") || "");
+    return fixed[s] || s;
   }
 
   function inferSelectedOutfit(root){
     const scope = document.querySelector("#list-attire") || document;
-    const values = [];
-    try{
-      scope.querySelectorAll("input[type='checkbox']:checked").forEach(function(cb){
-        if (!cb || (root && root.contains(cb))) return;
-        const v = checkedPromptValue(cb);
-        if (v) values.push(v.toLowerCase());
-      });
-    }catch(_){}
-    const joined = values.join(" | ");
-
+    const vals = [];
+    scope.querySelectorAll("input:checked").forEach(function(cb){
+      try{
+        if (root && root.contains(cb)) return;
+        const s = ((cb.dataset && (cb.dataset.en || cb.dataset.val || cb.dataset.prompt)) || cb.value || "").toLowerCase();
+        if (s) vals.push(s);
+      }catch(_){}
+    });
+    const joined = vals.join(" | ");
     const rules = [
-      { label: "selected bikini armor", re: /\bbikini armor\b/ },
-
-      // 水着系は generic swimsuit より前で細分化する。
-      // 例：monokini を選んだ時に "selected swimsuit outfit ... , monokini" だけになるのを避ける。
-      { label: "selected micro bikini outfit", re: /\bmicro bikini\b/ },
-      { label: "selected string bikini outfit", re: /\bstring bikini\b/ },
-      { label: "selected front-tie bikini outfit", re: /\bfront-tie bikini\b/ },
-      { label: "selected bikini outfit", re: /\bbikini\b/ },
-      { label: "selected monokini swimsuit outfit", re: /\bmonokini\b/ },
-      { label: "selected tankini swimsuit outfit", re: /\btankini\b/ },
-      { label: "selected one-piece swimsuit outfit", re: /\bone-piece swimsuit\b/ },
-      { label: "selected school swimsuit outfit", re: /\bschool swimsuit\b/ },
-      { label: "selected rash guard swimsuit outfit", re: /\brash guard\b/ },
-      { label: "selected wetsuit outfit", re: /\bwetsuit\b/ },
-      { label: "selected swimsuit outfit", re: /\bswimsuit\b/ },
-
-      // 特化・完成セット由来の複数タグから衣装カテゴリを推定する。
-      // 例：idol outfit designed for center position / spotlight-enhancing stage costume など。
-      { label: "selected idol outfit", re: /\b(idol outfit|idol costume|idol stage outfit|stage costume|stage outfit|performance outfit|performance costume|concert costume|center position|handheld microphone|spotlight-enhancing|classic flared idol|sparkling classic idol|sequined sparkling costume)\b/ },
-
-      { label: "selected kimono outfit", re: /\b(kimono|furisode|tomesode|shiromuku|uchikake|yukata|hakama|jinbei|samue)\b/ },
-      { label: "selected dress outfit", re: /\b(dress|gown|sundress|cocktail dress|evening dress|ball gown|wedding dress|one-piece dress)\b/ },
-      { label: "selected armor outfit", re: /\b(armor|armour|chainmail|plate armor|leather armor|paladin armor|armored fabric)\b/ },
-      { label: "selected uniform outfit", re: /\b(uniform|sailor uniform|school uniform|military uniform|maid uniform|nurse uniform)\b/ },
-      { label: "selected robe outfit", re: /\b(robe|cloak|cape|vestments|wizard robe|cleric vestments)\b/ },
-      { label: "selected bodysuit outfit", re: /\b(bodysuit|body suit|catsuit|leotard|skin-tight suit|restraint suit)\b/ },
-      { label: "selected lingerie outfit", re: /\b(lingerie|bra|panties|corset|garter|stockings|babydoll)\b/ }
+      [/micro bikini/, "selected micro bikini outfit"],
+      [/string bikini/, "selected string bikini outfit"],
+      [/front-tie bikini/, "selected front-tie bikini outfit"],
+      [/\bmonokini\b/, "selected monokini swimsuit outfit"],
+      [/\btankini\b/, "selected tankini swimsuit outfit"],
+      [/school swimsuit/, "selected school swimsuit outfit"],
+      [/one-piece swimsuit/, "selected one-piece swimsuit outfit"],
+      [/\bbikini\b/, "selected bikini outfit"],
+      [/\bswimsuit\b/, "selected swimsuit outfit"],
+      [/(idol outfit|stage costume|classic idol costume|sparkling classic idol costume|sequined sparkling costume|handheld microphone)/, "selected idol outfit"],
+      [/(maid outfit|maid dress)/, "selected maid outfit"],
+      [/(kimono|yukata|hakama)/, "selected kimono outfit"],
+      [/(dress|gown)/, "selected dress outfit"],
+      [/(armor|armour|breastplate)/, "selected armor outfit"],
+      [/(school uniform|uniform)/, "selected uniform outfit"],
+      [/(robe|cloak)/, "selected robe outfit"],
+      [/(bodysuit|body suit)/, "selected bodysuit outfit"],
+      [/(lingerie|babydoll|corset)/, "selected lingerie outfit"]
     ];
-
-    for (let i = 0; i < rules.length; i++){
-      if (rules[i].re.test(joined)) return rules[i].label;
+    for (const r of rules) {
+      if (r[0].test(joined)) return r[1];
     }
     return "selected outfit";
   }
 
-  function motifTag(raw, root){
-    const v = promptTheme(raw);
-    if (!v) return "";
+  function motifTag(theme, root, detail){
+    const t = normalizeTheme(theme);
+    if (!t) return "";
     const outfit = inferSelectedOutfit(root);
-    return outfit + " with " + v + "-inspired styling plus thematic accents matching trim and accessory details";
+    const d = detail || (t + "-inspired styling plus thematic accents matching trim and accessory details");
+    return outfit + " with " + d;
   }
 
-  function fusionTag(raw, root, detail){
-    const v = promptTheme(raw);
-    if (!v) return "";
+  function fusionTag(theme, root, detail){
+    const t = normalizeTheme(theme);
+    if (!t) return "";
     const outfit = inferSelectedOutfit(root);
-    const extra = cleanUserText(detail) || (v + "-inspired silhouette plus matching materials and trim");
-    return outfit + " transformed into a " + v + "-fusion costume design with " + extra + " plus integrated outfit details";
+    const d = detail || (t + "-inspired silhouette plus matching materials and trim plus integrated outfit details");
+    return outfit + " transformed into a " + t + "-fusion costume design with " + d;
   }
 
-  function requestOutputRefresh(){
-    // 旧v25ではチェック変更時に即生成していたが、現在は生成ボタン実行時のみ getTags() で反映する。
-    // 互換用に関数名だけ残すが、ここでは何もしない。
+  function presetForMode(source, mode){
+    return source.map(function(x){
+      return {
+        ja: x.ja,
+        theme: x.theme,
+        mode: mode,
+        detail: mode === "fusion" ? (x.fusionDetail || x.motifDetail || "") : (x.motifDetail || x.fusionDetail || "")
+      };
+    });
   }
 
-  function makeCheckbox(item, className){
+  function injectStyle(root){
+    const doc = document;
+    if (!doc.getElementById(STYLE_ID)) {
+      const st = doc.createElement("style");
+      st.id = STYLE_ID;
+      st.textContent = `
+.${ROOT_CLASS}, .${ROOT_CLASS} * { box-sizing:border-box; }
+.${ROOT_CLASS}{ display:block !important; width:100% !important; max-width:100% !important; margin:8px 0; border:1px solid #d9b0c4; border-radius:12px; background:#fffafb; overflow:hidden; }
+.${ROOT_CLASS} > summary{ padding:10px 12px; font-weight:800; color:#74344f; background:#fff1f7; cursor:pointer; }
+.${ROOT_CLASS} .v25-body{ display:block !important; width:100% !important; padding:8px 10px 12px; }
+.${ROOT_CLASS} .v25-note{ font-size:12px; line-height:1.55; color:#725767; padding:8px 10px; margin:0 0 8px; border:1px solid rgba(190,120,155,.18); border-radius:10px; background:#fffefe; }
+.${ROOT_CLASS} .v25-sub{ display:block !important; width:100% !important; max-width:100% !important; margin:8px 0; border:1px solid #e4bfd0; border-radius:10px; background:#fffdfd; overflow:hidden; }
+.${ROOT_CLASS} .v25-sub > summary{ padding:9px 10px; font-weight:750; color:#7a3e58; background:#fff7fa; cursor:pointer; list-style:none; }
+.${ROOT_CLASS} .v25-sub-body{ display:block !important; width:100% !important; max-width:100% !important; padding:8px 10px 10px; }
+.${ROOT_CLASS} details[open] > .v25-sub-body{ display:block !important; grid-template-columns:1fr !important; }
+.${ROOT_CLASS} .v25-mini{ font-size:12px; line-height:1.5; color:#755f69; margin:0 0 8px; }
+.${ROOT_CLASS} .v25-grid{ display:grid !important; grid-template-columns:1fr !important; gap:6px; width:100% !important; max-width:100% !important; }
+.${ROOT_CLASS} label{ display:flex; align-items:center; gap:6px; min-height:30px; padding:5px 6px; border:1px solid rgba(220,180,200,.45); border-radius:8px; background:#fff; font-size:13px; line-height:1.35; cursor:pointer; }
+.${ROOT_CLASS} input[type="text"]{ width:100%; min-width:0; padding:8px; border:1px solid #dac1ca; border-radius:8px; font-size:13px; }
+.${ROOT_CLASS} .v25-custom-row{ display:grid; grid-template-columns:minmax(110px, auto) 1fr; gap:8px; align-items:center; margin:0 0 8px; }
+@media (max-width:640px){
+  .${ROOT_CLASS} .v25-custom-row{ grid-template-columns:1fr; }
+  .${ROOT_CLASS} .v25-sub-body{ padding-left:8px !important; padding-right:8px !important; }
+  .${ROOT_CLASS} .v25-sub > summary{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+}`;
+      doc.head.appendChild(st);
+    }
+    try{
+      const host = (root || document).querySelector && (root || document).querySelector("#list-attire");
+      const shadowHost = host && host.closest && host.closest(".attire-v21-shima");
+      if (shadowHost && shadowHost.shadowRoot && !shadowHost.shadowRoot.getElementById(STYLE_ID)) {
+        const st2 = document.createElement("style");
+        st2.id = STYLE_ID;
+        st2.textContent = doc.getElementById(STYLE_ID).textContent;
+        shadowHost.shadowRoot.appendChild(st2);
+      }
+    }catch(_){}
+  }
+
+  function makeCheckbox(entry, mode){
     const label = document.createElement("label");
     const cb = document.createElement("input");
     cb.type = "checkbox";
-    cb.className = className || "attire-v25-preset";
-    cb.dataset.en = item.en || "";
-    cb.dataset.ja = item.ja || "";
-    cb.dataset.v25Mode = item.mode || "";
-    cb.dataset.theme = item.theme || "";
-    cb.dataset.detail = item.detail || "";
+    cb.className = "attire-v25-preset";
     cb.dataset.role = "shared";
-    // v25プリセットはチェック時点では出力生成しない。生成ボタン時の getTags() で反映する。
+    cb.dataset.v25Mode = entry.mode || mode || "";
+    cb.dataset.theme = entry.theme || "";
+    cb.dataset.detail = entry.detail || "";
+    cb.dataset.en = entry.en || "";
+    cb.dataset.ja = entry.ja || "";
+    // 重要：ここでは change で生成しない。生成ボタン時の getTags() だけで読む。
     label.appendChild(cb);
-    label.appendChild(document.createTextNode(item.ja));
-    label.title = item.ja || "";
+    label.appendChild(document.createTextNode(entry.ja || entry.theme || entry.en || ""));
+    label.title = entry.theme || entry.en || entry.ja || "";
     return label;
   }
 
-  function makePresetGrid(items){
+  function makeGrid(entries, mode){
     const grid = document.createElement("div");
     grid.className = "v25-grid";
-    items.forEach(function(item){
-      grid.appendChild(makeCheckbox(item, "attire-v25-preset"));
-    });
+    (entries || []).forEach(function(entry){ grid.appendChild(makeCheckbox(entry, mode)); });
     return grid;
   }
 
@@ -12859,17 +12764,15 @@ function createItemLabel(item){
     const wrap = document.createElement("div");
     const row = document.createElement("div");
     row.className = "v25-custom-row";
-
     const lab = document.createElement("label");
     const cb = document.createElement("input");
     cb.type = "checkbox";
     cb.className = "attire-v25-custom-toggle";
     cb.dataset.kind = kind;
     cb.dataset.role = "shared";
-    // 自由入力はチェック時点で出力生成せず、生成ボタン実行時の getTags() で反映する。
+    // 重要：チェック時点では生成しない。
     lab.appendChild(cb);
     lab.appendChild(document.createTextNode(labelText));
-
     const input = document.createElement("input");
     input.type = "text";
     input.className = "attire-v25-custom-input";
@@ -12877,125 +12780,86 @@ function createItemLabel(item){
     input.placeholder = placeholder;
     input.maxLength = 160;
     input.autocomplete = "off";
-    // 入力中も自動生成しない。生成ボタンを押した時点の入力値を読む。
-
+    // 入力中も生成しない。
     row.appendChild(lab);
     row.appendChild(input);
     wrap.appendChild(row);
     return wrap;
   }
 
-  function makeSub(title, desc, customNode, presets, childSubs){
+  function makeSub(title, desc, customNode, entries, mode, childSubs){
     const details = document.createElement("details");
     details.className = "v25-sub";
     details.open = false;
-
     const summary = document.createElement("summary");
     summary.textContent = title;
     details.appendChild(summary);
-
     const body = document.createElement("div");
     body.className = "v25-sub-body";
-
-    const p = document.createElement("div");
-    p.className = "v25-mini";
-    p.textContent = desc;
-    body.appendChild(p);
-
-    if (customNode) body.appendChild(customNode);
-    if (presets && presets.length) body.appendChild(makePresetGrid(presets));
-    if (childSubs && childSubs.length) {
-      childSubs.forEach(function(child){
-        if (child) body.appendChild(child);
-      });
+    if (desc) {
+      const mini = document.createElement("div");
+      mini.className = "v25-mini";
+      mini.textContent = desc;
+      body.appendChild(mini);
     }
-
+    if (customNode) body.appendChild(customNode);
+    if (entries && entries.length) body.appendChild(makeGrid(entries, mode));
+    if (childSubs && childSubs.length) childSubs.forEach(function(ch){ if(ch) body.appendChild(ch); });
     details.appendChild(body);
     return details;
   }
 
+  function buildLegendarySubs(mode){
+    const suffix = mode === "fusion" ? "フュージョン" : "モチーフ";
+    const descMid = mode === "fusion" ? "衣装構造へ統合します。" : "衣装テーマや装飾方向として重ねます。";
+    return [
+      makeSub("🐉 竜" + suffix, "バハムート・ティアマト・ヨルムンガンドなどを" + descMid, null, presetForMode(DRAGONS, mode), mode),
+      makeSub("☯ 四神・東洋神獣" + suffix, "青龍・白虎・朱雀・玄武などを" + descMid, null, presetForMode(FOUR_SYMBOLS, mode), mode),
+      makeSub("🪽 天使" + suffix, "ガブリエル・ミカエル・セラフィムなどを" + descMid, null, presetForMode(ANGELS, mode), mode),
+      makeSub("😈 悪魔" + suffix, "ルシフェル・サタン・リリスなどを" + descMid, null, presetForMode(DEMONS, mode), mode),
+      makeSub("🧚 妖精" + suffix, "妖精・ピクシー・シルフなどを" + descMid, null, presetForMode(FAIRIES, mode), mode),
+      makeSub("🧜 人魚・海神話" + suffix, "人魚・セイレーン・海の女神などを" + descMid, null, presetForMode(MERMAIDS, mode), mode),
+      makeSub("🔥 不死鳥・神鳥" + suffix, "フェニックス・グリフォン・ガルーダなどを" + descMid, null, presetForMode(SKY_BIRDS, mode), mode),
+      makeSub("🦄 神獣" + suffix, "ユニコーン・フェンリル・ケルベロスなどを" + descMid, null, presetForMode(BEASTS, mode), mode)
+    ];
+  }
+
   function buildUI(){
     const root = document.createElement("details");
-    root.className = ROOT_CLASS + " attire-v25-container";
+    root.className = ROOT_CLASS;
     root.open = false;
-
     const summary = document.createElement("summary");
-    summary.className = "v25-head";
     summary.textContent = "🧩 衣装モチーフ・フュージョン特化コレクション";
     root.appendChild(summary);
 
     const body = document.createElement("div");
     body.className = "v25-body";
-
     const note = document.createElement("div");
     note.className = "v25-note";
-    note.textContent = "選んだ衣装へ、自由入力や日本語プリセットでテーマ・装飾・融合デザインを後がけする補助棚。花・星月・結晶・歯車・羽根などの基本モチーフも棚化し、表示は日本語、生成時は英語プロンプトへ変換します。スマホ幅でも詰まりにくいよう、この棚は一列表示を優先します。";
+    note.textContent = "選んだ衣装へ、自由入力や日本語プリセットでテーマ・装飾・融合デザインを後がけする補助棚。表示は日本語、生成時は英語プロンプトへ変換します。チェックしても即生成せず、生成ボタンを押した時だけ反映します。";
     body.appendChild(note);
 
     body.appendChild(makeSub(
       "🧩 自由モチーフ / User Motif",
-      "刺繍だけに限定せず、花・星月・結晶・歯車・羽根などを衣装テーマや装飾方向として重ねます。各プリセット棚はこの中へ収納しています。",
+      "刺繍だけに限定せず、衣装テーマや装飾方向として重ねます。各プリセット棚はこの中へ収納しています。",
       makeCustomInput("motif", "生成時に入力を使う", "例：succubus / blue butterfly / white lily / 桜"),
-      MOTIF_PRESETS,
+      [],
+      "motif",
       [
-        makeSub(
-          "🌸 花モチーフ",
-          "桜・薔薇・紫陽花・朝顔などを、生成時は cherry blossom / rose / hydrangea / morning glory などへ変換します。",
-          null,
-          FLORAL_MOTIF_PRESETS
-        ),
-        makeSub(
-          "🌙 星月・宇宙モチーフ",
-          "星・月・星座・銀河などを、衣装の天体装飾として軽めに重ねます。",
-          null,
-          CELESTIAL_MOTIF_PRESETS
-        ),
-        makeSub(
-          "❄ 雪・結晶モチーフ",
-          "雪結晶・氷結晶・霜などを、衣装の透明感や結晶装飾として重ねます。",
-          null,
-          CRYSTAL_MOTIF_PRESETS
-        ),
-        makeSub(
-          "⚙ 時計歯車モチーフ",
-          "時計歯車・懐中時計・真鍮機械などを、衣装装飾として重ねます。",
-          null,
-          CLOCKWORK_MOTIF_PRESETS
-        ),
-        makeSub(
-          "💎 ガラス・宝石モチーフ",
-          "ステンドグラス・宝石・プリズムなどを、衣装の発光装飾や面構造として重ねます。",
-          null,
-          GLASS_GEM_MOTIF_PRESETS
-        ),
-        makeSub(
-          "🪽 羽根モチーフ",
-          "淡い羽根・白い羽根・黒い羽根などを、衣装の軽い装飾として重ねます。",
-          null,
-          FEATHER_MOTIF_PRESETS
-        ),
-        makeSub(
-          "🐾 動物モチーフ",
-          "表示は日本語、生成時は cat / dog / fox などの英語テーマとして衣装へ反映します。",
-          null,
-          ANIMAL_MOTIF_PRESETS
-        ),
-        makeSub(
-          "🐉 伝説・神話モチーフ",
-          "竜・天使・悪魔・妖精・人魚・神獣などを、詳細棚から選んで衣装テーマや装飾方向として重ねます。",
-          null,
-          LEGENDARY_MOTIF_PRESETS,
-          [
-            makeSub("🐉 竜モチーフ", "バハムート・ティアマト・ヨルムンガンドなど、神話竜名を衣装モチーフとして重ねます。", null, DRAGON_LEGENDARY_MOTIF_PRESETS),
-            makeSub("☯ 四神・東洋神獣モチーフ", "青龍・白虎・朱雀・玄武など、東洋神獣系を衣装装飾として重ねます。", null, FOUR_SYMBOLS_MOTIF_PRESETS),
-            makeSub("🪽 天使モチーフ", "ガブリエル・ミカエル・ウリエルなど、天使系の意匠を衣装へ軽く重ねます。", null, CELESTIAL_ANGEL_MOTIF_PRESETS),
-            makeSub("😈 悪魔モチーフ", "ルシフェル・サタン・ベルゼブブなど、悪魔系の意匠を衣装へ軽く重ねます。", null, INFERNAL_DEMON_MOTIF_PRESETS),
-            makeSub("🧚 妖精モチーフ", "妖精・ピクシー・シルフなど、軽やかな妖精系意匠を衣装へ重ねます。", null, FAIRY_MOTIF_PRESETS),
-            makeSub("🧜 人魚・海神話モチーフ", "人魚・セイレーン・ネレイド・海の女神など、海神話系意匠を衣装へ重ねます。", null, MERMAID_SEA_MOTIF_PRESETS),
-            makeSub("🔥 不死鳥・神鳥モチーフ", "フェニックス・朱雀・グリフォンなど、神鳥系意匠を衣装へ重ねます。", null, SKY_BIRD_MOTIF_PRESETS),
-            makeSub("🦄 神獣モチーフ", "ユニコーン・麒麟・フェンリルなど、神獣系意匠を衣装へ重ねます。", null, MYTHIC_BEAST_MOTIF_PRESETS)
-          ]
-        )
+        makeSub("🌸 花モチーフ", "花の種類を、生成時は英語テーマへ変換します。", null, presetForMode(FLORAL_MOTIF_PRESETS, "motif"), "motif"),
+        makeSub("🌙 星月・宇宙モチーフ", "星・月・星座・銀河などを、衣装の天体装飾として重ねます。", null, presetForMode(CELESTIAL_MOTIF_PRESETS, "motif"), "motif"),
+        makeSub("❄ 雪・結晶モチーフ", "雪結晶・氷結晶・霜などを、透明感や結晶装飾として重ねます。", null, presetForMode(CRYSTAL_MOTIF_PRESETS, "motif"), "motif"),
+        makeSub("⚙ 時計歯車モチーフ", "時計歯車・懐中時計・真鍮機械などを、衣装装飾として重ねます。", null, presetForMode(CLOCKWORK_MOTIF_PRESETS, "motif"), "motif"),
+        makeSub("💎 ガラス・宝石モチーフ", "ステンドグラス・宝石・プリズムなどを、衣装の発光装飾として重ねます。", null, presetForMode(GLASS_GEM_MOTIF_PRESETS, "motif"), "motif"),
+        makeSub("🪽 羽根モチーフ", "白い羽根・黒い羽根などを、衣装の軽い装飾として重ねます。", null, presetForMode(FEATHER_MOTIF_PRESETS, "motif"), "motif"),
+        makeSub("🍡 和菓子モチーフ", "わらび餅・団子・たい焼きなどを、見える和菓子意匠として衣装へ重ねます。", null, presetForMode(WAGASHI_PRESETS, "motif"), "motif"),
+        makeSub("🍨 スイーツモチーフ", "パフェ・プリン・マカロンなどを、見えるスイーツ意匠として衣装へ重ねます。", null, presetForMode(SWEETS_PRESETS, "motif"), "motif"),
+        makeSub("☕ 飲み物・カフェモチーフ", "紅茶・コーヒー・クリームソーダなどを、カフェ系の色・泡・装飾として衣装へ重ねます。", null, presetForMode(DRINK_CAFE_PRESETS, "motif"), "motif"),
+        makeSub("🌊 海・水中モチーフ", "波・泡・珊瑚・真珠・クラゲなどを、海系の形や透明感として衣装へ重ねます。", null, presetForMode(SEA_UNDERWATER_PRESETS, "motif"), "motif"),
+        makeSub("💎 宝石・鉱物モチーフ", "水晶・ルビー・オパール・黒曜石などを、色・反射・結晶形として衣装へ重ねます。", null, presetForMode(GEM_MINERAL_PRESETS, "motif"), "motif"),
+        makeSub("🌦 季節・天候モチーフ", "雨・雪・霧・雷・虹・紅葉などを、季節感や天候装飾として衣装へ重ねます。", null, presetForMode(SEASON_WEATHER_PRESETS, "motif"), "motif"),
+        makeSub("🐾 動物モチーフ", "表示は日本語、生成時は cat / dog / fox などの英語テーマとして衣装へ反映します。", null, presetForMode(ANIMAL_PRESETS, "motif"), "motif"),
+        makeSub("🐉 伝説・神話モチーフ", "竜・天使・悪魔・妖精・人魚・神獣などを、詳細棚から選んで衣装テーマや装飾方向として重ねます。", null, [], "motif", buildLegendarySubs("motif"))
       ]
     ));
 
@@ -13003,54 +12867,21 @@ function createItemLabel(item){
       "🧬 衣装フュージョン / Outfit Fusion",
       "キャラ融合ではなく、選択済み衣装を○○融合衣装デザインへ変形させる棚です。各プリセット棚はこの中へ収納しています。",
       makeCustomInput("fusion", "生成時に入力を使う", "例：dragon / cyberpunk / sea goddess / crystal"),
-      FUSION_PRESETS,
+      [],
+      "fusion",
       [
-        makeSub(
-          "🤖 サイバー・機械フュージョン",
-          "サイバー・機械・ホログラム系の素材やシルエットを衣装側へ統合します。",
-          null,
-          CYBER_FUSION_PRESETS
-        ),
-        makeSub(
-          "👘 文化衣装フュージョン",
-          "中華×洋装、和装×ドレスなど、衣装文化同士を統合します。",
-          null,
-          CULTURAL_FUSION_PRESETS
-        ),
-        makeSub(
-          "🌊 自然・元素フュージョン",
-          "海・氷・炎・森・雷などの自然要素を、衣装の形状や素材へ統合します。",
-          null,
-          NATURAL_FUSION_PRESETS
-        ),
-        makeSub(
-          "💎 装飾・宝石フュージョン",
-          "竜鱗・聖堂装飾・ステンドグラス・宝石・時計歯車などを、衣装構造へ統合します。",
-          null,
-          ORNAMENTAL_FUSION_PRESETS
-        ),
-        makeSub(
-          "🐾 動物フュージョン",
-          "cat / dog / fox などの動物要素を、別個体ではなく衣装シルエットや素材へ統合します。",
-          null,
-          ANIMAL_FUSION_PRESETS
-        ),
-        makeSub(
-          "🐉 伝説・神話フュージョン",
-          "竜・天使・悪魔・妖精・人魚・神獣などを、別個体ではなく衣装シルエットや素材へ統合します。",
-          null,
-          LEGENDARY_FUSION_PRESETS,
-          [
-            makeSub("🐉 竜フュージョン", "バハムート・ティアマト・ヨルムンガンドなどを衣装構造へ統合します。", null, DRAGON_LEGENDARY_FUSION_PRESETS),
-            makeSub("☯ 四神・東洋神獣フュージョン", "青龍・白虎・朱雀・玄武などを衣装シルエットや装飾へ統合します。", null, FOUR_SYMBOLS_FUSION_PRESETS),
-            makeSub("🪽 天使フュージョン", "ガブリエル・ミカエル・ウリエルなどを、天使系衣装シルエットへ統合します。", null, CELESTIAL_ANGEL_FUSION_PRESETS),
-            makeSub("😈 悪魔フュージョン", "ルシフェル・サタン・ベルゼブブなどを、悪魔系衣装シルエットへ統合します。", null, INFERNAL_DEMON_FUSION_PRESETS),
-            makeSub("🧚 妖精フュージョン", "妖精・ピクシー・シルフなどを、軽やかな衣装素材やラインへ統合します。", null, FAIRY_FUSION_PRESETS),
-            makeSub("🧜 人魚・海神話フュージョン", "人魚・セイレーン・海の女神などを、海神話系衣装構造へ統合します。", null, MERMAID_SEA_FUSION_PRESETS),
-            makeSub("🔥 不死鳥・神鳥フュージョン", "フェニックス・朱雀・グリフォンなどを、翼や炎を思わせる衣装構造へ統合します。", null, SKY_BIRD_FUSION_PRESETS),
-            makeSub("🦄 神獣フュージョン", "ユニコーン・麒麟・フェンリルなどを、神獣系衣装デザインへ統合します。", null, MYTHIC_BEAST_FUSION_PRESETS)
-          ]
-        )
+        makeSub("🤖 サイバー・機械フュージョン", "サイバー・機械・ホログラム系の素材やシルエットを衣装側へ統合します。", null, CYBER_FUSION_PRESETS.map(function(x){ x.mode="fusion"; return x; }), "fusion"),
+        makeSub("👘 文化衣装フュージョン", "中華×洋装、和装×ドレスなど、衣装文化同士を統合します。", null, CULTURAL_FUSION_PRESETS.map(function(x){ x.mode="fusion"; return x; }), "fusion"),
+        makeSub("🌊 自然・元素フュージョン", "海・氷・炎・森・雷などの自然要素を、衣装の形状や素材へ統合します。", null, NATURAL_FUSION_PRESETS.map(function(x){ x.mode="fusion"; return x; }), "fusion"),
+        makeSub("💎 装飾・宝石フュージョン", "ステンドグラス・宝石・結晶・時計歯車などを、衣装構造へ統合します。", null, presetForMode(GLASS_GEM_MOTIF_PRESETS.concat(CRYSTAL_MOTIF_PRESETS).concat(CLOCKWORK_MOTIF_PRESETS), "fusion"), "fusion"),
+        makeSub("🍡 和菓子フュージョン", "わらび餅・団子・たい焼きなどを、見える和菓子系の衣装構造へ統合します。", null, presetForMode(WAGASHI_PRESETS, "fusion"), "fusion"),
+        makeSub("🍨 スイーツフュージョン", "パフェ・プリン・マカロンなどを、見えるスイーツ系の衣装構造へ統合します。", null, presetForMode(SWEETS_PRESETS, "fusion"), "fusion"),
+        makeSub("☕ 飲み物・カフェフュージョン", "紅茶・コーヒー・クリームソーダなどを、泡・グラス感・カフェ色の衣装構造へ統合します。", null, presetForMode(DRINK_CAFE_PRESETS, "fusion"), "fusion"),
+        makeSub("🌊 海・水中フュージョン", "波・泡・珊瑚・真珠・クラゲなどを、海系素材やシルエットへ統合します。", null, presetForMode(SEA_UNDERWATER_PRESETS, "fusion"), "fusion"),
+        makeSub("💎 宝石・鉱物フュージョン", "水晶・ルビー・オパール・黒曜石などを、結晶素材や宝石シルエットへ統合します。", null, presetForMode(GEM_MINERAL_PRESETS, "fusion"), "fusion"),
+        makeSub("🌦 季節・天候フュージョン", "雨・雪・霧・雷・虹・紅葉などを、天候系素材や形状へ統合します。", null, presetForMode(SEASON_WEATHER_PRESETS, "fusion"), "fusion"),
+        makeSub("🐾 動物フュージョン", "cat / dog / fox などの動物要素を、別個体ではなく衣装シルエットや素材へ統合します。", null, presetForMode(ANIMAL_PRESETS, "fusion"), "fusion"),
+        makeSub("🐉 伝説・神話フュージョン", "竜・天使・悪魔・妖精・人魚・神獣などを、別個体ではなく衣装シルエットや素材へ統合します。", null, [], "fusion", buildLegendarySubs("fusion"))
       ]
     ));
 
@@ -13058,7 +12889,8 @@ function createItemLabel(item){
       "🛡 融合安全補助 / Safety",
       "獣・神獣・悪魔・生物系モチーフが別個体として出そうな時だけ使います。",
       null,
-      SAFETY_PRESETS
+      SAFETY_PRESETS,
+      ""
     ));
 
     root.appendChild(body);
@@ -13067,26 +12899,17 @@ function createItemLabel(item){
 
   const API = {
     initUI(container){
-      try{
-        if (window.__outputTranslation) window.__outputTranslation.register(DICT);
-      }catch(_){}
-
+      try{ if (window.__outputTranslation) window.__outputTranslation.register({}); }catch(_){}
       const mount = function(retry){
         const parent = document.querySelector("#list-attire") || container;
         if (!parent) {
-          if ((retry || 0) < 50) setTimeout(function(){ mount((retry || 0) + 1); }, 80);
+          if ((retry || 0) < 60) setTimeout(function(){ mount((retry || 0) + 1); }, 80);
           return;
         }
-
         if (parent.querySelector("." + ROOT_CLASS)) return;
-        injectStyle();
-
-        const host = parent.closest && parent.closest(".attire-v21-shima");
-        if (host && host.shadowRoot) injectStyle(host.shadowRoot);
-
+        injectStyle(document);
         const contentArea = parent.querySelector(".section-content") || parent;
-        const node = buildUI();
-        contentArea.appendChild(node);
+        contentArea.appendChild(buildUI());
         try{ if (window.__normalizeAttireLayout) window.__normalizeAttireLayout(contentArea || parent); }catch(_){}
       };
       mount(0);
@@ -13100,7 +12923,7 @@ function createItemLabel(item){
       root.querySelectorAll("input.attire-v25-preset:checked").forEach(function(cb){
         if (!cb || !cb.dataset) return;
         if (cb.dataset.v25Mode === "motif" && cb.dataset.theme) {
-          const tag = motifTag(cb.dataset.theme, root);
+          const tag = motifTag(cb.dataset.theme, root, cb.dataset.detail);
           if (tag) tags.push(tag);
           return;
         }
@@ -13115,14 +12938,14 @@ function createItemLabel(item){
       const motifToggle = root.querySelector(".attire-v25-custom-toggle[data-kind='motif']");
       const motifInput = root.querySelector(".attire-v25-custom-input[data-kind='motif']");
       if (motifToggle && motifToggle.checked && motifInput) {
-        const tag = motifTag(motifInput.value, root);
+        const tag = motifTag(motifInput.value, root, "");
         if (tag) tags.push(tag);
       }
 
       const fusionToggle = root.querySelector(".attire-v25-custom-toggle[data-kind='fusion']");
       const fusionInput = root.querySelector(".attire-v25-custom-input[data-kind='fusion']");
       if (fusionToggle && fusionToggle.checked && fusionInput) {
-        const tag = fusionTag(fusionInput.value, root);
+        const tag = fusionTag(fusionInput.value, root, "");
         if (tag) tags.push(tag);
       }
 

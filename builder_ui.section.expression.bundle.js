@@ -370,14 +370,75 @@
     ]
   };
 
-  const DICT = {
+  
+  // Stage3: wavy mouth driven scene/R-18 face presets
+  // - Keep existing shelves intact; append only missing items.
+  const __WAVY_MOUTH_SCENE_FACE_ADDITIONS = {
+    "🎬 口元リアクション・波口 (Mouth Reaction & Wavy Mouth Scene Faces)": [
+      { ja: "返事に詰まる顔", en: "wavy mouth, hesitant expression, averted gaze, nervous sweat, awkward silence" },
+      { ja: "言いかけ固まり顔", en: "wavy mouth, wide eyes, frozen expression, nervous sweat, unable to speak" },
+      { ja: "泣き笑い波口", en: "wavy mouth, teary eyes, strained smile, emotional face, soft blush" },
+      { ja: "バレかけ波口", en: "wavy mouth, panic sweat, wide eyes, embarrassed expression, shock lines" },
+      { ja: "ぽかん開口停止顔", en: "open mouth, blank expression, dazed eyes, frozen face, brain-lag reaction" },
+      { ja: "絶句開口顔", en: "open mouth, wide eyes, stunned expression, speechless face, dramatic pause" }
+    ]
+  };
+
+  const __WAVY_MOUTH_SECRET_FACE_ADDITIONS = {
+    "🔞 口元・微開き (Secret Lips & Parted Mouth Faces)": [
+      { ja: "艶波口", en: "wavy mouth, parted lips, heavy blush, half-lidded eyes, breathless adult expression" },
+      { ja: "吐息震え口", en: "trembling mouth, parted lips, shaky breath, flushed face, adult sensual expression" },
+      { ja: "我慢しきれない開口", en: "slightly open mouth, watery eyes, heavy blush, strained expression, breathless face" },
+      { ja: "余裕崩れ波口", en: "wavy mouth, flushed face, half-lidded eyes, composure slipping, breathless expression" }
+    ],
+    "🔞 我慢・揺らぎ (Secret Restraint Faces)": [
+      { ja: "こらえ波口", en: "wavy mouth, clenched composure, trembling lips, flushed cheeks, restrained adult tension" },
+      { ja: "声を抑える顔", en: "parted lips, suppressed voice, shaky breath, watery eyes, flushed face" }
+    ]
+  };
+
+  const __appendUniqueWavyMouthFaceItems = (target, additions) => {
+    if (!target || !additions) return;
+    Object.entries(additions).forEach(([cat, items]) => {
+      if (!target[cat]) target[cat] = [];
+      const existing = new Set(target[cat].map(item => item && item.en).filter(Boolean));
+      items.forEach(item => {
+        if (!item || !item.en || existing.has(item.en)) return;
+        target[cat].push(item);
+        existing.add(item.en);
+      });
+    });
+  };
+
+  __appendUniqueWavyMouthFaceItems(SCENE_FACE_DATA, __WAVY_MOUTH_SCENE_FACE_ADDITIONS);
+  if (typeof SECRET_SCENE_FACE_DATA !== "undefined") {
+    __appendUniqueWavyMouthFaceItems(SECRET_SCENE_FACE_DATA, __WAVY_MOUTH_SECRET_FACE_ADDITIONS);
+  }
+
+const DICT = {
     "smile": "笑顔", "happy": "幸せ", "laughing": "大笑い", "light smile": "微笑み",
     "angry": "怒り", "furious": "激怒", "sad": "悲しい", "crying": "泣く",
     "serious": "真剣", "expressionless": "無表情", "surprised": "驚き",
     "embarrassed": "恥じらい", "shy": "照れ", "nervous": "不安"
   };
 
-  const API = {
+  
+  Object.assign(DICT, {
+    "wavy mouth, hesitant expression, averted gaze, nervous sweat, awkward silence": "返事に詰まる顔",
+    "wavy mouth, wide eyes, frozen expression, nervous sweat, unable to speak": "言いかけ固まり顔",
+    "wavy mouth, teary eyes, strained smile, emotional face, soft blush": "泣き笑い波口",
+    "wavy mouth, panic sweat, wide eyes, embarrassed expression, shock lines": "バレかけ波口",
+    "open mouth, blank expression, dazed eyes, frozen face, brain-lag reaction": "ぽかん開口停止顔",
+    "open mouth, wide eyes, stunned expression, speechless face, dramatic pause": "絶句開口顔",
+    "wavy mouth, parted lips, heavy blush, half-lidded eyes, breathless adult expression": "艶波口",
+    "trembling mouth, parted lips, shaky breath, flushed face, adult sensual expression": "吐息震え口",
+    "slightly open mouth, watery eyes, heavy blush, strained expression, breathless face": "我慢しきれない開口",
+    "wavy mouth, flushed face, half-lidded eyes, composure slipping, breathless expression": "余裕崩れ波口",
+    "wavy mouth, clenched composure, trembling lips, flushed cheeks, restrained adult tension": "こらえ波口",
+    "parted lips, suppressed voice, shaky breath, watery eyes, flushed face": "声を抑える顔"
+  });
+
+const API = {
     initUI(container) {
       if (window.__outputTranslation) window.__outputTranslation.register(DICT);
 
@@ -574,6 +635,12 @@
     "👄 口・舌・歯 (Mouth)": [
       { ja: "口を開ける", en: "open mouth" }, { ja: "口を閉じる", en: "closed mouth" },
       { ja: "半開き", en: "parted lips" }, { ja: "むくれ顔", en: "pout" },
+      { ja: "波口・へにゃ口", en: "wavy mouth" }, { ja: "小さく開いた口", en: "slightly open mouth" },
+      { ja: "大きく開いた口", en: "wide open mouth" }, { ja: "ぽかん口", en: "open mouth, blank expression" },
+      { ja: "驚き開口", en: "open mouth, surprised expression" }, { ja: "困り波口", en: "wavy mouth, worried expression" },
+      { ja: "照れ波口", en: "wavy mouth, embarrassed expression, light blush" }, { ja: "泣きそうな波口", en: "wavy mouth, teary eyes" },
+      { ja: "震える口元", en: "trembling mouth" }, { ja: "引きつり笑い", en: "strained smile, wavy mouth" },
+      { ja: "言葉詰まり口", en: "parted lips, hesitant expression" },
       { ja: "舌出し", en: "tongue out" }, { ja: "猫口 (:3)", en: "cat mouth" },
       { ja: "三角口", en: "triangle mouth" }, { ja: "牙", en: "fangs" },
       { ja: "ギザ歯", en: "shark teeth" }, { ja: "歯を食いしばる", en: "clenched teeth" },
@@ -630,6 +697,11 @@
     "open mouth": "開口", "closed mouth": "閉口", "parted lips": "半開き", "pout": "むくれ", 
     "tongue out": "舌出し", "cat mouth": "猫口", "triangle mouth": "三角口", "fangs": "牙", 
     "shark teeth": "ギザ歯", "clenched teeth": "食いしばり", "lipstick": "リップ",
+    "wavy mouth": "波口", "slightly open mouth": "小さく開いた口", "wide open mouth": "大きく開いた口",
+    "open mouth, blank expression": "ぽかん口", "open mouth, surprised expression": "驚き開口",
+    "wavy mouth, worried expression": "困り波口", "wavy mouth, embarrassed expression, light blush": "照れ波口",
+    "wavy mouth, teary eyes": "泣きそうな波口", "trembling mouth": "震える口元",
+    "strained smile, wavy mouth": "引きつり笑い", "parted lips, hesitant expression": "言葉詰まり口",
     "blush": "赤面", "heavy blush": "激しい赤面", "blue lines on face": "青ざめ", 
     "shadow over face": "顔に影", "tearing up": "涙目", "nosebleed": "鼻血", "drooling": "よだれ", 
     "freckles": "そばかす", "anger vein": "怒りマーク", "flying sweatdrops": "飛び散る汗", 
@@ -656,7 +728,23 @@
     "foamy mouth": "口元の泡", "soft panting": "吐息もれ", "sparkles on face": "顔のきらめき", "cracked shadow effect": "顔のひび影"
   };
 
-  const API = {
+  
+  Object.assign(DICT, {
+    "wavy mouth, hesitant expression, averted gaze, nervous sweat, awkward silence": "返事に詰まる顔",
+    "wavy mouth, wide eyes, frozen expression, nervous sweat, unable to speak": "言いかけ固まり顔",
+    "wavy mouth, teary eyes, strained smile, emotional face, soft blush": "泣き笑い波口",
+    "wavy mouth, panic sweat, wide eyes, embarrassed expression, shock lines": "バレかけ波口",
+    "open mouth, blank expression, dazed eyes, frozen face, brain-lag reaction": "ぽかん開口停止顔",
+    "open mouth, wide eyes, stunned expression, speechless face, dramatic pause": "絶句開口顔",
+    "wavy mouth, parted lips, heavy blush, half-lidded eyes, breathless adult expression": "艶波口",
+    "trembling mouth, parted lips, shaky breath, flushed face, adult sensual expression": "吐息震え口",
+    "slightly open mouth, watery eyes, heavy blush, strained expression, breathless face": "我慢しきれない開口",
+    "wavy mouth, flushed face, half-lidded eyes, composure slipping, breathless expression": "余裕崩れ波口",
+    "wavy mouth, clenched composure, trembling lips, flushed cheeks, restrained adult tension": "こらえ波口",
+    "parted lips, suppressed voice, shaky breath, watery eyes, flushed face": "声を抑える顔"
+  });
+
+const API = {
     initUI(container) {
       if (window.__outputTranslation) window.__outputTranslation.register(DICT);
       let parent = document.querySelector("#list-expression");
@@ -868,6 +956,11 @@
   const FACIAL_OTHER_DATA = {
     "👄 口・舌・歯 (Mouth)": [
       { ja: "口を開ける", en: "open mouth" }, { ja: "口を閉じる", en: "closed mouth" }, { ja: "半開き", en: "parted lips" }, { ja: "むくれ顔", en: "pout" },
+      { ja: "波口・へにゃ口", en: "wavy mouth" }, { ja: "小さく開いた口", en: "slightly open mouth" }, { ja: "大きく開いた口", en: "wide open mouth" },
+      { ja: "ぽかん口", en: "open mouth, blank expression" }, { ja: "驚き開口", en: "open mouth, surprised expression" },
+      { ja: "困り波口", en: "wavy mouth, worried expression" }, { ja: "照れ波口", en: "wavy mouth, embarrassed expression, light blush" },
+      { ja: "泣きそうな波口", en: "wavy mouth, teary eyes" }, { ja: "震える口元", en: "trembling mouth" },
+      { ja: "引きつり笑い", en: "strained smile, wavy mouth" }, { ja: "言葉詰まり口", en: "parted lips, hesitant expression" },
       { ja: "舌出し", en: "tongue out" }, { ja: "猫口 (:3)", en: "cat mouth" }, { ja: "三角口", en: "triangle mouth" }, { ja: "牙", en: "fangs" },
       { ja: "ギザ歯", en: "shark teeth" }, { ja: "歯を食いしばる", en: "clenched teeth" }, { ja: "リップ (化粧)", en: "lipstick" }
     ],
@@ -1584,7 +1677,52 @@
     ]
   };
 
-  const DICT = {
+  
+  // Stage3: wavy mouth driven scene/R-18 face presets
+  // - Keep existing shelves intact; append only missing items.
+  const __WAVY_MOUTH_SCENE_FACE_ADDITIONS = {
+    "🎬 口元リアクション・波口 (Mouth Reaction & Wavy Mouth Scene Faces)": [
+      { ja: "返事に詰まる顔", en: "wavy mouth, hesitant expression, averted gaze, nervous sweat, awkward silence" },
+      { ja: "言いかけ固まり顔", en: "wavy mouth, wide eyes, frozen expression, nervous sweat, unable to speak" },
+      { ja: "泣き笑い波口", en: "wavy mouth, teary eyes, strained smile, emotional face, soft blush" },
+      { ja: "バレかけ波口", en: "wavy mouth, panic sweat, wide eyes, embarrassed expression, shock lines" },
+      { ja: "ぽかん開口停止顔", en: "open mouth, blank expression, dazed eyes, frozen face, brain-lag reaction" },
+      { ja: "絶句開口顔", en: "open mouth, wide eyes, stunned expression, speechless face, dramatic pause" }
+    ]
+  };
+
+  const __WAVY_MOUTH_SECRET_FACE_ADDITIONS = {
+    "🔞 口元・微開き (Secret Lips & Parted Mouth Faces)": [
+      { ja: "艶波口", en: "wavy mouth, parted lips, heavy blush, half-lidded eyes, breathless adult expression" },
+      { ja: "吐息震え口", en: "trembling mouth, parted lips, shaky breath, flushed face, adult sensual expression" },
+      { ja: "我慢しきれない開口", en: "slightly open mouth, watery eyes, heavy blush, strained expression, breathless face" },
+      { ja: "余裕崩れ波口", en: "wavy mouth, flushed face, half-lidded eyes, composure slipping, breathless expression" }
+    ],
+    "🔞 我慢・揺らぎ (Secret Restraint Faces)": [
+      { ja: "こらえ波口", en: "wavy mouth, clenched composure, trembling lips, flushed cheeks, restrained adult tension" },
+      { ja: "声を抑える顔", en: "parted lips, suppressed voice, shaky breath, watery eyes, flushed face" }
+    ]
+  };
+
+  const __appendUniqueWavyMouthFaceItems = (target, additions) => {
+    if (!target || !additions) return;
+    Object.entries(additions).forEach(([cat, items]) => {
+      if (!target[cat]) target[cat] = [];
+      const existing = new Set(target[cat].map(item => item && item.en).filter(Boolean));
+      items.forEach(item => {
+        if (!item || !item.en || existing.has(item.en)) return;
+        target[cat].push(item);
+        existing.add(item.en);
+      });
+    });
+  };
+
+  __appendUniqueWavyMouthFaceItems(SCENE_FACE_DATA, __WAVY_MOUTH_SCENE_FACE_ADDITIONS);
+  if (typeof SECRET_SCENE_FACE_DATA !== "undefined") {
+    __appendUniqueWavyMouthFaceItems(SECRET_SCENE_FACE_DATA, __WAVY_MOUTH_SECRET_FACE_ADDITIONS);
+  }
+
+const DICT = {
     "smug": "ドヤ顔", "disdain": "軽蔑", "seductive smile": "誘惑笑い", "yandere": "ヤンデレ",
     "ahegao": "アヘ顔/恍惚", "despair": "絶望", "crazy": "狂気", "panicked": "パニック",
     "tsundere": "ツンデレ", "kuudere": "クーデレ", "evil smile": "邪悪な笑み", "gentle smile": "優しい笑み",
@@ -1592,6 +1730,11 @@
     "kissing": "キス", "blowing kiss": "投げキッス", "wink": "ウインク", "shouting": "叫ぶ",
     "licking": "舐める", "chewing": "噛む", "hand on chin": "あごに手",
     "head resting on hand": "頬杖", "shushing": "シーッ",
+    "wavy mouth": "波口", "slightly open mouth": "小さく開いた口", "wide open mouth": "大きく開いた口",
+    "open mouth, blank expression": "ぽかん口", "open mouth, surprised expression": "驚き開口",
+    "wavy mouth, worried expression": "困り波口", "wavy mouth, embarrassed expression, light blush": "照れ波口",
+    "wavy mouth, teary eyes": "泣きそうな波口", "trembling mouth": "震える口元",
+    "strained smile, wavy mouth": "引きつり笑い", "parted lips, hesitant expression": "言葉詰まり口",
 
     // ★ R-18用 拡張翻訳辞書
     "ahegao:1.3": "アヘ顔(強)", "rolling eyes": "白目/上転", "drooling": "よだれ",
@@ -1658,12 +1801,20 @@
     return details.querySelector('.expression-top-group-content');
   };
 
-  return {
+  const existingR18Group = wrapper.querySelector('.expression-top-r18-collections');
+  if (!IS_UNLOCKED && existingR18Group) existingR18Group.remove();
+
+  const groups = {
     emotion: makeTopGroup('expression-top-emotion', '😊 感情設計 (Emotion Design)', '#d9c6ff', '#faf7ff'),
     facial: makeTopGroup('expression-top-facial', '🧩 顔パーツ・演出 (Facial Parts & FX)', '#bfe3ff', '#f5fbff'),
-    scene: makeTopGroup('expression-top-scene', '🎬 シーン顔 (Scene Faces)', '#ffd59e', '#fff8ef'),
-    r18collections: makeTopGroup('expression-top-r18-collections', '🧠 R-18感情コレクション (R-18 Emotion Collections)', '#f2b6d0', '#fff5fa')
+    scene: makeTopGroup('expression-top-scene', '🎬 シーン顔 (Scene Faces)', '#ffd59e', '#fff8ef')
   };
+
+  if (IS_UNLOCKED) {
+    groups.r18collections = makeTopGroup('expression-top-r18-collections', '🧠 R-18感情コレクション (R-18 Emotion Collections)', '#f2b6d0', '#fff5fa');
+  }
+
+  return groups;
 };
 
       const createCat = (title, items, isSecret = false) => {
@@ -2090,3 +2241,346 @@
 })();
 })();
 
+// --- builder_ui.section.expression.v4.js ---
+// 極限絶頂・体液・崩壊 専用特化コレクション（V4 強化統合版）
+(function(){
+  "use strict";
+  const VERSION = 4;
+  const KEY = "expression";
+
+  const IS_UNLOCKED = localStorage.getItem("MY_SECRET_UNLOCK") === "true";
+
+  const EXTREME_CLIMAX_COLLECTION = {
+    "🔥 完成セット (Complete Sets)": [
+      { ja: "連続絶頂アヘ顔", en: "multiple orgasm, ahegao, rolling eyes, tongue out, excessive drooling, mind break, twitching" },
+      { ja: "大量潮吹き崩壊", en: "heavy squirting, ahegao, eyes rolled back, tongue lolling, saliva strings, pleasure overload" },
+      { ja: "白目泡吹き失神", en: "eyes rolled back completely, foamy mouth, excessive drooling, mind broken, afterglow" },
+      { ja: "精神完全崩壊顔", en: "total mind break, vacant unfocused eyes, tongue hanging, drooling heavily, broken smile" },
+      { ja: "子宮イキ白目セット", en: "cervix orgasm, eyes rolled back, ahegao, squirting, belly quiver expression, tears" },
+      { ja: "失禁混合絶頂", en: "squirting and incontinence, crying ahegao, shame pleasure mix, rolling eyes" },
+      { ja: "長時間連続イキ", en: "prolonged orgasm, continuous climax, exhausted ahegao, heavy panting, sweat tears drool mix" },
+      { ja: "顔射後崩壊", en: "cum on face, bukkake, semen dripping, ahegao, tongue out, mind break" },
+      { ja: "泡吹き痙攣顔", en: "foaming at mouth, violent twitching, rolling eyes, ahegao, mind melted" },
+      { ja: "虚ろ瞳完全服従", en: "vacant eyes, completely submissive expression, tongue out, drooling" },
+      { ja: "涙鼻水混合崩壊", en: "crying with running nose, messy face, ahegao, excessive fluids" },
+      { ja: "壊滅的絶頂顔", en: "ruined orgasm, destroyed expression, crossed eyes, tongue protruding extremely, total surrender" }
+    ],
+
+    "🧬 ベース (Base)": [
+      { ja: "基本絶頂顔", en: "orgasm face, v-shaped eyebrows, heavy breathing" },
+      { ja: "完全白目", en: "eyes rolled back completely, white eyes" },
+      { ja: "舌出しアヘ", en: "tongue out, ahegao tongue, mouth gaping" },
+      { ja: "虚ろな瞳", en: "vacant unfocused eyes, dilated pupils" },
+      { ja: "泣き絶頂", en: "crying orgasm face, streaming tears" },
+      { ja: "半開き虚ろ目", en: "half-closed vacant eyes" },
+      { ja: "上目遣い絶頂", en: "ahegao with upward gaze" }
+    ],
+
+    "🎨 カスタマイズ (Customize)": [
+      { ja: "大量よだれ", en: "excessive drooling, long saliva strings from mouth" },
+      { ja: "口角泡立ち", en: "foamy mouth, bubbling saliva" },
+      { ja: "顔射精液まみれ", en: "cum covered face, bukkake, semen dripping from chin and cheeks" },
+      { ja: "混合体液顔", en: "cum saliva tears mix, glossy sticky messy face" },
+      { ja: "鼻水垂れ", en: "running nose, snot and tears mix" },
+      { ja: "激しい痙攣顔", en: "violent facial twitching, quivering cheeks" },
+      { ja: "血管浮き出たこめかみ", en: "visible temple veins, strained orgasm face" },
+      { ja: "極太舌出し", en: "extremely long tongue hanging out" },
+      { ja: "歯を食いしばり", en: "teeth clenched in orgasm" },
+      { ja: "瞳孔極限散大", en: "extremely dilated pupils" }
+    ],
+
+    "⚙️ 設定 (Settings)": [
+      { ja: "完全精神崩壊", en: "total mind break, brain melted expression" },
+      { ja: "完全服従", en: "total submission, slave-like expression" },
+      { ja: "快楽優先", en: "pleasure surrender, brain melted by pleasure" },
+      { ja: "羞恥快楽混合", en: "humiliation and pleasure mix" },
+      { ja: "長時間持続", en: "prolonged continuous climax" },
+      { ja: "壊滅的絶頂", en: "completely ruined orgasm face" },
+      { ja: "意識朦朧", en: "semi-conscious orgasm expression" },
+      { ja: "理性崩壊", en: "rationality destroyed, animalistic ahegao" },
+      { ja: "恍惚の笑み", en: "ecstatic broken smile" },
+      { ja: "苦痛混じり快楽", en: "pain mixed with overwhelming pleasure" }
+    ]
+  };
+
+  // 完成セット連動（主要セット対応）
+  const completeSetLinks = {
+    "multiple orgasm, ahegao, rolling eyes, tongue out, excessive drooling, mind break, twitching": [
+      "orgasm face", "eyes rolled back", "tongue out", "excessive drooling", "mind break"
+    ],
+    "heavy squirting, ahegao, eyes rolled back, tongue lolling, saliva strings, pleasure overload": [
+      "eyes rolled back", "tongue out", "excessive drooling"
+    ],
+    "eyes rolled back completely, foamy mouth, excessive drooling, mind broken, afterglow": [
+      "eyes rolled back", "foamy mouth", "excessive drooling", "vacant unfocused eyes"
+    ],
+    "total mind break, vacant unfocused eyes, tongue hanging, drooling heavily, broken smile": [
+      "vacant unfocused eyes", "tongue out", "excessive drooling", "mind break"
+    ],
+    "cervix orgasm, eyes rolled back, ahegao, squirting, belly quiver expression, tears": [
+      "eyes rolled back", "tongue out", "crying orgasm face"
+    ]
+  };
+
+  const API = {
+    initUI() {
+      if (!IS_UNLOCKED) return;
+
+      const parent = document.querySelector("#list-expression");
+      if (!parent) return;
+
+      let r18Group = parent.querySelector('.expression-top-r18-collections .expression-top-group-content');
+      if (!r18Group) return;
+
+      // 重複防止
+      if (r18Group.querySelector(".extreme-climax-collection")) return;
+
+      const details = document.createElement("details");
+      details.className = "extreme-climax-collection";
+      details.style.cssText = `margin:8px 0; border:2px solid #ff3366; border-radius:8px; background:#fff5f5;`;
+      details.open = false;
+
+      const summary = document.createElement("summary");
+      summary.innerHTML = `🔥 極限絶頂・体液・崩壊特化 <span style="color:#ff3366;">(v4 Enhanced)</span>`;
+      summary.style.cssText = `font-weight:bold; padding:10px; background:#ffe6e6; color:#c00; cursor:pointer;`;
+      details.appendChild(summary);
+
+      const content = document.createElement("div");
+      content.style.padding = "10px";
+      content.style.display = "flex";
+      content.style.flexDirection = "column";
+      content.style.gap = "10px";
+
+      const createSubCat = (title, items) => {
+        const sub = document.createElement("details");
+        sub.style.marginBottom = "8px";
+        sub.style.border = "1px solid #ff99aa";
+        sub.style.borderRadius = "4px";
+
+        const subSummary = document.createElement("summary");
+        subSummary.textContent = title;
+        subSummary.style.fontWeight = "bold";
+        subSummary.style.padding = "6px 10px";
+        subSummary.style.background = "#fff0f0";
+        sub.appendChild(subSummary);
+
+        const subContent = document.createElement("div");
+        subContent.style.padding = "8px";
+        subContent.style.display = "grid";
+        subContent.style.gridTemplateColumns = "repeat(auto-fill, minmax(135px, 1fr))";
+        subContent.style.gap = "6px";
+
+        items.forEach(item => {
+          const label = document.createElement("label");
+          label.style.cssText = "display:flex; align-items:center; font-size:0.88em; cursor:pointer;";
+          const cb = document.createElement("input");
+          cb.type = "checkbox";
+          cb.style.marginRight = "6px";
+          cb.dataset.val = item.en;
+          label.appendChild(cb);
+          label.appendChild(document.createTextNode(item.ja));
+          subContent.appendChild(label);
+        });
+        sub.appendChild(subContent);
+        return sub;
+      };
+
+      const sectionNodes = {};
+      const completeSetNode = createSubCat("🔥 完成セット (Complete Sets)", EXTREME_CLIMAX_COLLECTION["🔥 完成セット (Complete Sets)"]);
+      sectionNodes.complete = completeSetNode;
+      content.appendChild(completeSetNode);
+
+      ["🧬 ベース (Base)", "🎨 カスタマイズ (Customize)", "⚙️ 設定 (Settings)"].forEach(key => {
+        const node = createSubCat(key, EXTREME_CLIMAX_COLLECTION[key]);
+        sectionNodes[key] = node;
+        content.appendChild(node);
+      });
+
+      // 完成セット連動ロジック
+      let activeComplete = null;
+      const completeCheckboxes = completeSetNode.querySelectorAll('input[type="checkbox"]');
+
+      completeCheckboxes.forEach(cb => {
+        cb.addEventListener("change", () => {
+          if (!cb.checked) return;
+
+          completeCheckboxes.forEach(other => {
+            if (other !== cb) other.checked = false;
+          });
+
+          activeComplete = cb.dataset.val;
+
+          Object.values(sectionNodes).forEach(node => {
+            if (node !== completeSetNode) {
+              node.querySelectorAll('input[type="checkbox"]').forEach(c => c.checked = false);
+            }
+          });
+
+          const links = completeSetLinks[activeComplete] || [];
+          Object.values(sectionNodes).forEach(node => {
+            if (node === completeSetNode) return;
+            node.querySelectorAll('input[type="checkbox"]').forEach(c => {
+              if (links.some(link => 
+                c.dataset.val.toLowerCase().includes(link.toLowerCase()) || 
+                link.toLowerCase().includes(c.dataset.val.toLowerCase())
+              )) {
+                c.checked = true;
+              }
+            });
+          });
+        });
+      });
+
+      details.appendChild(content);
+      r18Group.appendChild(details);
+    },
+
+    getTags() {
+      const tags = [];
+      document.querySelectorAll(".extreme-climax-collection input[type='checkbox']:checked").forEach(cb => {
+        if (cb.dataset?.val) tags.push(cb.dataset.val);
+      });
+      return tags;
+    }
+  };
+
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
+
+// ================================================
+// builder_ui.section.expression.v5.js（bundle統合・Pose完全連動版）
+// ================================================
+(function(){
+  "use strict";
+  const VERSION = 5;
+  const KEY = "expression";
+
+  const IS_R18_UNLOCKED = localStorage.getItem("MY_SECRET_UNLOCK") === "true";
+  if (!IS_R18_UNLOCKED) return;
+
+  const EXTREME_R18_EXPRESSION = {
+    "🔥 完成絶頂セット (Climax Complete Sets)": [
+      { ja: "連続イキ白目崩壊", en: "multiple orgasm, ahegao, rolling eyes, tongue out, mind break, twitching, heavy breathing" },
+      { ja: "潮吹き絶頂失禁", en: "heavy squirting, female ejaculation, incontinence, ahegao, body spasms, legs trembling" },
+      { ja: "疲れ果てよだれ泣き崩壊", en: "((exhausted, saliva, crying, empty eyes, lots of drool)), blush, close up eyes, embarrassed, (((wet, sweat))), (twitching), (speech bubble, moaning), [full-face blush:1.4]" },
+      { ja: "恍惚虚ろ連続絶頂", en: "ecstasy face, vacant eyes, rolling eyes, excessive drooling, wavy mouth, mind break" },
+      { ja: "泣きイキ顔完全服従", en: "crying orgasm face, ahegao, rolling eyes, total submission, wavy mouth" },
+      { ja: "イキすぎ白目失神", en: "eyes rolled back completely, ahegao, passed out from pleasure, excessive drooling" }
+    ],
+    "🧬 ベース表情 (Base)": [
+      { ja: "アヘ顔ベース", en: "ahegao" },
+      { ja: "白目", en: "rolling eyes, eyes rolled back" },
+      { ja: "舌出しだらしなく", en: "tongue out, mouth wide open, gaping" },
+      { ja: "虚ろな目", en: "vacant eyes, empty eyes" },
+      { ja: "恍惚顔", en: "ecstasy face, pleasure face" }
+    ],
+    "🎨 カスタマイズ (Customize)": [
+      { ja: "大量よだれ", en: "excessive drooling, saliva trail, drool on chin, messy mouth" },
+      { ja: "口角泡立ち", en: "foamy mouth, bubbling saliva" },
+      { ja: "波打つ口", en: "wavy mouth, wavy mouth open" },
+      { ja: "恥ずかし泣き", en: "embarrassed crying, blush, wavy mouth" },
+      { ja: "フルフェイス赤面", en: "full-face blush, heavy blush" },
+      { ja: "震え・痙攣", en: "twitching, body spasms, quivering lips" }
+    ],
+    "⚙️ 設定・状態 (Settings)": [
+      { ja: "精神崩壊", en: "mind break, broken expression" },
+      { ja: "完全服従", en: "total submission" },
+      { ja: "疲労困憊", en: "exhausted, heavy breathing" },
+      { ja: "連続絶頂中", en: "multiple orgasm, ongoing orgasm" },
+      { ja: "失禁中", en: "incontinence" }
+    ],
+    "💦 体液・エフェクト (Fluids)": [
+      { ja: "大量潮吹き", en: "heavy squirting, female ejaculation" },
+      { ja: "混合体液顔", en: "cum and saliva mix, glossy messy face" }
+    ]
+  };
+
+  const API = {
+    initUI() {
+      let root = document.querySelector("#list-expression") || 
+                 document.querySelector(".expression-section") || 
+                 document.getElementById("pose-master-root");
+      if (!root) { setTimeout(() => API.initUI(), 300); return; }
+
+      if (root.querySelector(".expression-v5-extreme")) return;
+
+      const details = document.createElement("details");
+      details.className = "expression-v5-extreme";
+      details.style.cssText = "margin:12px 0; border:2px solid #c00; border-radius:10px; background:#fff5f5;";
+      details.open = false;
+
+      const summary = document.createElement("summary");
+      summary.innerHTML = `🔥 極限絶頂・崩壊表情特化 <span style="color:#c00;">(v5)</span>`;
+      summary.style.cssText = "font-weight:bold; padding:12px; background:#ffe6e6; color:#c00; cursor:pointer;";
+      details.appendChild(summary);
+
+      const content = document.createElement("div");
+      content.style.padding = "12px";
+      content.style.display = "flex";
+      content.style.flexDirection = "column";
+      content.style.gap = "12px";
+
+      const createSubCat = (title, items) => {
+        const sub = document.createElement("details");
+        sub.open = false;
+        sub.style.border = "1px solid #ff9999";
+        sub.style.borderRadius = "6px";
+        sub.style.background = "#fff9f9";
+
+        const subSum = document.createElement("summary");
+        subSum.textContent = title;
+        subSum.style.fontWeight = "bold";
+        subSum.style.padding = "8px 12px";
+        subSum.style.background = "#ffe6e6";
+        sub.appendChild(subSum);
+
+        const grid = document.createElement("div");
+        grid.style.padding = "10px";
+        grid.style.display = "grid";
+        grid.style.gridTemplateColumns = "repeat(auto-fill, minmax(165px, 1fr))";
+        grid.style.gap = "8px";
+
+        items.forEach(item => {
+          const label = document.createElement("label");
+          label.style.cssText = "display:flex; align-items:center; cursor:pointer; font-size:0.9em;";
+          const cb = document.createElement("input");
+          cb.type = "checkbox";
+          cb.style.marginRight = "6px";
+          cb.dataset.en = item.en;
+          label.appendChild(cb);
+          label.appendChild(document.createTextNode(item.ja));
+          grid.appendChild(label);
+        });
+        sub.appendChild(grid);
+        return sub;
+      };
+
+      Object.entries(EXTREME_R18_EXPRESSION).forEach(([title, items]) => {
+        content.appendChild(createSubCat(title, items));
+      });
+
+      details.appendChild(content);
+      root.appendChild(details);
+
+      // Pose v17との自動チェック連動は廃止。
+      // Expression v5は、この棚内で手動選択したチェックだけを出力対象にする。
+      try {
+        delete window.__activateExpressionV5Tags;
+      } catch (_) {
+        window.__activateExpressionV5Tags = undefined;
+      }
+
+      console.log("✅ Expression v5 単独版を登録しました");
+    },
+
+    getTags() {
+      const tags = [];
+      document.querySelectorAll(".expression-v5-extreme input[type='checkbox']:checked").forEach(cb => {
+        if (cb.dataset?.en) tags.push(cb.dataset.en);
+      });
+      return tags;
+    }
+  };
+
+  window.__registerPromptPart(KEY, VERSION, API);
+})();

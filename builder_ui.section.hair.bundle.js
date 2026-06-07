@@ -1,5 +1,5 @@
 // Auto-generated bundle for section 'hair'
-// Contains 6 versions stacked in ascending order.
+// Contains 7 versions stacked in ascending order.
 
 (function(){
 // --- builder_ui.section.hair.v1.js ---
@@ -896,3 +896,348 @@
 })();
 })();
 
+(function(){
+// --- builder_ui.section.hair.v7.js ---
+(function(){
+  "use strict";
+  const VERSION = 7; // 童話・昔話キャラ髪型特化コレクション
+  const KEY = "hair";
+  const COLLECTION_ID = "hair_fairytale_folktale_v7";
+
+  const FAIRYTALE_HAIR = [
+    {
+      title: "🌟 完成セット (Core Sets)",
+      role: "complete_set",
+      items: [
+        {
+          id: "ft_hair_complete_glass_slipper_updo",
+          ja: "ガラスの靴姫風：高め丸アップ",
+          en: "Glass-slipper princess updo",
+          val: "hairstyle focus, neat high rounded updo, smooth swept-back crown, soft side-swept bangs, elegant fairytale ballroom hair shape",
+          linked_ids: ["ft_hair_base_high_rounded_updo", "ft_hair_custom_side_swept_bangs", "ft_hair_custom_smooth_swept_crown", "ft_hair_setting_ballroom_princess_shape"]
+        },
+        {
+          id: "ft_hair_complete_short_storybook_bob",
+          ja: "白雪姫風：短め丸ボブ",
+          en: "Short storybook princess bob",
+          val: "hairstyle focus, short rounded bob, curled-under hair ends, soft side-parted bangs, tidy storybook princess hair shape",
+          linked_ids: ["ft_hair_base_short_rounded_bob", "ft_hair_custom_curled_under_ends", "ft_hair_custom_soft_side_part", "ft_hair_setting_storybook_princess_shape"]
+        },
+        {
+          id: "ft_hair_complete_tower_princess_braid",
+          ja: "塔の姫風：超ロング三つ編み",
+          en: "Tower princess long braid",
+          val: "hairstyle focus, extremely long thick braid, loose face-framing strands, soft woven braid texture, fairytale tower princess hair shape",
+          linked_ids: ["ft_hair_base_extremely_long_braid", "ft_hair_custom_loose_face_framing", "ft_hair_custom_thick_woven_braid", "ft_hair_setting_storybook_princess_shape"]
+        },
+        {
+          id: "ft_hair_complete_sleeping_princess_waves",
+          ja: "眠り姫風：流れる長髪ウェーブ",
+          en: "Sleeping princess soft waves",
+          val: "hairstyle focus, long softly flowing waves, gentle side part, smooth crown volume, graceful fairytale princess hair shape",
+          linked_ids: ["ft_hair_base_long_soft_waves", "ft_hair_custom_gentle_side_part", "ft_hair_custom_smooth_swept_crown", "ft_hair_setting_elegant_princess_shape"]
+        },
+        {
+          id: "ft_hair_complete_forest_girl_braids",
+          ja: "赤ずきん風：低めツイン三つ編み",
+          en: "Forest girl low twin braids",
+          val: "hairstyle focus, low twin braids, simple village girl braids, soft short bangs, tidy tied braid ends, folktale forest girl hair shape",
+          linked_ids: ["ft_hair_base_low_twin_braids", "ft_hair_custom_soft_short_bangs", "ft_hair_custom_tidy_braid_ends", "ft_hair_setting_rustic_village_shape"]
+        },
+        {
+          id: "ft_hair_complete_court_princess_hime",
+          ja: "かぐや姫風：姫カット長髪",
+          en: "Ancient court princess hime cut",
+          val: "hairstyle focus, very long straight hair, hime cut sidelocks, blunt bangs, smooth traditional court princess hair shape",
+          linked_ids: ["ft_hair_base_straight_hime_cut", "ft_hair_custom_blunt_bangs", "ft_hair_custom_long_sidelocks", "ft_hair_setting_ancient_court_shape"]
+        },
+        {
+          id: "ft_hair_complete_regal_villain_updo",
+          ja: "女王・継母風：鋭い高めアップ",
+          en: "Regal villainess sharp updo",
+          val: "hairstyle focus, sharp high updo, sleek pulled-back hairline, sculpted crown volume, severe regal fairytale villainess hair shape",
+          linked_ids: ["ft_hair_base_sharp_high_updo", "ft_hair_custom_sleek_hairline", "ft_hair_custom_sculpted_crown_volume", "ft_hair_setting_regal_villain_shape"]
+        },
+        {
+          id: "ft_hair_complete_folktale_witch_messy",
+          ja: "森の魔女・山姥風：乱れ長髪",
+          en: "Folktale witch messy long hair",
+          val: "hairstyle focus, wild messy long hair, uneven flyaway strands, rough loose hair shape, old folktale witch hair silhouette",
+          linked_ids: ["ft_hair_base_wild_messy_long", "ft_hair_custom_flyaway_strands", "ft_hair_custom_uneven_layers", "ft_hair_setting_folktale_witch_shape"]
+        },
+        {
+          id: "ft_hair_complete_folktale_hero_topknot",
+          ja: "昔話の若者風：短髪＋小さな髷",
+          en: "Folktale hero short topknot",
+          val: "hairstyle focus, short swept-back hair, small traditional topknot, neat simple folktale hero hair shape",
+          linked_ids: ["ft_hair_base_short_swept_back", "ft_hair_custom_small_topknot", "ft_hair_custom_clean_hairline", "ft_hair_setting_folktale_hero_shape"]
+        }
+      ]
+    },
+    {
+      title: "🧱 ベース髪型 (Base Shapes)",
+      role: "base",
+      items: [
+        { id: "ft_hair_base_high_rounded_updo", ja: "高め丸アップ", en: "High rounded updo", val: "high rounded updo, hair gathered high, rounded bun-like silhouette" },
+        { id: "ft_hair_base_short_rounded_bob", ja: "短め丸ボブ", en: "Short rounded bob", val: "short rounded bob, soft bob silhouette, compact storybook bob cut" },
+        { id: "ft_hair_base_extremely_long_braid", ja: "超ロング三つ編み", en: "Extremely long braid", val: "extremely long braid, thick single braid, long woven hair" },
+        { id: "ft_hair_base_long_soft_waves", ja: "流れる長髪ウェーブ", en: "Long soft waves", val: "long softly flowing wavy hair, gentle waves, smooth long hair silhouette" },
+        { id: "ft_hair_base_low_twin_braids", ja: "低めツイン三つ編み", en: "Low twin braids", val: "low twin braids, two simple braids, braids tied near the shoulders" },
+        { id: "ft_hair_base_straight_hime_cut", ja: "姫カット長髪", en: "Straight hime cut", val: "very long straight hair, hime cut sidelocks, straight smooth hair fall" },
+        { id: "ft_hair_base_sharp_high_updo", ja: "鋭い高めアップ", en: "Sharp high updo", val: "sharp high updo, tall sculpted updo, severe pulled-up hair silhouette" },
+        { id: "ft_hair_base_wild_messy_long", ja: "乱れ長髪", en: "Wild messy long hair", val: "wild messy long hair, loose uneven hair mass, rough untamed hair silhouette" },
+        { id: "ft_hair_base_short_swept_back", ja: "短髪オールバック寄り", en: "Short swept-back hair", val: "short swept-back hair, neat compact hair, simple traditional short hair shape" },
+        { id: "ft_hair_base_low_chignon", ja: "低めシニヨン", en: "Low chignon", val: "low chignon, hair gathered at the nape, modest rounded bun shape" }
+      ]
+    },
+    {
+      title: "✂️ 前髪・輪郭カスタム (Bangs / Detail)",
+      role: "customize",
+      items: [
+        { id: "ft_hair_custom_side_swept_bangs", ja: "流れる斜め前髪", en: "Side-swept bangs", val: "soft side-swept bangs, graceful fringe curve" },
+        { id: "ft_hair_custom_smooth_swept_crown", ja: "頭頂部なめらか流し", en: "Smooth swept crown", val: "smooth swept-back crown, clean crown volume, polished hairline flow" },
+        { id: "ft_hair_custom_curled_under_ends", ja: "内巻き毛先", en: "Curled-under ends", val: "curled-under hair ends, rounded inward bob tips" },
+        { id: "ft_hair_custom_soft_side_part", ja: "柔らかい横分け", en: "Soft side part", val: "soft side part, gentle parted fringe" },
+        { id: "ft_hair_custom_loose_face_framing", ja: "顔まわり後れ毛", en: "Loose face-framing strands", val: "loose face-framing strands, soft wisps around the face" },
+        { id: "ft_hair_custom_thick_woven_braid", ja: "太い編み目", en: "Thick woven braid", val: "thick woven braid texture, clearly braided hair sections" },
+        { id: "ft_hair_custom_gentle_side_part", ja: "上品なサイドパート", en: "Gentle side part", val: "gentle side part, elegant parted hairline" },
+        { id: "ft_hair_custom_soft_short_bangs", ja: "短め柔らか前髪", en: "Soft short bangs", val: "soft short bangs, gentle compact fringe" },
+        { id: "ft_hair_custom_tidy_braid_ends", ja: "整った三つ編み先", en: "Tidy braid ends", val: "tidy braid ends, neat tied braid tips" },
+        { id: "ft_hair_custom_blunt_bangs", ja: "ぱっつん前髪", en: "Blunt bangs", val: "blunt bangs, straight-cut fringe" },
+        { id: "ft_hair_custom_long_sidelocks", ja: "長い姫毛サイド", en: "Long sidelocks", val: "long straight sidelocks, face-framing hime cut side hair" },
+        { id: "ft_hair_custom_sleek_hairline", ja: "鋭い生え際流し", en: "Sleek hairline", val: "sleek pulled-back hairline, sharp clean forehead frame" },
+        { id: "ft_hair_custom_sculpted_crown_volume", ja: "彫刻的な頭頂ボリューム", en: "Sculpted crown volume", val: "sculpted crown volume, structured high hair shape" },
+        { id: "ft_hair_custom_flyaway_strands", ja: "乱れた後れ毛", en: "Flyaway strands", val: "uneven flyaway strands, stray loose hair wisps" },
+        { id: "ft_hair_custom_uneven_layers", ja: "不揃いレイヤー", en: "Uneven layers", val: "uneven hair layers, rough irregular hair edges" },
+        { id: "ft_hair_custom_small_topknot", ja: "小さな髷", en: "Small topknot", val: "small traditional topknot, compact tied hair knot" },
+        { id: "ft_hair_custom_clean_hairline", ja: "清潔な額まわり", en: "Clean hairline", val: "clean hairline, neatly arranged forehead hair" }
+      ]
+    },
+    {
+      title: "🎭 童話らしさ補助 (Hairstyle Mood)",
+      role: "setting",
+      items: [
+        { id: "ft_hair_setting_ballroom_princess_shape", ja: "舞踏会プリンセス髪型", en: "Ballroom princess hair shape", val: "elegant ballroom princess hairstyle, polished fairytale updo shape" },
+        { id: "ft_hair_setting_storybook_princess_shape", ja: "絵本の姫髪型", en: "Storybook princess hair shape", val: "storybook princess hairstyle, clean iconic fairytale hair silhouette" },
+        { id: "ft_hair_setting_elegant_princess_shape", ja: "上品プリンセス髪型", en: "Elegant princess hair shape", val: "elegant princess hairstyle, graceful smooth hair silhouette" },
+        { id: "ft_hair_setting_rustic_village_shape", ja: "村娘・森の少女髪型", en: "Rustic village girl hair shape", val: "rustic village girl hairstyle, simple practical folktale braid shape" },
+        { id: "ft_hair_setting_ancient_court_shape", ja: "古典宮廷姫髪型", en: "Ancient court noble hair shape", val: "ancient court noble hairstyle, formal straight traditional hair silhouette" },
+        { id: "ft_hair_setting_regal_villain_shape", ja: "女王・悪役髪型", en: "Regal villainess hair shape", val: "regal villainess hairstyle, severe elegant fairytale hair silhouette" },
+        { id: "ft_hair_setting_folktale_witch_shape", ja: "昔話の魔女髪型", en: "Folktale witch hair shape", val: "folktale witch hairstyle, rough mysterious messy hair silhouette" },
+        { id: "ft_hair_setting_folktale_hero_shape", ja: "昔話の若者髪型", en: "Folktale hero hair shape", val: "folktale hero hairstyle, neat simple traditional hair silhouette" },
+        { id: "ft_hair_setting_hairstyle_focus", ja: "髪型優先補助", en: "Hairstyle focus helper", val: "hairstyle focus, hair shape priority, clear hair silhouette" }
+      ]
+    }
+  ];
+
+  const DICT = {};
+  FAIRYTALE_HAIR.forEach(group => {
+    group.items.forEach(item => {
+      if (item.val && item.ja) DICT[item.val] = item.ja;
+    });
+  });
+
+  function ensureArray(v) {
+    if (!v) return [];
+    if (Array.isArray(v)) return v;
+    return [String(v)];
+  }
+
+  function parseJsonArrayAttr(raw) {
+    if (!raw) return [];
+    try {
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function openAncestorDetails(node) {
+    let cur = node;
+    while (cur) {
+      if (cur.tagName && String(cur.tagName).toLowerCase() === "details") cur.open = true;
+      cur = cur.parentElement;
+    }
+  }
+
+  function applyCheckboxVisual(cb) {
+    const label = cb && cb.parentElement && cb.parentElement.tagName && cb.parentElement.tagName.toLowerCase() === "label" ? cb.parentElement : null;
+    if (!label) return;
+    if (cb.checked) {
+      label.style.background = "rgba(111, 76, 255, 0.08)";
+      label.style.borderColor = "rgba(111, 76, 255, 0.35)";
+    } else {
+      label.style.background = "#fff";
+      label.style.borderColor = "rgba(0,0,0,0.10)";
+    }
+  }
+
+  function setCheckboxState(cb, checked) {
+    if (!cb) return;
+    cb.checked = !!checked;
+    applyCheckboxVisual(cb);
+  }
+
+  function findCheckboxById(root, id) {
+    if (!root || !id) return null;
+    return root.querySelector('input.hair-v7-cb[data-pack-id="' + String(id).replace(/\\/g, "\\\\").replace(/"/g, '\\"') + '"]');
+  }
+
+  function clearCollectionRoles(root, roles, exceptId) {
+    const boxes = root.querySelectorAll('input.hair-v7-cb[data-collection-id="' + COLLECTION_ID + '"]');
+    boxes.forEach(cb => {
+      const role = cb.getAttribute("data-collection-role") || "";
+      const packId = cb.getAttribute("data-pack-id") || "";
+      if (exceptId && packId === exceptId) return;
+      if (roles.indexOf(role) !== -1) setCheckboxState(cb, false);
+    });
+  }
+
+  function applyCompleteSetSelection(root, cb) {
+    const packId = cb.getAttribute("data-pack-id") || "";
+    const linked = parseJsonArrayAttr(cb.getAttribute("data-linked-ids"));
+
+    if (cb.checked) {
+      clearCollectionRoles(root, ["complete_set"], packId);
+      clearCollectionRoles(root, ["base", "customize", "setting"]);
+      setCheckboxState(cb, true);
+      openAncestorDetails(cb);
+      linked.forEach(id => {
+        const target = findCheckboxById(root, id);
+        if (!target) return;
+        setCheckboxState(target, true);
+        openAncestorDetails(target);
+      });
+    } else {
+      setCheckboxState(cb, false);
+      linked.forEach(id => {
+        const target = findCheckboxById(root, id);
+        if (target) setCheckboxState(target, false);
+      });
+    }
+
+    if (typeof window.generateOutput === "function") window.generateOutput();
+  }
+
+  function createItem(item, role) {
+    const label = document.createElement("label");
+    label.style.cssText =
+      "display:flex; gap:8px; align-items:flex-start; padding:8px 9px; border:1px solid rgba(0,0,0,0.10);" +
+      "border-radius:10px; background:#fff; cursor:pointer; font-size:0.92em; line-height:1.3; min-width:0;";
+
+    const cb = document.createElement("input");
+    cb.type = "checkbox";
+    cb.className = "hair-v7-cb";
+    cb.style.cssText = "margin-top:2px; width:18px; height:18px; flex:0 0 auto;";
+    cb.setAttribute("data-pack-id", item.id);
+    cb.setAttribute("data-collection-id", COLLECTION_ID);
+    cb.setAttribute("data-collection-role", role || "");
+    cb.setAttribute("data-en", item.val || "");
+    cb.setAttribute("data-val", item.val || "");
+    try { cb.setAttribute("data-tags", JSON.stringify(ensureArray(item.val))); } catch (e) { cb.setAttribute("data-tags", "[]"); }
+    try { cb.setAttribute("data-linked-ids", JSON.stringify(ensureArray(item.linked_ids))); } catch (e2) { cb.setAttribute("data-linked-ids", "[]"); }
+
+    const text = document.createElement("span");
+    text.style.cssText = "display:flex; flex-direction:column; gap:2px; min-width:0;";
+    const title = document.createElement("span");
+    title.style.cssText = "font-weight:700; color:#25203a; word-break:keep-all; overflow-wrap:anywhere;";
+    title.textContent = item.en ? item.ja + " / " + item.en : item.ja;
+    const sub = document.createElement("span");
+    sub.style.cssText = "font-size:0.84em; color:rgba(0,0,0,0.56); overflow-wrap:anywhere;";
+    sub.textContent = item.val;
+
+    text.appendChild(title);
+    text.appendChild(sub);
+    label.appendChild(cb);
+    label.appendChild(text);
+    applyCheckboxVisual(cb);
+    return label;
+  }
+
+  function createGroup(group) {
+    const details = document.createElement("details");
+    details.className = "hair-cat hair-v7-group";
+    details.style.cssText = "margin:8px 0; border:1px solid #eadfff; border-radius:12px; background:#fff;";
+    details.open = false;
+
+    const summary = document.createElement("summary");
+    summary.textContent = group.title;
+    summary.style.cssText = "font-weight:800; padding:8px 10px; cursor:pointer; background:#f8f4ff; color:#4b2f7f; border-radius:12px;";
+    details.appendChild(summary);
+
+    const content = document.createElement("div");
+    content.style.cssText = "padding:8px; display:flex; flex-direction:column; gap:6px;";
+    group.items.forEach(item => content.appendChild(createItem(item, group.role)));
+    details.appendChild(content);
+    return details;
+  }
+
+  const API = {
+    initUI(container) {
+      if (window.__outputTranslation) window.__outputTranslation.register(DICT);
+
+      const parent = document.querySelector("#list-hair") || container;
+      if (!parent) return;
+      const contentArea = parent.querySelector(".section-content") || parent;
+
+      if (contentArea.querySelector(".hair-v7-fairytale-collection")) return;
+
+      const root = document.createElement("div");
+      root.className = "hair-v7-fairytale-collection";
+      root.style.cssText = "margin-top:14px;";
+
+      const wrap = document.createElement("details");
+      wrap.className = "hair-v7-collection-wrap";
+      wrap.open = false;
+      wrap.style.cssText = "border:1px solid #ddccff; border-radius:14px; background:#fbf8ff; padding:0; margin:12px 0;";
+
+      const summary = document.createElement("summary");
+      summary.textContent = "📚 童話・昔話キャラ髪型特化コレクション v7";
+      summary.style.cssText = "font-weight:900; padding:10px 12px; cursor:pointer; color:#3d246d; background:#efe6ff; border-radius:14px;";
+      wrap.appendChild(summary);
+
+      const note = document.createElement("div");
+      note.style.cssText = "margin:8px 10px; padding:8px 10px; border-radius:10px; background:#fff; color:#5c5470; font-size:0.88em; line-height:1.45;";
+      note.textContent = "髪色は既存の髪色棚に任せるため、この特化コレクションは髪型・前髪・輪郭シルエットだけを出力します。";
+      wrap.appendChild(note);
+
+      FAIRYTALE_HAIR.forEach(group => wrap.appendChild(createGroup(group)));
+
+      root.addEventListener("change", ev => {
+        const target = ev && ev.target;
+        if (!target || !target.classList || !target.classList.contains("hair-v7-cb")) return;
+        applyCheckboxVisual(target);
+
+        const role = target.getAttribute("data-collection-role") || "";
+        if (role === "complete_set") {
+          applyCompleteSetSelection(root, target);
+          return;
+        }
+
+        if (typeof window.generateOutput === "function") window.generateOutput();
+      });
+
+      root.appendChild(wrap);
+      contentArea.appendChild(root);
+    },
+
+    getTags() {
+      const tags = [];
+      const seen = new Set();
+      document.querySelectorAll(".hair-v7-fairytale-collection input.hair-v7-cb:checked").forEach(cb => {
+        const values = parseJsonArrayAttr(cb.getAttribute("data-tags"));
+        values.forEach(v => {
+          const tag = String(v || "").trim();
+          if (!tag || seen.has(tag)) return;
+          seen.add(tag);
+          tags.push(tag);
+        });
+      });
+      return tags;
+    }
+  };
+
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
+})();
