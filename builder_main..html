@@ -426,11 +426,18 @@ body.log-fullscreen{
     }
     body::before{
       content:"";
-      position: fixed; inset:0;
-      z-index:-2;
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
       background:
         url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27520%27%20height%3D%27520%27%20viewBox%3D%270%200%20520%20520%27%3E%0A%3Cdefs%3E%0A%3Cfilter%20id%3D%27b%27%20x%3D%27-20%25%27%20y%3D%27-20%25%27%20width%3D%27140%25%27%20height%3D%27140%25%27%3E%0A%3CfeGaussianBlur%20stdDeviation%3D%2710%27/%3E%0A%3C/filter%3E%0A%3C/defs%3E%0A%3Cg%20filter%3D%27url%28%23b%29%27%20opacity%3D%270.9%27%3E%0A%3Cpath%20d%3D%27M185%20318c-52-22-74-92-36-142%2034-45%20101-59%20150-29%2028%2017%2052%2047%2057%2080%205%2034-8%2069-33%2092%2028%209%2055%2028%2072%2057-42%208-87-3-121-27-31%2040-89%2057-137%2039%2019-17%2034-39%2048-70z%27%0A%20fill%3D%27rgba%28255%2C255%2C255%2C0.08%29%27/%3E%0A%3Ccircle%20cx%3D%27278%27%20cy%3D%27212%27%20r%3D%2710%27%20fill%3D%27rgba%28255%2C255%2C255%2C0.10%29%27/%3E%0A%3C/g%3E%0A%3C/svg%3E") no-repeat right 6% top 18% / 360px 360px,
-        radial-gradient(900px 600p/* --- ShimaBuilder extra: tiny Shima-enaga face & feather whisper --- */
+        radial-gradient(900px 600px at 8% 12%, rgba(255,255,255,0.62), transparent 66%),
+        radial-gradient(700px 560px at 96% 90%, rgba(207,232,255,0.40), transparent 70%),
+        linear-gradient(180deg, rgba(247,251,255,0.18), rgba(234,244,255,0.32));
+    }
+
+    /* --- ShimaBuilder extra: tiny Shima-enaga face & feather whisper --- */
     /* --- ShimaBuilder extra: Elegant Shima-enaga mark (quiet & minimal) --- */
 .shima-face{
   display:inline-block;
@@ -530,6 +537,11 @@ body.log-fullscreen{
     }
 
   </style>
+  <link rel="stylesheet" href="shima_zero_theme.v1.css">
+  <link rel="stylesheet" href="zero_assist.v1.css">
+  <link rel="stylesheet" href="shima_snowfield_theme.v1.css">
+  <link rel="stylesheet" href="shima_navigation.v1.css">
+  <link rel="stylesheet" href="shima_snowfield_daylight.v1.css">
 </head>
 <body>
   <div class="shima-noise" aria-hidden="true"></div>
@@ -852,6 +864,7 @@ body.log-fullscreen{
 })();
 
 </script>
+<script src="ext_zero_assist.v1.js"></script>
+<script src="ext_shima_navigation.v1.js"></script>
 </body>
 </html>
-

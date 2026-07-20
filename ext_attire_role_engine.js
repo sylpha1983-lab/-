@@ -531,10 +531,10 @@
       }
     },
     getTags() {
-      const root = document.querySelector("." + CONTAINER_CLASS);
-      if (!root) return [];
       const tags = [];
-      root.querySelectorAll("input[type='checkbox']:checked").forEach(cb => tags.push(cb.dataset.en));
+      document.querySelectorAll("." + CONTAINER_CLASS + " input[type='checkbox']:checked").forEach(cb => {
+        if (cb && cb.dataset && cb.dataset.en) tags.push(cb.dataset.en);
+      });
       return tags;
     }
   };

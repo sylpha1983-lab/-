@@ -73,6 +73,81 @@
     ]
   };
 
+
+  // v26 diagnostic: classify Style v3 shelves before moving true generation bases into Quality/Settings.
+  // status:
+  // - migrate_base: strong candidate for Quality/Settings "生成ベース"
+  // - product_overlap: overlaps with Quality/Settings productization base; keep for compatibility until v27/v28
+  // - keep_flavor: better kept in Style as flavor/layout/media taste
+  const STYLE_V26_CATEGORY_DIAG = {
+    "🧸 ホビー・立体スタイル (Hobby & Figures)": {
+      status: "product_overlap",
+      label: "商品化ベース重複候補",
+      color: "#e67700",
+      note: "フィギュア・アクスタ・商品撮影系が多く、品質・設定の生成ベースへ統合候補。v26ではまだ移動しません。"
+    },
+    "🎁 商品化・グッズ化 (Merch & Productization)": {
+      status: "product_overlap",
+      label: "商品化ベース重複候補",
+      color: "#e67700",
+      note: "商品化ベースと役割が近い棚。専用補助へ整理候補。"
+    },
+    "🎨 イラストの塗り・仕上げ (Coloring Styles)": {
+      status: "migrate_base",
+      label: "生成ベース移植候補",
+      color: "#1971c2",
+      note: "アニメ塗り・水彩風・厚塗りなど、絵の土台になる項目が多い棚。"
+    },
+    "🎤 MMD・3DダンスCG セット (MMD / Dance CG)": {
+      status: "migrate_base",
+      label: "生成ベース移植候補",
+      color: "#1971c2",
+      note: "MMD風・セルルック3DはCGアニメ系生成ベースへ移植候補。照明や演出はStyle側に残す候補。"
+    },
+    "💻 デジタル・デザイン様式 (Digital & Design)": {
+      status: "migrate_base",
+      label: "一部生成ベース移植候補",
+      color: "#1971c2",
+      note: "ピクセルアート・ボクセル・ベクターなどは生成ベース向き。グリッチやフラットデザインは味付け候補。"
+    },
+    "📸 写真・映像スタイル (Photo & Film)": {
+      status: "keep_flavor",
+      label: "Style側残し候補",
+      color: "#6741d9",
+      note: "映画・写真の質感やレンズ効果が中心。生成ベースではなく味付けとして残す候補。"
+    },
+    "📺 年代別メディアの質感 (Retro Media Aesthetic)": {
+      status: "keep_flavor",
+      label: "Style側残し候補",
+      color: "#6741d9",
+      note: "年代感・メディア質感の味付け向き。"
+    },
+    "🧸 ちびキャラ (Chibi Characters)": {
+      status: "keep_flavor",
+      label: "Style側残し候補",
+      color: "#6741d9",
+      note: "等身・デフォルメ指定は作風ベースではなくキャラ表現寄り。"
+    },
+    "🛏️ メディア・グッズレイアウト (Otaku Media Formats)": {
+      status: "keep_flavor",
+      label: "Style側残し候補",
+      color: "#6741d9",
+      note: "抱き枕・TCG・設定画など、生成目的やレイアウトの指定。"
+    },
+    "🔮 ネット・美学 (Internet Aesthetics)": {
+      status: "keep_flavor",
+      label: "Style側残し候補",
+      color: "#6741d9",
+      note: "世界観・雰囲気の味付け向き。"
+    },
+    "⚙️ パンク・SFサブジャンル (Punks)": {
+      status: "keep_flavor",
+      label: "Style側残し候補",
+      color: "#6741d9",
+      note: "世界観ジャンル指定。背景・衣装・雰囲気とも絡むため現状はStyle側残し候補。"
+    }
+  };
+
   const DICT = {
     // Studios
     "kyoto animation": "京アニ", "ufotable": "ufotable", "studio ghibli": "ジブリ", "studio trigger": "TRIGGER",
@@ -106,7 +181,30 @@
       if (root.dataset && root.dataset.styleV1Mounted === "1") return;
       if (root.dataset) root.dataset.styleV1Mounted = "1";
 
+      const addV26DiagnosticHeader = (host) => {
+        if (!host || host.querySelector(".style-v26-diagnostic-header")) return;
+        const box = document.createElement("details");
+        box.className = "style-v26-diagnostic-header";
+        box.open = false;
+        box.style.cssText = "margin:8px 0 10px; border:1px solid #91a7ff; border-radius:8px; background:#edf2ff;";
+        const summary = document.createElement("summary");
+        summary.textContent = "🧭 Style v27：生成ベースへ移植済み";
+        summary.style.cssText = "font-weight:700; padding:8px 10px; cursor:pointer; color:#364fc7;";
+        const body = document.createElement("div");
+        body.style.cssText = "padding:8px 10px; font-size:12px; line-height:1.6; color:#343a40;";
+        body.innerHTML =
+          "品質・設定側の「生成ベース」へ、土台系の画風・商品化・デジタル作風を移植しました。"
+          + "<br>Style側には、ちびキャラ・メディア形式・年代感・ネット美学・SFジャンル・写真/映像など、味付け向きの項目だけを残しています。"
+          + "<br>作風の土台は「品質・設定」→「最初に選ぶ：生成ベース＋おすすめ連動」から選んでください。";
+        box.appendChild(summary);
+        box.appendChild(body);
+        host.appendChild(box);
+      };
+
+      const getDiag = (title) => STYLE_V26_CATEGORY_DIAG[title] || null;
+
       const createSub = (title, items) => {
+        const diag = getDiag(title);
         const details = document.createElement("details");
         details.className = "style-cat";
         details.style.cssText = "margin-bottom:6px; border:1px solid #b197fc; border-radius:4px; background:#fff;";
@@ -350,39 +448,7 @@
 
   // ===== 中身は完全に元のまま =====
   const STYLE_DATA = {
-    "🧸 ホビー・立体スタイル (Hobby & Figures)": [
-      { ja: "ねんどろいど風", en: "nendoroid style, super deformed figure, big head small body, glossy plastic" },
-      { ja: "フィギュア風", en: "figure style, collectible figure, detailed sculpt, painted, manufactured look" },
-      { ja: "PVCフィギュア風", en: "PVC figure style, glossy PVC material, painted figure, premium collectible" },
-      { ja: "アクリルスタンド風", en: "acrylic standee, acrylic stand merchandise, clear acrylic plate, printed acrylic, die-cut standee, small acrylic base" },
-      { ja: "ラバーストラップ風", en: "rubber strap merchandise, silicone keychain charm, rubber keychain, flat chibi design, thick outline, molded rubber edges, keychain loop" },
-      { ja: "スケールフィギュア風", en: "scale figure style, 1/7 scale figure, museum-quality paint, fine gradients, premium collectible" },
-      { ja: "アクションフィギュア風", en: "action figure, articulated joints, visible seams, hinge joints, interchangeable parts" },
-      { ja: "プラモデル風", en: "plastic model style, scale model, panel lines, plastic texture, sprue marks" },
-      { ja: "ガレージキット風", en: "garage kit style, resin kit, hand-painted, unassembled parts" },
-      { ja: "箱絵・パッケージ風", en: "box art, product package design, retail packaging, promotional image" },
-      { ja: "ブリスター梱包風", en: "blister packaging, clear plastic blister, backing card, retail display" },
-      { ja: "台座・ネームプレート", en: "display base, pedestal, nameplate, acrylic stand, premium display" },
-      { ja: "スタジオ物撮り", en: "product photography, lightbox, seamless backdrop, softbox lighting, clean studio" },
-      { ja: "回転台ショット", en: "turntable shot, 360 product view, centered composition" },
-      { ja: "マクロ塗装ディテール", en: "macro shot, paintwork details, decals, clear coat, tiny scratches" },
-      { ja: "トイ写真風", en: "toy photography, miniature diorama, shallow depth of field" }
-    ],
-    "🎁 商品化・グッズ化 (Merch & Productization)": [
-      { ja: "商品パッケージ風", en: "retail product packaging, box art, blister pack, branding labels, barcode, sealed plastic window" },
-      { ja: "ブラインドボックス玩具風", en: "blind box toy, collectible series packaging, small boxed figure, mystery box" },
-      { ja: "ガチャカプセル玩具風", en: "gacha capsule toy, capsule packaging, prize toy, small collectible" },
-      { ja: "クレーンゲーム景品風", en: "crane game prize, arcade prize figure, prize box packaging" },
-      { ja: "アクションフィギュア風", en: "action figure style, articulated joints, poseable figure, manufactured plastic" },
-      { ja: "可動関節強調（フィグマ系）", en: "figma-like articulated figure, visible joints, poseable limbs, action figure engineering" },
-      { ja: "レジンキャスト風", en: "resin cast figure, garage kit finish, hand-painted resin, matte resin surface" },
-      { ja: "透明レジン限定版風", en: "clear resin limited edition, translucent parts, pearlescent tint, internal refraction" },
-      { ja: "ジオラマ台座展示風", en: "diorama base display, scenic base, nameplate, museum display plinth" },
-      { ja: "クリスタルドーム展示風", en: "crystal dome display, acrylic dome case, premium collectible display" },
-      { ja: "スノードーム風", en: "snow globe display, glass sphere, swirling particles, miniature diorama inside" },
-      { ja: "ホログラム投影展示風", en: "hologram projection display, volumetric light, floating holographic figure, sci-fi showcase" }
-    ],
-    "🧸 ちびキャラ (Chibi Characters)": [
+"🧸 ちびキャラ (Chibi Characters)": [
       {"ja":"ちびキャラ","en":"chibi character, super deformed"},
       {"ja":"SDキャラ","en":"SD character, super deformed"},
       {"ja":"2頭身","en":"two-head-tall proportions"},
@@ -392,14 +458,7 @@
       {"ja":"マスコット風","en":"mascot style, cute simplified chibi"},
       {"ja":"幼児体型（ちび）","en":"childlike chibi proportions, big head small body"}
     ],
-    "🎨 イラストの塗り・仕上げ (Coloring Styles)": [
-      { ja: "アニメ塗り (影少なめ)", en: "cel shading, flat color, solid shading, anime coloring, clear lines" },
-      { ja: "ギャルゲ塗り・エロゲ塗り", en: "visual novel style, galge style, soft shading, glossy skin, detailed hair shading, blush" },
-      { ja: "ブラシ塗り (厚塗り寄り)", en: "brush shading, semi-realistic anime style, painterly rendering, blended shading" },
-      { ja: "水彩風アニメ塗り", en: "watercolor anime style, soft colors, transparent shading, color bleeding effect" },
-      { ja: "ソシャゲ風 (高密度・キラキラ)", en: "gacha game style, highly detailed shading, sparkling highlights, rich colors, ultra-detailed" }
-    ],
-    "🛏️ メディア・グッズレイアウト (Otaku Media Formats)": [
+"🛏️ メディア・グッズレイアウト (Otaku Media Formats)": [
       { ja: "抱き枕カバー風", en: "dakimakura design, body pillow cover, vertical composition, lying down, looking at viewer, top-down perspective, full body" },
       { ja: "ASMRサムネイル風", en: "ASMR cover art, close up on face, whispering, holding dummy head mic, soft warm lighting, intimate distance" },
       { ja: "TCG（トレカ）風", en: "trading card game illustration, ultra-detailed, dynamic pose, magic effects, character focus, card border frame" },
@@ -411,21 +470,7 @@
       { ja: "2000年代美少女ゲーム風", en: "2000s visual novel style, nostalgic anime art, early 2000s digital art, classic galge, text box overlay" },
       { ja: "ブラウン管テレビ (CRT)", en: "crt tv display, scanlines, chromatic aberration, rgb shift, retro gaming aesthetic, distorted edges" }
     ],
-    "🎤 MMD・3DダンスCG セット (MMD / Dance CG)": [
-      { ja: "style: MMD風", en: "style: MMD style, miku miku dance, 3D anime character, dance pose" },
-      { ja: "style: セルルック3D", en: "style: cel-shaded 3D, toon shader, anime 3D render" },
-      { ja: "light: ステージライト", en: "light: concert stage lighting, spotlights, glow sticks, lens flare" },
-      { ja: "effect: モーションブラー強め", en: "effect: motion blur, dynamic movement, dancing" },
-      { ja: "atmosphere: ライブ会場の空気感", en: "atmosphere: concert atmosphere, haze, bloom, crowd silhouettes" },
-      { ja: "light: ビート同期ライト", en: "light: beat-synced lights, rhythm lighting, pulsating stage lights" },
-      { ja: "effect: レーザー演出", en: "effect: laser beams, stage lasers, club lighting" },
-      { ja: "effect: スモーク＆ヘイズ", en: "effect: stage smoke, haze machine, volumetric haze" },
-      { ja: "background: LEDスクリーン背景", en: "background: LED screen backdrop, VJ visuals, stage screen" },
-      { ja: "light: リムライト強め", en: "light: strong rim light, backlight, stage backlight" },
-      { ja: "camera: ダイナミックカメラ", en: "camera: dynamic camera angle, wide-angle lens, performance shot" },
-      { ja: "effect: 残像・軌跡エフェクト", en: "effect: afterimage effect, motion trails, light trails" }
-    ],
-    "🔮 ネット・美学 (Internet Aesthetics)": [
+"🔮 ネット・美学 (Internet Aesthetics)": [
       { ja: "ヴェイパーウェイヴ", en: "vaporwave, aesthetic, neon pink and blue, retro computer, greek statues, glitch" },
       { ja: "シンセウェイヴ (80s)", en: "synthwave, retrowave, neon grid, sunset, futuristic 80s, outrun" },
       { ja: "ローファイ (Lo-Fi)", en: "lo-fi aesthetic, grainy, nostalgic, muted colors, anime study girl style" },
@@ -445,18 +490,7 @@
       { ja: "バイオパンク", en: "biopunk, organic tech, flesh, genetic engineering, glowing plants" },
       { ja: "アトムパンク (50s)", en: "atompunk, 1950s retro futurism, space age, atomic power, googie architecture" }
     ],
-    "💻 デジタル・デザイン様式 (Digital & Design)": [
-      { ja: "ピクセルアート (ドット)", en: "pixel art, 16-bit, retro game sprite, dithering" },
-      { ja: "ボクセル (箱庭)", en: "voxel art, minecraft style, 3d blocks, isometric view" },
-      { ja: "ローポリゴン", en: "low poly, faceted, 3d render, minimalist, sharp edges" },
-      { ja: "ベクターアート", en: "vector art, flat color, clean lines, illustrator style" },
-      { ja: "グリッチアート", en: "glitch art, datamoshing, digital noise, corrupted image, rgb shift" },
-      { ja: "フラットデザイン", en: "flat design, minimalist, simple shapes, bright colors" },
-      { ja: "メンフィス (80s)", en: "memphis design, geometric shapes, squiggly lines, pastel and bold colors, 80s pattern" },
-      { ja: "ブルータリズム", en: "brutalism, concrete, blocky, monolithic, raw, utilitarian" },
-      { ja: "ポップアート", en: "pop art style, bold colors, halftone dots, comic book style, andy warhol style" }
-    ],
-    "📸 写真・映像スタイル (Photo & Film)": [
+"📸 写真・映像スタイル (Photo & Film)": [
       { ja: "フィルムノワール", en: "film noir, high contrast, black and white, dramatic shadows, crime movie style" },
       { ja: "ヴィンテージ写真", en: "vintage photo, sepia tone, scratches, faded colors, old paper texture" },
       { ja: "ポラロイド", en: "polaroid style, flash photography, vignette, soft colors" },
@@ -538,11 +572,20 @@
         details.open = false;
 
         const summary = document.createElement("summary");
-        summary.innerHTML = `${title} <span style="font-size:0.8em; color:#6741d9;">(Modern)</span>`;
+        const diagBadge = diag
+          ? ` <span style="font-size:0.75em; color:#fff; background:${diag.color}; border-radius:999px; padding:2px 7px; margin-left:4px;">${diag.label}</span>`
+          : "";
+        summary.innerHTML = `${title} <span style="font-size:0.8em; color:#6741d9;">(Modern)</span>${diagBadge}`;
         summary.style.cssText = "font-weight:bold; padding:6px 10px; cursor:pointer; background:#f3f0ff; color:#5f3dc4;";
         details.appendChild(summary);
 
         const content = document.createElement("div");
+        if (diag && diag.note) {
+          const note = document.createElement("div");
+          note.textContent = "v26診断: " + diag.note;
+          note.style.cssText = `grid-column:1/-1; font-size:12px; line-height:1.5; padding:6px 8px; border-left:4px solid ${diag.color}; background:#f8f9fa; color:#343a40; border-radius:4px;`;
+          content.appendChild(note);
+        }
         content.style.cssText =
           "padding:8px; display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:6px;";
 
@@ -579,6 +622,8 @@
       const v3Container = document.createElement("div");
       v3Container.className = "style-v3-container";
       styleHost.appendChild(v3Container);
+
+      addV26DiagnosticHeader(v3Container);
 
       Object.entries(STYLE_DATA).forEach(([key, val]) => {
         v3Container.appendChild(createSub(key, val));

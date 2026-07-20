@@ -11,7 +11,647 @@
 
   const IS_UNLOCKED = localStorage.getItem("MY_SECRET_UNLOCK") === "true";
 
+  // 食べ物・飲み物のサイズ連動:
+  // サイズ指定だけを出力せず、選択中の対応フードと合成して使う。
+  const FOOD_SIZE_PRESETS = {
+    portion: {
+      small: { ja: "小盛り", template: "small serving of {food}" },
+      large: { ja: "大盛り", template: "large serving of {food}" },
+      extra: { ja: "特盛り", template: "extra-large serving of {food}" },
+      giga: { ja: "ギガ盛り", template: "gigantic heaping serving of {food}" },
+      tera: { ja: "テラ盛り", template: "towering mountain of {food}" }
+    },
+    unit: {
+      tiny: { ja: "極小", template: "tiny {food}" },
+      small: { ja: "小さめ", template: "small {food}" },
+      large: { ja: "大きめ", template: "oversized {food}" },
+      giant: { ja: "超巨大", template: "giant {food}" },
+      colossal: { ja: "規格外", template: "colossal {food}" }
+    },
+    count: {
+      few: { ja: "少なめ", template: "a few {food}" },
+      many: { ja: "たくさん", template: "many {food}" },
+      heap: { ja: "山盛り", template: "a heaping pile of {food}" },
+      giga: { ja: "ギガ山盛り", template: "a gigantic pile of {food}" },
+      tera: { ja: "山脈級", template: "an enormous mountain of {food}" }
+    },
+    volume: {
+      small: { ja: "小容量", template: "small serving of {food}" },
+      large: { ja: "大容量", template: "large serving of {food}" },
+      extra: { ja: "特大容量", template: "extra-large serving of {food}" },
+      giga: { ja: "ギガ容量", template: "giant container of {food}" },
+      tera: { ja: "テラ容量", template: "towering oversized container filled with {food}" }
+    }
+  };
+
+  const FOOD_SIZE_MODE_META = {
+    portion: { icon: "🍚", title: "盛り量", label: "盛り量" },
+    unit: { icon: "🥩", title: "単品サイズ", label: "単品サイズ" },
+    count: { icon: "🍪", title: "個数・山盛り", label: "個数・山盛り" },
+    volume: { icon: "🥤", title: "容量・容器サイズ", label: "容量・容器サイズ" }
+  };
+
+  // 食材そのものとは別に、料理・デザートへ掛ける修飾と飲み物フレーバーを扱う。
+  const FOOD_DECORATION_META = {
+    dessert: { icon: "🍓", title: "トッピング・フィリング", label: "トッピング" },
+    drink: { icon: "🥤", title: "ドリンクフレーバー", label: "フレーバー" },
+    onigiri: { icon: "🍙", title: "おにぎり・和の仕上げ", label: "おにぎり仕上げ" }
+  };
+
+  const FOOD_MODIFIER_TARGET_DATASET = {
+    dessert: "foodModifierTargetDessert",
+    drink: "foodModifierTargetDrink",
+    onigiri: "foodModifierTargetOnigiri"
+  };
+
+  function foodSizeText(item) {
+    return `${item && item.ja || ""} ${item && item.en || ""}`.toLowerCase();
+  }
+
+  function isFoodSizeSourceCategory(catName, catData) {
+    if (!String(catName || "").startsWith("🍱 食べ物・飲み物 /")) return false;
+    if (!catData || catData.isAction || catData.foodSizeMode || catData.foodModifierGroup || catData.foodDirectMenu) return false;
+    if (
+      catName.includes("🥢🍻 食べ物・飲み物動作") ||
+      catName.includes("🎭 食べ物・飲み物演出") ||
+      catName.includes("📏 サイズ・量カスタマイズ")
+    ) return false;
+    return true;
+  }
+
+  function getFoodSizeProfile(catName, catData, item) {
+    if (!isFoodSizeSourceCategory(catName, catData)) return null;
+    // 完成セット連動で自動ONになる部品タグは、サイズ対象にしない。
+    // 丼の完成セット自体へだけ「大盛り / 特盛り」を掛けて、具材まで別々に巨大化するのを防ぐ。
+    if (item && item.foodSizeDisabled) return null;
+
+    const path = String(catName || "").toLowerCase();
+    const text = foodSizeText(item);
+
+    // 食材でも、ぶどう・ベリー・盛り合わせのように個数で見せる方が自然なものは項目側で上書きできる。
+    if (item && item.foodSizeMode && FOOD_SIZE_MODE_META[item.foodSizeMode]) {
+      return { mode: item.foodSizeMode, kind: item.foodSizeKind || "" };
+    }
+
+    // 飲み物・ドリンクウェアは容量棚へ。容器そのものを選んだ時だけ、容器サイズとして合成する。
+    if (path.includes("🥛 容器・ドリンクウェア")) return { mode: "volume", kind: "container" };
+    if (path.includes("🥤 飲み物 /")) return { mode: "volume", kind: "drink" };
+
+    // 「ジュース付き弁当」などは料理・セット側として扱うため、飲み物語が含まれていてもここでは拾わない。
+    if (!/\b(lunch box|bento|meal|dish|set|plate)\b/.test(text) && /\b(drink|tea|coffee|latte|cocoa|smoothie|soda|juice|water|beer|wine|whiskey|sake|cocktail|elixir|potion|tonic|milkshake|float)\b/.test(text)) {
+      return { mode: "volume", kind: "drink" };
+    }
+
+    // 食材は「何個・何盛り」より、肉・野菜・果物など一品そのもののサイズを優先。
+    if (path.includes("🥩 食材")) return { mode: "unit" };
+
+    // デザートは種類ごとに最も自然な棚へ誘導する。
+    if (path.includes("🍰 デザート") || /\b(cake|donut|macaron|cookie|pudding|mousse|parfait|ice cream|gelato|sorbet|shaved ice|mochi|daifuku|taiyaki|dorayaki|pie|brownie|tart)\b/.test(text)) {
+      if (/\b(cookies?|macarons?|cand(?:y|ies)|berr(?:y|ies)|grapes|chocolate pieces?)\b/.test(text)) return { mode: "count" };
+      if (/\b(parfait|shaved ice|ice cream|gelato|frozen yogurt|soft serve|pudding|mousse|jelly|anmitsu|granita|semifreddo|frozen custard)\b/.test(text)) return { mode: "portion" };
+      return { mode: "unit" };
+    }
+
+    // 複数個・山盛りが自然な軽食だけを個数棚へ。フライドポテトなどは盛り量として扱う。
+    if (/\b(nuts|popcorn|chips|crackers|canape|finger food|dumplings|shumai|xiaolongbao|sushi|edamame|olives|assorted)\b/.test(text)) {
+      return { mode: "count" };
+    }
+
+    // 肉・単品料理・串・サンドは、大きさを変える方が自然。
+    if (/\b(steak|hamburger|burger|hot dog|sandwich|sausage|meat|chicken|rib|bacon|pork chop|cutlet|fish|shrimp|oyster|squid|scallop|skewer|kebab|naan|pizza slice|crepe|churros|taiyaki|apple|banana|pear|peach|melon|watermelon|tomato|carrot|potato|onion|eggplant|pumpkin|corn|cucumber|mushroom)\b/.test(text)) {
+      return { mode: "unit" };
+    }
+
+    // 丼・麺・皿・セット・鍋・プラッターなどは、まず盛り量を変える。
+    if (/\b(ramen|noodles?|curry|rice|pasta|spaghetti|soup|stew|porridge|risotto|gratin|lasagna|bento|lunch|platter|plate|board|bowl|salad|pizza|paella|bibimbap|pad thai|pho|biryani|meal|dish|set|yakisoba|oden|hot pot|fries|nachos|tacos|burrito|quesadilla|fajita|wrap|soba|udon)\b/.test(text)) {
+      return { mode: "portion" };
+    }
+
+    // 料理・提供スタイル・地域料理は、初期版では「盛り量」に寄せる。
+    return { mode: "portion" };
+  }
+
+  function composeFoodSizeTag(food, mode, preset, kind) {
+    const cleanFood = String(food || "").trim();
+    if (mode === "volume" && kind === "container") {
+      const containerTemplates = {
+        small: "small {food}",
+        large: "large {food}",
+        extra: "extra-large {food}",
+        giga: "giant {food}",
+        tera: "towering oversized {food}"
+      };
+      const containerTemplate = containerTemplates[preset];
+      return containerTemplate ? containerTemplate.replace(/\{food\}/g, cleanFood) : cleanFood;
+    }
+
+    const template = FOOD_SIZE_PRESETS[mode] && FOOD_SIZE_PRESETS[mode][preset] && FOOD_SIZE_PRESETS[mode][preset].template;
+    if (!template) return cleanFood;
+    return template.replace(/\{food\}/g, cleanFood);
+  }
+
+
+  function getDrinkBaseType(item) {
+    if (item && item.drinkBaseType) return String(item.drinkBaseType);
+    const value = String(item && item.en || "").trim().toLowerCase();
+    const known = {
+      "soda pop": "soda",
+      "iced tea": "iced tea",
+      "milkshake": "milkshake",
+      "smoothie": "smoothie",
+      "frappe": "frappe",
+      "float": "float",
+      "lemonade": "lemonade"
+    };
+    return known[value] || "";
+  }
+
+  function getFoodDecorationProfile(catName, catData, item) {
+    if (!isFoodSizeSourceCategory(catName, catData)) return null;
+    // 「おにぎり（海苔あり）」のような完成形は、追加仕上げの誘導を出さない。
+    if (item && item.foodDecorationDisabled) return null;
+
+    const path = String(catName || "").toLowerCase();
+    const text = foodSizeText(item);
+    const drinkBaseType = getDrinkBaseType(item);
+
+    // 専用ベースと、既存の無味ベース飲料だけをフレーバー対象にする。
+    if (catData && catData.foodDecorationBase === "drink" && drinkBaseType) {
+      return { group: "drink", drinkBaseType };
+    }
+    if (path.includes("🥤 飲み物 /") && drinkBaseType) {
+      return { group: "drink", drinkBaseType };
+    }
+
+    // 通常のおにぎりだけは、海苔仕上げの適用先として扱う。
+    // 弁当・セット・海苔あり完成形へは自動誘導しない。
+    if (String(item && item.en || "").trim().toLowerCase() === "rice ball") {
+      return { group: "onigiri" };
+    }
+
+    // パンケーキ、シュークリーム、ケーキ、パフェなどはトッピング先として扱う。
+    const dessertLike = (
+      path.includes("🍰 デザート") ||
+      /\b(pancakes?|waffles?|cream puff|eclairs?|donuts?|cakes?|shortcake|cheesecake|roll cake|tarts?|pie|parfait|shaved ice|ice cream|gelato|sorbet|soft serve|sundae|street crepe|crepe|muffin|cupcake|french toast|brownie|pudding|mousse|bavarois|jelly|tiramis[uù]|macarons?|taiyaki|dorayaki|daifuku|anmitsu)\b/.test(text)
+    );
+    if (dessertLike) {
+      return {
+        group: "dessert",
+        canFill: /\b(cream puff|eclairs?|donuts?|dorayaki|taiyaki|daifuku|roll cake|cakes?)\b/.test(text)
+      };
+    }
+
+    return null;
+  }
+
+  function joinFoodPhrases(values) {
+    const clean = [];
+    values.forEach(value => {
+      const text = String(value || "").trim();
+      if (text && !clean.includes(text)) clean.push(text);
+    });
+    if (clean.length === 0) return "";
+    if (clean.length === 1) return clean[0];
+    if (clean.length === 2) return `${clean[0]} and ${clean[1]}`;
+    return `${clean.slice(0, -1).join(", ")}, and ${clean[clean.length - 1]}`;
+  }
+
+  function composeFoodDecorationTag(base, target, modifiers) {
+    const cleanBase = String(base || "").trim();
+    if (!Array.isArray(modifiers) || modifiers.length === 0) return cleanBase;
+
+    if (target && target.decorationGroup === "drink") {
+      const flavors = modifiers
+        .filter(modifier => modifier.group === "drink")
+        .map(modifier => modifier.value);
+      const flavorText = joinFoodPhrases(flavors);
+      const drinkBase = String(target.drinkBaseType || cleanBase).trim();
+      return flavorText ? `${flavorText} ${drinkBase}` : cleanBase;
+    }
+
+    if (target && target.decorationGroup === "onigiri") {
+      const roleValues = role => modifiers
+        .filter(modifier => modifier.group === "onigiri" && modifier.role === role)
+        .map(modifier => modifier.value);
+
+      const fillings = joinFoodPhrases(roleValues("filling"));
+      const wraps = joinFoodPhrases(roleValues("wrap"));
+      const coatings = joinFoodPhrases(roleValues("coating"));
+      const seasonings = joinFoodPhrases(roleValues("seasoning"));
+      const garnishes = joinFoodPhrases(roleValues("garnish"));
+      const grills = joinFoodPhrases(roleValues("grill"));
+      const finishes = joinFoodPhrases(roleValues("finish"));
+
+      let output = cleanBase;
+      if (fillings) output += ` filled with ${fillings}`;
+      if (wraps) {
+        output += ` wrapped with ${wraps}`;
+        if (/nori seaweed/i.test(wraps)) output += ", visible nori seaweed wrap";
+      }
+      if (coatings) output += ` coated with ${coatings}`;
+      if (seasonings) output += ` seasoned with ${seasonings}`;
+      if (garnishes) output += ` sprinkled with ${garnishes}`;
+      if (grills) output = `grilled ${output} with ${grills}`;
+      if (finishes) output += ` finished with ${finishes}`;
+      return output;
+    }
+
+    const roleValues = role => modifiers
+      .filter(modifier => modifier.group === "dessert" && modifier.role === role)
+      .map(modifier => modifier.value);
+
+    const fillings = joinFoodPhrases(roleValues("filling"));
+    const toppings = joinFoodPhrases(roleValues("topping"));
+    const sauces = joinFoodPhrases(roleValues("sauce"));
+    const garnishes = joinFoodPhrases(roleValues("garnish"));
+
+    let output = cleanBase;
+    if (fillings) output += ` filled with ${fillings}`;
+    if (toppings) output += ` topped with ${toppings}`;
+    if (sauces) output += ` drizzled with ${sauces}`;
+    if (garnishes) output += ` finished with ${garnishes}`;
+    return output;
+  }
+
+
   const CATEGORIES = {
+
+    // 食材の果物とは分離。ここは料理・デザート・飲み物に掛けるための連動専用棚。
+    "🍱 食べ物・飲み物 / 🍓 トッピング・フィリング / 🍓 フルーツトッピング": {
+      icon: "🍓",
+      foodModifierGroup: "dessert",
+      note: "食材の果物とは別です。選択したデザートの上にのせるトッピングとして合成します。",
+      items: [
+        { ja: "いちごスライス", en: "sliced strawberries", foodModifierRole: "topping" },
+        { ja: "バナナスライス", en: "banana slices", foodModifierRole: "topping" },
+        { ja: "ブルーベリー", en: "blueberries", foodModifierRole: "topping" },
+        { ja: "ミックスベリー", en: "mixed berries", foodModifierRole: "topping" },
+        { ja: "桃スライス", en: "peach slices", foodModifierRole: "topping" },
+        { ja: "マンゴースライス", en: "mango slices", foodModifierRole: "topping" },
+        { ja: "キウイスライス", en: "kiwi slices", foodModifierRole: "topping" },
+        { ja: "メロンボール", en: "melon balls", foodModifierRole: "topping" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🍓 トッピング・フィリング / 🍦 クリーム・アイス・フィリング": {
+      icon: "🍦",
+      foodModifierGroup: "dessert",
+      note: "上にのせるクリーム・アイスと、シュークリームなどの中身を選び分けます。",
+      items: [
+        { ja: "ホイップクリーム", en: "whipped cream", foodModifierRole: "topping" },
+        { ja: "バニラアイス", en: "vanilla ice cream", foodModifierRole: "topping" },
+        { ja: "ストロベリーアイス", en: "strawberry ice cream", foodModifierRole: "topping" },
+        { ja: "カスタードクリーム（中身）", en: "custard cream", foodModifierRole: "filling" },
+        { ja: "いちごクリーム（中身）", en: "strawberry cream", foodModifierRole: "filling" },
+        { ja: "チョコクリーム（中身）", en: "chocolate cream", foodModifierRole: "filling" },
+        { ja: "抹茶クリーム（中身）", en: "matcha cream", foodModifierRole: "filling" },
+        { ja: "クリームチーズフィリング", en: "cream cheese filling", foodModifierRole: "filling" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🍓 トッピング・フィリング / 🍫 ソース・仕上げ": {
+      icon: "🍫",
+      foodModifierGroup: "dessert",
+      note: "ソースはかける表現、粉糖などは最後の仕上げとして合成します。",
+      items: [
+        { ja: "メープルシロップ", en: "maple syrup", foodModifierRole: "sauce" },
+        { ja: "チョコレートソース", en: "chocolate sauce", foodModifierRole: "sauce" },
+        { ja: "キャラメルソース", en: "caramel sauce", foodModifierRole: "sauce" },
+        { ja: "はちみつ", en: "honey", foodModifierRole: "sauce" },
+        { ja: "いちごソース", en: "strawberry sauce", foodModifierRole: "sauce" },
+        { ja: "ベリーソース", en: "berry sauce", foodModifierRole: "sauce" },
+        { ja: "粉砂糖", en: "powdered sugar", foodModifierRole: "garnish" },
+        { ja: "ココアパウダー", en: "cocoa powder", foodModifierRole: "garnish" },
+        { ja: "砕いたナッツ", en: "chopped nuts", foodModifierRole: "garnish" },
+        { ja: "カラースプリンクル", en: "colorful sprinkles", foodModifierRole: "garnish" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🍙 おにぎり・和の仕上げ / 🌿 外側の仕上げ": {
+      icon: "🌿",
+      foodModifierGroup: "onigiri",
+      note: "おにぎり専用です。外側に巻くもの・まぶすものを選びます。選択した「おにぎり」にだけ合成し、自動では選びません。",
+      items: [
+        { ja: "海苔あり（おにぎり用）", en: "nori seaweed", foodModifierRole: "wrap" },
+        { ja: "青じそ巻き", en: "green shiso leaf", foodModifierRole: "wrap" },
+        { ja: "とろろ昆布巻き", en: "tororo kombu", foodModifierRole: "wrap" },
+        { ja: "薄焼き卵巻き", en: "a thin omelet sheet", foodModifierRole: "wrap" },
+        { ja: "ごま塩", en: "gomashio sesame salt", foodModifierRole: "seasoning" },
+        { ja: "白ごま", en: "white sesame seeds", foodModifierRole: "garnish" },
+        { ja: "黒ごま", en: "black sesame seeds", foodModifierRole: "garnish" },
+        { ja: "ふりかけまぶし", en: "furikake seasoning", foodModifierRole: "coating" },
+        { ja: "かつお節まぶし", en: "bonito flakes", foodModifierRole: "coating" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🍙 おにぎり・和の仕上げ / 🥢 中の具": {
+      icon: "🥢",
+      foodModifierGroup: "onigiri",
+      note: "おにぎりの中身です。上に乗せず「中に入った具」として合成します。",
+      items: [
+        { ja: "梅干し", en: "pickled ume plum", foodModifierRole: "filling" },
+        { ja: "焼き鮭", en: "grilled salmon", foodModifierRole: "filling" },
+        { ja: "ツナマヨ", en: "tuna mayonnaise", foodModifierRole: "filling" },
+        { ja: "昆布の佃煮", en: "seasoned kelp tsukudani", foodModifierRole: "filling" },
+        { ja: "おかか", en: "seasoned bonito flakes", foodModifierRole: "filling" },
+        { ja: "明太子", en: "spicy cod roe", foodModifierRole: "filling" },
+        { ja: "たらこ", en: "salted cod roe", foodModifierRole: "filling" },
+        { ja: "鶏そぼろ", en: "seasoned ground chicken", foodModifierRole: "filling" },
+        { ja: "いくら", en: "salmon roe", foodModifierRole: "filling" },
+        { ja: "ねぎ味噌", en: "scallion miso", foodModifierRole: "filling" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🍙 おにぎり・和の仕上げ / 🔥 焼き・味付け": {
+      icon: "🔥",
+      foodModifierGroup: "onigiri",
+      note: "焼きおにぎりの表面・味付けです。具や外側の仕上げと組み合わせても使えます。",
+      items: [
+        { ja: "醤油焼き", en: "a glossy soy sauce glaze", foodModifierRole: "grill" },
+        { ja: "味噌焼き", en: "a fragrant miso glaze", foodModifierRole: "grill" },
+        { ja: "バター醤油焼き", en: "a butter soy sauce glaze", foodModifierRole: "grill" },
+        { ja: "焦がし醤油", en: "a charred soy sauce glaze", foodModifierRole: "grill" },
+        { ja: "香ばしい焼き目", en: "a lightly charred surface", foodModifierRole: "finish" },
+        { ja: "炙りチーズ仕上げ", en: "melted cheese", foodModifierRole: "finish" }
+      ]
+    },
+    // 丼物は既存の和食棚に混ぜず、完成セットからベース・具材・器・描写補助まで追える特化コレクションとして分離。
+    "🍱 食べ物・飲み物 / 🍚 丼物特化コレクション": {
+      icon: "🍚",
+      note: "定番丼は完成セットで一発選択できます。完成セットは対応するベース・カスタマイズ・設定・クオリティ補助へ連動し、手動の微調整にも使えます。"
+    },
+    "🍱 食べ物・飲み物 / 🍚 丼物特化コレクション / ✨ 完成セット": {
+      icon: "✨",
+      note: "完成セットを切り替えると、このコレクション内で自動連動した下位項目だけを入れ替えます。手動で選んだ下位項目は残せます。",
+      items: [
+        {
+          id: "donburi-complete-gyudon",
+          collection_id: "donburi-v1",
+          collection_role: "complete",
+          ja: "牛丼・定番セット",
+          en: "gyudon, Japanese beef rice bowl",
+          linked_ids: ["donburi-base-white-rice", "donburi-custom-beef-onion", "donburi-custom-pickled-ginger", "donburi-custom-scallions", "donburi-setting-ceramic-bowl", "donburi-quality-glossy-sauce"]
+        },
+        {
+          id: "donburi-complete-oyakodon",
+          collection_id: "donburi-v1",
+          collection_role: "complete",
+          ja: "親子丼・定番セット",
+          en: "oyakodon, chicken and egg rice bowl",
+          linked_ids: ["donburi-base-white-rice", "donburi-custom-chicken-egg", "donburi-custom-scallions", "donburi-setting-ceramic-bowl", "donburi-quality-steam"]
+        },
+        {
+          id: "donburi-complete-katsudon",
+          collection_id: "donburi-v1",
+          collection_role: "complete",
+          ja: "カツ丼・定番セット",
+          en: "katsudon, pork cutlet and egg rice bowl",
+          linked_ids: ["donburi-base-white-rice", "donburi-custom-pork-cutlet-egg", "donburi-custom-simmered-onion", "donburi-setting-ceramic-bowl", "donburi-quality-crispy"]
+        },
+        {
+          id: "donburi-complete-tendon",
+          collection_id: "donburi-v1",
+          collection_role: "complete",
+          ja: "天丼・定番セット",
+          en: "tendon, tempura rice bowl",
+          linked_ids: ["donburi-base-white-rice", "donburi-custom-tempura", "donburi-custom-tendon-sauce", "donburi-custom-scallions", "donburi-setting-lacquered-bowl", "donburi-quality-crispy"]
+        },
+        {
+          id: "donburi-complete-kaisendon",
+          collection_id: "donburi-v1",
+          collection_role: "complete",
+          ja: "海鮮丼・定番セット",
+          en: "kaisen-don, assorted sashimi rice bowl",
+          linked_ids: ["donburi-base-sushi-rice", "donburi-custom-sashimi", "donburi-custom-salmon-roe", "donburi-custom-wasabi", "donburi-custom-shredded-nori", "donburi-setting-ceramic-bowl", "donburi-quality-fresh-seafood"]
+        },
+        {
+          id: "donburi-complete-unadon",
+          collection_id: "donburi-v1",
+          collection_role: "complete",
+          ja: "うな丼・定番セット",
+          en: "unadon, grilled eel rice bowl",
+          linked_ids: ["donburi-base-white-rice", "donburi-custom-grilled-eel", "donburi-custom-eel-sauce", "donburi-custom-sansho", "donburi-setting-lacquered-bowl", "donburi-quality-glossy-sauce"]
+        }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🍚 丼物特化コレクション / 🍚 ベース": {
+      icon: "🍚",
+      note: "丼の土台です。完成セットでは自動連動し、手動なら好みのごはん・器を選べます。",
+      items: [
+        { id: "donburi-base-white-rice", collection_id: "donburi-v1", collection_role: "base", ja: "白ごはん", en: "steamed white rice in a deep donburi bowl", foodSizeDisabled: true },
+        { id: "donburi-base-sushi-rice", collection_id: "donburi-v1", collection_role: "base", ja: "酢飯（海鮮用）", en: "vinegared sushi rice in a deep donburi bowl", foodSizeDisabled: true },
+        { id: "donburi-base-mixed-grain-rice", collection_id: "donburi-v1", collection_role: "base", ja: "雑穀ごはん", en: "mixed grain rice in a deep donburi bowl", foodSizeDisabled: true },
+        { id: "donburi-base-large-rice", collection_id: "donburi-v1", collection_role: "base", ja: "大盛り白ごはん（丼土台）", en: "a generous bed of steamed white rice in a deep donburi bowl", foodSizeDisabled: true }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🍚 丼物特化コレクション / 🥢 カスタマイズ": {
+      icon: "🥢",
+      note: "主役具材・追い具・薬味です。完成セット後の差し替えや、手作り丼の組み立てに使えます。",
+      items: [
+        { id: "donburi-custom-beef-onion", collection_id: "donburi-v1", collection_role: "customize", ja: "牛肉と玉ねぎの甘辛煮", en: "thinly sliced beef and simmered onions in sweet soy broth", foodSizeDisabled: true },
+        { id: "donburi-custom-chicken-egg", collection_id: "donburi-v1", collection_role: "customize", ja: "鶏肉ととろとろ卵", en: "tender chicken pieces and softly cooked egg in dashi soy broth", foodSizeDisabled: true },
+        { id: "donburi-custom-pork-cutlet-egg", collection_id: "donburi-v1", collection_role: "customize", ja: "とんかつと卵とじ", en: "crispy pork cutlet with softly cooked egg", foodSizeDisabled: true },
+        { id: "donburi-custom-simmered-onion", collection_id: "donburi-v1", collection_role: "customize", ja: "玉ねぎのだし煮", en: "simmered onion slices in savory dashi", foodSizeDisabled: true },
+        { id: "donburi-custom-tempura", collection_id: "donburi-v1", collection_role: "customize", ja: "えび天と野菜天", en: "shrimp tempura and vegetable tempura", foodSizeDisabled: true },
+        { id: "donburi-custom-tendon-sauce", collection_id: "donburi-v1", collection_role: "customize", ja: "天丼のたれ", en: "glossy tempura sauce", foodSizeDisabled: true },
+        { id: "donburi-custom-sashimi", collection_id: "donburi-v1", collection_role: "customize", ja: "まぐろ・サーモン刺身", en: "assorted tuna and salmon sashimi", foodSizeDisabled: true },
+        { id: "donburi-custom-salmon-roe", collection_id: "donburi-v1", collection_role: "customize", ja: "いくら", en: "salmon roe", foodSizeDisabled: true },
+        { id: "donburi-custom-grilled-eel", collection_id: "donburi-v1", collection_role: "customize", ja: "香ばしい蒲焼きうなぎ", en: "glazed grilled eel fillet", foodSizeDisabled: true },
+        { id: "donburi-custom-eel-sauce", collection_id: "donburi-v1", collection_role: "customize", ja: "うなぎの照りだれ", en: "rich glossy eel sauce", foodSizeDisabled: true },
+        { id: "donburi-custom-soft-egg-yolk", collection_id: "donburi-v1", collection_role: "customize", ja: "卵黄のせ", en: "a soft egg yolk on top", foodSizeDisabled: true },
+        { id: "donburi-custom-scallions", collection_id: "donburi-v1", collection_role: "customize", ja: "刻みねぎ", en: "sliced scallions", foodSizeDisabled: true },
+        { id: "donburi-custom-pickled-ginger", collection_id: "donburi-v1", collection_role: "customize", ja: "紅しょうが", en: "pickled ginger", foodSizeDisabled: true },
+        { id: "donburi-custom-shredded-nori", collection_id: "donburi-v1", collection_role: "customize", ja: "刻み海苔", en: "shredded nori seaweed", foodSizeDisabled: true },
+        { id: "donburi-custom-wasabi", collection_id: "donburi-v1", collection_role: "customize", ja: "わさび", en: "wasabi", foodSizeDisabled: true },
+        { id: "donburi-custom-sansho", collection_id: "donburi-v1", collection_role: "customize", ja: "山椒", en: "sansho pepper", foodSizeDisabled: true }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🍚 丼物特化コレクション / 🏮 設定": {
+      icon: "🏮",
+      note: "器・卓上・提供スタイルです。料理自体を変えず、和食らしい見え方を足します。",
+      items: [
+        { id: "donburi-setting-ceramic-bowl", collection_id: "donburi-v1", collection_role: "setting", ja: "深い陶器どんぶり", en: "served in a deep ceramic donburi bowl", foodSizeDisabled: true },
+        { id: "donburi-setting-lacquered-bowl", collection_id: "donburi-v1", collection_role: "setting", ja: "漆塗りの和どんぶり", en: "served in a lacquered Japanese rice bowl", foodSizeDisabled: true },
+        { id: "donburi-setting-chopsticks", collection_id: "donburi-v1", collection_role: "setting", ja: "箸を添える", en: "chopsticks resting beside the bowl", foodSizeDisabled: true },
+        { id: "donburi-setting-japanese-tray", collection_id: "donburi-v1", collection_role: "setting", ja: "和食盆の上", en: "served on a Japanese meal tray", foodSizeDisabled: true },
+        { id: "donburi-setting-meal-set", collection_id: "donburi-v1", collection_role: "setting", ja: "味噌汁・漬物付き", en: "miso soup and pickles beside the bowl", foodSizeDisabled: true },
+        { id: "donburi-setting-diner", collection_id: "donburi-v1", collection_role: "setting", ja: "和食店の卓上", en: "on a casual Japanese diner table", foodSizeDisabled: true },
+        { id: "donburi-setting-stall", collection_id: "donburi-v1", collection_role: "setting", ja: "屋台・食堂風", en: "at a Japanese food stall counter", foodSizeDisabled: true }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🍚 丼物特化コレクション / ✨ クオリティ補助": {
+      icon: "✨",
+      note: "丼の描写を補助します。完成セットには相性のよい1項目だけを連動し、必要なら手動で追加できます。",
+      items: [
+        { id: "donburi-quality-glossy-sauce", collection_id: "donburi-v1", collection_role: "quality", ja: "たれの照り・艶", en: "glossy savory sauce with appetizing highlights", foodSizeDisabled: true },
+        { id: "donburi-quality-steam", collection_id: "donburi-v1", collection_role: "quality", ja: "湯気の立つ熱々丼", en: "steaming hot food with gentle rising steam", foodSizeDisabled: true },
+        { id: "donburi-quality-crispy", collection_id: "donburi-v1", collection_role: "quality", ja: "衣のサクサク感", en: "crisp golden fried coating with fine crumb texture", foodSizeDisabled: true },
+        { id: "donburi-quality-fresh-seafood", collection_id: "donburi-v1", collection_role: "quality", ja: "魚介の瑞々しい艶", en: "fresh seafood sheen and translucent sashimi texture", foodSizeDisabled: true },
+        { id: "donburi-quality-rice-grains", collection_id: "donburi-v1", collection_role: "quality", ja: "米粒の立体感", en: "clearly visible individual rice grains", foodSizeDisabled: true },
+        { id: "donburi-quality-food-focus", collection_id: "donburi-v1", collection_role: "quality", ja: "料理の主役感", en: "appetizing food focus, carefully arranged ingredients", foodSizeDisabled: true }
+      ]
+    },
+
+    // ピザは既存のジャンクフード・洋食棚を残したまま、完成セットから生地・チーズ・具材・焼き加減まで追える特化コレクションとして分離。
+    "🍱 食べ物・飲み物 / 🍕 ピザ特化コレクション": {
+      icon: "🍕",
+      note: "定番ピザは完成セットで一発選択できます。完成セットは対応するベース・カスタマイズ・設定・クオリティ補助へ連動し、生地・チーズ・具材の手動調整にも使えます。"
+    },
+    "🍱 食べ物・飲み物 / 🍕 ピザ特化コレクション / ✨ 完成セット": {
+      icon: "✨",
+      note: "完成セットを切り替えると、このコレクション内で自動連動した下位項目だけを入れ替えます。手動で選んだ下位項目は残せます。",
+      items: [
+        {
+          id: "pizza-complete-margherita",
+          collection_id: "pizza-v1",
+          collection_role: "complete",
+          ja: "マルゲリータ・定番セット",
+          en: "margherita pizza",
+          linked_ids: ["pizza-base-whole", "pizza-base-neapolitan", "pizza-custom-tomato-sauce", "pizza-custom-mozzarella", "pizza-custom-tomato-basil", "pizza-setting-wooden-board", "pizza-quality-golden-cheese"]
+        },
+        {
+          id: "pizza-complete-pepperoni",
+          collection_id: "pizza-v1",
+          collection_role: "complete",
+          ja: "ペパロニピザ・定番セット",
+          en: "pepperoni pizza",
+          linked_ids: ["pizza-base-whole", "pizza-base-american", "pizza-custom-tomato-sauce", "pizza-custom-extra-cheese", "pizza-custom-pepperoni", "pizza-setting-pizza-box", "pizza-quality-blistered-crust"]
+        },
+        {
+          id: "pizza-complete-seafood",
+          collection_id: "pizza-v1",
+          collection_role: "complete",
+          ja: "シーフードピザ・定番セット",
+          en: "seafood pizza",
+          linked_ids: ["pizza-base-whole", "pizza-base-crispy", "pizza-custom-white-sauce", "pizza-custom-mozzarella", "pizza-custom-seafood", "pizza-custom-onion-olive", "pizza-setting-wooden-board", "pizza-quality-visible-toppings"]
+        },
+        {
+          id: "pizza-complete-quattro-formaggi",
+          collection_id: "pizza-v1",
+          collection_role: "complete",
+          ja: "クワトロフォルマッジ・定番セット",
+          en: "quattro formaggi pizza",
+          linked_ids: ["pizza-base-whole", "pizza-base-neapolitan", "pizza-custom-four-cheese", "pizza-custom-honey-drizzle", "pizza-setting-italian-table", "pizza-quality-cheese-pull"]
+        },
+        {
+          id: "pizza-complete-teriyaki-chicken",
+          collection_id: "pizza-v1",
+          collection_role: "complete",
+          ja: "テリヤキチキンピザ・定番セット",
+          en: "teriyaki chicken pizza",
+          linked_ids: ["pizza-base-whole", "pizza-base-thick-chewy", "pizza-custom-teriyaki-sauce", "pizza-custom-mozzarella", "pizza-custom-teriyaki-chicken", "pizza-custom-corn-mayo", "pizza-setting-pizza-box", "pizza-quality-glossy-sauce"]
+        },
+        {
+          id: "pizza-complete-vegetable",
+          collection_id: "pizza-v1",
+          collection_role: "complete",
+          ja: "ベジタブルピザ・定番セット",
+          en: "vegetable pizza",
+          linked_ids: ["pizza-base-whole", "pizza-base-crispy", "pizza-custom-tomato-sauce", "pizza-custom-mozzarella", "pizza-custom-vegetable-toppings", "pizza-setting-wooden-board", "pizza-quality-visible-toppings"]
+        }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🍕 ピザ特化コレクション / 🍞 ベース": {
+      icon: "🍞",
+      note: "ピザの形と生地です。完成セットでは自動連動し、手動ならホール・一切れ・生地の厚みを選べます。",
+      items: [
+        { id: "pizza-base-whole", collection_id: "pizza-v1", collection_role: "base", ja: "ホールピザ", en: "a whole round pizza, ready to serve", foodSizeDisabled: true },
+        { id: "pizza-base-slice", collection_id: "pizza-v1", collection_role: "base", ja: "ピザ一切れ", en: "a single triangular pizza slice", foodSizeDisabled: true },
+        { id: "pizza-base-pre-sliced", collection_id: "pizza-v1", collection_role: "base", ja: "カット済み", en: "pizza cut into neat slices", foodSizeDisabled: true },
+        { id: "pizza-base-neapolitan", collection_id: "pizza-v1", collection_role: "base", ja: "ナポリ風薄生地", en: "thin Neapolitan-style crust with a puffy rim", foodSizeDisabled: true },
+        { id: "pizza-base-crispy", collection_id: "pizza-v1", collection_role: "base", ja: "クリスピー薄生地", en: "thin crispy pizza crust", foodSizeDisabled: true },
+        { id: "pizza-base-american", collection_id: "pizza-v1", collection_role: "base", ja: "アメリカン厚め生地", en: "thicker American-style pizza crust", foodSizeDisabled: true },
+        { id: "pizza-base-thick-chewy", collection_id: "pizza-v1", collection_role: "base", ja: "もちもち厚め生地", en: "soft chewy thick pizza dough", foodSizeDisabled: true },
+        { id: "pizza-base-deep-dish", collection_id: "pizza-v1", collection_role: "base", ja: "深皿ピザ", en: "deep-dish pizza with a tall crust edge", foodSizeDisabled: true }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🍕 ピザ特化コレクション / 🧀 カスタマイズ": {
+      icon: "🧀",
+      note: "ソース・チーズ・具材・仕上げです。完成セット後の差し替えや、好みのピザ作りに使えます。",
+      items: [
+        { id: "pizza-custom-tomato-sauce", collection_id: "pizza-v1", collection_role: "customize", ja: "濃厚トマトソース", en: "rich tomato pizza sauce", foodSizeDisabled: true },
+        { id: "pizza-custom-basil-pesto", collection_id: "pizza-v1", collection_role: "customize", ja: "バジルペスト", en: "fragrant basil pesto sauce", foodSizeDisabled: true },
+        { id: "pizza-custom-white-sauce", collection_id: "pizza-v1", collection_role: "customize", ja: "クリーミーホワイトソース", en: "creamy white pizza sauce", foodSizeDisabled: true },
+        { id: "pizza-custom-teriyaki-sauce", collection_id: "pizza-v1", collection_role: "customize", ja: "テリヤキソース", en: "glossy teriyaki sauce", foodSizeDisabled: true },
+        { id: "pizza-custom-mozzarella", collection_id: "pizza-v1", collection_role: "customize", ja: "モッツァレラたっぷり", en: "generous melted mozzarella cheese", foodSizeDisabled: true },
+        { id: "pizza-custom-extra-cheese", collection_id: "pizza-v1", collection_role: "customize", ja: "とろけるチーズ増量", en: "an extra layer of melted cheese", foodSizeDisabled: true },
+        { id: "pizza-custom-four-cheese", collection_id: "pizza-v1", collection_role: "customize", ja: "4種チーズ", en: "four-cheese blend with mozzarella, gorgonzola, parmesan, and ricotta", foodSizeDisabled: true },
+        { id: "pizza-custom-tomato-basil", collection_id: "pizza-v1", collection_role: "customize", ja: "フレッシュトマトとバジル", en: "fresh tomato slices and basil leaves", foodSizeDisabled: true },
+        { id: "pizza-custom-pepperoni", collection_id: "pizza-v1", collection_role: "customize", ja: "ペパロニ", en: "spicy pepperoni slices", foodSizeDisabled: true },
+        { id: "pizza-custom-seafood", collection_id: "pizza-v1", collection_role: "customize", ja: "えび・いか・貝のシーフード", en: "shrimp, calamari, and scallops", foodSizeDisabled: true },
+        { id: "pizza-custom-teriyaki-chicken", collection_id: "pizza-v1", collection_role: "customize", ja: "照り焼きチキン", en: "tender teriyaki chicken pieces", foodSizeDisabled: true },
+        { id: "pizza-custom-corn-mayo", collection_id: "pizza-v1", collection_role: "customize", ja: "コーンマヨ", en: "sweet corn kernels with a light mayonnaise drizzle", foodSizeDisabled: true },
+        { id: "pizza-custom-vegetable-toppings", collection_id: "pizza-v1", collection_role: "customize", ja: "彩り野菜", en: "bell peppers, mushrooms, onions, and black olives", foodSizeDisabled: true },
+        { id: "pizza-custom-onion-olive", collection_id: "pizza-v1", collection_role: "customize", ja: "オニオンとブラックオリーブ", en: "sliced onions and black olives", foodSizeDisabled: true },
+        { id: "pizza-custom-bacon-sausage", collection_id: "pizza-v1", collection_role: "customize", ja: "ベーコンとソーセージ", en: "crispy bacon and savory sausage", foodSizeDisabled: true },
+        { id: "pizza-custom-jalapeno", collection_id: "pizza-v1", collection_role: "customize", ja: "ハラペーニョ", en: "sliced jalapeno peppers", foodSizeDisabled: true },
+        { id: "pizza-custom-honey-drizzle", collection_id: "pizza-v1", collection_role: "customize", ja: "はちみつがけ", en: "a light honey drizzle", foodSizeDisabled: true }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🍕 ピザ特化コレクション / 🏠 設定": {
+      icon: "🏠",
+      note: "器・提供スタイル・食べる瞬間です。ピザそのものを変えず、見え方と場面を足します。",
+      items: [
+        { id: "pizza-setting-wooden-board", collection_id: "pizza-v1", collection_role: "setting", ja: "木のピザボード", en: "served on a rustic wooden pizza board", foodSizeDisabled: true },
+        { id: "pizza-setting-pizza-box", collection_id: "pizza-v1", collection_role: "setting", ja: "ピザ箱入り", en: "served in an open pizza box", foodSizeDisabled: true },
+        { id: "pizza-setting-slice-lifted", collection_id: "pizza-v1", collection_role: "setting", ja: "一切れを持ち上げる", en: "one pizza slice being lifted from the pie", foodSizeDisabled: true },
+        { id: "pizza-setting-cheese-stretch", collection_id: "pizza-v1", collection_role: "setting", ja: "チーズが伸びる瞬間", en: "long strands of melted cheese stretching from a lifted slice", foodSizeDisabled: true },
+        { id: "pizza-setting-party-table", collection_id: "pizza-v1", collection_role: "setting", ja: "パーティーテーブル", en: "on a lively party table", foodSizeDisabled: true },
+        { id: "pizza-setting-italian-table", collection_id: "pizza-v1", collection_role: "setting", ja: "イタリアン店の卓上", en: "on a cozy Italian restaurant table", foodSizeDisabled: true },
+        { id: "pizza-setting-fresh-oven", collection_id: "pizza-v1", collection_role: "setting", ja: "焼きたて・窯出し", en: "freshly baked and just out of the oven", foodSizeDisabled: true }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🍕 ピザ特化コレクション / ✨ クオリティ補助": {
+      icon: "✨",
+      note: "チーズ・生地・具材の食欲をそそる描写を補助します。完成セットには相性のよい1項目だけを連動し、必要なら手動で追加できます。",
+      items: [
+        { id: "pizza-quality-blistered-crust", collection_id: "pizza-v1", collection_role: "quality", ja: "香ばしい焦げ目の生地", en: "blistered crust with lightly charred edges", foodSizeDisabled: true },
+        { id: "pizza-quality-golden-cheese", collection_id: "pizza-v1", collection_role: "quality", ja: "黄金色の焼きチーズ", en: "golden baked cheese with appetizing browned spots", foodSizeDisabled: true },
+        { id: "pizza-quality-cheese-pull", collection_id: "pizza-v1", collection_role: "quality", ja: "糸を引くチーズ", en: "stretchy melted cheese pull", foodSizeDisabled: true },
+        { id: "pizza-quality-glossy-sauce", collection_id: "pizza-v1", collection_role: "quality", ja: "ソースの照り・艶", en: "glossy sauce with appetizing highlights", foodSizeDisabled: true },
+        { id: "pizza-quality-visible-toppings", collection_id: "pizza-v1", collection_role: "quality", ja: "具材の見えやすさ", en: "clearly visible, carefully arranged toppings", foodSizeDisabled: true },
+        { id: "pizza-quality-steam", collection_id: "pizza-v1", collection_role: "quality", ja: "熱々の湯気", en: "steaming hot pizza with gentle rising steam", foodSizeDisabled: true },
+        { id: "pizza-quality-food-focus", collection_id: "pizza-v1", collection_role: "quality", ja: "料理の主役感", en: "appetizing food focus with rich texture detail", foodSizeDisabled: true }
+      ]
+    },
+
+    "🍱 食べ物・飲み物 / 🥤 ドリンクフレーバー / 🍹 ドリンクベース": {
+      icon: "🍹",
+      foodDecorationBase: "drink",
+      note: "フレーバーを付けるための無味ベースです。桃＋ジュース、メロン＋ソーダのように組み合わせます。",
+      items: [
+        { ja: "ジュース（ベース）", en: "juice", drinkBaseType: "juice" },
+        { ja: "ソーダ（ベース）", en: "soda", drinkBaseType: "soda" },
+        { ja: "アイスティー（ベース）", en: "iced tea", drinkBaseType: "iced tea" },
+        { ja: "ミルクシェイク（ベース）", en: "milkshake", drinkBaseType: "milkshake" },
+        { ja: "スムージー（ベース）", en: "smoothie", drinkBaseType: "smoothie" },
+        { ja: "フロート（ベース）", en: "float", drinkBaseType: "float" },
+        { ja: "レモネード（ベース）", en: "lemonade", drinkBaseType: "lemonade" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🥤 ドリンクフレーバー / 🍑 果実フレーバー": {
+      icon: "🍑",
+      foodModifierGroup: "drink",
+      note: "選択したドリンクベースへ付ける果実フレーバーです。フレーバーだけでは出力しません。",
+      items: [
+        { ja: "いちごフレーバー", en: "strawberry", foodModifierRole: "flavor" },
+        { ja: "桃フレーバー", en: "peach", foodModifierRole: "flavor" },
+        { ja: "メロンフレーバー", en: "melon", foodModifierRole: "flavor" },
+        { ja: "りんごフレーバー", en: "apple", foodModifierRole: "flavor" },
+        { ja: "ぶどうフレーバー", en: "grape", foodModifierRole: "flavor" },
+        { ja: "オレンジフレーバー", en: "orange", foodModifierRole: "flavor" },
+        { ja: "レモンフレーバー", en: "lemon", foodModifierRole: "flavor" },
+        { ja: "マンゴーフレーバー", en: "mango", foodModifierRole: "flavor" },
+        { ja: "ミックスベリーフレーバー", en: "mixed berry", foodModifierRole: "flavor" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🍽 定番完成メニュー": {
+      icon: "🍽",
+      foodDirectMenu: true,
+      note: "定番だけを一発で選びたい時の完成形です。自由な組み合わせはトッピング・フィリング棚を使います。",
+      items: [
+        { ja: "いちごホイップパンケーキ", en: "pancakes topped with sliced strawberries and whipped cream" },
+        { ja: "いちごシュークリーム", en: "cream puff filled with strawberry cream" },
+        { ja: "チョコバナナクレープ", en: "crepe topped with banana slices and drizzled with chocolate sauce" },
+        { ja: "ミックスベリーパフェ", en: "parfait topped with mixed berries and whipped cream" },
+        { ja: "メロンソーダフロート", en: "melon soda float" }
+      ]
+    },
     "👒 頭部の装飾・帽子 (Headgear)": {
       items: [
         { ja: "帽子 (ハット)", en: "hat" }, { ja: "キャップ", en: "cap" }, { ja: "ベレー帽", en: "beret" }, { ja: "ニット帽", en: "beanie" }, { ja: "麦わら帽子", en: "straw hat" }, { ja: "サンバイザー", en: "visor" }, { ja: "ヘルメット", en: "helmet" }, { ja: "フード", en: "hood" }, { ja: "リボン (髪飾り)", en: "hair ribbon" }, { ja: "半透明のリボン", en: "translucent ribbon" }, { ja: "カチューシャ", en: "hairband" }, { ja: "シュシュ", en: "scrunchie" }, { ja: "ヘアピン", en: "hairclip" }, { ja: "バレッタ", en: "hair ornament" }, { ja: "羽根の髪飾り", en: "feather hairclip" }, { ja: "花飾り", en: "flower hair ornament" }, { ja: "ティアラ/王冠", en: "crown" }, { ja: "ベール", en: "veil" }, { ja: "ヘッドフォン", en: "headphones" }, { ja: "狐面", en: "fox mask" }, { ja: "マスク", en: "mask" }, { ja: "眼帯", en: "eyepatch" }, { ja: "サングラス", en: "sunglasses" }, { ja: "眼鏡", en: "glasses" }
@@ -99,7 +739,7 @@
     "🍱 食べ物・飲み物 / 🌍 世界観別フード / 🧪 ファンタジー食": { icon: "🧪", items: [{ ja: "魔獣肉", en: "magical beast meat" }, { ja: "妖精果実", en: "fairy fruit" }, { ja: "エルフパン", en: "elf bread" }, { ja: "ドワーフシチュー", en: "dwarf stew" }, { ja: "魔導チーズ", en: "arcane cheese" }, { ja: "古代穀物", en: "ancient grain" }, { ja: "聖樹の実", en: "sacred tree fruit" }, { ja: "幻獣卵", en: "mythic beast egg" }, { ja: "魔力茸", en: "mana mushroom" }, { ja: "錬金スープ", en: "alchemy soup" }, { ja: "星屑砂糖", en: "stardust sugar" }, { ja: "月光蜂蜜", en: "moonlight honey" }, { ja: "深海藻", en: "abyssal seaweed" }, { ja: "霊泉水", en: "spirit spring water" }, { ja: "魔法スープ", en: "magical soup" }, { ja: "謎肉", en: "mystery meat" }, { ja: "発光果実", en: "glowing fruit" }, { ja: "錬金パン", en: "alchemy bread" }, { ja: "魔力飴", en: "mana candy" }, { ja: "スライムゼリー", en: "slime jelly" }, { ja: "竜肉", en: "dragon meat" }, { ja: "フェニックス卵", en: "phoenix egg" }, { ja: "妖精蜜", en: "fairy honey" }, { ja: "エルフワイン", en: "elf wine" }, { ja: "ドワーフエール", en: "dwarf ale" }, { ja: "ポーション", en: "potion" }, { ja: "エリクサー", en: "elixir" }, { ja: "マナポーション", en: "mana potion" }, { ja: "回復薬", en: "healing potion" }, { ja: "強化薬", en: "strength potion" }, { ja: "解毒薬", en: "antidote" }, { ja: "魔素水", en: "mana water" }, { ja: "錬金チーズ", en: "alchemy cheese" }, { ja: "魔導ビスケット", en: "arcane biscuit" }, { ja: "ルーンパン", en: "rune bread" }, { ja: "魔石糖", en: "mana crystal sugar" }, { ja: "星屑塩", en: "stardust salt" }, { ja: "月光砂糖", en: "moonlight sugar" }, { ja: "火竜香辛料", en: "fire dragon spice" }, { ja: "氷竜香辛料", en: "ice dragon spice" }, { ja: "ゴブリンシチュー", en: "goblin stew" }, { ja: "オークソーセージ", en: "orc sausage" }, { ja: "グリフォンステーキ", en: "griffin steak" }, { ja: "クラーケン干物", en: "kraken jerky" }, { ja: "ユニコーンミルク", en: "unicorn milk" }, { ja: "マンドラゴラ根", en: "mandrake root" }, { ja: "エーテル茶", en: "aether tea" }, { ja: "霊薬", en: "spirit elixir" }, { ja: "聖餐パン", en: "sacrament bread" }, { ja: "悪魔香辛料", en: "demon spice" }, { ja: "魔界チョコ", en: "nether chocolate" }, { ja: "古代米", en: "ancient rice" }, { ja: "結晶果実", en: "crystal fruit" }, { ja: "幻獣バター", en: "chimera butter" }] },
     "🍱 食べ物・飲み物 / 🌍 世界観別フード / 🚀 SF・未来食": { icon: "🚀", items: [{ ja: "合成肉", en: "synthetic meat" }, { ja: "培養肉", en: "cultured meat" }, { ja: "栄養ブロック", en: "nutrition block" }, { ja: "完全食", en: "complete meal" }, { ja: "ナノフード", en: "nano food" }, { ja: "分子料理", en: "molecular cuisine" }, { ja: "宇宙食", en: "space food" }, { ja: "凍結乾燥食", en: "freeze-dried food" }, { ja: "カプセル食", en: "capsule food" }, { ja: "ゲル食", en: "gel food" }, { ja: "ペースト食", en: "paste food" }, { ja: "高密度栄養食", en: "high-density ration" }, { ja: "量子スナック", en: "quantum snack" }, { ja: "バイオスープ", en: "bio soup" }, { ja: "人工果実", en: "artificial fruit" }, { ja: "合成果汁", en: "synthetic juice" }, { ja: "プロテインペレット", en: "protein pellets" }, { ja: "エネルギーバー", en: "energy bar" }, { ja: "冷凍栄養食", en: "frozen ration" }] },
     "🍱 食べ物・飲み物 / 🌍 世界観別フード / 🪖 戦場・終末食": { icon: "🪖", items: [{ ja: "干し肉", en: "dried meat" }, { ja: "塩漬け肉", en: "salted meat" }, { ja: "黒パン", en: "dark bread" }, { ja: "乾燥パン", en: "dried bread" }, { ja: "クラッカー", en: "hard cracker" }, { ja: "乾燥チーズ", en: "dried cheese" }, { ja: "ナッツ", en: "nuts" }, { ja: "豆類", en: "dried beans" }, { ja: "スープ粉末", en: "soup powder" }, { ja: "乾燥スープ", en: "dried soup" }, { ja: "簡易シチュー", en: "simple stew" }, { ja: "軍用レーション", en: "military ration" }, { ja: "保存食", en: "preserved food" }, { ja: "乾パン", en: "hardtack" }, { ja: "缶詰", en: "canned food" }, { ja: "乾燥肉", en: "dried meat" }, { ja: "燻製肉", en: "smoked meat" }, { ja: "携行食", en: "field ration" }, { ja: "非常食", en: "emergency food" }, { ja: "代用食", en: "substitute food" }, { ja: "合成食", en: "synthetic ration" }, { ja: "高栄養食", en: "high-nutrition ration" }, { ja: "粉末食", en: "powdered food" }, { ja: "圧縮食", en: "compressed food" }, { ja: "栄養ペースト", en: "nutrition paste" }, { ja: "放射線食", en: "irradiated food" }, { ja: "汚染食", en: "contaminated food" }, { ja: "終末スープ", en: "apocalypse soup" }, { ja: "地下農産物", en: "underground produce" }, { ja: "菌類食", en: "fungal food" }, { ja: "再生食", en: "recycled food" }] },
-    "🍱 食べ物・飲み物 / 🍴 料理・ジャンル別 / 🍜 和食": { icon: "🍜", items: [{ ja: "ご飯", en: "steamed rice" }, { ja: "おにぎり", en: "rice ball" }, { ja: "お茶漬け", en: "ochazuke" }, { ja: "卵かけご飯", en: "rice with raw egg" }, { ja: "ラーメン", en: "ramen" }, { ja: "うどん", en: "udon noodles" }, { ja: "そば", en: "soba noodles" }, { ja: "焼きそば", en: "yakisoba" }, { ja: "寿司", en: "sushi" }, { ja: "刺身", en: "sashimi" }, { ja: "海鮮丼", en: "seafood rice bowl" }, { ja: "天ぷら", en: "tempura" }, { ja: "唐揚げ", en: "fried chicken karaage" }, { ja: "焼き鳥", en: "yakitori" }, { ja: "おでん", en: "oden" }, { ja: "味噌汁", en: "miso soup" }, { ja: "豚汁", en: "pork miso soup" }, { ja: "団子", en: "dango" }, { ja: "大福", en: "daifuku mochi" }, { ja: "たい焼き", en: "taiyaki" }] },
+    "🍱 食べ物・飲み物 / 🍴 料理・ジャンル別 / 🍜 和食": { icon: "🍜", items: [{ ja: "ご飯", en: "steamed rice" }, { ja: "おにぎり", en: "rice ball" }, { ja: "おにぎり（海苔あり）", en: "triangular onigiri wrapped with nori seaweed, visible nori seaweed wrap", foodSizeMode: "unit", foodDecorationDisabled: true }, { ja: "お茶漬け", en: "ochazuke" }, { ja: "卵かけご飯", en: "rice with raw egg" }, { ja: "ラーメン", en: "ramen" }, { ja: "うどん", en: "udon noodles" }, { ja: "そば", en: "soba noodles" }, { ja: "焼きそば", en: "yakisoba" }, { ja: "寿司", en: "sushi" }, { ja: "刺身", en: "sashimi" }, { ja: "海鮮丼", en: "seafood rice bowl" }, { ja: "天ぷら", en: "tempura" }, { ja: "唐揚げ", en: "fried chicken karaage" }, { ja: "焼き鳥", en: "yakitori" }, { ja: "おでん", en: "oden" }, { ja: "味噌汁", en: "miso soup" }, { ja: "豚汁", en: "pork miso soup" }, { ja: "団子", en: "dango" }, { ja: "大福", en: "daifuku mochi" }, { ja: "たい焼き", en: "taiyaki" }] },
     "🍱 食べ物・飲み物 / 🍴 料理・ジャンル別 / 🍖 洋食": { icon: "🍖", items: [{ ja: "ステーキ", en: "steak" }, { ja: "ハンバーガー", en: "hamburger" }, { ja: "ホットドッグ", en: "hot dog" }, { ja: "ローストビーフ", en: "roast beef" }, { ja: "グリルチキン", en: "grilled chicken" }, { ja: "ビーフシチュー", en: "beef stew" }, { ja: "シーフードグラタン", en: "seafood gratin" }, { ja: "ラザニア", en: "lasagna" }, { ja: "スパゲッティ", en: "spaghetti" }, { ja: "カルボナーラ", en: "carbonara" }, { ja: "ミートソース", en: "meat sauce pasta" }, { ja: "ピザ", en: "pizza" }, { ja: "マルゲリータ", en: "margherita pizza" }, { ja: "リゾット", en: "risotto" }, { ja: "オムライス", en: "omelette rice" }, { ja: "ドリア", en: "doria" }, { ja: "グリルソーセージ", en: "grilled sausage" }, { ja: "ポークチョップ", en: "pork chop" }, { ja: "チキンカツ", en: "chicken cutlet" }, { ja: "ビーフカツ", en: "beef cutlet" }, { ja: "えびフライ", en: "fried shrimp" }, { ja: "アジフライ", en: "fried horse mackerel" }, { ja: "白身魚フライ", en: "fried white fish" }, { ja: "カキフライ", en: "fried oyster" }, { ja: "イカフライ", en: "fried squid" }, { ja: "ホタテフライ", en: "fried scallop" }, { ja: "チキンフライ", en: "fried chicken cutlet" }, { ja: "ポークフライ", en: "fried pork cutlet" }, { ja: "ビーフフライ", en: "fried beef cutlet" }] },
     "🍱 食べ物・飲み物 / 🍴 料理・ジャンル別 / 🥟 中華": { icon: "🥟", items: [{ ja: "麻婆豆腐", en: "mapo tofu" }, { ja: "酢豚", en: "sweet and sour pork" }, { ja: "回鍋肉", en: "twice-cooked pork" }, { ja: "青椒肉絲", en: "stir-fried pork with green pepper" }, { ja: "八宝菜", en: "mixed vegetables stir-fry" }, { ja: "餃子", en: "dumplings" }, { ja: "焼売", en: "shumai" }, { ja: "小籠包", en: "xiaolongbao" }, { ja: "春巻き", en: "spring rolls" }, { ja: "肉まん", en: "steamed pork bun" }, { ja: "あんまん", en: "steamed sweet bean bun" }, { ja: "中華粥", en: "rice porridge" }, { ja: "チャーハン", en: "fried rice" }, { ja: "天津飯", en: "tenshinhan" }, { ja: "中華そば", en: "chinese noodles" }, { ja: "担々麺", en: "tantanmen" }, { ja: "酸辣湯", en: "hot and sour soup" }, { ja: "杏仁豆腐", en: "almond tofu" }, { ja: "ごま団子", en: "sesame balls" }] },
     "🍱 食べ物・飲み物 / 🍴 料理・ジャンル別 / 🍔 ジャンクフード": { icon: "🍔", items: [{ ja: "フライドポテト", en: "french fries" }, { ja: "ナゲット", en: "chicken nuggets" }, { ja: "オニオンリング", en: "onion rings" }, { ja: "チリドッグ", en: "chili dog" }, { ja: "チーズバーガー", en: "cheeseburger" }, { ja: "ベーコンバーガー", en: "bacon burger" }, { ja: "フィッシュバーガー", en: "fish burger" }, { ja: "ピザスライス", en: "pizza slice" }, { ja: "タコス", en: "tacos" }, { ja: "ブリトー", en: "burrito" }, { ja: "ケサディーヤ", en: "quesadilla" }, { ja: "ポテトチップス", en: "potato chips" }, { ja: "コーンチップス", en: "corn chips" }, { ja: "チーズナチョス", en: "cheese nachos" }, { ja: "ホットサンド", en: "hot sandwich" }, { ja: "ミートパイ", en: "meat pie" }, { ja: "ソーセージロール", en: "sausage roll" }, { ja: "フライドチキン", en: "fried chicken" }, { ja: "ポップコーン", en: "popcorn" }] },
@@ -533,8 +1173,327 @@
         { ja: "野菜の盛り合わせ", en: "assorted vegetables" }
       ]
     },
-    "🍱 食べ物・飲み物 / 🥩 食材 / 🥩 肉": { icon: "🥩", items: [{ ja: "ソーセージ串", en: "sausage skewer" }, { ja: "骨付き肉", en: "bone-in meat" }, { ja: "漫画肉", en: "manga meat" }] }
+    "🍱 食べ物・飲み物 / 🥩 食材 / 🍎 果物 / 🍎 りんご・梨・柿": {
+      icon: "🍎",
+      items: [
+        { ja: "りんご", en: "apple" },
+        { ja: "赤りんご", en: "red apple" },
+        { ja: "青りんご", en: "green apple" },
+        { ja: "りんごのくし切り", en: "apple wedges" },
+        { ja: "りんごの輪切り", en: "apple slices", foodSizeMode: "count" },
+        { ja: "洋梨", en: "pear" },
+        { ja: "和梨", en: "Asian pear" },
+        { ja: "梨のくし切り", en: "pear wedges" },
+        { ja: "柿", en: "persimmon" },
+        { ja: "干し柿", en: "dried persimmon", foodSizeMode: "count" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🥩 食材 / 🍎 果物 / 🍊 柑橘類": {
+      icon: "🍊",
+      items: [
+        { ja: "オレンジ", en: "orange" },
+        { ja: "オレンジの輪切り", en: "orange slices", foodSizeMode: "count" },
+        { ja: "みかん", en: "mandarin orange" },
+        { ja: "グレープフルーツ", en: "grapefruit" },
+        { ja: "グレープフルーツ半分", en: "half grapefruit" },
+        { ja: "レモン", en: "lemon" },
+        { ja: "レモンスライス", en: "lemon slices", foodSizeMode: "count" },
+        { ja: "ライム", en: "lime" },
+        { ja: "ライムスライス", en: "lime slices", foodSizeMode: "count" },
+        { ja: "ゆず", en: "yuzu" },
+        { ja: "すだち", en: "sudachi", foodSizeMode: "count" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🥩 食材 / 🍎 果物 / 🍌 バナナ・キウイ": {
+      icon: "🍌",
+      items: [
+        { ja: "バナナ", en: "banana" },
+        { ja: "バナナの房", en: "bunch of bananas", foodSizeMode: "count" },
+        { ja: "バナナスライス", en: "banana slices", foodSizeMode: "count" },
+        { ja: "プランテン", en: "plantain" },
+        { ja: "キウイ", en: "kiwi fruit" },
+        { ja: "キウイスライス", en: "kiwi slices", foodSizeMode: "count" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🥩 食材 / 🍎 果物 / 🍇 ぶどう・ベリー・さくらんぼ": {
+      icon: "🍇",
+      items: [
+        { ja: "ぶどう", en: "grapes", foodSizeMode: "count" },
+        { ja: "赤ぶどう", en: "red grapes", foodSizeMode: "count" },
+        { ja: "白ぶどう", en: "green grapes", foodSizeMode: "count" },
+        { ja: "房付きぶどう", en: "grapes on the vine", foodSizeMode: "count" },
+        { ja: "いちご", en: "strawberries", foodSizeMode: "count" },
+        { ja: "ブルーベリー", en: "blueberries", foodSizeMode: "count" },
+        { ja: "ラズベリー", en: "raspberries", foodSizeMode: "count" },
+        { ja: "ブラックベリー", en: "blackberries", foodSizeMode: "count" },
+        { ja: "さくらんぼ", en: "cherries", foodSizeMode: "count" },
+        { ja: "軸付きさくらんぼ", en: "cherries with stems", foodSizeMode: "count" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🥩 食材 / 🍎 果物 / 🍉 メロン・スイカ": {
+      icon: "🍉",
+      items: [
+        { ja: "スイカ", en: "watermelon" },
+        { ja: "スイカ一切れ", en: "watermelon slice" },
+        { ja: "スイカのくし切り", en: "watermelon wedges", foodSizeMode: "count" },
+        { ja: "赤肉メロン", en: "cantaloupe melon" },
+        { ja: "青肉メロン", en: "honeydew melon" },
+        { ja: "メロンのくし切り", en: "melon wedges", foodSizeMode: "count" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🥩 食材 / 🍎 果物 / 🍑 桃・核果・いちじく": {
+      icon: "🍑",
+      items: [
+        { ja: "桃", en: "peach" },
+        { ja: "白桃", en: "white peach" },
+        { ja: "桃のくし切り", en: "peach wedges", foodSizeMode: "count" },
+        { ja: "すもも", en: "plum" },
+        { ja: "あんず", en: "apricot" },
+        { ja: "ネクタリン", en: "nectarine" },
+        { ja: "いちじく", en: "fig" },
+        { ja: "ざくろ", en: "pomegranate" },
+        { ja: "ざくろの実", en: "pomegranate seeds", foodSizeMode: "count" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🥩 食材 / 🍎 果物 / 🥭 南国・トロピカルフルーツ": {
+      icon: "🥭",
+      items: [
+        { ja: "マンゴー", en: "mango" },
+        { ja: "マンゴースライス", en: "mango slices", foodSizeMode: "count" },
+        { ja: "パイナップル", en: "pineapple" },
+        { ja: "パイナップルスライス", en: "pineapple slices", foodSizeMode: "count" },
+        { ja: "パパイヤ", en: "papaya" },
+        { ja: "ココナッツ", en: "coconut" },
+        { ja: "ドラゴンフルーツ", en: "dragon fruit" },
+        { ja: "パッションフルーツ", en: "passion fruit" },
+        { ja: "ライチ", en: "lychee", foodSizeMode: "count" },
+        { ja: "ランブータン", en: "rambutan", foodSizeMode: "count" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 🥩 食材 / 🍎 果物 / 🧺 カットフルーツ・盛り合わせ": {
+      icon: "🧺",
+      items: [
+        { ja: "カットフルーツ", en: "cut fruit", foodSizeMode: "count" },
+        { ja: "フルーツ盛り合わせ", en: "assorted fresh fruit", foodSizeMode: "count" },
+        { ja: "フルーツバスケット", en: "fruit basket", foodSizeMode: "count" },
+        { ja: "果物かご", en: "basket of fresh fruit", foodSizeMode: "count" },
+        { ja: "フルーツ串", en: "fruit skewers", foodSizeMode: "count" },
+        { ja: "冷やしフルーツ", en: "chilled fresh fruit", foodSizeMode: "count" }
+      ]
+    },
+
+    "🍱 食べ物・飲み物 / 🥩 食材 / 🥩 肉": { icon: "🥩", items: [{ ja: "ソーセージ串", en: "sausage skewer" }, { ja: "骨付き肉", en: "bone-in meat" }, { ja: "漫画肉", en: "manga meat" }] },
+
+    "⚔️ 武器・兵器 / 動物用SF装備 / マウント・ハーネス": {
+      isTarget: true,
+      items: [
+        { ja: "動物用軽量ハーネス", en: "lightweight animal equipment harness, scaled for the selected animal body" },
+        { ja: "背部マウント基部", en: "animal-back equipment mount, external mount attached to the animal harness" },
+        { ja: "小型センサーパック", en: "miniature sensor pack mounted on the selected animal" },
+        { ja: "サイバー首輪ユニット", en: "cybernetic animal collar unit, compact diagnostic lights" },
+        { ja: "装甲固定具", en: "armor-mounted equipment brackets on the animal body" }
+      ]
+    },
+    "⚔️ 武器・兵器 / 動物用SF装備 / 架空SF武装": {
+      isTarget: true,
+      items: [
+        { ja: "小型レーザーキャノン", en: "fictional micro laser cannon mounted on the cyber animal equipment harness" },
+        { ja: "エネルギー投射ユニット", en: "fictional energy projector unit mounted on the selected animal" },
+        { ja: "肩部ミサイルポッド風", en: "fictional shoulder micro missile pod silhouette on the cyber animal harness" },
+        { ja: "背部レールキャノン風", en: "fictional animal-mounted rail cannon silhouette, sci-fi visual equipment" },
+        { ja: "エネルギーブレード外付け", en: "fictional external energy blade equipment attached to the animal armor" }
+      ]
+    },
+    "⚔️ 武器・兵器 / 動物用SF装備 / 偵察・支援ユニット": {
+      isTarget: true,
+      items: [
+        { ja: "偵察ドローン小動物", en: "reconnaissance cyber animal support unit, compact scout equipment" },
+        { ja: "診断ライトユニット", en: "diagnostic light modules on the cyber animal body" },
+        { ja: "通信アンテナ", en: "tiny communication antenna details on the animal equipment" },
+        { ja: "ホログラム投影機", en: "small holographic projector module mounted on the animal harness" },
+        { ja: "随伴支援ポッド", en: "small companion support pod attached to the cyber animal equipment" }
+      ]
+    },
+    "⚔️ 武器・兵器 / 鳥モチーフ・機械翼補助 / 人物側SF翼": {
+      isTarget: true,
+      items: [
+        { ja: "鳥モチーフ機械翼", en: "bird-motif mechanical wings attached to the human back, avian mecha wing silhouette" },
+        { ja: "分割式メカ羽根", en: "segmented mechanical feather wing panels on the human equipment" },
+        { ja: "背部スラスター翼", en: "back-mounted sci-fi wing thrusters, glowing mechanical feather fins" },
+        { ja: "鳥型装甲意匠", en: "avian-inspired armor motif, bird-shaped mechanical design language on the human suit" },
+        { ja: "肩部フェザードローン", en: "bird-shaped shoulder drone accessory, small mechanical feather drone near the human" }
+      ]
+    },
+    "⚔️ 武器・兵器 / 鳥モチーフ・機械翼補助 / 動物側へ固定": {
+      isTarget: true,
+      items: [
+        { ja: "動物側メカ翼固定", en: "mechanical wing details stay on the separate animal body, not on the human body" },
+        { ja: "小鳥用メカ羽根", en: "tiny mechanical feather panels scaled for the small bird companion" },
+        { ja: "鳥型偵察ユニット", en: "separate cybernetic bird scout unit with visible mechanical wings" },
+        { ja: "小鳥背部モジュール", en: "miniature dorsal module attached to the small bird companion" }
+      ]
+    },
+    "🤲 アイテムの状態・動作 / 🐾 動物用装備位置": {
+      items: [
+        { ja: "動物の背中に外付け", en: "equipment mounted externally on the selected animal's back" },
+        { ja: "動物用ハーネスに装着", en: "equipment attached to the selected animal's harness" },
+        { ja: "装甲プレートに固定", en: "equipment fixed onto the animal armor plates" },
+        { ja: "小型動物サイズに調整", en: "equipment scaled to fit a tiny animal body" },
+        { ja: "翼や脚の動きを妨げない", en: "equipment placement keeps the animal wings and legs visible and functional" },
+        { ja: "動物側へ装備固定", en: "equipment and cybernetic details stay attached to the separate animal body" },
+        { ja: "人物側へ移さない", en: "animal equipment does not transfer to the human body" },
+        { ja: "別個体の動物装備", en: "equipment belongs to the separate animal companion, not to the human body" }
+      ]
+    },
+
+    "🍱 食べ物・飲み物 / 📏 サイズ・量カスタマイズ / 🍚 盛り量": {
+      icon: "🍚",
+      foodSizeMode: "portion",
+      note: "丼・麺・皿・パフェなどに使う量の指定。選択中の対応フードへ合成して出力します。",
+      items: [
+        { ja: "小盛り", en: "food-size-portion-small", foodSizePreset: "small" },
+        { ja: "大盛り", en: "food-size-portion-large", foodSizePreset: "large" },
+        { ja: "特盛り", en: "food-size-portion-extra", foodSizePreset: "extra" },
+        { ja: "ギガ盛り", en: "food-size-portion-giga", foodSizePreset: "giga" },
+        { ja: "テラ盛り", en: "food-size-portion-tera", foodSizePreset: "tera" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 📏 サイズ・量カスタマイズ / 🥩 単品サイズ": {
+      icon: "🥩",
+      foodSizeMode: "unit",
+      note: "肉・ハンバーガー・果物・ケーキなど、一品そのものの大きさを指定します。",
+      items: [
+        { ja: "極小", en: "food-size-unit-tiny", foodSizePreset: "tiny" },
+        { ja: "小さめ", en: "food-size-unit-small", foodSizePreset: "small" },
+        { ja: "大きめ", en: "food-size-unit-large", foodSizePreset: "large" },
+        { ja: "超巨大", en: "food-size-unit-giant", foodSizePreset: "giant" },
+        { ja: "規格外", en: "food-size-unit-colossal", foodSizePreset: "colossal" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 📏 サイズ・量カスタマイズ / 🍪 個数・山盛り": {
+      icon: "🍪",
+      foodSizeMode: "count",
+      note: "クッキー・マカロン・キャンディ・寿司など、複数個で見せたい食べ物に使います。",
+      items: [
+        { ja: "少なめ", en: "food-size-count-few", foodSizePreset: "few" },
+        { ja: "たくさん", en: "food-size-count-many", foodSizePreset: "many" },
+        { ja: "山盛り", en: "food-size-count-heap", foodSizePreset: "heap" },
+        { ja: "ギガ山盛り", en: "food-size-count-giga", foodSizePreset: "giga" },
+        { ja: "山脈級", en: "food-size-count-tera", foodSizePreset: "tera" }
+      ]
+    },
+    "🍱 食べ物・飲み物 / 📏 サイズ・量カスタマイズ / 🥤 容量・容器サイズ": {
+      icon: "🥤",
+      foodSizeMode: "volume",
+      note: "コーヒー・ジュース・お酒・ポーションなど、飲み物の容量を指定します。",
+      items: [
+        { ja: "小容量", en: "food-size-volume-small", foodSizePreset: "small" },
+        { ja: "大容量", en: "food-size-volume-large", foodSizePreset: "large" },
+        { ja: "特大容量", en: "food-size-volume-extra", foodSizePreset: "extra" },
+        { ja: "ギガ容量", en: "food-size-volume-giga", foodSizePreset: "giga" },
+        { ja: "テラ容量", en: "food-size-volume-tera", foodSizePreset: "tera" }
+      ]
+    }
+
   };
+
+  const ACCESSORY_AKASHIC_PREFIX = "💠 装備アカシック / ";
+  const ACCESSORY_AKASHIC = window.SHIMA_ACCESSORY_AKASHIC_V1 || null;
+  const ACCESSORY_AKASHIC_AUDIT = {
+    version: ACCESSORY_AKASHIC && ACCESSORY_AKASHIC.version || "",
+    candidates: 0,
+    added: 0,
+    promptSkips: 0,
+    idCollisions: 0,
+    groups: Object.create(null)
+  };
+
+  const normalizeAccessoryValue = value => String(value || "")
+    .normalize("NFKC")
+    .toLowerCase()
+    .replace(/[\s\u3000]+/g, " ")
+    .replace(/\s*,\s*/g, ",")
+    .trim();
+
+  // 既存アクセサリー、食べ物、武器は上書きしない。
+  // 新しいアカシック棚だけを安定ID付きで非破壊追加する。
+  (function installAccessoryAkashic() {
+    if (!ACCESSORY_AKASHIC || !Array.isArray(ACCESSORY_AKASHIC.groups)) return;
+
+    const knownPrompts = new Set();
+    Object.values(CATEGORIES).forEach(category => {
+      (category && Array.isArray(category.items) ? category.items : []).forEach(existing => {
+        const prompt = normalizeAccessoryValue(existing && existing.en);
+        if (prompt) knownPrompts.add(prompt);
+      });
+    });
+
+    const generatedIds = new Set();
+    ACCESSORY_AKASHIC.groups.forEach(group => {
+      const groupTitle = String(group && group.title || group && group.key || "装備");
+      const groupKey = String(group && group.key || "group");
+      const groupPath = `${ACCESSORY_AKASHIC_PREFIX}${groupTitle}`;
+      CATEGORIES[groupPath] = {
+        accessoryAkashic: true,
+        accessoryAkashicRoot: true,
+        accessoryAkashicGroup: groupKey,
+        note: String(group && group.description || ""),
+        items: []
+      };
+      ACCESSORY_AKASHIC_AUDIT.groups[groupKey] = 0;
+
+      (Array.isArray(group && group.categories) ? group.categories : []).forEach(category => {
+        const categoryKey = String(category && category.key || "category");
+        const categoryTitle = String(category && category.title || categoryKey);
+        const accepted = [];
+
+        (Array.isArray(category && category.items) ? category.items : []).forEach(row => {
+          ACCESSORY_AKASHIC_AUDIT.candidates++;
+          const slug = String(row && row[0] || "").trim();
+          const ja = String(row && row[1] || "").trim();
+          const en = String(row && row[2] || "").trim();
+          const description = String(row && row[3] || "").trim();
+          const id = `accessory-akashic-${groupKey}-${categoryKey}-${slug}`;
+          const promptKey = normalizeAccessoryValue(en);
+
+          if (!slug || !ja || !en || !promptKey || knownPrompts.has(promptKey)) {
+            ACCESSORY_AKASHIC_AUDIT.promptSkips++;
+            return;
+          }
+          if (generatedIds.has(id)) {
+            ACCESSORY_AKASHIC_AUDIT.idCollisions++;
+            return;
+          }
+
+          generatedIds.add(id);
+          knownPrompts.add(promptKey);
+          accepted.push({
+            id,
+            slug,
+            ja,
+            en,
+            description,
+            outputChannel: "positive",
+            promptIntent: "normal",
+            accessoryAkashicGroup: groupKey,
+            accessoryAkashicCategory: categoryKey
+          });
+          ACCESSORY_AKASHIC_AUDIT.added++;
+          ACCESSORY_AKASHIC_AUDIT.groups[groupKey]++;
+        });
+
+        CATEGORIES[`${groupPath} / ${categoryTitle}`] = {
+          accessoryAkashic: true,
+          accessoryAkashicGroup: groupKey,
+          accessoryAkashicCategory: categoryKey,
+          note: String(category && category.note || ""),
+          items: accepted
+        };
+      });
+    });
+
+    window.__SHIMA_ACCESSORY_AKASHIC_AUDIT__ = ACCESSORY_AKASHIC_AUDIT;
+  })();
 
   // 🔒 シークレット表示：R-18 アクセサリー
   const SECRET_CATEGORIES = {
@@ -591,133 +1550,1378 @@
     initUI(container) {
       const parent = document.querySelector("#list-accessories") || container;
       parent.innerHTML = "";
+
       const section = document.createElement("div");
       section.className = "accessories-section";
+
       const h = document.createElement("div");
-      h.textContent = "💍 アクセサリ・小物 (Accessories)";
-      h.style.fontWeight = "bold"; h.style.color = "#c71585"; h.style.marginBottom = "8px";
+      h.textContent = "💍 アクセサリー・装備・小物 (Accessories & Gear)";
+      h.style.fontWeight = "bold";
+      h.style.color = "#c71585";
+      h.style.marginBottom = "8px";
       section.appendChild(h);
 
-      const entries = Object.entries(CATEGORIES);
-      const weaponEntries = entries.filter(([n]) => n.startsWith("⚔️ 武器・兵器 /"));
-      const foodEntries = entries.filter(([n]) => n.startsWith("🍱 食べ物・飲み物 /"));
-      const itemActionEntries = entries.filter(([n]) => n.startsWith("🤲 アイテムの状態・動作"));
-      const otherEntries = entries.filter(([n]) => !n.startsWith("🤲 アイテムの状態・動作") && !n.startsWith("⚔️ 武器・兵器 /") && !n.startsWith("🍱 食べ物・飲み物 /"));
+      const lead = document.createElement("div");
+      lead.textContent = "人物を飾る装備アカシックを先頭に、既存の小物・武器・食べ物も用途別で維持";
+      lead.style.fontSize = "0.86em";
+      lead.style.color = "#777";
+      lead.style.margin = "0 0 10px";
+      section.appendChild(lead);
 
-      const renderCategory = (catName, catData, mount) => {
-        const details = document.createElement("details");
-        details.style.border = "1px solid #ddd"; details.style.marginBottom = "6px"; details.style.borderRadius = "6px"; details.style.padding = "6px";
-        const summary = document.createElement("summary");
-        summary.textContent = catName; summary.style.cursor = "pointer"; summary.style.fontWeight = "bold";
-        details.appendChild(summary);
-        const content = document.createElement("div");
-        content.style.marginTop = "6px"; content.style.display = "flex"; content.style.flexWrap = "wrap"; content.style.gap = "6px";
-        catData.items.forEach(item => {
-          const label = document.createElement("label");
-          label.style.border = "1px solid #ddd"; label.style.padding = "4px 8px"; label.style.borderRadius = "6px"; label.style.fontSize = "0.85em"; label.style.display = "flex"; label.style.alignItems = "center"; label.style.cursor = "pointer";
-          const cb = document.createElement("input");
-          cb.type = "checkbox"; cb.dataset.en = item.en;
-          if(catData.isAction) cb.dataset.type = "action"; else if(catData.isTarget) cb.dataset.type = "target"; else cb.dataset.type = "normal";
-          cb.style.marginRight = "4px"; label.appendChild(cb); label.appendChild(document.createTextNode(item.ja)); content.appendChild(label);
-        });
-        details.appendChild(content); mount.appendChild(details);
+      const entries = Object.entries(CATEGORIES);
+
+      if (!document.getElementById("shima-accessory-akashic-style")) {
+        const style = document.createElement("style");
+        style.id = "shima-accessory-akashic-style";
+        style.textContent = `
+          .accessories-section .accessory-option-grid{
+            display:grid !important;
+            grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+            gap:8px !important;
+            align-items:stretch;
+          }
+          .accessories-section .accessory-option-card{
+            min-width:0;
+            box-sizing:border-box;
+            writing-mode:horizontal-tb !important;
+            overflow-wrap:anywhere;
+          }
+          .accessories-section .accessory-option-card.has-description{
+            align-items:flex-start !important;
+            padding:9px 10px !important;
+          }
+          .accessories-section .accessory-option-copy{
+            display:flex;
+            flex:1 1 auto;
+            min-width:0;
+            flex-direction:column;
+            gap:3px;
+          }
+          .accessories-section .accessory-option-title{
+            color:#214c54;
+            font-weight:800;
+            line-height:1.4;
+          }
+          .accessories-section .accessory-option-description{
+            color:#526a72;
+            font-size:.84em;
+            font-weight:500;
+            line-height:1.55;
+            white-space:normal;
+          }
+          .accessories-section .accessory-option-card.has-description > input{
+            flex:0 0 auto;
+            margin-top:3px;
+          }
+          .accessories-section .accessory-option-card.has-description > .zero-favorite-star{
+            align-self:center;
+            flex:0 0 auto;
+          }
+          .accessories-section .accessory-akashic-root{
+            border:1px solid #8fcfc7 !important;
+            background:linear-gradient(145deg,rgba(255,255,255,.98),rgba(228,249,246,.94)) !important;
+            box-shadow:0 10px 24px rgba(42,112,108,.10);
+            margin:10px 0 14px !important;
+            padding:8px !important;
+          }
+          .accessories-section .accessory-akashic-root > summary{
+            color:#185e5b !important;
+            font-size:1.03em;
+            line-height:1.45;
+          }
+          .accessories-section details[data-accessory-akashic-group]{
+            width:100%;
+            box-sizing:border-box;
+          }
+          @media (max-width:760px){
+            .accessories-section .accessory-option-grid{
+              display:grid !important;
+              grid-template-columns:minmax(0,1fr) !important;
+              width:100% !important;
+            }
+            .accessories-section .accessory-option-card{
+              display:flex !important;
+              width:100% !important;
+              max-width:100% !important;
+              min-height:48px;
+              line-height:1.45;
+              writing-mode:horizontal-tb !important;
+              text-orientation:mixed !important;
+              word-break:normal !important;
+            }
+            .accessories-section details[open] > div.accessory-option-grid{
+              display:grid !important;
+              grid-template-columns:minmax(0,1fr) !important;
+            }
+          }
+        `;
+        document.head.appendChild(style);
+      }
+
+      const DISPLAY_LABELS = {
+        "👒 頭部の装飾・帽子 (Headgear)": "👒 頭部装飾・帽子",
+        "💎 ジュエリー・装身具 (Jewelry)": "💎 ジュエリー・装身具",
+        "🧣 服飾小物・背部 (Clothing Acc)": "🧣 服飾小物・背部",
+        "👜 手持ち小物 (Handheld)": "👜 手持ち小物",
+        "🧸 ぬいぐるみ (Plushies)": "🧸 ぬいぐるみ",
+        "💰 財宝・金塊 (Treasure & Gold Bars)": "💰 財宝・金塊",
+        "💎 宝石・ジュエル (Gems & Jewels)": "💎 宝石・ジュエル",
+        "🪙 コイン・貨幣 (Coins & Currency)": "🪙 コイン・貨幣",
+        "💴 紙幣・札束 (Banknotes & Cash)": "💴 紙幣・札束",
+        "📦 宝箱・保管容器 (Treasure Chests & Storage)": "📦 宝箱・保管容器",
+        "💼 アタッシュケース・現金ケース (Attaché & Money Cases)": "💼 現金ケース",
+        "🛒 運搬・台車 (Carts & Transport)": "🛒 運搬・台車",
+        "🎸 音楽・趣味・その他 (Hobbies)": "🎸 趣味・楽器・その他"
       };
 
-      if (itemActionEntries.length) {
-        const actionRoot = document.createElement("details");
-        const actionSum = document.createElement("summary"); actionSum.textContent = "🤲 アイテムの状態・動作"; actionRoot.appendChild(actionSum);
-        itemActionEntries.forEach(([k, cat]) => renderCategory(k.split(" / ").pop(), cat, actionRoot));
-        section.appendChild(actionRoot);
-      }
-      otherEntries.forEach(([catName, catData]) => renderCategory(catName, catData, section));
+      const shortLabel = (name) => DISPLAY_LABELS[name] || name.replace(/\s*\([^)]*\)\s*$/g, "");
 
-      const buildEntryTree = (entries) => {
+      const divider = (title, desc, color) => {
+        const wrap = document.createElement("div");
+        wrap.style.margin = "14px 0 8px";
+        wrap.style.textAlign = "center";
+
+        const line = document.createElement("div");
+        line.textContent = title;
+        line.style.borderTop = "1px solid #ddd";
+        line.style.paddingTop = "6px";
+        line.style.fontWeight = "bold";
+        line.style.color = color || "#8a5a75";
+        wrap.appendChild(line);
+
+        if (desc) {
+          const note = document.createElement("div");
+          note.textContent = desc;
+          note.style.fontSize = "0.82em";
+          note.style.color = "#777";
+          note.style.marginTop = "3px";
+          wrap.appendChild(note);
+        }
+        section.appendChild(wrap);
+      };
+
+      const styleDetails = (details, color, bg) => {
+        details.style.border = `1px solid ${color || "#ddd"}`;
+        details.style.marginBottom = "6px";
+        details.style.borderRadius = "8px";
+        details.style.padding = "6px";
+        if (bg) details.style.background = bg;
+      };
+
+      const foodModifierDatasetKey = group => FOOD_MODIFIER_TARGET_DATASET[group] || "";
+
+      const getSelectedFoodDecorationTargets = group => {
+        return Array.from(section.querySelectorAll('input[data-food-decoration-target="true"]:checked'))
+          .filter(cb => cb.dataset.foodDecorationGroup === group)
+          .map(cb => ({
+            key: cb.dataset.foodDecorationTargetKey || "",
+            label: cb.dataset.foodLabel || cb.dataset.en || "選択した項目"
+          }))
+          .filter(target => target.key);
+      };
+
+      const getActiveFoodModifierTarget = group => {
+        const targets = getSelectedFoodDecorationTargets(group);
+        const dataKey = foodModifierDatasetKey(group);
+        let active = dataKey ? section.dataset[dataKey] || "" : "";
+        if (!targets.some(target => target.key === active)) active = "";
+        if (!active && targets.length === 1) active = targets[0].key;
+        if (dataKey) section.dataset[dataKey] = active;
+        return active;
+      };
+
+      const setActiveFoodModifierTarget = (group, key) => {
+        const dataKey = foodModifierDatasetKey(group);
+        if (!dataKey) return;
+        const valid = getSelectedFoodDecorationTargets(group).some(target => target.key === key);
+        section.dataset[dataKey] = valid ? key : "";
+      };
+
+      const bindFoodModifierToTarget = (cb, group, key) => {
+        if (!cb || !cb.checked) return;
+        const target = getSelectedFoodDecorationTargets(group).find(entry => entry.key === key);
+        if (!target) return;
+        cb.dataset.foodApplyTo = key;
+        cb.dataset.foodModifierUnbound = "";
+        cb.title = `適用先：${target.label}`;
+      };
+
+      const refreshFoodModifierTargetControls = () => {
+        ["dessert", "drink", "onigiri"].forEach(group => {
+          const targets = getSelectedFoodDecorationTargets(group);
+          const dataKey = foodModifierDatasetKey(group);
+          let active = dataKey ? section.dataset[dataKey] || "" : "";
+          if (!targets.some(target => target.key === active)) active = "";
+          if (!active && targets.length === 1) active = targets[0].key;
+          if (dataKey) section.dataset[dataKey] = active;
+
+          section.querySelectorAll(`select[data-food-modifier-target-picker="${group}"]`).forEach(select => {
+            select.innerHTML = "";
+            const empty = document.createElement("option");
+            empty.value = "";
+            empty.textContent = targets.length ? "適用先を選択…" : "先に料理・飲み物を選択…";
+            select.appendChild(empty);
+            targets.forEach(target => {
+              const option = document.createElement("option");
+              option.value = target.key;
+              option.textContent = target.label;
+              select.appendChild(option);
+            });
+            select.value = active;
+          });
+
+          section.querySelectorAll(`[data-food-modifier-target-status="${group}"]`).forEach(status => {
+            const current = targets.find(target => target.key === active);
+            status.textContent = current
+              ? `適用先：${current.label}`
+              : (targets.length ? "適用先：選択してください" : "適用先：料理・飲み物を先に選択してください");
+          });
+        });
+      };
+
+      const assignUnboundFoodModifiers = (group, key) => {
+        section.querySelectorAll(`input[data-food-modifier-group="${group}"]:checked`).forEach(cb => {
+          if (!cb.dataset.foodApplyTo) bindFoodModifierToTarget(cb, group, key);
+        });
+      };
+
+      const renderFoodModifierTargetControl = (group, mount) => {
+        const meta = FOOD_DECORATION_META[group] || FOOD_DECORATION_META.dessert;
+        const wrap = document.createElement("div");
+        wrap.style.cssText = "margin:7px 0 5px; padding:6px; border:1px dashed #d6a85d; border-radius:7px; background:#fffdf6;";
+
+        const status = document.createElement("div");
+        status.dataset.foodModifierTargetStatus = group;
+        status.style.cssText = "font-size:0.80em; font-weight:700; margin-bottom:5px; color:#7a5a20;";
+        status.textContent = `適用先：${meta.label}対象を選択してください`;
+
+        const row = document.createElement("div");
+        row.style.cssText = "display:flex; gap:6px; align-items:center; flex-wrap:wrap;";
+        const select = document.createElement("select");
+        select.dataset.foodModifierTargetPicker = group;
+        select.style.cssText = "min-width:0; flex:1 1 160px; padding:4px 6px; border:1px solid #d7b46d; border-radius:6px; background:#fff;";
+        const refresh = document.createElement("button");
+        refresh.type = "button";
+        refresh.textContent = "適用先を更新";
+        refresh.style.cssText = "border:1px solid #d7b46d; background:#fff7df; color:#6f4800; border-radius:999px; padding:4px 8px; font-weight:700; font-size:0.82em;";
+
+        select.addEventListener("change", () => {
+          const key = select.value || "";
+          setActiveFoodModifierTarget(group, key);
+          if (key) assignUnboundFoodModifiers(group, key);
+          refreshFoodModifierTargetControls();
+        });
+        refresh.addEventListener("click", refreshFoodModifierTargetControls);
+
+        row.appendChild(select);
+        row.appendChild(refresh);
+        wrap.appendChild(status);
+        wrap.appendChild(row);
+        mount.appendChild(wrap);
+        refreshFoodModifierTargetControls();
+      };
+
+      const isFoodSizeShortcutSuppressed = (ev) => {
+        try {
+          if (
+            window.__historyRestoring ||
+            window.__historySilentRestoring ||
+            window.__builderHistoryRestoring ||
+            window.__promptHistoryRestoring ||
+            window.__SHIMA_RESTORING_HISTORY__ ||
+            window.__builderResetting ||
+            window.__builderIsResetting ||
+            window.__SHIMA_INITING__ ||
+            window.__shimaInitialMounting ||
+            window.__isSyncingCheckboxes ||
+            window.__linkedIdsApplying ||
+            window.__suppressFoodSizeShortcut ||
+            window.__suppressFoodDecorationShortcut ||
+            window.__suppressFoodModifierShortcut
+          ) return true;
+          // 履歴復元や自動同期から案内カードを出さない。
+          if (ev && ev.isTrusted === false) return true;
+        } catch(_) {}
+        return false;
+      };
+
+      const getFoodSizeShortcutBox = () => {
+        let box = document.getElementById("food-size-shortcut-box");
+        if (!box) {
+          box = document.createElement("div");
+          box.id = "food-size-shortcut-box";
+          box.style.cssText = [
+            "display:none",
+            "position:fixed",
+            "left:10px",
+            "right:10px",
+            "bottom:12px",
+            "z-index:2147483641",
+            "box-sizing:border-box",
+            "padding:10px",
+            "border:2px solid #c77b16",
+            "border-radius:14px",
+            "background:#fff9ed",
+            "box-shadow:0 8px 24px rgba(0,0,0,0.20)",
+            "font-size:13px",
+            "line-height:1.35",
+            "color:#6f4800"
+          ].join(";");
+          document.body.appendChild(box);
+        }
+        return box;
+      };
+
+      const openFoodSizeShelf = (mode) => {
+        const shelves = Array.from(section.querySelectorAll("details[data-food-size-mode]"))
+          .filter(det => det.dataset.foodSizeMode === mode);
+        if (!shelves.length) return false;
+
+        shelves.forEach(det => {
+          let node = det;
+          while (node && node !== document.body) {
+            if (node.tagName === "DETAILS") node.open = true;
+            node = node.parentElement;
+          }
+        });
+
+        const focus = shelves[0];
+        try {
+          const oldOutline = focus.style.outline;
+          const oldOffset = focus.style.outlineOffset;
+          const oldShadow = focus.style.boxShadow;
+          focus.style.outline = "3px solid rgba(217, 119, 6, 0.72)";
+          focus.style.outlineOffset = "2px";
+          focus.style.boxShadow = "0 0 14px rgba(245, 158, 11, 0.35)";
+          setTimeout(() => {
+            focus.style.outline = oldOutline;
+            focus.style.outlineOffset = oldOffset;
+            focus.style.boxShadow = oldShadow;
+          }, 1800);
+        } catch(_) {}
+
+        try {
+          focus.scrollIntoView({ behavior: "smooth", block: "center" });
+        } catch(_) {
+          try { focus.scrollIntoView(false); } catch(__) {}
+        }
+        return true;
+      };
+
+      const showFoodSizeShortcut = (item, profile) => {
+        if (!profile || !profile.mode) return;
+        const box = getFoodSizeShortcutBox();
+        const meta = FOOD_SIZE_MODE_META[profile.mode] || FOOD_SIZE_MODE_META.portion;
+        const foodName = item && item.ja ? item.ja : "選択した食べ物";
+
+        // 動物ポーズ案内と重なった場合は、最後に選んだ対象の案内を優先する。
+        try {
+          const creatureBox = document.getElementById("creature-pose-shortcut-box");
+          if (creatureBox) creatureBox.style.display = "none";
+        } catch(_) {}
+
+        box.innerHTML = "";
+        box.style.display = "block";
+
+        const msg = document.createElement("div");
+        msg.style.cssText = "font-weight:800; margin-bottom:6px;";
+        msg.textContent = `${meta.icon} ${foodName}：${meta.label}を指定しますか？`;
+
+        const sub = document.createElement("div");
+        sub.style.marginBottom = "8px";
+        sub.textContent = `食べ物・飲み物欄の「${meta.title}」へ移動します。チェックは自動ONにしません。`;
+
+        const actions = document.createElement("div");
+        actions.style.cssText = "display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end;";
+
+        const noBtn = document.createElement("button");
+        noBtn.type = "button";
+        noBtn.textContent = "いいえ";
+        noBtn.style.cssText = "border:1px solid #94a3b8; background:#fff; border-radius:999px; padding:6px 10px; font-weight:700; flex:1 1 120px;";
+
+        const yesBtn = document.createElement("button");
+        yesBtn.type = "button";
+        yesBtn.textContent = "はい：サイズ候補へ";
+        yesBtn.style.cssText = "border:1px solid #d97706; background:#fef3c7; color:#78350f; border-radius:999px; padding:6px 10px; font-weight:800; flex:1 1 160px;";
+
+        noBtn.addEventListener("click", () => { box.style.display = "none"; });
+        yesBtn.addEventListener("click", () => {
+          yesBtn.disabled = true;
+          yesBtn.textContent = "移動中…";
+          const moved = openFoodSizeShelf(profile.mode);
+          if (moved) {
+            setTimeout(() => { box.style.display = "none"; }, 180);
+          } else {
+            sub.textContent = "サイズ棚の準備待ちです。食べ物・飲み物欄を開いてから、もう一度「はい」を押してください。";
+            yesBtn.disabled = false;
+            yesBtn.textContent = "はい：サイズ候補へ";
+          }
+        });
+
+        actions.appendChild(noBtn);
+        actions.appendChild(yesBtn);
+        box.appendChild(msg);
+        box.appendChild(sub);
+        box.appendChild(actions);
+      };
+
+      const hideCreaturePoseShortcut = () => {
+        try {
+          const creatureBox = document.getElementById("creature-pose-shortcut-box");
+          if (creatureBox) creatureBox.style.display = "none";
+        } catch(_) {}
+      };
+
+      const openFoodModifierShelf = (group, targetKey) => {
+        if (targetKey) setActiveFoodModifierTarget(group, targetKey);
+        refreshFoodModifierTargetControls();
+
+        const shelves = Array.from(section.querySelectorAll("details[data-food-modifier-group]"))
+          .filter(det => det.dataset.foodModifierGroup === group);
+        if (!shelves.length) return false;
+
+        shelves.forEach(det => {
+          let node = det;
+          while (node && node !== document.body) {
+            if (node.tagName === "DETAILS") node.open = true;
+            node = node.parentElement;
+          }
+        });
+
+        const focus = shelves[0];
+        try {
+          const oldOutline = focus.style.outline;
+          const oldOffset = focus.style.outlineOffset;
+          const oldShadow = focus.style.boxShadow;
+          focus.style.outline = "3px solid rgba(192, 90, 130, 0.62)";
+          focus.style.outlineOffset = "2px";
+          focus.style.boxShadow = "0 0 14px rgba(244, 114, 182, 0.26)";
+          setTimeout(() => {
+            focus.style.outline = oldOutline;
+            focus.style.outlineOffset = oldOffset;
+            focus.style.boxShadow = oldShadow;
+          }, 1800);
+        } catch(_) {}
+
+        try {
+          focus.scrollIntoView({ behavior: "smooth", block: "center" });
+        } catch(_) {
+          try { focus.scrollIntoView(false); } catch(__) {}
+        }
+        return true;
+      };
+
+      const showFoodModifierTargetPicker = (group, pendingCb, modifierLabel) => {
+        const meta = FOOD_DECORATION_META[group] || FOOD_DECORATION_META.dessert;
+        const targets = getSelectedFoodDecorationTargets(group);
+        const box = getFoodSizeShortcutBox();
+        hideCreaturePoseShortcut();
+        box.innerHTML = "";
+        box.style.display = "block";
+
+        const msg = document.createElement("div");
+        msg.style.cssText = "font-weight:800; margin-bottom:6px;";
+        msg.textContent = `${meta.icon} ${modifierLabel || meta.label}の適用先を選んでください`;
+
+        const sub = document.createElement("div");
+        sub.style.marginBottom = "8px";
+
+        const actions = document.createElement("div");
+        actions.style.cssText = "display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end;";
+
+        const closeBtn = document.createElement("button");
+        closeBtn.type = "button";
+        closeBtn.textContent = "閉じる";
+        closeBtn.style.cssText = "border:1px solid #94a3b8; background:#fff; border-radius:999px; padding:6px 10px; font-weight:700; flex:1 1 120px;";
+        closeBtn.addEventListener("click", () => { box.style.display = "none"; });
+
+        if (!targets.length) {
+          sub.textContent = group === "drink"
+            ? "先にドリンクベースを選ぶか、フレーバー対応の飲み物を選んでください。フレーバーだけでは出力しません。"
+            : group === "onigiri"
+              ? "先に料理・ジャンル別の「おにぎり」を選んでください。仕上げ・具・焼きは単独では出力しません。"
+              : "先にパンケーキ・シュークリーム・パフェなどのデザートを選んでください。トッピングだけでは出力しません。";
+          actions.appendChild(closeBtn);
+        } else {
+          sub.textContent = "選んだ対象にだけ合成します。ほかの料理・飲み物には自動適用しません。";
+          targets.forEach(target => {
+            const targetBtn = document.createElement("button");
+            targetBtn.type = "button";
+            targetBtn.textContent = `適用：${target.label}`;
+            targetBtn.style.cssText = "border:1px solid #c25a82; background:#fff1f6; color:#8d234f; border-radius:999px; padding:6px 10px; font-weight:800; flex:1 1 160px;";
+            targetBtn.addEventListener("click", () => {
+              setActiveFoodModifierTarget(group, target.key);
+              if (pendingCb) bindFoodModifierToTarget(pendingCb, group, target.key);
+              assignUnboundFoodModifiers(group, target.key);
+              refreshFoodModifierTargetControls();
+              box.style.display = "none";
+            });
+            actions.appendChild(targetBtn);
+          });
+          actions.appendChild(closeBtn);
+        }
+
+        box.appendChild(msg);
+        box.appendChild(sub);
+        box.appendChild(actions);
+      };
+
+      const showFoodDecorationShortcut = (item, profile, sizeProfile, cb) => {
+        if (!profile || !profile.group || !cb) return;
+        const meta = FOOD_DECORATION_META[profile.group] || FOOD_DECORATION_META.dessert;
+        const targetKey = cb.dataset.foodDecorationTargetKey || "";
+        const foodName = item && item.ja ? item.ja : "選択した項目";
+        const box = getFoodSizeShortcutBox();
+        hideCreaturePoseShortcut();
+        box.innerHTML = "";
+        box.style.display = "block";
+
+        const msg = document.createElement("div");
+        msg.style.cssText = "font-weight:800; margin-bottom:6px;";
+        msg.textContent = profile.group === "drink"
+          ? `${meta.icon} ${foodName}にフレーバーを追加しますか？`
+          : profile.group === "onigiri"
+            ? `${meta.icon} ${foodName}に海苔・具・焼き仕上げを追加しますか？`
+            : `${meta.icon} ${foodName}にトッピングを追加しますか？`;
+
+        const sub = document.createElement("div");
+        sub.style.marginBottom = "8px";
+        sub.textContent = profile.group === "drink"
+          ? "フレーバーはこの飲み物にだけ合成します。チェックは自動ONにしません。"
+          : profile.group === "onigiri"
+            ? "海苔・具・焼き仕上げはこのおにぎりにだけ合成します。チェックは自動ONにしません。"
+            : "トッピング・フィリングはこのデザートにだけ合成します。チェックは自動ONにしません。";
+
+        const actions = document.createElement("div");
+        actions.style.cssText = "display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end;";
+
+        const noBtn = document.createElement("button");
+        noBtn.type = "button";
+        noBtn.textContent = "いいえ";
+        noBtn.style.cssText = "border:1px solid #94a3b8; background:#fff; border-radius:999px; padding:6px 10px; font-weight:700; flex:1 1 110px;";
+        noBtn.addEventListener("click", () => { box.style.display = "none"; });
+
+        const yesBtn = document.createElement("button");
+        yesBtn.type = "button";
+        yesBtn.textContent = profile.group === "drink"
+          ? "はい：フレーバーへ"
+          : profile.group === "onigiri" ? "はい：おにぎり仕上げへ" : "はい：トッピングへ";
+        yesBtn.style.cssText = "border:1px solid #c25a82; background:#fff1f6; color:#8d234f; border-radius:999px; padding:6px 10px; font-weight:800; flex:1 1 160px;";
+        yesBtn.addEventListener("click", () => {
+          yesBtn.disabled = true;
+          yesBtn.textContent = "移動中…";
+          const moved = openFoodModifierShelf(profile.group, targetKey);
+          if (moved) {
+            setTimeout(() => { box.style.display = "none"; }, 180);
+          } else {
+            sub.textContent = "連動棚の準備待ちです。食べ物・飲み物欄を開いてから、もう一度「はい」を押してください。";
+            yesBtn.disabled = false;
+            yesBtn.textContent = profile.group === "drink"
+              ? "はい：フレーバーへ"
+              : profile.group === "onigiri" ? "はい：おにぎり仕上げへ" : "はい：トッピングへ";
+          }
+        });
+
+        actions.appendChild(noBtn);
+        actions.appendChild(yesBtn);
+
+        if (sizeProfile && sizeProfile.mode) {
+          const sizeMeta = FOOD_SIZE_MODE_META[sizeProfile.mode] || FOOD_SIZE_MODE_META.portion;
+          const sizeBtn = document.createElement("button");
+          sizeBtn.type = "button";
+          sizeBtn.textContent = `📏 ${sizeMeta.label}へ`;
+          sizeBtn.style.cssText = "border:1px solid #d97706; background:#fef3c7; color:#78350f; border-radius:999px; padding:6px 10px; font-weight:800; flex:1 1 130px;";
+          sizeBtn.addEventListener("click", () => {
+            sizeBtn.disabled = true;
+            sizeBtn.textContent = "移動中…";
+            const moved = openFoodSizeShelf(sizeProfile.mode);
+            if (moved) {
+              setTimeout(() => { box.style.display = "none"; }, 180);
+            } else {
+              sub.textContent = "サイズ棚の準備待ちです。食べ物・飲み物欄を開いてから、もう一度押してください。";
+              sizeBtn.disabled = false;
+              sizeBtn.textContent = `📏 ${sizeMeta.label}へ`;
+            }
+          });
+          actions.appendChild(sizeBtn);
+        }
+
+        box.appendChild(msg);
+        box.appendChild(sub);
+        box.appendChild(actions);
+      };
+
+      // 丼物特化コレクションの完成セット連動。
+      // 既存の全体linked_ids機構は使わず、アクセサリー内のこの小コレクションだけで静かに状態を同期する。
+      // 完成セットを切り替えた時は、前の完成セット由来で自動ONになった下位項目だけを解除する。
+      const clearDonburiAutoLinks = (ownerId) => {
+        if (!ownerId) return;
+        section.querySelectorAll("input[data-donburi-auto-owner]").forEach(input => {
+          if (input.dataset.donburiAutoOwner === ownerId) {
+            input.checked = false;
+            delete input.dataset.donburiAutoOwner;
+          }
+        });
+      };
+
+      const openDonburiLinkedShelves = (linkedIds) => {
+        const wanted = new Set(Array.isArray(linkedIds) ? linkedIds : []);
+        if (!wanted.size) return;
+        const linkedInputs = Array.from(section.querySelectorAll("input[data-donburi-item-id]"))
+          .filter(input => wanted.has(input.dataset.donburiItemId));
+
+        const shelves = new Set();
+        linkedInputs.forEach(input => {
+          let details = input.closest("details");
+          while (details) {
+            shelves.add(details);
+            details = details.parentElement ? details.parentElement.closest("details") : null;
+          }
+        });
+        shelves.forEach(details => { details.open = true; });
+
+        const focus = linkedInputs[0] && linkedInputs[0].closest("details");
+        if (!focus) return;
+        try {
+          const oldOutline = focus.style.outline;
+          const oldOffset = focus.style.outlineOffset;
+          const oldShadow = focus.style.boxShadow;
+          focus.style.outline = "3px solid rgba(217, 119, 6, 0.72)";
+          focus.style.outlineOffset = "2px";
+          focus.style.boxShadow = "0 0 14px rgba(245, 158, 11, 0.35)";
+          setTimeout(() => {
+            focus.style.outline = oldOutline;
+            focus.style.outlineOffset = oldOffset;
+            focus.style.boxShadow = oldShadow;
+          }, 1600);
+        } catch (_) {}
+      };
+
+      const applyDonburiCompleteLinks = (completeCb) => {
+        if (!completeCb || !completeCb.checked) return;
+        const ownerId = completeCb.dataset.donburiItemId || "";
+        if (!ownerId) return;
+
+        let linkedIds = [];
+        try {
+          linkedIds = JSON.parse(completeCb.dataset.donburiLinkedIds || "[]");
+        } catch (_) {
+          linkedIds = [];
+        }
+        if (!Array.isArray(linkedIds)) linkedIds = [];
+
+        const previousFlag = window.__linkedIdsApplying;
+        window.__linkedIdsApplying = true;
+        try {
+          // 完成セットはこのコレクション内で排他。以前のセット由来だけを外す。
+          section.querySelectorAll('input[data-donburi-complete="true"]').forEach(other => {
+            if (other === completeCb) return;
+            const otherOwner = other.dataset.donburiItemId || "";
+            if (other.checked) other.checked = false;
+            clearDonburiAutoLinks(otherOwner);
+          });
+
+          // 同じ完成セットを切り直した時の残骸を除去してから再構築する。
+          clearDonburiAutoLinks(ownerId);
+
+          linkedIds.forEach(id => {
+            const target = Array.from(section.querySelectorAll("input[data-donburi-item-id]"))
+              .find(input => input.dataset.donburiItemId === id);
+            if (!target) return;
+            // すでにユーザーが手動ONしていた項目は、完成セット由来として所有しない。
+            if (!target.checked) {
+              target.checked = true;
+              target.dataset.donburiAutoOwner = ownerId;
+            }
+          });
+        } finally {
+          window.__linkedIdsApplying = previousFlag;
+        }
+
+        openDonburiLinkedShelves(linkedIds);
+      };
+
+      // ピザ特化コレクションの完成セット連動。
+      // 丼物と同じく、このコレクション内の自動ONだけを切り替え、手動で選んだ下位項目は残す。
+      const clearPizzaAutoLinks = (ownerId) => {
+        if (!ownerId) return;
+        section.querySelectorAll("input[data-pizza-auto-owner]").forEach(input => {
+          if (input.dataset.pizzaAutoOwner === ownerId) {
+            input.checked = false;
+            delete input.dataset.pizzaAutoOwner;
+          }
+        });
+      };
+
+      const openPizzaLinkedShelves = (linkedIds) => {
+        const wanted = new Set(Array.isArray(linkedIds) ? linkedIds : []);
+        if (!wanted.size) return;
+        const linkedInputs = Array.from(section.querySelectorAll("input[data-pizza-item-id]"))
+          .filter(input => wanted.has(input.dataset.pizzaItemId));
+
+        const shelves = new Set();
+        linkedInputs.forEach(input => {
+          let details = input.closest("details");
+          while (details) {
+            shelves.add(details);
+            details = details.parentElement ? details.parentElement.closest("details") : null;
+          }
+        });
+        shelves.forEach(details => { details.open = true; });
+
+        const focus = linkedInputs[0] && linkedInputs[0].closest("details");
+        if (!focus) return;
+        try {
+          const oldOutline = focus.style.outline;
+          const oldOffset = focus.style.outlineOffset;
+          const oldShadow = focus.style.boxShadow;
+          focus.style.outline = "3px solid rgba(217, 119, 6, 0.72)";
+          focus.style.outlineOffset = "2px";
+          focus.style.boxShadow = "0 0 14px rgba(245, 158, 11, 0.35)";
+          setTimeout(() => {
+            focus.style.outline = oldOutline;
+            focus.style.outlineOffset = oldOffset;
+            focus.style.boxShadow = oldShadow;
+          }, 1600);
+        } catch (_) {}
+      };
+
+      const applyPizzaCompleteLinks = (completeCb) => {
+        if (!completeCb || !completeCb.checked) return;
+        const ownerId = completeCb.dataset.pizzaItemId || "";
+        if (!ownerId) return;
+
+        let linkedIds = [];
+        try {
+          linkedIds = JSON.parse(completeCb.dataset.pizzaLinkedIds || "[]");
+        } catch (_) {
+          linkedIds = [];
+        }
+        if (!Array.isArray(linkedIds)) linkedIds = [];
+
+        const previousFlag = window.__linkedIdsApplying;
+        window.__linkedIdsApplying = true;
+        try {
+          section.querySelectorAll('input[data-pizza-complete="true"]').forEach(other => {
+            if (other === completeCb) return;
+            const otherOwner = other.dataset.pizzaItemId || "";
+            if (other.checked) other.checked = false;
+            clearPizzaAutoLinks(otherOwner);
+          });
+
+          clearPizzaAutoLinks(ownerId);
+
+          linkedIds.forEach(id => {
+            const target = Array.from(section.querySelectorAll("input[data-pizza-item-id]"))
+              .find(input => input.dataset.pizzaItemId === id);
+            if (!target) return;
+            if (!target.checked) {
+              target.checked = true;
+              target.dataset.pizzaAutoOwner = ownerId;
+            }
+          });
+        } finally {
+          window.__linkedIdsApplying = previousFlag;
+        }
+
+        openPizzaLinkedShelves(linkedIds);
+      };
+
+      const renderItems = (catName, catData, mount) => {
+        const content = document.createElement("div");
+        content.className = "accessory-option-grid";
+        if (catData.accessoryAkashic) content.classList.add("accessory-akashic-options");
+        content.style.marginTop = "6px";
+        content.style.gap = "6px";
+
+        catData.items.forEach(item => {
+          const label = document.createElement("label");
+          label.className = "accessory-option-card";
+          if (catData.accessoryAkashic) label.classList.add("accessory-akashic-card");
+          label.style.border = "1px solid #ddd";
+          label.style.padding = "4px 8px";
+          label.style.borderRadius = "6px";
+          label.style.fontSize = "0.85em";
+          label.style.display = "flex";
+          label.style.alignItems = "center";
+          label.style.cursor = "pointer";
+          label.style.background = "#fff";
+
+          const cb = document.createElement("input");
+          cb.type = "checkbox";
+          if (item.id) cb.id = item.id;
+          cb.dataset.en = item.en;
+          cb.dataset.ja = item.ja || "";
+          if (item.outputChannel) cb.dataset.outputChannel = item.outputChannel;
+          if (item.promptIntent) cb.dataset.promptIntent = item.promptIntent;
+          if (item.description) cb.dataset.description = item.description;
+          if (item.accessoryAkashicGroup) cb.dataset.accessoryAkashicGroup = item.accessoryAkashicGroup;
+          if (item.accessoryAkashicCategory) cb.dataset.accessoryAkashicCategory = item.accessoryAkashicCategory;
+
+          if (item.collection_id === "donburi-v1" && item.id) {
+            cb.dataset.donburiItemId = item.id;
+            cb.dataset.donburiCollectionId = item.collection_id;
+            cb.dataset.donburiCollectionRole = item.collection_role || "";
+            if (Array.isArray(item.linked_ids) && item.linked_ids.length) {
+              cb.dataset.donburiComplete = "true";
+              cb.dataset.donburiLinkedIds = JSON.stringify(item.linked_ids);
+            }
+          }
+
+          if (item.collection_id === "pizza-v1" && item.id) {
+            cb.dataset.pizzaItemId = item.id;
+            cb.dataset.pizzaCollectionId = item.collection_id;
+            cb.dataset.pizzaCollectionRole = item.collection_role || "";
+            if (Array.isArray(item.linked_ids) && item.linked_ids.length) {
+              cb.dataset.pizzaComplete = "true";
+              cb.dataset.pizzaLinkedIds = JSON.stringify(item.linked_ids);
+            }
+          }
+
+          const foodProfile = getFoodSizeProfile(catName, catData, item);
+          const decorationProfile = getFoodDecorationProfile(catName, catData, item);
+
+          if (catData.foodModifierGroup) {
+            cb.dataset.type = "foodModifier";
+            cb.dataset.foodModifierGroup = catData.foodModifierGroup;
+            cb.dataset.foodModifierRole = item.foodModifierRole || "topping";
+            cb.dataset.foodModifierValue = item.foodModifierValue || item.en || "";
+            cb.title = "選択した料理・デザート・飲み物へ合成して出力します";
+          } else if (catData.foodSizeMode) {
+            cb.dataset.type = "foodSize";
+            cb.dataset.foodSizeMode = catData.foodSizeMode;
+            cb.dataset.foodSizePreset = item.foodSizePreset || "";
+            cb.title = "選択中の対応食べ物・飲み物へ合成して出力します";
+          } else if (foodProfile || decorationProfile) {
+            const profile = foodProfile || { mode: "portion", kind: "" };
+            cb.dataset.type = "normal";
+            cb.dataset.foodTarget = "true";
+            cb.dataset.foodSizeTargetMode = profile.mode;
+            cb.dataset.foodSizeTargetKind = profile.kind || "";
+            cb.dataset.foodLabel = item.ja || "";
+            if (decorationProfile) {
+              cb.dataset.foodDecorationTarget = "true";
+              cb.dataset.foodDecorationGroup = decorationProfile.group;
+              cb.dataset.foodDecorationTargetKey = `${catName}::${item.en}`;
+              cb.dataset.foodDrinkBaseType = decorationProfile.drinkBaseType || "";
+            }
+          } else if (catData.isAction) {
+            cb.dataset.type = "action";
+          } else if (catData.isTarget) {
+            cb.dataset.type = "target";
+          } else {
+            cb.dataset.type = "normal";
+          }
+
+          if (catData.foodModifierGroup) {
+            cb.addEventListener("change", ev => {
+              if (!cb.checked) return;
+              if (isFoodSizeShortcutSuppressed(ev)) return;
+              const group = cb.dataset.foodModifierGroup;
+              const targetKey = getActiveFoodModifierTarget(group);
+              if (targetKey) {
+                bindFoodModifierToTarget(cb, group, targetKey);
+                refreshFoodModifierTargetControls();
+              } else {
+                cb.dataset.foodApplyTo = "";
+                cb.dataset.foodModifierUnbound = "true";
+                showFoodModifierTargetPicker(group, cb, item.ja || "選択した項目");
+              }
+            });
+          } else if (catData.foodSizeMode) {
+            cb.addEventListener("change", () => {
+              // 同じ役割のサイズは排他。小盛りとテラ盛りを同時に出さない。
+              if (!cb.checked) return;
+              const mode = cb.dataset.foodSizeMode;
+              section.querySelectorAll(`input[data-food-size-mode="${mode}"]`).forEach(other => {
+                if (other !== cb) other.checked = false;
+              });
+            });
+          } else if (foodProfile || decorationProfile) {
+            cb.addEventListener("change", ev => {
+              refreshFoodModifierTargetControls();
+              if (!cb.checked || isFoodSizeShortcutSuppressed(ev)) return;
+              if (decorationProfile) {
+                showFoodDecorationShortcut(item, decorationProfile, foodProfile, cb);
+              } else if (foodProfile) {
+                showFoodSizeShortcut(item, foodProfile);
+              }
+            });
+          }
+
+          if (cb.dataset.donburiComplete === "true") {
+            cb.addEventListener("change", ev => {
+              if (isFoodSizeShortcutSuppressed(ev)) return;
+              if (cb.checked) {
+                applyDonburiCompleteLinks(cb);
+              } else {
+                clearDonburiAutoLinks(cb.dataset.donburiItemId || "");
+              }
+            });
+          } else if (cb.dataset.donburiItemId) {
+            cb.addEventListener("change", ev => {
+              // 完成セットが静かにONにした項目をユーザーが触った時点で、手動選択へ引き継ぐ。
+              if (ev && ev.isTrusted && cb.dataset.donburiAutoOwner) {
+                delete cb.dataset.donburiAutoOwner;
+              }
+            });
+          }
+
+          if (cb.dataset.pizzaComplete === "true") {
+            cb.addEventListener("change", ev => {
+              if (isFoodSizeShortcutSuppressed(ev)) return;
+              if (cb.checked) {
+                applyPizzaCompleteLinks(cb);
+              } else {
+                clearPizzaAutoLinks(cb.dataset.pizzaItemId || "");
+              }
+            });
+          } else if (cb.dataset.pizzaItemId) {
+            cb.addEventListener("change", ev => {
+              // 完成セットが静かにONにした項目をユーザーが触った時点で、手動選択へ引き継ぐ。
+              if (ev && ev.isTrusted && cb.dataset.pizzaAutoOwner) {
+                delete cb.dataset.pizzaAutoOwner;
+              }
+            });
+          }
+
+          cb.style.marginRight = "4px";
+          label.appendChild(cb);
+          if (item.description) {
+            label.classList.add("has-description");
+            const copy = document.createElement("span");
+            copy.className = "accessory-option-copy";
+            const title = document.createElement("span");
+            title.className = "accessory-option-title";
+            title.textContent = item.ja;
+            const description = document.createElement("span");
+            description.className = "accessory-option-description";
+            description.textContent = item.description;
+            copy.appendChild(title);
+            copy.appendChild(description);
+            label.appendChild(copy);
+          } else {
+            label.appendChild(document.createTextNode(item.ja));
+          }
+          content.appendChild(label);
+        });
+
+        mount.appendChild(content);
+      };
+
+      const renderCategory = (catName, catData, mount, opts = {}) => {
+        const details = document.createElement("details");
+        const fullName = opts.fullName || catName;
+        styleDetails(details, opts.border || "#ddd", opts.bg);
+        if (catData.accessoryAkashic) details.dataset.accessoryAkashicGroup = catData.accessoryAkashicGroup || "1";
+        if (catData.foodSizeMode) details.dataset.foodSizeMode = catData.foodSizeMode;
+        if (catData.foodModifierGroup) details.dataset.foodModifierGroup = catData.foodModifierGroup;
+
+        const summary = document.createElement("summary");
+        summary.textContent = shortLabel(catName);
+        summary.style.cursor = "pointer";
+        summary.style.fontWeight = "bold";
+        if (opts.color) summary.style.color = opts.color;
+        details.appendChild(summary);
+
+        if (catData.note) {
+          const note = document.createElement("div");
+          note.textContent = catData.note;
+          note.style.fontSize = "0.80em";
+          note.style.lineHeight = "1.35";
+          note.style.color = "#7a5a20";
+          note.style.margin = "6px 0 4px";
+          details.appendChild(note);
+        }
+
+        if (catData.foodModifierGroup) {
+          renderFoodModifierTargetControl(catData.foodModifierGroup, details);
+        }
+
+        renderItems(fullName, catData, details);
+        mount.appendChild(details);
+      };
+
+      const rootDetails = (title, desc, opts = {}) => {
+        const details = document.createElement("details");
+        styleDetails(details, opts.border || "#ddd", opts.bg);
+
+        const summary = document.createElement("summary");
+        summary.textContent = title;
+        summary.style.cursor = "pointer";
+        summary.style.fontWeight = "bold";
+        if (opts.color) summary.style.color = opts.color;
+        details.appendChild(summary);
+
+        if (desc) {
+          const note = document.createElement("div");
+          note.textContent = desc;
+          note.style.fontSize = "0.82em";
+          note.style.color = "#777";
+          note.style.margin = "6px 0";
+          details.appendChild(note);
+        }
+        return details;
+      };
+
+      const renderFlatGroup = (title, desc, groupEntries, opts = {}) => {
+        if (!groupEntries.length) return;
+        divider(title, desc, opts.titleColor || "#8a5a75");
+        groupEntries.forEach(([catName, catData]) => {
+          renderCategory(catName, catData, section, opts);
+        });
+      };
+
+      const buildEntryTree = (groupEntries) => {
         const root = {};
-        entries.forEach(([fullKey, cat]) => {
+        groupEntries.forEach(([fullKey, cat]) => {
           const parts = fullKey.split(" / ").slice(1);
           let node = root;
           parts.forEach((part, idx) => {
             node[part] = node[part] || { __children: {} };
-            if (idx === parts.length - 1) node[part].__cat = cat;
+            if (idx === parts.length - 1) {
+              node[part].__cat = cat;
+              node[part].__fullKey = fullKey;
+            }
             node = node[part].__children;
           });
         });
         return root;
       };
 
-      const renderEntryTree = (tree, mount) => {
+      const renderEntryTree = (tree, mount, opts = {}) => {
         Object.entries(tree).forEach(([label, node]) => {
           const hasChildren = node.__children && Object.keys(node.__children).length > 0;
           if (node.__cat && !hasChildren) {
-            renderCategory(label, node.__cat, mount);
+            renderCategory(label, node.__cat, mount, { ...opts, fullName: node.__fullKey || label });
             return;
           }
 
           const details = document.createElement("details");
-          details.style.border = "1px solid #ddd";
-          details.style.marginBottom = "6px";
-          details.style.borderRadius = "6px";
-          details.style.padding = "6px";
+          styleDetails(details, opts.border || "#ddd", opts.bg);
+          if (node.__cat && node.__cat.accessoryAkashic) {
+            details.dataset.accessoryAkashicGroup = node.__cat.accessoryAkashicGroup || "1";
+          }
+          if (node.__cat && node.__cat.foodSizeMode) details.dataset.foodSizeMode = node.__cat.foodSizeMode;
+          if (node.__cat && node.__cat.foodModifierGroup) details.dataset.foodModifierGroup = node.__cat.foodModifierGroup;
 
           const summary = document.createElement("summary");
           summary.textContent = label;
           summary.style.cursor = "pointer";
           summary.style.fontWeight = "bold";
+          if (opts.color) summary.style.color = opts.color;
           details.appendChild(summary);
 
-          if (node.__cat && Array.isArray(node.__cat.items) && node.__cat.items.length > 0) {
-            const directWrap = document.createElement("div");
-            directWrap.style.marginTop = "6px";
-            renderCategory(label, node.__cat, directWrap);
-            details.appendChild(directWrap);
+          if (node.__cat && node.__cat.note) {
+            const note = document.createElement("div");
+            note.textContent = node.__cat.note;
+            note.style.fontSize = "0.80em";
+            note.style.lineHeight = "1.35";
+            note.style.color = "#7a5a20";
+            note.style.margin = "6px 0 4px";
+            details.appendChild(note);
           }
 
-          renderEntryTree(node.__children || {}, details);
+          if (node.__cat && node.__cat.foodModifierGroup) {
+            renderFoodModifierTargetControl(node.__cat.foodModifierGroup, details);
+          }
+
+          if (node.__cat && Array.isArray(node.__cat.items) && node.__cat.items.length > 0) {
+            renderItems(node.__fullKey || label, node.__cat, details);
+          }
+
+          renderEntryTree(node.__children || {}, details, opts);
           mount.appendChild(details);
         });
       };
 
+      const byNames = (names) => entries.filter(([name]) => names.includes(name));
+      const consumedNames = new Set();
+
+      const akashicEntries = entries.filter(([name]) => name.startsWith(ACCESSORY_AKASHIC_PREFIX));
+      akashicEntries.forEach(([name]) => consumedNames.add(name));
+
+      const basicNames = [
+        "👒 頭部の装飾・帽子 (Headgear)",
+        "💎 ジュエリー・装身具 (Jewelry)",
+        "🧣 服飾小物・背部 (Clothing Acc)"
+      ];
+      const handheldNames = [
+        "👜 手持ち小物 (Handheld)",
+        "🧸 ぬいぐるみ (Plushies)",
+        "🎸 音楽・趣味・その他 (Hobbies)"
+      ];
+      const treasureNames = [
+        "💰 財宝・金塊 (Treasure & Gold Bars)",
+        "💎 宝石・ジュエル (Gems & Jewels)",
+        "🪙 コイン・貨幣 (Coins & Currency)",
+        "💴 紙幣・札束 (Banknotes & Cash)",
+        "📦 宝箱・保管容器 (Treasure Chests & Storage)",
+        "💼 アタッシュケース・現金ケース (Attaché & Money Cases)",
+        "🛒 運搬・台車 (Carts & Transport)"
+      ];
+
+      const basicEntries = byNames(basicNames);
+      const handheldEntries = byNames(handheldNames);
+      const treasureEntries = byNames(treasureNames);
+      [...basicNames, ...handheldNames, ...treasureNames].forEach(name => consumedNames.add(name));
+
+      const foodEntries = [
+        // 特化コレクションは通常の料理棚より先に置き、深掘り用途を見つけやすくする。
+        ...entries.filter(([n]) => n.startsWith("🍱 食べ物・飲み物 / 🍚 丼物特化コレクション")),
+        ...entries.filter(([n]) => n.startsWith("🍱 食べ物・飲み物 / 🍕 ピザ特化コレクション")),
+        ...entries.filter(([n]) => n.startsWith("🍱 食べ物・飲み物 / 🍓 トッピング・フィリング /")),
+        ...entries.filter(([n]) => n.startsWith("🍱 食べ物・飲み物 / 🍙 おにぎり・和の仕上げ /")),
+        ...entries.filter(([n]) => n.startsWith("🍱 食べ物・飲み物 / 🥤 ドリンクフレーバー /")),
+        ...entries.filter(([n]) => n === "🍱 食べ物・飲み物 / 🍽 定番完成メニュー"),
+        ...entries.filter(([n]) => n.startsWith("🍱 食べ物・飲み物 / 📏 サイズ・量カスタマイズ /")),
+        ...entries.filter(([n]) => n.startsWith("🍱 食べ物・飲み物 /") &&
+          !n.startsWith("🍱 食べ物・飲み物 / 🍚 丼物特化コレクション") &&
+          !n.startsWith("🍱 食べ物・飲み物 / 🍕 ピザ特化コレクション") &&
+          !n.startsWith("🍱 食べ物・飲み物 / 🍓 トッピング・フィリング /") &&
+          !n.startsWith("🍱 食べ物・飲み物 / 🍙 おにぎり・和の仕上げ /") &&
+          !n.startsWith("🍱 食べ物・飲み物 / 🥤 ドリンクフレーバー /") &&
+          n !== "🍱 食べ物・飲み物 / 🍽 定番完成メニュー" &&
+          !n.startsWith("🍱 食べ物・飲み物 / 📏 サイズ・量カスタマイズ /"))
+      ];
+      const weaponEntries = entries.filter(([n]) => n.startsWith("⚔️ 武器・兵器 /"));
+      const itemActionEntries = entries.filter(([n]) => n.startsWith("🤲 アイテムの状態・動作"));
+      [...foodEntries, ...weaponEntries, ...itemActionEntries].forEach(([name]) => consumedNames.add(name));
+
+      const otherEntries = entries.filter(([name]) => !consumedNames.has(name));
+
+      if (akashicEntries.length) {
+        divider("ACCESSORY ARSENAL / 装備アカシックレコード", "一発セットと部位別装備を、初期閉じ・スマホ一列で探す", "#1f7772");
+        const akashicRoot = rootDetails(
+          `💠 装備アカシックを開く　${ACCESSORY_AKASHIC_AUDIT.added}点`,
+          "サクッと決める時は『おまかせ装備セット』、細かく選ぶ時は頭・首・腕・腰・背中・道具・特殊・素材から選びます。既存棚は消していません。",
+          { border: "#8fcfc7", bg: "#f3fffd", color: "#185e5b" }
+        );
+        akashicRoot.classList.add("accessory-akashic-root");
+        renderEntryTree(buildEntryTree(akashicEntries), akashicRoot, {
+          border: "#b8ded9",
+          bg: "#fbfffe",
+          color: "#205f5c"
+        });
+        section.appendChild(akashicRoot);
+      }
+
+      renderFlatGroup("💎 定番アクセサリ", "旧来の汎用語を互換ショートカットとして維持", basicEntries, {
+        titleColor: "#a3477a",
+        border: "#ead2e1",
+        bg: "#fff8fc",
+        color: "#8a2d66"
+      });
+
+      renderFlatGroup("🤲 手持ち・趣味道具", "手に持つ小物、ぬいぐるみ、楽器・趣味用品", handheldEntries, {
+        titleColor: "#8a5a20",
+        border: "#eadcc8",
+        bg: "#fffaf2",
+        color: "#744818"
+      });
+
+      renderFlatGroup("💰 財宝・貨幣・運搬", "宝石・現金・宝箱・ケース・台車", treasureEntries, {
+        titleColor: "#987000",
+        border: "#eadfbc",
+        bg: "#fffdf4",
+        color: "#7a5a00"
+      });
+
       if (foodEntries.length) {
-        const foodWrap = document.createElement("details");
-        const foodSum = document.createElement("summary"); foodSum.textContent = "🍱 食べ物・飲み物"; foodWrap.appendChild(foodSum);
-        renderEntryTree(buildEntryTree(foodEntries), foodWrap);
+        divider("🍱 食べ物・飲み物", "料理・飲み物・食材・サイズ・食べ物演出", "#8a6420");
+        const foodWrap = rootDetails("🍱 食べ物・飲み物を開く", "料理・飲み物・食材に加え、サイズ・量を食べ物へ連動できる棚", {
+          border: "#eadcc8",
+          bg: "#fffaf2",
+          color: "#744818"
+        });
+        renderEntryTree(buildEntryTree(foodEntries), foodWrap, {
+          border: "#eadcc8",
+          bg: "#fffdf8",
+          color: "#744818"
+        });
         section.appendChild(foodWrap);
       }
+
       if (weaponEntries.length) {
-        const weaponRoot = document.createElement("details");
-        const weaponSum = document.createElement("summary"); weaponSum.textContent = "⚔️ 武器・兵器"; weaponRoot.appendChild(weaponSum);
-        weaponEntries.forEach(([k, cat]) => renderCategory(k.split(" / ").pop(), cat, weaponRoot));
+        divider("⚔️ 武器・兵器", "武器種・防具・SF武器・武器状態", "#3353a4");
+        const weaponRoot = rootDetails("⚔️ 武器・兵器を開く", "武器種と武器の見た目を分離した棚", {
+          border: "#bdd0f0",
+          bg: "#f7faff",
+          color: "#244899"
+        });
+        renderEntryTree(buildEntryTree(weaponEntries), weaponRoot, {
+          border: "#bdd0f0",
+          bg: "#f8fbff",
+          color: "#244899"
+        });
         section.appendChild(weaponRoot);
       }
 
-      if (IS_UNLOCKED) {
-        const secretRoot = document.createElement("details");
-        secretRoot.style.border = "1px solid #ffcccc";
-        const secretSum = document.createElement("summary"); secretSum.textContent = "🔒 R-18"; secretSum.style.color = "#b00000";
-        secretRoot.appendChild(secretSum);
-        const secretWrap = document.createElement("div");
-        Object.entries(SECRET_CATEGORIES).forEach(([name, data]) => renderCategory(name, data, secretWrap));
-        secretRoot.appendChild(secretWrap); section.appendChild(secretRoot);
+      if (itemActionEntries.length) {
+        divider("🤲 状態・動作", "持つ・運ぶ・置くなど、アイテムの扱い方", "#666");
+        const actionRoot = rootDetails("🤲 アイテム状態・動作を開く", "小物そのものではなく、持ち方・置き方・動作を指定", {
+          border: "#d8d8d8",
+          bg: "#fafafa",
+          color: "#555"
+        });
+        itemActionEntries.forEach(([k, cat]) => renderCategory(k.split(" / ").pop(), cat, actionRoot, {
+          border: "#d8d8d8",
+          bg: "#fff",
+          color: "#555"
+        }));
+        section.appendChild(actionRoot);
       }
+
+      renderFlatGroup("📦 その他小物", "既存分類に入らない予備棚", otherEntries, {
+        titleColor: "#777",
+        border: "#ddd",
+        bg: "#fff",
+        color: "#555"
+      });
+
+      if (IS_UNLOCKED) {
+        divider("🔞 R-18 / Secret", "成人向けの小物・拘束具・特殊装飾・動作", "#b00050");
+        const secretRoot = rootDetails("🔒 R-18 小物を開く", "通常小物と混ざらないよう末尾に分離", {
+          border: "#ffcccc",
+          bg: "#fff7f9",
+          color: "#b00050"
+        });
+
+        const secretGroups = [
+          {
+            title: "🧸 アイテム・生物系",
+            names: [
+              "🧸 R-18: おもちゃ・アイテム (Adult Toys)",
+              "🐙 R-18: 触手・スライム・生物 (Tentacles & Slime)"
+            ]
+          },
+          {
+            title: "⛓ 拘束・装飾系",
+            names: [
+              "⛓️ R-18: 拘束具・BDSM (Restraints & BDSM)",
+              "🔞 R-18: 特殊装飾・印 (Marks & Piercings)"
+            ]
+          },
+          {
+            title: "🤲 動作・状態",
+            names: [
+              "🤲 R-18: 動作・状態 (Secret Actions)"
+            ]
+          }
+        ];
+
+        secretGroups.forEach(group => {
+          const groupRoot = rootDetails(group.title, "", {
+            border: "#ffd6e0",
+            bg: "#fff",
+            color: "#a00048"
+          });
+          group.names.forEach(name => {
+            if (SECRET_CATEGORIES[name]) {
+              renderCategory(name, SECRET_CATEGORIES[name], groupRoot, {
+                border: "#ffd6e0",
+                bg: "#fff",
+                color: "#a00048"
+              });
+            }
+          });
+          secretRoot.appendChild(groupRoot);
+        });
+
+        Object.entries(SECRET_CATEGORIES).forEach(([name, data]) => {
+          const alreadyGrouped = secretGroups.some(group => group.names.includes(name));
+          if (!alreadyGrouped) {
+            renderCategory(name, data, secretRoot, {
+              border: "#ffd6e0",
+              bg: "#fff",
+              color: "#a00048"
+            });
+          }
+        });
+
+        section.appendChild(secretRoot);
+      }
+
       parent.appendChild(section);
     },
 
     getTags() {
       const normalTags = []; const targetTags = []; const actionTags = [];
+      const foodTargets = []; const foodModifiers = []; const foodSizeByMode = Object.create(null);
+
       document.querySelectorAll(".accessories-section input:checked").forEach(cb => {
-        const type = cb.dataset.type; const val = cb.dataset.en;
-        if (type === "action") actionTags.push(val); else if (type === "target") targetTags.push(val); else normalTags.push(val);
+        const type = cb.dataset.type;
+        const val = cb.dataset.en;
+
+        // サイズ指定は単独では出力しない。対応する食べ物・飲み物だけへ合成する。
+        if (cb.dataset.foodSizeMode && cb.dataset.foodSizePreset) {
+          if (!foodSizeByMode[cb.dataset.foodSizeMode]) {
+            foodSizeByMode[cb.dataset.foodSizeMode] = cb.dataset.foodSizePreset;
+          }
+          return;
+        }
+
+        // トッピング・フィリング・フレーバーも単独では出さない。選んだ適用先だけへ合成する。
+        if (cb.dataset.foodModifierGroup) {
+          foodModifiers.push({
+            group: cb.dataset.foodModifierGroup,
+            role: cb.dataset.foodModifierRole || "topping",
+            value: cb.dataset.foodModifierValue || val,
+            applyTo: cb.dataset.foodApplyTo || ""
+          });
+          return;
+        }
+
+        if (cb.dataset.foodTarget === "true") {
+          foodTargets.push({
+            key: cb.dataset.foodDecorationTargetKey || "",
+            value: val,
+            mode: cb.dataset.foodSizeTargetMode || "portion",
+            kind: cb.dataset.foodSizeTargetKind || "",
+            decorationGroup: cb.dataset.foodDecorationGroup || "",
+            drinkBaseType: cb.dataset.foodDrinkBaseType || ""
+          });
+          return;
+        }
+
+        if (type === "action") actionTags.push(val);
+        else if (type === "target") targetTags.push(val);
+        else normalTags.push(val);
+      });
+
+      const modifiersByTarget = Object.create(null);
+      foodModifiers.forEach(modifier => {
+        if (!modifier.applyTo) return;
+        (modifiersByTarget[modifier.applyTo] = modifiersByTarget[modifier.applyTo] || []).push(modifier);
       });
 
       const finalTags = [...normalTags];
+      foodTargets.forEach(food => {
+        const preset = foodSizeByMode[food.mode];
+        const modifiers = food.key ? modifiersByTarget[food.key] || [] : [];
+        let tag;
+
+        // 飲み物は「桃ジュース」→容量指定の順。量の語がフレーバーへ割り込まないようにする。
+        if (food.decorationGroup === "drink") {
+          tag = composeFoodDecorationTag(food.value, food, modifiers);
+          if (preset) tag = composeFoodSizeTag(tag, food.mode, preset, food.kind);
+        } else {
+          tag = preset ? composeFoodSizeTag(food.value, food.mode, preset, food.kind) : food.value;
+          if (food.decorationGroup === "dessert" || food.decorationGroup === "onigiri") {
+            tag = composeFoodDecorationTag(tag, food, modifiers);
+          }
+        }
+        finalTags.push(tag);
+      });
+
       if (actionTags.length > 0 && targetTags.length > 0) {
         actionTags.forEach(action => {
           targetTags.forEach(target => {
             const suffixActions = ["in mouth", "on back", "on belt", "on head", "in pocket", "in pussy, sex", "inserted deeply", "vibrating", "constricting", "wrapping around", "covered in slime"];
             if (suffixActions.includes(action)) {
-              finalTags.push(`${target} ${action}`); 
+              finalTags.push(`${target} ${action}`);
             } else {
-              finalTags.push(`${action} ${target}`); 
+              finalTags.push(`${action} ${target}`);
             }
           });
         });

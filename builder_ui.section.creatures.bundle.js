@@ -276,6 +276,28 @@
     ];
 
 
+
+    // Fantasy creatures are external beings only. Hybrid/roleplay variants belong to Race / Preset Packs.
+    const DATA_FANTASY_DRAGONKIN = [
+      { ja: "ドラゴン", en: "dragon, fantasy creature" },
+      { ja: "ワイバーン", en: "wyvern, dragon-like fantasy creature" }
+    ];
+    const DATA_FANTASY_HOOFED_WINGED = [
+      { ja: "グリフォン", en: "griffin, winged fantasy creature" },
+      { ja: "ペガサス", en: "pegasus, winged horse fantasy creature" },
+      { ja: "ユニコーン", en: "unicorn, horned horse fantasy creature" },
+      { ja: "麒麟", en: "kirin, sacred hoofed fantasy creature" }
+    ];
+    const DATA_FANTASY_AVIAN = [
+      { ja: "フェニックス", en: "phoenix, fire bird fantasy creature" },
+      { ja: "サンダーバード", en: "thunderbird, giant bird fantasy creature" }
+    ];
+    const DATA_FANTASY_GUARDIANS = [
+      { ja: "ケルベロス", en: "cerberus, three-headed hound fantasy creature" },
+      { ja: "スフィンクス", en: "sphinx, guardian fantasy creature" },
+      { ja: "バジリスク", en: "basilisk, serpent fantasy creature" }
+    ];
+
     // ---- UI helpers ----
     function el(tag, attrs={}, children=[]) {
       const n = document.createElement(tag);
@@ -310,13 +332,27 @@
     }
 
     function classifyCreaturePoseShortcut(item) {
-      if (!item || !item.en || isCreaturePoseRelationLike(item)) return null;
+      if (!item || item.noPoseShortcut || !item.en || isCreaturePoseRelationLike(item)) return null;
       const t = `${item.ja || ""} ${item.en || ""}`.toLowerCase();
+
+      // 幻獣は鳥判定より先に分岐する。フェニックスを実鳥棚へ吸わせない。
+      if (textHasAny(t, [
+        "dragon", "ドラゴン", "wyvern", "griffin", "グリフォン", "unicorn", "ユニコーン",
+        "phoenix", "フェニックス", "thunder bird", "thunderbird", "cerberus", "ケルベロス",
+        "pegasus", "ペガサス", "kirin", "麒麟", "sphinx", "basilisk", "mythical", "fantasy creature"
+      ])) {
+        return {
+          family: "fantasy",
+          targetShelf: "🐉 架空生物・幻獣（単体・別個体）",
+          focusLabel: "人物＋選択中の幻獣：並び・見守り＋別個体",
+          title: "架空生物・幻獣に合うポーズ候補"
+        };
+      }
 
       if (textHasAny(t, [
         "shima-enaga", "bushtit", "long-tailed bushtit", "white head shima",
         "sparrow", "swallow", "owl", "eagle", "hawk", "pelican", "swan",
-        "penguin", "crow", "pigeon", "bird", "phoenix", "thunder bird", "crane"
+        "penguin", "crow", "pigeon", "bird", "crane"
       ])) {
         return {
           family: "bird",
@@ -341,6 +377,16 @@
         };
       }
 
+      // 滑空系は "squirrel" より先に判定する。モモンガを小型齧歯類へ吸わせない。
+      if (textHasAny(t, ["flying squirrel", "sugar glider", "gliding membrane", "gliding"])) {
+        return {
+          family: "glider",
+          targetShelf: "🦘 有袋類・珍獣",
+          focusLabel: "人物＋選択中の滑空小動物：肩・腕に乗る＋別個体",
+          title: "滑空小動物に合うポーズ候補"
+        };
+      }
+
       if (textHasAny(t, [
         "hamster", "guinea pig", "marmot", "chinchilla", "degu", "mouse", "rat",
         "gerbil", "dormouse", "lemming", "jerboa", "kangaroo rat", "squirrel",
@@ -354,15 +400,6 @@
         };
       }
 
-      if (textHasAny(t, ["flying squirrel", "sugar glider", "gliding membrane", "gliding"])) {
-        return {
-          family: "glider",
-          targetShelf: "🦘 有袋類・珍獣",
-          focusLabel: "人物＋選択中の滑空小動物：肩・腕に乗る＋別個体",
-          title: "滑空小動物に合うポーズ候補"
-        };
-      }
-
       if (textHasAny(t, ["rabbit", "hare", "bunny", "pika"])) {
         return {
           family: "rabbit",
@@ -372,7 +409,17 @@
         };
       }
 
-      if (textHasAny(t, ["mink", "ferret", "weasel", "otter", "stoat", "ermine", "badger", "mustelid", "hedgehog", "mole", "shrew"])) {
+      // カワウソ・ラッコ系は小型哺乳類より水生動物を優先する。
+      if (textHasAny(t, ["sea otter", "river otter", "otter"])) {
+        return {
+          family: "aquatic",
+          targetShelf: "🌊 水生・海洋生物",
+          focusLabel: "水生動物単体：水中を泳ぐ＋体の流線形",
+          title: "水生・海洋生物に合うポーズ候補"
+        };
+      }
+
+      if (textHasAny(t, ["mink", "ferret", "weasel", "stoat", "ermine", "badger", "mustelid", "hedgehog", "mole", "shrew"])) {
         return {
           family: "small_mammal",
           targetShelf: "🐰 うさぎ・小型哺乳類",
@@ -438,18 +485,18 @@
       if (textHasAny(t, ["oyster", "bivalve", "clam", "scallop", "mussel", "sea anemone", "coral", "portuguese man o' war", "siphonophore", "jellyfish"])) {
         return {
           family: "marine_invertebrate",
-          targetShelf: "🪸 海洋無脊椎・浮遊生物",
-          focusLabel: "海洋無脊椎：殻・触手・群体を見せる",
-          title: "海洋無脊椎・浮遊生物の構図候補"
+          targetShelf: "🌊 水生・海洋生物",
+          focusLabel: "海洋無脊椎単体：漂うクラゲ・管クラゲ＋触手",
+          title: "水生・海洋生物に合うポーズ候補"
         };
       }
 
       if (textHasAny(t, ["fish", "shark", "dolphin", "whale", "seal", "sea lion", "otter", "aquatic", "marine"])) {
         return {
           family: "aquatic",
-          targetShelf: "🐬 水生動物",
-          focusLabel: "水生動物単体：イルカジャンプ＋ラッコ浮遊＋サメ旋回",
-          title: "水生動物に合うポーズ候補"
+          targetShelf: "🌊 水生・海洋生物",
+          focusLabel: "水生動物単体：水中を泳ぐ＋体の流線形",
+          title: "水生・海洋生物に合うポーズ候補"
         };
       }
 
@@ -459,15 +506,6 @@
           targetShelf: "🦋 昆虫・節足動物",
           focusLabel: "昆虫・節足動物単体：蝶羽休め＋カマキリ構え＋サソリ尾上げ",
           title: "昆虫・節足動物に合うポーズ候補"
-        };
-      }
-
-      if (textHasAny(t, ["dragon", "griffin", "unicorn", "cerberus", "mythical", "fantasy creature"])) {
-        return {
-          family: "fantasy",
-          targetShelf: "🐉 幻獣・ドラゴン",
-          focusLabel: "ドラゴン単体：翼広げ＋飛び立ち＋咆哮",
-          title: "幻獣・ドラゴンに合うポーズ候補"
         };
       }
 
@@ -594,7 +632,7 @@
       box.style.display = "block";
 
       const msg = el("div", { style: "font-weight:800; margin-bottom:6px;" }, `🐾 ${animalName}：${target.title || "対応ポーズ候補"}があります。`);
-      const sub = el("div", { style: "margin-bottom:8px;" }, `Pose欄の「${target.targetShelf}」へショートカットしますか？`);
+      const sub = el("div", { style: "margin-bottom:8px;" }, `Pose欄の「${target.targetShelf}」へショートカットしますか？チェックは自動ONにしません。`);
       const actions = el("div", { style: "display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end;" });
 
       const noBtn = el("button", { type: "button", style: "border:1px solid #94a3b8; background:#fff; border-radius:999px; padding:6px 10px; font-weight:700; flex:1 1 120px;" }, "いいえ");
@@ -633,6 +671,28 @@
       // 固定カードなので、棚内スクロール位置は動かさない。
     }
 
+    function isCreaturePoseShortcutSuppressed(ev) {
+      try {
+        if (
+          window.__historyRestoring ||
+          window.__historySilentRestoring ||
+          window.__builderHistoryRestoring ||
+          window.__promptHistoryRestoring ||
+          window.__SHIMA_RESTORING_HISTORY__ ||
+          window.__builderResetting ||
+          window.__builderIsResetting ||
+          window.__SHIMA_INITING__ ||
+          window.__shimaInitialMounting ||
+          window.__isSyncingCheckboxes ||
+          window.__linkedIdsApplying ||
+          window.__suppressCreaturePoseShortcut
+        ) return true;
+        // ユーザー操作以外の合成changeでは案内カードを出さない。
+        if (ev && ev.isTrusted === false) return true;
+      } catch(_) {}
+      return false;
+    }
+
     function makeCheckboxRow(item) {
       const id = `cr_${Math.random().toString(36).slice(2)}`;
       const cb = el("input", { type: "checkbox", id, "data-val": item.en });
@@ -650,8 +710,9 @@
         style: "display:grid; grid-template-columns:26px 1fr; column-gap:8px; align-items:start; margin:6px 0; min-width:0; max-width:100%; box-sizing:border-box;"
       }, [cb, lb]);
 
-      cb.addEventListener("change", () => {
+      cb.addEventListener("change", (ev) => {
         if (!cb.checked) return;
+        if (isCreaturePoseShortcutSuppressed(ev)) return;
         const target = classifyCreaturePoseShortcut(item);
         if (target) showCreaturePoseShortcut(item, target, row);
       });
@@ -1158,28 +1219,178 @@
       return root;
     }
 
+
+    const DATA_CYBER_ANIMAL_COMPLETE = [
+      {
+        ja: "動物優先メカ化・基本",
+        en: "the selected animal is the mechanized subject, cybernetic modifications are applied directly to the animal body, the animal receives the main cybernetic detailing, visible cybernetic animal anatomy, the human remains secondary and fully human, separate characters, distinct bodies, different species, species silhouette preserved, non-humanoid animal body, no species replacement",
+        noPoseShortcut: true
+      },
+      {
+        ja: "小鳥メカ強化・肩乗り",
+        en: "human character and a separate cybernetic small bird, the bird is the mechanized subject, the bird receives the main cybernetic detailing, cybernetic modifications are applied directly to the bird body, the human body remains fully human, perched on the human shoulder, the bird is visibly mechanized, armored avian torso, segmented metal feather panels, hard-surface wing structure, mechanical wing joints, glowing optical sensor eye, micro leg servos, tiny robotic claws, robotic tail feather frame, miniature dorsal module, tiny avian harness frame, compact drone-bird appearance while preserving the species silhouette, no humanoid bird, no species replacement, no giant bird wings on the human body",
+        noPoseShortcut: true
+      },
+      {
+        ja: "小鳥単体・純メカ試験",
+        en: "single cybernetic small bird subject, the bird is the only mechanized subject, visibly mechanized bird body, armored avian torso, segmented metal feather panels, hard-surface wing structure, mechanical wing joints, glowing optical sensor eye, micro leg servos, tiny robotic claws, robotic tail feather frame, miniature dorsal module, tiny avian harness frame, compact reconnaissance drone-bird design, species silhouette preserved, non-humanoid bird body, no human character, no species replacement",
+        noPoseShortcut: true
+      },
+      {
+        ja: "小型動物メカ強化・偵察型",
+        en: "the selected small animal is the mechanized subject, cybernetic modifications are applied directly to the small animal body, compact cybernetic small-animal body, the animal is visibly mechanized, lightweight armor scaled for a tiny animal, segmented metal fur panels, micro paw servos, articulated tail support, glowing optical sensor eye, miniature dorsal module, visible cybernetic small-animal anatomy, compact reconnaissance unit appearance while preserving the species silhouette, non-humanoid animal body, no species replacement",
+        noPoseShortcut: true
+      },
+      {
+        ja: "四足獣メカ強化・随伴型",
+        en: "the selected quadruped animal is the mechanized subject, cybernetic modifications are applied directly to the animal body, the animal is visibly mechanized, armored quadruped torso, segmented metal fur panels, hard-surface limb structure, reinforced mechanical legs, mechanical paw joints, glowing optical sensor eye, robotic tail frame, visible cybernetic animal anatomy, species silhouette preserved, non-humanoid animal body, the human remains secondary and fully human, no species replacement",
+        noPoseShortcut: true
+      },
+      {
+        ja: "大型獣・重装甲メタル",
+        en: "separate heavy cybernetic beast, the selected animal is the mechanized subject, the animal is visibly mechanized, armored beast torso, reinforced mechanical limbs, heavy cybernetic plating, segmented metal fur or scale armor, glowing optical sensor eyes, powerful machine-beast frame, predator or large-animal silhouette preserved, visible cybernetic animal anatomy, non-humanoid animal body, no species replacement",
+        noPoseShortcut: true
+      },
+      {
+        ja: "水生動物・流線型メカ",
+        en: "separate cybernetic aquatic animal, the aquatic animal is the mechanized subject, cybernetic modifications are applied directly to the aquatic body, the aquatic animal is visibly mechanized, mechanized aquatic body, segmented hydrodynamic plating, armored fin structure, smooth hard-surface body panels, glowing optical sensor eye, luminous seams along the body, species silhouette preserved, non-humanoid animal body, no species replacement",
+        noPoseShortcut: true
+      }
+    ];
+
+    const DATA_CYBER_ANIMAL_BASE = [
+      { ja: "動物が主メカ対象", en: "the selected animal is the mechanized subject, the animal receives the main cybernetic detailing", noPoseShortcut: true },
+      { ja: "動物体へ直接機械化", en: "cybernetic modifications are applied directly to the animal body, visible mechanical components on the animal", noPoseShortcut: true },
+      { ja: "別個体の動物維持", en: "separate animal body, distinct animal subject, different species, non-humanoid animal body", noPoseShortcut: true },
+      { ja: "種シルエット維持", en: "species silhouette preserved, selected animal species remains recognizable, no species replacement", noPoseShortcut: true },
+      { ja: "人間側は脇役維持", en: "the human remains secondary, the human body remains fully human, animal cybernetics do not transfer to the human body", noPoseShortcut: true },
+      { ja: "人間翼化を抑える", en: "no giant bird wings on the human body, no bird-wing replacement on the human body, cybernetic wings belong to the animal companion", noPoseShortcut: true },
+      { ja: "外付け機械パーツ", en: "external cybernetic parts attached to the animal body, visible mechanical components on the animal", noPoseShortcut: true },
+      { ja: "完全機械動物寄り", en: "fully cybernetic animal body, precision-engineered robotic animal anatomy, machine-animal frame", noPoseShortcut: true }
+    ];
+
+    const DATA_CYBER_ANIMAL_CUSTOMIZE = [
+      { ja: "鳥：胴体メカ化", en: "armored avian torso, visible cybernetic bird anatomy, miniature dorsal module, tiny avian harness frame", noPoseShortcut: true },
+      { ja: "鳥：金属羽根パネル", en: "segmented metal feather panels, hard-surface wing structure, mechanical wing joints, robotic tail feather frame", noPoseShortcut: true },
+      { ja: "鳥：センサー眼と脚サーボ", en: "glowing optical sensor eye, micro leg servos, tiny robotic claws, lightweight armor scaled for a tiny bird", noPoseShortcut: true },
+      { ja: "小型：胴体メカ化", en: "compact cybernetic small-animal body, visible cybernetic small-animal anatomy, miniature dorsal module", noPoseShortcut: true },
+      { ja: "小型：軽量偵察装備", en: "compact reconnaissance animal unit, miniature sensor modules, tiny antenna details, lightweight external armor", noPoseShortcut: true },
+      { ja: "四足：金属毛皮パネル", en: "armored quadruped torso, segmented metal fur panels, hard-surface limb structure, mechanical paw joints", noPoseShortcut: true },
+      { ja: "四足：尾フレーム", en: "robotic tail frame, articulated tail support, luminous seams along the animal body", noPoseShortcut: true },
+      { ja: "大型獣：重装甲", en: "heavy cybernetic plating, reinforced mechanical limbs, armored beast shoulder plates, powerful machine-beast frame", noPoseShortcut: true },
+      { ja: "水生：メカヒレ", en: "mechanized aquatic body, armored fin structure, segmented hydrodynamic plating, smooth hard-surface body panels", noPoseShortcut: true },
+      { ja: "爬虫類：金属鱗", en: "segmented metal scale panels, armored reptile torso, mechanical tail segments, glowing sensor eyes", noPoseShortcut: true },
+      { ja: "発光ライン", en: "thin glowing circuit lines along the animal body, illuminated seams, small diagnostic light points", noPoseShortcut: true },
+      { ja: "メタル外皮強め", en: "visible metallic plating on the animal body, hard-surface animal anatomy, clean mechanical panel separation", noPoseShortcut: true }
+    ];
+
+    const DATA_CYBER_ANIMAL_SETTING = [
+      { ja: "動物優先・人物添え", en: "the animal is the main mechanized subject, the human character is only a companion, cybernetic detailing stays on the animal body", noPoseShortcut: true },
+      { ja: "肩乗りメカ鳥", en: "cybernetic bird perched on the human shoulder, the bird is visibly mechanized, the bird receives the main cybernetic detailing, separate characters", noPoseShortcut: true },
+      { ja: "手の上の小型メカ動物", en: "compact cybernetic small animal in human hands, the animal is visibly mechanized, cybernetic modifications are applied directly to the small animal body", noPoseShortcut: true },
+      { ja: "隣に立つ四足メカ動物", en: "cybernetic quadruped standing beside the human character, separate animal companion, distinct bodies, the quadruped is visibly mechanized", noPoseShortcut: true },
+      { ja: "偵察ドローン動物", en: "reconnaissance cyber animal companion, compact scout unit, sensor modules and diagnostic lights on the animal body", noPoseShortcut: true },
+      { ja: "整備台・ラボ", en: "cyber animal on a maintenance platform, futuristic lab, small tools, holographic diagnostics focused on the animal body", noPoseShortcut: true },
+      { ja: "戦場随伴ユニット", en: "battlefield support cyber animal companion, armored escort animal, sci-fi tactical support unit", noPoseShortcut: true }
+    ];
+
+    const DATA_CYBER_ANIMAL_QUALITY = [
+      { ja: "動物メカ部位明瞭", en: "clear readable cybernetic parts on the animal body, visible mechanical panel separation on the selected animal", noPoseShortcut: true },
+      { ja: "ハードサーフェス描写", en: "hard-surface animal anatomy, clean edge definition, refined mechanical details", noPoseShortcut: true },
+      { ja: "素材分離", en: "clear material separation between organic fur or feathers and polished metal plating on the animal", noPoseShortcut: true },
+      { ja: "金属反射", en: "polished surface reflections, realistic material response, clear specular highlights", noPoseShortcut: true },
+      { ja: "発光制御", en: "controlled bloom, luminous seams, glowing sensor eye, soft rim light", noPoseShortcut: true },
+      { ja: "小型精密メカ", en: "miniature mechanical joints, micro-surface detail, precision-engineered compact components", noPoseShortcut: true }
+    ];
+
+    function makeCyberMechanicalAnimalsGroup() {
+      const outer = makeGroupContainer("🦾 サイバー・機械動物補助", "#38bdf8");
+
+      const makeSub = (title, items, accent) => {
+        const d = el("details", { class: "creatures-acc", style: `margin:8px 0; border:2px dashed ${accent}; border-radius:10px; background:#f8fdff; padding:8px; box-sizing:border-box;` });
+        d.open = false;
+        d.appendChild(el("summary", { text: title, style: "cursor:pointer; font-weight:800; font-size:13px;" }));
+        const box = el("div", { style: "margin-top:6px" });
+        (items || []).forEach(it => box.appendChild(makeCheckboxRow(it)));
+        d.appendChild(box);
+        return d;
+      };
+
+      const note = el("div", { style: "font-size:12px; line-height:1.35; color:#075985; margin:4px 0 8px;" },
+        "動物種は既存の動物棚で選び、ここでは「動物自身」をサイボーグ化・メタル化する。人物側へ翼や装甲が吸われる時は、動物優先・人間翼化抑制を併用。Pose連動は発火させない補助棚。"
+      );
+      outer.box.appendChild(note);
+      outer.box.appendChild(makeSub("✅ 完成セット", DATA_CYBER_ANIMAL_COMPLETE, "#38bdf8"));
+      outer.box.appendChild(makeSub("🧬 ベース", DATA_CYBER_ANIMAL_BASE, "#0ea5e9"));
+      outer.box.appendChild(makeSub("🧩 カスタマイズ", DATA_CYBER_ANIMAL_CUSTOMIZE, "#06b6d4"));
+      outer.box.appendChild(makeSub("⚙️ 設定", DATA_CYBER_ANIMAL_SETTING, "#0284c7"));
+      outer.box.appendChild(makeSub("✨ クオリティ補助", DATA_CYBER_ANIMAL_QUALITY, "#0891b2"));
+      return outer.det;
+    }
+
+
+    function makeFantasyCreaturesGroup() {
+      const outer = makeGroupContainer("🐉 架空生物・幻獣（単体・別個体）", "#8b5cf6");
+
+      const note = el("div", {
+        style: "font-size:12px; line-height:1.45; padding:8px 10px; margin:2px 0 8px; border-radius:9px; background:#faf5ff; color:#5b21b6;"
+      });
+      note.textContent = "ここでは別個体として登場する幻獣の種を選択します。人物との配置・動きはPose側で選びます。";
+      outer.box.appendChild(note);
+
+      outer.box.appendChild(makeGroup("🐲 竜・飛竜 / Dragons", DATA_FANTASY_DRAGONKIN, "#7c3aed"));
+      outer.box.appendChild(makeGroup("🪽 翼・角・聖獣 / Winged & Horned", DATA_FANTASY_HOOFED_WINGED, "#8b5cf6"));
+      outer.box.appendChild(makeGroup("🔥 鳥系幻獣 / Avian Mythics", DATA_FANTASY_AVIAN, "#a855f7"));
+      outer.box.appendChild(makeGroup("🛡️ 守護・異形幻獣 / Guardians", DATA_FANTASY_GUARDIANS, "#6d28d9"));
+      return outer.det;
+    }
+
     const API = {
       initUI(container) {
         const parent = document.querySelector("#list-creatures") || container;
         const contentArea = parent.querySelector(".section-content") || parent;
-        contentArea.innerHTML = "";
 
-        const note = el("div", { class: "creatures-note", style: "font-size:12px; opacity:0.85; margin:6px 0 10px 0;" });
-        note.textContent = "生物は“存在”。小物と混ぜない。ここで同行・群れ・目線まで制御する。";
-        contentArea.appendChild(note);
+        // 他の拡張棚を消さない。Creatures v1 が作った自分の領域だけを差し替える。
+        const previous = contentArea.querySelector("[data-creatures-v1-root='1']");
+        if (previous) previous.remove();
 
-        try { contentArea.appendChild(makeBirdsGroup()); } catch (e) { console.error(e); }
+        const catalogRoot = el("div", {
+          class: "creatures-v1-root",
+          "data-creatures-v1-root": "1",
+          style: "display:block; min-width:0; max-width:100%;"
+        });
+        contentArea.appendChild(catalogRoot);
+
+        const note = el("div", {
+          class: "creatures-note",
+          style: "font-size:12px; line-height:1.45; opacity:0.90; margin:6px 0 12px 0; padding:9px 10px; border-radius:10px; background:#f8fafc;"
+        });
+        note.textContent = "生物種・単体生物・人物とは別個体の生物を選ぶ棚です。人物との融合・なりきりは Preset Packs / Race 側で扱います。";
+        catalogRoot.appendChild(note);
+
+        // 見出しは浅い sibling にして、既存の種別棚・data-val・履歴パスをそのまま保つ。
+        catalogRoot.appendChild(makeSectionDivider("🐾", "現実生物・動物", "鳥・爬虫類・霊長類・犬猫・齧歯類・小型哺乳類"));
+        try { catalogRoot.appendChild(makeBirdsGroup()); } catch (e) { console.error(e); }
         try {
-          contentArea.appendChild(makeReptilesGroup());
-          contentArea.appendChild(makePrimatesGroup());
-          contentArea.appendChild(makeDogGroup());
-          contentArea.appendChild(makeCatGroup());
-          contentArea.appendChild(makeRodentsGroup()); // 🐹 Now works correctly
-          contentArea.appendChild(makeSmallAnimalsGroup()); // 🐰 NEW: Added safely here
-          contentArea.appendChild(makeMarineLifeGroup());
+          catalogRoot.appendChild(makeReptilesGroup());
+          catalogRoot.appendChild(makePrimatesGroup());
+          catalogRoot.appendChild(makeDogGroup());
+          catalogRoot.appendChild(makeCatGroup());
+          catalogRoot.appendChild(makeRodentsGroup());
+          catalogRoot.appendChild(makeSmallAnimalsGroup());
         } catch (e) { console.error(e); }
 
-        contentArea.appendChild(makeRelationsGroup());
+        catalogRoot.appendChild(makeSectionDivider("🌊", "水生・海洋生物", "魚類・海洋哺乳類・無脊椎・海域環境"));
+        try { catalogRoot.appendChild(makeMarineLifeGroup()); } catch (e) { console.error(e); }
+
+        catalogRoot.appendChild(makeSectionDivider("🐉", "架空生物・幻獣（単体・別個体）", "ドラゴン、グリフォン、ユニコーン、フェニックスなど"));
+        try { catalogRoot.appendChild(makeFantasyCreaturesGroup()); } catch (e) { console.error(e); }
+
+        // 既存の補助棚は独立維持する。
+        try { catalogRoot.appendChild(makeCyberMechanicalAnimalsGroup()); } catch (e) { console.error(e); }
+
+        catalogRoot.appendChild(makeSectionDivider("🦴", "状態・関係", "同行・群れ・視線・生態上の関係"));
+        try { catalogRoot.appendChild(makeRelationsGroup()); } catch (e) { console.error(e); }
       },
       getTags() {
         const root = document.querySelector("#list-creatures");

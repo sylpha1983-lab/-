@@ -76,17 +76,29 @@
   #footer-history-btn { background: #6f42c1; }
   .builder-footer-grid button:active { transform: translateY(1px); opacity: 0.9; }
 
+  /* P17: category clear buttons must never inherit the global button flex-grow. */
+  .section-summary-label {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
   .category-reset-btn {
     background: transparent;
     border: 1px solid #ccc;
     color: #666;
-    border-radius: 4px;
-    padding: 2px 8px;
+    border-radius: 6px;
+    padding: 0 9px;
     font-size: 0.8em;
+    line-height: 1;
     cursor: pointer;
-    margin-left: 10px;
+    margin-left: 8px;
     transition: all 0.2s;
-    flex-shrink: 0;
+    flex: 0 0 auto;
+    min-inline-size: 76px;
+    min-height: 34px;
+    white-space: nowrap;
+    overflow-wrap: normal;
+    word-break: keep-all;
   }
   .category-reset-btn:hover { background: #dc3545; color: #fff; border-color: #dc3545; }
 
@@ -563,10 +575,88 @@
     border-radius: 0.28em;
     box-shadow: 0 0 0 1px rgba(180,120,0,0.06);
   }
+  /* P17: keep the mobile TOC above the fixed tool tray, not over the active shelf. */
   @media (max-width: 700px) {
-    #active-category-floater { top: 76px; right: 10px; }
+    #active-category-floater {
+      top: auto;
+      right: 10px;
+      bottom: calc(var(--builder-footer-height, 300px) + 12px + env(safe-area-inset-bottom));
+    }
     #floater-btn { padding: 8px 14px; font-size: 0.84em; }
-    #floater-list { width: min(90vw, 320px); }
+    #floater-list {
+      width: min(90vw, 320px);
+      max-height: min(52svh, calc(100svh - var(--builder-footer-height, 300px) - 26px));
+    }
+  }
+
+  /* P17: Android-safe fixed footer.  Its live height is synchronised by core JS below. */
+  :root {
+    --builder-footer-height: 300px;
+    --builder-footer-gap: 16px;
+  }
+  body {
+    padding-bottom: calc(var(--builder-footer-height, 300px) + var(--builder-footer-gap, 16px) + env(safe-area-inset-bottom)) !important;
+  }
+  #mini-ui-fixed {
+    max-height: min(62svh, 620px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  }
+  #actions.builder-footer-grid {
+    gap: 8px;
+    margin-top: 0;
+    margin-bottom: 8px;
+  }
+  #actions.builder-footer-grid > #genBtn {
+    order: 1;
+    flex: 2 1 180px;
+  }
+  #actions.builder-footer-grid > #prompt-compiler-v2-control {
+    order: 2;
+    flex: 1 1 180px;
+    min-width: 160px;
+  }
+  #actions.builder-footer-grid > #prompt-compiler-v2-warning {
+    order: 3;
+  }
+  #actions.builder-footer-grid > #translateBtn,
+  #actions.builder-footer-grid > #copyBtn,
+  #actions.builder-footer-grid > #resetBtn,
+  #actions.builder-footer-grid > #footer-search-btn {
+    order: 4;
+    flex: 1 1 70px;
+    min-width: 70px;
+  }
+  #actions.builder-footer-grid > #footer-history-btn {
+    order: 5;
+    flex: 1 1 100%;
+    min-width: 100%;
+  }
+  #prompt-stats {
+    max-width: 1000px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box;
+  }
+  @media (max-width: 700px) {
+    #mini-ui-fixed {
+      max-height: min(62svh, 560px);
+    }
+    #actions.builder-footer-grid > #genBtn {
+      flex-basis: 160px;
+    }
+    #actions.builder-footer-grid > #prompt-compiler-v2-control {
+      flex-basis: 154px;
+      min-width: 154px;
+    }
+    #actions.builder-footer-grid > #footer-history-btn {
+      min-height: 42px;
+    }
+    textarea#out {
+      min-height: 60px;
+    }
   }
   
   /* --- UI Tweak Test: Accordion readability (Food & Drink etc.) --- */
@@ -744,32 +834,79 @@
 
       input.addEventListener("input", (e) => {
         const term = e.target.value.toLowerCase();
-        document.querySelectorAll(".section").forEach((sec) => {
-          let secHit = false;
-          sec.querySelectorAll("details").forEach((det) => {
-            let groupHit = false;
-            det.querySelectorAll("label").forEach((lbl) => {
-              const text = lbl.textContent.toLowerCase();
-              if (term === "" || text.includes(term)) {
-                lbl.style.display = "";
-                groupHit = true;
-              } else {
-                lbl.style.display = "none";
-              }
-            });
-            if (term !== "" && groupHit) {
-              det.open = true;
-              det.style.display = "";
-              secHit = true;
-            } else if (term === "") {
-              det.open = false;
-              det.style.display = "";
-              secHit = true;
-            } else {
-              det.style.display = "none";
+        const channelFilter = window.ShimaChannelSearch && typeof window.ShimaChannelSearch.getFilter === "function"
+          ? window.ShimaChannelSearch.getFilter()
+          : "all";
+        const channelFilterActive = channelFilter !== "all";
+        const hadTerm = input.dataset.shimaSearchHadTerm === "1";
+        input.dataset.shimaSearchHadTerm = term ? "1" : "0";
+
+        // 出力先ボタンだけの切替は、約2.7万件の検索DOMを触らない。
+        // ext_channel_search側で事前に付けたチャンネル印とCSSだけで切り替える。
+        if(term === "" && channelFilterActive && !hadTerm){
+          if(window.ShimaChannelSearch && typeof window.ShimaChannelSearch.applyDomFilter === "function"){
+            window.ShimaChannelSearch.applyDomFilter();
+          }
+          return;
+        }
+
+        const labels = Array.prototype.slice.call(document.querySelectorAll("#sections label"));
+        const detailsList = Array.prototype.slice.call(document.querySelectorAll("#sections details"));
+        const sections = Array.prototype.slice.call(document.querySelectorAll("#sections > .section"));
+
+        // 文字検索を消した時は、検索が付けた表示状態だけを1回で戻す。
+        if(term === ""){
+          labels.forEach((label) => { label.style.display = ""; });
+          detailsList.forEach((details) => {
+            details.style.display = "";
+            if(details.dataset.shimaSearchAutoOpened === "1"){
+              details.open = false;
+              delete details.dataset.shimaSearchAutoOpened;
+            }else if(!channelFilterActive){
+              details.open = false;
             }
           });
-          sec.style.display = secHit ? "" : "none";
+          sections.forEach((section) => { section.style.display = ""; });
+          if(window.ShimaChannelSearch && typeof window.ShimaChannelSearch.applyDomFilter === "function"){
+            window.ShimaChannelSearch.applyDomFilter();
+          }
+          return;
+        }
+
+        // 文字検索は「棚×子孫ラベル」の多重走査をやめ、全ラベルを1回だけ調べる。
+        const matchedDetails = new Set();
+        const matchedSections = new Set();
+        labels.forEach((label) => {
+          const checkbox = label.querySelector('input[type="checkbox"]');
+          if(!checkbox) return;
+          const text = window.ShimaChannelSearch && typeof window.ShimaChannelSearch.searchText === "function"
+            ? window.ShimaChannelSearch.searchText(label, checkbox)
+            : label.textContent.toLowerCase();
+          const channelMatches = window.ShimaChannelSearch && typeof window.ShimaChannelSearch.matches === "function"
+            ? window.ShimaChannelSearch.matches(checkbox)
+            : true;
+          const matched = text.includes(term) && channelMatches;
+          label.style.display = matched ? "" : "none";
+          if(!matched) return;
+
+          let node = label.parentElement;
+          while(node && node.id !== "sections"){
+            if(node.tagName === "DETAILS") matchedDetails.add(node);
+            if(node.classList && node.classList.contains("section")) matchedSections.add(node);
+            node = node.parentElement;
+          }
+        });
+
+        detailsList.forEach((details) => {
+          const matched = matchedDetails.has(details);
+          details.style.display = matched ? "" : "none";
+          if(matched && !details.open){
+            details.dataset.shimaSearchAutoOpened = "1";
+            details.open = true;
+          }
+        });
+        sections.forEach((section) => {
+          section.style.display = matchedSections.has(section) ? "" : "none";
         });
       });
 
@@ -791,7 +928,7 @@
       { id: "expression", label: "9. 表情 (Expression)" },
       { id: "attire", label: "10. 服装・衣装 (Attire)" },
       { id: "accessories", label: "11. アクセサリ・小物 (Accessories)" },
-      { id: "creatures", label: "12. 生物・動物 (Creatures)" },
+      { id: "creatures", label: "12. 🧬 生物・動物・架空生物（単体・別個体） (Creatures)" },
       { id: "texture", label: "13. 素材・質感 (Material/Texture)" },
       { id: "pose", label: "14. ポーズ・構図 (Pose)" },
       { id: "body_focus", label: "🔍 部位強調・フェチ (Body Focus)" },
@@ -804,7 +941,6 @@
       { id: "effect", label: "21. エフェクト・演出 (Effects)" },
       { id: "postprocessing", label: "22. 仕上げ・後処理 (Post-Processing)" },
       { id: "filter", label: "23. フィルター・効果 (Filter)" },
-      { id: "presets", label: "24. 保存済みプリセット (My Presets)" },
       { id: "visualsync", label: "🎨 トーン・色調補正 (Color Adjust)" },
       { id: "shadow", label: "Shadow (Internal)" },
     ];
@@ -1103,26 +1239,45 @@
     const normalized = (s + " " + core).replace(/[_-]+/g, " ");
     const has = (re) => re.test(s) || re.test(core) || re.test(normalized);
 
-    // 抑制は最後尾で効かせる
-    if (has(/\b(no|without|avoid|prevent|exclude)\b|no separate|no companion|not a separate|not a companion|not cosplay|external suppression|suppress/i)) return "suppression";
+    // 抑制は最後尾で効かせる。P18: not latex / non-hybrid なども抑制語として末尾へ寄せる。
+    if (has(/\b(no|not|without|avoid|prevent|exclude)\b|no separate|no companion|not a separate|not a companion|not cosplay|non[- ]hybrid|not[- ]?fused|no[- ]?fusion|external suppression|suppress/i)) return "suppression";
 
     // キャラ設計のみ確認用では一時除外したい、文字・漫画記号・動き演出系。quality より前で捕まえる。
-    if (has(/\b(sound effect text|comic sound effect|effect text|sfx|onomatopoeia|motion blur|dynamic motion blur|action blur|speed lines|motion lines|impact lines|manga sound|comic text|吹き出し|効果音|モーションブラー|アクションブラー)\b/i)) return "atmosphere_effect";
+    if (has(/\b(sound effect text|comic sound effect|effect text|sfx|onomatopoeia|motion blur|dynamic motion blur|action blur|speed lines|motion lines|impact lines|shock lines|manga sound|comic text|吹き出し|効果音|モーションブラー|アクションブラー)\b/i)) return "atmosphere_effect";
+
+    // 光源・陰影司令室。光の種類・方向・時間帯・影設計は描画品質ではなく演出スロットへ送る。
+    // ray tracing / global illumination / ambient occlusion / subsurface scattering は下のquality判定へ残す。
+    if (has(/\b(natural lighting|sunlight|soft lighting|hard lighting|ambient lighting|cinematic lighting|dramatic lighting|bright lighting|dim lighting|high[- ]key lighting|low[- ]key lighting|even illumination|diffused lighting|directional lighting|front lighting|side lighting|top lighting|underlighting|backlighting|rim lighting|rim light|key light|fill light|hair light|kicker light|edge light|eye catchlights?|facial light wrap|bounce lighting|morning light|morning glow|golden hour|sunset lighting|magic hour|blue hour|moonlight|overcast lighting|crepuscular rays|god rays|tyndall effect|warm lighting|cold lighting|neutral white lighting|red lighting|blue lighting|purple ambient|green glow|two tone lighting|colored gel lighting|colorful lighting|iridescent light|rainbow lighting|studio lighting|neon lighting|cyberpunk lighting|candlelight|lantern light|firelight|fireplace glow|sparklers|monitor light|hologram glow|bioluminescence|aurora|lightning flash|three[- ]point lighting|rembrandt lighting|butterfly lighting|split lighting|ring light|softbox lighting|clamshell lighting|beauty dish lighting|product photography lighting|specular lighting|white balance|volumetric lighting|caustics|refraction|radiance|prism|reflected light|indirect lighting|translucent backlighting|deep shadow|dark shadow|heavy shadow|strong shadow|sharp shadow|soft shadow|long shadow|drop shadow|no shadow|faint shadow|feathered shadow|crisp shadow|shadow falloff|penumbra|umbra|self shadow|cast shadows?|casting shadow|contact shadows?|grounding shadow|product shadow|shadow on face|shaded eyes|facial shadows?|under[- ]chin shadow|nose shadow|cheek shadow|jawline shadow|eye[- ]socket shading|half[- ]face shadow|body[- ]plane defining shadows|muscle shading|chiaroscuro|high contrast|low contrast|dynamic shading|silhouette|colored shadow|dramatic shadow|complex shadow|accidental shadow|cel[- ]shaded shadows|shadow gradient|graphic shadow|blinds shadow|window frame shadow|lattice shadow|lace curtain shadow|dappled sunlight|leaf shadows|heart[- ]shaped shadow|water[- ]reflection shadows|architectural cast shadow|shadows defining|subject shadow cast|layered shadows|readable facial planes in shadow|indirect illumination inside shadows|shadows consistent with the light direction)\b/i)) return "atmosphere_effect";
 
     // 画質・光・質感。body/attire より先に判定し、skin glow / hair highlights / coated fabric を前半へ出しすぎない
     if (has(/\b(masterpiece|best quality|highest quality|highres|high resolution|ultra[- ]detailed|ultra high resolution|8k|16k|4k|uhd|hdr|octane render|unreal engine|ray tracing|physically based rendering|global illumination|subsurface scattering|ambient occlusion|volumetric lighting|volumetric glow|cinematic lighting|dramatic lighting|realistic lighting|lumen reflections|nanite geometry|sharp focus|fine texture|texture detail|crisp detail|clean edge|edge definition|refined details|specular|speculars|bokeh|depth of field|bloom|controlled bloom|film grain|post[- ]processing|lens flare|rim lighting|rim light|backlight glow|material separation|diffusion|light diffusion|official art|illustration|anime[- ]realism|kodak|octane|unreal|glossy reflections|hard glossy|high energy highlights|translucent skin glow|silky hair highlights|shiny hair|glossy hair|coated fabric|glossy coated fabric|dynamic light interaction|spark[- ]like bokeh|clear specular highlights|natural skin translucency|subtle skin glow|soft rim light|rich color depth|smooth tonal gradation|semi[- ]realistic rendering)\b/i)) return "quality";
 
-    if (has(/\b(upper body|full body|cowboy shot|close[- ]?up|portrait|wide shot|medium shot|three[- ]quarter|low angle|high angle|dutch angle|pov|over the shoulder|camera|composition|framing|view)\b/i)) return "composition_camera";
-    if (has(/\b(pose|posture|standing(?![- ]stones?\b)|idle pose|seated|sitting|kneeling|crouching|lying|reclining|leaning|walking|running|jumping|on hands and knees|hands and knees|arched back|arms spread|crossed arms|one hand|raised hand|hand raised|beckon|beckoning|finger|holding|commanding gesture|drawn bow)\b/i)) return "pose";
-    if (has(/\b(expression|smile|smirk|grin|blush|lips|mouth|eyes|gaze|stare|glance|look|wink|eyebrow|raised eyebrow|half[- ]lidded|heavy[- ]lidded|sparkling eyes|intoxicated|drowsy|sleepy|curious|serious|sad|angry|crying|closed eyes|open eyes|heart[- ]throbbing|planner expression|enchanted expression|impish|teasing|mischievous|flirtatious|playful look|seductive look|alluring look|predatory eyes|ominous smile)\b/i)) return "expression";
+    if (has(/\b(upper body(?: shot)?|full body(?: shot)?|cowboy shot|close[- ]?up(?: portrait)?|head and shoulders portrait|portrait|wide shot|extreme wide shot|long shot|medium shot|three[- ]quarter|low angle|high angle|dutch angle|worm'?s[- ]eye|bird'?s[- ]eye|top[- ]down|overhead|ground[- ]level|pov|point of view|over[- ]the[- ]shoulder|camera|shot|lens|telephoto|wide[- ]angle|fisheye|macro lens|tilt[- ]shift|anamorphic|orthographic|focal length|mm lens|composition|framing|frame within a frame|perspective|view|depth of field|deep focus|selective focus|soft focus|sharp focus|bokeh|blurred foreground|blurred background|visual hierarchy|focal point|headroom|negative space|visual weight|leading lines|converging lines|vanishing point|foreground midground and background|foreground elements|atmospheric perspective|rule of thirds|golden ratio|symmetrical composition|asymmetrical balance|triangle composition|diagonal composition|s-curve composition|radial composition|spiral composition|centered composition|isometric composition|balanced two-subject composition|pair composition|group composition|environment-dominant composition|establishing composition|horizon|margins around the subject|frame edges|visual flow|direction space)\b/i)) return "composition_camera";
+    if (has(/\b(pose|posture|standing(?![- ]stones?\b)|idle pose|seated|sitting|kneeling|crouching|lying|lying on back|reclining|on bed|head on pillow|leaning|walking|running|jumping|on hands and knees|hands and knees|arched back|arms spread|crossed arms|one hand|raised hand|hand raised|beckon|beckoning|finger|holding|commanding gesture|drawn bow)\b/i)) return "pose";
+    if (has(/\b(expression|smile|smirk|grin|blush|blushing|flushed face|flushed cheeks|lips|mouth|eyes|gaze|stare|glance|look|wink|eyebrow|raised eyebrow|half[- ]lidded|heavy[- ]lidded|sparkling eyes|intoxicated|drowsy|sleepy|curious|serious|sad|angry|crying|closed eyes|open eyes|heart[- ]throbbing|planner expression|enchanted expression|impish|teasing|mischievous|flirtatious|playful look|seductive look|alluring look|predatory eyes|ominous smile)\b/i)) return "expression";
     if (has(/\b(1girl|1boy|solo|single human|single humanoid|single character|human character focus|humanoid girl|humanoid boy|faceless male|faceless female|male focus|female focus|muscular male|muscularmale)\b/i)) return "person_anchor";
-    if (has(/\b(inspired|motif|roleplay base|roleplay|empress|emperor|queen|king|lord|monarch|sovereign|demon|succubus|fox|beast|mythic|god|goddess|strategist|sage|femme fatale|beauty|dak?ki|taikobo|nezha|sun wukong|goku|fengshen|journey to the west|celtic|seiryu|byakko|suzaku|genbu|fenrir|leviathan|phoenix|griffon|unicorn|cerberus|kraken)\b/i)) return "subject_anchor";
-    if (has(/\b(horns?|wings?|tail|scales?|fangs?|claws?|ears?|fur|feathers?|plumage|mane|halo|body|skin|hair|appendages?|tentacles?|fins?|membranes?|pupils?|animal[- ]inspired|beast traits|dragon traits|fox traits|wolf traits|avian traits)\b/i)) return "body_traits";
+
+    // P18: Pose v18 の動物単体・人物＋別個体アンカーを、末尾 misc へ落とさない。
+    // 完成セットの「human character and a real pet hamster」等は、個体構成そのものを先に固定する。
+    if (has(/\bhuman character (?:and|with)\b.*\b(animal|hamster|rodent|chipmunk|bird|primate|rabbit|pika|mammal|marsupial|feline|cat|dog|fox|wolf|canine|invertebrate|fantasy creature)\b/i)) return "subject_anchor";
+
+    // 人物と動物の配置・接触・動きは、主題ではなくポーズとして主題直後へ置く。
+    if (has(/\b(in human hands|human hands holding|perched(?: on)?|on (?:the )?human(?:'s)? (?:shoulder|finger|hand|lap)|held securely in human arms|beside (?:the )?human|in front of (?:the )?human|walking along (?:the )?(?:human )?(?:arm|forearm)|flying nearby|reaching toward (?:the )?(?:bird|animal)|hand offering food|hand petting|holding (?:food|nut|seed)|looking up(?: at)?|looking at each other)\b/i)) return "pose";
+
+    // 分離・縮尺・可読性は、人物と別個体を保つベース指定として扱う。
+    if (has(/\b(separate characters|separate subjects|distinct bodies|different species|clear size difference|separate anatomy|pet animal as a separate animal|animal as a separate animal|clear two-subject composition|visible space between bodies|clear scale contrast|both readable|visible distance)\b/i)) return "base";
+
+    // 単体動物・選択中の生物そのものは主題アンカーとして残す。
+    if (has(/\b(single animal subject|single real animal subject|real animal subject|selected real pet animal|real pet animal|pet animal subject|selected (?:real )?(?:small )?(?:animal|rodent|bird|primate|rabbit|pika|mammal|feline|canine|aquatic animal|marine invertebrate|fantasy creature)|real (?:pet )?(?:animal|hamster|rodent|chipmunk|bird|primate|rabbit|pika|mammal|feline|cat|dog|canine|aquatic animal)|fantasy companion composition)\b/i)) return "subject_anchor";
+
+    // 衣装複合語を先に受け、dragon-scale armor などを主題・身体特徴へ誤分類しない。
     if (has(/\b(attire|outfit|robes?|robe|dress|gown|uniform|armor|armour|regalia|ornaments?|jewelry|jewellery|cloak|veil|ribbons?|fabric|kimono|court attire|layered robes|lacquered gold fittings|black-gold-red|palace dress|ceremonial dress|jewel tassels?)\b/i)) return "attire";
+    if (has(/\b(horns?|wings?|tail|scales?|fangs?|claws?|talons?|hooves?|ears?|fur|feathers?|plumage|mane|halo|body|skin|hair|appendages?|tentacles?|fins?|membranes?|pupils?|lower[- ]body|leg accents?|wing roots?|scale plates?|body transformation|merged character design|traits integrated into (?:the )?character body|integrated .*body traits|biological .*traits|animal[- ]inspired|beast traits|dragon traits|draconic traits|griffon traits|gryphon traits|unicorn traits|fox traits|wolf traits|avian traits|leonine|eagle[- ]lion|holy beast traits|sacred beast)\b/i)) return "body_traits";
+    if (has(/\b(inspired|motif|roleplay base|roleplay|empress|emperor|queen|king|lord|monarch|sovereign|demon|succubus|fox|beast|mythic|god|goddess|strategist|sage|femme fatale|beauty|dak?ki|taikobo|nezha|sun wukong|goku|fengshen|journey to the west|celtic|seiryu|byakko|suzaku|genbu|fenrir|leviathan|phoenix|griffon|unicorn|cerberus|kraken)\b/i)) return "subject_anchor";
     if (has(/\b(palace|court|throne room|bedroom|chamber|room|interior|background|riverbank|forest|mountain|temple|shrine|sanctuary|battlefield|city|street|lounge|stage|garden|hall|banners?|ritual banners|standing[- ]stones?|standing stone destiny|shang and zhou|late yin court|court aesthetics)\b/i)) return "scene_background";
     // glow / aura / mood は主題・人物・衣装判定の後で雰囲気へ送る
     if (has(/\b(aura|mist|haze|smoke|flames?|fire|foxfire|wisps?|petals?|spark|sparks|particles?|pressure|tension|mood|perfume|perfumed|pheromone|divine|sacred|infernal|heavenly|mandate|xianxia|taoist|immortal|war chronicle|seductive glow|warm glow|soft glow|ambient glow|atmosphere|atmospheric|menace|sinister|luxury contrast|decadent|glamour|glamorous|calamity|court light control|palace ember)\b/i)) return "atmosphere_effect";
-    if (has(/\b(base|preservation|anchor|human face|human torso|humanoid proportions|remain primary)\b/i)) return "base";
+    if (has(/\b(base|preservation|anchor|human face|clear human face|human facial structure|human torso|human head and torso|human silhouette|human torso silhouette|humanoid proportions|single humanoid character focus|readable human silhouette|remain primary|retained|attached .*traits only|single merged character design)\b/i)) return "base";
     return "misc";
   }
 
@@ -1151,6 +1306,9 @@
     if (fallbackRole === "pose" || fallbackRole === "expression" || fallbackRole === "scene_background" || fallbackRole === "atmosphere_effect" || fallbackRole === "composition_camera") {
       return fallbackRole === "composition_camera" ? "pose" : fallbackRole;
     }
+
+    // P18: 背景ぼかしは品質語に見えても、キャラ確認では構図・演出として一時除外する。
+    if (has(/\b(depth of field|bokeh)\b/i)) return "composition_camera";
 
     // 漫画記号・吹き出し・効果音・顔まわり演出
     if (has(/\b(speech bubble|dialogue bubble|text bubble|comic bubble|caption box|balloon|sound effect text|stylized sound effect text|comic sound effect|effect text|sensual sound effects?|sfx|onomatopoeia|moaning|motion lines|twitching motion lines|dynamic motion blur|motion blur|action blur|speed lines|impact lines|shock lines|steam from face|sparkles? on face|sparkle effect around face|floating hearts?|heart\b(?![- ]?(pupils?|eyes?))|zzz|sleeping bubble|flying sweatdrops?|sweatdrop|gloom lines|confusion lines|embarrassment lines|stress lines|impatience lines|anger vein|scribble symbol|exclamation mark symbol|question mark symbol|music note symbol|light bulb symbol|villainous aura|silent pressure|quiet menace|cold pressure|dark pressure)\b/i)) return "atmosphere_effect";
@@ -1387,7 +1545,8 @@ function generateOutput() {
     if (typeof window.__shimaApplyHoodToText === "function") { outText = window.__shimaApplyHoodToText(outText); }
 
     
-    outText = applySubjectAnchorOrdering(outText);
+    // 旧順は比較用の保険。Compiler前の主題アンカー整列も通さず、選択順を維持する。
+    if (getPromptCompilerV2Mode() !== "off") outText = applySubjectAnchorOrdering(outText);
     outText = applyPromptCompilerV2(outText);
     outText = applyAttireMotifFusionDuplicateSuppression(outText);
 
@@ -1442,8 +1601,20 @@ function generateOutput() {
         }
 
         if (mode === "extreme") {
-          if (!hasAbsurdres) tokens.push("absurdres");
-          if (!hasMasterpiece) tokens.unshift("masterpiece");
+          const qualityAdditions = [];
+          if (!hasAbsurdres) qualityAdditions.push("absurdres");
+          if (!hasMasterpiece) qualityAdditions.push("masterpiece");
+
+          // P18: 品質ブーストを先頭へ差し込まず、既存の品質語の直後へ置く。
+          // 通常/各Compilerモードでは品質スロット内、旧順では元の品質語の近くに留める。
+          if (qualityAdditions.length) {
+            let qualityEnd = -1;
+            for (let i = 0; i < tokens.length; i++) {
+              if (promptCompilerV2Role(tokens[i]) === "quality") qualityEnd = i;
+            }
+            const insertAt = qualityEnd >= 0 ? qualityEnd + 1 : tokens.length;
+            tokens.splice(insertAt, 0, ...qualityAdditions);
+          }
         }
 
         outText = tokens.join(", ");
@@ -1481,17 +1652,37 @@ function generateOutput() {
 
   
   // ---- Commercial Mode Suggestion (for hobby/merch styles) ----
+  // v24: Commercial suggestion is now limited to explicit product/merch items.
+  // Do not trigger it from art-material style bases such as acrylic painting.
   const __COMMERCIAL_HINT_KEYWORDS = [
-    "acrylic stand", "acrylic standee", "rubber strap", "keychain charm",
-    "action figure", "figma", "nendoroid", "blind box", "gacha", "capsule toy",
-    "blister", "retail packaging", "window box", "vinyl toy", "be@rbrick",
-    "garage kit", "resin", "pin badge", "button badge", "acrylic", "strap merchandise"
+    "acrylic stand", "acrylic standee", "clear acrylic plate", "laser cut acrylic",
+    "rubber strap", "strap merchandise", "keychain charm", "metal keychain ring",
+    "action figure", "collectible figure", "scale collectible figure", "figma", "nendoroid",
+    "blind box", "gacha", "capsule toy", "vinyl toy", "garage kit", "resin figure",
+    "pin badge", "button badge", "retail packaging", "window box", "blister packaging",
+    "product mockup", "product photography", "commercial render", "premium collectible",
+    "display base", "engraved nameplate", "merchandise"
   ];
 
   function __isCommercialHintStyle(cb){
     try{
       if(!cb || !cb.dataset) return false;
+
+      // Quality v22+ style base / art-material items are normal drawing styles.
+      // They must not show the old product-rendering Yes/No toast.
+      if(cb.dataset.qpStyleRole) return false;
+      if(cb.closest && cb.closest("#qp-v22-style-selector")) return false;
+
+      // The dedicated Commercial Mode shelf already contains explicit product tags.
+      // Do not ask a second Yes/No question when the user is already in that shelf.
+      if(cb.closest && cb.closest("#qp-commercial-mode")) return false;
+
       const s = ((cb.dataset.en || cb.dataset.val || "") + " " + (cb.dataset.ja || "")).toLowerCase();
+
+      // Guard common art-material false positives.
+      if(/acrylic\s*(painting|paint|illustration|colors?)/i.test(s) || /アクリル画|アクリル絵具|アクリルカラー/.test(s)) return false;
+      if(/resin\s*(texture|material|surface)/i.test(s)) return false;
+
       return __COMMERCIAL_HINT_KEYWORDS.some(k => s.includes(k));
     }catch(_e){ return false; }
   }
@@ -1581,7 +1772,8 @@ function applyCommercialDefaults(){
     // 2) seamless white background (background section or commercial mode tag)
     checkFirst(cb => /(seamless\s+white|white\s+seamless|white\s+backdrop|white\s+studio)/i.test(cb.dataset.en || cb.dataset.val || ""));
     // 3) shadow under object / product shadow
-    checkFirst(cb => /(shadow\s+under|realistic\s+shadow|product\s+shadow)/i.test(cb.dataset.en || cb.dataset.val || "") || /影/.test(cb.dataset.ja || ""));
+    // v24: avoid broad Japanese "影" matching, which could pick normal drawing styles such as 木炭画/陰影.
+    checkFirst(cb => /(shadow\s+under|realistic\s+shadow|product\s+shadow|cast\s+shadow\s+under\s+object)/i.test(cb.dataset.en || cb.dataset.val || ""));
     __setCommercialAutoGlow(true);
   }
 
@@ -1652,33 +1844,81 @@ function applyCommercialDefaults(){
   }
 
   function resetAll() {
+    if (window.__SHIMA_RESET_IN_PROGRESS__) return;
     if (!confirm("全てリセットしますか？")) return;
 
-    // Many extension panels update their visibility/state via checkbox
-    // 'change' events. If we only flip `checked=false`, those panels can
-    // remain visible/stale after reset.
-    const allCheckboxes = Array.from(document.querySelectorAll("input[type='checkbox']"));
-    allCheckboxes.forEach((el) => (el.checked = false));
-    // Notify listeners after the state change.
-    allCheckboxes.forEach((el) => el.dispatchEvent(new Event("change", { bubbles: true })));
-    document.querySelectorAll("input[type='range']").forEach((el) => {
-      el.value = 100;
-      el.dispatchEvent(new Event("input"));
-    });
-
-    const searchBar = document.querySelector("#ui-search-bar input");
-    if (searchBar) {
-      searchBar.value = "";
-      searchBar.dispatchEvent(new Event("input"));
+    const resetButton = document.getElementById("resetBtn");
+    const originalLabel = resetButton ? resetButton.textContent : "";
+    window.__SHIMA_RESET_IN_PROGRESS__ = true;
+    if (resetButton) {
+      resetButton.disabled = true;
+      resetButton.setAttribute("aria-busy", "true");
+      resetButton.textContent = "リセット中…";
     }
 
-    const out = document.getElementById("out");
-    if (out) {
-      out.value = "";
-      out.dispatchEvent(new Event("input", { bubbles: true }));
-    }
+    // Yield once so Android can paint the busy state before the batch starts.
+    setTimeout(() => {
+      let changedCheckboxes = 0;
+      let changedRanges = 0;
+      let searchCleared = false;
+      let outputCleared = false;
+      window.__SHIMA_BULK_RESET__ = true;
+      try {
+        // Only prompt controls that are actually selected need a change event.
+        // The former implementation notified every checkbox in the document,
+        // including 20k+ unchecked/hidden controls.
+        const checked = Array.from(
+          document.querySelectorAll("#sections input[type='checkbox']:checked")
+        );
+        changedCheckboxes = checked.length;
+        checked.forEach((el) => { el.checked = false; });
+        checked.forEach((el) => {
+          try { el.dispatchEvent(new Event("change", { bubbles: true })); } catch (_) {}
+        });
 
-    if (window.__outputTranslation) window.__outputTranslation.resetToEn();
+        document.querySelectorAll("#sections input[type='range']").forEach((el) => {
+          if (String(el.value) === "100") return;
+          changedRanges += 1;
+          el.value = 100;
+          el.dispatchEvent(new Event("input", { bubbles: true }));
+        });
+
+        const searchBar = document.querySelector("#ui-search-bar input");
+        if (searchBar && searchBar.value) {
+          searchCleared = true;
+          searchBar.value = "";
+          searchBar.dispatchEvent(new Event("input", { bubbles: true }));
+        }
+
+        const out = document.getElementById("out");
+        if (out && out.value) {
+          outputCleared = true;
+          out.value = "";
+          out.dispatchEvent(new Event("input", { bubbles: true }));
+        }
+
+        if (window.__outputTranslation) window.__outputTranslation.resetToEn();
+      } catch (error) {
+        try { console.error("[builder reset]", error); } catch (_) {}
+      } finally {
+        window.__SHIMA_BULK_RESET__ = false;
+        const didChange = changedCheckboxes > 0 || changedRanges > 0 || searchCleared || outputCleared;
+        if (didChange) {
+          try {
+            document.dispatchEvent(new CustomEvent("builderResetAll", {
+              bubbles: true,
+              detail: { changedCheckboxes, changedRanges, searchCleared, outputCleared }
+            }));
+          } catch (_) {}
+        }
+        if (resetButton) {
+          resetButton.disabled = false;
+          resetButton.removeAttribute("aria-busy");
+          resetButton.textContent = originalLabel || "リセット";
+        }
+        window.__SHIMA_RESET_IN_PROGRESS__ = false;
+      }
+    }, 0);
   }
 
   function copyOutput() {
@@ -1828,7 +2068,7 @@ function applyCommercialDefaults(){
 
     const getCheckedCount = (det) => {
       if (!det) return 0;
-      return det.querySelectorAll('input[type="checkbox"]:checked').length;
+      return det.querySelectorAll('input[type="checkbox"]:checked:not([data-zero-ignore="1"])').length;
     };
 
     const cleanTitle = (raw, fallback) =>
@@ -1938,7 +2178,7 @@ function applyCommercialDefaults(){
     const buildCheckedSectionData = (det, title, checkedCount) => {
       const groups = new Map();
 
-      Array.from(det.querySelectorAll('input[type="checkbox"]:checked')).forEach((cb, idx) => {
+      Array.from(det.querySelectorAll('input[type="checkbox"]:checked:not([data-zero-ignore="1"])')).forEach((cb, idx) => {
         const groupDetails = [];
         let cur = cb.parentElement;
         while (cur && cur !== det) {
@@ -2220,6 +2460,7 @@ function applyCommercialDefaults(){
       sectionsRoot.addEventListener(
         "change",
         (e) => {
+          if (window.__SHIMA_BULK_RESET__) return;
           if (e.target && e.target.matches && e.target.matches('input[type="checkbox"]')) {
             if (e.target.checked) stampCheckedBox(e.target);
             setTimeout(updateList, 20);
@@ -2227,6 +2468,10 @@ function applyCommercialDefaults(){
         },
         true
       );
+
+      document.addEventListener("builderResetAll", () => {
+        setTimeout(updateList, 0);
+      });
     }
 
     floaterBtn.addEventListener("click", () => {
@@ -2283,6 +2528,62 @@ function applyCommercialDefaults(){
 
     sortButtons.forEach((x) => x.classList.toggle("active", (x.dataset.sortMode || "added") === itemSortMode));
     setTimeout(updateList, 500);
+  }
+
+
+  // P17: the fixed footer grows after optional tools mount. Keep the document and overlays
+  // aware of its live height so the last shelf and popups remain reachable on Android.
+  function syncFixedFooterViewportSpace() {
+    try {
+      const footer = document.getElementById("mini-ui-fixed");
+      if (!footer) return;
+      const rect = footer.getBoundingClientRect();
+      const height = Math.max(0, Math.ceil(rect.height || footer.offsetHeight || 0));
+      if (!height) return;
+      document.documentElement.style.setProperty("--builder-footer-height", height + "px");
+      document.documentElement.style.setProperty("--builder-footer-gap", "16px");
+    } catch (e) {}
+  }
+
+  function bindFixedFooterViewportSpace() {
+    try {
+      const footer = document.getElementById("mini-ui-fixed");
+      if (!footer) return;
+
+      if (!window.__builderFooterViewportSpaceBound) {
+        window.__builderFooterViewportSpaceBound = true;
+        const schedule = () => {
+          try {
+            if (window.__builderFooterViewportSpaceRaf) {
+              cancelAnimationFrame(window.__builderFooterViewportSpaceRaf);
+            }
+            window.__builderFooterViewportSpaceRaf = requestAnimationFrame(() => {
+              window.__builderFooterViewportSpaceRaf = 0;
+              syncFixedFooterViewportSpace();
+            });
+          } catch (e) {
+            syncFixedFooterViewportSpace();
+          }
+        };
+
+        if (typeof ResizeObserver === "function") {
+          const observer = new ResizeObserver(schedule);
+          observer.observe(footer);
+          window.__builderFooterViewportSpaceObserver = observer;
+        }
+
+        window.addEventListener("resize", schedule, { passive: true });
+        if (window.visualViewport) {
+          window.visualViewport.addEventListener("resize", schedule, { passive: true });
+        }
+        window.addEventListener("builder:mounted", () => setTimeout(schedule, 0));
+        window.addEventListener("promptPartMounted", () => setTimeout(schedule, 0));
+      }
+
+      requestAnimationFrame(syncFixedFooterViewportSpace);
+      setTimeout(syncFixedFooterViewportSpace, 80);
+      setTimeout(syncFixedFooterViewportSpace, 700);
+    } catch (e) {}
   }
 
 
@@ -2362,6 +2663,7 @@ function applyCommercialDefaults(){
       const container = genBtn.parentElement;
       container.classList.add("builder-footer-grid");
       ensurePromptCompilerV2UI();
+      bindFixedFooterViewportSpace();
       genBtn.addEventListener("click", generateOutput);
 
       const copyBtn = document.getElementById("copyBtn");
@@ -2381,6 +2683,7 @@ function applyCommercialDefaults(){
       if (!sectionsRoot.__coreChangeBound) {
         sectionsRoot.__coreChangeBound = true;
         sectionsRoot.addEventListener("change", (e) => {
+          if (window.__SHIMA_BULK_RESET__) return;
           if (e.target.matches('input[type="checkbox"]')) {
             applyLinkage(e.target);
             // Suggest Commercial Mode when hobby/merch style is turned ON

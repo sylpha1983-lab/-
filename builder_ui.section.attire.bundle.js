@@ -119,6 +119,8 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
         ? (parent.querySelector(".section-content") || parent)
         : (document.querySelector("#list-attire .section-content") || document.getElementById("list-attire"));
       if (!root) return;
+      const catalogHost = document.getElementById("list-attire");
+      if (catalogHost && catalogHost.classList.contains("shima-attire-catalog-ready")) return;
       const IS_SECRET_UNLOCKED = (function(){
         try{ return localStorage.getItem("MY_SECRET_UNLOCK") === "true"; }catch(_){ return false; }
       })();
@@ -144,6 +146,10 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
         }
         existingNormalGroup.remove();
       }
+      const existingThemeTechDivider = root.querySelector("#__attire_theme_tech_divider__");
+      if (existingThemeTechDivider){
+        existingThemeTechDivider.remove();
+      }
       const existingR18Zone = root.querySelector("#__attire_r18_last_zone__");
       if (existingR18Zone){
         const groupedBodies = existingR18Zone.querySelectorAll(".attire-r18-parent-body");
@@ -161,23 +167,19 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
           if (!el) return;
           const txt = (el && el.textContent ? el.textContent : "").replace(/\s+/g, " ").trim();
           const cls = (el.className || "").toString();
+          const ownHeading = (function(){
+            try{
+              const node = el.matches && el.matches("details")
+                ? el.querySelector(":scope > summary")
+                : el.querySelector && el.querySelector(":scope > summary, :scope > h2, :scope > h3, :scope > .attire-section-title");
+              return (node && node.textContent ? node.textContent : "").replace(/\s+/g, " ").trim();
+            }catch(_){ return ""; }
+          })();
           const looksR18 =
             (el.id === "__attire_r18_last_zone__")
             || /attire-v17-container|attire-v22-container|attire-r18/.test(cls)
-            || txt.includes("R-18")
-            || txt.includes("NSFW")
-            || txt.includes("限界突破")
-            || txt.includes("フェティッシュ")
-            || txt.includes("完全露出")
-            || txt.includes("ボンテージ")
-            || txt.includes("拘束")
-            || txt.includes("露出・裸系")
-            || txt.includes("ランジェリー・特殊インナー")
-            || txt.includes("着崩し・チラリズム")
-            || txt.includes("異形・寄生・生体系")
-            || txt.includes("侵食・寄生特化コレクション")
-            || txt.includes("汚れ・液体系特化コレクション")
-            || txt.includes("女王・支配者特化コレクション");
+            || /^(?:🔞|R-18|NSFW)/i.test(ownHeading)
+            || /^(?:▼\s*)?(?:R-18|NSFW)/i.test(txt);
           if (looksR18 && el.parentNode === root) {
             el.remove();
           }
@@ -196,9 +198,11 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
       function isSpecialNode(el){
         if (!el) return false;
         if (el.id === "__attire_special_top_zone__" || el.id === "__attire_r18_last_zone__") return false;
-        if (el.matches && (el.matches(".attire-v21-shima") || el.matches(".attire-v23-container") || el.matches("[class*='attire-v23']"))) return true;
+        if (el.matches && (el.matches(".attire-v35-arcadia-wardrobe") || el.matches(".attire-v39-remix-lab") || el.matches(".attire-v21-shima") || el.matches(".attire-v23-container") || el.matches("[class*='attire-v23']"))) return true;
         const txt = getText(el);
-        return txt.includes("シマエナガ・コレクション")
+        return txt.includes("シマエナガ・アルカディア衣装")
+          || txt.includes("衣装改造工房")
+          || txt.includes("シマエナガ・コレクション")
           || txt.includes("チャイナ服特化コレクション")
           || txt.includes("アイドル衣装特化コレクション")
           || txt.includes("攻め・スペシャル")
@@ -220,13 +224,22 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
       function isGenderNode(el){
         if (!el) return false;
         if (el.id === "__attire_special_top_zone__" || el.id === "__attire_r18_last_zone__") return false;
+        if (el.matches && (el.matches(".attire-v32-role-expansion") || el.querySelector(".attire-v31-male,.attire-v31-female"))) return true;
         const txt = getText(el);
-        return txt.includes("男性専用") || txt.includes("女性専用") || txt.includes("Male Only") || txt.includes("Female Only");
+        return txt.includes("男性専用")
+          || txt.includes("女性専用")
+          || txt.includes("Male Only")
+          || txt.includes("Female Only")
+          || txt.includes("男性衣装パック")
+          || txt.includes("女性衣装パック")
+          || txt.includes("男性・")
+          || txt.includes("女性・");
       }
 
       children.forEach(function(el){
         if (!el) return;
         if (el.id === "__attire_normal_group__" || (el.classList && el.classList.contains("attire-normal-group"))) return;
+        if (el.id === "__attire_theme_tech_divider__" || (el.classList && el.classList.contains("attire-theme-tech-divider"))) return;
         if (el.id === "__attire_special_top_zone__" || el.id === "__attire_r18_last_zone__") return;
         if (isSpecialNode(el)) special.push(el);
         else if (isR18Node(el)) r18.push(el);
@@ -234,7 +247,107 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
         else normal.push(el);
       });
 
-      special.forEach(function(el){ if (el) root.appendChild(el); });
+      const topSpecial = [];
+      const themeTechSpecial = [];
+      const seasonalSpecial = [];
+
+      function isThemeTechSpecial(el){
+        const txt = getText(el);
+        return txt.includes("衣装モチーフ・フュージョン")
+          || txt.includes("サイバー・機械衣装");
+      }
+      function isSeasonalSpecial(el){
+        const txt = getText(el);
+        const cls = (el && el.className || "").toString();
+        return cls.includes("attire-v20-container")
+          || txt.includes("行事・季節衣装")
+          || txt.includes("節分・鬼衣装特化コレクション")
+          || txt.includes("サンタ衣装特化コレクション")
+          || txt.includes("ハロウィン衣装特化コレクション")
+          || txt.includes("バレンタイン衣装特化コレクション")
+          || txt.includes("ホワイトデー衣装特化コレクション")
+          || txt.includes("正月衣装特化コレクション")
+          || txt.includes("夏祭り衣装特化コレクション")
+          || txt.includes("お月見衣装特化コレクション")
+          || txt.includes("イースター衣装特化コレクション");
+      }
+      function appendThemeTechDivider(){
+        const existing = root.querySelector("#__attire_theme_tech_divider__");
+        if (existing) existing.remove();
+
+        const divider = document.createElement("div");
+        divider.id = "__attire_theme_tech_divider__";
+        divider.className = "attire-theme-tech-divider";
+        divider.style.cssText = "display:block;width:100%;max-width:100%;margin:14px 0 8px;box-sizing:border-box;text-align:center;color:#52708c;";
+
+        const line = document.createElement("div");
+        line.style.cssText = "display:flex;align-items:center;gap:10px;width:100%;box-sizing:border-box;font-weight:800;";
+        const left = document.createElement("span");
+        left.style.cssText = "flex:1;height:1px;background:#cfe4f5;display:block;";
+        const label = document.createElement("span");
+        label.textContent = "🧩 テーマ・特殊衣装拡張";
+        label.style.cssText = "white-space:nowrap;font-size:14px;letter-spacing:0.02em;";
+        const right = document.createElement("span");
+        right.style.cssText = "flex:1;height:1px;background:#cfe4f5;display:block;";
+        line.appendChild(left);
+        line.appendChild(label);
+        line.appendChild(right);
+        divider.appendChild(line);
+
+        const note = document.createElement("div");
+        note.textContent = "衣装モチーフ・フュージョン / サイバー・機械衣装など、季節イベントとは別の横断テーマ衣装";
+        note.style.cssText = "margin:3px 0 0;font-size:12px;line-height:1.45;color:#6d879d;";
+        divider.appendChild(note);
+
+        root.appendChild(divider);
+      }
+
+      function polishAttireVisibleLabels(targetRoot){
+        try{
+          if (!targetRoot || !targetRoot.querySelectorAll) return;
+          const replacements = [
+            ["▼ 男性専用衣装・拡張パック (Male Attire Expansion) ▼", "▼ 男性衣装パック ▼"],
+            ["▼ 女性専用衣装・判定強化パック (Female Attire Label Pack) ▼", "▼ 女性衣装パック ▼"],
+            ["🤵 男性専用・正装 (Male Formal)", "🤵 男性・正装"],
+            ["🏫 男子制服・学園 (Boys Schoolwear)", "🏫 男子制服・学園"],
+            ["🪖 男性専用・職業/戦闘 (Male Duty & Combat)", "🪖 男性・職業/戦闘"],
+            ["⚔️ 男性専用・和装/戦士 (Male Traditional & Warrior)", "⚔️ 男性・和装/戦士"],
+            ["🧥 男性専用・現代カジュアル (Male Casual)", "🧥 男性・現代カジュアル"],
+            ["👙 女性専用・水着/露出 (Female Swim & Revealing)", "👙 女性・水着/露出"],
+            ["👗 女性専用・ドレス/花嫁 (Female Dresses & Bridal)", "👗 女性・ドレス/花嫁"],
+            ["🎀 女性専用・メイド/アイドル/可憐 (Female Cute Performance)", "🎀 女性・メイド/アイドル/可憐"],
+            ["🏫 女性専用・学園/制服 (Girls Schoolwear)", "🏫 女性・学園/制服"]
+          ];
+          const nodes = targetRoot.querySelectorAll("summary, div");
+          Array.prototype.forEach.call(nodes, function(node){
+            Array.prototype.forEach.call(node.childNodes || [], function(child){
+              if (!child || child.nodeType !== 3) return;
+              const raw = child.nodeValue || "";
+              let next = raw;
+              replacements.forEach(function(pair){
+                if (next.indexOf(pair[0]) !== -1) {
+                  next = next.split(pair[0]).join(pair[1]);
+                }
+              });
+              if (next !== raw) child.nodeValue = next;
+            });
+          });
+        }catch(_){}
+      }
+
+      special.forEach(function(el){
+        if (!el) return;
+        if (isThemeTechSpecial(el)) themeTechSpecial.push(el);
+        else if (isSeasonalSpecial(el)) seasonalSpecial.push(el);
+        else topSpecial.push(el);
+      });
+
+      topSpecial.forEach(function(el){ if (el) root.appendChild(el); });
+      if (themeTechSpecial.length){
+        appendThemeTechDivider();
+        themeTechSpecial.forEach(function(el){ if (el) root.appendChild(el); });
+      }
+      seasonalSpecial.forEach(function(el){ if (el) root.appendChild(el); });
 
       if (normal.length){
         const normalDivider = document.createElement("div");
@@ -244,7 +357,7 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
         const dividerLineL = document.createElement("span");
         dividerLineL.style.cssText = "flex:1;height:1px;background:#e6d7dd;display:block;";
         const dividerLabel = document.createElement("span");
-        dividerLabel.textContent = "👗 通常衣装";
+        dividerLabel.textContent = "👗 一般衣装";
         dividerLabel.style.cssText = "white-space:nowrap;font-size:14px;letter-spacing:0.02em;";
         const dividerLineR = document.createElement("span");
         dividerLineR.style.cssText = "flex:1;height:1px;background:#e6d7dd;display:block;";
@@ -260,7 +373,7 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
         normalWrap.style.cssText = "display:block;width:100%;max-width:100%;margin:0 0 8px;border:1px solid #e5d8de;border-radius:12px;background:#fff;overflow:hidden;box-sizing:border-box;";
 
         const normalSummary = document.createElement("summary");
-        normalSummary.textContent = "👗 一般カテゴリー / General Attire";
+        normalSummary.textContent = "👗 一般カテゴリ / General";
         normalSummary.style.cssText = "display:list-item;cursor:pointer;list-style:none;font-weight:700;color:#8b6674;background:#faf6f8;padding:10px 12px;";
         normalWrap.appendChild(normalSummary);
 
@@ -3560,9 +3673,11 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
           const label = document.createElement("div");
           label.className = "attire-r18-collection-group-label attire-r18-collection-group-label-" + kind;
           const text = kind === "theme"
-            ? "🧬 テーマ特化コレクション"
-            : (kind === "outfit" ? "👗 衣装系コレクション" : "🔥 状態・見え方系コレクション");
-          const color = kind === "theme" ? "#9a5c7a" : (kind === "outfit" ? "#a36a7c" : "#b24d66");
+            ? "🧬 テーマ特化"
+            : (kind === "outfit" ? "👗 衣装系" : (kind === "relation" ? "⛓ 支配・関係性" : "🔥 状態・見え方"));
+          const color = kind === "theme"
+            ? "#9a5c7a"
+            : (kind === "outfit" ? "#a36a7c" : (kind === "relation" ? "#a0447a" : "#b24d66"));
           label.textContent = text;
           label.style.cssText = "margin:6px 0 10px;padding:0 2px;color:" + color + ";font-size:0.78em;font-weight:800;letter-spacing:0.02em;";
           r18Zone.appendChild(label);
@@ -3571,17 +3686,22 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
         function classifyR18CollectionTitle(title){
           const t = String(title || "");
           if (
-            t.includes("侵食・寄生特化コレクション") ||
-            t.includes("汚れ・液体系特化コレクション") ||
             t.includes("艶拘束・支配進行特化コレクション") ||
-            t.includes("魅了の首輪・魔力支配特化コレクション")
+            t.includes("魅了の首輪・魔力支配特化コレクション") ||
+            t.includes("女王・支配者特化コレクション") ||
+            t.includes("奴隷装飾・所有印特化コレクション") ||
+            t.includes("首輪・ハーネス・固定具衣装特化コレクション") ||
+            t.includes("支配者・女王・高圧衣装特化コレクション")
+          ) return "relation";
+          if (
+            t.includes("侵食・寄生特化コレクション") ||
+            t.includes("汚れ・液体系特化コレクション")
           ) return "theme";
           if (
             t.includes("呪印・刻印露出特化コレクション") ||
             t.includes("生体スーツ・拘束スーツ特化コレクション") ||
             t.includes("儀式巫女・堕ち神官特化コレクション") ||
             t.includes("淫紋チャイナ・呪術ドレス特化コレクション") ||
-            t.includes("奴隷装飾・所有印特化コレクション") ||
             t.includes("触手・粘液汚染衣装特化コレクション")
           ) return "outfit";
           if (
@@ -3589,15 +3709,13 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
             t.includes("夜着・私室衣装特化コレクション") ||
             t.includes("夜の高級衣装特化コレクション") ||
             t.includes("艶素材・密着特化コレクション") ||
-            t.includes("首輪・ハーネス・固定具衣装特化コレクション") ||
-            t.includes("支配者・女王・高圧衣装特化コレクション") ||
             t.includes("高級背徳ランジェリー特化コレクション")
           ) return "outfit";
           return "state";
         }
 
         if (topCollectionDefs.length){
-          const groupedCollections = { theme: [], outfit: [], state: [] };
+          const groupedCollections = { theme: [], outfit: [], state: [], relation: [] };
           preGroupedTopExtraCollections.forEach(function(collection){
             const kind = classifyR18CollectionTitle(collection && collection.title);
             groupedCollections[kind].push(collection);
@@ -3637,13 +3755,14 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
           groupedCollections.theme = dedupeCollections(groupedCollections.theme);
           groupedCollections.outfit = dedupeCollections(groupedCollections.outfit);
           groupedCollections.state = dedupeCollections(groupedCollections.state);
+          groupedCollections.relation = dedupeCollections(groupedCollections.relation);
           groupedCollections.outfit = moveCollectionAfter(
             groupedCollections.outfit,
             "🧬 生体スーツ・拘束スーツ特化コレクション",
             "🪬 呪印・刻印露出特化コレクション"
           );
 
-          ["theme", "outfit", "state"].forEach(function(kind){
+          ["theme", "outfit", "state", "relation"].forEach(function(kind){
             const list = groupedCollections[kind] || [];
             if (!list.length) return;
             appendR18CollectionGroupLabel(kind);
@@ -3793,6 +3912,8 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
 
         root.appendChild(r18Zone);
       }
+
+      try{ polishAttireVisibleLabels(root); }catch(_){}
     }catch(_){}
     finally{
       try{
@@ -5803,7 +5924,7 @@ const contentArea = parent.querySelector(".section-content") || parent;
       };
 
       const root = document.createElement("div");
-      root.className = "attire-v15-container";
+      root.className = "attire-v20-coordinate-container";
       
       // 区切り線
       const sep = document.createElement("div");
@@ -5821,7 +5942,7 @@ const contentArea = parent.querySelector(".section-content") || parent;
 
     getTags() {
       const tags = [];
-      document.querySelectorAll(".attire-v15-container input[type='checkbox']:checked").forEach(cb => {
+      document.querySelectorAll(".attire-v20-coordinate-container input[type='checkbox']:checked").forEach(cb => {
         tags.push(cb.dataset.val);
       });
       return tags;
@@ -12949,6 +13070,2235 @@ function createItemLabel(item){
         if (tag) tags.push(tag);
       }
 
+      return tags;
+    }
+  };
+
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
+
+
+// --- builder_ui.section.attire.v27.cyber_machine_attire_collection.js ---
+(function(){
+  "use strict";
+
+  const VERSION = 27;
+  const KEY = "attire";
+  const ROOT_CLASS = "attire-v27-cyber-machine-attire";
+  const COLLECTION_ID = "attire_nanometal_suit_collection";
+
+  const ITEMS = {
+    complete: [
+      {
+        id: "nano_biometal_core",
+        roleType: "complete_set",
+        ja: "ナノメタル・セカンドスキン Core Set",
+        enLabel: "Nanometal Second Skin Core Set",
+        desc: "肌に沿う極薄ナノメタルスーツ。硬質〜半透明のスマート金属布を衣装として軽量に足す。",
+        en: "nanometal second-skin suit, seamless smart-metal bodysuit, ultra-thin flexible metallic fabric, sleek wearable outfit design, human body silhouette remains visible",
+        linked_ids: ["nano_base_second_skin", "nano_custom_liquid_surface", "nano_custom_circuit_seams", "nano_setting_lab_prototype"]
+      },
+      {
+        id: "nano_biometal_safe",
+        roleType: "complete_set",
+        ja: "ナノメタル・セカンドスキン Safe Quality Set",
+        enLabel: "Nanometal Second Skin Safe Quality Set",
+        desc: "極薄ナノメタルの第二皮膚感を保ちながら、金属布の質感と輪郭を安全強化する。",
+        en: "nanometal second-skin suit, seamless smart-metal bodysuit, ultra-thin flexible metallic fabric, clean wearable outfit design, matte reflective metal fabric, crisp seam detail, human body silhouette remains visible",
+        linked_ids: ["nano_base_second_skin", "nano_custom_liquid_surface", "nano_custom_circuit_seams", "nano_setting_lab_prototype", "nano_quality_matte_metal"]
+      },
+      {
+        id: "nano_biometal_2000",
+        roleType: "complete_set",
+        ja: "ナノメタル・セカンドスキン 2000 Limit",
+        enLabel: "Nanometal Second Skin 2000 Limit",
+        desc: "2000字制限向け。極薄ナノメタル衣装の核だけ残す。",
+        en: "nanometal second-skin suit, seamless smart-metal bodysuit, ultra-thin metallic fabric, human body silhouette remains visible",
+        linked_ids: ["nano_base_second_skin", "nano_custom_circuit_seams"]
+      },
+      {
+        id: "nano_biometal_full",
+        roleType: "complete_set",
+        ja: "ナノメタル・セカンドスキン Full Set",
+        enLabel: "Nanometal Second Skin Full Set",
+        desc: "極薄金属布、発光回路、硬質ナノパネル、衣装優先の輪郭維持まで厚めに入れる。",
+        en: "nanometal second-skin suit, seamless smart-metal bodysuit, liquid nanometal surface, ultra-thin flexible metallic fabric, glowing circuit seams following the body lines, clean wearable suit design, clothing-first design, not a robot body, human body silhouette remains visible",
+        linked_ids: ["nano_base_second_skin", "nano_base_synthetic_muscle", "nano_custom_liquid_surface", "nano_custom_circuit_seams", "nano_setting_lab_prototype", "nano_quality_matte_metal", "nano_quality_muscle_fiber"]
+      },
+      {
+        id: "nano_combat_core",
+        roleType: "complete_set",
+        ja: "戦闘ナノアーマー Core Set",
+        enLabel: "Combat Nano Armor Core Set",
+        desc: "薄型装甲と発光ラインを中心にした戦闘向けナノスーツ。",
+        en: "combat-ready nanometal armor suit, thin smart armor plates, flexible bodysuit base, glowing circuit lines, tactical cyber suit silhouette, wearable outfit design",
+        linked_ids: ["nano_base_smart_armor", "nano_custom_magnetic_plates", "nano_custom_power_core", "nano_setting_combat_ready"]
+      },
+      {
+        id: "nano_combat_safe",
+        roleType: "complete_set",
+        ja: "戦闘ナノアーマー Safe Quality Set",
+        enLabel: "Combat Nano Armor Safe Quality Set",
+        desc: "戦闘スーツの読みやすさと金属質感を安全補強。",
+        en: "combat-ready nanometal armor suit, thin smart armor plates, flexible bodysuit base, glowing circuit lines, tactical cyber suit silhouette, crisp armor panel separation, clean material contrast, wearable outfit design",
+        linked_ids: ["nano_base_smart_armor", "nano_custom_magnetic_plates", "nano_custom_power_core", "nano_setting_combat_ready", "nano_quality_micro_circuit"]
+      },
+      {
+        id: "nano_combat_2000",
+        roleType: "complete_set",
+        ja: "戦闘ナノアーマー 2000 Limit",
+        enLabel: "Combat Nano Armor 2000 Limit",
+        desc: "2000字制限向けの戦闘ナノスーツ短縮版。",
+        en: "combat nanometal armor suit, thin smart armor plates, glowing circuit lines, tactical wearable suit",
+        linked_ids: ["nano_base_smart_armor", "nano_custom_magnetic_plates"]
+      },
+      {
+        id: "nano_combat_full",
+        roleType: "complete_set",
+        ja: "戦闘ナノアーマー Full Set",
+        enLabel: "Combat Nano Armor Full Set",
+        desc: "薄型装甲・磁着プレート・胸部コア・戦術設定を全部乗せ。",
+        en: "combat-ready nanometal armor suit, thin smart armor plates over a flexible bodysuit, magnetic armor plates, embedded power core at the chest or waist, glowing circuit seams, reinforced shoulder and thigh panels, tactical cyber operator styling, clothing-first wearable suit, not full mechanical body",
+        linked_ids: ["nano_base_smart_armor", "nano_custom_magnetic_plates", "nano_custom_power_core", "nano_setting_combat_ready", "nano_quality_micro_circuit", "nano_quality_matte_metal"]
+      },
+      {
+        id: "nano_muscle_core",
+        roleType: "complete_set",
+        ja: "人工筋肉スーツ Core Set",
+        enLabel: "Synthetic Muscle Suit Core Set",
+        desc: "人工筋肉レイヤーと関節カバーで、義体感を衣装側に寄せる。",
+        en: "synthetic muscle support suit, visible artificial muscle fiber layer, cybernetic joint covers, flexible medical-grade bodysuit, wearable cyborg support outfit",
+        linked_ids: ["nano_base_synthetic_muscle", "nano_custom_joint_covers", "nano_custom_cable_interface", "nano_setting_medical_support"]
+      },
+      {
+        id: "nano_muscle_safe",
+        roleType: "complete_set",
+        ja: "人工筋肉スーツ Safe Quality Set",
+        enLabel: "Synthetic Muscle Suit Safe Quality Set",
+        desc: "人工筋肉の筋繊維感を読みやすくする安全補強。",
+        en: "synthetic muscle support suit, visible artificial muscle fiber layer, cybernetic joint covers, flexible medical-grade bodysuit, clean fiber texture detail, wearable cyborg support outfit",
+        linked_ids: ["nano_base_synthetic_muscle", "nano_custom_joint_covers", "nano_custom_cable_interface", "nano_setting_medical_support", "nano_quality_muscle_fiber"]
+      },
+      {
+        id: "nano_muscle_2000",
+        roleType: "complete_set",
+        ja: "人工筋肉スーツ 2000 Limit",
+        enLabel: "Synthetic Muscle Suit 2000 Limit",
+        desc: "2000字制限向けの人工筋肉スーツ短縮版。",
+        en: "synthetic muscle support suit, artificial muscle fiber layer, cybernetic joint covers, wearable cyborg outfit",
+        linked_ids: ["nano_base_synthetic_muscle", "nano_custom_joint_covers"]
+      },
+      {
+        id: "nano_muscle_full",
+        roleType: "complete_set",
+        ja: "人工筋肉スーツ Full Set",
+        enLabel: "Synthetic Muscle Suit Full Set",
+        desc: "医療/義体補助系のスーツとして、筋繊維・関節・ケーブルを厚めに入れる。",
+        en: "synthetic muscle support suit, visible artificial muscle fiber layer beneath translucent mesh sections, cybernetic joint covers at elbows and knees, cable harness interface, medical-grade flexible bodysuit, soft glowing diagnostic lines, wearable cyborg support outfit, clothing-first design",
+        linked_ids: ["nano_base_synthetic_muscle", "nano_custom_joint_covers", "nano_custom_cable_interface", "nano_setting_medical_support", "nano_quality_muscle_fiber", "nano_quality_soft_emission"]
+      },
+      {
+        id: "nano_transparent_core",
+        roleType: "complete_set",
+        ja: "透明装甲コアスーツ Core Set",
+        enLabel: "Transparent Armor Core Suit Core Set",
+        desc: "透明パネルとコアユニットを主役にしたアンドロイド向け衣装。",
+        en: "transparent armor panel suit, seamless nanometal bodysuit, visible power core unit, clear resin armor parts, glowing internal circuit lines, wearable android-style outfit",
+        linked_ids: ["nano_base_seamless", "nano_custom_transparent_panels", "nano_custom_power_core", "nano_setting_lab_prototype"]
+      },
+      {
+        id: "nano_transparent_safe",
+        roleType: "complete_set",
+        ja: "透明装甲コアスーツ Safe Quality Set",
+        enLabel: "Transparent Armor Core Suit Safe Quality Set",
+        desc: "透明パネルの視認性と発光コアを安全補強。",
+        en: "transparent armor panel suit, seamless nanometal bodysuit, visible power core unit, clear resin armor parts, glowing internal circuit lines, clean transparent material separation, wearable android-style outfit",
+        linked_ids: ["nano_base_seamless", "nano_custom_transparent_panels", "nano_custom_power_core", "nano_setting_lab_prototype", "nano_quality_transparent_clarity"]
+      },
+      {
+        id: "nano_transparent_2000",
+        roleType: "complete_set",
+        ja: "透明装甲コアスーツ 2000 Limit",
+        enLabel: "Transparent Armor Core Suit 2000 Limit",
+        desc: "2000字制限向けの透明装甲スーツ短縮版。",
+        en: "transparent armor panel suit, nanometal bodysuit, visible power core, glowing circuits, wearable android-style outfit",
+        linked_ids: ["nano_base_seamless", "nano_custom_transparent_panels"]
+      },
+      {
+        id: "nano_transparent_full",
+        roleType: "complete_set",
+        ja: "透明装甲コアスーツ Full Set",
+        enLabel: "Transparent Armor Core Suit Full Set",
+        desc: "透明装甲・胸部/腰部コア・内部回路まで厚めに入れる。",
+        en: "transparent armor panel suit over a seamless nanometal bodysuit, clear resin armor plates on shoulders hips and thighs, visible power core unit at the chest or waist, glowing internal circuit lines under translucent panels, laboratory prototype styling, wearable android-style outfit, not a nude body, clothing-first design",
+        linked_ids: ["nano_base_seamless", "nano_custom_transparent_panels", "nano_custom_power_core", "nano_setting_lab_prototype", "nano_quality_transparent_clarity", "nano_quality_soft_emission"]
+      },
+      {
+        id: "nano_exoframe_core",
+        roleType: "complete_set",
+        ja: "外骨格フレームスーツ Core Set",
+        enLabel: "Exoskeleton Frame Suit Core Set",
+        desc: "ナノメタル側の入門版。軽い背部・腕・脚フレームを衣装として追加し、重装フレームは専用棚へ任せる。",
+        en: "starter wearable exoskeleton frame suit, light external support frame on arms and legs, mechanical spine unit, flexible bodysuit underlayer, cybernetic outfit design",
+        linked_ids: ["nano_base_exoframe", "nano_custom_mechanical_spine", "nano_custom_magnetic_plates", "nano_setting_combat_ready"]
+      },
+      {
+        id: "nano_exoframe_safe",
+        roleType: "complete_set",
+        ja: "外骨格フレームスーツ Safe Quality Set",
+        enLabel: "Exoskeleton Frame Suit Safe Quality Set",
+        desc: "入門版フレームの構造を読みやすくする。大型バックパックや重装脚部は外骨格専用棚で深掘りする。",
+        en: "starter wearable exoskeleton frame suit, light external support frame on arms and legs, mechanical spine unit, flexible bodysuit underlayer, clear mechanical joint structure, cybernetic outfit design",
+        linked_ids: ["nano_base_exoframe", "nano_custom_mechanical_spine", "nano_custom_magnetic_plates", "nano_setting_combat_ready", "nano_quality_micro_circuit"]
+      },
+      {
+        id: "nano_exoframe_2000",
+        roleType: "complete_set",
+        ja: "外骨格フレームスーツ 2000 Limit",
+        enLabel: "Exoskeleton Frame Suit 2000 Limit",
+        desc: "2000字制限向けの外骨格入門版。",
+        en: "starter exoskeleton frame suit, light arm and leg support frame, mechanical spine unit, cybernetic outfit",
+        linked_ids: ["nano_base_exoframe", "nano_custom_mechanical_spine"]
+      },
+      {
+        id: "nano_exoframe_full",
+        roleType: "complete_set",
+        ja: "外骨格フレームスーツ Full Set",
+        enLabel: "Exoskeleton Frame Suit Full Set",
+        desc: "ナノメタル側の外骨格入門フル版。衣装に載る軽〜中量フレームまでに留め、重装戦闘フレームは専用棚で深掘りする。",
+        en: "starter wearable exoskeleton frame suit, light-to-medium external support frame running along arms and legs, mechanical spine unit over the back, flexible nanometal bodysuit underlayer, magnetic armor plates attached to the frame, visible joint actuators, tactical cyber outfit design, clothing-first wearable suit",
+        linked_ids: ["nano_base_exoframe", "nano_base_smart_armor", "nano_custom_mechanical_spine", "nano_custom_magnetic_plates", "nano_setting_combat_ready", "nano_quality_micro_circuit", "nano_quality_matte_metal"]
+      },
+      {
+        id: "nano_dress_core",
+        roleType: "complete_set",
+        role: "female",
+        ja: "ナノメタル・サイバードレス Core Set",
+        enLabel: "Nanometal Cyber Dress Core Set",
+        desc: "ナノメタル側のドレス入門版。サイバーコルセットと金属スカートを軽く足し、機械天使・ゴシック等は専用棚で深掘りする。",
+        en: "starter nanometal cyber dress, sleek cyber corset frame, metallic skirt panels, glowing circuit embroidery, elegant android princess outfit",
+        linked_ids: ["nano_base_cyber_corset_dress", "nano_custom_circuit_seams", "nano_custom_power_core", "nano_setting_formal_android"]
+      },
+      {
+        id: "nano_dress_safe",
+        roleType: "complete_set",
+        role: "female",
+        ja: "ナノメタル・サイバードレス Safe Quality Set",
+        enLabel: "Nanometal Cyber Dress Safe Quality Set",
+        desc: "入門版ドレスの華やかさを保ちつつ、素材を読みやすくする。透明パネルや翼ドレスは専用棚で深掘りする。",
+        en: "starter nanometal cyber dress, sleek cyber corset frame, metallic skirt panels, glowing circuit embroidery, elegant android princess outfit, clean metal-fabric separation, soft luminous trim",
+        linked_ids: ["nano_base_cyber_corset_dress", "nano_custom_circuit_seams", "nano_custom_power_core", "nano_setting_formal_android", "nano_quality_soft_emission"]
+      },
+      {
+        id: "nano_dress_2000",
+        roleType: "complete_set",
+        role: "female",
+        ja: "ナノメタル・サイバードレス 2000 Limit",
+        enLabel: "Nanometal Cyber Dress 2000 Limit",
+        desc: "2000字制限向けの機械ドレス入門版。",
+        en: "starter nanometal cyber dress, cyber corset frame, metallic skirt panels, glowing circuit embroidery",
+        linked_ids: ["nano_base_cyber_corset_dress", "nano_custom_circuit_seams"]
+      },
+      {
+        id: "nano_dress_full",
+        roleType: "complete_set",
+        role: "female",
+        ja: "ナノメタル・サイバードレス Full Set",
+        enLabel: "Nanometal Cyber Dress Full Set",
+        desc: "ナノメタル側のドレス入門フル版。コアブローチ・回路刺繍・金属スカートまでに留め、機械天使や透明コアドレスは専用棚で深掘りする。",
+        en: "starter nanometal cyber dress, sleek cyber corset frame, layered metallic skirt panels, glowing circuit embroidery like lace, embedded power core brooch, transparent resin accents, formal android ceremonial styling, elegant machine-princess outfit, clothing-first design",
+        linked_ids: ["nano_base_cyber_corset_dress", "nano_custom_circuit_seams", "nano_custom_power_core", "nano_custom_transparent_panels", "nano_setting_formal_android", "nano_quality_soft_emission", "nano_quality_transparent_clarity"]
+      }
+    ],
+    base: [
+      { id: "nano_base_seamless", roleType: "base", ja: "シームレス・ナノメタルボディスーツ", enLabel: "Seamless Nanometal Bodysuit", desc: "種族変更せず、衣装として密着ナノメタルを足す土台。", en: "seamless nanometal bodysuit, body-hugging smart fabric, clothing-first wearable suit, human body silhouette remains visible" },
+      { id: "nano_base_second_skin", roleType: "base", ja: "ナノメタル第二皮膚スーツ", enLabel: "Nanometal Second Skin Suit", desc: "極薄スマート金属布が肌に沿う、ナノメタル側のスーツ土台。", en: "nanometal second-skin suit, flexible smart-metal fabric, smooth liquid nanometal cloth surface, wearable suit design" },
+      { id: "nano_base_synthetic_muscle", roleType: "base", ja: "人工筋肉レイヤースーツ", enLabel: "Synthetic Muscle Layer Suit", desc: "人工筋肉・義体補助寄りのスーツ土台。", en: "synthetic muscle layer suit, artificial muscle fibers under flexible fabric, cybernetic support clothing" },
+      { id: "nano_base_smart_armor", roleType: "base", ja: "薄型スマートアーマー", enLabel: "Thin Smart Armor Suit", desc: "戦闘・オペレーター向けの薄型装甲土台。", en: "thin smart armor suit, flexible nanometal armor plates, tactical wearable bodysuit" },
+      { id: "nano_base_exoframe", roleType: "base", ja: "外骨格サポートフレーム（入門）", enLabel: "Starter Exoskeleton Support Frame", desc: "ナノメタル側の入門版。背部・腕・脚へ軽い外部フレームを重ねる土台。", en: "starter wearable exoskeleton support frame, light external mechanical frame over a bodysuit, cybernetic outfit layer" },
+      { id: "nano_base_cyber_corset_dress", roleType: "base", role: "female", ja: "サイバーコルセット・ドレスフレーム（入門）", enLabel: "Starter Cyber Corset Dress Frame", desc: "ナノメタル側の入門版。ドレス型にしたい時の軽い機械衣装土台。", en: "starter cyber corset dress frame, nanometal dress base, structured metallic bodice and skirt panels" }
+    ],
+    custom: [
+      { id: "nano_custom_circuit_seams", roleType: "custom", ja: "発光回路シーム", enLabel: "Glowing Circuit Seams", desc: "体のラインに沿う回路発光。", en: "glowing circuit seams following the body lines, clean luminous interface lines" },
+      { id: "nano_custom_power_core", roleType: "custom", ja: "埋め込み式パワーコア", enLabel: "Embedded Power Core", desc: "胸部・腰部・ブローチなどに使えるコア。", en: "embedded power core unit, small reactor-like glowing core integrated into the outfit" },
+      { id: "nano_custom_transparent_panels", roleType: "custom", ja: "透明装甲パネル", enLabel: "Transparent Armor Panels", desc: "透明樹脂・クリア装甲を衣装化。", en: "transparent armor panels, clear resin armor parts, visible internal light under translucent plates" },
+      { id: "nano_custom_liquid_surface", roleType: "custom", ja: "液体ナノメタルサーフェス", enLabel: "Liquid Nanometal Surface", desc: "流動的なスマート金属布。ナノメタル側の硬質〜半透明な表面表現。", en: "liquid nanometal surface, smooth flowing smart-metal cloth, adaptive nanometal sheen" },
+      { id: "nano_custom_cable_interface", roleType: "custom", ja: "ケーブルハーネス端子", enLabel: "Cable Harness Interface", desc: "サイボーグ・メンテナンス感を足す。", en: "cable harness interface, small connector ports, clean cybernetic maintenance details" },
+      { id: "nano_custom_mechanical_spine", roleType: "custom", ja: "メカニカル背骨ユニット", enLabel: "Mechanical Spine Unit", desc: "背部に走る機械フレーム。", en: "mechanical spine unit over the back, segmented cybernetic support rail" },
+      { id: "nano_custom_magnetic_plates", roleType: "custom", ja: "磁着アーマープレート", enLabel: "Magnetic Armor Plates", desc: "浮く/貼り付く薄型装甲片。", en: "magnetic armor plates attached over the suit, modular floating armor segments" },
+      { id: "nano_custom_joint_covers", roleType: "custom", ja: "サイバネ関節カバー", enLabel: "Cybernetic Joint Covers", desc: "肘・膝・手首に機械的な関節カバー。", en: "cybernetic joint covers at elbows knees and wrists, clean mechanical joint detail" }
+    ],
+    setting: [
+      { id: "nano_setting_lab_prototype", roleType: "setting", ja: "研究所プロトタイプ仕様", enLabel: "Laboratory Prototype Styling", desc: "試作機・検査中のナノメタル衣装。", en: "laboratory prototype styling, clean test suit markings, experimental nanometal outfit design" },
+      { id: "nano_setting_combat_ready", roleType: "setting", ja: "戦闘即応仕様", enLabel: "Combat-ready Configuration", desc: "タクティカル・戦闘オペレーター向け。", en: "combat-ready configuration, tactical cyber operator styling, reinforced suit layout" },
+      { id: "nano_setting_medical_support", roleType: "setting", ja: "医療義体サポート仕様", enLabel: "Medical Cyborg Support Styling", desc: "医療・義体補助・リハビリ的な機械衣装。", en: "medical cyborg support styling, diagnostic suit marks, functional support outfit design" },
+      { id: "nano_setting_formal_android", roleType: "setting", ja: "アンドロイド式典仕様", enLabel: "Formal Android Ceremonial Styling", desc: "機械姫・式典ドレス・フォーマル寄り。", en: "formal android ceremonial styling, elegant machine-princess outfit, refined synthetic regalia" },
+      { id: "nano_setting_stealth_operator", roleType: "setting", ja: "ステルスオペレーター仕様", enLabel: "Stealth Operator Styling", desc: "暗色の隠密ナノスーツ。", en: "stealth operator styling, dark nanometal suit, low-profile glow lines, quiet tactical silhouette" },
+      { id: "nano_setting_urban_cyber", roleType: "setting", ja: "都市型サイバー服統合", enLabel: "Urban Cyberwear Integration", desc: "日常服にナノメタルを混ぜる方向。", en: "urban cyberwear integration, nanometal suit mixed with streetwear layers, wearable everyday cyber outfit" }
+    ],
+    quality: [
+      { id: "nano_quality_matte_metal", roleType: "quality", ja: "マット金属布の質感", enLabel: "Matte Metal Fabric Texture", desc: "ギラつきを抑えた金属布。", en: "matte reflective metal fabric, soft brushed nanometal texture, controlled highlights" },
+      { id: "nano_quality_micro_circuit", roleType: "quality", ja: "マイクロ回路ディテール", enLabel: "Micro Circuit Detail", desc: "細かい回路・接合線の精密化。", en: "micro circuit detail, crisp seam definition, tiny interface markings, clean technical patterning" },
+      { id: "nano_quality_soft_emission", roleType: "quality", ja: "柔らかい発光ライン", enLabel: "Soft Emission Lines", desc: "発光ラインを強すぎず綺麗に。", en: "soft glow emission lines, subtle luminous trim, balanced cyber light accents" },
+      { id: "nano_quality_transparent_clarity", roleType: "quality", ja: "透明装甲の明瞭化", enLabel: "Transparent Armor Clarity", desc: "透明パネルと内部発光の見分けを良くする。", en: "transparent resin armor clarity, clean refraction, readable clear panel edges" },
+      { id: "nano_quality_muscle_fiber", roleType: "quality", ja: "人工筋肉繊維の明瞭化", enLabel: "Artificial Muscle Fiber Clarity", desc: "人工筋肉の筋繊維を潰さない。", en: "artificial muscle fiber detail, clean synthetic fiber striations, readable flexible support layer" },
+      { id: "nano_quality_clothing_first", roleType: "quality", ja: "衣装優先・身体置換防止", enLabel: "Clothing-first Safety", desc: "アンドロイド身体化しすぎる時の補助。", en: "clothing-first design, wearable outfit not body replacement, not a robot body, human body silhouette remains visible" }
+    ]
+  };
+
+
+  const BIO_ITEMS = {
+  "complete": [
+    {
+      "id": "bio_second_skin_core",
+      "roleType": "complete_set",
+      "ja": "バイオメタル第二皮膚 Core Set",
+      "enLabel": "Bio-metal Second Skin Core Set",
+      "desc": "生体金属が肌に沿う衣装。身体改造ではなく、着用スーツとして軽量に足す。",
+      "en": "bio-metal second-skin suit, soft living metal fabric, seamless wearable bodysuit, organic metallic sheen, clothing-first design, not body replacement",
+      "linked_ids": [
+        "bio_base_second_skin",
+        "bio_custom_living_metal",
+        "bio_custom_biometric_seams",
+        "bio_setting_symbiotic_wear"
+      ]
+    },
+    {
+      "id": "bio_second_skin_safe",
+      "roleType": "complete_set",
+      "ja": "バイオメタル第二皮膚 Safe Quality Set",
+      "enLabel": "Bio-metal Second Skin Safe Quality Set",
+      "desc": "第二皮膚感と衣装感を崩さず、柔らかい金属質感を補強。",
+      "en": "bio-metal second-skin suit, soft living metal fabric, seamless wearable bodysuit, organic metallic sheen, clean clothing-first design, soft brushed biometal texture, readable seam detail, not body replacement",
+      "linked_ids": [
+        "bio_base_second_skin",
+        "bio_custom_living_metal",
+        "bio_custom_biometric_seams",
+        "bio_setting_symbiotic_wear",
+        "bio_quality_soft_biometal"
+      ]
+    },
+    {
+      "id": "bio_second_skin_2000",
+      "roleType": "complete_set",
+      "ja": "バイオメタル第二皮膚 2000 Limit",
+      "enLabel": "Bio-metal Second Skin 2000 Limit",
+      "desc": "2000字制限向け。生体金属衣装の核だけ残す。",
+      "en": "bio-metal second-skin suit, soft living metal fabric, seamless wearable bodysuit, clothing-first design",
+      "linked_ids": [
+        "bio_base_second_skin",
+        "bio_custom_living_metal"
+      ]
+    },
+    {
+      "id": "bio_second_skin_full",
+      "roleType": "complete_set",
+      "ja": "バイオメタル第二皮膚 Full Set",
+      "enLabel": "Bio-metal Second Skin Full Set",
+      "desc": "生体金属・第二皮膚・生体回路・柔らかい人工筋肉まで厚めに入れる。",
+      "en": "bio-metal second-skin suit, soft living metal fabric, seamless wearable bodysuit, organic metallic sheen, flexible artificial muscle support under the suit, subtle biometric seams following the body lines, adaptive living-metal surface, clothing-first wearable suit, not body replacement, human body silhouette remains visible",
+      "linked_ids": [
+        "bio_base_second_skin",
+        "bio_base_muscle_support",
+        "bio_custom_living_metal",
+        "bio_custom_biometric_seams",
+        "bio_setting_symbiotic_wear",
+        "bio_quality_soft_biometal",
+        "bio_quality_biomuscle_fiber"
+      ]
+    },
+    {
+      "id": "bio_liquid_dress_core",
+      "roleType": "complete_set",
+      "role": "female",
+      "ja": "流体金属ドレス Core Set",
+      "enLabel": "Liquid Bio-metal Dress Core Set",
+      "desc": "流れる金属布をドレス化。機械姫・人造聖女向け。",
+      "en": "liquid bio-metal dress, flowing metallic fabric, organic chrome dress panels, soft living metal skirt, elegant machine-princess outfit, clothing-first design",
+      "linked_ids": [
+        "bio_base_liquid_dress",
+        "bio_custom_living_metal",
+        "bio_custom_pulse_core",
+        "bio_setting_ceremonial_bio"
+      ]
+    },
+    {
+      "id": "bio_liquid_dress_safe",
+      "roleType": "complete_set",
+      "role": "female",
+      "ja": "流体金属ドレス Safe Quality Set",
+      "enLabel": "Liquid Bio-metal Dress Safe Quality Set",
+      "desc": "ドレス感を保ちつつ、生体金属の流動質感を安全補強。",
+      "en": "liquid bio-metal dress, flowing metallic fabric, organic chrome dress panels, soft living metal skirt, elegant machine-princess outfit, clean fabric-metal separation, subtle pulse-light trim, clothing-first design",
+      "linked_ids": [
+        "bio_base_liquid_dress",
+        "bio_custom_living_metal",
+        "bio_custom_pulse_core",
+        "bio_setting_ceremonial_bio",
+        "bio_quality_soft_biometal"
+      ]
+    },
+    {
+      "id": "bio_liquid_dress_2000",
+      "roleType": "complete_set",
+      "role": "female",
+      "ja": "流体金属ドレス 2000 Limit",
+      "enLabel": "Liquid Bio-metal Dress 2000 Limit",
+      "desc": "2000字制限向けの流体金属ドレス短縮版。",
+      "en": "liquid bio-metal dress, flowing metallic fabric, organic chrome dress panels, elegant machine-princess outfit",
+      "linked_ids": [
+        "bio_base_liquid_dress",
+        "bio_custom_living_metal"
+      ]
+    },
+    {
+      "id": "bio_liquid_dress_full",
+      "roleType": "complete_set",
+      "role": "female",
+      "ja": "流体金属ドレス Full Set",
+      "enLabel": "Liquid Bio-metal Dress Full Set",
+      "desc": "流体金属、脈動コア、金属布ドレープまで厚めに入れる。",
+      "en": "liquid bio-metal dress, flowing living-metal fabric, organic chrome bodice, layered soft metallic skirt panels, subtle pulse-core brooch, bioluminescent seam lines, elegant synthetic saint or machine-princess outfit, clothing-first design, not a robot body",
+      "linked_ids": [
+        "bio_base_liquid_dress",
+        "bio_custom_living_metal",
+        "bio_custom_pulse_core",
+        "bio_custom_bioluminescent_trim",
+        "bio_setting_ceremonial_bio",
+        "bio_quality_soft_biometal",
+        "bio_quality_pulse_light"
+      ]
+    },
+    {
+      "id": "bio_organic_armor_core",
+      "roleType": "complete_set",
+      "ja": "有機機械アーマー Core Set",
+      "enLabel": "Organic Machine Armor Core Set",
+      "desc": "有機的な機械装甲を衣装として重ねる戦闘向け。",
+      "en": "organic machine armor suit, bio-metal armor plates, flexible bodysuit underlayer, living mechanical seams, wearable combat outfit design",
+      "linked_ids": [
+        "bio_base_organic_armor",
+        "bio_custom_living_plates",
+        "bio_custom_biometric_seams",
+        "bio_setting_combat_bio"
+      ]
+    },
+    {
+      "id": "bio_organic_armor_safe",
+      "roleType": "complete_set",
+      "ja": "有機機械アーマー Safe Quality Set",
+      "enLabel": "Organic Machine Armor Safe Quality Set",
+      "desc": "生体装甲のパネル構造と衣装感を読みやすくする。",
+      "en": "organic machine armor suit, bio-metal armor plates, flexible bodysuit underlayer, living mechanical seams, clear armor panel separation, wearable combat outfit design",
+      "linked_ids": [
+        "bio_base_organic_armor",
+        "bio_custom_living_plates",
+        "bio_custom_biometric_seams",
+        "bio_setting_combat_bio",
+        "bio_quality_panel_clarity"
+      ]
+    },
+    {
+      "id": "bio_organic_armor_2000",
+      "roleType": "complete_set",
+      "ja": "有機機械アーマー 2000 Limit",
+      "enLabel": "Organic Machine Armor 2000 Limit",
+      "desc": "2000字制限向けの有機機械アーマー短縮版。",
+      "en": "organic machine armor suit, bio-metal armor plates, wearable combat outfit",
+      "linked_ids": [
+        "bio_base_organic_armor",
+        "bio_custom_living_plates"
+      ]
+    },
+    {
+      "id": "bio_organic_armor_full",
+      "roleType": "complete_set",
+      "ja": "有機機械アーマー Full Set",
+      "enLabel": "Organic Machine Armor Full Set",
+      "desc": "生体装甲板、脈動ライン、戦闘仕様まで全部乗せ。",
+      "en": "organic machine armor suit, bio-metal armor plates grown over a flexible bodysuit, living mechanical seams, pulsing biological circuit lines, adaptive shoulder and thigh armor, soft reactor-like pulse core, wearable combat outfit design, clothing-first design, not full mechanical body",
+      "linked_ids": [
+        "bio_base_organic_armor",
+        "bio_custom_living_plates",
+        "bio_custom_pulse_core",
+        "bio_setting_combat_bio",
+        "bio_quality_panel_clarity",
+        "bio_quality_pulse_light"
+      ]
+    },
+    {
+      "id": "bio_regen_core",
+      "roleType": "complete_set",
+      "ja": "自己修復バイオメタルスーツ Core Set",
+      "enLabel": "Self-repairing Bio-metal Suit Core Set",
+      "desc": "傷が閉じていくような再生金属スーツ。SF医療/実験体にも向く。",
+      "en": "self-repairing bio-metal suit, adaptive living-metal fabric, regenerative seam pattern, medical cyberwear silhouette, clothing-first wearable suit",
+      "linked_ids": [
+        "bio_base_regen_suit",
+        "bio_custom_regen_seams",
+        "bio_custom_bioluminescent_trim",
+        "bio_setting_medical_bio"
+      ]
+    },
+    {
+      "id": "bio_regen_safe",
+      "roleType": "complete_set",
+      "ja": "自己修復バイオメタルスーツ Safe Quality Set",
+      "enLabel": "Self-repairing Bio-metal Suit Safe Quality Set",
+      "desc": "再生シームと医療SF感を読みやすくする。",
+      "en": "self-repairing bio-metal suit, adaptive living-metal fabric, regenerative seam pattern, medical cyberwear silhouette, clean repair-line detail, clothing-first wearable suit",
+      "linked_ids": [
+        "bio_base_regen_suit",
+        "bio_custom_regen_seams",
+        "bio_custom_bioluminescent_trim",
+        "bio_setting_medical_bio",
+        "bio_quality_biomuscle_fiber"
+      ]
+    },
+    {
+      "id": "bio_regen_2000",
+      "roleType": "complete_set",
+      "ja": "自己修復バイオメタルスーツ 2000 Limit",
+      "enLabel": "Self-repairing Bio-metal Suit 2000 Limit",
+      "desc": "2000字制限向けの自己修復スーツ短縮版。",
+      "en": "self-repairing bio-metal suit, adaptive living-metal fabric, regenerative seams, medical cyberwear",
+      "linked_ids": [
+        "bio_base_regen_suit",
+        "bio_custom_regen_seams"
+      ]
+    },
+    {
+      "id": "bio_regen_full",
+      "roleType": "complete_set",
+      "ja": "自己修復バイオメタルスーツ Full Set",
+      "enLabel": "Self-repairing Bio-metal Suit Full Set",
+      "desc": "再生シーム、医療SF、脈動発光まで厚めに入れる。",
+      "en": "self-repairing bio-metal suit, adaptive living-metal fabric, regenerative seam pattern visibly closing like healed metal cloth, subtle bioluminescent trim, medical cyborg support styling, soft diagnostic markings, flexible protective outfit, clothing-first wearable suit",
+      "linked_ids": [
+        "bio_base_regen_suit",
+        "bio_custom_regen_seams",
+        "bio_custom_bioluminescent_trim",
+        "bio_setting_medical_bio",
+        "bio_quality_biomuscle_fiber",
+        "bio_quality_pulse_light"
+      ]
+    }
+  ],
+  "base": [
+    {
+      "id": "bio_base_second_skin",
+      "roleType": "base",
+      "ja": "バイオメタル第二皮膚",
+      "enLabel": "Bio-metal Second Skin",
+      "desc": "生体金属が肌に沿うスーツ土台。",
+      "en": "bio-metal second-skin suit, soft living-metal fabric, seamless wearable bodysuit, clothing-first design"
+    },
+    {
+      "id": "bio_base_muscle_support",
+      "roleType": "base",
+      "ja": "生体人工筋肉レイヤー",
+      "enLabel": "Bio-synthetic Muscle Layer",
+      "desc": "筋繊維的なバイオメタル補助服。",
+      "en": "bio-synthetic muscle support layer, flexible artificial muscle fibers under soft metallic fabric"
+    },
+    {
+      "id": "bio_base_liquid_dress",
+      "roleType": "base",
+      "role": "female",
+      "ja": "流体金属ドレス土台",
+      "enLabel": "Liquid Metal Dress Base",
+      "desc": "ドレス型のバイオメタル土台。",
+      "en": "liquid bio-metal dress base, flowing living-metal fabric, organic chrome bodice and skirt panels"
+    },
+    {
+      "id": "bio_base_organic_armor",
+      "roleType": "base",
+      "ja": "有機機械装甲土台",
+      "enLabel": "Organic Machine Armor Base",
+      "desc": "有機的な機械装甲を衣装化する土台。",
+      "en": "organic machine armor suit base, bio-metal armor plates over flexible bodysuit, wearable combat outfit"
+    },
+    {
+      "id": "bio_base_regen_suit",
+      "roleType": "base",
+      "ja": "自己修復スーツ土台",
+      "enLabel": "Regenerative Bio-metal Suit Base",
+      "desc": "自己修復する医療/実験体寄りスーツ。",
+      "en": "self-repairing bio-metal suit base, adaptive living-metal fabric, medical cyberwear silhouette"
+    }
+  ],
+  "custom": [
+    {
+      "id": "bio_custom_living_metal",
+      "roleType": "custom",
+      "ja": "生体金属サーフェス",
+      "enLabel": "Living Metal Surface",
+      "desc": "柔らかく流れる生体金属の表面。",
+      "en": "living metal surface, soft organic metallic sheen, smooth adaptive biometal texture"
+    },
+    {
+      "id": "bio_custom_biometric_seams",
+      "roleType": "custom",
+      "ja": "生体回路シーム",
+      "enLabel": "Biometric Circuit Seams",
+      "desc": "血管や神経のように走る回路シーム。",
+      "en": "biometric circuit seams, organic glowing seam lines following the suit structure"
+    },
+    {
+      "id": "bio_custom_pulse_core",
+      "roleType": "custom",
+      "ja": "脈動コア",
+      "enLabel": "Pulsing Bio-core",
+      "desc": "胸部・腰部・ブローチに使える脈動コア。",
+      "en": "small pulsing bio-core, soft reactor-like organic light integrated into the outfit"
+    },
+    {
+      "id": "bio_custom_living_plates",
+      "roleType": "custom",
+      "ja": "生体装甲プレート",
+      "enLabel": "Living Armor Plates",
+      "desc": "生えているような柔らかい装甲板。",
+      "en": "living armor plates, adaptive bio-metal armor segments grown over the outfit"
+    },
+    {
+      "id": "bio_custom_regen_seams",
+      "roleType": "custom",
+      "ja": "自己修復シーム",
+      "enLabel": "Regenerative Seams",
+      "desc": "傷が閉じるような再生ライン。",
+      "en": "regenerative seam pattern, repair-line details like healed metallic cloth"
+    },
+    {
+      "id": "bio_custom_bioluminescent_trim",
+      "roleType": "custom",
+      "ja": "生体発光トリム",
+      "enLabel": "Bioluminescent Trim",
+      "desc": "強すぎない有機的な発光縁取り。",
+      "en": "bioluminescent trim, soft organic glow accents, subtle living-light edges"
+    }
+  ],
+  "setting": [
+    {
+      "id": "bio_setting_symbiotic_wear",
+      "roleType": "setting",
+      "ja": "共生型ウェア仕様",
+      "enLabel": "Symbiotic Wear Styling",
+      "desc": "スーツが着用者と同調する方向。",
+      "en": "symbiotic wear styling, living suit synchronized with the wearer, clothing-first outfit concept"
+    },
+    {
+      "id": "bio_setting_ceremonial_bio",
+      "roleType": "setting",
+      "ja": "生体式典ドレス仕様",
+      "enLabel": "Bio-ceremonial Styling",
+      "desc": "式典・聖女・機械姫向けのバイオメタル装束。",
+      "en": "bio-ceremonial styling, elegant synthetic saint attire, living-metal formal outfit"
+    },
+    {
+      "id": "bio_setting_combat_bio",
+      "roleType": "setting",
+      "ja": "生体戦闘スーツ仕様",
+      "enLabel": "Bio-combat Configuration",
+      "desc": "戦闘・強化服向け。",
+      "en": "bio-combat configuration, adaptive living armor layout, reinforced organic machine outfit"
+    },
+    {
+      "id": "bio_setting_medical_bio",
+      "roleType": "setting",
+      "ja": "医療実験体サポート仕様",
+      "enLabel": "Medical Bio-support Styling",
+      "desc": "医療・実験体・義体補助風のバイオメタル服。",
+      "en": "medical bio-support styling, diagnostic markings, regenerative cyborg support outfit"
+    }
+  ],
+  "quality": [
+    {
+      "id": "bio_quality_soft_biometal",
+      "roleType": "quality",
+      "ja": "柔らかい生体金属質感",
+      "enLabel": "Soft Bio-metal Texture",
+      "desc": "硬すぎない生体金属の質感。",
+      "en": "soft bio-metal texture, smooth organic metallic sheen, controlled highlights, not hard armor only"
+    },
+    {
+      "id": "bio_quality_biomuscle_fiber",
+      "roleType": "quality",
+      "ja": "生体筋繊維ディテール",
+      "enLabel": "Bio-muscle Fiber Detail",
+      "desc": "生体人工筋肉の繊維を潰さない。",
+      "en": "bio-synthetic muscle fiber detail, clean organic fiber striations, readable flexible support layer"
+    },
+    {
+      "id": "bio_quality_panel_clarity",
+      "roleType": "quality",
+      "ja": "生体装甲パネル明瞭化",
+      "enLabel": "Living Armor Panel Clarity",
+      "desc": "有機装甲の形を読みやすくする。",
+      "en": "living armor panel clarity, readable bio-metal plate edges, clean organic mechanical separation"
+    },
+    {
+      "id": "bio_quality_pulse_light",
+      "roleType": "quality",
+      "ja": "脈動発光の明瞭化",
+      "enLabel": "Pulsing Light Clarity",
+      "desc": "脈動コアと発光ラインを綺麗に見せる。",
+      "en": "soft pulsing light clarity, subtle bioluminescent glow, balanced organic emission lines"
+    },
+    {
+      "id": "bio_quality_clothing_first",
+      "roleType": "quality",
+      "ja": "衣装優先・同化しすぎ防止",
+      "enLabel": "Clothing-first Bio Safety",
+      "desc": "身体同化しすぎる時の補助。",
+      "en": "clothing-first design, wearable outfit not body transformation, not bare skin, human body silhouette remains visible"
+    }
+  ]
+};
+
+
+const SUIT_ITEMS = {
+  "complete": [
+    {
+      "id": "plug_core_interface",
+      "roleType": "complete_set",
+      "ja": "インターフェース・プラグスーツ Core Set",
+      "enLabel": "Interface Plug Suit Core Set",
+      "desc": "密着スーツ、発光ライン、接続端子をまとめた基本セット。",
+      "en": "interface plug suit, sleek plugsuit, glowing seam lines, connection ports, wearable cyber suit, human body silhouette remains visible",
+      "linked_ids": ["plug_base_sleek", "plug_custom_glow_lines", "plug_custom_ports", "plug_setting_sync_operator"]
+    },
+    {
+      "id": "plug_core_safe",
+      "roleType": "complete_set",
+      "ja": "インターフェース・プラグスーツ Safe Quality Set",
+      "enLabel": "Interface Plug Suit Safe Quality Set",
+      "desc": "密着感と接続端子を保ちつつ、輪郭と発光を安全強化。",
+      "en": "interface plug suit, sleek plugsuit, glowing seam lines, connection ports, refined wearable cyber suit, crisp panel edges, clean luminous seams, human body silhouette remains visible",
+      "linked_ids": ["plug_base_sleek", "plug_custom_glow_lines", "plug_custom_ports", "plug_setting_sync_operator", "plug_quality_clean_glow"]
+    },
+    {
+      "id": "plug_core_2000",
+      "roleType": "complete_set",
+      "ja": "インターフェース・プラグスーツ 2000 Limit",
+      "enLabel": "Interface Plug Suit 2000 Limit",
+      "desc": "2000字制限向けの短縮版。",
+      "en": "interface plug suit, sleek plugsuit, glowing seam lines, connection ports",
+      "linked_ids": ["plug_base_sleek", "plug_custom_glow_lines"]
+    },
+    {
+      "id": "plug_core_full",
+      "roleType": "complete_set",
+      "ja": "インターフェース・プラグスーツ Full Set",
+      "enLabel": "Interface Plug Suit Full Set",
+      "desc": "発光ライン、接続端子、同期運用感まで厚めに入れる。",
+      "en": "interface plug suit, sleek body-hugging plugsuit, glowing seam lines, interface connection ports, subtle armor seams, clean cyber control suit, synchronization operator styling, wearable machine outfit",
+      "linked_ids": ["plug_base_sleek", "plug_custom_glow_lines", "plug_custom_ports", "plug_custom_subtle_armor", "plug_setting_sync_operator", "plug_quality_clean_glow"]
+    },
+    {
+      "id": "plug_tactical_core",
+      "roleType": "complete_set",
+      "ja": "戦術リンクナノスーツ Core Set",
+      "enLabel": "Tactical Link Nano Suit Core Set",
+      "desc": "戦術リンク要素を持つ薄型ナノスーツ。",
+      "en": "tactical link nano suit, slim armored bodysuit, glowing interface lines, tactical wearable cyber suit",
+      "linked_ids": ["plug_base_tactical", "plug_custom_glow_lines", "plug_custom_subtle_armor", "plug_setting_tactical_field"]
+    },
+    {
+      "id": "plug_tactical_safe",
+      "roleType": "complete_set",
+      "ja": "戦術リンクナノスーツ Safe Quality Set",
+      "enLabel": "Tactical Link Nano Suit Safe Quality Set",
+      "desc": "戦術スーツの輪郭と薄装甲を安全強化。",
+      "en": "tactical link nano suit, slim armored bodysuit, glowing interface lines, tactical wearable cyber suit, clean armor separation, crisp seam detail",
+      "linked_ids": ["plug_base_tactical", "plug_custom_glow_lines", "plug_custom_subtle_armor", "plug_setting_tactical_field", "plug_quality_panel_readability"]
+    },
+    {
+      "id": "plug_tactical_2000",
+      "roleType": "complete_set",
+      "ja": "戦術リンクナノスーツ 2000 Limit",
+      "enLabel": "Tactical Link Nano Suit 2000 Limit",
+      "desc": "戦術寄りナノスーツ短縮版。",
+      "en": "tactical link nano suit, slim armored bodysuit, tactical wearable cyber suit",
+      "linked_ids": ["plug_base_tactical", "plug_custom_subtle_armor"]
+    },
+    {
+      "id": "plug_tactical_full",
+      "roleType": "complete_set",
+      "ja": "戦術リンクナノスーツ Full Set",
+      "enLabel": "Tactical Link Nano Suit Full Set",
+      "desc": "薄型装甲、戦術接続、制御ラインまで厚めに入れる。",
+      "en": "tactical link nano suit, slim armored bodysuit, glowing control lines, subtle tactical armor panels, interface ports, field-linked combat support styling, wearable machine suit",
+      "linked_ids": ["plug_base_tactical", "plug_custom_glow_lines", "plug_custom_ports", "plug_custom_subtle_armor", "plug_setting_tactical_field", "plug_quality_panel_readability"]
+    },
+    {
+      "id": "plug_medical_core",
+      "roleType": "complete_set",
+      "ja": "医療同期プラグスーツ Core Set",
+      "enLabel": "Medical Sync Plug Suit Core Set",
+      "desc": "医療・補助寄りの同期スーツ。",
+      "en": "medical sync plug suit, support plugsuit, clean interface lines, gentle wearable cyber suit",
+      "linked_ids": ["plug_base_support", "plug_custom_glow_lines", "plug_custom_ports", "plug_setting_medical_sync"]
+    },
+    {
+      "id": "plug_medical_safe",
+      "roleType": "complete_set",
+      "ja": "医療同期プラグスーツ Safe Quality Set",
+      "enLabel": "Medical Sync Plug Suit Safe Quality Set",
+      "desc": "柔らかい医療同期感を安全強化。",
+      "en": "medical sync plug suit, support plugsuit, clean interface lines, gentle wearable cyber suit, clean luminous edges, controlled material separation",
+      "linked_ids": ["plug_base_support", "plug_custom_glow_lines", "plug_custom_ports", "plug_setting_medical_sync", "plug_quality_clean_glow"]
+    },
+    {
+      "id": "plug_medical_2000",
+      "roleType": "complete_set",
+      "ja": "医療同期プラグスーツ 2000 Limit",
+      "enLabel": "Medical Sync Plug Suit 2000 Limit",
+      "desc": "医療同期スーツ短縮版。",
+      "en": "medical sync plug suit, support plugsuit, clean interface lines",
+      "linked_ids": ["plug_base_support", "plug_custom_glow_lines"]
+    },
+    {
+      "id": "plug_medical_full",
+      "roleType": "complete_set",
+      "ja": "医療同期プラグスーツ Full Set",
+      "enLabel": "Medical Sync Plug Suit Full Set",
+      "desc": "医療補助、柔らかい発光、補助端子まで厚めに入れる。",
+      "en": "medical sync plug suit, support plugsuit, clean interface lines, soft luminous seams, subtle connection ports, diagnostic support styling, wearable cyber medical outfit",
+      "linked_ids": ["plug_base_support", "plug_custom_glow_lines", "plug_custom_ports", "plug_setting_medical_sync", "plug_quality_clean_glow"]
+    }
+  ],
+  "base": [
+    { "id": "plug_base_sleek", "roleType": "base", "ja": "密着プラグスーツ素体", "enLabel": "Sleek Plug Suit Base", "desc": "シンプルな密着プラグスーツ。", "en": "sleek plugsuit base, body-hugging wearable cyber suit, smooth clean bodysuit" },
+    { "id": "plug_base_tactical", "roleType": "base", "ja": "薄装甲ナノスーツ素体", "enLabel": "Tactical Nano Suit Base", "desc": "薄型装甲付きの戦術ナノスーツ。", "en": "slim armored nano suit base, light tactical bodysuit, wearable thin armor over suit" },
+    { "id": "plug_base_support", "roleType": "base", "ja": "補助同期スーツ素体", "enLabel": "Support Sync Suit Base", "desc": "医療・補助寄りの密着スーツ。", "en": "support sync suit base, clean support plugsuit, wearable medical cyber suit" }
+  ],
+  "custom": [
+    { "id": "plug_custom_glow_lines", "roleType": "custom", "ja": "発光ライン", "enLabel": "Glowing Seam Lines", "desc": "身体に沿う発光ライン。", "en": "glowing seam lines following the body, luminous interface lines" },
+    { "id": "plug_custom_ports", "roleType": "custom", "ja": "接続端子", "enLabel": "Connection Ports", "desc": "背中や腰周りの接続端子。", "en": "connection ports and interface jacks, subtle plug terminals on the suit" },
+    { "id": "plug_custom_subtle_armor", "roleType": "custom", "ja": "薄型装甲パネル", "enLabel": "Subtle Armor Panels", "desc": "スーツの上に乗る薄型装甲。", "en": "subtle armor panels over the suit, thin protective cyber plates" }
+  ],
+  "setting": [
+    { "id": "plug_setting_sync_operator", "roleType": "setting", "ja": "同期運用仕様", "enLabel": "Synchronization Operator Styling", "desc": "操縦・リンク運用向け。", "en": "synchronization operator styling, linked control suit, pilot-like cyber outfit" },
+    { "id": "plug_setting_tactical_field", "roleType": "setting", "ja": "戦術フィールド仕様", "enLabel": "Tactical Field Configuration", "desc": "戦術活動向け。", "en": "tactical field configuration, combat support suit styling, mission-ready cyber outfit" },
+    { "id": "plug_setting_medical_sync", "roleType": "setting", "ja": "医療同期仕様", "enLabel": "Medical Sync Configuration", "desc": "医療・補助接続向け。", "en": "medical sync configuration, support interface styling, diagnostic cyber outfit" }
+  ],
+  "quality": [
+    { "id": "plug_quality_clean_glow", "roleType": "quality", "ja": "発光ライン明瞭化", "enLabel": "Glow Line Clarity", "desc": "発光ラインを綺麗に出す。", "en": "clean glow line definition, crisp luminous seams, readable interface light" },
+    { "id": "plug_quality_panel_readability", "roleType": "quality", "ja": "薄装甲の読みやすさ", "enLabel": "Thin Armor Readability", "desc": "薄装甲の形を読みやすくする。", "en": "thin armor panel readability, crisp material separation, clean suit structure" }
+  ]
+};
+
+const FRAME_ITEMS = {
+  "complete": [
+    {
+      "id": "frame_light_core",
+      "roleType": "complete_set",
+      "ja": "軽装外骨格フレーム Core Set",
+      "enLabel": "Light Exoframe Core Set",
+      "desc": "肩・腕・脚の軽装外骨格をまとめた基本セット。",
+      "en": "light exoframe suit, visible external frame on shoulders arms and legs, wearable combat support rig, human silhouette remains visible",
+      "linked_ids": ["frame_base_light", "frame_custom_limb_frame", "frame_setting_support_ops"]
+    },
+    {
+      "id": "frame_light_safe",
+      "roleType": "complete_set",
+      "ja": "軽装外骨格フレーム Safe Quality Set",
+      "enLabel": "Light Exoframe Safe Quality Set",
+      "desc": "軽装外骨格のフレーム線を安全強化。",
+      "en": "light exoframe suit, visible external frame on shoulders arms and legs, clean support rig, crisp joint structure, readable mechanical braces",
+      "linked_ids": ["frame_base_light", "frame_custom_limb_frame", "frame_setting_support_ops", "frame_quality_joint_clarity"]
+    },
+    {
+      "id": "frame_light_2000",
+      "roleType": "complete_set",
+      "ja": "軽装外骨格フレーム 2000 Limit",
+      "enLabel": "Light Exoframe 2000 Limit",
+      "desc": "軽装外骨格の短縮版。",
+      "en": "light exoframe suit, visible support frame, mechanical braces",
+      "linked_ids": ["frame_base_light", "frame_custom_limb_frame"]
+    },
+    {
+      "id": "frame_light_full",
+      "roleType": "complete_set",
+      "ja": "軽装外骨格フレーム Full Set",
+      "enLabel": "Light Exoframe Full Set",
+      "desc": "四肢フレーム、背部ユニット、サポート機構まで厚めに入れる。",
+      "en": "light exoframe suit, visible frame on shoulders arms and legs, support back unit, readable mechanical braces, wearable exoskeleton over clothing, clean cyber support styling",
+      "linked_ids": ["frame_base_light", "frame_custom_limb_frame", "frame_custom_back_unit", "frame_setting_support_ops", "frame_quality_joint_clarity"]
+    },
+    {
+      "id": "frame_heavy_core",
+      "roleType": "complete_set",
+      "ja": "重装戦闘フレーム Core Set",
+      "enLabel": "Heavy Combat Frame Core Set",
+      "desc": "重装寄りの戦闘外骨格。", 
+      "en": "heavy combat frame, reinforced external exoskeleton, combat support harness, visible mechanical joints",
+      "linked_ids": ["frame_base_heavy", "frame_custom_limb_frame", "frame_custom_back_unit", "frame_setting_combat_frame"]
+    },
+    {
+      "id": "frame_heavy_safe",
+      "roleType": "complete_set",
+      "ja": "重装戦闘フレーム Safe Quality Set",
+      "enLabel": "Heavy Combat Frame Safe Quality Set",
+      "desc": "重装外骨格の輪郭と関節を安全強化。",
+      "en": "heavy combat frame, reinforced external exoskeleton, visible mechanical joints, crisp frame edges, readable support armor",
+      "linked_ids": ["frame_base_heavy", "frame_custom_limb_frame", "frame_custom_back_unit", "frame_setting_combat_frame", "frame_quality_joint_clarity"]
+    },
+    {
+      "id": "frame_heavy_2000",
+      "roleType": "complete_set",
+      "ja": "重装戦闘フレーム 2000 Limit",
+      "enLabel": "Heavy Combat Frame 2000 Limit",
+      "desc": "重装外骨格の短縮版。",
+      "en": "heavy combat frame, reinforced exoskeleton, visible mechanical joints",
+      "linked_ids": ["frame_base_heavy", "frame_custom_limb_frame"]
+    },
+    {
+      "id": "frame_heavy_full",
+      "roleType": "complete_set",
+      "ja": "重装戦闘フレーム Full Set",
+      "enLabel": "Heavy Combat Frame Full Set",
+      "desc": "戦闘フレーム、背部ユニット、重装支持を厚めに入れる。",
+      "en": "heavy combat frame, reinforced external exoskeleton, visible mechanical joints, support back unit, armored support harness, mission-ready combat frame outfit",
+      "linked_ids": ["frame_base_heavy", "frame_custom_limb_frame", "frame_custom_back_unit", "frame_setting_combat_frame", "frame_quality_frame_mass"]
+    },
+    {
+      "id": "frame_maintenance_core",
+      "roleType": "complete_set",
+      "ja": "整備外骨格ハーネス Core Set",
+      "enLabel": "Maintenance Exoharness Core Set",
+      "desc": "整備・作業向けの外骨格ハーネス。",
+      "en": "maintenance exoharness, work exoframe, visible support frame, utility cyber harness",
+      "linked_ids": ["frame_base_work", "frame_custom_limb_frame", "frame_setting_maintenance"]
+    },
+    {
+      "id": "frame_maintenance_safe",
+      "roleType": "complete_set",
+      "ja": "整備外骨格ハーネス Safe Quality Set",
+      "enLabel": "Maintenance Exoharness Safe Quality Set",
+      "desc": "整備用ハーネスの支柱や接続を安全強化。",
+      "en": "maintenance exoharness, work exoframe, visible support frame, clean utility braces, readable support mechanics",
+      "linked_ids": ["frame_base_work", "frame_custom_limb_frame", "frame_setting_maintenance", "frame_quality_joint_clarity"]
+    },
+    {
+      "id": "frame_maintenance_2000",
+      "roleType": "complete_set",
+      "ja": "整備外骨格ハーネス 2000 Limit",
+      "enLabel": "Maintenance Exoharness 2000 Limit",
+      "desc": "整備用外骨格の短縮版。",
+      "en": "maintenance exoharness, work exoframe, support frame",
+      "linked_ids": ["frame_base_work", "frame_custom_limb_frame"]
+    },
+    {
+      "id": "frame_maintenance_full",
+      "roleType": "complete_set",
+      "ja": "整備外骨格ハーネス Full Set",
+      "enLabel": "Maintenance Exoharness Full Set",
+      "desc": "作業補助の外骨格感を厚めに入れる。",
+      "en": "maintenance exoharness, work exoframe, visible support frame, utility braces, maintenance back unit, industrial cyber support outfit",
+      "linked_ids": ["frame_base_work", "frame_custom_limb_frame", "frame_custom_back_unit", "frame_setting_maintenance", "frame_quality_joint_clarity"]
+    }
+  ],
+  "base": [
+    { "id": "frame_base_light", "roleType": "base", "ja": "軽装フレーム素体", "enLabel": "Light Frame Base", "desc": "軽装の外骨格素体。", "en": "light exoframe base, slim external support frame over clothing" },
+    { "id": "frame_base_heavy", "roleType": "base", "ja": "重装フレーム素体", "enLabel": "Heavy Frame Base", "desc": "戦闘向けの重装外骨格。", "en": "heavy exoframe base, reinforced external support frame, combat exoskeleton over outfit" },
+    { "id": "frame_base_work", "roleType": "base", "ja": "作業ハーネス素体", "enLabel": "Work Harness Base", "desc": "整備・作業向けの外骨格素体。", "en": "work harness exoframe base, utility exoskeleton support over clothing" }
+  ],
+  "custom": [
+    { "id": "frame_custom_limb_frame", "roleType": "custom", "ja": "四肢フレーム", "enLabel": "Limb Support Frames", "desc": "肩・腕・脚の外部フレーム。", "en": "visible external frame on shoulders arms and legs, articulated support braces" },
+    { "id": "frame_custom_back_unit", "roleType": "custom", "ja": "背部ユニット", "enLabel": "Back Unit", "desc": "背中の補助ユニット。", "en": "support back unit, mechanical pack or brace assembly mounted on the back" }
+  ],
+  "setting": [
+    { "id": "frame_setting_support_ops", "roleType": "setting", "ja": "支援運用仕様", "enLabel": "Support Operations Styling", "desc": "支援運用向け。", "en": "support operations styling, assistive exoskeleton outfit, mission support rig" },
+    { "id": "frame_setting_combat_frame", "roleType": "setting", "ja": "戦闘フレーム仕様", "enLabel": "Combat Frame Configuration", "desc": "戦闘活動向け。", "en": "combat frame configuration, mission-ready exoskeleton styling, battle support rig" },
+    { "id": "frame_setting_maintenance", "roleType": "setting", "ja": "整備作業仕様", "enLabel": "Maintenance Configuration", "desc": "整備・工業向け。", "en": "maintenance configuration, industrial support exoskeleton styling, utility work rig" }
+  ],
+  "quality": [
+    { "id": "frame_quality_joint_clarity", "roleType": "quality", "ja": "メカ関節明瞭化", "enLabel": "Mechanical Joint Clarity", "desc": "関節と支柱を読みやすくする。", "en": "mechanical joint clarity, readable braces and hinges, crisp exoskeleton structure" },
+    { "id": "frame_quality_frame_mass", "roleType": "quality", "ja": "フレーム重量感", "enLabel": "Frame Mass Readability", "desc": "重装フレームの重量感を出す。", "en": "frame mass readability, reinforced support rig volume, heavy exoskeleton presence" }
+  ]
+};
+
+const DRESS_ITEMS = {
+  "complete": [
+    {
+      "id": "dress_angel_core",
+      "roleType": "complete_set",
+      "role": "female",
+      "ja": "機械天使ドレス Core Set",
+      "enLabel": "Mechanical Angel Dress Core Set",
+      "desc": "機械天使寄りのアンドロイド用ドレス基本形。",
+      "en": "mechanical angel dress, elegant android dress, luminous panel wings, glowing circuit embroidery, wearable machine-princess outfit",
+      "linked_ids": ["dress_base_angel", "dress_custom_circuit_embroidery", "dress_custom_panel_wings", "dress_setting_ceremonial_android"]
+    },
+    {
+      "id": "dress_angel_safe",
+      "roleType": "complete_set",
+      "role": "female",
+      "ja": "機械天使ドレス Safe Quality Set",
+      "enLabel": "Mechanical Angel Dress Safe Quality Set",
+      "desc": "発光刺繍とパネル翼を安全強化。",
+      "en": "mechanical angel dress, elegant android dress, luminous panel wings, glowing circuit embroidery, clean silhouette, refined machine-princess attire",
+      "linked_ids": ["dress_base_angel", "dress_custom_circuit_embroidery", "dress_custom_panel_wings", "dress_setting_ceremonial_android", "dress_quality_embroidery"]
+    },
+    {
+      "id": "dress_angel_2000",
+      "roleType": "complete_set",
+      "role": "female",
+      "ja": "機械天使ドレス 2000 Limit",
+      "enLabel": "Mechanical Angel Dress 2000 Limit",
+      "desc": "機械天使ドレス短縮版。",
+      "en": "mechanical angel dress, luminous panel wings, glowing circuit embroidery",
+      "linked_ids": ["dress_base_angel", "dress_custom_panel_wings"]
+    },
+    {
+      "id": "dress_angel_full",
+      "roleType": "complete_set",
+      "role": "female",
+      "ja": "機械天使ドレス Full Set",
+      "enLabel": "Mechanical Angel Dress Full Set",
+      "desc": "機械翼、回路刺繍、儀式服感まで厚めに入れる。",
+      "en": "mechanical angel dress, elegant android ceremonial dress, luminous panel wings, glowing circuit embroidery, structured metallic bodice, radiant machine-princess styling, wearable sacred cyber dress",
+      "linked_ids": ["dress_base_angel", "dress_custom_circuit_embroidery", "dress_custom_panel_wings", "dress_setting_ceremonial_android", "dress_quality_embroidery"]
+    },
+    {
+      "id": "dress_gothic_core",
+      "roleType": "complete_set",
+      "role": "female",
+      "ja": "メカゴシックドレス Core Set",
+      "enLabel": "Mecha Gothic Dress Core Set",
+      "desc": "メカゴシック寄りの機械ドレス。",
+      "en": "mecha gothic dress, dark mechanical dress, structured metallic skirt panels, elegant cyber gothic outfit",
+      "linked_ids": ["dress_base_gothic", "dress_custom_core_window", "dress_setting_gothic_machine"]
+    },
+    {
+      "id": "dress_gothic_safe",
+      "roleType": "complete_set",
+      "role": "female",
+      "ja": "メカゴシックドレス Safe Quality Set",
+      "enLabel": "Mecha Gothic Dress Safe Quality Set",
+      "desc": "ゴシック金属装飾を安全強化。",
+      "en": "mecha gothic dress, dark mechanical dress, structured metallic skirt panels, elegant cyber gothic outfit, crisp dress silhouette, readable metallic ornament",
+      "linked_ids": ["dress_base_gothic", "dress_custom_core_window", "dress_setting_gothic_machine", "dress_quality_panel_clarity"]
+    },
+    {
+      "id": "dress_gothic_2000",
+      "roleType": "complete_set",
+      "role": "female",
+      "ja": "メカゴシックドレス 2000 Limit",
+      "enLabel": "Mecha Gothic Dress 2000 Limit",
+      "desc": "メカゴシックドレス短縮版。",
+      "en": "mecha gothic dress, dark mechanical dress, metallic skirt panels",
+      "linked_ids": ["dress_base_gothic", "dress_custom_core_window"]
+    },
+    {
+      "id": "dress_gothic_full",
+      "roleType": "complete_set",
+      "role": "female",
+      "ja": "メカゴシックドレス Full Set",
+      "enLabel": "Mecha Gothic Dress Full Set",
+      "desc": "ゴシック機械装飾、コア窓、金属ドレス構成を厚めに入れる。",
+      "en": "mecha gothic dress, dark mechanical dress, structured metallic skirt panels, visible chest core window, elegant gothic machine silhouette, wearable cyber dress, refined mechanical princess styling",
+      "linked_ids": ["dress_base_gothic", "dress_custom_core_window", "dress_setting_gothic_machine", "dress_quality_panel_clarity"]
+    },
+    {
+      "id": "dress_transparent_core",
+      "roleType": "complete_set",
+      "role": "female",
+      "ja": "透明パネルコアドレス Core Set",
+      "enLabel": "Transparent Panel Core Dress Core Set",
+      "desc": "透明パネルとコア見せを軸にした機械ドレス。",
+      "en": "transparent panel core dress, elegant android dress, visible power core window, translucent cyber panels, wearable machine dress",
+      "linked_ids": ["dress_base_transparent", "dress_custom_core_window", "dress_setting_formal_core", "dress_quality_panel_clarity"]
+    },
+    {
+      "id": "dress_transparent_safe",
+      "roleType": "complete_set",
+      "role": "female",
+      "ja": "透明パネルコアドレス Safe Quality Set",
+      "enLabel": "Transparent Panel Core Dress Safe Quality Set",
+      "desc": "透明パネルとコア窓を安全強化。",
+      "en": "transparent panel core dress, elegant android dress, visible power core window, translucent cyber panels, clean transparent material separation, refined machine dress",
+      "linked_ids": ["dress_base_transparent", "dress_custom_core_window", "dress_setting_formal_core", "dress_quality_panel_clarity"]
+    },
+    {
+      "id": "dress_transparent_2000",
+      "roleType": "complete_set",
+      "role": "female",
+      "ja": "透明パネルコアドレス 2000 Limit",
+      "enLabel": "Transparent Panel Core Dress 2000 Limit",
+      "desc": "透明パネルドレス短縮版。",
+      "en": "transparent panel core dress, visible core window, translucent cyber panels",
+      "linked_ids": ["dress_base_transparent", "dress_custom_core_window"]
+    },
+    {
+      "id": "dress_transparent_full",
+      "roleType": "complete_set",
+      "role": "female",
+      "ja": "透明パネルコアドレス Full Set",
+      "enLabel": "Transparent Panel Core Dress Full Set",
+      "desc": "透明パネル、コア見せ、フォーマル機械感まで厚めに入れる。",
+      "en": "transparent panel core dress, elegant android ceremonial dress, visible chest core window, translucent armor-like panels, glowing circuit embroidery, machine-princess styling",
+      "linked_ids": ["dress_base_transparent", "dress_custom_core_window", "dress_custom_circuit_embroidery", "dress_setting_formal_core", "dress_quality_panel_clarity"]
+    }
+  ],
+  "base": [
+    { "id": "dress_base_angel", "roleType": "base", "role": "female", "ja": "機械天使ドレス素体", "enLabel": "Mechanical Angel Dress Base", "desc": "機械天使寄りのドレス素体。", "en": "mechanical angel dress base, elegant machine-princess dress silhouette, ceremonial cyber gown" },
+    { "id": "dress_base_gothic", "roleType": "base", "role": "female", "ja": "メカゴシックドレス素体", "enLabel": "Mecha Gothic Dress Base", "desc": "メカゴシック寄りのドレス素体。", "en": "mecha gothic dress base, dark mechanical gothic dress silhouette" },
+    { "id": "dress_base_transparent", "roleType": "base", "role": "female", "ja": "透明パネルドレス素体", "enLabel": "Transparent Panel Dress Base", "desc": "透明パネル付きの機械ドレス。", "en": "transparent panel dress base, elegant android dress with translucent structured panels" }
+  ],
+  "custom": [
+    { "id": "dress_custom_circuit_embroidery", "roleType": "custom", "role": "female", "ja": "回路刺繍", "enLabel": "Glowing Circuit Embroidery", "desc": "発光回路刺繍。", "en": "glowing circuit embroidery, luminous decorative seam patterns on the dress" },
+    { "id": "dress_custom_panel_wings", "roleType": "custom", "role": "female", "ja": "パネル翼", "enLabel": "Panel Wings", "desc": "背中に広がる機械翼パネル。", "en": "mechanical panel wings spreading from the back, elegant cyber wing panels" },
+    { "id": "dress_custom_core_window", "roleType": "custom", "role": "female", "ja": "胸部コア窓", "enLabel": "Core Window", "desc": "胸元のコア見せパーツ。", "en": "visible chest core window, elegant frame around a glowing power core" }
+  ],
+  "setting": [
+    { "id": "dress_setting_ceremonial_android", "roleType": "setting", "role": "female", "ja": "儀式機械姫仕様", "enLabel": "Ceremonial Android Princess Styling", "desc": "儀式・祝祭向け。", "en": "ceremonial android princess styling, sacred cyber dress presentation" },
+    { "id": "dress_setting_gothic_machine", "roleType": "setting", "role": "female", "ja": "ゴシック機械仕様", "enLabel": "Gothic Machine Styling", "desc": "ゴシック寄りの機械服。", "en": "gothic machine styling, elegant dark cyber dress presentation" },
+    { "id": "dress_setting_formal_core", "roleType": "setting", "role": "female", "ja": "フォーマルコア露出仕様", "enLabel": "Formal Core-exposure Styling", "desc": "フォーマル＋コア見せ寄り。", "en": "formal core-exposure styling, elegant ceremonial machine dress with visible core" }
+  ],
+  "quality": [
+    { "id": "dress_quality_embroidery", "roleType": "quality", "role": "female", "ja": "回路刺繍明瞭化", "enLabel": "Embroidery Clarity", "desc": "回路刺繍を綺麗に出す。", "en": "circuit embroidery clarity, clean luminous ornament detail" },
+    { "id": "dress_quality_panel_clarity", "roleType": "quality", "role": "female", "ja": "ドレスパネル明瞭化", "enLabel": "Dress Panel Clarity", "desc": "ドレスの機械パネルを読みやすくする。", "en": "dress panel clarity, crisp structured cyber dress panels, readable transparent segments" }
+  ]
+};
+
+const CASUAL_ITEMS = {
+  "complete": [
+    {
+      "id": "casual_jacket_core",
+      "roleType": "complete_set",
+      "ja": "義手見せジャケット Core Set",
+      "enLabel": "Prosthetic-show Jacket Core Set",
+      "desc": "義手や義体腕を見せやすい日常系サイバー服。",
+      "en": "prosthetic-show jacket, urban cyber casualwear, visible prosthetic arm, layered street outfit, wearable cyborg daily fashion",
+      "linked_ids": ["casual_base_jacket", "casual_custom_prosthetic_exposure", "casual_setting_urban_daily"]
+    },
+    {
+      "id": "casual_jacket_safe",
+      "roleType": "complete_set",
+      "ja": "義手見せジャケット Safe Quality Set",
+      "enLabel": "Prosthetic-show Jacket Safe Quality Set",
+      "desc": "義手見せと街着感を安全強化。",
+      "en": "prosthetic-show jacket, urban cyber casualwear, visible prosthetic arm, layered street outfit, crisp clothing folds, readable prosthetic exposure",
+      "linked_ids": ["casual_base_jacket", "casual_custom_prosthetic_exposure", "casual_setting_urban_daily", "casual_quality_layered_clothing"]
+    },
+    {
+      "id": "casual_jacket_2000",
+      "roleType": "complete_set",
+      "ja": "義手見せジャケット 2000 Limit",
+      "enLabel": "Prosthetic-show Jacket 2000 Limit",
+      "desc": "義手見せ街着の短縮版。",
+      "en": "prosthetic-show jacket, visible prosthetic arm, urban cyber casualwear",
+      "linked_ids": ["casual_base_jacket", "casual_custom_prosthetic_exposure"]
+    },
+    {
+      "id": "casual_jacket_full",
+      "roleType": "complete_set",
+      "ja": "義手見せジャケット Full Set",
+      "enLabel": "Prosthetic-show Jacket Full Set",
+      "desc": "ジャケット、義手見せ、街着レイヤー感まで厚めに入れる。",
+      "en": "prosthetic-show jacket, urban cyber casualwear, visible prosthetic arm, layered street outfit, rolled sleeve exposing cyber arm, practical city styling, wearable cyborg fashion",
+      "linked_ids": ["casual_base_jacket", "casual_custom_prosthetic_exposure", "casual_setting_urban_daily", "casual_quality_layered_clothing"]
+    },
+    {
+      "id": "casual_onearm_core",
+      "roleType": "complete_set",
+      "ja": "片腕メカ・ストリートウェア Core Set",
+      "enLabel": "One-arm Mecha Streetwear Core Set",
+      "desc": "片腕メカを見せるストリート寄り服。",
+      "en": "one-arm mecha streetwear, asymmetrical cyber casual outfit, visible mechanical arm, urban street style",
+      "linked_ids": ["casual_base_street", "casual_custom_prosthetic_exposure", "casual_custom_asymmetry", "casual_setting_urban_daily"]
+    },
+    {
+      "id": "casual_onearm_safe",
+      "roleType": "complete_set",
+      "ja": "片腕メカ・ストリートウェア Safe Quality Set",
+      "enLabel": "One-arm Mecha Streetwear Safe Quality Set",
+      "desc": "片腕メカの見せ方とストリート感を安全強化。",
+      "en": "one-arm mecha streetwear, asymmetrical cyber casual outfit, visible mechanical arm, urban street style, crisp asymmetrical clothing detail",
+      "linked_ids": ["casual_base_street", "casual_custom_prosthetic_exposure", "casual_custom_asymmetry", "casual_setting_urban_daily", "casual_quality_layered_clothing"]
+    },
+    {
+      "id": "casual_onearm_2000",
+      "roleType": "complete_set",
+      "ja": "片腕メカ・ストリートウェア 2000 Limit",
+      "enLabel": "One-arm Mecha Streetwear 2000 Limit",
+      "desc": "片腕メカ街着の短縮版。",
+      "en": "one-arm mecha streetwear, asymmetrical outfit, visible mechanical arm",
+      "linked_ids": ["casual_base_street", "casual_custom_asymmetry"]
+    },
+    {
+      "id": "casual_onearm_full",
+      "roleType": "complete_set",
+      "ja": "片腕メカ・ストリートウェア Full Set",
+      "enLabel": "One-arm Mecha Streetwear Full Set",
+      "desc": "片腕メカ露出、非対称服、都市感まで厚めに入れる。",
+      "en": "one-arm mecha streetwear, asymmetrical cyber casual outfit, visible mechanical arm, layered urban street style, practical belts and harness details, wearable cyborg city fashion",
+      "linked_ids": ["casual_base_street", "casual_custom_prosthetic_exposure", "casual_custom_asymmetry", "casual_setting_urban_daily", "casual_quality_layered_clothing"]
+    },
+    {
+      "id": "casual_harness_core",
+      "roleType": "complete_set",
+      "ja": "ケーブルハーネス都市服 Core Set",
+      "enLabel": "Cable Harness Urbanwear Core Set",
+      "desc": "ケーブルやハーネスが見える都市型サイバー服。",
+      "en": "cable harness urbanwear, urban cyber outfit, visible cable harness, daily wearable machine fashion",
+      "linked_ids": ["casual_base_harness", "casual_custom_cables", "casual_setting_tech_urban"]
+    },
+    {
+      "id": "casual_harness_safe",
+      "roleType": "complete_set",
+      "ja": "ケーブルハーネス都市服 Safe Quality Set",
+      "enLabel": "Cable Harness Urbanwear Safe Quality Set",
+      "desc": "ケーブルと街着感を安全強化。",
+      "en": "cable harness urbanwear, urban cyber outfit, visible cable harness, layered wearable machine fashion, clean cable routing, readable outfit structure",
+      "linked_ids": ["casual_base_harness", "casual_custom_cables", "casual_setting_tech_urban", "casual_quality_cable_readability"]
+    },
+    {
+      "id": "casual_harness_2000",
+      "roleType": "complete_set",
+      "ja": "ケーブルハーネス都市服 2000 Limit",
+      "enLabel": "Cable Harness Urbanwear 2000 Limit",
+      "desc": "ケーブル都市服短縮版。",
+      "en": "cable harness urbanwear, visible cable harness, urban cyber outfit",
+      "linked_ids": ["casual_base_harness", "casual_custom_cables"]
+    },
+    {
+      "id": "casual_harness_full",
+      "roleType": "complete_set",
+      "ja": "ケーブルハーネス都市服 Full Set",
+      "enLabel": "Cable Harness Urbanwear Full Set",
+      "desc": "ケーブル、ハーネス、都市型サイバー服感を厚めに入れる。",
+      "en": "cable harness urbanwear, urban cyber outfit, visible cable harness, layered city clothing, practical connectors and straps, wearable cyborg daily fashion",
+      "linked_ids": ["casual_base_harness", "casual_custom_cables", "casual_setting_tech_urban", "casual_quality_cable_readability"]
+    }
+  ],
+  "base": [
+    { "id": "casual_base_jacket", "roleType": "base", "ja": "ジャケット街着素体", "enLabel": "Jacket Casual Base", "desc": "ジャケット系の街着。", "en": "urban jacket casual base, practical layered city outfit" },
+    { "id": "casual_base_street", "roleType": "base", "ja": "ストリート服素体", "enLabel": "Streetwear Base", "desc": "サイバー寄りストリート服。", "en": "cyber streetwear base, practical urban layered outfit" },
+    { "id": "casual_base_harness", "roleType": "base", "ja": "ハーネス都市服素体", "enLabel": "Harness Urbanwear Base", "desc": "ハーネス寄りの都市服。", "en": "harness urbanwear base, practical city outfit with support straps" }
+  ],
+  "custom": [
+    { "id": "casual_custom_prosthetic_exposure", "roleType": "custom", "ja": "義手見せ", "enLabel": "Prosthetic Exposure", "desc": "義手やメカ腕を見せる。", "en": "visible prosthetic arm, rolled sleeve or open side showing the cyber arm" },
+    { "id": "casual_custom_asymmetry", "roleType": "custom", "ja": "非対称カット", "enLabel": "Asymmetrical Cut", "desc": "片側だけ露出する非対称服。", "en": "asymmetrical cut clothing, one-sided layered streetwear shape" },
+    { "id": "casual_custom_cables", "roleType": "custom", "ja": "ケーブルハーネス", "enLabel": "Cable Harness", "desc": "ケーブルとハーネスを見せる。", "en": "visible cable harness, practical exposed cables and support straps" }
+  ],
+  "setting": [
+    { "id": "casual_setting_urban_daily", "roleType": "setting", "ja": "都市日常仕様", "enLabel": "Urban Daily Styling", "desc": "都市日常向け。", "en": "urban daily styling, wearable city cyber fashion" },
+    { "id": "casual_setting_tech_urban", "roleType": "setting", "ja": "技術都市仕様", "enLabel": "Tech-urban Styling", "desc": "技術都市寄りの服。", "en": "tech-urban styling, wearable future city casualwear" }
+  ],
+  "quality": [
+    { "id": "casual_quality_layered_clothing", "roleType": "quality", "ja": "レイヤー服明瞭化", "enLabel": "Layered Clothing Clarity", "desc": "街着のレイヤーを読みやすくする。", "en": "layered clothing clarity, crisp folds and readable city outfit layering" },
+    { "id": "casual_quality_cable_readability", "roleType": "quality", "ja": "ケーブル配線明瞭化", "enLabel": "Cable Routing Clarity", "desc": "ケーブルの流れを読みやすくする。", "en": "cable routing clarity, readable exposed cable lines and harness structure" }
+  ]
+};
+
+
+
+const ACCENT_ITEMS = {
+  "complete": [
+    {
+      "id": "accent_core_lines_core",
+      "roleType": "complete_set",
+      "ja": "発光コア＆回路ライン Core Set",
+      "enLabel": "Glowing Core and Circuit Lines Core Set",
+      "desc": "胸部/腰部コアと発光ラインをまとめた汎用アクセント。",
+      "en": "wearable machine outfit accents, glowing chest or waist core, clean circuit lines, cyber accessory details, clothing-first design",
+      "linked_ids": ["accent_base_core_mount", "accent_custom_chest_core", "accent_custom_glow_routes", "accent_setting_powered_outfit"]
+    },
+    {
+      "id": "accent_core_lines_safe",
+      "roleType": "complete_set",
+      "ja": "発光コア＆回路ライン Safe Quality Set",
+      "enLabel": "Glowing Core and Circuit Lines Safe Quality Set",
+      "desc": "コアと回路ラインを読みやすく安全強化。",
+      "en": "wearable machine outfit accents, glowing chest or waist core, clean circuit lines, readable luminous routes, crisp core frame, clothing-first design",
+      "linked_ids": ["accent_base_core_mount", "accent_custom_chest_core", "accent_custom_glow_routes", "accent_setting_powered_outfit", "accent_quality_core_glow"]
+    },
+    {
+      "id": "accent_core_lines_2000",
+      "roleType": "complete_set",
+      "ja": "発光コア＆回路ライン 2000 Limit",
+      "enLabel": "Glowing Core and Circuit Lines 2000 Limit",
+      "desc": "2000字制限向けの短縮版。",
+      "en": "glowing chest core, clean circuit lines, wearable machine outfit accents",
+      "linked_ids": ["accent_custom_chest_core", "accent_custom_glow_routes"]
+    },
+    {
+      "id": "accent_core_lines_full",
+      "roleType": "complete_set",
+      "ja": "発光コア＆回路ライン Full Set",
+      "enLabel": "Glowing Core and Circuit Lines Full Set",
+      "desc": "コア、腰部コア、回路配線まで厚めに入れる。",
+      "en": "wearable machine outfit accents, glowing chest core and small waist core, clean circuit lines routed along the clothing seams, crisp core frame, subtle holographic interface glow, clothing-first cyber outfit design",
+      "linked_ids": ["accent_base_core_mount", "accent_custom_chest_core", "accent_custom_waist_core", "accent_custom_glow_routes", "accent_custom_hologram_ui", "accent_setting_powered_outfit", "accent_quality_core_glow"]
+    },
+    {
+      "id": "accent_back_connector_core",
+      "roleType": "complete_set",
+      "ja": "背部コネクタ＆ケーブル Core Set",
+      "enLabel": "Back Connector and Cable Core Set",
+      "desc": "背中の接続端子とケーブルを足す汎用アクセント。",
+      "en": "back connector unit, clean cable terminals, wearable cyber harness detail, machine outfit accessory, clothing-first design",
+      "linked_ids": ["accent_base_interface_harness", "accent_custom_back_connector", "accent_custom_cable_terminals", "accent_setting_maintenance_link"]
+    },
+    {
+      "id": "accent_back_connector_safe",
+      "roleType": "complete_set",
+      "ja": "背部コネクタ＆ケーブル Safe Quality Set",
+      "enLabel": "Back Connector and Cable Safe Quality Set",
+      "desc": "背部端子とケーブル配線を安全強化。",
+      "en": "back connector unit, clean cable terminals, wearable cyber harness detail, readable cable routing, crisp connector frames, clothing-first design",
+      "linked_ids": ["accent_base_interface_harness", "accent_custom_back_connector", "accent_custom_cable_terminals", "accent_setting_maintenance_link", "accent_quality_cable_readability"]
+    },
+    {
+      "id": "accent_back_connector_2000",
+      "roleType": "complete_set",
+      "ja": "背部コネクタ＆ケーブル 2000 Limit",
+      "enLabel": "Back Connector and Cable 2000 Limit",
+      "desc": "背部端子とケーブルの短縮版。",
+      "en": "back connector unit, clean cable terminals, wearable cyber harness detail",
+      "linked_ids": ["accent_custom_back_connector", "accent_custom_cable_terminals"]
+    },
+    {
+      "id": "accent_back_connector_full",
+      "roleType": "complete_set",
+      "ja": "背部コネクタ＆ケーブル Full Set",
+      "enLabel": "Back Connector and Cable Full Set",
+      "desc": "背部端子、腰ケーブル、メンテナンス感まで厚めに入れる。",
+      "en": "back connector unit mounted over the outfit, clean cable terminals around the back and waist, readable cable routing, subtle interface ports, maintenance-link styling, wearable cyber harness accessory",
+      "linked_ids": ["accent_base_interface_harness", "accent_custom_back_connector", "accent_custom_cable_terminals", "accent_setting_maintenance_link", "accent_quality_cable_readability"]
+    },
+    {
+      "id": "accent_clear_armor_core",
+      "roleType": "complete_set",
+      "ja": "透明パネル＆装甲アクセント Core Set",
+      "enLabel": "Transparent Panel and Armor Accent Core Set",
+      "desc": "透明装甲、肩/太もも装甲を衣装の上に重ねる。",
+      "en": "transparent armor panel accents, shoulder armor, thigh armor pieces, wearable machine outfit details, clothing-first design",
+      "linked_ids": ["accent_base_armor_accent", "accent_custom_transparent_panels", "accent_custom_shoulder_armor", "accent_custom_thigh_armor"]
+    },
+    {
+      "id": "accent_clear_armor_safe",
+      "roleType": "complete_set",
+      "ja": "透明パネル＆装甲アクセント Safe Quality Set",
+      "enLabel": "Transparent Panel and Armor Accent Safe Quality Set",
+      "desc": "透明パネルと装甲片の読みやすさを安全強化。",
+      "en": "transparent armor panel accents, shoulder armor, thigh armor pieces, clear resin edges, readable armor placement, wearable machine outfit details",
+      "linked_ids": ["accent_base_armor_accent", "accent_custom_transparent_panels", "accent_custom_shoulder_armor", "accent_custom_thigh_armor", "accent_quality_transparent_edges"]
+    },
+    {
+      "id": "accent_clear_armor_2000",
+      "roleType": "complete_set",
+      "ja": "透明パネル＆装甲アクセント 2000 Limit",
+      "enLabel": "Transparent Panel and Armor Accent 2000 Limit",
+      "desc": "透明パネル装甲の短縮版。",
+      "en": "transparent armor panel accents, shoulder armor, thigh armor pieces",
+      "linked_ids": ["accent_custom_transparent_panels", "accent_custom_shoulder_armor"]
+    },
+    {
+      "id": "accent_clear_armor_full",
+      "roleType": "complete_set",
+      "ja": "透明パネル＆装甲アクセント Full Set",
+      "enLabel": "Transparent Panel and Armor Accent Full Set",
+      "desc": "透明装甲、肩装甲、太もも装甲を厚めに入れる。",
+      "en": "transparent armor panel accents layered over the outfit, clear resin shoulder armor, thigh armor pieces, small waist armor plates, readable transparent edges, clothing-first wearable machine fashion",
+      "linked_ids": ["accent_base_armor_accent", "accent_custom_transparent_panels", "accent_custom_shoulder_armor", "accent_custom_thigh_armor", "accent_quality_transparent_edges"]
+    }
+  ],
+  "base": [
+    { "id": "accent_base_core_mount", "roleType": "base", "ja": "コア搭載アクセント土台", "enLabel": "Core Mount Accent Base", "desc": "胸部/腰部コアを衣装に載せる土台。", "en": "core mount accent base, small reactor frame mounted on clothing, wearable machine accessory" },
+    { "id": "accent_base_interface_harness", "roleType": "base", "ja": "インターフェースハーネス土台", "enLabel": "Interface Harness Base", "desc": "背部端子やケーブルを支える土台。", "en": "interface harness base, wearable connector harness over clothing" },
+    { "id": "accent_base_armor_accent", "roleType": "base", "ja": "装甲アクセント土台", "enLabel": "Armor Accent Base", "desc": "肩・腰・太ももの小型装甲土台。", "en": "armor accent base, small mechanical armor pieces layered over clothing" }
+  ],
+  "custom": [
+    { "id": "accent_custom_chest_core", "roleType": "custom", "ja": "胸部コア", "enLabel": "Chest Core", "desc": "胸元の小型発光コア。", "en": "small glowing chest core framed as clothing accessory" },
+    { "id": "accent_custom_waist_core", "roleType": "custom", "ja": "腰部コア", "enLabel": "Waist Core", "desc": "腰・ベルト位置の小型コア。", "en": "small glowing waist core integrated into the belt or outfit" },
+    { "id": "accent_custom_glow_routes", "roleType": "custom", "ja": "回路配線ライン", "enLabel": "Circuit Routing Lines", "desc": "衣装の縫い目に沿う回路ライン。", "en": "circuit routing lines following the outfit seams" },
+    { "id": "accent_custom_back_connector", "roleType": "custom", "ja": "背部コネクタ", "enLabel": "Back Connector", "desc": "背中の接続端子。", "en": "back connector unit mounted over the outfit" },
+    { "id": "accent_custom_cable_terminals", "roleType": "custom", "ja": "ケーブル端子", "enLabel": "Cable Terminals", "desc": "小さなケーブル端子と接続口。", "en": "small cable terminals and connector ports" },
+    { "id": "accent_custom_transparent_panels", "roleType": "custom", "ja": "透明装甲パネル", "enLabel": "Transparent Armor Panels", "desc": "衣装上の透明装甲片。", "en": "transparent armor panels layered over the outfit" },
+    { "id": "accent_custom_shoulder_armor", "roleType": "custom", "ja": "肩アーマー", "enLabel": "Shoulder Armor", "desc": "小型の肩装甲。", "en": "small mechanical shoulder armor pieces" },
+    { "id": "accent_custom_thigh_armor", "roleType": "custom", "ja": "太もも装甲", "enLabel": "Thigh Armor", "desc": "太ももまわりの小型装甲。", "en": "small thigh armor pieces over the outfit" },
+    { "id": "accent_custom_hologram_ui", "roleType": "custom", "ja": "ホログラムUI", "enLabel": "Hologram UI", "desc": "衣装周辺の小型UI発光。", "en": "small holographic UI elements near the outfit" }
+  ],
+  "setting": [
+    { "id": "accent_setting_powered_outfit", "roleType": "setting", "ja": "動力服アクセント仕様", "enLabel": "Powered Outfit Accent Styling", "desc": "コア動力を持つ衣装感。", "en": "powered outfit accent styling, small reactor accessory integrated into clothing" },
+    { "id": "accent_setting_maintenance_link", "roleType": "setting", "ja": "メンテナンス接続仕様", "enLabel": "Maintenance Link Styling", "desc": "接続・整備できる衣装感。", "en": "maintenance link styling, accessible cyber connector details on the outfit" },
+    { "id": "accent_setting_ceremonial_accent", "roleType": "setting", "ja": "式典サイバー装飾仕様", "enLabel": "Ceremonial Cyber Accent Styling", "desc": "式典・機械姫向け装飾。", "en": "ceremonial cyber accent styling, refined machine-princess accessory details" }
+  ],
+  "quality": [
+    { "id": "accent_quality_core_glow", "roleType": "quality", "ja": "コア発光の明瞭化", "enLabel": "Core Glow Clarity", "desc": "コア発光を綺麗に出す。", "en": "core glow clarity, readable small reactor light, clean luminous center" },
+    { "id": "accent_quality_cable_readability", "roleType": "quality", "ja": "ケーブル配線明瞭化", "enLabel": "Cable Routing Readability", "desc": "ケーブルの流れを読みやすくする。", "en": "cable routing readability, clean connector paths, readable interface wiring" },
+    { "id": "accent_quality_transparent_edges", "roleType": "quality", "ja": "透明装甲エッジ明瞭化", "enLabel": "Transparent Edge Clarity", "desc": "透明装甲の輪郭を読みやすくする。", "en": "transparent armor edge clarity, readable clear resin panel outlines" },
+    { "id": "accent_quality_clothing_first", "roleType": "quality", "ja": "衣装アクセント優先", "enLabel": "Accessory-first Safety", "desc": "機械身体化しすぎない補助。", "en": "machine accessories on clothing, wearable outfit details, not full body replacement" }
+  ]
+};
+
+const GIMMICK_ITEMS = {
+  "complete": [
+    {
+      "id": "gimmick_open_panel_core",
+      "roleType": "complete_set",
+      "ja": "アーマーパネル展開 Core Set",
+      "enLabel": "Open Armor Panel Core Set",
+      "desc": "装甲パネルが開いた状態を作るギミック。",
+      "en": "open armor panels, exposed inner frame, deployable machine outfit, wearable armor gimmick",
+      "linked_ids": ["gimmick_base_deployable_armor", "gimmick_custom_open_panels", "gimmick_custom_exposed_frame", "gimmick_setting_activation_sequence"]
+    },
+    {
+      "id": "gimmick_open_panel_safe",
+      "roleType": "complete_set",
+      "ja": "アーマーパネル展開 Safe Quality Set",
+      "enLabel": "Open Armor Panel Safe Quality Set",
+      "desc": "開いたパネルと内部フレームを読みやすくする。",
+      "en": "open armor panels, exposed inner frame, deployable machine outfit, crisp panel separation, readable mechanical interior",
+      "linked_ids": ["gimmick_base_deployable_armor", "gimmick_custom_open_panels", "gimmick_custom_exposed_frame", "gimmick_setting_activation_sequence", "gimmick_quality_panel_separation"]
+    },
+    {
+      "id": "gimmick_open_panel_2000",
+      "roleType": "complete_set",
+      "ja": "アーマーパネル展開 2000 Limit",
+      "enLabel": "Open Armor Panel 2000 Limit",
+      "desc": "パネル展開の短縮版。",
+      "en": "open armor panels, exposed inner frame, deployable armor outfit",
+      "linked_ids": ["gimmick_custom_open_panels", "gimmick_custom_exposed_frame"]
+    },
+    {
+      "id": "gimmick_open_panel_full",
+      "roleType": "complete_set",
+      "ja": "アーマーパネル展開 Full Set",
+      "enLabel": "Open Armor Panel Full Set",
+      "desc": "開閉パネル、内部フレーム、浮遊装甲まで厚めに入れる。",
+      "en": "open armor panels on a wearable machine outfit, exposed inner frame, floating armor segments, visible mechanical hinges, activation sequence styling, crisp panel separation",
+      "linked_ids": ["gimmick_base_deployable_armor", "gimmick_custom_open_panels", "gimmick_custom_exposed_frame", "gimmick_custom_floating_segments", "gimmick_setting_activation_sequence", "gimmick_quality_panel_separation"]
+    },
+    {
+      "id": "gimmick_reactor_charge_core",
+      "roleType": "complete_set",
+      "ja": "リアクター充電状態 Core Set",
+      "enLabel": "Reactor Charging State Core Set",
+      "desc": "コア充電、発光ライン起動、冷却スリットのギミック。",
+      "en": "charging reactor core, activated glow lines, cooling vents open, powered machine outfit state",
+      "linked_ids": ["gimmick_base_active_state", "gimmick_custom_charging_core", "gimmick_custom_activated_glow", "gimmick_custom_cooling_vents"]
+    },
+    {
+      "id": "gimmick_reactor_charge_safe",
+      "roleType": "complete_set",
+      "ja": "リアクター充電状態 Safe Quality Set",
+      "enLabel": "Reactor Charging State Safe Quality Set",
+      "desc": "充電コアと冷却スリットを読みやすくする。",
+      "en": "charging reactor core, activated glow lines, cooling vents open, readable powered suit state, controlled luminous intensity",
+      "linked_ids": ["gimmick_base_active_state", "gimmick_custom_charging_core", "gimmick_custom_activated_glow", "gimmick_custom_cooling_vents", "gimmick_quality_state_glow"]
+    },
+    {
+      "id": "gimmick_reactor_charge_2000",
+      "roleType": "complete_set",
+      "ja": "リアクター充電状態 2000 Limit",
+      "enLabel": "Reactor Charging State 2000 Limit",
+      "desc": "充電状態の短縮版。",
+      "en": "charging reactor core, activated glow lines, cooling vents open",
+      "linked_ids": ["gimmick_custom_charging_core", "gimmick_custom_activated_glow"]
+    },
+    {
+      "id": "gimmick_reactor_charge_full",
+      "roleType": "complete_set",
+      "ja": "リアクター充電状態 Full Set",
+      "enLabel": "Reactor Charging State Full Set",
+      "desc": "充電コア、起動ライン、冷却ベントを厚めに入れる。",
+      "en": "charging reactor core in a wearable machine outfit, activated glow lines along the seams, cooling vents open, subtle heat shimmer, powered suit activation state, controlled luminous intensity",
+      "linked_ids": ["gimmick_base_active_state", "gimmick_custom_charging_core", "gimmick_custom_activated_glow", "gimmick_custom_cooling_vents", "gimmick_setting_combat_deploy", "gimmick_quality_state_glow"]
+    },
+    {
+      "id": "gimmick_maintenance_hatch_core",
+      "roleType": "complete_set",
+      "ja": "メンテナンスハッチ開放 Core Set",
+      "enLabel": "Maintenance Hatch Open Core Set",
+      "desc": "整備ハッチや内部機構を見せるギミック。",
+      "en": "maintenance hatch open, exposed inner mechanism, diagnostic interface, wearable machine outfit detail",
+      "linked_ids": ["gimmick_base_maintenance_exposure", "gimmick_custom_maintenance_hatch", "gimmick_custom_exposed_frame", "gimmick_setting_maintenance_mode"]
+    },
+    {
+      "id": "gimmick_maintenance_hatch_safe",
+      "roleType": "complete_set",
+      "ja": "メンテナンスハッチ開放 Safe Quality Set",
+      "enLabel": "Maintenance Hatch Open Safe Quality Set",
+      "desc": "ハッチと内部構造を読みやすくする。",
+      "en": "maintenance hatch open, exposed inner mechanism, diagnostic interface, clean mechanical interior, readable service panel",
+      "linked_ids": ["gimmick_base_maintenance_exposure", "gimmick_custom_maintenance_hatch", "gimmick_custom_exposed_frame", "gimmick_setting_maintenance_mode", "gimmick_quality_inner_mechanism"]
+    },
+    {
+      "id": "gimmick_maintenance_hatch_2000",
+      "roleType": "complete_set",
+      "ja": "メンテナンスハッチ開放 2000 Limit",
+      "enLabel": "Maintenance Hatch Open 2000 Limit",
+      "desc": "整備ハッチ開放の短縮版。",
+      "en": "maintenance hatch open, exposed inner mechanism, diagnostic interface",
+      "linked_ids": ["gimmick_custom_maintenance_hatch", "gimmick_custom_exposed_frame"]
+    },
+    {
+      "id": "gimmick_maintenance_hatch_full",
+      "roleType": "complete_set",
+      "ja": "メンテナンスハッチ開放 Full Set",
+      "enLabel": "Maintenance Hatch Open Full Set",
+      "desc": "整備ハッチ、内部フレーム、診断UIまで厚めに入れる。",
+      "en": "maintenance hatch open on a wearable machine outfit, exposed inner mechanism, small diagnostic hologram, readable service panel, clean mechanical interior, maintenance mode styling",
+      "linked_ids": ["gimmick_base_maintenance_exposure", "gimmick_custom_maintenance_hatch", "gimmick_custom_exposed_frame", "gimmick_custom_diagnostic_ui", "gimmick_setting_maintenance_mode", "gimmick_quality_inner_mechanism"]
+    }
+  ],
+  "base": [
+    { "id": "gimmick_base_deployable_armor", "roleType": "base", "ja": "展開装甲ギミック土台", "enLabel": "Deployable Armor Base", "desc": "開閉装甲の土台。", "en": "deployable armor base, wearable outfit with mechanical opening panels" },
+    { "id": "gimmick_base_active_state", "roleType": "base", "ja": "起動状態ギミック土台", "enLabel": "Active State Base", "desc": "起動・充電状態の土台。", "en": "active machine outfit state base, powered cyber suit activation" },
+    { "id": "gimmick_base_maintenance_exposure", "roleType": "base", "ja": "整備露出ギミック土台", "enLabel": "Maintenance Exposure Base", "desc": "整備ハッチ・内部機構の土台。", "en": "maintenance exposure base, wearable machine outfit with service panels" }
+  ],
+  "custom": [
+    { "id": "gimmick_custom_open_panels", "roleType": "custom", "ja": "開いた装甲パネル", "enLabel": "Open Armor Panels", "desc": "装甲パネルを開いた状態。", "en": "open armor panels, mechanical plates unfolding from the outfit" },
+    { "id": "gimmick_custom_exposed_frame", "roleType": "custom", "ja": "露出内部フレーム", "enLabel": "Exposed Inner Frame", "desc": "内側のフレームを見せる。", "en": "exposed inner frame, visible internal mechanical support structure" },
+    { "id": "gimmick_custom_floating_segments", "roleType": "custom", "ja": "浮遊装甲片", "enLabel": "Floating Armor Segments", "desc": "磁力で浮く装甲片。", "en": "floating armor segments, magnetic plates hovering near the outfit" },
+    { "id": "gimmick_custom_charging_core", "roleType": "custom", "ja": "充電中コア", "enLabel": "Charging Reactor Core", "desc": "充電中のコア発光。", "en": "charging reactor core, concentrated power glow in a small outfit core" },
+    { "id": "gimmick_custom_activated_glow", "roleType": "custom", "ja": "起動発光ライン", "enLabel": "Activated Glow Lines", "desc": "起動状態の発光ライン。", "en": "activated glow lines, bright suit seams in powered state" },
+    { "id": "gimmick_custom_cooling_vents", "roleType": "custom", "ja": "開いた冷却スリット", "enLabel": "Cooling Vents Open", "desc": "開いた冷却ベント。", "en": "cooling vents open, small heat-release slits on the outfit" },
+    { "id": "gimmick_custom_maintenance_hatch", "roleType": "custom", "ja": "メンテナンスハッチ", "enLabel": "Maintenance Hatch", "desc": "開いた整備ハッチ。", "en": "maintenance hatch open, small service panel on the outfit" },
+    { "id": "gimmick_custom_diagnostic_ui", "roleType": "custom", "ja": "診断UI", "enLabel": "Diagnostic UI", "desc": "小さな診断ホログラム。", "en": "small diagnostic hologram interface near the outfit" }
+  ],
+  "setting": [
+    { "id": "gimmick_setting_activation_sequence", "roleType": "setting", "ja": "起動シーケンス仕様", "enLabel": "Activation Sequence Styling", "desc": "起動中の演出。", "en": "activation sequence styling, machine outfit in the moment of deployment" },
+    { "id": "gimmick_setting_combat_deploy", "roleType": "setting", "ja": "戦闘展開仕様", "enLabel": "Combat Deployment Styling", "desc": "戦闘モードに展開中。", "en": "combat deployment styling, machine outfit shifting into battle-ready mode" },
+    { "id": "gimmick_setting_maintenance_mode", "roleType": "setting", "ja": "メンテナンスモード仕様", "enLabel": "Maintenance Mode Styling", "desc": "整備・診断中の演出。", "en": "maintenance mode styling, service panels open for cyber outfit diagnostics" }
+  ],
+  "quality": [
+    { "id": "gimmick_quality_panel_separation", "roleType": "quality", "ja": "開閉パネル分離明瞭化", "enLabel": "Panel Separation Clarity", "desc": "開いたパネルの見分けを良くする。", "en": "panel separation clarity, readable open plate edges and hinges" },
+    { "id": "gimmick_quality_state_glow", "roleType": "quality", "ja": "起動発光の制御", "enLabel": "Active Glow Control", "desc": "発光が強すぎる時の補助。", "en": "controlled active glow, balanced luminous suit seams, readable power state" },
+    { "id": "gimmick_quality_inner_mechanism", "roleType": "quality", "ja": "内部機構明瞭化", "enLabel": "Inner Mechanism Clarity", "desc": "内部フレームを読みやすくする。", "en": "inner mechanism clarity, clean visible cybernetic interior, readable service parts" }
+  ]
+};
+
+const MATERIAL_ITEMS = {
+  "complete": [
+    {
+      "id": "material_matte_black_core",
+      "roleType": "complete_set",
+      "ja": "マットブラック・ナノメタル Core Set",
+      "enLabel": "Matte Black Nanometal Core Set",
+      "desc": "黒いマット金属布の質感補助。",
+      "en": "matte black nanometal fabric, soft brushed metal texture, low-glare wearable machine outfit material",
+      "linked_ids": ["material_base_matte_black", "material_custom_brushed_texture", "material_setting_stealth_material"]
+    },
+    {
+      "id": "material_matte_black_safe",
+      "roleType": "complete_set",
+      "ja": "マットブラック・ナノメタル Safe Quality Set",
+      "enLabel": "Matte Black Nanometal Safe Quality Set",
+      "desc": "黒金属の潰れを防ぎ、輪郭を出す。",
+      "en": "matte black nanometal fabric, soft brushed metal texture, low-glare wearable machine outfit material, controlled highlights, readable panel edges",
+      "linked_ids": ["material_base_matte_black", "material_custom_brushed_texture", "material_setting_stealth_material", "material_quality_controlled_reflection"]
+    },
+    {
+      "id": "material_matte_black_2000",
+      "roleType": "complete_set",
+      "ja": "マットブラック・ナノメタル 2000 Limit",
+      "enLabel": "Matte Black Nanometal 2000 Limit",
+      "desc": "黒マット金属の短縮版。",
+      "en": "matte black nanometal fabric, soft brushed metal texture",
+      "linked_ids": ["material_base_matte_black", "material_custom_brushed_texture"]
+    },
+    {
+      "id": "material_matte_black_full",
+      "roleType": "complete_set",
+      "ja": "マットブラック・ナノメタル Full Set",
+      "enLabel": "Matte Black Nanometal Full Set",
+      "desc": "黒い金属布、低反射、戦術素材感まで厚めに入れる。",
+      "en": "matte black nanometal fabric, soft brushed metal texture, low-glare wearable machine outfit material, controlled highlights, subtle carbon-fiber weave, stealth material styling, readable panel edges",
+      "linked_ids": ["material_base_matte_black", "material_custom_brushed_texture", "material_custom_carbon_weave", "material_setting_stealth_material", "material_quality_controlled_reflection"]
+    },
+    {
+      "id": "material_translucent_resin_core",
+      "roleType": "complete_set",
+      "ja": "透明樹脂装甲 Core Set",
+      "enLabel": "Translucent Resin Armor Core Set",
+      "desc": "透明装甲と内部発光の質感補助。",
+      "en": "translucent resin armor material, glass-like clear panels, visible inner glow, wearable machine outfit material",
+      "linked_ids": ["material_base_translucent_resin", "material_custom_glass_clear_panel", "material_setting_lab_clear_material"]
+    },
+    {
+      "id": "material_translucent_resin_safe",
+      "roleType": "complete_set",
+      "ja": "透明樹脂装甲 Safe Quality Set",
+      "enLabel": "Translucent Resin Armor Safe Quality Set",
+      "desc": "透明パネルの輪郭と屈折を安全強化。",
+      "en": "translucent resin armor material, glass-like clear panels, visible inner glow, clean refraction, readable transparent edges, wearable machine outfit material",
+      "linked_ids": ["material_base_translucent_resin", "material_custom_glass_clear_panel", "material_setting_lab_clear_material", "material_quality_transparent_readability"]
+    },
+    {
+      "id": "material_translucent_resin_2000",
+      "roleType": "complete_set",
+      "ja": "透明樹脂装甲 2000 Limit",
+      "enLabel": "Translucent Resin Armor 2000 Limit",
+      "desc": "透明樹脂装甲の短縮版。",
+      "en": "translucent resin armor material, glass-like clear panels, visible inner glow",
+      "linked_ids": ["material_base_translucent_resin", "material_custom_glass_clear_panel"]
+    },
+    {
+      "id": "material_translucent_resin_full",
+      "roleType": "complete_set",
+      "ja": "透明樹脂装甲 Full Set",
+      "enLabel": "Translucent Resin Armor Full Set",
+      "desc": "透明樹脂、内部発光、屈折まで厚めに入れる。",
+      "en": "translucent resin armor material, glass-like clear panels over a wearable machine outfit, visible inner glow under the panels, clean refraction, readable transparent edges, laboratory clear-material styling",
+      "linked_ids": ["material_base_translucent_resin", "material_custom_glass_clear_panel", "material_setting_lab_clear_material", "material_quality_transparent_readability"]
+    },
+    {
+      "id": "material_liquid_chrome_core",
+      "roleType": "complete_set",
+      "ja": "液体金属クローム Core Set",
+      "enLabel": "Liquid Chrome Metal Core Set",
+      "desc": "流体金属・クローム調の質感補助。",
+      "en": "liquid chrome metal material, flowing metallic cloth, smooth reflective biometal sheen, wearable outfit material",
+      "linked_ids": ["material_base_liquid_chrome", "material_custom_liquid_sheen", "material_setting_experimental_material"]
+    },
+    {
+      "id": "material_liquid_chrome_safe",
+      "roleType": "complete_set",
+      "ja": "液体金属クローム Safe Quality Set",
+      "enLabel": "Liquid Chrome Metal Safe Quality Set",
+      "desc": "流体金属の反射と衣装感を安全強化。",
+      "en": "liquid chrome metal material, flowing metallic cloth, smooth reflective biometal sheen, controlled reflections, wearable outfit material, not bare skin",
+      "linked_ids": ["material_base_liquid_chrome", "material_custom_liquid_sheen", "material_setting_experimental_material", "material_quality_material_separation"]
+    },
+    {
+      "id": "material_liquid_chrome_2000",
+      "roleType": "complete_set",
+      "ja": "液体金属クローム 2000 Limit",
+      "enLabel": "Liquid Chrome Metal 2000 Limit",
+      "desc": "液体金属質感の短縮版。",
+      "en": "liquid chrome metal material, flowing metallic cloth, smooth reflective sheen",
+      "linked_ids": ["material_base_liquid_chrome", "material_custom_liquid_sheen"]
+    },
+    {
+      "id": "material_liquid_chrome_full",
+      "roleType": "complete_set",
+      "ja": "液体金属クローム Full Set",
+      "enLabel": "Liquid Chrome Metal Full Set",
+      "desc": "流体金属、反射、柔らかい金属布感まで厚めに入れる。",
+      "en": "liquid chrome metal material, flowing metallic cloth over a wearable outfit, smooth reflective biometal sheen, soft silicone-like cyber layer under the shine, controlled reflections, experimental material styling, not bare skin",
+      "linked_ids": ["material_base_liquid_chrome", "material_custom_liquid_sheen", "material_custom_silicone_layer", "material_setting_experimental_material", "material_quality_material_separation"]
+    },
+    {
+      "id": "material_white_ceramic_core",
+      "roleType": "complete_set",
+      "ja": "白セラミック＆カーボン Core Set",
+      "enLabel": "White Ceramic and Carbon Core Set",
+      "desc": "白いセラミック装甲とカーボン繊維の質感補助。",
+      "en": "white ceramic armor material, carbon fiber weave, clean sci-fi outfit surface, wearable machine outfit material",
+      "linked_ids": ["material_base_white_ceramic", "material_custom_carbon_weave", "material_setting_clean_medical"]
+    },
+    {
+      "id": "material_white_ceramic_safe",
+      "roleType": "complete_set",
+      "ja": "白セラミック＆カーボン Safe Quality Set",
+      "enLabel": "White Ceramic and Carbon Safe Quality Set",
+      "desc": "白装甲とカーボンの見分けを安全強化。",
+      "en": "white ceramic armor material, carbon fiber weave, clean sci-fi outfit surface, crisp material separation, readable panel edges",
+      "linked_ids": ["material_base_white_ceramic", "material_custom_carbon_weave", "material_setting_clean_medical", "material_quality_material_separation"]
+    },
+    {
+      "id": "material_white_ceramic_2000",
+      "roleType": "complete_set",
+      "ja": "白セラミック＆カーボン 2000 Limit",
+      "enLabel": "White Ceramic and Carbon 2000 Limit",
+      "desc": "白セラミック素材の短縮版。",
+      "en": "white ceramic armor material, carbon fiber weave, clean sci-fi outfit",
+      "linked_ids": ["material_base_white_ceramic", "material_custom_carbon_weave"]
+    },
+    {
+      "id": "material_white_ceramic_full",
+      "roleType": "complete_set",
+      "ja": "白セラミック＆カーボン Full Set",
+      "enLabel": "White Ceramic and Carbon Full Set",
+      "desc": "白セラミック、カーボン繊維、清潔な医療SF感を厚めに入れる。",
+      "en": "white ceramic armor material, carbon fiber weave under clean white panels, subtle blue medical lights, crisp material separation, clean sci-fi wearable machine outfit surface",
+      "linked_ids": ["material_base_white_ceramic", "material_custom_carbon_weave", "material_setting_clean_medical", "material_quality_material_separation"]
+    }
+  ],
+  "base": [
+    { "id": "material_base_matte_black", "roleType": "base", "ja": "マットブラック金属布", "enLabel": "Matte Black Metal Fabric", "desc": "低反射の黒い金属布。", "en": "matte black nanometal fabric, low-glare wearable machine outfit material" },
+    { "id": "material_base_translucent_resin", "roleType": "base", "ja": "透明樹脂装甲素材", "enLabel": "Translucent Resin Armor Material", "desc": "透明装甲の素材。", "en": "translucent resin armor material, glass-like clear cyber panels" },
+    { "id": "material_base_liquid_chrome", "roleType": "base", "ja": "液体クローム金属布", "enLabel": "Liquid Chrome Metal Fabric", "desc": "流体金属の素材。", "en": "liquid chrome metal fabric, flowing reflective metallic cloth" },
+    { "id": "material_base_white_ceramic", "roleType": "base", "ja": "白セラミック装甲素材", "enLabel": "White Ceramic Armor Material", "desc": "清潔感のある白装甲素材。", "en": "white ceramic armor material, clean hard sci-fi outfit panels" }
+  ],
+  "custom": [
+    { "id": "material_custom_brushed_texture", "roleType": "custom", "ja": "ブラッシュ金属目", "enLabel": "Brushed Metal Texture", "desc": "細かな金属目。", "en": "brushed metal texture, fine soft metal grain on the outfit" },
+    { "id": "material_custom_carbon_weave", "roleType": "custom", "ja": "カーボン繊維織り", "enLabel": "Carbon Fiber Weave", "desc": "細かなカーボン繊維。", "en": "carbon fiber weave, subtle technical textile pattern" },
+    { "id": "material_custom_glass_clear_panel", "roleType": "custom", "ja": "ガラス質クリアパネル", "enLabel": "Glass-like Clear Panel", "desc": "ガラスのような透明パネル。", "en": "glass-like clear panel, clean transparent cyber material" },
+    { "id": "material_custom_liquid_sheen", "roleType": "custom", "ja": "液体金属の光沢", "enLabel": "Liquid Metal Sheen", "desc": "流れる金属光沢。", "en": "liquid metal sheen, smooth flowing reflective surface" },
+    { "id": "material_custom_silicone_layer", "roleType": "custom", "ja": "ソフトシリコン層", "enLabel": "Soft Silicone Cyber Layer", "desc": "柔らかい下地素材。", "en": "soft silicone cyber layer, flexible synthetic underlayer under the machine outfit" }
+  ],
+  "setting": [
+    { "id": "material_setting_stealth_material", "roleType": "setting", "ja": "ステルス素材仕様", "enLabel": "Stealth Material Styling", "desc": "低反射・暗色素材。", "en": "stealth material styling, low-glare tactical machine outfit surface" },
+    { "id": "material_setting_lab_clear_material", "roleType": "setting", "ja": "研究所クリア素材仕様", "enLabel": "Laboratory Clear Material Styling", "desc": "透明素材の研究所感。", "en": "laboratory clear material styling, transparent prototype cyber outfit surface" },
+    { "id": "material_setting_experimental_material", "roleType": "setting", "ja": "実験素材仕様", "enLabel": "Experimental Material Styling", "desc": "実験的な流体金属素材。", "en": "experimental material styling, unstable flowing metal outfit surface" },
+    { "id": "material_setting_clean_medical", "roleType": "setting", "ja": "清潔医療SF素材仕様", "enLabel": "Clean Medical Sci-fi Material Styling", "desc": "白装甲・医療SF向け。", "en": "clean medical sci-fi material styling, white ceramic and subtle clinical lights" }
+  ],
+  "quality": [
+    { "id": "material_quality_controlled_reflection", "roleType": "quality", "ja": "反射制御", "enLabel": "Controlled Reflection", "desc": "反射が強すぎる時の補助。", "en": "controlled reflections, low-glare highlights, readable material surface" },
+    { "id": "material_quality_transparent_readability", "roleType": "quality", "ja": "透明素材の読みやすさ", "enLabel": "Transparent Material Readability", "desc": "透明パネルを読みやすくする。", "en": "transparent material readability, clear panel edges and clean refraction" },
+    { "id": "material_quality_material_separation", "roleType": "quality", "ja": "素材分離明瞭化", "enLabel": "Material Separation Clarity", "desc": "素材差を見分けやすくする。", "en": "material separation clarity, readable differences between metal fabric, ceramic, resin and carbon fiber" }
+  ]
+};
+
+const GLOW_COLOR_ITEMS = {
+  "complete": [
+    {
+      "id": "glow_color_cyan_core",
+      "roleType": "complete_set",
+      "ja": "シアン発光ライン Core Set",
+      "enLabel": "Cyan Glow Lines Core Set",
+      "desc": "サイバー衣装の発光色をシアン系へ寄せる基本補助。",
+      "en": "cyan cyber glow lines, cool blue-green luminous trim, consistent cyan light accents on the wearable machine outfit",
+      "linked_ids": ["glow_color_base_cyan", "glow_color_custom_luminous_trim", "glow_color_setting_cool_cyber"]
+    },
+    {
+      "id": "glow_color_warm_core",
+      "roleType": "complete_set",
+      "ja": "暖色発光ライン Core Set",
+      "enLabel": "Warm Glow Lines Core Set",
+      "desc": "赤・橙・金の発光で戦闘用や儀式用に寄せる補助。",
+      "en": "warm amber and red cyber glow lines, golden luminous trim, consistent warm light accents on the wearable machine outfit",
+      "linked_ids": ["glow_color_base_warm", "glow_color_custom_core_glow", "glow_color_setting_alert_ritual"]
+    },
+    {
+      "id": "glow_color_soft_core",
+      "roleType": "complete_set",
+      "ja": "淡色発光ライン Core Set",
+      "enLabel": "Soft Pastel Glow Lines Core Set",
+      "desc": "淡いピンク・紫・白発光で機械ドレスや日常服にも馴染ませる補助。",
+      "en": "soft pastel cyber glow lines, pale pink violet and white luminous trim, gentle light accents on the wearable machine outfit",
+      "linked_ids": ["glow_color_base_pastel", "glow_color_custom_luminous_trim", "glow_color_setting_elegant_soft"]
+    }
+  ],
+  "base": [
+    { "id": "glow_color_base_cyan", "roleType": "base", "ja": "シアン発光ベース", "enLabel": "Cyan Glow Base", "desc": "冷たい青緑発光の基準。", "en": "cyan glow base, cool blue-green cyber light color, unified luminous accents" },
+    { "id": "glow_color_base_warm", "roleType": "base", "ja": "暖色発光ベース", "enLabel": "Warm Glow Base", "desc": "赤・橙・金発光の基準。", "en": "warm glow base, amber red and gold cyber light color, unified luminous accents" },
+    { "id": "glow_color_base_pastel", "roleType": "base", "ja": "淡色発光ベース", "enLabel": "Soft Pastel Glow Base", "desc": "淡いピンク・紫・白発光の基準。", "en": "soft pastel glow base, pale pink violet and white cyber light color, unified luminous accents" }
+  ],
+  "custom": [
+    { "id": "glow_color_custom_luminous_trim", "roleType": "custom", "ja": "発光トリム統一", "enLabel": "Unified Luminous Trim", "desc": "縁取り発光を一色へまとめる。", "en": "unified luminous trim, consistent glowing seams and edge lights across the outfit" },
+    { "id": "glow_color_custom_core_glow", "roleType": "custom", "ja": "コア発光色統一", "enLabel": "Unified Core Glow", "desc": "胸部・腰部・背部コアの色を揃える。", "en": "unified core glow color, matching chest waist and back connector lights" }
+  ],
+  "setting": [
+    { "id": "glow_color_setting_cool_cyber", "roleType": "setting", "ja": "冷色サイバー演出", "enLabel": "Cool Cyber Lighting", "desc": "研究所・都市夜景向け。", "en": "cool cyber lighting, blue-green sci-fi atmosphere, clean laboratory or night city mood" },
+    { "id": "glow_color_setting_alert_ritual", "roleType": "setting", "ja": "警戒・儀式発光", "enLabel": "Alert Ritual Lighting", "desc": "戦闘・式典向けの強い発光。", "en": "alert ritual lighting, warm warning glow, combat or ceremonial cyber mood" },
+    { "id": "glow_color_setting_elegant_soft", "roleType": "setting", "ja": "淡色エレガント発光", "enLabel": "Elegant Soft Lighting", "desc": "ドレス・日常服向けの柔らかい発光。", "en": "elegant soft lighting, gentle pastel cyber glow, refined dress or casual cyberwear mood" }
+  ],
+  "quality": [
+    { "id": "glow_color_quality_not_overexposed", "roleType": "quality", "ja": "発光白飛び防止", "enLabel": "Glow Exposure Control", "desc": "発光が強すぎて衣装が潰れる時の補助。", "en": "controlled glow exposure, readable luminous lines, no blown-out light, clear outfit details" },
+    { "id": "glow_color_quality_consistent_hue", "roleType": "quality", "ja": "発光色の統一", "enLabel": "Consistent Glow Hue", "desc": "複数色に散らばりすぎる時の補助。", "en": "consistent glow hue, unified cyber light color palette, clean luminous harmony" }
+  ]
+};
+
+const CLOTHING_SAFETY_ITEMS = {
+  "complete": [
+    {
+      "id": "safety_clothing_first_core",
+      "roleType": "complete_set",
+      "ja": "衣装優先・身体置換防止 Core Set",
+      "enLabel": "Clothing-first Safety Core Set",
+      "desc": "機械衣装がロボ身体化しすぎる時、服として重ねる方向へ戻す補助。",
+      "en": "clothing-first machine outfit, wearable cyber suit over the character body, not body replacement, human body silhouette remains visible",
+      "linked_ids": ["safety_base_wearable_layer", "safety_custom_visible_cloth_edges", "safety_setting_existing_body"]
+    },
+    {
+      "id": "safety_human_android_shared_core",
+      "roleType": "complete_set",
+      "ja": "人間/アンドロイド共用 Core Set",
+      "enLabel": "Human and Android Shared Core Set",
+      "desc": "人間・アンドロイド・サイボーグの誰にも着せられるよう、種族変更を抑える補助。",
+      "en": "wearable cyber outfit for human android or cyborg character, outfit layer only, character species remains unchanged, clear clothing silhouette",
+      "linked_ids": ["safety_base_species_neutral", "safety_custom_visible_fasteners", "safety_setting_existing_body"]
+    }
+  ],
+  "base": [
+    { "id": "safety_base_wearable_layer", "roleType": "base", "ja": "着用レイヤー固定", "enLabel": "Wearable Layer Anchor", "desc": "機械要素を身体ではなく衣装レイヤーへ固定。", "en": "wearable outfit layer, cyber clothing worn over the body, clear garment boundaries" },
+    { "id": "safety_base_species_neutral", "roleType": "base", "ja": "種族非変更アンカー", "enLabel": "Species-neutral Anchor", "desc": "人間・アンドロイド・サイボーグ共用の衣装として扱う。", "en": "species-neutral cyber attire, usable for human android or cyborg, outfit does not change the character species" }
+  ],
+  "custom": [
+    { "id": "safety_custom_visible_cloth_edges", "roleType": "custom", "ja": "服の縁・留め具を見せる", "enLabel": "Visible Garment Edges", "desc": "服として読ませる縁・ベルト・留め具。", "en": "visible garment edges, straps belts and fasteners, readable clothing construction" },
+    { "id": "safety_custom_visible_fasteners", "roleType": "custom", "ja": "着脱パーツを見せる", "enLabel": "Visible Detachable Parts", "desc": "着脱可能な機械衣装に見せる。", "en": "visible detachable parts, clasps connectors and suit seams, wearable machine outfit construction" }
+  ],
+  "setting": [
+    { "id": "safety_setting_existing_body", "roleType": "setting", "ja": "既存身体に重ねる設定", "enLabel": "Over Existing Body Setting", "desc": "元の身体ラインに衣装を重ねる方向。", "en": "worn over the existing character body, original body proportions preserved, clothing layer over the silhouette" }
+  ],
+  "quality": [
+    { "id": "safety_quality_silhouette_readability", "roleType": "quality", "ja": "人体シルエット明瞭化", "enLabel": "Human Silhouette Readability", "desc": "ロボ体ではなく、衣装を着た輪郭に戻す。", "en": "human body silhouette readability, clear wearable suit outline, machine outfit not full robot body" },
+    { "id": "safety_quality_material_boundary", "roleType": "quality", "ja": "身体と衣装の境界明瞭化", "enLabel": "Body and Outfit Boundary", "desc": "肌・布・金属の境界を見分けやすくする。", "en": "clear boundary between body skin fabric and metal outfit, readable layered clothing construction" }
+  ]
+};
+
+const USAGE_PRESET_ITEMS = {
+  "complete": [
+    {
+      "id": "usage_combat_core",
+      "roleType": "complete_set",
+      "ja": "戦闘用サイバー衣装 Core Set",
+      "enLabel": "Combat Cyber Outfit Core Set",
+      "desc": "戦闘・護衛・オペレーター用途へ寄せる横断プリセット。",
+      "en": "combat-purpose cyber outfit, tactical wearable machine suit, reinforced armor accents, ready-for-action operator styling",
+      "linked_ids": ["usage_base_combat", "usage_custom_reinforced_points", "usage_setting_battle_ready"]
+    },
+    {
+      "id": "usage_medical_core",
+      "roleType": "complete_set",
+      "ja": "医療・補助スーツ Core Set",
+      "enLabel": "Medical Support Suit Core Set",
+      "desc": "医療補助・リハビリ・生命維持スーツ寄りにする横断プリセット。",
+      "en": "medical support cyber suit, wearable assistive machine outfit, clean clinical panels, gentle support-frame styling",
+      "linked_ids": ["usage_base_medical", "usage_custom_status_lights", "usage_setting_clinical_support"]
+    },
+    {
+      "id": "usage_ceremonial_core",
+      "roleType": "complete_set",
+      "ja": "式典・機械姫 Core Set",
+      "enLabel": "Ceremonial Machine Princess Core Set",
+      "desc": "式典服・機械姫・機械聖女寄りにする横断プリセット。",
+      "en": "ceremonial cyber outfit, machine-princess attire, elegant luminous ornaments, formal wearable machine clothing",
+      "linked_ids": ["usage_base_ceremonial", "usage_custom_luminous_ornaments", "usage_setting_formal_stage"]
+    },
+    {
+      "id": "usage_everyday_core",
+      "roleType": "complete_set",
+      "ja": "日常サイバー服 Core Set",
+      "enLabel": "Everyday Cyberwear Core Set",
+      "desc": "街着・制服・ジャケットへ機械感を薄く重ねる横断プリセット。",
+      "en": "everyday cyberwear, wearable machine accents on casual clothing, subtle connectors and light trims, urban sci-fi outfit",
+      "linked_ids": ["usage_base_everyday", "usage_custom_subtle_connectors", "usage_setting_urban_daily"]
+    }
+  ],
+  "base": [
+    { "id": "usage_base_combat", "roleType": "base", "ja": "戦闘用途ベース", "enLabel": "Combat Purpose Base", "desc": "戦術・護衛向け。", "en": "combat purpose base, tactical cyber suit silhouette, reinforced wearable outfit" },
+    { "id": "usage_base_medical", "roleType": "base", "ja": "医療用途ベース", "enLabel": "Medical Purpose Base", "desc": "医療補助・リハビリ向け。", "en": "medical purpose base, clinical support cyber suit, assistive wearable outfit" },
+    { "id": "usage_base_ceremonial", "roleType": "base", "ja": "式典用途ベース", "enLabel": "Ceremonial Purpose Base", "desc": "機械姫・聖女・儀式服向け。", "en": "ceremonial purpose base, formal cyber attire, elegant machine-princess clothing" },
+    { "id": "usage_base_everyday", "roleType": "base", "ja": "日常用途ベース", "enLabel": "Everyday Purpose Base", "desc": "街着・制服・ジャケット向け。", "en": "everyday purpose base, casual cyberwear, subtle wearable machine accents" }
+  ],
+  "custom": [
+    { "id": "usage_custom_reinforced_points", "roleType": "custom", "ja": "要所補強パーツ", "enLabel": "Reinforced Key Points", "desc": "肩・肘・膝などを戦闘向けに補強。", "en": "reinforced key points, shoulder elbow and knee armor accents, tactical protection details" },
+    { "id": "usage_custom_status_lights", "roleType": "custom", "ja": "ステータスライト", "enLabel": "Status Lights", "desc": "医療・整備向けの状態表示。", "en": "status lights, small diagnostic indicators, clean medical cyber interface" },
+    { "id": "usage_custom_luminous_ornaments", "roleType": "custom", "ja": "発光装飾", "enLabel": "Luminous Ornaments", "desc": "式典向けの発光飾り。", "en": "luminous ornaments, glowing embroidery and formal cyber jewelry accents" },
+    { "id": "usage_custom_subtle_connectors", "roleType": "custom", "ja": "控えめコネクタ", "enLabel": "Subtle Connectors", "desc": "日常服へ馴染む小型端子。", "en": "subtle connectors, small cyber fasteners and cable ports blended into casual clothing" }
+  ],
+  "setting": [
+    { "id": "usage_setting_battle_ready", "roleType": "setting", "ja": "戦闘待機設定", "enLabel": "Battle-ready Setting", "desc": "出撃前・護衛任務向け。", "en": "battle-ready setting, mission standby mood, tactical sci-fi readiness" },
+    { "id": "usage_setting_clinical_support", "roleType": "setting", "ja": "医療補助設定", "enLabel": "Clinical Support Setting", "desc": "研究所・医療ベッド・整備室向け。", "en": "clinical support setting, clean laboratory or medical maintenance room mood" },
+    { "id": "usage_setting_formal_stage", "roleType": "setting", "ja": "式典ステージ設定", "enLabel": "Formal Stage Setting", "desc": "式典・謁見・聖堂風演出向け。", "en": "formal stage setting, ceremonial hall or sacred cyber stage mood" },
+    { "id": "usage_setting_urban_daily", "roleType": "setting", "ja": "都市日常設定", "enLabel": "Urban Daily Setting", "desc": "都市・学校・夜道向け。", "en": "urban daily setting, city street school or night walkway mood with subtle cyberwear" }
+  ],
+  "quality": [
+    { "id": "usage_quality_purpose_readability", "roleType": "quality", "ja": "用途の読みやすさ", "enLabel": "Purpose Readability", "desc": "何用の衣装か分かりやすくする。", "en": "purpose readability, clear functional cyber outfit design, coherent use-case styling" },
+    { "id": "usage_quality_not_overcrowded", "roleType": "quality", "ja": "詰め込みすぎ防止", "enLabel": "Not Overcrowded", "desc": "横断プリセットで要素が増えすぎた時の補助。", "en": "clean cyber outfit balance, not overcrowded, readable functional details and silhouette" }
+  ]
+};
+
+
+
+  function injectStyle(){
+    if (document.getElementById("__attire_v27_cyber_machine_style__")) return;
+    const st = document.createElement("style");
+    st.id = "__attire_v27_cyber_machine_style__";
+    st.textContent = `
+#list-attire .${ROOT_CLASS} {
+  margin: 12px 0;
+  padding: 10px;
+  border: 1px solid rgba(80, 120, 160, 0.25);
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(235,248,255,0.96), rgba(246,250,255,0.94));
+  box-sizing: border-box;
+}
+#list-attire .${ROOT_CLASS} summary {
+  cursor: pointer;
+  font-weight: 800;
+  line-height: 1.35;
+}
+#list-attire .${ROOT_CLASS} .v26-note {
+  margin: 8px 0 10px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.9);
+  color: #355;
+  font-size: 0.92em;
+  line-height: 1.45;
+}
+#list-attire .${ROOT_CLASS} .v26-group {
+  margin: 10px 0;
+  padding: 8px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.75);
+  border: 1px solid rgba(90,130,170,0.18);
+}
+#list-attire .${ROOT_CLASS} .v26-grid {
+  display: block !important;
+  grid-template-columns: 1fr !important;
+}
+#list-attire .${ROOT_CLASS} label.v26-card {
+  display: flex !important;
+  width: 100% !important;
+  box-sizing: border-box;
+  gap: 8px;
+  align-items: flex-start;
+  margin: 8px 0;
+  padding: 10px;
+  border: 1px solid rgba(60,120,180,0.20);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.92);
+  line-height: 1.35;
+}
+#list-attire .${ROOT_CLASS} label.v26-card input {
+  flex: 0 0 auto;
+  margin-top: 3px;
+}
+#list-attire .${ROOT_CLASS} .v26-title {
+  font-weight: 800;
+  color: #12508a;
+}
+#list-attire .${ROOT_CLASS} .v26-desc {
+  margin-top: 3px;
+  color: #555;
+  font-size: 0.90em;
+}
+#list-attire .${ROOT_CLASS} .v26-role {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: rgba(20,120,190,0.12);
+  color: #236;
+  font-size: 0.78em;
+  font-weight: 700;
+}
+`;
+    document.head.appendChild(st);
+  }
+
+  function allItems(){
+    return []
+      .concat(ITEMS.complete)
+      .concat(ITEMS.base)
+      .concat(ITEMS.custom)
+      .concat(ITEMS.setting)
+      .concat(ITEMS.quality)
+      .concat(BIO_ITEMS.complete)
+      .concat(BIO_ITEMS.base)
+      .concat(BIO_ITEMS.custom)
+      .concat(BIO_ITEMS.setting)
+      .concat(BIO_ITEMS.quality)
+      .concat(SUIT_ITEMS.complete)
+      .concat(SUIT_ITEMS.base)
+      .concat(SUIT_ITEMS.custom)
+      .concat(SUIT_ITEMS.setting)
+      .concat(SUIT_ITEMS.quality)
+      .concat(FRAME_ITEMS.complete)
+      .concat(FRAME_ITEMS.base)
+      .concat(FRAME_ITEMS.custom)
+      .concat(FRAME_ITEMS.setting)
+      .concat(FRAME_ITEMS.quality)
+      .concat(DRESS_ITEMS.complete)
+      .concat(DRESS_ITEMS.base)
+      .concat(DRESS_ITEMS.custom)
+      .concat(DRESS_ITEMS.setting)
+      .concat(DRESS_ITEMS.quality)
+      .concat(CASUAL_ITEMS.complete)
+      .concat(CASUAL_ITEMS.base)
+      .concat(CASUAL_ITEMS.custom)
+      .concat(CASUAL_ITEMS.setting)
+      .concat(CASUAL_ITEMS.quality)
+      .concat(ACCENT_ITEMS.complete)
+      .concat(ACCENT_ITEMS.base)
+      .concat(ACCENT_ITEMS.custom)
+      .concat(ACCENT_ITEMS.setting)
+      .concat(ACCENT_ITEMS.quality)
+      .concat(GIMMICK_ITEMS.complete)
+      .concat(GIMMICK_ITEMS.base)
+      .concat(GIMMICK_ITEMS.custom)
+      .concat(GIMMICK_ITEMS.setting)
+      .concat(GIMMICK_ITEMS.quality)
+      .concat(MATERIAL_ITEMS.complete)
+      .concat(MATERIAL_ITEMS.base)
+      .concat(MATERIAL_ITEMS.custom)
+      .concat(MATERIAL_ITEMS.setting)
+      .concat(MATERIAL_ITEMS.quality);
+  }
+
+  function itemMap(){
+    const map = {};
+    allItems().forEach(function(item){ map[item.id] = item; });
+    return map;
+  }
+
+  function card(item){
+    const label = document.createElement("label");
+    label.className = "v26-card";
+    const cb = document.createElement("input");
+    cb.type = "checkbox";
+    cb.className = "attire-v27-cyber-machine-cb";
+    cb.dataset.id = item.id;
+    cb.dataset.en = item.en;
+    cb.dataset.role = item.role || "shared";
+    cb.dataset.roleType = item.roleType || "";
+    cb.dataset.collectionId = item.collectionId || COLLECTION_ID;
+    if (item.linked_ids && item.linked_ids.length) cb.dataset.linkedIds = JSON.stringify(item.linked_ids);
+    label.appendChild(cb);
+
+    const text = document.createElement("span");
+    const title = document.createElement("span");
+    title.className = "v26-title";
+    title.textContent = item.ja + " / " + item.enLabel;
+    const badge = document.createElement("span");
+    badge.className = "v26-role";
+    badge.textContent = item.role || "shared";
+    title.appendChild(badge);
+    text.appendChild(title);
+
+    if (item.desc) {
+      const desc = document.createElement("div");
+      desc.className = "v26-desc";
+      desc.textContent = item.desc;
+      text.appendChild(desc);
+    }
+
+    label.appendChild(text);
+    return label;
+  }
+
+  function group(title, desc, items){
+    const details = document.createElement("details");
+    details.className = "v26-group";
+    details.open = false;
+    const summary = document.createElement("summary");
+    summary.textContent = title;
+    details.appendChild(summary);
+
+    const body = document.createElement("div");
+    if (desc) {
+      const note = document.createElement("div");
+      note.className = "v26-note";
+      note.textContent = desc;
+      body.appendChild(note);
+    }
+    const grid = document.createElement("div");
+    grid.className = "v26-grid";
+    items.forEach(function(item){ grid.appendChild(card(item)); });
+    body.appendChild(grid);
+    details.appendChild(body);
+    return details;
+  }
+
+  function buildCollection(titleText, noteText, sourceItems, defaultOpen){
+    const details = document.createElement("details");
+    details.className = "v26-group v27-collection";
+    details.open = !!defaultOpen;
+
+    const summary = document.createElement("summary");
+    summary.textContent = titleText;
+    details.appendChild(summary);
+
+    const note = document.createElement("div");
+    note.className = "v26-note";
+    note.textContent = noteText;
+    details.appendChild(note);
+
+    details.appendChild(group(
+      "完成セット (Complete Sets)",
+      "完成形の入口。Core / Safe / 2000 / Full でテストしやすく分けています。",
+      sourceItems.complete
+    ));
+    details.appendChild(group(
+      "ベース (Base)",
+      "スーツの基本形。人間にも機械娘にも着せられる、衣装側の土台です。",
+      sourceItems.base
+    ));
+    details.appendChild(group(
+      "カスタマイズ (Customize)",
+      "発光回路、透明装甲、コア、装甲パーツなどの差分です。",
+      sourceItems.custom
+    ));
+    details.appendChild(group(
+      "設定 (Setting)",
+      "研究所・戦闘・医療・式典など、スーツの用途を固定します。",
+      sourceItems.setting
+    ));
+    details.appendChild(group(
+      "クオリティ補助 (Quality)",
+      "金属布・回路・透明素材・生体筋繊維など、機械衣装の質感補助です。",
+      sourceItems.quality
+    ));
+
+    return details;
+  }
+
+  function buildUI(){
+    const root = document.createElement("details");
+    root.className = ROOT_CLASS;
+    root.open = false;
+
+    const summary = document.createElement("summary");
+    summary.textContent = "🤖 サイバー・機械衣装";
+    root.appendChild(summary);
+
+    const note = document.createElement("div");
+    note.className = "v26-note";
+    note.textContent = "アンドロイド/サイボーグ種族を変えず、衣装として機械スーツ・生体金属スーツ・外骨格・機械ドレスを重ねる親棚。下位の特化コレクションや横断補助で、ベース・カスタマイズ・設定・クオリティ補助を連動チェックします。";
+    root.appendChild(note);
+
+    root.appendChild(buildCollection(
+      "🧬 ナノメタルスーツ特化コレクション",
+      "硬質〜半透明なナノメタル、スマートアーマー、軽い外骨格・サイバードレス入門版寄り。生体金属表現はバイオメタル棚へ分け、深い外骨格・ドレス表現は専用棚へ任せます。",
+      ITEMS,
+      false
+    ));
+
+    root.appendChild(buildCollection(
+      "🧫 バイオメタルスーツ特化コレクション",
+      "柔らかい生体金属、流体金属布、自己修復シーム、有機機械アーマー寄り。ナノメタルよりも“生きている金属衣装”の質感を狙う棚です。",
+      BIO_ITEMS,
+      false
+    ));
+
+
+    root.appendChild(buildCollection(
+      "🧩 ナノスーツ・プラグスーツ特化コレクション",
+      "密着スーツ、発光ライン、インターフェース端子、薄型装甲寄り。操縦・同期・戦術リンクのしやすい機械衣装棚です。",
+      SUIT_ITEMS,
+      false
+    ));
+
+    root.appendChild(buildCollection(
+      "🦾 外骨格・戦闘フレーム特化コレクション",
+      "外骨格の専用深掘り版。肩・腕・脚の外部フレーム、背部ユニット、メカ関節、作業/戦闘フレームを厚めに扱います。軽い入門版はナノメタル棚側に残しています。",
+      FRAME_ITEMS,
+      false
+    ));
+
+    root.appendChild(buildCollection(
+      "👗 アンドロイド用ドレス特化コレクション",
+      "機械ドレスの専用深掘り版。機械天使ドレス、メカゴシック、透明パネル、胸部コア、光る回路刺繍を厚めに扱います。軽い入門版はナノメタル棚側に残しています。",
+      DRESS_ITEMS,
+      false
+    ));
+
+    root.appendChild(buildCollection(
+      "🧥 サイボーグ日常服特化コレクション",
+      "義手が見えるジャケット、片腕メカ、ケーブルハーネス、都市型サイバー服寄り。日常と機械感の両立を狙う棚です。",
+      CASUAL_ITEMS,
+      false
+    ));
+
+
+
+    root.appendChild(buildCollection(
+      "✨ サイバー衣装・共通アクセント補助",
+      "胸部コア、腰部コア、背部コネクタ、透明パネル、肩・太もも装甲などを、既存スーツに横断で重ねる補助棚です。",
+      ACCENT_ITEMS,
+      false
+    ));
+
+    root.appendChild(buildCollection(
+      "⚙️ 展開状態・メカギミック補助",
+      "開いた装甲パネル、露出内部フレーム、充電中コア、冷却ベント、整備ハッチなど、機械衣装が“動いている状態”を足す補助棚です。",
+      GIMMICK_ITEMS,
+      false
+    ));
+
+    root.appendChild(buildCollection(
+      "🧪 機械衣装マテリアル補助",
+      "マットブラック、透明樹脂、液体クローム、白セラミック、カーボン繊維など、素材差を安定させる横断補助棚です。",
+      MATERIAL_ITEMS,
+      false
+    ));
+
+    root.appendChild(buildCollection(
+      "💡 発光カラー補助",
+      "シアン、暖色、淡色など、発光ラインとコア色を横断で統一する補助棚です。",
+      GLOW_COLOR_ITEMS,
+      false
+    ));
+
+    root.appendChild(buildCollection(
+      "🧷 衣装優先・身体置換防止補助",
+      "機械衣装がロボ身体化しすぎる時、着用レイヤー・服の縁・元の身体シルエットを保つための安全補助棚です。",
+      CLOTHING_SAFETY_ITEMS,
+      false
+    ));
+
+    root.appendChild(buildCollection(
+      "🎯 用途プリセット補助",
+      "戦闘、医療、式典、日常など、機械衣装の用途を横断で固定する補助棚です。",
+      USAGE_PRESET_ITEMS,
+      false
+    ));
+
+
+    root.addEventListener("change", function(ev){
+      const cb = ev.target;
+      if (!cb || !cb.classList || !cb.classList.contains("attire-v27-cyber-machine-cb")) return;
+      if (cb.dataset.roleType === "complete_set" && cb.checked) {
+        const collectionBox = cb.closest(".v27-collection") || root;
+        const all = collectionBox.querySelectorAll("input.attire-v27-cyber-machine-cb");
+        all.forEach(function(other){
+          if (other !== cb) other.checked = false;
+        });
+        let linked = [];
+        try { linked = JSON.parse(cb.dataset.linkedIds || "[]"); } catch(_) { linked = []; }
+        linked.forEach(function(id){
+          const target = collectionBox.querySelector('input.attire-v27-cyber-machine-cb[data-id="' + id + '"]');
+          if (target) {
+            target.checked = true;
+            const d = target.closest("details");
+            if (d) d.open = true;
+          }
+        });
+        const ownDetails = cb.closest("details");
+        if (ownDetails) ownDetails.open = true;
+        if (collectionBox) collectionBox.open = true;
+      }
+      try { if (typeof window.generateOutput === "function") window.generateOutput(); } catch(_) {}
+    });
+
+    return root;
+  }
+
+  const API = {
+    initUI(container){
+      try { if (window.__outputTranslation) window.__outputTranslation.register({}); } catch(_) {}
+      const mount = function(retry){
+        const parent = document.querySelector("#list-attire") || container;
+        if (!parent) {
+          if ((retry || 0) < 60) setTimeout(function(){ mount((retry || 0) + 1); }, 80);
+          return;
+        }
+        if (parent.querySelector("." + ROOT_CLASS)) return;
+        injectStyle();
+        const contentArea = parent.querySelector(".section-content") || parent;
+        const cyberMachineRoot = buildUI();
+        contentArea.appendChild(cyberMachineRoot);
+        try { if (window.__normalizeAttireLayout) window.__normalizeAttireLayout(contentArea || parent); } catch(_) {}
+        try {
+          cyberMachineRoot.open = false;
+          cyberMachineRoot.querySelectorAll("details").forEach(function(d){ d.open = false; });
+        } catch(_) {}
+      };
+      mount(0);
+    },
+
+    getTags(){
+      const root = document.querySelector("." + ROOT_CLASS);
+      if (!root) return [];
+      const seen = {};
+      const tags = [];
+      root.querySelectorAll("input.attire-v27-cyber-machine-cb:checked").forEach(function(cb){
+        const val = cb.dataset.en || "";
+        if (!val || seen[val]) return;
+        seen[val] = true;
+        tags.push(val);
+      });
       return tags;
     }
   };

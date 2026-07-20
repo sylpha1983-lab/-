@@ -1,5 +1,5 @@
 // Auto-generated bundle for section 'hair'
-// Contains 7 versions stacked in ascending order.
+// Contains 8 versions stacked in ascending order.
 
 (function(){
 // --- builder_ui.section.hair.v1.js ---
@@ -1226,6 +1226,1251 @@
       const tags = [];
       const seen = new Set();
       document.querySelectorAll(".hair-v7-fairytale-collection input.hair-v7-cb:checked").forEach(cb => {
+        const values = parseJsonArrayAttr(cb.getAttribute("data-tags"));
+        values.forEach(v => {
+          const tag = String(v || "").trim();
+          if (!tag || seen.has(tag)) return;
+          seen.add(tag);
+          tags.push(tag);
+        });
+      });
+      return tags;
+    }
+  };
+
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
+})();
+
+(function(){
+// --- builder_ui.section.hair.v8.js ---
+(function(){
+  "use strict";
+  const VERSION = 8; // アニメキャラ髪型特化コレクション v8.1 増築版
+  const KEY = "hair";
+  const COLLECTION_ID = "hair_anime_character_styles_v8";
+
+  const ANIME_HAIR = [
+  {
+    "title": "🌟 完成セット (Role + Visible Base)",
+    "role": "complete_set",
+    "items": [
+      {
+        "id": "anime_hair_complete_heroine_soft_medium",
+        "ja": "王道ヒロイン（ふんわりミディアム＋顔まわり毛束）",
+        "en": "Classic heroine - soft medium with face-framing locks",
+        "val": "hairstyle focus, soft medium-length anime hairstyle, airy layered hair, side-swept bangs, face-framing side locks, clear heroine hair silhouette",
+        "linked_ids": [
+          "anime_hair_base_soft_medium_layered",
+          "anime_hair_bangs_side_swept",
+          "anime_hair_bangs_face_framing_locks",
+          "anime_hair_symbol_airy_layers",
+          "anime_hair_shape_clear_heroine"
+        ]
+      },
+      {
+        "id": "anime_hair_complete_cool_rival_sleek_long",
+        "ja": "クール系ライバル（シャープなストレートロング＋片目隠れ前髪）",
+        "en": "Cool rival - sleek long with one-eye fringe",
+        "val": "hairstyle focus, sleek long straight anime hairstyle, sharp side bangs, one-eye-covering fringe, clean face-framing strands, sharp rival hair silhouette",
+        "linked_ids": [
+          "anime_hair_base_sleek_long_straight",
+          "anime_hair_bangs_one_eye_fringe",
+          "anime_hair_bangs_sharp_side_bangs",
+          "anime_hair_shape_sharp_rival",
+          "anime_hair_symbol_clean_strands"
+        ]
+      },
+      {
+        "id": "anime_hair_complete_energetic_protagonist_high_pony",
+        "ja": "元気系主人公（高めポニーテール＋跳ね毛）",
+        "en": "Energetic protagonist - high ponytail with bouncy tips",
+        "val": "hairstyle focus, high ponytail anime hairstyle, bouncy outward hair tips, large ahoge, dynamic layered bangs, lively protagonist hair silhouette",
+        "linked_ids": [
+          "anime_hair_base_high_ponytail",
+          "anime_hair_symbol_large_ahoge",
+          "anime_hair_symbol_outward_tips",
+          "anime_hair_bangs_dynamic_layered",
+          "anime_hair_shape_dynamic_motion"
+        ]
+      },
+      {
+        "id": "anime_hair_complete_magical_twin_tails",
+        "ja": "魔法少女系（ツインテール＋丸いサイドボリューム）",
+        "en": "Magical girl - twin tails with round side volume",
+        "val": "hairstyle focus, twin tails anime hairstyle, round side hair volume, soft curled hair tips, cute symmetrical magical girl hair silhouette",
+        "linked_ids": [
+          "anime_hair_base_round_twin_tails",
+          "anime_hair_symbol_round_side_volume",
+          "anime_hair_symbol_soft_curled_tips",
+          "anime_hair_shape_symmetrical_cute",
+          "anime_hair_bangs_soft_parted"
+        ]
+      },
+      {
+        "id": "anime_hair_complete_ojousama_drill_curls",
+        "ja": "お嬢様系（縦ロール風サイドカール＋整った前髪）",
+        "en": "Ojousama - drill-like side curls with tidy bangs",
+        "val": "hairstyle focus, elegant side drill curls, tidy straight bangs, polished side curls, refined ojousama anime hair silhouette",
+        "linked_ids": [
+          "anime_hair_base_side_drill_curls",
+          "anime_hair_bangs_tidy_straight",
+          "anime_hair_symbol_polished_curls",
+          "anime_hair_shape_refined_elegant",
+          "anime_hair_bangs_face_framing_locks"
+        ]
+      },
+      {
+        "id": "anime_hair_complete_quiet_heavy_bob",
+        "ja": "無口系ヒロイン（重めボブ＋目にかかる前髪）",
+        "en": "Quiet heroine - heavy bob with eye-grazing bangs",
+        "val": "hairstyle focus, heavy rounded bob anime hairstyle, long bangs partly covering the eyes, inward curled ends, quiet compact hair silhouette",
+        "linked_ids": [
+          "anime_hair_base_heavy_rounded_bob",
+          "anime_hair_bangs_eye_grazing",
+          "anime_hair_symbol_inward_ends",
+          "anime_hair_shape_quiet_compact",
+          "anime_hair_symbol_soft_hair_mass"
+        ]
+      },
+      {
+        "id": "anime_hair_complete_shounen_spiky_short",
+        "ja": "少年漫画系主人公（ツンツンショート＋外ハネ）",
+        "en": "Shounen protagonist - spiky short with outward tips",
+        "val": "hairstyle focus, spiky short anime hairstyle, outward flipped hair tips, sharp hair spikes, energetic heroic hair silhouette",
+        "linked_ids": [
+          "anime_hair_base_spiky_short",
+          "anime_hair_symbol_sharp_spikes",
+          "anime_hair_symbol_outward_tips",
+          "anime_hair_bangs_dynamic_layered",
+          "anime_hair_shape_heroic_spiky"
+        ]
+      },
+      {
+        "id": "anime_hair_complete_near_future_asym_bob",
+        "ja": "近未来系キャラ（非対称ボブ＋片側ロング）",
+        "en": "Near-future character - asymmetrical bob with one long side",
+        "val": "hairstyle focus, asymmetrical bob anime hairstyle, one side longer hair lock, sharp angled bangs, sleek futuristic hair silhouette",
+        "linked_ids": [
+          "anime_hair_base_asymmetrical_bob",
+          "anime_hair_bangs_long_asymmetrical",
+          "anime_hair_symbol_clean_strands",
+          "anime_hair_shape_sleek_future",
+          "anime_hair_bangs_sharp_side_bangs"
+        ]
+      },
+      {
+        "id": "anime_hair_complete_childhood_friend_side_pony",
+        "ja": "幼なじみ系（低めサイドポニー＋やわらか前髪）",
+        "en": "Childhood friend - low side ponytail with soft bangs",
+        "val": "hairstyle focus, low side ponytail anime hairstyle, soft parted bangs, gentle face-framing strands, friendly everyday hair silhouette",
+        "linked_ids": [
+          "anime_hair_base_low_side_ponytail",
+          "anime_hair_bangs_soft_parted",
+          "anime_hair_bangs_face_framing_locks",
+          "anime_hair_shape_friendly_everyday",
+          "anime_hair_symbol_soft_hair_mass"
+        ]
+      },
+      {
+        "id": "anime_hair_complete_androgynous_layered_short",
+        "ja": "中性的主人公（レイヤーショート＋長め前髪）",
+        "en": "Androgynous protagonist - layered short with longer bangs",
+        "val": "hairstyle focus, layered short anime hairstyle, longer soft bangs, light nape layers, androgynous clean hair silhouette",
+        "linked_ids": [
+          "anime_hair_base_layered_short",
+          "anime_hair_bangs_long_soft",
+          "anime_hair_symbol_light_nape_layers",
+          "anime_hair_shape_androgynous_clean",
+          "anime_hair_symbol_airy_layers"
+        ]
+      },
+      {
+        "id": "anime_hair_complete_tsundere_two_side_up",
+        "ja": "ツンデレ系（高めツーサイドアップ＋小さな跳ね毛）",
+        "en": "Tsundere - high two-side-up with small ahoge",
+        "val": "hairstyle focus, high two-side-up anime hairstyle, small ahoge, sharp side bangs, perky outward hair tips, expressive tsundere hair silhouette",
+        "linked_ids": [
+          "anime_hair_base_high_two_side_up",
+          "anime_hair_symbol_small_ahoge",
+          "anime_hair_symbol_outward_tips",
+          "anime_hair_bangs_sharp_side_bangs",
+          "anime_hair_shape_expressive_perky"
+        ]
+      },
+      {
+        "id": "anime_hair_complete_mysterious_very_long",
+        "ja": "神秘系キャラ（超ロングストレート＋額見せ前髪）",
+        "en": "Mysterious character - very long straight with open forehead",
+        "val": "hairstyle focus, very long straight anime hairstyle, open forehead part, smooth falling hair sheets, mysterious elegant hair silhouette",
+        "linked_ids": [
+          "anime_hair_base_very_long_straight",
+          "anime_hair_bangs_open_forehead",
+          "anime_hair_symbol_smooth_hair_sheets",
+          "anime_hair_shape_mysterious_elegant",
+          "anime_hair_symbol_clean_strands"
+        ]
+      },
+      {
+        "id": "anime_hair_complete_hime_princess_cut",
+        "ja": "姫系キャラ（姫カット＋ぱっつん前髪＋長い姫もみあげ）",
+        "en": "Hime character - hime cut with blunt bangs and long sidelocks",
+        "val": "hairstyle focus, hime cut anime hairstyle, blunt straight bangs, long hime sidelocks, straight long hair panels, noble princess hair silhouette",
+        "linked_ids": [
+          "anime_hair_base_hime_cut_long",
+          "anime_hair_bangs_blunt_straight",
+          "anime_hair_bangs_long_hime_sidelocks",
+          "anime_hair_symbol_smooth_hair_sheets",
+          "anime_hair_shape_noble_hime"
+        ]
+      },
+      {
+        "id": "anime_hair_complete_villainess_half_up_ringlets",
+        "ja": "悪役令嬢（ハーフアップ＋縦ロール風サイドカール）",
+        "en": "Villainess - half-up with side ringlets",
+        "val": "hairstyle focus, half-up anime hairstyle, elegant side ringlets, curled side locks, lifted crown volume, dramatic noble hair silhouette",
+        "linked_ids": [
+          "anime_hair_base_half_up_side_ringlets",
+          "anime_hair_symbol_polished_curls",
+          "anime_hair_symbol_crown_volume",
+          "anime_hair_bangs_tidy_straight",
+          "anime_hair_shape_dramatic_noble"
+        ]
+      },
+      {
+        "id": "anime_hair_complete_imouto_low_twintails",
+        "ja": "妹系キャラ（低めツインテール＋丸い毛先）",
+        "en": "Younger-sister type - low twin tails with round tips",
+        "val": "hairstyle focus, low twin tails anime hairstyle, round hair tips, soft parted bangs, compact cute twin-tail silhouette",
+        "linked_ids": [
+          "anime_hair_base_low_twin_tails",
+          "anime_hair_symbol_round_hair_tips",
+          "anime_hair_bangs_soft_parted",
+          "anime_hair_shape_compact_cute",
+          "anime_hair_symbol_soft_hair_mass"
+        ]
+      },
+      {
+        "id": "anime_hair_complete_natural_fluffy_ahoge",
+        "ja": "天然系ヒロイン（外ハネミディアム＋大きめアホ毛）",
+        "en": "Airheaded heroine - outward medium with large ahoge",
+        "val": "hairstyle focus, fluffy outward medium anime hairstyle, large ahoge, loose layered bangs, bouncy outward tips, carefree fluffy hair silhouette",
+        "linked_ids": [
+          "anime_hair_base_fluffy_outward_medium",
+          "anime_hair_symbol_large_ahoge",
+          "anime_hair_symbol_outward_tips",
+          "anime_hair_bangs_loose_layered",
+          "anime_hair_shape_carefree_fluffy"
+        ]
+      },
+      {
+        "id": "anime_hair_complete_class_rep_low_braid",
+        "ja": "委員長系（低め三つ編み＋整った前髪）",
+        "en": "Class representative - low braid with tidy bangs",
+        "val": "hairstyle focus, low single braid anime hairstyle, tidy straight bangs, neat side hair, braided texture, serious organized hair silhouette",
+        "linked_ids": [
+          "anime_hair_base_low_single_braid",
+          "anime_hair_bangs_tidy_straight",
+          "anime_hair_symbol_braid_texture",
+          "anime_hair_shape_neat_organized",
+          "anime_hair_symbol_clean_strands"
+        ]
+      },
+      {
+        "id": "anime_hair_complete_sports_short_pony",
+        "ja": "スポーツ系ヒロイン（短めポニーテール＋軽い後れ毛）",
+        "en": "Sports heroine - short ponytail with loose baby hairs",
+        "val": "hairstyle focus, short practical ponytail anime hairstyle, loose baby hairs around the face, light nape strands, active sporty hair silhouette",
+        "linked_ids": [
+          "anime_hair_base_short_sport_ponytail",
+          "anime_hair_bangs_loose_baby_hairs",
+          "anime_hair_symbol_light_nape_layers",
+          "anime_hair_shape_active_sporty",
+          "anime_hair_symbol_clean_strands"
+        ]
+      },
+      {
+        "id": "anime_hair_complete_boyish_rounded_short",
+        "ja": "ボーイッシュ系（丸みショート＋長め前髪）",
+        "en": "Boyish character - rounded short with longer bangs",
+        "val": "hairstyle focus, rounded short anime hairstyle, longer front bangs, soft nape layers, boyish casual hair silhouette",
+        "linked_ids": [
+          "anime_hair_base_rounded_short",
+          "anime_hair_bangs_long_soft",
+          "anime_hair_symbol_light_nape_layers",
+          "anime_hair_shape_boyish_casual",
+          "anime_hair_symbol_soft_hair_mass"
+        ]
+      },
+      {
+        "id": "anime_hair_complete_downer_wolf_layer",
+        "ja": "ダウナー系（重めウルフレイヤー＋目にかかる前髪）",
+        "en": "Downer character - heavy wolf layer with eye-grazing bangs",
+        "val": "hairstyle focus, heavy wolf layered anime hairstyle, eye-grazing bangs, shaggy side layers, low-energy messy hair silhouette",
+        "linked_ids": [
+          "anime_hair_base_heavy_wolf_layer",
+          "anime_hair_bangs_eye_grazing",
+          "anime_hair_symbol_shaggy_side_layers",
+          "anime_hair_shape_downer_messy",
+          "anime_hair_symbol_heavy_layers"
+        ]
+      },
+      {
+        "id": "anime_hair_complete_retro_blunt_bob",
+        "ja": "レトロ少女（ぱっつんボブ＋内巻きシルエット）",
+        "en": "Retro girl - blunt bob with inward silhouette",
+        "val": "hairstyle focus, blunt bob anime hairstyle, straight blunt bangs, inward curled bob ends, tidy retro round hair silhouette",
+        "linked_ids": [
+          "anime_hair_base_blunt_bob",
+          "anime_hair_bangs_blunt_straight",
+          "anime_hair_symbol_inward_ends",
+          "anime_hair_shape_retro_round",
+          "anime_hair_symbol_clean_strands"
+        ]
+      },
+      {
+        "id": "anime_hair_complete_xianxia_twin_buns",
+        "ja": "中華・仙女系（左右お団子＋垂れた長い毛束）",
+        "en": "Xianxia/fairy type - twin buns with long falling locks",
+        "val": "hairstyle focus, twin hair buns anime hairstyle, long falling side locks, smooth trailing hair strands, graceful fantasy hair silhouette",
+        "linked_ids": [
+          "anime_hair_base_twin_buns_long_trails",
+          "anime_hair_bangs_long_falling_locks",
+          "anime_hair_symbol_smooth_trailing_strands",
+          "anime_hair_shape_graceful_fantasy",
+          "anime_hair_symbol_round_side_volume"
+        ]
+      },
+      {
+        "id": "anime_hair_complete_japanese_swordsman_high_tie",
+        "ja": "和風剣士系（高め一つ結び＋鋭い流し前髪）",
+        "en": "Japanese swordsman type - high single tie with sharp swept bangs",
+        "val": "hairstyle focus, high single-tie anime hairstyle, sharp swept bangs, tied-back crown, long trailing pony section, disciplined swordsman hair silhouette",
+        "linked_ids": [
+          "anime_hair_base_high_single_tie",
+          "anime_hair_bangs_sharp_swept",
+          "anime_hair_symbol_tied_back_crown",
+          "anime_hair_shape_disciplined_sharp",
+          "anime_hair_symbol_smooth_trailing_strands"
+        ]
+      },
+      {
+        "id": "anime_hair_complete_cyber_step_cut",
+        "ja": "サイバー系（段差カット＋非対称サイドロック）",
+        "en": "Cyber character - step cut with asymmetrical sidelock",
+        "val": "hairstyle focus, step-cut asymmetrical anime hairstyle, angular front locks, uneven side length, clean geometric futuristic hair silhouette",
+        "linked_ids": [
+          "anime_hair_base_step_cut_asymmetrical",
+          "anime_hair_bangs_angular_front_locks",
+          "anime_hair_symbol_geometric_edges",
+          "anime_hair_shape_geometric_future",
+          "anime_hair_bangs_long_asymmetrical"
+        ]
+      },
+      {
+        "id": "anime_hair_complete_delinquent_pompadour_short",
+        "ja": "不良・ヤンキー系（前髪上げポンパドール風ショート）",
+        "en": "Delinquent type - raised pompadour short hair",
+        "val": "hairstyle focus, raised pompadour short anime hairstyle, swept-up front hair, exposed forehead, bold angular short hair silhouette",
+        "linked_ids": [
+          "anime_hair_base_pompadour_short",
+          "anime_hair_bangs_swept_up_front",
+          "anime_hair_symbol_geometric_edges",
+          "anime_hair_shape_bold_delinq",
+          "anime_hair_bangs_open_forehead"
+        ]
+      },
+      {
+        "id": "anime_hair_complete_gothic_low_twin_drill",
+        "ja": "ゴシック少女（低めツインドリル＋重めぱっつん前髪）",
+        "en": "Gothic girl - low twin drill curls with heavy blunt bangs",
+        "val": "hairstyle focus, low twin drill curls anime hairstyle, heavy blunt bangs, dense spiral side curls, doll-like gothic hair silhouette",
+        "linked_ids": [
+          "anime_hair_base_low_twin_drill_curls",
+          "anime_hair_bangs_heavy_blunt",
+          "anime_hair_symbol_dense_spiral_curls",
+          "anime_hair_shape_gothic_doll",
+          "anime_hair_symbol_polished_curls"
+        ]
+      },
+      {
+        "id": "anime_hair_complete_idol_side_tail_curl",
+        "ja": "アイドル系（サイドテール＋大きめ毛束カール）",
+        "en": "Idol type - side tail with large curled lock",
+        "val": "hairstyle focus, high side-tail anime hairstyle, large curled hair lock, lively layered bangs, sparkling idol hair silhouette",
+        "linked_ids": [
+          "anime_hair_base_high_side_tail",
+          "anime_hair_symbol_large_curled_lock",
+          "anime_hair_bangs_lively_layered",
+          "anime_hair_shape_sparkling_idol",
+          "anime_hair_symbol_outward_tips"
+        ]
+      },
+      {
+        "id": "anime_hair_complete_doll_blunt_long",
+        "ja": "人形系（ぱっつんロング＋均一な毛束）",
+        "en": "Doll-like character - blunt long hair with even strands",
+        "val": "hairstyle focus, blunt long anime hairstyle, straight blunt bangs, even hair panels, smooth symmetrical doll hair silhouette",
+        "linked_ids": [
+          "anime_hair_base_blunt_long_even",
+          "anime_hair_bangs_blunt_straight",
+          "anime_hair_symbol_even_hair_panels",
+          "anime_hair_shape_symmetrical_doll",
+          "anime_hair_symbol_smooth_hair_sheets"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "🧱 ベース髪型 (Base Hair Shapes)",
+    "role": "base",
+    "items": [
+      {
+        "id": "anime_hair_base_soft_medium_layered",
+        "ja": "ふんわりミディアムレイヤー",
+        "en": "Soft medium layered hair",
+        "val": "soft medium-length anime hairstyle, airy layered medium hair"
+      },
+      {
+        "id": "anime_hair_base_sleek_long_straight",
+        "ja": "シャープなストレートロング",
+        "en": "Sleek long straight hair",
+        "val": "sleek long straight anime hairstyle, smooth straight long hair"
+      },
+      {
+        "id": "anime_hair_base_high_ponytail",
+        "ja": "高めポニーテール",
+        "en": "High ponytail",
+        "val": "high ponytail anime hairstyle, hair tied high behind the head"
+      },
+      {
+        "id": "anime_hair_base_round_twin_tails",
+        "ja": "丸みツインテール",
+        "en": "Round twin tails",
+        "val": "twin tails anime hairstyle, rounded twin tail volume"
+      },
+      {
+        "id": "anime_hair_base_side_drill_curls",
+        "ja": "縦ロール風サイドカール",
+        "en": "Side drill curls",
+        "val": "elegant side drill curls, vertical curled side locks"
+      },
+      {
+        "id": "anime_hair_base_heavy_rounded_bob",
+        "ja": "重め丸ボブ",
+        "en": "Heavy rounded bob",
+        "val": "heavy rounded bob anime hairstyle, compact bob hair mass"
+      },
+      {
+        "id": "anime_hair_base_spiky_short",
+        "ja": "ツンツンショート",
+        "en": "Spiky short hair",
+        "val": "spiky short anime hairstyle, short pointed hair tufts"
+      },
+      {
+        "id": "anime_hair_base_asymmetrical_bob",
+        "ja": "非対称ボブ",
+        "en": "Asymmetrical bob",
+        "val": "asymmetrical bob anime hairstyle, uneven left-right bob length"
+      },
+      {
+        "id": "anime_hair_base_low_side_ponytail",
+        "ja": "低めサイドポニー",
+        "en": "Low side ponytail",
+        "val": "low side ponytail anime hairstyle, hair tied low to one side"
+      },
+      {
+        "id": "anime_hair_base_layered_short",
+        "ja": "レイヤーショート",
+        "en": "Layered short hair",
+        "val": "layered short anime hairstyle, light short layered hair"
+      },
+      {
+        "id": "anime_hair_base_high_two_side_up",
+        "ja": "高めツーサイドアップ",
+        "en": "High two-side-up",
+        "val": "high two-side-up anime hairstyle, two small high side pony sections"
+      },
+      {
+        "id": "anime_hair_base_very_long_straight",
+        "ja": "超ロングストレート",
+        "en": "Very long straight hair",
+        "val": "very long straight anime hairstyle, smooth extra-long straight hair"
+      },
+      {
+        "id": "anime_hair_base_hime_cut_long",
+        "ja": "姫カットロング",
+        "en": "Long hime cut",
+        "val": "hime cut anime hairstyle, straight long hair with blunt sidelocks"
+      },
+      {
+        "id": "anime_hair_base_half_up_side_ringlets",
+        "ja": "ハーフアップ＋サイド縦ロール",
+        "en": "Half-up with side ringlets",
+        "val": "half-up anime hairstyle, side ringlets and lifted crown volume"
+      },
+      {
+        "id": "anime_hair_base_low_twin_tails",
+        "ja": "低めツインテール",
+        "en": "Low twin tails",
+        "val": "low twin tails anime hairstyle, hair tied low on both sides"
+      },
+      {
+        "id": "anime_hair_base_fluffy_outward_medium",
+        "ja": "外ハネふんわりミディアム",
+        "en": "Fluffy outward medium",
+        "val": "fluffy outward medium anime hairstyle, medium hair with outward flipped tips"
+      },
+      {
+        "id": "anime_hair_base_low_single_braid",
+        "ja": "低め一本三つ編み",
+        "en": "Low single braid",
+        "val": "low single braid anime hairstyle, hair braided low behind the shoulder"
+      },
+      {
+        "id": "anime_hair_base_short_sport_ponytail",
+        "ja": "短めスポーツポニーテール",
+        "en": "Short sports ponytail",
+        "val": "short practical ponytail anime hairstyle, compact tied-back hair for active motion"
+      },
+      {
+        "id": "anime_hair_base_rounded_short",
+        "ja": "丸みショート",
+        "en": "Rounded short hair",
+        "val": "rounded short anime hairstyle, soft compact short hair shape"
+      },
+      {
+        "id": "anime_hair_base_heavy_wolf_layer",
+        "ja": "重めウルフレイヤー",
+        "en": "Heavy wolf layer",
+        "val": "heavy wolf layered anime hairstyle, shaggy layered hair around the neck"
+      },
+      {
+        "id": "anime_hair_base_blunt_bob",
+        "ja": "ぱっつんボブ",
+        "en": "Blunt bob",
+        "val": "blunt bob anime hairstyle, straight bob cut with clean lower edge"
+      },
+      {
+        "id": "anime_hair_base_twin_buns_long_trails",
+        "ja": "左右お団子＋長い垂れ毛束",
+        "en": "Twin buns with long trails",
+        "val": "twin hair buns anime hairstyle, long falling side locks trailing downward"
+      },
+      {
+        "id": "anime_hair_base_high_single_tie",
+        "ja": "高め一つ結び",
+        "en": "High single tie",
+        "val": "high single-tie anime hairstyle, hair tied high into one trailing section"
+      },
+      {
+        "id": "anime_hair_base_step_cut_asymmetrical",
+        "ja": "段差カット非対称ヘア",
+        "en": "Step-cut asymmetrical hair",
+        "val": "step-cut asymmetrical anime hairstyle, visible layered length steps"
+      },
+      {
+        "id": "anime_hair_base_pompadour_short",
+        "ja": "ポンパドール風ショート",
+        "en": "Pompadour short hair",
+        "val": "raised pompadour short anime hairstyle, swept-up short front hair"
+      },
+      {
+        "id": "anime_hair_base_low_twin_drill_curls",
+        "ja": "低めツインドリルカール",
+        "en": "Low twin drill curls",
+        "val": "low twin drill curls anime hairstyle, two low spiral curled side sections"
+      },
+      {
+        "id": "anime_hair_base_high_side_tail",
+        "ja": "高めサイドテール",
+        "en": "High side tail",
+        "val": "high side-tail anime hairstyle, hair tied high to one side"
+      },
+      {
+        "id": "anime_hair_base_blunt_long_even",
+        "ja": "ぱっつんロング均一毛束",
+        "en": "Blunt long even hair",
+        "val": "blunt long anime hairstyle, straight long hair with even hair panels"
+      }
+    ]
+  },
+  {
+    "title": "✂️ 前髪・顔まわり (Bangs / Face Frame)",
+    "role": "customize",
+    "items": [
+      {
+        "id": "anime_hair_bangs_side_swept",
+        "ja": "流し前髪",
+        "en": "Side-swept bangs",
+        "val": "side-swept bangs, soft diagonal fringe"
+      },
+      {
+        "id": "anime_hair_bangs_face_framing_locks",
+        "ja": "顔まわり毛束",
+        "en": "Face-framing side locks",
+        "val": "face-framing side locks, visible hair strands along the cheeks"
+      },
+      {
+        "id": "anime_hair_bangs_one_eye_fringe",
+        "ja": "片目隠れ前髪",
+        "en": "One-eye-covering fringe",
+        "val": "one-eye-covering fringe, long fringe covering one eye area"
+      },
+      {
+        "id": "anime_hair_bangs_sharp_side_bangs",
+        "ja": "鋭い斜め前髪",
+        "en": "Sharp side bangs",
+        "val": "sharp side bangs, angular diagonal fringe"
+      },
+      {
+        "id": "anime_hair_bangs_dynamic_layered",
+        "ja": "動きのあるレイヤー前髪",
+        "en": "Dynamic layered bangs",
+        "val": "dynamic layered bangs, separated anime fringe locks"
+      },
+      {
+        "id": "anime_hair_bangs_soft_parted",
+        "ja": "柔らかい分け前髪",
+        "en": "Soft parted bangs",
+        "val": "soft parted bangs, gentle separated fringe"
+      },
+      {
+        "id": "anime_hair_bangs_tidy_straight",
+        "ja": "整ったまっすぐ前髪",
+        "en": "Tidy straight bangs",
+        "val": "tidy straight bangs, clean straight fringe line"
+      },
+      {
+        "id": "anime_hair_bangs_eye_grazing",
+        "ja": "目にかかる重め前髪",
+        "en": "Eye-grazing heavy bangs",
+        "val": "long heavy bangs grazing the eyes, soft shadowing fringe"
+      },
+      {
+        "id": "anime_hair_bangs_long_asymmetrical",
+        "ja": "長め非対称前髪",
+        "en": "Long asymmetrical bangs",
+        "val": "long asymmetrical bangs, one side longer front hair lock"
+      },
+      {
+        "id": "anime_hair_bangs_long_soft",
+        "ja": "長め柔らか前髪",
+        "en": "Long soft bangs",
+        "val": "long soft bangs, gentle longer front hair strands"
+      },
+      {
+        "id": "anime_hair_bangs_open_forehead",
+        "ja": "額見せ前髪",
+        "en": "Open forehead part",
+        "val": "open forehead part, parted front hair revealing the forehead"
+      },
+      {
+        "id": "anime_hair_bangs_blunt_straight",
+        "ja": "ぱっつん前髪",
+        "en": "Blunt straight bangs",
+        "val": "blunt straight bangs, straight horizontal fringe line"
+      },
+      {
+        "id": "anime_hair_bangs_long_hime_sidelocks",
+        "ja": "長い姫もみあげ",
+        "en": "Long hime sidelocks",
+        "val": "long hime sidelocks, straight cheek-length to chest-length side locks"
+      },
+      {
+        "id": "anime_hair_bangs_loose_layered",
+        "ja": "ゆるいレイヤー前髪",
+        "en": "Loose layered bangs",
+        "val": "loose layered bangs, soft uneven front hair locks"
+      },
+      {
+        "id": "anime_hair_bangs_loose_baby_hairs",
+        "ja": "軽い後れ毛",
+        "en": "Loose baby hairs",
+        "val": "loose baby hairs around the face, small stray hair strands"
+      },
+      {
+        "id": "anime_hair_bangs_long_falling_locks",
+        "ja": "垂れた長い顔横毛束",
+        "en": "Long falling side locks",
+        "val": "long falling side locks, smooth front-side hair strands hanging downward"
+      },
+      {
+        "id": "anime_hair_bangs_sharp_swept",
+        "ja": "鋭い流し前髪",
+        "en": "Sharp swept bangs",
+        "val": "sharp swept bangs, front hair swept diagonally with pointed tips"
+      },
+      {
+        "id": "anime_hair_bangs_angular_front_locks",
+        "ja": "角ばった前髪毛束",
+        "en": "Angular front locks",
+        "val": "angular front locks, geometric separated front hair strands"
+      },
+      {
+        "id": "anime_hair_bangs_swept_up_front",
+        "ja": "前髪上げ",
+        "en": "Swept-up front hair",
+        "val": "swept-up front hair, raised front hair exposing the forehead"
+      },
+      {
+        "id": "anime_hair_bangs_heavy_blunt",
+        "ja": "重めぱっつん前髪",
+        "en": "Heavy blunt bangs",
+        "val": "heavy blunt bangs, dense straight fringe across the forehead"
+      },
+      {
+        "id": "anime_hair_bangs_lively_layered",
+        "ja": "明るいレイヤー前髪",
+        "en": "Lively layered bangs",
+        "val": "lively layered bangs, separated front hair with upbeat motion"
+      }
+    ]
+  },
+  {
+    "title": "🌀 アニメ記号カスタム (Anime Hair Symbols)",
+    "role": "customize",
+    "items": [
+      {
+        "id": "anime_hair_symbol_large_ahoge",
+        "ja": "大きめアホ毛",
+        "en": "Large ahoge",
+        "val": "large ahoge, expressive single hair antenna"
+      },
+      {
+        "id": "anime_hair_symbol_small_ahoge",
+        "ja": "小さなアホ毛",
+        "en": "Small ahoge",
+        "val": "small ahoge, subtle hair antenna"
+      },
+      {
+        "id": "anime_hair_symbol_hair_intakes",
+        "ja": "インテーク風前髪",
+        "en": "Hair intakes",
+        "val": "hair intakes, stylized curved front hair shapes"
+      },
+      {
+        "id": "anime_hair_symbol_outward_tips",
+        "ja": "外ハネ毛先",
+        "en": "Outward hair tips",
+        "val": "outward flipped hair tips, bouncy hair ends"
+      },
+      {
+        "id": "anime_hair_symbol_inward_ends",
+        "ja": "内巻き毛先",
+        "en": "Inward curled ends",
+        "val": "inward curled hair ends, rounded bob tips"
+      },
+      {
+        "id": "anime_hair_symbol_round_side_volume",
+        "ja": "丸いサイドボリューム",
+        "en": "Round side volume",
+        "val": "round side hair volume, soft rounded side hair mass"
+      },
+      {
+        "id": "anime_hair_symbol_soft_curled_tips",
+        "ja": "柔らかい毛先カール",
+        "en": "Soft curled tips",
+        "val": "soft curled hair tips, gentle curled hair ends"
+      },
+      {
+        "id": "anime_hair_symbol_sharp_spikes",
+        "ja": "鋭い毛束スパイク",
+        "en": "Sharp hair spikes",
+        "val": "sharp hair spikes, pointed anime hair tufts"
+      },
+      {
+        "id": "anime_hair_symbol_clean_strands",
+        "ja": "清潔な細い毛束",
+        "en": "Clean hair strands",
+        "val": "clean separated hair strands, tidy anime hair locks"
+      },
+      {
+        "id": "anime_hair_symbol_polished_curls",
+        "ja": "整った巻き髪束",
+        "en": "Polished curls",
+        "val": "polished curled hair locks, clean spiral curl definition"
+      },
+      {
+        "id": "anime_hair_symbol_soft_hair_mass",
+        "ja": "柔らかい髪の塊感",
+        "en": "Soft hair mass",
+        "val": "soft rounded hair mass, gentle anime hair volume"
+      },
+      {
+        "id": "anime_hair_symbol_light_nape_layers",
+        "ja": "軽い襟足レイヤー",
+        "en": "Light nape layers",
+        "val": "light nape layers, soft short hair at the nape"
+      },
+      {
+        "id": "anime_hair_symbol_airy_layers",
+        "ja": "空気感レイヤー",
+        "en": "Airy layers",
+        "val": "airy layered hair, light floating anime hair layers"
+      },
+      {
+        "id": "anime_hair_symbol_smooth_hair_sheets",
+        "ja": "なめらかな面の長髪",
+        "en": "Smooth hair sheets",
+        "val": "smooth falling hair sheets, clean long hair panels"
+      },
+      {
+        "id": "anime_hair_symbol_crown_volume",
+        "ja": "頭頂部の上品ボリューム",
+        "en": "Crown volume",
+        "val": "lifted crown volume, smooth volume at the top of the hairstyle"
+      },
+      {
+        "id": "anime_hair_symbol_round_hair_tips",
+        "ja": "丸い毛先",
+        "en": "Round hair tips",
+        "val": "round hair tips, softly rounded hair ends"
+      },
+      {
+        "id": "anime_hair_symbol_braid_texture",
+        "ja": "三つ編みの編み目",
+        "en": "Braid texture",
+        "val": "visible braid texture, clear woven hair pattern"
+      },
+      {
+        "id": "anime_hair_symbol_shaggy_side_layers",
+        "ja": "ざっくりサイドレイヤー",
+        "en": "Shaggy side layers",
+        "val": "shaggy side layers, uneven side hair tufts"
+      },
+      {
+        "id": "anime_hair_symbol_heavy_layers",
+        "ja": "重めレイヤー",
+        "en": "Heavy layers",
+        "val": "heavy layered hair, dense layered hair mass"
+      },
+      {
+        "id": "anime_hair_symbol_smooth_trailing_strands",
+        "ja": "なめらかな垂れ毛束",
+        "en": "Smooth trailing strands",
+        "val": "smooth trailing hair strands, long clean falling locks"
+      },
+      {
+        "id": "anime_hair_symbol_tied_back_crown",
+        "ja": "結い上げた頭頂部",
+        "en": "Tied-back crown",
+        "val": "tied-back crown, front hair pulled back into a clean tie"
+      },
+      {
+        "id": "anime_hair_symbol_geometric_edges",
+        "ja": "幾何学的な毛先ライン",
+        "en": "Geometric hair edges",
+        "val": "geometric hair edges, crisp angular hair tips"
+      },
+      {
+        "id": "anime_hair_symbol_dense_spiral_curls",
+        "ja": "密なスパイラルカール",
+        "en": "Dense spiral curls",
+        "val": "dense spiral curls, thick drill-like curled hair locks"
+      },
+      {
+        "id": "anime_hair_symbol_large_curled_lock",
+        "ja": "大きめ毛束カール",
+        "en": "Large curled lock",
+        "val": "large curled hair lock, visible single curled hair section"
+      },
+      {
+        "id": "anime_hair_symbol_even_hair_panels",
+        "ja": "均一な長い毛束面",
+        "en": "Even hair panels",
+        "val": "even hair panels, straight symmetrical long hair sections"
+      }
+    ]
+  },
+  {
+    "title": "🎬 動き・シルエット補助 (Motion / Silhouette)",
+    "role": "setting",
+    "items": [
+      {
+        "id": "anime_hair_shape_clear_heroine",
+        "ja": "王道ヒロイン髪型シルエット",
+        "en": "Clear heroine hair silhouette",
+        "val": "clear heroine hair silhouette, readable soft anime hair shape"
+      },
+      {
+        "id": "anime_hair_shape_sharp_rival",
+        "ja": "シャープなライバル髪型シルエット",
+        "en": "Sharp rival hair silhouette",
+        "val": "sharp rival hair silhouette, sleek angular anime hair shape"
+      },
+      {
+        "id": "anime_hair_shape_dynamic_motion",
+        "ja": "動きのある主人公髪型",
+        "en": "Dynamic protagonist hair motion",
+        "val": "dynamic protagonist hair motion, lively bouncy anime hair silhouette"
+      },
+      {
+        "id": "anime_hair_shape_symmetrical_cute",
+        "ja": "左右対称かわいい髪型",
+        "en": "Symmetrical cute hair silhouette",
+        "val": "symmetrical cute hair silhouette, balanced twin-tail anime hair shape"
+      },
+      {
+        "id": "anime_hair_shape_refined_elegant",
+        "ja": "上品で整った髪型",
+        "en": "Refined elegant hair silhouette",
+        "val": "refined elegant hair silhouette, polished formal anime hair shape"
+      },
+      {
+        "id": "anime_hair_shape_quiet_compact",
+        "ja": "静かなコンパクト髪型",
+        "en": "Quiet compact hair silhouette",
+        "val": "quiet compact hair silhouette, soft closed anime bob shape"
+      },
+      {
+        "id": "anime_hair_shape_heroic_spiky",
+        "ja": "主人公らしいツンツン髪型",
+        "en": "Heroic spiky hair silhouette",
+        "val": "heroic spiky hair silhouette, readable pointed anime short hair"
+      },
+      {
+        "id": "anime_hair_shape_sleek_future",
+        "ja": "近未来的なすっきり髪型",
+        "en": "Sleek future hair silhouette",
+        "val": "sleek futuristic hair silhouette, clean asymmetrical anime hair shape"
+      },
+      {
+        "id": "anime_hair_shape_friendly_everyday",
+        "ja": "親しみやすい日常髪型",
+        "en": "Friendly everyday hair silhouette",
+        "val": "friendly everyday hair silhouette, soft natural anime ponytail shape"
+      },
+      {
+        "id": "anime_hair_shape_androgynous_clean",
+        "ja": "中性的で清潔な髪型",
+        "en": "Androgynous clean hair silhouette",
+        "val": "androgynous clean hair silhouette, light neat anime short hair"
+      },
+      {
+        "id": "anime_hair_shape_expressive_perky",
+        "ja": "表情豊かな跳ね髪シルエット",
+        "en": "Expressive perky hair silhouette",
+        "val": "expressive perky hair silhouette, lively two-side-up anime hair shape"
+      },
+      {
+        "id": "anime_hair_shape_mysterious_elegant",
+        "ja": "神秘的で長い髪型",
+        "en": "Mysterious elegant hair silhouette",
+        "val": "mysterious elegant hair silhouette, smooth very long anime hair shape"
+      },
+      {
+        "id": "anime_hair_shape_noble_hime",
+        "ja": "姫系の直線的な高貴シルエット",
+        "en": "Noble hime silhouette",
+        "val": "noble hime hair silhouette, straight refined princess-like anime hair shape"
+      },
+      {
+        "id": "anime_hair_shape_dramatic_noble",
+        "ja": "悪役令嬢風の大きめシルエット",
+        "en": "Dramatic noble silhouette",
+        "val": "dramatic noble hair silhouette, large elegant curled anime hair shape"
+      },
+      {
+        "id": "anime_hair_shape_compact_cute",
+        "ja": "小さく可愛いツイン髪型",
+        "en": "Compact cute silhouette",
+        "val": "compact cute hair silhouette, low twin-tail anime hair shape"
+      },
+      {
+        "id": "anime_hair_shape_carefree_fluffy",
+        "ja": "天然系のふわ跳ねシルエット",
+        "en": "Carefree fluffy silhouette",
+        "val": "carefree fluffy hair silhouette, loose bouncy anime hair shape"
+      },
+      {
+        "id": "anime_hair_shape_neat_organized",
+        "ja": "きちんと整った優等生髪型",
+        "en": "Neat organized silhouette",
+        "val": "neat organized hair silhouette, serious tidy anime hair shape"
+      },
+      {
+        "id": "anime_hair_shape_active_sporty",
+        "ja": "動きやすいスポーツ髪型",
+        "en": "Active sporty silhouette",
+        "val": "active sporty hair silhouette, practical tied-back anime hair shape"
+      },
+      {
+        "id": "anime_hair_shape_boyish_casual",
+        "ja": "ボーイッシュで軽い髪型",
+        "en": "Boyish casual silhouette",
+        "val": "boyish casual hair silhouette, rounded light anime short hair shape"
+      },
+      {
+        "id": "anime_hair_shape_downer_messy",
+        "ja": "ダウナー系の重だるい髪型",
+        "en": "Downer messy silhouette",
+        "val": "downer messy hair silhouette, heavy shaggy anime hair shape"
+      },
+      {
+        "id": "anime_hair_shape_retro_round",
+        "ja": "レトロな丸ボブ髪型",
+        "en": "Retro round silhouette",
+        "val": "retro round hair silhouette, clean inward bob anime hair shape"
+      },
+      {
+        "id": "anime_hair_shape_graceful_fantasy",
+        "ja": "仙女風の優雅な垂れ髪",
+        "en": "Graceful fantasy silhouette",
+        "val": "graceful fantasy hair silhouette, twin buns with long flowing locks"
+      },
+      {
+        "id": "anime_hair_shape_disciplined_sharp",
+        "ja": "和風剣士の引き締まった髪型",
+        "en": "Disciplined sharp silhouette",
+        "val": "disciplined sharp hair silhouette, tied high anime hair with pointed front locks"
+      },
+      {
+        "id": "anime_hair_shape_geometric_future",
+        "ja": "幾何学的なサイバー髪型",
+        "en": "Geometric future silhouette",
+        "val": "geometric futuristic hair silhouette, angular step-cut anime hair shape"
+      },
+      {
+        "id": "anime_hair_shape_bold_delinq",
+        "ja": "前髪上げの強いショート髪型",
+        "en": "Bold delinquent silhouette",
+        "val": "bold angular short hair silhouette, raised front anime hair shape"
+      },
+      {
+        "id": "anime_hair_shape_gothic_doll",
+        "ja": "ゴシック人形風の重い巻き髪",
+        "en": "Gothic doll silhouette",
+        "val": "gothic doll hair silhouette, low twin drill curls with dense bangs"
+      },
+      {
+        "id": "anime_hair_shape_sparkling_idol",
+        "ja": "アイドル風の華やかサイド髪型",
+        "en": "Sparkling idol silhouette",
+        "val": "sparkling idol hair silhouette, lively side-tail anime hair shape"
+      },
+      {
+        "id": "anime_hair_shape_symmetrical_doll",
+        "ja": "人形風の左右対称ロング",
+        "en": "Symmetrical doll silhouette",
+        "val": "symmetrical doll hair silhouette, even blunt long anime hair shape"
+      },
+      {
+        "id": "anime_hair_shape_wind_swept",
+        "ja": "風で流れる髪型補助",
+        "en": "Wind-swept hair helper",
+        "val": "wind-swept hair motion, hair strands flowing in one direction"
+      },
+      {
+        "id": "anime_hair_shape_hairstyle_priority",
+        "ja": "髪型優先補助",
+        "en": "Hairstyle priority helper",
+        "val": "hairstyle focus, hair shape priority, clear anime hair silhouette"
+      }
+    ]
+  }
+];
+
+  const DICT = {};
+  ANIME_HAIR.forEach(group => {
+    group.items.forEach(item => {
+      if (item.val && item.ja) DICT[item.val] = item.ja;
+    });
+  });
+
+  function ensureArray(v) {
+    if (!v) return [];
+    if (Array.isArray(v)) return v;
+    return [String(v)];
+  }
+
+  function parseJsonArrayAttr(raw) {
+    if (!raw) return [];
+    try {
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function openAncestorDetails(node) {
+    let cur = node;
+    while (cur) {
+      if (cur.tagName && String(cur.tagName).toLowerCase() === "details") cur.open = true;
+      cur = cur.parentElement;
+    }
+  }
+
+  function applyCheckboxVisual(cb) {
+    const label = cb && cb.parentElement && cb.parentElement.tagName && cb.parentElement.tagName.toLowerCase() === "label" ? cb.parentElement : null;
+    if (!label) return;
+    if (cb.checked) {
+      label.style.background = "rgba(255, 126, 66, 0.10)";
+      label.style.borderColor = "rgba(255, 126, 66, 0.40)";
+    } else {
+      label.style.background = "#fff";
+      label.style.borderColor = "rgba(0,0,0,0.10)";
+    }
+  }
+
+  function setCheckboxState(cb, checked) {
+    if (!cb) return;
+    cb.checked = !!checked;
+    applyCheckboxVisual(cb);
+  }
+
+  function selectorSafeId(id) {
+    return String(id || "").replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+  }
+
+  function findCheckboxById(root, id) {
+    if (!root || !id) return null;
+    return root.querySelector('input.hair-v8-cb[data-pack-id="' + selectorSafeId(id) + '"]');
+  }
+
+  function clearCollectionRoles(root, roles, exceptId) {
+    const boxes = root.querySelectorAll('input.hair-v8-cb[data-collection-id="' + COLLECTION_ID + '"]');
+    boxes.forEach(cb => {
+      const role = cb.getAttribute("data-collection-role") || "";
+      const packId = cb.getAttribute("data-pack-id") || "";
+      if (exceptId && packId === exceptId) return;
+      if (roles.indexOf(role) !== -1) setCheckboxState(cb, false);
+    });
+  }
+
+  function applyCompleteSetSelection(root, cb) {
+    const packId = cb.getAttribute("data-pack-id") || "";
+    const linked = parseJsonArrayAttr(cb.getAttribute("data-linked-ids"));
+
+    if (cb.checked) {
+      clearCollectionRoles(root, ["complete_set"], packId);
+      clearCollectionRoles(root, ["base", "customize", "setting"]);
+      setCheckboxState(cb, true);
+      openAncestorDetails(cb);
+      linked.forEach(id => {
+        const target = findCheckboxById(root, id);
+        if (!target) return;
+        setCheckboxState(target, true);
+        openAncestorDetails(target);
+      });
+    } else {
+      setCheckboxState(cb, false);
+      linked.forEach(id => {
+        const target = findCheckboxById(root, id);
+        if (target) setCheckboxState(target, false);
+      });
+    }
+
+    if (typeof window.generateOutput === "function") window.generateOutput();
+  }
+
+  function createItem(item, role) {
+    const label = document.createElement("label");
+    label.style.cssText =
+      "display:flex; gap:8px; align-items:flex-start; padding:8px 9px; border:1px solid rgba(0,0,0,0.10);" +
+      "border-radius:10px; background:#fff; cursor:pointer; font-size:0.92em; line-height:1.3; min-width:0;";
+
+    const cb = document.createElement("input");
+    cb.type = "checkbox";
+    cb.className = "hair-v8-cb";
+    cb.style.cssText = "margin-top:2px; width:18px; height:18px; flex:0 0 auto;";
+    cb.setAttribute("data-pack-id", item.id);
+    cb.setAttribute("data-collection-id", COLLECTION_ID);
+    cb.setAttribute("data-collection-role", role || "");
+    cb.setAttribute("data-en", item.val || "");
+    cb.setAttribute("data-val", item.val || "");
+    try { cb.setAttribute("data-tags", JSON.stringify(ensureArray(item.val))); } catch (e) { cb.setAttribute("data-tags", "[]"); }
+    try { cb.setAttribute("data-linked-ids", JSON.stringify(ensureArray(item.linked_ids))); } catch (e2) { cb.setAttribute("data-linked-ids", "[]"); }
+
+    const text = document.createElement("span");
+    text.style.cssText = "display:flex; flex-direction:column; gap:2px; min-width:0;";
+    const title = document.createElement("span");
+    title.style.cssText = "font-weight:700; color:#3a2318; word-break:keep-all; overflow-wrap:anywhere;";
+    title.textContent = item.en ? item.ja + " / " + item.en : item.ja;
+    const sub = document.createElement("span");
+    sub.style.cssText = "font-size:0.84em; color:rgba(0,0,0,0.56); overflow-wrap:anywhere;";
+    sub.textContent = item.val;
+
+    text.appendChild(title);
+    text.appendChild(sub);
+    label.appendChild(cb);
+    label.appendChild(text);
+    applyCheckboxVisual(cb);
+    return label;
+  }
+
+  function createGroup(group) {
+    const details = document.createElement("details");
+    details.className = "hair-cat hair-v8-group";
+    details.style.cssText = "margin:8px 0; border:1px solid #ffd7bd; border-radius:12px; background:#fff;";
+    details.open = false;
+
+    const summary = document.createElement("summary");
+    summary.textContent = group.title;
+    summary.style.cssText = "font-weight:800; padding:8px 10px; cursor:pointer; background:#fff3eb; color:#7a3418; border-radius:12px;";
+    details.appendChild(summary);
+
+    const content = document.createElement("div");
+    content.style.cssText = "padding:8px; display:flex; flex-direction:column; gap:6px;";
+    group.items.forEach(item => content.appendChild(createItem(item, group.role)));
+    details.appendChild(content);
+    return details;
+  }
+
+  const API = {
+    initUI(container) {
+      if (window.__outputTranslation) window.__outputTranslation.register(DICT);
+
+      const parent = document.querySelector("#list-hair") || container;
+      if (!parent) return;
+      const contentArea = parent.querySelector(".section-content") || parent;
+
+      if (contentArea.querySelector(".hair-v8-anime-collection")) return;
+
+      const root = document.createElement("div");
+      root.className = "hair-v8-anime-collection";
+      root.style.cssText = "margin-top:14px;";
+
+      const wrap = document.createElement("details");
+      wrap.className = "hair-v8-collection-wrap";
+      wrap.open = false;
+      wrap.style.cssText = "border:1px solid #ffc8a8; border-radius:14px; background:#fff9f5; padding:0; margin:12px 0;";
+
+      const summary = document.createElement("summary");
+      summary.textContent = "🎬 アニメキャラ髪型特化コレクション v8.1";
+      summary.style.cssText = "font-weight:900; padding:10px 12px; cursor:pointer; color:#6b2d12; background:#ffe6d6; border-radius:14px;";
+      wrap.appendChild(summary);
+
+      const note = document.createElement("div");
+      note.style.cssText = "margin:8px 10px; padding:8px 10px; border-radius:10px; background:#fff; color:#5c5048; font-size:0.88em; line-height:1.45;";
+      note.textContent = "役割名だけだと誤認しやすいため、完成セット名は「キャラ記号＋髪型ベース」を併記します。v8.1では姫カット、悪役令嬢、妹系、委員長、スポーツ、サイバー、和風剣士などを増築。髪色と固有キャラ名は入れず、髪型・前髪・輪郭シルエットだけを出力します。";
+      wrap.appendChild(note);
+
+      ANIME_HAIR.forEach(group => wrap.appendChild(createGroup(group)));
+
+      root.addEventListener("change", ev => {
+        const target = ev && ev.target;
+        if (!target || !target.classList || !target.classList.contains("hair-v8-cb")) return;
+        applyCheckboxVisual(target);
+
+        const role = target.getAttribute("data-collection-role") || "";
+        if (role === "complete_set") {
+          applyCompleteSetSelection(root, target);
+          return;
+        }
+
+        if (typeof window.generateOutput === "function") window.generateOutput();
+      });
+
+      root.appendChild(wrap);
+      contentArea.appendChild(root);
+    },
+
+    getTags() {
+      const tags = [];
+      const seen = new Set();
+      document.querySelectorAll(".hair-v8-anime-collection input.hair-v8-cb:checked").forEach(cb => {
         const values = parseJsonArrayAttr(cb.getAttribute("data-tags"));
         values.forEach(v => {
           const tag = String(v || "").trim();

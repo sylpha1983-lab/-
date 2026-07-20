@@ -164,15 +164,17 @@
         return;
     }
 
-    // 2. 翻訳辞書ロード (必須)
-    await safeLoad(`${basePath}builder_data.translation.v1.js`, true);
-
-    // 3. Static Manifest内のファイルをロード
+    // 2. Static Manifest内のファイルをロード
+    // i18n は ext_manifest.v2.js 側で管理する。存在しない旧翻訳辞書は読みに行かない。
     const staticFilesList = await loadStaticManifest();
-    const totalStatic = (staticFilesList && staticFilesList.length) ? staticFilesList.length : 1;
+    // Coreは上で必須先読み済み。manifest内の同一Coreをもう一度処理しない。
+    const staticFilesToLoad = staticFilesList.filter(function(file) {
+      return String(file || "").replace(/^\.\//, "") !== "builder_core.v1.js";
+    });
+    const totalStatic = staticFilesToLoad.length || 1;
     let doneStatic = 0;
     setProgress(1, "Manifest loaded…");
-    for (const file of staticFilesList) {
+    for (const file of staticFilesToLoad) {
       const fullPath = `./${file}`;
       await safeLoad(fullPath, true);
       doneStatic++;
@@ -180,7 +182,7 @@
       setProgress(pct, `Loading… ${doneStatic}/${totalStatic}`);
     }
     setProgress(100, "Finalizing…");
-// 4. 自動探索対象カテゴリ 
+// 3. 自動探索対象カテゴリ 
     // ★修正: quality_preset を追加しました
     const categories = [
       "quality_preset", // ← これが重要！(v1, v6, v8, v9, v10を読み込むため)

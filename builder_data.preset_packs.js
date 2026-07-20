@@ -2528,7 +2528,7 @@
     {
       "label": "ホログラフィックオペレーター（存在定義）",
       "desc": "投影人格/光の身体",
-      "val": "(holographic operator:1.5), (clearly female:1.4), (semi-transparent figure:1.3), (ethereal body made of light:1.3), (glowing edges:1.3), (digital circuits faintly visible:1.2), (long translucent blue hair:1.4), (warm gentle smile:1.4), (soft facial features:1.3)"
+      "val": "(holographic operator:1.3), (semi-transparent figure:1.2), ethereal body made of light, glowing edges, faint digital circuits, long translucent blue hair, clearly female, warm gentle smile, soft facial features"
     },
     {
       "label": "リアル×ホロ接続（関係演出）",
@@ -22577,11 +22577,11 @@
             {
               "label": "ホログラフィックオペレーター（存在定義）",
               "desc": "投影人格/光の身体",
-              "val": "(holographic operator:1.5), (clearly female:1.4), (semi-transparent figure:1.3), (ethereal body made of light:1.3), (glowing edges:1.3), (digital circuits faintly visible:1.2), (long translucent blue hair:1.4), (warm gentle smile:1.4), (soft facial features:1.3)"
+              "val": "(holographic operator:1.3), (semi-transparent figure:1.2), ethereal body made of light, glowing edges, faint digital circuits, long translucent blue hair, clearly female, warm gentle smile, soft facial features"
             },
             {
               "label": "ホログラフィックオペレーター（存在定義）（ペア補助） / ホログラフィックオペレーター（存在定義） (Pair Helper)",
-              "val": "(1girl:1.2), (1boy:1.2), (paired duo), (male counterpart), (female counterpart), (two-person interaction), (mutual gaze), (duo composition), (themed pair staging), (holographic operator:1.5), (clearly female:1.4), (semi-transparent figure:1.3), (ethereal body made of light:1.3), (glowing edges:1.3), (digital circuits faintly visible:1.2), (long translucent blue hair:1.4), (warm gentle smile:1.4), (soft facial features:1.3)",
+              "val": "(1girl:1.2), (1boy:1.2), paired duo, mutual gaze, two-person interaction, (female holographic operator:1.3), male counterpart, semi-transparent light body, glowing edges, faint digital circuits, long translucent blue hair, warm gentle smile",
               "desc": "男女ペア向け補助語つきなりきり演出 / ホログラフィックオペレーター（存在定義）"
             },
             {
@@ -22591,7 +22591,7 @@
             },
             {
               "label": "リアル×ホロ接続（関係演出）（ペア補助） / リアル×ホロ接続（関係演出） (Pair Helper)",
-              "val": "(1girl:1.2), (1boy:1.2), (paired duo), (male counterpart), (female counterpart), (two-person interaction), (mutual gaze), (duo composition), (themed pair staging), standing close, slightly floating, (hands almost touching but not overlapping:1.4), glowing data strands connecting their hands, reflected light paints their faces, bittersweet connection, (emotional realism:1.3)",
+              "val": "(1girl:1.2), (1boy:1.2), distinct male and female duo, two-person interaction, duo composition, standing close, slightly floating, (hands almost touching but not overlapping:1.4), glowing data strands connecting their hands, reflected light paints their faces, bittersweet connection, emotional realism",
               "desc": "男女ペア向け補助語つきなりきり演出 / リアル×ホロ接続（関係演出）"
             },
             {
@@ -34658,7 +34658,7 @@
                             "mythic_sky_role_mutation_phoenix",
                             "mythic_sky_preserve_phoenix",
                             "mythic_sky_suppress_phoenix",
-                            "mythic_sky_safe_quality_set_phoenix"
+                            "mythic_sky_quality_set_phoenix"
                           ]
                         },
                         {
@@ -34674,7 +34674,7 @@
                             "mythic_sky_role_mutation_phoenix",
                             "mythic_sky_preserve_phoenix",
                             "mythic_sky_suppress_phoenix",
-                            "mythic_sky_safe_quality_set_phoenix"
+                            "mythic_sky_quality_set_phoenix"
                           ]
                         },
                         {
@@ -34690,8 +34690,7 @@
                             "mythic_sky_role_mutation_phoenix",
                             "mythic_sky_preserve_phoenix",
                             "mythic_sky_suppress_phoenix",
-                            "mythic_sky_safe_quality_set_phoenix",
-                            "mythic_sky_myth_quality_set_phoenix",
+                            "mythic_sky_quality_set_phoenix",
                             "mythic_sky_divine_phoenix",
                             "mythic_sky_weather_phoenix"
                           ]
@@ -35020,7 +35019,7 @@
                             "mythic_sky_role_mutation_griffin",
                             "mythic_sky_preserve_griffin",
                             "mythic_sky_suppress_griffin",
-                            "mythic_sky_safe_quality_set_griffin"
+                            "mythic_sky_quality_set_griffin"
                           ]
                         },
                         {
@@ -35036,7 +35035,7 @@
                             "mythic_sky_role_mutation_griffin",
                             "mythic_sky_preserve_griffin",
                             "mythic_sky_suppress_griffin",
-                            "mythic_sky_safe_quality_set_griffin"
+                            "mythic_sky_quality_set_griffin"
                           ]
                         },
                         {
@@ -35052,8 +35051,7 @@
                             "mythic_sky_role_mutation_griffin",
                             "mythic_sky_preserve_griffin",
                             "mythic_sky_suppress_griffin",
-                            "mythic_sky_safe_quality_set_griffin",
-                            "mythic_sky_myth_quality_set_griffin",
+                            "mythic_sky_quality_set_griffin",
                             "mythic_sky_divine_griffin",
                             "mythic_sky_weather_griffin"
                           ]
@@ -35382,7 +35380,7 @@
                             "mythic_sky_role_mutation_sphinx",
                             "mythic_sky_preserve_sphinx",
                             "mythic_sky_suppress_sphinx",
-                            "mythic_sky_safe_quality_set_sphinx"
+                            "mythic_sky_quality_set_sphinx"
                           ]
                         },
                         {
@@ -35398,7 +35396,7 @@
                             "mythic_sky_role_mutation_sphinx",
                             "mythic_sky_preserve_sphinx",
                             "mythic_sky_suppress_sphinx",
-                            "mythic_sky_safe_quality_set_sphinx"
+                            "mythic_sky_quality_set_sphinx"
                           ]
                         },
                         {
@@ -35414,8 +35412,7 @@
                             "mythic_sky_role_mutation_sphinx",
                             "mythic_sky_preserve_sphinx",
                             "mythic_sky_suppress_sphinx",
-                            "mythic_sky_safe_quality_set_sphinx",
-                            "mythic_sky_myth_quality_set_sphinx",
+                            "mythic_sky_quality_set_sphinx",
                             "mythic_sky_divine_sphinx",
                             "mythic_sky_weather_sphinx"
                           ]
@@ -44949,7 +44946,7 @@
       var linked = kind === 'core' ? [spec.baseId, spec.roleId, spec.roleMutId, spec.preserveId, spec.suppressId] :
                    kind === 'safe' ? [spec.baseId, spec.roleId, spec.roleMutId, spec.preserveId, spec.suppressId, spec.qSafeSetId] :
                    kind === '2000' ? [spec.baseId, spec.roleId, spec.roleMutId, spec.preserveId, spec.suppressId, spec.qSafeSetId] :
-                   [spec.baseId, spec.roleId, spec.roleMutId, spec.preserveId, spec.suppressId, spec.qSafeSetId, spec.qMythSetId, spec.divineId, spec.weatherId];
+                   [spec.baseId, spec.roleId, spec.roleMutId, spec.preserveId, spec.suppressId, spec.qSafeSetId, spec.divineId, spec.weatherId];
       var label = kind === 'core' ? spec.ja + 'セット / ' + spec.en + ' Core Set' :
                   kind === 'safe' ? spec.ja + '高画質セット / ' + spec.en + ' Safe Quality Set' :
                   kind === '2000' ? spec.ja + '高画質セット 2000字制限対応版 / ' + spec.en + ' Safe Quality Set 2000 Limit Compatible' :
@@ -45014,8 +45011,9 @@
       spec.roleMutId = 'mythic_sky_role_mutation_' + spec.stem;
       spec.preserveId = 'mythic_sky_preserve_' + spec.stem;
       spec.suppressId = 'mythic_sky_suppress_' + spec.stem;
-      spec.qSafeSetId = 'mythic_sky_safe_quality_set_' + spec.stem;
-      spec.qMythSetId = 'mythic_sky_myth_quality_set_' + spec.stem;
+      // 最終表示ツリーに実在するQuality Setへ統一する。
+      // Mythic Full Setは同じ品質セットに神格・専用演出を重ねるため、別の未定義Quality Setは作らない。
+      spec.qSafeSetId = 'mythic_sky_quality_set_' + spec.stem;
       spec.divineId = 'mythic_sky_divine_' + spec.stem;
       spec.weatherId = 'mythic_sky_weather_' + spec.stem;
       spec.roleplay = spec.stem === 'phoenix'
@@ -54844,7 +54842,7 @@
                                     {
                                           "id": "mythic_bahamut_enchantdragon_fullset_boost",
                                           "label": "フルセット補強 / Full Set Boost",
-                                          "val": "(masterpiece:1.3), (best quality:1.3), (ultra high resolution:1.3), (intricate details:1.2), (cinematic lighting:1.2), single humanoid dragon princess, majestic crown-like dragon horns, compact celestial dragon wings, face and gaze clearly visible, heavy-lidded glowing eyes, a smile as if testing the viewer, slow predatory elegance, one knee raised slightly, hip angled to one side, fitted waist silhouette, asymmetrical draped gown, slightly loosened shoulder drape, delicate thigh jewelry",
+                                          "val": "single humanoid dragon princess, majestic crown-like dragon horns, compact celestial dragon wings, face and gaze clearly visible, heavy-lidded glowing eyes, a smile as if testing the viewer, slow predatory elegance, one knee raised slightly, hip angled to one side, fitted waist silhouette, asymmetrical draped gown, slightly loosened shoulder drape, delicate thigh jewelry",
                                           "desc": "フルセット専用：格・視線・衣装シルエットを軽量に盛る",
                                           "collection_id": "mythic_bahamut_collection",
                                           "collection_role": "customize"
@@ -55644,5 +55642,2877 @@
     window.__BAHAMUT_SPECIAL_COLLECTION_EXPANDED_LIGHT_CHAOS_STORM_20260516 = true;
   } catch(e) {
     try { console.warn("[bahamut_special_collection_variants]", e); } catch(_e) {}
+  }
+})();
+/* ============================================================
+ * Sky & Divine Birds: three-route expansion (East / West / Heroine)
+ * Data-only patch. Existing Phoenix / Griffin / Sphinx and Four Symbols shelves stay untouched.
+ * ============================================================ */
+(function(){
+  "use strict";
+  try {
+    var db = (window.__PP_DB && window.__PP_DB.packs) || window.PRESET_PACKS_DB || window.__PRESET_PACKS_DB;
+    if (!db || typeof db !== "object") return;
+
+    var ROLEPLAY_PARENT_KEY = "🎭 なりきりおすすめセット (Roleplay Recommended Sets)";
+    var SPECIAL_TITLE_JA = "🧩 神獣・伝説特化コレクション";
+    var SKY_TITLE_JA = "🪽 天空・神鳥特化コレクション";
+    var COLLECTION_ID = "mythic_sky_birds_collection";
+
+    function isArray(v){ return Object.prototype.toString.call(v) === "[object Array]"; }
+    function titleOf(node){ return (node && (node.title_ja || node.titleJa || node.title || node.label || "")) || ""; }
+    function findByTitle(node, title){
+      if (!node) return null;
+      if (isArray(node)) {
+        for (var i = 0; i < node.length; i++) {
+          var found = findByTitle(node[i], title);
+          if (found) return found;
+        }
+        return null;
+      }
+      if (typeof node === "object") {
+        if (titleOf(node) === title) return node;
+        var keys = Object.keys(node);
+        for (var j = 0; j < keys.length; j++) {
+          if (keys[j] === "val" || keys[j] === "desc") continue;
+          var nested = findByTitle(node[keys[j]], title);
+          if (nested) return nested;
+        }
+      }
+      return null;
+    }
+    function leaf(id, label, val, desc, role, linkedIds){
+      return {
+        id: id,
+        label: label,
+        val: val,
+        desc: desc || "",
+        collection_id: COLLECTION_ID,
+        collection_role: role || "",
+        linked_ids: isArray(linkedIds) ? linkedIds : []
+      };
+    }
+    function group(titleJa, titleEn, children){
+      return { title_ja:titleJa, title_en:titleEn || "", collection_id:COLLECTION_ID, children:children || [] };
+    }
+    function guide(left, right){
+      return { type:"pair_header", leftLabel:left, rightLabel:right };
+    }
+    function themeSet(prefix, theme){
+      return leaf(
+        prefix + "_complete_" + theme.stem,
+        theme.completeLabel,
+        theme.completeVal,
+        "完成セット：主役・人型神鳥の核と固定デザインだけを連動。表情・ポーズ・背景・強演出は外付け。",
+        "complete_set",
+        theme.completeLinked
+      );
+    }
+    function characterOnlySet(prefix, theme){
+      return leaf(
+        prefix + "_character_" + theme.stem,
+        theme.characterLabel,
+        theme.characterVal,
+        "キャラのみ：表情・視線・ポーズ・背景・強エフェクトを固定しない外付け起点。",
+        "complete_set",
+        theme.characterLinked
+      );
+    }
+    function ownedRouteId(node){
+      return node && (node.collection_id === "mythic_sky_route_east_collection" || node.collection_id === "mythic_sky_route_west_collection" || node.collection_id === "mythic_sky_route_heroine_collection");
+    }
+    function installRoutes(skyRoot, routes){
+      if (!skyRoot || !isArray(skyRoot.children)) return;
+      var retained = [];
+      for (var i = 0; i < skyRoot.children.length; i++) {
+        if (!ownedRouteId(skyRoot.children[i])) retained.push(skyRoot.children[i]);
+      }
+      skyRoot.children = retained.concat(routes);
+    }
+
+    var roleplayRoot = findByTitle(db[ROLEPLAY_PARENT_KEY] || db["🎭 なりきりおすすめセット｜神獣・伝説なりきり"] || [], "🎭 なりきり");
+    if (!roleplayRoot || !isArray(roleplayRoot.children)) return;
+    var specialRoot = findByTitle(roleplayRoot.children, SPECIAL_TITLE_JA);
+    if (!specialRoot || !isArray(specialRoot.children)) return;
+    var skyRoot = findByTitle(specialRoot.children, SKY_TITLE_JA);
+    if (!skyRoot || !isArray(skyRoot.children)) return;
+
+    /* ------------------------------ Route A: Eastern divine birds ------------------------------ */
+    var eastPrefix = "mythic_sky_east";
+    var eastBaseHumanoid = eastPrefix + "_base_humanoid";
+    var eastBaseWings = eastPrefix + "_base_integrated_wings";
+    var eastBasePriest = eastPrefix + "_base_celestial_priest";
+    var eastBaseSolar = eastPrefix + "_base_solar_bird";
+    var eastBaseFeatures = eastPrefix + "_base_bird_features";
+    var eastBaseAnchor = eastPrefix + "_base_humanoid_anchor";
+
+    var eastThemes = [
+      {
+        stem:"fenghuang",
+        completeLabel:"鳳凰の天界王族 / Fenghuang Celestial Royal",
+        completeVal:"fenghuang celestial royal heroine, single humanoid character focus, clearly human face, integrated crimson-gold feathered wings, attached phoenix tail feathers, feather crown, celestial imperial embroidered robe, traits integrated into the character body",
+        characterLabel:"鳳凰キャラのみセット / Fenghuang Character Only Set",
+        characterVal:"fenghuang-inspired humanoid heroine, single humanoid character focus, clearly human face, attached crimson-gold feathered wings, integrated phoenix tail feathers, feather crown, celestial imperial embroidered robe, traits integrated into the character body",
+        completeLinked:[eastBaseHumanoid,eastBaseWings,eastBaseAnchor,eastPrefix+"_custom_fenghuang_tail",eastPrefix+"_custom_feather_crown",eastPrefix+"_custom_royal_embroidery"],
+        characterLinked:[eastBaseHumanoid,eastBaseWings,eastBaseAnchor,eastPrefix+"_custom_fenghuang_tail",eastPrefix+"_custom_feather_crown",eastPrefix+"_custom_royal_embroidery"]
+      },
+      {
+        stem:"garuda",
+        completeLabel:"迦楼羅の天翔戦士 / Garuda Sky Warrior",
+        completeVal:"Garuda / golden-winged bird warrior, single humanoid character focus, clearly human face, attached broad golden feathered wings, integrated tail feathers, sacred wing-warrior armor, sun disk ornament, traits integrated into the character body, no separate bird companion",
+        characterLabel:"迦楼羅キャラのみセット / Garuda Character Only Set",
+        characterVal:"Garuda-inspired humanoid warrior, single humanoid character focus, clearly human face, attached golden feathered wings, integrated tail feathers, sacred wing-warrior armor, sun disk ornament, traits integrated into the character body, no separate bird companion",
+        completeLinked:[eastBaseHumanoid,eastBaseWings,eastBaseAnchor,eastPrefix+"_custom_golden_wings",eastPrefix+"_custom_wing_warrior_armor",eastPrefix+"_custom_sun_disk"],
+        characterLinked:[eastBaseHumanoid,eastBaseWings,eastBaseAnchor,eastPrefix+"_custom_golden_wings",eastPrefix+"_custom_wing_warrior_armor",eastPrefix+"_custom_sun_disk"]
+      },
+      {
+        stem:"three_legged_crow",
+        completeLabel:"三足烏の太陽神官 / Three-Legged Crow Sun Priestess",
+        completeVal:"three-legged crow-inspired sun priestess, single humanoid character focus, clearly human face, black-gold feathered wings attached to her back, integrated crow tail feathers, solar disk accessory, ceremonial sun-priest robe, traits integrated into the character body, no separate crow",
+        characterLabel:"三足烏キャラのみセット / Three-Legged Crow Character Only Set",
+        characterVal:"three-legged crow-inspired humanoid priestess, single humanoid character focus, clearly human face, attached black-gold feathered wings, integrated crow tail feathers, solar disk accessory, ceremonial sun-priest robe, traits integrated into the character body, no separate crow",
+        completeLinked:[eastBaseHumanoid,eastBaseWings,eastBaseSolar,eastBaseAnchor,eastPrefix+"_custom_suncrow_feathers",eastPrefix+"_custom_sun_disk",eastPrefix+"_custom_ritual_robes"],
+        characterLinked:[eastBaseHumanoid,eastBaseWings,eastBaseSolar,eastBaseAnchor,eastPrefix+"_custom_suncrow_feathers",eastPrefix+"_custom_sun_disk",eastPrefix+"_custom_ritual_robes"]
+      },
+      {
+        stem:"yatagarasu",
+        completeLabel:"八咫烏の導き手 / Yatagarasu Guide",
+        completeVal:"Yatagarasu-inspired celestial guide, single humanoid character focus, clearly human face, attached black feathered wings, integrated guiding tail feathers, raven-feather hood, sacred bell, travel-guide robe, traits integrated into the character body, no separate crow companion",
+        characterLabel:"八咫烏キャラのみセット / Yatagarasu Character Only Set",
+        characterVal:"Yatagarasu-inspired humanoid guide, single humanoid character focus, clearly human face, attached black feathered wings, integrated tail feathers, raven-feather hood, sacred bell, travel-guide robe, traits integrated into the character body, no separate crow companion",
+        completeLinked:[eastBaseHumanoid,eastBaseWings,eastBaseFeatures,eastBaseAnchor,eastPrefix+"_custom_yatagarasu_feathers",eastPrefix+"_custom_feather_hood",eastPrefix+"_custom_sacred_bell"],
+        characterLinked:[eastBaseHumanoid,eastBaseWings,eastBaseFeatures,eastBaseAnchor,eastPrefix+"_custom_yatagarasu_feathers",eastPrefix+"_custom_feather_hood",eastPrefix+"_custom_sacred_bell"]
+      },
+      {
+        stem:"qingluan",
+        completeLabel:"青鸞の瑞兆姫 / Qingluan Auspicious Princess",
+        completeVal:"Qingluan auspicious princess, single humanoid character focus, clearly human face, attached blue-green feathered wings, integrated blue-green tail feathers, delicate feather crown, refined celestial court dress, traits integrated into the character body",
+        characterLabel:"青鸞キャラのみセット / Qingluan Character Only Set",
+        characterVal:"Qingluan-inspired humanoid heroine, single humanoid character focus, clearly human face, attached blue-green feathered wings, integrated tail feathers, delicate feather crown, refined celestial court dress, traits integrated into the character body",
+        completeLinked:[eastBaseHumanoid,eastBaseWings,eastBaseFeatures,eastBaseAnchor,eastPrefix+"_custom_qingluan_plumage",eastPrefix+"_custom_feather_crown",eastPrefix+"_custom_royal_embroidery"],
+        characterLinked:[eastBaseHumanoid,eastBaseWings,eastBaseFeatures,eastBaseAnchor,eastPrefix+"_custom_qingluan_plumage",eastPrefix+"_custom_feather_crown",eastPrefix+"_custom_royal_embroidery"]
+      },
+      {
+        stem:"biyiniao",
+        completeLabel:"比翼鳥の天空舞姫 / Biyiniao Sky Dance Princess",
+        completeVal:"Biyiniao-inspired sky dance princess, single humanoid character focus, clearly human face, attached paired-style feathered wings on one character, integrated elegant tail feathers, feathered dance robe, ribboned wing sleeves, traits integrated into the character body, no partner character",
+        characterLabel:"比翼鳥キャラのみセット / Biyiniao Character Only Set",
+        characterVal:"Biyiniao-inspired single humanoid heroine, clearly human face, attached paired-style feathered wings, integrated elegant tail feathers, feathered dance robe, ribboned wing sleeves, traits integrated into the character body, no partner character",
+        completeLinked:[eastBaseHumanoid,eastBaseWings,eastBaseAnchor,eastPrefix+"_custom_biyiniao_wings",eastPrefix+"_custom_hagoromo",eastPrefix+"_custom_feather_fan"],
+        characterLinked:[eastBaseHumanoid,eastBaseWings,eastBaseAnchor,eastPrefix+"_custom_biyiniao_wings",eastPrefix+"_custom_hagoromo",eastPrefix+"_custom_feather_fan"]
+      },
+      {
+        stem:"dapeng",
+        completeLabel:"鵬の風雲飛仙 / Dapeng Windborne Immortal",
+        completeVal:"Dapeng-inspired celestial traveler, single humanoid character focus, clearly human face, attached vast layered feathered wings, integrated long tail feathers, wind-traveler robe, feather mantle, traits integrated into the character body",
+        characterLabel:"鵬キャラのみセット / Dapeng Character Only Set",
+        characterVal:"Dapeng-inspired humanoid traveler, single humanoid character focus, clearly human face, attached layered feathered wings, integrated long tail feathers, wind-traveler robe, feather mantle, traits integrated into the character body",
+        completeLinked:[eastBaseHumanoid,eastBaseWings,eastBaseAnchor,eastPrefix+"_custom_dapeng_wings",eastPrefix+"_custom_feather_mantle",eastPrefix+"_custom_royal_embroidery"],
+        characterLinked:[eastBaseHumanoid,eastBaseWings,eastBaseAnchor,eastPrefix+"_custom_dapeng_wings",eastPrefix+"_custom_feather_mantle",eastPrefix+"_custom_royal_embroidery"]
+      },
+      {
+        stem:"crane_celestial",
+        completeLabel:"鶴仙人の雲上神官 / Crane Celestial Priest",
+        completeVal:"crane celestial priest, single humanoid character focus, clearly human face, attached white crane wings, integrated crane tail feathers, tall feather crest, ritual priest robe, sacred bell, traits integrated into the character body",
+        characterLabel:"鶴仙人キャラのみセット / Crane Celestial Character Only Set",
+        characterVal:"crane-inspired celestial humanoid, single humanoid character focus, clearly human face, attached white crane wings, integrated tail feathers, feather crest, ritual priest robe, sacred bell, traits integrated into the character body",
+        completeLinked:[eastBaseHumanoid,eastBaseWings,eastBasePriest,eastBaseAnchor,eastPrefix+"_custom_crane_wings",eastPrefix+"_custom_ritual_robes",eastPrefix+"_custom_sacred_bell"],
+        characterLinked:[eastBaseHumanoid,eastBaseWings,eastBasePriest,eastBaseAnchor,eastPrefix+"_custom_crane_wings",eastPrefix+"_custom_ritual_robes",eastPrefix+"_custom_sacred_bell"]
+      },
+      {
+        stem:"hagoromo_priestess",
+        completeLabel:"天女鳥人・羽衣神官 / Hagoromo Bird-Person Priestess",
+        completeVal:"celestial bird-person priestess, single humanoid character focus, clearly human face, attached soft feathered wings, integrated tail feathers, hagoromo feather robe, feather crown, sacred fan, traits integrated into the character body",
+        characterLabel:"天女鳥人キャラのみセット / Hagoromo Bird-Person Character Only Set",
+        characterVal:"celestial bird-person heroine, single humanoid character focus, clearly human face, attached soft feathered wings, integrated tail feathers, hagoromo feather robe, feather crown, sacred fan, traits integrated into the character body",
+        completeLinked:[eastBaseHumanoid,eastBaseWings,eastBasePriest,eastBaseAnchor,eastPrefix+"_custom_hagoromo",eastPrefix+"_custom_feather_crown",eastPrefix+"_custom_feather_fan"],
+        characterLinked:[eastBaseHumanoid,eastBaseWings,eastBasePriest,eastBaseAnchor,eastPrefix+"_custom_hagoromo",eastPrefix+"_custom_feather_crown",eastPrefix+"_custom_feather_fan"]
+      }
+    ];
+
+    var eastRoute = {
+      title_ja:"🏮 東方中心：霊鳥・神鳥なりきり",
+      title_en:"Eastern Divine Birds Route",
+      collection_id:"mythic_sky_route_east_collection",
+      collection_role:"route_group",
+      children:[
+        group("完成セット", "Core Sets", eastThemes.map(function(theme){ return themeSet(eastPrefix, theme); })),
+        group("キャラのみセット", "Character Only Sets", eastThemes.map(function(theme){ return characterOnlySet(eastPrefix, theme); })),
+        group("ベース", "Base", [
+          leaf(eastBaseHumanoid,"人型神鳥ベース / Humanoid Divine Bird Base","single humanoid character focus, clearly human face, human facial proportions, human torso and limbs remain primary, traits integrated into the character body","人型主役を先に固定する共通ベース","base"),
+          leaf(eastBaseWings,"羽翼・尾羽一体型 / Integrated Wings and Tail Feathers","attached feathered wings growing from the back, integrated tail feathers attached to the lower back, one connected character silhouette","翼と尾羽を身体接続型にする","base"),
+          leaf(eastBasePriest,"天界神官体型 / Celestial Priest Silhouette","elegant celestial priest silhouette, layered ceremonial robe proportions, long sleeves, poised humanoid frame","天界神官・舞姫系の土台","base"),
+          leaf(eastBaseSolar,"神火・太陽鳥の身体特徴 / Solar Bird Traits","black-gold feather accents, subtle sunbird markings close to the body, warm metallic feather sheen","三足烏など太陽鳥系の身体寄り差分","base"),
+          leaf(eastBaseFeatures,"鳥瞳・羽耳・羽冠 / Avian Eyes Ears and Crest","birdlike iris detail, feather ear ornaments, attached feather crest, delicate crown feathers","顔を獣化させず鳥要素を足す","base"),
+          leaf(eastBaseAnchor,"単体人型維持 / Single Humanoid Anchor","single humanoid character focus, clearly human face, human facial structure remains clear, traits integrated into the character body","別個体化を避けるための軽い人型アンカー","base")
+        ]),
+        group("カスタマイズ", "Customize", [
+          leaf(eastPrefix+"_custom_fenghuang_tail","鳳凰尾羽 / Fenghuang Tail Feathers","long crimson-gold phoenix tail feathers integrated into the character body, elegant layered feather pattern","鳳凰の尾羽差分","customize"),
+          leaf(eastPrefix+"_custom_golden_wings","金翅大翼 / Golden Winged Great Wings","broad golden feathered wings attached to the back, layered sun-gold flight feathers","迦楼羅系の大翼差分","customize"),
+          leaf(eastPrefix+"_custom_qingluan_plumage","青鸞の青緑羽 / Qingluan Blue-Green Plumage","blue-green feather layers, teal iridescent wing coverts, elegant auspicious tail feathers","青鸞の色羽差分","customize"),
+          leaf(eastPrefix+"_custom_suncrow_feathers","三足烏の黒金羽 / Three-Legged Crow Black-Gold Feathers","black-gold crow feathers attached to the body, restrained solar metallic sheen, integrated dark tail feathers","三足烏向けの身体接続羽","customize"),
+          leaf(eastPrefix+"_custom_yatagarasu_feathers","八咫烏の導き羽 / Yatagarasu Guiding Feathers","deep black guiding feathers, subtle gold-edged wing feathers, raven-feather mantle attached to the body","八咫烏の案内人差分","customize"),
+          leaf(eastPrefix+"_custom_biyiniao_wings","比翼鳥の対翼意匠 / Biyiniao Paired-Wing Design","symmetrical paired-style wings attached to one character, elegant linked feather layers, single-character design","比翼鳥をペア構図にしない一人用差分","customize"),
+          leaf(eastPrefix+"_custom_dapeng_wings","鵬の大翼 / Dapeng Great Wings","large layered flight feathers attached to the back, sweeping but body-connected wing silhouette","鵬・大鵬向けの大翼差分","customize"),
+          leaf(eastPrefix+"_custom_crane_wings","鶴羽 / Crane Feather Wings","white crane wing feathers attached to the back, slim layered tail feathers, red cord accents","鶴仙人系の翼差分","customize"),
+          leaf(eastPrefix+"_custom_feather_crown","羽冠 / Feather Crown","delicate feather crown attached at the head, small gold ornaments, readable crown silhouette","羽冠の外付け","customize"),
+          leaf(eastPrefix+"_custom_feather_hood","羽根付きフード / Feather Hood","raven-feather hood, integrated feather trim, travel-guide mantle","八咫烏系のフード差分","customize"),
+          leaf(eastPrefix+"_custom_feather_mantle","羽毛ケープ / Feather Mantle","layered feather mantle, light shoulder plumage, clear character silhouette","羽毛ケープの外付け","customize")
+        ]),
+        group("小物・衣装", "Props and Attire", [
+          leaf(eastPrefix+"_custom_hagoromo","羽衣 / Hagoromo Robe","flowing hagoromo feather robe, translucent feather-trimmed sleeves, celestial fabric layers","羽衣の衣装差分","customize"),
+          leaf(eastPrefix+"_custom_feather_fan","羽扇 / Feather Fan","ornate feather fan held as a fixed ceremonial prop, delicate gold handle","羽扇の固定小物","customize"),
+          leaf(eastPrefix+"_custom_sacred_bell","神鈴 / Sacred Bell","small sacred bell ornament, ritual cord, refined handheld shrine accessory","神鈴の固定小物","customize"),
+          leaf(eastPrefix+"_custom_sun_disk","太陽円盤 / Sun Disk","small solar disk accessory worn behind the shoulders or at the waist, restrained gold radial ornament","太陽鳥系の固定小物","customize"),
+          leaf(eastPrefix+"_custom_royal_embroidery","天界王族の刺繍衣装 / Celestial Royal Embroidered Attire","celestial royal embroidered robe, layered silk panels, gold feather embroidery, courtly trim","鳳凰・青鸞向け衣装","customize"),
+          leaf(eastPrefix+"_custom_ritual_robes","霊鳥神官の儀礼衣装 / Divine Bird Ritual Robes","divine bird priest ceremonial robe, feather-trimmed sleeves, ritual cords, refined shrine ornament","神官・鶴仙人向け衣装","customize"),
+          leaf(eastPrefix+"_custom_wing_warrior_armor","金翅戦士装甲 / Golden Wing Warrior Armor","light golden wing-warrior armor, feather-shaped pauldrons, ceremonial bracers","迦楼羅向け戦士装備","customize")
+        ]),
+        group("エフェクト", "Effects", [
+          leaf(eastPrefix+"_effect_thin_sacred_fire","薄い神火 / Thin Sacred Fire","thin sacred fire ribbons close to the wings, restrained ember glow, clear character silhouette","強すぎない神火の外付け","customize"),
+          leaf(eastPrefix+"_effect_soft_gold_morning","静かな金色の朝光 / Quiet Golden Morning Light","quiet golden morning light, soft warm rimlight, restrained sunrise haze","空気感だけを追加","customize"),
+          leaf(eastPrefix+"_effect_feather_glimmer","羽毛の微光 / Feather Glimmer","subtle feather glimmer, delicate gold reflections on feather edges, no large particle storm","羽の質感演出","customize")
+        ]),
+        group("設定", "Settings", [
+          leaf(eastPrefix+"_setting_sky_palace","天空宮殿 / Celestial Palace","celestial palace above the clouds, eastern heavenly architecture, open sky corridors","背景・空間の外付け","setting"),
+          leaf(eastPrefix+"_setting_cloud_corridor","雲海の回廊 / Sea-of-Clouds Corridor","cloud sea corridor, floating eastern colonnades, layered cloud depth","雲海背景の外付け","setting"),
+          leaf(eastPrefix+"_setting_sun_temple","日輪神殿 / Sun Disk Temple","sun disk temple, radiant eastern sanctuary, ceremonial stone floor","太陽神官向け背景","setting"),
+          leaf(eastPrefix+"_setting_moon_garden","月下の浮遊庭園 / Moonlit Floating Garden","moonlit floating garden, quiet suspended bridges, delicate celestial plants","月下の設定","setting"),
+          leaf(eastPrefix+"_setting_eastern_heaven","東方天界 / Eastern Heaven","eastern heavenly realm, layered palace roofs, pale celestial mist","東方天界の設定","setting"),
+          leaf(eastPrefix+"_setting_spirit_peak","霞む霊峰 / Misty Spirit Peak","misty sacred mountain peak, distant ridgelines, soft cloud veil","霊峰の設定","setting")
+        ]),
+        group("クオリティセット", "Quality Sets", [
+          leaf(eastPrefix+"_quality_safe","東方神鳥・安全画質セット / Eastern Divine Bird Safe Quality","", "羽毛・金飾り・雲海を安全に整えるクオリティセット", "quality_set", [eastPrefix+"_quality_feather",eastPrefix+"_quality_light",eastPrefix+"_quality_gold",eastPrefix+"_quality_cloud"]),
+          leaf(eastPrefix+"_quality_sacred","東方神鳥・神域質感セット / Eastern Divine Bird Sacred Quality","", "神域感を控えめに追加するクオリティセット", "quality_set", [eastPrefix+"_quality_feather",eastPrefix+"_quality_light",eastPrefix+"_quality_gold",eastPrefix+"_quality_cloud",eastPrefix+"_quality_sacred_atmosphere"])
+        ]),
+        group("実クオリティ項目", "Quality Details", [
+          leaf(eastPrefix+"_quality_feather","羽毛の層状描写 / Layered Feather Detail","layered feather detail, readable feather overlap, refined feather edge texture","羽毛質感","quality_detail"),
+          leaf(eastPrefix+"_quality_light","柔らかい天界光 / Soft Heavenly Lighting","soft heavenly lighting, gentle face light, restrained rimlight","光の補助","quality_detail"),
+          leaf(eastPrefix+"_quality_gold","繊細な金飾り / Delicate Gold Ornament Detail","delicate gold ornament detail, refined embroidery highlights, readable small accessories","金飾り補助","quality_detail"),
+          leaf(eastPrefix+"_quality_cloud","空気遠近と雲海 / Airy Cloud Depth","airy cloud depth, soft atmospheric perspective, clean distant layers","雲海の奥行き","quality_detail"),
+          leaf(eastPrefix+"_quality_sacred_atmosphere","控えめな神域感 / Subtle Sacred Atmosphere","subtle sacred atmosphere, calm luminous air, no overwhelming effects","神域の空気感","quality_detail")
+        ]),
+        group("🧭 既存棚への導線", "Existing Shelf Guide", [
+          guide("🔥 朱雀の神火巫女", "☯ 四神特化コレクションの朱雀棚で管理（重複追加なし）")
+        ])
+      ]
+    };
+
+    /* ------------------------------ Route B: Western divine birds and winged beasts ------------------------------ */
+    var westPrefix = "mythic_sky_west";
+    var westBaseHumanoid = westPrefix + "_base_humanoid";
+    var westBaseWings = westPrefix + "_base_winged_humanoid";
+    var westBaseRoyal = westPrefix + "_base_winged_royal";
+    var westBaseArmor = westPrefix + "_base_feather_armor";
+    var westBaseTalons = westPrefix + "_base_light_talons";
+    var westBaseHybrid = westPrefix + "_base_ears_wings";
+    var westBaseAnchor = westPrefix + "_base_humanoid_anchor";
+
+    var westThemes = [
+      {
+        stem:"bennu", completeLabel:"ベンヌの暁神官 / Bennu Dawn Priestess",
+        completeVal:"Bennu dawn priestess, single humanoid character focus, clearly human face, attached warm-gold feathered wings, integrated sunbird tail feathers, dawn-priest robe, small solar disk ornament, traits integrated into the character body",
+        characterLabel:"ベンヌキャラのみセット / Bennu Character Only Set",
+        characterVal:"Bennu-inspired humanoid priestess, single humanoid character focus, clearly human face, attached warm-gold feathered wings, integrated tail feathers, dawn-priest robe, small solar disk ornament, traits integrated into the character body",
+        completeLinked:[westBaseHumanoid,westBaseWings,westBaseAnchor,westPrefix+"_custom_bennu_tail",westPrefix+"_custom_sun_disk",westPrefix+"_custom_oracle_robes"],
+        characterLinked:[westBaseHumanoid,westBaseWings,westBaseAnchor,westPrefix+"_custom_bennu_tail",westPrefix+"_custom_sun_disk",westPrefix+"_custom_oracle_robes"]
+      },
+      {
+        stem:"simurgh", completeLabel:"シームルグの賢鳥女王 / Simurgh Wise Bird Queen",
+        completeVal:"Simurgh wise bird queen, single humanoid character focus, clearly human face, attached iridescent feathered wings, integrated rainbow tail feathers, feathered crown, regal star-map mantle, refined queenly robe, traits integrated into the character body",
+        characterLabel:"シームルグキャラのみセット / Simurgh Character Only Set",
+        characterVal:"Simurgh-inspired humanoid queen, single humanoid character focus, clearly human face, attached iridescent feathered wings, integrated rainbow tail feathers, feathered crown, regal mantle, traits integrated into the character body",
+        completeLinked:[westBaseHumanoid,westBaseWings,westBaseRoyal,westBaseAnchor,westPrefix+"_custom_simurgh_plumage",westPrefix+"_custom_feather_crown",westPrefix+"_custom_star_map_cape"],
+        characterLinked:[westBaseHumanoid,westBaseWings,westBaseRoyal,westBaseAnchor,westPrefix+"_custom_simurgh_plumage",westPrefix+"_custom_feather_crown",westPrefix+"_custom_star_map_cape"]
+      },
+      {
+        stem:"roc", completeLabel:"ロック鳥の天空遊牧姫 / Roc Sky Nomad Princess",
+        completeVal:"Roc sky nomad princess, single humanoid character focus, clearly human face, attached immense layered wings, integrated long tail feathers, wind-worn nomad coat, feather travel ornaments, traits integrated into the character body",
+        characterLabel:"ロック鳥キャラのみセット / Roc Character Only Set",
+        characterVal:"Roc-inspired humanoid traveler, single humanoid character focus, clearly human face, attached immense layered wings, integrated long tail feathers, wind-worn nomad coat, feather travel ornaments, traits integrated into the character body",
+        completeLinked:[westBaseHumanoid,westBaseWings,westBaseRoyal,westBaseAnchor,westPrefix+"_custom_roc_wings",westPrefix+"_custom_nomad_coat",westPrefix+"_custom_feather_crown"],
+        characterLinked:[westBaseHumanoid,westBaseWings,westBaseRoyal,westBaseAnchor,westPrefix+"_custom_roc_wings",westPrefix+"_custom_nomad_coat",westPrefix+"_custom_feather_crown"]
+      },
+      {
+        stem:"thunderbird", completeLabel:"サンダーバードの雷雲騎士 / Thunderbird Storm Knight",
+        completeVal:"Thunderbird storm knight, single humanoid character focus, clearly human face, attached dark feathered wings, metal feather armor, wing-knight lance, traits integrated into the character body",
+        characterLabel:"サンダーバードキャラのみセット / Thunderbird Character Only Set",
+        characterVal:"Thunderbird-inspired humanoid knight, single humanoid character focus, clearly human face, attached dark feathered wings, metal feather armor, wing-knight lance, traits integrated into the character body",
+        completeLinked:[westBaseHumanoid,westBaseWings,westBaseArmor,westBaseAnchor,westPrefix+"_custom_metal_feather_armor",westPrefix+"_custom_knight_lance"],
+        characterLinked:[westBaseHumanoid,westBaseWings,westBaseArmor,westBaseAnchor,westPrefix+"_custom_metal_feather_armor",westPrefix+"_custom_knight_lance"]
+      },
+      {
+        stem:"anzu", completeLabel:"アンズーの嵐の盗賊王 / Anzu Storm Thief Monarch",
+        completeVal:"Anzu-inspired sky thief monarch, single humanoid character focus, clearly human face, attached dark-blue feathered wings, integrated hooked talon ornaments, storm-raider coat, stolen sun-disk relic, traits integrated into the character body, no separate beast",
+        characterLabel:"アンズーキャラのみセット / Anzu Character Only Set",
+        characterVal:"Anzu-inspired humanoid sky raider, single humanoid character focus, clearly human face, attached dark-blue feathered wings, integrated talon ornaments, storm-raider coat, sun-disk relic, traits integrated into the character body, no separate beast",
+        completeLinked:[westBaseHumanoid,westBaseWings,westBaseTalons,westBaseAnchor,westPrefix+"_custom_anzu_mantle",westPrefix+"_custom_sun_disk",westPrefix+"_custom_nomad_coat"],
+        characterLinked:[westBaseHumanoid,westBaseWings,westBaseTalons,westBaseAnchor,westPrefix+"_custom_anzu_mantle",westPrefix+"_custom_sun_disk",westPrefix+"_custom_nomad_coat"]
+      },
+      {
+        stem:"alkonost", completeLabel:"アルコノストの楽園歌姫 / Alkonost Paradise Songstress",
+        completeVal:"Alkonost paradise songstress, single humanoid character focus, clearly human face, attached soft feathered wings, integrated iridescent tail feathers, feathered crown, refined songstress dress, small sacred bell, traits integrated into the character body",
+        characterLabel:"アルコノストキャラのみセット / Alkonost Character Only Set",
+        characterVal:"Alkonost-inspired humanoid songstress, single humanoid character focus, clearly human face, attached soft feathered wings, integrated tail feathers, feathered crown, refined songstress dress, small sacred bell, traits integrated into the character body",
+        completeLinked:[westBaseHumanoid,westBaseWings,westBaseAnchor,westPrefix+"_custom_alkonost_plumage",westPrefix+"_custom_feather_crown",westPrefix+"_custom_sacred_bell"],
+        characterLinked:[westBaseHumanoid,westBaseWings,westBaseAnchor,westPrefix+"_custom_alkonost_plumage",westPrefix+"_custom_feather_crown",westPrefix+"_custom_sacred_bell"]
+      },
+      {
+        stem:"gamayun", completeLabel:"ガマユンの予言鳥巫女 / Gamayun Oracle Priestess",
+        completeVal:"Gamayun oracle priestess, single humanoid character focus, clearly human face, attached grey-blue feathered wings, integrated tail feathers, oracle robe, prophecy scroll, feather pen, small crystal orb, traits integrated into the character body",
+        characterLabel:"ガマユンキャラのみセット / Gamayun Character Only Set",
+        characterVal:"Gamayun-inspired humanoid oracle, single humanoid character focus, clearly human face, attached grey-blue feathered wings, integrated tail feathers, oracle robe, prophecy scroll, feather pen, small crystal orb, traits integrated into the character body",
+        completeLinked:[westBaseHumanoid,westBaseWings,westBaseAnchor,westPrefix+"_custom_gamayun_feathers",westPrefix+"_custom_prophecy_scroll",westPrefix+"_custom_feather_pen",westPrefix+"_custom_orb"],
+        characterLinked:[westBaseHumanoid,westBaseWings,westBaseAnchor,westPrefix+"_custom_gamayun_feathers",westPrefix+"_custom_prophecy_scroll",westPrefix+"_custom_feather_pen",westPrefix+"_custom_orb"]
+      },
+      {
+        stem:"huma", completeLabel:"フマ鳥の幸運王女 / Huma Fortune Princess",
+        completeVal:"Huma bird fortune princess, single humanoid character focus, clearly human face, attached elegant pale feathered wings, integrated long tail feathers, feather crown, courtly robe, traits integrated into the character body",
+        characterLabel:"フマ鳥キャラのみセット / Huma Character Only Set",
+        characterVal:"Huma bird-inspired humanoid princess, single humanoid character focus, clearly human face, attached pale feathered wings, integrated long tail feathers, feather crown, courtly robe, traits integrated into the character body",
+        completeLinked:[westBaseHumanoid,westBaseWings,westBaseRoyal,westBaseAnchor,westPrefix+"_custom_huma_feathers",westPrefix+"_custom_feather_crown",westPrefix+"_custom_star_map_cape"],
+        characterLinked:[westBaseHumanoid,westBaseWings,westBaseRoyal,westBaseAnchor,westPrefix+"_custom_huma_feathers",westPrefix+"_custom_feather_crown",westPrefix+"_custom_star_map_cape"]
+      },
+      {
+        stem:"harpy", completeLabel:"ハルピュイアの軽翼レンジャー / Harpy Light-Wing Ranger",
+        completeVal:"Harpy-inspired wing ranger, single humanoid character focus, clearly human face, human torso and legs remain primary, attached compact feathered wings, light wing-arm accents, talon glove ornaments, ranger coat, traits integrated into the character body, no bird flock",
+        characterLabel:"ハルピュイアキャラのみセット / Harpy Character Only Set",
+        characterVal:"Harpy-inspired humanoid ranger, single humanoid character focus, clearly human face, human torso and legs remain primary, attached compact feathered wings, light wing-arm accents, talon glove ornaments, ranger coat, traits integrated into the character body, no bird flock",
+        completeLinked:[westBaseHumanoid,westBaseWings,westBaseTalons,westBaseAnchor,westPrefix+"_custom_harpy_wingarms",westPrefix+"_custom_nomad_coat"],
+        characterLinked:[westBaseHumanoid,westBaseWings,westBaseTalons,westBaseAnchor,westPrefix+"_custom_harpy_wingarms",westPrefix+"_custom_nomad_coat"]
+      }
+    ];
+
+    var westRoute = {
+      title_ja:"🏛 西方中心：神鳥・翼獣なりきり",
+      title_en:"Western Divine Birds and Winged Beasts Route",
+      collection_id:"mythic_sky_route_west_collection",
+      collection_role:"route_group",
+      children:[
+        group("完成セット", "Core Sets", westThemes.map(function(theme){ return themeSet(westPrefix, theme); })),
+        group("キャラのみセット", "Character Only Sets", westThemes.map(function(theme){ return characterOnlySet(westPrefix, theme); })),
+        group("ベース", "Base", [
+          leaf(westBaseHumanoid,"人型不死鳥・神鳥ベース / Humanoid Divine Bird Base","single humanoid character focus, clearly human face, human torso and limbs remain primary, traits integrated into the character body","人型主役の共通ベース","base"),
+          leaf(westBaseWings,"天空翼人 / Sky Winged Humanoid","attached feathered wings growing from the back, integrated tail feathers, clear wing roots, one connected character silhouette","翼の身体接続ベース","base"),
+          leaf(westBaseRoyal,"翼獣王族 / Winged Beast Royalty","regal winged character silhouette, refined royal robe layers, feather crown proportions, elegant humanoid frame","王族・女王・王子系の土台","base"),
+          leaf(westBaseArmor,"羽毛装甲型 / Feathered Armor Type","light metal feather armor, layered feather-shaped plates, mobile humanoid silhouette","翼騎士系の土台","base"),
+          leaf(westBaseTalons,"鳥脚・鉤爪の軽量差分 / Light Talon Accent","subtle talon glove ornaments, light bird-claw accents, human legs remain primary","怪物化を避ける軽量爪差分","base"),
+          leaf(westBaseHybrid,"獣耳と羽翼の複合型 / Ears and Wings Hybrid","subtle beast-ear ornaments, attached feathered wings, human facial structure remains clear","翼獣寄りの軽い複合型","base"),
+          leaf(westBaseAnchor,"人型維持・顔の明確化 / Humanoid Face Anchor","single humanoid character focus, clearly human face, human facial proportions, single merged character design","獣個体化を避ける人型アンカー","base")
+        ]),
+        group("カスタマイズ", "Customize", [
+          leaf(westPrefix+"_custom_bennu_tail","炎の尾羽 / Bennu Ember Tail Feathers","warm ember-toned tail feathers integrated into the character body, restrained dawn-gold feather sheen","ベンヌの身体寄り尾羽","customize"),
+          leaf(westPrefix+"_custom_simurgh_plumage","孔雀状の虹彩羽 / Simurgh Iridescent Plumage","peacock-like iridescent feather layers, jewel-toned wing coverts, elegant tail plume","シームルグ向け虹彩羽","customize"),
+          leaf(westPrefix+"_custom_roc_wings","ロック鳥の巨翼 / Roc Great Wings","immense layered feathered wings attached to the back, clear wing-root structure, readable human silhouette","ロック鳥向け巨翼","customize"),
+          leaf(westPrefix+"_custom_thunder_wingtips","雷光を帯びた翼端 / Electric Wing Tips","restrained electric glow at feather tips, thin controlled lightning filaments, readable wing edges","サンダーバードの軽い雷翼端","customize"),
+          leaf(westPrefix+"_custom_anzu_mantle","アンズーの嵐羽マント / Anzu Storm Feather Mantle","dark blue storm-feather mantle attached around shoulders, talon-shaped trim, sky-raider silhouette","アンズーの外見差分","customize"),
+          leaf(westPrefix+"_custom_huma_feathers","フマ鳥の幸運羽 / Huma Fortune Feathers","pale gold and ivory feather accents, long fortunate tail plumes, delicate crown feather","フマ鳥の羽差分","customize"),
+          leaf(westPrefix+"_custom_harpy_wingarms","ハルピュイアの翼腕差分 / Harpy Wing-Arm Accent","light feathered wing-arm accents, compact forearm feathers, human hands remain readable","翼腕を最小限に外付け","customize"),
+          leaf(westPrefix+"_custom_alkonost_plumage","アルコノストの楽園羽 / Alkonost Paradise Plumage","soft white and pastel feather layers, delicate songbird tail feathers, elegant wing trim","楽園歌姫向け羽","customize"),
+          leaf(westPrefix+"_custom_gamayun_feathers","ガマユンの予言羽 / Gamayun Oracle Feathers","grey-blue oracle feathers, fine gold edge trim, quiet tail plume","予言鳥巫女向け羽","customize")
+        ]),
+        group("小物・衣装", "Props and Attire", [
+          leaf(westPrefix+"_custom_metal_feather_armor","金属羽根装甲 / Metallic Feather Armor","refined metallic feather armor, articulated feather pauldrons, readable light armor","翼騎士向け装甲","customize"),
+          leaf(westPrefix+"_custom_feather_crown","羽根付き王冠 / Feather Crown","feathered crown, refined metal setting, small jewel accents","王族向け王冠","customize"),
+          leaf(westPrefix+"_custom_star_map_cape","星図のマント / Star-Map Cape","star-map cape, embroidered constellation trim, flowing but readable mantle","賢鳥・観測者向けマント","customize"),
+          leaf(westPrefix+"_custom_sun_disk","太陽円盤 / Sun Disk","small solar disk ornament, restrained gold radial design, wearable relic scale","ベンヌ・アンズー向け小物","customize"),
+          leaf(westPrefix+"_custom_knight_lance","翼騎士の槍 / Wing Knight Lance","slender wing-knight lance, feather-shaped spearhead, ceremonial grip","騎士の固定武装","customize"),
+          leaf(westPrefix+"_custom_prophecy_scroll","神託の巻物 / Prophecy Scroll","oracle scroll with fine celestial script, held as a small readable prop","ガマユン向け小物","customize"),
+          leaf(westPrefix+"_custom_feather_pen","羽根ペン / Feather Pen","ornate feather pen, small ink charm, scholar-oracle prop","予言鳥・賢鳥向け小物","customize"),
+          leaf(westPrefix+"_custom_sacred_bell","聖鈴 / Sacred Bell","small sacred bell, ceremonial cord, delicate audible ornament","歌姫・神官向け小物","customize"),
+          leaf(westPrefix+"_custom_orb","宝珠 / Crystal Orb","small crystal orb, clear glass surface, compact oracle accessory","神託の宝珠","customize"),
+          leaf(westPrefix+"_custom_oracle_robes","暁・神託の神官衣装 / Dawn and Oracle Robes","refined dawn-priest robe, layered ceremonial fabric, feather-trimmed sleeves","神官系衣装","customize"),
+          leaf(westPrefix+"_custom_nomad_coat","天空遊牧コート / Sky Nomad Coat","wind-worn sky nomad coat, feather-trimmed collar, layered travel cloth","遊牧・空賊・旅人向け衣装","customize")
+        ]),
+        group("エフェクト", "Effects", [
+          leaf(westPrefix+"_effect_restrained_rebirth","控えめな再生火 / Restrained Rebirth Glow","restrained rebirth glow close to the feather edges, no explosive flames, clear character silhouette","フェニックス系の強炎を外付けへ分離","customize"),
+          leaf(westPrefix+"_effect_thin_storm","薄い嵐光 / Thin Storm Light","thin storm-light filaments, restrained cloud-edge charge, no overwhelming storm wall","雷雲・嵐の軽い外付け","customize"),
+          leaf(westPrefix+"_effect_subtle_mythic","控えめな神話光 / Subtle Mythic Light","subtle mythic light, gentle rim glow, small atmospheric particles","神話感の軽い外付け","customize")
+        ]),
+        group("設定", "Settings", [
+          leaf(westPrefix+"_setting_floating_temple","浮遊神殿 / Floating Temple","floating temple above the clouds, open winged colonnades, calm sacred sky","背景の外付け","setting"),
+          leaf(westPrefix+"_setting_dawn_cloudsea","暁の雲海 / Dawn Cloud Sea","dawn cloud sea, layered warm mist, clear horizon depth","暁背景の外付け","setting"),
+          leaf(westPrefix+"_setting_thunder_fortress","雷雲上の城塞 / Thundercloud Fortress","fortress above thunderclouds, distant towers, controlled storm atmosphere","雷翼騎士向け背景","setting"),
+          leaf(westPrefix+"_setting_desert_ruins","古代砂漠の天空遺跡 / Desert Sky Ruins","ancient desert sky ruins, high stone arches, distant sandy horizon","砂漠天空の設定","setting"),
+          leaf(westPrefix+"_setting_star_corridor","星降る翼廊 / Starfall Wing Corridor","starfall wing corridor, floating observatory arches, quiet cosmic depth","星羽系の背景","setting"),
+          leaf(westPrefix+"_setting_moon_garden","月下の浮遊庭園 / Moonlit Floating Garden","moonlit floating garden, suspended terraces, quiet silver air","月下の背景","setting"),
+          leaf(westPrefix+"_setting_aurora","極光の空 / Aurora Sky","aurora sky, soft polar light ribbons, deep atmospheric horizon","極光背景","setting"),
+          leaf(westPrefix+"_setting_sky_library","静かな天空図書館 / Quiet Sky Library","quiet sky library, tall shelves, open celestial windows, calm study atmosphere","賢鳥・予言鳥向け背景","setting")
+        ]),
+        group("クオリティセット", "Quality Sets", [
+          leaf(westPrefix+"_quality_safe","西方神鳥・安全画質セット / Western Divine Bird Safe Quality","", "羽毛・金属・空の奥行きを安全に整える", "quality_set", [westPrefix+"_quality_feather",westPrefix+"_quality_rim",westPrefix+"_quality_metal",westPrefix+"_quality_sky"]),
+          leaf(westPrefix+"_quality_mythic","西方神鳥・神話光セット / Western Divine Bird Mythic Quality","", "主題を埋めずに神話光を足す", "quality_set", [westPrefix+"_quality_feather",westPrefix+"_quality_rim",westPrefix+"_quality_metal",westPrefix+"_quality_sky",westPrefix+"_quality_mythic_light"])
+        ]),
+        group("実クオリティ項目", "Quality Details", [
+          leaf(westPrefix+"_quality_feather","羽毛テクスチャ / Detailed Feather Texture","detailed feather texture, clear layered plumage, refined feather edges","羽毛の描写補助","quality_detail"),
+          leaf(westPrefix+"_quality_rim","発光リムライト / Luminous Rim Light","luminous rim light, clear wing separation, gentle face light","光の補助","quality_detail"),
+          leaf(westPrefix+"_quality_metal","金属装飾の精密化 / Refined Metallic Ornament","refined metallic ornament, clear armor edges, elegant jewel settings","金属羽根装甲の補助","quality_detail"),
+          leaf(westPrefix+"_quality_sky","天空の奥行き / Atmospheric Sky Depth","atmospheric sky depth, soft distant layers, clean aerial perspective","空の奥行き補助","quality_detail"),
+          leaf(westPrefix+"_quality_mythic_light","控えめな神話ライティング / Subtle Mythic Lighting","subtle mythic lighting, calm luminous air, restrained magical reflections","神話光の補助","quality_detail")
+        ]),
+        group("🧭 既存棚への導線", "Existing Shelf Guide", [
+          guide("🔥 フェニックスの不死鳥王女", "この天空・神鳥棚の既存フェニックス個別棚で管理"),
+          guide("🦅 グリフォンの天空守護騎士", "この天空・神鳥棚の既存グリフォン個別棚で管理"),
+          guide("🦁 スフィンクスの星砂神官", "この天空・神鳥棚の既存スフィンクス個別棚で管理")
+        ])
+      ]
+    };
+
+    /* ------------------------------ Route C: generic bird-human heroines ------------------------------ */
+    var heroinePrefix = "mythic_sky_heroine";
+    var heroineBaseHumanoid = heroinePrefix + "_base_humanoid";
+    var heroineBaseWings = heroinePrefix + "_base_back_wings";
+    var heroineBaseAnchor = heroinePrefix + "_base_humanoid_anchor";
+    var heroineThemes = [
+      { stem:"white_priestess", completeLabel:"白翼の天空神官 / White-Wing Sky Priestess", completeVal:"white-wing bird-human heroine, single humanoid character focus, clearly human face, attached white feathered wings, integrated tail feathers, refined sky-priest robe, feather crown, traits integrated into the character body", characterLabel:"白翼の天空神官キャラのみ / White-Wing Sky Priestess Character Only", characterVal:"white-wing bird-human heroine, single humanoid character focus, clearly human face, attached white feathered wings, integrated tail feathers, refined priest robe, feather crown, traits integrated into the character body", completeLinked:[heroineBaseHumanoid,heroineBaseWings,heroineBaseAnchor,heroinePrefix+"_custom_white_wing",heroinePrefix+"_custom_priest_robe",heroinePrefix+"_custom_feather_crown"], characterLinked:[heroineBaseHumanoid,heroineBaseWings,heroineBaseAnchor,heroinePrefix+"_custom_white_wing",heroinePrefix+"_custom_priest_robe",heroinePrefix+"_custom_feather_crown"] },
+      { stem:"black_mage", completeLabel:"黒翼の夜空魔術師 / Black-Wing Night Mage", completeVal:"black-wing bird-human heroine, single humanoid character focus, clearly human face, attached black feathered wings, integrated tail feathers, night mage coat, small star-map accessory, traits integrated into the character body", characterLabel:"黒翼の夜空魔術師キャラのみ / Black-Wing Night Mage Character Only", characterVal:"black-wing bird-human heroine, single humanoid character focus, clearly human face, attached black feathered wings, integrated tail feathers, night mage coat, star-map accessory, traits integrated into the character body", completeLinked:[heroineBaseHumanoid,heroineBaseWings,heroineBaseAnchor,heroinePrefix+"_custom_black_wing",heroinePrefix+"_custom_airship_coat",heroinePrefix+"_custom_star_accessory"], characterLinked:[heroineBaseHumanoid,heroineBaseWings,heroineBaseAnchor,heroinePrefix+"_custom_black_wing",heroinePrefix+"_custom_airship_coat",heroinePrefix+"_custom_star_accessory"] },
+      { stem:"peacock_dancer", completeLabel:"孔雀羽の王族舞姫 / Peacock-Feather Royal Dancer", completeVal:"peacock-feather bird-human heroine, single humanoid character focus, clearly human face, attached peacock wings, integrated eye-pattern tail feathers, royal dance dress, feather crown, traits integrated into the character body", characterLabel:"孔雀羽の王族舞姫キャラのみ / Peacock-Feather Royal Dancer Character Only", characterVal:"peacock-feather bird-human heroine, single humanoid character focus, clearly human face, attached peacock wings, integrated eye-pattern tail feathers, royal dress, feather crown, traits integrated into the character body", completeLinked:[heroineBaseHumanoid,heroineBaseWings,heroineBaseAnchor,heroinePrefix+"_custom_peacock_wing",heroinePrefix+"_custom_tail_skirt",heroinePrefix+"_custom_feather_crown"], characterLinked:[heroineBaseHumanoid,heroineBaseWings,heroineBaseAnchor,heroinePrefix+"_custom_peacock_wing",heroinePrefix+"_custom_tail_skirt",heroinePrefix+"_custom_feather_crown"] },
+      { stem:"crane_sage", completeLabel:"鶴羽の雲上仙女 / Crane-Wing Cloud Immortal", completeVal:"crane-wing bird-human heroine, single humanoid character focus, clearly human face, attached white crane wings, integrated tail feathers, hagoromo dress, slender feather crest, traits integrated into the character body", characterLabel:"鶴羽の雲上仙女キャラのみ / Crane-Wing Cloud Immortal Character Only", characterVal:"crane-wing bird-human heroine, single humanoid character focus, clearly human face, attached white crane wings, integrated tail feathers, hagoromo dress, feather crest, traits integrated into the character body", completeLinked:[heroineBaseHumanoid,heroineBaseWings,heroineBaseAnchor,heroinePrefix+"_custom_crane_wing",heroinePrefix+"_custom_hagoromo_dress",heroinePrefix+"_custom_feather_crown"], characterLinked:[heroineBaseHumanoid,heroineBaseWings,heroineBaseAnchor,heroinePrefix+"_custom_crane_wing",heroinePrefix+"_custom_hagoromo_dress",heroinePrefix+"_custom_feather_crown"] },
+      { stem:"crow_guide", completeLabel:"鴉羽の導き手 / Crow-Feather Guide", completeVal:"crow-feather bird-human heroine, single humanoid character focus, clearly human face, attached black raven wings, integrated tail feathers, guide coat, feathered hood, small sacred bell, traits integrated into the character body", characterLabel:"鴉羽の導き手キャラのみ / Crow-Feather Guide Character Only", characterVal:"crow-feather bird-human heroine, single humanoid character focus, clearly human face, attached black raven wings, integrated tail feathers, guide coat, feathered hood, sacred bell, traits integrated into the character body", completeLinked:[heroineBaseHumanoid,heroineBaseWings,heroineBaseAnchor,heroinePrefix+"_custom_crow_wing",heroinePrefix+"_custom_feather_hood",heroinePrefix+"_custom_sacred_bell"], characterLinked:[heroineBaseHumanoid,heroineBaseWings,heroineBaseAnchor,heroinePrefix+"_custom_crow_wing",heroinePrefix+"_custom_feather_hood",heroinePrefix+"_custom_sacred_bell"] },
+      { stem:"thunder_knight", completeLabel:"雷翼の天空騎士 / Thunder-Wing Sky Knight", completeVal:"thunder-wing bird-human heroine, single humanoid character focus, clearly human face, attached feathered wings, wing-knight armor, slender lance, traits integrated into the character body", characterLabel:"雷翼の天空騎士キャラのみ / Thunder-Wing Sky Knight Character Only", characterVal:"thunder-wing bird-human heroine, single humanoid character focus, clearly human face, attached feathered wings, wing-knight armor, slender lance, traits integrated into the character body", completeLinked:[heroineBaseHumanoid,heroineBaseWings,heroineBaseAnchor,heroinePrefix+"_custom_knight_armor",heroinePrefix+"_custom_knight_lance"], characterLinked:[heroineBaseHumanoid,heroineBaseWings,heroineBaseAnchor,heroinePrefix+"_custom_knight_armor",heroinePrefix+"_custom_knight_lance"] },
+      { stem:"star_observer", completeLabel:"星羽の観測者 / Star-Feather Observer", completeVal:"star-feather bird-human heroine, single humanoid character focus, clearly human face, attached midnight-blue feathered wings, integrated tail feathers, observer coat, constellation accessory, feather pen, traits integrated into the character body", characterLabel:"星羽の観測者キャラのみ / Star-Feather Observer Character Only", characterVal:"star-feather bird-human heroine, single humanoid character focus, clearly human face, attached midnight-blue feathered wings, integrated tail feathers, observer coat, constellation accessory, feather pen, traits integrated into the character body", completeLinked:[heroineBaseHumanoid,heroineBaseWings,heroineBaseAnchor,heroinePrefix+"_custom_star_wing",heroinePrefix+"_custom_star_accessory",heroinePrefix+"_custom_feather_pen"], characterLinked:[heroineBaseHumanoid,heroineBaseWings,heroineBaseAnchor,heroinePrefix+"_custom_star_wing",heroinePrefix+"_custom_star_accessory",heroinePrefix+"_custom_feather_pen"] },
+      { stem:"paradise_princess", completeLabel:"楽園鳥の姫君 / Bird-of-Paradise Princess", completeVal:"bird-of-paradise heroine, single humanoid character focus, clearly human face, attached vivid paradise-bird wings, integrated long ornamental tail feathers, royal feather dress, small jewel orb, traits integrated into the character body", characterLabel:"楽園鳥の姫君キャラのみ / Bird-of-Paradise Princess Character Only", characterVal:"bird-of-paradise heroine, single humanoid character focus, clearly human face, attached vivid paradise-bird wings, integrated long ornamental tail feathers, royal feather dress, small jewel orb, traits integrated into the character body", completeLinked:[heroineBaseHumanoid,heroineBaseWings,heroineBaseAnchor,heroinePrefix+"_custom_paradise_wing",heroinePrefix+"_custom_tail_skirt",heroinePrefix+"_custom_small_orb"], characterLinked:[heroineBaseHumanoid,heroineBaseWings,heroineBaseAnchor,heroinePrefix+"_custom_paradise_wing",heroinePrefix+"_custom_tail_skirt",heroinePrefix+"_custom_small_orb"] },
+      { stem:"wind_traveler", completeLabel:"風翼の旅人 / Wind-Wing Traveler", completeVal:"wind-wing bird-human heroine, single humanoid character focus, clearly human face, attached light feathered wings, integrated tail feathers, travel coat, sky mail bag, feather hood, traits integrated into the character body", characterLabel:"風翼の旅人キャラのみ / Wind-Wing Traveler Character Only", characterVal:"wind-wing bird-human heroine, single humanoid character focus, clearly human face, attached light feathered wings, integrated tail feathers, travel coat, sky mail bag, feather hood, traits integrated into the character body", completeLinked:[heroineBaseHumanoid,heroineBaseWings,heroineBaseAnchor,heroinePrefix+"_custom_wind_wing",heroinePrefix+"_custom_airship_coat",heroinePrefix+"_custom_mail_bag"], characterLinked:[heroineBaseHumanoid,heroineBaseWings,heroineBaseAnchor,heroinePrefix+"_custom_wind_wing",heroinePrefix+"_custom_airship_coat",heroinePrefix+"_custom_mail_bag"] },
+      { stem:"hagoromo_dancer", completeLabel:"羽衣の神殿舞姫 / Hagoromo Shrine Dancer", completeVal:"hagoromo bird-human heroine, single humanoid character focus, clearly human face, attached soft feathered wings, integrated tail feathers, hagoromo dress, feather fan, sacred bell, traits integrated into the character body", characterLabel:"羽衣の神殿舞姫キャラのみ / Hagoromo Shrine Dancer Character Only", characterVal:"hagoromo bird-human heroine, single humanoid character focus, clearly human face, attached soft feathered wings, integrated tail feathers, hagoromo dress, feather fan, sacred bell, traits integrated into the character body", completeLinked:[heroineBaseHumanoid,heroineBaseWings,heroineBaseAnchor,heroinePrefix+"_custom_hagoromo_dress",heroinePrefix+"_custom_feather_fan",heroinePrefix+"_custom_sacred_bell"], characterLinked:[heroineBaseHumanoid,heroineBaseWings,heroineBaseAnchor,heroinePrefix+"_custom_hagoromo_dress",heroinePrefix+"_custom_feather_fan",heroinePrefix+"_custom_sacred_bell"] }
+    ];
+
+    var heroineRoute = {
+      title_ja:"🪽 鳥人ヒロイン中心：汎用天空キャラ",
+      title_en:"Bird-Human Heroine Route",
+      collection_id:"mythic_sky_route_heroine_collection",
+      collection_role:"route_group",
+      children:[
+        group("完成セット", "Core Sets", heroineThemes.map(function(theme){ return themeSet(heroinePrefix, theme); })),
+        group("キャラのみセット", "Character Only Sets", heroineThemes.map(function(theme){ return characterOnlySet(heroinePrefix, theme); })),
+        group("ベース", "Base", [
+          leaf(heroineBaseHumanoid,"鳥人ヒロイン・人型維持 / Bird-Human Heroine Humanoid Base","bird-human heroine, single humanoid character focus, clearly human face, human torso and limbs remain primary, traits integrated into the character body","特定神話へ固定しない共通ベース","base"),
+          leaf(heroineBaseWings,"背中翼・尾羽一体型 / Back Wings and Integrated Tail Feathers","attached feathered wings growing from the back, integrated tail feathers attached to the body, one connected character silhouette","翼と尾羽の一体型","base"),
+          leaf(heroineBaseAnchor,"顔と身体の明確化 / Clear Face and Body Anchor","clearly human face, readable facial features, human body remains primary, single merged character design","鳥化・別個体化を避ける人型アンカー","base"),
+          leaf(heroinePrefix+"_base_white_wing","白翼鳥人 / White-Wing Bird-Human","white feathered wings, soft white tail feathers, clean wing structure","白翼の基本色","base"),
+          leaf(heroinePrefix+"_base_black_wing","黒翼鳥人 / Black-Wing Bird-Human","black feathered wings, dark tail feathers, clear wing silhouette","黒翼の基本色","base"),
+          leaf(heroinePrefix+"_base_peacock_wing","孔雀羽鳥人 / Peacock-Feather Bird-Human","peacock feather wings, eye-pattern tail feathers, iridescent coverts","孔雀羽の基本色","base"),
+          leaf(heroinePrefix+"_base_crane_wing","鶴羽鳥人 / Crane-Wing Bird-Human","white crane wings, slim tail feathers, delicate red cord accents","鶴羽の基本色","base"),
+          leaf(heroinePrefix+"_base_crow_wing","鴉羽鳥人 / Crow-Feather Bird-Human","black raven wings, compact dark tail feathers, subtle blue-black sheen","鴉羽の基本色","base"),
+          leaf(heroinePrefix+"_base_star_wing","星羽鳥人 / Star-Feather Bird-Human","midnight-blue star-dusted feathers, restrained silver edge detail","星羽の基本色","base"),
+          leaf(heroinePrefix+"_base_small_wings","小翼・大翼・多翼 / Small, Large and Multi-Wing Options","choose compact wings, broad wings, or a restrained additional wing pair, all attached to one humanoid body","多翼は外付け差分として選ぶ","base"),
+          leaf(heroinePrefix+"_base_wing_arm","翼腕・背中翼・羽毛肩 / Wing Arm, Back Wing and Feather Shoulder","choose light wing-arm accents, back-mounted wings, or feathered shoulders, while keeping hands and torso readable","翼の配置差分","base"),
+          leaf(heroinePrefix+"_base_feather_features","羽耳・冠羽・鳥瞳 / Feather Ears, Crest and Bird Eyes","feather ear ornaments, attached crest feathers, birdlike iris detail, clear human facial structure","顔を獣化させない小さな鳥要素","base")
+        ]),
+        group("カスタマイズ", "Customize", [
+          leaf(heroinePrefix+"_custom_white_wing","白翼 / White Wings","attached white feathered wings, clean layered primary feathers, clear wing roots","白翼の外付け","customize"),
+          leaf(heroinePrefix+"_custom_black_wing","黒翼 / Black Wings","attached black feathered wings, blue-black feather sheen, clear layered silhouette","黒翼の外付け","customize"),
+          leaf(heroinePrefix+"_custom_peacock_wing","孔雀羽 / Peacock Wings","attached peacock feather wings, iridescent eye-pattern feathers, integrated tail plume","孔雀羽の外付け","customize"),
+          leaf(heroinePrefix+"_custom_crane_wing","鶴羽 / Crane Wings","attached white crane wings, slim layered tail feathers, delicate red cord accents","鶴羽の外付け","customize"),
+          leaf(heroinePrefix+"_custom_crow_wing","鴉羽 / Crow Wings","attached black raven wings, subtle dark feather mantle, integrated tail feathers","鴉羽の外付け","customize"),
+          leaf(heroinePrefix+"_custom_star_wing","星羽 / Star Wings","attached midnight-blue feathered wings, subtle starlike feather speckles, clear wing edges","星羽の外付け","customize"),
+          leaf(heroinePrefix+"_custom_paradise_wing","楽園鳥の羽 / Bird-of-Paradise Wings","attached vivid paradise-bird wings, ornamental feather layers, long integrated tail plumes","楽園鳥の羽","customize"),
+          leaf(heroinePrefix+"_custom_wind_wing","風翼 / Wind Wings","attached light wind-swept wings, layered pale feathers, clear body-connected wing roots","旅人向け風翼","customize"),
+          leaf(heroinePrefix+"_custom_thunder_wingtips","翼端の軽い発光 / Light Electric Wing Tips","subtle light at feather tips, restrained electric edge glow, no large lightning bolts","軽い発光だけを追加","customize"),
+          leaf(heroinePrefix+"_custom_feather_hood","羽根付きフード / Feather Hood","feather-trimmed hood, compact mantle, readable face opening","フード差分","customize"),
+          leaf(heroinePrefix+"_custom_feather_crown","羽冠 / Feather Crown","attached feather crown, delicate small ornaments, clear head silhouette","羽冠差分","customize"),
+          leaf(heroinePrefix+"_custom_tail_skirt","尾羽スカート / Tail-Feather Skirt","tail-feather skirt, layered feather panels attached to the costume, clear waist silhouette","尾羽スカート","customize"),
+          leaf(heroinePrefix+"_custom_feather_cape","羽毛ケープ / Feather Cape","soft feather cape, layered shoulder plumage, elegant outer silhouette","羽毛ケープ","customize")
+        ]),
+        group("小物・衣装", "Props and Attire", [
+          leaf(heroinePrefix+"_custom_knight_armor","翼騎士アーマー / Wing Knight Armor","light wing-knight armor, feather-shaped plates, mobile humanoid silhouette","翼騎士の衣装","customize"),
+          leaf(heroinePrefix+"_custom_hagoromo_dress","羽衣ドレス / Hagoromo Dress","flowing hagoromo dress, feather-trimmed sleeves, light layered fabric","羽衣ドレス","customize"),
+          leaf(heroinePrefix+"_custom_priest_robe","神官ローブ / Priest Robe","celestial priest robe, refined layered sleeves, restrained feather trim","神官ローブ","customize"),
+          leaf(heroinePrefix+"_custom_airship_coat","空賊・旅人コート / Skyfarer Coat","skyfarer coat, practical layered travel cloth, feather-trimmed collar","空賊・旅人コート","customize"),
+          leaf(heroinePrefix+"_custom_star_accessory","星図アクセサリー / Star-Map Accessory","small star-map accessory, constellation brooch, compact observatory charm","星見用アクセサリー","customize"),
+          leaf(heroinePrefix+"_custom_feather_pen","羽根ペン / Feather Pen","ornate feather pen, compact writing accessory","羽根ペン","customize"),
+          leaf(heroinePrefix+"_custom_mail_bag","天空郵便鞄 / Sky Mail Bag","compact sky mail bag, travel straps, small sealed letters","天空郵便鞄","customize"),
+          leaf(heroinePrefix+"_custom_sacred_bell","聖鈴 / Sacred Bell","small sacred bell, delicate cord, ceremonial accessory","聖鈴","customize"),
+          leaf(heroinePrefix+"_custom_small_orb","小さな宝珠 / Small Jewel Orb","small jewel orb, compact clear accessory, readable glass detail","小さな宝珠","customize"),
+          leaf(heroinePrefix+"_custom_feather_fan","羽扇 / Feather Fan","light feather fan, compact ceremonial prop, clear hand-held accessory","羽扇","customize"),
+          leaf(heroinePrefix+"_custom_knight_lance","翼騎士の槍 / Wing Knight Lance","slender wing-knight lance, feather-shaped spearhead, compact ceremonial weapon","翼騎士の槍","customize")
+        ]),
+        group("エフェクト", "Effects", [
+          leaf(heroinePrefix+"_effect_soft_wing_light","羽のやわらかい微光 / Soft Wing Light","soft feather-edge glow, gentle small highlights, clear character silhouette","羽を埋めない軽い発光","customize"),
+          leaf(heroinePrefix+"_effect_wind_path","光る風の通路 / Luminous Wind Path","subtle luminous wind path, thin flowing air ribbons, no large particle storm","風の演出を外付け","customize"),
+          leaf(heroinePrefix+"_effect_star_dust","控えめな星屑 / Restrained Star Dust","restrained star dust close to the wings, delicate points of light, no crowded sky","星羽向けの軽い演出","customize")
+        ]),
+        group("設定", "Settings", [
+          leaf(heroinePrefix+"_setting_cloud_city","雲海の街 / Cloud-Sea City","cloud-sea city, suspended streets, gentle aerial depth","雲海の街背景","setting"),
+          leaf(heroinePrefix+"_setting_island_market","浮遊島の市場 / Floating Island Market","floating island market, small stalls, airy bridges, calm daytime atmosphere","浮遊島の市場背景","setting"),
+          leaf(heroinePrefix+"_setting_sky_temple","天空神殿 / Sky Temple","sky temple, open colonnades, quiet sacred architecture","天空神殿背景","setting"),
+          leaf(heroinePrefix+"_setting_observatory","星見の天文台 / Starwatch Observatory","starwatch observatory, brass instruments, open dome, calm night study atmosphere","天文台背景","setting"),
+          leaf(heroinePrefix+"_setting_moon_rooftop","月夜の屋上 / Moonlit Rooftop","moonlit rooftop, quiet city distance, clear night air","月夜の屋上背景","setting"),
+          leaf(heroinePrefix+"_setting_dawn_port","暁の飛行港 / Dawn Flight Port","dawn flight port, suspended docks, soft morning haze","飛行港背景","setting"),
+          leaf(heroinePrefix+"_setting_rain_garden","雨上がりの空中庭園 / Rain-Washed Aerial Garden","rain-washed aerial garden, wet leaves, gentle air, clear path","空中庭園背景","setting"),
+          leaf(heroinePrefix+"_setting_thin_cloud_corridor","薄雲の回廊 / Thin-Cloud Corridor","thin-cloud corridor, quiet arches, soft drifting mist","薄雲の回廊背景","setting"),
+          leaf(heroinePrefix+"_setting_quiet_night","静かな夜空 / Quiet Night Sky","quiet night sky, sparse stars, clear atmospheric depth","夜空背景","setting")
+        ]),
+        group("クオリティセット", "Quality Sets", [
+          leaf(heroinePrefix+"_quality_safe","鳥人ヒロイン・安全画質セット / Bird-Human Heroine Safe Quality","", "顔・翼・衣装を読みやすく整える", "quality_set", [heroinePrefix+"_quality_feather",heroinePrefix+"_quality_wings",heroinePrefix+"_quality_face",heroinePrefix+"_quality_sky",heroinePrefix+"_quality_costume"]),
+          leaf(heroinePrefix+"_quality_gentle","鳥人ヒロイン・空気感セット / Bird-Human Heroine Gentle Atmosphere Quality","", "空気感を控えめに加える", "quality_set", [heroinePrefix+"_quality_feather",heroinePrefix+"_quality_wings",heroinePrefix+"_quality_face",heroinePrefix+"_quality_sky",heroinePrefix+"_quality_costume",heroinePrefix+"_quality_atmosphere"])
+        ]),
+        group("実クオリティ項目", "Quality Details", [
+          leaf(heroinePrefix+"_quality_feather","やわらかい羽毛質感 / Soft Feather Texture","soft feather texture, refined feather overlap, clear feather edges","羽毛質感","quality_detail"),
+          leaf(heroinePrefix+"_quality_wings","優雅な翼構造 / Elegant Wing Structure","elegant wing structure, clear wing roots, anatomically readable feather layers","翼構造","quality_detail"),
+          leaf(heroinePrefix+"_quality_face","顔立ちの明瞭化 / Clear Facial Features","clear facial features, gentle face light, readable eyes and mouth","顔の読みやすさ","quality_detail"),
+          leaf(heroinePrefix+"_quality_sky","控えめな空の光 / Subtle Sky Lighting","subtle sky lighting, soft rimlight, balanced highlights","空の光","quality_detail"),
+          leaf(heroinePrefix+"_quality_costume","衣装ディテールの精密化 / Refined Costume Detail","refined costume detail, clear fabric folds, readable small accessories","衣装の描写","quality_detail"),
+          leaf(heroinePrefix+"_quality_atmosphere","穏やかな空気遠近 / Gentle Atmospheric Depth","gentle atmospheric depth, clean distant layers, soft air perspective","空気感","quality_detail")
+        ])
+      ]
+    };
+
+    installRoutes(skyRoot, [eastRoute, westRoute, heroineRoute]);
+
+    if (window.__PP_DB) window.__PP_DB.packs = db;
+    window.PRESET_PACKS_DB = db;
+    window.__PRESET_PACKS_DB = db;
+    window.__MYTHIC_SKY_THREE_ROUTE_EXPANSION = true;
+  } catch (e) {
+    try { console.warn("[mythic_sky_three_route_expansion]", e); } catch (_ignore) {}
+  }
+})();
+
+/* ===== Doom Beasts 3-route expansion (Eastern / Western / Generic) =====
+   Keeps existing Fenrir / Cerberus / Behemoth shelves intact.
+   Uses the existing mythic_doom_beasts_collection so complete-set switching
+   clears old linked base/customize/setting/quality items before applying the new route. */
+(function(){
+  "use strict";
+  try {
+    var db = (window.__PP_DB && window.__PP_DB.packs) || window.PRESET_PACKS_DB || window.__PRESET_PACKS_DB;
+    if (!db || typeof db !== "object") return;
+
+    var ROLEPLAY_PARENT_KEY = "🎭 なりきりおすすめセット (Roleplay Recommended Sets)";
+    var SPECIAL_TITLE_JA = "🧩 神獣・伝説特化コレクション";
+    var DOOM_TITLE_JA = "☠ 冥獣・終末獣特化コレクション";
+    var COLLECTION_ID = "mythic_doom_beasts_collection";
+
+    function isArray(v) {
+      return Object.prototype.toString.call(v) === "[object Array]";
+    }
+    function titleOf(node) {
+      return node && (node.title_ja || node.titleJa || node.title || node.label || "");
+    }
+    function findByTitle(node, title) {
+      if (!node) return null;
+      if (isArray(node)) {
+        for (var i = 0; i < node.length; i++) {
+          var hit = findByTitle(node[i], title);
+          if (hit) return hit;
+        }
+        return null;
+      }
+      if (typeof node === "object") {
+        if (titleOf(node) === title) return node;
+        var keys = Object.keys(node);
+        for (var j = 0; j < keys.length; j++) {
+          var value = node[keys[j]];
+          if (!value || typeof value !== "object") continue;
+          var nested = findByTitle(value, title);
+          if (nested) return nested;
+        }
+      }
+      return null;
+    }
+    function upsertByTitle(arr, node) {
+      if (!isArray(arr) || !node) return;
+      var title = titleOf(node);
+      for (var i = 0; i < arr.length; i++) {
+        if (titleOf(arr[i]) === title) {
+          arr[i] = node;
+          return;
+        }
+      }
+      arr.push(node);
+    }
+    function leaf(id, label, val, desc, role, linkedIds) {
+      return {
+        id: id,
+        label: label,
+        val: val,
+        desc: desc || "",
+        collection_id: COLLECTION_ID,
+        collection_role: role,
+        linked_ids: isArray(linkedIds) ? linkedIds.slice() : []
+      };
+    }
+    function group(titleJa, titleEn, children) {
+      return {
+        title_ja: titleJa,
+        title_en: titleEn,
+        children: children
+      };
+    }
+    function idFor(routeKey, stem, suffix) {
+      return "mythic_doom_" + routeKey + "_" + stem + "_" + suffix;
+    }
+    function joinPrompt() {
+      var out = [];
+      for (var i = 0; i < arguments.length; i++) {
+        if (arguments[i]) out.push(arguments[i]);
+      }
+      return out.join(", ");
+    }
+    function makeRoute(route) {
+      var complete = [];
+      var characterOnly = [];
+      var bases = [];
+      var customizes = [];
+      var outfits = [];
+      var settings = [];
+      var qualitySets = [];
+      var qualityDetails = [];
+
+      for (var i = 0; i < route.themes.length; i++) {
+        var theme = route.themes[i];
+        var stem = theme.stem;
+        var baseId = idFor(route.key, stem, "base");
+        var customId = idFor(route.key, stem, "custom");
+        var outfitId = idFor(route.key, stem, "outfit");
+        var settingId = idFor(route.key, stem, "setting");
+        var qualitySetId = idFor(route.key, stem, "quality_set_safe");
+        var qualityAId = idFor(route.key, stem, "quality_detail_a");
+        var qualityBId = idFor(route.key, stem, "quality_detail_b");
+        var coreId = idFor(route.key, stem, "complete_core");
+        var safeId = idFor(route.key, stem, "complete_safe_quality");
+        var limitId = idFor(route.key, stem, "complete_2000_limit");
+        var fullId = idFor(route.key, stem, "complete_full");
+        var characterId = idFor(route.key, stem, "character_only");
+        var suppressId = theme.suppress ? idFor(route.key, stem, "suppress_external") : "";
+        var coreLinks = [baseId, customId, outfitId, settingId];
+        var safeLinks = [baseId, customId, outfitId, settingId, qualitySetId];
+        var limitLinks = [baseId, outfitId];
+        var fullLinks = [baseId, customId, outfitId, settingId, qualitySetId];
+        if (suppressId) {
+          coreLinks.push(suppressId);
+          safeLinks.push(suppressId);
+          fullLinks.push(suppressId);
+        }
+
+        complete.push(leaf(
+          coreId,
+          theme.ja + " Core Set / " + theme.en + " Core Set",
+          theme.anchor,
+          "完成セット：主題・人型維持・固定衣装の核。表情やポーズは外付け。",
+          "complete_set",
+          coreLinks
+        ));
+        complete.push(leaf(
+          safeId,
+          theme.ja + " Safe Quality Set / " + theme.en + " Safe Quality Set",
+          theme.anchor,
+          "完成セット：主題を増やさず、質感と光だけを安全に補強。",
+          "complete_set",
+          safeLinks
+        ));
+        complete.push(leaf(
+          limitId,
+          theme.ja + " 2000 Limit Compatible Set / " + theme.en + " 2000 Limit Compatible Set",
+          theme.short,
+          "完成セット：重複語を抑えた短縮・実戦版。",
+          "complete_set",
+          limitLinks
+        ));
+        complete.push(leaf(
+          fullId,
+          theme.ja + " Full Set / " + theme.en + " Full Set",
+          joinPrompt(theme.anchor, theme.full),
+          "完成セット：ベース・差分・衣装・舞台・品質をまとめて試す全部乗せ版。",
+          "complete_set",
+          fullLinks
+        ));
+
+        characterOnly.push(leaf(
+          characterId,
+          theme.ja + "キャラのみセット / " + theme.en + " Character Only Set",
+          theme.short,
+          "外付け前提の起点。固定表情・ポーズ・背景・強演出を入れない。",
+          "complete_set",
+          [baseId, customId, outfitId]
+        ));
+
+        bases.push(leaf(
+          baseId,
+          theme.ja + "ベース / " + theme.en + " Base",
+          theme.base,
+          "人型維持と身体接続型の種族特徴。",
+          "base",
+          []
+        ));
+        customizes.push(leaf(
+          customId,
+          theme.ja + "カスタマイズ / " + theme.en + " Customize",
+          theme.custom,
+          "翼・角・尾・紋様・固有装飾などの差別化要素。",
+          "customize",
+          []
+        ));
+        outfits.push(leaf(
+          outfitId,
+          theme.ja + "衣装・小物 / " + theme.en + " Attire & Relics",
+          theme.attire,
+          "衣装と固定小物。表情・ポーズは含めない。",
+          "customize",
+          []
+        ));
+        settings.push(leaf(
+          settingId,
+          theme.ja + "設定 / " + theme.en + " Setting",
+          theme.setting,
+          "舞台・空間・静かな終末感の外付け。",
+          "setting",
+          []
+        ));
+        qualitySets.push(leaf(
+          qualitySetId,
+          theme.ja + "クオリティ補助 / " + theme.en + " Quality Support",
+          theme.quality,
+          "質感・光・描写強化を安全にまとめてON。",
+          "quality_set",
+          [qualityAId, qualityBId]
+        ));
+        qualityDetails.push(leaf(
+          qualityAId,
+          theme.ja + "質感描写 / " + theme.en + " Texture Detail",
+          theme.quality,
+          "素材・衣装・身体特徴の精密描写。",
+          "quality_detail",
+          []
+        ));
+        qualityDetails.push(leaf(
+          qualityBId,
+          theme.ja + "空気感描写 / " + theme.en + " Atmosphere Detail",
+          theme.quality_detail,
+          "光と奥行きの補助。主題を埋もれさせない。",
+          "quality_detail",
+          []
+        ));
+
+        if (suppressId) {
+          settings.push(leaf(
+            suppressId,
+            theme.ja + "外部獣抑制 / " + theme.en + " Single Character Guard",
+            theme.suppress,
+            "別個体化しやすい題材だけに使う、人型一体化の補助。",
+            "setting",
+            []
+          ));
+        }
+      }
+
+      return {
+        title_ja: route.title_ja,
+        title_en: route.title_en,
+        collection_id: COLLECTION_ID,
+        children: [
+          group("完成セット", "Complete Sets", complete),
+          group("キャラのみセット", "Character Only Sets", characterOnly),
+          group("ベース", "Base", bases),
+          group("カスタマイズ", "Customize", customizes),
+          group("衣装・小物", "Attire & Relics", outfits),
+          group("設定", "Settings", settings),
+          group("クオリティセット", "Quality Sets", qualitySets),
+          group("実クオリティ項目", "Quality Details", qualityDetails)
+        ]
+      };
+    }
+
+    var routes = [
+  {
+    "key": "east",
+    "title_ja": "🏮 東方冥獣・四凶なりきり",
+    "title_en": "Eastern Doom Beasts & Four Perils",
+    "themes": [
+      {
+        "stem": "taotie",
+        "ja": "饕餮の飢渇王女",
+        "en": "Taotie Hunger Sovereign",
+        "anchor": "Taotie-inspired humanoid heroine, single humanoid character focus, clearly human face, Taotie traits integrated into her own body, jade-black horn buds attached to the head, subtle fanged ornaments, black-gold ritual court dress, ancient hunger-mask pendant",
+        "short": "Taotie humanoid heroine, clearly human face, jade-black horn buds, black-gold ritual dress, hunger-mask pendant, single merged character design",
+        "base": "human body remains primary, clearly human face, Taotie traits integrated into the character body, jade-black horn buds, subtle scaled ear accents, elegant dark tail ornament, single merged character design",
+        "custom": "engraved hunger-mask motifs on sleeves and belt, black jade talismans, small gold fanged ornaments, restrained shadow haze close to her silhouette",
+        "attire": "black and antique-gold ceremonial court dress, jade-inlaid collar, layered embroidered sleeves, delicate bronze ritual jewelry",
+        "setting": "quiet ruined bronze altar, distant eclipse haze, ancient ceremonial hall, subdued end-time atmosphere",
+        "quality": "detailed black-jade and antique-gold ornament, layered fabric embroidery, controlled sacred shadow lighting",
+        "quality_detail": "subtle eclipse rim light, refined bronze patina, deep ceremonial atmosphere",
+        "full": "quiet ruined bronze altar, restrained eclipse haze, black jade talismans floating close to her silhouette"
+      },
+      {
+        "stem": "qiongqi",
+        "ja": "窮奇の反逆獣騎士",
+        "en": "Qiongqi Rebel Beast Knight",
+        "anchor": "Qiongqi-inspired humanoid beast knight, single humanoid character focus, clearly human face, compact black-and-white feathered wings attached to her back, curved tiger-like ears and striped tail integrated into her body, dark rebel knight armor, broken-banner crest",
+        "short": "Qiongqi humanoid beast knight, clearly human face, attached compact feathered wings, striped tail, dark rebel armor, single merged character design",
+        "base": "human body remains primary, clearly human face, compact feathered wings attached to the back, curved tiger-like ears, striped tail attached to the lower back, single merged character design",
+        "custom": "barbed wing tips, dark feather mantle, claw-shaped gauntlet accents, cracked rebel crest, restrained storm sparks around the armor",
+        "attire": "asymmetrical black lamellar knight armor, torn ceremonial cape, feather-trimmed shoulder guards, dark silver belt ornaments",
+        "setting": "wind-cut cliff shrine, weathered stone path, broken banners, quiet storm-front sky",
+        "quality": "crisp feather structure, refined dark metal detail, controlled storm rim light",
+        "quality_detail": "layered black-and-white feather texture, atmospheric cliff depth, sharp but readable armor highlights",
+        "full": "wind-cut cliff shrine, broken banners, a restrained storm-front glow behind her",
+        "suppress": "single merged character design, no separate Qiongqi beast or companion creature"
+      },
+      {
+        "stem": "taowu",
+        "ja": "檮杌の荒廃神官",
+        "en": "Taowu Ruin Priestess",
+        "anchor": "Taowu-inspired humanoid ruin priestess, single humanoid character focus, clearly human face, weathered horn crown attached to the head, pale stone-fur mantle integrated around the shoulders, heavy talisman tail ornament, ash-gray ceremonial robe",
+        "short": "Taowu humanoid ruin priestess, clearly human face, weathered horn crown, stone-fur mantle, ash-gray ceremonial robe, single merged character design",
+        "base": "human body remains primary, clearly human face, weathered horn crown attached to the head, stone-fur shoulder mantle, heavy tail ornament attached to the lower back, single merged character design",
+        "custom": "cracked stone prayer beads, worn talisman strips, eroded horn carvings, fine ash dust close to the robe hem",
+        "attire": "ash-gray high-collar ceremonial robe, layered weathered sashes, stone bead jewelry, muted iron ornaments",
+        "setting": "silent collapsed shrine, wind-polished pillars, pale ash ground, abandoned ritual path",
+        "quality": "weathered stone texture, layered robe fibers, low-contrast ruin lighting",
+        "quality_detail": "fine ash particles, refined erosion detail, quiet desaturated atmospheric depth",
+        "full": "silent collapsed shrine, pale ash drifting around her hem, weathered prayer stones",
+        "suppress": "single merged character design, no separate Taowu beast behind her"
+      },
+      {
+        "stem": "hundun",
+        "ja": "混沌の虚無姫",
+        "en": "Hundun Void Princess",
+        "anchor": "Hundun-inspired humanoid void princess, single humanoid character focus, clearly human face, soft black feather-like mantle integrated into her cloak, small obsidian horn ornaments attached to the head, irregular starless markings on skin and dress, dark violet royal gown",
+        "short": "Hundun humanoid void princess, clearly human face, obsidian horn ornaments, black feather mantle, dark violet royal gown, single merged character design",
+        "base": "human body remains primary, clearly human face, subtle obsidian horn ornaments attached to the head, black feather-like mantle integrated into the shoulders, starless body markings, single merged character design",
+        "custom": "frayed void ribbons, small sealed-orb jewelry, irregular black star motifs, close-body violet haze",
+        "attire": "dark violet royal gown, layered black veil sleeves, obsidian crown pins, restrained celestial embroidery",
+        "setting": "quiet starless observatory, broken circular window, dim void horizon, calm end-of-night atmosphere",
+        "quality": "soft black feather texture, controlled violet edge light, refined obsidian ornament detail",
+        "quality_detail": "deep starless atmospheric depth, delicate void haze, clear facial lighting",
+        "full": "quiet starless observatory, dim void horizon, small sealed-orb lights near her silhouette"
+      },
+      {
+        "stem": "zhuyin",
+        "ja": "燭陰の夜明け終末巫女",
+        "en": "Zhuyin Dawn-End Oracle",
+        "anchor": "Zhuyin-inspired humanoid dawn-end oracle, single humanoid character focus, clearly human face, crimson horn pair attached to the head, one long serpent tail attached to the lower back, sun-moon eye accents, layered vermilion and midnight-blue shrine robes",
+        "short": "Zhuyin humanoid oracle, clearly human face, crimson horn pair, attached serpent tail, sun-moon eye accents, layered shrine robes",
+        "base": "human body remains primary, clearly human face, crimson horn pair attached to the head, one long serpent tail attached to the lower back, subtle sun-moon eye accents, single merged character design",
+        "custom": "small sun-disc hairpins, moon-thread tassels, vermilion scale cuffs, restrained dawn-and-night glow close to the body",
+        "attire": "layered vermilion and midnight-blue shrine robes, gold sun-thread embroidery, moonstone prayer beads, ritual sash",
+        "setting": "twilight mountain sanctuary, distant sun-moon horizon, quiet incense path, sacred ending-of-night atmosphere",
+        "quality": "fine scale accents, soft dawn-and-night lighting, refined gold thread detail",
+        "quality_detail": "balanced vermilion and blue rim light, atmospheric mountain depth, readable face light",
+        "full": "twilight mountain sanctuary, a quiet sun-moon horizon, thin incense ribbons near her silhouette"
+      }
+    ]
+  },
+  {
+    "key": "west",
+    "title_ja": "🏛 西方冥界・終末獣なりきり",
+    "title_en": "Western Underworld & Apocalypse Beasts",
+    "themes": [
+      {
+        "stem": "ammit",
+        "ja": "アミットの冥界裁定官",
+        "en": "Ammit Underworld Adjudicator",
+        "anchor": "Ammit-inspired humanoid underworld adjudicator, single humanoid character focus, clearly human face, crocodile-scale accents integrated across shoulders and hips, lion-like ear tufts, short heavy tail ornament attached to the lower back, black-gold judgment robe, heart-scale pendant",
+        "short": "Ammit humanoid adjudicator, clearly human face, crocodile-scale accents, lion-like ear tufts, black-gold judgment robe, single merged character design",
+        "base": "human body remains primary, clearly human face, subtle crocodile-scale accents across shoulders and hips, lion-like ear tufts, short tail ornament attached to the lower back, single merged character design",
+        "custom": "heart-scale pendant, papyrus seal charms, gold claw-ring accents, restrained river-mist close to the hem",
+        "attire": "black-gold judgment robe, broad collar with green stone inlays, layered linen sash, ceremonial scale jewelry",
+        "setting": "quiet hall of weighing, dark river beyond stone columns, orderly judgement tablets, subdued underworld light",
+        "quality": "refined scale texture, ancient gold ornament detail, soft river-shadow lighting",
+        "quality_detail": "readable face lighting, delicate linen texture, calm underworld atmospheric depth",
+        "full": "quiet hall of weighing, dark river beyond stone columns, faint gold scales of judgment nearby"
+      },
+      {
+        "stem": "garmr",
+        "ja": "ガルムの冥界番犬騎士",
+        "en": "Garmr Underworld Hound Knight",
+        "anchor": "Garmr-inspired humanoid underworld hound knight, single humanoid character focus, clearly human face, midnight-blue hound ears attached to the head, long hound tail attached to the lower back, iron rune collar, frost-dark gatekeeper armor",
+        "short": "Garmr humanoid hound knight, clearly human face, midnight-blue hound ears, attached hound tail, iron rune collar, gatekeeper armor",
+        "base": "human body remains primary, clearly human face, midnight-blue hound ears attached to the head, long hound tail attached to the lower back, subtle fang accents, single merged character design",
+        "custom": "iron rune collar, heavy gate keys, frost-dark fur cuffs, restrained cold breath close to the armor",
+        "attire": "frost-dark gatekeeper armor, layered charcoal cloak, rune-etched belt, iron key ornaments",
+        "setting": "silent underworld bridge, sealed iron gate, low northern fog, calm funeral bell distance",
+        "quality": "refined iron texture, soft cold rim light, detailed dark fur cuffs",
+        "quality_detail": "atmospheric gate fog, readable armor highlights, restrained winter depth",
+        "full": "silent underworld bridge, sealed iron gate, low northern fog gathering around her boots"
+      },
+      {
+        "stem": "typhon",
+        "ja": "テュポーンの嵐獣王",
+        "en": "Typhon Storm Beast Sovereign",
+        "anchor": "Typhon-inspired humanoid storm beast sovereign, single humanoid character focus, clearly human face, small horn crown attached to the head, serpent-like mane woven into her hair, compact dark wing mantle integrated into the back, storm-etched royal armor",
+        "short": "Typhon humanoid storm sovereign, clearly human face, horn crown, serpent-like mane, compact wing mantle, storm-etched armor",
+        "base": "human body remains primary, clearly human face, small horn crown attached to the head, serpent-like hair ornaments, compact dark wing mantle integrated into the back, single merged character design",
+        "custom": "storm sigil bracers, bronze scale tassels, controlled electric filaments close to the armor, wind-torn mantle edges",
+        "attire": "dark bronze royal armor, layered storm cloak, serpent-pattern sash, weathered crown jewelry",
+        "setting": "ruined mountaintop citadel, distant thundercloud wall, broken columns, restrained end-storm atmosphere",
+        "quality": "refined bronze scale detail, controlled storm lighting, crisp mantle structure",
+        "quality_detail": "subtle electric rim light, deep thundercloud depth, clear human facial features",
+        "full": "ruined mountaintop citadel, a restrained thundercloud wall, small storm sigils circling close to her armor",
+        "suppress": "single merged character design, no separate multi-headed storm beast"
+      },
+      {
+        "stem": "manticore",
+        "ja": "マンティコアの砂獣錬金姫",
+        "en": "Manticore Desert Alchemist",
+        "anchor": "Manticore-inspired humanoid desert alchemist, single humanoid character focus, clearly human face, lion-like ear tufts attached to the head, compact feathered shoulder mantle, slender scorpion-tail accent attached to the lower back, sunset-gold alchemist coat",
+        "short": "Manticore humanoid alchemist, clearly human face, lion-like ear tufts, feather mantle, attached scorpion-tail accent, sunset-gold coat",
+        "base": "human body remains primary, clearly human face, lion-like ear tufts attached to the head, compact feathered shoulder mantle, slender scorpion-tail accent attached to the lower back, single merged character design",
+        "custom": "gold alchemy vials, small sting-shaped hairpin, desert claw gloves, restrained amber dust close to the coat",
+        "attire": "sunset-gold alchemist coat, layered sand-colored tunic, leather vial belt, fine feathered collar",
+        "setting": "quiet desert observatory, half-buried astrolabe, distant red dunes, late-sun stillness",
+        "quality": "fine feather texture, warm metallic ornament detail, controlled desert rim light",
+        "quality_detail": "subtle amber dust, deep dune atmosphere, crisp textile detail",
+        "full": "quiet desert observatory, half-buried astrolabe, restrained amber dust close to her silhouette",
+        "suppress": "single merged character design, no separate manticore beast"
+      },
+      {
+        "stem": "chimera",
+        "ja": "キマイラの禁忌錬成士",
+        "en": "Chimera Forbidden Alchemist",
+        "anchor": "Chimera-inspired humanoid forbidden alchemist, single humanoid character focus, clearly human face, small goat-like horns attached to the head, lion-mane collar integrated around the shoulders, compact dragon-wing ornaments attached to the back, slender serpent tail attached to the lower back, dark laboratory coat",
+        "short": "Chimera humanoid alchemist, clearly human face, goat-like horns, lion-mane collar, compact wing ornaments, attached serpent tail",
+        "base": "human body remains primary, clearly human face, small goat-like horns attached to the head, lion-mane collar integrated around the shoulders, compact dragon-wing ornaments, slender serpent tail, single merged character design",
+        "custom": "sealed specimen bottles, alchemical sigil brooches, small scale plates, restrained green-gold transmutation glow close to the sleeves",
+        "attire": "dark high-collar laboratory coat, layered black vest, antique brass buckles, delicate alchemy chains",
+        "setting": "quiet forbidden laboratory, tall reagent shelves, sealed glass vessels, dim green-gold work light",
+        "quality": "refined horn and mane texture, controlled alchemical glow, crisp brass detail",
+        "quality_detail": "clear facial features, subtle laboratory atmosphere, detailed fabric and metal surfaces",
+        "full": "quiet forbidden laboratory, sealed glass vessels, restrained green-gold transmutation motes near her hands",
+        "suppress": "single merged character design, no separate chimera creature or companion beast"
+      }
+    ]
+  },
+  {
+    "key": "generic",
+    "title_ja": "🕯 汎用冥界獣人・終末ヒロイン",
+    "title_en": "Generic Underworld Beastkin & Doom Heroines",
+    "themes": [
+      {
+        "stem": "eclipse_hound",
+        "ja": "月蝕の冥犬巫女",
+        "en": "Eclipse Underworld Hound Priestess",
+        "anchor": "underworld hound shrine maiden, single humanoid character focus, clearly human face, dark hound ears attached to the head, long dark tail attached to the lower back, crescent mask pendant, black and silver shrine dress",
+        "short": "underworld hound shrine maiden, clearly human face, dark hound ears, attached tail, crescent pendant, black and silver shrine dress",
+        "base": "human body remains primary, clearly human face, dark hound ears attached to the head, long dark tail attached to the lower back, subtle fang accents, single merged character design",
+        "custom": "crescent mask pendant, silver bell tassels, dark fur cuffs, soft eclipse haze close to the body",
+        "attire": "black and silver shrine dress, layered ritual sleeves, moon-thread sash, small bell ornaments",
+        "setting": "quiet moon-eclipse shrine path, low stone lanterns, dark cedar gate, calm midnight atmosphere",
+        "quality": "soft dark fur texture, refined silver ornament detail, gentle eclipse lighting",
+        "quality_detail": "clear face lighting, delicate bell detail, subtle midnight atmospheric depth",
+        "full": "quiet moon-eclipse shrine path, low stone lanterns, soft eclipse haze near her silhouette"
+      },
+      {
+        "stem": "obsidian_wolf",
+        "ja": "黒曜の終末狼騎士",
+        "en": "Obsidian Doom Wolf Knight",
+        "anchor": "obsidian doom wolf knight, single humanoid character focus, clearly human face, charcoal wolf ears attached to the head, long wolf tail attached to the lower back, obsidian armor plates, dark red oath ribbon",
+        "short": "obsidian doom wolf knight, clearly human face, charcoal wolf ears, attached wolf tail, obsidian armor, dark red oath ribbon",
+        "base": "human body remains primary, clearly human face, charcoal wolf ears attached to the head, long wolf tail attached to the lower back, subtle claw accents, single merged character design",
+        "custom": "obsidian claw gauntlets, wolf-fang brooch, dark red oath ribbon, restrained ash motes close to the armor",
+        "attire": "layered obsidian knight armor, charcoal cloak, dark red belt sash, engraved iron buckles",
+        "setting": "quiet ruined causeway, black stone arches, distant ash plain, muted end-of-world dusk",
+        "quality": "crisp obsidian surface detail, controlled red rim light, refined armor texture",
+        "quality_detail": "subtle ash atmosphere, readable face and armor lighting, deep ruin perspective",
+        "full": "quiet ruined causeway, black stone arches, restrained ash motes around her boots"
+      },
+      {
+        "stem": "abyss_princess",
+        "ja": "深淵海獣の王女",
+        "en": "Abyssal Sea Beast Princess",
+        "anchor": "abyssal sea beast princess, single humanoid character focus, clearly human face, blue-black fin ornaments integrated along the arms and back, one elegant sea-tail fin attached to the lower back, pearl crown, deep navy royal dress",
+        "short": "abyssal sea beast princess, clearly human face, blue-black fin ornaments, attached sea-tail fin, pearl crown, deep navy royal dress",
+        "base": "human body remains primary, clearly human face, blue-black fin ornaments integrated along the arms and back, one elegant sea-tail fin attached to the lower back, subtle scale accents, single merged character design",
+        "custom": "pearl chain jewelry, shell-shaped hairpins, small bioluminescent beads, soft deep-blue glow close to the dress",
+        "attire": "deep navy royal dress, layered translucent sleeve fins, pearl crown, silver shell embroidery",
+        "setting": "quiet submerged throne hall, dark blue windows, distant drifting lights, calm trench atmosphere",
+        "quality": "delicate fin structure, refined pearl texture, soft deep-sea lighting",
+        "quality_detail": "subtle underwater depth, controlled bioluminescent highlights, clear facial features",
+        "full": "quiet submerged throne hall, distant drifting lights, soft deep-blue glow near her silhouette"
+      },
+      {
+        "stem": "bonehorn_sentinel",
+        "ja": "骨角の荒野守護者",
+        "en": "Bone-Horn Wasteland Sentinel",
+        "anchor": "bone-horn wasteland sentinel, single humanoid character focus, clearly human face, pale ram-like horns attached to the head, bone shoulder guards integrated into the outfit, short dark tail ornament attached to the lower back, sand-gray guardian mantle",
+        "short": "bone-horn wasteland sentinel, clearly human face, pale ram horns, bone shoulder guards, dark tail ornament, sand-gray mantle",
+        "base": "human body remains primary, clearly human face, pale ram-like horns attached to the head, subtle bone shoulder guards, short tail ornament attached to the lower back, single merged character design",
+        "custom": "weathered bone charms, cracked stone beads, small relic lantern, restrained pale dust close to the mantle",
+        "attire": "sand-gray guardian mantle, layered bone-trim armor, dark leather sash, worn relic jewelry",
+        "setting": "silent salt wasteland, half-buried watchtower, pale wind, long empty horizon",
+        "quality": "weathered bone detail, layered cloth texture, soft pale desert light",
+        "quality_detail": "subtle dust depth, refined relic surface, clear human facial features",
+        "full": "silent salt wasteland, half-buried watchtower, pale wind moving around her mantle"
+      },
+      {
+        "stem": "serpent_priestess",
+        "ja": "蛇環の終焉神官",
+        "en": "Serpent-Ring End Priestess",
+        "anchor": "serpent-ring end priestess, single humanoid character focus, clearly human face, small serpent crown attached to the head, one elegant serpent tail attached to the lower back, scale-pattern cuffs, black teal ceremonial robe",
+        "short": "serpent-ring end priestess, clearly human face, serpent crown, attached serpent tail, scale cuffs, black teal ceremonial robe",
+        "base": "human body remains primary, clearly human face, small serpent crown attached to the head, one elegant serpent tail attached to the lower back, subtle scale-pattern cuffs, single merged character design",
+        "custom": "ringed serpent bangles, obsidian prayer beads, scale-pattern sash, restrained teal mist close to the robe",
+        "attire": "black teal ceremonial robe, layered scale embroidery, dark silver sash, small ritual bells",
+        "setting": "quiet circular shrine, black water pool, carved serpent pillars, dim terminal twilight",
+        "quality": "fine scale pattern detail, controlled teal edge light, refined silver ornaments",
+        "quality_detail": "calm black-water reflection, subtle mist depth, readable facial lighting",
+        "full": "quiet circular shrine, black water pool, restrained teal mist close to her hem"
+      },
+      {
+        "stem": "void_beast_princess",
+        "ja": "星骸の虚無獣姫",
+        "en": "Star-Corpse Void Beast Princess",
+        "anchor": "star-corpse void beast princess, single humanoid character focus, clearly human face, small black horn ornaments attached to the head, feathered shadow mantle integrated around the shoulders, faint constellation scars on skin, dark blue funeral royal dress",
+        "short": "star-corpse void beast princess, clearly human face, black horn ornaments, feathered shadow mantle, constellation scars, dark blue royal dress",
+        "base": "human body remains primary, clearly human face, small black horn ornaments attached to the head, feathered shadow mantle integrated around the shoulders, faint constellation scars, single merged character design",
+        "custom": "sealed star-glass pendant, tiny black crystal beads, frayed shadow ribbons, soft indigo haze close to the dress",
+        "attire": "dark blue funeral royal dress, layered black veil sleeves, star-thread embroidery, obsidian jewelry",
+        "setting": "quiet abandoned observatory, broken telescope dome, distant dim stars, calm cosmic dusk",
+        "quality": "soft feathered shadow texture, delicate star-thread detail, controlled indigo lighting",
+        "quality_detail": "deep cosmic atmospheric depth, clear human face, refined obsidian reflections",
+        "full": "quiet abandoned observatory, distant dim stars, small indigo motes near her silhouette"
+      },
+      {
+        "stem": "blackgold_royalty",
+        "ja": "黒金の冥界獣王族",
+        "en": "Black-Gold Underworld Beast Royal",
+        "anchor": "black-gold underworld beast royal, single humanoid character focus, clearly human face, elegant dark beast ears attached to the head, long black tail attached to the lower back, gold claw jewelry, formal black-gold royal dress",
+        "short": "black-gold underworld beast royal, clearly human face, dark beast ears, attached black tail, gold claw jewelry, formal royal dress",
+        "base": "human body remains primary, clearly human face, elegant dark beast ears attached to the head, long black tail attached to the lower back, subtle claw ornaments, single merged character design",
+        "custom": "gold claw jewelry, black crystal crest, velvet fur cuffs, restrained gold shadow close to the dress",
+        "attire": "formal black-gold royal dress, layered velvet cape, antique crown pins, dark gemstone belt",
+        "setting": "quiet underworld audience chamber, black stone throne, distant candle rows, composed nocturnal air",
+        "quality": "refined velvet texture, delicate gold ornament detail, soft nocturnal lighting",
+        "quality_detail": "clear facial features, polished black stone reflections, gentle atmospheric depth",
+        "full": "quiet underworld audience chamber, distant candle rows, restrained gold shadow around her cape"
+      },
+      {
+        "stem": "calamity_horn_mage",
+        "ja": "災厄の角獣魔術師",
+        "en": "Calamity Horn-Beast Mage",
+        "anchor": "calamity horn-beast mage, single humanoid character focus, clearly human face, swept dark horns attached to the head, short feathered wing mantle integrated into the shoulders, small tail ornament attached to the lower back, layered dark mage coat",
+        "short": "calamity horn-beast mage, clearly human face, swept dark horns, feathered wing mantle, tail ornament, layered dark mage coat",
+        "base": "human body remains primary, clearly human face, swept dark horns attached to the head, short feathered wing mantle integrated into the shoulders, small tail ornament attached to the lower back, single merged character design",
+        "custom": "dark rune cards, small horn-shaped hairpins, ash-black spell ribbon, restrained violet sparks close to the sleeves",
+        "attire": "layered dark mage coat, charcoal vest, deep violet sash, silver rune clasps",
+        "setting": "quiet ruined spell library, broken shelves, dim rune lamps, calm pre-cataclysm atmosphere",
+        "quality": "refined horn texture, crisp rune-clasp detail, controlled violet edge light",
+        "quality_detail": "subtle rune-lamp glow, readable face lighting, deep library atmosphere",
+        "full": "quiet ruined spell library, dim rune lamps, restrained violet sparks near her sleeves"
+      },
+      {
+        "stem": "night_guide",
+        "ja": "冥夜の獣耳案内人",
+        "en": "Underworld Night Beast Guide",
+        "anchor": "underworld night beast guide, single humanoid character focus, clearly human face, soft black beast ears attached to the head, short dark tail attached to the lower back, lantern key charm, midnight travel coat",
+        "short": "underworld night beast guide, clearly human face, soft black beast ears, attached dark tail, lantern key charm, midnight travel coat",
+        "base": "human body remains primary, clearly human face, soft black beast ears attached to the head, short dark tail attached to the lower back, subtle fang accents, single merged character design",
+        "custom": "small lantern key charm, black feather scarf, route-map pouch, soft blue guide-light close to the coat",
+        "attire": "midnight travel coat, layered black scarf, dark leather boots, silver route-map brooch",
+        "setting": "quiet underworld passage, low blue lanterns, stone steps, misty night corridor",
+        "quality": "soft ear and scarf texture, refined silver charm detail, gentle guide-light",
+        "quality_detail": "subtle corridor depth, clear facial features, calm blue atmospheric light",
+        "full": "quiet underworld passage, low blue lanterns, soft guide-light near her coat"
+      }
+    ]
+  }
+];
+
+    var roleplayRoot = findByTitle(db[ROLEPLAY_PARENT_KEY], "🎭 なりきり");
+    if (!roleplayRoot || !isArray(roleplayRoot.children)) return;
+    var specialRoot = findByTitle(roleplayRoot.children, SPECIAL_TITLE_JA);
+    if (!specialRoot || !isArray(specialRoot.children)) return;
+    var doomRoot = findByTitle(specialRoot.children, DOOM_TITLE_JA);
+    if (!doomRoot || !isArray(doomRoot.children)) return;
+
+    for (var r = 0; r < routes.length; r++) {
+      upsertByTitle(doomRoot.children, makeRoute(routes[r]));
+    }
+
+    var topOrder = {
+      "🐺 フェンリル": 0,
+      "🐶 ケルベロス": 1,
+      "🦬 ベヒーモス": 2,
+      "🏮 東方冥獣・四凶なりきり": 3,
+      "🏛 西方冥界・終末獣なりきり": 4,
+      "🕯 汎用冥界獣人・終末ヒロイン": 5
+    };
+    doomRoot.children.sort(function(a, b) {
+      var ai = Object.prototype.hasOwnProperty.call(topOrder, titleOf(a)) ? topOrder[titleOf(a)] : 999;
+      var bi = Object.prototype.hasOwnProperty.call(topOrder, titleOf(b)) ? topOrder[titleOf(b)] : 999;
+      return ai - bi;
+    });
+
+    if (window.__PP_DB) window.__PP_DB.packs = db;
+    window.PRESET_PACKS_DB = db;
+    window.__PRESET_PACKS_DB = db;
+  } catch (e) {}
+})();
+
+
+/* === Special collection expansion: roleplay all-in additions === */
+(function(){
+  "use strict";
+  try {
+    var db = (window.__PP_DB && window.__PP_DB.packs) || window.PRESET_PACKS_DB || window.__PRESET_PACKS_DB;
+    if (!db || typeof db !== "object") return;
+
+    var ROLEPLAY_PARENT_KEY = "🎭 なりきりおすすめセット (Roleplay Recommended Sets)";
+    var SPECIAL_TITLE_JA = "🧩 神獣・伝説特化コレクション";
+    var COLLECTIONS = [
+  {
+    "title_ja": "🪙 マモン（強欲）特化コレクション",
+    "title_en": "Mammon (Greed) Special Collection",
+    "collection_id": "mythic_mammon_greed_collection",
+    "key": "mammon",
+    "themes": [
+      {
+        "stem": "gold_covenant",
+        "ja": "黄金の契約魔王",
+        "en": "Golden Covenant Demon Sovereign",
+        "anchor": "greed demon sovereign, single humanoid character focus, clearly human face, single merged character design, black-gold curled horns attached to the head, jewel-threaded tail attached to the lower back, contract seal scepter, key-ring ornaments, gemstone chains, black-gold signet rings, formal black-gold royal attire, layered jewel-trimmed cape, lacquered high boots",
+        "short": "greed demon sovereign, single humanoid character focus, clearly human face, black-gold curled horns attached to the head, jewel-threaded tail attached to the lower back, formal black-gold royal attire, layered jewel-trimmed cape, lacquered high boots",
+        "base": "human body remains primary, clearly human face, single merged character design, black-gold curled horns attached to the head, jewel-threaded tail attached to the lower back",
+        "custom": "contract seal scepter, key-ring ornaments, gemstone chains, black-gold signet rings",
+        "attire": "formal black-gold royal attire, layered jewel-trimmed cape, lacquered high boots",
+        "effect": "restrained gold glimmer close to the hands, tiny coin-light motes",
+        "setting": "vault audience chamber, treasure ledger altar, quiet imperial wealth",
+        "quality": "refined metal shine, crisp jewel facets, controlled black-gold highlights",
+        "quality_detail": "luxurious atmospheric depth, readable face lighting, calm opulent aura",
+        "full": "vault audience chamber, treasure ledger altar, quiet imperial wealth, restrained gold glimmer close to the hands, tiny coin-light motes",
+        "suppress": "wealth motifs integrated into costume accessories, no giant floating treasure heap as the main subject"
+      },
+      {
+        "stem": "jewel_heiress",
+        "ja": "宝石商の魔王令嬢",
+        "en": "Jewel Merchant Demon Heiress",
+        "anchor": "jewel merchant demon heiress, single humanoid character focus, clearly human face, single merged character design, small gold horns attached to the head, fine gem motif markings, slender tail attached to the lower back, gem ledger, jewel case charm, layered gemstone earrings, measuring chain, refined merchant dress, fitted black velvet coat, ruby-trimmed skirt, silk gloves",
+        "short": "jewel merchant demon heiress, single humanoid character focus, clearly human face, small gold horns attached to the head, fine gem motif markings, slender tail attached to the lower back, refined merchant dress, fitted black velvet coat, ruby-trimmed skirt, silk gloves",
+        "base": "human body remains primary, clearly human face, single merged character design, small gold horns attached to the head, fine gem motif markings, slender tail attached to the lower back",
+        "custom": "gem ledger, jewel case charm, layered gemstone earrings, measuring chain",
+        "attire": "refined merchant dress, fitted black velvet coat, ruby-trimmed skirt, silk gloves",
+        "effect": "soft jewel refractions near the sleeves, delicate gold dust",
+        "setting": "quiet luxury arcade, velvet showcase hall, aristocratic night market",
+        "quality": "clear gemstone reflections, elegant velvet texture, polished gold trim",
+        "quality_detail": "soft showroom glow, rich depth around the silhouette, stable facial clarity",
+        "full": "quiet luxury arcade, velvet showcase hall, aristocratic night market, soft jewel refractions near the sleeves, delicate gold dust",
+        "suppress": ""
+      },
+      {
+        "stem": "vaultwarden",
+        "ja": "欲望の金庫番",
+        "en": "Vaultwarden of Desire",
+        "anchor": "vaultwarden of desire, single humanoid character focus, clearly human face, single merged character design, short black horns attached to the head, guarded tail attached to the lower back, subtle claw ornaments, key bundle, vault seal tablet, iron-gold arm guard, chain belt, guarded black-gold uniform, fitted long coat, armored corset, disciplined boots",
+        "short": "vaultwarden of desire, single humanoid character focus, clearly human face, short black horns attached to the head, guarded tail attached to the lower back, subtle claw ornaments, guarded black-gold uniform, fitted long coat, armored corset, disciplined boots",
+        "base": "human body remains primary, clearly human face, single merged character design, short black horns attached to the head, guarded tail attached to the lower back, subtle claw ornaments",
+        "custom": "key bundle, vault seal tablet, iron-gold arm guard, chain belt",
+        "attire": "guarded black-gold uniform, fitted long coat, armored corset, disciplined boots",
+        "effect": "small seal sparks near the key bundle, restrained golden haze",
+        "setting": "fortified treasure vault, engraved door corridor, silent contractual pressure",
+        "quality": "clean metal edges, crisp uniform folds, restrained golden gloss",
+        "quality_detail": "quiet depth inside the vault corridor, disciplined light control, readable facial planes",
+        "full": "fortified treasure vault, engraved door corridor, silent contractual pressure, small seal sparks near the key bundle, restrained golden haze",
+        "suppress": ""
+      },
+      {
+        "stem": "blackgold_executor",
+        "ja": "黒金の契約執行官",
+        "en": "Black-Gold Contract Enforcer",
+        "anchor": "black-gold contract enforcer, single humanoid character focus, clearly human face, single merged character design, sharp black horns attached to the head, narrow demon tail attached to the lower back, precise claw accents, judgment stamp, contract chain, signet gauntlet, decree scroll, black-gold judicial coat, layered officer mantle, formal waist armor, high collar",
+        "short": "black-gold contract enforcer, single humanoid character focus, clearly human face, sharp black horns attached to the head, narrow demon tail attached to the lower back, precise claw accents, black-gold judicial coat, layered officer mantle, formal waist armor, high collar",
+        "base": "human body remains primary, clearly human face, single merged character design, sharp black horns attached to the head, narrow demon tail attached to the lower back, precise claw accents",
+        "custom": "judgment stamp, contract chain, signet gauntlet, decree scroll",
+        "attire": "black-gold judicial coat, layered officer mantle, formal waist armor, high collar",
+        "effect": "contract glyph sparks close to the gauntlet, subtle gold-black embers",
+        "setting": "dark tribunal chamber, obsidian columns, lawful infernal pressure",
+        "quality": "refined obsidian sheen, crisp insignia detail, focused black-gold contrast",
+        "quality_detail": "subtle tribunal depth, controlled glow near the insignia, clear face definition",
+        "full": "dark tribunal chamber, obsidian columns, lawful infernal pressure, contract glyph sparks close to the gauntlet, subtle gold-black embers",
+        "suppress": ""
+      }
+    ]
+  },
+  {
+    "title_ja": "🎎 和風妖異・百鬼夜行",
+    "title_en": "Japanese Yokai & Hyakki Yagyo",
+    "collection_id": "mythic_hyakki_yako_collection",
+    "key": "hyakki",
+    "themes": [
+      {
+        "stem": "tengu_priest",
+        "ja": "天狗の山風神官",
+        "en": "Tengu Mountain Wind Priest",
+        "anchor": "tengu mountain wind priest, single humanoid character focus, clearly human face, single merged character design, clearly human face, feathered mantle attached to the shoulders, compact wings attached to the back, subtle beak-inspired nose line, red tengu crest, ritual fan, sacred bells, wind prayer strips, lacquer hair ornaments, layered mountain priest robes, red-white ceremonial cords, travel hakama, feathered stole",
+        "short": "tengu mountain wind priest, single humanoid character focus, clearly human face, clearly human face, feathered mantle attached to the shoulders, compact wings attached to the back, subtle beak-inspired nose line, red tengu crest, layered mountain priest robes, red-white ceremonial cords, travel hakama, feathered stole",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, feathered mantle attached to the shoulders, compact wings attached to the back, subtle beak-inspired nose line, red tengu crest",
+        "custom": "ritual fan, sacred bells, wind prayer strips, lacquer hair ornaments",
+        "attire": "layered mountain priest robes, red-white ceremonial cords, travel hakama, feathered stole",
+        "effect": "light mountain wind swirls close to the sleeves, small leaf motes",
+        "setting": "misty mountain shrine path, cedar gate, highland dawn air",
+        "quality": "crisp feather texture, refined cloth layers, clear lacquer ornament detail",
+        "quality_detail": "soft mountain depth, airy wind atmosphere, stable facial lighting",
+        "full": "misty mountain shrine path, cedar gate, highland dawn air, light mountain wind swirls close to the sleeves, small leaf motes",
+        "suppress": ""
+      },
+      {
+        "stem": "yuki_guide",
+        "ja": "雪女の月夜案内人",
+        "en": "Yuki-onna Moonlit Guide",
+        "anchor": "yuki-onna moonlit guide, single humanoid character focus, clearly human face, single merged character design, clear human face, pale frost patterns near the neck, long dark hair, delicate ice ornament attached to the hair, ice lantern, silver hairpin, frost charm, sleeve tassels, layered pale kimono, translucent shawl sleeves, silver obi, winter sandals",
+        "short": "yuki-onna moonlit guide, single humanoid character focus, clearly human face, clear human face, pale frost patterns near the neck, long dark hair, delicate ice ornament attached to the hair, layered pale kimono, translucent shawl sleeves, silver obi, winter sandals",
+        "base": "human body remains primary, clearly human face, single merged character design, clear human face, pale frost patterns near the neck, long dark hair, delicate ice ornament attached to the hair",
+        "custom": "ice lantern, silver hairpin, frost charm, sleeve tassels",
+        "attire": "layered pale kimono, translucent shawl sleeves, silver obi, winter sandals",
+        "effect": "fine frost breath, tiny snow motes close to the body",
+        "setting": "moonlit snowy path, frozen torii, quiet winter night",
+        "quality": "soft fabric translucency, delicate ice detail, clear face and hair rendering",
+        "quality_detail": "subtle moonlit haze, calm winter depth, restrained cold glow",
+        "full": "moonlit snowy path, frozen torii, quiet winter night, fine frost breath, tiny snow motes close to the body",
+        "suppress": ""
+      },
+      {
+        "stem": "yaksha_miko",
+        "ja": "夜叉の戦巫女",
+        "en": "Yaksha Battle Shrine Maiden",
+        "anchor": "yaksha battle shrine maiden, single humanoid character focus, clearly human face, single merged character design, clearly human face, small oni-like horns attached to the head, fang accents, ceremonial arm guards, ritual blade, prayer tags, bead cords, braided waist rope, battle shrine maiden attire, reinforced hakama, layered chest guard, shrine ribbons",
+        "short": "yaksha battle shrine maiden, single humanoid character focus, clearly human face, clearly human face, small oni-like horns attached to the head, fang accents, ceremonial arm guards, battle shrine maiden attire, reinforced hakama, layered chest guard, shrine ribbons",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, small oni-like horns attached to the head, fang accents, ceremonial arm guards",
+        "custom": "ritual blade, prayer tags, bead cords, braided waist rope",
+        "attire": "battle shrine maiden attire, reinforced hakama, layered chest guard, shrine ribbons",
+        "effect": "restrained ember-like spirit wisps near the blade, red-black prayer sparks",
+        "setting": "ruined shrine courtyard, stone lanterns, storm-cleared dusk",
+        "quality": "sharp metal detail, crisp layered cloth, precise horn and bead rendering",
+        "quality_detail": "tense shrine atmosphere, clean dusk depth, controlled spiritual glow",
+        "full": "ruined shrine courtyard, stone lanterns, storm-cleared dusk, restrained ember-like spirit wisps near the blade, red-black prayer sparks",
+        "suppress": ""
+      },
+      {
+        "stem": "tsukumogami_princess",
+        "ja": "付喪神の古道具姫",
+        "en": "Tsukumogami Antique Princess",
+        "anchor": "tsukumogami antique princess, single humanoid character focus, clearly human face, single merged character design, clearly human face, antique motif ornaments integrated into the hair and sleeves, old lacquer accents, folding parasol, old key charm, bell tassels, antique combs, antique-pattern kimono, layered haori, heirloom obi, elegant tabi shoes",
+        "short": "tsukumogami antique princess, single humanoid character focus, clearly human face, clearly human face, antique motif ornaments integrated into the hair and sleeves, old lacquer accents, antique-pattern kimono, layered haori, heirloom obi, elegant tabi shoes",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, antique motif ornaments integrated into the hair and sleeves, old lacquer accents",
+        "custom": "folding parasol, old key charm, bell tassels, antique combs",
+        "attire": "antique-pattern kimono, layered haori, heirloom obi, elegant tabi shoes",
+        "effect": "small antique light motes near the sleeves, quiet dust glimmer",
+        "setting": "old storehouse room, vintage shelves, warm lamp glow",
+        "quality": "refined textile patterns, clean antique lacquer detail, graceful ornament clarity",
+        "quality_detail": "soft nostalgic room depth, warm dust-lit atmosphere, readable face lighting",
+        "full": "old storehouse room, vintage shelves, warm lamp glow, small antique light motes near the sleeves, quiet dust glimmer",
+        "suppress": ""
+      },
+      {
+        "stem": "menreiki_dancer",
+        "ja": "面霊気の舞踏師",
+        "en": "Menreiki Mask Dancer",
+        "anchor": "menreiki mask dancer, single humanoid character focus, clearly human face, single merged character design, clearly human face, mask motifs attached to the costume and hair, no separate mask spirits as main subjects, mini mask cluster, hair ribbons, wrist bells, dance fan, layered dance kimono, flowing sleeves, patterned sash, elegant stage sandals",
+        "short": "menreiki mask dancer, single humanoid character focus, clearly human face, clearly human face, mask motifs attached to the costume and hair, no separate mask spirits as main subjects, layered dance kimono, flowing sleeves, patterned sash, elegant stage sandals",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, mask motifs attached to the costume and hair, no separate mask spirits as main subjects",
+        "custom": "mini mask cluster, hair ribbons, wrist bells, dance fan",
+        "attire": "layered dance kimono, flowing sleeves, patterned sash, elegant stage sandals",
+        "effect": "small paper-mask wisps near the costume, controlled theatrical glow",
+        "setting": "moonlit kagura stage, old festival bridge, quiet midnight performance",
+        "quality": "crisp silk folds, delicate mask ornament detail, elegant sleeve motion texture",
+        "quality_detail": "soft performance depth, restrained lantern atmosphere, clear facial readability",
+        "full": "moonlit kagura stage, old festival bridge, quiet midnight performance, small paper-mask wisps near the costume, controlled theatrical glow",
+        "suppress": "mask motifs integrated into costume and accessories, no swarm of separate mask spirits as the main subject"
+      }
+    ]
+  },
+  {
+    "title_ja": "🌌 星座・天体守護者",
+    "title_en": "Constellation & Celestial Guardians",
+    "collection_id": "mythic_astra_guardians_collection",
+    "key": "astra",
+    "themes": [
+      {
+        "stem": "solar_priest",
+        "ja": "日輪の神官",
+        "en": "Solar Priest",
+        "anchor": "solar priest, single humanoid character focus, clearly human face, single merged character design, clearly human face, sun-disc hair ornament, radiant trim integrated into the costume, sun talisman, gold prayer beads, halo-shaped brooch, light sash, gold-white ritual robes, sun-embroidered mantle, layered silk sleeves",
+        "short": "solar priest, single humanoid character focus, clearly human face, clearly human face, sun-disc hair ornament, radiant trim integrated into the costume, gold-white ritual robes, sun-embroidered mantle, layered silk sleeves",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, sun-disc hair ornament, radiant trim integrated into the costume",
+        "custom": "sun talisman, gold prayer beads, halo-shaped brooch, light sash",
+        "attire": "gold-white ritual robes, sun-embroidered mantle, layered silk sleeves",
+        "effect": "soft dawn radiance near the shoulders, tiny light motes",
+        "setting": "sunlit temple terrace, high clouds, calm dawn sky",
+        "quality": "clean gold ornament detail, refined silk texture, clear facial features",
+        "quality_detail": "subtle sunlit depth, airy temple atmosphere, stable warm lighting",
+        "full": "sunlit temple terrace, high clouds, calm dawn sky, soft dawn radiance near the shoulders, tiny light motes",
+        "suppress": ""
+      },
+      {
+        "stem": "eclipse_mage",
+        "ja": "月蝕の魔術師",
+        "en": "Eclipse Magician",
+        "anchor": "eclipse magician, single humanoid character focus, clearly human face, single merged character design, clearly human face, crescent ornament, eclipse motif markings, dark-silver accents, astrolabe wand, moon-ring accessory, rune pendants, eclipse veil, dark navy mage attire, layered mantle, silver-trimmed skirt, high boots",
+        "short": "eclipse magician, single humanoid character focus, clearly human face, clearly human face, crescent ornament, eclipse motif markings, dark-silver accents, dark navy mage attire, layered mantle, silver-trimmed skirt, high boots",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, crescent ornament, eclipse motif markings, dark-silver accents",
+        "custom": "astrolabe wand, moon-ring accessory, rune pendants, eclipse veil",
+        "attire": "dark navy mage attire, layered mantle, silver-trimmed skirt, high boots",
+        "effect": "subtle eclipse shimmer close to the wand, faint silver haze",
+        "setting": "moonlit observatory balcony, cloud-broken night, quiet eclipse sky",
+        "quality": "precise metallic trim, elegant cloth rendering, crisp astrolabe detail",
+        "quality_detail": "controlled lunar depth, delicate night haze, readable face lighting",
+        "full": "moonlit observatory balcony, cloud-broken night, quiet eclipse sky, subtle eclipse shimmer close to the wand, faint silver haze",
+        "suppress": ""
+      },
+      {
+        "stem": "star_atlas_knight",
+        "ja": "星図の天空騎士",
+        "en": "Star Atlas Sky Knight",
+        "anchor": "star atlas sky knight, single humanoid character focus, clearly human face, single merged character design, clearly human face, constellation insignia integrated into armor, cape clasp shaped like a star chart, star atlas, knight lance, navigation brooch, map case, light celestial armor, layered cape, fitted undersuit, knee-high boots",
+        "short": "star atlas sky knight, single humanoid character focus, clearly human face, clearly human face, constellation insignia integrated into armor, cape clasp shaped like a star chart, light celestial armor, layered cape, fitted undersuit, knee-high boots",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, constellation insignia integrated into armor, cape clasp shaped like a star chart",
+        "custom": "star atlas, knight lance, navigation brooch, map case",
+        "attire": "light celestial armor, layered cape, fitted undersuit, knee-high boots",
+        "effect": "tiny starlight motes near the cape edge, restrained sky glow",
+        "setting": "cloudbridge bastion, open night sky, constellation-lit parapet",
+        "quality": "crisp armor edges, refined cape folds, readable insignia detail",
+        "quality_detail": "atmospheric sky depth, clear night contrast, stable facial clarity",
+        "full": "cloudbridge bastion, open night sky, constellation-lit parapet, tiny starlight motes near the cape edge, restrained sky glow",
+        "suppress": ""
+      },
+      {
+        "stem": "comet_wanderer",
+        "ja": "彗星の旅人",
+        "en": "Comet Wanderer",
+        "anchor": "comet wanderer, single humanoid character focus, clearly human face, single merged character design, clearly human face, trailing scarf silhouette, comet-tail ornament integrated into the hair, traveler satchel, compass charm, star pin, route ribbons, travel coat, layered short cape, fitted leggings, sturdy boots",
+        "short": "comet wanderer, single humanoid character focus, clearly human face, clearly human face, trailing scarf silhouette, comet-tail ornament integrated into the hair, travel coat, layered short cape, fitted leggings, sturdy boots",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, trailing scarf silhouette, comet-tail ornament integrated into the hair",
+        "custom": "traveler satchel, compass charm, star pin, route ribbons",
+        "attire": "travel coat, layered short cape, fitted leggings, sturdy boots",
+        "effect": "soft comet spark trace close to the scarf, tiny dust streaks",
+        "setting": "twilight sky road, cliffside route, distant luminous horizon",
+        "quality": "clean coat texture, crisp accessory detail, controlled luminous accents",
+        "quality_detail": "gentle travel atmosphere, open sky depth, readable face lighting",
+        "full": "twilight sky road, cliffside route, distant luminous horizon, soft comet spark trace close to the scarf, tiny dust streaks",
+        "suppress": ""
+      },
+      {
+        "stem": "dawn_observer",
+        "ja": "黎明の観測者",
+        "en": "Dawn Observer",
+        "anchor": "dawn observer, single humanoid character focus, clearly human face, single merged character design, clearly human face, star-lens ornament, slim telescope motif accessories, lens monocle, star chart scroll, silver clips, notebook charm, long observer coat, layered blouse, fitted skirt, practical belts",
+        "short": "dawn observer, single humanoid character focus, clearly human face, clearly human face, star-lens ornament, slim telescope motif accessories, long observer coat, layered blouse, fitted skirt, practical belts",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, star-lens ornament, slim telescope motif accessories",
+        "custom": "lens monocle, star chart scroll, silver clips, notebook charm",
+        "attire": "long observer coat, layered blouse, fitted skirt, practical belts",
+        "effect": "fine dawn glints near the lens, restrained light haze",
+        "setting": "dawn observatory deck, calm morning clouds, early sky color band",
+        "quality": "refined lens reflections, crisp coat seams, elegant paper detail",
+        "quality_detail": "soft dawn depth, clear horizon atmosphere, stable facial rendering",
+        "full": "dawn observatory deck, calm morning clouds, early sky color band, fine dawn glints near the lens, restrained light haze",
+        "suppress": ""
+      },
+      {
+        "stem": "midnight_diviner",
+        "ja": "深夜の星詠み巫女",
+        "en": "Midnight Stargazing Shrine Maiden",
+        "anchor": "midnight stargazing shrine maiden, single humanoid character focus, clearly human face, single merged character design, clearly human face, starlit hair tassels, constellation trim integrated into the robe, star omikuji strips, bell tassels, moon comb, divination wand, dark shrine maiden robes, layered sash, celestial embroidery, tabi shoes",
+        "short": "midnight stargazing shrine maiden, single humanoid character focus, clearly human face, clearly human face, starlit hair tassels, constellation trim integrated into the robe, dark shrine maiden robes, layered sash, celestial embroidery, tabi shoes",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, starlit hair tassels, constellation trim integrated into the robe",
+        "custom": "star omikuji strips, bell tassels, moon comb, divination wand",
+        "attire": "dark shrine maiden robes, layered sash, celestial embroidery, tabi shoes",
+        "effect": "small star motes near the sleeves, gentle midnight glow",
+        "setting": "quiet shrine rooftop, clear midnight sky, subtle lantern light",
+        "quality": "clean embroidery detail, soft robe texture, precise tassel rendering",
+        "quality_detail": "subtle midnight depth, calm sky atmosphere, readable face lighting",
+        "full": "quiet shrine rooftop, clear midnight sky, subtle lantern light, small star motes near the sleeves, gentle midnight glow",
+        "suppress": ""
+      }
+    ]
+  },
+  {
+    "title_ja": "⚰️ 冥府職能・死者の案内人",
+    "title_en": "Underworld Roles & Guides of the Dead",
+    "collection_id": "mythic_underworld_roles_collection",
+    "key": "underrole",
+    "themes": [
+      {
+        "stem": "dead_guide",
+        "ja": "死者の案内人",
+        "en": "Guide of the Dead",
+        "anchor": "guide of the dead, single humanoid character focus, clearly human face, single merged character design, clearly human face, calm mortuary insignia integrated into attire, small feather ornaments, guide lantern, route map, soul tag slips, silver key charm, dark guide cloak, layered travel robes, narrow sash, practical boots",
+        "short": "guide of the dead, single humanoid character focus, clearly human face, clearly human face, calm mortuary insignia integrated into attire, small feather ornaments, dark guide cloak, layered travel robes, narrow sash, practical boots",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, calm mortuary insignia integrated into attire, small feather ornaments",
+        "custom": "guide lantern, route map, soul tag slips, silver key charm",
+        "attire": "dark guide cloak, layered travel robes, narrow sash, practical boots",
+        "effect": "small soul-light wisps close to the lantern, gentle pale haze",
+        "setting": "silent riverbank path, dim gate, quiet night passage",
+        "quality": "clean lantern detail, refined layered cloth, readable facial features",
+        "quality_detail": "calm underworld depth, restrained pale glow, stable silhouette clarity",
+        "full": "silent riverbank path, dim gate, quiet night passage, small soul-light wisps close to the lantern, gentle pale haze",
+        "suppress": ""
+      },
+      {
+        "stem": "arbiter",
+        "ja": "冥府裁定官",
+        "en": "Underworld Arbiter",
+        "anchor": "underworld arbiter, single humanoid character focus, clearly human face, single merged character design, clearly human face, judgment insignia integrated into costume, black-silver formal trim, judgment tablet, scale charm, seal ring, decree cords, formal arbiter robes, layered mantle, fitted waist armor, high collar",
+        "short": "underworld arbiter, single humanoid character focus, clearly human face, clearly human face, judgment insignia integrated into costume, black-silver formal trim, formal arbiter robes, layered mantle, fitted waist armor, high collar",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, judgment insignia integrated into costume, black-silver formal trim",
+        "custom": "judgment tablet, scale charm, seal ring, decree cords",
+        "attire": "formal arbiter robes, layered mantle, fitted waist armor, high collar",
+        "effect": "subtle judgment glimmer near the tablet, restrained ash-blue glow",
+        "setting": "underworld tribunal, stone archive hall, still ceremonial darkness",
+        "quality": "crisp insignia detail, refined formal fabric texture, clean seal rendering",
+        "quality_detail": "quiet hall depth, controlled tribunal lighting, readable face planes",
+        "full": "underworld tribunal, stone archive hall, still ceremonial darkness, subtle judgment glimmer near the tablet, restrained ash-blue glow",
+        "suppress": ""
+      },
+      {
+        "stem": "grave_knight",
+        "ja": "墓守の騎士",
+        "en": "Gravewarden Knight",
+        "anchor": "gravewarden knight, single humanoid character focus, clearly human face, single merged character design, clearly human face, grave crest integrated into armor, muted metal trim, grave key spear, memorial ribbon, ward talismans, stone bead cord, guard knight armor, dark tabard, layered mantle, armored boots",
+        "short": "gravewarden knight, single humanoid character focus, clearly human face, clearly human face, grave crest integrated into armor, muted metal trim, guard knight armor, dark tabard, layered mantle, armored boots",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, grave crest integrated into armor, muted metal trim",
+        "custom": "grave key spear, memorial ribbon, ward talismans, stone bead cord",
+        "attire": "guard knight armor, dark tabard, layered mantle, armored boots",
+        "effect": "small ward sparks near the spear, restrained gray-blue haze",
+        "setting": "old cemetery gate, rain-cleared gravestone path, solemn twilight",
+        "quality": "clean armor texture, precise emblem detail, crisp cloth layering",
+        "quality_detail": "subtle cemetery depth, quiet air perspective, readable face lighting",
+        "full": "old cemetery gate, rain-cleared gravestone path, solemn twilight, small ward sparks near the spear, restrained gray-blue haze",
+        "suppress": ""
+      },
+      {
+        "stem": "ferryman",
+        "ja": "黄泉舟の船頭",
+        "en": "Ferryman of Yomi",
+        "anchor": "ferryman of yomi, single humanoid character focus, clearly human face, single merged character design, clearly human face, river-crossing ornaments integrated into the attire, rope details, boat pole, lantern float charm, oar token, route beads, dark ferryman coat, layered travel kimono, tied waist rope, water-safe boots",
+        "short": "ferryman of yomi, single humanoid character focus, clearly human face, clearly human face, river-crossing ornaments integrated into the attire, rope details, dark ferryman coat, layered travel kimono, tied waist rope, water-safe boots",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, river-crossing ornaments integrated into the attire, rope details",
+        "custom": "boat pole, lantern float charm, oar token, route beads",
+        "attire": "dark ferryman coat, layered travel kimono, tied waist rope, water-safe boots",
+        "effect": "small pale ripples near the oar token, quiet ferry glow",
+        "setting": "misty river crossing, shadowed pier, moonlit current",
+        "quality": "clean rope and wood detail, refined wet-cloth texture, stable facial clarity",
+        "quality_detail": "soft river mist depth, calm nocturnal atmosphere, restrained water glow",
+        "full": "misty river crossing, shadowed pier, moonlit current, small pale ripples near the oar token, quiet ferry glow",
+        "suppress": ""
+      },
+      {
+        "stem": "soul_archivist",
+        "ja": "魂の記録官",
+        "en": "Soul Archivist",
+        "anchor": "soul archivist, single humanoid character focus, clearly human face, single merged character design, clearly human face, record seals and page motifs integrated into costume, silver paper clips, bound ledger, ink brush, name tags, document chain, archive clerk robes, layered vest, fitted sleeves, document belt",
+        "short": "soul archivist, single humanoid character focus, clearly human face, clearly human face, record seals and page motifs integrated into costume, silver paper clips, archive clerk robes, layered vest, fitted sleeves, document belt",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, record seals and page motifs integrated into costume, silver paper clips",
+        "custom": "bound ledger, ink brush, name tags, document chain",
+        "attire": "archive clerk robes, layered vest, fitted sleeves, document belt",
+        "effect": "small script glimmers near the ledger, restrained indigo haze",
+        "setting": "underworld archive room, endless shelves, quiet blue lamp light",
+        "quality": "crisp paper detail, refined cloth rendering, precise accessory clarity",
+        "quality_detail": "deep archive depth, controlled blue ambience, readable face lighting",
+        "full": "underworld archive room, endless shelves, quiet blue lamp light, small script glimmers near the ledger, restrained indigo haze",
+        "suppress": ""
+      },
+      {
+        "stem": "lamp_watcher",
+        "ja": "灯火を持つ夜警",
+        "en": "Lamplight Night Watcher",
+        "anchor": "lamplight night watcher, single humanoid character focus, clearly human face, single merged character design, clearly human face, guard insignia integrated into attire, subtle dark feather trims, watch lantern, key cluster, whistle charm, ward ribbon, night watch coat, layered scarf, fitted uniform, practical boots",
+        "short": "lamplight night watcher, single humanoid character focus, clearly human face, clearly human face, guard insignia integrated into attire, subtle dark feather trims, night watch coat, layered scarf, fitted uniform, practical boots",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, guard insignia integrated into attire, subtle dark feather trims",
+        "custom": "watch lantern, key cluster, whistle charm, ward ribbon",
+        "attire": "night watch coat, layered scarf, fitted uniform, practical boots",
+        "effect": "soft lamp glow close to the hands, tiny ember-like motes",
+        "setting": "moonlit gate district, quiet stone corridor, deep midnight calm",
+        "quality": "clean uniform seams, refined lantern material, clear facial features",
+        "quality_detail": "gentle midnight depth, restrained watch-light atmosphere, stable silhouette readability",
+        "full": "moonlit gate district, quiet stone corridor, deep midnight calm, soft lamp glow close to the hands, tiny ember-like motes",
+        "suppress": ""
+      }
+    ]
+  },
+  {
+    "title_ja": "⚗️ 錬金術・人造生命",
+    "title_en": "Alchemy & Artificial Life",
+    "collection_id": "mythic_alchemy_life_collection",
+    "key": "alchemy",
+    "themes": [
+      {
+        "stem": "moon_alchemist",
+        "ja": "月光の錬金術師",
+        "en": "Moonlit Alchemist",
+        "anchor": "moonlit alchemist, single humanoid character focus, clearly human face, single merged character design, clearly human face, alchemy marks integrated into gloves and sleeves, silver vial ornaments, glass flask set, silver tongs, moon-seal notebook, formula charms, long laboratory coat, layered vest, fitted blouse, utility belts",
+        "short": "moonlit alchemist, single humanoid character focus, clearly human face, clearly human face, alchemy marks integrated into gloves and sleeves, silver vial ornaments, long laboratory coat, layered vest, fitted blouse, utility belts",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, alchemy marks integrated into gloves and sleeves, silver vial ornaments",
+        "custom": "glass flask set, silver tongs, moon-seal notebook, formula charms",
+        "attire": "long laboratory coat, layered vest, fitted blouse, utility belts",
+        "effect": "soft alchemical glows near the flasks, restrained silver vapor",
+        "setting": "moonlit laboratory, polished workbench, neat alchemy apparatus",
+        "quality": "clean glass reflections, precise metal tool detail, crisp cloth texture",
+        "quality_detail": "calm laboratory depth, controlled moonlit ambience, readable face lighting",
+        "full": "moonlit laboratory, polished workbench, neat alchemy apparatus, soft alchemical glows near the flasks, restrained silver vapor",
+        "suppress": ""
+      },
+      {
+        "stem": "dollmaker_witch",
+        "ja": "人形師の魔女",
+        "en": "Dollmaker Witch",
+        "anchor": "dollmaker witch, single humanoid character focus, clearly human face, single merged character design, clearly human face, thread motifs integrated into sleeves, doll-joint ornaments used as accessories, doll key, golden thread spool, lace ribbon bundle, carved charm, layered witch dress, lace apron, fitted bodice, elegant boots",
+        "short": "dollmaker witch, single humanoid character focus, clearly human face, clearly human face, thread motifs integrated into sleeves, doll-joint ornaments used as accessories, layered witch dress, lace apron, fitted bodice, elegant boots",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, thread motifs integrated into sleeves, doll-joint ornaments used as accessories",
+        "custom": "doll key, golden thread spool, lace ribbon bundle, carved charm",
+        "attire": "layered witch dress, lace apron, fitted bodice, elegant boots",
+        "effect": "subtle thread shimmer near the fingertips, tiny dust motes",
+        "setting": "quiet atelier room, shelves of crafted dolls, warm lamp corner",
+        "quality": "fine lace detail, crisp carved ornament rendering, stable facial features",
+        "quality_detail": "soft atelier depth, gentle lamp atmosphere, controlled warm glow",
+        "full": "quiet atelier room, shelves of crafted dolls, warm lamp corner, subtle thread shimmer near the fingertips, tiny dust motes",
+        "suppress": "doll motifs integrated into accessories and costume, no crowd of separate dolls as the main subject"
+      },
+      {
+        "stem": "homunculus_researcher",
+        "ja": "ホムンクルスの研究者",
+        "en": "Homunculus Researcher",
+        "anchor": "homunculus researcher, single humanoid character focus, clearly human face, single merged character design, clearly human face, research seals integrated into the sleeves, specimen tags as accessories, formula tablet, sample vial, restraint strap details, notebook clasp, research robes, fitted lab vest, layered skirt, practical gloves",
+        "short": "homunculus researcher, single humanoid character focus, clearly human face, clearly human face, research seals integrated into the sleeves, specimen tags as accessories, research robes, fitted lab vest, layered skirt, practical gloves",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, research seals integrated into the sleeves, specimen tags as accessories",
+        "custom": "formula tablet, sample vial, restraint strap details, notebook clasp",
+        "attire": "research robes, fitted lab vest, layered skirt, practical gloves",
+        "effect": "small bio-luminescent motes near the sample vial, restrained pale green glow",
+        "setting": "clean research chamber, glass tank row, organized notes",
+        "quality": "precise glass and paper rendering, crisp garment seams, clear facial features",
+        "quality_detail": "controlled chamber depth, quiet scientific atmosphere, stable lighting",
+        "full": "clean research chamber, glass tank row, organized notes, small bio-luminescent motes near the sample vial, restrained pale green glow",
+        "suppress": "research motifs integrated into props and attire, no large separate creature specimen as the main subject"
+      },
+      {
+        "stem": "runic_engineer",
+        "ja": "ルーン機関技師",
+        "en": "Runic Engine Mechanic",
+        "anchor": "runic engine mechanic, single humanoid character focus, clearly human face, single merged character design, clearly human face, rune plates integrated into armor pieces, brass tool motifs, gear wrench, rune key, brass gauge, chain toolkit, engineer coat, short mantle, fitted trousers, sturdy boots",
+        "short": "runic engine mechanic, single humanoid character focus, clearly human face, clearly human face, rune plates integrated into armor pieces, brass tool motifs, engineer coat, short mantle, fitted trousers, sturdy boots",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, rune plates integrated into armor pieces, brass tool motifs",
+        "custom": "gear wrench, rune key, brass gauge, chain toolkit",
+        "attire": "engineer coat, short mantle, fitted trousers, sturdy boots",
+        "effect": "tiny rune sparks near the tool belt, restrained brass glow",
+        "setting": "clockwork workshop, rune engine console, quiet forge light",
+        "quality": "clean brass texture, crisp mechanical detail, precise costume seams",
+        "quality_detail": "deep workshop atmosphere, controlled forge glow, readable face lighting",
+        "full": "clockwork workshop, rune engine console, quiet forge light, tiny rune sparks near the tool belt, restrained brass glow",
+        "suppress": ""
+      },
+      {
+        "stem": "golem_guardian",
+        "ja": "ゴーレム守護者",
+        "en": "Golem Guardian",
+        "anchor": "golem guardian, single humanoid character focus, clearly human face, single merged character design, clearly human face, stone-inscribed armor pieces integrated into the body design, crystal core ornament, ward hammer, sigil tablet, crystal key, binding cords, stone-trim guard attire, fitted armored dress, layered mantle, heavy boots",
+        "short": "golem guardian, single humanoid character focus, clearly human face, clearly human face, stone-inscribed armor pieces integrated into the body design, crystal core ornament, stone-trim guard attire, fitted armored dress, layered mantle, heavy boots",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, stone-inscribed armor pieces integrated into the body design, crystal core ornament",
+        "custom": "ward hammer, sigil tablet, crystal key, binding cords",
+        "attire": "stone-trim guard attire, fitted armored dress, layered mantle, heavy boots",
+        "effect": "subtle crystal pulse near the chest ornament, quiet dust glow",
+        "setting": "ancient sanctum, ward circle floor, solemn protection hall",
+        "quality": "clean stone texture, refined crystal core detail, stable facial clarity",
+        "quality_detail": "calm sanctum depth, controlled ward-light atmosphere, readable silhouette",
+        "full": "ancient sanctum, ward circle floor, solemn protection hall, subtle crystal pulse near the chest ornament, quiet dust glow",
+        "suppress": ""
+      },
+      {
+        "stem": "glass_apothecary",
+        "ja": "玻璃の薬師",
+        "en": "Glass Apothecary",
+        "anchor": "glass apothecary, single humanoid character focus, clearly human face, single merged character design, clearly human face, glass motif ornaments integrated into the hair and sleeves, delicate vial charms, medicine case, measuring spoon, healing bottle set, crystal spoon pendant, apothecary robes, fitted vest, layered long skirt, neat apron",
+        "short": "glass apothecary, single humanoid character focus, clearly human face, clearly human face, glass motif ornaments integrated into the hair and sleeves, delicate vial charms, apothecary robes, fitted vest, layered long skirt, neat apron",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, glass motif ornaments integrated into the hair and sleeves, delicate vial charms",
+        "custom": "medicine case, measuring spoon, healing bottle set, crystal spoon pendant",
+        "attire": "apothecary robes, fitted vest, layered long skirt, neat apron",
+        "effect": "tiny healing glints near the medicine case, restrained clear vapor",
+        "setting": "quiet dispensary room, herb shelves, soft daylight window",
+        "quality": "crisp glass clarity, refined fabric texture, clean accessory rendering",
+        "quality_detail": "soft room depth, gentle apothecary atmosphere, readable face lighting",
+        "full": "quiet dispensary room, herb shelves, soft daylight window, tiny healing glints near the medicine case, restrained clear vapor",
+        "suppress": ""
+      }
+    ]
+  },
+  {
+    "title_ja": "🃏 正逆タロット・大アルカナ",
+    "title_en": "Tarot Upright & Reversed Major Arcana",
+    "collection_id": "mythic_tarot_arcana_collection",
+    "key": "tarot",
+    "themes": [
+      {
+        "stem": "magician_upright",
+        "ja": "魔術師：正位置の創造術師",
+        "en": "Upright Magician Creator",
+        "anchor": "upright magician creator, single humanoid character focus, clearly human face, single merged character design, clearly human face, arcana insignia integrated into attire, one-hand casting posture implied by costume flow, wand, card deck, infinity ribbon brooch, symbolic tools, refined arcana magician attire, layered vest, fitted cape, jewel gloves",
+        "short": "upright magician creator, single humanoid character focus, clearly human face, clearly human face, arcana insignia integrated into attire, one-hand casting posture implied by costume flow, refined arcana magician attire, layered vest, fitted cape, jewel gloves",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, arcana insignia integrated into attire, one-hand casting posture implied by costume flow",
+        "custom": "wand, card deck, infinity ribbon brooch, symbolic tools",
+        "attire": "refined arcana magician attire, layered vest, fitted cape, jewel gloves",
+        "effect": "subtle arcana light near the wand, tiny card glimmers",
+        "setting": "quiet ritual chamber, symbolic table, stable arcana atmosphere",
+        "quality": "clean card detail, precise cloth folds, refined metallic accents",
+        "quality_detail": "controlled mystical depth, readable facial lighting, elegant arcana ambience",
+        "full": "quiet ritual chamber, symbolic table, stable arcana atmosphere, subtle arcana light near the wand, tiny card glimmers",
+        "suppress": ""
+      },
+      {
+        "stem": "magician_reversed",
+        "ja": "魔術師：逆位置の逸脱術師",
+        "en": "Reversed Magician Dissident",
+        "anchor": "reversed magician dissident, single humanoid character focus, clearly human face, single merged character design, clearly human face, inverted arcana motifs integrated into attire, unstable ribbon accents, twisted wand, reversed card set, fractured charm, symbol chain, dark arcana coat, layered vest, asymmetrical sash, fitted gloves",
+        "short": "reversed magician dissident, single humanoid character focus, clearly human face, clearly human face, inverted arcana motifs integrated into attire, unstable ribbon accents, dark arcana coat, layered vest, asymmetrical sash, fitted gloves",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, inverted arcana motifs integrated into attire, unstable ribbon accents",
+        "custom": "twisted wand, reversed card set, fractured charm, symbol chain",
+        "attire": "dark arcana coat, layered vest, asymmetrical sash, fitted gloves",
+        "effect": "subtle unstable sparks near the wand, restrained violet haze",
+        "setting": "shadowed ritual room, quiet disordered altar, arcana imbalance",
+        "quality": "crisp card and charm detail, refined cloth rendering, clear facial features",
+        "quality_detail": "subtle uneasy depth, controlled dark glow, readable silhouette",
+        "full": "shadowed ritual room, quiet disordered altar, arcana imbalance, subtle unstable sparks near the wand, restrained violet haze",
+        "suppress": ""
+      },
+      {
+        "stem": "priestess_upright",
+        "ja": "女教皇：正位置の静謐司祭",
+        "en": "Upright High Priestess",
+        "anchor": "upright high priestess, single humanoid character focus, clearly human face, single merged character design, clearly human face, sacred veil and moon motif integrated into attire, scripture scroll, moon rosary, temple key, veil pin, serene priestess robes, layered veil sleeves, fitted gown, silver ornaments",
+        "short": "upright high priestess, single humanoid character focus, clearly human face, clearly human face, sacred veil and moon motif integrated into attire, serene priestess robes, layered veil sleeves, fitted gown, silver ornaments",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, sacred veil and moon motif integrated into attire",
+        "custom": "scripture scroll, moon rosary, temple key, veil pin",
+        "attire": "serene priestess robes, layered veil sleeves, fitted gown, silver ornaments",
+        "effect": "soft moonlit glints near the scripture, tiny sacred motes",
+        "setting": "quiet moon temple, tall pillars, calm midnight stillness",
+        "quality": "refined veil translucency, clean silver detail, clear facial readability",
+        "quality_detail": "gentle temple depth, stable moonlit atmosphere, controlled soft lighting",
+        "full": "quiet moon temple, tall pillars, calm midnight stillness, soft moonlit glints near the scripture, tiny sacred motes",
+        "suppress": ""
+      },
+      {
+        "stem": "priestess_reversed",
+        "ja": "女教皇：逆位置の秘匿巫女",
+        "en": "Reversed High Priestess",
+        "anchor": "reversed high priestess, single humanoid character focus, clearly human face, single merged character design, clearly human face, concealed veil motifs integrated into attire, hidden script details, sealed scroll, black moon rosary, secret key, hidden charm strings, dark priestess robes, layered hooded veil, fitted dress, silver-black trim",
+        "short": "reversed high priestess, single humanoid character focus, clearly human face, clearly human face, concealed veil motifs integrated into attire, hidden script details, dark priestess robes, layered hooded veil, fitted dress, silver-black trim",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, concealed veil motifs integrated into attire, hidden script details",
+        "custom": "sealed scroll, black moon rosary, secret key, hidden charm strings",
+        "attire": "dark priestess robes, layered hooded veil, fitted dress, silver-black trim",
+        "effect": "faint hidden glows near the scroll, restrained indigo mist",
+        "setting": "sealed chamber, curtained sanctuary, silent secretive atmosphere",
+        "quality": "fine veil texture, precise ornament detail, readable facial structure",
+        "quality_detail": "deep chamber atmosphere, controlled indigo lighting, clear face definition",
+        "full": "sealed chamber, curtained sanctuary, silent secretive atmosphere, faint hidden glows near the scroll, restrained indigo mist",
+        "suppress": ""
+      },
+      {
+        "stem": "death_funerary",
+        "ja": "死神：静かな葬送者",
+        "en": "Death Arcana Funerary Guide",
+        "anchor": "death arcana funerary guide, single humanoid character focus, clearly human face, single merged character design, clearly human face, funerary insignia integrated into attire, calm skeletal motifs kept ornamental, black banner, funeral lily, token scythe, memorial seals, dark ceremonial robes, layered mantle, fitted mourning attire, silver trim",
+        "short": "death arcana funerary guide, single humanoid character focus, clearly human face, clearly human face, funerary insignia integrated into attire, calm skeletal motifs kept ornamental, dark ceremonial robes, layered mantle, fitted mourning attire, silver trim",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, funerary insignia integrated into attire, calm skeletal motifs kept ornamental",
+        "custom": "black banner, funeral lily, token scythe, memorial seals",
+        "attire": "dark ceremonial robes, layered mantle, fitted mourning attire, silver trim",
+        "effect": "soft pale wisps close to the banner, restrained funeral glow",
+        "setting": "quiet procession path, stone arches, solemn dusk air",
+        "quality": "clean emblem detail, refined dark fabric rendering, stable facial clarity",
+        "quality_detail": "subtle funerary depth, calm pale atmosphere, readable silhouette",
+        "full": "quiet procession path, stone arches, solemn dusk air, soft pale wisps close to the banner, restrained funeral glow",
+        "suppress": ""
+      },
+      {
+        "stem": "moon_enchanter",
+        "ja": "月：幻惑の案内人",
+        "en": "Moon Arcana Enchanter",
+        "anchor": "moon arcana enchanter, single humanoid character focus, clearly human face, single merged character design, clearly human face, crescent and wave motifs integrated into attire, dreamlike ribbons, moon mirror, dream cards, shell charm, silver ribbons, night arcana dress, layered shawl, fitted bodice, moonlit accessories",
+        "short": "moon arcana enchanter, single humanoid character focus, clearly human face, clearly human face, crescent and wave motifs integrated into attire, dreamlike ribbons, night arcana dress, layered shawl, fitted bodice, moonlit accessories",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, crescent and wave motifs integrated into attire, dreamlike ribbons",
+        "custom": "moon mirror, dream cards, shell charm, silver ribbons",
+        "attire": "night arcana dress, layered shawl, fitted bodice, moonlit accessories",
+        "effect": "soft moon haze near the mirror, tiny reflective motes",
+        "setting": "moonlit path, still water, distant pillars under night sky",
+        "quality": "clean reflective detail, elegant textile rendering, clear face and hair",
+        "quality_detail": "gentle night depth, subtle illusion atmosphere, controlled lunar lighting",
+        "full": "moonlit path, still water, distant pillars under night sky, soft moon haze near the mirror, tiny reflective motes",
+        "suppress": ""
+      },
+      {
+        "stem": "world_closed_queen",
+        "ja": "世界：閉じた世界の女王",
+        "en": "World Arcana Closed Queen",
+        "anchor": "world arcana closed queen, single humanoid character focus, clearly human face, single merged character design, clearly human face, circular world motifs integrated into attire, laurel accents, world ring, laurel sash, closing key, framed relic charm, regal arcana dress, layered mantle, fitted corset, crown pins",
+        "short": "world arcana closed queen, single humanoid character focus, clearly human face, clearly human face, circular world motifs integrated into attire, laurel accents, regal arcana dress, layered mantle, fitted corset, crown pins",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, circular world motifs integrated into attire, laurel accents",
+        "custom": "world ring, laurel sash, closing key, framed relic charm",
+        "attire": "regal arcana dress, layered mantle, fitted corset, crown pins",
+        "effect": "small arcana ring glows near the world emblem, restrained emerald light",
+        "setting": "enclosed world hall, circular archway, calm universal stillness",
+        "quality": "refined laurel detail, crisp cloth layers, elegant metallic clarity",
+        "quality_detail": "deep ceremonial atmosphere, controlled green-gold glow, readable facial features",
+        "full": "enclosed world hall, circular archway, calm universal stillness, small arcana ring glows near the world emblem, restrained emerald light",
+        "suppress": ""
+      }
+    ]
+  },
+  {
+    "title_ja": "✨ 七つの美徳",
+    "title_en": "Seven Heavenly Virtues",
+    "collection_id": "mythic_heavenly_virtues_collection",
+    "key": "virtues",
+    "themes": [
+      {
+        "stem": "humility",
+        "ja": "謙虚の聖務官",
+        "en": "Humility Officer",
+        "anchor": "humility officer, single humanoid character focus, clearly human face, single merged character design, clearly human face, modest white-gold insignia integrated into attire, restrained wing-like trims, service key, folded prayer book, modest ribbon, silver seal, white-gold service robes, layered mantle, fitted gown, neat gloves",
+        "short": "humility officer, single humanoid character focus, clearly human face, clearly human face, modest white-gold insignia integrated into attire, restrained wing-like trims, white-gold service robes, layered mantle, fitted gown, neat gloves",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, modest white-gold insignia integrated into attire, restrained wing-like trims",
+        "custom": "service key, folded prayer book, modest ribbon, silver seal",
+        "attire": "white-gold service robes, layered mantle, fitted gown, neat gloves",
+        "effect": "soft pale glow near the book, tiny gentle motes",
+        "setting": "quiet cloister walkway, morning light, serene sacred calm",
+        "quality": "clean white-gold trim, refined cloth texture, clear face rendering",
+        "quality_detail": "gentle sacred depth, restrained warm light, stable facial clarity",
+        "full": "quiet cloister walkway, morning light, serene sacred calm, soft pale glow near the book, tiny gentle motes",
+        "suppress": ""
+      },
+      {
+        "stem": "charity",
+        "ja": "慈愛の治癒師",
+        "en": "Charity Healer",
+        "anchor": "charity healer, single humanoid character focus, clearly human face, single merged character design, clearly human face, healing motifs integrated into sleeves, pale feather accents, healing satchel, ribboned staff, herb pouch, prayer charm, gentle healer robes, layered capelet, fitted dress, soft boots",
+        "short": "charity healer, single humanoid character focus, clearly human face, clearly human face, healing motifs integrated into sleeves, pale feather accents, gentle healer robes, layered capelet, fitted dress, soft boots",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, healing motifs integrated into sleeves, pale feather accents",
+        "custom": "healing satchel, ribboned staff, herb pouch, prayer charm",
+        "attire": "gentle healer robes, layered capelet, fitted dress, soft boots",
+        "effect": "soft healing light near the satchel, tiny clear motes",
+        "setting": "garden infirmary, calm colonnade, soothing daylight",
+        "quality": "clean fabric softness, refined accessory detail, readable face lighting",
+        "quality_detail": "gentle garden depth, calm restorative atmosphere, stable warm glow",
+        "full": "garden infirmary, calm colonnade, soothing daylight, soft healing light near the satchel, tiny clear motes",
+        "suppress": ""
+      },
+      {
+        "stem": "patience",
+        "ja": "忍耐の守護騎士",
+        "en": "Patience Guardian Knight",
+        "anchor": "patience guardian knight, single humanoid character focus, clearly human face, single merged character design, clearly human face, calm shield insignia integrated into armor, restrained white-silver trim, shield emblem, oath ribbon, prayer sword, ward beads, white-silver guard armor, layered tabard, fitted undersuit, cape",
+        "short": "patience guardian knight, single humanoid character focus, clearly human face, clearly human face, calm shield insignia integrated into armor, restrained white-silver trim, white-silver guard armor, layered tabard, fitted undersuit, cape",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, calm shield insignia integrated into armor, restrained white-silver trim",
+        "custom": "shield emblem, oath ribbon, prayer sword, ward beads",
+        "attire": "white-silver guard armor, layered tabard, fitted undersuit, cape",
+        "effect": "subtle ward light near the shield emblem, calm silver haze",
+        "setting": "temple gate, high steps, clear morning sky",
+        "quality": "crisp armor detail, refined tabard texture, readable facial features",
+        "quality_detail": "serene architectural depth, controlled silver light, stable silhouette",
+        "full": "temple gate, high steps, clear morning sky, subtle ward light near the shield emblem, calm silver haze",
+        "suppress": ""
+      },
+      {
+        "stem": "diligence",
+        "ja": "勤勉の工房主",
+        "en": "Diligence Atelier Master",
+        "anchor": "diligence atelier master, single humanoid character focus, clearly human face, single merged character design, clearly human face, work insignia integrated into attire, neatly arranged tool motifs, craft tools, apron charm, note book, ribbon seal, atelier work dress, layered apron, fitted sleeves, sturdy shoes",
+        "short": "diligence atelier master, single humanoid character focus, clearly human face, clearly human face, work insignia integrated into attire, neatly arranged tool motifs, atelier work dress, layered apron, fitted sleeves, sturdy shoes",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, work insignia integrated into attire, neatly arranged tool motifs",
+        "custom": "craft tools, apron charm, note book, ribbon seal",
+        "attire": "atelier work dress, layered apron, fitted sleeves, sturdy shoes",
+        "effect": "tiny work-spark glimmers near the tools, restrained warm light",
+        "setting": "sunlit workshop, clean worktable, orderly craft space",
+        "quality": "crisp textile and tool rendering, refined apron detail, clear facial clarity",
+        "quality_detail": "soft workshop depth, calm industrious atmosphere, stable daylight",
+        "full": "sunlit workshop, clean worktable, orderly craft space, tiny work-spark glimmers near the tools, restrained warm light",
+        "suppress": ""
+      },
+      {
+        "stem": "temperance",
+        "ja": "節制の月光司祭",
+        "en": "Temperance Moon Priest",
+        "anchor": "temperance moon priest, single humanoid character focus, clearly human face, single merged character design, clearly human face, moon-water motifs integrated into attire, balanced ornament pairs, moon chalice, silver bottle, paired charms, ritual sash, flowing priest robes, layered shawl, fitted dress, moonlit ornaments",
+        "short": "temperance moon priest, single humanoid character focus, clearly human face, clearly human face, moon-water motifs integrated into attire, balanced ornament pairs, flowing priest robes, layered shawl, fitted dress, moonlit ornaments",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, moon-water motifs integrated into attire, balanced ornament pairs",
+        "custom": "moon chalice, silver bottle, paired charms, ritual sash",
+        "attire": "flowing priest robes, layered shawl, fitted dress, moonlit ornaments",
+        "effect": "gentle moon-water glow near the chalice, subtle silver mist",
+        "setting": "moonlit pool terrace, balanced pillars, calm night air",
+        "quality": "clean silver detail, elegant robe texture, clear facial rendering",
+        "quality_detail": "soft night depth, restrained lunar atmosphere, stable silhouette",
+        "full": "moonlit pool terrace, balanced pillars, calm night air, gentle moon-water glow near the chalice, subtle silver mist",
+        "suppress": ""
+      },
+      {
+        "stem": "kindness",
+        "ja": "親切の花園案内人",
+        "en": "Kindness Garden Guide",
+        "anchor": "kindness garden guide, single humanoid character focus, clearly human face, single merged character design, clearly human face, floral motifs integrated into attire, gentle ribbon accents, garden basket, flower pin, ribbon charm, service bell, light garden dress, layered cardigan, fitted skirt, soft shoes",
+        "short": "kindness garden guide, single humanoid character focus, clearly human face, clearly human face, floral motifs integrated into attire, gentle ribbon accents, light garden dress, layered cardigan, fitted skirt, soft shoes",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, floral motifs integrated into attire, gentle ribbon accents",
+        "custom": "garden basket, flower pin, ribbon charm, service bell",
+        "attire": "light garden dress, layered cardigan, fitted skirt, soft shoes",
+        "effect": "tiny flower-light motes near the basket, soft pastel haze",
+        "setting": "sunlit conservatory garden, path through blossoms, welcoming air",
+        "quality": "refined floral detail, crisp fabric texture, readable face lighting",
+        "quality_detail": "gentle garden depth, soothing daylight atmosphere, stable clarity",
+        "full": "sunlit conservatory garden, path through blossoms, welcoming air, tiny flower-light motes near the basket, soft pastel haze",
+        "suppress": ""
+      },
+      {
+        "stem": "chastity",
+        "ja": "純潔の白翼巫女",
+        "en": "Chastity White-Wing Shrine Maiden",
+        "anchor": "chastity white-wing shrine maiden, single humanoid character focus, clearly human face, single merged character design, clearly human face, compact white wings attached to the back, pure white feather accents, white bell, purity ribbon, sacred feather pin, crystal charm, white sacred robes, layered sleeves, fitted dress, silver-trimmed sash",
+        "short": "chastity white-wing shrine maiden, single humanoid character focus, clearly human face, clearly human face, compact white wings attached to the back, pure white feather accents, white sacred robes, layered sleeves, fitted dress, silver-trimmed sash",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, compact white wings attached to the back, pure white feather accents",
+        "custom": "white bell, purity ribbon, sacred feather pin, crystal charm",
+        "attire": "white sacred robes, layered sleeves, fitted dress, silver-trimmed sash",
+        "effect": "soft white feather glow near the shoulders, tiny clear motes",
+        "setting": "high shrine courtyard, clear sky, quiet sacred light",
+        "quality": "clean feather texture, refined white textile detail, clear facial features",
+        "quality_detail": "airy shrine depth, restrained holy atmosphere, stable lighting",
+        "full": "high shrine courtyard, clear sky, quiet sacred light, soft white feather glow near the shoulders, tiny clear motes",
+        "suppress": ""
+      }
+    ]
+  },
+  {
+    "title_ja": "🪞 聖遺物・呪物の擬人化",
+    "title_en": "Anthropomorphic Holy Relics & Cursed Artifacts",
+    "collection_id": "mythic_relics_cursed_collection",
+    "key": "relic",
+    "themes": [
+      {
+        "stem": "eclipse_sword",
+        "ja": "月蝕の聖剣姫",
+        "en": "Eclipse Holy Sword Princess",
+        "anchor": "eclipse holy sword princess, single humanoid character focus, clearly human face, single merged character design, clearly human face, sword motifs integrated into attire, silver-black eclipse crest, holy sword hilt, sheath charm, oath ribbon, eclipse seal, regal knight dress, layered cape, fitted armor bodice, high boots",
+        "short": "eclipse holy sword princess, single humanoid character focus, clearly human face, clearly human face, sword motifs integrated into attire, silver-black eclipse crest, regal knight dress, layered cape, fitted armor bodice, high boots",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, sword motifs integrated into attire, silver-black eclipse crest",
+        "custom": "holy sword hilt, sheath charm, oath ribbon, eclipse seal",
+        "attire": "regal knight dress, layered cape, fitted armor bodice, high boots",
+        "effect": "small eclipse gleam near the sword hilt, restrained silver glow",
+        "setting": "moonlit sanctuary, stone altar, quiet sacred tension",
+        "quality": "clean metal rendering, crisp layered cloth, stable facial clarity",
+        "quality_detail": "subtle sanctuary depth, controlled eclipse atmosphere, readable face lighting",
+        "full": "moonlit sanctuary, stone altar, quiet sacred tension, small eclipse gleam near the sword hilt, restrained silver glow",
+        "suppress": "the relic identity is carried by integrated costume motifs and a held accessory, no oversized floating separate sword as the main subject"
+      },
+      {
+        "stem": "obsidian_mirror",
+        "ja": "黒曜の鏡神官",
+        "en": "Obsidian Mirror Priestess",
+        "anchor": "obsidian mirror priestess, single humanoid character focus, clearly human face, single merged character design, clearly human face, mirror motifs integrated into attire, black-silver reflective trim, mirror frame charm, obsidian mirror, silver tassels, prayer beads, dark ceremonial robes, layered shawl, fitted dress, elegant sandals",
+        "short": "obsidian mirror priestess, single humanoid character focus, clearly human face, clearly human face, mirror motifs integrated into attire, black-silver reflective trim, dark ceremonial robes, layered shawl, fitted dress, elegant sandals",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, mirror motifs integrated into attire, black-silver reflective trim",
+        "custom": "mirror frame charm, obsidian mirror, silver tassels, prayer beads",
+        "attire": "dark ceremonial robes, layered shawl, fitted dress, elegant sandals",
+        "effect": "soft mirror glints near the hand, restrained dark sheen",
+        "setting": "quiet mirror hall, polished stone floor, calm ritual silence",
+        "quality": "clear reflective detail, refined cloth texture, readable facial features",
+        "quality_detail": "deep mirror-room atmosphere, stable dark contrast, controlled glow",
+        "full": "quiet mirror hall, polished stone floor, calm ritual silence, soft mirror glints near the hand, restrained dark sheen",
+        "suppress": "the relic identity remains integrated into costume and hand-held accessories, no giant floating mirror as the main subject"
+      },
+      {
+        "stem": "sealed_tome",
+        "ja": "封印書の司書",
+        "en": "Sealed Tome Librarian",
+        "anchor": "sealed tome librarian, single humanoid character focus, clearly human face, single merged character design, clearly human face, page and seal motifs integrated into attire, arcane ribbon trim, sealed book, bookmark charms, archive key, script ribbons, librarian robes, layered vest, fitted sleeves, long skirt",
+        "short": "sealed tome librarian, single humanoid character focus, clearly human face, clearly human face, page and seal motifs integrated into attire, arcane ribbon trim, librarian robes, layered vest, fitted sleeves, long skirt",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, page and seal motifs integrated into attire, arcane ribbon trim",
+        "custom": "sealed book, bookmark charms, archive key, script ribbons",
+        "attire": "librarian robes, layered vest, fitted sleeves, long skirt",
+        "effect": "tiny script glimmers near the book, restrained indigo light",
+        "setting": "sealed archive room, tall shelves, quiet lamplight",
+        "quality": "crisp paper detail, refined textile rendering, clear facial structure",
+        "quality_detail": "deep archive depth, controlled magical ambience, readable face lighting",
+        "full": "sealed archive room, tall shelves, quiet lamplight, tiny script glimmers near the book, restrained indigo light",
+        "suppress": ""
+      },
+      {
+        "stem": "crown_heir",
+        "ja": "王冠の継承者",
+        "en": "Crown Heir",
+        "anchor": "crown heir, single humanoid character focus, clearly human face, single merged character design, clearly human face, crown motifs integrated into attire, noble gold trim, small crown, succession seal, scepter charm, family ribbon, regal inheritance dress, layered mantle, fitted corset, noble gloves",
+        "short": "crown heir, single humanoid character focus, clearly human face, clearly human face, crown motifs integrated into attire, noble gold trim, regal inheritance dress, layered mantle, fitted corset, noble gloves",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, crown motifs integrated into attire, noble gold trim",
+        "custom": "small crown, succession seal, scepter charm, family ribbon",
+        "attire": "regal inheritance dress, layered mantle, fitted corset, noble gloves",
+        "effect": "subtle regal gleam near the crown, restrained gold motes",
+        "setting": "inheritance chamber, ceremonial pillars, quiet royal dusk",
+        "quality": "refined gold detail, crisp layered fabrics, stable facial clarity",
+        "quality_detail": "soft royal depth, calm ceremonial atmosphere, readable face lighting",
+        "full": "inheritance chamber, ceremonial pillars, quiet royal dusk, subtle regal gleam near the crown, restrained gold motes",
+        "suppress": ""
+      },
+      {
+        "stem": "rusted_key",
+        "ja": "錆びた鍵の案内人",
+        "en": "Rusted Key Guide",
+        "anchor": "rusted key guide, single humanoid character focus, clearly human face, single merged character design, clearly human face, key motifs integrated into attire, weathered metal accents, rusted key, guide lantern, lock charm, route tags, travel coat, layered scarf, fitted tunic, sturdy boots",
+        "short": "rusted key guide, single humanoid character focus, clearly human face, clearly human face, key motifs integrated into attire, weathered metal accents, travel coat, layered scarf, fitted tunic, sturdy boots",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, key motifs integrated into attire, weathered metal accents",
+        "custom": "rusted key, guide lantern, lock charm, route tags",
+        "attire": "travel coat, layered scarf, fitted tunic, sturdy boots",
+        "effect": "tiny metal glints near the key, restrained dusty haze",
+        "setting": "abandoned corridor, old gate, quiet twilight journey",
+        "quality": "clean aged-metal detail, refined coat texture, clear facial readability",
+        "quality_detail": "soft ruin depth, restrained travel atmosphere, stable lighting",
+        "full": "abandoned corridor, old gate, quiet twilight journey, tiny metal glints near the key, restrained dusty haze",
+        "suppress": ""
+      },
+      {
+        "stem": "hourglass_observer",
+        "ja": "砂時計の観測者",
+        "en": "Hourglass Observer",
+        "anchor": "hourglass observer, single humanoid character focus, clearly human face, single merged character design, clearly human face, time motifs integrated into attire, gold sand-line ornaments, hourglass, clock key, note seal, chain accessory, observer coat, layered blouse, fitted skirt, long gloves",
+        "short": "hourglass observer, single humanoid character focus, clearly human face, clearly human face, time motifs integrated into attire, gold sand-line ornaments, observer coat, layered blouse, fitted skirt, long gloves",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, time motifs integrated into attire, gold sand-line ornaments",
+        "custom": "hourglass, clock key, note seal, chain accessory",
+        "attire": "observer coat, layered blouse, fitted skirt, long gloves",
+        "effect": "subtle sand glimmer near the hourglass, restrained amber haze",
+        "setting": "clock tower balcony, still evening air, distant city glow",
+        "quality": "precise glass detail, elegant cloth rendering, readable face lighting",
+        "quality_detail": "gentle vertical depth, controlled amber atmosphere, stable silhouette",
+        "full": "clock tower balcony, still evening air, distant city glow, subtle sand glimmer near the hourglass, restrained amber haze",
+        "suppress": ""
+      },
+      {
+        "stem": "cursed_orb",
+        "ja": "呪われた宝珠の魔術師",
+        "en": "Cursed Orb Mage",
+        "anchor": "cursed orb mage, single humanoid character focus, clearly human face, single merged character design, clearly human face, orb motifs integrated into attire, violet-black curse patterns kept ornamental, cursed orb, seal chain, black ribbon charms, arcane ring, dark mage attire, layered mantle, fitted dress, high boots",
+        "short": "cursed orb mage, single humanoid character focus, clearly human face, clearly human face, orb motifs integrated into attire, violet-black curse patterns kept ornamental, dark mage attire, layered mantle, fitted dress, high boots",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, orb motifs integrated into attire, violet-black curse patterns kept ornamental",
+        "custom": "cursed orb, seal chain, black ribbon charms, arcane ring",
+        "attire": "dark mage attire, layered mantle, fitted dress, high boots",
+        "effect": "faint curse glimmers near the orb, restrained violet haze",
+        "setting": "shadowed chamber, sealed pedestal room, quiet occult stillness",
+        "quality": "clean gem rendering, refined dark cloth texture, clear face definition",
+        "quality_detail": "controlled occult depth, subtle dark atmosphere, stable lighting",
+        "full": "shadowed chamber, sealed pedestal room, quiet occult stillness, faint curse glimmers near the orb, restrained violet haze",
+        "suppress": "the cursed object identity is carried by integrated costume motifs and a held accessory, no giant floating orb as the main subject"
+      }
+    ]
+  },
+  {
+    "title_ja": "🌙 夢界・悪夢の案内人",
+    "title_en": "Dreamrealm & Nightmare Guides",
+    "collection_id": "mythic_dream_nightmare_collection",
+    "key": "dream",
+    "themes": [
+      {
+        "stem": "dream_weaver",
+        "ja": "星屑の夢織り",
+        "en": "Stardust Dream Weaver",
+        "anchor": "stardust dream weaver, single humanoid character focus, clearly human face, single merged character design, clearly human face, dream-ribbon motifs integrated into attire, stardust trim, dream spindle, star thread, pillow charm, ribbon clips, layered dream dress, fitted bodice, star-embroidered shawl, soft shoes",
+        "short": "stardust dream weaver, single humanoid character focus, clearly human face, clearly human face, dream-ribbon motifs integrated into attire, stardust trim, layered dream dress, fitted bodice, star-embroidered shawl, soft shoes",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, dream-ribbon motifs integrated into attire, stardust trim",
+        "custom": "dream spindle, star thread, pillow charm, ribbon clips",
+        "attire": "layered dream dress, fitted bodice, star-embroidered shawl, soft shoes",
+        "effect": "soft star motes near the fingertips, restrained dreamy haze",
+        "setting": "quiet dream room, floating curtains, gentle twilight glow",
+        "quality": "fine fabric rendering, delicate star-thread detail, clear facial features",
+        "quality_detail": "soft dreamy depth, stable pastel atmosphere, readable face lighting",
+        "full": "quiet dream room, floating curtains, gentle twilight glow, soft star motes near the fingertips, restrained dreamy haze",
+        "suppress": ""
+      },
+      {
+        "stem": "sleep_guide",
+        "ja": "眠りの案内人",
+        "en": "Sleep Guide",
+        "anchor": "sleep guide, single humanoid character focus, clearly human face, single merged character design, clearly human face, night motifs integrated into attire, gentle crescent ornaments, sleep lamp, route bell, moon charm, ribbon tag, soft guide robes, layered scarf, fitted dress, calm slippers",
+        "short": "sleep guide, single humanoid character focus, clearly human face, clearly human face, night motifs integrated into attire, gentle crescent ornaments, soft guide robes, layered scarf, fitted dress, calm slippers",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, night motifs integrated into attire, gentle crescent ornaments",
+        "custom": "sleep lamp, route bell, moon charm, ribbon tag",
+        "attire": "soft guide robes, layered scarf, fitted dress, calm slippers",
+        "effect": "small drowsy motes near the lamp, restrained pale glow",
+        "setting": "quiet bedroom corridor, night lamp line, calm midnight hush",
+        "quality": "clean lamp detail, soft cloth texture, stable facial clarity",
+        "quality_detail": "gentle nocturnal depth, restful atmosphere, readable silhouette",
+        "full": "quiet bedroom corridor, night lamp line, calm midnight hush, small drowsy motes near the lamp, restrained pale glow",
+        "suppress": ""
+      },
+      {
+        "stem": "dream_eater",
+        "ja": "月蝕の夢喰い",
+        "en": "Eclipse Dream Eater",
+        "anchor": "eclipse dream eater, single humanoid character focus, clearly human face, single merged character design, clearly human face, eclipse motifs integrated into attire, compact shadow-feather ornaments, moon mirror, dream catcher charm, silver chain, dark ribbon, eclipse cloak, layered bodice, fitted sleeves, dark boots",
+        "short": "eclipse dream eater, single humanoid character focus, clearly human face, clearly human face, eclipse motifs integrated into attire, compact shadow-feather ornaments, eclipse cloak, layered bodice, fitted sleeves, dark boots",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, eclipse motifs integrated into attire, compact shadow-feather ornaments",
+        "custom": "moon mirror, dream catcher charm, silver chain, dark ribbon",
+        "attire": "eclipse cloak, layered bodice, fitted sleeves, dark boots",
+        "effect": "subtle shadow wisps near the mirror, restrained lunar haze",
+        "setting": "moonlit dream gate, still water edge, quiet surreal passage",
+        "quality": "crisp accessory detail, refined cloak texture, clear facial readability",
+        "quality_detail": "subtle surreal depth, controlled lunar atmosphere, stable lighting",
+        "full": "moonlit dream gate, still water edge, quiet surreal passage, subtle shadow wisps near the mirror, restrained lunar haze",
+        "suppress": ""
+      },
+      {
+        "stem": "clocktower_librarian",
+        "ja": "目覚めない時計塔の司書",
+        "en": "Sleepless Clocktower Librarian",
+        "anchor": "sleepless clocktower librarian, single humanoid character focus, clearly human face, single merged character design, clearly human face, clock motifs integrated into attire, page and gear ornaments, book bundle, clock key, chain bookmark, quill charm, tower librarian attire, layered vest, fitted skirt, long gloves",
+        "short": "sleepless clocktower librarian, single humanoid character focus, clearly human face, clearly human face, clock motifs integrated into attire, page and gear ornaments, tower librarian attire, layered vest, fitted skirt, long gloves",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, clock motifs integrated into attire, page and gear ornaments",
+        "custom": "book bundle, clock key, chain bookmark, quill charm",
+        "attire": "tower librarian attire, layered vest, fitted skirt, long gloves",
+        "effect": "tiny clock-light glimmers near the key, restrained amber haze",
+        "setting": "old clocktower library, still gears, quiet midnight archive",
+        "quality": "clean paper and metal detail, refined cloth rendering, stable face clarity",
+        "quality_detail": "deep tower atmosphere, controlled amber lighting, readable silhouette",
+        "full": "old clocktower library, still gears, quiet midnight archive, tiny clock-light glimmers near the key, restrained amber haze",
+        "suppress": ""
+      },
+      {
+        "stem": "nightmare_watcher",
+        "ja": "悪夢を封じる夜警",
+        "en": "Nightmare Sealing Watcher",
+        "anchor": "nightmare sealing watcher, single humanoid character focus, clearly human face, single merged character design, clearly human face, seal motifs integrated into uniform, dark-blue protective trim, seal lantern, ward ribbon, dream-key, charm tags, night guard uniform, layered coat, fitted trousers, sturdy boots",
+        "short": "nightmare sealing watcher, single humanoid character focus, clearly human face, clearly human face, seal motifs integrated into uniform, dark-blue protective trim, night guard uniform, layered coat, fitted trousers, sturdy boots",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, seal motifs integrated into uniform, dark-blue protective trim",
+        "custom": "seal lantern, ward ribbon, dream-key, charm tags",
+        "attire": "night guard uniform, layered coat, fitted trousers, sturdy boots",
+        "effect": "faint seal lights near the lantern, restrained blue haze",
+        "setting": "corridor of sleeping chambers, quiet warded hall, moonlit silence",
+        "quality": "crisp uniform detail, clear lantern texture, readable facial features",
+        "quality_detail": "calm corridor depth, restrained protective atmosphere, stable lighting",
+        "full": "corridor of sleeping chambers, quiet warded hall, moonlit silence, faint seal lights near the lantern, restrained blue haze",
+        "suppress": ""
+      },
+      {
+        "stem": "drowse_observer",
+        "ja": "まどろみの観測者",
+        "en": "Drowsing Observer",
+        "anchor": "drowsing observer, single humanoid character focus, clearly human face, single merged character design, clearly human face, soft eye-like star motifs integrated into attire, layered ribbon drape, lens charm, dream notebook, cloud pin, silver clip, observer coat, layered blouse, fitted skirt, ribbon stockings",
+        "short": "drowsing observer, single humanoid character focus, clearly human face, clearly human face, soft eye-like star motifs integrated into attire, layered ribbon drape, observer coat, layered blouse, fitted skirt, ribbon stockings",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, soft eye-like star motifs integrated into attire, layered ribbon drape",
+        "custom": "lens charm, dream notebook, cloud pin, silver clip",
+        "attire": "observer coat, layered blouse, fitted skirt, ribbon stockings",
+        "effect": "tiny sleepy motes near the notebook, restrained pastel haze",
+        "setting": "night observatory nook, thin curtains, quiet star-lit window",
+        "quality": "clean lens detail, refined garment texture, clear face and hair",
+        "quality_detail": "soft interior depth, dreamy night atmosphere, stable lighting",
+        "full": "night observatory nook, thin curtains, quiet star-lit window, tiny sleepy motes near the notebook, restrained pastel haze",
+        "suppress": ""
+      }
+    ]
+  },
+  {
+    "title_ja": "🎭 仮面劇・人形・劇場",
+    "title_en": "Masks, Dolls & Theater",
+    "collection_id": "mythic_masks_theater_collection",
+    "key": "theater",
+    "themes": [
+      {
+        "stem": "porcelain_doll",
+        "ja": "白磁の人形姫",
+        "en": "Porcelain Doll Princess",
+        "anchor": "porcelain doll princess, single humanoid character focus, clearly human face, single merged character design, clearly human face, doll-joint motifs kept ornamental, porcelain-inspired makeup, porcelain rose, lace ribbon, doll key charm, pearl clips, white lace dress, layered skirt, fitted corset, ribbon shoes",
+        "short": "porcelain doll princess, single humanoid character focus, clearly human face, clearly human face, doll-joint motifs kept ornamental, porcelain-inspired makeup, white lace dress, layered skirt, fitted corset, ribbon shoes",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, doll-joint motifs kept ornamental, porcelain-inspired makeup",
+        "custom": "porcelain rose, lace ribbon, doll key charm, pearl clips",
+        "attire": "white lace dress, layered skirt, fitted corset, ribbon shoes",
+        "effect": "tiny dust motes near the sleeves, restrained pearly glow",
+        "setting": "quiet display room, curtained stage, soft lamplight",
+        "quality": "fine lace detail, porcelain-like smooth rendering, stable facial clarity",
+        "quality_detail": "gentle stage depth, calm lamp atmosphere, readable face lighting",
+        "full": "quiet display room, curtained stage, soft lamplight, tiny dust motes near the sleeves, restrained pearly glow",
+        "suppress": ""
+      },
+      {
+        "stem": "gold_thread_puppeteer",
+        "ja": "金糸の操り人形師",
+        "en": "Golden String Puppeteer",
+        "anchor": "golden string puppeteer, single humanoid character focus, clearly human face, single merged character design, clearly human face, thread motifs integrated into attire, elegant hand ornaments, gold thread spool, puppet key, finger rings, stage ribbon, dark theater dress, layered coat tails, fitted bodice, heeled boots",
+        "short": "golden string puppeteer, single humanoid character focus, clearly human face, clearly human face, thread motifs integrated into attire, elegant hand ornaments, dark theater dress, layered coat tails, fitted bodice, heeled boots",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, thread motifs integrated into attire, elegant hand ornaments",
+        "custom": "gold thread spool, puppet key, finger rings, stage ribbon",
+        "attire": "dark theater dress, layered coat tails, fitted bodice, heeled boots",
+        "effect": "subtle thread shimmer near the fingers, restrained stage dust",
+        "setting": "small theater stage, velvet curtain, silent rehearsal room",
+        "quality": "clean gold-thread detail, refined cloth texture, clear face definition",
+        "quality_detail": "soft rehearsal depth, controlled stage atmosphere, stable lighting",
+        "full": "small theater stage, velvet curtain, silent rehearsal room, subtle thread shimmer near the fingers, restrained stage dust",
+        "suppress": "thread motifs integrated into the costume and hands, no crowd of separate puppets as the main subject"
+      },
+      {
+        "stem": "moon_mask_dancer",
+        "ja": "月面の仮面舞踏師",
+        "en": "Moonlit Mask Dancer",
+        "anchor": "moonlit mask dancer, single humanoid character focus, clearly human face, single merged character design, clearly human face, mask motifs integrated into attire, silver-lace accents, half mask, dance fan, bell earrings, moon ribbon, layered dance gown, fitted bodice, flowing shawl, elegant shoes",
+        "short": "moonlit mask dancer, single humanoid character focus, clearly human face, clearly human face, mask motifs integrated into attire, silver-lace accents, layered dance gown, fitted bodice, flowing shawl, elegant shoes",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, mask motifs integrated into attire, silver-lace accents",
+        "custom": "half mask, dance fan, bell earrings, moon ribbon",
+        "attire": "layered dance gown, fitted bodice, flowing shawl, elegant shoes",
+        "effect": "small moonlit glints near the mask, restrained silver haze",
+        "setting": "moonlit ballroom, arched windows, quiet midnight performance",
+        "quality": "refined lace detail, crisp accessory rendering, readable facial features",
+        "quality_detail": "gentle ballroom depth, controlled moonlit atmosphere, stable clarity",
+        "full": "moonlit ballroom, arched windows, quiet midnight performance, small moonlit glints near the mask, restrained silver haze",
+        "suppress": ""
+      },
+      {
+        "stem": "shadow_director",
+        "ja": "黒幕の劇場支配人",
+        "en": "Shadow Theater Director",
+        "anchor": "shadow theater director, single humanoid character focus, clearly human face, single merged character design, clearly human face, curtain motifs integrated into attire, dark red-black trim, script folder, cane, signet ring, cue bell, theater director coat, layered vest, fitted trousers, polished shoes",
+        "short": "shadow theater director, single humanoid character focus, clearly human face, clearly human face, curtain motifs integrated into attire, dark red-black trim, theater director coat, layered vest, fitted trousers, polished shoes",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, curtain motifs integrated into attire, dark red-black trim",
+        "custom": "script folder, cane, signet ring, cue bell",
+        "attire": "theater director coat, layered vest, fitted trousers, polished shoes",
+        "effect": "subtle cue-light glints near the cane, restrained crimson haze",
+        "setting": "grand theater box, dark curtain backdrop, formal evening air",
+        "quality": "clean coat and cane detail, refined textile texture, stable face clarity",
+        "quality_detail": "deep theater atmosphere, controlled low-key lighting, readable silhouette",
+        "full": "grand theater box, dark curtain backdrop, formal evening air, subtle cue-light glints near the cane, restrained crimson haze",
+        "suppress": ""
+      },
+      {
+        "stem": "fallen_crown_jester",
+        "ja": "破れた王冠の道化師",
+        "en": "Fallen Crown Jester",
+        "anchor": "fallen crown jester, single humanoid character focus, clearly human face, single merged character design, clearly human face, jester motifs integrated into attire, torn crown ornament, broken crown, playing card charm, bell tassels, ribbon staff, jester dress, layered frills, fitted corset, mismatched stockings",
+        "short": "fallen crown jester, single humanoid character focus, clearly human face, clearly human face, jester motifs integrated into attire, torn crown ornament, jester dress, layered frills, fitted corset, mismatched stockings",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, jester motifs integrated into attire, torn crown ornament",
+        "custom": "broken crown, playing card charm, bell tassels, ribbon staff",
+        "attire": "jester dress, layered frills, fitted corset, mismatched stockings",
+        "effect": "small stage sparkles near the bell tassels, restrained carnival haze",
+        "setting": "empty stage after the show, scattered confetti, dim spotlight",
+        "quality": "fine frill detail, clean accessory rendering, readable facial features",
+        "quality_detail": "subtle post-show depth, controlled dim spotlight, stable face lighting",
+        "full": "empty stage after the show, scattered confetti, dim spotlight, small stage sparkles near the bell tassels, restrained carnival haze",
+        "suppress": ""
+      },
+      {
+        "stem": "funerary_actor",
+        "ja": "終演を告げる葬送役者",
+        "en": "Funerary Actor of Finale",
+        "anchor": "funerary actor of finale, single humanoid character focus, clearly human face, single merged character design, clearly human face, funeral theater motifs integrated into attire, black-white ribbon accents, ending bell, flower pin, script page, mourning mask charm, black theater attire, layered long coat, fitted vest, formal gloves",
+        "short": "funerary actor of finale, single humanoid character focus, clearly human face, clearly human face, funeral theater motifs integrated into attire, black-white ribbon accents, black theater attire, layered long coat, fitted vest, formal gloves",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, funeral theater motifs integrated into attire, black-white ribbon accents",
+        "custom": "ending bell, flower pin, script page, mourning mask charm",
+        "attire": "black theater attire, layered long coat, fitted vest, formal gloves",
+        "effect": "soft pale stage dust near the bell, restrained monochrome glow",
+        "setting": "final curtain stage, silent seats, quiet farewell atmosphere",
+        "quality": "clean formalwear detail, refined monochrome contrast, stable facial clarity",
+        "quality_detail": "deep theater hush, controlled farewell lighting, readable silhouette",
+        "full": "final curtain stage, silent seats, quiet farewell atmosphere, soft pale stage dust near the bell, restrained monochrome glow",
+        "suppress": ""
+      }
+    ]
+  },
+  {
+    "title_ja": "🐎 黙示録の四騎士",
+    "title_en": "The Four Horsemen of the Apocalypse",
+    "collection_id": "mythic_apocalypse_riders_collection",
+    "key": "riders",
+    "themes": [
+      {
+        "stem": "conquest",
+        "ja": "白馬の征服者",
+        "en": "White Rider of Conquest",
+        "anchor": "white rider of conquest, single humanoid character focus, clearly human face, single merged character design, clearly human face, white conquest insignia integrated into attire, pale feather trim, bow emblem, laurel ribbon, crown pin, pale sash, white rider attire, layered mantle, fitted armor dress, high boots",
+        "short": "white rider of conquest, single humanoid character focus, clearly human face, clearly human face, white conquest insignia integrated into attire, pale feather trim, white rider attire, layered mantle, fitted armor dress, high boots",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, white conquest insignia integrated into attire, pale feather trim",
+        "custom": "bow emblem, laurel ribbon, crown pin, pale sash",
+        "attire": "white rider attire, layered mantle, fitted armor dress, high boots",
+        "effect": "soft pale glints near the bow emblem, restrained white haze",
+        "setting": "high wind rampart, pale sky, solemn advance atmosphere",
+        "quality": "clean white fabric detail, crisp emblem rendering, readable facial features",
+        "quality_detail": "airy battlefield depth, controlled pale lighting, stable silhouette",
+        "full": "high wind rampart, pale sky, solemn advance atmosphere, soft pale glints near the bow emblem, restrained white haze",
+        "suppress": ""
+      },
+      {
+        "stem": "war",
+        "ja": "赤馬の戦火騎士",
+        "en": "Red Rider of War",
+        "anchor": "red rider of war, single humanoid character focus, clearly human face, single merged character design, clearly human face, red war insignia integrated into attire, sharp armor trims, war blade, red banner ribbon, spur charm, gauntlet seals, red-black rider armor, layered mantle, fitted cuirass, battle boots",
+        "short": "red rider of war, single humanoid character focus, clearly human face, clearly human face, red war insignia integrated into attire, sharp armor trims, red-black rider armor, layered mantle, fitted cuirass, battle boots",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, red war insignia integrated into attire, sharp armor trims",
+        "custom": "war blade, red banner ribbon, spur charm, gauntlet seals",
+        "attire": "red-black rider armor, layered mantle, fitted cuirass, battle boots",
+        "effect": "subtle ember sparks near the blade, restrained war haze",
+        "setting": "storm-cleared battlefield ridge, banners in the distance, tense dusk",
+        "quality": "crisp armor and fabric detail, focused red-black contrast, clear facial structure",
+        "quality_detail": "deep martial atmosphere, controlled ember lighting, readable silhouette",
+        "full": "storm-cleared battlefield ridge, banners in the distance, tense dusk, subtle ember sparks near the blade, restrained war haze",
+        "suppress": ""
+      },
+      {
+        "stem": "famine",
+        "ja": "黒馬の秤の裁定官",
+        "en": "Black Rider of the Scales",
+        "anchor": "black rider of the scales, single humanoid character focus, clearly human face, single merged character design, clearly human face, balance motifs integrated into attire, black-gold formal trim, scales emblem, ledger tablet, measure chain, decree ring, black rider attire, layered cloak, fitted formal armor, high collar",
+        "short": "black rider of the scales, single humanoid character focus, clearly human face, clearly human face, balance motifs integrated into attire, black-gold formal trim, black rider attire, layered cloak, fitted formal armor, high collar",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, balance motifs integrated into attire, black-gold formal trim",
+        "custom": "scales emblem, ledger tablet, measure chain, decree ring",
+        "attire": "black rider attire, layered cloak, fitted formal armor, high collar",
+        "effect": "small dark-gold glints near the scales emblem, restrained dry haze",
+        "setting": "silent market ruins, long road horizon, austere twilight",
+        "quality": "clean insignia detail, refined black fabric texture, readable facial clarity",
+        "quality_detail": "spare atmospheric depth, controlled austere light, stable silhouette",
+        "full": "silent market ruins, long road horizon, austere twilight, small dark-gold glints near the scales emblem, restrained dry haze",
+        "suppress": ""
+      },
+      {
+        "stem": "pale",
+        "ja": "青白馬の静寂の案内人",
+        "en": "Pale Rider of Silence",
+        "anchor": "pale rider of silence, single humanoid character focus, clearly human face, single merged character design, clearly human face, pale funeral motifs integrated into attire, cool gray-blue accents, quiet banner, bell charm, seal ribbon, pale token, pale rider robes, layered mantle, fitted dress, dark boots",
+        "short": "pale rider of silence, single humanoid character focus, clearly human face, clearly human face, pale funeral motifs integrated into attire, cool gray-blue accents, pale rider robes, layered mantle, fitted dress, dark boots",
+        "base": "human body remains primary, clearly human face, single merged character design, clearly human face, pale funeral motifs integrated into attire, cool gray-blue accents",
+        "custom": "quiet banner, bell charm, seal ribbon, pale token",
+        "attire": "pale rider robes, layered mantle, fitted dress, dark boots",
+        "effect": "soft pale motes near the banner, restrained cold glow",
+        "setting": "misty road under dim sky, silent procession space, end-of-day calm",
+        "quality": "clean cloth detail, refined pale contrast, readable facial features",
+        "quality_detail": "subtle mist depth, controlled silent atmosphere, stable lighting",
+        "full": "misty road under dim sky, silent procession space, end-of-day calm, soft pale motes near the banner, restrained cold glow",
+        "suppress": ""
+      }
+    ]
+  }
+];
+
+    function isArray(v) {
+      return Object.prototype.toString.call(v) === "[object Array]";
+    }
+    function titleOf(node) {
+      return node && (node.title_ja || node.titleJa || node.title || node.label || "");
+    }
+    function findByTitle(node, title) {
+      if (!node) return null;
+      if (isArray(node)) {
+        for (var i = 0; i < node.length; i++) {
+          var hit = findByTitle(node[i], title);
+          if (hit) return hit;
+        }
+        return null;
+      }
+      if (typeof node === "object") {
+        if (titleOf(node) === title) return node;
+        var keys = Object.keys(node);
+        for (var j = 0; j < keys.length; j++) {
+          var value = node[keys[j]];
+          if (value && typeof value === "object") {
+            var hit2 = findByTitle(value, title);
+            if (hit2) return hit2;
+          }
+        }
+      }
+      return null;
+    }
+    function upsertByTitle(arr, node) {
+      if (!isArray(arr) || !node) return;
+      var title = titleOf(node);
+      for (var i = 0; i < arr.length; i++) {
+        if (titleOf(arr[i]) === title) {
+          arr[i] = node;
+          return;
+        }
+      }
+      arr.push(node);
+    }
+    function leaf(collectionId, id, label, val, desc, role, linkedIds) {
+      return {
+        id: id,
+        label: label,
+        val: val,
+        desc: desc,
+        collection_id: collectionId,
+        collection_role: role,
+        linked_ids: linkedIds && linkedIds.length ? linkedIds : undefined
+      };
+    }
+    function group(titleJa, titleEn, children) {
+      return { title_ja: titleJa, title_en: titleEn, children: children };
+    }
+    function idFor(prefix, stem, suffix) {
+      return prefix + "_" + stem + "_" + suffix;
+    }
+    function joinPrompt() {
+      var out = [];
+      for (var i = 0; i < arguments.length; i++) if (arguments[i]) out.push(arguments[i]);
+      return out.join(", ");
+    }
+    function makeCollection(def) {
+      var complete = [];
+      var characterOnly = [];
+      var bases = [];
+      var customizes = [];
+      var attires = [];
+      var effects = [];
+      var settings = [];
+      var qualitySets = [];
+      var qualityDetails = [];
+      var prefix = def.key;
+
+      for (var i = 0; i < def.themes.length; i++) {
+        var theme = def.themes[i];
+        var stem = theme.stem;
+        var baseId = idFor(prefix, stem, "base");
+        var customId = idFor(prefix, stem, "custom");
+        var outfitId = idFor(prefix, stem, "outfit");
+        var effectId = idFor(prefix, stem, "effect");
+        var settingId = idFor(prefix, stem, "setting");
+        var qualitySetId = idFor(prefix, stem, "quality_set_safe");
+        var qualityAId = idFor(prefix, stem, "quality_detail_a");
+        var qualityBId = idFor(prefix, stem, "quality_detail_b");
+        var suppressId = theme.suppress ? idFor(prefix, stem, "suppress") : "";
+        var coreId = idFor(prefix, stem, "complete_core");
+        var safeId = idFor(prefix, stem, "complete_safe_quality");
+        var limitId = idFor(prefix, stem, "complete_2000_limit");
+        var fullId = idFor(prefix, stem, "complete_full");
+        var characterId = idFor(prefix, stem, "character_only");
+
+        var coreLinks = [baseId, customId, outfitId, effectId, settingId];
+        var safeLinks = [baseId, customId, outfitId, effectId, settingId, qualitySetId];
+        var limitLinks = [baseId, outfitId];
+        var fullLinks = [baseId, customId, outfitId, effectId, settingId, qualitySetId];
+        var characterLinks = [baseId, customId, outfitId];
+        if (suppressId) {
+          coreLinks.push(suppressId);
+          safeLinks.push(suppressId);
+          limitLinks.push(suppressId);
+          fullLinks.push(suppressId);
+          characterLinks.push(suppressId);
+        }
+
+        complete.push(leaf(def.collection_id, coreId, theme.ja + " Core Set / " + theme.en + " Core Set", theme.anchor, "完成セット：主題・人型維持・固定衣装の核。表情やポーズは外付け。", "complete_set", coreLinks));
+        complete.push(leaf(def.collection_id, safeId, theme.ja + " Safe Quality Set / " + theme.en + " Safe Quality Set", joinPrompt(theme.anchor, theme.quality, theme.quality_detail), "完成セット：主題を崩さず、画質・光・質感だけを安全に強化。", "complete_set", safeLinks));
+        complete.push(leaf(def.collection_id, limitId, theme.ja + " 2000 Limit Compatible Set / " + theme.en + " 2000 Limit Compatible Set", theme.short, "完成セット：重複語を抑えた短縮・実戦版。", "complete_set", limitLinks));
+        complete.push(leaf(def.collection_id, fullId, theme.ja + " Full Set / " + theme.en + " Full Set", joinPrompt(theme.anchor, theme.full), "完成セット：ベース・差分・衣装・舞台・品質をまとめて試す全部乗せ版。", "complete_set", fullLinks));
+
+        characterOnly.push(leaf(def.collection_id, characterId, theme.ja + "キャラのみセット / " + theme.en + " Character Only Set", theme.short, "外付け前提の起点。固定表情・ポーズ・背景・強演出を入れない。", "complete_set", characterLinks));
+
+        bases.push(leaf(def.collection_id, baseId, theme.ja + "ベース / " + theme.en + " Base", theme.base, "人型維持と身体接続型の主題特徴。", "base", []));
+        customizes.push(leaf(def.collection_id, customId, theme.ja + "差分 / " + theme.en + " Custom", theme.custom, "モチーフ小物・身体差分・意匠の補強。", "customize", []));
+        attires.push(leaf(def.collection_id, outfitId, theme.ja + "衣装 / " + theme.en + " Attire", theme.attire, "衣装・装飾・固定アクセサリー。", "customize", []));
+        effects.push(leaf(def.collection_id, effectId, theme.ja + "演出 / " + theme.en + " Effect", theme.effect, "キャラ近傍で完結する軽い演出。", "setting", []));
+        settings.push(leaf(def.collection_id, settingId, theme.ja + "舞台 / " + theme.en + " Setting", theme.setting, "背景・空間・物語の舞台。", "setting", []));
+        qualitySets.push(leaf(def.collection_id, qualitySetId, theme.ja + "高画質補助 / " + theme.en + " Quality Support", joinPrompt(theme.quality, theme.quality_detail), "描写安定用の軽い品質補助。", "quality_set", []));
+        qualityDetails.push(leaf(def.collection_id, qualityAId, theme.ja + "質感描写 / " + theme.en + " Texture Detail", theme.quality, "素材・衣装・身体特徴の精密描写。", "quality_detail", []));
+        qualityDetails.push(leaf(def.collection_id, qualityBId, theme.ja + "空気感描写 / " + theme.en + " Atmosphere Detail", theme.quality_detail, "光と奥行きの補助。主題を埋もれさせない。", "quality_detail", []));
+        if (suppressId) {
+          settings.push(leaf(def.collection_id, suppressId, theme.ja + "主題維持 / " + theme.en + " Subject Preserve", theme.suppress, "別個体化・背景主役化を避ける補助。", "setting", []));
+        }
+      }
+
+      return {
+        title_ja: def.title_ja,
+        title_en: def.title_en,
+        collection_id: def.collection_id,
+        children: [
+          group("完成セット", "Complete Sets", complete),
+          group("キャラのみセット", "Character Only Sets", characterOnly),
+          group("ベース", "Base", bases),
+          group("カスタマイズ", "Customization", customizes),
+          group("衣装・小物", "Attire & Accessories", attires),
+          group("演出・エフェクト", "Effects", effects),
+          group("設定", "Setting", settings),
+          group("クオリティ補助", "Quality Support", qualitySets.concat(qualityDetails))
+        ]
+      };
+    }
+
+    var roleplayRoot = findByTitle(db[ROLEPLAY_PARENT_KEY], "🎭 なりきり");
+    if (!roleplayRoot || !isArray(roleplayRoot.children)) return;
+    var specialRoot = findByTitle(roleplayRoot.children, SPECIAL_TITLE_JA);
+    if (!specialRoot || !isArray(specialRoot.children)) return;
+
+    for (var c = 0; c < COLLECTIONS.length; c++) {
+      upsertByTitle(specialRoot.children, makeCollection(COLLECTIONS[c]));
+    }
+
+    var topOrder = {
+      "🪽 天空・神鳥特化コレクション": 0,
+      "☠ 冥獣・終末獣特化コレクション": 1,
+      "🪙 マモン（強欲）特化コレクション": 2,
+      "🎎 和風妖異・百鬼夜行": 3,
+      "🌌 星座・天体守護者": 4,
+      "⚰️ 冥府職能・死者の案内人": 5,
+      "⚗️ 錬金術・人造生命": 6,
+      "🃏 正逆タロット・大アルカナ": 7,
+      "✨ 七つの美徳": 8,
+      "🪞 聖遺物・呪物の擬人化": 9,
+      "🌙 夢界・悪夢の案内人": 10,
+      "🎭 仮面劇・人形・劇場": 11,
+      "🐎 黙示録の四騎士": 12
+    };
+    specialRoot.children.sort(function(a, b) {
+      var ai = Object.prototype.hasOwnProperty.call(topOrder, titleOf(a)) ? topOrder[titleOf(a)] : 999;
+      var bi = Object.prototype.hasOwnProperty.call(topOrder, titleOf(b)) ? topOrder[titleOf(b)] : 999;
+      return ai - bi;
+    });
+
+    if (window.__PP_DB) window.__PP_DB.packs = db;
+    window.PRESET_PACKS_DB = db;
+    window.__PRESET_PACKS_DB = db;
+  } catch (e) {}
+})();
+
+
+/* P20.1a: Item Sets completed-set link repair.
+ * Restore the 15 existing linked leaf definitions into the final Item Sets role trees.
+ * The complete-set IDs and linked_ids are intentionally kept unchanged for history compatibility.
+ */
+(function repairThemeItemSetLinkedLeaves(){
+  "use strict";
+  try {
+    var db = window.PRESET_PACKS_DB || window.__PRESET_PACKS_DB || (window.__PP_DB && window.__PP_DB.packs);
+    var root = db && db["🧰 テーマ別・持ち物セット (Item Sets)"];
+    if (Object.prototype.toString.call(root) !== "[object Array]") return;
+
+    function titleOf(node) {
+      return node && typeof node === "object" ? (node.title_ja || node.title_en || "") : "";
+    }
+    function findByTitle(list, title) {
+      if (Object.prototype.toString.call(list) !== "[object Array]") return null;
+      for (var i = 0; i < list.length; i++) {
+        if (titleOf(list[i]) === title) return list[i];
+      }
+      return null;
+    }
+    function containsId(node, id) {
+      if (!node || typeof node !== "object") return false;
+      if (node.id === id) return true;
+      if (Object.prototype.toString.call(node) === "[object Array]") {
+        for (var i = 0; i < node.length; i++) {
+          if (containsId(node[i], id)) return true;
+        }
+      } else if (Object.prototype.toString.call(node.children) === "[object Array]") {
+        return containsId(node.children, id);
+      }
+      return false;
+    }
+    function targetChildren(roleTitle, groupTitle, shelfTitle) {
+      var roleRoot = findByTitle(root, roleTitle);
+      var group = roleRoot && findByTitle(roleRoot.children, groupTitle);
+      var shelf = group && findByTitle(group.children, shelfTitle);
+      return shelf && Object.prototype.toString.call(shelf.children) === "[object Array]" ? shelf.children : null;
+    }
+    function add(roleTitle, groupTitle, shelfTitle, item) {
+      if (containsId(root, item.id)) return;
+      var children = targetChildren(roleTitle, groupTitle, shelfTitle);
+      if (children) children.push(item);
+    }
+
+    var collectionId = "theme_item_collection";
+    var ritual = "🕯 ゴシック・儀式";
+    var defs = [
+      {
+        roleTitle: "2. ベース", shelf: "⛪ 礼拝・書記",
+        item: {
+          id: "itemset_base_choircloister",
+          label: "聖歌隊回廊土台 / Choir Cloister Core",
+          desc: "譜面台・祈祷台・回廊席で聖歌隊の配置と礼拝回廊を作る",
+          val: "choir cloister base, hymn stands and cloister choir stalls, sacred corridor structure",
+          collection_id: collectionId, collection_role: "base"
+        }
+      },
+      {
+        roleTitle: "3. 追加小物", shelf: "⛪ 礼拝・書記",
+        item: {
+          id: "itemset_custom_choircloister",
+          label: "譜面・香油小物追加 / Choir Cloister Extras",
+          desc: "聖歌譜・香油瓶・小燭台で歌声と祈りの密度を足す",
+          val: "choir cloister extras, hymn folios and holy oil vials, reverent choir accessories",
+          collection_id: collectionId, collection_role: "custom"
+        }
+      },
+      {
+        roleTitle: "4. 用途・空気", shelf: "⛪ 礼拝・書記",
+        item: {
+          id: "itemset_setting_choircloister",
+          label: "聖歌回廊の反響 / Choir Cloister Mood",
+          desc: "回廊に歌が響き続ける祈りの余韻を足す",
+          val: "choir cloister mood, echoing hymns through stone corridors, solemn reverberant devotion",
+          collection_id: collectionId, collection_role: "setting"
+        }
+      },
+      {
+        roleTitle: "2. ベース", shelf: "⚰ 葬送・追悼",
+        item: {
+          id: "itemset_base_gravevigil",
+          label: "墓苑追悼土台 / Grave Vigil Core",
+          desc: "墓標灯・供花籠・黒傘で墓苑追悼の核を置く",
+          val: "(cemetery lantern), (offering flower basket), (black mourning umbrella), (wet grave path), (grave vigil core)",
+          collection_id: collectionId, collection_role: "base"
+        }
+      },
+      {
+        roleTitle: "3. 追加小物", shelf: "⚰ 葬送・追悼",
+        item: {
+          id: "itemset_custom_gravevigil",
+          label: "供物・墓碑小物追加 / Grave Vigil Extras",
+          desc: "供花札や濡れた墓碑片で墓苑追悼の湿った密度を増す",
+          val: "(offering tags), (wet gravestone fragments), (mourning ribbon), (dripping umbrella), (grave vigil extras)",
+          collection_id: collectionId, collection_role: "custom"
+        }
+      },
+      {
+        roleTitle: "4. 用途・空気", shelf: "⚰ 葬送・追悼",
+        item: {
+          id: "itemset_setting_gravevigil",
+          label: "墓苑追悼の薄雨感 / Grave Vigil Mood",
+          desc: "薄雨と墓標灯が続く墓苑追悼の湿った静けさを足す",
+          val: "(grave vigil atmosphere), (light rain cemetery hush), (wet stone mourning path), (soft lantern sorrow)",
+          collection_id: collectionId, collection_role: "setting"
+        }
+      },
+      {
+        roleTitle: "2. ベース", shelf: "⚰ 葬送・追悼",
+        item: {
+          id: "itemset_base_ossuarypilgrimage",
+          label: "納骨堂巡礼土台 / Ossuary Pilgrimage Core",
+          desc: "納骨壁龕・巡礼灯・祈念台で地下納骨堂の巡礼導線を作る",
+          val: "ossuary pilgrimage base, wall niches and votive lanterns, sepulchral pilgrimage core",
+          collection_id: collectionId, collection_role: "base"
+        }
+      },
+      {
+        roleTitle: "3. 追加小物", shelf: "⚰ 葬送・追悼",
+        item: {
+          id: "itemset_custom_ossuarypilgrimage",
+          label: "骨壺・巡礼灯小物追加 / Ossuary Pilgrimage Extras",
+          desc: "骨壺・灯火・祈念札で納骨堂巡礼の静かな重みを足す",
+          val: "ossuary pilgrimage extras, reliquary urns and votive markers, sepulchral pilgrimage accessories",
+          collection_id: collectionId, collection_role: "custom"
+        }
+      },
+      {
+        roleTitle: "4. 用途・空気", shelf: "⚰ 葬送・追悼",
+        item: {
+          id: "itemset_setting_ossuarypilgrimage",
+          label: "納骨堂巡礼の沈黙 / Ossuary Pilgrimage Mood",
+          desc: "骨壁の前で祈りが沈む静かな巡礼の空気を足す",
+          val: "ossuary pilgrimage mood, hushed prayer before sepulchral walls, solemn burial silence",
+          collection_id: collectionId, collection_role: "setting"
+        }
+      },
+      {
+        roleTitle: "2. ベース", shelf: "🩸 呪術・契約",
+        item: {
+          id: "itemset_base_pactarchive",
+          label: "封印契約書庫土台 / Sealed Pact Archive Core",
+          desc: "封書棚・契印箱・鍵束で禁じられた契約書庫の核を作る",
+          val: "sealed pact archive base, covenant shelves and seal boxes, hidden archive core",
+          collection_id: collectionId, collection_role: "base"
+        }
+      },
+      {
+        roleTitle: "3. 追加小物", shelf: "🩸 呪術・契約",
+        item: {
+          id: "itemset_custom_pactarchive",
+          label: "契紙・鍵印小物追加 / Sealed Pact Archive Extras",
+          desc: "契約紙片・印環・封緘鍵で秘匿契約の層を足す",
+          val: "sealed pact archive extras, covenant slips and signet keys, forbidden archive accessories",
+          collection_id: collectionId, collection_role: "custom"
+        }
+      },
+      {
+        roleTitle: "4. 用途・空気", shelf: "🩸 呪術・契約",
+        item: {
+          id: "itemset_setting_pactarchive",
+          label: "封印契約書庫の息詰まり / Sealed Pact Archive Mood",
+          desc: "秘匿契約が眠る書庫の乾いた緊張を足す",
+          val: "sealed pact archive mood, airless tension among forbidden covenant shelves, oppressive secrecy",
+          collection_id: collectionId, collection_role: "setting"
+        }
+      },
+      {
+        roleTitle: "2. ベース", shelf: "🦇 夜会・劇場・工房",
+        item: {
+          id: "itemset_base_masquerade",
+          label: "仮面舞踏夜会土台 / Masquerade Soirée Core",
+          desc: "舞踏床・仮面卓・給仕導線で退廃夜会の場を作る",
+          val: "masquerade soiree base, ballroom floor and mask table, nocturne salon core",
+          collection_id: collectionId, collection_role: "base"
+        }
+      },
+      {
+        roleTitle: "3. 追加小物", shelf: "🦇 夜会・劇場・工房",
+        item: {
+          id: "itemset_custom_masquerade",
+          label: "仮面・羽扇小物追加 / Masquerade Soirée Extras",
+          desc: "仮面・羽扇・酒杯で夜会の退廃と社交の香りを足す",
+          val: "masquerade soiree extras, masks and feather fans, decadent ballroom accessories",
+          collection_id: collectionId, collection_role: "custom"
+        }
+      },
+      {
+        roleTitle: "4. 用途・空気", shelf: "🦇 夜会・劇場・工房",
+        item: {
+          id: "itemset_setting_masquerade",
+          label: "仮面夜会の退廃 / Masquerade Soirée Mood",
+          desc: "仮面の笑みが漂う夜会の甘く危うい気配を足す",
+          val: "masquerade soiree mood, decadent masked revelry and perfumed danger, nocturne salon allure",
+          collection_id: collectionId, collection_role: "setting"
+        }
+      }
+    ];
+
+    for (var i = 0; i < defs.length; i++) {
+      add(defs[i].roleTitle, ritual, defs[i].shelf, defs[i].item);
+    }
+
+    if (window.__PP_DB) window.__PP_DB.packs = db;
+    window.PRESET_PACKS_DB = db;
+    window.__PRESET_PACKS_DB = db;
+  } catch (e) {}
+})();
+
+/* P20.2c: Bahamut Fusion compatibility-only marker.
+ * Keep the legacy Fusion Version branches in the DB for old history / linked_ids,
+ * but let the UI render them as non-visible compatibility inputs.
+ */
+(function markBahamutFusionCompatibilityOnly(){
+  "use strict";
+  try {
+    var db = window.PRESET_PACKS_DB || window.__PRESET_PACKS_DB || (window.__PP_DB && window.__PP_DB.packs);
+    if (!db || typeof db !== "object") return;
+
+    function isArray(v) {
+      return Object.prototype.toString.call(v) === "[object Array]";
+    }
+    function titleOf(node) {
+      return node && typeof node === "object" ? String(node.title_ja || node.label || node.title || "") : "";
+    }
+    function findBahamutCollection(node) {
+      if (!node || typeof node !== "object") return null;
+      if (isArray(node)) {
+        for (var ai = 0; ai < node.length; ai++) {
+          var foundInArray = findBahamutCollection(node[ai]);
+          if (foundInArray) return foundInArray;
+        }
+        return null;
+      }
+
+      if (
+        node.collection_id === "mythic_bahamut_collection" &&
+        isArray(node.children) &&
+        titleOf(node).indexOf("バハムート") !== -1 &&
+        titleOf(node).indexOf("特化コレクション") !== -1
+      ) {
+        return node;
+      }
+
+      var childKeys = ["children", "items", "packs"];
+      for (var ci = 0; ci < childKeys.length; ci++) {
+        var list = node[childKeys[ci]];
+        if (!isArray(list)) continue;
+        var found = findBahamutCollection(list);
+        if (found) return found;
+      }
+
+      var keys = Object.keys(node);
+      for (var ki = 0; ki < keys.length; ki++) {
+        var value = node[keys[ki]];
+        if (isArray(value)) {
+          var arrayFound = findBahamutCollection(value);
+          if (arrayFound) return arrayFound;
+        } else if (value && typeof value === "object" &&
+                   (value.children || value.items || value.packs || value.collection_id || value.title_ja)) {
+          var deepFound = findBahamutCollection(value);
+          if (deepFound) return deepFound;
+        }
+      }
+      return null;
+    }
+
+    var collection = findBahamutCollection(db);
+    if (!collection || !isArray(collection.children)) return;
+
+    var legacyTitles = {
+      "🐉 融合版 / Fusion Version": true,
+      "⚠️ 融合版（ワード注意版） / Fusion Version Word Caution": true
+    };
+
+    for (var i = 0; i < collection.children.length; i++) {
+      var child = collection.children[i];
+      if (!child || !legacyTitles[titleOf(child)]) continue;
+      child.compatibility_only = true;
+      child.compatibility_reason = "legacy_bahamut_fusion";
+      child.compatibility_visible = false;
+    }
+
+    if (window.__PP_DB) window.__PP_DB.packs = db;
+    window.PRESET_PACKS_DB = db;
+    window.__PRESET_PACKS_DB = db;
+    window.__BAHAMUT_FUSION_COMPATIBILITY_ONLY__ = true;
+  } catch (e) {
+    try { console.warn("[bahamut_fusion_compatibility_only]", e); } catch (_e) {}
+  }
+})();
+
+
+
+/* P20.3d: Griffon mid/deep Fusion compatibility-only marker.
+ * Keep legacy medium/deep body-fusion entries in the DB for old history / linked_ids,
+ * but let the UI render them as non-visible compatibility inputs.
+ * Light roleplay / light body-mutation entries remain visible because active Griffon sets link to them.
+ */
+(function markGriffonMidDeepFusionCompatibilityOnly(){
+  "use strict";
+  try {
+    var db = window.PRESET_PACKS_DB || window.__PRESET_PACKS_DB || (window.__PP_DB && window.__PP_DB.packs);
+    if (!db || typeof db !== "object") return;
+
+    function isArray(v) {
+      return Object.prototype.toString.call(v) === "[object Array]";
+    }
+    function titleOf(node) {
+      return node && typeof node === "object" ? String(node.title_ja || node.label || node.title || "") : "";
+    }
+
+    var targetIds = {
+      mythic_griffon_hybrid_griffon: true,
+      mythic_griffon_hybrid_mutation_griffon: true,
+      mythic_griffon_full_griffon: true,
+      mythic_griffon_full_mutation_griffon: true,
+      mythic_sky_hybrid_griffin: true,
+      mythic_sky_hybrid_mutation_griffin: true,
+      mythic_sky_full_griffin: true,
+      mythic_sky_full_mutation_griffin: true
+    };
+
+    var legacyGroupTitles = {
+      "🧬 中融合": true,
+      "🐾 中身体変化": true,
+      "🐉 深融合": true,
+      "🐾 深身体変化": true
+    };
+
+    function containsTargetId(node) {
+      if (!node || typeof node !== "object") return false;
+      if (isArray(node)) {
+        for (var ai = 0; ai < node.length; ai++) {
+          if (containsTargetId(node[ai])) return true;
+        }
+        return false;
+      }
+      if (node.id && targetIds[String(node.id)]) return true;
+      var keys = Object.keys(node);
+      for (var ki = 0; ki < keys.length; ki++) {
+        var value = node[keys[ki]];
+        if (value && typeof value === "object" && containsTargetId(value)) return true;
+      }
+      return false;
+    }
+
+    function markNode(node) {
+      node.compatibility_only = true;
+      node.legacy_compatibility_only = true;
+      node.compatibility_reason = "legacy_griffon_middeep_fusion";
+      node.compatibility_visible = false;
+    }
+
+    var marked = 0;
+    function walk(node) {
+      if (!node || typeof node !== "object") return;
+      if (isArray(node)) {
+        for (var ai = 0; ai < node.length; ai++) walk(node[ai]);
+        return;
+      }
+
+      if (legacyGroupTitles[titleOf(node)] && containsTargetId(node)) {
+        markNode(node);
+        marked++;
+        return;
+      }
+
+      var keys = Object.keys(node);
+      for (var ki = 0; ki < keys.length; ki++) {
+        var value = node[keys[ki]];
+        if (value && typeof value === "object") walk(value);
+      }
+    }
+
+    walk(db);
+
+    if (window.__PP_DB) window.__PP_DB.packs = db;
+    window.PRESET_PACKS_DB = db;
+    window.__PRESET_PACKS_DB = db;
+    window.__GRIFFON_MIDDEEP_FUSION_COMPATIBILITY_ONLY__ = marked;
+  } catch (e) {
+    try { console.warn("[griffon_middeep_fusion_compatibility_only]", e); } catch (_e) {}
+  }
+})();
+/* P20.4c: Unicorn mid/deep Fusion compatibility-only marker.
+ * Keep legacy medium/deep body-fusion entries in the DB for old history / linked_ids,
+ * but let the UI render them as non-visible compatibility inputs.
+ * Light roleplay / light body-mutation, preserve, and suppress entries remain visible
+ * because active Unicorn sets link to them.
+ */
+(function markUnicornMidDeepFusionCompatibilityOnly(){
+  "use strict";
+  try {
+    var db = window.PRESET_PACKS_DB || window.__PRESET_PACKS_DB || (window.__PP_DB && window.__PP_DB.packs);
+    if (!db || typeof db !== "object") return;
+
+    function isArray(v) {
+      return Object.prototype.toString.call(v) === "[object Array]";
+    }
+    function titleOf(node) {
+      return node && typeof node === "object" ? String(node.title_ja || node.label || node.title || "") : "";
+    }
+
+    var targetIds = {
+      mythic_unicorn_hybrid_unicorn: true,
+      mythic_unicorn_hybrid_mutation_unicorn: true,
+      mythic_unicorn_full_unicorn: true,
+      mythic_unicorn_full_mutation_unicorn: true
+    };
+
+    var legacyGroupTitles = {
+      "🧬 中融合": true,
+      "🐾 中身体変化": true,
+      "🐉 深融合": true,
+      "🐾 深身体変化": true
+    };
+
+    function containsTargetId(node) {
+      if (!node || typeof node !== "object") return false;
+      if (isArray(node)) {
+        for (var ai = 0; ai < node.length; ai++) {
+          if (containsTargetId(node[ai])) return true;
+        }
+        return false;
+      }
+      if (node.id && targetIds[String(node.id)]) return true;
+      var keys = Object.keys(node);
+      for (var ki = 0; ki < keys.length; ki++) {
+        var value = node[keys[ki]];
+        if (value && typeof value === "object" && containsTargetId(value)) return true;
+      }
+      return false;
+    }
+
+    function markNode(node) {
+      node.compatibility_only = true;
+      node.legacy_compatibility_only = true;
+      node.compatibility_reason = "legacy_unicorn_middeep_fusion";
+      node.compatibility_visible = false;
+    }
+
+    var marked = 0;
+    function walk(node) {
+      if (!node || typeof node !== "object") return;
+      if (isArray(node)) {
+        for (var ai = 0; ai < node.length; ai++) walk(node[ai]);
+        return;
+      }
+
+      if (legacyGroupTitles[titleOf(node)] && containsTargetId(node)) {
+        markNode(node);
+        marked++;
+        return;
+      }
+
+      var keys = Object.keys(node);
+      for (var ki = 0; ki < keys.length; ki++) {
+        var value = node[keys[ki]];
+        if (value && typeof value === "object") walk(value);
+      }
+    }
+
+    walk(db);
+
+    if (window.__PP_DB) window.__PP_DB.packs = db;
+    window.PRESET_PACKS_DB = db;
+    window.__PRESET_PACKS_DB = db;
+    window.__UNICORN_MIDDEEP_FUSION_COMPATIBILITY_ONLY__ = marked;
+  } catch (e) {
+    try { console.warn("[unicorn_middeep_fusion_compatibility_only]", e); } catch (_e) {}
   }
 })();

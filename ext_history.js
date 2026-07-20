@@ -80,8 +80,13 @@
         val: cb.getAttribute('data-val') || '',
         en: cb.getAttribute('data-en') || '',
         ja: cb.getAttribute('data-ja') || '',
+        outputChannel: cb.getAttribute('data-output-channel') || 'positive',
         labelText: getLabelText(cb),
-        detailsTrail: getDetailsTrail(cb)
+        detailsTrail: getDetailsTrail(cb),
+        // Pose v18の完成セット由来 / 手動保持を保存する。
+        // 空文字も「この履歴では由来なし」として意味を持つため、常に保持する。
+        animalPoseLinkedBy: cb.getAttribute('data-animal-pose-linked-by') || '',
+        animalPoseManualKeep: cb.getAttribute('data-animal-pose-manual-keep') || ''
       };
     });
   }
@@ -95,7 +100,10 @@
         (x.sectionId || '') !== (y.sectionId || '') ||
         Number(x.sectionIndex) !== Number(y.sectionIndex) ||
         (x.packId || '') !== (y.packId || '') ||
-        (x.labelText || '') !== (y.labelText || '')
+        (x.outputChannel || 'positive') !== (y.outputChannel || 'positive') ||
+        (x.labelText || '') !== (y.labelText || '') ||
+        (x.animalPoseLinkedBy || '') !== (y.animalPoseLinkedBy || '') ||
+        (x.animalPoseManualKeep || '') !== (y.animalPoseManualKeep || '')
       ) return false;
     }
     return true;
@@ -132,10 +140,37 @@
     boxes.forEach(cb => { cb.checked = false; });
   }
 
+  function closeAllBuilderShelves() {
+    // 履歴復元前に、前回の手動操作で開いた棚を残さない。
+    // 対象はビルダー本体の棚だけに限定し、履歴ポップアップ等の details には触れない。
+    const sectionsRoot = document.getElementById('sections');
+    const roots = sectionsRoot
+      ? [sectionsRoot]
+      : Array.from(document.querySelectorAll('[id^="list-"]'));
+    const seen = new Set();
+    const openDetails = [];
+
+    roots.forEach(root => {
+      root.querySelectorAll('details[open]').forEach(detail => {
+        if (!seen.has(detail)) {
+          seen.add(detail);
+          openDetails.push(detail);
+        }
+      });
+    });
+
+    // 深い子棚から閉じる。親子ともにopenの時も、表示状態を静かに初期化できる。
+    openDetails
+      .sort((a, b) => b.querySelectorAll('details').length - a.querySelectorAll('details').length)
+      .forEach(detail => { detail.open = false; });
+  }
+
   function openAncestors(el) {
+    const sectionsRoot = document.getElementById('sections');
     let node = el;
     while (node && node !== document.body) {
       if (node.tagName === 'DETAILS') node.open = true;
+      if (sectionsRoot && node === sectionsRoot) break;
       node = node.parentElement;
     }
   }
@@ -165,15 +200,36 @@
     return (el && el.type === 'checkbox') ? el : null;
   }
 
+  function sameDetailsTrail(a, b) {
+    const aa = Array.isArray(a) ? a : [];
+    const bb = Array.isArray(b) ? b : [];
+    if (!aa.length || aa.length !== bb.length) return false;
+    for (let i = 0; i < aa.length; i++) {
+      if (safeText(aa[i]) !== safeText(bb[i])) return false;
+    }
+    return true;
+  }
+
   function findByValueAndSection(item) {
     if (!item || !item.sectionId) return null;
     const section = document.getElementById(item.sectionId);
     if (!section) return null;
     const boxes = getSectionCheckboxes(section);
-    return boxes.find(cb => {
-      return (item.val && cb.getAttribute('data-val') === item.val) ||
-             (item.en && cb.getAttribute('data-en') === item.en);
-    }) || null;
+    const matches = boxes.filter(cb => {
+      const valueMatch = (item.val && cb.getAttribute('data-val') === item.val) ||
+                         (item.en && cb.getAttribute('data-en') === item.en);
+      if (!valueMatch) return false;
+      if (!item.outputChannel) return true;
+      return (cb.getAttribute('data-output-channel') || 'positive') === item.outputChannel;
+    });
+    if (!matches.length) return null;
+
+    // data-en / data-val が同一の互換項目は、保存済みの棚経路とラベルで絞る。
+    // それでも一意にならない場合だけ、旧来と同じ先頭候補へ戻す。
+    const trailMatch = matches.find(cb => sameDetailsTrail(getDetailsTrail(cb), item.detailsTrail));
+    if (trailMatch) return trailMatch;
+    const labelMatch = matches.find(cb => item.labelText && getLabelText(cb) === item.labelText);
+    return labelMatch || matches[0];
   }
 
   function findByLabelAndSection(item) {
@@ -181,7 +237,26 @@
     const section = document.getElementById(item.sectionId);
     if (!section) return null;
     const boxes = getSectionCheckboxes(section);
-    return boxes.find(cb => getLabelText(cb) === item.labelText) || null;
+    return boxes.find(cb => {
+      if (getLabelText(cb) !== item.labelText) return false;
+      if (!item.outputChannel) return true;
+      return (cb.getAttribute('data-output-channel') || 'positive') === item.outputChannel;
+    }) || null;
+  }
+
+  function restoreAnimalPoseLinkOrigins(items) {
+    const source = Array.isArray(items) ? items : [];
+    const poseItems = source.filter(item => item && item.sectionId === 'list-pose');
+    if (!poseItems.length) return false;
+
+    try {
+      if (typeof window.__SHIMA_REHYDRATE_ANIMAL_POSE_HISTORY__ === 'function') {
+        return !!window.__SHIMA_REHYDRATE_ANIMAL_POSE_HISTORY__(poseItems);
+      }
+      // Pose v18がまだ描画前なら、Pose側がmount完了後に静かに処理する。
+      window.__SHIMA_PENDING_ANIMAL_POSE_HISTORY_REHYDRATE__ = poseItems;
+    } catch (e) {}
+    return false;
   }
 
   function restoreCheckedItems(items) {
@@ -189,16 +264,22 @@
     const used = new Set();
     let restored = 0;
 
+    // 前回の手動開閉状態をリセットしてから、復元できたチェック項目の祖先棚だけを開く。
+    // 開閉イベントは発火しても、履歴復元中フラグにより連動・同期系の副作用を抑える。
+    closeAllBuilderShelves();
     clearAllCheckboxes();
 
     source.forEach(item => {
       let cb = null;
+      // 再描画で変わりうるinputIdより、データの安定IDを優先する。
+      // data-val / data-en が重複する互換項目は findByValueAndSection 内で棚経路も照合する。
+      // sectionIndex / globalIndex は最後の保険に留める。
       const candidates = [
-        () => findBySectionIndex(item),
-        () => findByInputId(item),
         () => findByPackId(item),
         () => findByValueAndSection(item),
+        () => findByInputId(item),
         () => findByLabelAndSection(item),
+        () => findBySectionIndex(item),
         () => findByGlobalIndex(item)
       ];
 
@@ -262,7 +343,7 @@
         #history-restore-toast {
           position:fixed;
           left:50%;
-          bottom:90px;
+          bottom:calc(var(--builder-footer-height, 300px) + 12px);
           transform:translateX(-50%);
           background:rgba(0,0,0,.88);
           color:#fff;
@@ -330,10 +411,10 @@
     const menu = document.createElement('div');
     menu.id = 'history-popup-menu';
     menu.style.cssText = `
-      position: fixed; bottom: 70px; left: 50%; transform: translateX(-50%);
+      position: fixed; bottom: calc(var(--builder-footer-height, 300px) + 12px); left: 50%; transform: translateX(-50%);
       background: white; border: 1px solid #ccc; border-radius: 8px;
       box-shadow: 0 5px 20px rgba(0,0,0,0.4); padding: 0; z-index: 10001;
-      max-height: 60vh; overflow-y: auto; display: none; min-width: 300px; max-width: 95%; width: 500px;
+      max-height: min(60svh, calc(100svh - var(--builder-footer-height, 300px) - 28px)); overflow-y: auto; display: none; min-width: 300px; max-width: 95%; width: 500px;
     `;
     document.body.appendChild(menu);
 
@@ -407,6 +488,8 @@
           window.__historySilentRestoring = true;
           try {
             restoredCount = restoreCheckedItems(item.checkedItems || []);
+            // Pose v18のlinked_ids由来 / 手動保持を、changeイベントなしで戻す。
+            restoreAnimalPoseLinkOrigins(item.checkedItems || []);
             // 履歴の text はフォールバック表示としてだけ入れる。
             // input/change は発火させず、最後に1回だけ generateOutput で現在モードの出力へ再構築する。
             out.value = item.text || '';

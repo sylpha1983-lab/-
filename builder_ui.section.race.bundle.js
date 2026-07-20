@@ -2250,3 +2250,733 @@ const PARTS_DATA_3 = {
   window.__registerPromptPart(KEY, VERSION, API);
 })();
 })();
+
+(function(){
+// --- builder_ui.section.race.v21.bahamut_fusion.js ---
+(function(){
+  "use strict";
+  const VERSION = 21;
+  const KEY = "race";
+
+  // P20.2a: Preset Packsの人物主役セットとは分離し、ここでは本人の身体融合だけを扱う。
+  // 既存Preset Packsのid / linked_ids / data-enは移動・削除しない。
+  const BAHAMUT_FUSION_DATA = {
+    "軽度：角・翼・尾・局所鱗": [
+      {
+        ja: "人型バハムート基底",
+        en: "Bahamut-inspired humanoid, clear human facial structure, single merged character design, localized draconic traits integrated into the character body"
+      },
+      {
+        ja: "局所竜パーツ",
+        en: "small dragon horns attached to the head, compact dragon wings attached to the back, dragon tail attached to the lower back, subtle blue-white scale accents"
+      }
+    ],
+    "中度：鱗肌・竜爪・生体竜装": [
+      {
+        ja: "鱗肌・竜爪",
+        en: "scale-textured skin across shoulders and collarbone, draconic claws, reinforced dragon nails, clear human torso silhouette"
+      },
+      {
+        ja: "生体竜装",
+        en: "living dragon armor integrated with the body, star-forged scale plates growing from the body, attached armor-like wing roots"
+      }
+    ],
+    "深度：強い生体竜化": [
+      {
+        ja: "強い生体竜化",
+        en: "extensive draconic body transformation, integrated scale skin across arms and legs, powerful dragon legs, broad attached dragon wings, heavy dragon tail, human facial structure retained"
+      }
+    ],
+    "人型維持・外部竜抑制": [
+      {
+        ja: "人型優先",
+        en: "single humanoid character focus, human torso and limbs remain primary, clear human face, attached dragon traits only"
+      },
+      {
+        ja: "外部竜を別個体にしない",
+        en: "no separate Bahamut creature, no companion dragon, all dragon traits belong to the humanoid character"
+      }
+    ]
+  };
+
+  const DICT = {
+    "Bahamut-inspired humanoid": "バハムート着想の人型",
+    "clear human facial structure": "明確な人間の顔立ち",
+    "single merged character design": "単一の融合キャラクターデザイン",
+    "localized draconic traits integrated into the character body": "局所的な竜要素を身体へ統合",
+    "small dragon horns attached to the head": "頭部に接続した小型竜角",
+    "compact dragon wings attached to the back": "背中に接続したコンパクトな竜翼",
+    "dragon tail attached to the lower back": "腰から接続した竜尾",
+    "subtle blue-white scale accents": "青白い控えめな鱗アクセント",
+    "scale-textured skin across shoulders and collarbone": "肩と鎖骨に鱗質の肌",
+    "draconic claws": "竜の爪",
+    "reinforced dragon nails": "強化された竜爪",
+    "clear human torso silhouette": "明確な人型の胴体シルエット",
+    "living dragon armor integrated with the body": "身体へ統合された生体竜装",
+    "star-forged scale plates growing from the body": "身体から生える星鍛造の鱗板",
+    "attached armor-like wing roots": "接続された鎧状の翼根",
+    "extensive draconic body transformation": "強い生体竜化",
+    "integrated scale skin across arms and legs": "手足に統合された鱗肌",
+    "powerful dragon legs": "力強い竜脚",
+    "broad attached dragon wings": "接続された大きな竜翼",
+    "heavy dragon tail": "重厚な竜尾",
+    "human facial structure retained": "人間的な顔立ちを維持",
+    "single humanoid character focus": "単一の人型キャラクターを主役にする",
+    "human torso and limbs remain primary": "人間の胴体と手足を主に保つ",
+    "clear human face": "明確な人間の顔",
+    "attached dragon traits only": "接続された竜要素のみ",
+    "no separate Bahamut creature": "別個体のバハムートを出さない",
+    "no companion dragon": "同行する竜を出さない",
+    "all dragon traits belong to the humanoid character": "すべての竜要素を人型本人に帰属させる"
+  };
+
+  function makeCategory(title, items){
+    const details = document.createElement("details");
+    details.className = "race-cat race-bahamut-fusion-tier";
+    details.style.cssText = [
+      "margin-bottom:7px",
+      "border:1px solid #d9c9f5",
+      "border-radius:7px",
+      "background:#fff",
+      "width:100%",
+      "box-sizing:border-box"
+    ].join(";");
+
+    const summary = document.createElement("summary");
+    summary.textContent = title;
+    summary.style.cssText = [
+      "font-weight:bold",
+      "padding:7px 10px",
+      "cursor:pointer",
+      "background:#fcfaff",
+      "color:#48335e",
+      "line-height:1.35",
+      "word-break:break-word",
+      "overflow-wrap:anywhere"
+    ].join(";");
+    details.appendChild(summary);
+
+    const content = document.createElement("div");
+    content.style.cssText = [
+      "padding:8px",
+      "display:grid",
+      "grid-template-columns:repeat(auto-fit, minmax(150px, 1fr))",
+      "gap:8px",
+      "width:100%",
+      "box-sizing:border-box"
+    ].join(";");
+
+    items.forEach((item, index) => {
+      const label = document.createElement("label");
+      label.style.cssText = [
+        "display:flex",
+        "align-items:flex-start",
+        "gap:6px",
+        "font-size:0.92em",
+        "line-height:1.35",
+        "cursor:pointer",
+        "word-break:break-word",
+        "overflow-wrap:anywhere"
+      ].join(";");
+      const cb = document.createElement("input");
+      cb.type = "checkbox";
+      cb.style.margin = "2px 0 0";
+      cb.dataset.val = item.en;
+      cb.dataset.raceFusionId = "bahamut_" + title.replace(/[^\w]+/g, "_").replace(/^_|_$/g, "") + "_" + index;
+      label.appendChild(cb);
+      label.appendChild(document.createTextNode(item.ja));
+      label.title = item.en;
+      content.appendChild(label);
+    });
+
+    details.appendChild(content);
+    return details;
+  }
+
+  function makeContainer(){
+    const container = document.createElement("details");
+    container.className = "race-divine-fusion-container";
+    container.style.cssText = [
+      "margin-bottom:10px",
+      "border:2px dashed #7e57c2",
+      "border-radius:10px",
+      "background:#fff",
+      "width:100%",
+      "box-sizing:border-box"
+    ].join(";");
+    container.open = false;
+
+    const mainSummary = document.createElement("summary");
+    mainSummary.textContent = "🐉 神獣融合・種族化 (Mythic Fusion & Species Traits)";
+    mainSummary.style.cssText = [
+      "font-weight:bold",
+      "padding:10px",
+      "cursor:pointer",
+      "background:#f5efff",
+      "color:#40295a",
+      "font-size:1em",
+      "line-height:1.35",
+      "word-break:break-word",
+      "overflow-wrap:anywhere"
+    ].join(";");
+    container.appendChild(mainSummary);
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "race-divine-fusion-wrapper";
+    wrapper.style.cssText = [
+      "padding:10px",
+      "width:100%",
+      "box-sizing:border-box",
+      "display:grid",
+      "grid-template-columns:repeat(auto-fit, minmax(260px, 1fr))",
+      "gap:8px",
+      "align-items:start",
+      "justify-items:stretch"
+    ].join(";");
+
+    const bahamut = document.createElement("details");
+    bahamut.className = "race-bahamut-fusion-container";
+    bahamut.style.cssText = [
+      "margin:0",
+      "border:1px solid #c5b0ec",
+      "border-radius:8px",
+      "background:#fff",
+      "width:100%",
+      "box-sizing:border-box"
+    ].join(";");
+    bahamut.open = false;
+
+    const bahamutSummary = document.createElement("summary");
+    bahamutSummary.textContent = "🐉 バハムート融合 (Bahamut Fusion)";
+    bahamutSummary.style.cssText = [
+      "font-weight:bold",
+      "padding:9px 10px",
+      "cursor:pointer",
+      "background:#faf7ff",
+      "color:#493463",
+      "line-height:1.35",
+      "word-break:break-word",
+      "overflow-wrap:anywhere"
+    ].join(";");
+    bahamut.appendChild(bahamutSummary);
+
+    const content = document.createElement("div");
+    content.style.cssText = "padding:9px; width:100%; box-sizing:border-box;";
+    Object.entries(BAHAMUT_FUSION_DATA).forEach(([title, items]) => {
+      content.appendChild(makeCategory(title, items));
+    });
+    bahamut.appendChild(content);
+    wrapper.appendChild(bahamut);
+    container.appendChild(wrapper);
+    return container;
+  }
+
+  function findSpeciesBody(partsRoot){
+    const blocks = Array.from(partsRoot.querySelectorAll(":scope > .race-group-block"));
+    const block = blocks.find(node => {
+      const head = node.querySelector(":scope > button");
+      return (head ? head.textContent : "").includes("種族パーツ");
+    });
+    return block ? block.querySelector(":scope > .race-group-body") : null;
+  }
+
+  function getDivineFusionWrapper(container){
+    if (!container) return null;
+    let wrapper = container.querySelector(":scope > .race-divine-fusion-wrapper");
+    if (!wrapper){
+      wrapper = container.querySelector(":scope > div");
+      if (wrapper) wrapper.classList.add("race-divine-fusion-wrapper");
+    }
+    if (wrapper && wrapper !== container){
+      wrapper.style.cssText = [
+        "padding:10px",
+        "width:100%",
+        "box-sizing:border-box",
+        "display:grid",
+        "grid-template-columns:repeat(auto-fit, minmax(260px, 1fr))",
+        "gap:8px",
+        "align-items:start",
+        "justify-items:stretch"
+      ].join(";");
+    }
+    return wrapper || container;
+  }
+
+  function orderDivineFusionChildren(wrapper){
+    if (!wrapper) return;
+    [
+      ".race-bahamut-fusion-container",
+      ".race-griffon-fusion-container",
+      ".race-unicorn-fusion-container"
+    ].forEach(selector => {
+      const child = wrapper.querySelector(":scope > " + selector);
+      if (child) wrapper.appendChild(child);
+    });
+  }
+
+  function ensureDivineFusionRoot(attempt, onReady){
+    const partsRoot = document.getElementById("race-root-parts-content");
+    if (!partsRoot){
+      if (attempt < 16) window.setTimeout(() => ensureDivineFusionRoot(attempt + 1, onReady), 90);
+      return;
+    }
+
+    const speciesBody = findSpeciesBody(partsRoot);
+    if (!speciesBody){
+      if (attempt < 16) window.setTimeout(() => ensureDivineFusionRoot(attempt + 1, onReady), 90);
+      return;
+    }
+
+    let container = partsRoot.querySelector(".race-divine-fusion-container");
+    if (!container) container = makeContainer();
+
+    if (container.parentNode !== speciesBody){
+      const dragonContainer = speciesBody.querySelector(".race-dragon-container");
+      if (dragonContainer && dragonContainer.nextSibling){
+        speciesBody.insertBefore(container, dragonContainer.nextSibling);
+      } else if (dragonContainer) {
+        speciesBody.appendChild(container);
+      } else {
+        speciesBody.insertBefore(container, speciesBody.firstChild || null);
+      }
+    }
+
+    const wrapper = getDivineFusionWrapper(container);
+    orderDivineFusionChildren(wrapper);
+    if (typeof onReady === "function") onReady(container, wrapper);
+  }
+
+  function mountIntoSpeciesGroup(attempt){
+    ensureDivineFusionRoot(attempt || 0);
+  }
+
+  // P20.5c: Androidでカードが上下にずれて見えないよう、神獣融合カードの余白とgrid配置を統一。
+  // P20.5b: 神獣融合棚のマウント経路を1本化。
+  // 後続のバハムート／グリフォン／ユニコーン追加は、この受け口へ集約して順序と再試行を安定させる。
+  window.__shimaRaceMountDivineFusionChild = function(className, makeChild, attempt){
+    ensureDivineFusionRoot(attempt || 0, function(container, wrapper){
+      if (!wrapper || !className || typeof makeChild !== "function") return;
+      if (!wrapper.querySelector(":scope > ." + className)){
+        wrapper.appendChild(makeChild());
+      }
+      orderDivineFusionChildren(wrapper);
+    });
+  };
+
+  const API = {
+    initUI(){
+      if (window.__outputTranslation) window.__outputTranslation.register(DICT);
+      // Race v18の大分類が組み終わった後に、種族パーツ内へ差し込む。
+      window.setTimeout(() => mountIntoSpeciesGroup(0), 220);
+    },
+    getTags(){ return []; }
+  };
+
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
+
+
+(function(){
+// --- builder_ui.section.race.v22.griffon_fusion.js ---
+(function(){
+  "use strict";
+  const VERSION = 22;
+  const KEY = "race";
+
+  // P20.3b: Preset Packsのグリフォンなりきりとは分離し、ここでは本人の身体融合だけを扱う。
+  // 既存Preset Packsのid / linked_ids / data-enは移動・削除しない。
+  const GRIFFON_FUSION_DATA = {
+    "軽度：鷲翼・羽毛腕・獅子尾": [
+      {
+        ja: "人型グリフォン基底",
+        en: "Gryphon-inspired humanoid, clear human facial structure, single merged character design, localized eagle-lion traits integrated into the character body"
+      },
+      {
+        ja: "鷲翼・羽毛腕・獅子尾",
+        en: "attached eagle wings on the back, feathered arm accents, compact lion tail attached to the lower back, subtle gold-brown feather and fur accents"
+      }
+    ],
+    "中度：鉤爪・獣脚・羽毛体表": [
+      {
+        ja: "鉤爪・獣脚アクセント",
+        en: "talon-like fingernails, feathered forearms, leonine leg accents, lion-like tail base, clear human torso silhouette"
+      },
+      {
+        ja: "羽毛体表・獅子質感",
+        en: "integrated gryphon body traits, eagle-feather mantle growing from the shoulders, lion-claw foot accents, natural feather and fur texture across limbs"
+      }
+    ],
+    "深度：鷲獅子の強い生体融合": [
+      {
+        ja: "強い鷲獅子化",
+        en: "strong gryphon body transformation, broad attached eagle wings, feathered arms, powerful lion hind-leg silhouette, leonine tail, human facial structure retained"
+      }
+    ],
+    "人型維持・外部グリフォン抑制": [
+      {
+        ja: "人型優先",
+        en: "single humanoid character focus, human head and torso remain primary, attached gryphon traits only, readable human silhouette"
+      },
+      {
+        ja: "外部グリフォンを別個体にしない",
+        en: "no separate gryphon creature, no companion gryphon, all eagle and lion traits belong to the humanoid character"
+      }
+    ]
+  };
+
+  const DICT = {
+    "Gryphon-inspired humanoid": "グリフォン着想の人型",
+    "clear human facial structure": "明確な人間の顔立ち",
+    "single merged character design": "単一の融合キャラクターデザイン",
+    "localized eagle-lion traits integrated into the character body": "鷲と獅子の要素を身体へ局所統合",
+    "attached eagle wings on the back": "背中に接続した鷲翼",
+    "feathered arm accents": "腕の羽毛アクセント",
+    "compact lion tail attached to the lower back": "腰に接続した小型の獅子尾",
+    "subtle gold-brown feather and fur accents": "金茶の控えめな羽毛と獣毛アクセント",
+    "talon-like fingernails": "鉤爪のような指先",
+    "feathered forearms": "羽毛の前腕",
+    "leonine leg accents": "獅子脚アクセント",
+    "lion-like tail base": "獅子尾の付け根",
+    "clear human torso silhouette": "明確な人型の胴体シルエット",
+    "integrated gryphon body traits": "統合されたグリフォン身体特徴",
+    "eagle-feather mantle growing from the shoulders": "肩から生える鷲羽のマント状部位",
+    "lion-claw foot accents": "獅子爪の足元アクセント",
+    "natural feather and fur texture across limbs": "手足に自然な羽毛と獣毛の質感",
+    "strong gryphon body transformation": "強い鷲獅子の生体変化",
+    "broad attached eagle wings": "接続された大きな鷲翼",
+    "feathered arms": "羽毛の腕",
+    "powerful lion hind-leg silhouette": "力強い獅子後脚シルエット",
+    "leonine tail": "獅子の尾",
+    "human facial structure retained": "人間的な顔立ちを維持",
+    "single humanoid character focus": "単一の人型キャラクターを主役にする",
+    "human head and torso remain primary": "人間の頭部と胴体を主に保つ",
+    "attached gryphon traits only": "接続されたグリフォン要素のみ",
+    "readable human silhouette": "読み取りやすい人型シルエット",
+    "no separate gryphon creature": "別個体のグリフォンを出さない",
+    "no companion gryphon": "同行するグリフォンを出さない",
+    "all eagle and lion traits belong to the humanoid character": "すべての鷲と獅子要素を人型本人に帰属させる"
+  };
+
+  function makeCategory(title, items){
+    const details = document.createElement("details");
+    details.className = "race-cat race-griffon-fusion-tier";
+    details.style.cssText = [
+      "margin-bottom:7px",
+      "border:1px solid #d7c8ef",
+      "border-radius:7px",
+      "background:#fff",
+      "width:100%",
+      "box-sizing:border-box"
+    ].join(";");
+
+    const summary = document.createElement("summary");
+    summary.textContent = title;
+    summary.style.cssText = [
+      "font-weight:bold",
+      "padding:7px 10px",
+      "cursor:pointer",
+      "background:#fcfaff",
+      "color:#48335e",
+      "line-height:1.35",
+      "word-break:break-word",
+      "overflow-wrap:anywhere"
+    ].join(";");
+    details.appendChild(summary);
+
+    const content = document.createElement("div");
+    content.style.cssText = [
+      "padding:8px",
+      "display:grid",
+      "grid-template-columns:repeat(auto-fit, minmax(150px, 1fr))",
+      "gap:8px",
+      "width:100%",
+      "box-sizing:border-box"
+    ].join(";");
+
+    items.forEach((item, index) => {
+      const label = document.createElement("label");
+      label.style.cssText = [
+        "display:flex",
+        "align-items:flex-start",
+        "gap:6px",
+        "font-size:0.92em",
+        "line-height:1.35",
+        "cursor:pointer",
+        "word-break:break-word",
+        "overflow-wrap:anywhere"
+      ].join(";");
+      const cb = document.createElement("input");
+      cb.type = "checkbox";
+      cb.style.margin = "2px 0 0";
+      cb.dataset.val = item.en;
+      cb.dataset.raceFusionId = "griffon_" + title.replace(/[^\w]+/g, "_").replace(/^_|_$/g, "") + "_" + index;
+      label.appendChild(cb);
+      label.appendChild(document.createTextNode(item.ja));
+      label.title = item.en;
+      content.appendChild(label);
+    });
+
+    details.appendChild(content);
+    return details;
+  }
+
+  function makeGriffonContainer(){
+    const griffon = document.createElement("details");
+    griffon.className = "race-griffon-fusion-container";
+    griffon.style.cssText = [
+      "margin:0",
+      "border:1px solid #c5b0ec",
+      "border-radius:8px",
+      "background:#fff",
+      "width:100%",
+      "box-sizing:border-box"
+    ].join(";");
+    griffon.open = false;
+
+    const summary = document.createElement("summary");
+    summary.textContent = "🦅 グリフォン融合 (Gryphon Fusion)";
+    summary.style.cssText = [
+      "font-weight:bold",
+      "padding:9px 10px",
+      "cursor:pointer",
+      "background:#faf7ff",
+      "color:#493463",
+      "line-height:1.35",
+      "word-break:break-word",
+      "overflow-wrap:anywhere"
+    ].join(";");
+    griffon.appendChild(summary);
+
+    const content = document.createElement("div");
+    content.style.cssText = "padding:9px; width:100%; box-sizing:border-box;";
+    Object.entries(GRIFFON_FUSION_DATA).forEach(([title, items]) => {
+      content.appendChild(makeCategory(title, items));
+    });
+    griffon.appendChild(content);
+    return griffon;
+  }
+
+  function mountGriffonFusion(attempt){
+    if (typeof window.__shimaRaceMountDivineFusionChild === "function"){
+      window.__shimaRaceMountDivineFusionChild("race-griffon-fusion-container", makeGriffonContainer, attempt || 0);
+      return;
+    }
+    if (attempt < 16) window.setTimeout(() => mountGriffonFusion(attempt + 1), 90);
+  }
+
+  const API = {
+    initUI(){
+      if (window.__outputTranslation) window.__outputTranslation.register(DICT);
+      // P20.5b: 共通マウント受け口へ集約。受け口側で親棚生成・順序整列・再試行を行う。
+      window.setTimeout(() => mountGriffonFusion(0), 40);
+    },
+    getTags(){ return []; }
+  };
+
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
+})();
+
+
+
+(function(){
+// --- builder_ui.section.race.v23.unicorn_fusion.js ---
+(function(){
+  "use strict";
+  const VERSION = 23;
+  const KEY = "race";
+
+  // P20.4b: Preset Packsのユニコーンなりきりとは分離し、ここでは本人の身体融合だけを扱う。
+  // 既存Preset Packsのid / linked_ids / data-enは移動・削除しない。
+  const UNICORN_FUSION_DATA = {
+    "軽度：生体角・銀白体表・聖獣アクセント": [
+      {
+        ja: "人型ユニコーン基底",
+        en: "Unicorn-inspired humanoid, clear human facial structure, single merged character design, localized holy beast traits integrated into the character body"
+      },
+      {
+        ja: "生体角・銀白アクセント",
+        en: "single biological unicorn horn growing from the forehead, pearly white skin accents, subtle silver mane-like hair details, holy beast aura close to the body"
+      }
+    ],
+    "中度：蹄風脚部・聖獣体表・祝福器官": [
+      {
+        ja: "蹄風脚部アクセント",
+        en: "hoof-inspired leg accents, elegant lower-leg silhouette, small ankle fur tufts, clear human torso and hands retained"
+      },
+      {
+        ja: "聖獣体表・祝福器官",
+        en: "integrated unicorn body traits, pearl-like skin sheen, luminous blessing marks along the arms and shoulders, sacred horn as a living body part"
+      }
+    ],
+    "深度：高位聖獣の強い生体融合": [
+      {
+        ja: "強い聖獣化",
+        en: "strong unicorn body transformation, prominent living unicorn horn, flowing silver mane accents, sacred beast lower-body cues, human facial structure retained"
+      }
+    ],
+    "人型維持・外部ユニコーン抑制": [
+      {
+        ja: "人型優先",
+        en: "single humanoid character focus, human head and torso remain primary, attached unicorn traits only, readable human silhouette"
+      },
+      {
+        ja: "外部ユニコーンを別個体にしない",
+        en: "no separate unicorn creature, no companion unicorn, all horn and holy beast traits belong to the humanoid character"
+      }
+    ]
+  };
+
+  const DICT = {
+    "Unicorn-inspired humanoid": "ユニコーン着想の人型",
+    "clear human facial structure": "明確な人間の顔立ち",
+    "single merged character design": "単一の融合キャラクターデザイン",
+    "localized holy beast traits integrated into the character body": "聖獣要素を身体へ局所統合",
+    "single biological unicorn horn growing from the forehead": "額から生える一本の生体ユニコーン角",
+    "pearly white skin accents": "真珠白の肌アクセント",
+    "subtle silver mane-like hair details": "控えめな銀のたてがみ風ヘアディテール",
+    "holy beast aura close to the body": "身体近くにまとまる聖獣オーラ",
+    "hoof-inspired leg accents": "蹄風の脚部アクセント",
+    "elegant lower-leg silhouette": "優雅な下腿シルエット",
+    "small ankle fur tufts": "足首の小さな毛房",
+    "clear human torso and hands retained": "人間の胴体と手を明確に維持",
+    "integrated unicorn body traits": "統合されたユニコーン身体特徴",
+    "pearl-like skin sheen": "真珠のような肌の光沢",
+    "luminous blessing marks along the arms and shoulders": "腕と肩に沿う発光する祝福紋",
+    "sacred horn as a living body part": "生体部位としての聖なる角",
+    "strong unicorn body transformation": "強い聖獣ユニコーンの生体変化",
+    "prominent living unicorn horn": "目立つ生体ユニコーン角",
+    "flowing silver mane accents": "流れる銀のたてがみアクセント",
+    "sacred beast lower-body cues": "聖獣らしい下半身の手がかり",
+    "human facial structure retained": "人間的な顔立ちを維持",
+    "single humanoid character focus": "単一の人型キャラクターを主役にする",
+    "human head and torso remain primary": "人間の頭部と胴体を主に保つ",
+    "attached unicorn traits only": "接続されたユニコーン要素のみ",
+    "readable human silhouette": "読み取りやすい人型シルエット",
+    "no separate unicorn creature": "別個体のユニコーンを出さない",
+    "no companion unicorn": "同行するユニコーンを出さない",
+    "all horn and holy beast traits belong to the humanoid character": "すべての角と聖獣要素を人型本人に帰属させる"
+  };
+
+  function makeCategory(title, items){
+    const details = document.createElement("details");
+    details.className = "race-cat race-unicorn-fusion-tier";
+    details.style.cssText = [
+      "margin-bottom:7px",
+      "border:1px solid #d7c8ef",
+      "border-radius:7px",
+      "background:#fff",
+      "width:100%",
+      "box-sizing:border-box"
+    ].join(";");
+
+    const summary = document.createElement("summary");
+    summary.textContent = title;
+    summary.style.cssText = [
+      "font-weight:bold",
+      "padding:7px 10px",
+      "cursor:pointer",
+      "background:#fcfaff",
+      "color:#48335e",
+      "line-height:1.35",
+      "word-break:break-word",
+      "overflow-wrap:anywhere"
+    ].join(";");
+    details.appendChild(summary);
+
+    const content = document.createElement("div");
+    content.style.cssText = [
+      "padding:8px",
+      "display:grid",
+      "grid-template-columns:repeat(auto-fit, minmax(150px, 1fr))",
+      "gap:8px",
+      "width:100%",
+      "box-sizing:border-box"
+    ].join(";");
+
+    items.forEach((item, index) => {
+      const label = document.createElement("label");
+      label.style.cssText = [
+        "display:flex",
+        "align-items:flex-start",
+        "gap:6px",
+        "font-size:0.92em",
+        "line-height:1.35",
+        "cursor:pointer",
+        "word-break:break-word",
+        "overflow-wrap:anywhere"
+      ].join(";");
+      const cb = document.createElement("input");
+      cb.type = "checkbox";
+      cb.style.margin = "2px 0 0";
+      cb.dataset.val = item.en;
+      cb.dataset.raceFusionId = "unicorn_" + title.replace(/[^\w]+/g, "_").replace(/^_|_$/g, "") + "_" + index;
+      label.appendChild(cb);
+      label.appendChild(document.createTextNode(item.ja));
+      label.title = item.en;
+      content.appendChild(label);
+    });
+
+    details.appendChild(content);
+    return details;
+  }
+
+  function makeUnicornContainer(){
+    const unicorn = document.createElement("details");
+    unicorn.className = "race-unicorn-fusion-container";
+    unicorn.style.cssText = [
+      "margin:0",
+      "border:1px solid #c5b0ec",
+      "border-radius:8px",
+      "background:#fff",
+      "width:100%",
+      "box-sizing:border-box"
+    ].join(";");
+    unicorn.open = false;
+
+    const summary = document.createElement("summary");
+    summary.textContent = "🦄 ユニコーン融合 (Unicorn Fusion)";
+    summary.style.cssText = [
+      "font-weight:bold",
+      "padding:9px 10px",
+      "cursor:pointer",
+      "background:#faf7ff",
+      "color:#493463",
+      "line-height:1.35",
+      "word-break:break-word",
+      "overflow-wrap:anywhere"
+    ].join(";");
+    unicorn.appendChild(summary);
+
+    const content = document.createElement("div");
+    content.style.cssText = "padding:9px; width:100%; box-sizing:border-box;";
+    Object.entries(UNICORN_FUSION_DATA).forEach(([title, items]) => {
+      content.appendChild(makeCategory(title, items));
+    });
+    unicorn.appendChild(content);
+    return unicorn;
+  }
+
+  function mountUnicornFusion(attempt){
+    if (typeof window.__shimaRaceMountDivineFusionChild === "function"){
+      window.__shimaRaceMountDivineFusionChild("race-unicorn-fusion-container", makeUnicornContainer, attempt || 0);
+      return;
+    }
+    if (attempt < 16) window.setTimeout(() => mountUnicornFusion(attempt + 1), 90);
+  }
+
+  const API = {
+    initUI(){
+      if (window.__outputTranslation) window.__outputTranslation.register(DICT);
+      // P20.5b: 共通マウント受け口へ集約。受け口側で親棚生成・順序整列・再試行を行う。
+      window.setTimeout(() => mountUnicornFusion(0), 60);
+    },
+    getTags(){ return []; }
+  };
+
+  window.__registerPromptPart(KEY, VERSION, API);
+})();
+})();
+
+})();
+

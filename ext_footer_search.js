@@ -40,7 +40,7 @@
     menu.id = menuId;
     menu.style.cssText = `
       position: fixed;
-      bottom: 70px;
+      bottom: calc(var(--builder-footer-height, 300px) + 12px);
       left: 50%;
       transform: translateX(-50%);
       background: white;
@@ -49,7 +49,7 @@
       box-shadow: 0 5px 15px rgba(0,0,0,0.3);
       padding: 10px;
       z-index: 10000;
-      max-height: 50vh;
+      max-height: min(50svh, calc(100svh - var(--builder-footer-height, 300px) - 28px));
       overflow-y: auto;
       display: none;
       min-width: 260px;
