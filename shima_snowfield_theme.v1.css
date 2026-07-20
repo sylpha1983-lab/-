@@ -1,0 +1,1107 @@
+@charset "UTF-8";
+
+/*
+ * SHIMA BUILDER v5 — SHIMA SNOWFIELD UI
+ * Appearance-only layer loaded after ZERO UI and ZERO Assist.
+ * Remove this stylesheet link to return to the previous ZERO appearance.
+ */
+
+:root {
+  color-scheme: dark;
+  --primary-color: #8ce6f4 !important;
+  --accent-gradient: linear-gradient(105deg, #ffffff 0%, #dff7ff 34%, #a9e8f8 62%, #9fe9d8 100%) !important;
+  --bg-color: #06101d !important;
+  --card-bg: #102338 !important;
+  --text-color: #f4fbff !important;
+  --border-radius: 17px !important;
+
+  --snow-night: #06101d;
+  --snow-night-2: #091a2c;
+  --snow-panel: rgba(13, 31, 49, 0.94);
+  --snow-panel-soft: rgba(17, 39, 59, 0.88);
+  --snow-panel-bright: rgba(28, 57, 79, 0.86);
+  --snow-white: #f8fdff;
+  --snow-ice: #dff7ff;
+  --snow-blue: #a9dcf5;
+  --snow-muted: #8ba8bd;
+  --snow-line: rgba(211, 241, 255, 0.2);
+  --snow-line-strong: rgba(223, 248, 255, 0.4);
+  --snow-aurora: #79e5d1;
+  --snow-aurora-soft: rgba(121, 229, 209, 0.14);
+  --snow-sky: #82bfff;
+  --snow-sky-soft: rgba(130, 191, 255, 0.14);
+  --snow-gold: #ffd98a;
+  --snow-danger: #ff879b;
+  --snow-shadow: 0 18px 48px rgba(0, 7, 17, 0.38);
+  --snow-inner: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+  /* Re-map ZERO tokens so runtime panels inherit the snow palette. */
+  --zero-bg: var(--snow-night);
+  --zero-bg-soft: var(--snow-night-2);
+  --zero-panel: #10283e;
+  --zero-panel-2: #15344e;
+  --zero-panel-3: #1a405d;
+  --zero-line: var(--snow-line);
+  --zero-line-strong: rgba(121, 229, 209, 0.44);
+  --zero-text: var(--snow-white);
+  --zero-text-soft: #cce1ed;
+  --zero-muted: var(--snow-muted);
+  --zero-mint: var(--snow-aurora);
+  --zero-mint-soft: var(--snow-aurora-soft);
+  --zero-blue: var(--snow-sky);
+  --zero-blue-soft: var(--snow-sky-soft);
+  --zero-amber: var(--snow-gold);
+  --zero-red: var(--snow-danger);
+  --zero-shadow: var(--snow-shadow);
+}
+
+html {
+  background: var(--snow-night) !important;
+  scrollbar-color: #779db5 #071522 !important;
+}
+
+body {
+  background:
+    radial-gradient(900px 430px at 8% -2%, rgba(105, 218, 231, 0.2), transparent 68%),
+    radial-gradient(760px 460px at 102% 5%, rgba(117, 149, 246, 0.18), transparent 70%),
+    radial-gradient(900px 660px at 50% 86%, rgba(102, 184, 220, 0.09), transparent 72%),
+    linear-gradient(180deg, #06101d 0%, #09192a 34%, #081522 72%, #050d18 100%) !important;
+  color: var(--snow-white) !important;
+}
+
+body::before {
+  z-index: 0 !important;
+  opacity: 1 !important;
+  background:
+    radial-gradient(circle at 7% 11%, rgba(255, 255, 255, 0.5) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 30% 18%, rgba(222, 247, 255, 0.32) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 76% 9%, rgba(255, 255, 255, 0.42) 0 1.2px, transparent 1.8px),
+    radial-gradient(circle at 91% 25%, rgba(196, 234, 255, 0.28) 0 1px, transparent 1.5px),
+    linear-gradient(155deg, transparent 0 69%, rgba(197, 234, 255, 0.025) 69.2%, transparent 69.5%),
+    linear-gradient(205deg, transparent 0 74%, rgba(255, 255, 255, 0.022) 74.2%, transparent 74.5%) !important;
+  background-size: 168px 168px, 230px 230px, 196px 196px, 280px 280px, auto, auto !important;
+  pointer-events: none;
+}
+
+body > header,
+body > .container {
+  position: relative;
+  z-index: 1;
+}
+
+::selection {
+  background: rgba(163, 232, 249, 0.34) !important;
+  color: #ffffff !important;
+}
+
+/* Quiet snowfall: decorative, pointer-free, and deliberately low-density. */
+.shima-noise {
+  z-index: 2 !important;
+  opacity: 0.17 !important;
+  mix-blend-mode: screen !important;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.9) 0 1px, transparent 1.35px),
+    radial-gradient(circle, rgba(199, 237, 255, 0.7) 0 1.2px, transparent 1.55px),
+    radial-gradient(circle, rgba(255, 255, 255, 0.45) 0 0.8px, transparent 1.2px) !important;
+  background-position: 0 0, 35px 54px, 81px 26px !important;
+  background-size: 132px 148px, 188px 206px, 104px 121px !important;
+  animation: shimaSnowDrift 36s linear infinite !important;
+}
+
+@keyframes shimaSnowDrift {
+  from { transform: translate3d(0, -36px, 0); }
+  to { transform: translate3d(-28px, 112px, 0); }
+}
+
+/* Brand / Shima-enaga crest */
+body > header {
+  isolation: isolate;
+  padding-block: 22px 24px !important;
+  overflow: hidden !important;
+  background:
+    radial-gradient(480px 120px at 50% 116%, rgba(225, 249, 255, 0.18), transparent 70%),
+    radial-gradient(360px 160px at 12% 0%, rgba(105, 229, 209, 0.16), transparent 72%),
+    radial-gradient(420px 180px at 90% -18%, rgba(118, 171, 255, 0.2), transparent 72%),
+    linear-gradient(180deg, rgba(11, 29, 47, 0.98), rgba(6, 17, 30, 0.98)) !important;
+  border-bottom: 1px solid rgba(213, 244, 255, 0.3) !important;
+  box-shadow: 0 16px 42px rgba(0, 6, 15, 0.38), inset 0 -1px 0 rgba(121, 229, 209, 0.12) !important;
+}
+
+body > header::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: -20px !important;
+  z-index: -1;
+  opacity: 0.25 !important;
+  transform: none !important;
+  filter: none !important;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='140' viewBox='0 0 240 140'%3E%3Cg fill='none' stroke='%23dff7ff' stroke-linecap='round'%3E%3Cpath opacity='.42' d='M22 106c28-38 55-57 96-77-25 20-47 44-65 72'/%3E%3Cpath opacity='.25' d='M39 111c31-38 65-61 108-80'/%3E%3Cpath opacity='.32' d='M159 116c15-25 34-43 61-57-17 15-29 31-39 51'/%3E%3C/g%3E%3Cg fill='%23ffffff'%3E%3Ccircle opacity='.55' cx='190' cy='20' r='1.5'/%3E%3Ccircle opacity='.35' cx='139' cy='64' r='1'/%3E%3Ccircle opacity='.45' cx='72' cy='22' r='1.2'/%3E%3C/g%3E%3C/svg%3E") repeat !important;
+  background-size: 240px 140px !important;
+  pointer-events: none;
+}
+
+body > header::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: auto -2% -7px !important;
+  z-index: -1;
+  height: 18px !important;
+  opacity: 0.78 !important;
+  transform: none !important;
+  filter: none !important;
+  background:
+    radial-gradient(70px 13px at 8% 0%, rgba(232, 249, 255, 0.22) 48%, transparent 52%),
+    radial-gradient(95px 15px at 29% 0%, rgba(232, 249, 255, 0.18) 48%, transparent 52%),
+    radial-gradient(82px 14px at 53% 0%, rgba(232, 249, 255, 0.2) 48%, transparent 52%),
+    radial-gradient(110px 15px at 79% 0%, rgba(232, 249, 255, 0.17) 48%, transparent 52%),
+    radial-gradient(72px 13px at 97% 0%, rgba(232, 249, 255, 0.2) 48%, transparent 52%) !important;
+  pointer-events: none;
+}
+
+body > header h1 {
+  gap: 10px !important;
+  color: var(--snow-white) !important;
+  text-shadow: 0 12px 30px rgba(0, 0, 0, 0.35) !important;
+}
+
+.title-text {
+  background: linear-gradient(98deg, #ffffff 0%, #dff8ff 38%, #aee6f5 66%, #a0eddb 100%) !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-text-stroke: 0 transparent !important;
+  letter-spacing: 0.085em !important;
+  text-shadow: none !important;
+}
+
+.subtitle {
+  color: #9cb8ca !important;
+  letter-spacing: 0.18em !important;
+}
+
+.subtitle::after {
+  content: "  /  SNOWFIELD EDITION";
+  color: #86dacd;
+}
+
+.shima-face {
+  width: 42px !important;
+  height: 37px !important;
+  margin-right: 4px !important;
+  overflow: visible !important;
+  border: 1px solid rgba(225, 247, 255, 0.95) !important;
+  border-radius: 52% 52% 46% 46% !important;
+  background:
+    radial-gradient(circle at 36% 43%, #101d2a 0 2px, transparent 2.4px),
+    radial-gradient(circle at 64% 43%, #101d2a 0 2px, transparent 2.4px),
+    radial-gradient(ellipse at 19% 60%, rgba(45, 62, 75, 0.34) 0 24%, transparent 25%),
+    radial-gradient(ellipse at 81% 60%, rgba(45, 62, 75, 0.34) 0 24%, transparent 25%),
+    linear-gradient(155deg, #ffffff 0%, #f4fbff 52%, #cfe6f1 100%) !important;
+  box-shadow: 0 0 0 5px rgba(218, 245, 255, 0.07), 0 10px 26px rgba(0, 0, 0, 0.32) !important;
+  filter: none !important;
+}
+
+.shima-face::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 22px !important;
+  right: -10px !important;
+  left: auto !important;
+  width: 18px !important;
+  height: 9px !important;
+  border: 0 !important;
+  border-radius: 20% 90% 90% 20% !important;
+  background: linear-gradient(90deg, #edf9ff 0 42%, #263441 44% 100%) !important;
+  box-shadow: none !important;
+  transform: rotate(22deg) !important;
+}
+
+.shima-face::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 19px !important;
+  right: auto !important;
+  left: 19px !important;
+  width: 5px !important;
+  height: 4px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: #263441 !important;
+  box-shadow: none !important;
+  clip-path: polygon(0 0, 100% 50%, 0 100%) !important;
+}
+
+.title-icon {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  font-size: 0 !important;
+  filter: drop-shadow(0 0 10px rgba(202, 243, 255, 0.42)) !important;
+}
+
+.title-icon::before {
+  content: "❄";
+  color: #dff8ff;
+  font-size: 1.35rem;
+}
+
+/* Loading / search / inputs */
+#loading-wrapper,
+#log-wrapper {
+  background:
+    radial-gradient(240px 90px at 90% 0%, rgba(130, 191, 255, 0.12), transparent 70%),
+    linear-gradient(180deg, rgba(19, 43, 64, 0.96), rgba(10, 27, 43, 0.96)) !important;
+  color: #d5e8f2 !important;
+  border: 1px solid var(--snow-line) !important;
+  box-shadow: var(--snow-shadow), var(--snow-inner) !important;
+}
+
+#log {
+  background: rgba(4, 15, 26, 0.94) !important;
+  color: #bcf4ea !important;
+  border-color: rgba(201, 238, 255, 0.18) !important;
+}
+
+.progress-outer {
+  background: rgba(3, 13, 23, 0.9) !important;
+  border-color: var(--snow-line) !important;
+}
+
+.progress-inner {
+  background: linear-gradient(90deg, #dff8ff, #93dcf2 48%, #79e5d1) !important;
+  box-shadow: 0 0 20px rgba(143, 225, 241, 0.36) !important;
+}
+
+#ui-search-bar {
+  background: linear-gradient(180deg, rgba(6, 16, 29, 0.97), rgba(8, 23, 38, 0.92)) !important;
+  border-bottom: 1px solid rgba(211, 241, 255, 0.2) !important;
+  box-shadow: 0 12px 26px rgba(0, 5, 14, 0.22) !important;
+  backdrop-filter: blur(18px) saturate(1.18) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.18) !important;
+}
+
+#ui-search-bar input,
+input[type="text"],
+input[type="search"],
+input[type="number"],
+select,
+textarea:not(#out) {
+  background: rgba(5, 18, 31, 0.9) !important;
+  color: var(--snow-white) !important;
+  border: 1px solid rgba(194, 232, 249, 0.22) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035) !important;
+}
+
+#ui-search-bar input {
+  border-color: rgba(164, 226, 241, 0.34) !important;
+  background:
+    radial-gradient(circle at 97% 20%, rgba(255, 255, 255, 0.07) 0 1px, transparent 1.5px),
+    rgba(6, 21, 35, 0.95) !important;
+  box-shadow: 0 9px 24px rgba(0, 6, 15, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #7896ab !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: rgba(141, 226, 242, 0.78) !important;
+  box-shadow: 0 0 0 3px rgba(141, 226, 242, 0.12) !important;
+}
+
+option {
+  background: #10283e !important;
+  color: var(--snow-white) !important;
+}
+
+/* Main shelves: frosted boards with bright snow-edge hierarchy. */
+#sections > .section {
+  background:
+    radial-gradient(300px 120px at 96% -10%, rgba(207, 243, 255, 0.08), transparent 70%),
+    linear-gradient(180deg, rgba(16, 38, 58, 0.96), rgba(8, 24, 39, 0.96)) !important;
+  border: 1px solid rgba(202, 237, 251, 0.19) !important;
+  border-top-color: rgba(230, 249, 255, 0.34) !important;
+  border-radius: 17px !important;
+  box-shadow: 0 14px 38px rgba(0, 6, 16, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.065) !important;
+}
+
+#sections > .section:has(> details[open]) {
+  border-color: rgba(158, 225, 239, 0.34) !important;
+  border-top-color: rgba(235, 251, 255, 0.5) !important;
+  box-shadow: 0 18px 44px rgba(0, 7, 17, 0.34), 0 0 0 1px rgba(121, 229, 209, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+#sections summary.section-summary {
+  background:
+    radial-gradient(180px 80px at 100% 0%, rgba(226, 249, 255, 0.09), transparent 72%),
+    linear-gradient(105deg, rgba(31, 60, 82, 0.98), rgba(13, 34, 53, 0.98)) !important;
+  color: #e8f7ff !important;
+  border-left: 4px solid #7a9aae !important;
+  border-bottom-color: transparent !important;
+  text-shadow: 0 2px 12px rgba(0, 6, 14, 0.4) !important;
+}
+
+#sections summary.section-summary:hover {
+  background:
+    radial-gradient(180px 80px at 100% 0%, rgba(226, 249, 255, 0.13), transparent 72%),
+    linear-gradient(105deg, rgba(40, 75, 98, 0.99), rgba(17, 43, 64, 0.99)) !important;
+  border-left-color: #b8eff8 !important;
+}
+
+#sections details[open] > summary.section-summary {
+  background:
+    radial-gradient(220px 90px at 100% 0%, rgba(121, 229, 209, 0.13), transparent 72%),
+    linear-gradient(105deg, rgba(34, 75, 92, 0.98), rgba(14, 43, 61, 0.98)) !important;
+  color: #ffffff !important;
+  border-left-color: var(--snow-aurora) !important;
+  border-bottom: 1px solid rgba(181, 235, 246, 0.2) !important;
+  box-shadow: inset 0 -1px 22px rgba(121, 229, 209, 0.045) !important;
+}
+
+.category-reset-btn,
+.reload-btn {
+  background: rgba(224, 246, 255, 0.055) !important;
+  color: #bdd3df !important;
+  border-color: rgba(208, 240, 253, 0.22) !important;
+}
+
+.category-reset-btn:hover,
+.reload-btn:hover {
+  background: rgba(255, 135, 155, 0.13) !important;
+  color: #ffb0bd !important;
+  border-color: rgba(255, 135, 155, 0.42) !important;
+}
+
+.section-content {
+  background: rgba(3, 14, 25, 0.14) !important;
+}
+
+#sections details {
+  background: rgba(11, 30, 47, 0.78) !important;
+  color: #c9dfe9 !important;
+  border-color: rgba(196, 231, 246, 0.14) !important;
+}
+
+#sections details[open] {
+  background: rgba(14, 36, 55, 0.94) !important;
+  border-color: rgba(165, 224, 239, 0.24) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+}
+
+#sections details > summary {
+  background: linear-gradient(100deg, rgba(27, 55, 76, 0.94), rgba(15, 37, 57, 0.94)) !important;
+  color: #cfe4ee !important;
+  border-color: transparent !important;
+}
+
+#sections details > summary:hover {
+  background: linear-gradient(100deg, rgba(37, 72, 94, 0.98), rgba(20, 48, 70, 0.98)) !important;
+  color: #f7fcff !important;
+}
+
+#sections details[open] > summary {
+  background: linear-gradient(100deg, rgba(29, 69, 82, 0.98), rgba(16, 47, 64, 0.98)) !important;
+  color: #ecfffb !important;
+  border-bottom-color: rgba(178, 234, 245, 0.17) !important;
+}
+
+#sections details > summary::before {
+  color: #87a8ba !important;
+}
+
+#sections details[open] > summary::before {
+  color: #a4f0e2 !important;
+  text-shadow: 0 0 10px rgba(121, 229, 209, 0.35);
+}
+
+#sections label,
+#sections .builder-chip,
+#sections [class$="-row"] {
+  background: rgba(8, 27, 43, 0.92) !important;
+  color: #c9dfe9 !important;
+  border-color: rgba(193, 229, 244, 0.15) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025) !important;
+}
+
+#sections label:hover,
+#sections .builder-chip:hover,
+#sections [class$="-row"]:hover {
+  background: rgba(22, 53, 74, 0.98) !important;
+  color: #f7fcff !important;
+  border-color: rgba(166, 227, 241, 0.5) !important;
+  box-shadow: 0 8px 20px rgba(0, 7, 17, 0.25), inset 0 0 0 1px rgba(223, 248, 255, 0.055) !important;
+}
+
+#sections label:has(input:checked),
+#sections .builder-chip:has(input:checked),
+#sections [class$="-row"]:has(input:checked) {
+  background:
+    radial-gradient(110px 42px at 98% 0%, rgba(255, 255, 255, 0.12), transparent 72%),
+    linear-gradient(105deg, rgba(62, 128, 133, 0.34), rgba(37, 83, 113, 0.42)) !important;
+  color: #f5fffd !important;
+  border-color: rgba(164, 239, 225, 0.76) !important;
+  box-shadow: inset 0 0 0 1px rgba(224, 252, 247, 0.12), 0 8px 22px rgba(0, 8, 18, 0.28), 0 0 18px rgba(121, 229, 209, 0.07) !important;
+}
+
+#sections input[type="checkbox"],
+#sections input[type="radio"] {
+  accent-color: #8ce9da !important;
+  filter: drop-shadow(0 0 5px rgba(121, 229, 209, 0.26)) !important;
+}
+
+#sections [class$="-head"],
+#sections [class$="-guide"],
+#sections [class$="-note"],
+#sections .builder-card-head,
+#sections .bg-section,
+#sections .qp-subacc-box,
+#sections .qp-section-content,
+#sections .visualsync-trial-header {
+  background: rgba(12, 32, 49, 0.92) !important;
+  color: #c3dbe6 !important;
+  border-color: rgba(195, 231, 246, 0.16) !important;
+}
+
+#sections [class$="-note"],
+#sections [class$="-guide"] {
+  color: #94b0c1 !important;
+}
+
+#sections hr,
+.floater-divider {
+  border-color: transparent !important;
+  background: linear-gradient(90deg, transparent, rgba(205, 241, 252, 0.22), rgba(121, 229, 209, 0.15), transparent) !important;
+}
+
+/* Character memo / floating panels */
+#ext-char-input-container {
+  background: rgba(6, 20, 33, 0.91) !important;
+  border-color: rgba(186, 231, 244, 0.2) !important;
+  box-shadow: 0 14px 34px rgba(0, 6, 15, 0.3), var(--snow-inner) !important;
+  backdrop-filter: blur(16px) !important;
+}
+
+#ext-char-details {
+  background: linear-gradient(105deg, rgba(26, 55, 75, 0.98), rgba(13, 34, 52, 0.98)) !important;
+  border-color: rgba(158, 219, 240, 0.4) !important;
+}
+
+#ext-char-details > summary,
+#ext-char-details > summary span,
+#ext-char-details div {
+  color: #c8dfe9 !important;
+}
+
+#floater-btn {
+  background:
+    radial-gradient(circle at 84% 16%, rgba(255, 255, 255, 0.17) 0 2px, transparent 2.5px),
+    linear-gradient(110deg, rgba(56, 116, 135, 0.98), rgba(48, 91, 143, 0.98)) !important;
+  color: #f3fffc !important;
+  border-color: rgba(186, 239, 244, 0.48) !important;
+  box-shadow: 0 13px 32px rgba(0, 7, 17, 0.4), 0 0 0 1px rgba(228, 249, 255, 0.07) !important;
+}
+
+#floater-list,
+#history-popup-menu,
+#search-popup-menu,
+#yakuguid_panel,
+#i18nToolsPanel,
+dialog,
+[role="dialog"] {
+  background: rgba(8, 25, 40, 0.985) !important;
+  color: #d4e8f1 !important;
+  border-color: rgba(182, 230, 243, 0.23) !important;
+  box-shadow: var(--snow-shadow) !important;
+  backdrop-filter: blur(20px) saturate(1.16) !important;
+}
+
+.floater-header,
+#history-popup-menu > div:first-child,
+#search-popup-menu > div:first-child {
+  background: rgba(18, 44, 64, 0.98) !important;
+  color: #e8f6fb !important;
+  border-color: rgba(190, 233, 247, 0.17) !important;
+}
+
+.floater-item,
+.floater-subgroup-btn,
+.floater-leaf-btn,
+.floater-empty,
+.floater-checked-card,
+.floater-subgroup-details,
+#history-popup-menu > div:last-child > div,
+#yakuguid_list > div {
+  background: rgba(13, 35, 53, 0.96) !important;
+  color: #cce0ea !important;
+  border-color: rgba(191, 230, 245, 0.15) !important;
+}
+
+.floater-item:hover,
+.floater-subgroup-btn:hover,
+.floater-leaf-btn:hover,
+.floater-item.active {
+  background: rgba(27, 62, 82, 0.98) !important;
+  border-color: rgba(152, 224, 237, 0.42) !important;
+}
+
+.floater-item-status,
+.floater-subgroup-status {
+  background: rgba(130, 191, 255, 0.14) !important;
+  color: #b9d9ff !important;
+}
+
+.floater-item.is-open .floater-item-status,
+.floater-item-status.has-checks,
+.floater-sort-btn.active {
+  background: rgba(121, 229, 209, 0.14) !important;
+  color: #a8f2e5 !important;
+  border-color: rgba(121, 229, 209, 0.4) !important;
+}
+
+/* ZERO Assist — frosted armory controls */
+.zero-assist-toolbar,
+.zero-selection-tray {
+  position: relative;
+  isolation: isolate;
+  border-color: rgba(197, 235, 249, 0.22) !important;
+  border-top-color: rgba(231, 249, 255, 0.38) !important;
+  box-shadow: 0 15px 38px rgba(0, 6, 16, 0.3), var(--snow-inner) !important;
+}
+
+.zero-assist-toolbar {
+  background:
+    radial-gradient(260px 100px at 100% 0%, rgba(138, 200, 255, 0.11), transparent 70%),
+    radial-gradient(180px 90px at 0% 110%, rgba(121, 229, 209, 0.09), transparent 72%),
+    linear-gradient(105deg, rgba(20, 47, 68, 0.96), rgba(9, 28, 44, 0.96)) !important;
+}
+
+.zero-assist-toolbar__title strong,
+.zero-selection-tray__title strong {
+  color: #effaff !important;
+}
+
+.zero-assist-eyebrow {
+  color: #94ecdc !important;
+  text-shadow: 0 0 12px rgba(121, 229, 209, 0.2);
+}
+
+.zero-filter-button,
+.zero-preset-button {
+  background: rgba(8, 28, 45, 0.92) !important;
+  color: #b7cfdb !important;
+  border-color: rgba(195, 232, 246, 0.2) !important;
+}
+
+.zero-filter-button:hover,
+.zero-preset-button:hover {
+  background: rgba(28, 62, 82, 0.98) !important;
+  color: #f5fcff !important;
+  border-color: rgba(163, 226, 240, 0.46) !important;
+}
+
+.zero-filter-button.is-active {
+  background: linear-gradient(110deg, rgba(71, 148, 143, 0.25), rgba(48, 102, 128, 0.26)) !important;
+  color: #adf6e9 !important;
+  border-color: rgba(137, 235, 218, 0.64) !important;
+  box-shadow: inset 0 0 0 1px rgba(225, 254, 249, 0.08), 0 0 16px rgba(121, 229, 209, 0.06) !important;
+}
+
+.zero-preset-button {
+  background: linear-gradient(110deg, rgba(82, 101, 164, 0.22), rgba(51, 98, 135, 0.2)) !important;
+  color: #d6e3ff !important;
+  border-color: rgba(159, 190, 246, 0.34) !important;
+}
+
+.zero-filter-empty {
+  background: rgba(8, 26, 42, 0.84) !important;
+  color: #91adbd !important;
+  border-color: rgba(196, 233, 246, 0.24) !important;
+}
+
+.zero-selection-tray {
+  background:
+    radial-gradient(220px 90px at 100% 0%, rgba(204, 241, 252, 0.09), transparent 72%),
+    linear-gradient(180deg, rgba(16, 41, 61, 0.97), rgba(7, 25, 41, 0.97)) !important;
+}
+
+.zero-selection-tray__header {
+  border-color: rgba(198, 234, 247, 0.15) !important;
+}
+
+.zero-selection-tray__header small {
+  color: #82a1b3 !important;
+}
+
+.zero-selection-count {
+  background: rgba(194, 240, 249, 0.13) !important;
+  color: #bbf5eb !important;
+  border: 1px solid rgba(194, 240, 249, 0.16);
+}
+
+.zero-selection-chip {
+  border-color: rgba(202, 237, 249, 0.2) !important;
+  border-top-color: rgba(234, 250, 255, 0.32) !important;
+  border-radius: 13px 13px 15px 15px !important;
+  background:
+    radial-gradient(60px 24px at 85% 0%, rgba(255, 255, 255, 0.1), transparent 70%),
+    linear-gradient(110deg, rgba(24, 53, 72, 0.98), rgba(12, 36, 55, 0.98)) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+}
+
+.zero-selection-chip:hover {
+  border-color: rgba(150, 228, 239, 0.46) !important;
+  box-shadow: 0 7px 18px rgba(0, 7, 17, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.055) !important;
+}
+
+.zero-selection-chip__jump {
+  color: #e2f1f7 !important;
+}
+
+.zero-selection-chip__jump small {
+  color: #82a0b1 !important;
+}
+
+.zero-selection-chip__favorite.is-favorite,
+.zero-favorite-star.is-favorite {
+  color: var(--snow-gold) !important;
+  filter: drop-shadow(0 0 7px rgba(255, 217, 138, 0.34));
+}
+
+.zero-favorite-star {
+  color: #7794a6 !important;
+  border-color: rgba(202, 237, 249, 0.18) !important;
+  background: rgba(7, 24, 39, 0.58) !important;
+}
+
+.zero-favorite-star:hover,
+.zero-favorite-star:focus-visible {
+  color: #ffe4aa !important;
+  border-color: rgba(255, 217, 138, 0.48) !important;
+  background: rgba(102, 77, 32, 0.2) !important;
+}
+
+.zero-assist-jump-highlight {
+  outline-color: #b9f3e8 !important;
+  box-shadow: 0 0 0 5px rgba(121, 229, 209, 0.13), 0 0 28px rgba(164, 231, 243, 0.16) !important;
+}
+
+.zero-diagnostics-button {
+  background: rgba(13, 37, 55, 0.92) !important;
+  color: #bdd4df !important;
+  border-color: rgba(193, 233, 246, 0.2) !important;
+}
+
+.zero-diagnostics-button[data-level="ok"] {
+  background: rgba(50, 127, 116, 0.17) !important;
+  border-color: rgba(121, 229, 209, 0.34) !important;
+}
+
+.zero-diagnostics-button[data-level="warning"] {
+  background: rgba(112, 83, 32, 0.2) !important;
+  border-color: rgba(255, 217, 138, 0.38) !important;
+}
+
+.zero-diagnostics-button[data-level="error"] {
+  background: rgba(114, 43, 60, 0.21) !important;
+  border-color: rgba(255, 135, 155, 0.4) !important;
+}
+
+/* Preset and diagnostics windows */
+.zero-assist-dialog {
+  background: rgba(7, 24, 39, 0.99) !important;
+  color: #dceef5 !important;
+  border-color: rgba(193, 234, 247, 0.28) !important;
+  border-top-color: rgba(233, 250, 255, 0.44) !important;
+  box-shadow: 0 32px 88px rgba(0, 5, 14, 0.66), var(--snow-inner) !important;
+}
+
+.zero-assist-dialog::backdrop {
+  background: rgba(1, 8, 16, 0.76) !important;
+  backdrop-filter: blur(7px) !important;
+}
+
+.zero-assist-dialog__header {
+  background:
+    radial-gradient(240px 100px at 100% 0%, rgba(130, 191, 255, 0.13), transparent 72%),
+    linear-gradient(110deg, rgba(24, 54, 75, 0.98), rgba(10, 32, 49, 0.98)) !important;
+  border-color: rgba(197, 235, 248, 0.18) !important;
+}
+
+.zero-assist-dialog__header h2 {
+  color: #f5fcff !important;
+}
+
+.zero-assist-dialog__header p,
+.zero-preset-selected {
+  color: #8daaba !important;
+}
+
+.zero-dialog-close {
+  background: rgba(226, 248, 255, 0.055) !important;
+  color: #bed5df !important;
+  border-color: rgba(198, 235, 248, 0.2) !important;
+}
+
+.zero-preset-save,
+.zero-diagnostics-summary {
+  background: rgba(5, 20, 33, 0.96) !important;
+  border-color: rgba(193, 232, 246, 0.15) !important;
+}
+
+.zero-preset-input {
+  background: rgba(3, 15, 26, 0.96) !important;
+  color: #edf8fc !important;
+  border-color: rgba(192, 232, 247, 0.22) !important;
+}
+
+.zero-primary-button {
+  background: linear-gradient(110deg, #dff8ff 0%, #9de1f1 45%, #82e6d4 100%) !important;
+  color: #06202b !important;
+  border-color: rgba(235, 253, 255, 0.78) !important;
+  box-shadow: 0 9px 23px rgba(105, 205, 213, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.66) !important;
+}
+
+.zero-preset-card {
+  background:
+    radial-gradient(100px 40px at 100% 0%, rgba(255, 255, 255, 0.07), transparent 72%),
+    linear-gradient(105deg, rgba(20, 49, 69, 0.97), rgba(9, 31, 49, 0.97)) !important;
+  border-color: rgba(192, 232, 246, 0.17) !important;
+  border-top-color: rgba(229, 249, 255, 0.28) !important;
+}
+
+.zero-preset-card__meta strong,
+.zero-diagnostics-summary__item strong,
+.zero-diagnostic-card strong {
+  color: #e7f5fa !important;
+}
+
+.zero-preset-card__meta p,
+.zero-diagnostic-card p {
+  color: #91adbc !important;
+}
+
+.zero-preset-apply {
+  background: rgba(121, 229, 209, 0.13) !important;
+  color: #a8f2e5 !important;
+  border-color: rgba(121, 229, 209, 0.4) !important;
+}
+
+.zero-diagnostics-summary__item {
+  border-color: rgba(193, 232, 246, 0.13) !important;
+}
+
+.zero-diagnostics-summary__item span {
+  color: #7f9eaf !important;
+}
+
+.zero-diagnostic-card {
+  background: rgba(27, 58, 80, 0.58) !important;
+  border-color: rgba(151, 201, 255, 0.22) !important;
+}
+
+.zero-diagnostic-card[data-severity="warning"] {
+  background: rgba(116, 83, 29, 0.18) !important;
+  border-color: rgba(255, 217, 138, 0.34) !important;
+}
+
+.zero-diagnostic-card[data-severity="error"] {
+  background: rgba(119, 43, 60, 0.2) !important;
+  border-color: rgba(255, 135, 155, 0.38) !important;
+}
+
+/* Each issue gets a small Shima-enaga face; warnings tilt their head. */
+.zero-diagnostic-card__icon {
+  position: relative;
+  width: 31px !important;
+  height: 29px !important;
+  overflow: visible;
+  border: 1px solid rgba(230, 248, 255, 0.82) !important;
+  border-radius: 52% 52% 46% 46% !important;
+  background:
+    radial-gradient(circle at 36% 43%, #172633 0 1.6px, transparent 2px),
+    radial-gradient(circle at 64% 43%, #172633 0 1.6px, transparent 2px),
+    radial-gradient(ellipse at 18% 62%, rgba(46, 61, 72, 0.28) 0 24%, transparent 25%),
+    radial-gradient(ellipse at 82% 62%, rgba(46, 61, 72, 0.28) 0 24%, transparent 25%),
+    linear-gradient(150deg, #ffffff, #d8edf5) !important;
+  color: transparent !important;
+  font-size: 0 !important;
+  box-shadow: 0 6px 14px rgba(0, 5, 13, 0.25) !important;
+}
+
+.zero-diagnostic-card__icon::after {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 14px;
+  width: 4px;
+  height: 3px;
+  background: #2d3a44;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.zero-diagnostic-card[data-severity="warning"] .zero-diagnostic-card__icon {
+  border-color: rgba(255, 225, 166, 0.88) !important;
+  transform: rotate(-7deg);
+}
+
+.zero-diagnostic-card[data-severity="error"] .zero-diagnostic-card__icon {
+  border-color: rgba(255, 166, 181, 0.9) !important;
+  box-shadow: 0 0 0 3px rgba(255, 135, 155, 0.08), 0 6px 14px rgba(0, 5, 13, 0.25) !important;
+}
+
+.zero-diagnostic-card--ok {
+  background:
+    radial-gradient(120px 55px at 100% 0%, rgba(224, 251, 246, 0.09), transparent 72%),
+    rgba(45, 120, 108, 0.15) !important;
+  border-color: rgba(121, 229, 209, 0.32) !important;
+}
+
+.zero-diagnostic-card--ok strong {
+  color: #aaf4e7 !important;
+}
+
+.zero-assist-toast,
+#linkage-toast,
+#commercial-suggest-toast,
+#core-loaded-toast,
+#history-restore-toast {
+  background: rgba(6, 23, 37, 0.97) !important;
+  color: #e6f5fa !important;
+  border-color: rgba(184, 232, 245, 0.3) !important;
+  box-shadow: 0 15px 38px rgba(0, 5, 14, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.055) !important;
+}
+
+/* Fixed output console — dark ice with an aurora primary action. */
+#mini-ui-fixed {
+  background:
+    radial-gradient(520px 150px at 90% 0%, rgba(130, 191, 255, 0.1), transparent 72%),
+    linear-gradient(180deg, rgba(12, 34, 52, 0.965), rgba(4, 17, 29, 0.99)) !important;
+  border-top: 1px solid rgba(208, 241, 252, 0.3) !important;
+  box-shadow: 0 -20px 56px rgba(0, 5, 14, 0.52), inset 0 1px 0 rgba(255, 255, 255, 0.065) !important;
+  backdrop-filter: blur(20px) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(1.2) !important;
+}
+
+#actions.builder-footer-grid button,
+#actions button {
+  color: #f4fbff !important;
+  border-color: rgba(225, 247, 255, 0.12) !important;
+  box-shadow: 0 9px 20px rgba(0, 6, 15, 0.26), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+#genBtn {
+  background: linear-gradient(110deg, #f1fcff 0%, #b5ecf7 34%, #82dfec 64%, #82e6d4 100%) !important;
+  color: #05202a !important;
+  border-color: rgba(238, 253, 255, 0.84) !important;
+  box-shadow: 0 11px 28px rgba(95, 203, 214, 0.27), inset 0 1px 0 rgba(255, 255, 255, 0.72) !important;
+}
+
+#translateBtn {
+  background: linear-gradient(135deg, #876a37, #ad8646) !important;
+  border-color: rgba(255, 217, 138, 0.36) !important;
+}
+
+#copyBtn {
+  background: linear-gradient(135deg, #35506a, #233c54) !important;
+  border-color: rgba(198, 232, 248, 0.22) !important;
+}
+
+#resetBtn {
+  background: linear-gradient(135deg, #824052, #a34c61) !important;
+  border-color: rgba(255, 135, 155, 0.34) !important;
+}
+
+#footer-search-btn {
+  background: linear-gradient(135deg, #2d716c, #3a9287) !important;
+  border-color: rgba(121, 229, 209, 0.34) !important;
+}
+
+#footer-history-btn {
+  background: linear-gradient(135deg, #4f5c91, #6775b0) !important;
+  border-color: rgba(169, 194, 255, 0.3) !important;
+}
+
+#prompt-stats {
+  background: rgba(6, 23, 37, 0.92) !important;
+  color: #9db7c5 !important;
+  border-color: rgba(196, 233, 246, 0.18) !important;
+  box-shadow: var(--snow-inner) !important;
+}
+
+#prompt-stats #prompt-word-count {
+  color: #e0f0f6 !important;
+}
+
+textarea#out {
+  background:
+    radial-gradient(260px 100px at 100% 0%, rgba(151, 213, 237, 0.045), transparent 72%),
+    rgba(3, 15, 26, 0.96) !important;
+  color: #edf8fc !important;
+  caret-color: #9cf0e1 !important;
+  border-color: rgba(177, 229, 243, 0.28) !important;
+  box-shadow: inset 0 2px 13px rgba(0, 5, 13, 0.34) !important;
+}
+
+textarea#out:focus {
+  border-color: rgba(142, 229, 242, 0.76) !important;
+  box-shadow: 0 0 0 3px rgba(142, 229, 242, 0.11), inset 0 2px 13px rgba(0, 5, 13, 0.34) !important;
+}
+
+#smart-edit-toolbar,
+#smart-edit-toolbar > span {
+  color: #89a6b7 !important;
+}
+
+#smart-edit-toolbar > button,
+#weight-popup-menu button,
+.hist-copy-btn,
+.hist-restore-btn,
+#hist-clear-btn {
+  background: rgba(17, 43, 62, 0.98) !important;
+  color: #d2e5ed !important;
+  border-color: rgba(191, 230, 245, 0.2) !important;
+}
+
+#smart-edit-toolbar > button:first-of-type,
+.hist-restore-btn {
+  background: rgba(121, 229, 209, 0.13) !important;
+  color: #a8f2e5 !important;
+  border-color: rgba(121, 229, 209, 0.38) !important;
+}
+
+#weight-popup-menu {
+  background: rgba(8, 27, 43, 0.99) !important;
+  border-color: rgba(183, 231, 244, 0.24) !important;
+  box-shadow: var(--snow-shadow) !important;
+}
+
+/* Mobile shelf/output switch: wing-white active segment. */
+@media (max-width: 700px) {
+  body > header {
+    padding-block: 16px 18px !important;
+  }
+
+  body > header h1 {
+    font-size: 1.28rem !important;
+    gap: 7px !important;
+  }
+
+  .shima-face {
+    width: 35px !important;
+    height: 31px !important;
+  }
+
+  .shima-face::before {
+    top: 19px !important;
+    right: -8px !important;
+    width: 15px !important;
+    height: 8px !important;
+  }
+
+  .shima-face::after {
+    top: 16px !important;
+    left: 16px !important;
+  }
+
+  .title-icon {
+    width: 22px;
+  }
+
+  .title-icon::before {
+    font-size: 1.05rem;
+  }
+
+  .subtitle {
+    font-size: 0.59rem !important;
+    letter-spacing: 0.12em !important;
+  }
+
+  .subtitle::after {
+    content: " / SNOWFIELD";
+  }
+
+  .shima-noise {
+    opacity: 0.11 !important;
+    background-size: 170px 190px, 240px 270px, 140px 158px !important;
+    animation-duration: 48s !important;
+  }
+
+  #sections > .section {
+    border-radius: 15px !important;
+  }
+
+  #sections summary.section-summary {
+    border-left-width: 3px !important;
+  }
+
+  .zero-assist-toolbar,
+  .zero-selection-tray {
+    border-radius: 15px !important;
+  }
+
+  .zero-selection-chip {
+    border-radius: 12px 12px 14px 14px !important;
+  }
+
+  .zero-mobile-view-switch {
+    gap: 5px !important;
+    padding: 4px !important;
+    border-radius: 14px !important;
+    background: rgba(4, 18, 30, 0.94) !important;
+    border: 1px solid rgba(198, 234, 247, 0.2) !important;
+    border-top-color: rgba(231, 249, 255, 0.35) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.055) !important;
+  }
+
+  .zero-mobile-view-switch button {
+    background: transparent !important;
+    color: #89a8b9 !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .zero-mobile-view-switch button.is-active {
+    background: linear-gradient(110deg, #e7faff, #a9e7f4 52%, #93e9d9) !important;
+    color: #06202a !important;
+    border-color: rgba(238, 253, 255, 0.74) !important;
+    box-shadow: 0 7px 18px rgba(89, 193, 205, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.64) !important;
+  }
+
+  .zero-mobile-view-switch span {
+    background: rgba(194, 238, 248, 0.12) !important;
+    color: #b8efe5 !important;
+    border: 1px solid rgba(194, 238, 248, 0.12);
+  }
+
+  .zero-mobile-view-switch button.is-active span {
+    background: rgba(5, 42, 52, 0.12) !important;
+    color: #0b5360 !important;
+    border-color: rgba(6, 63, 72, 0.12) !important;
+  }
+
+  .zero-assist-dialog {
+    border-radius: 17px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shima-noise,
+  .title-icon {
+    animation: none !important;
+  }
+}
+
+button:focus-visible,
+summary:focus-visible,
+label:focus-within,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #a5eff5 !important;
+  outline-offset: 2px !important;
+}
