@@ -4,7 +4,7 @@
   if (window.__SHIMA_NAVIGATION_V1__) return;
   window.__SHIMA_NAVIGATION_V1__ = true;
 
-  const VERSION = "1.1.0";
+  const VERSION = "1.2.0";
   const STORAGE = {
     route: "shimaBuilderV5.shimaNavigation.route.v1",
     collapsed: "shimaBuilderV5.shimaNavigation.collapsed.v1",
@@ -142,7 +142,11 @@
     collapsed: readBoolean(STORAGE.collapsed, false),
     mobileView: readMobileView(),
     refreshTimer: 0,
-    selectionObserver: null
+    selectionObserver: null,
+    eventsBound: false,
+    bootTimer: 0,
+    bootObserver: null,
+    mobileIntegrityObserver: null
   };
 
   const ui = {
@@ -202,7 +206,18 @@
 
   function createStartDeck() {
     const search = document.getElementById("ui-search-bar");
-    if (!search || document.getElementById("shima-start-deck")) return false;
+    const existing = document.getElementById("shima-start-deck");
+    if (existing) {
+      ui.deck = existing;
+      ui.deckBody = existing.querySelector(".shima-start-deck__body");
+      ui.deckToggle = existing.querySelector('[data-shima-action="toggle-deck"]');
+      ui.currentRoute = document.getElementById("shima-current-route");
+      ui.routeGrid = existing.querySelector(".shima-route-grid");
+      ui.status = document.getElementById("shima-start-status");
+      ui.continueButton = existing.querySelector('[data-shima-action="continue"]');
+      return !!(ui.deckBody && ui.deckToggle && ui.currentRoute && ui.routeGrid && ui.status);
+    }
+    if (!search) return false;
 
     const deck = create("section", "shima-start-deck");
     deck.id = "shima-start-deck";
@@ -296,7 +311,15 @@
   }
 
   function createRouteNavigation() {
-    if (!ui.deck || document.getElementById("shima-route-navigation")) return false;
+    const existing = document.getElementById("shima-route-navigation");
+    if (existing) {
+      ui.routeNav = existing;
+      ui.routeNavList = existing.querySelector(".shima-route-navigation__list");
+      ui.routeProgress = existing.querySelector(".shima-route-progress");
+      ui.routeHint = existing.querySelector(".shima-route-navigation__hint");
+      return !!(ui.routeNavList && ui.routeProgress && ui.routeHint);
+    }
+    if (!ui.deck) return false;
 
     const navigation = create("section", "shima-route-navigation");
     navigation.id = "shima-route-navigation";
@@ -336,14 +359,15 @@
     const output = navigation.querySelector('[data-zero-mobile-view="output"]');
     if (!shelf || !output) return false;
 
-    if (!document.getElementById("shima-mobile-selected-view")) {
+    let selected = navigation.querySelector("#shima-mobile-selected-view");
+    if (!selected) {
       shelf.textContent = "☷ 棚";
 
       const oldCount = output.querySelector("#zero-mobile-selection-count");
       output.textContent = "❄ 出力 ";
       if (oldCount) output.appendChild(oldCount);
 
-      const selected = create("button", "", "◉ 選択中 ");
+      selected = create("button", "", "◉ 選択中 ");
       selected.type = "button";
       selected.id = "shima-mobile-selected-view";
       selected.dataset.shimaMobileView = "selected";
@@ -356,8 +380,13 @@
       ui.mobileSelected = selected;
       ui.mobileSelectedCount = count;
     } else {
-      ui.mobileSelected = document.getElementById("shima-mobile-selected-view");
-      ui.mobileSelectedCount = document.getElementById("shima-mobile-selected-count");
+      ui.mobileSelected = selected;
+      ui.mobileSelectedCount = selected.querySelector("#shima-mobile-selected-count");
+      if (!ui.mobileSelectedCount) {
+        ui.mobileSelectedCount = create("span", "", "0");
+        ui.mobileSelectedCount.id = "shima-mobile-selected-count";
+        selected.appendChild(ui.mobileSelectedCount);
+      }
     }
 
     ui.mobileSwitch = navigation;
@@ -371,6 +400,25 @@
     }
     applyMobileView(state.mobileView, false, true);
     return true;
+  }
+
+  function observeMobileSwitchIntegrity() {
+    if (state.mobileIntegrityObserver || typeof MutationObserver !== "function") return;
+    const footer = document.getElementById("mini-ui-fixed");
+    if (!footer) return;
+    state.mobileIntegrityObserver = new MutationObserver(function () {
+      const navigation = document.getElementById("zero-mobile-view-switch");
+      const ready = navigation &&
+        navigation.querySelector('[data-zero-mobile-view="shelf"]') &&
+        navigation.querySelector('[data-shima-mobile-view="selected"]') &&
+        navigation.querySelector('[data-zero-mobile-view="output"]');
+      if (ready) return;
+      if (!navigation && window.ZeroAssist && typeof window.ZeroAssist.ensureUI === "function") {
+        window.ZeroAssist.ensureUI();
+      }
+      enhanceMobileSwitch();
+    });
+    state.mobileIntegrityObserver.observe(footer, { childList: true, subtree: true });
   }
 
   function applyDeckState() {
@@ -650,6 +698,8 @@
   }
 
   function bindEvents() {
+    if (state.eventsBound) return;
+    state.eventsBound = true;
     document.addEventListener("click", function (event) {
       if (event.target.closest && event.target.closest("#resetBtn")) return;
       const routeButton = event.target.closest && event.target.closest("[data-shima-route]");
@@ -726,7 +776,16 @@
   }
 
   function mount() {
-    if (state.mounted) return true;
+    if (state.mounted) {
+      const healthy = enhanceMobileSwitch() &&
+        document.getElementById("shima-start-deck") &&
+        document.getElementById("shima-route-navigation");
+      if (healthy) {
+        observeMobileSwitchIntegrity();
+        return true;
+      }
+      state.mounted = false;
+    }
     const ready = document.getElementById("sections") &&
       document.getElementById("ui-search-bar") &&
       document.getElementById("zero-assist-toolbar") &&
@@ -735,12 +794,20 @@
       window.ZeroAssist;
     if (!ready) return false;
 
+    try {
+      if (!createStartDeck()) return false;
+      if (!createRouteNavigation()) return false;
+      if (!enhanceMobileSwitch()) return false;
+    } catch (error) {
+      state.mounted = false;
+      console.error("[ShimaNavigation] UI mount deferred:", error);
+      return false;
+    }
+
     state.mounted = true;
-    createStartDeck();
-    createRouteNavigation();
-    enhanceMobileSwitch();
     bindEvents();
     observeSelectionTray();
+    observeMobileSwitchIntegrity();
     applyDeckState();
     refreshNavigation();
     setTimeout(function () { scheduleRefresh(0); }, 700);
@@ -752,6 +819,7 @@
       setRoute: function (key) { setRoute(key, true); },
       setMobileView: function (view) { applyMobileView(view, true, true); },
       refresh: function () { refreshNavigation(); },
+      ensureUI: function () { return mount(); },
       getState: function () {
         return {
           route: state.route,
@@ -766,16 +834,43 @@
     return true;
   }
 
-  function boot(attempt) {
-    if (mount()) return;
-    if (attempt > 120) return;
-    setTimeout(function () { boot(attempt + 1); }, 180);
+  function stopBootWait() {
+    clearTimeout(state.bootTimer);
+    state.bootTimer = 0;
+    if (state.bootObserver) {
+      state.bootObserver.disconnect();
+      state.bootObserver = null;
+    }
   }
 
-  window.addEventListener("zeroAssistMounted", function () { boot(0); }, { once: true });
+  function observeBootReadiness() {
+    if (state.bootObserver || typeof MutationObserver !== "function") return;
+    const footer = document.getElementById("mini-ui-fixed");
+    if (!footer) return;
+    state.bootObserver = new MutationObserver(function () { boot(); });
+    state.bootObserver.observe(footer, { childList: true, subtree: true });
+  }
+
+  function boot() {
+    clearTimeout(state.bootTimer);
+    state.bootTimer = 0;
+    if (mount()) {
+      stopBootWait();
+      return;
+    }
+    observeBootReadiness();
+    state.bootTimer = setTimeout(boot, 1200);
+  }
+
+  window.__ensureShimaNavigationMounted = boot;
+  window.addEventListener("zeroAssistMounted", boot);
+  window.addEventListener("zeroAssistMobileSwitchReady", boot);
+  window.addEventListener("builder:mounted", boot);
+  window.addEventListener("promptPartMounted", boot);
+  window.addEventListener("pageshow", boot);
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function () { boot(0); }, { once: true });
+    document.addEventListener("DOMContentLoaded", boot, { once: true });
   } else {
-    boot(0);
+    boot();
   }
 })();

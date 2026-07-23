@@ -81,6 +81,8 @@ window.EXT_MANIFEST = [
   "ext_attire_aqua_wardrobe.v1.js",
   "builder_data.omni_akashic.v1.js",
   "ext_omni_akashic.v1.js",
+  "builder_data.attire_bath_discovery.v1.js",
+  "ext_attire_bath_discovery.v1.js",
   "ext_attire_catalog.v1.js",
   "ext_attire_workshop_merge.v1.js",
   "builder_data.attire_r18_remix_lab.v1.js",

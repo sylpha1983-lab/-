@@ -53,6 +53,10 @@
     { selector: ".attire-v34-adjust", origin: "attire-v34-adjust", order: 880 }
   ];
 
+  const DISCOVERY_SELECTORS = [
+    ".attire-v55-bath-discovery"
+  ];
+
   const SPECIAL_SELECTORS = [
     ".attire-v35-arcadia-wardrobe",
     ".attire-v39-remix-lab",
@@ -310,6 +314,14 @@
         return Number(a.dataset.attireCatalogOrder || 0) - Number(b.dataset.attireCatalogOrder || 0);
       });
 
+      const discovery = [];
+      DISCOVERY_SELECTORS.forEach(function(selector){
+        Array.from(root.querySelectorAll(selector)).forEach(function(node){
+          if (node.dataset.attireCatalogOrigin) return;
+          if (discovery.indexOf(node) < 0) discovery.push(node);
+        });
+      });
+
       const special = [];
       SPECIAL_SELECTORS.forEach(function(selector){
         Array.from(root.querySelectorAll(selector)).forEach(function(node){
@@ -320,7 +332,7 @@
 
       const r18Zone = root.querySelector("#__attire_r18_last_zone__");
       const specialZone = root.querySelector("#__attire_special_top_zone__");
-      const protectedNodes = new Set(tagged.concat(special));
+      const protectedNodes = new Set(tagged.concat(discovery, special));
       if (r18Zone) protectedNodes.add(r18Zone);
       if (specialZone) protectedNodes.add(specialZone);
 
@@ -356,6 +368,15 @@
       });
 
       const anchor = r18Zone || null;
+      if (discovery.length) {
+        root.insertBefore(makeDivider("🧭 新着・埋もれない衣装入口", "湯浴み・湯上がりの再発見セットと、第1便18着を衣装一覧の先頭へ固定"), anchor);
+        discovery.forEach(function(node){
+          node.querySelectorAll("details").forEach(function(details){ details.open = false; });
+          if (node.tagName === "DETAILS") node.open = false;
+          root.insertBefore(node, anchor);
+        });
+      }
+
       GROUPS.forEach(function(def){
         const items = tagged.filter(function(item){ return item.dataset.attireCatalogGroup === def.key; });
         if (!items.length) return;
@@ -387,6 +408,7 @@
             checkboxes: group.querySelectorAll("input[type='checkbox']").length
           };
         }),
+        discovery: discovery.length,
         special: special.length,
         visibleCheckboxes: root.querySelectorAll("input[type='checkbox']").length
       };
@@ -413,7 +435,7 @@
   };
 
   window.__SHIMA_ATTIRE_CATALOG_V1__ = {
-    version: "1.0.0",
+    version: "1.1.0",
     organize: organize,
     lastReport: null
   };
@@ -433,5 +455,5 @@
   }
 
   register(0);
-  console.log("👗 Loaded: ./ext_attire_catalog.v1.js v1.0.0");
+  console.log("👗 Loaded: ./ext_attire_catalog.v1.js v1.1.0 discovery priority");
 })();

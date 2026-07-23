@@ -1,5 +1,5 @@
 {
-  "version": "SHIMA ADULT START DECK v5.4",
+  "version": "SHIMA UI BOOT GUARD v5.5.1",
   "display_settings": [],
   "features": [
     "HC Emotional System",
@@ -51,7 +51,13 @@
     "Lazy Adult Detail Card Materialization with One Thousand Stable Inputs for Search, History, Favorites and My Presets",
     "Six Hundred New Adult Costume Sets covering Academy-inspired Uniforms, Athletic Leotards, Swimwear, Dresses, Cultural Formalwear, Divine Beauty, Demons, Boudoir, Service Roles and Mythic Queens",
     "Strict Normal and Adult-only Separation with Consent-aware Adult Prompts and Existing R-18 Unlock Compatibility",
-    "One-column Closed-by-default Detail Shelves with Direct Checkbox Toggle, Visible Included Components, Search, Favorites, History and Reset Compatibility"
+    "One-column Closed-by-default Detail Shelves with Direct Checkbox Toggle, Visible Included Components, Search, Favorites, History and Reset Compatibility",
+    "Priority Attire Discovery Entrance Pinned before the Ten Standard Wardrobe Shelves",
+    "Dedicated Bathing, After-bath and Spa Shelf with Seven Rediscovery Coordinates and Five New Wearable Choices",
+    "Attire Discovery Wave One with Eighteen New Positive-channel Outfits across Bathing, Historical Indoorwear, Protective Workwear, Sports, Space, Medical, World Ceremonial and Experimental Material Categories",
+    "Twenty-five Stable-ID One-column Cards with Visible Japanese Components, Closed-by-default Shelves and Existing Wardrobe Preservation",
+    "Readiness-driven Android Helper UI Initialization without a Fixed Startup Timeout",
+    "Self-healing Three-view Mobile Navigation for Shelf, Selected and Output with Duplicate-safe Rehydration"
   ],
   "core_modules": [
     "builder_data.hc_presets.js",

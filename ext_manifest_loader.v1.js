@@ -214,6 +214,12 @@
     if (window.__triggerUIMount) {
       log("🚀 Triggering UI mount...", "success");
       window.__triggerUIMount();
+      // Static helper scripts may still be waiting while a large Android build
+      // finishes. Publish an explicit readiness signal instead of making them
+      // guess completion from a short timeout.
+      window.dispatchEvent(new CustomEvent("builder:mounted", {
+        detail: { source: "manifest-loader", loaded: stats.success, failed: stats.fail }
+      }));
     } else {
       log("❌ Core function __triggerUIMount not found.", "fail");
     }
@@ -223,4 +229,3 @@
   init();
 
 })();
-

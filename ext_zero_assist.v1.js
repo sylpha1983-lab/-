@@ -4,7 +4,7 @@
   if (window.__SHIMA_ZERO_ASSIST_V1__) return;
   window.__SHIMA_ZERO_ASSIST_V1__ = true;
 
-  const VERSION = "1.1.0";
+  const VERSION = "1.2.0";
   const STORAGE = {
     favorites: "shimaBuilderV5.zeroAssist.favorites.v1",
     presets: "shimaBuilderV5.zeroAssist.presets.v1",
@@ -27,7 +27,11 @@
     diagnosticTimer: 0,
     decorateQueue: [],
     decorateRunning: false,
-    mobileView: loadMobileView()
+    mobileView: loadMobileView(),
+    eventsBound: false,
+    bootTimer: 0,
+    bootObserver: null,
+    mobileIntegrityObserver: null
   };
 
   const ui = {};
@@ -305,7 +309,16 @@
 
   function createToolbar() {
     const search = document.getElementById("ui-search-bar");
-    if (!search || document.getElementById("zero-assist-toolbar")) return false;
+    const existing = document.getElementById("zero-assist-toolbar");
+    if (existing) {
+      ui.toolbar = existing;
+      ui.selectedFilter = document.getElementById("zero-selected-filter");
+      ui.favoritesFilter = document.getElementById("zero-favorites-filter");
+      ui.presetsButton = document.getElementById("zero-presets-button");
+      ui.filterEmpty = document.getElementById("zero-filter-empty");
+      return !!(ui.selectedFilter && ui.favoritesFilter && ui.presetsButton && ui.filterEmpty);
+    }
+    if (!search) return false;
 
     const toolbar = create("section", "zero-assist-toolbar");
     toolbar.id = "zero-assist-toolbar";
@@ -354,7 +367,14 @@
   }
 
   function createSelectionTray() {
-    if (!ui.toolbar || document.getElementById("zero-selection-tray")) return;
+    const existing = document.getElementById("zero-selection-tray");
+    if (existing) {
+      ui.tray = existing;
+      ui.selectionCount = existing.querySelector(".zero-selection-count");
+      ui.selectionChips = document.getElementById("zero-selection-chips");
+      return !!(ui.selectionCount && ui.selectionChips);
+    }
+    if (!ui.toolbar || !ui.filterEmpty) return false;
     const tray = create("section", "zero-selection-tray");
     tray.id = "zero-selection-tray";
     tray.hidden = true;
@@ -380,6 +400,7 @@
     ui.tray = tray;
     ui.selectionCount = count;
     ui.selectionChips = chips;
+    return true;
   }
 
   function refreshTray() {
@@ -690,7 +711,16 @@
   }
 
   function createPresetDialog() {
-    if (document.getElementById("zero-preset-dialog")) return;
+    const existing = document.getElementById("zero-preset-dialog");
+    if (existing) {
+      ui.presetDialog = existing;
+      ui.presetName = document.getElementById("zero-preset-name");
+      ui.presetDescription = document.getElementById("zero-preset-description");
+      ui.savePresetButton = document.getElementById("zero-save-preset");
+      ui.presetSelected = existing.querySelector(".zero-preset-selected");
+      ui.presetList = document.getElementById("zero-preset-list");
+      return !!(ui.presetName && ui.presetDescription && ui.savePresetButton && ui.presetSelected && ui.presetList);
+    }
     const dialog = create("dialog", "zero-assist-dialog");
     dialog.id = "zero-preset-dialog";
 
@@ -749,6 +779,7 @@
     ui.savePresetButton = saveButton;
     ui.presetSelected = selected;
     ui.presetList = list;
+    return true;
   }
 
   function openDialog(dialog) {
@@ -1174,9 +1205,18 @@
       stats.appendChild(button);
       ui.diagnosticsButton = button;
       ui.diagnosticsBadge = badge;
+    } else {
+      ui.diagnosticsButton = document.getElementById("zero-diagnostics-button");
+      ui.diagnosticsBadge = document.getElementById("zero-diagnostics-badge");
     }
 
-    if (document.getElementById("zero-diagnostics-dialog")) return;
+    const existing = document.getElementById("zero-diagnostics-dialog");
+    if (existing) {
+      ui.diagnosticsDialog = existing;
+      ui.diagnosticsSummary = document.getElementById("zero-diagnostics-summary");
+      ui.diagnosticsList = document.getElementById("zero-diagnostics-list");
+      return !!(ui.diagnosticsButton && ui.diagnosticsBadge && ui.diagnosticsSummary && ui.diagnosticsList);
+    }
     const dialog = create("dialog", "zero-assist-dialog zero-diagnostics-dialog");
     dialog.id = "zero-diagnostics-dialog";
     const shell = create("div", "zero-assist-dialog__shell");
@@ -1205,6 +1245,7 @@
     ui.diagnosticsDialog = dialog;
     ui.diagnosticsSummary = summary;
     ui.diagnosticsList = list;
+    return !!(ui.diagnosticsButton && ui.diagnosticsBadge);
   }
 
   function severityRank(value) {
@@ -1283,27 +1324,67 @@
 
   function createMobileSwitch() {
     const footer = document.getElementById("mini-ui-fixed");
-    if (!footer || document.getElementById("zero-mobile-view-switch")) return;
-    const nav = create("nav", "zero-mobile-view-switch");
-    nav.id = "zero-mobile-view-switch";
-    nav.setAttribute("aria-label", "スマートフォン表示切替");
+    if (!footer) return false;
+    let changed = false;
+    let nav = document.getElementById("zero-mobile-view-switch");
+    if (!nav) {
+      nav = create("nav", "zero-mobile-view-switch");
+      nav.id = "zero-mobile-view-switch";
+      nav.setAttribute("aria-label", "スマートフォン表示切替");
+      footer.insertBefore(nav, footer.firstChild);
+      changed = true;
+    }
 
-    const shelf = create("button", "", "☷ 棚を選ぶ");
-    shelf.type = "button";
-    shelf.dataset.zeroMobileView = "shelf";
-    const output = create("button", "", "↝ 出力・生成 ");
-    output.type = "button";
-    output.dataset.zeroMobileView = "output";
-    const count = create("span", "", "0");
-    count.id = "zero-mobile-selection-count";
-    output.appendChild(count);
+    let shelf = nav.querySelector('[data-zero-mobile-view="shelf"]');
+    if (!shelf) {
+      shelf = create("button", "", "☷ 棚を選ぶ");
+      shelf.type = "button";
+      shelf.dataset.zeroMobileView = "shelf";
+      nav.insertBefore(shelf, nav.firstChild);
+      changed = true;
+    }
 
-    nav.appendChild(shelf);
-    nav.appendChild(output);
-    footer.insertBefore(nav, footer.firstChild);
+    let output = nav.querySelector('[data-zero-mobile-view="output"]');
+    if (!output) {
+      output = create("button", "", "↝ 出力・生成 ");
+      output.type = "button";
+      output.dataset.zeroMobileView = "output";
+      nav.appendChild(output);
+      changed = true;
+    }
+
+    let count = document.getElementById("zero-mobile-selection-count");
+    if (!count || !output.contains(count)) {
+      count = create("span", "", String(selectedCheckboxes().length));
+      count.id = "zero-mobile-selection-count";
+      output.appendChild(count);
+      changed = true;
+    }
+
     ui.mobileSwitch = nav;
     ui.mobileCount = count;
     setMobileView(state.mobileView, false);
+    if (changed) {
+      window.dispatchEvent(new CustomEvent("zeroAssistMobileSwitchReady", {
+        detail: { version: VERSION }
+      }));
+    }
+    return true;
+  }
+
+  function observeMobileSwitchIntegrity() {
+    if (state.mobileIntegrityObserver || typeof MutationObserver !== "function") return;
+    const footer = document.getElementById("mini-ui-fixed");
+    if (!footer) return;
+    state.mobileIntegrityObserver = new MutationObserver(function () {
+      const nav = document.getElementById("zero-mobile-view-switch");
+      const ready = nav &&
+        nav.querySelector('[data-zero-mobile-view="shelf"]') &&
+        nav.querySelector('[data-zero-mobile-view="output"]') &&
+        document.getElementById("zero-mobile-selection-count");
+      if (!ready) createMobileSwitch();
+    });
+    state.mobileIntegrityObserver.observe(footer, { childList: true, subtree: true });
   }
 
   function syncFooterHeight() {
@@ -1455,6 +1536,8 @@
   }
 
   function bindEvents() {
+    if (state.eventsBound) return;
+    state.eventsBound = true;
     document.addEventListener("click", handleClick, true);
     document.addEventListener("keydown", handleKeydown, true);
 
@@ -1507,27 +1590,49 @@
   }
 
   function mount() {
-    if (state.mounted) return true;
+    if (state.mounted) {
+      const healthy = createMobileSwitch() &&
+        document.getElementById("zero-assist-toolbar") &&
+        document.getElementById("zero-selection-tray");
+      if (healthy) {
+        observeMobileSwitchIntegrity();
+        return true;
+      }
+      state.mounted = false;
+    }
     const sections = document.getElementById("sections");
     const search = document.getElementById("ui-search-bar");
     const footer = document.getElementById("mini-ui-fixed");
     if (!sections || !search || !footer) return false;
 
-    state.mounted = true;
-    createToolbar();
-    createSelectionTray();
-    createPresetDialog();
-    createDiagnosticsUI();
-    createMobileSwitch();
+    try {
+      // The three-view mobile switch is the primary escape route on a phone.
+      // Build it first, then hydrate the remaining helpers. Every creator is
+      // idempotent so a partially completed first attempt can repair itself.
+      if (!createMobileSwitch()) return false;
+      if (!createToolbar()) return false;
+      if (!createSelectionTray()) return false;
+      if (!createPresetDialog()) return false;
+      if (!createDiagnosticsUI()) return false;
+    } catch (error) {
+      state.mounted = false;
+      console.error("[ZeroAssist] UI mount deferred:", error);
+      return false;
+    }
 
-    const toast = create("div", "zero-assist-toast");
-    toast.id = "zero-assist-toast";
-    toast.setAttribute("role", "status");
-    toast.setAttribute("aria-live", "polite");
-    document.body.appendChild(toast);
+    let toast = document.getElementById("zero-assist-toast");
+    if (!toast) {
+      toast = create("div", "zero-assist-toast");
+      toast.id = "zero-assist-toast";
+      toast.setAttribute("role", "status");
+      toast.setAttribute("aria-live", "polite");
+      document.body.appendChild(toast);
+    }
     ui.toast = toast;
 
+    state.mounted = true;
     bindEvents();
+    observeMobileSwitchIntegrity();
     updateFilterButtons();
     requestRefresh(0);
     setTimeout(function () { requestRefresh(0); }, 700);
@@ -1547,6 +1652,7 @@
       openPresets: openPresetDialog,
       openDiagnostics: openDiagnostics,
       setMobileView: function (view) { setMobileView(view, true); },
+      ensureUI: function () { return mount(); },
       getState: function () {
         return {
           favorites: state.favorites.size,
@@ -1563,15 +1669,43 @@
     return true;
   }
 
-  function boot(attempt) {
-    if (mount()) return;
-    if (attempt > 100) return;
-    setTimeout(function () { boot(attempt + 1); }, 180);
+  function stopBootWait() {
+    clearTimeout(state.bootTimer);
+    state.bootTimer = 0;
+    if (state.bootObserver) {
+      state.bootObserver.disconnect();
+      state.bootObserver = null;
+    }
   }
 
+  function observeBootReadiness() {
+    if (state.bootObserver || typeof MutationObserver !== "function") return;
+    const sections = document.getElementById("sections");
+    if (!sections) return;
+    state.bootObserver = new MutationObserver(function () { boot(); });
+    state.bootObserver.observe(sections, { childList: true });
+  }
+
+  function boot() {
+    clearTimeout(state.bootTimer);
+    state.bootTimer = 0;
+    if (mount()) {
+      stopBootWait();
+      return;
+    }
+    observeBootReadiness();
+    // No fixed attempt limit: first load on Android can legitimately take more
+    // than twenty seconds when tens of thousands of choices are assembled.
+    state.bootTimer = setTimeout(boot, 1200);
+  }
+
+  window.__ensureZeroAssistMounted = boot;
+  window.addEventListener("builder:mounted", boot);
+  window.addEventListener("promptPartMounted", boot);
+  window.addEventListener("pageshow", boot);
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function () { boot(0); }, { once: true });
+    document.addEventListener("DOMContentLoaded", boot, { once: true });
   } else {
-    boot(0);
+    boot();
   }
 })();
