@@ -198,10 +198,14 @@ const SHIMA_BRAND_CORE = "Shima-enaga inspired design language, based on a small
       function isSpecialNode(el){
         if (!el) return false;
         if (el.id === "__attire_special_top_zone__" || el.id === "__attire_r18_last_zone__") return false;
-        if (el.matches && (el.matches(".attire-v35-arcadia-wardrobe") || el.matches(".attire-v39-remix-lab") || el.matches(".attire-v21-shima") || el.matches(".attire-v23-container") || el.matches("[class*='attire-v23']"))) return true;
+        if (el.matches && (el.matches(".attire-v35-arcadia-wardrobe") || el.matches(".attire-v39-remix-lab") || el.matches(".attire-v47-aqua-wardrobe") || el.matches(".shima-v50-formal") || el.matches(".shima-v50-armor") || el.matches(".shima-v51-fetish-detail") || el.matches(".attire-v21-shima") || el.matches(".attire-v23-container") || el.matches("[class*='attire-v23']"))) return true;
         const txt = getText(el);
         return txt.includes("シマエナガ・アルカディア衣装")
           || txt.includes("衣装改造工房")
+          || txt.includes("水着特化コレクション")
+          || txt.includes("ドレス・礼装特化コレクション")
+          || txt.includes("鎧・戦闘衣装特化コレクション")
+          || txt.includes("フェチ・ディテール特化コレクション")
           || txt.includes("シマエナガ・コレクション")
           || txt.includes("チャイナ服特化コレクション")
           || txt.includes("アイドル衣装特化コレクション")

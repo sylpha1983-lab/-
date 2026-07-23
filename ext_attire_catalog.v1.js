@@ -56,6 +56,10 @@
   const SPECIAL_SELECTORS = [
     ".attire-v35-arcadia-wardrobe",
     ".attire-v39-remix-lab",
+    ".attire-v47-aqua-wardrobe",
+    ".shima-v50-formal",
+    ".shima-v50-armor",
+    ".shima-v51-fetish-detail",
     ".attire-v21-shima",
     ".attire-v23-container",
     ".attire-v25-container",
@@ -359,7 +363,7 @@
       });
 
       if (special.length) {
-        root.insertBefore(makeDivider("⭐ 特化・テーマ衣装", "衣装改造、アルカディア、シマエナガ、チャイナ、アイドル、モチーフ、機械衣装を個別に深掘り"), anchor);
+        root.insertBefore(makeDivider("⭐ 特化・テーマ衣装", "衣装改造、水着、礼装、鎧、アルカディア、シマエナガ、チャイナ、アイドル、モチーフ、機械衣装、フェチディテールを個別に深掘り"), anchor);
         special.forEach(function(node){
           node.querySelectorAll("details").forEach(function(details){ details.open = false; });
           if (node.tagName === "DETAILS") node.open = false;

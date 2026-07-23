@@ -1,5 +1,5 @@
 {
-  "version": "SHIMA CULINARY AKASHIC EXPANSION II v4.6",
+  "version": "SHIMA ADULT START DECK v5.4",
   "display_settings": [],
   "features": [
     "HC Emotional System",
@@ -29,7 +29,29 @@
     "Eighty One-tap Complete Menus and Sixteen Regional Cuisine Collections",
     "Culinary Akashic Expansion II with 400 New Positive Food Choices across 40 Categories",
     "Sixty Explained Complete Menus and Twelve Additional Regional Cuisine Collections",
-    "One Thousand Nine Hundred Three Food Choices with Preserved Size, Dessert, Search, Favorites, History and My Presets Compatibility"
+    "One Thousand Nine Hundred Three Food Choices with Preserved Size, Dessert, Search, Favorites, History and My Presets Compatibility",
+    "Aqua Wardrobe with 360 Normal Positive-channel Swimwear Choices across Nine Mobile-first Groups",
+    "Eighty Explained Complete Swim Coordinates, Two Hundred Forty Standalone Swimsuits and Forty Swim-specific Modification Parts",
+    "Dedicated Swimwear Shelf with Stable IDs, Existing-prompt Deduplication and Search, Favorites, History and My Presets Compatibility",
+    "Omni Akashic Expansion with Eight Independent Mobile-first Specialty Collections and 2460 Positive-channel Choices",
+    "Hair Akashic with 360 Color-neutral Complete Hairstyles, Base Shapes and Hair-only Finish Parts",
+    "Pose Action Archive with 360 Everyday, Action, Multi-subject and Zero-gravity Choices",
+    "Armament Akashic with 360 Generic Blades, Ranged Weapons, Firearms, Arcane Tools, Shields and Weapon-only Modifiers",
+    "World Architecture Archive with 360 Person-free Nature, City, Interior, Heritage, Fantasy and Science-fiction Backgrounds",
+    "Effect Forge with 300 Elemental, Arcane, Impact, Aura, Graphic, Particle, Holographic and Finisher Effects",
+    "Ceremonial Wardrobe with 240 Wearer-neutral Formal Outfits and Formalwear-only Modification Parts",
+    "Armor Vault with 240 Light, Medium, Heavy, Heritage, Fantasy, Science-fiction and Protective Outfits",
+    "Mobility Workshop with 240 Vehicles, Mecha, Fantasy Transport, Animal Tack and Vehicle-only Modification Parts",
+    "Stable Omni IDs with Direct Checkbox Toggle, One-column Snowfield Cards, Search, Favorites, History, My Presets and Reset Compatibility",
+    "Fetish Detail Akashic with 660 Non-explicit Positive-channel Choices across Twelve Mobile-first Groups",
+    "One Hundred Explained Fetish Detail Sets plus 560 Modular Legwear, Hand, Material, Styling, Body-focus, Face, Strap, State, Framing, Contrast and Nonhuman Parts",
+    "Adult-only Fetish Detail Workshop with 1000 Isolated Positive-channel Choices across Twenty Groups",
+    "Adult Quick-set Limit Break with 840 Explained Complete Sets across Fifteen Themes",
+    "Fifteen-theme Adult Start Deck with Non-selecting Jump Buttons and Live Selected Counts",
+    "Lazy Adult Detail Card Materialization with One Thousand Stable Inputs for Search, History, Favorites and My Presets",
+    "Six Hundred New Adult Costume Sets covering Academy-inspired Uniforms, Athletic Leotards, Swimwear, Dresses, Cultural Formalwear, Divine Beauty, Demons, Boudoir, Service Roles and Mythic Queens",
+    "Strict Normal and Adult-only Separation with Consent-aware Adult Prompts and Existing R-18 Unlock Compatibility",
+    "One-column Closed-by-default Detail Shelves with Direct Checkbox Toggle, Visible Included Components, Search, Favorites, History and Reset Compatibility"
   ],
   "core_modules": [
     "builder_data.hc_presets.js",
