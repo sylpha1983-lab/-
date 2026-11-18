@@ -1,0 +1,65 @@
+name: Mirror verified Shima Builder v7.250.0
+on:
+  push:
+    branches: [distribution-v7250-verified-mirror]
+    paths: [.github/workflows/mirror-v7250.yml]
+permissions:
+  contents: read
+concurrency:
+  group: shima-builder-v7250-release
+  cancel-in-progress: false
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: write
+    env:
+      GH_REPO: sylpha1983-lab/-
+      TAG: shima-builder-v7.250.0-distribution
+    steps:
+      - name: Download and verify existing public release bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir payload
+          cd payload
+          curl --fail --location --retry 2 --max-time 1200 --output shima-builder-v7.250.0.apk 'https://shima-builder-distribution-5.phesant.chatgpt.site/builder-downloads/shima-builder-v7.250.0.apk'
+          curl --fail --location --retry 2 --max-time 1200 --output SHIMA_ATTIRE_SHELF_PREVIEW_v7.250.0_FULL.zip 'https://shima-builder-distribution-5.phesant.chatgpt.site/builder-downloads/SHIMA_ATTIRE_SHELF_PREVIEW_v7.250.0_FULL.zip'
+          test "$(stat -c%s shima-builder-v7.250.0.apk)" = 803890122
+          test "$(stat -c%s SHIMA_ATTIRE_SHELF_PREVIEW_v7.250.0_FULL.zip)" = 805122603
+          printf '%s\n' '3222ae8b92ce9e21cffd138613ba659c82ed97597fd733db309158b4d88b952e  shima-builder-v7.250.0.apk' '57cae6244896750b8306ee673418b3b946375a613e482e95b5e22ded35c3d3a0  SHIMA_ATTIRE_SHELF_PREVIEW_v7.250.0_FULL.zip' > SHA256SUMS.txt
+          sha256sum --check SHA256SUMS.txt
+          python -m zipfile -t shima-builder-v7.250.0.apk
+          python -m zipfile -t SHIMA_ATTIRE_SHELF_PREVIEW_v7.250.0_FULL.zip
+      - name: Upload exact verified files as a draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET_SHA: ${{ github.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo 'Release already exists; refusing to overwrite.'
+            exit 1
+          fi
+          printf '%s\n' '公開済みシマビルダー v7.250.0 の配布ミラーです。APKとFULLは従来配布先と同一のバイト列で、再ビルド・署名変更はしていません。' '' 'Android: shima-builder-v7.250.0.apk' '完全版データ: SHIMA_ATTIRE_SHELF_PREVIEW_v7.250.0_FULL.zip' '照合用: SHA256SUMS.txt' '' 'GitHubが自動生成する Source code アーカイブは、このv7.250.0配布物ではありません。上記の添付ファイルを使用してください。' '' '元の配布ページおよび既存サイトには変更を加えていません。' > release-notes.txt
+          gh release create "$TAG" payload/shima-builder-v7.250.0.apk payload/SHIMA_ATTIRE_SHELF_PREVIEW_v7.250.0_FULL.zip payload/SHA256SUMS.txt --draft --target "$TARGET_SHA" --title 'シマビルダー v7.250.0 配布ミラー' --notes-file release-notes.txt
+          mkdir verify-draft
+          gh release download "$TAG" --dir verify-draft --pattern '*.apk' --pattern '*FULL.zip'
+          cp payload/SHA256SUMS.txt verify-draft/
+          (cd verify-draft && sha256sum --check SHA256SUMS.txt)
+          rm -rf verify-draft
+          gh release edit "$TAG" --draft=false
+      - name: Verify anonymous full downloads after publication
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir verify-public
+          cd verify-public
+          base="https://github.com/$GH_REPO/releases/download/$TAG"
+          curl --fail --location --retry 2 --max-time 1200 --output shima-builder-v7.250.0.apk "$base/shima-builder-v7.250.0.apk"
+          curl --fail --location --retry 2 --max-time 1200 --output SHIMA_ATTIRE_SHELF_PREVIEW_v7.250.0_FULL.zip "$base/SHIMA_ATTIRE_SHELF_PREVIEW_v7.250.0_FULL.zip"
+          cp ../payload/SHA256SUMS.txt .
+          sha256sum --check SHA256SUMS.txt
+          printf '%s\n' 'Verified public v7.250.0 APK/FULL downloads match the original SHA-256 values.' >> "$GITHUB_STEP_SUMMARY"
